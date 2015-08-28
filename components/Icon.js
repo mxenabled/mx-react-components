@@ -26,7 +26,7 @@ const styles = {
   }
 };
 
-const Demo = React.createClass({
+const IconDocs = React.createClass({
   getInitialState () {
     return {
       icon: {
@@ -39,6 +39,7 @@ const Demo = React.createClass({
   render () {
     return (
       <div>
+        <h2>{'<Icon />'}</h2>
         <Select
           isMobile={false}
           onChange={this._handleSelectChange}
@@ -281,7 +282,7 @@ const Demo = React.createClass({
           selectedStyle={{}}
           valid={true}
         />
-        <br/><br/>
+        <br/>
         <div style={{ textAlign: 'center' }}>
           <Icon
             type={this.state.icon.value}
@@ -291,6 +292,9 @@ const Demo = React.createClass({
             }}
           />
         </div>
+
+        <h3>How To Use</h3>
+
       </div>
     );
   },
@@ -302,4 +306,4 @@ const Demo = React.createClass({
   }
 });
 
-module.exports = Demo;
+module.exports = IconDocs;

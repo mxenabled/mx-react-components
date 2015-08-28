@@ -1,14 +1,13 @@
 const React = require('react');
-const Demo = require('./components/Demo');
+const IconDocs = require('./components/Icon');
+const SelectDocs = require('./components/Select')
 
 const Docs = React.createClass({
   render () {
     return (
       <div>
-        <h2>Demo</h2>
-        <Demo />
-
-        <h2>How To Use</h2>
+        <IconDocs />
+        <SelectDocs />
       </div>
     );
   }

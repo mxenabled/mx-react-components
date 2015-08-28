@@ -47,7 +47,8 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Demo = __webpack_require__(161);
+	var IconDocs = __webpack_require__(162);
+	var SelectDocs = __webpack_require__(163);
 
 	var Docs = React.createClass({
 	  displayName: 'Docs',
@@ -56,17 +57,8 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(Demo, null),
-	      React.createElement(
-	        'h2',
-	        null,
-	        'How To Use'
-	      )
+	      React.createElement(IconDocs, null),
+	      React.createElement(SelectDocs, null)
 	    );
 	  }
 	});
@@ -21074,7 +21066,8 @@
 	module.exports = Select;
 
 /***/ },
-/* 161 */
+/* 161 */,
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21111,8 +21104,8 @@
 	  }
 	};
 
-	var Demo = React.createClass({
-	  displayName: 'Demo',
+	var IconDocs = React.createClass({
+	  displayName: 'IconDocs',
 
 	  getInitialState: function getInitialState() {
 	    return {
@@ -21127,6 +21120,11 @@
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        '<Icon />'
+	      ),
 	      React.createElement(Select, {
 	        isMobile: false,
 	        onChange: this._handleSelectChange,
@@ -21313,7 +21311,6 @@
 	        valid: true
 	      }),
 	      React.createElement('br', null),
-	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        { style: { textAlign: 'center' } },
@@ -21324,6 +21321,11 @@
 	            color: '#359BCF'
 	          }
 	        })
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'How To Use'
 	      )
 	    );
 	  },
@@ -21335,7 +21337,93 @@
 	  }
 	});
 
-	module.exports = Demo;
+	module.exports = IconDocs;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(157);
+
+	var Select = _require.Select;
+
+	var SelectDocs = React.createClass({
+	  displayName: 'SelectDocs',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      selected: {
+	        value: null,
+	        displayValue: 'Select One'
+	      }
+	    };
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        '<Select >'
+	      ),
+	      React.createElement(Select, {
+	        isMobile: false,
+	        onChange: this._handleSelectChange,
+	        options: [{
+	          value: 'option-one-value',
+	          displayValue: 'Option 1'
+	        }, {
+	          value: 'option-two-value',
+	          displayValue: 'Option 2'
+	        }, {
+	          value: 'option-three-value',
+	          displayValue: 'Option 3'
+	        }],
+	        optionsStyle: {},
+	        optionStyle: {
+	          color: '#333'
+	        },
+	        optionHoverStyle: {
+	          backgroundColor: '#359BCF',
+	          color: '#fff'
+	        },
+	        placeholderText: 'Pick One',
+	        selected: this.state.selected,
+	        selectedStyle: {},
+	        valid: true
+	      }),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'strong',
+	        null,
+	        'Selected:'
+	      ),
+	      ' ',
+	      this.state.selected.displayValue,
+	      ': ',
+	      this.state.selected.value,
+	      React.createElement(
+	        'h3',
+	        null,
+	        'How To Use'
+	      )
+	    );
+	  },
+
+	  _handleSelectChange: function _handleSelectChange(option) {
+	    this.setState({
+	      selected: option
+	    });
+	  }
+	});
+
+	module.exports = SelectDocs;
 
 /***/ }
 /******/ ]);
