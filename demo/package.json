@@ -1,0 +1,38 @@
+{
+  "name": "mx-react-components",
+  "version": "0.0.1",
+  "description": "A collection of generic React UI components",
+  "main": "dist/Index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.moneydesktop.com/dev/mx-react-components"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "mx",
+    "UI",
+    "library"
+  ],
+  "author": "Brandon Beeks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moneydesktop/mx-react-components/issues"
+  },
+  "homepage": "http://moneydesktop.github.io/mx-react-components/",
+  "dependencies": {
+    "object-assign": "3.x.x"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "babel-core": "^5.6.15",
+    "babel-loader": "^5.3.1",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.10.1"
+  }
+}
