@@ -117,7 +117,10 @@ const Select = React.createClass({
   _renderOptions () {
     if (this.state.isOpen) {
       if (this.props.children) {
-        return this.props.children;
+        return (
+          <div style={this._getOptionListStyles()}>
+            this.props.children;
+          </div>
       } else {
         return (
           <ul style={this._getOptionListStyles()}>
