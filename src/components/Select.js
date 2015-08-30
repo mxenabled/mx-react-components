@@ -179,7 +179,7 @@ const styles = {
     cursor: 'pointer',
     fontFamily: 'Helvetica, Arial, sans-serif',
     fontSize: '13px',
-    padding: '10px',
+    padding: '10px 30px 10px 10px',
     position: 'relative',
     WebkitAppearance: 'none',
     boxSizing: 'border-box',
