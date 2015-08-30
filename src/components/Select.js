@@ -148,7 +148,7 @@ const Select = React.createClass({
           style={this._getComponentStyles()}
           tabIndex='0'
         >
-          <div key='selected'>
+          <div key='selected' style={this.props.selectedStyle}>
             {selected.displayValue}
             <Icon
               size='20'

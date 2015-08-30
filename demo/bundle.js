@@ -278,7 +278,10 @@
 	        },
 	        placeholderText: 'Pick One',
 	        selected: this.state.icon,
-	        selectedStyle: {},
+	        selectedStyle: {
+	          fontSize: '16px',
+	          fontWeight: 600
+	        },
 	        valid: true
 	      }),
 	      React.createElement('br', null),
@@ -21058,7 +21061,7 @@
 	        onClick: this._handleToggle,
 	        style: this._getComponentStyles(),
 	        tabIndex: '0'
-	      }, React.createElement('div', { key: 'selected' }, selected.displayValue, React.createElement(Icon, {
+	      }, React.createElement('div', { key: 'selected', style: this.props.selectedStyle }, selected.displayValue, React.createElement(Icon, {
 	        size: '20',
 	        style: styles.downArrow,
 	        type: this.state.isOpen ? 'caret-up' : 'caret-down'

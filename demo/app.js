@@ -279,7 +279,10 @@ const Demo = React.createClass({
           }}
           placeholderText='Pick One'
           selected={this.state.icon}
-          selectedStyle={{}}
+          selectedStyle={{
+            fontSize: '16px',
+            fontWeight: 600
+          }}
           valid={true}
         />
         <br/><br/>
