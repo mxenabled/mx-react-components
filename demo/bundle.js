@@ -21047,7 +21047,7 @@
 
 	    if (this.state.isOpen) {
 	      if (this.props.children) {
-	        return this.props.children;
+	        return React.createElement('div', { style: this._getOptionListStyles() }, 'this.props.children;');
 	      } else {
 	        return React.createElement('ul', { style: this._getOptionListStyles() }, this.props.options.map(function (option) {
 	          return React.createElement('li', {

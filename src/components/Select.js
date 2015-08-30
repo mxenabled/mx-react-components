@@ -121,6 +121,7 @@ const Select = React.createClass({
           <div style={this._getOptionListStyles()}>
             this.props.children;
           </div>
+        );
       } else {
         return (
           <ul style={this._getOptionListStyles()}>
