@@ -78,6 +78,176 @@
 	  }
 	};
 
+	var icons = [{
+	  value: 'accounts',
+	  displayValue: 'Accounts'
+	}, {
+	  value: 'add',
+	  displayValue: 'Add'
+	}, {
+	  value: 'add-solid',
+	  displayValue: 'Add Solid'
+	}, {
+	  value: 'arrow-down',
+	  displayValue: 'Arrow Down'
+	}, {
+	  value: 'arrow-left',
+	  displayValue: 'Arrow Left'
+	}, {
+	  value: 'arrow-right',
+	  displayValue: 'Arrow Right'
+	}, {
+	  value: 'arrow-up',
+	  displayValue: 'Arrow Up'
+	}, {
+	  value: 'attention',
+	  displayValue: 'Attention'
+	}, {
+	  value: 'auto',
+	  displayValue: 'Auto'
+	}, {
+	  value: 'backspace',
+	  displayValue: 'Backspace'
+	}, {
+	  value: 'campaigns',
+	  displayValue: 'Campaigns'
+	}, {
+	  value: 'caret-down',
+	  displayValue: 'Caret Down'
+	}, {
+	  value: 'caret-left',
+	  displayValue: 'Caret Left'
+	}, {
+	  value: 'caret-right',
+	  displayValue: 'Caret Right'
+	}, {
+	  value: 'caret-up',
+	  displayValue: 'Caret Up'
+	}, {
+	  value: 'check',
+	  displayValue: 'Check'
+	}, {
+	  value: 'check-solid',
+	  displayValue: 'Check Solid'
+	}, {
+	  value: 'checking',
+	  displayValue: 'Checking'
+	}, {
+	  value: 'close',
+	  displayValue: 'Close'
+	}, {
+	  value: 'close-solid',
+	  displayValue: 'Close Solid'
+	}, {
+	  value: 'comparisons',
+	  displayValue: 'Comparisons'
+	}, {
+	  value: 'credit-card',
+	  displayValue: 'Credit Card'
+	}, {
+	  value: 'delete',
+	  displayValue: 'Delete'
+	}, {
+	  value: 'download',
+	  displayValue: 'Download'
+	}, {
+	  value: 'edit',
+	  displayValue: 'Edit'
+	}, {
+	  value: 'envelope',
+	  displayValue: 'Envelope'
+	}, {
+	  value: 'export',
+	  displayValue: 'Export'
+	}, {
+	  value: 'folder',
+	  displayValue: 'Folder'
+	}, {
+	  value: 'gallery',
+	  displayValue: 'Gallery'
+	}, {
+	  value: 'gear',
+	  displayValue: 'Gear'
+	}, {
+	  value: 'hamburger',
+	  displayValue: 'Hamburger'
+	}, {
+	  value: 'help',
+	  displayValue: 'Help'
+	}, {
+	  value: 'home',
+	  displayValue: 'Home'
+	}, {
+	  value: 'info',
+	  displayValue: 'Info'
+	}, {
+	  value: 'list-view',
+	  displayValue: 'List View'
+	}, {
+	  value: 'loans',
+	  displayValue: 'Loans'
+	}, {
+	  value: 'md-cash',
+	  displayValue: 'Cash (MD)'
+	}, {
+	  value: 'md-check-mark',
+	  displayValue: 'Check Mark (MD)'
+	}, {
+	  value: 'md-credit',
+	  displayValue: 'Creidt (MD)'
+	}, {
+	  value: 'md-debts',
+	  displayValue: 'Debts (MD)'
+	}, {
+	  value: 'md-savings',
+	  displayValue: 'Savings (MD)'
+	}, {
+	  value: 'mobile-phone',
+	  displayValue: 'Mobile Phone'
+	}, {
+	  value: 'mx',
+	  displayValue: 'MX'
+	}, {
+	  value: 'phone',
+	  displayValue: 'Phone'
+	}, {
+	  value: 'play',
+	  displayValue: 'Play'
+	}, {
+	  value: 'play-solid',
+	  displayValue: 'Play Solid'
+	}, {
+	  value: 'savings',
+	  displayValue: 'Savings'
+	}, {
+	  value: 'search',
+	  displayValue: 'Search'
+	}, {
+	  value: 'segments',
+	  displayValue: 'Segments'
+	}, {
+	  value: 'sync',
+	  displayValue: 'Sync'
+	}, {
+	  value: 'transactions',
+	  displayValue: 'Transactions'
+	}, {
+	  value: 'user',
+	  displayValue: 'User'
+	}, {
+	  value: 'view',
+	  displayValue: 'View'
+	}, {
+	  value: 'visit',
+	  displayValue: 'Visit'
+	}, {
+	  value: 'x-axis',
+	  displayValue: 'X Axis'
+	}, {
+	  value: 'y-axis',
+	  displayValue: 'Y Axis'
+	}];
+
 	var Demo = React.createClass({
 	  displayName: 'Demo',
 
@@ -99,175 +269,7 @@
 	      React.createElement(Select, {
 	        isMobile: false,
 	        onChange: this._handleSelectChange,
-	        options: [{
-	          value: 'accounts',
-	          displayValue: 'Accounts'
-	        }, {
-	          value: 'add',
-	          displayValue: 'Add'
-	        }, {
-	          value: 'add-solid',
-	          displayValue: 'Add Solid'
-	        }, {
-	          value: 'arrow-down',
-	          displayValue: 'Arrow Down'
-	        }, {
-	          value: 'arrow-left',
-	          displayValue: 'Arrow Left'
-	        }, {
-	          value: 'arrow-right',
-	          displayValue: 'Arrow Right'
-	        }, {
-	          value: 'arrow-up',
-	          displayValue: 'Arrow Up'
-	        }, {
-	          value: 'attention',
-	          displayValue: 'Attention'
-	        }, {
-	          value: 'auto',
-	          displayValue: 'Auto'
-	        }, {
-	          value: 'backspace',
-	          displayValue: 'Backspace'
-	        }, {
-	          value: 'campaigns',
-	          displayValue: 'Campaigns'
-	        }, {
-	          value: 'caret-down',
-	          displayValue: 'Caret Down'
-	        }, {
-	          value: 'caret-left',
-	          displayValue: 'Caret Left'
-	        }, {
-	          value: 'caret-right',
-	          displayValue: 'Caret Right'
-	        }, {
-	          value: 'caret-up',
-	          displayValue: 'Caret Up'
-	        }, {
-	          value: 'check',
-	          displayValue: 'Check'
-	        }, {
-	          value: 'check-solid',
-	          displayValue: 'Check Solid'
-	        }, {
-	          value: 'checking',
-	          displayValue: 'Checking'
-	        }, {
-	          value: 'close',
-	          displayValue: 'Close'
-	        }, {
-	          value: 'close-solid',
-	          displayValue: 'Close Solid'
-	        }, {
-	          value: 'comparisons',
-	          displayValue: 'Comparisons'
-	        }, {
-	          value: 'credit-card',
-	          displayValue: 'Credit Card'
-	        }, {
-	          value: 'delete',
-	          displayValue: 'Delete'
-	        }, {
-	          value: 'download',
-	          displayValue: 'Download'
-	        }, {
-	          value: 'edit',
-	          displayValue: 'Edit'
-	        }, {
-	          value: 'envelope',
-	          displayValue: 'Envelope'
-	        }, {
-	          value: 'export',
-	          displayValue: 'Export'
-	        }, {
-	          value: 'folder',
-	          displayValue: 'Folder'
-	        }, {
-	          value: 'gallery',
-	          displayValue: 'Gallery'
-	        }, {
-	          value: 'gear',
-	          displayValue: 'Gear'
-	        }, {
-	          value: 'hamburger',
-	          displayValue: 'Hamburger'
-	        }, {
-	          value: 'help',
-	          displayValue: 'Help'
-	        }, {
-	          value: 'home',
-	          displayValue: 'Home'
-	        }, {
-	          value: 'info',
-	          displayValue: 'Info'
-	        }, {
-	          value: 'list-view',
-	          displayValue: 'List View'
-	        }, {
-	          value: 'loans',
-	          displayValue: 'Loans'
-	        }, {
-	          value: 'md-cash',
-	          displayValue: 'Cash (MD)'
-	        }, {
-	          value: 'md-check-mark',
-	          displayValue: 'Check Mark (MD)'
-	        }, {
-	          value: 'md-credit',
-	          displayValue: 'Creidt (MD)'
-	        }, {
-	          value: 'md-debts',
-	          displayValue: 'Debts (MD)'
-	        }, {
-	          value: 'md-savings',
-	          displayValue: 'Savings (MD)'
-	        }, {
-	          value: 'mobile-phone',
-	          displayValue: 'Mobile Phone'
-	        }, {
-	          value: 'mx',
-	          displayValue: 'MX'
-	        }, {
-	          value: 'phone',
-	          displayValue: 'Phone'
-	        }, {
-	          value: 'play',
-	          displayValue: 'Play'
-	        }, {
-	          value: 'play-solid',
-	          displayValue: 'Play Solid'
-	        }, {
-	          value: 'savings',
-	          displayValue: 'Savings'
-	        }, {
-	          value: 'search',
-	          displayValue: 'Search'
-	        }, {
-	          value: 'segments',
-	          displayValue: 'Segments'
-	        }, {
-	          value: 'sync',
-	          displayValue: 'Sync'
-	        }, {
-	          value: 'transactions',
-	          displayValue: 'Transactions'
-	        }, {
-	          value: 'user',
-	          displayValue: 'User'
-	        }, {
-	          value: 'view',
-	          displayValue: 'View'
-	        }, {
-	          value: 'visit',
-	          displayValue: 'Visit'
-	        }, {
-	          value: 'x-axis',
-	          displayValue: 'X Axis'
-	        }, {
-	          value: 'y-axis',
-	          displayValue: 'Y Axis'
-	        }],
+	        options: icons,
 	        optionsStyle: {},
 	        optionStyle: {
 	          color: '#333'
@@ -21044,16 +21046,20 @@
 	    var _this = this;
 
 	    if (this.state.isOpen) {
-	      return React.createElement('ul', { style: this._getOptionListStyles() }, this.props.options.map(function (option) {
-	        return React.createElement('li', {
-	          key: option.displayValue + option.value,
-	          onClick: _this._handleOptionClick.bind(null, option),
-	          onMouseEnter: _this._handleOptionMouseEnter.bind(null, option),
-	          onMouseLeave: _this._handleOptionMouseLeave.bind(null, option),
-	          ref: option.displayValue + option.value,
-	          style: objectAssign(styles.option, _this.props.optionStyle)
-	        }, option.displayValue);
-	      }));
+	      if (this.props.children) {
+	        return this.props.children;
+	      } else {
+	        return React.createElement('ul', { style: this._getOptionListStyles() }, this.props.options.map(function (option) {
+	          return React.createElement('li', {
+	            key: option.displayValue + option.value,
+	            onClick: _this._handleOptionClick.bind(null, option),
+	            onMouseEnter: _this._handleOptionMouseEnter.bind(null, option),
+	            onMouseLeave: _this._handleOptionMouseLeave.bind(null, option),
+	            ref: option.displayValue + option.value,
+	            style: objectAssign(styles.option, _this.props.optionStyle)
+	          }, option.displayValue);
+	        }));
+	      }
 	    }
 	  },
 
@@ -21067,6 +21073,7 @@
 	    var selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
 	    if (this.props.isMobile) {
+	      //TODO: We should always have a select present, just hidden. If mobile, we just utilize it to display the native select options
 	      return React.createElement('select', { name: 'select', onChange: this._handleSelectChange, style: styles.select, value: selected.value }, this.props.options.map(function (option) {
 	        return React.createElement('option', { key: option.displayValue + option.value, value: option.value }, option.displayValue);
 	      }));

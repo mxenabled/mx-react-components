@@ -116,24 +116,28 @@ const Select = React.createClass({
 
   _renderOptions () {
     if (this.state.isOpen) {
-      return (
-        <ul style={this._getOptionListStyles()}>
-          {this.props.options.map(option => {
-            return (
-              <li
-                key={option.displayValue + option.value}
-                onClick={this._handleOptionClick.bind(null, option)}
-                onMouseEnter={this._handleOptionMouseEnter.bind(null, option)}
-                onMouseLeave={this._handleOptionMouseLeave.bind(null, option)}
-                ref={option.displayValue + option.value}
-                style={objectAssign(styles.option, this.props.optionStyle)}
-              >
-              {option.displayValue}
-              </li>
-            );
-          })}
-        </ul>
-      );
+      if (this.props.children) {
+        return this.props.children;
+      } else {
+        return (
+          <ul style={this._getOptionListStyles()}>
+            {this.props.options.map(option => {
+              return (
+                <li
+                  key={option.displayValue + option.value}
+                  onClick={this._handleOptionClick.bind(null, option)}
+                  onMouseEnter={this._handleOptionMouseEnter.bind(null, option)}
+                  onMouseLeave={this._handleOptionMouseLeave.bind(null, option)}
+                  ref={option.displayValue + option.value}
+                  style={objectAssign(styles.option, this.props.optionStyle)}
+                >
+                {option.displayValue}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      }
     }
   },
 
@@ -149,6 +153,7 @@ const Select = React.createClass({
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     if (this.props.isMobile) {
+      //TODO: We should always have a select present, just hidden. If mobile, we just utilize it to display the native select options
       return (
         <select name='select' onChange={this._handleSelectChange} style={styles.select} value={selected.value}>
           {this.props.options.map(option => {
