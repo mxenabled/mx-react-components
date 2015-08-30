@@ -21036,12 +21036,6 @@
 	    return optionListStyles;
 	  },
 
-	  _getScrimStyles: function _getScrimStyles() {
-	    var scrimStyles = objectAssign(styles.scrim, this.props.scrimStyle);
-
-	    return scrimStyles;
-	  },
-
 	  _renderOptions: function _renderOptions() {
 	    var _this = this;
 
@@ -21065,7 +21059,7 @@
 
 	  _renderScrim: function _renderScrim() {
 	    if (this.state.isOpen) {
-	      return React.createElement('div', { onClick: this._handleBlur, style: this._getScrimStyles() });
+	      return React.createElement('div', { onClick: this._handleBlur, style: objectAssign(styles.scrim, this.props.scrimStyle) });
 	    }
 	  },
 
@@ -21083,7 +21077,7 @@
 	        onClick: this._handleToggle,
 	        style: this._getComponentStyles(),
 	        tabIndex: '0'
-	      }, this._renderScrim(), React.createElement('div', { key: 'selected', style: this.props.selectedStyle }, selected.displayValue, React.createElement(Icon, {
+	      }, this._renderScrim(), React.createElement('div', { key: 'selected', style: objectAssign(styles.selected, this.props.selectedStyle) }, selected.displayValue, React.createElement(Icon, {
 	        size: '20',
 	        style: styles.downArrow,
 	        type: this.state.isOpen ? 'caret-up' : 'caret-down'
@@ -21104,7 +21098,7 @@
 	    cursor: 'pointer',
 	    fontFamily: 'Helvetica, Arial, sans-serif',
 	    fontSize: '13px',
-	    padding: '10px 30px 10px 10px',
+	    padding: '10px',
 	    position: 'relative',
 	    WebkitAppearance: 'none',
 	    boxSizing: 'border-box',
@@ -21113,10 +21107,13 @@
 	  select: {
 	    outline: 'none !important'
 	  },
+	  selected: {
+	    position: 'relative'
+	  },
 	  downArrow: {
 	    color: '#999999',
 	    position: 'absolute',
-	    right: '5px',
+	    right: 0,
 	    top: '50%',
 	    marginTop: '-10px'
 	  },

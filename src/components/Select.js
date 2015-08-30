@@ -108,12 +108,6 @@ const Select = React.createClass({
     return optionListStyles;
   },
 
-  _getScrimStyles () {
-    const scrimStyles = objectAssign(styles.scrim, this.props.scrimStyle);
-
-    return scrimStyles;
-  },
-
   _renderOptions () {
     if (this.state.isOpen) {
       if (this.props.children) {
@@ -148,7 +142,7 @@ const Select = React.createClass({
   _renderScrim () {
     if (this.state.isOpen) {
       return (
-        <div onClick={this._handleBlur} style={this._getScrimStyles()} />
+        <div onClick={this._handleBlur} style={objectAssign(styles.scrim, this.props.scrimStyle)} />
       );
     }
   },
@@ -174,7 +168,7 @@ const Select = React.createClass({
           tabIndex='0'
         >
           {this._renderScrim()}
-          <div key='selected' style={this.props.selectedStyle}>
+          <div key='selected' style={objectAssign(styles.selected, this.props.selectedStyle)}>
             {selected.displayValue}
             <Icon
               size='20'
@@ -205,7 +199,7 @@ const styles = {
     cursor: 'pointer',
     fontFamily: 'Helvetica, Arial, sans-serif',
     fontSize: '13px',
-    padding: '10px 30px 10px 10px',
+    padding: '10px',
     position: 'relative',
     WebkitAppearance: 'none',
     boxSizing: 'border-box',
@@ -214,10 +208,13 @@ const styles = {
   select: {
     outline: 'none !important'
   },
+  selected: {
+    position: 'relative'
+  },
   downArrow: {
     color: '#999999',
     position: 'absolute',
-    right: '5px',
+    right: 0,
     top: '50%',
     marginTop: '-10px'
   },
