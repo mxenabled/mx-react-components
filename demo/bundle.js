@@ -277,6 +277,7 @@
 	          color: '#fff'
 	        },
 	        placeholderText: 'Pick One',
+	        scrimStyle: {},
 	        selected: this.state.icon,
 	        selectedStyle: {
 	          fontSize: '16px',
@@ -20936,6 +20937,7 @@
 	    optionsStyle: React.PropTypes.object,
 	    optionStyle: React.PropTypes.object,
 	    placeholderText: React.PropTypes.string,
+	    scrimStyle: React.PropTypes.object,
 	    selected: React.PropTypes.object,
 	    selectedStyle: React.PropTypes.object,
 	    style: React.PropTypes.object,
@@ -20951,6 +20953,7 @@
 	      optionsStyle: {},
 	      optionStyle: {},
 	      placeholderText: 'Select One',
+	      scrimStyle: {},
 	      selected: false,
 	      selectedStyle: {},
 	      valid: true
@@ -21031,6 +21034,12 @@
 	    return optionListStyles;
 	  },
 
+	  _getScrimStyles: function _getScrimStyles() {
+	    var scrimStyles = objectAssign(styles.scrim, this.props.scrimStyle);
+
+	    return scrimStyles;
+	  },
+
 	  _renderOptions: function _renderOptions() {
 	    var _this = this;
 
@@ -21048,6 +21057,12 @@
 	    }
 	  },
 
+	  _renderScrim: function _renderScrim() {
+	    if (this.state.isOpen) {
+	      return React.createElement('div', { onClick: this._handleBlur, style: this._getScrimStyles() });
+	    }
+	  },
+
 	  _renderSelect: function _renderSelect() {
 	    var selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
@@ -21061,7 +21076,7 @@
 	        onClick: this._handleToggle,
 	        style: this._getComponentStyles(),
 	        tabIndex: '0'
-	      }, React.createElement('div', { key: 'selected', style: this.props.selectedStyle }, selected.displayValue, React.createElement(Icon, {
+	      }, this._renderScrim(), React.createElement('div', { key: 'selected', style: this.props.selectedStyle }, selected.displayValue, React.createElement(Icon, {
 	        size: '20',
 	        style: styles.downArrow,
 	        type: this.state.isOpen ? 'caret-up' : 'caret-down'
@@ -21082,7 +21097,7 @@
 	    cursor: 'pointer',
 	    fontFamily: 'Helvetica, Arial, sans-serif',
 	    fontSize: '13px',
-	    padding: '10px',
+	    padding: '10px 30px 10px 10px',
 	    position: 'relative',
 	    WebkitAppearance: 'none',
 	    boxSizing: 'border-box',
@@ -21111,7 +21126,7 @@
 	    padding: '0',
 	    minWidth: '100%',
 	    position: 'absolute',
-	    zIndex: '10',
+	    zIndex: 10,
 	    fontSize: '12px',
 	    boxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
 	    boxSizing: 'border-box',
@@ -21128,6 +21143,14 @@
 	  optionHover: {
 	    backgroundColor: '#f9f9f9',
 	    opacity: 1
+	  },
+	  scrim: {
+	    position: 'fixed',
+	    zIndex: 9,
+	    top: 0,
+	    right: 0,
+	    bottom: 0,
+	    left: 0
 	  }
 	};
 

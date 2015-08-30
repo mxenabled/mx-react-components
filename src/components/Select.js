@@ -11,6 +11,7 @@ const Select = React.createClass({
     optionsStyle: React.PropTypes.object,
     optionStyle: React.PropTypes.object,
     placeholderText: React.PropTypes.string,
+    scrimStyle: React.PropTypes.object,
     selected: React.PropTypes.object,
     selectedStyle: React.PropTypes.object,
     style: React.PropTypes.object,
@@ -26,6 +27,7 @@ const Select = React.createClass({
       optionsStyle: {},
       optionStyle: {},
       placeholderText: 'Select One',
+      scrimStyle: {},
       selected: false,
       selectedStyle: {},
       valid: true
@@ -106,6 +108,12 @@ const Select = React.createClass({
     return optionListStyles;
   },
 
+  _getScrimStyles () {
+    const scrimStyles = objectAssign(styles.scrim, this.props.scrimStyle);
+
+    return scrimStyles;
+  },
+
   _renderOptions () {
     if (this.state.isOpen) {
       return (
@@ -129,6 +137,14 @@ const Select = React.createClass({
     }
   },
 
+  _renderScrim () {
+    if (this.state.isOpen) {
+      return (
+        <div onClick={this._handleBlur} style={this._getScrimStyles()} />
+      );
+    }
+  },
+
   _renderSelect () {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
@@ -148,6 +164,7 @@ const Select = React.createClass({
           style={this._getComponentStyles()}
           tabIndex='0'
         >
+          {this._renderScrim()}
           <div key='selected' style={this.props.selectedStyle}>
             {selected.displayValue}
             <Icon
@@ -208,7 +225,7 @@ const styles = {
     padding: '0',
     minWidth: '100%',
     position: 'absolute',
-    zIndex: '10',
+    zIndex: 10,
     fontSize: '12px',
     boxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
     boxSizing: 'border-box',
@@ -225,6 +242,14 @@ const styles = {
   optionHover: {
     backgroundColor: '#f9f9f9',
     opacity: 1
+  },
+  scrim: {
+    position: 'fixed',
+    zIndex: 9,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0
   }
 };
 

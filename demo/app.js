@@ -278,6 +278,7 @@ const Demo = React.createClass({
             color: '#fff'
           }}
           placeholderText='Pick One'
+          scrimStyle={{}}
           selected={this.state.icon}
           selectedStyle={{
             fontSize: '16px',
