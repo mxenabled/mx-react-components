@@ -119,7 +119,7 @@ const Select = React.createClass({
       if (this.props.children) {
         return (
           <div style={this._getOptionListStyles()}>
-            this.props.children;
+            {this.props.children}
           </div>
         );
       } else {
