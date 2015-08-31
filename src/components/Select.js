@@ -212,7 +212,7 @@ const styles = {
     position: 'relative'
   },
   downArrow: {
-    color: '#999999',
+    color: '#000000',
     position: 'absolute',
     right: 0,
     top: '50%',
