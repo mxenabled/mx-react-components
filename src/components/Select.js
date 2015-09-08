@@ -172,7 +172,7 @@ const Select = React.createClass({
             {selected.displayValue}
             <Icon
               size='20'
-              style={styles.downArrow}
+              style={objectAssign(styles.downArrow, { color: this.props.selectedStyle.color || '#000000' })}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
@@ -212,7 +212,6 @@ const styles = {
     position: 'relative'
   },
   downArrow: {
-    color: '#999999',
     position: 'absolute',
     right: 0,
     top: '50%',
