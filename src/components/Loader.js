@@ -3,6 +3,7 @@ const Spin = require('./Spin');
 
 const Loader = React.createClass({
   propTypes: {
+    color: React.PropTypes.string,
     isLoading: React.PropTypes.bool,
     isRelative: React.PropTypes.bool,
     isSmall: React.PropTypes.bool
@@ -10,6 +11,7 @@ const Loader = React.createClass({
 
   getDefaultProps () {
     return {
+      color: '#333333',
       isLoading: false,
       isRelative: false,
       isSmall: false
@@ -49,7 +51,7 @@ const Loader = React.createClass({
           borderRadius: '100%',
           width: this.props.isSmall ? '30px' : '50px',
           height: this.props.isSmall ? '30px' : '50px',
-          borderTop: '3px solid #333',
+          borderTop: '3px solid ' + this.props.color,
           borderRight: '3px solid transparent',
           borderBottom: '3px solid transparent',
           borderLeft: '3px solid transparent'
