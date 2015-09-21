@@ -57,6 +57,7 @@ const Loader = React.createClass({
           borderLeft: '3px solid transparent'
         },
         text: {
+          marginTop: '10px',
           fontSize: '10px'
         }
       };
