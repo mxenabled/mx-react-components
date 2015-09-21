@@ -27,14 +27,14 @@ const Loader = React.createClass({
           color: '#999',
           fontFamily: 'Helvetica, Arial, sans-serif',
           fontSize: '10px',
-          fontWeight: 600
+          fontWeight: 600,
           left: 0,
           letterSpacing: '1px',
           position: this.props.isRelative ? 'absolute' : 'fixed',
           right: 0,
           textAlign: 'center',
           top: 0,
-          zIndex: 100,
+          zIndex: 100
         },
         content: {
           textAlign: 'center',
