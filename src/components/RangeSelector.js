@@ -1,4 +1,5 @@
 const React = require('react');
+const objectAssign = require('object-assign');
 const _throttle = require('lodash/function/throttle');
 
 const RangeSelector = React.createClass({
@@ -262,7 +263,7 @@ const RangeSelector = React.createClass({
     };
 
     return (
-      <div style={styles.component}>
+      <div style={objectAssign(styles.component, this.props.style)}>
         <div style={styles.presets}>
           {this.props.presets.map(preset => {
             return (
