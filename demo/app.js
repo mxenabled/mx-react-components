@@ -1,5 +1,5 @@
 const React = require('react');
-const { Select, Icon, RangeSelector } = require('../dist/Index');
+const { Select, Icon, RangeSelector, Loader } = require('../dist/Index');
 
 const styles = {
   block: {
@@ -332,6 +332,10 @@ const Demo = React.createClass({
           range={100}
           selectedColor='#359BCF'
         />
+        <br/><br/>
+        <div style={{ padding: '100px', position: 'relative' }}>
+          <Loader isLoading={true} isRelative={true} />
+        </div>
       </div>
     );
   },
