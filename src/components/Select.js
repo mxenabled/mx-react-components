@@ -199,7 +199,7 @@ const styles = {
     cursor: 'pointer',
     fontFamily: 'Helvetica, Arial, sans-serif',
     fontSize: '13px',
-    padding: '10px',
+    padding: '11px 10px 12px',
     position: 'relative',
     WebkitAppearance: 'none',
     boxSizing: 'border-box',
@@ -213,7 +213,7 @@ const styles = {
   },
   downArrow: {
     position: 'absolute',
-    right: 0,
+    right: '-5px',
     top: '50%',
     marginTop: '-10px'
   },
@@ -226,7 +226,7 @@ const styles = {
     borderRadius: '0 0 3px 3px',
     left: '-1px',
     right: '-1px',
-    margin: '8px 0 0 0',
+    margin: '10px 0 0 0',
     padding: '0',
     minWidth: '100%',
     position: 'absolute',
