@@ -1,5 +1,5 @@
 const React = require('react');
-const { Select, Icon } = require('../dist/Index');
+const { Select, Icon, RangeSelector } = require('../dist/Index');
 
 const styles = {
   block: {
@@ -271,7 +271,6 @@ const Demo = React.createClass({
           isMobile={false}
           onChange={this._handleSelectChange}
           options={icons}
-          optionsStyle={{}}
           optionStyle={{
             color: '#333'
           }}
@@ -280,12 +279,7 @@ const Demo = React.createClass({
             color: '#fff'
           }}
           placeholderText='Pick One'
-          scrimStyle={{}}
           selected={this.state.icon}
-          selectedStyle={{
-            fontSize: '16px',
-            fontWeight: 600
-          }}
           valid={true}
         />
         <br/><br/>
@@ -298,6 +292,46 @@ const Demo = React.createClass({
             }}
           />
         </div>
+        <br/><br/>
+        <RangeSelector
+          defaultLowerValue={18}
+          defaultUpperValue={30}
+          interval={1}
+          presets={[
+            {
+              lowerValue: 0,
+              upperValue: 13,
+              label: 'Gen Z'
+            },
+            {
+              lowerValue: 14,
+              upperValue: 34,
+              label: 'Millenials'
+            },
+            {
+              lowerValue: 10,
+              upperValue: 40,
+              label: 'Gen Y'
+            },
+            {
+              lowerValue: 36,
+              upperValue: 50,
+              label: 'Gen X'
+            },
+            {
+              lowerValue: 51,
+              upperValue: 72,
+              label: 'Baby Boomers'
+            },
+            {
+              lowerValue: 73,
+              upperValue: 90,
+              label: 'Silent'
+            }
+          ]}
+          range={100}
+          selectedColor='#359BCF'
+        />
       </div>
     );
   },
