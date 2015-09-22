@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    app: './demo/app.js'
+    app: './app.js'
   },
   module: {
     loaders: [
@@ -12,6 +12,6 @@ module.exports = {
     ]
   },
   output: {
-    filename: './demo/bundle.js'
+    filename: './bundle.js'
   }
 };
