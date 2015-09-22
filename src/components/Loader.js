@@ -1,5 +1,8 @@
 const React = require('react');
+
 const Spin = require('./Spin');
+
+const StyleConstants = require('../constants/Style');
 
 const Loader = React.createClass({
   propTypes: {
@@ -11,7 +14,7 @@ const Loader = React.createClass({
 
   getDefaultProps () {
     return {
-      color: '#333333',
+      color: StyleConstants.Colors.PRIMARY,
       isLoading: false,
       isRelative: false,
       isSmall: false
@@ -25,7 +28,7 @@ const Loader = React.createClass({
           backgroundColor: 'rgba(255,255,255,0.9)',
           bottom: 0,
           color: '#999',
-          fontFamily: 'Helvetica, Arial, sans-serif',
+          fontFamily: StyleConstants.FontFamily,
           fontSize: '10px',
           fontWeight: 600,
           left: 0,

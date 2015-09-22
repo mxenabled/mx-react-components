@@ -17,7 +17,7 @@ const Spin = React.createClass({
   componentDidMount () {
     const el = React.findDOMNode(this);
     const speed = this.props.speed;
-    const spinDirection = this.props.direction === 'clockwise' ? -1: 1;
+    const spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
     let rotation = 0;
 
     setInterval(() => {

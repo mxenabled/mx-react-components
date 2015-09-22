@@ -1,6 +1,8 @@
 const React = require('react');
-const objectAssign = require('object-assign');
+const Radium = require('radium');
 const _throttle = require('lodash/function/throttle');
+
+const StyleConstants = require('../constants/Style');
 
 const RangeSelector = React.createClass({
   propTypes: {
@@ -31,7 +33,7 @@ const RangeSelector = React.createClass({
       onUpperDragStop () {},
       presets: [],
       range: 100,
-      selectedColor: '#333'
+      selectedColor: StyleConstants.Colors.PRIMARY
     };
   },
 
@@ -160,7 +162,7 @@ const RangeSelector = React.createClass({
       component: {
         position: 'relative',
         fontSize: '11px',
-        fontFamily: 'Helvetica, Arial, sans-serif'
+        fontFamily: StyleConstants.FontFamily
       },
       presets: {
         position: 'absolute',
@@ -263,7 +265,7 @@ const RangeSelector = React.createClass({
     };
 
     return (
-      <div style={objectAssign(styles.component, this.props.style)}>
+      <div style={[styles.component, this.props.style]}>
         <div style={styles.presets}>
           {this.props.presets.map(preset => {
             return (
@@ -314,4 +316,4 @@ const RangeSelector = React.createClass({
   }
 });
 
-module.exports = RangeSelector;
+module.exports = Radium(RangeSelector);

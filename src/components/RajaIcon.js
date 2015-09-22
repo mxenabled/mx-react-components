@@ -1,20 +1,15 @@
 const React = require('react');
-const objectAssign = require('object-assign');
+const Radium = require('radium');
 
-module.exports = React.createClass({
+const RajaIcon = React.createClass({
   propTypes: {
-    size: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    style: React.PropTypes.object,
+    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     type: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
       size: 24,
-      style: {},
       type: 'b'
     };
   },
@@ -651,21 +646,20 @@ module.exports = React.createClass({
   },
 
   render () {
-    const userStyles = this.props.style;
-    const styles = objectAssign({
-      fill: userStyles.color,
+    const styles = {
+      fill: this.props.style.color,
       width: this.props.size,
       height: this.props.size,
       display: 'inline-block',
       verticalAlign: 'middle'
-    }, userStyles);
+    };
 
     return (
       <svg
         {...this.props}
         fit={true}
         preserveAspectRatio='xMidYMid meet'
-        style={styles}
+        style={[styles, this.props.style]}
         viewBox='0 0 1024 1024'
       >
         {this._renderSvg()}
@@ -673,3 +667,5 @@ module.exports = React.createClass({
     );
   }
 });
+
+module.exports = Radium(RajaIcon);
