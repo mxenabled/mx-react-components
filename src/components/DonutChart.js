@@ -29,7 +29,7 @@ const DonutChart = React.createClass({
       activeIndex: -1,
       activeOffset: 3,
       arcWidth: 80,
-      colors: [],
+      colors: d3.scale.category20().range(),
       data: [],
       height: 360,
       labelStyle: {},
