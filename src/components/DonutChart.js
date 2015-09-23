@@ -11,6 +11,7 @@ const DonutChart = React.createClass({
     colors: React.PropTypes.array,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
+    labelStyle: React.PropTypes.object,
     onClick: React.PropTypes.func,
     onMouseEnter: React.PropTypes.func,
     onMouseLeave: React.PropTypes.func,
@@ -25,9 +26,9 @@ const DonutChart = React.createClass({
 
   getDefaultProps () {
     return {
-      animate: true,
       activeIndex: -1,
       activeOffset: 3,
+      animate: true,
       arcWidth: 80,
       colors: d3.scale.category20().range(),
       data: [],
