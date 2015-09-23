@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
   entry: {
     app: './app.js'
@@ -21,5 +23,10 @@ module.exports = {
   },
   output: {
     filename: './bundle.js'
+  },
+  resolve: {
+    alias: {
+      components: path.join(__dirname, 'components')
+    }
   }
 };
