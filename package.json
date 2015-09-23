@@ -11,9 +11,13 @@
   "devDependencies": {
     "babel-core": "^5.6.15",
     "babel-loader": "^5.3.1",
+    "eslint-loader": "^1.0.0",
     "mx-react-components": "0.0.1",
     "node-libs-browser": "^0.5.2",
     "react": "*",
     "webpack": "^1.10.1"
+  },
+  "dependencies": {
+    "mx-react-components": "0.0.17"
   }
 }

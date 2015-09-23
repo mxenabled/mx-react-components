@@ -124,7 +124,7 @@
     "eol-last": 0,
     "func-names": 0,
     "func-style": 0,
-    "indent": [2, 2, {"indentSwitchCase": true}],
+    "indent": [2, 2, {"SwitchCase": 1}],
     "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
     "lines-around-comment": [2, {"beforeBlockComment": true, "beforeLineComment": false}],
     "linebreak-style": 2,

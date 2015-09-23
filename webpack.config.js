@@ -3,6 +3,14 @@ module.exports = {
     app: './app.js'
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        include: /components/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      }
+    ],
     loaders: [
       {
         test: /\.js$/,

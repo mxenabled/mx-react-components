@@ -1,17 +1,15 @@
 const React = require('react');
-const IconDocs = require('./components/Icon');
-const SelectDocs = require('./components/Select')
+const { Icon } = require('mx-react-components');
 
 const Docs = React.createClass({
   render () {
     return (
       <div>
-        <IconDocs />
-        <SelectDocs />
+        <Icon />
       </div>
     );
   }
 });
 
 
-React.render(<Docs />, document.getElementById('docs'));
+React.render(<Docs />, document.getElementById('content'));
