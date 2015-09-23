@@ -26998,7 +26998,7 @@
 	            React.createElement(
 	              'div',
 	              { className: 'feature' },
-	              React.createElement('img', { src: '../images/react-logo.png' }),
+	              React.createElement('img', { src: '/mx-react-components/images/react-logo.png' }),
 	              React.createElement(
 	                'h2',
 	                null,
@@ -27043,7 +27043,7 @@
 	            React.createElement(
 	              'div',
 	              { className: 'feature' },
-	              React.createElement('img', { src: '../images/radium-logo.png' }),
+	              React.createElement('img', { src: '/mx-react-components/images/radium-logo.png' }),
 	              React.createElement(
 	                'h2',
 	                null,
