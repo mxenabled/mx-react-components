@@ -21015,8 +21015,8 @@
 	      }
 	    };
 
-	    return React.createElement('div', { style: [styles.component, this.props.style] }, React.createElement('div', { style: styles.presets }, this.props.presets.map(function (preset) {
-	      return React.createElement('div', { onClick: _this._handlePresetClick.bind(null, preset), style: styles.preset }, preset.label);
+	    return React.createElement('div', { style: [styles.component, this.props.style] }, React.createElement('div', { style: styles.presets }, this.props.presets.map(function (preset, i) {
+	      return React.createElement('div', { key: preset.label + i, onClick: _this._handlePresetClick.bind(null, preset), style: styles.preset }, preset.label);
 	    }), React.createElement('div', { onClick: this._handleToggleViews, style: styles.preset }, 'Custom')), React.createElement('div', {
 	      onMouseLeave: this._handleMouseUp,
 	      onMouseMove: this._handleMouseMove,
