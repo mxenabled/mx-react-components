@@ -10,6 +10,8 @@ body, html {
   font-size: 13px;
   color: #2E323F;
   background: #ffffff;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -41,6 +43,13 @@ h1 {
   margin: 0 0 15px;
   line-height: 1.2em;
 }
+  h1 label {
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
 h2 {
   font-size: 24px;
@@ -56,6 +65,18 @@ h3 {
   font-weight: 300;
   text-transform: uppercase;
 }
+
+h5 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+  h5 label {
+    font-style: italic;
+    color: #999;
+    margin-left: 5px;
+    font-weight: 300;
+  }
 
 .flex {
   display: flex
@@ -115,6 +136,28 @@ h3 {
     text-align: center;
     margin-bottom: 50px;
   }
+
+.sideNav {
+  width: 20%;
+  margin-right: 60px;
+  border-right: 1px solid #e5e5e5;
+  text-align: right;
+  padding-bottom: 60px;
+}
+  .sideNav h3 {
+    padding-right: 40px;
+    font-size: 14px;
+  }
+  .sideNav a {
+    display: block;
+    margin-bottom: 10px;
+    padding-right: 40px;
+  }
+
+.content {
+  width: 80%;
+  padding: 60px 0;
+}
 
 footer {
   padding: 40px 0;

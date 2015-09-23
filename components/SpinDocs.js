@@ -1,10 +1,36 @@
 const React = require('react');
 
+const { Icon, Spin } = require('mx-react-components');
+
 const SpinDocs = React.createClass({
   render () {
     return (
       <div>
-        Spin Docs
+        <h1>
+          Spin
+          <label>A component used to rotate an element 360 degrees at a specified interval using CSS animations.</label>
+        </h1>
+
+        <h3>Demo</h3>
+        <Spin>
+          <Icon
+            size={50}
+            type='sync'
+          />
+        </Spin>
+
+        <h3>Usage</h3>
+        <h5>children <label>Node</label></h5>
+        <p>An element that you wish to spin.</p>
+
+        <h5>direction <label>String</label></h5>
+        <p>The direction of the spin. Available Options: counterclockwise, clockwise. Default: 'counterclockwise'</p>
+
+        <h5>speed <label>Number</label></h5>
+        <p>The time it takes the element to make 1 full rotation in milliseconds. Default: 1000</p>
+
+        <h3>Example</h3>
+
       </div>
     );
   }
