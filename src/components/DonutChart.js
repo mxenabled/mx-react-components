@@ -2,14 +2,18 @@ const React = require('react');
 const d3 = require('d3');
 const objectAssign = require('object-assign');
 
+const DonutPath = require('./DonutPath')
+
 const DonutChart = React.createClass({
   propTypes: {
     activeIndex: React.PropTypes.number,
     activeOffset: React.PropTypes.number,
-    animate: React.PropTypes.bool,
+    animateOnHover: React.PropTypes.bool,
+    animateOnLoad: React.PropTypes.bool,
     arcWidth: React.PropTypes.number,
     baseArcColor: React.PropTypes.string,
     chartTotal: React.PropTypes.number,
+    children: React.PropTypes.node,
     colors: React.PropTypes.array,
     data: React.PropTypes.array.isRequired,
     dataPoints: React.PropTypes.array,
@@ -27,14 +31,16 @@ const DonutChart = React.createClass({
     showLegend: React.PropTypes.bool,
     valueFormat: React.PropTypes.object,
     valueStyle: React.PropTypes.object,
-    width: React.PropTypes.number
+    width: React.PropTypes.number,
+    zeroStateText: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
       activeIndex: -1,
       activeOffset: 3,
-      animate: true,
+      animateOnHover: true,
+      animateOnLoad: true,
       arcWidth: 80,
       baseArcColor: '#E5E5E5',
       colors: d3.scale.category20().range(),
@@ -54,7 +60,8 @@ const DonutChart = React.createClass({
       showLegend: true,
       valueFormat: {},
       valueStyle: {},
-      width: 360
+      width: 360,
+      zeroStateText: 'Roll over an item for details'
     };
   },
 
@@ -78,7 +85,7 @@ const DonutChart = React.createClass({
 
 
       return values.map((point, i) => {
-        const arc = this.props.activeIndex === i && this.props.animate ? hoverArc : standardArc;
+        const arc = this.props.activeIndex === i && this.props.animateOnHover ? hoverArc : standardArc;
 
         return (
           <g
@@ -87,7 +94,7 @@ const DonutChart = React.createClass({
             onMouseEnter={this.props.onMouseEnter.bind(null, i)}
             onMouseLeave={this.props.onMouseLeave}
           >
-            <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity}></path>
+            <DonutPath {...this.props} arc={arc} color={this.props.colors[i]} value={point} />
           </g>
         );
       });
@@ -137,36 +144,54 @@ const DonutChart = React.createClass({
   },
 
   _renderLegend () {
-    if (this.props.showLegend && this.props.activeIndex > -1) {
-      const activeDataSet = this.props.data[this.props.activeIndex] || {};
-      const color = this.props.colors[this.props.activeIndex];
-      const labelStyle = objectAssign({
-        color: '#333',
-        fontSize: '18px',
-        fontWeight: '800'
-      }, this.props.labelStyle);
-      const valueStyle = objectAssign({
-        color,
-        fontSize: '28px',
-        fontWeight: '400'
-      }, this.props.valueStyle);
-      const valueFormat = objectAssign({
-        decimals: 0,
-        leading: '',
-        trailing: ''
-      }, this.props.valueFormat);
-      const value = valueFormat.leading + parseFloat(activeDataSet.value).toFixed(valueFormat.decimals) + valueFormat.trailing;
+    if (this.props.showLegend) {
+      if (this.props.children) {
+        return (
+          <div onClick={this.props.onClick} style={styles.center}>
+            {this.props.children}
+          </div>
+        );
+      } else {
+        const labelStyle = objectAssign({
+          color: '#333',
+          fontSize: '18px',
+          fontWeight: '800'
+        }, this.props.labelStyle);
+        if (this.props.activeIndex >= 0) {
+          const activeDataSet = this.props.data[this.props.activeIndex] || {};
+          const color = this.props.colors[this.props.activeIndex];
+          const valueStyle = objectAssign({
+            color,
+            fontSize: '28px',
+            fontWeight: '400'
+          }, this.props.valueStyle);
+          const valueFormat = objectAssign({
+            decimals: 0,
+            leading: '',
+            trailing: ''
+          }, this.props.valueFormat);
+          const value = valueFormat.leading + parseFloat(activeDataSet.value).toFixed(valueFormat.decimals) + valueFormat.trailing;
 
-      return (
-        <div style={styles.center}>
-            <div style={this.props.labelStyle}>
-              {activeDataSet.name}
+          return (
+            <div onClick={this.props.onClick} style={styles.center}>
+                <div style={this.props.labelStyle}>
+                  {activeDataSet.name}
+                </div>
+                <div style={valueStyle}>
+                  {value}
+                </div>
             </div>
-            <div style={valueStyle}>
-              {value}
+          );
+        } else {
+          return (
+            <div onClick={this.props.onClick} style={styles.center}>
+                <div style={this.props.labelStyle}>
+                  {this.props.zeroStateText}
+                </div>
             </div>
-        </div>
-      );
+          );
+        }
+      }
     }
   },
 
