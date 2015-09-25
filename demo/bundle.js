@@ -52,6 +52,8 @@
 
 	var Select = _require.Select;
 	var Icon = _require.Icon;
+	var RangeSelector = _require.RangeSelector;
+	var Loader = _require.Loader;
 
 	var styles = {
 	  block: {
@@ -270,7 +272,6 @@
 	        isMobile: false,
 	        onChange: this._handleSelectChange,
 	        options: icons,
-	        optionsStyle: {},
 	        optionStyle: {
 	          color: '#333'
 	        },
@@ -279,12 +280,7 @@
 	          color: '#fff'
 	        },
 	        placeholderText: 'Pick One',
-	        scrimStyle: {},
 	        selected: this.state.icon,
-	        selectedStyle: {
-	          fontSize: '16px',
-	          fontWeight: 600
-	        },
 	        valid: true
 	      }),
 	      React.createElement('br', null),
@@ -299,6 +295,47 @@
 	            color: '#359BCF'
 	          }
 	        })
+	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(RangeSelector, {
+	        defaultLowerValue: 18,
+	        defaultUpperValue: 30,
+	        interval: 1,
+	        presets: [{
+	          lowerValue: 0,
+	          upperValue: 13,
+	          label: 'Gen Z'
+	        }, {
+	          lowerValue: 14,
+	          upperValue: 34,
+	          label: 'Millenials'
+	        }, {
+	          lowerValue: 10,
+	          upperValue: 40,
+	          label: 'Gen Y'
+	        }, {
+	          lowerValue: 36,
+	          upperValue: 50,
+	          label: 'Gen X'
+	        }, {
+	          lowerValue: 51,
+	          upperValue: 72,
+	          label: 'Baby Boomers'
+	        }, {
+	          lowerValue: 73,
+	          upperValue: 90,
+	          label: 'Silent'
+	        }],
+	        range: 100,
+	        selectedColor: '#359BCF'
+	      }),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { style: { padding: '100px', position: 'relative' } },
+	        React.createElement(Loader, { isLoading: true, isRelative: true })
 	      )
 	    );
 	  },
@@ -345,15 +382,15 @@
 	var ReactContext = __webpack_require__(12);
 	var ReactCurrentOwner = __webpack_require__(17);
 	var ReactElement = __webpack_require__(11);
-	var ReactElementValidator = __webpack_require__(32);
+	var ReactElementValidator = __webpack_require__(30);
 	var ReactDOM = __webpack_require__(40);
 	var ReactDOMTextComponent = __webpack_require__(42);
 	var ReactDefaultInjection = __webpack_require__(91);
-	var ReactInstanceHandles = __webpack_require__(19);
+	var ReactInstanceHandles = __webpack_require__(20);
 	var ReactMount = __webpack_require__(67);
-	var ReactPerf = __webpack_require__(28);
+	var ReactPerf = __webpack_require__(26);
 	var ReactPropTypes = __webpack_require__(122);
-	var ReactReconciler = __webpack_require__(29);
+	var ReactReconciler = __webpack_require__(27);
 	var ReactServerRendering = __webpack_require__(154);
 
 	var assign = __webpack_require__(13);
@@ -476,7 +513,7 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	// shim for using process in browser
 
@@ -1845,7 +1882,7 @@
 
 /***/ },
 /* 13 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2014-2015, Facebook, Inc.
@@ -1991,7 +2028,7 @@
 
 /***/ },
 /* 16 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -2029,7 +2066,7 @@
 
 /***/ },
 /* 17 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -2084,9 +2121,9 @@
 
 	var ReactElement = __webpack_require__(11);
 	var ReactFragment = __webpack_require__(10);
-	var ReactInstanceHandles = __webpack_require__(19);
+	var ReactInstanceHandles = __webpack_require__(20);
 
-	var getIteratorFn = __webpack_require__(21);
+	var getIteratorFn = __webpack_require__(19);
 	var invariant = __webpack_require__(7);
 	var warning = __webpack_require__(15);
 
@@ -2325,6 +2362,54 @@
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule getIteratorFn
+	 * @typechecks static-only
+	 */
+
+	'use strict';
+
+	/* global Symbol */
+	var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+	var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+	/**
+	 * Returns the iterator method function contained on the iterable object.
+	 *
+	 * Be sure to invoke the function with the iterable as context:
+	 *
+	 *     var iteratorFn = getIteratorFn(myIterable);
+	 *     if (iteratorFn) {
+	 *       var iterator = iteratorFn.call(myIterable);
+	 *       ...
+	 *     }
+	 *
+	 * @param {?object} maybeIterable
+	 * @return {?function}
+	 */
+	function getIteratorFn(maybeIterable) {
+	  var iteratorFn = maybeIterable && (
+	    (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL])
+	  );
+	  if (typeof iteratorFn === 'function') {
+	    return iteratorFn;
+	  }
+	}
+
+	module.exports = getIteratorFn;
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {/**
 	 * Copyright 2013-2015, Facebook, Inc.
 	 * All rights reserved.
@@ -2339,7 +2424,7 @@
 
 	'use strict';
 
-	var ReactRootIndex = __webpack_require__(20);
+	var ReactRootIndex = __webpack_require__(21);
 
 	var invariant = __webpack_require__(7);
 
@@ -2661,8 +2746,8 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 20 */
-/***/ function(module, exports) {
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -2693,54 +2778,6 @@
 	};
 
 	module.exports = ReactRootIndex;
-
-
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule getIteratorFn
-	 * @typechecks static-only
-	 */
-
-	'use strict';
-
-	/* global Symbol */
-	var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-	var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-
-	/**
-	 * Returns the iterator method function contained on the iterable object.
-	 *
-	 * Be sure to invoke the function with the iterable as context:
-	 *
-	 *     var iteratorFn = getIteratorFn(myIterable);
-	 *     if (iteratorFn) {
-	 *       var iterator = iteratorFn.call(myIterable);
-	 *       ...
-	 *     }
-	 *
-	 * @param {?object} maybeIterable
-	 * @return {?function}
-	 */
-	function getIteratorFn(maybeIterable) {
-	  var iteratorFn = maybeIterable && (
-	    (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL])
-	  );
-	  if (typeof iteratorFn === 'function') {
-	    return iteratorFn;
-	  }
-	}
-
-	module.exports = getIteratorFn;
 
 
 /***/ },
@@ -2917,11 +2954,11 @@
 
 	'use strict';
 
-	var ReactLifeCycle = __webpack_require__(24);
+	var ReactLifeCycle = __webpack_require__(35);
 	var ReactCurrentOwner = __webpack_require__(17);
 	var ReactElement = __webpack_require__(11);
-	var ReactInstanceMap = __webpack_require__(25);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactInstanceMap = __webpack_require__(36);
+	var ReactUpdates = __webpack_require__(24);
 
 	var assign = __webpack_require__(13);
 	var invariant = __webpack_require__(7);
@@ -3204,100 +3241,6 @@
 
 /***/ },
 /* 24 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactLifeCycle
-	 */
-
-	'use strict';
-
-	/**
-	 * This module manages the bookkeeping when a component is in the process
-	 * of being mounted or being unmounted. This is used as a way to enforce
-	 * invariants (or warnings) when it is not recommended to call
-	 * setState/forceUpdate.
-	 *
-	 * currentlyMountingInstance: During the construction phase, it is not possible
-	 * to trigger an update since the instance is not fully mounted yet. However, we
-	 * currently allow this as a convenience for mutating the initial state.
-	 *
-	 * currentlyUnmountingInstance: During the unmounting phase, the instance is
-	 * still mounted and can therefore schedule an update. However, this is not
-	 * recommended and probably an error since it's about to be unmounted.
-	 * Therefore we still want to trigger in an error for that case.
-	 */
-
-	var ReactLifeCycle = {
-	  currentlyMountingInstance: null,
-	  currentlyUnmountingInstance: null
-	};
-
-	module.exports = ReactLifeCycle;
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactInstanceMap
-	 */
-
-	'use strict';
-
-	/**
-	 * `ReactInstanceMap` maintains a mapping from a public facing stateful
-	 * instance (key) and the internal representation (value). This allows public
-	 * methods to accept the user facing instance as an argument and map them back
-	 * to internal methods.
-	 */
-
-	// TODO: Replace this with ES6: var ReactInstanceMap = new Map();
-	var ReactInstanceMap = {
-
-	  /**
-	   * This API should be called `delete` but we'd have to make sure to always
-	   * transform these to strings for IE support. When this transform is fully
-	   * supported we can rename it.
-	   */
-	  remove: function(key) {
-	    key._reactInternalInstance = undefined;
-	  },
-
-	  get: function(key) {
-	    return key._reactInternalInstance;
-	  },
-
-	  has: function(key) {
-	    return key._reactInternalInstance !== undefined;
-	  },
-
-	  set: function(key, value) {
-	    key._reactInternalInstance = value;
-	  }
-
-	};
-
-	module.exports = ReactInstanceMap;
-
-
-/***/ },
-/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3313,12 +3256,12 @@
 
 	'use strict';
 
-	var CallbackQueue = __webpack_require__(27);
+	var CallbackQueue = __webpack_require__(25);
 	var PooledClass = __webpack_require__(9);
 	var ReactCurrentOwner = __webpack_require__(17);
-	var ReactPerf = __webpack_require__(28);
-	var ReactReconciler = __webpack_require__(29);
-	var Transaction = __webpack_require__(36);
+	var ReactPerf = __webpack_require__(26);
+	var ReactReconciler = __webpack_require__(27);
+	var Transaction = __webpack_require__(34);
 
 	var assign = __webpack_require__(13);
 	var invariant = __webpack_require__(7);
@@ -3582,7 +3525,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 27 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3685,7 +3628,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 28 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3792,7 +3735,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 29 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -3808,8 +3751,8 @@
 
 	'use strict';
 
-	var ReactRef = __webpack_require__(30);
-	var ReactElementValidator = __webpack_require__(32);
+	var ReactRef = __webpack_require__(28);
+	var ReactElementValidator = __webpack_require__(30);
 
 	/**
 	 * Helper to call ReactRef.attachRefs with this composite component, split out
@@ -3919,7 +3862,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 30 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3935,7 +3878,7 @@
 
 	'use strict';
 
-	var ReactOwner = __webpack_require__(31);
+	var ReactOwner = __webpack_require__(29);
 
 	var ReactRef = {};
 
@@ -3994,7 +3937,7 @@
 
 
 /***/ },
-/* 31 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -4109,7 +4052,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 32 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -4134,12 +4077,12 @@
 
 	var ReactElement = __webpack_require__(11);
 	var ReactFragment = __webpack_require__(10);
-	var ReactPropTypeLocations = __webpack_require__(33);
-	var ReactPropTypeLocationNames = __webpack_require__(34);
+	var ReactPropTypeLocations = __webpack_require__(31);
+	var ReactPropTypeLocationNames = __webpack_require__(32);
 	var ReactCurrentOwner = __webpack_require__(17);
-	var ReactNativeComponent = __webpack_require__(35);
+	var ReactNativeComponent = __webpack_require__(33);
 
-	var getIteratorFn = __webpack_require__(21);
+	var getIteratorFn = __webpack_require__(19);
 	var invariant = __webpack_require__(7);
 	var warning = __webpack_require__(15);
 
@@ -4577,7 +4520,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 33 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4605,7 +4548,7 @@
 
 
 /***/ },
-/* 34 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -4636,7 +4579,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 35 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -4746,7 +4689,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 36 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -4990,6 +4933,100 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactLifeCycle
+	 */
+
+	'use strict';
+
+	/**
+	 * This module manages the bookkeeping when a component is in the process
+	 * of being mounted or being unmounted. This is used as a way to enforce
+	 * invariants (or warnings) when it is not recommended to call
+	 * setState/forceUpdate.
+	 *
+	 * currentlyMountingInstance: During the construction phase, it is not possible
+	 * to trigger an update since the instance is not fully mounted yet. However, we
+	 * currently allow this as a convenience for mutating the initial state.
+	 *
+	 * currentlyUnmountingInstance: During the unmounting phase, the instance is
+	 * still mounted and can therefore schedule an update. However, this is not
+	 * recommended and probably an error since it's about to be unmounted.
+	 * Therefore we still want to trigger in an error for that case.
+	 */
+
+	var ReactLifeCycle = {
+	  currentlyMountingInstance: null,
+	  currentlyUnmountingInstance: null
+	};
+
+	module.exports = ReactLifeCycle;
+
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactInstanceMap
+	 */
+
+	'use strict';
+
+	/**
+	 * `ReactInstanceMap` maintains a mapping from a public facing stateful
+	 * instance (key) and the internal representation (value). This allows public
+	 * methods to accept the user facing instance as an argument and map them back
+	 * to internal methods.
+	 */
+
+	// TODO: Replace this with ES6: var ReactInstanceMap = new Map();
+	var ReactInstanceMap = {
+
+	  /**
+	   * This API should be called `delete` but we'd have to make sure to always
+	   * transform these to strings for IE support. When this transform is fully
+	   * supported we can rename it.
+	   */
+	  remove: function(key) {
+	    key._reactInternalInstance = undefined;
+	  },
+
+	  get: function(key) {
+	    return key._reactInternalInstance;
+	  },
+
+	  has: function(key) {
+	    return key._reactInternalInstance !== undefined;
+	  },
+
+	  set: function(key, value) {
+	    key._reactInternalInstance = value;
+	  }
+
+	};
+
+	module.exports = ReactInstanceMap;
+
+
+/***/ },
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5010,10 +5047,10 @@
 	var ReactCurrentOwner = __webpack_require__(17);
 	var ReactElement = __webpack_require__(11);
 	var ReactErrorUtils = __webpack_require__(38);
-	var ReactInstanceMap = __webpack_require__(25);
-	var ReactLifeCycle = __webpack_require__(24);
-	var ReactPropTypeLocations = __webpack_require__(33);
-	var ReactPropTypeLocationNames = __webpack_require__(34);
+	var ReactInstanceMap = __webpack_require__(36);
+	var ReactLifeCycle = __webpack_require__(35);
+	var ReactPropTypeLocations = __webpack_require__(31);
+	var ReactPropTypeLocationNames = __webpack_require__(32);
 	var ReactUpdateQueue = __webpack_require__(23);
 
 	var assign = __webpack_require__(13);
@@ -5940,7 +5977,7 @@
 
 /***/ },
 /* 38 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -5976,7 +6013,7 @@
 
 /***/ },
 /* 39 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -6033,7 +6070,7 @@
 	'use strict';
 
 	var ReactElement = __webpack_require__(11);
-	var ReactElementValidator = __webpack_require__(32);
+	var ReactElementValidator = __webpack_require__(30);
 
 	var mapObject = __webpack_require__(41);
 
@@ -6198,7 +6235,7 @@
 
 /***/ },
 /* 41 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -6905,7 +6942,7 @@
 
 /***/ },
 /* 46 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -7022,7 +7059,7 @@
 	var DOMChildrenOperations = __webpack_require__(58);
 	var DOMPropertyOperations = __webpack_require__(43);
 	var ReactMount = __webpack_require__(67);
-	var ReactPerf = __webpack_require__(28);
+	var ReactPerf = __webpack_require__(26);
 
 	var invariant = __webpack_require__(7);
 	var setInnerHTML = __webpack_require__(66);
@@ -7356,7 +7393,7 @@
 
 /***/ },
 /* 50 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -7485,7 +7522,7 @@
 
 /***/ },
 /* 51 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -7579,7 +7616,7 @@
 
 /***/ },
 /* 53 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -7722,7 +7759,7 @@
 
 /***/ },
 /* 56 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -7759,7 +7796,7 @@
 
 /***/ },
 /* 57 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -8702,15 +8739,15 @@
 	var ReactBrowserEventEmitter = __webpack_require__(68);
 	var ReactCurrentOwner = __webpack_require__(17);
 	var ReactElement = __webpack_require__(11);
-	var ReactElementValidator = __webpack_require__(32);
+	var ReactElementValidator = __webpack_require__(30);
 	var ReactEmptyComponent = __webpack_require__(76);
-	var ReactInstanceHandles = __webpack_require__(19);
-	var ReactInstanceMap = __webpack_require__(25);
+	var ReactInstanceHandles = __webpack_require__(20);
+	var ReactInstanceMap = __webpack_require__(36);
 	var ReactMarkupChecksum = __webpack_require__(77);
-	var ReactPerf = __webpack_require__(28);
-	var ReactReconciler = __webpack_require__(29);
+	var ReactPerf = __webpack_require__(26);
+	var ReactReconciler = __webpack_require__(27);
 	var ReactUpdateQueue = __webpack_require__(23);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactUpdates = __webpack_require__(24);
 
 	var emptyObject = __webpack_require__(14);
 	var containsNode = __webpack_require__(79);
@@ -10567,7 +10604,7 @@
 
 /***/ },
 /* 72 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -10656,7 +10693,7 @@
 
 /***/ },
 /* 74 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -10774,7 +10811,7 @@
 	'use strict';
 
 	var ReactElement = __webpack_require__(11);
-	var ReactInstanceMap = __webpack_require__(25);
+	var ReactInstanceMap = __webpack_require__(36);
 
 	var invariant = __webpack_require__(7);
 
@@ -10908,7 +10945,7 @@
 
 /***/ },
 /* 78 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -11023,7 +11060,7 @@
 
 /***/ },
 /* 81 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -11054,7 +11091,7 @@
 
 /***/ },
 /* 82 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -11111,7 +11148,7 @@
 
 	var ReactCompositeComponent = __webpack_require__(84);
 	var ReactEmptyComponent = __webpack_require__(76);
-	var ReactNativeComponent = __webpack_require__(35);
+	var ReactNativeComponent = __webpack_require__(33);
 
 	var assign = __webpack_require__(13);
 	var invariant = __webpack_require__(7);
@@ -11253,15 +11290,15 @@
 	var ReactContext = __webpack_require__(12);
 	var ReactCurrentOwner = __webpack_require__(17);
 	var ReactElement = __webpack_require__(11);
-	var ReactElementValidator = __webpack_require__(32);
-	var ReactInstanceMap = __webpack_require__(25);
-	var ReactLifeCycle = __webpack_require__(24);
-	var ReactNativeComponent = __webpack_require__(35);
-	var ReactPerf = __webpack_require__(28);
-	var ReactPropTypeLocations = __webpack_require__(33);
-	var ReactPropTypeLocationNames = __webpack_require__(34);
-	var ReactReconciler = __webpack_require__(29);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactElementValidator = __webpack_require__(30);
+	var ReactInstanceMap = __webpack_require__(36);
+	var ReactLifeCycle = __webpack_require__(35);
+	var ReactNativeComponent = __webpack_require__(33);
+	var ReactPerf = __webpack_require__(26);
+	var ReactPropTypeLocations = __webpack_require__(31);
+	var ReactPropTypeLocationNames = __webpack_require__(32);
+	var ReactReconciler = __webpack_require__(27);
+	var ReactUpdates = __webpack_require__(24);
 
 	var assign = __webpack_require__(13);
 	var emptyObject = __webpack_require__(14);
@@ -12347,7 +12384,7 @@
 	  __webpack_require__(47);
 	var ReactMount = __webpack_require__(67);
 	var ReactMultiChild = __webpack_require__(88);
-	var ReactPerf = __webpack_require__(28);
+	var ReactPerf = __webpack_require__(26);
 
 	var assign = __webpack_require__(13);
 	var escapeTextContentForBrowser = __webpack_require__(46);
@@ -12853,7 +12890,7 @@
 	var ReactComponentEnvironment = __webpack_require__(85);
 	var ReactMultiChildUpdateTypes = __webpack_require__(64);
 
-	var ReactReconciler = __webpack_require__(29);
+	var ReactReconciler = __webpack_require__(27);
 	var ReactChildReconciler = __webpack_require__(89);
 
 	/**
@@ -13284,7 +13321,7 @@
 
 	'use strict';
 
-	var ReactReconciler = __webpack_require__(29);
+	var ReactReconciler = __webpack_require__(27);
 
 	var flattenChildren = __webpack_require__(90);
 	var instantiateReactComponent = __webpack_require__(83);
@@ -13502,7 +13539,7 @@
 	var ReactElement = __webpack_require__(11);
 	var ReactEventListener = __webpack_require__(126);
 	var ReactInjection = __webpack_require__(129);
-	var ReactInstanceHandles = __webpack_require__(19);
+	var ReactInstanceHandles = __webpack_require__(20);
 	var ReactMount = __webpack_require__(67);
 	var ReactReconcileTransaction = __webpack_require__(130);
 	var SelectEventPlugin = __webpack_require__(136);
@@ -14621,7 +14658,7 @@
 
 /***/ },
 /* 98 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -14725,7 +14762,7 @@
 	var EventPluginHub = __webpack_require__(69);
 	var EventPropagators = __webpack_require__(93);
 	var ExecutionEnvironment = __webpack_require__(51);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactUpdates = __webpack_require__(24);
 	var SyntheticEvent = __webpack_require__(97);
 
 	var isEventSupported = __webpack_require__(75);
@@ -15092,7 +15129,7 @@
 
 /***/ },
 /* 101 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -15139,7 +15176,7 @@
 
 /***/ },
 /* 102 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -15506,7 +15543,7 @@
 
 /***/ },
 /* 107 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -15886,7 +15923,7 @@
 	'use strict';
 
 	var ReactCurrentOwner = __webpack_require__(17);
-	var ReactInstanceMap = __webpack_require__(25);
+	var ReactInstanceMap = __webpack_require__(36);
 	var ReactMount = __webpack_require__(67);
 
 	var invariant = __webpack_require__(7);
@@ -15960,8 +15997,8 @@
 
 	'use strict';
 
-	var ReactUpdates = __webpack_require__(26);
-	var Transaction = __webpack_require__(36);
+	var ReactUpdates = __webpack_require__(24);
+	var Transaction = __webpack_require__(34);
 
 	var assign = __webpack_require__(13);
 	var emptyFunction = __webpack_require__(16);
@@ -16121,7 +16158,7 @@
 
 /***/ },
 /* 115 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2014-2015, Facebook, Inc.
@@ -16388,7 +16425,7 @@
 	var ReactClass = __webpack_require__(37);
 	var ReactElement = __webpack_require__(11);
 	var ReactMount = __webpack_require__(67);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactUpdates = __webpack_require__(24);
 
 	var assign = __webpack_require__(13);
 	var invariant = __webpack_require__(7);
@@ -16722,7 +16759,7 @@
 
 	var ReactElement = __webpack_require__(11);
 	var ReactFragment = __webpack_require__(10);
-	var ReactPropTypeLocationNames = __webpack_require__(34);
+	var ReactPropTypeLocationNames = __webpack_require__(32);
 
 	var emptyFunction = __webpack_require__(16);
 
@@ -17133,7 +17170,7 @@
 	var ReactBrowserComponentMixin = __webpack_require__(110);
 	var ReactClass = __webpack_require__(37);
 	var ReactElement = __webpack_require__(11);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactUpdates = __webpack_require__(24);
 
 	var assign = __webpack_require__(13);
 
@@ -17316,7 +17353,7 @@
 	var ReactBrowserComponentMixin = __webpack_require__(110);
 	var ReactClass = __webpack_require__(37);
 	var ReactElement = __webpack_require__(11);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactUpdates = __webpack_require__(24);
 
 	var assign = __webpack_require__(13);
 	var invariant = __webpack_require__(7);
@@ -17457,9 +17494,9 @@
 	var EventListener = __webpack_require__(127);
 	var ExecutionEnvironment = __webpack_require__(51);
 	var PooledClass = __webpack_require__(9);
-	var ReactInstanceHandles = __webpack_require__(19);
+	var ReactInstanceHandles = __webpack_require__(20);
 	var ReactMount = __webpack_require__(67);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactUpdates = __webpack_require__(24);
 
 	var assign = __webpack_require__(13);
 	var getEventTarget = __webpack_require__(98);
@@ -17718,7 +17755,7 @@
 
 /***/ },
 /* 128 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -17783,11 +17820,11 @@
 	var ReactClass = __webpack_require__(37);
 	var ReactEmptyComponent = __webpack_require__(76);
 	var ReactBrowserEventEmitter = __webpack_require__(68);
-	var ReactNativeComponent = __webpack_require__(35);
+	var ReactNativeComponent = __webpack_require__(33);
 	var ReactDOMComponent = __webpack_require__(87);
-	var ReactPerf = __webpack_require__(28);
-	var ReactRootIndex = __webpack_require__(20);
-	var ReactUpdates = __webpack_require__(26);
+	var ReactPerf = __webpack_require__(26);
+	var ReactRootIndex = __webpack_require__(21);
+	var ReactUpdates = __webpack_require__(24);
 
 	var ReactInjection = {
 	  Component: ReactComponentEnvironment.injection,
@@ -17824,12 +17861,12 @@
 
 	'use strict';
 
-	var CallbackQueue = __webpack_require__(27);
+	var CallbackQueue = __webpack_require__(25);
 	var PooledClass = __webpack_require__(9);
 	var ReactBrowserEventEmitter = __webpack_require__(68);
 	var ReactInputSelection = __webpack_require__(131);
 	var ReactPutListenerQueue = __webpack_require__(135);
-	var Transaction = __webpack_require__(36);
+	var Transaction = __webpack_require__(34);
 
 	var assign = __webpack_require__(13);
 
@@ -18344,7 +18381,7 @@
 
 /***/ },
 /* 133 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -18423,7 +18460,7 @@
 
 /***/ },
 /* 134 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -18715,7 +18752,7 @@
 
 /***/ },
 /* 137 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -18763,7 +18800,7 @@
 
 /***/ },
 /* 138 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -18816,17 +18853,17 @@
 	var EventConstants = __webpack_require__(5);
 	var EventPluginUtils = __webpack_require__(4);
 	var EventPropagators = __webpack_require__(93);
-	var SyntheticClipboardEvent = __webpack_require__(140);
+	var SyntheticClipboardEvent = __webpack_require__(141);
 	var SyntheticEvent = __webpack_require__(97);
-	var SyntheticFocusEvent = __webpack_require__(141);
-	var SyntheticKeyboardEvent = __webpack_require__(142);
+	var SyntheticFocusEvent = __webpack_require__(142);
+	var SyntheticKeyboardEvent = __webpack_require__(143);
 	var SyntheticMouseEvent = __webpack_require__(105);
-	var SyntheticDragEvent = __webpack_require__(145);
+	var SyntheticDragEvent = __webpack_require__(140);
 	var SyntheticTouchEvent = __webpack_require__(146);
 	var SyntheticUIEvent = __webpack_require__(106);
 	var SyntheticWheelEvent = __webpack_require__(147);
 
-	var getEventCharCode = __webpack_require__(143);
+	var getEventCharCode = __webpack_require__(144);
 
 	var invariant = __webpack_require__(7);
 	var keyOf = __webpack_require__(39);
@@ -19239,6 +19276,49 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
+	 * @providesModule SyntheticDragEvent
+	 * @typechecks static-only
+	 */
+
+	'use strict';
+
+	var SyntheticMouseEvent = __webpack_require__(105);
+
+	/**
+	 * @interface DragEvent
+	 * @see http://www.w3.org/TR/DOM-Level-3-Events/
+	 */
+	var DragEventInterface = {
+	  dataTransfer: null
+	};
+
+	/**
+	 * @param {object} dispatchConfig Configuration used to dispatch this event.
+	 * @param {string} dispatchMarker Marker identifying the event target.
+	 * @param {object} nativeEvent Native browser event.
+	 * @extends {SyntheticUIEvent}
+	 */
+	function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent) {
+	  SyntheticMouseEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent);
+	}
+
+	SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
+
+	module.exports = SyntheticDragEvent;
+
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
 	 * @providesModule SyntheticClipboardEvent
 	 * @typechecks static-only
 	 */
@@ -19277,7 +19357,7 @@
 
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19320,7 +19400,7 @@
 
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19339,8 +19419,8 @@
 
 	var SyntheticUIEvent = __webpack_require__(106);
 
-	var getEventCharCode = __webpack_require__(143);
-	var getEventKey = __webpack_require__(144);
+	var getEventCharCode = __webpack_require__(144);
+	var getEventKey = __webpack_require__(145);
 	var getEventModifierState = __webpack_require__(107);
 
 	/**
@@ -19411,8 +19491,8 @@
 
 
 /***/ },
-/* 143 */
-/***/ function(module, exports) {
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -19467,7 +19547,7 @@
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19484,7 +19564,7 @@
 
 	'use strict';
 
-	var getEventCharCode = __webpack_require__(143);
+	var getEventCharCode = __webpack_require__(144);
 
 	/**
 	 * Normalization of deprecated HTML5 `key` values
@@ -19573,49 +19653,6 @@
 	}
 
 	module.exports = getEventKey;
-
-
-/***/ },
-/* 145 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule SyntheticDragEvent
-	 * @typechecks static-only
-	 */
-
-	'use strict';
-
-	var SyntheticMouseEvent = __webpack_require__(105);
-
-	/**
-	 * @interface DragEvent
-	 * @see http://www.w3.org/TR/DOM-Level-3-Events/
-	 */
-	var DragEventInterface = {
-	  dataTransfer: null
-	};
-
-	/**
-	 * @param {object} dispatchConfig Configuration used to dispatch this event.
-	 * @param {string} dispatchMarker Marker identifying the event target.
-	 * @param {object} nativeEvent Native browser event.
-	 * @extends {SyntheticUIEvent}
-	 */
-	function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent) {
-	  SyntheticMouseEvent.call(this, dispatchConfig, dispatchMarker, nativeEvent);
-	}
-
-	SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
-
-	module.exports = SyntheticDragEvent;
 
 
 /***/ },
@@ -19919,7 +19956,7 @@
 	var DOMProperty = __webpack_require__(44);
 	var ReactDefaultPerfAnalysis = __webpack_require__(151);
 	var ReactMount = __webpack_require__(67);
-	var ReactPerf = __webpack_require__(28);
+	var ReactPerf = __webpack_require__(26);
 
 	var performanceNow = __webpack_require__(152);
 
@@ -20460,7 +20497,7 @@
 	'use strict';
 
 	var ReactElement = __webpack_require__(11);
-	var ReactInstanceHandles = __webpack_require__(19);
+	var ReactInstanceHandles = __webpack_require__(20);
 	var ReactMarkupChecksum = __webpack_require__(77);
 	var ReactServerRenderingTransaction =
 	  __webpack_require__(155);
@@ -20546,9 +20583,9 @@
 	'use strict';
 
 	var PooledClass = __webpack_require__(9);
-	var CallbackQueue = __webpack_require__(27);
+	var CallbackQueue = __webpack_require__(25);
 	var ReactPutListenerQueue = __webpack_require__(135);
-	var Transaction = __webpack_require__(36);
+	var Transaction = __webpack_require__(34);
 
 	var assign = __webpack_require__(13);
 	var emptyFunction = __webpack_require__(16);
@@ -20694,12 +20731,2605 @@
 	'use strict';
 
 	module.exports = {
-	  Icon: __webpack_require__(158),
-	  Select: __webpack_require__(160)
+	  Icon: __webpack_require__(191),
+	  Loader: __webpack_require__(192),
+	  RajaIcon: __webpack_require__(194),
+	  RangeSelector: __webpack_require__(158),
+	  Select: __webpack_require__(195),
+	  Spin: __webpack_require__(193)
 	};
 
 /***/ },
 /* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Radium = __webpack_require__(159);
+	var _throttle = __webpack_require__(182);
+
+	var StyleConstants = __webpack_require__(190);
+
+	var RangeSelector = React.createClass({
+	  displayName: 'RangeSelector',
+
+	  propTypes: {
+	    defaultLowerValue: React.PropTypes.number,
+	    defaultUpperValue: React.PropTypes.number,
+	    formatter: React.PropTypes.func,
+	    interval: React.PropTypes.number,
+	    onLowerDrag: React.PropTypes.func,
+	    onLowerDragStop: React.PropTypes.func,
+	    onUpperDrag: React.PropTypes.func,
+	    onUpperDragStop: React.PropTypes.func,
+	    presets: React.PropTypes.array,
+	    range: React.PropTypes.number,
+	    selectedColor: React.PropTypes.string
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      defaultLowerValue: 0,
+	      defaultUpperValue: 1,
+	      interval: 1,
+	      formatter: function formatter(value) {
+	        return value;
+	      },
+	      onLowerDrag: function onLowerDrag() {},
+	      onLowerDragStop: function onLowerDragStop() {},
+	      onUpperDrag: function onUpperDrag() {},
+	      onUpperDragStop: function onUpperDragStop() {},
+	      presets: [],
+	      range: 100,
+	      selectedColor: StyleConstants.Colors.PRIMARY
+	    };
+	  },
+
+	  getInitialState: function getInitialState() {
+	    var lowerValue = this.props.defaultLowerValue;
+	    var upperValue = this.props.defaultUpperValue;
+
+	    return {
+	      dragging: null,
+	      lowerPixels: 0,
+	      lowerValue: lowerValue,
+	      selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
+	      showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
+	      upperPixels: 1,
+	      upperValue: upperValue
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this._setDefaultRangeValues();
+
+	    window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
+	  },
+
+	  _getSelectedLabel: function _getSelectedLabel(lowerValue, upperValue) {
+	    if (this.props.presets) {
+	      var preset = this.props.presets.filter(function (preset) {
+	        return preset.lowerValue === lowerValue && preset.upperValue === upperValue;
+	      })[0];
+
+	      return preset ? preset.label : null;
+	    }
+	  },
+
+	  _setDefaultRangeValues: function _setDefaultRangeValues() {
+	    var component = React.findDOMNode(this.refs.rangeSelector);
+	    var componentStyles = window.getComputedStyle(component);
+	    var width = parseInt(componentStyles.width, 0);
+
+	    var lowerPixels = Math.round(this.state.lowerValue * width / this.props.range / this.props.interval * this.props.interval);
+	    var upperPixels = Math.round(this.state.upperValue * width / this.props.range / this.props.interval * this.props.interval);
+
+	    this.setState({
+	      lowerPixels: lowerPixels,
+	      upperPixels: upperPixels,
+	      width: width
+	    });
+	  },
+
+	  _handlePresetClick: function _handlePresetClick(preset) {
+	    var lowerPixels = Math.round(preset.lowerValue * this.state.width / this.props.range / this.props.interval * this.props.interval);
+	    var upperPixels = Math.round(preset.upperValue * this.state.width / this.props.range / this.props.interval * this.props.interval);
+
+	    this.setState({
+	      lowerPixels: lowerPixels,
+	      lowerValue: preset.lowerValue,
+	      upperPixels: upperPixels,
+	      upperValue: preset.upperValue,
+	      showPresets: false,
+	      selectedLabel: this._getSelectedLabel(preset.lowerValue, preset.upperValue)
+	    });
+
+	    this.props.onLowerDragStop(preset.lowerValue);
+	    this.props.onUpperDragStop(preset.upperValue);
+	  },
+
+	  _handleMouseDown: function _handleMouseDown(type) {
+	    this.setState({
+	      dragging: type
+	    });
+	  },
+
+	  _handleMouseMove: function _handleMouseMove(e) {
+	    if (this.state.dragging) {
+	      var newPosition = e.clientX - React.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+	      var pixelInterval = this.props.interval * this.state.width / this.props.range;
+	      var newState = {
+	        selectedLabel: null
+	      };
+
+	      newPosition = Math.min(newPosition, this.state.width);
+	      newPosition = Math.max(newPosition, 0);
+
+	      if (this.state.dragging === 'Lower') {
+	        newPosition = Math.min(newPosition, this.state.upperPixels);
+	      }
+
+	      if (this.state.dragging === 'Upper') {
+	        newPosition = Math.max(newPosition, this.state.lowerPixels);
+	      }
+
+	      newPosition = Math.round(newPosition / pixelInterval) * pixelInterval;
+
+	      newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPosition;
+	      newState[this.state.dragging.toLowerCase() + 'Value'] = Math.round(newPosition * this.props.range / this.state.width / this.props.interval) * this.props.interval;
+
+	      this.setState(newState);
+
+	      e.preventDefault();
+	    }
+	  },
+
+	  _handleMouseUp: function _handleMouseUp() {
+	    if (this.state.dragging) {
+	      this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
+	    }
+
+	    this.setState({
+	      dragging: false
+	    });
+	  },
+
+	  _handleToggleViews: function _handleToggleViews() {
+	    this.setState({
+	      selectedLabel: null,
+	      showPresets: !this.state.showPresets
+	    });
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    var styles = {
+	      component: {
+	        position: 'relative',
+	        fontSize: '11px',
+	        fontFamily: StyleConstants.FontFamily
+	      },
+	      presets: {
+	        position: 'absolute',
+	        top: 0,
+	        right: 0,
+	        bottom: 0,
+	        left: 0,
+	        padding: '20px 0',
+	        zIndex: 1,
+	        display: this.state.showPresets ? 'block' : 'none'
+	      },
+	      range: {
+	        padding: '30px 0',
+	        margin: '0 10px',
+	        visibility: this.state.showPresets ? 'hidden' : 'visible'
+	      },
+	      track: {
+	        height: '1px',
+	        background: '#ccc'
+	      },
+	      lowerToggle: {
+	        width: '20px',
+	        height: '20px',
+	        borderRadius: '100%',
+	        background: '#fff',
+	        boxShadow: '0px 1px 2px rgba(0,0,0,0.3)',
+	        position: 'absolute',
+	        top: '50%',
+	        left: this.state.lowerPixels,
+	        transform: 'translate(-50%, -50%)',
+	        WebkitTransform: 'translate(-50%, -50%)',
+	        cursor: 'pointer'
+	      },
+	      upperToggle: {
+	        width: '20px',
+	        height: '20px',
+	        borderRadius: '100%',
+	        background: '#fff',
+	        boxShadow: '0px 1px 2px rgba(0,0,0,0.3)',
+	        position: 'absolute',
+	        top: '50%',
+	        left: this.state.upperPixels,
+	        transform: 'translate(-50%, -50%)',
+	        WebkitTransform: 'translate(-50%, -50%)',
+	        cursor: 'pointer',
+	        zIndex: 1
+	      },
+	      selected: {
+	        position: 'absolute',
+	        left: this.state.lowerPixels,
+	        width: this.state.upperPixels - this.state.lowerPixels,
+	        background: this.props.selectedColor,
+	        height: '3px',
+	        top: '50%',
+	        transform: 'translateY(-50%)',
+	        WebkitTransform: 'translateY(-50%)'
+	      },
+	      lowerToggleLabel: {
+	        position: 'absolute',
+	        top: '100%',
+	        left: '50%',
+	        transform: 'translateX(-50%)',
+	        WebkitTransform: 'translateX(-50%)',
+	        textAlign: 'center',
+	        marginTop: '5px',
+	        display: 'block'
+	      },
+	      upperToggleLabel: {
+	        position: 'absolute',
+	        bottom: '100%',
+	        left: '50%',
+	        transform: 'translateX(-50%)',
+	        WebkitTransform: 'translateX(-50%)',
+	        textAlign: 'center',
+	        marginBottom: '5px',
+	        display: 'block'
+	      },
+	      preset: {
+	        display: 'inline-block',
+	        background: '#fff',
+	        border: '1px solid #e5e5e5',
+	        borderRadius: '2px',
+	        padding: '4px 10px 5px',
+	        margin: '0 5px 5px 0',
+	        cursor: 'pointer'
+	      },
+	      showPresets: {
+	        position: 'absolute',
+	        top: 0,
+	        right: '10px',
+	        cursor: 'pointer',
+	        color: this.props.selectedColor
+	      },
+	      selectedLabel: {
+	        textAlign: 'center',
+	        marginTop: '17px',
+	        fontStyle: 'italic',
+	        opacity: 0.5
+	      }
+	    };
+
+	    return React.createElement('div', { style: [styles.component, this.props.style] }, React.createElement('div', { style: styles.presets }, this.props.presets.map(function (preset, i) {
+	      return React.createElement('div', { key: preset.label + i, onClick: _this._handlePresetClick.bind(null, preset), style: styles.preset }, preset.label);
+	    }), React.createElement('div', { onClick: this._handleToggleViews, style: styles.preset }, 'Custom')), React.createElement('div', {
+	      onMouseLeave: this._handleMouseUp,
+	      onMouseMove: this._handleMouseMove,
+	      onMouseUp: this._handleMouseUp,
+	      ref: 'rangeSelector',
+	      style: styles.range
+	    }, this.props.presets.length ? React.createElement('div', { onClick: this._handleToggleViews, style: styles.showPresets }, 'Groups') : null, React.createElement('div', { style: styles.track }), React.createElement('div', { style: styles.selected }, React.createElement('div', { style: styles.selectedLabel }, this.state.selectedLabel)), React.createElement('div', {
+	      onMouseDown: this._handleMouseDown.bind(null, 'Lower'),
+	      onMouseUp: this._handleMouseUp,
+	      style: styles.lowerToggle
+	    }, React.createElement('label', { style: styles.lowerToggleLabel }, this.props.formatter(this.state.lowerValue))), React.createElement('div', {
+	      onMouseDown: this._handleMouseDown.bind(null, 'Upper'),
+	      onMouseUp: this._handleMouseUp,
+	      style: styles.upperToggle
+	    }, React.createElement('label', { style: styles.upperToggleLabel }, this.props.formatter(this.state.upperValue)))));
+	  }
+	});
+
+	module.exports = Radium(RangeSelector);
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Enhancer = __webpack_require__(165);
+
+	module.exports = function (ComposedComponent /*: constructor*/) {
+	  return Enhancer(ComposedComponent);
+	};
+	module.exports.Plugins = __webpack_require__(167);
+	module.exports.PrintStyleSheet = __webpack_require__(180);
+	module.exports.Style = __webpack_require__(160);
+	module.exports.getState = __webpack_require__(174);
+	module.exports.keyframes = __webpack_require__(181);
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var createMarkupForStyles = __webpack_require__(161);
+	var Prefixer = __webpack_require__(162);
+
+	var React = __webpack_require__(1);
+
+	var buildCssString = function buildCssString(component, selector, rules) {
+	  if (!selector || !rules) {
+	    return;
+	  }
+
+	  var prefixedRules = Prefixer.getPrefixedStyle(component, rules, 'css');
+	  var serializedRules = createMarkupForStyles(prefixedRules);
+
+	  return selector + '{' + serializedRules + '}';
+	};
+
+	var Style = React.createClass({
+	  displayName: 'Style',
+
+	  propTypes: {
+	    rules: React.PropTypes.object,
+	    scopeSelector: React.PropTypes.string
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      scopeSelector: ''
+	    };
+	  },
+
+	  _buildStyles: function _buildStyles(styles) {
+	    var _this = this;
+
+	    return Object.keys(styles).reduce(function (accumulator, selector) {
+	      var rules = styles[selector];
+
+	      if (selector === 'mediaQueries') {
+	        accumulator += _this._buildMediaQueryString(rules);
+	      } else {
+	        var completeSelector = (_this.props.scopeSelector ? _this.props.scopeSelector + ' ' : '') + selector;
+	        accumulator += buildCssString(_this, completeSelector, rules);
+	      }
+
+	      return accumulator;
+	    }, '');
+	  },
+
+	  _buildMediaQueryString: function _buildMediaQueryString(mediaQueryObj) {
+	    var _this2 = this;
+
+	    var contextMediaQueries = this._getContextMediaQueries();
+	    var mediaQueryString = '';
+
+	    Object.keys(mediaQueryObj).forEach(function (query) {
+	      var completeQuery = contextMediaQueries[query] ? contextMediaQueries[query] : query;
+	      mediaQueryString += '@media ' + completeQuery + '{' + _this2._buildStyles(mediaQueryObj[query]) + '}';
+	    });
+
+	    return mediaQueryString;
+	  },
+
+	  _getContextMediaQueries: function _getContextMediaQueries() {
+	    var contextMediaQueries = {};
+	    if (this.context && this.context.mediaQueries) {
+	      Object.keys(this.context.mediaQueries).forEach((function (query) {
+	        contextMediaQueries[query] = this.context.mediaQueries[query].media;
+	      }).bind(this));
+	    }
+
+	    return contextMediaQueries;
+	  },
+
+	  render: function render() {
+	    if (!this.props.rules) {
+	      return null;
+	    }
+
+	    var styles = this._buildStyles(this.props.rules);
+
+	    return React.createElement('style', { dangerouslySetInnerHTML: { __html: styles } });
+	  }
+	});
+
+	module.exports = Style;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	var createMarkupForStyles = function createMarkupForStyles(style /*: Object*/, spaces /*: string*/) /*: string*/ {
+	  spaces = spaces || '';
+	  return Object.keys(style).map(function (property) {
+	    return spaces + property + ': ' + style[property] + ';';
+	  }).join('\n');
+	};
+
+	module.exports = createMarkupForStyles;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Based on https://github.com/jsstyles/css-vendor, but without having to
+	 * convert between different cases all the time.
+	 *
+	 * @flow
+	 */
+
+	'use strict';
+
+	var ExecutionEnvironment = __webpack_require__(163);
+	var arrayFind = __webpack_require__(164);
+
+	var VENDOR_PREFIX_REGEX = /-(moz|webkit|ms|o)-/;
+
+	var vendorPrefixes = ['Webkit', 'ms', 'Moz', 'O'];
+
+	var infoByCssPrefix = {
+	  '-moz-': {
+	    cssPrefix: '-moz-',
+	    jsPrefix: 'Moz',
+	    alternativeProperties: {
+	      // OLD - Firefox 19-
+	      alignItems: [{ css: '-moz-box-align', js: 'MozBoxAlign' }],
+	      flex: [{ css: '-moz-box-flex', js: 'MozBoxFlex' }],
+	      flexDirection: [{ css: '-moz-box-orient', js: 'MozBoxOrient' }],
+	      justifyContent: [{ css: '-moz-box-pack', js: 'MozBoxPack' }],
+	      order: [{ css: '-moz-box-ordinal-group', js: 'MozBoxOrdinalGroup' }]
+	    },
+	    alternativeValues: {
+	      // OLD - Firefox 19-
+	      alignItems: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end']
+	      },
+	      display: {
+	        flex: ['-moz-box']
+	      },
+	      flexDirection: {
+	        column: ['vertical'],
+	        row: ['horizontal']
+	      },
+	      justifyContent: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end'],
+	        'space-between': ['justify']
+	      }
+	    }
+	  },
+	  '-ms-': {
+	    cssPrefix: '-ms-',
+	    jsPrefix: 'ms',
+	    alternativeProperties: {
+	      // TWEENER - IE 10
+	      alignContent: [{ css: '-ms-flex-line-pack', js: 'msFlexLinePack' }],
+	      alignItems: [{ css: '-ms-flex-align', js: 'msFlexAlign' }],
+	      alignSelf: [{ css: '-ms-flex-align-item', js: 'msFlexAlignItem' }],
+	      justifyContent: [{ css: '-ms-flex-pack', js: 'msFlexPack' }],
+	      order: [{ css: '-ms-flex-order', js: 'msFlexOrder' }]
+	    },
+	    alternativeValues: {
+	      // TWEENER - IE 10
+	      alignContent: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end'],
+	        'space-between': ['justify'],
+	        'space-around': ['distribute']
+	      },
+	      alignItems: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end']
+	      },
+	      alignSelf: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end']
+	      },
+	      display: {
+	        flex: ['-ms-flexbox'],
+	        'inline-flex': ['-ms-inline-flexbox']
+	      },
+	      justifyContent: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end'],
+	        'space-between': ['justify'],
+	        'space-around': ['distribute']
+	      }
+	    }
+	  },
+	  '-o-': {
+	    cssPrefix: '-o-',
+	    jsPrefix: 'O'
+	  },
+	  '-webkit-': {
+	    cssPrefix: '-webkit-',
+	    jsPrefix: 'Webkit',
+	    alternativeProperties: {
+	      // OLD - iOS 6-, Safari 3.1-6
+	      alignItems: [{ css: '-webkit-box-align', js: 'WebkitBoxAlign' }],
+	      flex: [{ css: '-webkit-box-flex', js: 'MozBoxFlex' }],
+	      flexDirection: [{ css: '-webkit-box-orient', js: 'WebkitBoxOrient' }],
+	      justifyContent: [{ css: '-webkit-box-pack', js: 'WebkitBoxPack' }],
+	      order: [{ css: '-webkit-box-ordinal-group', js: 'WebkitBoxOrdinalGroup' }]
+	    },
+	    alternativeValues: {
+	      // OLD - iOS 6-, Safari 3.1-6
+	      alignItems: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end']
+	      },
+	      display: {
+	        flex: ['-webkit-box']
+	      },
+	      flexDirection: {
+	        row: ['horizontal'],
+	        column: ['vertical']
+	      },
+	      justifyContent: {
+	        'flex-start': ['start'],
+	        'flex-end': ['end'],
+	        'space-between': ['justify']
+	      }
+	    }
+	  }
+	};
+
+	/**
+	 * CSS properties which accept numbers but are not in units of "px".
+	 * Copied from React core June 22, 2015.
+	 * https://github.com/facebook/react/blob/
+	 * ba81b60ad8e93b747be42a03b797065932c49c96/
+	 * src/renderers/dom/shared/CSSProperty.js
+	 */
+	var isUnitlessNumber = {
+	  boxFlex: true,
+	  boxFlexGroup: true,
+	  columnCount: true,
+	  flex: true,
+	  flexGrow: true,
+	  flexPositive: true,
+	  flexShrink: true,
+	  flexNegative: true,
+	  fontWeight: true,
+	  lineClamp: true,
+	  lineHeight: true,
+	  opacity: true,
+	  order: true,
+	  orphans: true,
+	  tabSize: true,
+	  widows: true,
+	  zIndex: true,
+	  zoom: true,
+
+	  // SVG-related properties
+	  fillOpacity: true,
+	  strokeDashoffset: true,
+	  strokeOpacity: true,
+	  strokeWidth: true
+	};
+
+	var domStyle = {};
+	var prefixedPropertyCache = {};
+	var prefixedValueCache = {};
+	var prefixInfo = {
+	  cssPrefix: '',
+	  jsPrefix: ''
+	};
+
+	if (ExecutionEnvironment.canUseDOM) {
+	  domStyle = (document /*: any*/).createElement('p').style;
+
+	  // older Firefox versions may have no float property in style object
+	  // so we need to add it manually
+	  if (domStyle.float === undefined) {
+	    domStyle.float = '';
+	  }
+
+	  // Based on http://davidwalsh.name/vendor-prefix
+	  var prefixMatch;
+	  var windowStyles = window.getComputedStyle(document.documentElement, '');
+
+	  // Array.prototype.slice.call(windowStyles) fails with
+	  // "Uncaught TypeError: undefined is not a function"
+	  // in older versions Android (KitKat) web views
+	  for (var i = 0; i < windowStyles.length; i++) {
+	    prefixMatch = windowStyles[i].match(VENDOR_PREFIX_REGEX);
+
+	    if (prefixMatch) {
+	      break;
+	    }
+	  }
+
+	  var cssVendorPrefix = prefixMatch && prefixMatch[0];
+
+	  prefixInfo = cssVendorPrefix && infoByCssPrefix[cssVendorPrefix] ? infoByCssPrefix[cssVendorPrefix] : prefixInfo;
+	}
+
+	var _camelCaseRegex = /([a-z])?([A-Z])/g;
+	var _camelCaseReplacer = function _camelCaseReplacer(match, p1, p2) {
+	  return p1 + '-' + p2.toLowerCase();
+	};
+	var _camelCaseToDashCase = function _camelCaseToDashCase(s) {
+	  return s.replace(_camelCaseRegex, _camelCaseReplacer);
+	};
+
+	var getPrefixedPropertyName = function getPrefixedPropertyName(property /*: string*/) /*: {css: string, js: string}*/ {
+	  if (prefixedPropertyCache.hasOwnProperty(property)) {
+	    return prefixedPropertyCache[property];
+	  }
+
+	  var unprefixed = {
+	    css: _camelCaseToDashCase(property),
+	    js: property,
+	    isDefaultForServer: true
+	  };
+
+	  // Try the prefixed version first. Chrome in particular has the `filter` and
+	  // `webkitFilter` properties availalbe on the style object, but only the
+	  // prefixed version actually works.
+	  var possiblePropertyNames = [
+	  // Prefixed
+	  {
+	    css: prefixInfo.cssPrefix + _camelCaseToDashCase(property),
+	    js: prefixInfo.jsPrefix + property[0].toUpperCase() + property.slice(1)
+	  }, unprefixed];
+
+	  // Alternative property names
+	  if (prefixInfo.alternativeProperties && prefixInfo.alternativeProperties[property]) {
+	    possiblePropertyNames = possiblePropertyNames.concat(prefixInfo.alternativeProperties[property]);
+	  }
+
+	  var workingProperty = arrayFind(possiblePropertyNames, function (possiblePropertyName) {
+	    if (possiblePropertyName.js in domStyle) {
+	      return possiblePropertyName;
+	    }
+	  }) || false;
+
+	  return prefixedPropertyCache[property] = workingProperty;
+	};
+
+	// We are un-prefixing values before checking for isUnitlessNumber,
+	// otherwise we are at risk of being in a situation where someone
+	// explicitly passes something like `MozBoxFlex: 1` and that will
+	// in turn get transformed into `MozBoxFlex: 1px`.
+	var _getUnprefixedProperty = function _getUnprefixedProperty(property) {
+	  var noPrefixProperty = property;
+
+	  vendorPrefixes.some(function (prefix) {
+	    // Let's check if the property starts with a vendor prefix
+	    if (property.indexOf(prefix) === 0) {
+	      noPrefixProperty = noPrefixProperty.replace(prefix, '');
+
+	      // We have removed the vendor prefix, however the first
+	      // character is going to be uppercase hence won't match
+	      // any of the `isUnitlessNumber` keys as they all start
+	      // with lower case. Let's ensure that the first char is
+	      // lower case.
+	      noPrefixProperty = noPrefixProperty.charAt(0).toLowerCase() + noPrefixProperty.slice(1);
+
+	      return true;
+	    }
+	  });
+
+	  return noPrefixProperty;
+	};
+
+	// React is planning to deprecate adding px automatically
+	// (https://github.com/facebook/react/issues/1873), and if they do, this
+	// should change to a warning or be removed in favor of React's warning.
+	// Same goes for below.
+	var _addPixelSuffixToValueIfNeeded = function _addPixelSuffixToValueIfNeeded(originalProperty, value) {
+	  var unPrefixedProperty = _getUnprefixedProperty(originalProperty);
+
+	  if (value !== 0 && !isNaN(value) && !isUnitlessNumber[unPrefixedProperty]) {
+	    return value + 'px';
+	  }
+	  return value;
+	};
+
+	var _getPrefixedValue = function _getPrefixedValue(componentName, property, value, originalProperty) {
+	  if (!Array.isArray(value)) {
+	    // don't test numbers (pure or stringy), but do add 'px' prefix if needed
+	    if (!isNaN(value) && value !== null) {
+	      return _addPixelSuffixToValueIfNeeded(originalProperty, value);
+	    }
+
+	    if (typeof value !== 'string') {
+	      if (value !== null && value !== undefined) {
+	        value = value.toString();
+	      } else {
+	        return value;
+	      }
+	    }
+
+	    // don't test numbers with units (e.g. 10em)
+	    if (!isNaN(parseInt(value, 10))) {
+	      return value;
+	    }
+	  }
+
+	  var cacheKey = Array.isArray(value) ? value.join(' || ') : property + value;
+
+	  if (prefixedValueCache.hasOwnProperty(cacheKey)) {
+	    return prefixedValueCache[cacheKey];
+	  }
+
+	  var possibleValues;
+	  if (Array.isArray(value)) {
+	    // Add px for the same values React would, otherwise the testing below will
+	    // fail and it will try to fallback.
+	    possibleValues = value.map(function (v) {
+	      return _addPixelSuffixToValueIfNeeded(originalProperty, v);
+	    });
+
+	    // Add prefixed versions
+	    possibleValues = possibleValues.concat(value.filter(function (v) {
+	      return !isNaN(v);
+	    }) // Don't prefix numbers
+	    .map(function (v) {
+	      return prefixInfo.cssPrefix + v;
+	    }));
+	  } else {
+	    possibleValues = [
+	    // Unprefixed
+	    value,
+	    // Prefixed
+	    prefixInfo.cssPrefix + value];
+	  }
+
+	  // Alternative values
+	  if (prefixInfo.alternativeValues && prefixInfo.alternativeValues[originalProperty] && prefixInfo.alternativeValues[originalProperty][value]) {
+	    possibleValues = possibleValues.concat(prefixInfo.alternativeValues[originalProperty][value]);
+	  }
+
+	  // Test possible value in order
+	  var workingValue = arrayFind(possibleValues, function (possibleValue) {
+	    domStyle[property] = '';
+	    domStyle[property] = possibleValue;
+
+	    // Note that we just make sure it is not an empty string. Browsers will
+	    // sometimes rewrite values, but still accept them. They will set the value
+	    // to an empty string if not supported.
+	    // E.g. for border, "solid 1px black" becomes "1px solid black"
+	    //      but "foobar" becomes "", since it is not supported.
+	    return !!domStyle[property];
+	  });
+
+	  if (workingValue) {
+	    prefixedValueCache[cacheKey] = workingValue;
+	  } else {
+	    // Unsupported, assume unprefixed works, but warn
+	    prefixedValueCache[cacheKey] = value;
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      /* eslint-disable no-console */
+	      if (console && console.warn) {
+	        var componentContext = componentName ? ' in component "' + componentName + '"' : '';
+
+	        console.warn('Unsupported CSS value "' + value + '" for property "' + property + '"' + componentContext);
+	      }
+	      /* eslint-enable no-console */
+	    }
+	  }
+
+	  return prefixedValueCache[cacheKey];
+	};
+
+	// Returns a new style object with vendor prefixes added to property names
+	// and values.
+	var getPrefixedStyle = function getPrefixedStyle(componentName /*: any*/, // ReactComponent
+	style /*: Object*/) /*: Object*/ {
+	  var mode /*: 'css' | 'js'*/ = arguments.length <= 2 || arguments[2] === undefined ? 'js' : arguments[2];
+
+	  if (!ExecutionEnvironment.canUseDOM) {
+	    return Object.keys(style).reduce(function (newStyle, key) {
+	      var value = style[key];
+	      var newKey = mode === 'css' ? _camelCaseToDashCase(key) : key;
+	      var newValue = Array.isArray(value) ? value[0] : value;
+	      newStyle[newKey] = newValue;
+	      return newStyle;
+	    }, {});
+	  }
+
+	  var prefixedStyle = {};
+	  Object.keys(style).forEach(function (property) {
+	    var value = style[property];
+
+	    var newProperty = getPrefixedPropertyName(property);
+	    if (newProperty === false) {
+	      // Ignore unsupported properties
+	      if (process.env.NODE_ENV !== 'production') {
+	        /* eslint-disable no-console */
+	        if (console && console.warn) {
+	          var componentContext = componentName ? ' in component "' + componentName + '"' : '';
+
+	          console.warn('Unsupported CSS property "' + property + '$"' + componentContext);
+	        }
+	        /* eslint-enable no-console */
+	        return;
+	      }
+	    }
+
+	    var newValue = _getPrefixedValue(componentName, newProperty.js, value, property);
+
+	    prefixedStyle[newProperty[mode]] = newValue;
+	  });
+	  return prefixedStyle;
+	};
+
+	module.exports = {
+	  getPrefixedPropertyName: getPrefixedPropertyName,
+	  getPrefixedStyle: getPrefixedStyle,
+	  cssPrefix: prefixInfo.cssPrefix,
+	  jsPrefix: prefixInfo.jsPrefix
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Based on code that is Copyright 2013-2015, Facebook, Inc.
+	  All rights reserved.
+	*/
+
+	(function () {
+		'use strict';
+
+		var canUseDOM = !!(
+			typeof window !== 'undefined' &&
+			window.document &&
+			window.document.createElement
+		);
+
+		var ExecutionEnvironment = {
+
+			canUseDOM: canUseDOM,
+
+			canUseWorkers: typeof Worker !== 'undefined',
+
+			canUseEventListeners:
+				canUseDOM && !!(window.addEventListener || window.attachEvent),
+
+			canUseViewport: canUseDOM && !!window.screen
+
+		};
+
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return ExecutionEnvironment;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module !== 'undefined' && module.exports) {
+			module.exports = ExecutionEnvironment;
+		} else {
+			window.ExecutionEnvironment = ExecutionEnvironment;
+		}
+
+	}());
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function find(array, predicate, context) {
+	  if (typeof Array.prototype.find === 'function') {
+	    return array.find(predicate, context);
+	  }
+
+	  context = context || this;
+	  var length = array.length;
+	  var i;
+
+	  if (typeof predicate !== 'function') {
+	    throw new TypeError(predicate + ' is not a function');
+	  }
+
+	  for (i = 0; i < length; i++) {
+	    if (predicate.call(context, array[i], i, array)) {
+	      return array[i];
+	    }
+	  }
+	}
+
+	module.exports = find;
+
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/* @flow */
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var resolveStyles = __webpack_require__(166);
+	var printStyles = __webpack_require__(179);
+
+	var KEYS_TO_IGNORE_WHEN_COPYING_PROPERTIES = ['arguments', 'callee', 'caller', 'length', 'name', 'prototype', 'type'];
+
+	var copyProperties = function copyProperties(source, target) {
+	  Object.getOwnPropertyNames(source).forEach(function (key) {
+	    if (KEYS_TO_IGNORE_WHEN_COPYING_PROPERTIES.indexOf(key) < 0 && !target.hasOwnProperty(key)) {
+	      var descriptor = Object.getOwnPropertyDescriptor(source, key);
+	      Object.defineProperty(target, key, descriptor);
+	    }
+	  });
+	};
+
+	var enhanceWithRadium = function enhanceWithRadium(configOrComposedComponent /*: constructor | Object*/) /*: constructor*/ {
+	  var config /*:: ?: Object*/ = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	  if (typeof configOrComposedComponent !== 'function') {
+	    var newConfig = _extends({}, config, configOrComposedComponent);
+	    return function (configOrComponent) {
+	      return enhanceWithRadium(configOrComponent, newConfig);
+	    };
+	  }
+
+	  var ComposedComponent = configOrComposedComponent;
+
+	  var RadiumEnhancer = (function (_ComposedComponent) {
+	    _inherits(RadiumEnhancer, _ComposedComponent);
+
+	    function RadiumEnhancer() {
+	      _classCallCheck(this, RadiumEnhancer);
+
+	      _get(Object.getPrototypeOf(RadiumEnhancer.prototype), 'constructor', this).apply(this, arguments);
+
+	      this.state = this.state || {};
+	      this.state._radiumStyleState = {};
+
+	      if (RadiumEnhancer.printStyleClass) {
+	        this.printStyleClass = RadiumEnhancer.printStyleClass;
+	      }
+	    }
+
+	    // Class inheritance uses Object.create and because of __proto__ issues
+	    // with IE <10 any static properties of the superclass aren't inherited and
+	    // so need to be manually populated.
+	    // See http://babeljs.io/docs/advanced/caveats/#classes-10-and-below-
+
+	    _createClass(RadiumEnhancer, [{
+	      key: 'render',
+	      value: function render() {
+	        var renderedElement = _get(Object.getPrototypeOf(RadiumEnhancer.prototype), 'render', this).call(this);
+	        return resolveStyles(this, renderedElement, config);
+	      }
+	    }, {
+	      key: 'componentWillUnmount',
+	      value: function componentWillUnmount() {
+	        if (_get(Object.getPrototypeOf(RadiumEnhancer.prototype), 'componentWillUnmount', this)) {
+	          _get(Object.getPrototypeOf(RadiumEnhancer.prototype), 'componentWillUnmount', this).call(this);
+	        }
+
+	        if (this._radiumMouseUpListener) {
+	          this._radiumMouseUpListener.remove();
+	        }
+
+	        if (this._radiumMediaQueryListenersByQuery) {
+	          Object.keys(this._radiumMediaQueryListenersByQuery).forEach(function (query) {
+	            this._radiumMediaQueryListenersByQuery[query].remove();
+	          }, this);
+	        }
+	      }
+	    }]);
+
+	    return RadiumEnhancer;
+	  })(ComposedComponent);
+
+	  copyProperties(ComposedComponent, RadiumEnhancer);
+
+	  if (process.env.NODE_ENV !== 'production') {
+	    // This also fixes React Hot Loader by exposing the original components top
+	    // level prototype methods on the Radium enhanced prototype as discussed in
+	    // https://github.com/FormidableLabs/radium/issues/219.
+	    copyProperties(ComposedComponent.prototype, RadiumEnhancer.prototype);
+	  }
+
+	  RadiumEnhancer.displayName = ComposedComponent.displayName || ComposedComponent.name || 'Component';
+
+	  RadiumEnhancer.printStyleClass = printStyles.addPrintStyles(RadiumEnhancer);
+
+	  return RadiumEnhancer;
+	};
+
+	module.exports = enhanceWithRadium;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	/*:: import type {Config} from './config';*/
+
+	var _getState = __webpack_require__(174);
+	var getStateKey = __webpack_require__(175);
+	var mergeStyles = __webpack_require__(176);
+	var Plugins = __webpack_require__(167);
+
+	var ExecutionEnvironment = __webpack_require__(163);
+	var React = __webpack_require__(1);
+
+	var DEFAULT_CONFIG = {
+	  plugins: [Plugins.mergeStyleArray, Plugins.checkProps, Plugins.resolveMediaQueries, Plugins.resolveInteractionStyles, Plugins.prefix, Plugins.checkProps]
+	};
+
+	// Gross
+	var globalState = {};
+
+	// Declare early for recursive helpers.
+	var resolveStyles = ((null /*: any*/) /*: (
+	                                        component: any, // ReactComponent, flow+eslint complaining
+	                                        renderedElement: any,
+	                                        config: Config,
+	                                        existingKeyMap?: {[key: string]: bool}
+	                                      ) => any*/);
+
+	var _resolveChildren = function _resolveChildren(_ref) {
+	  var children = _ref.children;
+	  var component = _ref.component;
+	  var config = _ref.config;
+	  var existingKeyMap = _ref.existingKeyMap;
+
+	  if (!children) {
+	    return children;
+	  }
+
+	  var childrenType = typeof children;
+
+	  if (childrenType === 'string' || childrenType === 'number') {
+	    // Don't do anything with a single primitive child
+	    return children;
+	  }
+
+	  if (childrenType === 'function') {
+	    // Wrap the function, resolving styles on the result
+	    return function () {
+	      var result = children.apply(this, arguments);
+	      if (React.isValidElement(result)) {
+	        return resolveStyles(component, result, config, existingKeyMap);
+	      }
+	      return result;
+	    };
+	  }
+
+	  if (React.Children.count(children) === 1 && children.type) {
+	    // If a React Element is an only child, don't wrap it in an array for
+	    // React.Children.map() for React.Children.only() compatibility.
+	    var onlyChild = React.Children.only(children);
+	    return resolveStyles(component, onlyChild, config, existingKeyMap);
+	  }
+
+	  return React.Children.map(children, function (child) {
+	    if (React.isValidElement(child)) {
+	      return resolveStyles(component, child, config, existingKeyMap);
+	    }
+
+	    return child;
+	  });
+	};
+
+	// Recurse over props, just like children
+	var _resolveProps = function _resolveProps(_ref2) {
+	  var component = _ref2.component;
+	  var config = _ref2.config;
+	  var existingKeyMap = _ref2.existingKeyMap;
+	  var props = _ref2.props;
+
+	  var newProps = props;
+
+	  Object.keys(props).forEach(function (prop) {
+	    // We already recurse over children above
+	    if (prop === 'children') {
+	      return;
+	    }
+
+	    var propValue = props[prop];
+	    if (React.isValidElement(propValue)) {
+	      newProps = _extends({}, newProps);
+	      newProps[prop] = resolveStyles(component, propValue, config, existingKeyMap);
+	    }
+	  });
+
+	  return newProps;
+	};
+
+	var _buildGetKey = function _buildGetKey(renderedElement, existingKeyMap) {
+	  // We need a unique key to correlate state changes due to user interaction
+	  // with the rendered element, so we know to apply the proper interactive
+	  // styles.
+	  var originalKey = renderedElement.ref || renderedElement.key;
+	  var key = getStateKey(originalKey);
+
+	  var alreadyGotKey = false;
+	  var getKey = function getKey() {
+	    if (alreadyGotKey) {
+	      return key;
+	    }
+
+	    alreadyGotKey = true;
+
+	    if (existingKeyMap[key]) {
+	      throw new Error('Radium requires each element with interactive styles to have a unique ' + 'key, set using either the ref or key prop. ' + (originalKey ? 'Key "' + originalKey + '" is a duplicate.' : 'Multiple elements have no key specified.'));
+	    }
+
+	    existingKeyMap[key] = true;
+
+	    return key;
+	  };
+
+	  return getKey;
+	};
+
+	var _setStyleState = function _setStyleState(component, key, stateKey, value) {
+	  var existing = component._lastRadiumState || component.state && component.state._radiumStyleState || {};
+
+	  var state = { _radiumStyleState: _extends({}, existing) };
+	  state._radiumStyleState[key] = _extends({}, state._radiumStyleState[key]);
+	  state._radiumStyleState[key][stateKey] = value;
+
+	  component._lastRadiumState = state._radiumStyleState;
+	  component.setState(state);
+	};
+
+	var _runPlugins = function _runPlugins(_ref3) {
+	  var component = _ref3.component;
+	  var config = _ref3.config;
+	  var existingKeyMap = _ref3.existingKeyMap;
+	  var props = _ref3.props;
+	  var renderedElement = _ref3.renderedElement;
+
+	  // Don't run plugins if renderedElement is not a simple ReactDOMElement or has
+	  // no style.
+	  if (!React.isValidElement(renderedElement) || typeof renderedElement.type !== 'string' || !props.style) {
+	    return props;
+	  }
+
+	  var newProps = props;
+
+	  var plugins = config.plugins || DEFAULT_CONFIG.plugins;
+
+	  var getKey = _buildGetKey(renderedElement, existingKeyMap);
+
+	  var newStyle = props.style;
+	  plugins.forEach(function (plugin) {
+	    var result = plugin({
+	      ExecutionEnvironment: ExecutionEnvironment,
+	      componentName: component.constructor.displayName || component.constructor.name,
+	      getComponentField: function getComponentField(key) {
+	        return component[key];
+	      },
+	      getGlobalState: function getGlobalState(key) {
+	        return globalState[key];
+	      },
+	      config: config,
+	      getState: function getState(stateKey, elementKey) {
+	        return _getState(component.state, elementKey || getKey(), stateKey);
+	      },
+	      mergeStyles: mergeStyles,
+	      props: newProps,
+	      setState: function setState(stateKey, value, elementKey) {
+	        return _setStyleState(component, elementKey || getKey(), stateKey, value);
+	      },
+	      style: newStyle
+	    }) || {};
+
+	    newStyle = result.style || newStyle;
+
+	    newProps = result.props && Object.keys(result.props).length ? _extends({}, newProps, result.props) : newProps;
+
+	    var newComponentFields = result.componentFields || {};
+	    Object.keys(newComponentFields).forEach(function (fieldName) {
+	      component[fieldName] = newComponentFields[fieldName];
+	    });
+
+	    var newGlobalState = result.globalState || {};
+	    Object.keys(newGlobalState).forEach(function (key) {
+	      globalState[key] = newGlobalState[key];
+	    });
+	  });
+
+	  if (newStyle !== props.style) {
+	    newProps = _extends({}, newProps, { style: newStyle });
+	  }
+
+	  return newProps;
+	};
+
+	// Wrapper around React.cloneElement. To avoid processing the same element
+	// twice, whenever we clone an element add a special prop to make sure we don't
+	// process this element again.
+	var _cloneElement = function _cloneElement(renderedElement, newProps, newChildren) {
+	  // Only add flag if this is a normal DOM element
+	  if (typeof renderedElement.type === 'string') {
+	    newProps = _extends({}, newProps, { _radiumDidResolveStyles: true });
+	  }
+
+	  return React.cloneElement(renderedElement, newProps, newChildren);
+	};
+
+	//
+	// The nucleus of Radium. resolveStyles is called on the rendered elements
+	// before they are returned in render. It iterates over the elements and
+	// children, rewriting props to add event handlers required to capture user
+	// interactions (e.g. mouse over). It also replaces the style prop because it
+	// adds in the various interaction styles (e.g. :hover).
+	//
+	resolveStyles = function (component /*: any*/, // ReactComponent, flow+eslint complaining
+	renderedElement /*: any*/, // ReactElement
+	config /*: Config*/, existingKeyMap /*:: ?: {[key: string]: boolean}*/) /*: any*/ {
+	  if (config === undefined) config = DEFAULT_CONFIG;
+	  // ReactElement
+	  existingKeyMap = existingKeyMap || {};
+
+	  if (!renderedElement ||
+	  // Bail if we've already processed this element. This ensures that only the
+	  // owner of an element processes that element, since the owner's render
+	  // function will be called first (which will always be the case, since you
+	  // can't know what else to render until you render the parent component).
+	  renderedElement.props && renderedElement.props._radiumDidResolveStyles) {
+	    return renderedElement;
+	  }
+
+	  var newChildren = _resolveChildren({
+	    children: renderedElement.props.children,
+	    component: component,
+	    config: config,
+	    existingKeyMap: existingKeyMap
+	  });
+
+	  var newProps = _resolveProps({
+	    component: component,
+	    config: config,
+	    existingKeyMap: existingKeyMap,
+	    props: renderedElement.props
+	  });
+
+	  newProps = _runPlugins({
+	    component: component,
+	    config: config,
+	    existingKeyMap: existingKeyMap,
+	    props: newProps,
+	    renderedElement: renderedElement
+	  });
+
+	  // If nothing changed, don't bother cloning the element. Might be a bit
+	  // wasteful, as we add the sentinal to stop double-processing when we clone.
+	  // Assume benign double-processing is better than unneeded cloning.
+	  if (newChildren === renderedElement.props.children && newProps === renderedElement.props) {
+	    return renderedElement;
+	  }
+
+	  return _cloneElement(renderedElement, newProps !== renderedElement.props ? newProps : {}, newChildren);
+	};
+
+	// Only for use by tests
+	resolveStyles.__clearStateForTests = function () {
+	  globalState = {};
+	};
+
+	module.exports = resolveStyles;
+	// ReactComponent, flow+eslint complaining
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @flow */
+	/* eslint-disable block-scoped-var */
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	/*:: import type {Config} from '../config';*/
+
+	var checkPropsPlugin = __webpack_require__(168);
+	var mergeStyleArrayPlugin = __webpack_require__(169);
+	var prefixPlugin = __webpack_require__(170);
+	var resolveInteractionStylesPlugin = __webpack_require__(171);
+	var resolveMediaQueriesPlugin = __webpack_require__(173);
+
+	/*:: export type PluginConfig = {
+	  // May not be readable if code has been minified
+	  componentName: string,
+
+	  // The Radium configuration
+	  config: Config,
+
+	  // Retrieve the value of a field on the component
+	  getComponentField: (key: string) => any,
+
+	  // Retrieve the value of a field global to the Radium module
+	  // Used so that tests can easily clear global state.
+	  getGlobalState: (key: string) => any,
+
+	  // Retrieve the value of some state specific to the rendered element.
+	  // Requires the element to have a unique key or ref or for an element key
+	  // to be passed in.
+	  getState: (stateKey: string, elementKey?: string) => any,
+
+	  // Access to the mergeStyles utility
+	  mergeStyles: (styles: Array<Object>) => Object,
+
+	  // The props of the rendered element. This can be changed by each plugin,
+	  // and successive plugins will see the result of previous plugins.
+	  props: Object,
+
+	  // Calls setState on the component with the given key and value.
+	  // By default this is specific to the rendered element, but you can override
+	  // by passing in the `elementKey` parameter.
+	  setState: (stateKey: string, value: any, elementKey?: string) => void,
+
+	  // The style prop of the rendered element. This can be changed by each plugin,
+	  // and successive plugins will see the result of previous plugins. Kept
+	  // separate from `props` for ease of use.
+	  style: Object,
+
+	  // uses the exenv npm module
+	  ExecutionEnvironment: {
+	    canUseEventListeners: bool,
+	    canUseDOM: bool,
+	  }
+	};*/
+	/*:: export type PluginResult = ?{
+	  // Merged into the component directly. Useful for storing things for which you
+	  // don't need to re-render, event subscriptions, for instance.
+	  componentFields?: Object,
+
+	  // Merged into a Radium controlled global state object. Use this instead of
+	  // module level state for ease of clearing state between tests.
+	  globalState?: Object,
+
+	  // Merged into the rendered element's props.
+	  props?: Object,
+
+	  // Replaces (not merged into) the rendered element's style property.
+	  style?: Object,
+	};*/
+
+	module.exports = {
+	  checkProps: checkPropsPlugin,
+	  mergeStyleArray: mergeStyleArrayPlugin,
+	  prefix: prefixPlugin,
+	  resolveInteractionStyles: resolveInteractionStylesPlugin,
+	  resolveMediaQueries: resolveMediaQueriesPlugin
+	};
+
+	// May not be readable if code has been minified
+
+	// The Radium configuration
+
+	// Retrieve the value of a field on the component
+
+	// Retrieve the value of a field global to the Radium module
+	// Used so that tests can easily clear global state.
+
+	// Retrieve the value of some state specific to the rendered element.
+	// Requires the element to have a unique key or ref or for an element key
+	// to be passed in.
+
+	// Access to the mergeStyles utility
+
+	// The props of the rendered element. This can be changed by each plugin,
+	// and successive plugins will see the result of previous plugins.
+
+	// Calls setState on the component with the given key and value.
+	// By default this is specific to the rendered element, but you can override
+	// by passing in the `elementKey` parameter.
+
+	// The style prop of the rendered element. This can be changed by each plugin,
+	// and successive plugins will see the result of previous plugins. Kept
+	// separate from `props` for ease of use.
+
+	// uses the exenv npm module
+
+	// Merged into the component directly. Useful for storing things for which you
+	// don't need to re-render, event subscriptions, for instance.
+
+	// Merged into a Radium controlled global state object. Use this instead of
+	// module level state for ease of clearing state between tests.
+
+	// Merged into the rendered element's props.
+
+	// Replaces (not merged into) the rendered element's style property.
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/* @flow */
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	/*:: import type {PluginConfig, PluginResult} from '.';*/
+
+	var checkProps = (function () {} /*: any*/);
+
+	if (process.env.NODE_ENV !== 'production') {
+	  // Warn if you use longhand and shorthand properties in the same style
+	  // object.
+	  // https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties
+
+	  var shorthandPropertyExpansions = {
+	    'background': ['backgroundAttachment', 'backgroundBlendMode', 'backgroundClip', 'backgroundColor', 'backgroundImage', 'backgroundOrigin', 'backgroundPosition', 'backgroundPositionX', 'backgroundPositionY', 'backgroundRepeat', 'backgroundRepeatX', 'backgroundRepeatY', 'backgroundSize'],
+	    'border': ['borderBottom', 'borderBottomColor', 'borderBottomStyle', 'borderBottomWidth', 'borderColor', 'borderLeft', 'borderLeftColor', 'borderLeftStyle', 'borderLeftWidth', 'borderRight', 'borderRightColor', 'borderRightStyle', 'borderRightWidth', 'borderStyle', 'borderTop', 'borderTopColor', 'borderTopStyle', 'borderTopWidth', 'borderWidth'],
+	    'borderImage': ['borderImageOutset', 'borderImageRepeat', 'borderImageSlice', 'borderImageSource', 'borderImageWidth'],
+	    'borderRadius': ['borderBottomLeftRadius', 'borderBottomRightRadius', 'borderTopLeftRadius', 'borderTopRightRadius'],
+	    'font': ['fontFamily', 'fontKerning', 'fontSize', 'fontStretch', 'fontStyle', 'fontVariant', 'fontVariantLigatures', 'fontWeight', 'lineHeight'],
+	    'listStyle': ['listStyleImage', 'listStylePosition', 'listStyleType'],
+	    'margin': ['marginBottom', 'marginLeft', 'marginRight', 'marginTop'],
+	    'padding': ['paddingBottom', 'paddingLeft', 'paddingRight', 'paddingTop'],
+	    'transition': ['transitionDelay', 'transitionDuration', 'transitionProperty', 'transitionTimingFunction']
+	  };
+
+	  checkProps = function (config /*: PluginConfig*/) /*: PluginResult*/ {
+	    var componentName = config.componentName;
+	    var style = config.style;
+
+	    if (typeof style !== 'object' || !style) {
+	      return;
+	    }
+
+	    var styleKeys = Object.keys(style);
+	    styleKeys.forEach(function (styleKey) {
+	      if (shorthandPropertyExpansions[styleKey] && shorthandPropertyExpansions[styleKey].some(function (sp) {
+	        return styleKeys.indexOf(sp) !== -1;
+	      })) {
+	        if (process.env.NODE_ENV !== 'production') {
+	          /* eslint-disable no-console */
+	          console.warn('Radium: property "' + styleKey + '" in style object', style, ': do not mix longhand and ' + 'shorthand properties in the same style object. Check the render ' + 'method of ' + componentName + '.', 'See https://github.com/FormidableLabs/radium/issues/95 for more ' + 'information.');
+	          /* eslint-enable no-console */
+	        }
+	      }
+	    });
+
+	    styleKeys.forEach(function (k) {
+	      return checkProps(_extends({}, config, { style: style[k] }));
+	    });
+	    return;
+	  };
+	}
+
+	module.exports = checkProps;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	// Convenient syntax for multiple styles: `style={[style1, style2, etc]}`
+	// Ignores non-objects, so you can do `this.state.isCool && styles.cool`.
+	/*:: import type {PluginConfig, PluginResult} from '.';*/var mergeStyleArrayPlugin = function mergeStyleArrayPlugin(_ref /*: PluginConfig*/) /*: PluginResult*/ {
+	  var style = _ref.style;
+	  var mergeStyles = _ref.mergeStyles;
+
+	  var newStyle = Array.isArray(style) ? mergeStyles(style) : style;
+	  return { style: newStyle };
+	};
+
+	module.exports = mergeStyleArrayPlugin;
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	/*:: import type {PluginConfig, PluginResult} from '.';*/
+
+	var Prefixer = __webpack_require__(162);
+
+	var prefixPlugin = function prefixPlugin(_ref /*: PluginConfig*/) /*: PluginResult*/ {
+	  var componentName = _ref.componentName;
+	  var style = _ref.style;
+
+	  var newStyle = Prefixer.getPrefixedStyle(componentName, style);
+	  return { style: newStyle };
+	};
+
+	module.exports = prefixPlugin;
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @flow */
+
+	'use strict';
+
+	/*:: import type {PluginConfig, PluginResult} from '.';*/
+
+	var MouseUpListener = __webpack_require__(172);
+
+	var _isInteractiveStyleField = function _isInteractiveStyleField(styleFieldName) {
+	  return styleFieldName === ':hover' || styleFieldName === ':active' || styleFieldName === ':focus';
+	};
+
+	var resolveInteractionStyles = function resolveInteractionStyles(config /*: PluginConfig*/) /*: PluginResult*/ {
+	  var ExecutionEnvironment = config.ExecutionEnvironment;
+	  var getComponentField = config.getComponentField;
+	  var getState = config.getState;
+	  var mergeStyles = config.mergeStyles;
+	  var props = config.props;
+	  var setState = config.setState;
+	  var style = config.style;
+
+	  var newComponentFields = {};
+	  var newProps = {};
+
+	  // Only add handlers if necessary
+	  if (style[':hover'] || style[':active']) {
+	    // Always call the existing handler if one is already defined.
+	    // This code, and the very similar ones below, could be abstracted a bit
+	    // more, but it hurts readability IMO.
+	    var existingOnMouseEnter = props.onMouseEnter;
+	    newProps.onMouseEnter = function (e) {
+	      existingOnMouseEnter && existingOnMouseEnter(e);
+	      setState(':hover', true);
+	    };
+
+	    var existingOnMouseLeave = props.onMouseLeave;
+	    newProps.onMouseLeave = function (e) {
+	      existingOnMouseLeave && existingOnMouseLeave(e);
+	      setState(':hover', false);
+	    };
+	  }
+
+	  if (style[':active']) {
+	    var existingOnMouseDown = props.onMouseDown;
+	    newProps.onMouseDown = function (e) {
+	      existingOnMouseDown && existingOnMouseDown(e);
+	      newComponentFields._lastMouseDown = Date.now();
+	      setState(':active', true);
+	    };
+	  }
+
+	  if (style[':focus']) {
+	    var existingOnFocus = props.onFocus;
+	    newProps.onFocus = function (e) {
+	      existingOnFocus && existingOnFocus(e);
+	      setState(':focus', true);
+	    };
+
+	    var existingOnBlur = props.onBlur;
+	    newProps.onBlur = function (e) {
+	      existingOnBlur && existingOnBlur(e);
+	      setState(':focus', false);
+	    };
+	  }
+
+	  if (style[':active'] && !getComponentField('_radiumMouseUpListener') && ExecutionEnvironment.canUseEventListeners) {
+	    newComponentFields._radiumMouseUpListener = MouseUpListener.subscribe(function () {
+	      Object.keys(getComponentField('state')._radiumStyleState).forEach(function (key) {
+	        if (getState(':active')) {
+	          setState(':active', false, key);
+	        }
+	      });
+	    });
+	  }
+
+	  // Merge the styles in the order they were defined
+	  var interactionStyles = Object.keys(style).filter(function (name) {
+	    return _isInteractiveStyleField(name) && getState(name);
+	  }).map(function (name) {
+	    return style[name];
+	  });
+
+	  var newStyle = mergeStyles([style].concat(interactionStyles));
+
+	  // Remove interactive styles
+	  newStyle = Object.keys(newStyle).reduce(function (styleWithoutInteractions, name) {
+	    if (!_isInteractiveStyleField(name)) {
+	      styleWithoutInteractions[name] = newStyle[name];
+	    }
+	    return styleWithoutInteractions;
+	  }, {});
+
+	  return {
+	    componentFields: newComponentFields,
+	    props: newProps,
+	    style: newStyle
+	  };
+	};
+
+	module.exports = resolveInteractionStyles;
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	var _callbacks = [];
+	var _mouseUpListenerIsActive = false;
+
+	var _handleMouseUp = function _handleMouseUp(ev) {
+	  _callbacks.forEach(function (callback) {
+	    callback(ev);
+	  });
+	};
+
+	var subscribe = function subscribe(callback /*: () => void*/) /*: {remove: () => void}*/ {
+	  if (_callbacks.indexOf(callback) === -1) {
+	    _callbacks.push(callback);
+	  }
+
+	  if (!_mouseUpListenerIsActive) {
+	    window.addEventListener('mouseup', _handleMouseUp);
+	    _mouseUpListenerIsActive = true;
+	  }
+
+	  return {
+	    remove: function remove() {
+	      var index = _callbacks.indexOf(callback);
+	      _callbacks.splice(index, 1);
+
+	      if (_callbacks.length === 0 && _mouseUpListenerIsActive) {
+	        window.removeEventListener('mouseup', _handleMouseUp);
+	        _mouseUpListenerIsActive = false;
+	      }
+	    }
+	  };
+	};
+
+	module.exports = {
+	  subscribe: subscribe
+	};
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @flow */
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	/*:: import type {MatchMediaType} from '../config';*/
+	/*:: import type {PluginConfig, PluginResult} from '.';*/
+
+	var _windowMatchMedia;
+	var _getWindowMatchMedia = function _getWindowMatchMedia(ExecutionEnvironment) {
+	  if (_windowMatchMedia === undefined) {
+	    _windowMatchMedia = !!ExecutionEnvironment.canUseDOM && !!window && !!window.matchMedia && function (mediaQueryString) {
+	      return window.matchMedia(mediaQueryString);
+	    } || null;
+	  }
+	  return _windowMatchMedia;
+	};
+
+	var resolveMediaQueries = function resolveMediaQueries(_ref /*: PluginConfig*/) /*: PluginResult*/ {
+	  var ExecutionEnvironment = _ref.ExecutionEnvironment;
+	  var getComponentField = _ref.getComponentField;
+	  var getGlobalState = _ref.getGlobalState;
+	  var config = _ref.config;
+	  var mergeStyles = _ref.mergeStyles;
+	  var setState = _ref.setState;
+	  var style = _ref.style;
+
+	  var newComponentFields = {};
+	  var newStyle = style;
+	  var matchMedia /*: ?MatchMediaType*/ = config.matchMedia || _getWindowMatchMedia(ExecutionEnvironment);
+	  if (!matchMedia) {
+	    return newStyle;
+	  }
+
+	  var mediaQueryListByQueryString = getGlobalState('mediaQueryListByQueryString') || {};
+
+	  Object.keys(style).filter(function (name) {
+	    return name.indexOf('@media') === 0;
+	  }).map(function (query) {
+	    var mediaQueryStyles = style[query];
+	    query = query.replace('@media ', '');
+
+	    // Create a global MediaQueryList if one doesn't already exist
+	    var mql = mediaQueryListByQueryString[query];
+	    if (!mql && matchMedia) {
+	      mediaQueryListByQueryString[query] = mql = matchMedia(query);
+	    }
+
+	    var listenersByQuery = getComponentField('_radiumMediaQueryListenersByQuery');
+
+	    if (!listenersByQuery || !listenersByQuery[query]) {
+	      var listener = function listener() {
+	        return setState(query, mql.matches, '_all');
+	      };
+	      mql.addListener(listener);
+	      newComponentFields._radiumMediaQueryListenersByQuery = _extends({}, listenersByQuery);
+	      newComponentFields._radiumMediaQueryListenersByQuery[query] = {
+	        remove: function remove() {
+	          mql.removeListener(listener);
+	        }
+	      };
+	    }
+
+	    // Apply media query states
+	    if (mql.matches) {
+	      newStyle = mergeStyles([newStyle, mediaQueryStyles]);
+	    }
+	  });
+
+	  // Remove media queries
+	  newStyle = Object.keys(newStyle).reduce(function (styleWithoutMedia, key) {
+	    if (key.indexOf('@media') !== 0) {
+	      styleWithoutMedia[key] = newStyle[key];
+	    }
+	    return styleWithoutMedia;
+	  }, {});
+
+	  return {
+	    componentFields: newComponentFields,
+	    globalState: { mediaQueryListByQueryString: mediaQueryListByQueryString },
+	    style: newStyle
+	  };
+	};
+
+	module.exports = resolveMediaQueries;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	var getStateKey = __webpack_require__(175);
+
+	var VALID_KEYS = [':active', ':focus', ':hover'];
+
+	var getState = function getState(state /*: {_radiumStyleState: {[key: string]: {[value: string]: boolean}}}*/, elementKey /*: string*/, value /*: string*/) /*: boolean*/ {
+	  if (VALID_KEYS.indexOf(value) === -1) {
+	    throw new Error('Radium.getState invalid value param: `' + value + '`');
+	  }
+
+	  var key = getStateKey(elementKey);
+
+	  return !!(state && state._radiumStyleState && state._radiumStyleState[key] && state._radiumStyleState[key][value]);
+	};
+
+	module.exports = getState;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	var getStateKey = function getStateKey(elementKey /*: ?string*/) /*: string*/ {
+	  return elementKey === null || elementKey === undefined ? 'main' : elementKey.toString();
+	};
+
+	module.exports = getStateKey;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var isPlainObject = __webpack_require__(177);
+
+	var shouldMerge = function shouldMerge(value) {
+	  // Don't merge objects overriding toString, since they should be converted
+	  // to string values.
+	  return isPlainObject(value) && value.toString === Object.prototype.toString;
+	};
+
+	// Merge style objects. Deep merge plain object values.
+	var mergeStyles = function mergeStyles(styles) {
+	  var result = {};
+
+	  styles.forEach(function (style) {
+	    if (!style || typeof style !== 'object') {
+	      return;
+	    }
+
+	    if (Array.isArray(style)) {
+	      style = mergeStyles(style);
+	    }
+
+	    Object.keys(style).forEach(function (key) {
+	      if (shouldMerge(style[key]) && shouldMerge(result[key])) {
+	        result[key] = mergeStyles([result[key], style[key]]);
+	      } else {
+	        result[key] = style[key];
+	      }
+	    });
+	  });
+
+	  return result;
+	};
+
+	module.exports = mergeStyles;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*!
+	 * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
+	 *
+	 * Copyright (c) 2014-2015, Jon Schlinkert.
+	 * Licensed under the MIT License.
+	 */
+
+	'use strict';
+
+	var isObject = __webpack_require__(178);
+
+	function isObjectObject(o) {
+	  return isObject(o) === true
+	    && Object.prototype.toString.call(o) === '[object Object]';
+	}
+
+	module.exports = function isPlainObject(o) {
+	  var ctor,prot;
+	  
+	  if (isObjectObject(o) === false) return false;
+	  
+	  // If has modified constructor
+	  ctor = o.constructor;
+	  if (typeof ctor !== 'function') return false;
+	  
+	  // If has modified prototype
+	  prot = ctor.prototype;
+	  if (isObjectObject(prot) === false) return false;
+	  
+	  // If constructor does not have an Object-specific method
+	  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+	    return false;
+	  }
+	  
+	  // Most likely a plain Object
+	  return true;
+	};
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*!
+	 * isobject <https://github.com/jonschlinkert/isobject>
+	 *
+	 * Copyright (c) 2014-2015, Jon Schlinkert.
+	 * Licensed under the MIT License.
+	 */
+
+	'use strict';
+
+	module.exports = function isObject(val) {
+	  return val != null && typeof val === 'object'
+	    && !Array.isArray(val);
+	};
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	"use strict";
+
+	var allPrintStyles = {};
+	var listeners = [];
+
+	var subscribe = function subscribe(listener /*: () => void*/) /*: {remove: () => void}*/ {
+	  if (listeners.indexOf(listener) === -1) {
+	    listeners.push(listener);
+	  }
+
+	  return {
+	    remove: function remove() {
+	      var listenerIndex = listeners.indexOf(listener);
+
+	      if (listenerIndex > -1) {
+	        listeners.splice(listenerIndex, 1);
+	      }
+	    }
+	  };
+	};
+
+	var _emitChange = function _emitChange() {
+	  listeners.forEach(function (listener) {
+	    return listener();
+	  });
+	};
+
+	var _appendImportantToEachValue = function _appendImportantToEachValue(styleObj) {
+	  var importantStyleObj = {};
+
+	  Object.keys(styleObj).forEach(function (key) {
+	    var value = styleObj[key];
+
+	    // This breaks unitless values but they'll be deprecated soon anyway
+	    // https://github.com/facebook/react/issues/1873
+	    value = value + " !important";
+	    importantStyleObj[key] = value;
+	  });
+
+	  return importantStyleObj;
+	};
+
+	var addPrintStyles = function addPrintStyles(Component /*: constructor*/) {
+	  if (!Component.printStyles) {
+	    return;
+	  }
+
+	  var printStyleClass = {};
+
+	  Object.keys(Component.printStyles).forEach(function (key) {
+	    var styles = Component.printStyles[key];
+	    var className = "Radium-" + Component.displayName + "-" + key;
+	    allPrintStyles["." + className] = _appendImportantToEachValue(styles);
+	    printStyleClass[key] = className;
+	  });
+
+	  // Allows for lazy loading of JS that then calls Radium to update the
+	  // print styles
+	  _emitChange();
+	  return printStyleClass;
+	};
+
+	var getPrintStyles = function getPrintStyles() /*: Object*/ {
+	  return allPrintStyles;
+	};
+
+	module.exports = {
+	  addPrintStyles: addPrintStyles,
+	  getPrintStyles: getPrintStyles,
+	  subscribe: subscribe
+	};
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Style = __webpack_require__(160);
+	var printStyles = __webpack_require__(179);
+
+	var PrintStyle = React.createClass({
+	  displayName: 'PrintStyle',
+
+	  getInitialState: function getInitialState() {
+	    return this._getStylesState();
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.subscription = printStyles.subscribe(this._onChange);
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.subscription.remove();
+	  },
+
+	  _onChange: function _onChange() {
+	    this.setState(this._getStylesState());
+	  },
+
+	  _getStylesState: function _getStylesState() {
+	    return {
+	      styles: printStyles.getPrintStyles()
+	    };
+	  },
+
+	  render: function render() {
+	    return React.createElement(Style, { rules: {
+	        mediaQueries: {
+	          print: this.state.styles
+	        }
+	      } });
+	  }
+	});
+
+	module.exports = PrintStyle;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* @flow */
+
+	'use strict';
+
+	var createMarkupForStyles = __webpack_require__(161);
+	var Prefixer = __webpack_require__(162);
+
+	var ExecutionEnvironment = __webpack_require__(163);
+
+	var isAnimationSupported = ExecutionEnvironment.canUseDOM && Prefixer.getPrefixedPropertyName('animation') !== false;
+
+	var animationIndex = 1;
+	var animationStyleSheet = null;
+	var keyframesPrefixed = 'keyframes';
+
+	if (isAnimationSupported) {
+	  animationStyleSheet = (document.createElement('style') /*: any*/);
+	  document.head.appendChild(animationStyleSheet);
+
+	  // Test if prefix needed for keyframes (copied from PrefixFree)
+	  animationStyleSheet.textContent = '@keyframes {}';
+	  if (!animationStyleSheet.sheet.cssRules.length) {
+	    keyframesPrefixed = Prefixer.cssPrefix + 'keyframes';
+	  }
+	}
+
+	// Simple animation helper that injects CSS into a style object containing the
+	// keyframes, and returns a string with the generated animation name.
+	var keyframes = function keyframes(keyframeRules /*: {[percentage: string]: {[key: string]: string|number}}*/, componentName /*:: ?: string*/) /*: string*/ {
+	  var name = 'Animation' + animationIndex;
+	  animationIndex += 1;
+
+	  if (!isAnimationSupported) {
+	    return name;
+	  }
+
+	  var rule = '@' + keyframesPrefixed + ' ' + name + ' {\n' + Object.keys(keyframeRules).map(function (percentage) {
+	    var props = keyframeRules[percentage];
+	    var prefixedProps = Prefixer.getPrefixedStyle(componentName, props, 'css');
+	    var serializedProps = createMarkupForStyles(prefixedProps, '  ');
+	    return '  ' + percentage + ' {\n  ' + serializedProps + '\n  }';
+	  }).join('\n') + '\n}\n';
+
+	  // for flow
+	  /* istanbul ignore next */
+	  if (!animationStyleSheet) {
+	    throw new Error('keyframes not initialized properly');
+	  }
+
+	  animationStyleSheet.sheet.insertRule(rule, animationStyleSheet.sheet.cssRules.length);
+	  return name;
+	};
+
+	module.exports = keyframes;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var debounce = __webpack_require__(183),
+	    isObject = __webpack_require__(184);
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/**
+	 * Creates a throttled function that only invokes `func` at most once per
+	 * every `wait` milliseconds. The throttled function comes with a `cancel`
+	 * method to cancel delayed invocations. Provide an options object to indicate
+	 * that `func` should be invoked on the leading and/or trailing edge of the
+	 * `wait` timeout. Subsequent calls to the throttled function return the
+	 * result of the last `func` call.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+	 * on the trailing edge of the timeout only if the the throttled function is
+	 * invoked more than once during the `wait` timeout.
+	 *
+	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+	 * for details over the differences between `_.throttle` and `_.debounce`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to throttle.
+	 * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+	 * @param {Object} [options] The options object.
+	 * @param {boolean} [options.leading=true] Specify invoking on the leading
+	 *  edge of the timeout.
+	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
+	 *  edge of the timeout.
+	 * @returns {Function} Returns the new throttled function.
+	 * @example
+	 *
+	 * // avoid excessively updating the position while scrolling
+	 * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+	 *
+	 * // invoke `renewToken` when the click event is fired, but not more than once every 5 minutes
+	 * jQuery('.interactive').on('click', _.throttle(renewToken, 300000, {
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // cancel a trailing throttled call
+	 * jQuery(window).on('popstate', throttled.cancel);
+	 */
+	function throttle(func, wait, options) {
+	  var leading = true,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  if (options === false) {
+	    leading = false;
+	  } else if (isObject(options)) {
+	    leading = 'leading' in options ? !!options.leading : leading;
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+	  return debounce(func, wait, { 'leading': leading, 'maxWait': +wait, 'trailing': trailing });
+	}
+
+	module.exports = throttle;
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(184),
+	    now = __webpack_require__(185);
+
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max;
+
+	/**
+	 * Creates a debounced function that delays invoking `func` until after `wait`
+	 * milliseconds have elapsed since the last time the debounced function was
+	 * invoked. The debounced function comes with a `cancel` method to cancel
+	 * delayed invocations. Provide an options object to indicate that `func`
+	 * should be invoked on the leading and/or trailing edge of the `wait` timeout.
+	 * Subsequent calls to the debounced function return the result of the last
+	 * `func` invocation.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
+	 * on the trailing edge of the timeout only if the the debounced function is
+	 * invoked more than once during the `wait` timeout.
+	 *
+	 * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+	 * for details over the differences between `_.debounce` and `_.throttle`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Function
+	 * @param {Function} func The function to debounce.
+	 * @param {number} [wait=0] The number of milliseconds to delay.
+	 * @param {Object} [options] The options object.
+	 * @param {boolean} [options.leading=false] Specify invoking on the leading
+	 *  edge of the timeout.
+	 * @param {number} [options.maxWait] The maximum time `func` is allowed to be
+	 *  delayed before it's invoked.
+	 * @param {boolean} [options.trailing=true] Specify invoking on the trailing
+	 *  edge of the timeout.
+	 * @returns {Function} Returns the new debounced function.
+	 * @example
+	 *
+	 * // avoid costly calculations while the window size is in flux
+	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+	 *
+	 * // invoke `sendMail` when the click event is fired, debouncing subsequent calls
+	 * jQuery('#postbox').on('click', _.debounce(sendMail, 300, {
+	 *   'leading': true,
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // ensure `batchLog` is invoked once after 1 second of debounced calls
+	 * var source = new EventSource('/stream');
+	 * jQuery(source).on('message', _.debounce(batchLog, 250, {
+	 *   'maxWait': 1000
+	 * }));
+	 *
+	 * // cancel a debounced call
+	 * var todoChanges = _.debounce(batchLog, 1000);
+	 * Object.observe(models.todo, todoChanges);
+	 *
+	 * Object.observe(models, function(changes) {
+	 *   if (_.find(changes, { 'user': 'todo', 'type': 'delete'})) {
+	 *     todoChanges.cancel();
+	 *   }
+	 * }, ['delete']);
+	 *
+	 * // ...at some point `models.todo` is changed
+	 * models.todo.completed = true;
+	 *
+	 * // ...before 1 second has passed `models.todo` is deleted
+	 * // which cancels the debounced `todoChanges` call
+	 * delete models.todo;
+	 */
+	function debounce(func, wait, options) {
+	  var args,
+	      maxTimeoutId,
+	      result,
+	      stamp,
+	      thisArg,
+	      timeoutId,
+	      trailingCall,
+	      lastCalled = 0,
+	      maxWait = false,
+	      trailing = true;
+
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  wait = wait < 0 ? 0 : (+wait || 0);
+	  if (options === true) {
+	    var leading = true;
+	    trailing = false;
+	  } else if (isObject(options)) {
+	    leading = !!options.leading;
+	    maxWait = 'maxWait' in options && nativeMax(+options.maxWait || 0, wait);
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+
+	  function cancel() {
+	    if (timeoutId) {
+	      clearTimeout(timeoutId);
+	    }
+	    if (maxTimeoutId) {
+	      clearTimeout(maxTimeoutId);
+	    }
+	    lastCalled = 0;
+	    maxTimeoutId = timeoutId = trailingCall = undefined;
+	  }
+
+	  function complete(isCalled, id) {
+	    if (id) {
+	      clearTimeout(id);
+	    }
+	    maxTimeoutId = timeoutId = trailingCall = undefined;
+	    if (isCalled) {
+	      lastCalled = now();
+	      result = func.apply(thisArg, args);
+	      if (!timeoutId && !maxTimeoutId) {
+	        args = thisArg = undefined;
+	      }
+	    }
+	  }
+
+	  function delayed() {
+	    var remaining = wait - (now() - stamp);
+	    if (remaining <= 0 || remaining > wait) {
+	      complete(trailingCall, maxTimeoutId);
+	    } else {
+	      timeoutId = setTimeout(delayed, remaining);
+	    }
+	  }
+
+	  function maxDelayed() {
+	    complete(trailing, timeoutId);
+	  }
+
+	  function debounced() {
+	    args = arguments;
+	    stamp = now();
+	    thisArg = this;
+	    trailingCall = trailing && (timeoutId || !leading);
+
+	    if (maxWait === false) {
+	      var leadingCall = leading && !timeoutId;
+	    } else {
+	      if (!maxTimeoutId && !leading) {
+	        lastCalled = stamp;
+	      }
+	      var remaining = maxWait - (stamp - lastCalled),
+	          isCalled = remaining <= 0 || remaining > maxWait;
+
+	      if (isCalled) {
+	        if (maxTimeoutId) {
+	          maxTimeoutId = clearTimeout(maxTimeoutId);
+	        }
+	        lastCalled = stamp;
+	        result = func.apply(thisArg, args);
+	      }
+	      else if (!maxTimeoutId) {
+	        maxTimeoutId = setTimeout(maxDelayed, remaining);
+	      }
+	    }
+	    if (isCalled && timeoutId) {
+	      timeoutId = clearTimeout(timeoutId);
+	    }
+	    else if (!timeoutId && wait !== maxWait) {
+	      timeoutId = setTimeout(delayed, wait);
+	    }
+	    if (leadingCall) {
+	      isCalled = true;
+	      result = func.apply(thisArg, args);
+	    }
+	    if (isCalled && !timeoutId && !maxTimeoutId) {
+	      args = thisArg = undefined;
+	    }
+	    return result;
+	  }
+	  debounced.cancel = cancel;
+	  return debounced;
+	}
+
+	module.exports = debounce;
+
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(1);
+	 * // => false
+	 */
+	function isObject(value) {
+	  // Avoid a V8 JIT bug in Chrome 19-20.
+	  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+
+	module.exports = isObject;
+
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getNative = __webpack_require__(186);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeNow = getNative(Date, 'now');
+
+	/**
+	 * Gets the number of milliseconds that have elapsed since the Unix epoch
+	 * (1 January 1970 00:00:00 UTC).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Date
+	 * @example
+	 *
+	 * _.defer(function(stamp) {
+	 *   console.log(_.now() - stamp);
+	 * }, _.now());
+	 * // => logs the number of milliseconds it took for the deferred function to be invoked
+	 */
+	var now = nativeNow || function() {
+	  return new Date().getTime();
+	};
+
+	module.exports = now;
+
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isNative = __webpack_require__(187);
+
+	/**
+	 * Gets the native function at `key` of `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {string} key The key of the method to get.
+	 * @returns {*} Returns the function if it's native, else `undefined`.
+	 */
+	function getNative(object, key) {
+	  var value = object == null ? undefined : object[key];
+	  return isNative(value) ? value : undefined;
+	}
+
+	module.exports = getNative;
+
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isFunction = __webpack_require__(188),
+	    isObjectLike = __webpack_require__(189);
+
+	/** Used to detect host constructors (Safari > 5). */
+	var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var fnToString = Function.prototype.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Used to detect if a method is native. */
+	var reIsNative = RegExp('^' +
+	  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
+	  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+	);
+
+	/**
+	 * Checks if `value` is a native function.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
+	 * @example
+	 *
+	 * _.isNative(Array.prototype.push);
+	 * // => true
+	 *
+	 * _.isNative(_);
+	 * // => false
+	 */
+	function isNative(value) {
+	  if (value == null) {
+	    return false;
+	  }
+	  if (isFunction(value)) {
+	    return reIsNative.test(fnToString.call(value));
+	  }
+	  return isObjectLike(value) && reIsHostCtor.test(value);
+	}
+
+	module.exports = isNative;
+
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(184);
+
+	/** `Object#toString` result references. */
+	var funcTag = '[object Function]';
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is classified as a `Function` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isFunction(_);
+	 * // => true
+	 *
+	 * _.isFunction(/abc/);
+	 * // => false
+	 */
+	function isFunction(value) {
+	  // The use of `Object#toString` avoids issues with the `typeof` operator
+	  // in older versions of Chrome and Safari which return 'function' for regexes
+	  // and Safari 8 which returns 'object' for typed array constructors.
+	  return isObject(value) && objToString.call(value) == funcTag;
+	}
+
+	module.exports = isFunction;
+
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Checks if `value` is object-like.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = {
+	  Colors: {
+	    PRIMARY: '#359BCF',
+	    DARK_PRIMARY: '#2E323F',
+	    INVERSE_PRIMARY: '#FFFFFF',
+
+	    SECONDARY: '#F7B148',
+	    INVERSE_SECONDARY: '#FFFFFF',
+
+	    FONT: '#2E323F',
+	    LIGHT_FONT: '#999999',
+
+	    ORANGE: '#ca3a31',
+	    YELLOW: '#f6a01e',
+	    GREEN: '#00a89c',
+	    BLUE: '#359BCF',
+	    RED: '#EE4235'
+	  },
+
+	  FontSize: '13px',
+	  FontFamily: 'Helvetica, Arial, sans-serif'
+	};
+
+/***/ },
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20715,14 +23345,13 @@
 	};
 
 	var React = __webpack_require__(1);
-	var objectAssign = __webpack_require__(159);
+	var Radium = __webpack_require__(159);
 
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var Icon = React.createClass({
+	  displayName: 'Icon',
 
 	  propTypes: {
 	    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-	    style: React.PropTypes.object,
 	    type: React.PropTypes.string
 	  },
 
@@ -20855,78 +23484,438 @@
 	  },
 
 	  render: function render() {
-	    var userStyles = this.props.style;
-	    var styles = objectAssign({
-	      fill: userStyles.color,
+	    var styles = {
+	      fill: this.props.style.color,
 	      width: this.props.size,
 	      height: this.props.size,
 	      display: 'inline-block',
 	      verticalAlign: 'middle'
-	    }, userStyles);
+	    };
 
 	    return React.createElement('svg', _extends({}, this.props, {
 	      fit: true,
 	      preserveAspectRatio: 'xMidYMid meet',
-	      style: styles,
+	      style: [styles, this.props.style],
 	      viewBox: '0 0 512 512'
 	    }), this._renderSvg());
 	  }
 	});
 
-/***/ },
-/* 159 */
-/***/ function(module, exports) {
-
-	'use strict';
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	function ownEnumerableKeys(obj) {
-		var keys = Object.getOwnPropertyNames(obj);
-
-		if (Object.getOwnPropertySymbols) {
-			keys = keys.concat(Object.getOwnPropertySymbols(obj));
-		}
-
-		return keys.filter(function (key) {
-			return propIsEnumerable.call(obj, key);
-		});
-	}
-
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = ownEnumerableKeys(Object(from));
-
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-
-		return to;
-	};
-
+	module.exports = Radium(Icon);
 
 /***/ },
-/* 160 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Icon = __webpack_require__(158);
-	var objectAssign = __webpack_require__(159);
+
+	var Spin = __webpack_require__(193);
+
+	var StyleConstants = __webpack_require__(190);
+
+	var Loader = React.createClass({
+	  displayName: 'Loader',
+
+	  propTypes: {
+	    color: React.PropTypes.string,
+	    isLoading: React.PropTypes.bool,
+	    isRelative: React.PropTypes.bool,
+	    isSmall: React.PropTypes.bool
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      color: StyleConstants.Colors.PRIMARY,
+	      isLoading: false,
+	      isRelative: false,
+	      isSmall: false
+	    };
+	  },
+
+	  render: function render() {
+	    if (this.props.isLoading) {
+	      var styles = {
+	        component: {
+	          backgroundColor: 'rgba(255,255,255,0.9)',
+	          bottom: 0,
+	          color: '#999',
+	          fontFamily: StyleConstants.FontFamily,
+	          fontSize: '10px',
+	          fontWeight: 600,
+	          left: 0,
+	          letterSpacing: '1px',
+	          position: this.props.isRelative ? 'absolute' : 'fixed',
+	          right: 0,
+	          textAlign: 'center',
+	          top: 0,
+	          zIndex: 100
+	        },
+	        content: {
+	          textAlign: 'center',
+	          position: 'absolute',
+	          top: 0,
+	          right: 0,
+	          bottom: 0,
+	          left: 0,
+	          margin: 'auto',
+	          width: this.props.isSmall ? '30px' : '50px',
+	          height: this.props.isSmall ? '30px' : '50px'
+	        },
+	        circle: {
+	          borderRadius: '100%',
+	          width: this.props.isSmall ? '30px' : '50px',
+	          height: this.props.isSmall ? '30px' : '50px',
+	          borderTop: '3px solid ' + this.props.color,
+	          borderRight: '3px solid transparent',
+	          borderBottom: '3px solid transparent',
+	          borderLeft: '3px solid transparent'
+	        },
+	        text: {
+	          marginTop: '10px',
+	          fontSize: '10px'
+	        }
+	      };
+
+	      return React.createElement('div', { style: styles.component }, React.createElement('div', { style: styles.content }, React.createElement(Spin, null, React.createElement('div', { style: styles.circle })), this.props.isSmall ? null : React.createElement('div', { style: styles.text }, 'LOADING...')));
+	    } else {
+	      return React.createElement('div', null);
+	    }
+	  }
+	});
+
+	module.exports = Loader;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Spin = React.createClass({
+	  displayName: 'Spin',
+
+	  propTypes: {
+	    children: React.PropTypes.node,
+	    direction: React.PropTypes.oneOf(['counterclockwise', 'clockwise']),
+	    speed: React.PropTypes.number //milliseconds, time it takes to make 1 full rotation
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      direction: 'clockwise',
+	      speed: 1000
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    var el = React.findDOMNode(this);
+	    var speed = this.props.speed;
+	    var spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
+	    var rotation = 0;
+
+	    setInterval(function () {
+	      el.style.transform = 'rotate(' + rotation * spinDirection + 'deg)';
+
+	      if (rotation < 360) {
+	        rotation += 1;
+	      } else {
+	        rotation = 0;
+	      }
+	    }, speed / 360);
+	  },
+
+	  render: function render() {
+	    return React.createElement('div', { style: { display: 'inline-block' } }, this.props.children);
+	  }
+	});
+
+	module.exports = Spin;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }return target;
+	};
+
+	var React = __webpack_require__(1);
+	var Radium = __webpack_require__(159);
+
+	var RajaIcon = React.createClass({
+	  displayName: 'RajaIcon',
+
+	  propTypes: {
+	    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+	    type: React.PropTypes.string
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      size: 24,
+	      type: 'b'
+	    };
+	  },
+
+	  _renderSvg: function _renderSvg() {
+	    switch (this.props.type) {
+	      case 'about':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1024 508c0 286-228 514-510 514-284 0-514-228-514-514 0-282 230-510 514-510 282 0 510 228 510 510zM626 676c0-10-4-16-10-16-14 0-66 82-94 82-8 0-16-8-16-12 0-14 12-40 18-54l70-188c34-92-10-114-50-114-58 0-108 26-146 62-14 12-52 54-52 70 0 8 8 14 14 14 20 0 62-84 96-84 6 0 16 8 10 26l-68 168c-8 16-36 92-36 138 0 40 22 52 54 52 96 0 210-120 210-144zM660 264c0-40-26-66-66-66s-76 36-76 76c0 36 28 68 64 68 44 0 78-34 78-78z' }));
+	      case 'airplane':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1024 896l-128 128-144-192h-48v-64l-138-182-182 182v192c0 36-28 64-64 64h-64l-64-192-192-64v-64c0-36 28-64 64-64h192l182-182-182-138h-64v-48l-192-144 128-128 548 220 174-174c50-50 118-62 154-26s24 104-26 154l-174 174z' }));
+	      case 'appliances':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M82 0h860c22 0 40 18 40 40v944c0 22-18 40-40 40h-860c-22 0-40-18-40-40v-944c0-22 18-40 40-40zM112 50c-12 0-20 10-20 22v190h840v-190c0-12-8-22-20-22h-800zM92 324v628c0 12 8 22 20 22h800c12 0 20-10 20-22v-628h-840zM176 390h672c16 0 32 14 32 30s-16 30-32 30h-672c-16 0-32-14-32-30s16-30 32-30zM244 524h536c22 0 40 18 40 40v278c0 22-18 40-40 40h-536c-22 0-40-18-40-40v-278c0-22 18-40 40-40zM298 110c28 0 52 22 52 50s-24 52-52 52-50-24-50-52 22-50 50-50zM512 110c28 0 50 22 50 50s-22 52-50 52-50-24-50-52 22-50 50-50zM726 110c28 0 50 22 50 50s-22 52-50 52-52-24-52-52 24-50 52-50z' }));
+	      case 'atm':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M196 0h632c48 0 90 38 90 86v850c0 48-42 88-90 88h-632c-48 0-90-40-90-88v-850c0-48 42-86 90-86zM172 88v456h680v-456h-680zM172 632v42h66v24h218v-24h66v-42h-350zM306 226h40l72 184h-36l-14-36h-84l-12 36h-38zM326 258l-32 88h66zM410 226h142v28h-56v156h-32v-156h-54v-28zM580 226h46l48 120 50-120h46v184h-32v-138l-56 138h-14l-56-138v138h-32v-184zM588 654v64h66v-64h-66zM588 740v66h66v-66h-66zM588 828v66h66v-66h-66zM676 654v64h66v-64h-66zM676 740v66h66v-66h-66zM676 828v66h66v-66h-66zM764 654v64h66v-64h-66zM764 740v66h66v-66h-66zM764 828v66h66v-66h-66z' }));
+	      case 'auto':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M768 448c256 0 256 240 256 256h-68c-14 72-78 128-156 128s-144-56-158-128h-262c-14 72-78 128-156 128s-142-56-156-128h-68v-128l64-128-64-64s256-128 384-128h192zM224 800c70 0 128-58 128-128s-58-128-128-128-128 58-128 128 58 128 128 128zM448 448h230l-128-128h-166zM800 800c70 0 128-58 128-128s-58-128-128-128-128 58-128 128 58 128 128 128z' }));
+	      case 'bike':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M774 430c138 0 250 114 250 252s-112 250-250 250-250-112-250-250c0-84 42-160 106-206 0 4 0 6 2 10l20 52c-40 34-66 86-66 144 0 104 84 186 188 186s188-82 188-186-84-188-188-188h-4l-16-42v-20c6 0 14-2 20-2zM166 660c-58 0-104 46-104 104s46 104 104 104 104-46 104-104-46-104-104-104zM166 598c92 0 166 74 166 166s-74 168-166 168-166-76-166-168 74-166 166-166zM314 608c-18 0-32-14-32-30 0-132-40-180-152-180-18 0-30-12-30-30v-30c0-18 12-30 30-30h246c18 0 32 12 32 30s-14 32-32 32h-112c46 32 68 82 76 132 94-92 230-164 320-178v-144c0-14-12-24-26-24h-198c-18 0-30-14-30-32s12-32 30-32h198c48 0 88 40 88 88v278l80 212c8 18-4 42-28 42-12 0-26-8-30-20l-82-216c-2-4-2-8-2-12v-76c-88 18-244 104-322 208-6 8-14 12-24 12z' }));
+	      case 'boat':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M782 922c76-76 158-76 236 0 2 2 4 2 6 4v78c-16-8-34-20-50-36-54-52-94-54-146-2-38 38-80 58-120 58s-80-20-118-58c-52-52-94-50-148 2-76 74-160 74-236 0-54-52-94-52-148 0-20 18-38 30-58 40v-74c4-4 10-8 14-12 78-76 158-76 236 0 52 50 96 50 148 0 78-76 162-76 238 0 52 52 94 52 146 0zM1018 730c2 2 4 2 6 4v78c-16-8-34-20-50-36-54-52-94-54-146-2-38 38-80 58-120 58s-80-20-118-58c-48-48-98-48-148 2-76 74-160 74-236 0-54-52-94-52-148 0-20 18-38 30-58 40v-74c4-4 10-8 14-12 78-76 158-76 236 0 2 2 4 2 6 4v-158l-92-92c-18-18-6-46 14-52l78-26v-214h64v-64h128v-96c0-18 14-32 32-32h64c18 0 32 14 32 32v96h128v64h64v214l78 26c20 6 32 34 14 52l-92 92v166c4-4 10-8 14-12 76-76 158-76 236 0zM704 384v-128h-64v-64h-256v64h-64v128l192-64z' }));
+	      case 'briefcase':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M678 248c-20 0-36-14-36-34 0-70-56-128-126-128s-126 58-126 128c0 20-16 34-36 34s-34-14-34-34c0-108 88-198 196-198s196 90 196 198c0 20-14 34-34 34zM614 648c146-6 286-28 410-64v382c0 22-16 40-38 40h-948c-22 0-38-18-38-40v-386c126 38 268 60 416 68v56c0 32 24 56 56 56h86c30 0 56-24 56-56v-56zM416 594c-150-8-292-30-416-68v-212c0-22 16-38 38-38h948c22 0 38 16 38 38v216c-124 36-264 58-410 64v-50c0-32-26-58-56-58h-86c-32 0-56 26-56 58v50zM584 686c0 22-18 38-40 38h-58c-22 0-40-16-40-38v-124c0-22 18-40 40-40h58c22 0 40 18 40 40v124z' }));
+	      case 'bubble_budgets':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M832 384c-106 0-192-86-192-192s86-192 192-192 192 86 192 192-86 192-192 192zM832 64v64c36 0 64 28 64 64s-28 64-64 64v64c70 0 128-58 128-128s-58-128-128-128zM384 256c212 0 384 172 384 384s-172 384-384 384-384-172-384-384 172-384 384-384zM384 960c176 0 320-144 320-320s-144-320-320-320v64c142 0 256 114 256 256s-114 256-256 256-256-114-256-256v0h-64c0 176 144 320 320 320zM1024 544c0 54-42 96-96 96s-96-42-96-96 42-96 96-96 96 42 96 96z' }));
+	      case 'budget_increase':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M420 0c90 194 138 400 138 616h58l-80 76-82-76h60c0-208-46-408-134-596zM514 808h44v86h86v44h-86v86h-44v-86h-86v-44h86v-86z' }));
+	      case 'budget_decrease':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M368 976h236v48h-236v-48zM612 0l44 20c-96 204-146 424-146 652h64l-88 84-88-84h64c0-234 50-462 150-672z' }));
+	      case 'business':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM580 736c70 0 128-56 128-126 0-38-18-72-44-96 26-24 44-58 44-96 0-70-60-130-130-130h-200c-18 0-32 14-32 32v384c0 18 14 32 32 32v0 0h202zM644 610c0 36-28 62-64 62h-170v-126h170c36 0 64 28 64 64zM578 352c36 0 66 30 66 66s-28 64-64 64h-170v-130h168z' }));
+	      case 'card':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1024 320h-1024v-64c0-36 28-64 64-64h896c36 0 64 28 64 64v64zM0 448h1024v320c0 36-28 64-64 64h-896c-36 0-64-28-64-64v-320z' }));
+	      case 'cash':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M870 154l-676 68 608-156c24 0 42 8 52 30zM960 286h-848l798-84c24 2 40 16 48 40zM990 342c18 4 30 14 34 32v614c-4 18-16 32-34 36h-952c-18-4-32-18-38-36v-614c6-18 20-28 38-32h952zM206 410c0 70-56 136-138 136v270c52 0 94 26 120 74 12 22 18 42 18 66h616c0-52 22-94 68-120 22-12 44-20 66-20v-270c-52 0-92-24-118-72-12-22-16-42-16-64h-616zM684 682c0 54-14 102-42 146-32 48-74 72-128 74-78 0-130-46-158-138-2-2-2-6-2-8-6-22-10-46-10-74 0-54 14-104 42-148 32-48 74-72 128-74 78 0 130 46 158 138 2 2 2 6 2 8 6 22 10 48 10 76zM410 818v-50h68v-152c0 2-10 12-28 30l-42-44 80-72h60v238h66v50h-204zM658 680c0-106-66-190-146-190s-146 84-146 190 66 192 146 192 146-86 146-192z' }));
+	      case 'chair':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M236 292l-108-38c4-120 174-190 384-190s380 70 384 190l-106 36c-12 4-22 16-22 30 0 0 12 182 0 194s-500 12-512 0 0-192 0-192c0-14-8-26-20-30zM192 546c0 18 14 32 32 32h576c18 0 32-14 32-32v-98s-8-88 0-104c4-10 38-18 64-24v0c54-12 130 0 130 64 0 90-64 128-130 128v278c0 22-20 42-42 42h-22v88c0 22-18 40-40 40h-48c-22 0-40-18-40-40v-88h-384v88c0 22-18 40-40 40h-48c-22 0-40-18-40-40v-88h-18c-38 0-46-44-46-44v-276c-64-2-128-38-128-128 0-64 74-74 128-64v0c26 6 60 16 64 24 8 12 0 104 0 104v98z' }));
+	      case 'check_mark':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1024 286l-642 642h-2l-380-382 190-188 192 192 452-454z' }));
+	      case 'checkbook':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M960 256c36 0 64 28 64 64v512c0 36-28 64-64 64h-896c-36 0-64-28-64-64v-512c0-36 28-64 64-64h522l-128 128h-394v448h896v-448h-138l128-128h10zM576 768h-416c-18 0-32-14-32-32s14-32 32-32h416c18 0 32 14 32 32s-14 32-32 32zM1010 82c18 18 18 50 0 68l-490 490h-136v-136l490-490c18-18 50-18 68 0z' }));
+	      case 'circle':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M950 512c0 176-100 310-218 380-68 40-140 58-220 58-176 0-310-100-380-218-40-68-58-140-58-220 0-176 100-310 218-380 68-40 140-58 220-58 176 0 310 100 380 218 40 68 58 140 58 220z' }));
+	      case 'circle_1':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM492 274l-134 136 48 50 76-80v364h82v-470h-72z' }));
+	      case 'circle_2':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM504 266c-66 0-132 26-174 76l48 54c30-34 74-56 128-56 42 0 84 22 84 72 0 68-72 128-254 266v66h340v-74h-208c126-94 206-172 206-258 0-94-80-146-170-146z' }));
+	      case 'circle_3':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM504 266c-78 0-136 32-172 74l42 52c34-34 74-52 122-52 52 0 94 22 94 66 0 42-42 62-96 62h-54v74c8 0 34-2 54-2 66 0 104 20 104 66 0 44-36 72-98 72-50 0-100-20-130-56l-44 54c32 42 94 76 178 76 108 0 176-58 176-138 0-72-64-110-110-114 48-8 102-44 102-106 0-78-66-128-168-128z' }));
+	      case 'circle_4':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM520 274l-194 296v66h224v106h82v-106h64v-72h-64v-290h-112zM550 348v216h-142z' }));
+	      case 'circle_flag':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM384 736v-448c0-18-14-32-32-32s-32 14-32 32v448c0 18 14 32 32 32s32-14 32-32zM768 512l64-192h-384v192h320z' }));
+	      case 'circle_question_mark':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M566 804c10 0 20-8 20-18v-110c0-10-10-18-20-18h-108c-10 0-20 8-20 18v110c0 10 10 18 20 18h108zM566 622c10 0 20-8 20-18 0-36 48-60 70-74 14-8 42-32 52-46 12-18 24-50 24-82 0-76-58-134-112-160-32-16-62-22-96-22-92 0-164 40-212 122-6 10-4 18 4 24l76 56c2 2 6 4 10 4 6 0 10-4 14-8 20-26 38-42 50-52s28-14 48-14c30 0 72 22 72 50 0 36-22 46-52 60-40 18-96 64-96 120v22c0 10 10 18 20 18h108zM950 512c0 176-100 310-218 380-68 40-140 58-220 58-176 0-310-100-380-218-40-68-58-140-58-220 0-176 100-310 218-380 68-40 140-58 220-58 176 0 310 100 380 218 40 68 58 140 58 220z' }));
+	      case 'clock':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M684 594c12 12 20 28 20 46 0 36-28 64-64 64-18 0-32-6-44-18v0l-126-126c-14-12-22-28-22-48v-192c0-36 28-64 64-64s64 28 64 64v164zM512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM512 896c212 0 384-172 384-384s-172-384-384-384-384 172-384 384 172 384 384 384z' }));
+	      case 'close':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1024 192l-320 320 320 320-192 192-320-320-320 320-192-192 320-320-320-320 192-192 320 320 320-320z' }));
+	      case 'coin':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM512 990c264 0 478-214 478-478s-214-478-478-478-478 214-478 478 214 478 478 478zM552 574c32 10 56 24 56 48 0 22-20 44-56 52v-100zM512 102c226 0 410 184 410 410s-184 410-410 410-410-184-410-410 184-410 410-410zM552 766c108-12 162-74 162-156 0-100-86-130-162-150v-106c34 8 66 26 92 50l58-78c-40-36-90-60-150-66v-70h-70v68c-100 10-160 76-160 150 0 100 84 128 160 148v118c-50-8-90-36-118-64l-58 80c40 40 98 70 176 76v68h70v-68zM430 398c0-26 18-44 52-48v90c-32-8-52-20-52-42z' }));
+	      case 'color_palette':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M576 64c384 0 448 256 448 448s-64 512-448 512c-128 0-192-112-192-256 0-128-164-150-192-64-64 192-192 64-192 0 0-256 192-640 576-640zM256 528c44 0 80-36 80-80s-36-80-80-80-80 36-80 80 36 80 80 80zM400 288c0 44 36 80 80 80s80-36 80-80-36-80-80-80-80 36-80 80zM608 848c62 0 112-50 112-112s-50-112-112-112-112 50-112 112 50 112 112 112zM800 656c26 0 48-22 48-48s-22-48-48-48-48 22-48 48 22 48 48 48zM736 464c-62 0-112-50-112-112s50-112 112-112 112 50 112 112-50 112-112 112z' }));
+	      case 'computer':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M40 6h944c22 0 40 18 40 40v826c0 22-18 40-40 40h-402v74h92c8 0 16 8 16 16s-8 16-16 16h-324c-8 0-16-8-16-16s8-16 16-16h90v-74h-400c-22 0-40-18-40-40v-826c0-22 18-40 40-40zM70 56c-12 0-20 8-20 20v586c0 12 8 20 20 20h884c12 0 20-8 20-20v-586c0-12-8-20-20-20h-884zM682 318l98 180-12 6-26-48-36 40zM682 318l136 118-52 8 26 48-12 6z' }));
+	      case 'conversation':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M454 794c0 8-8 18-18 18-4 0-8-2-12-6l-92-106h-300c-18 0-32-14-32-32v-348c0-18 14-32 32-32h572c18 0 32 14 32 32v348c0 18-14 32-32 32h-150v94zM34 322v344h304c4 0 10 2 14 6l68 76v-64c0-10 6-18 16-18h166v-344h-568zM438 212h570c8 0 16 8 16 16v348c0 8-8 16-16 16h-166v110l-98-110h-90v-288c0-18-14-34-32-34h-200v-42c0-8 8-16 16-16z' }));
+	      case 'credit':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M0 768v-384h1024v384c0 70-58 128-128 128h-768c-70 0-128-58-128-128zM896 128c70 0 128 58 128 128v64h-1024v-64c0-70 58-128 128-128h768z' }));
+	      case 'debts':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M384 448h64v128h-64v-128zM512 640h64v128h-64v-128zM956 978c2 4 4 8 4 14 0 18-14 32-32 32h-896c-18 0-32-14-32-32 0-6 2-10 4-14l188-786 128-64v-96c0-18 14-32 32-32h256c18 0 32 14 32 32v96l128 64zM384 64v64h192v-64h-192zM608 832c18 0 32-14 32-32v-192c0-18-14-32-32-32h-96v-128h96c18 0 32-14 32-32s-14-32-32-32h-96v-32c0-18-14-32-32-32s-32 14-32 32v32h-96c-18 0-32 14-32 32v192c0 18 14 32 32 32h96v128h-96c-18 0-32 14-32 32s14 32 32 32h96v32c0 18 14 32 32 32s32-14 32-32v-32h96z' }));
+	      case 'donut_graph':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M576 256v-256c240 16 430 206 446 446h-258c-14-98-90-176-188-190zM150 892c-92-88-150-210-150-348 0-254 198-464 448-480v258c-108 16-192 110-192 222 0 66 28 124 74 166zM700 576h258c-16 250-224 448-478 448-104 0-204-36-282-92l186-186c28 14 62 22 96 22 112 0 204-84 220-192z' }));
+	      case 'down':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M798 420c0 4-2 10-6 14l-266 266c-4 4-10 6-14 6s-10-2-14-6l-266-266c-4-4-6-10-6-14s2-8 6-12l30-30c4-4 8-4 12-4s10 0 14 4l224 226 224-226c4-4 10-4 14-4s8 0 12 4l30 30c4 4 6 8 6 12z' }));
+	      case 'download':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M140 440c-6-6-12-14-12-24 0-18 14-32 32-32h224v-384h256v384h224c18 0 32 14 32 32 0 10-4 18-12 24l-328 310c-12 10-26 18-44 18s-32-8-44-18v0l-328-310zM0 896h1024v128h-1024v-128z' }));
+	      case 'duplicate':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1024 572c0 212-172 388-384 388s-384-176-384-388 172-380 384-380 384 168 384 380zM576 128c-226 22-400 216-400 448 0 68 16 134 44 192-130-56-220-190-220-340 0-202 166-364 368-364 80 0 148 20 208 64z' }));
+	      case 'electronics':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M72 194h880v512h-880v-512zM912 666v-430h-800v430h800zM712 748h-422l58-20h308zM502 666c0 0 0 72-154 72h308c-154 0-154-72-154-72z' }));
+	      case 'film_projector':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M768 948c0 24-20 44-44 44h-680c-24 0-44-20-44-44v-424c0-24 20-44 44-44h680c24 0 44 20 44 44v424zM302 296c0 66-54 118-120 118s-118-52-118-118 52-120 118-120 120 54 120 120zM724 224c0 106-84 190-190 190s-192-84-192-190 86-192 192-192 190 86 190 192zM1024 850c0 6-6 14-14 14-2 0-6-2-8-4l-164-90c-4-2-6-6-6-12v0 0-40c0-6 2-8 6-10l164-98c10-8 22 2 22 12v228z' }));
+	      case 'flag':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M64 0c36 0 64 28 64 64v896c0 36-28 64-64 64s-64-28-64-64v-896c0-36 28-64 64-64zM192 64h768l-128 448h-640v-448z' }));
+	      case 'food':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M0 896h576v64c0 36-28 64-64 64h-448c-36 0-64-28-64-64v-64zM512 704c36 0 64 28 64 64s-28 64-64 64h-448c-36 0-64-28-64-64s28-64 64-64h448zM8 576c18-30 170-128 282-128s252 92 274 128c18 28 16 64-18 64h-516s-20-10-26-20c-6-12-6-26 4-44zM1024 320v4l-64 572c0 36-28 64-64 64h-192c-36 0-64-28-64-64l-62-564c0-4-2-8-2-12 0-36 28-64 64-64h150l36-144-104-52c-10-6-18-16-18-28 0-18 14-32 32-32 6 0 10 0 14 2l128 64c10 6 18 18 18 30 0 2-2 4-2 6l-38 154h104c36 0 64 28 64 64zM830 832l66-448h-64l-64 448h62z' }));
+	      case 'gear':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 658c80 0 146-66 146-146s-66-146-146-146-146 66-146 146 66 146 146 146zM950 450v126c0 10-8 20-16 22l-104 16c-8 20-16 38-24 52 14 20 34 44 62 78 4 4 6 10 6 14s-2 10-6 14c-10 14-88 102-110 102-4 0-8-2-14-6l-80-62c-16 8-34 16-52 22-6 52-12 86-16 106-2 10-8 16-20 16h-128c-10 0-20-6-20-16l-16-106c-18-6-36-12-52-20l-80 60c-4 4-8 6-14 6s-10-2-14-6c-48-44-80-76-94-96-2-4-4-10-4-14s0-8 4-12c10-14 50-66 60-80-10-20-18-38-24-56l-104-16c-10-2-16-10-16-20v-126c0-10 6-20 14-22l106-16c6-18 14-34 24-52-16-22-36-48-62-78-4-4-6-10-6-14s2-10 6-14c10-12 90-102 110-102 4 0 10 2 14 6l80 62c16-8 34-16 52-22 6-52 12-86 16-106 2-10 8-16 20-16h128c10 0 20 6 20 16l16 106c18 6 36 12 52 20l80-60c4-4 8-6 14-6 4 0 10 2 14 6 50 46 80 78 94 98 2 4 4 6 4 12 0 4 0 8-4 12-10 14-50 66-60 80 10 20 18 38 24 56l104 16c10 2 16 10 16 20z' }));
+	      case 'gift':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M576 1024v-384h320v320c0 36-28 64-64 64h-256zM896 320c36 0 64 28 64 64v192h-384v-192h-128v192h-384v-192c0-36 28-64 64-64h126l-126-128h128v-128l256 256 320-320v128h128l-194 192h130zM128 960v-320h320v384h-256c-36 0-64-28-64-64z' }));
+	      case 'goals_icon':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM512 712l240 120-240-640-240 640z' }));
+	      case 'golf_clubs':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M954 82c32 0 70 6 70 64 0 26-52 40-82 26-18-8-48-40-62-40s-40 26-40 26l-2-4-152 100c14 28 20 54 8 68-28 36-106 150-106 150s12 34-28 100-50 80-50 80l14 18s-122 160-164 206-64 50-86 46-24 28-28 38-36 38-46 50-14 26-56-4-144-110-144-120c0 0 12-8 12-16v-24l76-86 42-62s-18-10-18-26 82-126 92-116 16 2 16 2l70-78 26-64 22-10 78-100 12-36 78-64 52-78s32-8 54 18l36-44-2-2s44-60 54-70c8-12 30-16 50-24 30-10 68-14 84 40 6 22-34 54-70 50-20-2-56-24-70-18-12 4-32 38-32 38l-4-4-36 46c14 18 38 52 56 84l152-102v-4s58-40 70-48c10-8 32-6 54-6zM760 12c-12 4-62 16-56 32 2 4 6 6 8 8 0 0-2-2 0 0v0c2 0 2 0 0 0 4 0 6-2 10-2 4-2 4-4 6-8 6-12 20-16 32-22 6-4 10-6 16-10-6 0-12 0-16 2zM698 58c22 10 48 22 78 24 24 0 36-8 46-20-36 20-84 2-124-4zM554 448c0 0 124-84 88-154s-96-14-158 38-306 400-322 440 4 44 28 64c34 28 36 0 66-38s46-180 116-226 182-124 182-124zM978 92c-14-6-80-6-78 10 0 4 4 8 6 10 0 0-2-2 0 0v0c2 2 0 2 0 0 4 0 6 2 10 2s6-4 8-6c10-8 20-8 34-10 6-2 14-4 20-6zM1008 158c-4 2-14 2-20 2-26 0-44-16-62-26-12-8-22-14-36-20 22 22 54 54 96 52 4 0 22-8 22-8z' }));
+	      case 'gps_arrow':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 832l-384 192 384-1024 384 1024z' }));
+	      case 'graduation_cap':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M0 360l512-168 512 168-512 152zM736 512c0 0 28 62 22 88 0 0-246 58-246 124 0-66-246-124-246-124-6-26 22-88 22-88l224 72zM920 590v240h-50v-246zM870 526h50v34h-50v-34zM870 458h50v34h-50v-34zM870 382h50v46h-50v-46z' }));
+	      case 'guitar':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M360 978c-12 8-28 0-36-8-6-6-4-28 0-62 0 0 4-58 12-130 6-60 4-64 2-70-4-10-8-12-16-16-4-2-218 24-220 24-12-2-32-12-28-28 0-2 2-10 10-14 6-4 390-214 402-220 10-6 14-4 14-4 24 2 28-6 34-10 4-4 288-282 294-288 4-4 6-6 6-20 0-12-10-10 2-16 24-12 90-44 114-52 10-4 18 4 22 12 6 12-12 22-60 98-6 8-8 14-20 10-22-8-38 2-38 2s-252 264-256 270-4 14-4 14c-8 10-14 20-18 38 0 0 2 18-4 26-8 12-132 292-174 376-32 68-26 62-38 68zM912 174l2-2v2l4-2h2c4-4 14 4 16 4v6c-2 2-6 10-12 6s-6-8-10-10c-2 0 0-4-2-4zM928 150l2-2 4-2 2 2c4-4 14 4 16 4v6c-2 2-6 10-12 6s-6-8-10-10c-2 0 0-4-2-4zM946 126l2-2v2l4-2h2c4-4 14 4 16 4v6c-2 2-6 10-12 6s-6-8-10-10c-2 0 0-2-2-4zM910 82c-6 2-14 12-20 2-4-6 10-10 14-12zM882 96l-14 6c0-2-10-8-6-10 4-4 8-4 14-6zM852 110c-6 4-12 8-18 0-4-6 8-8 12-10zM110 710v8c-8 4 0 4 6 4s0-6 0-6v-6s2 0 0 0h-6zM348 746c0 0 30 140 30 144s2 2 6-6 12-26 16-34 150-308 150-312-10-12-14-16-58-56-58-56c-8 2-208 140-212 142 0 0 0 4 4 4 6 2 80-2 82-2 12 2 18 12 36 32s28 26 28 28c2 6-68 76-68 76zM398 728c0 6-4 8-10 8s-10-2-10-8 4-10 10-10 10 4 10 10zM440 722c0 6-4 8-10 8s-10-2-10-8 4-10 10-10 10 4 10 10zM420 762c0 6-4 10-10 10s-8-4-8-10 2-10 8-10 10 4 10 10zM826 158c10 8 18 16 28 24 0 0 14-8 18-8s8-4 10-6 16-20 18-24c6-12 14-32-12-28-20 4-36 14-50 24-4 4 0 6-4 10-2 4-8 6-8 8zM440 608c8 8-4 20-12 12l-34-34c-8-8 4-20 12-12zM454 594c8 8-6 22-14 14l-32-34c-8-8 4-20 12-12zM506 542c8 8-4 20-12 12l-34-34c-8-8 4-20 12-12zM520 528c8 8-6 22-14 14l-32-34c-8-8 4-22 12-14z' }));
+	      case 'happy':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM512 960c246 0 448-200 448-448s-202-448-448-448-448 200-448 448 202 448 448 448zM826 576h6c-94 116-158 192-320 192s-226-76-320-192h8c80 80 190 128 312 128s234-48 314-128zM384 448c-36 0-64-42-64-96s28-96 64-96 64 42 64 96-28 96-64 96zM640 448c36 0 64-42 64-96s-28-96-64-96-64 42-64 96 28 96 64 96z' }));
+	      case 'heart':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M732 536c6 16 20 26 36 26h256v50h-200l-324 340-318-340h-182v-50h292c12 0 24-8 32-18l42-66 120 238c6 12 20 20 34 20h2c14 0 26-8 32-22l134-306zM60 486c-36-42-60-102-60-164 0-138 112-250 250-250s250 112 250 250c0-138 114-250 252-250s250 112 250 250c0 60-24 118-60 164h-148l-66-196c-10-32-58-36-72-4l-138 322-114-222c-12-26-48-28-64-4l-68 104h-212z' }));
+	      case 'home':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M182 566l2-2 328-272 328 272s2 0 2 2v276c0 20-18 36-38 36h-218v-220h-148v220h-218c-20 0-38-16-38-36v-276zM822 146c10 0 20 8 20 18v234l124 104c8 6 8 18 2 26l-34 42c-4 4-8 6-12 6h-2c-4 0-8-2-12-4l-396-330-396 330c-10 6-20 6-26-2l-34-42c-6-8-6-20 2-26l410-342c12-10 28-16 44-16s32 6 44 16l138 116v-112c0-10 10-18 20-18h108z' }));
+	      case 'institution':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M952 406v28h-36c2 4 4 8 4 12 0 16-14 30-30 30v392h26v30h30v30h50v30h28v66h-1024v-66h28v-30h50v-30h34v-30h24v-392c-16 0-30-14-30-30 0-4 2-8 4-12h-38v-28l-50-32h-22v-6l512-308v2l512 306v6h-22zM546 434h-68c2 4 2 8 2 12 0 16-14 30-30 30v392h26v30h72v-30h26v-392c-16 0-30-14-30-30 0-4 0-8 2-12zM234 868h26v30h70v-30h24v-392c-16 0-30-14-30-30 0-4 0-8 2-12h-66c2 4 4 8 4 12 0 16-14 30-30 30v392zM768 868h24v-392c-16 0-30-14-30-30 0-4 2-8 4-12h-68c2 4 2 8 2 12 0 16-14 30-30 30v392h26v30h72v-30z' }));
+	      case 'insurance':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c192 0 384 64 384 64v478s-24 348-384 482c-360-134-384-482-384-482v-478s192-64 384-64zM704 448v-128h-128v-128h-128v128h-128v128h128v128h128v-128h128z' }));
+	      case 'investments':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M960 896c36 0 64 28 64 64s-28 64-64 64h-896c-36 0-64-28-64-64v-896c0-36 28-64 64-64s64 28 64 64v624l198-394c10-22 32-38 58-38 24 0 42 12 54 30l216 324 264-210c12-10 26-16 42-16 36 0 64 28 64 64 0 20-10 38-24 50l-320 256c-10 8-24 14-40 14-22 0-42-10-54-28l-194-292-224 448h792z' }));
+	      case 'jewelry':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M356 0h312l48 48-122 122c198 38 350 212 350 422 0 238-194 432-432 432s-432-194-432-432c0-210 152-384 350-422l-122-122zM512 234c-198 0-358 160-358 358s160 358 358 358 358-160 358-358-160-358-358-358z' }));
+	      case 'left':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M688 310c0 4-2 10-6 14l-224 224 224 226c4 4 6 8 6 12s-2 10-6 14l-28 28c-4 4-10 6-14 6s-10-2-14-6l-266-266c-4-4-6-10-6-14s2-8 6-12l266-266c4-4 10-6 14-6s10 2 14 6l28 28c4 4 6 8 6 12z' }));
+	      case 'lightbulb':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M298 240c-24 0-46-14-54-36-12-30 2-64 32-76l316-124c30-12 62 2 74 32s-2 64-32 76l-316 124c-8 2-12 4-20 4zM298 410c-22 0-46-14-54-36-12-30 2-62 32-74l430-172c30-12 62 2 74 32s-2 64-32 76l-430 170c-8 2-12 4-20 4zM240 526v-12c0-18 18-36 30-42 2-2 4-2 6-2v0l430-170c30-12 62 2 74 32s-2 62-32 74l-290 116c24 26 48 68 48 136v6h-116v-6c0-28-6-48-20-60-20-18-58-18-66-18v0h-12c-4 0-6-2-8-2-8 0-18-6-22-10v0c-12-8-18-20-22-36v-6zM676 466c32 0 56 26 56 58 0 30-24 54-54 56-8 2-30 22-30 94 0 6 0 12-2 16h46c6 0 12 6 12 12v184c0 6-6 12-12 12h-56c0 70-58 126-128 126s-128-56-128-126h-56c-6 0-12-6-12-12v-184c0-6 6-12 12-12h212c-2-4-4-10-4-16 0-76 20-134 58-170s78-38 86-38z' }));
+	      case 'loan':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M432 354c22 4 52 8 80 8 20 0 40-2 56-6 10 34 8 70-10 104-48 58-130 110-210 124l-24 82-70 18 18 68-68 20 18 70-68 18 18 70s-32 10-82 22c-24 6-64-20-70-44-8-30-18-62-18-62l206-342c-20-66-26-180 0-244 36-88 122-110 222-60 44 22 84 56 110 96-28 2-60 2-86-2-12-42-76-54-98-10-14 26-2 58 24 72 18 8 36 8 52-2zM70 882l190-312-26-14-172 292zM912 274l112 612-502 72-64-376c50-26 94-62 126-102 20-40 26-86 14-132 36-14 64-40 74-74 28-10 46-38 46-68 0-40-34-74-74-74s-74 34-74 74c0 26 16 48 36 62-8 10-20 16-34 20-26-44-68-82-116-110 36-56 96-96 166-108 136-24 266 68 290 204zM792 778c40-10 80-34 68-92-12-52-60-58-114-66-18-2-48-8-40-30 6-18 34-22 52-12 10 6 16 16 18 30l60-12-20-90-56 12 2 22c-6-8-16-12-26-14l-8-40-54 12 6 32c-34 10-64 40-54 90 12 52 58 60 112 68 16 2 46 4 36 24s-52 20-68 6c-4-4-8-10-10-18l-60 14 20 92 56-12v-24c8 4 14 8 22 10l12 50 54-12z' }));
+	      case 'lock':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 128c-70 0-128 58-128 128 0 36-28 64-64 64s-64-28-64-64c0-68 26-134 74-182s114-74 182-74 134 26 182 74 74 114 74 182v192c36 0 64 28 64 64v448c0 36-28 64-64 64h-512c-36 0-64-28-64-64v-448c0-36 28-64 64-64h384v-192c0-70-58-128-128-128z' }));
+	      case 'logout':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M406 106c178 0 328 114 384 272h-176c-44-68-120-114-208-114-136 0-248 112-248 248s112 248 248 248c78 0 148-38 194-94h182c-60 148-206 252-376 252-224 0-406-182-406-406s182-406 406-406zM832 346l192 176-192 176v-96h-304v-160h304v-96z' }));
+	      case 'mail':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M510 494l-510-242v-124h1024v124zM512 636l512-242v502h-1024v-502z' }));
+	      case 'md_logo':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M532 256h80l74 510h-96l-44-330-164 330h-66l-166-332-44 332h-96l74-510h80l186 372zM842 274c94 32 158 120 158 244 0 104-52 184-120 220-36 18-86 28-148 28l-10-72c44-2 76-4 94-10 66-22 110-80 110-166 0-92-48-154-120-176-28-8-78-14-146-14h-22l-10-72h52c74 0 128 6 162 18z' }));
+	      case 'merchant':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 98c38 0 70 30 70 68 0 4-2 10-2 14l324 176h92c16 0 28 14 28 30v512c0 16-12 28-28 28h-968c-16 0-28-12-28-28v-512c0-16 12-30 28-30h92l324-176c0-4-2-10-2-14 0-38 32-68 70-68zM200 534c-64 0-112 48-112 112s48 110 112 110c66 0 112-46 112-110s-46-112-112-112zM200 576c40 0 66 30 66 70s-26 70-66 70-64-30-64-70 24-70 64-70zM454 204l-280 152h676l-280-152c-12 20-34 32-58 32s-46-12-58-32zM344 538v214h46v-76h56c46 0 72-30 72-68s-26-70-72-70h-102zM390 578h50c18 0 30 12 30 30s-12 28-30 28h-50v-58zM546 538v214h152v-40h-106v-48h104v-40h-104v-46h106v-40h-152zM734 538v214h44v-140l104 140h44v-214h-46v134l-100-134h-46z' }));
+	      case 'motorcycle':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M0 694c0-80 50-148 118-178v-8c0-26 6-40 28-40h158c0-18 0-36 18-54l78-82c16-16 44-24 68-34 10-4 14-4 20-4v-22c-6-10-12-10-12-40 0-34 22-64 62-64s60 30 64 64h-14v48c0 18-16 30-38 30v10l42 72 42 38c18 16 38 6 34-12l-34-138c-2-10 4-18 14-2l82 124c20 30 68 48 100 48h40v66l-2-2c-24 0-46 6-66 14l10 16c18-6 34-10 54-10 86 0 158 72 158 158s-72 158-158 158-156-72-156-158c0-46 20-88 52-116l-10-16c-38 32-62 80-62 132 0 38-18 78-74 78s-100-2-166-2h-120c-26 48-78 82-138 82-86 0-158-70-158-156h-34zM770 692c0 54 42 98 96 98s98-44 98-98-44-96-98-96c-8 0-14 0-22 2l22 34c34 0 60 28 60 60s-26 60-60 60c-32 0-58-28-58-60 0-10 2-22 8-30l-22-34c-16 18-24 40-24 64zM470 468l68 66 100-40-124-70c-14 22-24 32-44 44zM288 566c30 22 50 54 58 92 2 8 10 6 10 0v-100h-64c-8 0-8 4-4 8zM94 692c0 54 44 98 98 98s98-44 98-98c0-34-20-64-46-82l-12 38c12 10 20 26 20 44 0 32-28 60-60 60s-60-28-60-60c0-30 24-54 52-58l12-38h-4c-54 0-98 42-98 96z' }));
+	      case 'net_worth':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M224 832c-54 0-96-42-96-96s42-96 96-96h8l104-172c-10-16-16-32-16-52 0-54 42-96 96-96s96 42 96 96c0 20-6 36-16 52l104 172h14l170-298c-10-16-16-34-16-54 0-54 42-96 96-96s96 42 96 96-42 96-96 96h-6l-170 298c10 16 16 34 16 54 0 54-42 96-96 96s-96-42-96-96c0-20 6-36 16-52l-104-172h-16l-104 172c10 16 16 32 16 52 0 54-42 96-96 96zM64 0v960h960v64h-1024v-1024h64z' }));
+	      case 'no':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM896 512c0-212-172-384-384-384-82 0-162 26-224 70l536 536c44-62 72-140 72-222zM128 512c0 212 172 384 384 384 82 0 160-28 222-72l-536-536c-44 62-70 142-70 224z' }));
+	      case 'not_cleared':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM480 672c20 0 32-16 32-32v-288c0-18-14-32-32-32s-32 14-32 32v204l-200-226c-20-22-56-6-56 22v288c0 18 14 32 32 32s32-14 32-32v-204l200 226c6 8 14 10 24 10zM576 498c0 94 78 174 170 174 46 0 92-18 124-52 12-12 10-32-2-44s-32-12-44 0c-20 22-48 32-78 32-58 0-106-50-106-110s50-114 106-114c28 0 56 10 76 30 12 12 34 12 46 0s12-32 0-44c-32-32-76-50-122-50-92 0-170 82-170 178z' }));
+	      case 'no_mail':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M84 212h528l-22 42h-464v36l334 202-20 36-356-212v-104zM84 362l44 40v346h192l-24 44h-212v-430zM774 0l60 34-550 990-60-34zM940 362v430h-486l24-44h418v-346zM772 212h168v104l-334 200 40-72 252-154v-36h-150z' }));
+	      case 'no_phone':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M756 0l62 34-550 990-62-34zM600 20h82v4h18l-96 176h-312v568l-38 70v-488h-4v-36h4v-56h-4v-36h4v-60h-4v-46h4v-8c0-44 22-84 90-84h256v-4zM770 186v706c0 78-42 96-80 96h-346c-4 0-8-2-12-2l96-176h308v-560zM424 102c-6 0-12 6-12 12s6 12 12 12 12-6 12-12-6-12-12-12zM476 102c-6 0-12 6-12 12s6 12 12 12h74c6 0 12-6 12-12s-6-12-12-12h-74zM514 848c-28 0-50 22-50 50s22 48 50 48 48-20 48-48-20-50-48-50z' }));
+	      case 'palm_tree':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M726 844c142 26 232 92 298 180h-926c78-106 250-182 454-190-24-114-108-250-184-356 8 6 130 8 130 8 98 122 186 278 228 358zM162 322c-44 78-66 178 16 382 0-106 76-272 128-320 64 0 128 64 128 64 0-64-18-98-42-138 100-4 256 10 298 138-64-192-192-256-256-256 64-64 64-64 192-64-196-148-318-30-364 32-20-42-20-116-20-160 0 0-66 68-80 152-80-24-162-88-162-88 28 28 64 128 90 142-104 82-90 306-90 306 58-118 104-180 162-190z' }));
+	      case 'password':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M0 960h1024v34h-1024v-34zM428 60c0-26 16-30 46-30h76c30 0 44 4 44 30v12l-26 282 262-112c6-2 16-6 24-6 16 0 18 20 24 36l26 74c2 12 6 20 6 30 0 14-18 20-32 22l-274 62 184 216c8 6 14 16 14 28 0 10-16 22-24 28l-64 46c-10 8-18 16-30 16s-20-14-26-22l-146-244-146 244c-6 10-14 22-28 22-10 0-22-10-30-16l-62-46c-12-8-28-16-28-30 0-10 10-20 16-26l184-216-272-62c-16-2-32-8-32-24 0-4 8-24 8-28l24-74c6-18 8-36 24-36 10 0 20 2 26 4l260 114-28-282v-12z' }));
+	      case 'pencil':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M944 306l-226-226 56-56c32-32 82-32 114 0l112 112c32 32 32 82 0 114zM676 122l226 226-676 676h-226v-226zM204 872l520-520-52-52-520 520z' }));
+	      case 'personal':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M542 320c54 0 98 44 98 98s-44 94-98 94h-94v-192h94zM512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM542 576c90 0 162-68 162-158s-72-162-162-162h-126c-18 0-32 14-32 32v448c0 18 14 32 32 32s32-14 32-32v-160h94z' }));
+	      case 'personal_care':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M724 120v-20h-128c-26 0-26-40 0-40h128v-20h-128c-26 0-26-40 0-40h178c36 0 58 36 58 62v918c0 58-108 60-108 0v-398h-126c-26 0-26-42 0-42h126v-20h-126v-38h126v-20h-126c-26 0-26-40 0-40h126v-22h-126c-26 0-26-38 0-38h126v-20h-126c-26 0-26-40 0-40h126v-20h-126c-26 0-28-40 0-40h126v-22h-126v-40h126v-20h-128c-26 0-26-40 0-40h128zM600 896c-12 54 2 66 14 88 12 24-16 52-40 30-20-18-30-64-30-98h-16c-54 0-104-46-104-110v-264h-20v264c0 54-44 112-106 112s-106-52-106-112c0-68 68-142 158-94v-264l48-434c2-12 10-14 16-14s12 2 14 14l50 434v264c90-48 160 28 160 96 0 36-16 68-42 88h4zM298 862c30 0 54-24 54-54s-24-54-54-54-54 24-54 54 24 54 54 54zM480 808c0 30 22 54 52 54s54-24 54-54-24-54-54-54-52 24-52 54z' }));
+	      case 'pets':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M532 368l200 200-24 44v264c0 30-24 54-54 54s-56-24-56-54v-112c-152 6-278-18-406-76v188c0 30-24 54-54 54s-56-24-56-54v-430 0c-2-32-74-94-82-136s48-52 58-28c14 36 22 62 54 86h420zM574 332l256-238v102l194 212-104 104-122-70-46 60z' }));
+	      case 'phone':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M694 4c58 0 94 28 94 90v828c0 82-44 102-84 102h-368c-74 0-94-42-94-88v-586h-6v-38h6v-58h-6v-38h6v-64h-6v-50h6v-8c0-46 22-90 94-90h270v-4h88v4zM516 980c28 0 52-24 52-52s-24-52-52-52-52 24-52 52 24 52 52 52zM282 836h468v-644h-468v644zM566 100c0-6-6-12-12-12h-78c-6 0-14 6-14 12s8 12 14 12h78c6 0 12-6 12-12zM422 88c-6 0-12 6-12 12s6 12 12 12 12-6 12-12-6-12-12-12z' }));
+	      case 'plus':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M960 448c36 0 64 28 64 64s-28 64-64 64h-384v384c0 36-28 64-64 64s-64-28-64-64v-384h-384c-36 0-64-28-64-64s28-64 64-64h384v-384c0-36 28-64 64-64s64 28 64 64v384h384z' }));
+	      case 'plus_card':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M896 126c70 0 128 58 128 128v64h-1024v-64c0-70 58-128 128-128h768zM896 832h128v64h-128v128h-64v-128h-128v-64h128v-128h64v128zM638 768v126h-510c-70 0-128-58-128-128v-320h1024v322h-64v-128h-192v128h-130zM896 704v128h110c-22 36-64 62-110 62h-194v-62h130v-128h64z' }));
+	      case 'power':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M640 146c186 56 320 228 320 430 0 248-200 448-448 448s-448-200-448-448c0-202 134-374 320-430v136c-36 16-70 40-98 68-60 60-94 140-94 226s34 166 94 226 140 94 226 94 166-34 226-94 94-140 94-226-34-166-94-226c-28-28-62-52-98-68v-136zM576 448c0 36-28 64-64 64s-64-28-64-64v-384c0-36 28-64 64-64s64 28 64 64v384z' }));
+	      case 'printer':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M256 0h384l128 126v130h-512v-256zM960 320c36 0 64 28 64 64v320c0 36-28 64-64 64h-192v256h-512v-256h-192c-36 0-64-28-64-64v-320c0-36 28-64 64-64h896zM704 960v-320h-384v320h384zM974 416c0-26-20-46-46-46s-46 20-46 46 20 46 46 46 46-20 46-46z' }));
+	      case 'property':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M160 272c-32 0-44-48-14-62l430-210 428 210c16 8 24 26 16 42s-26 24-42 16l-402-200-404 200c-4 2-8 4-12 4zM576 736c192 0 192 170 192 182h-52c-12 54-60 106-118 106s-104-52-116-106h-198c-12 54-58 106-116 106s-106-52-118-106h-50v-88l66-62-66-66s192-104 288-104h144s100 94 144 138zM336 736h172l-96-96h-124zM576 128l382 192v576h-94s-2-66-24-110c-38-78-128-100-218-108l-166-166h-266v-192zM638 448v-194h-128v194h128z' }));
+	      case 'question_mark':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M598 694c12 0 24 12 24 24v136c0 12-12 24-24 24h-136c-12 0-24-12-24-24v-136c0-12 12-24 24-24h136zM620 374c0-36-48-60-88-60-24 0-46 4-62 16-14 10-32 32-60 66-4 6-12 8-18 8-4 0-10 0-14-4l-94-72c-8-6-12-18-6-30 60-102 148-152 264-152 70 0 134 32 176 66s84 90 84 162c0 102-62 146-128 182-22 12-54 46-54 74 0 12-12 28-24 28h-136c-12 0-22-20-22-32v-26c0-70 70-128 120-150 22-10 38-20 48-32s14-26 14-44z' }));
+	      case 'real_estate':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M790 106c22 0 42 22 42 44v768h-278v-128h-84v128h-278v-768c0-22 20-44 42-44h556zM448 704v-42h-128v42h128zM448 576v-42h-128v42h128zM448 448v-42h-128v42h128zM448 320v-42h-128v42h128zM704 704v-42h-128v42h128zM704 576v-42h-128v42h128zM704 448v-42h-128v42h128zM704 320v-42h-128v42h128z' }));
+	      case 'refresh':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M582 512h442l-222 220zM442 950c-244 0-442-196-442-438s198-438 442-438 444 196 444 438h-166c0-152-126-274-278-274s-276 122-276 274 124 274 276 274v164z' }));
+	      case 'retirement':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M900 316c0 42-34 76-76 76s-74-34-74-76 32-76 74-76 76 34 76 76zM416 774v0h-26l-174 140c-8 6-16 8-26 8-12 0-26-4-34-14-14-18-12-46 6-60l216-174c8-8 24-12 38-12h182c12 0 36-14 44-24l30-40h-148c-24 0-44-18-44-42 0-6 2-12 4-16v-92h52v-32l50-52c10-10 26 6 16 16l-44 46v22h14v64h160l46-62c18-26 54-32 80-14s30 54 12 80l-136 190c-28 40-86 68-136 68h-182zM76 246v-6c80 0 148 16 182 60 34-44 100-60 180-60v6c-130 0-158 102-158 102h-46s-28-102-158-102zM90 164c0 0-16-58-90-58v-4c46 0 82 8 102 34 20-26 56-34 102-34v4c-74 0-88 58-88 58h-26zM1016 614h8v44h-8c-42 0-78-18-104-50-36 50-74 102-96 134-60 84-126 124-214 124h-188c-12 0-22-10-22-22s10-22 22-22h188c74 0 126-30 178-104 56-80 204-280 206-282 16-22 50 2 34 24 0 2-36 50-80 110v2c16 26 44 42 76 42zM328 572c16-24 54 0 38 24-24 40-68 62-114 62-36 0-70-14-94-38-24 24-56 38-92 38-24 0-46-4-66-16v-56c16 18 40 28 66 28 30 0 58-14 74-40 4-6 10-10 18-10s16 4 20 10c16 26 44 40 74 40 32 0 60-16 76-42z' }));
+	      case 'right':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M670 548c0 4-2 10-6 14l-266 266c-4 4-10 6-14 6s-10-2-14-6l-28-28c-4-4-6-10-6-14s2-8 6-12l224-226-224-224c-4-4-6-10-6-14s2-8 6-12l28-28c4-4 10-6 14-6s10 2 14 6l266 266c4 4 6 8 6 12z' }));
+	      case 'savings':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M576 96c0 54-42 96-96 96s-96-42-96-96 42-96 96-96 96 42 96 96zM960 450c36 0 62 26 62 62v128c0 36-26 66-62 66h-78c-24 72-78 138-148 184l34 134h-192l-18-68c-26 4-52 4-78 4s-52-2-78-6l-18 70h-192l34-136c-90-58-150-146-160-246h-2c-36 0-64-28-64-64s28-64 64-64h14c50-148 212-258 402-258 54 0 106 8 154 24l132-88v160c34 28 64 62 86 98h108zM480 384c98 0 136 42 160 42 30 0 44-42 16-58-4-2-80-48-176-48s-172 46-176 48c-16 10-22 28-12 44s28 20 44 10c0 0 66-38 144-38zM768 574c36 0 64-28 64-64s-28-64-64-64-64 28-64 64 28 64 64 64z' }));
+	      case 'sad':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M512 0c282 0 512 230 512 512s-230 512-512 512-512-230-512-512 230-512 512-512zM512 960c246 0 448-200 448-448s-202-448-448-448-448 200-448 448 202 448 448 448zM512 576c162 0 226 76 320 192h-6c-80-80-192-128-314-128s-232 48-312 128h-8c94-116 158-192 320-192zM384 448c-36 0-64-42-64-96s28-96 64-96 64 42 64 96-28 96-64 96zM640 448c36 0 64-42 64-96s-28-96-64-96-64 42-64 96 28 96 64 96z' }));
+	      case 'search':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M690 788c36-28 68-62 96-98l238 238-96 96zM816 408c0 94-34 180-76 238v0c-26 38-58 70-96 96v0c-66 46-148 74-236 74-226 0-408-184-408-408 0-162 94-302 230-368 54-26 114-40 178-40 226 0 408 182 408 408zM408 678c150 0 272-120 272-270s-122-272-272-272-272 122-272 272 122 270 272 270z' }));
+	      case 'share':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M960 576c36 0 64 28 64 64v320c0 36-28 64-64 64h-896c-36 0-64-28-64-64v-896c0-36 28-64 64-64h320c36 0 64 28 64 64s-28 64-64 64h-256v768h768v-256c0-36 28-64 64-64zM576 0h448v448l-178-178-544 544c-12 12-28 18-46 18-36 0-64-28-64-64 0-18 6-34 18-46l544-544z' }));
+	      case 'shopping_bag':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M894 890l32 134h-832l34-132v-614h118v-8c0-148 120-270 270-270s270 122 270 270v8h108v612zM306 270v8h420v-8c0-116-94-210-210-210s-210 94-210 210zM952 1024l-32-134v-612h12l40 608 52 138h-72z' }));
+	      case 'skydiving':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M54 322h10l420 522c-2-2-2-6-2-8l-366-516h10l356 504 2-2-268-500h10l264 490 2-2-110-490h10l110 486c2 0 4-2 8-2s6 0 10 2l108-486h10l-110 492c2 2 4 2 6 4l264-494h10l-270 506 360-508h10l-382 540 434-538h10l-434 540h4c6 0 12 4 12 8v54c0 4-6 8-12 8v92h-18v-76h-20v76h-22v-92c-6 0-12-4-12-8v-54c0-4 6-8 12-8h8zM492 852l4 6h2l-2-2c-2 0-2-4-4-4zM52 318c0-108 108-222 216-262-82 56-152 134-154 262-26-12-38-10-62 0zM628 314c-24-24-194-36-234 2-2-192 36-226 92-288 2 0 50 0 50-2 84 70 96 160 92 288zM128 314c-4-128 110-282 288-304 0 2 0 6 2 6-122 26-200 172-202 300-24-16-66-14-88-2zM226 316c-4-128 80-268 196-298 0 2 50 8 52 8-58 46-100 118-92 290-36-24-132-22-156 0zM972 316c-24-10-36-12-62 0-2-128-72-206-154-262 108 40 216 154 216 262zM896 314c-22-12-64-14-88 2-2-128-84-260-204-300 2 0 4-4 4-6 178 22 292 176 288 304zM796 316c-24-22-120-24-156 0 8-172-34-244-92-290 2 0 46-4 46-6 116 30 206 168 202 296zM510 0c50 0 90 4 90 10s-40 10-90 10-90-4-90-10 40-10 90-10z' }));
+	      case 'split':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M946 638c20 0 34 16 36 32l42 288c4 22-14 40-34 42l-290 22c-28 2-54-32-32-58l72-84-332-240h-338s-70-18-70-104 70-88 70-88h342l338-286-82-100c-22-28 4-62 32-60l290 22c20 2 38 20 34 42l-42 288c-2 16-16 32-36 32-10 0-20-6-28-14l-78-94-296 232v2l296 234 78-94c8-8 18-14 28-14z' }));
+	      case 'sports_equipment':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M876 152c-88 102-222 166-364 166s-276-64-364-166c92-94 222-152 364-152s272 58 364 152zM512 642c-156 0-306 70-406 182-66-86-106-194-106-312s40-226 106-312c100 112 250 182 406 182s306-70 406-182c66 86 106 194 106 312s-40 226-106 312c-100-112-250-182-406-182zM148 872c88-102 222-166 364-166s276 64 364 166c-92 94-222 152-364 152s-272-58-364-152z' }));
+	      case 'tabular':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M0 40h1024v944h-1024v-944zM54 94v188h270v-188h-270zM54 336v162h270v-162h-270zM54 552v162h270v-162h-270zM54 768v162h270v-162h-270zM378 94v188h268v-188h-268zM378 336v162h268v-162h-268zM378 552v162h268v-162h-268zM378 768v162h268v-162h-268zM700 94v188h270v-188h-270zM700 336v162h270v-162h-270zM700 552v162h270v-162h-270zM700 768v162h270v-162h-270z' }));
+	      case 'taxes':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M296 320v142h-64v-70h-38v238h36v74h-164v-74h36v-238h-38v70h-64v-142h296zM660 704h-178v-72h42l-8-38h-92l-8 38h34v72h-140v-72h30l60-242h-18v-70h168l78 312h32v72zM442 528h56l-28-118zM824 704h-146v-70h38l64-106-80-136h-22v-72h174v72h-24l42 72 46-72h-40v-72h148v72h-38l-68 106 80 134h26v72h-176v-72h24c-14-24-28-46-42-70l-46 72h40v70z' }));
+	      case 'transactions':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M110 694c60 0 110 50 110 110s-50 110-110 110-110-50-110-110 50-110 110-110zM110 402c60 0 110 50 110 110s-50 110-110 110-110-50-110-110 50-110 110-110zM1006 732c10 0 18 8 18 18v110c0 10-8 18-18 18h-696c-10 0-18-8-18-18v-110c0-10 8-18 18-18h696zM110 110c60 0 110 50 110 110s-50 110-110 110-110-50-110-110 50-110 110-110zM1006 438c10 0 18 10 18 20v108c0 10-8 20-18 20h-696c-10 0-18-10-18-20v-108c0-10 8-20 18-20h696zM1006 146c10 0 18 8 18 18v110c0 10-8 18-18 18h-696c-10 0-18-8-18-18v-110c0-10 8-18 18-18h696z' }));
+	      case 'transfer':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M968 448c30 0 56 34 56 64s-26 64-56 64h-392v328c0 30-34 56-64 56-16 0-30-8-40-18l-458-390c-10-10-16-24-16-40s6-30 16-40l458-392c10-10 24-16 40-16 30 0 64 26 64 56v328h392zM766 360v-104h-126l-2-130 128 2v-106c0-22 14-30 32-16l210 162c18 14 18 34 0 48l-210 160c-18 14-32 6-32-16zM64 256c-36 0-64-28-64-64s28-64 64-64v0h254l-128 128h-126z' }));
+	      case 'trash':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M832 960c0 36-28 64-64 64h-512c-36 0-64-28-64-64l-64-576c0-36 28-64 64-64h640c36 0 64 28 64 64zM896 128c36 0 64 28 64 64s-28 64-64 64h-768c-36 0-64-28-64-64s28-64 64-64h192v-64c0-36 28-64 64-64h256c36 0 64 28 64 64v64h192zM640 128v-64h-256v64h256z' }));
+	      case 'up':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M798 676c0 4-2 10-6 14l-30 28c-4 4-8 6-12 6s-10-2-14-6l-224-224-224 224c-4 4-10 6-14 6s-8-2-12-6l-30-28c-4-4-6-10-6-14s2-8 6-12l266-266c4-4 10-6 14-6s10 2 14 6l266 266c4 4 6 8 6 12z' }));
+	      case 'vacation':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M92 696h870v38c-2 30-32 52-72 52-38 0-70-22-72-52-2 30-34 52-72 52-40 0-70-22-72-52-2 30-34 52-72 52-40 0-74-22-74-52h-2c0 30-32 52-72 52-38 0-70-22-72-50-2 28-32 50-72 50-38 0-70-22-72-50-2 28-32 50-72 50-38 0-72-22-74-52v-38zM962 792v68c-2 28-32 52-72 52-38 0-70-24-72-52-2 28-34 52-72 52-40 0-70-24-72-52-2 28-34 52-72 52-40 0-74-24-74-52h-2c0 28-32 52-72 52-38 0-70-24-72-52-2 28-32 52-72 52-38 0-70-24-72-52-2 28-32 52-72 52-38 0-72-24-74-52v-68c2 28 36 52 74 52 40 0 70-24 72-52 2 28 34 52 72 52 40 0 70-24 72-52 2 28 34 52 72 52 40 0 72-24 72-52h2c0 28 34 52 74 52 38 0 70-24 72-52 2 28 32 52 72 52 38 0 70-24 72-52 2 28 34 52 72 52 40 0 70-24 72-52zM272 616l-30 46h-100l6-36zM820 602l6 44-6 12c-4 2-20 4-20 4h-490l38-46s80-8 122-10l-60-86-110 142h-46c12-14 156-218 168-216 6 2 76 88 124 150 40-6 176-26 192-26 20 0 82 32 82 32zM928 618c0 24-20 42-40 42-24 0-42-18-42-42s18-42 42-42c20 0 40 18 40 42zM462 210c58-82 190-88 294-16 104 74 144 200 88 282zM540 520l-20-26 154-216 26 16z' }));
+	      case 'vertical_bar_graph':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M640 384v512h-128v-512c0-36 28-64 64-64s64 28 64 64zM832 256v640h-128v-640c0-36 28-64 64-64s64 28 64 64zM960 64c36 0 64 28 64 64v768h-128v-768c0-36 28-64 64-64zM64 0v960h960v64h-1024v-1024h64zM448 320v576h-128v-576c0-36 28-64 64-64s64 28 64 64zM256 448v448h-128v-448c0-36 28-64 64-64s64 28 64 64z' }));
+	      case 'wallet':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M444 352l324-160 64 160h-388zM984 256c22 0 40 18 40 40v624c0 22-18 40-40 40h-24v-576c0-38-24-64-64-64h-22l-26-64h136zM224 352l320-352 128 192-322 158zM832 384c32 0 64 26 64 64v512s-24 64-64 64h-792c-22 0-40-18-40-40v-688c0-22 18-40 40-40h216l-64 64h-32c-18 0-32 14-32 32s14 32 32 32h672z' }));
+	      case 'warning':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M1018 932c4 8 6 18 6 28 0 36-28 64-64 64h-896c-36 0-64-28-64-64 0-10 2-20 6-28l448-896c10-22 32-36 58-36s48 14 58 36zM448 256v256c0 36 28 64 64 64s64-28 64-64v-256c0-36-28-64-64-64s-64 28-64 64zM512 896c54 0 96-42 96-96s-42-96-96-96-96 42-96 96 42 96 96 96z' }));
+	      case 'wedding':
+	        return React.createElement('g', null, React.createElement('path', { d: 'M434 96c0 38-32 68-70 68s-70-30-70-68 32-70 70-70 70 32 70 70zM644 142c0 36-32 66-68 66s-66-30-66-66 30-66 66-66 68 30 68 66zM392 178c2 0 4 0 4 2v20c0 2-2 4-4 4l-22-6c-2 2-4 2-6 2s-2 0-4-2h-2l-22 6c-2 0-4-2-4-4v-20c0-2 2-2 4-2l22 6h2c2-2 2-2 4-2s4 0 6 2v0zM374 232c0 6-4 10-10 10s-10-4-10-10 4-10 10-10 10 4 10 10zM374 272c0 6-4 10-10 10s-10-4-10-10 4-10 10-10 10 4 10 10zM374 312c0 6-4 10-10 10s-10-4-10-10 4-10 10-10 10 4 10 10zM374 352c0 6-4 10-10 10s-10-4-10-10 4-10 10-10 10 4 10 10zM576 30c66 0 104 40 104 112h-22c0-42-14-92-82-92s-80 50-80 92h-22c0-72 36-112 102-112zM824 950c10 54-44 56-60 34-20 20-32 14-54 4-26 18-34 10-52 0-20 18-38 6-52 0-28 18-38 6-52-2-24 24-52 0-52 0-24 20-42 6-52 0-20 20-46 8-54 0 0 10-14 10-14 10h-120v-422s-2 16-32 16-30-22-30-22v-330c0-44 50-48 50-48h66v158s2 36 48 36 48-36 48-36v-158h38c60 0 66 38 66 38h180v364zM274 302c12 0 22-12 22-24s-10-22-22-22-24 10-24 22 12 24 24 24zM790 982c10 0 18-6 18-16 0-6-2-14-2-14l-198-554 24-70s4-8 12-4 4 12 4 12l-24 62 56 146v-294s0-4-6-4h-148s-4 0-2 8l52 154s18 62-30 62h-48l-100 336-2-194s0-10-12-10-10 12-10 12v268s-22 78-22 84c0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14 0-6 6-8 14-8s14 2 14 8v0c-4 4-6 8-6 14 0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14 0-6 8-8 16-8s16 2 16 8h-2c-4 4-6 10-6 14 0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14v0c0-6 6-8 14-8s12 2 12 8c-4 4-6 8-6 14 0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14v0c0-6 8-8 16-8s14 2 14 8c-4 4-6 8-6 14 0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14 0-6 6-8 14-8s14 2 14 8c-4 4-6 10-6 14 0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14 0-6 6-8 14-8s16 2 16 8v0c-4 4-6 8-6 14 0 10 8 16 18 16s18-6 18-16c0-6-2-10-6-14 0-6 6-8 14-8s14 2 14 8c-4 4-6 8-6 14 0 10 8 16 18 16s16-6 16-16c0-6-2-10-6-14 0-6 8-8 16-8s14 2 14 8c-4 4-6 10-6 14 0 10 8 16 18 16z' }));
+	      default:
+	        return null;
+	    }
+	  },
+
+	  render: function render() {
+	    var styles = {
+	      fill: this.props.style.color,
+	      width: this.props.size,
+	      height: this.props.size,
+	      display: 'inline-block',
+	      verticalAlign: 'middle'
+	    };
+
+	    return React.createElement('svg', _extends({}, this.props, {
+	      fit: true,
+	      preserveAspectRatio: 'xMidYMid meet',
+	      style: [styles, this.props.style],
+	      viewBox: '0 0 1024 1024'
+	    }), this._renderSvg());
+	  }
+	});
+
+	module.exports = Radium(RajaIcon);
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Radium = __webpack_require__(159);
+
+	var Icon = __webpack_require__(191);
+
+	var StyleConstants = __webpack_require__(190);
 
 	var Select = React.createClass({
 	  displayName: 'Select',
@@ -20934,15 +23923,13 @@
 	  propTypes: {
 	    isMobile: React.PropTypes.bool,
 	    onChange: React.PropTypes.func,
-	    optionHoverStyle: React.PropTypes.object,
 	    options: React.PropTypes.array,
-	    optionsStyle: React.PropTypes.object,
-	    optionStyle: React.PropTypes.object,
+	    optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+	    optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
 	    placeholderText: React.PropTypes.string,
-	    scrimStyle: React.PropTypes.object,
+	    scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
 	    selected: React.PropTypes.object,
-	    selectedStyle: React.PropTypes.object,
-	    style: React.PropTypes.object,
+	    selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
 	    valid: React.PropTypes.bool
 	  },
 
@@ -20950,14 +23937,9 @@
 	    return {
 	      isMobile: false,
 	      onChange: function onChange() {},
-	      optionHoverStyle: {},
 	      options: [],
-	      optionsStyle: {},
-	      optionStyle: {},
 	      placeholderText: 'Select One',
-	      scrimStyle: {},
 	      selected: false,
-	      selectedStyle: {},
 	      valid: true
 	    };
 	  },
@@ -20990,28 +23972,6 @@
 	    this.props.onChange(option);
 	  },
 
-	  _handleOptionMouseEnter: function _handleOptionMouseEnter(option) {
-	    var optionEl = React.findDOMNode(this.refs[option.displayValue + option.value]);
-	    var optionStyle = objectAssign(styles.optionHover, this.props.optionHoverStyle);
-
-	    for (var key in optionStyle) {
-	      if (optionStyle[key]) {
-	        optionEl.style[key] = optionStyle[key];
-	      }
-	    }
-	  },
-
-	  _handleOptionMouseLeave: function _handleOptionMouseLeave(option) {
-	    var optionEl = React.findDOMNode(this.refs[option.displayValue + option.value]);
-	    var optionStyle = objectAssign(styles.option, this.props.optionStyle);
-
-	    for (var key in optionStyle) {
-	      if (optionStyle[key]) {
-	        optionEl.style[key] = optionStyle[key];
-	      }
-	    }
-	  },
-
 	  _handleSelectChange: function _handleSelectChange(e) {
 	    var selectedOption = this.props.options.filter(function (option) {
 	      return option.value + '' === e.target.value;
@@ -21020,37 +23980,19 @@
 	    this._handleOptionClick(selectedOption);
 	  },
 
-	  _getComponentStyles: function _getComponentStyles() {
-	    var componentStyles = objectAssign(styles.component, this.props.style);
-
-	    if (!this.props.valid) {
-	      componentStyles = objectAssign(componentStyles, styles.invalid);
-	    }
-
-	    return componentStyles;
-	  },
-
-	  _getOptionListStyles: function _getOptionListStyles() {
-	    var optionListStyles = objectAssign(styles.options, this.props.optionsStyle);
-
-	    return optionListStyles;
-	  },
-
 	  _renderOptions: function _renderOptions() {
 	    var _this = this;
 
 	    if (this.state.isOpen) {
 	      if (this.props.children) {
-	        return React.createElement('div', { style: this._getOptionListStyles() }, this.props.children);
+	        return React.createElement('div', { style: [styles.options, this.props.optionsStyle] }, this.props.children);
 	      } else {
-	        return React.createElement('ul', { style: this._getOptionListStyles() }, this.props.options.map(function (option) {
+	        return React.createElement('ul', { style: [styles.options, this.props.optionsStyle] }, this.props.options.map(function (option) {
 	          return React.createElement('li', {
 	            key: option.displayValue + option.value,
 	            onClick: _this._handleOptionClick.bind(null, option),
-	            onMouseEnter: _this._handleOptionMouseEnter.bind(null, option),
-	            onMouseLeave: _this._handleOptionMouseLeave.bind(null, option),
 	            ref: option.displayValue + option.value,
-	            style: objectAssign(styles.option, _this.props.optionStyle)
+	            style: [styles.option, _this.props.optionStyle]
 	          }, option.displayValue);
 	        }));
 	      }
@@ -21059,7 +24001,7 @@
 
 	  _renderScrim: function _renderScrim() {
 	    if (this.state.isOpen) {
-	      return React.createElement('div', { onClick: this._handleBlur, style: objectAssign(styles.scrim, this.props.scrimStyle) });
+	      return React.createElement('div', { onClick: this._handleBlur, style: [styles.scrim, this.props.scrimStyle] });
 	    }
 	  },
 
@@ -21075,11 +24017,11 @@
 	      return React.createElement('div', {
 	        onBlur: this._handleBlur,
 	        onClick: this._handleToggle,
-	        style: this._getComponentStyles(),
+	        style: [styles.component, this.props.style],
 	        tabIndex: '0'
-	      }, this._renderScrim(), React.createElement('div', { key: 'selected', style: objectAssign(styles.selected, this.props.selectedStyle) }, selected.displayValue, React.createElement(Icon, {
+	      }, this._renderScrim(), React.createElement('div', { key: 'selected', style: [styles.selected, this.props.selectedStyle] }, selected.displayValue, React.createElement(Icon, {
 	        size: '20',
-	        style: styles.downArrow,
+	        style: [styles.downArrow, this.props.selectedStyle && { color: this.props.selectedStyle.color }],
 	        type: this.state.isOpen ? 'caret-up' : 'caret-down'
 	      })), this._renderOptions());
 	    }
@@ -21096,9 +24038,9 @@
 	    borderRadius: '3px',
 	    border: '1px solid #E5E5E5',
 	    cursor: 'pointer',
-	    fontFamily: 'Helvetica, Arial, sans-serif',
-	    fontSize: '13px',
-	    padding: '10px',
+	    fontFamily: StyleConstants.FontFamily,
+	    fontSize: StyleConstants.FontSize,
+	    padding: '11px 10px 12px',
 	    position: 'relative',
 	    WebkitAppearance: 'none',
 	    boxSizing: 'border-box',
@@ -21111,14 +24053,14 @@
 	    position: 'relative'
 	  },
 	  downArrow: {
-	    color: '#999999',
+	    color: StyleConstants.Colors.FONT,
 	    position: 'absolute',
-	    right: 0,
+	    right: '-5px',
 	    top: '50%',
 	    marginTop: '-10px'
 	  },
 	  invalid: {
-	    borderColor: 'red'
+	    borderColor: StyleConstants.Colors.RED
 	  },
 	  options: {
 	    backgroundColor: '#FFFFFF',
@@ -21126,7 +24068,7 @@
 	    borderRadius: '0 0 3px 3px',
 	    left: '-1px',
 	    right: '-1px',
-	    margin: '8px 0 0 0',
+	    margin: '10px 0 0 0',
 	    padding: '0',
 	    minWidth: '100%',
 	    position: 'absolute',
@@ -21142,11 +24084,13 @@
 	    backgroundColor: '#FFFFFF',
 	    padding: '10px',
 	    whiteSpace: 'nowrap',
-	    opacity: 0.4
-	  },
-	  optionHover: {
-	    backgroundColor: '#f9f9f9',
-	    opacity: 1
+	    opacity: 0.4,
+
+	    ':hover': {
+	      backgroundColor: StyleConstants.Colors.PRIMARY,
+	      color: StyleConstants.Colors.INVERSE_PRIMARY,
+	      opacity: 1
+	    }
 	  },
 	  scrim: {
 	    position: 'fixed',
@@ -21158,7 +24102,7 @@
 	  }
 	};
 
-	module.exports = Select;
+	module.exports = Radium(Select);
 
 /***/ }
 /******/ ]);

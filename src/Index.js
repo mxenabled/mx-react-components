@@ -1,5 +1,9 @@
 module.exports = {
   DonutChart: require('./components/DonutChart'),
   Icon: require('./components/Icon'),
-  Select: require('./components/Select')
+  Loader: require('./components/Loader'),
+  RajaIcon: require('./components/RajaIcon'),
+  RangeSelector: require('./components/RangeSelector'),
+  Select: require('./components/Select'),
+  Spin: require('./components/Spin')
 };

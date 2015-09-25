@@ -1,20 +1,21 @@
 const React = require('react');
+const Radium = require('radium');
+
 const Icon = require('./Icon');
-const objectAssign = require('object-assign');
+
+const StyleConstants = require('../constants/Style');
 
 const Select = React.createClass({
   propTypes: {
     isMobile: React.PropTypes.bool,
     onChange: React.PropTypes.func,
-    optionHoverStyle: React.PropTypes.object,
     options: React.PropTypes.array,
-    optionsStyle: React.PropTypes.object,
-    optionStyle: React.PropTypes.object,
+    optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     placeholderText: React.PropTypes.string,
-    scrimStyle: React.PropTypes.object,
+    scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     selected: React.PropTypes.object,
-    selectedStyle: React.PropTypes.object,
-    style: React.PropTypes.object,
+    selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     valid: React.PropTypes.bool
   },
 
@@ -22,14 +23,9 @@ const Select = React.createClass({
     return {
       isMobile: false,
       onChange () {},
-      optionHoverStyle: {},
       options: [],
-      optionsStyle: {},
-      optionStyle: {},
       placeholderText: 'Select One',
-      scrimStyle: {},
       selected: false,
-      selectedStyle: {},
       valid: true
     };
   },
@@ -62,28 +58,6 @@ const Select = React.createClass({
     this.props.onChange(option);
   },
 
-  _handleOptionMouseEnter (option) {
-    const optionEl = React.findDOMNode(this.refs[option.displayValue + option.value]);
-    const optionStyle = objectAssign(styles.optionHover, this.props.optionHoverStyle);
-
-    for (const key in optionStyle) {
-      if (optionStyle[key]) {
-        optionEl.style[key] = optionStyle[key];
-      }
-    }
-  },
-
-  _handleOptionMouseLeave (option) {
-    const optionEl = React.findDOMNode(this.refs[option.displayValue + option.value]);
-    const optionStyle = objectAssign(styles.option, this.props.optionStyle);
-
-    for (const key in optionStyle) {
-      if (optionStyle[key]) {
-        optionEl.style[key] = optionStyle[key];
-      }
-    }
-  },
-
   _handleSelectChange (e) {
     const selectedOption = this.props.options.filter(option => {
       return option.value + '' === e.target.value;
@@ -92,42 +66,24 @@ const Select = React.createClass({
     this._handleOptionClick(selectedOption);
   },
 
-  _getComponentStyles () {
-    let componentStyles = objectAssign(styles.component, this.props.style);
-
-    if (!this.props.valid) {
-      componentStyles = objectAssign(componentStyles, styles.invalid);
-    }
-
-    return componentStyles;
-  },
-
-  _getOptionListStyles () {
-    const optionListStyles = objectAssign(styles.options, this.props.optionsStyle);
-
-    return optionListStyles;
-  },
-
   _renderOptions () {
     if (this.state.isOpen) {
       if (this.props.children) {
         return (
-          <div style={this._getOptionListStyles()}>
+          <div style={[styles.options, this.props.optionsStyle]}>
             {this.props.children}
           </div>
         );
       } else {
         return (
-          <ul style={this._getOptionListStyles()}>
+          <ul style={[styles.options, this.props.optionsStyle]}>
             {this.props.options.map(option => {
               return (
                 <li
                   key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(null, option)}
-                  onMouseEnter={this._handleOptionMouseEnter.bind(null, option)}
-                  onMouseLeave={this._handleOptionMouseLeave.bind(null, option)}
                   ref={option.displayValue + option.value}
-                  style={objectAssign(styles.option, this.props.optionStyle)}
+                  style={[styles.option, this.props.optionStyle]}
                 >
                 {option.displayValue}
                 </li>
@@ -142,7 +98,7 @@ const Select = React.createClass({
   _renderScrim () {
     if (this.state.isOpen) {
       return (
-        <div onClick={this._handleBlur} style={objectAssign(styles.scrim, this.props.scrimStyle)} />
+        <div onClick={this._handleBlur} style={[styles.scrim, this.props.scrimStyle]} />
       );
     }
   },
@@ -164,15 +120,15 @@ const Select = React.createClass({
         <div
           onBlur={this._handleBlur}
           onClick={this._handleToggle}
-          style={this._getComponentStyles()}
+          style={[styles.component, this.props.style]}
           tabIndex='0'
         >
           {this._renderScrim()}
-          <div key='selected' style={objectAssign(styles.selected, this.props.selectedStyle)}>
+          <div key='selected' style={[styles.selected, this.props.selectedStyle]}>
             {selected.displayValue}
             <Icon
               size='20'
-              style={styles.downArrow}
+              style={[styles.downArrow, this.props.selectedStyle && { color: this.props.selectedStyle.color }]}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
@@ -197,9 +153,9 @@ const styles = {
     borderRadius: '3px',
     border: '1px solid #E5E5E5',
     cursor: 'pointer',
-    fontFamily: 'Helvetica, Arial, sans-serif',
-    fontSize: '13px',
-    padding: '10px',
+    fontFamily: StyleConstants.FontFamily,
+    fontSize: StyleConstants.FontSize,
+    padding: '11px 10px 12px',
     position: 'relative',
     WebkitAppearance: 'none',
     boxSizing: 'border-box',
@@ -212,14 +168,14 @@ const styles = {
     position: 'relative'
   },
   downArrow: {
-    color: '#999999',
+    color: StyleConstants.Colors.FONT,
     position: 'absolute',
-    right: 0,
+    right: '-5px',
     top: '50%',
     marginTop: '-10px'
   },
   invalid: {
-    borderColor: 'red'
+    borderColor: StyleConstants.Colors.RED
   },
   options: {
     backgroundColor: '#FFFFFF',
@@ -227,7 +183,7 @@ const styles = {
     borderRadius: '0 0 3px 3px',
     left: '-1px',
     right: '-1px',
-    margin: '8px 0 0 0',
+    margin: '10px 0 0 0',
     padding: '0',
     minWidth: '100%',
     position: 'absolute',
@@ -243,11 +199,13 @@ const styles = {
     backgroundColor: '#FFFFFF',
     padding: '10px',
     whiteSpace: 'nowrap',
-    opacity: 0.4
-  },
-  optionHover: {
-    backgroundColor: '#f9f9f9',
-    opacity: 1
+    opacity: 0.4,
+
+    ':hover': {
+      backgroundColor: StyleConstants.Colors.PRIMARY,
+      color: StyleConstants.Colors.INVERSE_PRIMARY,
+      opacity: 1
+    }
   },
   scrim: {
     position: 'fixed',
@@ -259,4 +217,4 @@ const styles = {
   }
 };
 
-module.exports = Select;
+module.exports = Radium(Select);
