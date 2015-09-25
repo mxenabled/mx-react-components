@@ -1,8 +1,10 @@
 const React = require('react');
+const Radium = require('radium');
 const d3 = require('d3');
 
 const DonutPath = React.createClass({
   propTypes: {
+    animateOnLoad: React.PropTypes.bool,
     arc: React.PropTypes.func,
     color: React.PropTypes.string,
     opacity: React.PropTypes.number,
@@ -62,4 +64,4 @@ const DonutPath = React.createClass({
   }
 });
 
-module.exports = DonutPath;
+module.exports = Radium.Enhancer(DonutPath);
