@@ -8,7 +8,6 @@ const DonutChart = React.createClass({
     activeIndex: React.PropTypes.number,      // The index of the data set that is active. Default: -1
     activeOffset: React.PropTypes.number,     // Amount in pixels to animate on hover. Default: 3
     animateOnHover: React.PropTypes.bool,     // Show animation on hover. Dependent on activeIndex prop. Default: false
-    animateOnLoad: React.PropTypes.bool,      // Show animation on load. Default: false
     arcWidth: React.PropTypes.number,         // Width of the arc. Default: 80
     baseArcColor: React.PropTypes.string,     // Color of the base arc when using a partial total chart: Default: #E5E5E5
     chartTotal: React.PropTypes.number,       // Used when data total is not used for chart total, ie: chart with data of 30% and 20% but displayed against 100%. Default: 100
@@ -39,7 +38,6 @@ const DonutChart = React.createClass({
       activeIndex: -1,
       activeOffset: 3,
       animateOnHover: false,
-      animateOnLoad: false,
       arcWidth: 80,
       baseArcColor: '#E5E5E5',
       chartTotal: 100,
