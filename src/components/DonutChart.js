@@ -3,8 +3,6 @@ const Radium = require('radium');
 const d3 = require('d3');
 const objectAssign = require('object-assign');
 
-const DonutPath = require('./DonutPath');
-
 const DonutChart = React.createClass({
   propTypes: {
     activeIndex: React.PropTypes.number,      // The index of the data set that is active. Default: -1
@@ -95,13 +93,7 @@ const DonutChart = React.createClass({
             onMouseEnter={this.props.onMouseEnter.bind(null, i)}
             onMouseLeave={this.props.onMouseLeave}
           >
-            <DonutPath
-              animateOnLoad={this.props.animateOnLoad}
-              arc={arc}
-              color={this.props.colors[i]}
-              opacity={this.props.opacity}
-              value={point}
-            />
+            <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity} />
           </g>
         );
       });
