@@ -39,8 +39,8 @@ const DonutChart = React.createClass({
     return {
       activeIndex: -1,
       activeOffset: 3,
-      animateOnHover: true,
-      animateOnLoad: true,
+      animateOnHover: false,
+      animateOnLoad: false,
       arcWidth: 80,
       baseArcColor: '#E5E5E5',
       colors: d3.scale.category20().range(),
