@@ -4,11 +4,11 @@ const d3 = require('d3');
 
 const DonutPath = React.createClass({
   propTypes: {
-    animateOnLoad: React.PropTypes.bool,
-    arc: React.PropTypes.func,
-    color: React.PropTypes.string,
-    opacity: React.PropTypes.number,
-    value: React.PropTypes.object
+    animateOnLoad: React.PropTypes.bool.isRequired, // Show animation on load. Default: false (from DonutChart)
+    arc: React.PropTypes.func.isRequired, // D3 arc method used to calculate path.
+    color: React.PropTypes.string.isRequired, // Color for the path
+    opacity: React.PropTypes.number.isRequired, // Opacity for the path. Default: 1 (from DonutChart)
+    value: React.PropTypes.object.isRequired // Value for the segment.
   },
 
   getInitialState () {
