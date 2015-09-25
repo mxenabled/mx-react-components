@@ -1,6 +1,5 @@
 const React = require('react');
 const Radium = require('radium');
-const d3 = require('d3');
 
 const DonutPath = React.createClass({
   propTypes: {
@@ -55,12 +54,11 @@ const DonutPath = React.createClass({
 
   render () {
     const endAngle = this.props.animateOnLoad ? this.state.endAngle : this.props.value.endAngle;
-    const arc =  this.props.arc.startAngle(this.props.value.startAngle).endAngle(endAngle).padAngle(this.props.value.padAngle);
+    const arc = this.props.arc.startAngle(this.props.value.startAngle).endAngle(endAngle).padAngle(this.props.value.padAngle);
 
     return (
       <path d={arc()} fill={this.props.color} opacity={this.props.opacity} />
     );
-
   }
 });
 

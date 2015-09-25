@@ -3,7 +3,7 @@ const Radium = require('radium');
 const d3 = require('d3');
 const objectAssign = require('object-assign');
 
-const DonutPath = require('./DonutPath')
+const DonutPath = require('./DonutPath');
 
 const DonutChart = React.createClass({
   propTypes: {
@@ -17,9 +17,9 @@ const DonutChart = React.createClass({
     children: React.PropTypes.node,           // Node passed to be used as custom legend. Default: none
     colors: React.PropTypes.array,            // Array of colors to be used. Default: D3's category20 colors
     data: React.PropTypes.array.isRequired,   // Array of data with values to be used for chart. Default: none. Required
-    dataPoints: React.PropTypes.array,        // Array of data points to be used for single points on the chart, ie: Top Performer. Default: none
     dataPointColors: React.PropTypes.array,   // Array of colors to be used for data points. Default: D3's category20b colors
     dataPointRadius: React.PropTypes.number,  // Radius for the data point circles. Default: 40
+    dataPoints: React.PropTypes.array,        // Array of data points to be used for single points on the chart, ie: Top Performer. Default: none
     height: React.PropTypes.number,           // Height of the chart: Default: 360
     labelStyle: React.PropTypes.object,       // Object for use in styling the legend label. Default: see stlyes variable
     onClick: React.PropTypes.func,            // Method to be called when chart is clicked. Default: dummy function
@@ -47,9 +47,9 @@ const DonutChart = React.createClass({
       chartTotal: 100,
       colors: d3.scale.category20().range(),
       data: [],
-      dataPoints: [],
       dataPointColors: d3.scale.category20b().range(),
       dataPointRadius: 40,
+      dataPoints: [],
       height: 360,
       labelStyle: {},
       onClick () {},
@@ -73,7 +73,7 @@ const DonutChart = React.createClass({
         return item.value;
       });
 
-      const valueTotal = dataSets.reduce((a,b) => {
+      const valueTotal = dataSets.reduce((a, b) => {
         return a + b;
       });
 
@@ -142,7 +142,14 @@ const DonutChart = React.createClass({
         .endAngle(endAngle * 2 * 2 * Math.PI);
 
       return (
-        <circle cx='0' cy='0' r={this.props.dataPointRadius} key={index} transform={'translate(' + dataPointArc.centroid() + ')'} fill={this.props.dataPointColors[index]} />
+        <circle
+          cx='0'
+          cy='0'
+          fill={this.props.dataPointColors[index]}
+          key={index}
+          r={this.props.dataPointRadius}
+          transform={'translate(' + dataPointArc.centroid() + ')'}
+        />
       );
     });
   },
@@ -155,38 +162,36 @@ const DonutChart = React.createClass({
             {this.props.children}
           </div>
         );
+      } else if (this.props.activeIndex >= 0) {
+        const activeDataSet = this.props.data[this.props.activeIndex] || {};
+        const color = this.props.colors[this.props.activeIndex];
+
+        const valueFormat = objectAssign({
+          decimals: 0,
+          leading: '',
+          trailing: ''
+        }, this.props.valueFormat);
+
+        const value = valueFormat.leading + parseFloat(activeDataSet.value).toFixed(valueFormat.decimals) + valueFormat.trailing;
+
+        return (
+          <div onClick={this.props.onClick} style={styles.center}>
+              <div style={[styles.label, this.props.labelStyle]}>
+                {activeDataSet.name}
+              </div>
+              <div style={[styles.value, this.props.valueStyle, { color }]}>
+                {value}
+              </div>
+          </div>
+        );
       } else {
-        if (this.props.activeIndex >= 0) {
-          const activeDataSet = this.props.data[this.props.activeIndex] || {};
-          const color = this.props.colors[this.props.activeIndex];
-
-          const valueFormat = objectAssign({
-            decimals: 0,
-            leading: '',
-            trailing: ''
-          }, this.props.valueFormat);
-
-          const value = valueFormat.leading + parseFloat(activeDataSet.value).toFixed(valueFormat.decimals) + valueFormat.trailing;
-
-          return (
-            <div onClick={this.props.onClick} style={styles.center}>
-                <div style={[styles.label, this.props.labelStyle]}>
-                  {activeDataSet.name}
-                </div>
-                <div style={[styles.value, this.props.valueStyle, { color }]}>
-                  {value}
-                </div>
-            </div>
-          );
-        } else {
-          return (
-            <div onClick={this.props.onClick} style={styles.center}>
-                <div style={[styles.label, this.props.labelStyle]}>
-                  {this.props.zeroStateText}
-                </div>
-            </div>
-          );
-        }
+        return (
+          <div onClick={this.props.onClick} style={styles.center}>
+              <div style={[styles.label, this.props.labelStyle]}>
+                {this.props.zeroStateText}
+              </div>
+          </div>
+        );
       }
     }
   },
@@ -198,7 +203,7 @@ const DonutChart = React.createClass({
       <div style={[styles.component, { height: this.props.height, width: this.props.width }]}>
         {this._renderLegend()}
         <svg height={this.props.height} width={this.props.width}>
-          <g transform={position} style={styles.pointer}>
+          <g style={styles.pointer} transform={position}>
             {this._renderBaseArc()}
             {this._renderArcs()}
             {this._renderDataPoints()}
