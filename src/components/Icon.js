@@ -4,6 +4,7 @@ const Radium = require('radium');
 const Icon = React.createClass({
   propTypes: {
     size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+    style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
     type: React.PropTypes.string
   },
 
