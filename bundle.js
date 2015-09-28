@@ -52,14 +52,14 @@
 	var RouteHandler = Router.RouteHandler;
 	var DefaultRoute = Router.DefaultRoute;
 
-	var Header = __webpack_require__(219);
-	var Home = __webpack_require__(218);
-	var Components = __webpack_require__(196);
-	var Icon = __webpack_require__(197);
-	var Loader = __webpack_require__(198);
-	var RangeSelector = __webpack_require__(199);
-	var Select = __webpack_require__(200);
-	var Spin = __webpack_require__(201);
+	var Header = __webpack_require__(196);
+	var Home = __webpack_require__(213);
+	var Components = __webpack_require__(214);
+	var Icon = __webpack_require__(215);
+	var Loader = __webpack_require__(216);
+	var RangeSelector = __webpack_require__(217);
+	var Select = __webpack_require__(218);
+	var Spin = __webpack_require__(219);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -23602,64 +23602,57 @@
 	var _require = __webpack_require__(157);
 
 	var Link = _require.Link;
-	var RouteHandler = _require.RouteHandler;
 
-	var Components = React.createClass({
-	  displayName: 'Components',
+	var _require2 = __webpack_require__(197);
+
+	var Icon = _require2.Icon;
+
+	var Header = React.createClass({
+	  displayName: 'Header',
 
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      { className: 'container flex' },
+	      { style: styles.component },
+	      React.createElement(Icon, { size: 70, type: 'mx' }),
 	      React.createElement(
-	        'div',
-	        { className: 'sideNav' },
+	        'nav',
+	        { style: styles.nav },
 	        React.createElement(
-	          'h3',
-	          null,
-	          'General'
+	          Link,
+	          { style: styles.navLink, to: 'home' },
+	          'Home'
 	        ),
 	        React.createElement(
 	          Link,
-	          { to: 'icon' },
-	          'Icon'
-	        ),
-	        React.createElement(
-	          Link,
-	          { to: 'loader' },
-	          'Loader'
-	        ),
-	        React.createElement(
-	          Link,
-	          { to: 'spin' },
-	          'Spin'
-	        ),
-	        React.createElement(
-	          'h3',
-	          null,
-	          'Form'
-	        ),
-	        React.createElement(
-	          Link,
-	          { to: 'range-selector' },
-	          'Range Selector'
-	        ),
-	        React.createElement(
-	          Link,
-	          { to: 'select' },
-	          'Select'
+	          { style: styles.navLink, to: 'components' },
+	          'Components'
 	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'content' },
-	        React.createElement(RouteHandler, null)
 	      )
 	    );
 	  }
 	});
 
-	module.exports = Components;
+	var styles = {
+	  component: {
+	    position: 'relative',
+	    margin: '0 auto',
+	    width: '90%',
+	    maxWidth: '1200px'
+	  },
+	  nav: {
+	    position: 'absolute',
+	    right: '20px',
+	    top: 0,
+	    lineHeight: '70px'
+	  },
+	  navLink: {
+	    marginLeft: '20px',
+	    textTransform: 'uppercase'
+	  }
+	};
+
+	module.exports = Header;
 
 /***/ },
 /* 197 */
@@ -23667,285 +23660,14 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(202);
-
-	var Icon = _require.Icon;
-	var Select = _require.Select;
-
-	var IconDocs = React.createClass({
-	  displayName: 'IconDocs',
-
-	  getInitialState: function getInitialState() {
-	    return {
-	      icon: {
-	        value: 'accounts',
-	        displayValue: 'Accounts'
-	      }
-	    };
-	  },
-
-	  _handleSelectChange: function _handleSelectChange(option) {
-	    this.setState({
-	      icon: option
-	    });
-	  },
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Icon',
-	        React.createElement(
-	          'label',
-	          null,
-	          'A set of predfined svg icons inspired by the MX products'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(Select, {
-	        onChange: this._handleSelectChange,
-	        options: icons,
-	        selected: this.state.icon,
-	        valid: true
-	      }),
-	      React.createElement('br', null),
-	      React.createElement('br', null),
-	      React.createElement(Icon, {
-	        size: 50,
-	        type: this.state.icon.value
-	      }),
-	      React.createElement('br', null),
-	      React.createElement(
-	        'div',
-	        null,
-	        '(',
-	        this.state.icon.value,
-	        ')'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'size ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Number, String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A single number representing the width and height of the icon in pixels.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'type ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The name of the icon to be displayed. See above for available options.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      )
-	    );
-	  }
-	});
-
-	var icons = [{
-	  value: 'accounts',
-	  displayValue: 'Accounts'
-	}, {
-	  value: 'add',
-	  displayValue: 'Add'
-	}, {
-	  value: 'add-solid',
-	  displayValue: 'Add Solid'
-	}, {
-	  value: 'arrow-down',
-	  displayValue: 'Arrow Down'
-	}, {
-	  value: 'arrow-left',
-	  displayValue: 'Arrow Left'
-	}, {
-	  value: 'arrow-right',
-	  displayValue: 'Arrow Right'
-	}, {
-	  value: 'arrow-up',
-	  displayValue: 'Arrow Up'
-	}, {
-	  value: 'attention',
-	  displayValue: 'Attention'
-	}, {
-	  value: 'auto',
-	  displayValue: 'Auto'
-	}, {
-	  value: 'backspace',
-	  displayValue: 'Backspace'
-	}, {
-	  value: 'campaigns',
-	  displayValue: 'Campaigns'
-	}, {
-	  value: 'caret-down',
-	  displayValue: 'Caret Down'
-	}, {
-	  value: 'caret-left',
-	  displayValue: 'Caret Left'
-	}, {
-	  value: 'caret-right',
-	  displayValue: 'Caret Right'
-	}, {
-	  value: 'caret-up',
-	  displayValue: 'Caret Up'
-	}, {
-	  value: 'check',
-	  displayValue: 'Check'
-	}, {
-	  value: 'check-solid',
-	  displayValue: 'Check Solid'
-	}, {
-	  value: 'checking',
-	  displayValue: 'Checking'
-	}, {
-	  value: 'close',
-	  displayValue: 'Close'
-	}, {
-	  value: 'close-solid',
-	  displayValue: 'Close Solid'
-	}, {
-	  value: 'comparisons',
-	  displayValue: 'Comparisons'
-	}, {
-	  value: 'credit-card',
-	  displayValue: 'Credit Card'
-	}, {
-	  value: 'delete',
-	  displayValue: 'Delete'
-	}, {
-	  value: 'download',
-	  displayValue: 'Download'
-	}, {
-	  value: 'edit',
-	  displayValue: 'Edit'
-	}, {
-	  value: 'envelope',
-	  displayValue: 'Envelope'
-	}, {
-	  value: 'export',
-	  displayValue: 'Export'
-	}, {
-	  value: 'folder',
-	  displayValue: 'Folder'
-	}, {
-	  value: 'gallery',
-	  displayValue: 'Gallery'
-	}, {
-	  value: 'gear',
-	  displayValue: 'Gear'
-	}, {
-	  value: 'hamburger',
-	  displayValue: 'Hamburger'
-	}, {
-	  value: 'help',
-	  displayValue: 'Help'
-	}, {
-	  value: 'home',
-	  displayValue: 'Home'
-	}, {
-	  value: 'info',
-	  displayValue: 'Info'
-	}, {
-	  value: 'list-view',
-	  displayValue: 'List View'
-	}, {
-	  value: 'loans',
-	  displayValue: 'Loans'
-	}, {
-	  value: 'md-cash',
-	  displayValue: 'Cash (MD)'
-	}, {
-	  value: 'md-check-mark',
-	  displayValue: 'Check Mark (MD)'
-	}, {
-	  value: 'md-credit',
-	  displayValue: 'Creidt (MD)'
-	}, {
-	  value: 'md-debts',
-	  displayValue: 'Debts (MD)'
-	}, {
-	  value: 'md-savings',
-	  displayValue: 'Savings (MD)'
-	}, {
-	  value: 'mobile-phone',
-	  displayValue: 'Mobile Phone'
-	}, {
-	  value: 'mx',
-	  displayValue: 'MX'
-	}, {
-	  value: 'phone',
-	  displayValue: 'Phone'
-	}, {
-	  value: 'play',
-	  displayValue: 'Play'
-	}, {
-	  value: 'play-solid',
-	  displayValue: 'Play Solid'
-	}, {
-	  value: 'savings',
-	  displayValue: 'Savings'
-	}, {
-	  value: 'search',
-	  displayValue: 'Search'
-	}, {
-	  value: 'segments',
-	  displayValue: 'Segments'
-	}, {
-	  value: 'sync',
-	  displayValue: 'Sync'
-	}, {
-	  value: 'transactions',
-	  displayValue: 'Transactions'
-	}, {
-	  value: 'user',
-	  displayValue: 'User'
-	}, {
-	  value: 'view',
-	  displayValue: 'View'
-	}, {
-	  value: 'visit',
-	  displayValue: 'Visit'
-	}, {
-	  value: 'x-axis',
-	  displayValue: 'X Axis'
-	}, {
-	  value: 'y-axis',
-	  displayValue: 'Y Axis'
-	}];
-
-	module.exports = IconDocs;
+	module.exports = {
+	  Icon: __webpack_require__(198),
+	  Loader: __webpack_require__(200),
+	  RajaIcon: __webpack_require__(202),
+	  RangeSelector: __webpack_require__(203),
+	  Select: __webpack_require__(212),
+	  Spin: __webpack_require__(201)
+	};
 
 /***/ },
 /* 198 */
@@ -23953,725 +23675,10 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(202);
-
-	var Loader = _require.Loader;
-
-	var LoaderDocs = React.createClass({
-	  displayName: 'LoaderDocs',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Loader',
-	        React.createElement(
-	          'label',
-	          null,
-	          'A loading scrim that can be placed over the entire page or relative to a element.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'flex' },
-	        React.createElement(
-	          'div',
-	          { style: style },
-	          React.createElement(Loader, { isLoading: true, isRelative: true })
-	        ),
-	        React.createElement(
-	          'div',
-	          { style: style },
-	          React.createElement(Loader, { isLoading: true, isRelative: true, isSmall: true })
-	        ),
-	        React.createElement(
-	          'div',
-	          { style: style },
-	          React.createElement(Loader, { isLoading: true, isRelative: true, color: 'red' })
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'color ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A css hex value or color keyword that sets the color of the loading circle.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'isLoading ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If this is set to \'true\', then the loader element will be displayed. If it\'s set to \'false\', then an empty \'div\' will be rendered.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'isRelative ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If this is set to \'true\', then the loader will be bound by the closest parent component with a \'position: relative\'.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'isSmall ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If this is set to \'true\', then the word "Loading" will not be displayed and the loading cirle\'s size will be reduced to 30x30 pixels.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      )
-	    );
-	  }
-	});
-
-	var style = {
-	  backgroundImage: 'url("../images/sample-image.jpg")',
-	  backgroundSize: 'cover',
-	  backgroundRepeat: 'no-repeat',
-	  backgroundPosition: 'center',
-	  width: '33.3%',
-	  paddingTop: '20%',
-	  margin: '20px',
-	  position: 'relative'
-	};
-
-	module.exports = LoaderDocs;
-
-/***/ },
-/* 199 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(202);
-
-	var RangeSelector = _require.RangeSelector;
-
-	var RangeSelectorDocs = React.createClass({
-	  displayName: 'RangeSelectorDocs',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Range Selector',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Used to display and edit a start and end value with the option to define preset start/end values.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(RangeSelector, {
-	        defaultLowerValue: 18,
-	        defaultUpperValue: 30,
-	        interval: 1,
-	        presets: [{
-	          lowerValue: 0,
-	          upperValue: 13,
-	          label: 'Gen Z'
-	        }, {
-	          lowerValue: 14,
-	          upperValue: 34,
-	          label: 'Millenials'
-	        }, {
-	          lowerValue: 10,
-	          upperValue: 40,
-	          label: 'Gen Y'
-	        }, {
-	          lowerValue: 36,
-	          upperValue: 50,
-	          label: 'Gen X'
-	        }, {
-	          lowerValue: 51,
-	          upperValue: 72,
-	          label: 'Baby Boomers'
-	        }, {
-	          lowerValue: 73,
-	          upperValue: 90,
-	          label: 'Silent'
-	        }],
-	        range: 100,
-	        selectedColor: '#359BCF'
-	      }),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'defaultLowerValue ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Number'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The default value for the lower value/toggle.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'defaultUpperValue ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Number'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The default value for the upper value/toggle.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'formatter ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A function to be used to format the toggle labels. The toggle value will be passed to this function and the function should return a formatted value.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'interval ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Number'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A number representing the interval you\'d like the toggles to snap to.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'onLowerDragStop ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A function to be called when the user has stopped dragging the lower toggle. The new lower toggle value will be passed to this function.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'onUpperDragStop ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A function to be called when the user has stopped dragging the upper toggle. The new upper toggle value will be passed to this function.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'presets ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An array of objects with the following key/value pairs that will be used to preset the toggle values/positions when clicked: lowerValue: Number, upperValue: number, label: String.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'range ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Number'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A number that sets the upper bound of the Range Selector and is used to calculate the relative position of the toggles. The lower bound of the Range Selector is always set to 0.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'selectedColor ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The color of the element that spans between the two toggles and represents the selected values.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = RangeSelectorDocs;
-
-/***/ },
-/* 200 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(202);
-
-	var Select = _require.Select;
-
-	var options = [{
-	  value: '1',
-	  displayValue: 'Option 1'
-	}, {
-	  value: '2',
-	  displayValue: 'Option 2'
-	}, {
-	  value: '3',
-	  displayValue: 'Option 3'
-	}, {
-	  value: '4',
-	  displayValue: 'Option 4'
-	}, {
-	  value: '5',
-	  displayValue: 'Option 5'
-	}, {
-	  value: '6',
-	  displayValue: 'Option 6'
-	}, {
-	  value: '7',
-	  displayValue: 'Option 7'
-	}, {
-	  value: '8',
-	  displayValue: 'Option 8'
-	}, {
-	  value: '9',
-	  displayValue: 'Option 9'
-	}, {
-	  value: '10',
-	  displayValue: 'Option 10'
-	}];
-
-	var SelectDocs = React.createClass({
-	  displayName: 'SelectDocs',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Select',
-	        React.createElement(
-	          'label',
-	          null,
-	          'A custom select box meant to replace the default ',
-	          '<select>',
-	          ' html element.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(Select, {
-	        key: 'default',
-	        options: options,
-	        valid: true
-	      }),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'isMobile ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If set to \'true\', then a default html select element will be used to control the native device select ui.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'onChange ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A function that is called when a new value has been selected.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'options ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An array of option objects with the follow key/value pairs: value: String/Number, displayValue: String.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'optionsStyle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object or Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A style object or Radium array that modifies the css styles of the options wrapper element.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'optionStyle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object or Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A style object or Radium array that modifies the css styles of each option element.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'placeholderText ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A text to be displayed when there is no value selected.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'scrimStyle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object or Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A style object or Radium array that modifies the css styles of scrim. The scrim is used to handle clicking away from the select box and has a default opacity of 0.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'selected ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An object that represents the selected value. This is typically used to pass in a default selected value. The object must have the following key/value pairs: value: String/Number, displayValue: String.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'selectedStyle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object or Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A style object or Radium array that modifies the css styles of the selected valued.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'valid ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If set to \'false\', then the element will be marked as invalid and a red border will be placed around the element.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = SelectDocs;
-
-/***/ },
-/* 201 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(202);
-
-	var Icon = _require.Icon;
-	var Spin = _require.Spin;
-
-	var SpinDocs = React.createClass({
-	  displayName: 'SpinDocs',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Spin',
-	        React.createElement(
-	          'label',
-	          null,
-	          'A component used to rotate an element 360 degrees at a specified interval using CSS animations.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(
-	        Spin,
-	        null,
-	        React.createElement(Icon, {
-	          size: 50,
-	          type: 'sync'
-	        })
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'children ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Node'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An element that you wish to spin.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'direction ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The direction of the spin. Available Options: counterclockwise, clockwise. Default: \'counterclockwise\''
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'speed ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Number'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The time it takes the element to make 1 full rotation in milliseconds. Default: 1000'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = SpinDocs;
-
-/***/ },
-/* 202 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = {
-	  Icon: __webpack_require__(203),
-	  Loader: __webpack_require__(205),
-	  RajaIcon: __webpack_require__(207),
-	  RangeSelector: __webpack_require__(208),
-	  Select: __webpack_require__(217),
-	  Spin: __webpack_require__(206)
-	};
-
-/***/ },
-/* 203 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var React = __webpack_require__(1);
-	var objectAssign = __webpack_require__(204);
+	var objectAssign = __webpack_require__(199);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -24984,7 +23991,7 @@
 	});
 
 /***/ },
-/* 204 */
+/* 199 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25029,13 +24036,13 @@
 
 
 /***/ },
-/* 205 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Spin = __webpack_require__(206);
+	var Spin = __webpack_require__(201);
 
 	var Loader = React.createClass({
 	  displayName: 'Loader',
@@ -25127,7 +24134,7 @@
 	module.exports = Loader;
 
 /***/ },
-/* 206 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25179,7 +24186,7 @@
 	module.exports = Spin;
 
 /***/ },
-/* 207 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25187,7 +24194,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var React = __webpack_require__(1);
-	var objectAssign = __webpack_require__(204);
+	var objectAssign = __webpack_require__(199);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -25861,14 +24868,14 @@
 	});
 
 /***/ },
-/* 208 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var objectAssign = __webpack_require__(204);
-	var _throttle = __webpack_require__(209);
+	var objectAssign = __webpack_require__(199);
+	var _throttle = __webpack_require__(204);
 
 	var RangeSelector = React.createClass({
 	  displayName: 'RangeSelector',
@@ -26211,11 +25218,11 @@
 	module.exports = RangeSelector;
 
 /***/ },
-/* 209 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var debounce = __webpack_require__(210),
-	    isObject = __webpack_require__(211);
+	var debounce = __webpack_require__(205),
+	    isObject = __webpack_require__(206);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -26279,11 +25286,11 @@
 
 
 /***/ },
-/* 210 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(211),
-	    now = __webpack_require__(212);
+	var isObject = __webpack_require__(206),
+	    now = __webpack_require__(207);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -26466,7 +25473,7 @@
 
 
 /***/ },
-/* 211 */
+/* 206 */
 /***/ function(module, exports) {
 
 	/**
@@ -26500,10 +25507,10 @@
 
 
 /***/ },
-/* 212 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(213);
+	var getNative = __webpack_require__(208);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeNow = getNative(Date, 'now');
@@ -26530,10 +25537,10 @@
 
 
 /***/ },
-/* 213 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isNative = __webpack_require__(214);
+	var isNative = __webpack_require__(209);
 
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -26552,11 +25559,11 @@
 
 
 /***/ },
-/* 214 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(215),
-	    isObjectLike = __webpack_require__(216);
+	var isFunction = __webpack_require__(210),
+	    isObjectLike = __webpack_require__(211);
 
 	/** Used to detect host constructors (Safari > 5). */
 	var reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -26606,10 +25613,10 @@
 
 
 /***/ },
-/* 215 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(211);
+	var isObject = __webpack_require__(206);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]';
@@ -26650,7 +25657,7 @@
 
 
 /***/ },
-/* 216 */
+/* 211 */
 /***/ function(module, exports) {
 
 	/**
@@ -26668,14 +25675,14 @@
 
 
 /***/ },
-/* 217 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Icon = __webpack_require__(203);
-	var objectAssign = __webpack_require__(204);
+	var Icon = __webpack_require__(198);
+	var objectAssign = __webpack_require__(199);
 
 	var Select = React.createClass({
 	  displayName: 'Select',
@@ -26944,14 +25951,14 @@
 	module.exports = Select;
 
 /***/ },
-/* 218 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 
-	var _require = __webpack_require__(202);
+	var _require = __webpack_require__(197);
 
 	var Icon = _require.Icon;
 
@@ -27184,7 +26191,7 @@
 	module.exports = Home;
 
 /***/ },
-/* 219 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27194,57 +26201,1050 @@
 	var _require = __webpack_require__(157);
 
 	var Link = _require.Link;
+	var RouteHandler = _require.RouteHandler;
 
-	var _require2 = __webpack_require__(202);
-
-	var Icon = _require2.Icon;
-
-	var Header = React.createClass({
-	  displayName: 'Header',
+	var Components = React.createClass({
+	  displayName: 'Components',
 
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      { style: styles.component },
-	      React.createElement(Icon, { size: 70, type: 'mx' }),
+	      { className: 'container flex' },
 	      React.createElement(
-	        'nav',
-	        { style: styles.nav },
+	        'div',
+	        { className: 'sideNav' },
 	        React.createElement(
-	          Link,
-	          { style: styles.navLink, to: 'home' },
-	          'Home'
+	          'h3',
+	          null,
+	          'General'
 	        ),
 	        React.createElement(
 	          Link,
-	          { style: styles.navLink, to: 'components' },
-	          'Components'
+	          { to: 'icon' },
+	          'Icon'
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: 'loader' },
+	          'Loader'
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: 'spin' },
+	          'Spin'
+	        ),
+	        React.createElement(
+	          'h3',
+	          null,
+	          'Form'
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: 'range-selector' },
+	          'Range Selector'
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: 'select' },
+	          'Select'
 	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'content' },
+	        React.createElement(RouteHandler, null)
 	      )
 	    );
 	  }
 	});
 
-	var styles = {
-	  component: {
-	    position: 'relative',
-	    margin: '0 auto',
-	    width: '90%',
-	    maxWidth: '1200px'
+	module.exports = Components;
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(197);
+
+	var Icon = _require.Icon;
+	var Select = _require.Select;
+
+	var IconDocs = React.createClass({
+	  displayName: 'IconDocs',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      icon: {
+	        value: 'accounts',
+	        displayValue: 'Accounts'
+	      }
+	    };
 	  },
-	  nav: {
-	    position: 'absolute',
-	    right: '20px',
-	    top: 0,
-	    lineHeight: '70px'
+
+	  _handleSelectChange: function _handleSelectChange(option) {
+	    this.setState({
+	      icon: option
+	    });
 	  },
-	  navLink: {
-	    marginLeft: '20px',
-	    textTransform: 'uppercase'
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Icon',
+	        React.createElement(
+	          'label',
+	          null,
+	          'A set of predfined svg icons inspired by the MX products'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(Select, {
+	        onChange: this._handleSelectChange,
+	        options: icons,
+	        selected: this.state.icon,
+	        valid: true
+	      }),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
+	      React.createElement(Icon, {
+	        size: 50,
+	        type: this.state.icon.value
+	      }),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        null,
+	        '(',
+	        this.state.icon.value,
+	        ')'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'size ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number, String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A single number representing the width and height of the icon in pixels.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'type ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The name of the icon to be displayed. See above for available options.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      )
+	    );
 	  }
+	});
+
+	var icons = [{
+	  value: 'accounts',
+	  displayValue: 'Accounts'
+	}, {
+	  value: 'add',
+	  displayValue: 'Add'
+	}, {
+	  value: 'add-solid',
+	  displayValue: 'Add Solid'
+	}, {
+	  value: 'arrow-down',
+	  displayValue: 'Arrow Down'
+	}, {
+	  value: 'arrow-left',
+	  displayValue: 'Arrow Left'
+	}, {
+	  value: 'arrow-right',
+	  displayValue: 'Arrow Right'
+	}, {
+	  value: 'arrow-up',
+	  displayValue: 'Arrow Up'
+	}, {
+	  value: 'attention',
+	  displayValue: 'Attention'
+	}, {
+	  value: 'auto',
+	  displayValue: 'Auto'
+	}, {
+	  value: 'backspace',
+	  displayValue: 'Backspace'
+	}, {
+	  value: 'campaigns',
+	  displayValue: 'Campaigns'
+	}, {
+	  value: 'caret-down',
+	  displayValue: 'Caret Down'
+	}, {
+	  value: 'caret-left',
+	  displayValue: 'Caret Left'
+	}, {
+	  value: 'caret-right',
+	  displayValue: 'Caret Right'
+	}, {
+	  value: 'caret-up',
+	  displayValue: 'Caret Up'
+	}, {
+	  value: 'check',
+	  displayValue: 'Check'
+	}, {
+	  value: 'check-solid',
+	  displayValue: 'Check Solid'
+	}, {
+	  value: 'checking',
+	  displayValue: 'Checking'
+	}, {
+	  value: 'close',
+	  displayValue: 'Close'
+	}, {
+	  value: 'close-solid',
+	  displayValue: 'Close Solid'
+	}, {
+	  value: 'comparisons',
+	  displayValue: 'Comparisons'
+	}, {
+	  value: 'credit-card',
+	  displayValue: 'Credit Card'
+	}, {
+	  value: 'delete',
+	  displayValue: 'Delete'
+	}, {
+	  value: 'download',
+	  displayValue: 'Download'
+	}, {
+	  value: 'edit',
+	  displayValue: 'Edit'
+	}, {
+	  value: 'envelope',
+	  displayValue: 'Envelope'
+	}, {
+	  value: 'export',
+	  displayValue: 'Export'
+	}, {
+	  value: 'folder',
+	  displayValue: 'Folder'
+	}, {
+	  value: 'gallery',
+	  displayValue: 'Gallery'
+	}, {
+	  value: 'gear',
+	  displayValue: 'Gear'
+	}, {
+	  value: 'hamburger',
+	  displayValue: 'Hamburger'
+	}, {
+	  value: 'help',
+	  displayValue: 'Help'
+	}, {
+	  value: 'home',
+	  displayValue: 'Home'
+	}, {
+	  value: 'info',
+	  displayValue: 'Info'
+	}, {
+	  value: 'list-view',
+	  displayValue: 'List View'
+	}, {
+	  value: 'loans',
+	  displayValue: 'Loans'
+	}, {
+	  value: 'md-cash',
+	  displayValue: 'Cash (MD)'
+	}, {
+	  value: 'md-check-mark',
+	  displayValue: 'Check Mark (MD)'
+	}, {
+	  value: 'md-credit',
+	  displayValue: 'Creidt (MD)'
+	}, {
+	  value: 'md-debts',
+	  displayValue: 'Debts (MD)'
+	}, {
+	  value: 'md-savings',
+	  displayValue: 'Savings (MD)'
+	}, {
+	  value: 'mobile-phone',
+	  displayValue: 'Mobile Phone'
+	}, {
+	  value: 'mx',
+	  displayValue: 'MX'
+	}, {
+	  value: 'phone',
+	  displayValue: 'Phone'
+	}, {
+	  value: 'play',
+	  displayValue: 'Play'
+	}, {
+	  value: 'play-solid',
+	  displayValue: 'Play Solid'
+	}, {
+	  value: 'savings',
+	  displayValue: 'Savings'
+	}, {
+	  value: 'search',
+	  displayValue: 'Search'
+	}, {
+	  value: 'segments',
+	  displayValue: 'Segments'
+	}, {
+	  value: 'sync',
+	  displayValue: 'Sync'
+	}, {
+	  value: 'transactions',
+	  displayValue: 'Transactions'
+	}, {
+	  value: 'user',
+	  displayValue: 'User'
+	}, {
+	  value: 'view',
+	  displayValue: 'View'
+	}, {
+	  value: 'visit',
+	  displayValue: 'Visit'
+	}, {
+	  value: 'x-axis',
+	  displayValue: 'X Axis'
+	}, {
+	  value: 'y-axis',
+	  displayValue: 'Y Axis'
+	}];
+
+	module.exports = IconDocs;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(197);
+
+	var Loader = _require.Loader;
+
+	var LoaderDocs = React.createClass({
+	  displayName: 'LoaderDocs',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Loader',
+	        React.createElement(
+	          'label',
+	          null,
+	          'A loading scrim that can be placed over the entire page or relative to a element.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'flex' },
+	        React.createElement(
+	          'div',
+	          { style: style },
+	          React.createElement(Loader, { isLoading: true, isRelative: true })
+	        ),
+	        React.createElement(
+	          'div',
+	          { style: style },
+	          React.createElement(Loader, { isLoading: true, isRelative: true, isSmall: true })
+	        ),
+	        React.createElement(
+	          'div',
+	          { style: style },
+	          React.createElement(Loader, { isLoading: true, isRelative: true, color: 'red' })
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'color ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A css hex value or color keyword that sets the color of the loading circle.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'isLoading ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If this is set to \'true\', then the loader element will be displayed. If it\'s set to \'false\', then an empty \'div\' will be rendered.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'isRelative ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If this is set to \'true\', then the loader will be bound by the closest parent component with a \'position: relative\'.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'isSmall ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If this is set to \'true\', then the word "Loading" will not be displayed and the loading cirle\'s size will be reduced to 30x30 pixels.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      )
+	    );
+	  }
+	});
+
+	var style = {
+	  backgroundImage: 'url("../images/sample-image.jpg")',
+	  backgroundSize: 'cover',
+	  backgroundRepeat: 'no-repeat',
+	  backgroundPosition: 'center',
+	  width: '33.3%',
+	  paddingTop: '20%',
+	  margin: '20px',
+	  position: 'relative'
 	};
 
-	module.exports = Header;
+	module.exports = LoaderDocs;
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(197);
+
+	var RangeSelector = _require.RangeSelector;
+
+	var RangeSelectorDocs = React.createClass({
+	  displayName: 'RangeSelectorDocs',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Range Selector',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Used to display and edit a start and end value with the option to define preset start/end values.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(RangeSelector, {
+	        defaultLowerValue: 18,
+	        defaultUpperValue: 30,
+	        interval: 1,
+	        presets: [{
+	          lowerValue: 0,
+	          upperValue: 13,
+	          label: 'Gen Z'
+	        }, {
+	          lowerValue: 14,
+	          upperValue: 34,
+	          label: 'Millenials'
+	        }, {
+	          lowerValue: 10,
+	          upperValue: 40,
+	          label: 'Gen Y'
+	        }, {
+	          lowerValue: 36,
+	          upperValue: 50,
+	          label: 'Gen X'
+	        }, {
+	          lowerValue: 51,
+	          upperValue: 72,
+	          label: 'Baby Boomers'
+	        }, {
+	          lowerValue: 73,
+	          upperValue: 90,
+	          label: 'Silent'
+	        }],
+	        range: 100,
+	        selectedColor: '#359BCF'
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'defaultLowerValue ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The default value for the lower value/toggle.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'defaultUpperValue ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The default value for the upper value/toggle.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'formatter ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A function to be used to format the toggle labels. The toggle value will be passed to this function and the function should return a formatted value.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'interval ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A number representing the interval you\'d like the toggles to snap to.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onLowerDragStop ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A function to be called when the user has stopped dragging the lower toggle. The new lower toggle value will be passed to this function.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onUpperDragStop ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A function to be called when the user has stopped dragging the upper toggle. The new upper toggle value will be passed to this function.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'presets ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of objects with the following key/value pairs that will be used to preset the toggle values/positions when clicked: lowerValue: Number, upperValue: number, label: String.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'range ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A number that sets the upper bound of the Range Selector and is used to calculate the relative position of the toggles. The lower bound of the Range Selector is always set to 0.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'selectedColor ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The color of the element that spans between the two toggles and represents the selected values.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = RangeSelectorDocs;
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(197);
+
+	var Select = _require.Select;
+
+	var options = [{
+	  value: '1',
+	  displayValue: 'Option 1'
+	}, {
+	  value: '2',
+	  displayValue: 'Option 2'
+	}, {
+	  value: '3',
+	  displayValue: 'Option 3'
+	}, {
+	  value: '4',
+	  displayValue: 'Option 4'
+	}, {
+	  value: '5',
+	  displayValue: 'Option 5'
+	}, {
+	  value: '6',
+	  displayValue: 'Option 6'
+	}, {
+	  value: '7',
+	  displayValue: 'Option 7'
+	}, {
+	  value: '8',
+	  displayValue: 'Option 8'
+	}, {
+	  value: '9',
+	  displayValue: 'Option 9'
+	}, {
+	  value: '10',
+	  displayValue: 'Option 10'
+	}];
+
+	var SelectDocs = React.createClass({
+	  displayName: 'SelectDocs',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Select',
+	        React.createElement(
+	          'label',
+	          null,
+	          'A custom select box meant to replace the default ',
+	          '<select>',
+	          ' html element.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(Select, {
+	        key: 'default',
+	        options: options,
+	        valid: true
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'isMobile ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If set to \'true\', then a default html select element will be used to control the native device select ui.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onChange ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A function that is called when a new value has been selected.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'options ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of option objects with the follow key/value pairs: value: String/Number, displayValue: String.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'optionsStyle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object or Radium array that modifies the css styles of the options wrapper element.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'optionStyle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object or Radium array that modifies the css styles of each option element.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'placeholderText ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A text to be displayed when there is no value selected.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'scrimStyle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object or Radium array that modifies the css styles of scrim. The scrim is used to handle clicking away from the select box and has a default opacity of 0.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'selected ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An object that represents the selected value. This is typically used to pass in a default selected value. The object must have the following key/value pairs: value: String/Number, displayValue: String.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'selectedStyle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object or Radium array that modifies the css styles of the selected valued.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'valid ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If set to \'false\', then the element will be marked as invalid and a red border will be placed around the element.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = SelectDocs;
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(197);
+
+	var Icon = _require.Icon;
+	var Spin = _require.Spin;
+
+	var SpinDocs = React.createClass({
+	  displayName: 'SpinDocs',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Spin',
+	        React.createElement(
+	          'label',
+	          null,
+	          'A component used to rotate an element 360 degrees at a specified interval using CSS animations.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(
+	        Spin,
+	        null,
+	        React.createElement(Icon, {
+	          size: 50,
+	          type: 'sync'
+	        })
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'children ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Node'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An element that you wish to spin.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'direction ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The direction of the spin. Available Options: counterclockwise, clockwise. Default: \'counterclockwise\''
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'speed ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The time it takes the element to make 1 full rotation in milliseconds. Default: 1000'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = SpinDocs;
 
 /***/ }
 /******/ ]);

@@ -152,7 +152,16 @@ h5 {
     display: block;
     margin-bottom: 10px;
     padding-right: 40px;
+    color: #999;
   }
+    .sideNav a:hover {
+      color: #359BCF;
+    }
+    .sideNav a.active {
+      font-weight: 600;
+      color: #359BCF;
+      border-right: 2px solid #359BCF;
+    }
 
 .content {
   width: 80%;
