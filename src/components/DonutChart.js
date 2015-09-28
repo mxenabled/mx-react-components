@@ -1,36 +1,32 @@
 const React = require('react');
 const Radium = require('radium');
 const d3 = require('d3');
-const objectAssign = require('object-assign');
 
 const DonutChart = React.createClass({
   propTypes: {
-    activeIndex: React.PropTypes.number,      // The index of the data set that is active. Default: -1
-    activeOffset: React.PropTypes.number,     // Amount in pixels to animate on hover. Default: 3
-    animateOnHover: React.PropTypes.bool,     // Show animation on hover. Dependent on activeIndex prop. Default: false
-    arcWidth: React.PropTypes.number,         // Width of the arc. Default: 80
-    baseArcColor: React.PropTypes.string,     // Color of the base arc when using a partial total chart: Default: #E5E5E5
-    chartTotal: React.PropTypes.number,       // Used when data total is not used for chart total, ie: chart with data of 30% and 20% but displayed against 100%. Default: 100
-    children: React.PropTypes.node,           // Node passed to be used as custom legend. Default: none
-    colors: React.PropTypes.array,            // Array of colors to be used. Default: D3's category20 colors
-    data: React.PropTypes.array.isRequired,   // Array of data with values to be used for chart. Default: none. Required
-    dataPointColors: React.PropTypes.array,   // Array of colors to be used for data points. Default: D3's category20b colors
-    dataPointRadius: React.PropTypes.number,  // Radius for the data point circles. Default: 40
-    dataPoints: React.PropTypes.array,        // Array of data points to be used for single points on the chart, ie: Top Performer. Default: none
-    height: React.PropTypes.number,           // Height of the chart: Default: 360
-    labelStyle: React.PropTypes.object,       // Object for use in styling the legend label. Default: see stlyes variable
-    onClick: React.PropTypes.func,            // Method to be called when chart is clicked. Default: dummy function
-    onMouseEnter: React.PropTypes.func,       // Method to be called when section hover is entered. Default: dummy function
-    onMouseLeave: React.PropTypes.func,       // Method to be called when section hover is exited. Default: dummy function
-    opacity: React.PropTypes.number,          // Opacity of the chart colors. Default: 1
-    padAngle: React.PropTypes.number,         // Space between sections. Default: 0.01
-    radiusOffset: React.PropTypes.number,     // Inset for the radius of the chart. Can be used to nest rings on charts with the same width/height. Default: 0
-    showBaseArc: React.PropTypes.bool,        // Show the base arc on partial total charts. Default: false
-    showLegend: React.PropTypes.bool,         // Show center legend. Default: true
-    valueFormat: React.PropTypes.object,      // Format of the value displayed in the legend. Default: basic number. Options: leading, trailing and decimals
-    valueStyle: React.PropTypes.object,       // Object used for styling the legend value. Default: see styles variable
-    width: React.PropTypes.number,            // Width of the chart. Default: 360
-    zeroStateText: React.PropTypes.string     // Text to display in the legend when not hovreing over a section: Default: 'Roll over an item for details'
+    activeIndex: React.PropTypes.number,
+    activeOffset: React.PropTypes.number,
+    animateOnHover: React.PropTypes.bool,
+    arcWidth: React.PropTypes.number,
+    baseArcColor: React.PropTypes.string,
+    chartTotal: React.PropTypes.number,
+    children: React.PropTypes.node,
+    colors: React.PropTypes.array,
+    data: React.PropTypes.array.isRequired,
+    dataPointColors: React.PropTypes.array,
+    dataPointRadius: React.PropTypes.number,
+    dataPoints: React.PropTypes.array,
+    defaultLabelText: React.PropTypes.string,
+    formatter: React.PropTypes.func,
+    height: React.PropTypes.number,
+    onClick: React.PropTypes.func,
+    onMouseEnter: React.PropTypes.func,
+    onMouseLeave: React.PropTypes.func,
+    opacity: React.PropTypes.number,
+    padAngle: React.PropTypes.number,
+    showBaseArc: React.PropTypes.bool,
+    showDataLabel: React.PropTypes.bool,
+    width: React.PropTypes.number
   },
 
   getDefaultProps () {
@@ -46,21 +42,56 @@ const DonutChart = React.createClass({
       dataPointColors: d3.scale.category20b().range(),
       dataPointRadius: 40,
       dataPoints: [],
+      defaultLabelText: 'Roll over an item for details',
+      formatter (value) {
+        return value;
+      },
       height: 360,
-      labelStyle: {},
       onClick () {},
       onMouseEnter () {},
       onMouseLeave () {},
       opacity: 1,
       padAngle: 0.01,
-      radiusOffset: 0,
       showBaseArc: false,
-      showLegend: true,
-      valueFormat: {},
-      valueStyle: {},
-      width: 360,
-      zeroStateText: 'Roll over an item for details'
+      showDataLabel: true,
+      width: 360
     };
+  },
+
+  getInitialState () {
+    return {
+      activeIndex: -1
+    };
+  },
+
+  componentDidMount () {
+    this.setState({
+      activeIndex: this.props.activeIndex
+    });
+  },
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.activeIndex !== this.props.activeIndex) {
+      this.setState({
+        activeIndex: newProps.activeIndex
+      });
+    }
+  },
+
+  _handleMouseEnter (index) {
+    this.setState({
+      activeIndex: index
+    });
+
+    this.props.onMouseEnter(index);
+  },
+
+  _handleMouseLeave () {
+    this.setState({
+      activeIndex: -1
+    });
+
+    this.props.onMouseLeave();
   },
 
   _renderArcs () {
@@ -76,20 +107,20 @@ const DonutChart = React.createClass({
       const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
       const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
       const values = pie(dataSets);
-      const radius = (Math.min(this.props.width, this.props.height) / 2) - this.props.radiusOffset;
+      const radius = Math.min(this.props.width, this.props.height) / 2;
       const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
       const hoverArc = d3.svg.arc().outerRadius(radius).innerRadius(radius - this.props.arcWidth);
 
 
       return values.map((point, i) => {
-        const arc = this.props.activeIndex === i && this.props.animateOnHover ? hoverArc : standardArc;
+        const arc = this.state.activeIndex === i && this.props.animateOnHover ? hoverArc : standardArc;
 
         return (
           <g
             key={i}
             onClick={this.props.onClick.bind(null, i)}
-            onMouseEnter={this.props.onMouseEnter.bind(null, i)}
-            onMouseLeave={this.props.onMouseLeave}
+            onMouseEnter={this._handleMouseEnter.bind(null, i)}
+            onMouseLeave={this._handleMouseLeave}
           >
             <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity} />
           </g>
@@ -120,7 +151,7 @@ const DonutChart = React.createClass({
       return dataPoint.value;
     });
 
-    const radius = (Math.min(this.props.width, this.props.height) / 2) - this.props.radiusOffset;
+    const radius = Math.min(this.props.width, this.props.height) / 2;
 
     return dataPoints.map((dataPoint, index) => {
       const endAngle = dataPoint / this.props.chartTotal;
@@ -144,32 +175,25 @@ const DonutChart = React.createClass({
     });
   },
 
-  _renderLegend () {
-    if (this.props.showLegend) {
+  _renderDataLabel () {
+    if (this.props.showDataLabel) {
       if (this.props.children) {
         return (
           <div onClick={this.props.onClick} style={styles.center}>
             {this.props.children}
           </div>
         );
-      } else if (this.props.activeIndex >= 0) {
-        const activeDataSet = this.props.data[this.props.activeIndex] || {};
-        const color = this.props.colors[this.props.activeIndex];
-
-        const valueFormat = objectAssign({
-          decimals: 0,
-          leading: '',
-          trailing: ''
-        }, this.props.valueFormat);
-
-        const value = valueFormat.leading + parseFloat(activeDataSet.value).toFixed(valueFormat.decimals) + valueFormat.trailing;
+      } else if (this.state.activeIndex >= 0) {
+        const activeDataSet = this.props.data[this.state.activeIndex] || {};
+        const color = this.props.colors[this.state.activeIndex];
+        const value = this.props.formatter(activeDataSet.value);
 
         return (
           <div onClick={this.props.onClick} style={styles.center}>
-              <div style={[styles.label, this.props.labelStyle]}>
+              <div style={styles.label}>
                 {activeDataSet.name}
               </div>
-              <div style={[styles.value, this.props.valueStyle, { color }]}>
+              <div style={[styles.value, { color }]}>
                 {value}
               </div>
           </div>
@@ -177,9 +201,9 @@ const DonutChart = React.createClass({
       } else {
         return (
           <div onClick={this.props.onClick} style={styles.center}>
-              <div style={[styles.label, this.props.labelStyle]}>
-                {this.props.zeroStateText}
-              </div>
+            <div style={styles.label}>
+              {this.props.defaultLabelText}
+            </div>
           </div>
         );
       }
@@ -191,7 +215,7 @@ const DonutChart = React.createClass({
 
     return (
       <div style={[styles.component, { height: this.props.height, width: this.props.width }]}>
-        {this._renderLegend()}
+        {this._renderDataLabel()}
         <svg height={this.props.height} width={this.props.width}>
           <g style={styles.pointer} transform={position}>
             {this._renderBaseArc()}
@@ -217,14 +241,14 @@ const styles = {
   },
   label: {
     color: '#333',
-    fontSize: '18px',
+    fontSize: '14px',
     fontWeight: '800'
   },
   pointer: {
     cursor: 'pointer'
   },
   value: {
-    fontSize: '28px',
+    fontSize: '24px',
     fontWeight: '400'
   }
 };
