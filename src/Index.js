@@ -1,4 +1,5 @@
 module.exports = {
+  BarChart: require('./components/BarChart'),
   DonutChart: require('./components/DonutChart'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
