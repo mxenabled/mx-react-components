@@ -2,6 +2,8 @@ const React = require('react');
 const Radium = require('radium');
 const d3 = require('d3');
 
+const StyleConstants = require('../constants/Style');
+
 const DonutChart = React.createClass({
   propTypes: {
     activeIndex: React.PropTypes.number,
@@ -33,10 +35,9 @@ const DonutChart = React.createClass({
     return {
       activeIndex: -1,
       activeOffset: 3,
-      animateOnHover: false,
+      animateOnHover: true,
       arcWidth: 80,
       baseArcColor: '#E5E5E5',
-      chartTotal: 100,
       colors: d3.scale.category20().range(),
       data: [],
       dataPointColors: d3.scale.category20b().range(),
@@ -230,7 +231,8 @@ const DonutChart = React.createClass({
 
 const styles = {
   component: {
-    position: 'relative'
+    position: 'relative',
+    fontFamily: StyleConstants.FontFamily
   },
   center: {
     position: 'absolute',
@@ -253,4 +255,4 @@ const styles = {
   }
 };
 
-module.exports = Radium.Enhancer(DonutChart);
+module.exports = Radium(DonutChart);
