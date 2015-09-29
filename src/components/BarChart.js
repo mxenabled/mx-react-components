@@ -10,10 +10,15 @@ const BarChart = React.createClass({
     colors: React.PropTypes.array,
     data: React.PropTypes.array.isRequired,
     fontSize: React.PropTypes.number,
+    gridColor: React.PropTypes.string,
     height: React.PropTypes.number,
     margin: React.PropTypes.object,
     tickCount: React.PropTypes.number,
-    width: React.PropTypes.number
+    width: React.PropTypes.number,
+    xAxisLabelColor: React.PropTypes.string,
+    xAxisPosition: React.PropTypes.string,
+    yAxisLabelColor: React.PropTypes.string,
+    yAxisPosition: React.PropTypes.string
   },
 
   getDefaultProps () {
@@ -22,20 +27,23 @@ const BarChart = React.createClass({
       colors: d3.scale.category20().range(),
       data: [],
       fontSize: 13,
+      gridColor: '#999',
       height: 360,
       margin: {
-        bottom: 10,
-        left: 10,
-        right: 10,
-        top: 10
+        xAxis: 20,
+        yAxis: 20
       },
-      tickCount: 10,
-      width: 360
+      tickCount: 4,
+      width: 360,
+      xAxisLabelColor: '#333',
+      xAxisPosition: 'bottom',
+      yAxisLabelColor: '#999',
+      yAxisPosition: 'left'
     };
   },
 
   _getTicks () {
-    const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
+    const adjustedHeight = this.props.height - this.props.margin.xAxis;
 
     return d3.scale.identity()
       .range([adjustedHeight, 0])
@@ -46,17 +54,15 @@ const BarChart = React.createClass({
   },
 
   _getXScale () {
-    const adjustedWidth = this.props.width - this.props.margin.left - this.props.margin.right;
-
     return d3.scale.ordinal()
-      .rangeRoundBands([0, adjustedWidth], this.props.barSpace)
+      .rangeRoundBands([0, this.props.width], this.props.barSpace)
       .domain(this.props.data.map(d => {
         return d.label;
       }));
   },
 
   _getYScale () {
-    const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
+    const adjustedHeight = this.props.height - this.props.margin.xAxis;
 
     return d3.scale.linear()
       .range([adjustedHeight, 0])
@@ -66,14 +72,13 @@ const BarChart = React.createClass({
   },
 
   _renderBars () {
-    const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
+    const adjustedHeight = this.props.height - this.props.margin.xAxis;
     const xScale = this._getXScale();
     const yScale = this._getYScale();
 
     return this.props.data.map((dataSet, index) => {
       const y = yScale(dataSet.value);
-      const left = xScale(dataSet.label) + this.props.margin.left;
-      const translate = 'translate(' + left + ', 0)';
+      const translate = 'translate(' + xScale(dataSet.label) + ', 0)';
 
       return (
         <rect
@@ -91,25 +96,27 @@ const BarChart = React.createClass({
   _renderGrid () {
     const yScale = this._getYScale();
     const ticks = this._getTicks();
+    const stroke = this.props.gridColor;
 
     return ticks.map((tick, index) => {
       return (
-        <g key={index} style={styles.grid} transform={'translate(0,' + yScale(tick) + ')'}>
-          <line x2={this.props.width} y2={0} />
+        <g key={index} style={[styles.grid, { stroke }]} transform={'translate(0,' + yScale(tick) + ')'}>
+          <line x2={this.props.width} />
         </g>
       );
     });
   },
 
   _renderXAxisLabels () {
-    const xScale = this._getXScale();;
+    const xScale = this._getXScale();
     const width = xScale.rangeBand();
+    const color = this.props.xAxisLabelColor;
 
     return this.props.data.map((dataSet, index) => {
-      const left = xScale(dataSet.label) + this.props.margin.left;
+      const left = xScale(dataSet.label);
 
       return (
-        <div key={index} style={[styles.xAxisLabel, { width, left }]}>
+        <div key={index} style={[styles.xAxisLabel, { color, width, left }]}>
           {dataSet.label}
         </div>
       );
@@ -117,16 +124,16 @@ const BarChart = React.createClass({
   },
 
   _renderYAxisLabels () {
-    console.log(StyleConstants.FontSize);
-
     const yScale = this._getYScale();
     const ticks = this._getTicks();
+    const color = this.props.yAxisLabelColor;
 
     return ticks.map((tick, index) => {
-      const top = yScale(tick) - this.props.fontSize - 2;
+      const top = this.props.xAxisPosition === 'top' ? yScale(tick) - this.props.fontSize + this.props.margin.yAxis : yScale(tick) - this.props.fontSize;
+      const textAlign = this.props.yAxisPosition;
 
       return (
-        <div key={index} style={[styles.yAxislabel, { top }]}>
+        <div key={index} style={[styles.yAxislabel, { color, textAlign, top }]}>
           {tick}
         </div>
       );
@@ -134,18 +141,20 @@ const BarChart = React.createClass({
   },
 
   render () {
+    const adjustedHeight = this.props.height - this.props.margin.xAxis;
+    const xAxisPosition = this.props.xAxisPosition === 'top' ? { top: 0 } : { top: adjustedHeight + 5 };
+    const chartMargin = this.props.xAxisPosition === 'top' ? { marginTop: this.props.margin.xAxis } : { marginBottom: this.props.margin.xAxis };
+
     return (
       <div style={[styles.component, { height: this.props.height, width: this.props.width, fontSize: this.props.fontSize + 'px' }]}>
-        <div style={styles.yAxis}>
-          {this._renderYAxisLabels()}
-        </div>
-        <svg height={this.props.height} width={this.props.width}>
+        {this._renderYAxisLabels()}
+        <svg height={adjustedHeight} style={chartMargin} width={this.props.width}>
           <g>
             {this._renderGrid()}
             {this._renderBars()}
           </g>
         </svg>
-        <div style={styles.xAxis}>
+        <div style={[styles.xAxis, xAxisPosition]}>
           {this._renderXAxisLabels()}
         </div>
       </div>
@@ -159,30 +168,21 @@ const styles = {
     fontFamily: StyleConstants.FontFamily
   },
   grid: {
-    stroke: '#333',
     strokeWidth: '0.5px',
-    strokeDasharray: '3px, 5px'
+    strokeDasharray: '3px, 3px'
   },
   xAxis: {
-    paddingTop: '5px',
-    position: 'absolute',
-    bottom: 0,
-    left: 0
+    position: 'absolute'
   },
   xAxisLabel: {
     position: 'absolute',
-    bottom: 0,
     textAlign: 'center',
     display: 'inline-block'
   },
-  yAxis: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
   yAxislabel: {
+    lineHeight: '0.8em',
     position: 'absolute',
-    left: 0
+    width: '100%'
   }
 };
 

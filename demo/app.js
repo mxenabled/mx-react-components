@@ -290,7 +290,7 @@ const Demo = React.createClass({
     return (
       <div>
         <DonutChart data={donutData} />
-        <BarChart tickCount={6} data={donutData} width={800}/>
+        <BarChart data={donutData} width={800}/>
         <br/><br/>
         <Select
           isMobile={false}
