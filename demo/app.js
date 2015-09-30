@@ -253,6 +253,17 @@ const icons = [
   }
 ];
 
+const donutChartData = [
+  {
+    name: 'Large Company Stocks',
+    value: 30
+  },
+  {
+    name: 'Small Company Stocks',
+    value: 45
+  }
+];
+
 const Demo = React.createClass({
   getInitialState () {
     return {
@@ -266,6 +277,8 @@ const Demo = React.createClass({
   render () {
     return (
       <div>
+        <br/><br/>
+        <DonutChart data={donutChartData} />
         <br/><br/>
         <Select
           isMobile={false}
