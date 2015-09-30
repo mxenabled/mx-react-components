@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  DonutChart: require('./components/DonutChart'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   RajaIcon: require('./components/RajaIcon'),
