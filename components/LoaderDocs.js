@@ -2,6 +2,8 @@ const React = require('react');
 
 const { Loader } = require('mx-react-components');
 
+const Markdown = require('components/Markdown');
+
 const LoaderDocs = React.createClass({
   render () {
     return (
@@ -20,7 +22,7 @@ const LoaderDocs = React.createClass({
             <Loader isLoading={true} isRelative={true} isSmall={true} />
           </div>
           <div style={style}>
-            <Loader isLoading={true} isRelative={true} color='red' />
+            <Loader color='red' isLoading={true} isRelative={true} />
           </div>
         </div>
 
@@ -38,7 +40,15 @@ const LoaderDocs = React.createClass({
         <p>If this is set to 'true', then the word "Loading" will not be displayed and the loading cirle's size will be reduced to 30x30 pixels.</p>
 
         <h3>Example</h3>
-
+        <Markdown>
+  {`
+    <Loader
+      isLoading={true}
+      isRelative={true}
+      isSmall={true}
+    />
+  `}
+        </Markdown>
       </div>
     );
   }

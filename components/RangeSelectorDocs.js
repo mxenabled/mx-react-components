@@ -2,6 +2,8 @@ const React = require('react');
 
 const { RangeSelector } = require('mx-react-components');
 
+const Markdown = require('components/Markdown');
+
 const RangeSelectorDocs = React.createClass({
   render () {
     return (
@@ -81,7 +83,49 @@ const RangeSelectorDocs = React.createClass({
         <p>The color of the element that spans between the two toggles and represents the selected values.</p>
 
         <h3>Example</h3>
-
+        <Markdown>
+  {`
+    <RangeSelector
+      defaultLowerValue={18}
+      defaultUpperValue={30}
+      interval={1}
+      presets={[
+        {
+          lowerValue: 0,
+          upperValue: 13,
+          label: 'Gen Z'
+        },
+        {
+          lowerValue: 14,
+          upperValue: 34,
+          label: 'Millenials'
+        },
+        {
+          lowerValue: 10,
+          upperValue: 40,
+          label: 'Gen Y'
+        },
+        {
+          lowerValue: 36,
+          upperValue: 50,
+          label: 'Gen X'
+        },
+        {
+          lowerValue: 51,
+          upperValue: 72,
+          label: 'Baby Boomers'
+        },
+        {
+          lowerValue: 73,
+          upperValue: 90,
+          label: 'Silent'
+        }
+      ]}
+      range={100}
+      selectedColor='#359BCF'
+    />
+  `}
+        </Markdown>
       </div>
     );
   }

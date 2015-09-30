@@ -2,6 +2,8 @@ const React = require('react');
 
 const { Icon, Select } = require('mx-react-components');
 
+const Markdown = require('components/Markdown');
+
 const IconDocs = React.createClass({
   getInitialState () {
     return {
@@ -49,7 +51,14 @@ const IconDocs = React.createClass({
         <p>The name of the icon to be displayed. See above for available options.</p>
 
         <h3>Example</h3>
-
+        <Markdown>
+  {`
+    <Icon
+      size={50}
+      type='accounts'
+    />
+  `}
+        </Markdown>
       </div>
     );
   }

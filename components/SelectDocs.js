@@ -2,6 +2,8 @@ const React = require('react');
 
 const { Select } = require('mx-react-components');
 
+const Markdown = require('components/Markdown');
+
 const options = [
   {
     value: '1',
@@ -93,7 +95,55 @@ const SelectDocs = React.createClass({
         <p>If set to 'false', then the element will be marked as invalid and a red border will be placed around the element.</p>
 
         <h3>Example</h3>
-
+        <Markdown>
+  {`
+    <Select
+      options={[
+        {
+          value: '1',
+          displayValue: 'Option 1'
+        },
+        {
+          value: '2',
+          displayValue: 'Option 2'
+        },
+        {
+          value: '3',
+          displayValue: 'Option 3'
+        },
+        {
+          value: '4',
+          displayValue: 'Option 4'
+        },
+        {
+          value: '5',
+          displayValue: 'Option 5'
+        },
+        {
+          value: '6',
+          displayValue: 'Option 6'
+        },
+        {
+          value: '7',
+          displayValue: 'Option 7'
+        },
+        {
+          value: '8',
+          displayValue: 'Option 8'
+        },
+        {
+          value: '9',
+          displayValue: 'Option 9'
+        },
+        {
+          value: '10',
+          displayValue: 'Option 10'
+        }
+      ]}
+      valid={true}
+    />
+  `}
+        </Markdown>
       </div>
     );
   }
