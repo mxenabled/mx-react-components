@@ -175,7 +175,7 @@ const RangeSelector = React.createClass({
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-        padding: '30px 0',
+        padding: '44px 0 30px',
         margin: '0 10px',
         visibility: this.state.showPresets ? 'hidden' : 'visible'
       },
@@ -192,6 +192,7 @@ const RangeSelector = React.createClass({
         position: 'absolute',
         top: '50%',
         left: this.state.lowerPixels,
+        marginTop: '6px',
         transform: 'translate(-50%, -50%)',
         WebkitTransform: 'translate(-50%, -50%)',
         cursor: 'pointer'
@@ -205,6 +206,7 @@ const RangeSelector = React.createClass({
         position: 'absolute',
         top: '50%',
         left: this.state.upperPixels,
+        marginTop: '6px',
         transform: 'translate(-50%, -50%)',
         WebkitTransform: 'translate(-50%, -50%)',
         cursor: 'pointer',
@@ -217,6 +219,7 @@ const RangeSelector = React.createClass({
         background: this.props.selectedColor,
         height: '3px',
         top: '50%',
+        marginTop: '6px',
         transform: 'translateY(-50%)',
         WebkitTransform: 'translateY(-50%)'
       },
@@ -227,7 +230,7 @@ const RangeSelector = React.createClass({
         transform: 'translateX(-50%)',
         WebkitTransform: 'translateX(-50%)',
         textAlign: 'center',
-        marginTop: '5px',
+        marginTop: '2px',
         display: 'block'
       },
       upperToggleLabel: {
@@ -237,7 +240,7 @@ const RangeSelector = React.createClass({
         transform: 'translateX(-50%)',
         WebkitTransform: 'translateX(-50%)',
         textAlign: 'center',
-        marginBottom: '5px',
+        marginBottom: '2px',
         display: 'block'
       },
       preset: {

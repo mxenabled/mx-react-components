@@ -20926,7 +20926,7 @@
 	        display: this.state.showPresets ? 'block' : 'none'
 	      },
 	      range: {
-	        padding: '30px 0',
+	        padding: '44px 0 30px',
 	        margin: '0 10px',
 	        visibility: this.state.showPresets ? 'hidden' : 'visible'
 	      },
@@ -20943,6 +20943,7 @@
 	        position: 'absolute',
 	        top: '50%',
 	        left: this.state.lowerPixels,
+	        marginTop: '6px',
 	        transform: 'translate(-50%, -50%)',
 	        WebkitTransform: 'translate(-50%, -50%)',
 	        cursor: 'pointer'
@@ -20956,6 +20957,7 @@
 	        position: 'absolute',
 	        top: '50%',
 	        left: this.state.upperPixels,
+	        marginTop: '6px',
 	        transform: 'translate(-50%, -50%)',
 	        WebkitTransform: 'translate(-50%, -50%)',
 	        cursor: 'pointer',
@@ -20968,6 +20970,7 @@
 	        background: this.props.selectedColor,
 	        height: '3px',
 	        top: '50%',
+	        marginTop: '6px',
 	        transform: 'translateY(-50%)',
 	        WebkitTransform: 'translateY(-50%)'
 	      },
@@ -20978,7 +20981,7 @@
 	        transform: 'translateX(-50%)',
 	        WebkitTransform: 'translateX(-50%)',
 	        textAlign: 'center',
-	        marginTop: '5px',
+	        marginTop: '2px',
 	        display: 'block'
 	      },
 	      upperToggleLabel: {
@@ -20988,7 +20991,7 @@
 	        transform: 'translateX(-50%)',
 	        WebkitTransform: 'translateX(-50%)',
 	        textAlign: 'center',
-	        marginBottom: '5px',
+	        marginBottom: '2px',
 	        display: 'block'
 	      },
 	      preset: {
@@ -23352,6 +23355,7 @@
 
 	  propTypes: {
 	    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+	    style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
 	    type: React.PropTypes.string
 	  },
 
