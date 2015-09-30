@@ -20759,9 +20759,7 @@
 	    defaultUpperValue: React.PropTypes.number,
 	    formatter: React.PropTypes.func,
 	    interval: React.PropTypes.number,
-	    onLowerDrag: React.PropTypes.func,
 	    onLowerDragStop: React.PropTypes.func,
-	    onUpperDrag: React.PropTypes.func,
 	    onUpperDragStop: React.PropTypes.func,
 	    presets: React.PropTypes.array,
 	    range: React.PropTypes.number,
@@ -20776,9 +20774,7 @@
 	      formatter: function formatter(value) {
 	        return value;
 	      },
-	      onLowerDrag: function onLowerDrag() {},
 	      onLowerDragStop: function onLowerDragStop() {},
-	      onUpperDrag: function onUpperDrag() {},
 	      onUpperDragStop: function onUpperDragStop() {},
 	      presets: [],
 	      range: 100,

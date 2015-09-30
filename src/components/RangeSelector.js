@@ -10,9 +10,7 @@ const RangeSelector = React.createClass({
     defaultUpperValue: React.PropTypes.number,
     formatter: React.PropTypes.func,
     interval: React.PropTypes.number,
-    onLowerDrag: React.PropTypes.func,
     onLowerDragStop: React.PropTypes.func,
-    onUpperDrag: React.PropTypes.func,
     onUpperDragStop: React.PropTypes.func,
     presets: React.PropTypes.array,
     range: React.PropTypes.number,
@@ -27,9 +25,7 @@ const RangeSelector = React.createClass({
       formatter (value) {
         return value;
       },
-      onLowerDrag () {},
       onLowerDragStop () {},
-      onUpperDrag () {},
       onUpperDragStop () {},
       presets: [],
       range: 100,
