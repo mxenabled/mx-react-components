@@ -20759,9 +20759,7 @@
 	    defaultUpperValue: React.PropTypes.number,
 	    formatter: React.PropTypes.func,
 	    interval: React.PropTypes.number,
-	    onLowerDrag: React.PropTypes.func,
 	    onLowerDragStop: React.PropTypes.func,
-	    onUpperDrag: React.PropTypes.func,
 	    onUpperDragStop: React.PropTypes.func,
 	    presets: React.PropTypes.array,
 	    range: React.PropTypes.number,
@@ -20776,9 +20774,7 @@
 	      formatter: function formatter(value) {
 	        return value;
 	      },
-	      onLowerDrag: function onLowerDrag() {},
 	      onLowerDragStop: function onLowerDragStop() {},
-	      onUpperDrag: function onUpperDrag() {},
 	      onUpperDragStop: function onUpperDragStop() {},
 	      presets: [],
 	      range: 100,
@@ -20926,7 +20922,7 @@
 	        display: this.state.showPresets ? 'block' : 'none'
 	      },
 	      range: {
-	        padding: '30px 0',
+	        padding: '44px 0 30px',
 	        margin: '0 10px',
 	        visibility: this.state.showPresets ? 'hidden' : 'visible'
 	      },
@@ -20943,6 +20939,7 @@
 	        position: 'absolute',
 	        top: '50%',
 	        left: this.state.lowerPixels,
+	        margin: '6px 0 0 10px',
 	        transform: 'translate(-50%, -50%)',
 	        WebkitTransform: 'translate(-50%, -50%)',
 	        cursor: 'pointer'
@@ -20956,6 +20953,7 @@
 	        position: 'absolute',
 	        top: '50%',
 	        left: this.state.upperPixels,
+	        margin: '6px 0 0 10px',
 	        transform: 'translate(-50%, -50%)',
 	        WebkitTransform: 'translate(-50%, -50%)',
 	        cursor: 'pointer',
@@ -20968,6 +20966,7 @@
 	        background: this.props.selectedColor,
 	        height: '3px',
 	        top: '50%',
+	        marginTop: '6px',
 	        transform: 'translateY(-50%)',
 	        WebkitTransform: 'translateY(-50%)'
 	      },
@@ -20978,8 +20977,10 @@
 	        transform: 'translateX(-50%)',
 	        WebkitTransform: 'translateX(-50%)',
 	        textAlign: 'center',
-	        marginTop: '5px',
-	        display: 'block'
+	        marginTop: '2px',
+	        display: 'block',
+	        cursor: 'pointer',
+	        minWidth: '20px'
 	      },
 	      upperToggleLabel: {
 	        position: 'absolute',
@@ -20988,8 +20989,10 @@
 	        transform: 'translateX(-50%)',
 	        WebkitTransform: 'translateX(-50%)',
 	        textAlign: 'center',
-	        marginBottom: '5px',
-	        display: 'block'
+	        marginBottom: '2px',
+	        display: 'block',
+	        cursor: 'pointer',
+	        minWidth: '20px'
 	      },
 	      preset: {
 	        display: 'inline-block',
@@ -21003,7 +21006,7 @@
 	      showPresets: {
 	        position: 'absolute',
 	        top: 0,
-	        right: '10px',
+	        right: 0,
 	        cursor: 'pointer',
 	        color: this.props.selectedColor
 	      },
@@ -23352,6 +23355,7 @@
 
 	  propTypes: {
 	    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+	    style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
 	    type: React.PropTypes.string
 	  },
 
