@@ -10,9 +10,7 @@ const RangeSelector = React.createClass({
     defaultUpperValue: React.PropTypes.number,
     formatter: React.PropTypes.func,
     interval: React.PropTypes.number,
-    onLowerDrag: React.PropTypes.func,
     onLowerDragStop: React.PropTypes.func,
-    onUpperDrag: React.PropTypes.func,
     onUpperDragStop: React.PropTypes.func,
     presets: React.PropTypes.array,
     range: React.PropTypes.number,
@@ -27,9 +25,7 @@ const RangeSelector = React.createClass({
       formatter (value) {
         return value;
       },
-      onLowerDrag () {},
       onLowerDragStop () {},
-      onUpperDrag () {},
       onUpperDragStop () {},
       presets: [],
       range: 100,
@@ -175,7 +171,7 @@ const RangeSelector = React.createClass({
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-        padding: '30px 0',
+        padding: '44px 0 30px',
         margin: '0 10px',
         visibility: this.state.showPresets ? 'hidden' : 'visible'
       },
@@ -192,6 +188,7 @@ const RangeSelector = React.createClass({
         position: 'absolute',
         top: '50%',
         left: this.state.lowerPixels,
+        margin: '6px 0 0 10px',
         transform: 'translate(-50%, -50%)',
         WebkitTransform: 'translate(-50%, -50%)',
         cursor: 'pointer'
@@ -205,6 +202,7 @@ const RangeSelector = React.createClass({
         position: 'absolute',
         top: '50%',
         left: this.state.upperPixels,
+        margin: '6px 0 0 10px',
         transform: 'translate(-50%, -50%)',
         WebkitTransform: 'translate(-50%, -50%)',
         cursor: 'pointer',
@@ -217,6 +215,7 @@ const RangeSelector = React.createClass({
         background: this.props.selectedColor,
         height: '3px',
         top: '50%',
+        marginTop: '6px',
         transform: 'translateY(-50%)',
         WebkitTransform: 'translateY(-50%)'
       },
@@ -227,8 +226,10 @@ const RangeSelector = React.createClass({
         transform: 'translateX(-50%)',
         WebkitTransform: 'translateX(-50%)',
         textAlign: 'center',
-        marginTop: '5px',
-        display: 'block'
+        marginTop: '2px',
+        display: 'block',
+        cursor: 'pointer',
+        minWidth: '20px'
       },
       upperToggleLabel: {
         position: 'absolute',
@@ -237,8 +238,10 @@ const RangeSelector = React.createClass({
         transform: 'translateX(-50%)',
         WebkitTransform: 'translateX(-50%)',
         textAlign: 'center',
-        marginBottom: '5px',
-        display: 'block'
+        marginBottom: '2px',
+        display: 'block',
+        cursor: 'pointer',
+        minWidth: '20px'
       },
       preset: {
         display: 'inline-block',
@@ -252,7 +255,7 @@ const RangeSelector = React.createClass({
       showPresets: {
         position: 'absolute',
         top: 0,
-        right: '10px',
+        right: 0,
         cursor: 'pointer',
         color: this.props.selectedColor
       },
