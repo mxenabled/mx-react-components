@@ -1,5 +1,5 @@
 const React = require('react');
-const { Select, Icon, RangeSelector, Loader, DonutChart } = require('../src/Index');
+const { Select, Icon, RangeSelector, Loader, DonutChart, TypeAhead } = require('../src/Index');
 
 const styles = {
   block: {
@@ -279,6 +279,22 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <DonutChart data={donutChartData} />
+        <br/><br/>
+        <TypeAhead
+          items={[
+            'JPMorgan Chase',
+            'Bank of America',
+            'Citigroup',
+            'Wells Fargo',
+            'The Bank of New York Mellon',
+            'U.S. Bancorp',
+            'HSBC Bank USA',
+            'Capital One',
+            'PNC Financial Services',
+            'State Street Corporation'
+          ]}
+          placeholderText='Select a Bank'
+        />
         <br/><br/>
         <Select
           isMobile={false}
