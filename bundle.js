@@ -52,12 +52,13 @@
 	var RouteHandler = Router.RouteHandler;
 	var DefaultRoute = Router.DefaultRoute;
 
-	var Header = __webpack_require__(196);
-	var Home = __webpack_require__(239);
 	var Components = __webpack_require__(240);
 	var DonutChart = __webpack_require__(241);
+	var Header = __webpack_require__(196);
+	var Home = __webpack_require__(239);
 	var Icon = __webpack_require__(381);
 	var Loader = __webpack_require__(382);
+	var Modal = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"components/Modal\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var RangeSelector = __webpack_require__(383);
 	var Select = __webpack_require__(384);
 	var Spin = __webpack_require__(385);
@@ -91,12 +92,13 @@
 	  React.createElement(
 	    Route,
 	    { handler: Components, name: 'components' },
+	    React.createElement(Route, { handler: DonutChart, name: 'donut' }),
 	    React.createElement(Route, { handler: Icon, name: 'icon' }),
 	    React.createElement(Route, { handler: Loader, name: 'loader' }),
+	    React.createElement(Route, { handler: Modal, name: 'modal' }),
 	    React.createElement(Route, { handler: RangeSelector, name: 'range-selector' }),
 	    React.createElement(Route, { handler: Select, name: 'select' }),
 	    React.createElement(Route, { handler: Spin, name: 'spin' }),
-	    React.createElement(Route, { handler: DonutChart, name: 'donut' }),
 	    React.createElement(Route, { handler: TypeAhead, name: 'type-ahead' })
 	  ),
 	  React.createElement(DefaultRoute, { handler: Home })
@@ -38180,6 +38182,11 @@
 	          Link,
 	          { to: 'loader' },
 	          'Loader'
+	        ),
+	        React.createElement(
+	          Link,
+	          { to: 'modal' },
+	          'Modal'
 	        ),
 	        React.createElement(
 	          Link,

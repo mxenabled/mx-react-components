@@ -9,6 +9,7 @@ const Components = React.createClass({
           <h3>General</h3>
           <Link to='icon'>Icon</Link>
           <Link to='loader'>Loader</Link>
+          <Link to='modal'>Modal</Link>
           <Link to='spin'>Spin</Link>
 
           <h3>Form</h3>
