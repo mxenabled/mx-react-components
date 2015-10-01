@@ -1,5 +1,5 @@
 const React = require('react');
-const { Select, Icon, RangeSelector, Loader, DonutChart } = require('../dist/Index');
+const { Select, Icon, RangeSelector, Loader, DonutChart } = require('../src/Index');
 
 const styles = {
   block: {

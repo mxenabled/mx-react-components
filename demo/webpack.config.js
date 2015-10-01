@@ -1,7 +1,4 @@
 module.exports = {
-  entry: {
-    app: './app.js'
-  },
   module: {
     loaders: [
       {
@@ -10,8 +7,5 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  },
-  output: {
-    filename: './bundle.js'
   }
 };

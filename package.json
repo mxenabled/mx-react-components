@@ -4,7 +4,8 @@
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "eslint src && babel src --out-dir dist",
+    "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,8 @@
     "eslint": "^1.5.0",
     "eslint-plugin-react": "^3.4.2",
     "eslint-watch": "^2.1.1",
+    "http-server": "^0.8.5",
+    "live-server": "^0.8.1",
     "node-libs-browser": "^0.5.2",
     "webpack": "^1.10.1"
   }
