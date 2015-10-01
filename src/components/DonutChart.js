@@ -132,7 +132,7 @@ const DonutChart = React.createClass({
 
   _renderBaseArc () {
     if (this.props.showBaseArc) {
-      const radius = (Math.min(this.props.width, this.props.height) / 2) - this.props.radiusOffset;
+      const radius = (Math.min(this.props.width, this.props.height) / 2);
 
       const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset)
                                   .innerRadius(radius - this.props.arcWidth)
