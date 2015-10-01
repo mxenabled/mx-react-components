@@ -61,6 +61,7 @@
 	var RangeSelector = __webpack_require__(382);
 	var Select = __webpack_require__(383);
 	var Spin = __webpack_require__(384);
+	var TypeAhead = __webpack_require__(385);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -95,7 +96,8 @@
 	    React.createElement(Route, { handler: RangeSelector, name: 'range-selector' }),
 	    React.createElement(Route, { handler: Select, name: 'select' }),
 	    React.createElement(Route, { handler: Spin, name: 'spin' }),
-	    React.createElement(Route, { handler: DonutChart, name: 'donut' })
+	    React.createElement(Route, { handler: DonutChart, name: 'donut' }),
+	    React.createElement(Route, { handler: TypeAhead, name: 'type-ahead' })
 	  ),
 	  React.createElement(DefaultRoute, { handler: Home })
 	);
@@ -37775,6 +37777,11 @@
 	          'Select'
 	        ),
 	        React.createElement(
+	          Link,
+	          { to: 'type-ahead' },
+	          'Type Ahead'
+	        ),
+	        React.createElement(
 	          'h3',
 	          null,
 	          'Charts (D3)'
@@ -54682,6 +54689,163 @@
 	});
 
 	module.exports = SpinDocs;
+
+/***/ },
+/* 385 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(197);
+
+	var TypeAhead = _require.TypeAhead;
+
+	var Markdown = __webpack_require__(241);
+
+	var TypeAheadDocs = React.createClass({
+	  displayName: 'TypeAheadDocs',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'TypeAhead',
+	        React.createElement(
+	          'label',
+	          null,
+	          'An interactive list selector, commonly used in forms.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(TypeAhead, {
+	        items: ['JPMorgan Chase', 'Bank of America', 'Citigroup', 'Wells Fargo', 'The Bank of New York Mellon', 'U.S. Bancorp', 'HSBC Bank USA', 'Capital One', 'PNC Financial Services', 'State Street Corporation'],
+	        placeholderText: 'Select a Bank',
+	        preSelectedItems: ['Bank of America', 'Wells Fargo']
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'items ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of Strings used for the options list. Example:'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    [\n      \'JPMorgan Chase\',\n      \'Bank of America\',\n      \'Citigroup\',\n      \'Wells Fargo\',\n      \'The Bank of New York Mellon\',\n      \'U.S. Bancorp\',\n      \'HSBC Bank USA\',\n      \'Capital One\',\n      \'PNC Financial Services\',\n      \'State Street Corporation\'\n    ]\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onItemRemove ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A method to be called whenever an item is removed by the user. It will be passed 2 parameters: the item removed, an updated array of selected items. Example:'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    _handleItemRemoved (item, selectedItems) {\n      console.log(item + \' was removed from the list\');\n    }\n\n    <TypeAhead\n      // ..other props\n      onItemRemove={_handleItemRemoved)\n    />\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onItemSelect ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A method to be called whenever an item is selected by the user. It will be passed 2 parameters: the item selected, an updated array of selected items. Example:'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    _handleItemSelected (item, selectedItems) {\n      console.log(item + \' was selected from the list\');\n    }\n\n    <TypeAhead\n      // ..other props\n      onItemSelect={_handleItemSelected)\n    />\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'placeholderText ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: \'Select Filters\''
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The text to display by default when no items have been selected.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'preSelectedItems ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of Strings to be displayed as selected options by default. These values should be contained in the items Array. These values will be the starting point of the TypeAhead\'s selected values state. Once the user begins interacting with the TypeAhead, they will be ignored.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        null,
+	        '\n    <TypeAhead\n      items={[\n        \'JPMorgan Chase\',\n        \'Bank of America\',\n        \'Citigroup\',\n        \'Wells Fargo\',\n        \'The Bank of New York Mellon\',\n        \'U.S. Bancorp\',\n        \'HSBC Bank USA\',\n        \'Capital One\',\n        \'PNC Financial Services\',\n        \'State Street Corporation\'\n      ]}\n      placeholderText=\'Select a Bank\'\n      preSelectedItems={[\n        \'Bank of America\',\n        \'Wells Fargo\'\n      ]}\n    />\n  '
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TypeAheadDocs;
 
 /***/ }
 /******/ ]);

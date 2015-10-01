@@ -11,6 +11,7 @@ const Loader = require('components/LoaderDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const Select = require('components/SelectDocs');
 const Spin = require('components/SpinDocs');
+const TypeAhead = require('components/TypeAheadDocs');
 
 const App = React.createClass({
   render () {
@@ -37,6 +38,7 @@ const routes = (
       <Route handler={Select} name='select' />
       <Route handler={Spin} name='spin' />
       <Route handler={DonutChart} name='donut' />
+      <Route handler={TypeAhead} name='type-ahead' />
     </Route>
     <DefaultRoute handler={Home} />
   </Route>
