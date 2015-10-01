@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "eslint src && babel src --out-dir dist",
     "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js",
-    "travis": "eslint src"
+    "test": "eslint src"
   },
   "repository": {
     "type": "git",
