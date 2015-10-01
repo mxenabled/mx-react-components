@@ -8,14 +8,10 @@ const StyleConstants = require('../constants/Style');
 const TypeAhead = React.createClass({
   propTypes: {
     items: React.PropTypes.array,
-    onItemsRemove: React.PropTypes.func,
-    onItemsSelect: React.PropTypes.func,
+    onItemRemove: React.PropTypes.func,
+    onItemSelect: React.PropTypes.func,
     placeholderText: React.PropTypes.string,
-    selectedItems: React.PropTypes.array,
-    style: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ])
+    preSelectedItems: React.PropTypes.array
   },
 
   getDefaultProps () {
@@ -286,7 +282,7 @@ const TypeAhead = React.createClass({
       <div
         onBlur={this._handleBlur}
         onFocus={this._handleFocus}
-        style={[styles.component]}
+        style={[styles.component, this.props.style]}
         tabIndex='0'
       >
         {this._renderSelectedItems()}

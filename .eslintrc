@@ -186,7 +186,7 @@
     "react/no-did-update-set-state": 2,
     "react/no-multi-comp": 2,
     "react/no-unknown-property": 2,
-    "react/prop-types": 0,
+    "react/prop-types": [2, { "ignore": ["style", "children"] }],
     "react/react-in-jsx-scope": 2,
     "react/require-extension": [2, { "extensions": [".js", ".jsx"] }],
     "react/self-closing-comp": 2,
