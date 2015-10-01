@@ -11,7 +11,7 @@ const Icon = React.createClass({
   getDefaultProps () {
     return {
       size: 24,
-      style: {},
+      style: {}  ,
       type: 'accounts'
     };
   },
