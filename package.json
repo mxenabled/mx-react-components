@@ -4,7 +4,7 @@
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
-    "prepublish": "eslint src && babel src --out-dir dist",
+    "release": "eslint src && babel src --out-dir dist",
     "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js",
     "test": "eslint src"
   },
