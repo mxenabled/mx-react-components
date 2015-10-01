@@ -14,6 +14,9 @@ const Components = React.createClass({
           <h3>Form</h3>
           <Link to='range-selector'>Range Selector</Link>
           <Link to='select'>Select</Link>
+
+          <h3>Charts (D3)</h3>
+          <Link to='donut'>Donut</Link>
         </div>
         <div className='content'>
           <RouteHandler />

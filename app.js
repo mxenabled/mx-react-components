@@ -5,6 +5,7 @@ const { Route, RouteHandler, DefaultRoute } = Router;
 const Header = require('components/Header');
 const Home = require('components/Home');
 const Components = require('components/Components');
+const DonutChart = require('components/DonutChartDocs');
 const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
@@ -35,6 +36,7 @@ const routes = (
       <Route handler={RangeSelector} name='range-selector' />
       <Route handler={Select} name='select' />
       <Route handler={Spin} name='spin' />
+      <Route handler={DonutChart} name='donut' />
     </Route>
     <DefaultRoute handler={Home} />
   </Route>
