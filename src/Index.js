@@ -5,5 +5,6 @@ module.exports = {
   RajaIcon: require('./components/RajaIcon'),
   RangeSelector: require('./components/RangeSelector'),
   Select: require('./components/Select'),
-  Spin: require('./components/Spin')
+  Spin: require('./components/Spin'),
+  TypeAhead: require('./components/TypeAhead')
 };
