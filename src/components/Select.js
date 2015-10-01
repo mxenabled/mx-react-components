@@ -120,7 +120,7 @@ const Select = React.createClass({
         <div
           onBlur={this._handleBlur}
           onClick={this._handleToggle}
-          style={[styles.component, this.props.style]}
+          style={styles.component}
           tabIndex='0'
         >
           {this._renderScrim()}
@@ -140,7 +140,7 @@ const Select = React.createClass({
 
   render () {
     return (
-      <div>
+      <div style={this.props.style}>
         {this._renderSelect()}
       </div>
     );
