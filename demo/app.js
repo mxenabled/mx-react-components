@@ -1,5 +1,13 @@
 const React = require('react');
-const { Select, Icon, RangeSelector, Loader, DonutChart, TypeAhead } = require('../src/Index');
+const {
+  DonutChart,
+  Icon,
+  Loader,
+  Modal,
+  RangeSelector,
+  Select,
+  TypeAhead
+} = require('../src/Index');
 
 const styles = {
   block: {
@@ -23,6 +31,17 @@ const styles = {
     display: 'inline-block',
     margin: '5px 0',
     padding: '3px 5px'
+  },
+  button: {
+    borderRadius: '3px',
+    background: '#359BCF',
+    padding: '10px 20px',
+    display: 'inline-block',
+    margin: '0 5px',
+    color: '#fff',
+    cursor: 'pointer',
+    fontSize: '14px',
+    WebkitFontSmoothing: 'antialiased'
   }
 };
 
@@ -253,17 +272,6 @@ const icons = [
   }
 ];
 
-const donutChartData = [
-  {
-    name: 'Large Company Stocks',
-    value: 30
-  },
-  {
-    name: 'Small Company Stocks',
-    value: 45
-  }
-];
-
 const Demo = React.createClass({
   getInitialState () {
     return {
@@ -271,6 +279,8 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+      showModal: false,
+      showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
   },
@@ -299,11 +309,49 @@ const Demo = React.createClass({
     return (
       <div>
         <br/><br/>
+        <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <span style={styles.button} onClick={this._handleModalClick}>Show Default Modal</span>
+          <span style={styles.button} onClick={this._handleSmallModalClick}>Show Small Modal</span>
+        </div>
+        <Modal
+          isOpen={this.state.showModal}
+          isSmall={this.state.showSmallModal}
+          onRequestClose={this._handleModalClose}
+        >
+          <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
+          <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto' }} />
+        </Modal>
+
+        <br/><br/>
         <DonutChart
+          activeIndex={1}
+          activeOffset={10}
           arcWidth={40}
-          data={donutChartData}
+          baseArcColor='#f5f5f5'
+          chartTotal={300}
+          data={[
+            {
+              name: 'Data Point 1',
+              value: 50
+            },
+            {
+              name: 'Data Point 2',
+              value: 80
+            }
+          ]}
+          dataPointRadius={16}
+          dataPoints={[
+            {
+              name: 'Data Dot 1',
+              value: 200
+            }
+          ]}
+          dataPointColors={[ '#555' ]}
+          showBaseArc={true}
+          style={{ margin: '0 auto' }}
           width={this.state.windowWidth - 40}
         />
+
         <br/><br/>
         <TypeAhead
           items={[
@@ -320,6 +368,7 @@ const Demo = React.createClass({
           ]}
           placeholderText='Select a Bank'
         />
+
         <br/><br/>
         <Select
           isMobile={false}
@@ -336,6 +385,7 @@ const Demo = React.createClass({
           selected={this.state.icon}
           valid={true}
         />
+
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
           <Icon
@@ -346,6 +396,7 @@ const Demo = React.createClass({
             }}
           />
         </div>
+
         <br/><br/>
         <RangeSelector
           defaultLowerValue={18}
@@ -386,12 +437,40 @@ const Demo = React.createClass({
           range={100}
           selectedColor='#359BCF'
         />
+
         <br/><br/>
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
       </div>
     );
+  },
+
+  _handleSelectChange (option) {
+    this.setState({
+      icon: option
+    });
+  },
+
+  _handleModalClick () {
+    this.setState({
+      showModal: true,
+      showSmallModal: false
+    });
+  },
+
+  _handleSmallModalClick () {
+    this.setState({
+      showModal: true,
+      showSmallModal: true
+    });
+  },
+
+  _handleModalClose () {
+    this.setState({
+      showModal: false,
+      showSmallModal: false
+    });
   }
 });
 

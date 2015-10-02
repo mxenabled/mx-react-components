@@ -215,7 +215,7 @@ const DonutChart = React.createClass({
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
 
     return (
-      <div style={[styles.component, { height: this.props.height, width: this.props.width }]}>
+      <div style={[styles.component, this.props.style, { height: this.props.height, width: this.props.width }]}>
         {this._renderDataLabel()}
         <svg height={this.props.height} width={this.props.width}>
           <g style={styles.pointer} transform={position}>
