@@ -5,9 +5,10 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
+const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
+
 const Select = React.createClass({
   propTypes: {
-    isMobile: React.PropTypes.bool,
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
     optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
@@ -21,7 +22,6 @@ const Select = React.createClass({
 
   getDefaultProps () {
     return {
-      isMobile: false,
       onChange () {},
       options: [],
       placeholderText: 'Select One',
@@ -43,10 +43,12 @@ const Select = React.createClass({
     });
   },
 
-  _handleToggle () {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  _handleClick () {
+    if (!isMobile) {
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+    }
   },
 
   _handleOptionClick (option) {
@@ -64,6 +66,14 @@ const Select = React.createClass({
     })[0];
 
     this._handleOptionClick(selectedOption);
+  },
+
+  _renderScrim () {
+    if (this.state.isOpen) {
+      return (
+        <div onClick={this._handleBlur} style={[styles.scrim, this.props.scrimStyle]} />
+      );
+    }
   },
 
   _renderOptions () {
@@ -95,31 +105,14 @@ const Select = React.createClass({
     }
   },
 
-  _renderScrim () {
-    if (this.state.isOpen) {
-      return (
-        <div onClick={this._handleBlur} style={[styles.scrim, this.props.scrimStyle]} />
-      );
-    }
-  },
-
-  _renderSelect () {
+  render () {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
-    if (this.props.isMobile) {
-      //TODO: We should always have a select present, just hidden. If mobile, we just utilize it to display the native select options
-      return (
-        <select name='select' onChange={this._handleSelectChange} style={styles.select} value={selected.value}>
-          {this.props.options.map(option => {
-            return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
-          })}
-        </select>
-      );
-    } else {
-      return (
+    return (
+      <div style={[this.props.style, { position: 'relative' }]}>
         <div
           onBlur={this._handleBlur}
-          onClick={this._handleToggle}
+          onClick={this._handleClick}
           style={styles.component}
           tabIndex='0'
         >
@@ -134,14 +127,14 @@ const Select = React.createClass({
           </div>
           {this._renderOptions()}
         </div>
-      );
-    }
-  },
 
-  render () {
-    return (
-      <div style={this.props.style}>
-        {this._renderSelect()}
+        {isMobile ? (
+          <select onChange={this._handleSelectChange} ref='defaultSelect' style={styles.select} value={selected.value}>
+            {this.props.options.map(option => {
+              return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
+            })}
+          </select>
+        ) : null }
       </div>
     );
   }
@@ -157,12 +150,20 @@ const styles = {
     fontSize: StyleConstants.FontSize,
     padding: '11px 10px 12px',
     position: 'relative',
+    appearance: 'none',
     WebkitAppearance: 'none',
     boxSizing: 'border-box',
     outline: 'none'
   },
   select: {
-    outline: 'none !important'
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    WebkitAppearance: 'none',
+    opacity: 0
   },
   selected: {
     position: 'relative'
