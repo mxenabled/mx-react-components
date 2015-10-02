@@ -151,7 +151,6 @@ const styles = {
     padding: '11px 10px 12px',
     position: 'relative',
     appearance: 'none',
-    MozApearance: 'none',
     WebkitAppearance: 'none',
     boxSizing: 'border-box',
     outline: 'none'
