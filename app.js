@@ -2,12 +2,13 @@ const React = require('react');
 const Router = require('react-router');
 const { Route, RouteHandler, DefaultRoute } = Router;
 
-const Header = require('components/Header');
-const Home = require('components/Home');
 const Components = require('components/Components');
 const DonutChart = require('components/DonutChartDocs');
+const Header = require('components/Header');
+const Home = require('components/Home');
 const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
+const Modal = require('components/ModalDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const Select = require('components/SelectDocs');
 const Spin = require('components/SpinDocs');
@@ -32,12 +33,13 @@ const App = React.createClass({
 const routes = (
   <Route handler={App} name='home' path='/'>
     <Route handler={Components} name='components'>
+      <Route handler={DonutChart} name='donut' />
       <Route handler={Icon} name='icon' />
       <Route handler={Loader} name='loader' />
+      <Route handler={Modal} name='modal' />
       <Route handler={RangeSelector} name='range-selector' />
       <Route handler={Select} name='select' />
       <Route handler={Spin} name='spin' />
-      <Route handler={DonutChart} name='donut' />
       <Route handler={TypeAhead} name='type-ahead' />
     </Route>
     <DefaultRoute handler={Home} />
