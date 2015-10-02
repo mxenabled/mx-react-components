@@ -43,8 +43,8 @@ const ModalDocs = React.createClass({
 
         <h3>Demo</h3>
         <div style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <span onClick={this._handleModalClick} style={styles.button}>Show Default Modal</span>
-          <span onClick={this._handleSmallModalClick} style={styles.button}>Show Small Modal</span>
+          <span className='button' onClick={this._handleModalClick}>Show Default Modal</span>
+          <span className='button' onClick={this._handleSmallModalClick}>Show Small Modal</span>
         </div>
         <Modal
           isOpen={this.state.showModal}
@@ -85,19 +85,5 @@ const ModalDocs = React.createClass({
     );
   }
 });
-
-const styles = {
-  button: {
-    borderRadius: '3px',
-    background: '#359BCF',
-    padding: '10px 20px',
-    display: 'inline-block',
-    marginRight: '10px',
-    color: '#fff',
-    cursor: 'pointer',
-    fontSize: '14px',
-    WebkitFontSmoothing: 'antialiased'
-  }
-};
 
 module.exports = ModalDocs;

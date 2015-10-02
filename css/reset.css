@@ -49,6 +49,7 @@ h1 {
     font-weight: 300;
     text-transform: none;
     letter-spacing: 0;
+    line-height: 1.3em;
   }
 
 h2 {
@@ -78,21 +79,50 @@ h5 {
     font-weight: 300;
   }
 
+.button {
+  border-radius: 3px;
+  background: #359BCF;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .button {
+    width: auto;
+  }
+}
+
+
 .flex {
-  display: flex
+  display: flex;
 }
 
 .container {
-  width: 90%;
+  width: 86%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .hero {
   text-align: center;
-  padding: 200px 0 260px;
-  width: 60%;
+  padding: 100px 0 160px;
+  width: 80%;
   margin: 0 auto
+}
+
+@media screen and (min-width: 769px) {
+  .hero {
+    padding: 200px 0 260px;
+    width: 60%;
+  }
 }
   .hero p {
     font-size: 16px;
@@ -113,8 +143,13 @@ h5 {
     margin-bottom: 50px;
   }
   .feature {
-    width: 25%;
-    padding: 0 50px;
+    padding: 0 50px 50px;
+  }
+  @media screen and (min-width: 769px) {
+    .feature {
+      width: 25%;
+      padding: 0 50px;
+    }
   }
     .feature img {
       max-width: 100%;
@@ -130,7 +165,13 @@ h5 {
     }
 
 .contribute {
+  text-align: center;
   padding: 100px 0;
+}
+@media screen and (min-width: 769px) {
+  .contribute {
+    text-align: left;
+  }
 }
   .contribute h1 {
     text-align: center;
@@ -138,12 +179,14 @@ h5 {
   }
 
 .sideNav {
-  width: 20%;
-  margin-right: 60px;
-  border-right: 1px solid #e5e5e5;
-  text-align: right;
   padding-bottom: 60px;
 }
+  .sideNav .defaultSelect {
+    display: block;
+  }
+  .sideNav .links {
+    display: none;
+  }
   .sideNav h3 {
     padding-right: 40px;
     font-size: 14px;
@@ -163,9 +206,27 @@ h5 {
       border-right: 2px solid #359BCF;
     }
 
-.content {
-  width: 80%;
-  padding: 60px 0;
+@media screen and (min-width: 769px) {
+  .components {
+    display: flex;
+  }
+  .sideNav {
+    margin-right: 60px;
+    width: 20%;
+    border-right: 1px solid #e5e5e5;
+    text-align: right;
+    padding-bottom: 60px;
+  }
+    .sideNav .defaultSelect {
+      display: none;
+    }
+    .sideNav .links {
+      display: block;
+    }
+  .content {
+    width: 80%;
+    padding: 50px 0;
+  }
 }
 
 footer {
