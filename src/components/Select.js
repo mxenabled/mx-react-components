@@ -5,7 +5,7 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
 
 const Select = React.createClass({
   propTypes: {
@@ -128,13 +128,13 @@ const Select = React.createClass({
           {this._renderOptions()}
         </div>
 
-        {isMobile ?
-          <select ref='defaultSelect' onChange={this._handleSelectChange} style={styles.select} value={selected.value}>
+        {isMobile ? (
+          <select onChange={this._handleSelectChange} ref='defaultSelect' style={styles.select} value={selected.value}>
             {this.props.options.map(option => {
               return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
             })}
           </select>
-        : null }
+        ) : null }
       </div>
     );
   }

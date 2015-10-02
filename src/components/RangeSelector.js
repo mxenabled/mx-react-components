@@ -4,9 +4,7 @@ const _throttle = require('lodash/function/throttle');
 
 const StyleConstants = require('../constants/Style');
 
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-React.initializeTouchEvents(true)
+React.initializeTouchEvents(true);
 
 const RangeSelector = React.createClass({
   propTypes: {
@@ -104,7 +102,7 @@ const RangeSelector = React.createClass({
     this.props.onUpperDragStop(preset.upperValue);
   },
 
-  _handleDragStart (type, event) {
+  _handleDragStart (type) {
     this.setState({
       dragging: type
     });
@@ -290,8 +288,8 @@ const RangeSelector = React.createClass({
         <div
           onMouseLeave={this._handleDragEnd}
           onMouseMove={this._handleDragging}
-          onTouchMove={this._handleDragging}
           onMouseUp={this._handleDragEnd}
+          onTouchMove={this._handleDragging}
           ref='rangeSelector'
           style={styles.range}
         >
@@ -304,9 +302,9 @@ const RangeSelector = React.createClass({
           </div>
           <div
             onMouseDown={this._handleDragStart.bind(null, 'Lower')}
-            onTouchStart={this._handleDragStart.bind(null, 'Lower')}
             onMouseUp={this._handleDragEnd}
             onTouchEnd={this._handleDragEnd}
+            onTouchStart={this._handleDragStart.bind(null, 'Lower')}
             style={styles.lowerToggle}
           >
             <label style={styles.lowerToggleLabel}>
@@ -315,9 +313,9 @@ const RangeSelector = React.createClass({
           </div>
           <div
             onMouseDown={this._handleDragStart.bind(null, 'Upper')}
-            onTouchStart={this._handleDragStart.bind(null, 'Upper')}
             onMouseUp={this._handleDragEnd}
             onTouchEnd={this._handleDragEnd}
+            onTouchStart={this._handleDragStart.bind(null, 'Upper')}
             style={styles.upperToggle}
           >
             <label style={styles.upperToggleLabel}>
