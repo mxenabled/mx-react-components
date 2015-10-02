@@ -31,7 +31,7 @@ const ModalDocs = React.createClass({
       showModal: false,
       showSmallModal: false
     });
-  }
+  },
 
   render () {
     return (
@@ -42,9 +42,9 @@ const ModalDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <span style={styles.button} onClick={this._handleModalClick}>Show Default Modal</span>
-          <span style={styles.button} onClick={this._handleSmallModalClick}>Show Small Modal</span>
+        <div style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <span onClick={this._handleModalClick} style={styles.button}>Show Default Modal</span>
+          <span onClick={this._handleSmallModalClick} style={styles.button}>Show Small Modal</span>
         </div>
         <Modal
           isOpen={this.state.showModal}
@@ -92,7 +92,7 @@ const styles = {
     background: '#359BCF',
     padding: '10px 20px',
     display: 'inline-block',
-    margin: '0 5px',
+    marginRight: '10px',
     color: '#fff',
     cursor: 'pointer',
     fontSize: '14px',
