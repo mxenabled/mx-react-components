@@ -7,7 +7,7 @@ const Home = React.createClass({
     return (
       <div>
         <div className='hero'>
-          <h1>MX Component Library</h1>
+          <h1>MX React Components</h1>
           <p>A lightweight, ReactJS based ui kit for developing web-based applications.</p>
           <code>npm install mx-react-components</code>
         </div>
