@@ -270,15 +270,40 @@ const Demo = React.createClass({
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
-      }
+      },
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
+  },
+
+  componentDidMount () {
+    window.addEventListener('resize', this._handleWindowResize);
+  },
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleSelectChange (option) {
+    this.setState({
+      icon: option
+    });
+  },
+
+  _handleWindowResize () {
+    this.setState({
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    });
   },
 
   render () {
     return (
       <div>
         <br/><br/>
-        <DonutChart data={donutChartData} />
+        <DonutChart
+          arcWidth={40}
+          data={donutChartData}
+          width={this.state.windowWidth - 40}
+        />
         <br/><br/>
         <TypeAhead
           items={[
@@ -295,6 +320,12 @@ const Demo = React.createClass({
           ]}
           placeholderText='Select a Bank'
         />
+        <select multiple>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
         <br/><br/>
         <Select
           isMobile={false}
@@ -311,6 +342,12 @@ const Demo = React.createClass({
           selected={this.state.icon}
           valid={true}
         />
+        <select>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
           <Icon
@@ -367,12 +404,6 @@ const Demo = React.createClass({
         </div>
       </div>
     );
-  },
-
-  _handleSelectChange (option) {
-    this.setState({
-      icon: option
-    });
   }
 });
 
