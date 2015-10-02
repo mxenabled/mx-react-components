@@ -4,6 +4,8 @@ const _throttle = require('lodash/function/throttle');
 
 const StyleConstants = require('../constants/Style');
 
+React.initializeTouchEvents(true);
+
 const RangeSelector = React.createClass({
   propTypes: {
     defaultLowerValue: React.PropTypes.number,
@@ -100,19 +102,21 @@ const RangeSelector = React.createClass({
     this.props.onUpperDragStop(preset.upperValue);
   },
 
-  _handleMouseDown (type) {
+  _handleDragStart (type) {
     this.setState({
       dragging: type
     });
   },
 
-  _handleMouseMove (e) {
+  _handleDragging (e) {
     if (this.state.dragging) {
-      let newPosition = e.clientX - React.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const pixelInterval = this.props.interval * this.state.width / this.props.range;
       const newState = {
         selectedLabel: null
       };
+
+      let newPosition = clientX - React.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
 
       newPosition = Math.min(newPosition, this.state.width);
       newPosition = Math.max(newPosition, 0);
@@ -136,7 +140,7 @@ const RangeSelector = React.createClass({
     }
   },
 
-  _handleMouseUp () {
+  _handleDragEnd () {
     if (this.state.dragging) {
       this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
     }
@@ -282,9 +286,10 @@ const RangeSelector = React.createClass({
           </div>
         </div>
         <div
-          onMouseLeave={this._handleMouseUp}
-          onMouseMove={this._handleMouseMove}
-          onMouseUp={this._handleMouseUp}
+          onMouseLeave={this._handleDragEnd}
+          onMouseMove={this._handleDragging}
+          onMouseUp={this._handleDragEnd}
+          onTouchMove={this._handleDragging}
           ref='rangeSelector'
           style={styles.range}
         >
@@ -296,8 +301,10 @@ const RangeSelector = React.createClass({
             </div>
           </div>
           <div
-            onMouseDown={this._handleMouseDown.bind(null, 'Lower')}
-            onMouseUp={this._handleMouseUp}
+            onMouseDown={this._handleDragStart.bind(null, 'Lower')}
+            onMouseUp={this._handleDragEnd}
+            onTouchEnd={this._handleDragEnd}
+            onTouchStart={this._handleDragStart.bind(null, 'Lower')}
             style={styles.lowerToggle}
           >
             <label style={styles.lowerToggleLabel}>
@@ -305,8 +312,10 @@ const RangeSelector = React.createClass({
             </label>
           </div>
           <div
-            onMouseDown={this._handleMouseDown.bind(null, 'Upper')}
-            onMouseUp={this._handleMouseUp}
+            onMouseDown={this._handleDragStart.bind(null, 'Upper')}
+            onMouseUp={this._handleDragEnd}
+            onTouchEnd={this._handleDragEnd}
+            onTouchStart={this._handleDragStart.bind(null, 'Upper')}
             style={styles.upperToggle}
           >
             <label style={styles.upperToggleLabel}>

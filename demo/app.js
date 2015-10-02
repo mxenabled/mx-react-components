@@ -280,8 +280,29 @@ const Demo = React.createClass({
         displayValue: 'Accounts'
       },
       showModal: false,
-      showSmallModal: false
+      showSmallModal: false,
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
+  },
+
+  componentDidMount () {
+    window.addEventListener('resize', this._handleWindowResize);
+  },
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleSelectChange (option) {
+    this.setState({
+      icon: option
+    });
+  },
+
+  _handleWindowResize () {
+    this.setState({
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    });
   },
 
   render () {
@@ -328,6 +349,7 @@ const Demo = React.createClass({
           dataPointColors={[ '#555' ]}
           showBaseArc={true}
           style={{ margin: '0 auto' }}
+          width={this.state.windowWidth - 40}
         />
 
         <br/><br/>
