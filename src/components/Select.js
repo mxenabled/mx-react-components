@@ -109,11 +109,11 @@ const Select = React.createClass({
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div style={{ position: 'relative' }}>
+      <div style={[this.props.style, { position: 'relative' }]}>
         <div
           onBlur={this._handleBlur}
           onClick={this._handleClick}
-          style={[styles.component, this.props.style]}
+          style={styles.component}
           tabIndex='0'
         >
           {this._renderScrim()}
