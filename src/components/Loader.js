@@ -66,15 +66,15 @@ const Loader = React.createClass({
       };
 
       return (
-        <div style={styles.component}>
-          <div style={styles.content}>
+        <div className='mx-loader' style={styles.component}>
+          <div className='mx-loader-content' style={styles.content}>
             <Spin>
               <div style={styles.circle} />
             </Spin>
             {this.props.isSmall ? (
               null
             ) : (
-              <div style={styles.text} >LOADING...</div>
+              <div className='mx-loader-text' style={styles.text} >LOADING...</div>
             )}
           </div>
         </div>
