@@ -86,9 +86,7 @@ const TypeAhead = React.createClass({
     //add to selectedItems
     const selectedItems = this.state.selectedItems;
 
-    if (item) {
-      selectedItems.push(item);
-    }
+    selectedItems.push(item);
 
     this.props.onItemSelect(item, selectedItems);
 
@@ -130,7 +128,11 @@ const TypeAhead = React.createClass({
     if (e.keyCode === 9) {
       e.preventDefault();
 
-      this._handleItemSelect(filteredItems[0]);
+      const item = filteredItems[0];
+
+      if (item) {
+        this._handleItemSelect(item);
+      }
     }
 
     //remove tag on backspace
