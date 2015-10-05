@@ -132,7 +132,7 @@ const DonutChart = React.createClass({
 
   _renderBaseArc () {
     if (this.props.showBaseArc) {
-      const radius = (Math.min(this.props.width, this.props.height) / 2) - this.props.radiusOffset;
+      const radius = (Math.min(this.props.width, this.props.height) / 2);
 
       const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset)
                                   .innerRadius(radius - this.props.arcWidth)
@@ -215,7 +215,7 @@ const DonutChart = React.createClass({
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
 
     return (
-      <div style={[styles.component, { height: this.props.height, width: this.props.width }]}>
+      <div style={[styles.component, this.props.style, { height: this.props.height, width: this.props.width }]}>
         {this._renderDataLabel()}
         <svg height={this.props.height} width={this.props.width}>
           <g style={styles.pointer} transform={position}>

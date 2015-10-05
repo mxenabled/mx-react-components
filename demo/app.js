@@ -1,5 +1,14 @@
 const React = require('react');
-const { Select, Icon, RangeSelector, Loader, DonutChart, BarChart } = require('../dist/Index');
+const {
+  BarChart,
+  DonutChart,
+  Icon,
+  Loader,
+  Modal,
+  RangeSelector,
+  Select,
+  TypeAhead
+} = require('../src/Index');
 
 const styles = {
   block: {
@@ -23,6 +32,17 @@ const styles = {
     display: 'inline-block',
     margin: '5px 0',
     padding: '3px 5px'
+  },
+  button: {
+    borderRadius: '3px',
+    background: '#359BCF',
+    padding: '10px 20px',
+    display: 'inline-block',
+    margin: '0 5px',
+    color: '#fff',
+    cursor: 'pointer',
+    fontSize: '14px',
+    WebkitFontSmoothing: 'antialiased'
   }
 };
 
@@ -253,36 +273,120 @@ const icons = [
   }
 ];
 
-const chartData = [
-  {
-    label: 'Large Company Stocks',
-    name: 'Large Company Stocks',
-    value: 30
-  },
-  {
-    label: 'Small Company Stocks',
-    name: 'Small Company Stocks',
-    value: 45
-  }
-];
-
 const Demo = React.createClass({
   getInitialState () {
     return {
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
-      }
+      },
+      showModal: false,
+      showSmallModal: false,
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
+  },
+
+  componentDidMount () {
+    window.addEventListener('resize', this._handleWindowResize);
+  },
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleSelectChange (option) {
+    this.setState({
+      icon: option
+    });
+  },
+
+  _handleWindowResize () {
+    this.setState({
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    });
   },
 
   render () {
     return (
       <div>
         <br/><br/>
-        <BarChart data={chartData} />
+        <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <span style={styles.button} onClick={this._handleModalClick}>Show Default Modal</span>
+          <span style={styles.button} onClick={this._handleSmallModalClick}>Show Small Modal</span>
+        </div>
+        <Modal
+          isOpen={this.state.showModal}
+          isSmall={this.state.showSmallModal}
+          onRequestClose={this._handleModalClose}
+        >
+          <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
+          <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto' }} />
+        </Modal>
+
         <br/><br/>
-        <DonutChart data={chartData} />
+        <BarChart
+          data={[
+            {
+              label: 'Data Point 1',
+              name: 'Data Point 1',
+              value: 50
+            },
+            {
+              label: 'Data Point 2',
+              name: 'Data Point 2',
+              value: 80
+            }
+          ]}
+          width={this.state.windowWidth - 40}
+        />
+
+        <br/><br/>
+        <DonutChart
+          activeIndex={1}
+          activeOffset={10}
+          arcWidth={40}
+          baseArcColor='#f5f5f5'
+          chartTotal={300}
+          data={[
+            {
+              name: 'Data Point 1',
+              value: 50
+            },
+            {
+              name: 'Data Point 2',
+              value: 80
+            }
+          ]}
+          dataPointRadius={16}
+          dataPoints={[
+            {
+              name: 'Data Dot 1',
+              value: 200
+            }
+          ]}
+          dataPointColors={[ '#555' ]}
+          showBaseArc={true}
+          style={{ margin: '0 auto' }}
+          width={this.state.windowWidth - 40}
+        />
+
+        <br/><br/>
+        <TypeAhead
+          items={[
+            'JPMorgan Chase',
+            'Bank of America',
+            'Citigroup',
+            'Wells Fargo',
+            'The Bank of New York Mellon',
+            'U.S. Bancorp',
+            'HSBC Bank USA',
+            'Capital One',
+            'PNC Financial Services',
+            'State Street Corporation'
+          ]}
+          placeholderText='Select a Bank'
+        />
+
         <br/><br/>
         <Select
           isMobile={false}
@@ -299,6 +403,7 @@ const Demo = React.createClass({
           selected={this.state.icon}
           valid={true}
         />
+
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
           <Icon
@@ -309,6 +414,7 @@ const Demo = React.createClass({
             }}
           />
         </div>
+
         <br/><br/>
         <RangeSelector
           defaultLowerValue={18}
@@ -349,6 +455,7 @@ const Demo = React.createClass({
           range={100}
           selectedColor='#359BCF'
         />
+
         <br/><br/>
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
@@ -360,6 +467,27 @@ const Demo = React.createClass({
   _handleSelectChange (option) {
     this.setState({
       icon: option
+    });
+  },
+
+  _handleModalClick () {
+    this.setState({
+      showModal: true,
+      showSmallModal: false
+    });
+  },
+
+  _handleSmallModalClick () {
+    this.setState({
+      showModal: true,
+      showSmallModal: true
+    });
+  },
+
+  _handleModalClose () {
+    this.setState({
+      showModal: false,
+      showSmallModal: false
     });
   }
 });
