@@ -86,7 +86,9 @@ const TypeAhead = React.createClass({
     //add to selectedItems
     const selectedItems = this.state.selectedItems;
 
-    selectedItems.push(item);
+    if (item) {
+      selectedItems.push(item);
+    }
 
     this.props.onItemSelect(item, selectedItems);
 
