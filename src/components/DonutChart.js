@@ -39,9 +39,9 @@ const DonutChart = React.createClass({
       animateOnHover: false,
       arcWidth: 10,
       baseArcColor: StyleConstants.Colors.BASE_ARC,
-      colors: [StyleConstants.Colors.DEFAULT_ARC].concat(d3.scale.category20().range()),
+      colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
       data: [],
-      dataPointColors: [StyleConstants.Colors.DEFAULT_DOT].concat(d3.scale.category20b().range()),
+      dataPointColors: [StyleConstants.Colors.SECONDARY].concat(d3.scale.category20b().range()),
       dataPointRadius: 5,
       dataPoints: [],
       formatter (value) {
@@ -211,8 +211,6 @@ const DonutChart = React.createClass({
   render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2 + 'px';
-
-    console.log('on click', this.props.onClick());
 
     return (
       <div style={[styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width }]}>

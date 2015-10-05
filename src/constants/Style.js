@@ -11,9 +11,6 @@ module.exports = {
     LIGHT_FONT: '#999999',
 
     BASE_ARC: '#F5F5F5',
-    DEFAULT_ARC: '#359BCF',
-    DEFAULT_DOT: '#F7B148',
-
     ORANGE: '#ca3a31',
     YELLOW: '#f6a01e',
     GREEN: '#00a89c',
