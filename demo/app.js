@@ -1,5 +1,5 @@
 const React = require('react');
-const { Select, Icon, RangeSelector, Loader, DonutChart } = require('../dist/Index');
+const { Select, Icon, RangeSelector, Loader, DonutChart, BarChart } = require('../dist/Index');
 
 const styles = {
   block: {
@@ -253,12 +253,14 @@ const icons = [
   }
 ];
 
-const donutChartData = [
+const chartData = [
   {
+    label: 'Large Company Stocks',
     name: 'Large Company Stocks',
     value: 30
   },
   {
+    label: 'Small Company Stocks',
     name: 'Small Company Stocks',
     value: 45
   }
@@ -278,7 +280,9 @@ const Demo = React.createClass({
     return (
       <div>
         <br/><br/>
-        <DonutChart data={donutChartData} />
+        <BarChart data={chartData} />
+        <br/><br/>
+        <DonutChart data={chartData} />
         <br/><br/>
         <Select
           isMobile={false}
