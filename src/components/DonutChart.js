@@ -39,9 +39,9 @@ const DonutChart = React.createClass({
       animateOnHover: false,
       arcWidth: 10,
       baseArcColor: StyleConstants.Colors.BASE_ARC,
-      colors: d3.scale.category20().range(),
+      colors: [StyleConstants.Colors.DEFAULT_ARC].concat(d3.scale.category20().range()),
       data: [],
-      dataPointColors: d3.scale.category20b().range(),
+      dataPointColors: [StyleConstants.Colors.DEFAULT_DOT].concat(d3.scale.category20b().range()),
       dataPointRadius: 5,
       dataPoints: [],
       formatter (value) {
