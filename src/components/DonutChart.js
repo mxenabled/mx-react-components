@@ -212,11 +212,13 @@ const DonutChart = React.createClass({
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2 + 'px';
 
+    console.log('on click', this.props.onClick());
+
     return (
       <div style={[styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width }]}>
         {this._renderDataLabel()}
         <svg height={this.props.height} width={this.props.width}>
-          <g style={{ cursor: this.props.animateOnHover ? 'pointer' : 'auto' }} transform={position}>
+          <g transform={position}>
             {this._renderBaseArc()}
             {this._renderArcs()}
             {this._renderDataPoints()}
