@@ -20,10 +20,11 @@ const Modal = React.createClass({
   render () {
     if (this.props.isOpen)
       return (
-        <div style={styles.scrim}>
-          <div onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
-          <div style={[styles.container, this.props.isSmall && styles.small, this.props.style]}>
+        <div className='mx-modal' style={styles.scrim}>
+          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
+          <div className='mx-modal-content' style={[styles.container, this.props.isSmall && styles.small, this.props.style]}>
             <Icon
+              className='mx-modal-close'
               onClick={this.props.onRequestClose}
               size='32'
               style={styles.close}
