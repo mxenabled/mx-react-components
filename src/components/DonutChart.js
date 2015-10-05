@@ -38,17 +38,16 @@ const DonutChart = React.createClass({
       activeOffset: 0,
       animateOnHover: false,
       arcWidth: 10,
-      baseArcColor: '#F5F5F5',
+      baseArcColor: StyleConstants.Colors.BASE_ARC,
       colors: d3.scale.category20().range(),
       data: [],
       dataPointColors: d3.scale.category20b().range(),
       dataPointRadius: 5,
       dataPoints: [],
-      defaultLabelText: 'Roll over an item for details',
       formatter (value) {
         return value;
       },
-      height: 360,
+      height: 150,
       onClick () {},
       onMouseEnter () {},
       onMouseLeave () {},
@@ -56,7 +55,7 @@ const DonutChart = React.createClass({
       padAngle: 0.01,
       showBaseArc: true,
       showDataLabel: true,
-      width: 360
+      width: 150
     };
   },
 
@@ -85,9 +84,9 @@ const DonutChart = React.createClass({
       this.setState({
         activeIndex: index
       });
-
-      this.props.onMouseEnter(index);
     }
+
+    this.props.onMouseEnter(index);
   },
 
   _handleMouseLeave () {
@@ -95,9 +94,9 @@ const DonutChart = React.createClass({
       this.setState({
         activeIndex: -1
       });
-
-      this.props.onMouseLeave();
     }
+
+    this.props.onMouseLeave();
   },
 
   _renderArcs () {
@@ -241,7 +240,7 @@ const styles = {
     transform: 'translate(-50%, -50%)'
   },
   label: {
-    color: '#999',
+    color: StyleConstants.Colors.LIGHT_FONT,
     fontSize: '0.4em',
     marginTop: '5px'
   },
