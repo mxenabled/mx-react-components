@@ -1,5 +1,9 @@
 # Contributing
 
+## first-timers-only
+
+Issues tagged with `first-timers-only` should only be completed by someone who has never contributed to an open source project before. The purpose of this is to encourage and help more people learn how to contribute. See https://medium.com/@kentcdodds/first-timers-only-78281ea47455 for more details.
+
 ## Questions/Help
 
 If you have a question you can:
