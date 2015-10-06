@@ -337,7 +337,6 @@ const Demo = React.createClass({
               value: 80
             }
           ]}
-          width={this.state.windowWidth - 40}
         />
 
         <br/><br/>

@@ -12,57 +12,51 @@ const BarChart = React.createClass({
     fontSize: React.PropTypes.number,
     gridColor: React.PropTypes.string,
     height: React.PropTypes.number,
-    margin: React.PropTypes.object,
+    multiColor: React.PropTypes.bool,
+    opacity: React.PropTypes.number,
     tickCount: React.PropTypes.number,
     width: React.PropTypes.number,
     xAxisLabelColor: React.PropTypes.string,
+    xAxisMargin: React.PropTypes.number,
     xAxisPosition: React.PropTypes.string,
     yAxisLabelColor: React.PropTypes.string,
+    yAxisLabelInset: React.PropTypes.number,
+    yAxisMargin: React.PropTypes.number,
     yAxisPosition: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
       barSpace: 0.1,
-      colors: d3.scale.category20().range(),
+      colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
       data: [],
       fontSize: 13,
-      gridColor: '#999',
-      height: 360,
-      margin: {
-        xAxis: 20,
-        yAxis: 20
-      },
+      gridColor: StyleConstants.Colors.GRID_COLOR,
+      height: 400,
+      multiColor: false,
+      opacity: 0.8,
       tickCount: 4,
-      width: 360,
-      xAxisLabelColor: '#333',
+      width: 1200,
+      xAxisLabelColor: StyleConstants.Colors.LIGHT_FONT,
+      xAxisMargin: 80,
       xAxisPosition: 'bottom',
-      yAxisLabelColor: '#999',
+      yAxisLabelColor: StyleConstants.Colors.LIGHT_FONT,
+      yAxisLabelInset: 35,
+      yAxisMargin: 20,
       yAxisPosition: 'left'
     };
   },
 
-  _getTicks () {
-    const adjustedHeight = this.props.height - this.props.margin.xAxis;
-
-    return d3.scale.identity()
-      .range([adjustedHeight, 0])
-      .domain([0, d3.max(this.props.data, d => {
-        return d.value;
-      })])
-      .ticks(this.props.tickCount);
-  },
-
   _getXScale () {
     return d3.scale.ordinal()
-      .rangeRoundBands([0, this.props.width], this.props.barSpace)
+      .rangeRoundBands([0, (this.props.width - this.props.xAxisMargin * 2)], this.props.barSpace)
       .domain(this.props.data.map(d => {
         return d.label;
       }));
   },
 
   _getYScale () {
-    const adjustedHeight = this.props.height - this.props.margin.xAxis;
+    const adjustedHeight = this.props.height - this.props.xAxisMargin;
 
     return d3.scale.linear()
       .range([adjustedHeight, 0])
@@ -72,19 +66,21 @@ const BarChart = React.createClass({
   },
 
   _renderBars () {
-    const adjustedHeight = this.props.height - this.props.margin.xAxis;
+    const adjustedHeight = this.props.height - this.props.xAxisMargin;
     const xScale = this._getXScale();
     const yScale = this._getYScale();
 
     return this.props.data.map((dataSet, index) => {
       const y = yScale(dataSet.value);
-      const translate = 'translate(' + xScale(dataSet.label) + ', 0)';
+      const translate = 'translate(' + (xScale(dataSet.label) + this.props.xAxisMargin) + ', 0)';
+      const color = this.props.multiColor ? this.props.colors[index] : this.props.colors[0];
 
       return (
         <rect
-          fill={this.props.colors[index]}
+          fill={color}
           height={adjustedHeight - y}
           key={index}
+          opacity={this.props.opacity}
           transform={translate}
           width={xScale.rangeBand()}
           y={y}
@@ -95,7 +91,7 @@ const BarChart = React.createClass({
 
   _renderGrid () {
     const yScale = this._getYScale();
-    const ticks = this._getTicks();
+    const ticks = this._getYScale().ticks(this.props.tickCount);
     const stroke = this.props.gridColor;
 
     return ticks.map((tick, index) => {
@@ -113,7 +109,7 @@ const BarChart = React.createClass({
     const color = this.props.xAxisLabelColor;
 
     return this.props.data.map((dataSet, index) => {
-      const left = xScale(dataSet.label);
+      const left = xScale(dataSet.label) + this.props.xAxisMargin;
 
       return (
         <div key={index} style={[styles.xAxisLabel, { color, width, left }]}>
@@ -125,15 +121,16 @@ const BarChart = React.createClass({
 
   _renderYAxisLabels () {
     const yScale = this._getYScale();
-    const ticks = this._getTicks();
+    const ticks = yScale.ticks(this.props.tickCount);
     const color = this.props.yAxisLabelColor;
+    const labelInset = this.props.yAxisPosition === 'left' ? { left: this.props.yAxisLabelInset } : { right: this.props.yAxisLabelInset };
 
     return ticks.map((tick, index) => {
-      const top = this.props.xAxisPosition === 'top' ? yScale(tick) - this.props.fontSize + this.props.margin.yAxis : yScale(tick) - this.props.fontSize;
+      const top = this.props.xAxisPosition === 'top' ? yScale(tick) - this.props.fontSize + this.props.yAxisMargin : yScale(tick) - this.props.fontSize;
       const textAlign = this.props.yAxisPosition;
 
       return (
-        <div key={index} style={[styles.yAxislabel, { color, textAlign, top }]}>
+        <div key={index} style={[styles.yAxislabel, labelInset, { color, textAlign, top }]}>
           {tick}
         </div>
       );
@@ -141,9 +138,9 @@ const BarChart = React.createClass({
   },
 
   render () {
-    const adjustedHeight = this.props.height - this.props.margin.xAxis;
+    const adjustedHeight = this.props.height - this.props.xAxisMargin;
     const xAxisPosition = this.props.xAxisPosition === 'top' ? { top: 0 } : { top: adjustedHeight + 5 };
-    const chartMargin = this.props.xAxisPosition === 'top' ? { marginTop: this.props.margin.xAxis } : { marginBottom: this.props.margin.xAxis };
+    const chartMargin = this.props.xAxisPosition === 'top' ? { marginTop: this.props.xAxisMargin } : { marginBottom: this.props.xAxisMargin };
 
     return (
       <div style={[styles.component, { height: this.props.height, width: this.props.width, fontSize: this.props.fontSize + 'px' }]}>
@@ -169,7 +166,7 @@ const styles = {
   },
   grid: {
     strokeWidth: '0.5px',
-    strokeDasharray: '3px, 3px'
+    strokeDasharray: '3px, 5px'
   },
   xAxis: {
     position: 'absolute'
