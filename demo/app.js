@@ -324,10 +324,7 @@ const Demo = React.createClass({
 
         <br/><br/>
         <DonutChart
-          activeIndex={1}
-          activeOffset={10}
-          arcWidth={40}
-          baseArcColor='#f5f5f5'
+          animateOnHover={true}
           chartTotal={300}
           data={[
             {
@@ -339,17 +336,14 @@ const Demo = React.createClass({
               value: 80
             }
           ]}
-          dataPointRadius={16}
           dataPoints={[
             {
               name: 'Data Dot 1',
               value: 200
             }
           ]}
-          dataPointColors={[ '#555' ]}
-          showBaseArc={true}
-          style={{ margin: '0 auto' }}
-          width={this.state.windowWidth - 40}
+          defaultLabelText='Total Users'
+          defaultLabelValue={300}
         />
 
         <br/><br/>
