@@ -223,7 +223,7 @@ const TypeAhead = React.createClass({
   _renderSelectedItems () {
     return this.state.selectedItems.map((item, index) => {
       return (
-        <div key={index} style={styles.itemTag}>
+        <div className='mx-typeahead-selected' key={index} style={styles.itemTag}>
           {item}
           <Icon
             onClick={this._handleItemRemove.bind(null, item)}
@@ -237,9 +237,10 @@ const TypeAhead = React.createClass({
 
   _renderItemList () {
     return (
-      <div ref='optionList' style={styles.itemList}>
+      <div className='mx-typeahead-option-list' ref='optionList' style={styles.itemList}>
         {this.state.selectedItems.length !== this.props.items.length ? (
           <div
+            className='mx-typeahead-select-all'
             key='selectAllItem'
             onMouseDown={this._handleSelectAll}
             onMouseOver={this._handleItemMouseOver}
@@ -253,6 +254,7 @@ const TypeAhead = React.createClass({
 
         {this.state.selectedItems.length > 0 ? (
           <div
+            className='mx-typeahead-clear-all'
             key='clearAllItem'
             onMouseDown={this._handleClearAll}
             onMouseOver={this._handleItemMouseOver}
@@ -267,6 +269,7 @@ const TypeAhead = React.createClass({
         {this._getFilteredItems().map((item, index) => {
           return (
             <div
+              className='mx-typeahead-option'
               key={index}
               onMouseDown={this._handleItemSelect.bind(null, item)}
               onMouseOver={this._handleItemMouseOver}
@@ -284,6 +287,7 @@ const TypeAhead = React.createClass({
   render () {
     return (
       <div
+        className='mx-typeahead'
         onBlur={this._handleBlur}
         onFocus={this._handleFocus}
         style={[styles.component, this.props.style]}
@@ -292,6 +296,7 @@ const TypeAhead = React.createClass({
         {this._renderSelectedItems()}
 
         <input
+          className='mx-typeahead-input'
           key='input'
           onChange={this._handleInputChange}
           onKeyDown={this._handleInputKeyDown}
@@ -302,7 +307,7 @@ const TypeAhead = React.createClass({
           value={this.state.searchString}
         />
 
-        <div key='testingOnClick' style={[styles.itemListContainer, !this.state.isOpen && { display: 'none' }]}>
+        <div className='mx-typeahead-option-list-container' style={[styles.itemListContainer, !this.state.isOpen && { display: 'none' }]}>
           {this._renderItemList()}
         </div>
       </div>
