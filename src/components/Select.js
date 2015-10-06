@@ -9,6 +9,7 @@ const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini
 
 const Select = React.createClass({
   propTypes: {
+    dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
     optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
@@ -113,7 +114,7 @@ const Select = React.createClass({
         <div
           onBlur={this._handleBlur}
           onClick={this._handleClick}
-          style={styles.component}
+          style={[styles.component, this.props.dropdownStyle]}
           tabIndex='0'
         >
           {this._renderScrim()}
