@@ -109,28 +109,30 @@ const DonutChart = React.createClass({
         return a + b;
       });
 
-      const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
-      const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
-      const values = pie(dataSets);
-      const radius = Math.min(this.props.width, this.props.height) / 2;
-      const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
-      const hoverArc = d3.svg.arc().outerRadius(radius).innerRadius(radius - this.props.arcWidth);
+      if (valueTotal) {
+        const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
+        const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
+        const values = pie(dataSets);
+        const radius = Math.min(this.props.width, this.props.height) / 2;
+        const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
+        const hoverArc = d3.svg.arc().outerRadius(radius).innerRadius(radius - this.props.arcWidth);
 
 
-      return values.map((point, i) => {
-        const arc = this.state.activeIndex === i && this.props.animateOnHover ? hoverArc : standardArc;
+        return values.map((point, i) => {
+          const arc = this.state.activeIndex === i && this.props.animateOnHover ? hoverArc : standardArc;
 
-        return (
-          <g
-            key={i}
-            onClick={this.props.onClick.bind(null, i)}
-            onMouseEnter={this._handleMouseEnter.bind(null, i)}
-            onMouseLeave={this._handleMouseLeave}
-          >
-            <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity} />
-          </g>
-        );
-      });
+          return (
+            <g
+              key={i}
+              onClick={this.props.onClick.bind(null, i)}
+              onMouseEnter={this._handleMouseEnter.bind(null, i)}
+              onMouseLeave={this._handleMouseLeave}
+            >
+              <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity} />
+            </g>
+          );
+        });
+      }
     }
   },
 
