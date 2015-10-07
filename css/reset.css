@@ -26,6 +26,18 @@ p {
   margin: 0 0 10px;
 }
 
+ul, ol {
+  margin: 20px 0 20px 30px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5em;
+}
+ul li {
+  list-style-type: disc;
+  margin-bottom: 10px;
+}
+
 code {
   background-color: #f5f5f5;
   font-family: monospace;

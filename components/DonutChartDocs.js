@@ -15,10 +15,6 @@ const DonutChartDocs = React.createClass({
 
         <h3>Demo</h3>
         <DonutChart
-          activeIndex={1}
-          activeOffset={10}
-          arcWidth={40}
-          baseArcColor='#f5f5f5'
           chartTotal={300}
           data={[
             {
@@ -34,7 +30,6 @@ const DonutChartDocs = React.createClass({
               value: 20
             }
           ]}
-          dataPointRadius={16}
           dataPoints={[
             {
               name: 'Data Dot 1',
@@ -112,6 +107,9 @@ const DonutChartDocs = React.createClass({
         <h5>defaultLabelText <label>String</label></h5>
         <p>Default: Roll over item for details</p>
         <p>The text to display in the data label when not hovering over a slice.</p>
+
+        <h5>dropdownStyle <label>Object | Array</label></h5>
+        <p>A Radium style object or array that will be applied to the dropdown select box.</p>
 
         <h5>height <label>Number</label></h5>
         <p>Default: 360</p>

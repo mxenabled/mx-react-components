@@ -2,6 +2,7 @@ const React = require('react');
 const Router = require('react-router');
 const { Route, RouteHandler, DefaultRoute } = Router;
 
+const Changelog = require('components/Changelog');
 const Components = require('components/Components');
 const DonutChart = require('components/DonutChartDocs');
 const Header = require('components/Header');
@@ -33,6 +34,7 @@ const App = React.createClass({
 const routes = (
   <Route handler={App} name='home' path='/'>
     <Route handler={Components} name='components'>
+      <DefaultRoute handler={Changelog} />
       <Route handler={DonutChart} name='donut' />
       <Route handler={Icon} name='icon' />
       <Route handler={Loader} name='loader' />
