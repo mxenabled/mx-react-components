@@ -5,8 +5,6 @@ const StyleConstants = require('../constants/Style');
 
 const ToggleSwitch = React.createClass({
   propTypes: {
-    fontFamily: React.PropTypes.string,
-    fontSize: React.PropTypes.string,
     height: React.PropTypes.string,
     iconSize: React.PropTypes.string,
     isOn: React.PropTypes.bool,
@@ -24,9 +22,7 @@ const ToggleSwitch = React.createClass({
 
   getDefaultProps () {
     return {
-      fontFamily: StyleConstants.Colors.FONT_FAMILY,
-      fontSize: StyleConstants.Colors.FONT_SIZE,
-      height: '20',
+      height: '20px',
       iconSize: '14',
       isOn: true,
       offColor: StyleConstants.Colors.BASE_ARC,
@@ -34,7 +30,7 @@ const ToggleSwitch = React.createClass({
       onColor: StyleConstants.Colors.PRIMARY,
       onText: 'On',
       onToggle () {},
-      width: '80'
+      width: '80px'
     };
   },
 
@@ -69,14 +65,16 @@ const ToggleSwitch = React.createClass({
   render () {
     const styles = {
       component: {
-        height: this.props.height + 'px',
+        fontFamily: StyleConstants.FontFamily,
+        fontSize: '12px',
+        height: this.props.height,
         display: 'inline-block'
       },
       toggle: {
         display: 'inline-block',
         margin: '0 10px',
-        width: this.props.width + 'px',
-        height: this.props.height + 'px'
+        width: this.props.width,
+        height: this.props.height
       },
       left: {
         transform: 'translateX(0%)',
@@ -107,8 +105,8 @@ const ToggleSwitch = React.createClass({
         fontWeight: 'bold',
         fontSize: this.props.fontSize,
         display: 'inline-block',
-        height: this.props.height + 'px',
-        lineHeight: this.props.height + 'px',
+        height: this.props.height,
+        lineHeight: this.props.height,
         verticalAlign: 'top'
       },
       iconStyle: {
