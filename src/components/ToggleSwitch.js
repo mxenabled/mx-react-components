@@ -103,7 +103,6 @@ const ToggleSwitch = React.createClass({
       },
       text: {
         fontWeight: 'bold',
-        fontSize: this.props.fontSize,
         display: 'inline-block',
         height: this.props.height,
         lineHeight: this.props.height,
