@@ -4,9 +4,9 @@ const StyleConstants = require('../constants/Style');
 
 const ToggleSwitch = React.createClass({
   propTypes: {
-    activeByDefault: React.PropTypes.bool,
     activeColor: React.PropTypes.string,
     children: React.PropTypes.node,
+    defaultPosition: React.PropTypes.oneOf(['left', 'right']),
     height: React.PropTypes.number,
     inactiveColor: React.PropTypes.string,
     leftLabel: React.PropTypes.string,
@@ -22,8 +22,8 @@ const ToggleSwitch = React.createClass({
 
   getDefaultProps () {
     return {
-      activeByDefault: true,
       activeColor: StyleConstants.Colors.PRIMARY,
+      defaultPosition: 'left',
       height: 20,
       inactiveColor: StyleConstants.Colors.BASE_ARC,
       leftLabel: 'On',
@@ -36,25 +36,25 @@ const ToggleSwitch = React.createClass({
 
   getInitialState () {
     return {
-      active: this.props.activeByDefault
+      activePosition: this.props.defaultPosition
     };
   },
 
 
   _handleToggle () {
-    const active = !this.state.active;
+    const activePosition = this.state.activePosition === 'left' ? 'right' : 'left';
 
     this.setState({
-      active
+      activePosition
     });
 
-    this.props.onToggle(active);
+    this.props.onToggle(activePosition);
   },
 
   _renderLeftLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span style={[styles.text, this.state.active && styles.activeText || styles.inactiveText]}>{this.props.leftLabel}</span>
+        <span className='left-label' style={[styles.text, this.state.activePosition === 'left' && styles.activeText || styles.inactiveText]}>{this.props.leftLabel}</span>
       );
     }
   },
@@ -62,7 +62,7 @@ const ToggleSwitch = React.createClass({
   _renderRightLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span style={[styles.text, !this.state.active && styles.activeText || styles.inactiveText]}>{this.props.rightLabel}</span>
+        <span className='right-label' style={[styles.text, this.state.activePosition === 'right' && styles.activeText || styles.inactiveText]}>{this.props.rightLabel}</span>
       );
     }
   },
@@ -115,10 +115,10 @@ const ToggleSwitch = React.createClass({
     };
 
     return (
-      <div style={[styles.component, this.props.style]}>
+      <div className='toggle-switch-component' style={[styles.component, this.props.style]}>
         {this._renderLeftLabel(styles)}
-        <div onClick={this._handleToggle} style={[styles.toggle, styles.inactive]} >
-          <div style={[styles.active, this.state.active && styles.left || styles.right]}>
+        <div className='toggle-switch' onClick={this._handleToggle} style={[styles.toggle, styles.inactive]} >
+          <div className='toggle-switch-active' style={[styles.active, this.state.activePosition === 'left' && styles.left || styles.right]}>
             {this.props.children}
           </div>
         </div>
