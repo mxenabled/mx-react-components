@@ -7,5 +7,6 @@ module.exports = {
   RangeSelector: require('./components/RangeSelector'),
   Select: require('./components/Select'),
   Spin: require('./components/Spin'),
+  ToggleSwitch: require('./components/ToggleSwitch'),
   TypeAhead: require('./components/TypeAhead')
 };
