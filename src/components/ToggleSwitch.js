@@ -1,65 +1,70 @@
 const React = require('react');
 const Radium = require('radium');
-const RajaIcon = require('./RajaIcon');
 const StyleConstants = require('../constants/Style');
 
 const ToggleSwitch = React.createClass({
   propTypes: {
-    height: React.PropTypes.string,
-    iconSize: React.PropTypes.string,
-    isOn: React.PropTypes.bool,
-    offColor: React.PropTypes.string,
-    offText: React.PropTypes.string,
-    onColor: React.PropTypes.string,
-    onText: React.PropTypes.string,
+    activeByDefault: React.PropTypes.bool,
+    activeColor: React.PropTypes.string,
+    children: React.PropTypes.node,
+    height: React.PropTypes.number,
+    inactiveColor: React.PropTypes.string,
+    leftLabel: React.PropTypes.string,
     onToggle: React.PropTypes.func,
+    rightLabel: React.PropTypes.string,
+    showLabels: React.PropTypes.bool,
     style: React.PropTypes.oneOfType([
       React.PropTypes.array,
       React.PropTypes.object
     ]),
-    width: React.PropTypes.string
+    width: React.PropTypes.number
   },
 
   getDefaultProps () {
     return {
-      height: '20px',
-      iconSize: '14',
-      isOn: true,
-      offColor: StyleConstants.Colors.BASE_ARC,
-      offText: 'Off',
-      onColor: StyleConstants.Colors.PRIMARY,
-      onText: 'On',
+      activeByDefault: true,
+      activeColor: StyleConstants.Colors.PRIMARY,
+      height: 20,
+      inactiveColor: StyleConstants.Colors.BASE_ARC,
+      leftLabel: 'On',
       onToggle () {},
-      width: '80px'
+      rightLabel: 'Off',
+      showLabels: true,
+      width: 80
     };
   },
 
   getInitialState () {
     return {
-      isOn: true
+      active: this.props.activeByDefault
     };
   },
 
-  componentDidMount () {
+
+  _handleToggle () {
+    const active = !this.state.active;
+
     this.setState({
-      isOn: this.props.isOn
+      active
     });
+
+    this.props.onToggle(active);
   },
 
-  componentWillReceiveProps (newProps) {
-    if (newProps.isOn !== this.props.isOn) {
-      this.setState({
-        isOn: newProps.isOn
-      });
+  _renderLeftLabel (styles) {
+    if (this.props.showLabels) {
+      return (
+        <span style={[styles.text, this.state.active && styles.activeText || styles.inactiveText]}>{this.props.leftLabel}</span>
+      );
     }
   },
 
-  _handleToggle () {
-    this.setState({
-      isOn: !this.state.isOn
-    });
-
-    this.props.onToggle();
+  _renderRightLabel (styles) {
+    if (this.props.showLabels) {
+      return (
+        <span style={[styles.text, !this.state.active && styles.activeText || styles.inactiveText]}>{this.props.rightLabel}</span>
+      );
+    }
   },
 
   render () {
@@ -67,66 +72,57 @@ const ToggleSwitch = React.createClass({
       component: {
         fontFamily: StyleConstants.FontFamily,
         fontSize: '12px',
-        height: this.props.height,
+        height: this.props.height + 'px',
         display: 'inline-block'
       },
       toggle: {
         display: 'inline-block',
         margin: '0 10px',
-        width: this.props.width,
-        height: this.props.height
+        width: this.props.width + 'px',
+        height: this.props.height + 'px',
+        verticalAlign: 'middle',
+        cursor: 'pointer'
       },
       left: {
         transform: 'translateX(0%)',
-        transition: 'transform .3s'
+        transition: 'transform .1s'
       },
       right: {
         transform: 'translateX(100%)',
-        transition: 'transform .3s'
+        transition: 'transform .1s'
       },
-      on: {
+      active: {
         position: 'relative',
-        backgroundColor: this.props.onColor,
+        backgroundColor: this.props.activeColor,
         textAlign: 'center',
         display: 'inline-block',
-        height: this.props.height,
+        height: this.props.height + 'px',
         width: '50%'
       },
-      onText: {
-        color: this.props.onColor
+      activeText: {
+        color: this.props.activeColor
       },
-      off: {
-        backgroundColor: this.props.offColor
+      inactive: {
+        backgroundColor: this.props.inactiveColor
       },
-      offText: {
-        color: this.props.offColor
+      inactiveText: {
+        color: this.props.inactiveColor
       },
       text: {
         fontWeight: 'bold',
-        display: 'inline-block',
-        height: this.props.height,
-        lineHeight: this.props.height,
-        verticalAlign: 'top'
-      },
-      iconStyle: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        display: 'inline-block',
-        color: '#FFF'
+        verticalAlign: 'middle'
       }
     };
 
     return (
       <div style={[styles.component, this.props.style]}>
-        <div style={[styles.text, this.state.isOn && styles.onText || styles.offText]}>{this.props.onText}</div>
-        <div onClick={this._handleToggle} style={[styles.toggle, styles.off]} >
-          <div style={[styles.on, this.state.isOn && styles.left || styles.right]}>
-            <RajaIcon size={this.props.iconSize} style={styles.iconStyle} type={'check_mark'} />
+        {this._renderLeftLabel(styles)}
+        <div onClick={this._handleToggle} style={[styles.toggle, styles.inactive]} >
+          <div style={[styles.active, this.state.active && styles.left || styles.right]}>
+            {this.props.children}
           </div>
         </div>
-        <div style={[styles.text, !this.state.isOn && styles.onText || styles.offText]}>{this.props.offText}</div>
+        {this._renderRightLabel(styles)}
       </div>
     );
   }
