@@ -7,5 +7,6 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  }
+  },
+  devtool: 'eval'
 };

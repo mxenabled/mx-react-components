@@ -1,4 +1,6 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
+
 const {
   DonutChart,
   Icon,
@@ -344,7 +346,8 @@ const Demo = React.createClass({
             }
           ]}
           defaultLabelText='Total Users'
-          defaultLabelValue={300}
+          defaultLabelValue='300'
+          style={{ margin: '0 auto' }}
         />
 
         <br/><br/>
@@ -472,4 +475,4 @@ const Demo = React.createClass({
   }
 });
 
-React.render(<Demo />, document.getElementById('demo'));
+ReactDOM.render(<Demo />, document.getElementById('demo'));
