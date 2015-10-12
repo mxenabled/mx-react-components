@@ -119,7 +119,7 @@ class BarChart extends React.Component {
       </div>
     );
   }
-};
+}
 
 const styles = {
   component: {
