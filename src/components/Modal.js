@@ -3,20 +3,7 @@ const Radium = require('radium');
 
 const Icon = require('./Icon');
 
-const Modal = React.createClass({
-  propTypes: {
-    isOpen: React.PropTypes.bool,
-    isSmall: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func
-  },
-
-  getDefaultProps () {
-    return {
-      isOpen: false,
-      isSmall: false
-    };
-  },
-
+class Modal extends React.Component {
   render () {
     if (this.props.isOpen)
       return (
@@ -39,8 +26,7 @@ const Modal = React.createClass({
         null
       );
   }
-
-});
+};
 
 const styles = {
   scrim: {
@@ -86,6 +72,17 @@ const styles = {
     textAlign: 'center',
     padding: '30px'
   }
+};
+
+Modal.propTypes = {
+  isOpen: React.PropTypes.bool,
+  isSmall: React.PropTypes.bool,
+  onRequestClose: React.PropTypes.func
+};
+
+Modal.defaultProps = {
+  isOpen: false,
+  isSmall: false
 };
 
 module.exports = Radium(Modal);
