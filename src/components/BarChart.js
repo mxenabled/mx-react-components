@@ -4,48 +4,10 @@ const d3 = require('d3');
 
 const StyleConstants = require('../constants/Style');
 
-const BarChart = React.createClass({
-  propTypes: {
-    barSpace: React.PropTypes.number,
-    colors: React.PropTypes.array,
-    data: React.PropTypes.array.isRequired,
-    fontSize: React.PropTypes.number,
-    gridColor: React.PropTypes.string,
-    height: React.PropTypes.number,
-    multiColor: React.PropTypes.bool,
-    opacity: React.PropTypes.number,
-    tickCount: React.PropTypes.number,
-    width: React.PropTypes.number,
-    xAxisLabelColor: React.PropTypes.string,
-    xAxisMargin: React.PropTypes.number,
-    xAxisPosition: React.PropTypes.string,
-    yAxisLabelColor: React.PropTypes.string,
-    yAxisLabelInset: React.PropTypes.number,
-    yAxisMargin: React.PropTypes.number,
-    yAxisPosition: React.PropTypes.string
-  },
-
-  getDefaultProps () {
-    return {
-      barSpace: 0.1,
-      colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
-      data: [],
-      fontSize: 13,
-      gridColor: StyleConstants.Colors.GRID_COLOR,
-      height: 400,
-      multiColor: false,
-      opacity: 0.8,
-      tickCount: 4,
-      width: 1200,
-      xAxisLabelColor: StyleConstants.Colors.LIGHT_FONT,
-      xAxisMargin: 80,
-      xAxisPosition: 'bottom',
-      yAxisLabelColor: StyleConstants.Colors.LIGHT_FONT,
-      yAxisLabelInset: 35,
-      yAxisMargin: 20,
-      yAxisPosition: 'left'
-    };
-  },
+class BarChart extends React.Component {
+  constructor (props) {
+    super(props);
+  }
 
   _getXScale () {
     return d3.scale.ordinal()
@@ -53,7 +15,7 @@ const BarChart = React.createClass({
       .domain(this.props.data.map(d => {
         return d.label;
       }));
-  },
+  }
 
   _getYScale () {
     const adjustedHeight = this.props.height - this.props.xAxisMargin;
@@ -63,7 +25,7 @@ const BarChart = React.createClass({
       .domain([0, d3.max(this.props.data, d => {
         return d.value;
       })]);
-  },
+  }
 
   _renderBars () {
     const adjustedHeight = this.props.height - this.props.xAxisMargin;
@@ -87,7 +49,7 @@ const BarChart = React.createClass({
         />
       );
     });
-  },
+  }
 
   _renderGrid () {
     const yScale = this._getYScale();
@@ -101,7 +63,7 @@ const BarChart = React.createClass({
         </g>
       );
     });
-  },
+  }
 
   _renderXAxisLabels () {
     const xScale = this._getXScale();
@@ -117,7 +79,7 @@ const BarChart = React.createClass({
         </div>
       );
     });
-  },
+  }
 
   _renderYAxisLabels () {
     const yScale = this._getYScale();
@@ -135,7 +97,7 @@ const BarChart = React.createClass({
         </div>
       );
     });
-  },
+  }
 
   render () {
     const adjustedHeight = this.props.height - this.props.xAxisMargin;
@@ -157,7 +119,7 @@ const BarChart = React.createClass({
       </div>
     );
   }
-});
+};
 
 const styles = {
   component: {
@@ -181,6 +143,46 @@ const styles = {
     position: 'absolute',
     width: '100%'
   }
+};
+
+BarChart.propTypes = {
+  barSpace: React.PropTypes.number,
+  colors: React.PropTypes.array,
+  data: React.PropTypes.array.isRequired,
+  fontSize: React.PropTypes.number,
+  gridColor: React.PropTypes.string,
+  height: React.PropTypes.number,
+  multiColor: React.PropTypes.bool,
+  opacity: React.PropTypes.number,
+  tickCount: React.PropTypes.number,
+  width: React.PropTypes.number,
+  xAxisLabelColor: React.PropTypes.string,
+  xAxisMargin: React.PropTypes.number,
+  xAxisPosition: React.PropTypes.string,
+  yAxisLabelColor: React.PropTypes.string,
+  yAxisLabelInset: React.PropTypes.number,
+  yAxisMargin: React.PropTypes.number,
+  yAxisPosition: React.PropTypes.string
+};
+
+BarChart.defaultProps = {
+  barSpace: 0.1,
+  colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
+  data: [],
+  fontSize: 13,
+  gridColor: StyleConstants.Colors.GRID_COLOR,
+  height: 400,
+  multiColor: false,
+  opacity: 0.8,
+  tickCount: 4,
+  width: 1200,
+  xAxisLabelColor: StyleConstants.Colors.LIGHT_FONT,
+  xAxisMargin: 80,
+  xAxisPosition: 'bottom',
+  yAxisLabelColor: StyleConstants.Colors.LIGHT_FONT,
+  yAxisLabelInset: 35,
+  yAxisMargin: 20,
+  yAxisPosition: 'left'
 };
 
 module.exports = Radium(BarChart);
