@@ -7,13 +7,13 @@ const Header = React.createClass({
   render () {
     return (
       <div style={styles.component}>
-        <Link to='home'>
+        <Link to='/'>
           <Icon size={70} type='mx' />
         </Link>
 
         <nav style={styles.nav}>
-          <Link style={styles.navLink} to='home'>Home</Link>
-          <Link style={styles.navLink} to='components'>Components</Link>
+          <Link style={styles.navLink} to='/'>Home</Link>
+          <Link style={styles.navLink} to='/components'>Components</Link>
           <a href='http://github.com/mxenabled/mx-react-components' style={styles.navLink}>Github</a>
         </nav>
       </div>

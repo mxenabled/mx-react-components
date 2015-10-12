@@ -1,6 +1,6 @@
 const React = require('react');
-const Router = require('react-router');
-const { Route, RouteHandler, DefaultRoute } = Router;
+const ReactDOM = require('react-dom');
+const { Route, IndexRoute, Router } = require('react-router');
 
 const Changelog = require('components/Changelog');
 const Components = require('components/Components');
@@ -20,7 +20,7 @@ const App = React.createClass({
     return (
       <div>
         <Header />
-        <RouteHandler />
+        {this.props.children}
         <footer>
           <div className='container'>
             &copy; Copyright 2015 - MX
@@ -31,25 +31,21 @@ const App = React.createClass({
   }
 });
 
-const routes = (
-  <Route handler={App} name='home' path='/'>
-    <Route handler={Components} name='components'>
-      <DefaultRoute handler={Changelog} />
-      <Route handler={DonutChart} name='donut' />
-      <Route handler={Icon} name='icon' />
-      <Route handler={Loader} name='loader' />
-      <Route handler={Modal} name='modal' />
-      <Route handler={RangeSelector} name='range-selector' />
-      <Route handler={Select} name='select' />
-      <Route handler={Spin} name='spin' />
-      <Route handler={TypeAhead} name='type-ahead' />
+ReactDOM.render((
+  <Router>
+    <Route component={App} path='/'>
+      <Route component={Components} path='components'>
+        <IndexRoute component={Changelog} />
+        <Route component={DonutChart} path='donut' />
+        <Route component={Icon} path='icon' />
+        <Route component={Loader} path='loader' />
+        <Route component={Modal} path='modal' />
+        <Route component={RangeSelector} path='range-selector' />
+        <Route component={Select} path='select' />
+        <Route component={Spin} path='spin' />
+        <Route component={TypeAhead} path='type-ahead' />
+      </Route>
+      <IndexRoute component={Home} />
     </Route>
-    <DefaultRoute handler={Home} />
-  </Route>
-);
-
-Router.run(routes, (Handler, state) => {
-  const params = state.params;
-
-  React.render(<Handler params={params} />, document.body);
-});
+  </Router>
+), document.getElementById('app'));

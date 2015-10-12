@@ -1,13 +1,13 @@
 const React = require('react');
-const { Link, RouteHandler, Navigation } = require('react-router');
+const { Link, History } = require('react-router');
 
 const { Select } = require('mx-react-components');
 
 const Components = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
 
   _handleChange (selected) {
-    this.transitionTo(selected.value);
+    this.history.pushState(null, '/components/' + selected.value);
   },
 
   render () {
@@ -73,7 +73,7 @@ const Components = React.createClass({
         </div>
 
         <div className='content'>
-          <RouteHandler />
+          {this.props.children}
         </div>
       </div>
     );
