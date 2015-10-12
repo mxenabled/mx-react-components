@@ -4,72 +4,19 @@ const d3 = require('d3');
 
 const StyleConstants = require('../constants/Style');
 
-const DonutChart = React.createClass({
-  propTypes: {
-    activeIndex: React.PropTypes.number,
-    activeOffset: React.PropTypes.number,
-    animateOnHover: React.PropTypes.bool,
-    arcWidth: React.PropTypes.number,
-    baseArcColor: React.PropTypes.string,
-    chartTotal: React.PropTypes.number,
-    children: React.PropTypes.node,
-    colors: React.PropTypes.array,
-    data: React.PropTypes.array.isRequired,
-    dataPointColors: React.PropTypes.array,
-    dataPointRadius: React.PropTypes.number,
-    dataPoints: React.PropTypes.array,
-    defaultLabelText: React.PropTypes.string,
-    defaultLabelValue: React.PropTypes.string,
-    formatter: React.PropTypes.func,
-    height: React.PropTypes.number,
-    onClick: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    opacity: React.PropTypes.number,
-    padAngle: React.PropTypes.number,
-    showBaseArc: React.PropTypes.bool,
-    showDataLabel: React.PropTypes.bool,
-    width: React.PropTypes.number
-  },
-
-  getDefaultProps () {
-    return {
-      activeIndex: -1,
-      activeOffset: 0,
-      animateOnHover: false,
-      arcWidth: 10,
-      baseArcColor: StyleConstants.Colors.BASE_ARC,
-      colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
-      data: [],
-      dataPointColors: [StyleConstants.Colors.SECONDARY].concat(d3.scale.category20b().range()),
-      dataPointRadius: 5,
-      dataPoints: [],
-      formatter (value) {
-        return value;
-      },
-      height: 150,
-      onClick () {},
-      onMouseEnter () {},
-      onMouseLeave () {},
-      opacity: 1,
-      padAngle: 0.01,
-      showBaseArc: true,
-      showDataLabel: true,
-      width: 150
-    };
-  },
-
-  getInitialState () {
-    return {
+class DonutChart extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
       activeIndex: -1
-    };
-  },
+    }
+  }
 
   componentDidMount () {
     this.setState({
       activeIndex: this.props.activeIndex
     });
-  },
+  }
 
   componentWillReceiveProps (newProps) {
     if (newProps.activeIndex !== this.props.activeIndex) {
@@ -77,7 +24,7 @@ const DonutChart = React.createClass({
         activeIndex: newProps.activeIndex
       });
     }
-  },
+  }
 
   _handleMouseEnter (index) {
     if (this.props.animateOnHover) {
@@ -87,7 +34,7 @@ const DonutChart = React.createClass({
     }
 
     this.props.onMouseEnter(index);
-  },
+  }
 
   _handleMouseLeave () {
     if (this.props.animateOnHover) {
@@ -97,7 +44,7 @@ const DonutChart = React.createClass({
     }
 
     this.props.onMouseLeave();
-  },
+  }
 
   _renderArcs () {
     if (this.props.data.length > 0) {
@@ -125,8 +72,8 @@ const DonutChart = React.createClass({
             <g
               key={i}
               onClick={this.props.onClick.bind(null, i)}
-              onMouseEnter={this._handleMouseEnter.bind(null, i)}
-              onMouseLeave={this._handleMouseLeave}
+              onMouseEnter={this._handleMouseEnter.bind(this, i)}
+              onMouseLeave={this._handleMouseLeave.bind(this)}
             >
               <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity} />
             </g>
@@ -134,7 +81,7 @@ const DonutChart = React.createClass({
         });
       }
     }
-  },
+  }
 
   _renderBaseArc () {
     if (this.props.showBaseArc) {
@@ -151,7 +98,7 @@ const DonutChart = React.createClass({
         </g>
       );
     }
-  },
+  }
 
   _renderDataPoints () {
     const dataPoints = this.props.dataPoints.map(dataPoint => {
@@ -180,7 +127,7 @@ const DonutChart = React.createClass({
         />
       );
     });
-  },
+  }
 
   _renderDataLabel () {
     if (this.props.showDataLabel) {
@@ -208,7 +155,7 @@ const DonutChart = React.createClass({
         );
       }
     }
-  },
+  }
 
   render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
@@ -227,7 +174,7 @@ const DonutChart = React.createClass({
       </div>
     );
   }
-});
+};
 
 const styles = {
   component: {
@@ -249,6 +196,58 @@ const styles = {
   value: {
     fontWeight: 300
   }
+};
+
+DonutChart.propTypes = {
+  activeIndex: React.PropTypes.number,
+  activeOffset: React.PropTypes.number,
+  animateOnHover: React.PropTypes.bool,
+  arcWidth: React.PropTypes.number,
+  baseArcColor: React.PropTypes.string,
+  chartTotal: React.PropTypes.number,
+  children: React.PropTypes.node,
+  colors: React.PropTypes.array,
+  data: React.PropTypes.array.isRequired,
+  dataPointColors: React.PropTypes.array,
+  dataPointRadius: React.PropTypes.number,
+  dataPoints: React.PropTypes.array,
+  defaultLabelText: React.PropTypes.string,
+  defaultLabelValue: React.PropTypes.string,
+  formatter: React.PropTypes.func,
+  height: React.PropTypes.number,
+  onClick: React.PropTypes.func,
+  onMouseEnter: React.PropTypes.func,
+  onMouseLeave: React.PropTypes.func,
+  opacity: React.PropTypes.number,
+  padAngle: React.PropTypes.number,
+  showBaseArc: React.PropTypes.bool,
+  showDataLabel: React.PropTypes.bool,
+  width: React.PropTypes.number
+};
+
+DonutChart.defaultProps = {
+  activeIndex: -1,
+  activeOffset: 0,
+  animateOnHover: false,
+  arcWidth: 10,
+  baseArcColor: StyleConstants.Colors.BASE_ARC,
+  colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
+  data: [],
+  dataPointColors: [StyleConstants.Colors.SECONDARY].concat(d3.scale.category20b().range()),
+  dataPointRadius: 5,
+  dataPoints: [],
+  formatter (value) {
+    return value;
+  },
+  height: 150,
+  onClick () {},
+  onMouseEnter () {},
+  onMouseLeave () {},
+  opacity: 1,
+  padAngle: 0.01,
+  showBaseArc: true,
+  showDataLabel: true,
+  width: 150
 };
 
 module.exports = Radium(DonutChart);
