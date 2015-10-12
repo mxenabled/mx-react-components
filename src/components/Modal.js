@@ -26,7 +26,7 @@ class Modal extends React.Component {
         null
       );
   }
-};
+}
 
 const styles = {
   scrim: {

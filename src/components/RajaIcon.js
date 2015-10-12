@@ -654,7 +654,7 @@ class RajaIcon extends React.Component {
       </svg>
     );
   }
-};
+}
 
 RajaIcon.propTypes = {
   size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),

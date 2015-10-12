@@ -587,7 +587,7 @@ class Icon extends React.Component {
       </svg>
     );
   }
-};
+}
 
 Icon.propTypes = {
   size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),

@@ -69,7 +69,7 @@ class Loader extends React.Component {
       );
     }
   }
-};
+}
 
 Loader.propTypes = {
   color: React.PropTypes.string,

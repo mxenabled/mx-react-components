@@ -297,7 +297,7 @@ class TypeAhead extends React.Component {
       </div>
     );
   }
-};
+}
 
 const styles = {
   component: {

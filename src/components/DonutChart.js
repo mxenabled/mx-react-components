@@ -9,7 +9,7 @@ class DonutChart extends React.Component {
     super(props);
     this.state = {
       activeIndex: -1
-    }
+    };
   }
 
   componentDidMount () {
@@ -174,7 +174,7 @@ class DonutChart extends React.Component {
       </div>
     );
   }
-};
+}
 
 const styles = {
   component: {

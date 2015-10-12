@@ -117,7 +117,7 @@ class Select extends React.Component {
       </div>
     );
   }
-};
+}
 
 const styles = {
   component: {

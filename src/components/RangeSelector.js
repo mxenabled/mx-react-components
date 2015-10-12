@@ -299,7 +299,7 @@ class RangeSelector extends React.Component {
       </div>
     );
   }
-};
+}
 
 RangeSelector.propTypes = {
   defaultLowerValue: React.PropTypes.number,
