@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.0.0</h3>
+        <ul>
+          <li>Upgrade to React 0.14 (see <a href='http://facebook.github.io/react/blog/2015/10/07/react-v0.14.html'>React v0.14</a>)</li>
+        </ul>
+
         <h3>0.4.1</h3>
         <ul>
           <li>Add MIT License</li>
