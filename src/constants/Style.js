@@ -12,6 +12,8 @@ module.exports = {
 
     GRID_COLOR: '#CCCCCC',
 
+    BASE_ARC: '#F5F5F5',
+
     ORANGE: '#ca3a31',
     YELLOW: '#f6a01e',
     GREEN: '#00a89c',

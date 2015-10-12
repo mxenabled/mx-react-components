@@ -7,41 +7,20 @@ const StyleConstants = require('../constants/Style');
 
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
 
-const Select = React.createClass({
-  propTypes: {
-    onChange: React.PropTypes.func,
-    options: React.PropTypes.array,
-    optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    placeholderText: React.PropTypes.string,
-    scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    selected: React.PropTypes.object,
-    selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    valid: React.PropTypes.bool
-  },
-
-  getDefaultProps () {
-    return {
-      onChange () {},
-      options: [],
-      placeholderText: 'Select One',
-      selected: false,
-      valid: true
-    };
-  },
-
-  getInitialState () {
-    return {
+class Select extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
       isOpen: false,
       selected: false
     };
-  },
+  }
 
   _handleBlur () {
     this.setState({
       isOpen: false
     });
-  },
+  }
 
   _handleClick () {
     if (!isMobile) {
@@ -49,7 +28,7 @@ const Select = React.createClass({
         isOpen: !this.state.isOpen
       });
     }
-  },
+  }
 
   _handleOptionClick (option) {
     this.setState({
@@ -58,7 +37,7 @@ const Select = React.createClass({
     });
 
     this.props.onChange(option);
-  },
+  }
 
   _handleSelectChange (e) {
     const selectedOption = this.props.options.filter(option => {
@@ -66,15 +45,15 @@ const Select = React.createClass({
     })[0];
 
     this._handleOptionClick(selectedOption);
-  },
+  }
 
   _renderScrim () {
     if (this.state.isOpen) {
       return (
-        <div onClick={this._handleBlur} style={[styles.scrim, this.props.scrimStyle]} />
+        <div onClick={this._handleBlur.bind(this)} style={[styles.scrim, this.props.scrimStyle]} />
       );
     }
-  },
+  }
 
   _renderOptions () {
     if (this.state.isOpen) {
@@ -91,7 +70,7 @@ const Select = React.createClass({
               return (
                 <li
                   key={option.displayValue + option.value}
-                  onClick={this._handleOptionClick.bind(null, option)}
+                  onClick={this._handleOptionClick.bind(this, option)}
                   ref={option.displayValue + option.value}
                   style={[styles.option, this.props.optionStyle]}
                 >
@@ -103,7 +82,7 @@ const Select = React.createClass({
         );
       }
     }
-  },
+  }
 
   render () {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
@@ -111,9 +90,9 @@ const Select = React.createClass({
     return (
       <div style={[this.props.style, { position: 'relative' }]}>
         <div
-          onBlur={this._handleBlur}
-          onClick={this._handleClick}
-          style={styles.component}
+          onBlur={this._handleBlur.bind(this)}
+          onClick={this._handleClick.bind(this)}
+          style={[styles.component, this.props.dropdownStyle]}
           tabIndex='0'
         >
           {this._renderScrim()}
@@ -129,7 +108,7 @@ const Select = React.createClass({
         </div>
 
         {isMobile ? (
-          <select onChange={this._handleSelectChange} ref='defaultSelect' style={styles.select} value={selected.value}>
+          <select onChange={this._handleSelectChange.bind(this)} ref='defaultSelect' style={styles.select} value={selected.value}>
             {this.props.options.map(option => {
               return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
             })}
@@ -138,7 +117,7 @@ const Select = React.createClass({
       </div>
     );
   }
-});
+}
 
 const styles = {
   component: {
@@ -216,6 +195,27 @@ const styles = {
     bottom: 0,
     left: 0
   }
+};
+
+Select.propTypes = {
+  dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  onChange: React.PropTypes.func,
+  options: React.PropTypes.array,
+  optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  placeholderText: React.PropTypes.string,
+  scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  selected: React.PropTypes.object,
+  selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  valid: React.PropTypes.bool
+};
+
+Select.defaultProps = {
+  onChange () {},
+  options: [],
+  placeholderText: 'Select One',
+  selected: false,
+  valid: true
 };
 
 module.exports = Radium(Select);

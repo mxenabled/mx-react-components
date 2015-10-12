@@ -1,45 +1,18 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _throttle = require('lodash/function/throttle');
 
 const StyleConstants = require('../constants/Style');
 
-React.initializeTouchEvents(true);
+class RangeSelector extends React.Component {
+  constructor (props) {
+    super(props);
 
-const RangeSelector = React.createClass({
-  propTypes: {
-    defaultLowerValue: React.PropTypes.number,
-    defaultUpperValue: React.PropTypes.number,
-    formatter: React.PropTypes.func,
-    interval: React.PropTypes.number,
-    onLowerDragStop: React.PropTypes.func,
-    onUpperDragStop: React.PropTypes.func,
-    presets: React.PropTypes.array,
-    range: React.PropTypes.number,
-    selectedColor: React.PropTypes.string
-  },
-
-  getDefaultProps () {
-    return {
-      defaultLowerValue: 0,
-      defaultUpperValue: 1,
-      interval: 1,
-      formatter (value) {
-        return value;
-      },
-      onLowerDragStop () {},
-      onUpperDragStop () {},
-      presets: [],
-      range: 100,
-      selectedColor: StyleConstants.Colors.PRIMARY
-    };
-  },
-
-  getInitialState () {
     const lowerValue = this.props.defaultLowerValue;
     const upperValue = this.props.defaultUpperValue;
 
-    return {
+    this.state = {
       dragging: null,
       lowerPixels: 0,
       lowerValue,
@@ -48,17 +21,17 @@ const RangeSelector = React.createClass({
       upperPixels: 1,
       upperValue
     };
-  },
+  }
 
   componentDidMount () {
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
-  },
+  }
 
   componentWillUnmount () {
     window.removeEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
-  },
+  }
 
   _getSelectedLabel (lowerValue, upperValue) {
     if (this.props.presets) {
@@ -68,10 +41,10 @@ const RangeSelector = React.createClass({
 
       return preset ? preset.label : null;
     }
-  },
+  }
 
   _setDefaultRangeValues () {
-    const component = React.findDOMNode(this.refs.rangeSelector);
+    const component = ReactDOM.findDOMNode(this.refs.rangeSelector);
     const componentStyles = window.getComputedStyle(component);
     const width = parseInt(componentStyles.width, 0);
 
@@ -83,7 +56,7 @@ const RangeSelector = React.createClass({
       upperPixels,
       width
     });
-  },
+  }
 
   _handlePresetClick (preset) {
     const lowerPixels = Math.round((preset.lowerValue * this.state.width / this.props.range) / this.props.interval * this.props.interval);
@@ -100,13 +73,13 @@ const RangeSelector = React.createClass({
 
     this.props.onLowerDragStop(preset.lowerValue);
     this.props.onUpperDragStop(preset.upperValue);
-  },
+  }
 
   _handleDragStart (type) {
     this.setState({
       dragging: type
     });
-  },
+  }
 
   _handleDragging (e) {
     if (this.state.dragging) {
@@ -116,7 +89,7 @@ const RangeSelector = React.createClass({
         selectedLabel: null
       };
 
-      let newPosition = clientX - React.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+      let newPosition = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
 
       newPosition = Math.min(newPosition, this.state.width);
       newPosition = Math.max(newPosition, 0);
@@ -138,7 +111,7 @@ const RangeSelector = React.createClass({
 
       e.preventDefault();
     }
-  },
+  }
 
   _handleDragEnd () {
     if (this.state.dragging) {
@@ -148,14 +121,14 @@ const RangeSelector = React.createClass({
     this.setState({
       dragging: false
     });
-  },
+  }
 
   _handleToggleViews () {
     this.setState({
       selectedLabel: null,
       showPresets: !this.state.showPresets
     });
-  },
+  }
 
   render () {
     const styles = {
@@ -276,24 +249,24 @@ const RangeSelector = React.createClass({
         <div style={styles.presets}>
           {this.props.presets.map((preset, i) => {
             return (
-              <div key={preset.label + i} onClick={this._handlePresetClick.bind(null, preset)} style={styles.preset} >
+              <div key={preset.label + i} onClick={this._handlePresetClick.bind(this, preset)} style={styles.preset} >
                 {preset.label}
               </div>
             );
           })}
-          <div onClick={this._handleToggleViews} style={styles.preset} >
+          <div onClick={this._handleToggleViews.bind(this)} style={styles.preset} >
             Custom
           </div>
         </div>
         <div
-          onMouseLeave={this._handleDragEnd}
-          onMouseMove={this._handleDragging}
-          onMouseUp={this._handleDragEnd}
-          onTouchMove={this._handleDragging}
+          onMouseLeave={this._handleDragEnd.bind(this)}
+          onMouseMove={this._handleDragging.bind(this)}
+          onMouseUp={this._handleDragEnd.bind(this)}
+          onTouchMove={this._handleDragging.bind(this)}
           ref='rangeSelector'
           style={styles.range}
         >
-          {this.props.presets.length ? <div onClick={this._handleToggleViews} style={styles.showPresets}>Groups</div> : null}
+          {this.props.presets.length ? <div onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
           <div style={styles.track}></div>
           <div style={styles.selected}>
             <div style={styles.selectedLabel}>
@@ -301,10 +274,10 @@ const RangeSelector = React.createClass({
             </div>
           </div>
           <div
-            onMouseDown={this._handleDragStart.bind(null, 'Lower')}
-            onMouseUp={this._handleDragEnd}
-            onTouchEnd={this._handleDragEnd}
-            onTouchStart={this._handleDragStart.bind(null, 'Lower')}
+            onMouseDown={this._handleDragStart.bind(this, 'Lower')}
+            onMouseUp={this._handleDragEnd.bind(this)}
+            onTouchEnd={this._handleDragEnd.bind(this)}
+            onTouchStart={this._handleDragStart.bind(this, 'Lower')}
             style={styles.lowerToggle}
           >
             <label style={styles.lowerToggleLabel}>
@@ -312,10 +285,10 @@ const RangeSelector = React.createClass({
             </label>
           </div>
           <div
-            onMouseDown={this._handleDragStart.bind(null, 'Upper')}
-            onMouseUp={this._handleDragEnd}
-            onTouchEnd={this._handleDragEnd}
-            onTouchStart={this._handleDragStart.bind(null, 'Upper')}
+            onMouseDown={this._handleDragStart.bind(this, 'Upper')}
+            onMouseUp={this._handleDragEnd.bind(this)}
+            onTouchEnd={this._handleDragEnd.bind(this)}
+            onTouchStart={this._handleDragStart.bind(this, 'Upper')}
             style={styles.upperToggle}
           >
             <label style={styles.upperToggleLabel}>
@@ -326,6 +299,32 @@ const RangeSelector = React.createClass({
       </div>
     );
   }
-});
+}
+
+RangeSelector.propTypes = {
+  defaultLowerValue: React.PropTypes.number,
+  defaultUpperValue: React.PropTypes.number,
+  formatter: React.PropTypes.func,
+  interval: React.PropTypes.number,
+  onLowerDragStop: React.PropTypes.func,
+  onUpperDragStop: React.PropTypes.func,
+  presets: React.PropTypes.array,
+  range: React.PropTypes.number,
+  selectedColor: React.PropTypes.string
+};
+
+RangeSelector.defaultProps = {
+  defaultLowerValue: 0,
+  defaultUpperValue: 1,
+  interval: 1,
+  formatter (value) {
+    return value;
+  },
+  onLowerDragStop () {},
+  onUpperDragStop () {},
+  presets: [],
+  range: 100,
+  selectedColor: StyleConstants.Colors.PRIMARY
+};
 
 module.exports = Radium(RangeSelector);

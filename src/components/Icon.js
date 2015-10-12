@@ -1,21 +1,7 @@
 const React = require('react');
 const Radium = require('radium');
 
-const Icon = React.createClass({
-  propTypes: {
-    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
-    type: React.PropTypes.string
-  },
-
-  getDefaultProps () {
-    return {
-      size: 24,
-      style: {},
-      type: 'accounts'
-    };
-  },
-
+class Icon extends React.Component {
   _renderSvg () {
     switch (this.props.type) {
       case 'accounts':
@@ -578,7 +564,7 @@ const Icon = React.createClass({
       default:
         return null;
     }
-  },
+  }
 
   render () {
     const styles = {
@@ -601,6 +587,18 @@ const Icon = React.createClass({
       </svg>
     );
   }
-});
+}
+
+Icon.propTypes = {
+  size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+  style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
+  type: React.PropTypes.string
+};
+
+Icon.defaultProps = {
+  size: 24,
+  style: {},
+  type: 'accounts'
+};
 
 module.exports = Radium(Icon);

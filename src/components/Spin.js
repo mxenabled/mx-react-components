@@ -1,21 +1,13 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 
-const Spin = React.createClass({
-  propTypes: {
-    children: React.PropTypes.node,
-    direction: React.PropTypes.oneOf(['counterclockwise', 'clockwise']),
-    speed: React.PropTypes.number //milliseconds, time it takes to make 1 full rotation
-  },
-
-  getDefaultProps () {
-    return {
-      direction: 'clockwise',
-      speed: 1000
-    };
-  },
+class Spin extends React.Component {
+  constructor (props) {
+    super(props);
+  }
 
   componentDidMount () {
-    const el = React.findDOMNode(this);
+    const el = ReactDOM.findDOMNode(this);
     const speed = this.props.speed;
     const spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
     let rotation = 0;
@@ -29,7 +21,7 @@ const Spin = React.createClass({
         rotation = 0;
       }
     }, speed / 360);
-  },
+  }
 
   render () {
     return (
@@ -38,6 +30,17 @@ const Spin = React.createClass({
       </div>
     );
   }
-});
+}
+
+Spin.propTypes = {
+  children: React.PropTypes.node,
+  direction: React.PropTypes.oneOf(['counterclockwise', 'clockwise']),
+  speed: React.PropTypes.number //milliseconds, time it takes to make 1 full rotation
+};
+
+Spin.defaultProps = {
+  direction: 'clockwise',
+  speed: 1000
+};
 
 module.exports = Spin;

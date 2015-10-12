@@ -3,27 +3,15 @@ const Radium = require('radium');
 
 const Icon = require('./Icon');
 
-const Modal = React.createClass({
-  propTypes: {
-    isOpen: React.PropTypes.bool,
-    isSmall: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func
-  },
-
-  getDefaultProps () {
-    return {
-      isOpen: false,
-      isSmall: false
-    };
-  },
-
+class Modal extends React.Component {
   render () {
     if (this.props.isOpen)
       return (
-        <div style={styles.scrim}>
-          <div onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
-          <div style={[styles.container, this.props.isSmall && styles.small, this.props.style]}>
+        <div className='mx-modal' style={styles.scrim}>
+          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
+          <div className='mx-modal-content' style={[styles.container, this.props.isSmall && styles.small, this.props.style]}>
             <Icon
+              className='mx-modal-close'
               onClick={this.props.onRequestClose}
               size='32'
               style={styles.close}
@@ -38,8 +26,7 @@ const Modal = React.createClass({
         null
       );
   }
-
-});
+}
 
 const styles = {
   scrim: {
@@ -85,6 +72,17 @@ const styles = {
     textAlign: 'center',
     padding: '30px'
   }
+};
+
+Modal.propTypes = {
+  isOpen: React.PropTypes.bool,
+  isSmall: React.PropTypes.bool,
+  onRequestClose: React.PropTypes.func
+};
+
+Modal.defaultProps = {
+  isOpen: false,
+  isSmall: false
 };
 
 module.exports = Radium(Modal);
