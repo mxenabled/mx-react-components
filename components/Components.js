@@ -57,18 +57,18 @@ const Components = React.createClass({
 
           <div className='links'>
             <h3>General</h3>
-            <Link to='icon'>Icon</Link>
-            <Link to='loader'>Loader</Link>
-            <Link to='modal'>Modal</Link>
-            <Link to='spin'>Spin</Link>
+            <Link to='/components/icon'>Icon</Link>
+            <Link to='/components/loader'>Loader</Link>
+            <Link to='/components/modal'>Modal</Link>
+            <Link to='/components/spin'>Spin</Link>
 
             <h3>Form</h3>
-            <Link to='range-selector'>Range Selector</Link>
-            <Link to='select'>Select</Link>
-            <Link to='type-ahead'>Type Ahead</Link>
+            <Link to='/components/range-selector'>Range Selector</Link>
+            <Link to='/components/select'>Select</Link>
+            <Link to='/components/type-ahead'>Type Ahead</Link>
 
             <h3>Charts (D3)</h3>
-            <Link to='donut'>Donut</Link>
+            <Link to='/components/donut'>Donut</Link>
           </div>
         </div>
 
