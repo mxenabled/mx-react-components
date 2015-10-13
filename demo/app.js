@@ -8,6 +8,7 @@ const {
   Modal,
   RangeSelector,
   Select,
+  ToggleSwitch,
   TypeAhead
 } = require('../src/Index');
 
@@ -348,6 +349,9 @@ const Demo = React.createClass({
           defaultLabelValue='300'
           style={{ margin: '0 auto' }}
         />
+
+        <br/><br/>
+        <ToggleSwitch />
 
         <br/><br/>
         <TypeAhead
