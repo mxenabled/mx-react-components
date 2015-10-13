@@ -26,10 +26,30 @@ class ToggleSwitch extends React.Component {
     this.props.onToggle(activePosition);
   }
 
+  _handleLeftLabelClick () {
+    const activePosition = 'left';
+
+    this.setState({
+      activePosition
+    });
+
+    this.props.onToggle(activePosition);
+  }
+
+  _handleRightLabelClick () {
+    const activePosition = 'right';
+
+    this.setState({
+      activePosition
+    });
+
+    this.props.onToggle(activePosition);
+  }
+
   _renderLeftLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span className='left-label' style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
+        <span className='left-label' onClick={this._handleLeftLabelClick.bind(this)} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
       );
     }
   }
@@ -37,7 +57,7 @@ class ToggleSwitch extends React.Component {
   _renderRightLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span className='right-label' style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
+        <span className='right-label' onClick={this._handleRightLabelClick.bind(this)} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
       );
     }
   }
@@ -86,6 +106,7 @@ class ToggleSwitch extends React.Component {
         color: this.props.inactiveColor
       },
       label: {
+        cursor: 'pointer',
         fontWeight: 'bold'
       }
     };
