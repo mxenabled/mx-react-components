@@ -101,7 +101,7 @@ class ToggleSwitch extends React.Component {
       </div>
     );
   }
-};
+}
 
 ToggleSwitch.propTypes = {
   activeColor: React.PropTypes.string,
@@ -132,7 +132,7 @@ ToggleSwitch.propTypes = {
     React.PropTypes.object
   ]),
   width: React.PropTypes.number
-},
+};
 
 ToggleSwitch.defaultProps = {
   activeColor: StyleConstants.Colors.PRIMARY,
@@ -146,6 +146,6 @@ ToggleSwitch.defaultProps = {
   sliderInset: 2,
   sliderSize: 16,
   width: 38
-},
+};
 
 module.exports = Radium(ToggleSwitch);
