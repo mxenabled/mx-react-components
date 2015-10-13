@@ -16,16 +16,6 @@ class ToggleSwitch extends React.Component {
     });
   }
 
-  _handleToggle () {
-    const activePosition = this.state.activePosition === 'left' ? 'right' : 'left';
-
-    this.setState({
-      activePosition
-    });
-
-    this.props.onToggle(activePosition);
-  }
-
   _handleLeftLabelClick () {
     const activePosition = 'left';
 
@@ -38,6 +28,16 @@ class ToggleSwitch extends React.Component {
 
   _handleRightLabelClick () {
     const activePosition = 'right';
+
+    this.setState({
+      activePosition
+    });
+
+    this.props.onToggle(activePosition);
+  }
+
+  _handleToggle () {
+    const activePosition = this.state.activePosition === 'left' ? 'right' : 'left';
 
     this.setState({
       activePosition
@@ -64,43 +64,15 @@ class ToggleSwitch extends React.Component {
 
   render () {
     const styles = {
+      activeLabel: {
+        color: this.props.activeColor
+      },
       component: {
-        position: 'relative',
+        display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: '12px',
         height: this.props.height + 'px',
-        display: 'inline-block'
-      },
-      toggle: {
-        backgroundColor: StyleConstants.Colors.LIGHT_FONT,
-        position: 'relative',
-        borderRadius: this.props.height + 'px',
-        display: 'inline-block',
-        margin: '0 10px',
-        width: this.props.width + 'px',
-        height: this.props.height + 'px',
-        verticalAlign: 'middle',
-        cursor: 'pointer'
-      },
-      left: {
-        top: this.props.sliderInset,
-        left: this.props.sliderInset,
-        transition: 'all .1s'
-      },
-      right: {
-        top: this.props.sliderInset,
-        left: this.props.width - this.props.sliderSize - this.props.sliderInset,
-        transition: 'all .1s'
-      },
-      active: {
-        position: 'absolute',
-        background: StyleConstants.Colors.INVERSE_PRIMARY,
-        borderRadius: '100%',
-        height: (this.props.sliderSize) + 'px',
-        width: (this.props.sliderSize) + 'px'
-      },
-      activeLabel: {
-        color: this.props.activeColor
+        position: 'relative'
       },
       inactiveLabel: {
         color: this.props.inactiveColor
@@ -108,14 +80,42 @@ class ToggleSwitch extends React.Component {
       label: {
         cursor: 'pointer',
         fontWeight: 'bold'
+      },
+      left: {
+        left: this.props.togglePadding,
+        top: this.props.togglePadding,
+        transition: 'all .1s'
+      },
+      right: {
+        left: this.props.width - this.props.toggleSize - this.props.togglePadding,
+        top: this.props.togglePadding,
+        transition: 'all .1s'
+      },
+      toggle: {
+        background: StyleConstants.Colors.INVERSE_PRIMARY,
+        borderRadius: '100%',
+        height: (this.props.toggleSize) + 'px',
+        position: 'absolute',
+        width: (this.props.toggleSize) + 'px'
+      },
+      track: {
+        backgroundColor: StyleConstants.Colors.LIGHT_FONT,
+        borderRadius: this.props.height + 'px',
+        cursor: 'pointer',
+        display: 'inline-block',
+        height: this.props.height + 'px',
+        margin: '0 10px',
+        position: 'relative',
+        verticalAlign: 'middle',
+        width: this.props.width + 'px'
       }
     };
 
     return (
       <div className='toggle-switch-component' style={[styles.component, this.props.componentStyle]}>
         {this._renderLeftLabel(styles)}
-        <div className='toggle-switch' onClick={this._handleToggle.bind(this)} style={[styles.toggle, this.props.toggleStyle]} >
-          <div className='toggle-switch-slider' style={[styles.active, this.state.activePosition === 'left' && styles.left || styles.right, this.props.sliderStyle]}></div>
+        <div className='toggle-switch-track' onClick={this._handleToggle.bind(this)} style={[styles.track, this.props.trackStyle]} >
+          <div className='toggle-switch-toggle' style={[styles.toggle, this.state.activePosition === 'left' && styles.left || styles.right, this.props.toggleStyle]}></div>
           {this.props.children}
         </div>
         {this._renderRightLabel(styles)}
@@ -142,13 +142,13 @@ ToggleSwitch.propTypes = {
   onToggle: React.PropTypes.func,
   rightLabel: React.PropTypes.string,
   showLabels: React.PropTypes.bool,
-  sliderInset: React.PropTypes.number,
-  sliderSize: React.PropTypes.number,
-  sliderStyle: React.PropTypes.oneOfType([
+  togglePadding: React.PropTypes.number,
+  toggleSize: React.PropTypes.number,
+  toggleStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
   ]),
-  toggleStyle: React.PropTypes.oneOfType([
+  trackStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
   ]),
@@ -164,8 +164,8 @@ ToggleSwitch.defaultProps = {
   onToggle () {},
   rightLabel: 'Off',
   showLabels: true,
-  sliderInset: 2,
-  sliderSize: 16,
+  togglePadding: 2,
+  toggleSize: 16,
   width: 38
 };
 
