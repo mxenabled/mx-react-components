@@ -2,60 +2,19 @@ const React = require('react');
 const Radium = require('radium');
 const StyleConstants = require('../constants/Style');
 
-const ToggleSwitch = React.createClass({
-  propTypes: {
-    activeColor: React.PropTypes.string,
-    children: React.PropTypes.node,
-    componentStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    defaultPosition: React.PropTypes.oneOf(['left', 'right']),
-    height: React.PropTypes.number,
-    inactiveColor: React.PropTypes.string,
-    labelStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    leftLabel: React.PropTypes.string,
-    onToggle: React.PropTypes.func,
-    rightLabel: React.PropTypes.string,
-    showLabels: React.PropTypes.bool,
-    sliderInset: React.PropTypes.number,
-    sliderSize: React.PropTypes.number,
-    sliderStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    toggleStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    width: React.PropTypes.number
-  },
-
-  getDefaultProps () {
-    return {
-      activeColor: StyleConstants.Colors.PRIMARY,
-      defaultPosition: 'left',
-      height: 20,
-      inactiveColor: StyleConstants.Colors.LIGHT_FONT,
-      leftLabel: 'On',
-      onToggle () {},
-      rightLabel: 'Off',
-      showLabels: true,
-      sliderInset: 2,
-      sliderSize: 16,
-      width: 38
+class ToggleSwitch extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      activePosition: 'left'
     };
-  },
+  }
 
-  getInitialState () {
-    return {
+  componentWillMount () {
+    this.setState({
       activePosition: this.props.defaultPosition
-    };
-  },
-
+    });
+  }
 
   _handleToggle () {
     const activePosition = this.state.activePosition === 'left' ? 'right' : 'left';
@@ -65,7 +24,7 @@ const ToggleSwitch = React.createClass({
     });
 
     this.props.onToggle(activePosition);
-  },
+  }
 
   _renderLeftLabel (styles) {
     if (this.props.showLabels) {
@@ -73,7 +32,7 @@ const ToggleSwitch = React.createClass({
         <span className='left-label' style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
       );
     }
-  },
+  }
 
   _renderRightLabel (styles) {
     if (this.props.showLabels) {
@@ -81,7 +40,7 @@ const ToggleSwitch = React.createClass({
         <span className='right-label' style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
       );
     }
-  },
+  }
 
   render () {
     const styles = {
@@ -134,7 +93,7 @@ const ToggleSwitch = React.createClass({
     return (
       <div className='toggle-switch-component' style={[styles.component, this.props.componentStyle]}>
         {this._renderLeftLabel(styles)}
-        <div className='toggle-switch' onClick={this._handleToggle} style={[styles.toggle, this.props.toggleStyle]} >
+        <div className='toggle-switch' onClick={this._handleToggle.bind(this)} style={[styles.toggle, this.props.toggleStyle]} >
           <div className='toggle-switch-slider' style={[styles.active, this.state.activePosition === 'left' && styles.left || styles.right, this.props.sliderStyle]}></div>
           {this.props.children}
         </div>
@@ -142,6 +101,51 @@ const ToggleSwitch = React.createClass({
       </div>
     );
   }
-});
+};
+
+ToggleSwitch.propTypes = {
+  activeColor: React.PropTypes.string,
+  children: React.PropTypes.node,
+  componentStyle: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.object
+  ]),
+  defaultPosition: React.PropTypes.oneOf(['left', 'right']),
+  height: React.PropTypes.number,
+  inactiveColor: React.PropTypes.string,
+  labelStyle: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.object
+  ]),
+  leftLabel: React.PropTypes.string,
+  onToggle: React.PropTypes.func,
+  rightLabel: React.PropTypes.string,
+  showLabels: React.PropTypes.bool,
+  sliderInset: React.PropTypes.number,
+  sliderSize: React.PropTypes.number,
+  sliderStyle: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.object
+  ]),
+  toggleStyle: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.object
+  ]),
+  width: React.PropTypes.number
+},
+
+ToggleSwitch.defaultProps = {
+  activeColor: StyleConstants.Colors.PRIMARY,
+  defaultPosition: 'left',
+  height: 20,
+  inactiveColor: StyleConstants.Colors.LIGHT_FONT,
+  leftLabel: 'On',
+  onToggle () {},
+  rightLabel: 'Off',
+  showLabels: true,
+  sliderInset: 2,
+  sliderSize: 16,
+  width: 38
+},
 
 module.exports = Radium(ToggleSwitch);
