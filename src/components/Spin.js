@@ -25,7 +25,7 @@ class Spin extends React.Component {
 
   render () {
     return (
-      <div style={{ display: 'inline-block' }}>
+      <div className='mx-spin' style={{ display: 'inline-block' }}>
         {this.props.children}
       </div>
     );
