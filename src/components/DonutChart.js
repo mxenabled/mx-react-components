@@ -26,6 +26,10 @@ class DonutChart extends React.Component {
     }
   }
 
+  _handleClick (index) {
+    this.props.onClick(index);
+  }
+
   _handleMouseEnter (index) {
     if (this.props.animateOnHover) {
       this.setState({
