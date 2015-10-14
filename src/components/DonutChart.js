@@ -26,6 +26,10 @@ class DonutChart extends React.Component {
     }
   }
 
+  _handleClick (index) {
+    this.props.onClick(index);
+  }
+
   _handleMouseEnter (index) {
     if (this.props.animateOnHover) {
       this.setState({
@@ -71,7 +75,7 @@ class DonutChart extends React.Component {
           return (
             <g
               key={i}
-              onClick={this.props.onClick.bind(this, i)}
+              onClick={this._handleClick.bind(this, i)}
               onMouseEnter={this._handleMouseEnter.bind(this, i)}
               onMouseLeave={this._handleMouseLeave.bind(this)}
             >
@@ -133,7 +137,7 @@ class DonutChart extends React.Component {
     if (this.props.showDataLabel) {
       if (this.props.children) {
         return (
-          <div onClick={this.props.onClick.bind(this)} style={styles.center}>
+          <div onClick={this._handleClick.bind(this)} style={styles.center}>
             {this.props.children}
           </div>
         );
@@ -144,7 +148,7 @@ class DonutChart extends React.Component {
         const value = this.state.activeIndex === -1 ? this.props.formatter(this.props.defaultLabelValue) : this.props.formatter(activeDataSet.value);
 
         return (
-          <div onClick={this.props.onClick.bind(this)} style={styles.center}>
+          <div onClick={this._handleClick.bind(this)} style={styles.center}>
             <div style={[styles.value, { color }]}>
               {value}
             </div>
