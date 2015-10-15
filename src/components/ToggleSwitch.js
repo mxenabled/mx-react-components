@@ -92,7 +92,7 @@ class ToggleSwitch extends React.Component {
         transition: 'all .1s'
       },
       toggle: {
-        background: StyleConstants.Colors.INVERSE_PRIMARY,
+        backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
         borderRadius: '100%',
         height: (this.props.toggleHeight) + 'px',
         position: 'absolute',
