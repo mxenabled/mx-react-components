@@ -142,8 +142,8 @@ ToggleSwitch.propTypes = {
   onToggle: React.PropTypes.func,
   rightLabel: React.PropTypes.string,
   showLabels: React.PropTypes.bool,
-  togglePadding: React.PropTypes.number,
   toggleHeight: React.PropTypes.number,
+  togglePadding: React.PropTypes.number,
   toggleStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
