@@ -87,16 +87,16 @@ class ToggleSwitch extends React.Component {
         transition: 'all .1s'
       },
       right: {
-        left: this.props.width - this.props.toggleSize - this.props.togglePadding,
+        left: this.props.width - this.props.toggleWidth - this.props.togglePadding,
         top: this.props.togglePadding,
         transition: 'all .1s'
       },
       toggle: {
         background: StyleConstants.Colors.INVERSE_PRIMARY,
         borderRadius: '100%',
-        height: (this.props.toggleSize) + 'px',
+        height: (this.props.toggleHeight) + 'px',
         position: 'absolute',
-        width: (this.props.toggleSize) + 'px'
+        width: (this.props.toggleWidth) + 'px'
       },
       track: {
         backgroundColor: StyleConstants.Colors.LIGHT_FONT,
@@ -143,11 +143,12 @@ ToggleSwitch.propTypes = {
   rightLabel: React.PropTypes.string,
   showLabels: React.PropTypes.bool,
   togglePadding: React.PropTypes.number,
-  toggleSize: React.PropTypes.number,
+  toggleHeight: React.PropTypes.number,
   toggleStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
   ]),
+  toggleWidth: React.PropTypes.number,
   trackStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
@@ -165,7 +166,8 @@ ToggleSwitch.defaultProps = {
   rightLabel: 'Off',
   showLabels: true,
   togglePadding: 2,
-  toggleSize: 16,
+  toggleHeight: 16,
+  toggleWidth: 16,
   width: 38
 };
 
