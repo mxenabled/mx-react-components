@@ -2,7 +2,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _throttle = require('lodash/function/throttle');
-const _bind = require('lodash/function/bind');
 
 const StyleConstants = require('../constants/Style');
 
@@ -27,11 +26,11 @@ class RangeSelector extends React.Component {
   componentDidMount () {
     this._setDefaultRangeValues();
 
-    window.addEventListener('resize', _throttle(_bind(this._setDefaultRangeValues, this), 300));
+    window.addEventListener('resize', _throttle(this._setDefaultRangeValues.bind(this), 300));
   }
 
   componentWillUnmount () {
-    window.removeEventListener('resize', _throttle(_bind(this._setDefaultRangeValues, this), 300));
+    window.removeEventListener('resize', _throttle(this._setDefaultRangeValues.bind(this), 300));
   }
 
   _getSelectedLabel (lowerValue, upperValue) {
