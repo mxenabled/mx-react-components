@@ -6,14 +6,8 @@ class ToggleSwitch extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      activePosition: 'left'
-    };
-  }
-
-  componentWillMount () {
-    this.setState({
       activePosition: this.props.defaultPosition
-    });
+    };
   }
 
   _handleLeftLabelClick () {
