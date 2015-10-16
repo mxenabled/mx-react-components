@@ -146,7 +146,7 @@ ToggleSwitch.propTypes = {
   trackStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
-  ]),
+  ])
 };
 
 ToggleSwitch.defaultProps = {
