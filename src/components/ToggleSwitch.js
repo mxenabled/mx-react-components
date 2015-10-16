@@ -107,7 +107,7 @@ class ToggleSwitch extends React.Component {
       <div className='toggle-switch-component' style={[styles.component, this.props.componentStyle]}>
         {this._renderLeftLabel(styles)}
         <div className='toggle-switch-track' onClick={this._handleToggle.bind(this)} style={[styles.track, this.props.trackStyle]} >
-          <div className='toggle-switch-toggle' style={[styles.toggle, this.state.activePosition === 'left' && styles.left || styles.right, this.props.toggleStyle]}></div>
+          <div className='toggle-switch-toggle' style={[styles.toggle, styles[this.state.activePosition], this.props.toggleStyle]}></div>
           {this.props.children}
         </div>
         {this._renderRightLabel(styles)}
