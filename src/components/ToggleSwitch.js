@@ -6,14 +6,8 @@ class ToggleSwitch extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      activePosition: 'left'
-    };
-  }
-
-  componentWillMount () {
-    this.setState({
       activePosition: this.props.defaultPosition
-    });
+    };
   }
 
   _handleLeftLabelClick () {
@@ -71,7 +65,6 @@ class ToggleSwitch extends React.Component {
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: '12px',
-        height: this.props.height + 'px',
         position: 'relative'
       },
       inactiveLabel: {
@@ -82,32 +75,31 @@ class ToggleSwitch extends React.Component {
         fontWeight: 'bold'
       },
       left: {
-        left: this.props.togglePadding,
-        top: this.props.togglePadding,
+        left: this.props.trackStyle.padding || '2px',
         transition: 'all .1s'
       },
       right: {
-        left: this.props.width - this.props.toggleSize - this.props.togglePadding,
-        top: this.props.togglePadding,
+        right: this.props.trackStyle.padding || '2px',
         transition: 'all .1s'
       },
       toggle: {
-        background: StyleConstants.Colors.INVERSE_PRIMARY,
+        backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
         borderRadius: '100%',
-        height: (this.props.toggleSize) + 'px',
+        height: this.props.toggleStyle.height || '20px',
         position: 'absolute',
-        width: (this.props.toggleSize) + 'px'
+        width: this.props.toggleStyle.width || '20px'
       },
       track: {
         backgroundColor: StyleConstants.Colors.LIGHT_FONT,
-        borderRadius: this.props.height + 'px',
+        borderRadius: this.props.trackStyle.height || '20px',
         cursor: 'pointer',
         display: 'inline-block',
-        height: this.props.height + 'px',
+        height: this.props.trackStyle.height || '20px',
         margin: '0 10px',
+        padding: this.props.trackStyle.padding || '2px',
         position: 'relative',
         verticalAlign: 'middle',
-        width: this.props.width + 'px'
+        width: this.props.trackStyle.width || '38px'
       }
     };
 
@@ -115,7 +107,7 @@ class ToggleSwitch extends React.Component {
       <div className='toggle-switch-component' style={[styles.component, this.props.componentStyle]}>
         {this._renderLeftLabel(styles)}
         <div className='toggle-switch-track' onClick={this._handleToggle.bind(this)} style={[styles.track, this.props.trackStyle]} >
-          <div className='toggle-switch-toggle' style={[styles.toggle, this.state.activePosition === 'left' && styles.left || styles.right, this.props.toggleStyle]}></div>
+          <div className='toggle-switch-toggle' style={[styles.toggle, styles[this.state.activePosition], this.props.toggleStyle]}></div>
           {this.props.children}
         </div>
         {this._renderRightLabel(styles)}
@@ -132,7 +124,6 @@ ToggleSwitch.propTypes = {
     React.PropTypes.object
   ]),
   defaultPosition: React.PropTypes.oneOf(['left', 'right']),
-  height: React.PropTypes.number,
   inactiveColor: React.PropTypes.string,
   labelStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
@@ -142,8 +133,6 @@ ToggleSwitch.propTypes = {
   onToggle: React.PropTypes.func,
   rightLabel: React.PropTypes.string,
   showLabels: React.PropTypes.bool,
-  togglePadding: React.PropTypes.number,
-  toggleSize: React.PropTypes.number,
   toggleStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
@@ -151,22 +140,19 @@ ToggleSwitch.propTypes = {
   trackStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
-  ]),
-  width: React.PropTypes.number
+  ])
 };
 
 ToggleSwitch.defaultProps = {
   activeColor: StyleConstants.Colors.PRIMARY,
   defaultPosition: 'left',
-  height: 20,
   inactiveColor: StyleConstants.Colors.LIGHT_FONT,
   leftLabel: 'On',
   onToggle () {},
   rightLabel: 'Off',
   showLabels: true,
-  togglePadding: 2,
-  toggleSize: 16,
-  width: 38
+  toggleStyle: {},
+  trackStyle: {}
 };
 
 module.exports = Radium(ToggleSwitch);
