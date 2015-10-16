@@ -51,6 +51,7 @@ const Components = React.createClass({
                   displayValue: 'Donut'
                 }
               ]}
+              selected={null}
               valid={true}
             />
           </div>
@@ -65,6 +66,7 @@ const Components = React.createClass({
             <h3>Form</h3>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/select'>Select</Link>
+            <Link to='/components/toggle-switch'>Toggle Switch</Link>
             <Link to='/components/type-ahead'>Type Ahead</Link>
 
             <h3>Charts (D3)</h3>

@@ -13,6 +13,7 @@ const Modal = require('components/ModalDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const Select = require('components/SelectDocs');
 const Spin = require('components/SpinDocs');
+const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
 
 const App = React.createClass({
@@ -43,6 +44,7 @@ ReactDOM.render((
         <Route component={RangeSelector} path='range-selector' />
         <Route component={Select} path='select' />
         <Route component={Spin} path='spin' />
+        <Route component={ToggleSwitch} path='toggle-switch' />
         <Route component={TypeAhead} path='type-ahead' />
       </Route>
       <IndexRoute component={Home} />
