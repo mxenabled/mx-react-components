@@ -71,7 +71,6 @@ class ToggleSwitch extends React.Component {
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: '12px',
-        height: this.props.height + 'px',
         position: 'relative'
       },
       inactiveLabel: {
@@ -82,32 +81,31 @@ class ToggleSwitch extends React.Component {
         fontWeight: 'bold'
       },
       left: {
-        left: this.props.togglePadding,
-        top: this.props.togglePadding,
+        left: this.props.toggleStyle.padding,
         transition: 'all .1s'
       },
       right: {
-        left: this.props.width - this.props.toggleWidth - this.props.togglePadding,
-        top: this.props.togglePadding,
+        right: this.props.toggleStyle.padding,
         transition: 'all .1s'
       },
       toggle: {
         backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
         borderRadius: '100%',
-        height: (this.props.toggleHeight) + 'px',
+        height: this.props.toggleStyle.height,
         position: 'absolute',
-        width: (this.props.toggleWidth) + 'px'
+        width: this.props.toggleStyle.width
       },
       track: {
         backgroundColor: StyleConstants.Colors.LIGHT_FONT,
-        borderRadius: this.props.height + 'px',
+        borderRadius: this.props.trackStyle.height,
         cursor: 'pointer',
         display: 'inline-block',
-        height: this.props.height + 'px',
+        height: this.props.trackStyle.height,
         margin: '0 10px',
+        padding: this.props.trackStyle.padding,
         position: 'relative',
         verticalAlign: 'middle',
-        width: this.props.width + 'px'
+        width: this.props.trackStyle.width
       }
     };
 
@@ -132,7 +130,6 @@ ToggleSwitch.propTypes = {
     React.PropTypes.object
   ]),
   defaultPosition: React.PropTypes.oneOf(['left', 'right']),
-  height: React.PropTypes.number,
   inactiveColor: React.PropTypes.string,
   labelStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
@@ -142,33 +139,34 @@ ToggleSwitch.propTypes = {
   onToggle: React.PropTypes.func,
   rightLabel: React.PropTypes.string,
   showLabels: React.PropTypes.bool,
-  toggleHeight: React.PropTypes.number,
-  togglePadding: React.PropTypes.number,
   toggleStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
   ]),
-  toggleWidth: React.PropTypes.number,
   trackStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
   ]),
-  width: React.PropTypes.number
 };
 
 ToggleSwitch.defaultProps = {
   activeColor: StyleConstants.Colors.PRIMARY,
   defaultPosition: 'left',
-  height: 20,
   inactiveColor: StyleConstants.Colors.LIGHT_FONT,
   leftLabel: 'On',
   onToggle () {},
   rightLabel: 'Off',
   showLabels: true,
-  togglePadding: 2,
-  toggleHeight: 16,
-  toggleWidth: 16,
-  width: 38
+  toggleStyle: {
+    padding: '2px',
+    height: '16px',
+    width: '16px'
+  },
+  trackStyle: {
+    height: '20px',
+    width: '38px',
+    padding: '2px'
+  }
 };
 
 module.exports = Radium(ToggleSwitch);
