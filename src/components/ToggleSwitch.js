@@ -81,11 +81,11 @@ class ToggleSwitch extends React.Component {
         fontWeight: 'bold'
       },
       left: {
-        left: this.props.toggleStyle.padding || '2px',
+        left: this.props.trackStyle.padding || '2px',
         transition: 'all .1s'
       },
       right: {
-        right: this.props.toggleStyle.padding || '2px',
+        right: this.props.trackStyle.padding || '2px',
         transition: 'all .1s'
       },
       toggle: {
