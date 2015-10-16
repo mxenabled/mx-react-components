@@ -245,20 +245,21 @@ class RangeSelector extends React.Component {
     };
 
     return (
-      <div style={[styles.component, this.props.style]}>
-        <div style={styles.presets}>
+      <div className='mx-rangeselector' style={[styles.component, this.props.style]}>
+        <div className='mx-rangeselector-presets' style={styles.presets}>
           {this.props.presets.map((preset, i) => {
             return (
-              <div key={preset.label + i} onClick={this._handlePresetClick.bind(this, preset)} style={styles.preset} >
+              <div className='mx-rangeselector-preset' key={preset.label + i} onClick={this._handlePresetClick.bind(this, preset)} style={styles.preset} >
                 {preset.label}
               </div>
             );
           })}
-          <div onClick={this._handleToggleViews.bind(this)} style={styles.preset} >
+          <div className='mx-rangeselector-preset' onClick={this._handleToggleViews.bind(this)} style={styles.preset} >
             Custom
           </div>
         </div>
         <div
+          className='mx-rangeselector-range'
           onMouseLeave={this._handleDragEnd.bind(this)}
           onMouseMove={this._handleDragging.bind(this)}
           onMouseUp={this._handleDragEnd.bind(this)}
@@ -266,32 +267,34 @@ class RangeSelector extends React.Component {
           ref='rangeSelector'
           style={styles.range}
         >
-          {this.props.presets.length ? <div onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
-          <div style={styles.track}></div>
-          <div style={styles.selected}>
-            <div style={styles.selectedLabel}>
+          {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
+          <div className='mx-rangeselector-track' style={styles.track}></div>
+          <div className='mx-rangeselector-selected' style={styles.selected}>
+            <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
               {this.state.selectedLabel}
             </div>
           </div>
           <div
+            className='mx-rangeselector-lower-toggle'
             onMouseDown={this._handleDragStart.bind(this, 'Lower')}
             onMouseUp={this._handleDragEnd.bind(this)}
             onTouchEnd={this._handleDragEnd.bind(this)}
             onTouchStart={this._handleDragStart.bind(this, 'Lower')}
             style={styles.lowerToggle}
           >
-            <label style={styles.lowerToggleLabel}>
+            <label className='mx-rangeselector-lower-toggle-label' style={styles.lowerToggleLabel}>
               {this.props.formatter(this.state.lowerValue)}
             </label>
           </div>
           <div
+            className='mx-rangeselector-upper-toggle'
             onMouseDown={this._handleDragStart.bind(this, 'Upper')}
             onMouseUp={this._handleDragEnd.bind(this)}
             onTouchEnd={this._handleDragEnd.bind(this)}
             onTouchStart={this._handleDragStart.bind(this, 'Upper')}
             style={styles.upperToggle}
           >
-            <label style={styles.upperToggleLabel}>
+            <label className='mx-rangeselector-upper-toggle-label' style={styles.upperToggleLabel}>
               {this.props.formatter(this.state.upperValue)}
             </label>
           </div>
