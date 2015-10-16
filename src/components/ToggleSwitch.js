@@ -81,31 +81,31 @@ class ToggleSwitch extends React.Component {
         fontWeight: 'bold'
       },
       left: {
-        left: this.props.toggleStyle.padding,
+        left: this.props.toggleStyle.padding || '2px',
         transition: 'all .1s'
       },
       right: {
-        right: this.props.toggleStyle.padding,
+        right: this.props.toggleStyle.padding || '2px',
         transition: 'all .1s'
       },
       toggle: {
         backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
         borderRadius: '100%',
-        height: this.props.toggleStyle.height,
+        height: this.props.toggleStyle.height || '20px',
         position: 'absolute',
-        width: this.props.toggleStyle.width
+        width: this.props.toggleStyle.width || '20px'
       },
       track: {
         backgroundColor: StyleConstants.Colors.LIGHT_FONT,
-        borderRadius: this.props.trackStyle.height,
+        borderRadius: this.props.trackStyle.height || '20px',
         cursor: 'pointer',
         display: 'inline-block',
-        height: this.props.trackStyle.height,
+        height: this.props.trackStyle.height || '20px',
         margin: '0 10px',
-        padding: this.props.trackStyle.padding,
+        padding: this.props.trackStyle.padding || '2px',
         position: 'relative',
         verticalAlign: 'middle',
-        width: this.props.trackStyle.width
+        width: this.props.trackStyle.width || '38px'
       }
     };
 
@@ -157,16 +157,8 @@ ToggleSwitch.defaultProps = {
   onToggle () {},
   rightLabel: 'Off',
   showLabels: true,
-  toggleStyle: {
-    padding: '2px',
-    height: '16px',
-    width: '16px'
-  },
-  trackStyle: {
-    height: '20px',
-    width: '38px',
-    padding: '2px'
-  }
+  toggleStyle: {},
+  trackStyle: {}
 };
 
 module.exports = Radium(ToggleSwitch);
