@@ -4,55 +4,24 @@ const moment = require('moment');
 
 const Icon = require('./Icon');
 
-const DatePicker = React.createClass({
-  propTypes: {
-    calendarColumns: React.PropTypes.number,
-    closeOnDateSelect: React.PropTypes.bool,
-    divideCells: React.PropTypes.bool,
-    fontSize: React.PropTypes.string,
-    format: React.PropTypes.string,
-    locale: React.PropTypes.string,
-    minimumDate: React.PropTypes.string,
-    onDateSelect: React.PropTypes.func,
-    scrimStyle: React.PropTypes.object,
-    selectedDate: React.PropTypes.number,
-    useInputForSelectedDate: React.PropTypes.bool,
-    useScrim: React.PropTypes.bool
-  },
-
-  getDefaultProps () {
-    return {
-      calendarColumns: 7,
-      closeOnDateSelect: false,
-      divideCells: false,
-      selectedDate: moment().unix(),
-      fontSize: '1em',
-      format: 'YYYY-MM-DD',
-      locale: 'en',
-      onDateSelect () {},
-      scrimStyle: {},
-      title: null,
-      useInputForSelectedDate: true,
-      useScrim: false
-    };
-  },
-
-  getInitialState () {
-    return {
+class DatePicker extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
       currentDate: null,
       showCalendar: false
     };
-  },
+  }
 
   _shouldBorderCell (cellCount) {
     return cellCount % this.props.calendarColumns !== 0;
-  },
+  }
 
   _shouldBorderRow (currentCell, cellCount) {
     const rows = (cellCount / this.props.calendarColumns) - 1;
 
     return (currentCell / this.props.calendarColumns) < rows;
-  },
+  }
 
   _handleDateSelect (date) {
     if (this.props.closeOnDateSelect) {
@@ -60,7 +29,7 @@ const DatePicker = React.createClass({
     }
 
     this.props.onDateSelect(date);
-  },
+  }
 
   _handlePreviousClick () {
     const selectedDate = moment.unix(this.props.selectedDate).locale(this.props.locale);
@@ -71,7 +40,7 @@ const DatePicker = React.createClass({
     this.setState({
       currentDate
     });
-  },
+  }
 
   _handleNextClick () {
     const selectedDate = moment.unix(this.props.selectedDate).locale(this.props.locale);
@@ -82,7 +51,7 @@ const DatePicker = React.createClass({
     this.setState({
       currentDate
     });
-  },
+  }
 
   _renderMonthTable (styles, currentDate, selectedDate) {
     const days = [];
@@ -108,7 +77,7 @@ const DatePicker = React.createClass({
       ) : (
         <div
           key={startDate.month() + '-' + startDate.date()}
-          onClick={this._handleDateSelect.bind(null, startDate.unix())}
+          onClick={this._handleDateSelect.bind(this, startDate.unix())}
           style={[
             styles.calendarDay,
             isCurrentMonth && styles.currentMonth
@@ -141,7 +110,7 @@ const DatePicker = React.createClass({
     }
 
     return days;
-  },
+  }
 
   _renderScrim (styles) {
     if (this.props.useScrim && this.state.showCalendar) {
@@ -149,7 +118,7 @@ const DatePicker = React.createClass({
         <div style={[styles.scrim, this.props.scrimStyle]}/>
       );
     }
-  },
+  }
 
   _renderSelectedDate (styles) {
     if (this.props.useInputForSelectedDate) {
@@ -157,13 +126,13 @@ const DatePicker = React.createClass({
         <div>
           <input
             key='input'
-            onClick={this._toggleCalendar}
+            onClick={this._toggleCalendar.bind(this)}
             style={styles.input}
             type='text'
             value={moment.unix(this.props.selectedDate).format(this.props.format)}
           />
           <Icon
-            onClick={this._toggleCalendar}
+            onClick={this._toggleCalendar.bind(this)}
             size='1.75em'
             style={styles.calendarIcon}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
@@ -174,14 +143,14 @@ const DatePicker = React.createClass({
       return (
         <div
           key='selectedDate'
-          onClick={this._toggleCalendar}
+          onClick={this._toggleCalendar.bind(this)}
           style={styles.selectedDate}
         >
           {moment.unix(this.props.selectedDate).format(this.props.format)}
         </div>
       );
     }
-  },
+  }
 
   _renderTitle (styles) {
     if (this.props.title) {
@@ -195,19 +164,19 @@ const DatePicker = React.createClass({
         <div></div>
       );
     }
-  },
+  }
 
   _toggleCalendar () {
     this.setState({
       showCalendar: !this.state.showCalendar
     });
-  },
+  }
 
   _handleBlur () {
     this.setState({
       showCalendar: false
     });
-  },
+  }
 
   render () {
     const selectedDate = moment.unix(this.props.selectedDate).locale(this.props.locale);
@@ -417,7 +386,7 @@ const DatePicker = React.createClass({
 
     return (
       <div
-        onBlur={this._handleBlur}
+        onBlur={this._handleBlur.bind(this)}
         style={[styles.component, styles.clearFix]}
         tabIndex='0'
       >
@@ -428,14 +397,14 @@ const DatePicker = React.createClass({
           {this._renderTitle(styles)}
           <div key='calendarHeader' style={[styles.calendarHeader, styles.clearFix]}>
             <Icon
-              onClick={this._handlePreviousClick}
+              onClick={this._handlePreviousClick.bind(this)}
               size='2em'
               style={[styles.navIcon, styles.navLeft, this.props.divideCells && styles.borderRight]}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
-              onClick={this._handleNextClick}
+              onClick={this._handleNextClick.bind(this)}
               size='2em'
               style={[styles.navIcon, styles.navRight, this.props.divideCells && styles.borderLeft]}
               type='caret-right'
@@ -450,6 +419,36 @@ const DatePicker = React.createClass({
       </div>
     );
   }
-});
+}
+
+DatePicker.propTypes = {
+  calendarColumns: React.PropTypes.number,
+  closeOnDateSelect: React.PropTypes.bool,
+  divideCells: React.PropTypes.bool,
+  fontSize: React.PropTypes.string,
+  format: React.PropTypes.string,
+  locale: React.PropTypes.string,
+  minimumDate: React.PropTypes.string,
+  onDateSelect: React.PropTypes.func,
+  scrimStyle: React.PropTypes.object,
+  selectedDate: React.PropTypes.number,
+  useInputForSelectedDate: React.PropTypes.bool,
+  useScrim: React.PropTypes.bool
+};
+
+DatePicker.defaultProps = {
+  calendarColumns: 7,
+  closeOnDateSelect: false,
+  divideCells: false,
+  selectedDate: moment().unix(),
+  fontSize: '1em',
+  format: 'YYYY-MM-DD',
+  locale: 'en',
+  onDateSelect () {},
+  scrimStyle: {},
+  title: null,
+  useInputForSelectedDate: true,
+  useScrim: false
+};
 
 module.exports = Radium(DatePicker);
