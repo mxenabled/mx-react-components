@@ -2,8 +2,11 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _throttle = require('lodash/function/throttle');
+const _uniqueId = require('lodash').uniqueId;
 
 const StyleConstants = require('../constants/Style');
+const KeyCodeConstants = require('../constants/KeyCodes');
+
 
 class RangeSelector extends React.Component {
   constructor (props) {
@@ -16,21 +19,29 @@ class RangeSelector extends React.Component {
       dragging: null,
       lowerPixels: 0,
       lowerValue,
+      presetMenuHasFocus: false,
+      presetMenuIndex: 0,
       selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
       showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
       upperPixels: 1,
       upperValue
     };
+
+    this._id = this.props.id || _uniqueId('range-selector-');
+    this._showPresetsButton = null;
+    this._presetLabelRefs = {};
   }
 
   componentDidMount () {
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues.bind(this), 300));
+    window.addEventListener('keydown', this._handleKeyPress.bind(this));
   }
 
   componentWillUnmount () {
     window.removeEventListener('resize', _throttle(this._setDefaultRangeValues.bind(this), 300));
+    window.removeEventListener('keydown', this._handleKeyPress.bind(this));
   }
 
   _getSelectedLabel (lowerValue, upperValue) {
@@ -56,6 +67,264 @@ class RangeSelector extends React.Component {
       upperPixels,
       width
     });
+  }
+
+  _moveLowerToggle (multiplier) {
+    const pixelInterval = this.props.interval * this.state.width / this.props.range;
+    let newValue = this.state.lowerValue + (multiplier * this.props.interval);
+    let newPosition = this.state.lowerPixels + (multiplier * pixelInterval);
+
+    newValue = Math.min(newValue, this.props.range);
+    newValue = Math.max(newValue, 0);
+    newPosition = Math.min(newPosition, this.state.width);
+    newPosition = Math.max(newPosition, 0);
+
+    if (multiplier > 0) {
+      newValue = Math.min(newValue, this.state.upperValue);
+      newPosition = Math.min(newPosition, this.state.upperPixels);
+    }
+
+    this.setState({
+      selectedLabel: null,
+      lowerValue: newValue,
+      lowerPixels: newPosition
+    });
+  }
+
+  _moveUpperToggle (multiplier) {
+    const pixelInterval = this.props.interval * this.state.width / this.props.range;
+    let newValue = this.state.upperValue + (multiplier * this.props.interval);
+    let newPosition = this.state.upperPixels + (multiplier * pixelInterval);
+
+    newValue = Math.min(newValue, this.props.range);
+    newValue = Math.max(newValue, 0);
+    newPosition = Math.min(newPosition, this.state.width);
+    newPosition = Math.max(newPosition, 0);
+    if (multiplier < 0) {
+      newValue = Math.max(newValue, this.state.lowerValue);
+      newPosition = Math.max(newPosition, this.state.lowerPixels);
+    }
+
+    this.setState({
+      selectedLabel: null,
+      upperValue: newValue,
+      upperPixels: newPosition
+    });
+  }
+
+  _menuNavigatePrevious () {
+    let nextIndex = this.state.presetMenuIndex - 1;
+
+    if (nextIndex < 0) {
+      nextIndex = this.props.presets.length; // because of extra custom option
+      this._presetLabelRefs['Custom'].focus();
+    } else {
+      this._presetLabelRefs[this.props.presets[nextIndex].label].focus();
+    }
+    this.setState({ presetMenuIndex: nextIndex });
+  }
+
+  _menuNavigateNext () {
+    let nextIndex = this.state.presetMenuIndex + 1;
+
+    if (nextIndex > this.props.presets.length) {
+      nextIndex = 0;
+    }
+    this.setState({ presetMenuIndex: nextIndex });
+    this._focusToMenuItem();
+  }
+
+  _focusToMenuItem () {
+    if (this.state.presetMenuIndex === this.props.presets.length) {
+      this._presetLabelRefs['Custom'].focus();
+    } else {
+      this._presetLabelRefs[this.props.presets[this.state.presetMenuIndex].label].focus();
+    }
+    this.setState({ presetMenuHasFocus: true });
+  }
+
+  _handleKeyPress (evt) {
+    const key = evt.keyCode || evt.which;
+    const activeElement = document.activeElement;
+
+    /**
+     * Keyboard behavior for preset menu and slider outlined by the following docs.
+     * http://www.w3.org/TR/wai-aria-practices/#menubutton
+     * http://www.w3.org/TR/wai-aria-practices/#menu
+     * http://www.w3.org/TR/wai-aria-practices/#slider
+     */
+    // if presets menu is displayed and a menu item has focus
+    if (this.state.presetMenuHasFocus) {
+      switch (key) {
+        // escape closes menu and returns focus to menu button
+        case KeyCodeConstants.esc:
+          this._handleToggleViews();
+          this._showPresetsButton.focus();
+          this.setState({ presetMenuHasFocus: false });
+          evt.preventDefault();
+          break;
+        case KeyCodeConstants.tab:
+          this.setState({ presetMenuHasFocus: false });
+          this._handleToggleViews();
+          this._lowerToggle.focus();
+          evt.preventDefault();
+          break;
+        // up and down toggle between menu items
+        case KeyCodeConstants.upArrow:
+          this._menuNavigateNext();
+          evt.preventDefault();
+          break;
+        case KeyCodeConstants.downArrow:
+          this._menuNavigatePrevious();
+          evt.preventDefault();
+          break;
+        // left switches focus back to menu button
+        case KeyCodeConstants.leftArrow:
+          this.setState({ presetMenuHasFocus: false });
+          this._showPresetsButton.focus();
+          evt.preventDefault();
+          break;
+        case KeyCodeConstants.enter:
+          if (this.state.presetMenuIndex === this.props.presets.length) {
+            this.setState({ presetMenuHasFocus: false });
+            this._handleToggleViews();
+            this._showPresetsButton.focus();
+          } else {
+            this.setState({ presetMenuHasFocus: false });
+            this._handlePresetClick(this.props.presets[this.state.presetMenuIndex]);
+            this._showPresetsButton.focus();
+          }
+          evt.preventDefault();
+          break;
+        case KeyCodeConstants.space:
+          if (this.state.presetMenuIndex === this.props.presets.length) {
+            this.setState({ presetMenuHasFocus: false });
+            this._handleToggleViews();
+            this._showPresetsButton.focus();
+          } else {
+            this.setState({ presetMenuHasFocus: false });
+            this._handlePresetClick(this.props.presets[this.state.presetMenuIndex]);
+            this._showPresetsButton.focus();
+          }
+          evt.preventDefault();
+          break;
+        default:
+          break;
+      }
+    } else {
+      // menu button has focus, and menu is open
+      if (this.state.showPresets && activeElement === this._showPresetsButton) {
+        switch (key) {
+          case KeyCodeConstants.tab:
+            this._handleToggleViews();
+            this._lowerToggle.focus();
+            evt.preventDefault();
+            break;
+          case KeyCodeConstants.rightArrow:
+            this._focusToMenuItem();
+            this.setState({ presetMenuHasFocus: true });
+            evt.preventDefault();
+            break;
+          case KeyCodeConstants.enter:
+            this._handleToggleViews();
+            evt.preventDefault();
+            break;
+          case KeyCodeConstants.space:
+            this._handleToggleViews();
+            evt.preventDefault();
+            break;
+          case KeyCodeConstants.downArrow:
+            evt.preventDefault();
+            this.setState({ presetMenuIndex: 0 });
+            this._focusToMenuItem();
+            break;
+          default:
+            break;
+        }
+      } else if (activeElement === this._showPresetsButton) { // menu button has focus, and menu is closed
+        switch (key) {
+          case KeyCodeConstants.enter:
+            this._handleToggleViews();
+            evt.preventDefault();
+            break;
+          case KeyCodeConstants.space:
+            this._handleToggleViews();
+            evt.preventDefault();
+            break;
+          case KeyCodeConstants.downArrow:
+            this._handleToggleViews();
+            this.setState({
+              presetMenuHasFocus: true,
+              presetMenuIndex: 0
+            });
+            this._focusToMenuItem();
+            evt.preventDefault();
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (activeElement === this._lowerToggle) {
+        switch (key) {
+          case KeyCodeConstants.leftArrow:
+            evt.preventDefault();
+            this._moveLowerToggle(-1);
+            break;
+          case KeyCodeConstants.downArrow:
+            evt.preventDefault();
+            this._moveLowerToggle(-1);
+            break;
+          case KeyCodeConstants.pageDown:
+            evt.preventDefault();
+            this._moveLowerToggle(-1 * this.props.pageUpDownInterval);
+            break;
+          case KeyCodeConstants.rightArrow:
+            evt.preventDefault();
+            this._moveLowerToggle(1);
+            break;
+          case KeyCodeConstants.upArrow:
+            evt.preventDefault();
+            this._moveLowerToggle(1);
+            break;
+          case KeyCodeConstants.pageUp:
+            evt.preventDefault();
+            this._moveLowerToggle(this.props.pageUpDownInterval);
+            break;
+          default:
+            return null;
+        }
+      } else if (activeElement === this._upperToggle) {
+        switch (key) {
+          case KeyCodeConstants.leftArrow:
+            evt.preventDefault();
+            this._moveUpperToggle(-1);
+            break;
+          case KeyCodeConstants.downArrow:
+            evt.preventDefault();
+            this._moveUpperToggle(-1);
+            break;
+          case KeyCodeConstants.pageDown:
+            evt.preventDefault();
+            this._moveUpperToggle(-1 * this.props.pageUpDownInterval);
+            break;
+          case KeyCodeConstants.rightArrow:
+            evt.preventDefault();
+            this._moveUpperToggle(1);
+            break;
+          case KeyCodeConstants.upArrow:
+            evt.preventDefault();
+            this._moveUpperToggle(1);
+            break;
+          case KeyCodeConstants.pageUp:
+            evt.preventDefault();
+            this._moveUpperToggle(this.props.pageUpDownInterval);
+            break;
+          default:
+            return null;
+        }
+      }
+    }
   }
 
   _handlePresetClick (preset) {
@@ -241,20 +510,52 @@ class RangeSelector extends React.Component {
         marginTop: '17px',
         fontStyle: 'italic',
         opacity: 0.5
+      },
+      screenReaderLabel: {
+        position: 'absolute',
+        top: '-9999px',
+        left: '-9999px'
       }
     };
 
     return (
       <div className='mx-rangeselector' style={[styles.component, this.props.style]}>
-        <div className='mx-rangeselector-presets' style={styles.presets}>
+          {this.props.presets.length ? <div
+            aria-haspopup='true'
+            aria-owns={`${this._id}-presets-menu`}
+            className='mx-rangeselector-toggle'
+            onClick={this._handleToggleViews.bind(this)}
+            ref={(c) => this._showPresetsButton = c}
+            role='button'
+            style={styles.showPresets}
+            tabIndex='0'>
+            Groups
+          </div> : null}
+        <div
+          className='mx-rangeselector-presets'
+          id={`${this._id}-presets-menu`}
+          role='menu'
+          style={styles.presets}>
           {this.props.presets.map((preset, i) => {
             return (
-              <div className='mx-rangeselector-preset' key={preset.label + i} onClick={this._handlePresetClick.bind(this, preset)} style={styles.preset} >
+              <div
+                className='mx-rangeselector-preset'
+                key={preset.label + i}
+                onClick={this._handlePresetClick.bind(this, preset)}
+                ref={(c) => this._presetLabelRefs[preset.label] = c}
+                role='menuitem'
+                style={styles.preset}
+                tabIndex='-1'>
                 {preset.label}
               </div>
             );
           })}
-          <div className='mx-rangeselector-preset' onClick={this._handleToggleViews.bind(this)} style={styles.preset} >
+          <div
+            className='mx-rangeselector-preset'
+            onClick={this._handleToggleViews.bind(this)}
+            ref={(c) => this._presetLabelRefs['Custom'] = c}
+            style={styles.preset}
+            tabIndex='-1'>
             Custom
           </div>
         </div>
@@ -267,36 +568,63 @@ class RangeSelector extends React.Component {
           ref='rangeSelector'
           style={styles.range}
         >
-          {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
           <div className='mx-rangeselector-track' style={styles.track}></div>
           <div className='mx-rangeselector-selected' style={styles.selected}>
             <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
               {this.state.selectedLabel}
             </div>
           </div>
+          <label htmlFor={`${this._id}-lower-toggle`} style={styles.screenReaderLabel}>
+            Lower Range Value
+          </label>
           <div
+            aria-controls={`${this._id}-lower-toggle-value`}
+            aria-describedby={this.props.descriptionElementId}
+            aria-valuemax={this.props.formatter(this.props.range)}
+            aria-valuemin={this.props.formatter(0)}
+            aria-valuenow={this.props.formatter(this.state.lowerValue)}
             className='mx-rangeselector-lower-toggle'
+            id={`${this._id}-lower-toggle`}
             onMouseDown={this._handleDragStart.bind(this, 'Lower')}
             onMouseUp={this._handleDragEnd.bind(this)}
             onTouchEnd={this._handleDragEnd.bind(this)}
             onTouchStart={this._handleDragStart.bind(this, 'Lower')}
+            ref={(c) => this._lowerToggle = c}
             style={styles.lowerToggle}
+            tabIndex='0'
           >
-            <label className='mx-rangeselector-lower-toggle-label' style={styles.lowerToggleLabel}>
+            <div
+              className='mx-rangeselector-lower-toggle-label'
+              id={`${this._id}-lower-toggle-value`}
+              style={styles.lowerToggleLabel}>
               {this.props.formatter(this.state.lowerValue)}
-            </label>
+            </div>
           </div>
+          <label htmlFor={`${this._id}-upper-toggle`} style={styles.screenReaderLabel}>
+            Upper Range Value
+          </label>
           <div
+            aria-controls={`${this._id}-upper-toggle-value`}
+            aria-describedby={this.props.descriptionElementId}
+            aria-valuemax={this.props.formatter(this.props.range)}
+            aria-valuemin={this.props.formatter(0)}
+            aria-valuenow={this.props.formatter(this.state.upperValue)}
             className='mx-rangeselector-upper-toggle'
+            id={`${this._id}-upper-toggle`}
             onMouseDown={this._handleDragStart.bind(this, 'Upper')}
             onMouseUp={this._handleDragEnd.bind(this)}
             onTouchEnd={this._handleDragEnd.bind(this)}
             onTouchStart={this._handleDragStart.bind(this, 'Upper')}
+            ref={(c) => this._upperToggle = c}
             style={styles.upperToggle}
+            tabIndex='0'
           >
-            <label className='mx-rangeselector-upper-toggle-label' style={styles.upperToggleLabel}>
+            <div
+              className='mx-rangeselector-upper-toggle-label'
+              id={`${this._id}-lower-upper-value`}
+              style={styles.upperToggleLabel}>
               {this.props.formatter(this.state.upperValue)}
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -307,10 +635,13 @@ class RangeSelector extends React.Component {
 RangeSelector.propTypes = {
   defaultLowerValue: React.PropTypes.number,
   defaultUpperValue: React.PropTypes.number,
+  descriptionElementId: React.PropTypes.string,
   formatter: React.PropTypes.func,
+  id: React.PropTypes.string,
   interval: React.PropTypes.number,
   onLowerDragStop: React.PropTypes.func,
   onUpperDragStop: React.PropTypes.func,
+  pageUpDownInterval: React.PropTypes.number,
   presets: React.PropTypes.array,
   range: React.PropTypes.number,
   selectedColor: React.PropTypes.string
@@ -319,12 +650,15 @@ RangeSelector.propTypes = {
 RangeSelector.defaultProps = {
   defaultLowerValue: 0,
   defaultUpperValue: 1,
+  descriptionElementId: null,
+  id: null,
   interval: 1,
   formatter (value) {
     return value;
   },
   onLowerDragStop () {},
   onUpperDragStop () {},
+  pageUpDownInterval: 10,
   presets: [],
   range: 100,
   selectedColor: StyleConstants.Colors.PRIMARY
