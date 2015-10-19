@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const moment = require('moment');
 
 const {
   DonutChart,
@@ -9,7 +10,8 @@ const {
   RangeSelector,
   Select,
   ToggleSwitch,
-  TypeAhead
+  TypeAhead,
+  DatePicker
 } = require('../src/Index');
 
 const styles = {
@@ -282,6 +284,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+      selectedDate: moment().startOf('month').unix(),
       showModal: false,
       showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -305,6 +308,12 @@ const Demo = React.createClass({
   _handleWindowResize () {
     this.setState({
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    });
+  },
+
+  _handleDateSelect (selectedDate) {
+    this.setState({
+      selectedDate: moment.unix(selectedDate).startOf('day').unix()
     });
   },
 
@@ -443,6 +452,17 @@ const Demo = React.createClass({
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
+
+        <br/><br/>
+        <DatePicker
+          calendarColumns={7}
+          closeOnDateSelect={true}
+          divideCells={false}
+          onDateSelect={this._handleDateSelect}
+          selectedDate={this.state.selectedDate}
+          title={'Select a Date'}
+          useInputForSelectedDate={false}
+          />
       </div>
     );
   },

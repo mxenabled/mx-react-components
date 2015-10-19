@@ -8,5 +8,6 @@ module.exports = {
   Select: require('./components/Select'),
   Spin: require('./components/Spin'),
   ToggleSwitch: require('./components/ToggleSwitch'),
-  TypeAhead: require('./components/TypeAhead')
+  TypeAhead: require('./components/TypeAhead'),
+  DatePicker: require('./components/DatePicker')
 };
