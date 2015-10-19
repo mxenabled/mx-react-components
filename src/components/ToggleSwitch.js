@@ -1,6 +1,8 @@
+const KeyCodes = require('../constants/KeyCodes');
 const React = require('react');
 const Radium = require('radium');
 const StyleConstants = require('../constants/Style');
+const _uniqueId = require('lodash').uniqueId;
 
 class ToggleSwitch extends React.Component {
   constructor (props) {
@@ -8,6 +10,26 @@ class ToggleSwitch extends React.Component {
     this.state = {
       activePosition: this.props.defaultPosition
     };
+    this._id = this.props.id || _uniqueId('toggle-switch-');
+    this._toggleElement = null;
+  }
+
+  componentWillMount () {
+    window.addEventListener('keydown', this._handleKeyPress.bind(this));
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this._handleKeyPress.bind(this));
+  }
+
+  _handleKeyPress (evt) {
+    const key = evt.keyCode || evt.which;
+
+    // if toggle has focus and user presses space bar
+    if (document.activeElement === this._toggleElement && key === KeyCodes.space) {
+      evt.preventDefault();
+      this._handleToggle();
+    }
   }
 
   _handleLeftLabelClick () {
@@ -18,6 +40,15 @@ class ToggleSwitch extends React.Component {
     });
 
     this.props.onToggle(activePosition);
+  }
+
+  _getAriaLabelAttributes (labelPosition) {
+    const ariaLabelAttributes = {};
+
+    if (this.props.ariaCheckedPosition === labelPosition) {
+      ariaLabelAttributes['htmlFor'] = this._id;
+    }
+    return ariaLabelAttributes;
   }
 
   _handleRightLabelClick () {
@@ -43,7 +74,14 @@ class ToggleSwitch extends React.Component {
   _renderLeftLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span className='left-label' onClick={this._handleLeftLabelClick.bind(this)} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
+        <label
+          {...this._getAriaLabelAttributes('left')}
+          className='left-label'
+          id={`${this._id}-left-label`}
+          onClick={this._handleLeftLabelClick.bind(this)}
+          style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>
+         {this.props.leftLabel}
+        </label>
       );
     }
   }
@@ -51,7 +89,14 @@ class ToggleSwitch extends React.Component {
   _renderRightLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span className='right-label' onClick={this._handleRightLabelClick.bind(this)} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
+        <label
+          {...this._getAriaLabelAttributes('right')}
+          className='right-label'
+          id={`${this._id}-right-label`}
+          onClick={this._handleRightLabelClick.bind(this)}
+          style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>
+          {this.props.rightLabel}
+        </label>
       );
     }
   }
@@ -103,11 +148,24 @@ class ToggleSwitch extends React.Component {
       }
     };
 
+    const toggleAriaAttributes = {
+      'aria-checked': this.state.activePosition === this.props.ariaCheckedPosition,
+      'aria-describedby': this.props.ariaDescribedByElementId,
+      'aria-labelledby': `${this._id}-${this.props.ariaCheckedPosition}-label`,
+      ref: (c) => this._toggleElement = c,
+      role: 'switch',
+      tabIndex: '0'
+    };
+
     return (
       <div className='toggle-switch-component' style={[styles.component, this.props.componentStyle]}>
         {this._renderLeftLabel(styles)}
         <div className='toggle-switch-track' onClick={this._handleToggle.bind(this)} style={[styles.track, this.props.trackStyle]} >
-          <div className='toggle-switch-toggle' style={[styles.toggle, styles[this.state.activePosition], this.props.toggleStyle]}></div>
+          <div
+            className='toggle-switch-toggle'
+            style={[styles.toggle, styles[this.state.activePosition], this.props.toggleStyle]}
+          {...toggleAriaAttributes}>
+          </div>
           {this.props.children}
         </div>
         {this._renderRightLabel(styles)}
@@ -118,12 +176,15 @@ class ToggleSwitch extends React.Component {
 
 ToggleSwitch.propTypes = {
   activeColor: React.PropTypes.string,
+  ariaCheckedPosition: React.PropTypes.string,
+  ariaDescribedByElementId: React.PropTypes.string,
   children: React.PropTypes.node,
   componentStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.object
   ]),
   defaultPosition: React.PropTypes.oneOf(['left', 'right']),
+  id: React.PropTypes.string,
   inactiveColor: React.PropTypes.string,
   labelStyle: React.PropTypes.oneOfType([
     React.PropTypes.array,
@@ -145,7 +206,10 @@ ToggleSwitch.propTypes = {
 
 ToggleSwitch.defaultProps = {
   activeColor: StyleConstants.Colors.PRIMARY,
+  ariaCheckedPosition: 'left',
+  ariaDescribedByElementId: null,
   defaultPosition: 'left',
+  id: null,
   inactiveColor: StyleConstants.Colors.LIGHT_FONT,
   leftLabel: 'On',
   onToggle () {},
