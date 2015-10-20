@@ -284,7 +284,6 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
-      selectedDate: moment().startOf('month').unix(),
       showModal: false,
       showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -312,9 +311,7 @@ const Demo = React.createClass({
   },
 
   _handleDateSelect (selectedDate) {
-    this.setState({
-      selectedDate: moment.unix(selectedDate).startOf('day').unix()
-    });
+
   },
 
   render () {
@@ -457,9 +454,8 @@ const Demo = React.createClass({
         <DatePicker
           calendarColumns={7}
           closeOnDateSelect={true}
-          divideCells={false}
+          showDayBorders={false}
           onDateSelect={this._handleDateSelect}
-          selectedDate={this.state.selectedDate}
           title={'Select a Date'}
           useInputForSelectedDate={false}
           />
