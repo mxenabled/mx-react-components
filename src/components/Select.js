@@ -89,7 +89,7 @@ class Select extends React.Component {
                   onMouseEnter={this._handleMouseEnter.bind(this, index)}
                   onMouseLeave={this._handleMouseLeave.bind(this)}
                   ref={option.displayValue + option.value}
-                  style={[styles.option, this.props.optionStyle, isActiveIndex && styles.hover]}
+                  style={[styles.option, this.props.optionStyle, isActiveIndex && styles.hover, isActiveIndex && this.props.hoverStyle]}
                 >
                 {option.displayValue}
                 </li>
@@ -215,6 +215,7 @@ const styles = {
 
 Select.propTypes = {
   dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  hoverStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
   onChange: React.PropTypes.func,
   options: React.PropTypes.array,
   optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
