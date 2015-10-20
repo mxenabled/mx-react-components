@@ -278,10 +278,7 @@ const icons = [
 const Demo = React.createClass({
   getInitialState () {
     return {
-      icon: {
-        value: 'accounts',
-        displayValue: 'Accounts'
-      },
+      icon: icons[0],
       showModal: false,
       showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
