@@ -11,7 +11,7 @@ class Select extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      activeIndex: this.props.options.indexOf(this.props.selected),
+      activeIndex: false,
       isOpen: false,
       selected: false
     };
@@ -19,6 +19,7 @@ class Select extends React.Component {
 
   _handleBlur () {
     this.setState({
+      activeIndex: false,
       isOpen: false
     });
   }
@@ -26,6 +27,7 @@ class Select extends React.Component {
   _handleClick () {
     if (!isMobile) {
       this.setState({
+        activeIndex: false,
         isOpen: !this.state.isOpen
       });
     }
@@ -39,7 +41,7 @@ class Select extends React.Component {
 
   _handleMouseLeave () {
     this.setState({
-      activeIndex: -1
+      activeIndex: false
     });
   }
 
