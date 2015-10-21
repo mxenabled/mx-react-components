@@ -148,7 +148,7 @@ class RangeSelector extends React.Component {
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-        padding: '44px 0 30px',
+        padding: '45px 0',
         margin: '0 10px',
         visibility: this.state.showPresets ? 'hidden' : 'visible'
       },
@@ -165,7 +165,7 @@ class RangeSelector extends React.Component {
         position: 'absolute',
         top: '50%',
         left: this.state.lowerPixels,
-        margin: '6px 0 0 10px',
+        marginLeft: '10px',
         transform: 'translate(-50%, -50%)',
         WebkitTransform: 'translate(-50%, -50%)',
         cursor: 'pointer'
@@ -179,7 +179,7 @@ class RangeSelector extends React.Component {
         position: 'absolute',
         top: '50%',
         left: this.state.upperPixels,
-        margin: '6px 0 0 10px',
+        marginLeft: '10px',
         transform: 'translate(-50%, -50%)',
         WebkitTransform: 'translate(-50%, -50%)',
         cursor: 'pointer',
@@ -187,12 +187,11 @@ class RangeSelector extends React.Component {
       },
       selected: {
         position: 'absolute',
-        left: this.state.lowerPixels,
+        left: this.state.lowerPixels + 10,
         width: this.state.upperPixels - this.state.lowerPixels,
         background: this.props.selectedColor,
         height: '3px',
         top: '50%',
-        marginTop: '6px',
         transform: 'translateY(-50%)',
         WebkitTransform: 'translateY(-50%)'
       },
@@ -238,7 +237,7 @@ class RangeSelector extends React.Component {
       },
       selectedLabel: {
         textAlign: 'center',
-        marginTop: '17px',
+        marginTop: '30px',
         fontStyle: 'italic',
         opacity: 0.5
       }
