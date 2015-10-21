@@ -4,12 +4,14 @@ const moment = require('moment');
 
 const Icon = require('./Icon');
 
+const StyleConstants = require('../constants/Style');
+
 class DatePicker extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       currentDate: null,
-      selectedDate: moment().unix(),
+      selectedDate: moment(this.props.selectedDate).unix(),
       showCalendar: false
     };
   }
@@ -109,7 +111,7 @@ class DatePicker extends React.Component {
     }
   }
 
-  _renderSelectedDate (styles) {
+  _renderSelectedDate () {
     if (this.props.useInputForSelectedDate) {
       return (
         <div>
@@ -163,6 +165,26 @@ class DatePicker extends React.Component {
     });
   }
 
+  _renderCaret () {
+    if (this.state.showCalendar) {
+      return (
+        <Icon
+          onClick={this._toggleCalendar.bind(this)}
+          size='20px'
+          style={[styles.navIcon, styles.navRight]}
+          type='caret-up'
+        />);
+    } else {
+      return (
+        <Icon
+          onClick={this._toggleCalendar.bind(this)}
+          size='20px'
+          style={[styles.navIcon, styles.navRight]}
+          type='caret-down'
+        />);
+    }
+  }
+
   render () {
     const selectedDate = moment.unix(this.state.selectedDate).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
@@ -174,7 +196,8 @@ class DatePicker extends React.Component {
         tabIndex='0'
       >
         <div key='componentTop' style={[styles.componentTop, this.state.showCalendar && styles.componentTopOpen]}>
-          {this._renderSelectedDate(styles)}
+          {this._renderSelectedDate()}
+          {this.props.showCaret ? this._renderCaret() : null}
         </div>
         <div key='componentBottom' style={[styles.componentBottom, this.state.showCalendar && styles.calendarShow]}>
           {this._renderTitle(styles)}
@@ -212,6 +235,8 @@ DatePicker.propTypes = {
   minimumDate: React.PropTypes.string,
   onDateSelect: React.PropTypes.func,
   scrimStyle: React.PropTypes.object,
+  selectedDate: React.PropTypes.string,
+  showCaret: React.PropTypes.bool,
   showDayBorders: React.PropTypes.bool,
   title: React.PropTypes.string,
   useInputForSelectedDate: React.PropTypes.bool,
@@ -220,11 +245,13 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   closeOnDateSelect: false,
-  fontSize: '16px',
+  fontSize: StyleConstants.FontSize,
   format: 'YYYY-MM-DD',
   locale: 'en',
   onDateSelect () {},
   scrimStyle: {},
+  selectedDate: moment().unix(),
+  showCaret: true,
   showDayBorders: false,
   title: null,
   useInputForSelectedDate: true,
@@ -266,8 +293,8 @@ const styles = {
     padding: '0px 2px 10px 6px'
   },
   calendarDayContent: {
-    borderRadius: '100%',
-    height: '75%',
+    borderRadius: '50%',
+    height: '100%',
     left: '50%',
     position: 'absolute',
     top: '50%',
@@ -282,7 +309,7 @@ const styles = {
   },
   calendarDayText: {
     borderRadius: '100%',
-    fontSize: '16px',
+    fontSize: StyleConstants.FontSize,
     fontWeight: 'normal',
     left: '50%',
     position: 'absolute',
@@ -298,7 +325,7 @@ const styles = {
   calendarHeader: {
     borderBottom: '#E5E5E5',
     borderBottomWidth: '1px',
-    fontSize: '16px',
+    fontSize: '15px',
     fontWeight: 'normal',
     padding: '5px 0px 7px 0px',
     position: 'relative',
@@ -327,7 +354,7 @@ const styles = {
     width: '100%',
 
     '@media (max-width: 768px)': {
-      fontSize: '9.6px'
+      fontSize: '8px'
     },
 
     ':focus': {
@@ -341,11 +368,10 @@ const styles = {
     borderBottomRightRadius: '3px',
     borderColor: '#E5E5E5',
     borderStyle: 'solid',
-    borderWidth: '1px 1px 1px 1px',
-    boxShadow: '0 10px 10px 2px rgba(0,0,0,0.1)',
+    borderWidth: '0 1px 1px 1px',
+    boxShadow: StyleConstants.BoxShadow,
     boxSizing: 'border-box',
     display: 'none',
-    marginTop: '10px',
     maxWidth: '270px',
     padding: '0px 0px 0px 0px',
     position: 'absolute',
@@ -359,7 +385,7 @@ const styles = {
     borderStyle: 'solid',
     borderWidth: '1px 1px 1px 1px',
     position: 'relative',
-    padding: '10px 10px 0 10px'
+    padding: '5px 5px 5px 5px'
   },
   componentTopOpen: {
     borderBottomWidth: '0',
@@ -375,7 +401,7 @@ const styles = {
   input: {
     backgroundColor: '#FFFFFF',
     border: 'none',
-    fontSize: '16px',
+    fontSize: StyleConstants.FontSize,
     outline: 'none',
     paddingBottom: '10px',
     WebkitAppearance: 'none',
@@ -414,7 +440,7 @@ const styles = {
   selectedDate: {
     color: '#606060',
     cursor: 'pointer',
-    fontSize: '19px',
+    fontSize: StyleConstants.FontSize,
     fontWeight: 'bold',
     verticalAlign: 'middle',
     width: '100%',
@@ -428,7 +454,7 @@ const styles = {
     color: '#f2f2f2',
     textAlign: 'center',
     padding: '7px 0px 7px 0px',
-    fontSize: '16px',
+    fontSize: StyleConstants.FontSize,
     margin: '1px'
   }
 };
