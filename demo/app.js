@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const moment = require('moment');
 
 const {
   DonutChart,
@@ -8,6 +9,7 @@ const {
   Modal,
   RangeSelector,
   Select,
+  TimeBasedLineChart,
   ToggleSwitch,
   TypeAhead
 } = require('../src/Index');
@@ -351,6 +353,147 @@ const Demo = React.createClass({
         />
 
         <br/><br/>
+        <TimeBasedLineChart
+          breakPointDate={moment().startOf('day').unix()}
+          breakPointLabel='Today'
+          data={[
+            {
+              timeStamp: moment().subtract(15, 'days').unix(),
+              value: 2000
+            },
+            {
+              timeStamp: moment().subtract(14, 'days').unix(),
+              value: 1900
+            },
+            {
+              timeStamp: moment().subtract(13, 'days').unix(),
+              value: 1850
+            },
+            {
+              timeStamp: moment().subtract(12, 'days').unix(),
+              value: 1550
+            },
+            {
+              timeStamp: moment().subtract(11, 'days').unix(),
+              value: 1500
+            },
+            {
+              timeStamp: moment().subtract(10, 'days').unix(),
+              value: 1000
+            },
+            {
+              timeStamp: moment().subtract(9, 'days').unix(),
+              value: 900
+            },
+            {
+              timeStamp: moment().subtract(8, 'days').unix(),
+              value: 900
+            },
+            {
+              timeStamp: moment().subtract(7, 'days').unix(),
+              value: 900
+            },
+            {
+              timeStamp: moment().subtract(6, 'days').unix(),
+              value: 800
+            },
+            {
+              timeStamp: moment().subtract(5, 'days').unix(),
+              value: 600
+            },
+            {
+              timeStamp: moment().subtract(4, 'days').unix(),
+              value: 600
+            },
+            {
+              timeStamp: moment().subtract(3, 'days').unix(),
+              value: 600
+            },
+            {
+              timeStamp: moment().subtract(2, 'days').unix(),
+              value: 1600
+            },
+            {
+              timeStamp: moment().subtract(1, 'days').unix(),
+              value: 1700
+            },
+            {
+              timeStamp: moment().unix(),
+              value: 1400
+            },
+            {
+              timeStamp: moment().add(1, 'days').unix(),
+              value: 1200
+            },
+            {
+              timeStamp: moment().add(2, 'days').unix(),
+              value: 1200
+            },
+            {
+              timeStamp: moment().add(3, 'days').unix(),
+              value: 1700
+            },
+            {
+              timeStamp: moment().add(4, 'days').unix(),
+              value: 1100
+            },
+            {
+              timeStamp: moment().add(5, 'days').unix(),
+              value: 1000
+            },
+            {
+              timeStamp: moment().add(6, 'days').unix(),
+              value: 900
+            },
+            {
+              timeStamp: moment().add(7, 'days').unix(),
+              value: 500
+            },
+            {
+              timeStamp: moment().add(8, 'days').unix(),
+              value: 300
+            },
+            {
+              timeStamp: moment().add(9, 'days').unix(),
+              value: 300
+            },
+            {
+              timeStamp: moment().add(10, 'days').unix(),
+              value: 300
+            },
+            {
+              timeStamp: moment().add(11, 'days').unix(),
+              value: 1700
+            },
+            {
+              timeStamp: moment().add(12, 'days').unix(),
+              value: 1700
+            },
+            {
+              timeStamp: moment().add(13, 'days').unix(),
+              value: 1700
+            },
+            {
+              timeStamp: moment().add(14, 'days').unix(),
+              value: 1300
+            },
+            {
+              timeStamp: moment().add(15, 'days').unix(),
+              value: 900
+            },
+          ]}
+          height={400}
+          hoverCallBack={this._handleLineChartHover}
+          margin={{ top: 30, right: 50, bottom: 20, left: 50 }}
+          shadeAreaBelowZero={true}
+          width={700}
+        >
+          <div style={{ backgroundColor: '#999', color: '#fff', padding: '5px' }}>
+            {'$' + this.state.lineChartHoverValue}
+          </div>
+        </TimeBasedLineChart>
+
+        <br/><br/>
         <ToggleSwitch />
 
         <br/><br/>
@@ -445,6 +588,12 @@ const Demo = React.createClass({
         </div>
       </div>
     );
+  },
+
+  _handleLineChartHover (data) {
+    this.setState({
+      lineChartHoverValue: data.value
+    });
   },
 
   _handleSelectChange (option) {
