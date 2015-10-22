@@ -11,6 +11,7 @@ class Select extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      activeIndex: false,
       isOpen: false,
       selected: false
     };
@@ -18,6 +19,7 @@ class Select extends React.Component {
 
   _handleBlur () {
     this.setState({
+      activeIndex: false,
       isOpen: false
     });
   }
@@ -25,9 +27,22 @@ class Select extends React.Component {
   _handleClick () {
     if (!isMobile) {
       this.setState({
+        activeIndex: false,
         isOpen: !this.state.isOpen
       });
     }
+  }
+
+  _handleMouseEnter (activeIndex) {
+    this.setState({
+      activeIndex
+    });
+  }
+
+  _handleMouseLeave () {
+    this.setState({
+      activeIndex: false
+    });
   }
 
   _handleOptionClick (option) {
@@ -66,13 +81,17 @@ class Select extends React.Component {
       } else {
         return (
           <ul style={[styles.options, this.props.optionsStyle]}>
-            {this.props.options.map(option => {
+            {this.props.options.map((option, index) => {
+              const isActiveIndex = this.state.activeIndex === index;
+
               return (
                 <li
                   key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(this, option)}
+                  onMouseEnter={this._handleMouseEnter.bind(this, index)}
+                  onMouseLeave={this._handleMouseLeave.bind(this)}
                   ref={option.displayValue + option.value}
-                  style={[styles.option, this.props.optionStyle]}
+                  style={[styles.option, this.props.optionStyle, isActiveIndex && styles.hover, isActiveIndex && this.props.hoverStyle]}
                 >
                 {option.displayValue}
                 </li>
@@ -154,6 +173,11 @@ const styles = {
     top: '50%',
     marginTop: '-10px'
   },
+  hover: {
+    backgroundColor: StyleConstants.Colors.PRIMARY,
+    color: StyleConstants.Colors.INVERSE_PRIMARY,
+    opacity: 1
+  },
   invalid: {
     borderColor: StyleConstants.Colors.RED
   },
@@ -179,13 +203,7 @@ const styles = {
     backgroundColor: '#FFFFFF',
     padding: '10px',
     whiteSpace: 'nowrap',
-    opacity: 0.4,
-
-    ':hover': {
-      backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.INVERSE_PRIMARY,
-      opacity: 1
-    }
+    opacity: 0.4
   },
   scrim: {
     position: 'fixed',
@@ -199,6 +217,7 @@ const styles = {
 
 Select.propTypes = {
   dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  hoverStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
   onChange: React.PropTypes.func,
   options: React.PropTypes.array,
   optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
