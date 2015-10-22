@@ -489,7 +489,7 @@ const Demo = React.createClass({
           width={700}
         >
           <div style={{ backgroundColor: '#999', color: '#fff', padding: '5px' }}>
-            {'$' + this.state.lineChartHoverValue}
+            {this.state.lineChartHoverValue}
           </div>
         </TimeBasedLineChart>
 
