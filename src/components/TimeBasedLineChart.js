@@ -46,7 +46,7 @@ class TimeBasedLineChart extends React.Component {
   _getAreaBelowZero (data) {
     const area = d3.svg.area()
       .x(d => {
-        const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+        const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
         return this._getXScaleValue(currentDate);
       })
@@ -59,7 +59,7 @@ class TimeBasedLineChart extends React.Component {
   _getFlatLine (data) {
     const flatLine = d3.svg.line()
       .x(d => {
-        const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+        const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
         return this._getXScaleValue(currentDate);
       })
@@ -71,7 +71,7 @@ class TimeBasedLineChart extends React.Component {
   _getLine (data) {
     const line = d3.svg.line()
       .x(d => {
-        const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+        const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
         return this._getXScaleValue(currentDate);
       })
@@ -87,7 +87,7 @@ class TimeBasedLineChart extends React.Component {
   }
 
   _getSliceWidth (timeStamp) {
-    const rangeType = this.props.rangeType === 'year' ? 'month' : 'day';
+    const rangeType = this.props.rangeType;
     const startOf = timeStamp ? moment.unix(timeStamp).startOf(rangeType).unix() : moment(timeStamp).startOf(rangeType).unix();
     const endOf = timeStamp ? moment.unix(timeStamp).endOf(rangeType).unix() : moment(timeStamp).endOf(rangeType).unix();
 
@@ -99,17 +99,17 @@ class TimeBasedLineChart extends React.Component {
     const past = [];
 
     this.props.data.forEach(item => {
-      const currentDate = moment.unix(item.timeStamp).startOf('day');
+      const currentDate = moment.unix(item.timeStamp).startOf(this.props.rangeType);
 
-      if (currentDate.isBefore(moment.unix(this.props.breakPointDate), 'day')) {
+      if (currentDate.isBefore(moment.unix(this.props.breakPointDate), this.props.rangeType)) {
         past.push(item);
       }
 
-      if (currentDate.isAfter(moment.unix(this.props.breakPointDate), 'day')) {
+      if (currentDate.isAfter(moment.unix(this.props.breakPointDate), this.props.rangeType)) {
         future.push(item);
       }
 
-      if (currentDate.isSame(moment.unix(this.props.breakPointDate), 'day')) {
+      if (currentDate.isSame(moment.unix(this.props.breakPointDate), this.props.rangeType)) {
         past.push(item);
         future.push(item);
       }
@@ -155,8 +155,8 @@ class TimeBasedLineChart extends React.Component {
     let maxDate = this.props.data[this.props.data.length - 1].timeStamp;
     let minDate = this.props.data[0].timeStamp;
 
-    maxDate = moment.unix(maxDate).endOf('day').unix();
-    minDate = moment.unix(minDate).startOf('day').unix();
+    maxDate = moment.unix(maxDate).endOf(this.props.rangeType).unix();
+    minDate = moment.unix(minDate).startOf(this.props.rangeType).unix();
 
     return d3.time.scale()
       .range([0, this.state.adjustedWidth])
@@ -276,7 +276,7 @@ class TimeBasedLineChart extends React.Component {
     data.forEach((dataSet, i) => {
       const color = this.props.lineColor;
       const breakPointDate = moment.unix(this.props.breakPointDate);
-      const isMonthRangeType = this.props.rangeType === 'month';
+      const isDayRangeType = this.props.rangeType === 'day';
       const isPast = i === 0;
 
       const group = chart.append('g')
@@ -324,8 +324,8 @@ class TimeBasedLineChart extends React.Component {
         newBreakPoint.append('text')
           .attr('class', 'mx-time-based-line-chart-break-point-label')
           .attr('x', d => {
-            const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
-            const offSet = isMonthRangeType ? 18 : 25;
+            const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
+            const offSet = isDayRangeType ? 18 : 25;
 
             return this._getXScaleValue(currentDate) - offSet;
           })
@@ -343,8 +343,8 @@ class TimeBasedLineChart extends React.Component {
           newBreakPoint.append('text')
             .attr('class', 'mx-time-based-line-chart-break-point-date')
             .attr('x', d => {
-              const offSet = isMonthRangeType ? 18 : 22;
-              const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+              const offSet = isDayRangeType ? 18 : 22;
+              const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
               return this._getXScaleValue(currentDate) - offSet;
             })
@@ -356,8 +356,8 @@ class TimeBasedLineChart extends React.Component {
               return isSameDateAsBreakPoint && i === 1 ? '1' : '0';
             })
             .text(d => {
-              const dateFormat = isMonthRangeType ? 'MMM D' : 'MMMM';
-              const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+              const dateFormat = isDayRangeType ? 'MMM D' : 'MMMM';
+              const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
               return moment.unix(currentDate).format(dateFormat);
             });
@@ -367,13 +367,13 @@ class TimeBasedLineChart extends React.Component {
         newBreakPoint.append('line')
           .attr('class', 'mx-time-based-line-chart-break-point-line')
           .attr('x1', d => {
-            const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+            const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
             return this._getXScaleValue(currentDate);
           })
           .attr('y1', -10)
           .attr('x2', d => {
-            const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+            const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
             return this._getXScaleValue(currentDate);
           })
@@ -401,7 +401,7 @@ class TimeBasedLineChart extends React.Component {
       newDots.append('circle')
         .attr('class', 'mx-time-based-line-chart-dot')
         .attr('cx', d => {
-          const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+          const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
           return this._getXScaleValue(currentDate);
         })
@@ -437,14 +437,14 @@ class TimeBasedLineChart extends React.Component {
       newSlices.append('rect')
         .attr('class', 'slice')
         .attr('x', d => {
-          const currentDate = moment.unix(d.timeStamp).startOf('day').unix()
+          const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix()
 
           return this._getXScaleValue(currentDate) - this._getSliceMiddle();
         })
         .attr('y', -10)
         .attr('height', this.state.adjustedHeight)
         .attr('width', d => {
-          const currentDate = moment.unix(d.timeStamp).startOf('day').unix();
+          const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix();
 
           return this._getSliceWidth(currentDate);
         })
@@ -483,10 +483,9 @@ class TimeBasedLineChart extends React.Component {
   }
 
   _showTooltip (d) {
-    const breakPointDate = moment.unix(this.props.breakPointDate);
-    const currentDate = moment.unix(d.timeStamp).startOf('day');
+    const breakPointDate = moment.unix(this.props.breakPointDate).startOf(this.props.rangeType);
+    const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType);
     const isAfterBreakPoint = currentDate.isAfter(breakPointDate);
-    const isMonthRangeType = this.props.rangeType === 'month';
     const sliceWidth = this._getSliceWidth(currentDate.unix());
     const xScale = this._getXScaleValue(currentDate.unix());
 
@@ -537,12 +536,12 @@ class TimeBasedLineChart extends React.Component {
     const hoveredData = this.state.hoveredData;
 
     const breakPointDate = moment.unix(this.props.breakPointDate);
-    const currentDate = moment.unix(hoveredData.timeStamp).startOf('day');
+    const currentDate = moment.unix(hoveredData.timeStamp).startOf(this.props.rangeType);
 
     const dash = currentDate.isAfter(breakPointDate) && this.props.dashedFutureLine ? '2, 2' : 'none';
     const isBreakPointDate = currentDate.format('MM DD YYYY') === breakPointDate.format('MM DD YYYY');
-    const isMonthRangeType = this.props.rangeType === 'month';
-    const dateFormat = isMonthRangeType ? 'MM/DD' : 'MMM';
+    const isDayRangeType = this.props.rangeType === 'day';
+    const dateFormat = isDayRangeType ? 'MM/DD' : 'MMM';
 
     const dots = d3.select(this.state.chartEl).selectAll('.dot-group');
     const slices = d3.select(this.state.chartEl).selectAll('.slice-group');
@@ -740,7 +739,7 @@ TimeBasedLineChart.defaultProps = {
   hoverCallBack: () => {},
   lineColor: StyleConstants.Colors.PRIMARY,
   margin: { top: 20, right: 50, bottom: 20, left: 50 },
-  rangeType: 'month',
+  rangeType: 'day',
   shadeAreaBelowZero: false,
   showBreakPoint: true,
   showTooltips: true,
