@@ -746,7 +746,7 @@ TimeBasedLineChart.defaultProps = {
   staticXAxis: true,
   width: 550,
   yAxisFormatter (d) {
-    return numeral(d).format('$0a');
+    return numeral(d).format('0a');
   }
 };
 
