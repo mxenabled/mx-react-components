@@ -240,7 +240,7 @@ class TimeBasedLineChart extends React.Component {
           .text('No data found.');
     }
 
-    chart.on('mouseleave', this._hideTooltip.bind(this));
+    chart.on('mouseleave', this._handleChartMouseLeave.bind(this));
   }
 
   _renderLineChart () {
@@ -455,7 +455,7 @@ class TimeBasedLineChart extends React.Component {
 
           return isPast && isBreakPointDate ? 'none' : 'block';
         })
-        .on('mouseover', this._showTooltip.bind(this));
+        .on('mouseover', this._handleDataPointMouseOver.bind(this));
     });
 
     //Update the axes
@@ -482,7 +482,7 @@ class TimeBasedLineChart extends React.Component {
     chart.selectAll('.grid-line .tick').style(styles.gridLineTick);
   }
 
-  _showTooltip (d) {
+  _handleDataPointMouseOver (d) {
     const breakPointDate = moment.unix(this.props.breakPointDate).startOf(this.props.rangeType);
     const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType);
     const isAfterBreakPoint = currentDate.isAfter(breakPointDate);
@@ -513,7 +513,7 @@ class TimeBasedLineChart extends React.Component {
     this.props.hoverCallBack(d);
   }
 
-  _hideTooltip () {
+  _handleChartMouseLeave () {
     this.setState({
       hoveredData: false,
       tooltipPosition: false
