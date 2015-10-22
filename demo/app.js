@@ -435,7 +435,8 @@ const Demo = React.createClass({
               label: 'Silent'
             }
           ]}
-          range={100}
+          lowerBound={-25}
+          upperBound={100}
           selectedColor='#359BCF'
         />
 
