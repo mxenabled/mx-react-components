@@ -9,5 +9,6 @@ module.exports = {
   Spin: require('./components/Spin'),
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
-  TypeAhead: require('./components/TypeAhead')
+  TypeAhead: require('./components/TypeAhead'),
+  DatePicker: require('./components/DatePicker')
 };

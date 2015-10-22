@@ -11,7 +11,8 @@ const {
   Select,
   TimeBasedLineChart,
   ToggleSwitch,
-  TypeAhead
+  TypeAhead,
+  DatePicker
 } = require('../src/Index');
 
 const styles = {
@@ -310,6 +311,10 @@ const Demo = React.createClass({
     });
   },
 
+  _handleDateSelect (selectedDate) {
+
+  },
+
   render () {
     return (
       <div>
@@ -586,6 +591,16 @@ const Demo = React.createClass({
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
+
+        <br/><br/>
+        <DatePicker
+          calendarColumns={7}
+          closeOnDateSelect={true}
+          defaultDate={'2015-10-10'}
+          showDayBorders={false}
+          onDateSelect={this._handleDateSelect}
+          useInputForSelectedDate={false}
+        />
       </div>
     );
   },
