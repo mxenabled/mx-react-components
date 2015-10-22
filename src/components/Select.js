@@ -50,7 +50,7 @@ class Select extends React.Component {
   _renderScrim () {
     if (this.state.isOpen) {
       return (
-        <div onClick={this._handleBlur.bind(this)} style={[styles.scrim, this.props.scrimStyle]} />
+        <div className='mx-select-scrim' onClick={this._handleBlur.bind(this)} style={[styles.scrim, this.props.scrimStyle]} />
       );
     }
   }
@@ -65,13 +65,11 @@ class Select extends React.Component {
         );
       } else {
         return (
-          <ul style={[styles.options, this.props.optionsStyle]}>
+          <ul className='mx-select-options' style={[styles.options, this.props.optionsStyle]}>
             {this.props.options.map(option => {
               return (
                 <li
-                  className='mx-select-scrim'
-                  className='mx-select-options'
-                  key={option.displayValue + option.value}
+                  className='mx-select-option' key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(this, option)}
                   ref={option.displayValue + option.value}
                   style={[styles.option, this.props.optionStyle]}
@@ -90,20 +88,17 @@ class Select extends React.Component {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select-options' style={[this.props.style, { position: 'relative' }]}>
+      <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
         <div
-          className='mx-select-custom'
-          className='mx-select-option'
-          onBlur={this._handleBlur.bind(this)}
+          className='mx-select-custom' onBlur={this._handleBlur.bind(this)}
           onClick={this._handleClick.bind(this)}
           style={[styles.component, this.props.dropdownStyle]}
           tabIndex='0'
         >
           {this._renderScrim()}
-          <div key='selected' style={[styles.selected, this.props.selectedStyle]}>
+          <div className='mx-select-selected' key='selected' style={[styles.selected, this.props.selectedStyle]}>
             {selected.displayValue}
             <Icon
-              className='mx-select'
               size='20'
               style={[styles.downArrow, this.props.selectedStyle && { color: this.props.selectedStyle.color }]}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
@@ -113,9 +108,9 @@ class Select extends React.Component {
         </div>
 
         {isMobile ? (
-          <select className='mx-select-default' className='mx-select' onChange={this._handleSelectChange.bind(this)} ref='defaultSelect' style={styles.select} value={selected.value}>
+          <select className='mx-select-default' onChange={this._handleSelectChange.bind(this)} ref='defaultSelect' style={styles.select} value={selected.value}>
             {this.props.options.map(option => {
-              return (<option className='mx-select-selected' key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
+              return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
             })}
           </select>
         ) : null }
