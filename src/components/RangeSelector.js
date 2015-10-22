@@ -16,6 +16,7 @@ class RangeSelector extends React.Component {
       dragging: null,
       lowerPixels: 0,
       lowerValue,
+      range: this.props.upperBound - this.props.lowerBound,
       selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
       showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
       upperPixels: 1,
@@ -48,8 +49,13 @@ class RangeSelector extends React.Component {
     const componentStyles = window.getComputedStyle(component);
     const width = parseInt(componentStyles.width, 0);
 
-    const lowerPixels = Math.round((this.state.lowerValue * width / this.props.range) / this.props.interval * this.props.interval);
-    const upperPixels = Math.round((this.state.upperValue * width / this.props.range) / this.props.interval * this.props.interval);
+    //convert our values to a 0-based scale
+    const lowerPosition = this.state.lowerValue - (this.props.lowerBound);
+    const upperPosition = this.state.upperValue - (this.props.lowerBound);
+
+    //convert our 0-based values to pixels
+    const lowerPixels = Math.round((lowerPosition * width / this.state.range) / this.props.interval * this.props.interval);
+    const upperPixels = Math.round((upperPosition * width / this.state.range) / this.props.interval * this.props.interval);
 
     this.setState({
       lowerPixels,
@@ -59,8 +65,13 @@ class RangeSelector extends React.Component {
   }
 
   _handlePresetClick (preset) {
-    const lowerPixels = Math.round((preset.lowerValue * this.state.width / this.props.range) / this.props.interval * this.props.interval);
-    const upperPixels = Math.round((preset.upperValue * this.state.width / this.props.range) / this.props.interval * this.props.interval);
+    //convert our values to a 0-based scale
+    const lowerPosition = preset.lowerValue - (this.props.lowerBound);
+    const upperPosition = preset.upperValue - (this.props.lowerBound);
+
+    //convert our 0-based values to pixels
+    const lowerPixels = Math.round((lowerPosition * this.state.width / this.state.range) / this.props.interval * this.props.interval);
+    const upperPixels = Math.round((upperPosition * this.state.width / this.state.range) / this.props.interval * this.props.interval);
 
     this.setState({
       lowerPixels,
@@ -84,28 +95,40 @@ class RangeSelector extends React.Component {
   _handleDragging (e) {
     if (this.state.dragging) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const pixelInterval = this.props.interval * this.state.width / this.props.range;
+      const pixelInterval = this.props.interval * this.state.width / this.state.range;
       const newState = {
         selectedLabel: null
       };
 
-      let newPosition = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+      let newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
 
-      newPosition = Math.min(newPosition, this.state.width);
-      newPosition = Math.max(newPosition, 0);
+      //make sure we don't go past the end of the track
+      newPixels = Math.min(newPixels, this.state.width);
 
+      //make sure we don't go past the beginning of the track
+      newPixels = Math.max(newPixels, 0);
+
+      //make sure the lower toggle doesn't go past the upper toggle
       if (this.state.dragging === 'Lower') {
-        newPosition = Math.min(newPosition, this.state.upperPixels);
+        newPixels = Math.min(newPixels, this.state.upperPixels);
       }
 
+      //make sure the upper toggle doesn't go past the lower toggle
       if (this.state.dragging === 'Upper') {
-        newPosition = Math.max(newPosition, this.state.lowerPixels);
+        newPixels = Math.max(newPixels, this.state.lowerPixels);
       }
 
-      newPosition = Math.round(newPosition / pixelInterval) * pixelInterval;
+      //make sure we snap to our interval
+      newPixels = Math.round(newPixels / pixelInterval) * pixelInterval;
 
-      newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPosition;
-      newState[this.state.dragging.toLowerCase() + 'Value'] = Math.round((newPosition * this.props.range / this.state.width) / this.props.interval) * this.props.interval;
+      //convert our pixels to a 0-based scale
+      const newPosition = (newPixels * this.state.range / this.state.width) + this.props.lowerBound;
+
+      //covert our 0-based value to actual value
+      const newValue = Math.round(newPosition / this.props.interval) * this.props.interval;
+
+      newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPixels;
+      newState[this.state.dragging.toLowerCase() + 'Value'] = newValue;
 
       this.setState(newState);
 
@@ -308,11 +331,12 @@ RangeSelector.propTypes = {
   defaultUpperValue: React.PropTypes.number,
   formatter: React.PropTypes.func,
   interval: React.PropTypes.number,
+  lowerBound: React.PropTypes.number,
   onLowerDragStop: React.PropTypes.func,
   onUpperDragStop: React.PropTypes.func,
   presets: React.PropTypes.array,
-  range: React.PropTypes.number,
-  selectedColor: React.PropTypes.string
+  selectedColor: React.PropTypes.string,
+  upperBound: React.PropTypes.number
 };
 
 RangeSelector.defaultProps = {
@@ -322,11 +346,12 @@ RangeSelector.defaultProps = {
   formatter (value) {
     return value;
   },
+  lowerBound: 0,
   onLowerDragStop () {},
   onUpperDragStop () {},
   presets: [],
-  range: 100,
-  selectedColor: StyleConstants.Colors.PRIMARY
+  selectedColor: StyleConstants.Colors.PRIMARY,
+  upperBound: 100
 };
 
 module.exports = Radium(RangeSelector);
