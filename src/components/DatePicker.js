@@ -11,7 +11,7 @@ class DatePicker extends React.Component {
     super(props);
     this.state = {
       currentDate: null,
-      selectedDate: moment(this.props.selectedDate).unix(),
+      selectedDate: moment(this.props.defaultDate).unix(),
       showCalendar: false
     };
   }
@@ -171,7 +171,7 @@ class DatePicker extends React.Component {
         <Icon
           onClick={this._toggleCalendar.bind(this)}
           size='20px'
-          style={[styles.navIcon, styles.navRight]}
+          style={styles.caret}
           type='caret-up'
         />);
     } else {
@@ -179,7 +179,7 @@ class DatePicker extends React.Component {
         <Icon
           onClick={this._toggleCalendar.bind(this)}
           size='20px'
-          style={[styles.navIcon, styles.navRight]}
+          style={styles.caret}
           type='caret-down'
         />);
     }
@@ -229,13 +229,13 @@ class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   closeOnDateSelect: React.PropTypes.bool,
+  defaultDate: React.PropTypes.string,
   fontSize: React.PropTypes.string,
   format: React.PropTypes.string,
   locale: React.PropTypes.string,
   minimumDate: React.PropTypes.string,
   onDateSelect: React.PropTypes.func,
   scrimStyle: React.PropTypes.object,
-  selectedDate: React.PropTypes.string,
   showCaret: React.PropTypes.bool,
   showDayBorders: React.PropTypes.bool,
   title: React.PropTypes.string,
@@ -245,12 +245,12 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   closeOnDateSelect: false,
+  defaultDate: moment().unix(),
   fontSize: StyleConstants.FontSize,
   format: 'YYYY-MM-DD',
   locale: 'en',
   onDateSelect () {},
   scrimStyle: {},
-  selectedDate: moment().unix(),
   showCaret: true,
   showDayBorders: false,
   title: null,
@@ -259,6 +259,13 @@ DatePicker.defaultProps = {
 };
 
 const styles = {
+  caret: {
+    color: '#CCCCCC',
+    position: 'absolute',
+    right: '0',
+    top: '50%',
+    transform: 'translateY(-50%)'
+  },
   calendar: {
     borderTopColor: '#E5E5E5',
     borderTopStyle: 'solid',
@@ -294,12 +301,12 @@ const styles = {
   },
   calendarDayContent: {
     borderRadius: '50%',
-    height: '100%',
+    height: '32px',
     left: '50%',
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%) translateX(-50%)',
-    width: '90%',
+    width: '32px',
 
     ':hover': {
       backgroundColor: '#359BCF',
@@ -323,6 +330,7 @@ const styles = {
     }
   },
   calendarHeader: {
+    color: '#606060',
     borderBottom: '#E5E5E5',
     borderBottomWidth: '1px',
     fontSize: '15px',
@@ -349,6 +357,7 @@ const styles = {
   component: {
     backgroundColor: '#FFFFFF',
     color: '#000000',
+    fontFamily: StyleConstants.FontFamily,
     height: '100%',
     WebkitAppearance: 'none',
     width: '100%',
@@ -396,7 +405,7 @@ const styles = {
     color: '#FFFFFF'
   },
   currentMonth: {
-    color: '#000000'
+    color: '#606060'
   },
   input: {
     backgroundColor: '#FFFFFF',
@@ -414,7 +423,6 @@ const styles = {
     }
   },
   navIcon: {
-    color: '#000000',
     cursor: 'pointer'
   },
   navLeft: {
@@ -441,7 +449,7 @@ const styles = {
     color: '#606060',
     cursor: 'pointer',
     fontSize: StyleConstants.FontSize,
-    fontWeight: 'bold',
+    padding: '5px 0 5px 5px',
     verticalAlign: 'middle',
     width: '100%',
 
