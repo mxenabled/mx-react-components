@@ -578,6 +578,7 @@ class Icon extends React.Component {
     return (
       <svg
         {...this.props}
+        className='mx-icon'
         fit={true}
         preserveAspectRatio='xMidYMid meet'
         style={[styles, this.props.style]}
