@@ -137,7 +137,11 @@ class DonutChart extends React.Component {
     if (this.props.showDataLabel) {
       if (this.props.children) {
         return (
-          <div onClick={this._handleClick.bind(this)} style={styles.center}>
+          <div
+            className='mx-donutchart-data'
+            onClick={this._handleClick.bind(this)}
+            style={styles.center}
+          >
             {this.props.children}
           </div>
         );
@@ -148,11 +152,15 @@ class DonutChart extends React.Component {
         const value = this.state.activeIndex === -1 ? this.props.formatter(this.props.defaultLabelValue) : this.props.formatter(activeDataSet.value);
 
         return (
-          <div onClick={this._handleClick.bind(this)} style={styles.center}>
-            <div style={[styles.value, { color }]}>
+          <div
+            className='mx-donutchart-data'
+            onClick={this._handleClick.bind(this)}
+            style={styles.center}
+          >
+            <div className='mx-donutchart-data-value' style={[styles.value, { color }]}>
               {value}
             </div>
-            <div style={styles.label}>
+            <div className='mx-donutchart-data-label' style={styles.label}>
               {text}
             </div>
           </div>
@@ -166,10 +174,17 @@ class DonutChart extends React.Component {
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2 + 'px';
 
     return (
-      <div style={[styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width }]}>
+      <div
+        className='mx-donutchart'
+        style={[styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width }]}
+      >
         {this._renderDataLabel()}
-        <svg height={this.props.height} width={this.props.width}>
-          <g transform={position}>
+        <svg
+          className='mx-donutchart-svg'
+          height={this.props.height}
+          width={this.props.width}
+        >
+          <g className='mx-donutchart-g' transform={position}>
             {this._renderBaseArc()}
             {this._renderArcs()}
             {this._renderDataPoints()}
