@@ -533,7 +533,7 @@ class TimeBasedLineChart extends React.Component {
     const dash = currentDate.isAfter(breakPointDate) && this.props.dashedFutureLine ? '2, 2' : 'none';
     const isBreakPointDate = currentDate.format('MM DD YYYY') === breakPointDate.format('MM DD YYYY');
     const isDayRangeType = this.props.rangeType === 'day';
-    const dateFormat = isDayRangeType ? 'MM/DD' : 'MMM';
+    const dateFormat = isDayRangeType ? 'MMM D' : 'MMM';
 
     const dots = d3.select(this.state.chartEl).selectAll('.dot-group');
     const slices = d3.select(this.state.chartEl).selectAll('.slice-group');
@@ -553,10 +553,12 @@ class TimeBasedLineChart extends React.Component {
       //Date Text
       slices.append('text')
         .attr('x', () => {
-          return this._getXScaleValue(currentDate.unix()) - this._getSliceMiddle() - 4;
+          const offSet = this.props.rangeType === 'day' ? 17 : 10;
+
+          return this._getXScaleValue(currentDate.unix()) - offSet;
         })
         .attr('y', this.state.adjustedHeight + 5)
-        .style('font-size', '10')
+        .style('font-size', '12')
         .style('opacity', '0.3')
         .text(() => {
           return isBreakPointDate ? null : currentDate.format(dateFormat);
