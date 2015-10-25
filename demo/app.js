@@ -552,7 +552,6 @@ const Demo = React.createClass({
           margin={{ top: 30, right: 75, bottom: 30, left: 75 }}
           rangeType={dataType}
           shadeAreaBelowZero={true}
-          staticXAxis={false}
           width={700}
         >
           <div style={{ backgroundColor: '#999', color: '#fff', padding: '5px' }}>
