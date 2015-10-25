@@ -628,7 +628,7 @@ class TimeBasedLineChart extends React.Component {
 
       return (
         <div style={[styles.tooltipWrapper, position]}>
-          <div style={[styles.defaultToolTip]}>
+          <div style={styles.defaultToolTip}>
             {hoveredData.value}
           </div>
         </div>
