@@ -205,7 +205,6 @@ class TimeBasedLineChart extends React.Component {
 
   _renderChartBase () {
     const margin = this.props.margin;
-    const marginLeftOffSet = Math.floor(this.state.adjustedWidth / this.props.data.length);
     const width = this.props.width;
     const height = this.props.height;
     const chart = d3.select(this.state.chartEl);
@@ -441,9 +440,7 @@ class TimeBasedLineChart extends React.Component {
         })
         .attr('y', -10)
         .attr('height', this.state.adjustedHeight)
-        .attr('width', d => {
-          return this._getSliceWidth();
-        })
+        .attr('width', this._getSliceWidth())
         .style('opacity', '0')
         .style('display', d => {
           const currentDate = moment.unix(d.timeStamp);
