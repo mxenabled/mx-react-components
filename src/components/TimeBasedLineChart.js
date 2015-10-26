@@ -628,16 +628,8 @@ class TimeBasedLineChart extends React.Component {
 
       return (
         <div style={[styles.tooltipWrapper, position]}>
-          <div style={[styles.tooltip, styles.credit]}>
-            {numeral(hoveredData.above).format('$0,0')} Income
-          </div>
-          <br/>
-          <div style={[styles.tooltip, { backgroundColor: this.props.lineColor }]}>
-            {numeral(hoveredData.value).format('$0,0')} Cash Balance
-          </div>
-          <br/>
-          <div style={[styles.tooltip, styles.debit]}>
-            {numeral(hoveredData.below).format('$0,0')} Expenses
+          <div style={styles.defaultToolTip}>
+            {hoveredData.value}
           </div>
         </div>
       );
@@ -667,6 +659,12 @@ const styles = {
   },
   debit: {
     backgroundColor: '#C93030'
+  },
+  defaultToolTip: {
+    backgroundColor: StyleConstants.Colors.PRIMARY,
+    color: '#FFFFFF',
+    padding: '3px 5px 3px 5px',
+    transform: 'translateY(32px)'
   },
   domain: {
     opacity: 0

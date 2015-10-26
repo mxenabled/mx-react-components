@@ -492,11 +492,7 @@ const Demo = React.createClass({
           margin={{ top: 30, right: 50, bottom: 20, left: 50 }}
           shadeAreaBelowZero={true}
           width={700}
-        >
-          <div style={{ backgroundColor: '#999', color: '#fff', padding: '5px' }}>
-            {this.state.lineChartHoverValue}
-          </div>
-        </TimeBasedLineChart>
+        />
 
         <br/><br/>
         <ToggleSwitch />
