@@ -82,16 +82,12 @@ class TimeBasedLineChart extends React.Component {
     return line(data);
   }
 
-  _getSliceMiddle (timeStamp) {
-    return Math.floor(this._getSliceWidth(timeStamp) / 2);
+  _getSliceMiddle () {
+    return this._getSliceWidth() / 2;
   }
 
-  _getSliceWidth (timeStamp) {
-    const rangeType = this.props.rangeType;
-    const startOf = timeStamp ? moment.unix(timeStamp).startOf(rangeType).unix() : moment(timeStamp).startOf(rangeType).unix();
-    const endOf = timeStamp ? moment.unix(timeStamp).endOf(rangeType).unix() : moment(timeStamp).endOf(rangeType).unix();
-
-    return Math.floor(this._getXScaleValue(endOf) - this._getXScaleValue(startOf));
+  _getSliceWidth () {
+    return Math.floor(this.state.adjustedWidth / this.props.data.length);
   }
 
   _getSplitData () {
@@ -224,15 +220,15 @@ class TimeBasedLineChart extends React.Component {
     if (data.length > 0) {
       chart.append('g')
         .attr('class', 'x-axis')
-        .attr('transform', 'translate(' + margin.left + ',' + (height - margin.bottom) + ')');
+        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (height - margin.bottom) + ')');
 
       chart.append('g')
         .attr('class', 'y-axis')
-        .attr('transform', 'translate(' + (margin.left + 30) + ',' + (margin.top - 10) + ')');
+        .attr('transform', 'translate(' + (margin.left + 20) + ',' + (margin.top - 10) + ')');
 
       chart.append('g')
         .attr('class', 'grid-line')
-        .attr('transform', 'translate(' + (margin.left - 10) + ',' + (margin.top - 10) + ')');
+        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
     } else {
       chart.append('g')
         .append('text')
@@ -246,6 +242,7 @@ class TimeBasedLineChart extends React.Component {
   _renderLineChart () {
     const chart = d3.select(this.state.chartEl);
     const data = this._getSplitData();
+    const xAxisFormat = this.props.rangeType === 'day' ? 'MMM D' : 'MMM';
     const yTicks = this._getYAxisTicks(this.props.data);
 
     //Draw the xAxis labels
@@ -253,7 +250,7 @@ class TimeBasedLineChart extends React.Component {
       .scale(this._getXScaleFunction())
       .orient('bottom')
       .tickFormat(d => {
-        return moment.unix(d).format('MMM D');
+        return moment.unix(d).format(xAxisFormat);
       })
       .ticks(8);
 
@@ -410,8 +407,8 @@ class TimeBasedLineChart extends React.Component {
         })
         .attr('r', 3)
         .attr('opacity', (d, j) => {
-          const currentDate = moment.unix(d.timeStamp);
-          const isBreakPointDate = currentDate.format('YYYY MM DD') === breakPointDate.format('YYYY MM D');
+          const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType);
+          const isBreakPointDate = currentDate.format('YYYY MM DD') === breakPointDate.format('YYYY MM DD');
           const isStartOfSet = j === 0;
           const isEndOfSet = j === (dataSet.length - 1);
 
@@ -443,11 +440,7 @@ class TimeBasedLineChart extends React.Component {
         })
         .attr('y', -10)
         .attr('height', this.state.adjustedHeight)
-        .attr('width', d => {
-          const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix();
-
-          return this._getSliceWidth(currentDate);
-        })
+        .attr('width', this._getSliceWidth())
         .style('opacity', '0')
         .style('display', d => {
           const currentDate = moment.unix(d.timeStamp);
@@ -486,11 +479,11 @@ class TimeBasedLineChart extends React.Component {
     const breakPointDate = moment.unix(this.props.breakPointDate).startOf(this.props.rangeType);
     const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType);
     const isAfterBreakPoint = currentDate.isAfter(breakPointDate);
-    const sliceWidth = this._getSliceWidth(currentDate.unix());
+    const sliceWidth = this._getSliceMiddle();
     const xScale = this._getXScaleValue(currentDate.unix());
 
-    const left = isAfterBreakPoint ? 'auto' : xScale + this.props.margin.left + sliceWidth + 3;
-    const right = isAfterBreakPoint ? this.state.adjustedWidth + this.props.margin.right + sliceWidth + 3 - xScale : 'auto';
+    const left = isAfterBreakPoint ? 'auto' : xScale + this.props.margin.left + sliceWidth + 10;
+    const right = isAfterBreakPoint ? this.state.adjustedWidth + this.props.margin.right + sliceWidth + 10 - xScale : 'auto';
     const textAlign = isAfterBreakPoint ? 'right' : 'left';
     const top = this.props.children ? this._getYScaleValue(d.value) - 5 + this.props.margin.top : this._getYScaleValue(d.value) - 5;
 
@@ -537,7 +530,7 @@ class TimeBasedLineChart extends React.Component {
     const dash = currentDate.isAfter(breakPointDate) && this.props.dashedFutureLine ? '2, 2' : 'none';
     const isBreakPointDate = currentDate.format('MM DD YYYY') === breakPointDate.format('MM DD YYYY');
     const isDayRangeType = this.props.rangeType === 'day';
-    const dateFormat = isDayRangeType ? 'MM/DD' : 'MMM';
+    const dateFormat = isDayRangeType ? 'MMM D' : 'MMM';
 
     const dots = d3.select(this.state.chartEl).selectAll('.dot-group');
     const slices = d3.select(this.state.chartEl).selectAll('.slice-group');
@@ -550,19 +543,19 @@ class TimeBasedLineChart extends React.Component {
       })
       .attr('y', -10)
       .attr('height', this.state.adjustedHeight)
-      .attr('width', () => {
-        return this._getSliceWidth(currentDate.unix());
-      })
+      .attr('width', this._getSliceWidth())
       .style('opacity', '0.025');
 
     if (!this.props.staticXAxis) {
       //Date Text
       slices.append('text')
         .attr('x', () => {
-          return this._getXScaleValue(currentDate.unix()) - this._getSliceMiddle() - 4;
+          const offSet = this.props.rangeType === 'day' ? 17 : 10;
+
+          return this._getXScaleValue(currentDate.unix()) - offSet;
         })
         .attr('y', this.state.adjustedHeight + 5)
-        .style('font-size', '10')
+        .style('font-size', '12')
         .style('opacity', '0.3')
         .text(() => {
           return isBreakPointDate ? null : currentDate.format(dateFormat);
