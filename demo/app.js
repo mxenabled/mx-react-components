@@ -552,11 +552,14 @@ const Demo = React.createClass({
           margin={{ top: 30, right: 75, bottom: 30, left: 75 }}
           rangeType={dataType}
           shadeAreaBelowZero={true}
+          style={{ margin: '0 auto'}}
           width={700}
         />
 
         <br/><br/>
-        <ToggleSwitch />
+        <div style={{ textAlign: 'center' }}>
+          <ToggleSwitch />
+        </div>
 
         <br/><br/>
         <TypeAhead
