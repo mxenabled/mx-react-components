@@ -634,7 +634,7 @@ class TimeBasedLineChart extends React.Component {
     this._renderChart();
 
     return (
-      <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
+      <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }, this.props.style]}>
         {this._renderTooltip()}
         <svg className='mx-time-based-line-chart-svg' ref='chart' />
       </div>
