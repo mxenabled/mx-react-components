@@ -16,7 +16,7 @@ class Select extends React.Component {
     };
   }
 
-  _handleBlur () {
+  _handleScrimClick () {
     this.setState({
       isOpen: false
     });
@@ -51,7 +51,7 @@ class Select extends React.Component {
     if (this.state.isOpen) {
       return (
         <div className='mx-select-scrim'
-        onClick={this._handleBlur.bind(this)} style={[styles.scrim, this.props.scrimStyle]} />
+        onClick={this._handleScrimClick.bind(this)} style={[styles.scrim, this.props.scrimStyle]} />
       );
     }
   }
@@ -92,7 +92,6 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
         <div className='mx-select-custom'
-        onBlur={this._handleBlur.bind(this)}
         onClick={this._handleClick.bind(this)}
         style={[styles.component, this.props.dropdownStyle]}
         tabIndex='0'
