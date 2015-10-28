@@ -35,6 +35,10 @@ const Components = React.createClass({
                   displayValue: 'Spin'
                 },
                 {
+                  value: 'date-picker',
+                  displayValue: 'Date Picker'
+                },
+                {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
                 },
@@ -72,6 +76,7 @@ const Components = React.createClass({
             <Link to='/components/spin'>Spin</Link>
 
             <h3>Form</h3>
+            <Link to='/components/date-picker'>Date Picker</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/select'>Select</Link>
             <Link to='/components/toggle-switch'>Toggle Switch</Link>

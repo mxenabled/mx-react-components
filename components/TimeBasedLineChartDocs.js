@@ -134,6 +134,41 @@ const TimeBasedLineChartDocs = React.createClass({
 
         <h5>yAxisFormatter <label>Function</label></h5>
         <p>This function will be used to determine the format of the y axis tick labels. If should return some type of value.</p>
+
+        <h3>Example</h3>
+        <Markdown lang='js'>
+  {`
+    const lineChartData = [];
+
+    for (let i = 6; i > 0; i--) {
+      lineChartData.push({
+        timeStamp: moment().subtract(i, 'months').startOf('month').unix(),
+        value: Math.floor(Math.random() * 1000)
+      });
+    }
+
+    for (let i = 0; i < 6; i++) {
+      lineChartData.push({
+        timeStamp: moment().add(i, 'months').startOf('month').unix(),
+        value: Math.floor(Math.random() * 1000)
+      });
+    }
+
+    <TimeBasedLineChart
+      alwaysShowZeroYTick={true}
+      breakPointDate={moment().startOf('month').unix()}
+      breakPointLabel={'This Month'}
+      dashedFutureLine={false}
+      data={lineChartData}
+      height={400}
+      margin={{ top: 30, right: 0, bottom: 30, left: 75 }}
+      rangeType={'month'}
+      shadeAreaBelowZero={true}
+      style={{ boxSizing: 'content-box' }}
+      width={700}
+    />
+  `}
+        </Markdown>
       </div>
     );
   }
