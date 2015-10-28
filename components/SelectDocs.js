@@ -64,8 +64,8 @@ const SelectDocs = React.createClass({
         />
 
         <h3>Usage</h3>
-        <h5>isMobile <label>Boolean</label></h5>
-        <p>If set to 'true', then a default html select element will be used to control the native device select ui.</p>
+        <h5>dropdownStyle <label>Object | Array</label></h5>
+        <p>A style object or Radium array that modifies the css styles of the 'div' element that wraps the selected option and options menu elements.</p>
 
         <h5>onChange <label>Function</label></h5>
         <p>A function that is called when a new value has been selected.</p>
@@ -82,7 +82,7 @@ const SelectDocs = React.createClass({
         <h5>placeholderText <label>String</label></h5>
         <p>A text to be displayed when there is no value selected.</p>
 
-        <h5>scrimStyle <label>Object or Array</label></h5>
+        <h5>scrimStyle <label>Object | Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of scrim. The scrim is used to handle clicking away from the select box and has a default opacity of 0.</p>
 
         <h5>selected <label>Object</label></h5>
