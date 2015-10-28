@@ -18,6 +18,7 @@ const RangeSelectorDocs = React.createClass({
           defaultLowerValue={18}
           defaultUpperValue={30}
           interval={1}
+          lowerBound={-100}
           presets={[
             {
               lowerValue: 0,
@@ -50,8 +51,8 @@ const RangeSelectorDocs = React.createClass({
               label: 'Silent'
             }
           ]}
-          range={100}
           selectedColor='#359BCF'
+          upperBound={100}
         />
 
         <h3>Usage</h3>
@@ -67,6 +68,10 @@ const RangeSelectorDocs = React.createClass({
         <h5>interval <label>Number</label></h5>
         <p>A number representing the interval you'd like the toggles to snap to.</p>
 
+        <h5>lowerBound <label>Number</label></h5>
+        <p>Default: 0</p>
+        <p>A number that sets the lower bound of the RangeSelector and is used to calculate the relative position of the toggles.</p>
+
         <h5>onLowerDragStop <label>Function</label></h5>
         <p>A function to be called when the user has stopped dragging the lower toggle. The new lower toggle value will be passed to this function.</p>
 
@@ -76,8 +81,8 @@ const RangeSelectorDocs = React.createClass({
         <h5>presets <label>Array</label></h5>
         <p>An array of objects with the following key/value pairs that will be used to preset the toggle values/positions when clicked: lowerValue: Number, upperValue: number, label: String.</p>
 
-        <h5>range <label>Number</label></h5>
-        <p>A number that sets the upper bound of the Range Selector and is used to calculate the relative position of the toggles. The lower bound of the Range Selector is always set to 0.</p>
+        <h5>upperBound <label>Number</label></h5>
+        <p>A number that sets the upper bound of the RangeSelector and is used to calculate the relative position of the toggles.</p>
 
         <h5>selectedColor <label>String</label></h5>
         <p>The color of the element that spans between the two toggles and represents the selected values.</p>
