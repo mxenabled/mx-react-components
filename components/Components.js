@@ -43,12 +43,20 @@ const Components = React.createClass({
                   displayValue: 'Select'
                 },
                 {
+                  value: 'toggle-switch',
+                  displayValue: 'Toggle Switch'
+                },
+                {
                   value: 'type-ahead',
                   displayValue: 'Type Ahead'
                 },
                 {
                   value: 'donut',
                   displayValue: 'Donut'
+                },
+                {
+                  value: 'time-based-line-chart',
+                  displayValue: 'Time Based Line Chart'
                 }
               ]}
               selected={null}
@@ -71,6 +79,7 @@ const Components = React.createClass({
 
             <h3>Charts (D3)</h3>
             <Link to='/components/donut'>Donut</Link>
+            <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>
           </div>
         </div>
 

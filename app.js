@@ -15,6 +15,7 @@ const Select = require('components/SelectDocs');
 const Spin = require('components/SpinDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
+const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
 
 const App = React.createClass({
   render () {
@@ -46,6 +47,7 @@ ReactDOM.render((
         <Route component={Spin} path='spin' />
         <Route component={ToggleSwitch} path='toggle-switch' />
         <Route component={TypeAhead} path='type-ahead' />
+        <Route component={TimeBasedLineChart} path='time-based-line-chart' />
       </Route>
       <IndexRoute component={Home} />
     </Route>
