@@ -338,7 +338,7 @@ const styles = {
     padding: '5px 0px 7px 0px',
     position: 'relative',
     textAlign: 'center',
-    textTransform: 'normal'
+    textTransform: 'none'
   },
   calendarIcon: {
     color: '#DDDDDD',
