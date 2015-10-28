@@ -266,13 +266,6 @@ const styles = {
     top: '50%',
     transform: 'translateY(-50%)'
   },
-  calendar: {
-    borderTopColor: '#E5E5E5',
-    borderTopStyle: 'solid',
-    borderTopWidth: '1px',
-    display: 'none',
-    padding: '10px 0'
-  },
   calendarDay: {
     color: '#DDDDDD',
     float: 'left',
@@ -358,7 +351,6 @@ const styles = {
     backgroundColor: '#FFFFFF',
     color: '#000000',
     fontFamily: StyleConstants.FontFamily,
-    height: '100%',
     WebkitAppearance: 'none',
     width: '100%',
 
@@ -383,6 +375,7 @@ const styles = {
     display: 'none',
     maxWidth: '270px',
     padding: '0px 0px 0px 0px',
+    margin: '0 0 40px 0',
     position: 'absolute',
     width: '100%',
     zIndex: 10

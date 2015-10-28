@@ -476,15 +476,16 @@ class TimeBasedLineChart extends React.Component {
   }
 
   _handleDataPointMouseOver (d) {
-    const breakPointDate = moment.unix(this.props.breakPointDate).startOf(this.props.rangeType);
+    const graphMiddleTimeStamp = this.props.data[Math.floor(this.props.data.length / 2)].timeStamp;
+    const graphMiddleDate = moment.unix(graphMiddleTimeStamp).startOf(this.props.rangeType);
     const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType);
-    const isAfterBreakPoint = currentDate.isAfter(breakPointDate);
+    const isAfterMidPoint = currentDate.isAfter(graphMiddleDate);
     const sliceWidth = this._getSliceMiddle();
     const xScale = this._getXScaleValue(currentDate.unix());
 
-    const left = isAfterBreakPoint ? 'auto' : xScale + this.props.margin.left + sliceWidth + 10;
-    const right = isAfterBreakPoint ? this.state.adjustedWidth + this.props.margin.right + sliceWidth + 10 - xScale : 'auto';
-    const textAlign = isAfterBreakPoint ? 'right' : 'left';
+    const left = isAfterMidPoint ? 'auto' : xScale + this.props.margin.left + sliceWidth + 10;
+    const right = isAfterMidPoint ? this.state.adjustedWidth + this.props.margin.right + sliceWidth + 10 - xScale : 'auto';
+    const textAlign = isAfterMidPoint ? 'right' : 'left';
     const top = this.props.children ? this._getYScaleValue(d.value) - 5 + this.props.margin.top : this._getYScaleValue(d.value) - 5;
 
     const position = {
@@ -633,7 +634,7 @@ class TimeBasedLineChart extends React.Component {
     this._renderChart();
 
     return (
-      <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
+      <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }, this.props.style]}>
         {this._renderTooltip()}
         <svg className='mx-time-based-line-chart-svg' ref='chart' />
       </div>

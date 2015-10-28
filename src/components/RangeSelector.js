@@ -110,12 +110,12 @@ class RangeSelector extends React.Component {
 
       //make sure the lower toggle doesn't go past the upper toggle
       if (this.state.dragging === 'Lower') {
-        newPixels = Math.min(newPixels, this.state.upperPixels);
+        newPixels = Math.min(newPixels, this.state.upperPixels - pixelInterval);
       }
 
       //make sure the upper toggle doesn't go past the lower toggle
       if (this.state.dragging === 'Upper') {
-        newPixels = Math.max(newPixels, this.state.lowerPixels);
+        newPixels = Math.max(newPixels, this.state.lowerPixels + pixelInterval);
       }
 
       //make sure we snap to our interval
