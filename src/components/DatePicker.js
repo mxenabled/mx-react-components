@@ -166,22 +166,15 @@ class DatePicker extends React.Component {
   }
 
   _renderCaret () {
-    if (this.state.showCalendar) {
+    if (this.props.showCaret) {
       return (
         <Icon
           onClick={this._toggleCalendar.bind(this)}
-          size='20px'
+          size='28px'
           style={styles.caret}
-          type='caret-up'
-        />);
-    } else {
-      return (
-        <Icon
-          onClick={this._toggleCalendar.bind(this)}
-          size='20px'
-          style={styles.caret}
-          type='caret-down'
-        />);
+          type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+        />
+      );
     }
   }
 
@@ -197,7 +190,7 @@ class DatePicker extends React.Component {
       >
         <div key='componentTop' style={[styles.componentTop, this.state.showCalendar && styles.componentTopOpen]}>
           {this._renderSelectedDate()}
-          {this.props.showCaret ? this._renderCaret() : null}
+          {this._renderCaret()}
         </div>
         <div key='componentBottom' style={[styles.componentBottom, this.state.showCalendar && styles.calendarShow]}>
           {this._renderTitle(styles)}
@@ -261,6 +254,7 @@ DatePicker.defaultProps = {
 const styles = {
   caret: {
     color: '#CCCCCC',
+    cursor: 'pointer',
     position: 'absolute',
     right: '0',
     top: '50%',
