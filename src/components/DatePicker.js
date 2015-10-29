@@ -170,7 +170,7 @@ class DatePicker extends React.Component {
       return (
         <Icon
           onClick={this._toggleCalendar.bind(this)}
-          size='28px'
+          size='20px'
           style={styles.caret}
           type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
         />
