@@ -104,7 +104,7 @@ class TypeAhead extends React.Component {
     const filteredItems = this._getFilteredItems();
 
     //add item on enter
-    if (e.keyCode === 13 && selectedItems.indexOf(highlightedValue) === -1) {
+    if (e.keyCode === 13 && highlightedValue && selectedItems.indexOf(highlightedValue) === -1) {
       this._handleItemSelect(highlightedValue);
     }
 
@@ -177,7 +177,7 @@ class TypeAhead extends React.Component {
     const filteredItems = this._getFilteredItems();
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
     const skipClearSelectAll = 2;
-    const activeLi = this.refs.optionList.getDOMNode().children[nextIndex + skipClearSelectAll];
+    const activeLi = ul.children[nextIndex + skipClearSelectAll];
 
     if (scrollDirection === 'up' && activeLi) {
       const heightFromTop = (nextIndex + skipClearSelectAll) * activeLi.clientHeight + activeLi.clientHeight;
