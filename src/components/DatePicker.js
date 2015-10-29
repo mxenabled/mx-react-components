@@ -6,6 +6,19 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
+function validDate(props, propName, componentName, location) {
+  componentName = componentName || 'ANONYMOUS';
+
+  if (props[propName]) {
+    let value = props[propName];
+    if (typeof value === 'string') {
+        return moment(value).isValid() ? null : new Error(propName + ' in ' + componentName + " is not a valid date");
+    }
+  }
+
+  return null;
+}
+
 class DatePicker extends React.Component {
   constructor (props) {
     super(props);
@@ -229,7 +242,7 @@ class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   closeOnDateSelect: React.PropTypes.bool,
-  defaultDate: React.PropTypes.string,
+  defaultDate: validDate,
   fontSize: React.PropTypes.string,
   format: React.PropTypes.string,
   locale: React.PropTypes.string,
@@ -245,7 +258,7 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   closeOnDateSelect: false,
-  defaultDate: moment().unix(),
+  defaultDate: moment(),
   fontSize: StyleConstants.FontSize,
   format: 'YYYY-MM-DD',
   locale: 'en',
@@ -459,5 +472,7 @@ const styles = {
     margin: '1px'
   }
 };
+
+
 
 module.exports = Radium(DatePicker);
