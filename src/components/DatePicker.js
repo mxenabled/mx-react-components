@@ -24,7 +24,7 @@ class DatePicker extends React.Component {
       selectedDate: moment.unix(date)
     });
 
-    this.props.onDateSelect(moment.unix(date).format(this.props.format));
+    this.props.onDateSelect(date);
   }
 
   _handlePreviousClick () {
