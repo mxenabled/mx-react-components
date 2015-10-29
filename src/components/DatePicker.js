@@ -185,7 +185,7 @@ class DatePicker extends React.Component {
     return (
       <div
         onBlur={this._handleBlur.bind(this)}
-        style={[styles.component, { fontSize: this.props.fontSize }, styles.clearFix]}
+        style={[styles.component, styles.clearFix]}
         tabIndex='0'
       >
         <div key='componentTop' style={[styles.componentTop, this.state.showCalendar && styles.componentTopOpen]}>
@@ -223,7 +223,6 @@ class DatePicker extends React.Component {
 DatePicker.propTypes = {
   closeOnDateSelect: React.PropTypes.bool,
   defaultDate: React.PropTypes.number,
-  fontSize: React.PropTypes.string,
   format: React.PropTypes.string,
   locale: React.PropTypes.string,
   minimumDate: React.PropTypes.number,
@@ -239,7 +238,6 @@ DatePicker.propTypes = {
 DatePicker.defaultProps = {
   closeOnDateSelect: false,
   defaultDate: moment().unix(),
-  fontSize: StyleConstants.FontSize,
   format: 'YYYY-MM-DD',
   locale: 'en',
   onDateSelect () {},
@@ -345,6 +343,7 @@ const styles = {
     backgroundColor: '#FFFFFF',
     color: '#000000',
     fontFamily: StyleConstants.FontFamily,
+    fontSize: StyleConstants.FontSize,
     WebkitAppearance: 'none',
     width: '100%',
 
