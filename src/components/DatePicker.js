@@ -185,7 +185,7 @@ class DatePicker extends React.Component {
     return (
       <div
         onBlur={this._handleBlur.bind(this)}
-        style={[styles.component, styles.clearFix]}
+        style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex='0'
       >
         <div key='componentTop' style={[styles.componentTop, this.state.showCalendar && styles.componentTopOpen]}>
