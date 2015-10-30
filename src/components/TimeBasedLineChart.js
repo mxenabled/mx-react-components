@@ -708,7 +708,7 @@ TimeBasedLineChart.propTypes = {
   lineColor: React.PropTypes.string,
   margin: React.PropTypes.object,
   onDataPointHover: React.PropTypes.func,
-  rangeType: React.PropTypes.string,
+  rangeType: React.PropTypes.oneOf(['day', 'month']),
   shadeAreaBelowZero: React.PropTypes.bool,
   showBreakPoint: React.PropTypes.bool,
   showTooltips: React.PropTypes.bool,
