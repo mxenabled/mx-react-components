@@ -646,7 +646,8 @@ const styles = {
   component: {
     fontFamily: StyleConstants.FontFamily,
     padding: '10px',
-    position: 'relative'
+    position: 'relative',
+    boxSizing: 'content-box'
   },
   credit: {
     backgroundColor: '#30B53C'
@@ -725,7 +726,7 @@ TimeBasedLineChart.defaultProps = {
   data: [],
   height: 400,
   lineColor: StyleConstants.Colors.PRIMARY,
-  margin: { top: 20, right: 50, bottom: 20, left: 50 },
+  margin: { top: 30, right: 50, bottom: 20, left: 50 },
   onDataPointHover: () => {},
   rangeType: 'day',
   shadeAreaBelowZero: false,
