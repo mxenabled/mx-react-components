@@ -726,7 +726,7 @@ TimeBasedLineChart.defaultProps = {
   height: 400,
   hoverCallBack: () => {},
   lineColor: StyleConstants.Colors.PRIMARY,
-  margin: { top: 20, right: 50, bottom: 20, left: 50 },
+  margin: { top: 30, right: 50, bottom: 20, left: 50 },
   rangeType: 'day',
   shadeAreaBelowZero: false,
   showBreakPoint: true,
