@@ -646,7 +646,8 @@ const styles = {
   component: {
     fontFamily: StyleConstants.FontFamily,
     padding: '10px',
-    position: 'relative'
+    position: 'relative',
+    boxSizing: 'content-box'
   },
   credit: {
     backgroundColor: '#30B53C'
