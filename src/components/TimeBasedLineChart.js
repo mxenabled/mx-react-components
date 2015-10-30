@@ -500,7 +500,7 @@ class TimeBasedLineChart extends React.Component {
       tooltipPosition: position
     });
 
-    this.props.hoverCallBack(d);
+    this.props.onDataPointHover(d);
   }
 
   _handleChartMouseLeave () {
@@ -704,7 +704,7 @@ TimeBasedLineChart.propTypes = {
   dashedFutureLine: React.PropTypes.bool,
   data: React.PropTypes.array,
   height: React.PropTypes.number,
-  hoverCallBack: React.PropTypes.func,
+  onDataPointHover: React.PropTypes.func,
   lineColor: React.PropTypes.string,
   margin: React.PropTypes.object,
   rangeType: React.PropTypes.string,
@@ -724,7 +724,7 @@ TimeBasedLineChart.defaultProps = {
   dashedFutureLine: true,
   data: [],
   height: 400,
-  hoverCallBack: () => {},
+  onDataPointHover: () => {},
   lineColor: StyleConstants.Colors.PRIMARY,
   margin: { top: 20, right: 50, bottom: 20, left: 50 },
   rangeType: 'day',
