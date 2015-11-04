@@ -50,13 +50,15 @@ const TwoLevelSelector = React.createClass({
     return parentItems;
   },
 
-  _flattenArray (obj) {
+  _flattenObjectToArray (obj) {
     const tempArray = [];
 
     for (const key in obj) {
-      tempArray.push(key);
+      if (obj.hasOwnProperty(key)) {
+        tempArray.push(key);
+      }
 
-      obj[key].map(function(val) {
+      obj[key].map(val => {
         tempArray.push(val);
       });
     }
@@ -64,7 +66,7 @@ const TwoLevelSelector = React.createClass({
   },
 
   _getCategoriesByKeyword (searchKeyword) {
-    const flatList = this._flattenArray(this.props.data);
+    const flatList = this._flattenObjectToArray(this.props.data);
     const searchList = flatList.filter(option => {
       return option.toLowerCase().match(searchKeyword.toLowerCase());
     });
