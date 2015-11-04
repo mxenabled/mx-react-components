@@ -58,9 +58,9 @@ const TwoLevelSelector = React.createClass({
         tempArray.push(key);
       }
 
-      obj[key].map(val => {
-        tempArray.push(val);
-      });
+      for (let i = 0; i < obj[key].length; i ++) {
+        tempArray.push(obj[key][i]);
+      }
     }
     return tempArray;
   },
