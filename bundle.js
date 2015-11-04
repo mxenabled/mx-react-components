@@ -43048,16 +43048,6 @@
 	        )
 	      ),
 	      React.createElement(
-	        'p',
-	        null,
-	        'New Contributors: ',
-	        React.createElement(
-	          'a',
-	          { href: 'http://github.com/tumentumurchudur' },
-	          'tumentumurchudur'
-	        )
-	      ),
-	      React.createElement(
 	        'h3',
 	        null,
 	        '1.2.2'
