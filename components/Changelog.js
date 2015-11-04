@@ -19,6 +19,7 @@ const Changelog = React.createClass({
           <li>Change TimeBasedLineChart component default topMargin to 30px. (<a href='https://github.com/mxenabled/mx-react-components/pull/99'>#99</a>)</li>
           <li>Restrict rangeType prop to either 'day' or 'month' in the TimeBasedLineChart component. (<a href='https://github.com/mxenabled/mx-react-components/pull/100'>#100</a>)</li>
         </ul>
+        <p>New Contributors: <a href='http://github.com/tumentumurchudur'>tumentumurchudur</a></p>
 
         <h3>1.2.2</h3>
         <ul>
