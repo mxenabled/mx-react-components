@@ -39,23 +39,26 @@ const TwoLevelSelector = React.createClass({
   },
 
   _getParentItems () {
-    let parentItems = [];
+    const parentItems = [];
+    const items = this.props.data;
 
-    for (let key in this.props.data) {
-      parentItems.push(key);
+    for (const key in items) {
+      if (items.hasOwnProperty(key)) {
+        parentItems.push(key);
+      }
     }
     return parentItems;
   },
 
   _flattenArray (obj) {
-    let tempArray = [];
+    const tempArray = [];
 
-    for (let key in obj) {
-     tempArray.push(key);
+    for (const key in obj) {
+      tempArray.push(key);
 
-     obj[key].map(function(val) {
-      tempArray.push(val);
-     })
+      obj[key].map(function(val) {
+        tempArray.push(val);
+      });
     }
     return tempArray;
   },
