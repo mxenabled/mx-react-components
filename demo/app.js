@@ -85,6 +85,10 @@ const icons = [
     displayValue: 'Attention'
   },
   {
+    value: 'attention-solid',
+    displayValue: 'Attention Solid'
+  },
+  {
     value: 'auto',
     displayValue: 'Auto'
   },
@@ -187,6 +191,10 @@ const icons = [
   {
     value: 'info',
     displayValue: 'Info'
+  },
+  {
+    value: 'link',
+    displayValue: 'Link'
   },
   {
     value: 'list-view',
