@@ -59,38 +59,24 @@ class DatePicker extends React.Component {
       const isCurrentMonth = startDate.month() === currentDate.month();
       const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
       let day;
+      const noSelectDay = startDate.isBefore(minimumDate);
 
-      if (startDate.isBefore(minimumDate)) {
-        day = (
+      day = (
+        <div
+          key={startDate.month() + '-' + startDate.date()}
+          onClick={!noSelectDay ? this._handleDateSelect.bind(this, startDate.unix()) : null}
+          style={[
+            styles.calendarDay,
+            (!noSelectDay && isCurrentMonth) && styles.currentMonth
+          ]}
+        >
           <div
-            key={startDate.month() + '-' + startDate.date()}
-            style={styles.calendarDay}
+            key={startDate.format('DDDD')}
+            style={[styles.calendarDayContent, noSelectDay ? styles.calendarDayDisabled : isCurrentDay && styles.currentDay]}
           >
-            <div
-              key={startDate.format('DDDD')}
-              style={[styles.calendarDayContent, styles.calendarDayDisabled]}
-            >
-              {startDate.date()}
-            </div>
-          </div>);
-      } else {
-        day = (
-          <div
-            key={startDate.month() + '-' + startDate.date()}
-            onClick={this._handleDateSelect.bind(this, startDate.unix())}
-            style={[
-              styles.calendarDay,
-              isCurrentMonth && styles.currentMonth
-            ]}
-          >
-            <div
-              key={startDate.format('DDDD')}
-              style={[styles.calendarDayContent, isCurrentDay && styles.currentDay]}
-            >
-              <div style={styles.calendarDayText}>{startDate.date()}</div>
-            </div>
-          </div>);
-      }
+            <div style={styles.calendarDayText}>{startDate.date()}</div>
+          </div>
+        </div>);
 
       if (this.props.showDayBorders) {
         day.props.style.push([styles.borderRight, styles.borderBottom]);
