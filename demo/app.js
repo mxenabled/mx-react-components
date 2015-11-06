@@ -665,7 +665,7 @@ const Demo = React.createClass({
         <DatePicker
           calendarColumns={7}
           closeOnDateSelect={true}
-          defaultDate={'2015-10-10'}
+          defaultDate={moment().unix()}
           showDayBorders={false}
           onDateSelect={this._handleDateSelect}
           useInputForSelectedDate={false}
