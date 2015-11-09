@@ -175,16 +175,16 @@ class DatePicker extends React.Component {
         tabIndex='0'
       >
         <div key='selectedDateWrapper' style={[
-            (this.props.selectedDateWrapperStyle || styles.selectedDateWrapper),
-            this.state.showCalendar && styles.selectedDateWrapperOpen
-          ]}>
+          (this.props.selectedDateWrapperStyle || styles.selectedDateWrapper),
+          this.state.showCalendar && styles.selectedDateWrapperOpen
+        ]}>
           {this._renderSelectedDate()}
           {this._renderCaret()}
         </div>
         <div key='calendarWrapper' style={[
-            (this.props.calendarWrapperStyle || styles.calendarWrapper),
-            this.state.showCalendar && styles.calendarShow
-          ]}>
+          (this.props.calendarWrapperStyle || styles.calendarWrapper),
+          this.state.showCalendar && styles.calendarShow
+        ]}>
           {this._renderTitle(styles)}
           <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
             <Icon
