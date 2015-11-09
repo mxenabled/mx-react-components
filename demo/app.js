@@ -663,7 +663,6 @@ const Demo = React.createClass({
 
         <br/><br/>
         <DatePicker
-          calendarColumns={7}
           closeOnDateSelect={true}
           defaultDate={moment().unix()}
           showDayBorders={false}

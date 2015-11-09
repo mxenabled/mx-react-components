@@ -174,11 +174,19 @@ class DatePicker extends React.Component {
         style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex='0'
       >
-        <div key='componentTop' style={[styles.componentTop, this.state.showCalendar && styles.componentTopOpen]}>
+        <div key='selectedDateWrapper' style={[
+          styles.selectedDateWrapper,
+          this.props.selectedDateWrapperStyle,
+          this.state.showCalendar && styles.selectedDateWrapperOpen
+        ]}>
           {this._renderSelectedDate()}
           {this._renderCaret()}
         </div>
-        <div key='componentBottom' style={[styles.componentBottom, this.state.showCalendar && styles.calendarShow]}>
+        <div key='calendarWrapper' style={[
+          styles.calendarWrapper,
+          this.props.calendarWrapperStyle,
+          this.state.showCalendar && styles.calendarShow
+        ]}>
           {this._renderTitle(styles)}
           <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
             <Icon
@@ -207,6 +215,7 @@ class DatePicker extends React.Component {
 }
 
 DatePicker.propTypes = {
+  calendarWrapperStyle: React.PropTypes.object,
   closeOnDateSelect: React.PropTypes.bool,
   defaultDate: React.PropTypes.number,
   format: React.PropTypes.string,
@@ -214,8 +223,10 @@ DatePicker.propTypes = {
   minimumDate: React.PropTypes.number,
   onDateSelect: React.PropTypes.func,
   scrimStyle: React.PropTypes.object,
+  selectedDateWrapperStyle: React.PropTypes.object,
   showCaret: React.PropTypes.bool,
   showDayBorders: React.PropTypes.bool,
+  style: React.PropTypes.object,
   title: React.PropTypes.string,
   useInputForSelectedDate: React.PropTypes.bool,
   useScrim: React.PropTypes.bool
@@ -342,7 +353,7 @@ const styles = {
       outline: 'none'
     }
   },
-  componentBottom: {
+  calendarWrapper: {
     backgroundColor: '#FFFFFF',
     borderBottomLeftRadius: '3px',
     borderBottomRightRadius: '3px',
@@ -359,7 +370,7 @@ const styles = {
     width: '100%',
     zIndex: 10
   },
-  componentTop: {
+  selectedDateWrapper: {
     borderBottomWidth: '1px',
     borderColor: '#E5E5E5',
     borderRadius: '3px 3px 3px 3px',
@@ -368,7 +379,7 @@ const styles = {
     position: 'relative',
     padding: '5px 5px 5px 5px'
   },
-  componentTopOpen: {
+  selectedDateWrapperOpen: {
     borderBottomWidth: '0',
     borderRadius: '3px 3px 0 0'
   },
