@@ -27,7 +27,7 @@ class DatePicker extends React.Component {
       if (newDate.isValid()) {
         inputValue = newDate.format(this.props.format);
       } else {
-        inputValue = 'Invalid Date';
+        inputValue = date;
       }
     }
 
@@ -47,6 +47,7 @@ class DatePicker extends React.Component {
 
     this.setState({
       inputValue: moment.unix(date).format(this.props.format),
+      isValid: true,
       selectedDate: date
     });
 
@@ -55,21 +56,26 @@ class DatePicker extends React.Component {
 
   _handleInputBlur (evt) {
     let inputValue = null;
+    let isValid = true;
     let selectedDate = null;
 
-    if (evt.target.value.length) {
+    if (evt.target.value && evt.target.value.length) {
       const newDate = moment(new Date(evt.target.value));
 
-      inputValue = this._getInputValueByDate(newDate.unix());
-      selectedDate = newDate.unix();
+      inputValue = this._getInputValueByDate(newDate.isValid() ? newDate.unix() : evt.target.value);
+      isValid = newDate.isValid();
+      selectedDate = newDate.isValid() ? newDate.unix() : this.state.selectedDate;
     }
 
     this.setState({
       inputValue,
+      isValid,
       selectedDate
     });
 
-    this.props.onDateSelect(selectedDate);
+    if (isValid) {
+      this.props.onDateSelect(selectedDate);
+    }
   }
 
   _handleInputChange (evt) {
