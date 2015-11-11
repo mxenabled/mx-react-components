@@ -101,7 +101,7 @@ class Select extends React.Component {
             {selected.displayValue}
             <Icon
               size='20'
-              style={[styles.downArrow, this.props.selectedStyle && { color: this.props.selectedStyle.color }]}
+              style={styles.caret}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
@@ -121,6 +121,14 @@ class Select extends React.Component {
 }
 
 const styles = {
+  caret: {
+    color: '#CCCCCC',
+    cursor: 'pointer',
+    position: 'absolute',
+    right: '-5px',
+    top: '50%',
+    transform: 'translateY(-50%)'
+  },
   component: {
     backgroundColor: '#FFFFFF',
     borderRadius: '3px',
@@ -147,13 +155,6 @@ const styles = {
   },
   selected: {
     position: 'relative'
-  },
-  downArrow: {
-    color: StyleConstants.Colors.FONT,
-    position: 'absolute',
-    right: '-5px',
-    top: '50%',
-    marginTop: '-10px'
   },
   invalid: {
     borderColor: StyleConstants.Colors.RED
