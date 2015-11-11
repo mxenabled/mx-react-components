@@ -670,7 +670,6 @@ const Demo = React.createClass({
           defaultDate={this.state.selectedDatePickerDate}
           showDayBorders={false}
           onDateSelect={this._handleDateSelect}
-          useScrim={true}
         />
       </div>
     );

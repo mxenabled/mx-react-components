@@ -159,9 +159,9 @@ class DatePicker extends React.Component {
   }
 
   _renderScrim (styles) {
-    if (this.props.useScrim && this.state.showCalendar) {
+    if (this.state.showCalendar) {
       return (
-        <div onClick={this._handleScrimClick.bind(this)} style={[styles.scrim, this.props.scrimStyle, !this.props.useScrim && styles.hiddenScrim]}/>
+        <div onClick={this._handleScrimClick.bind(this)} style={[styles.scrim, this.props.scrimStyle]}/>
       );
     }
   }
@@ -483,6 +483,7 @@ const styles = {
   },
   placeholderText: {
     color: '#AAAAAA',
+    fontSize: '14px',
     position: 'absolute',
     top: '10px',
     zIndex: 1
