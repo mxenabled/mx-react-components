@@ -1,4 +1,5 @@
 const React = require('react');
+const moment = require('moment');
 
 const { DatePicker } = require('mx-react-components');
 
@@ -16,10 +17,9 @@ const DatePickerDocs = React.createClass({
         <h3>Demo</h3>
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={'2015-10-10'}
+          defaultDate={moment().unix()}
           title='Select A Date'
           useInputForSelectedDate={false}
-          useScrim={true}
         />
 
         <h3>Usage</h3>
@@ -28,12 +28,14 @@ const DatePickerDocs = React.createClass({
         <p>If set to `true`, the calendar will be close after the user selects a data.</p>
 
         <h5>defaultDate <label>Number (unix timestamp)</label></h5>
-        <p>Default: today's unix timestamp</p>
         <p>This sets the default selected date on component mount.</p>
 
         <h5>format <label>String</label></h5>
         <p>Default: 'YYYY-MM-DD'</p>
         <p>This is used to determine the format of the selected date. It should follow the Moment.js conventions outlined <a href='http://momentjs.com/docs/#/parsing/string-format/' target='_blank'>here</a>.</p>
+
+        <h5>inputStyle <label>Object</label></h5>
+        <p>Style object used to style the selected date input.</p>
 
         <h5>locale <label>String</label></h5>
         <p>Default: 'en'</p>
@@ -44,6 +46,13 @@ const DatePickerDocs = React.createClass({
 
         <h5>onDateSelect <label>Function</label></h5>
         <p>A function to be called when the user has selected a date. The selected date timestamp will be passed to this function.</p>
+
+        <h5>placeholderText <label>String</label></h5>
+        <p>Default: Select A Date</p>
+        <p>A string used as placeholder text for the selected date input when it is empty.</p>
+
+        <h5>placeholderTextStyle <label>Object</label></h5>
+        <p>A style object used to style the placeholderText.</p>
 
         <h5>scrimStyle <label>Object | Array</label></h5>
         <p>A style object or Radium array that is used to modify the scrim element's styles.</p>
@@ -63,10 +72,6 @@ const DatePickerDocs = React.createClass({
         <p>Default: true</p>
         <p>If set to 'true', the user will be able to edit the selected date by typing. If set to 'false', the user will only be able to change the selected date by interacting with the calendar.</p>
 
-        <h5>useScrim <label>Boolean</label></h5>
-        <p>Default: false</p>
-        <p>If set to 'true', a transparent scrim element will be placed behind the calendar. You can use the 'scrimStyle' prop to style the scrim.</p>
-
         <h3>Example</h3>
         <Markdown>
   {`
@@ -74,7 +79,6 @@ const DatePickerDocs = React.createClass({
       closeOnDateSelect={true}
       title='Select A Date'
       useInputForSelectedDate={false}
-      useScrim={true}
     />
   `}
         </Markdown>
