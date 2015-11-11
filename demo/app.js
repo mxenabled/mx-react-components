@@ -476,6 +476,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+      selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -502,8 +503,10 @@ const Demo = React.createClass({
     });
   },
 
-  _handleDateSelect (selectedDate) {
-
+  _handleDateSelect (selectedDatePickerDate) {
+    this.setState({
+      selectedDatePickerDate
+    })
   },
 
   render () {
@@ -664,10 +667,9 @@ const Demo = React.createClass({
         <br/><br/>
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={moment().unix()}
+          defaultDate={this.state.selectedDatePickerDate}
           showDayBorders={false}
           onDateSelect={this._handleDateSelect}
-          useInputForSelectedDate={false}
         />
       </div>
     );
