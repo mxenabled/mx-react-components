@@ -19,7 +19,7 @@
     "highlight.js": "^8.8.0",
     "marked": "^0.3.5",
     "moment": "^2.10.6",
-    "mx-react-components": "^1.2.0",
+    "mx-react-components": "^1.2.6",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-router": "^v1.0.0-rc3"
