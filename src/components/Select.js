@@ -125,7 +125,7 @@ const styles = {
     color: '#CCCCCC',
     cursor: 'pointer',
     position: 'absolute',
-    right: '-10px',
+    right: '-5px',
     top: '50%',
     transform: 'translateY(-50%)'
   },
