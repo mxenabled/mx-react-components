@@ -308,7 +308,7 @@ const styles = {
     color: '#CCCCCC',
     cursor: 'pointer',
     position: 'absolute',
-    right: '0',
+    right: '5px',
     top: '50%',
     transform: 'translateY(-50%)'
   },
@@ -454,6 +454,7 @@ const styles = {
     opacity: 0,
     outline: 'none',
     paddingBottom: '10px',
+    paddingLeft: '5px',
     position: 'relative',
     top: '5px',
     WebkitAppearance: 'none',
@@ -484,6 +485,7 @@ const styles = {
   placeholderText: {
     color: '#AAAAAA',
     fontSize: '14px',
+    paddingLeft: '5px',
     position: 'absolute',
     top: '10px'
   },
