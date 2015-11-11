@@ -133,7 +133,7 @@ class DatePicker extends React.Component {
       day = (
         <div
           key={startDate.month() + '-' + startDate.date()}
-          onClick={this._handleDateSelect.bind(this, startDate.unix())}
+          onClick={!noSelectDay ? this._handleDateSelect.bind(this, startDate.unix()) : null}
           style={[
             styles.calendarDay,
             (!noSelectDay && isCurrentMonth) && styles.currentMonth
