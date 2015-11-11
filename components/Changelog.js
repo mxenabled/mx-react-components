@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.2.6</h3>
+        <ul>
+          <li>Refactor DatePicker component to add functionality (<a href='https://github.com/mxenabled/mx-react-components/pull/107'>#107</a>)</li>
+          <li>Correct styling for Select component caret icon to match other components (<a href='https://github.com/mxenabled/mx-react-components/pull/108'>#108</a>)</li>
+        </ul>
+
         <h3>1.2.5</h3>
         <ul>
           <li>Fix invalid date error in demo app for DatePicker. (<a href='https://github.com/mxenabled/mx-react-components/commit/a1d99cfeccd146ebc1b338faad003c5171806e00'>see commit</a>)</li>
