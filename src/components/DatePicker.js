@@ -485,8 +485,7 @@ const styles = {
     color: '#AAAAAA',
     fontSize: '14px',
     position: 'absolute',
-    top: '10px',
-    zIndex: 1
+    top: '10px'
   },
   scrim: {
     position: 'fixed',
