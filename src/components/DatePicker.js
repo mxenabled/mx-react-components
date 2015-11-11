@@ -11,24 +11,75 @@ class DatePicker extends React.Component {
     super(props);
     this.state = {
       currentDate: null,
-      selectedDate: moment.unix(this.props.defaultDate),
+      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      isValid: true,
+      selectedDate: this.props.defaultDate,
       showCalendar: false
     };
   }
 
+  _getInputValueByDate (date) {
+    let inputValue = null;
+
+    if (date) {
+      const newDate = moment.unix(date);
+
+      if (newDate.isValid()) {
+        inputValue = newDate.format(this.props.format);
+      } else {
+        inputValue = 'Invalid Date';
+      }
+    }
+
+    return inputValue;
+  }
+
+  _getSelectedDate () {
+    const selectedDate = this.state.selectedDate;
+
+    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
+  }
+
   _handleDateSelect (date) {
     if (this.props.closeOnDateSelect) {
-      this._handleBlur();
+      this._handleScrimClick();
     }
+
     this.setState({
-      selectedDate: moment.unix(date)
+      inputValue: moment.unix(date).format(this.props.format),
+      selectedDate: date
     });
 
     this.props.onDateSelect(date);
   }
 
+  _handleInputBlur (evt) {
+    let inputValue = null;
+    let selectedDate = null;
+
+    if (evt.target.value.length) {
+      const newDate = moment(new Date(evt.target.value));
+
+      inputValue = this._getInputValueByDate(newDate.unix());
+      selectedDate = newDate.unix();
+    }
+
+    this.setState({
+      inputValue,
+      selectedDate
+    });
+
+    this.props.onDateSelect(selectedDate);
+  }
+
+  _handleInputChange (evt) {
+    this.setState({
+      inputValue: evt.target.value
+    });
+  }
+
   _handlePreviousClick () {
-    const selectedDate = moment(this.state.selectedDate).locale(this.props.locale);
+    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     currentDate = moment(currentDate.startOf('month').subtract(1, 'm'), this.props.format);
@@ -39,13 +90,25 @@ class DatePicker extends React.Component {
   }
 
   _handleNextClick () {
-    const selectedDate = moment(this.state.selectedDate).locale(this.props.locale);
+    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     currentDate = moment(currentDate.endOf('month').add(1, 'd'), this.props.format);
 
     this.setState({
       currentDate
+    });
+  }
+
+  _handleScrimClick () {
+    this.setState({
+      showCalendar: false
+    });
+  }
+
+  _toggleCalendar () {
+    this.setState({
+      showCalendar: !this.state.showCalendar
     });
   }
 
@@ -64,7 +127,7 @@ class DatePicker extends React.Component {
       day = (
         <div
           key={startDate.month() + '-' + startDate.date()}
-          onClick={!noSelectDay ? this._handleDateSelect.bind(this, startDate.unix()) : null}
+          onClick={this._handleDateSelect.bind(this, startDate.unix())}
           style={[
             styles.calendarDay,
             (!noSelectDay && isCurrentMonth) && styles.currentMonth
@@ -92,28 +155,29 @@ class DatePicker extends React.Component {
   _renderScrim (styles) {
     if (this.props.useScrim && this.state.showCalendar) {
       return (
-        <div style={[styles.scrim, this.props.scrimStyle]}/>
+        <div onClick={this._handleScrimClick.bind(this)} style={[styles.scrim, this.props.scrimStyle, !this.props.useScrim && styles.hiddenScrim]}/>
       );
     }
   }
 
   _renderSelectedDate () {
     if (this.props.useInputForSelectedDate) {
+      const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
+
       return (
         <div>
           <input
             key='input'
+            onBlur={this._handleInputBlur.bind(this)}
+            onChange={this._handleInputChange.bind(this)}
             onClick={this._toggleCalendar.bind(this)}
-            style={styles.input}
+            style={[styles.input, this.props.inputStyle, hidePlaceholder && { opacity: 1 }]}
             type='text'
-            value={moment(this.state.selectedDate).format(this.props.format)}
+            value={this.state.inputValue}
           />
-          <Icon
-            onClick={this._toggleCalendar.bind(this)}
-            size='28px'
-            style={styles.calendarIcon}
-            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-          />
+          <div style={[styles.placeholderText, this.props.placeholderTextStyle]}>
+            {this.props.placeholderText || 'Select A Date'}
+          </div>
         </div>
       );
     } else {
@@ -123,7 +187,7 @@ class DatePicker extends React.Component {
           onClick={this._toggleCalendar.bind(this)}
           style={styles.selectedDate}
         >
-          {moment(this.state.selectedDate).format(this.props.format)}
+          {this.state.inputValue}
         </div>
       );
     }
@@ -137,18 +201,6 @@ class DatePicker extends React.Component {
         </div>
       );
     }
-  }
-
-  _toggleCalendar () {
-    this.setState({
-      showCalendar: !this.state.showCalendar
-    });
-  }
-
-  _handleBlur () {
-    this.setState({
-      showCalendar: false
-    });
   }
 
   _renderCaret () {
@@ -165,12 +217,11 @@ class DatePicker extends React.Component {
   }
 
   render () {
-    const selectedDate = moment(this.state.selectedDate).locale(this.props.locale);
+    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     return (
       <div
-        onBlur={this._handleBlur.bind(this)}
         style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex='0'
       >
@@ -219,31 +270,31 @@ DatePicker.propTypes = {
   closeOnDateSelect: React.PropTypes.bool,
   defaultDate: React.PropTypes.number,
   format: React.PropTypes.string,
+  inputStyle: React.PropTypes.object,
   locale: React.PropTypes.string,
   minimumDate: React.PropTypes.number,
   onDateSelect: React.PropTypes.func,
+  placeholderText: React.PropTypes.string,
+  placeholderTextStyle: React.PropTypes.object,
   scrimStyle: React.PropTypes.object,
   selectedDateWrapperStyle: React.PropTypes.object,
   showCaret: React.PropTypes.bool,
   showDayBorders: React.PropTypes.bool,
   style: React.PropTypes.object,
   title: React.PropTypes.string,
-  useInputForSelectedDate: React.PropTypes.bool,
-  useScrim: React.PropTypes.bool
+  useInputForSelectedDate: React.PropTypes.bool
 };
 
 DatePicker.defaultProps = {
   closeOnDateSelect: false,
-  defaultDate: moment().unix(),
-  format: 'YYYY-MM-DD',
+  format: 'MMM D, YYYY',
   locale: 'en',
   onDateSelect () {},
   scrimStyle: {},
   showCaret: true,
   showDayBorders: false,
   title: null,
-  useInputForSelectedDate: true,
-  useScrim: false
+  useInputForSelectedDate: true
 };
 
 const styles = {
@@ -394,10 +445,14 @@ const styles = {
     backgroundColor: '#FFFFFF',
     border: 'none',
     fontSize: StyleConstants.FontSize,
+    opacity: 0,
     outline: 'none',
     paddingBottom: '10px',
+    position: 'relative',
+    top: '5px',
     WebkitAppearance: 'none',
     width: '80%',
+    zIndex: 2,
 
     ':focus': {
       border: 'none',
@@ -419,6 +474,12 @@ const styles = {
     right: '0',
     top: '50%',
     transform: 'translateY(-50%)'
+  },
+  placeholderText: {
+    color: '#AAAAAA',
+    position: 'absolute',
+    top: '10px',
+    zIndex: 1
   },
   scrim: {
     position: 'fixed',
