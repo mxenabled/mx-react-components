@@ -55,26 +55,17 @@ class DatePicker extends React.Component {
   }
 
   _handleInputBlur (evt) {
-    let inputValue = null;
-    let isValid = true;
-    let selectedDate = null;
+    if (evt.target.value.length === 0) {
+      this.props.onDateSelect(null);
 
-    if (evt.target.value && evt.target.value.length) {
-      const newDate = moment(new Date(evt.target.value));
-
-      inputValue = this._getInputValueByDate(newDate.isValid() ? newDate.unix() : evt.target.value);
-      isValid = newDate.isValid();
-      selectedDate = newDate.isValid() ? newDate.unix() : this.state.selectedDate;
-    }
-
-    this.setState({
-      inputValue,
-      isValid,
-      selectedDate
-    });
-
-    if (isValid) {
-      this.props.onDateSelect(selectedDate);
+      this.setState({
+        inputValue: null,
+        selectedDate: null
+      });
+    } else {
+      this.setState({
+        inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
+      });
     }
   }
 
@@ -184,6 +175,7 @@ class DatePicker extends React.Component {
           <div style={[styles.placeholderText, this.props.placeholderTextStyle]}>
             {this.props.placeholderText || 'Select A Date'}
           </div>
+          {this._renderCaret()}
         </div>
       );
     } else {
@@ -194,6 +186,7 @@ class DatePicker extends React.Component {
           style={styles.selectedDate}
         >
           {this.state.inputValue}
+          {this._renderCaret()}
         </div>
       );
     }
@@ -212,12 +205,14 @@ class DatePicker extends React.Component {
   _renderCaret () {
     if (this.props.showCaret) {
       return (
-        <Icon
-          onClick={this._toggleCalendar.bind(this)}
-          size='20px'
-          style={styles.caret}
-          type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-        />
+        <div style={[styles.caretWrapper, this.props.caretWrapperStyle]}>
+          <Icon
+            onClick={this._toggleCalendar.bind(this)}
+            size='20'
+            style={styles.caret}
+            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+          />
+        </div>
       );
     }
   }
@@ -233,11 +228,9 @@ class DatePicker extends React.Component {
       >
         <div key='selectedDateWrapper' style={[
           styles.selectedDateWrapper,
-          this.props.selectedDateWrapperStyle,
-          this.state.showCalendar && styles.selectedDateWrapperOpen
+          this.props.selectedDateWrapperStyle
         ]}>
           {this._renderSelectedDate()}
-          {this._renderCaret()}
         </div>
         <div key='calendarWrapper' style={[
           styles.calendarWrapper,
@@ -273,6 +266,7 @@ class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   calendarWrapperStyle: React.PropTypes.object,
+  caretWrapperStyle: React.PropTypes.object,
   closeOnDateSelect: React.PropTypes.bool,
   defaultDate: React.PropTypes.number,
   format: React.PropTypes.string,
@@ -311,6 +305,11 @@ const styles = {
     right: '5px',
     top: '50%',
     transform: 'translateY(-50%)'
+  },
+  caretWrapper: {
+    position: 'absolute',
+    top: '50%',
+    right: '5px'
   },
   calendarDay: {
     color: '#DDDDDD',
@@ -416,7 +415,7 @@ const styles = {
     borderBottomRightRadius: '3px',
     borderColor: '#E5E5E5',
     borderStyle: 'solid',
-    borderWidth: '0 1px 1px 1px',
+    borderWidth: '1px',
     boxShadow: StyleConstants.BoxShadow,
     boxSizing: 'border-box',
     display: 'none',
@@ -435,10 +434,6 @@ const styles = {
     borderWidth: '1px 1px 1px 1px',
     position: 'relative',
     padding: '5px 5px 5px 5px'
-  },
-  selectedDateWrapperOpen: {
-    borderBottomWidth: '0',
-    borderRadius: '3px 3px 0 0'
   },
   currentDay: {
     backgroundColor: '#359BCF',
