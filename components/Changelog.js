@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.2.8</h3>
+        <ul>
+          <li>DatePicker - revert UTC date changes (<a href='https://github.com/mxenabled/mx-react-components/pull/110'>#110</a>)</li>
+        </ul>
+
         <h3>1.2.7</h3>
         <ul>
           <li>DatePicker bug fixes (<a href='https://github.com/mxenabled/mx-react-components/pull/109'>#109</a>)</li>
