@@ -22,7 +22,7 @@ class DatePicker extends React.Component {
     let inputValue = null;
 
     if (date) {
-      const newDate = moment.utc(date * 1000);
+      const newDate = moment.unix(date);
 
       if (newDate.isValid()) {
         inputValue = newDate.format(this.props.format);
@@ -37,7 +37,7 @@ class DatePicker extends React.Component {
   _getSelectedDate () {
     const selectedDate = this.state.selectedDate;
 
-    return selectedDate && moment.utc(selectedDate * 1000).isValid() ? this.state.selectedDate : moment().unix();
+    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
   }
 
   _handleDateSelect (date) {
@@ -46,7 +46,7 @@ class DatePicker extends React.Component {
     }
 
     this.setState({
-      inputValue: moment.utc(date * 1000).format(this.props.format),
+      inputValue: moment.unix(date).format(this.props.format),
       isValid: true,
       selectedDate: date
     });
@@ -64,7 +64,7 @@ class DatePicker extends React.Component {
       });
     } else {
       this.setState({
-        inputValue: moment.utc(this.state.selectedDate * 1000).format(this.props.format)
+        inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
       });
     }
   }
@@ -76,7 +76,7 @@ class DatePicker extends React.Component {
   }
 
   _handlePreviousClick () {
-    const selectedDate = moment.utc(this._getSelectedDate() * 1000).locale(this.props.locale);
+    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     currentDate = moment(currentDate.startOf('month').subtract(1, 'm'), this.props.format);
@@ -87,7 +87,7 @@ class DatePicker extends React.Component {
   }
 
   _handleNextClick () {
-    const selectedDate = moment.utc(this._getSelectedDate() * 1000).locale(this.props.locale);
+    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     currentDate = moment(currentDate.endOf('month').add(1, 'd'), this.props.format);
@@ -113,7 +113,7 @@ class DatePicker extends React.Component {
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
-    const minimumDate = this.props.minimumDate ? moment.utc(this.props.minimumDate * 1000) : null;
+    const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
 
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
@@ -168,7 +168,7 @@ class DatePicker extends React.Component {
             onBlur={this._handleInputBlur.bind(this)}
             onChange={this._handleInputChange.bind(this)}
             onClick={this._toggleCalendar.bind(this)}
-            style={[styles.input, this.props.inputStyle, hidePlaceholder && { opacity: 1 }]}
+            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: '#FFFFFF' }]}
             type='text'
             value={this.state.inputValue}
           />
@@ -218,7 +218,7 @@ class DatePicker extends React.Component {
   }
 
   render () {
-    const selectedDate = moment.utc(this._getSelectedDate() * 1000).locale(this.props.locale);
+    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     return (
@@ -443,10 +443,9 @@ const styles = {
     color: '#606060'
   },
   input: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     border: 'none',
     fontSize: StyleConstants.FontSize,
-    opacity: 0,
     outline: 'none',
     paddingBottom: '10px',
     paddingLeft: '5px',
