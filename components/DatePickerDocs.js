@@ -23,6 +23,9 @@ const DatePickerDocs = React.createClass({
         />
 
         <h3>Usage</h3>
+        <h5>caretWrapperStyle <label>Object</label></h5>
+        <p>Style object used to style the wrapping div around the caret icon that shows the open/close status of the component.</p>
+
         <h5>closeOnDateSelect <label>Boolean</label></h5>
         <p>Default: false</p>
         <p>If set to `true`, the calendar will be close after the user selects a data.</p>
