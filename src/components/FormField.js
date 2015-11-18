@@ -1,23 +1,9 @@
 const React = require('react');
 const Radium = require('radium');
-const moment = require('moment');
 
 const StyleConstants = require('../constants/Style');
 
 class FormField extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      focused: false
-    };
-  }
-
-  _toggleFieldFocus () {
-    this.setState({
-      focused: !this.state.focused
-    });
-  }
-
   render () {
     return (
       <div
@@ -74,10 +60,14 @@ class FormField extends React.Component {
 }
 
 FormField.propTypes = {
+  fieldWrapperStyle: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
   height: React.PropTypes.number,
   isRequired: React.PropTypes.bool,
   label: React.PropTypes.string,
+  labelStyle: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
   placeholder: React.PropTypes.string,
+  placeholderStyle: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
+  requiredStyle: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
   width: React.PropTypes.number
 };
 
