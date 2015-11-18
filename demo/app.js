@@ -12,7 +12,8 @@ const {
   TimeBasedLineChart,
   ToggleSwitch,
   TypeAhead,
-  DatePicker
+  DatePicker,
+  FormField
 } = require('../src/Index');
 
 const styles = {
@@ -48,6 +49,29 @@ const styles = {
     cursor: 'pointer',
     fontSize: '14px',
     WebkitFontSmoothing: 'antialiased'
+  },
+  input: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: '#56595A',
+    fontSize: '16px',
+    height: '100%',
+    paddingTop: '20px',
+    position: 'relative',
+    width: '100%',
+    zindex: 2,
+
+    ':focus': {
+      backgroundColor: '#F7F8F8',
+      border: 'none',
+      outline: 'none'
+    },
+
+    ':hover': {
+      backgroundColor: '#F7F8F8',
+      border: 'none',
+      outline: 'none'
+    }
   }
 };
 
@@ -479,7 +503,9 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
-      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth,
+      nameInputValue: 'John Doe',
+      emailInputValue: 'john.doe@missingidentity.com'
     }
   },
 
@@ -507,6 +533,18 @@ const Demo = React.createClass({
     this.setState({
       selectedDatePickerDate
     })
+  },
+
+  _handleNameInputChange (evt) {
+    this.setState({
+      nameInputValue: evt.target.value
+    });
+  },
+
+  _handleEmailInputChange (evt) {
+    this.setState({
+      emailInputValue: evt.target.value
+    });
   },
 
   render () {
@@ -671,6 +709,32 @@ const Demo = React.createClass({
           showDayBorders={false}
           onDateSelect={this._handleDateSelect}
         />
+
+        <br/><br/>
+        <FormField
+          isRequired={this.state.nameInputValue.length === 0}
+          label='Name'
+          placeholder='Enter Your Name'
+        >
+          <input
+            onChange={this._handleNameInputChange}
+            style={[styles.input, this.state.nameInputValue.length > 0 && { backgroundColor: '#FFFFFF' }]}
+            value={this.state.nameInputValue}
+          />
+        </FormField>
+        <FormField
+          isRequired={this.state.emailInputValue.length === 0}
+          label='Email'
+          placeholder='Enter Your Email'
+        >
+          <input
+            onChange={this._handleEmailInputChange}
+            style={[styles.input, this.state.emailInputValue.length > 0 && { backgroundColor: '#FFFFFF' }]}
+            value={this.state.emailInputValue}
+          />
+        </FormField>
+
+        <br/><br/>
       </div>
     );
   },
