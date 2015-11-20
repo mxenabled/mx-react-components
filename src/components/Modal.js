@@ -110,7 +110,7 @@ class Modal extends React.Component {
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
           <div
             className='mx-modal-content'
-            style={[styles.container, this.props.isSmall && styles.small, { padding: this.props.showHeader ? '65px 20px' : '20px 20px' }, this.props.style]}
+            style={[styles.container, this.props.isSmall && styles.small, { padding: this.props.showHeader ? '70px 20px' : '20px 20px' }, this.props.style]}
           >
             <Icon
               className='mx-modal-close'
