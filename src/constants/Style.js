@@ -30,6 +30,6 @@ module.exports = {
   },
 
   FontSize: '13px',
-  FontFamily: 'ProximaNova, Helvetica, Verdana, Tahoma, Arial, san-serif',
+  FontFamily: 'Helvetica, Arial, sans-serif',
   BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)'
 };
