@@ -15,10 +15,21 @@ module.exports = {
     YELLOW: '#f6a01e',
     GREEN: '#00a89c',
     BLUE: '#359BCF',
-    RED: '#EE4235'
+    RED: '#EE4235',
+
+    //Grays
+    ASH: '#ACB0B3',       //Base Color 3
+    CHARCOAL: '#56595A',  //Base Color 7
+    FOG: '#E3E6E7',       //Base Color 1
+    PORCELAIN: '#F7F8F8', //Base Color 0
+
+    //Status Colors
+    BANANA: '#FBB600',    //Anything yellow
+    LIME: '#2EBE51',      //Anything green
+    STRAWBERRY: '#E22727' //Anything red
   },
 
   FontSize: '13px',
-  FontFamily: 'Helvetica, Arial, sans-serif',
+  FontFamily: 'ProximaNova, Helvetica, Verdana, Tahoma, Arial, san-serif',
   BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)'
 };
