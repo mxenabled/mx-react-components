@@ -47,9 +47,9 @@ class Modal extends React.Component {
             />
           </div>
           <span
+            className='mx-modal-footer-text'
             onMouseOut={this._handleIconMouseHover.bind(this, false)}
             onMouseOver={this._handleIconMouseHover.bind(this, true)}
-            className='mx-modal-footer-text'
             style={[styles.footerText, { color: this.props.brandColor }]}
           >
             {this.props.textFooter}
@@ -253,7 +253,7 @@ const styles = {
     position: 'relative',
     textAlign: 'center',
     top: '10px',
-    width: 'auto',
+    width: 'auto'
   },
   primaryButtonText: {
     color: StyleConstants.Colors.INVERSE_SECONDARY,
@@ -294,19 +294,19 @@ Modal.propTypes = {
   brandColor: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
   isSmall: React.PropTypes.bool,
-  onRequestClose: React.PropTypes.func,
   onPrimaryButtonClick: React.PropTypes.func,
+  onRequestClose: React.PropTypes.func,
   onSecondaryButtonClick: React.PropTypes.func,
-  textFooter: React.PropTypes.string,
-  textInfoBody: React.PropTypes.string,
-  textInfoTitle: React.PropTypes.string,
-  textHeader: React.PropTypes.string,
-  textPrimaryButton: React.PropTypes.string,
-  textSecondaryButton: React.PropTypes.string,
   showFooter: React.PropTypes.bool,
   showHeader: React.PropTypes.bool,
   showPrimaryButton: React.PropTypes.bool,
-  showSecondaryButton: React.PropTypes.bool
+  showSecondaryButton: React.PropTypes.bool,
+  textFooter: React.PropTypes.string,
+  textHeader: React.PropTypes.string,
+  textInfoBody: React.PropTypes.string,
+  textInfoTitle: React.PropTypes.string,
+  textPrimaryButton: React.PropTypes.string,
+  textSecondaryButton: React.PropTypes.string
 };
 
 Modal.defaultProps = {
