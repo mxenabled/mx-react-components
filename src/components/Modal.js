@@ -33,43 +33,38 @@ class Modal extends React.Component {
     if (this.props.showFooter) {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
-          <Icon
-            className='mx-modal-tooltip-icon'
-            onMouseOut={this._handleTooltipToggle.bind(this, false)}
-            onMouseOver={this._handleTooltipToggle.bind(this, true)}
-            size={18}
-            style={{ color: this.props.brandColor }}
-            type='info'
-          />
-          <span
-            className='mx-modal-footer-text'
-            onMouseOut={this._handleTooltipToggle.bind(this, false)}
-            onMouseOver={this._handleTooltipToggle.bind(this, true)}
-            style={[styles.footerText, { color: this.props.brandColor }]}
-          >
-            {this.props.footerText}
-          </span>
-          {this.props.showPrimaryButton ? (
-            <div
-              className='mx-modal-footer-primary-button'
-              onClick={this.props.onPrimaryButtonClick}
-              style={[styles.primaryButton, { backgroundColor: this.props.brandColor }]}
+          <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
+            <Icon
+              className='mx-modal-tooltip-label-icon'
+              onMouseOut={this._handleTooltipToggle.bind(this, false)}
+              onMouseOver={this._handleTooltipToggle.bind(this, true)}
+              size={18}
+              style={{ color: this.props.brandColor }}
+              type='info'
+            />
+            <span
+              className='mx-modal-tooltip-label-text'
+              onMouseOut={this._handleTooltipToggle.bind(this, false)}
+              onMouseOver={this._handleTooltipToggle.bind(this, true)}
+              style={[styles.tooltipLabelText, { color: this.props.brandColor }]}
             >
-              <span className='mx-modal-footer-primary-button-text' style={styles.primaryButtonText}>
-                {this.props.textPrimaryButton}
-              </span>
-            </div>) : null}
-
-          {this.props.showSecondaryButton ? (
-            <div
-              className='mx-modal-footer-secondary-button'
-              onClick={this.props.onSecondaryButtonClick}
-              style={styles.secondaryButton}
-            >
-              <span className='mx-modal-footer-secondary-button-text' style={styles.secondaryButtonText}>
-                {this.props.textSecondaryButton}
-              </span>
-            </div>) : null}
+              {this.props.tooltipLabel}
+            </span>
+          </div>
+          <div className='mx-modal-buttons'>
+            {this.props.buttons.map((button, i) => {
+              return (
+                <div
+                  className={'mx-modal-button ' + button.className}
+                  key={button.type + i}
+                  onClick={button.onClick}
+                  style={[styles.button, styles[button.type + 'Button'], button.style]}
+                >
+                  {button.label}
+                </div>
+              );
+            })}
+          </div>
         </div>
       );
     }
@@ -79,7 +74,7 @@ class Modal extends React.Component {
     if (this.state.showTooltip) {
       return (
         <div style={styles.tooltip}>
-          <div className='mx-modal-tooltip-label' style={[styles.tooltipTitle, { color: this.props.color }]}>
+          <div className='mx-modal-tooltip-title' style={[styles.tooltipTitle, { color: this.props.color }]}>
             {this.props.tooltipTitle}
           </div>
           <div className='mx-modal-tooltip-content' style={styles.tooltipContent}>
@@ -175,9 +170,14 @@ const styles = {
   },
   footer: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
-    padding: '15px 20px'
+    padding: '15px 20px',
+    display: 'flex',
+    justifyContent: 'space-between'
   },
-  footerText: {
+  tooltipLabel: {
+    padding: '5px 0'
+  },
+  tooltipLabelText: {
     fontSize: StyleConstants.FontSizes.SMALL
   },
   tooltip: {
@@ -203,46 +203,25 @@ const styles = {
     lineHeight: '1.5em',
     textAlign: 'left',
   },
-  primaryButton: {
-    borderRadius: '2px',
-    color: '#FFF',
-    cursor: 'pointer',
-    float: 'right',
-    height: 30,
-    margin: '0 20px 0 10px',
-    position: 'relative',
-    textAlign: 'center',
-    top: 10,
-    width: 'auto'
+  buttons: {
+    textAlign: 'right'
   },
-  primaryButtonText: {
-    color: StyleConstants.Colors.INVERSE_SECONDARY,
+  button: {
+    display: 'inline-block',
+    borderRadius: '2px',
+    cursor: 'pointer',
     fontSize: StyleConstants.FontSizes.MEDIUM,
     fontWeight: 600,
-    padding: '10px 10px',
-    position: 'relative',
-    top: 8
+    padding: '7px 14px',
+    marginLeft: 5
+  },
+  primaryButton: {
+    backgroundColor: StyleConstants.Colors.PRIMARY,
+    color: StyleConstants.Colors.INVERSE_SECONDARY,
   },
   secondaryButton: {
     backgroundColor: StyleConstants.Colors.FOG,
-    borderRadius: '2px',
-    color: '#FFF',
-    cursor: 'pointer',
-    float: 'right',
-    height: 30,
-    margin: 0,
-    position: 'relative',
-    top: 10,
-    width: 'auto',
-    textAlign: 'center'
-  },
-  secondaryButtonText: {
     color: StyleConstants.Colors.CHARCOAL,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    fontWeight: 600,
-    padding: '10px 10px',
-    position: 'relative',
-    top: 8
   },
   small: {
     width: 400,
@@ -251,38 +230,37 @@ const styles = {
 };
 
 Modal.propTypes = {
+  buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
+    className: React.PropTypes.string,
+    label: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    style: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
+    type: React.PropTypes.oneOf(['primary', 'secondary'])
+  })),
   color: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
   isSmall: React.PropTypes.bool,
-  onPrimaryButtonClick: React.PropTypes.func,
   onRequestClose: React.PropTypes.func,
-  onSecondaryButtonClick: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
   showTitleBar: React.PropTypes.bool,
-  showPrimaryButton: React.PropTypes.bool,
-  showSecondaryButton: React.PropTypes.bool,
-  footerText: React.PropTypes.string,
+  tooltipLabel: React.PropTypes.string,
   title: React.PropTypes.string,
-  textPrimaryButton: React.PropTypes.string,
-  textSecondaryButton: React.PropTypes.string,
   tooltip: React.PropTypes.string,
   tooltipTitle: React.PropTypes.string
 };
 
 Modal.defaultProps = {
+  buttons: [],
   color: StyleConstants.Colors.PRIMARY,
   isOpen: false,
   isSmall: false,
-  onPrimaryButtonClick () {},
-  onSecondaryButtonClick () {},
   showFooter: false,
   showTitleBar: false,
-  showPrimaryButton: false,
-  showSecondaryButton: false,
-  footerText: '',
+  tooltipLabel: '',
   title: '',
-  textPrimaryButton: 'Primary',
-  textSecondaryButton: 'Secondary',
   tooltip: null,
   tooltipTitle: null
 };
