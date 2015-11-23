@@ -9,13 +9,13 @@ class Modal extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      hoveringInfoIcon: false
+      showTooltip: false
     };
   }
 
-  _handleIconMouseHover (show) {
+  _handleTooltipToggle (show) {
     this.setState({
-      hoveringInfoIcon: show
+      showTooltip: show
     });
   }
 
@@ -36,11 +36,11 @@ class Modal extends React.Component {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
           {this._renderOnHoverText()}
-          <div style={styles.infoIcon}>
+          <div style={styles.tooltipIcon}>
             <Icon
-              className='mx-modal-info-icon'
-              onMouseOut={this._handleIconMouseHover.bind(this, false)}
-              onMouseOver={this._handleIconMouseHover.bind(this, true)}
+              className='mx-modal-tooltip-icon'
+              onMouseOut={this._handleTooltipToggle.bind(this, false)}
+              onMouseOver={this._handleTooltipToggle.bind(this, true)}
               size={18}
               style={{ color: this.props.brandColor }}
               type='info'
@@ -48,8 +48,8 @@ class Modal extends React.Component {
           </div>
           <span
             className='mx-modal-footer-text'
-            onMouseOut={this._handleIconMouseHover.bind(this, false)}
-            onMouseOver={this._handleIconMouseHover.bind(this, true)}
+            onMouseOut={this._handleTooltipToggle.bind(this, false)}
+            onMouseOver={this._handleTooltipToggle.bind(this, true)}
             style={[styles.footerText, { color: this.props.brandColor }]}
           >
             {this.props.textFooter}
@@ -81,22 +81,22 @@ class Modal extends React.Component {
   }
 
   _renderOnHoverText () {
-    if (this.state.hoveringInfoIcon) {
+    if (this.state.showTooltip) {
       return (
-        <div style={styles.infoBox}>
-          <div style={[styles.infoTitle, { color: this.props.color }]}>
+        <div style={styles.tooltip}>
+          <div style={[styles.tooltipTitle, { color: this.props.color }]}>
             <Icon
-              className='mx-modal-title-info-icon'
+              className='mx-modal-tooltip-label-icon'
               size={18}
               style={{ color: this.props.color }}
               type={'attention'}
             />
-            <span className='mx-modal-info-title' style={[styles.hoverText, { color: this.props.color }]}>
-              {this.props.textInfoTitle}
+            <span className='mx-modal-tooltip-label' style={[styles.hoverText, { color: this.props.color }]}>
+              {this.props.tooltipTitle}
             </span>
           </div>
-          <div className='mx-modal-info-body' style={styles.infoText}>
-            {this.props.textInfoBody}
+          <div className='mx-modal-tooltip-content' style={styles.tooltipContent}>
+            {this.props.tooltip}
           </div>
         </div>
       );
@@ -209,7 +209,7 @@ const styles = {
     position: 'relative',
     top: '2px'
   },
-  infoBox: {
+  tooltip: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
     borderColor: StyleConstants.Colors.FOG,
     borderStyle: 'solid',
@@ -221,12 +221,12 @@ const styles = {
     position: 'absolute',
     width: '250px'
   },
-  infoIcon: {
+  tooltipIcon: {
     left: '20px',
     marginTop: '16px',
     position: 'absolute'
   },
-  infoText: {
+  tooltipContent: {
     color: StyleConstants.Colors.ASH,
     fontSize: '12px',
     lineHeight: 1.45,
@@ -237,7 +237,7 @@ const styles = {
     textAlign: 'left',
     top: '30%'
   },
-  infoTitle: {
+  tooltipTitle: {
     fontSize: '12px',
     paddingLeft: '8px',
     paddingTop: '10px',
@@ -303,8 +303,8 @@ Modal.propTypes = {
   showSecondaryButton: React.PropTypes.bool,
   textFooter: React.PropTypes.string,
   textHeader: React.PropTypes.string,
-  textInfoBody: React.PropTypes.string,
-  textInfoTitle: React.PropTypes.string,
+  tooltip: React.PropTypes.string,
+  tooltipTitle: React.PropTypes.string,
   textPrimaryButton: React.PropTypes.string,
   textSecondaryButton: React.PropTypes.string
 };
@@ -316,8 +316,8 @@ Modal.defaultProps = {
   onPrimaryButtonClick () {},
   onSecondaryButtonClick () {},
   textFooter: '',
-  textInfoBody: 'Aenean commodo ligula eget dolor. Donec interdum, metus et hendrerit aliquet.',
-  textInfoTitle: 'Maecenas nec',
+  tooltip: null,
+  tooltipTitle: null,
   textHeader: '',
   textPrimaryButton: 'Primary',
   textSecondaryButton: 'Secondary',
