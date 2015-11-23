@@ -523,6 +523,12 @@ const Demo = React.createClass({
           isOpen={this.state.showModal}
           isSmall={this.state.showSmallModal}
           onRequestClose={this._handleModalClose}
+          showFooter={true}
+          showTitleBar={true}
+          footerText='This is the footer text.'
+          title='This is the header text'
+          tooltip='This is my tooltip content'
+          tooltipTitle='This is my tooltip title'
         >
           <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
           <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto' }} />

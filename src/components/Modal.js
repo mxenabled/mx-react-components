@@ -19,12 +19,12 @@ class Modal extends React.Component {
     });
   }
 
-  _renderHeader () {
-    if (this.props.showHeader) {
+  _renderTitleBar () {
+    if (this.props.showTitleBar) {
       return (
-        <div className='mx-modal-header' style={styles.header}>
-          <span className='mx-modal-header-text' style={styles.headerText}>
-            {this.props.headerText}
+        <div className='mx-modal-title-bar' style={styles.titleBar}>
+          <span className='mx-modal-title' style={styles.title}>
+            {this.props.title}
           </span>
         </div>
       );
@@ -36,16 +36,14 @@ class Modal extends React.Component {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
           {this._renderOnHoverText()}
-          <div style={styles.tooltipIcon}>
-            <Icon
-              className='mx-modal-tooltip-icon'
-              onMouseOut={this._handleTooltipToggle.bind(this, false)}
-              onMouseOver={this._handleTooltipToggle.bind(this, true)}
-              size={18}
-              style={{ color: this.props.brandColor }}
-              type='info'
-            />
-          </div>
+          <Icon
+            className='mx-modal-tooltip-icon'
+            onMouseOut={this._handleTooltipToggle.bind(this, false)}
+            onMouseOver={this._handleTooltipToggle.bind(this, true)}
+            size={18}
+            style={{ color: this.props.brandColor }}
+            type='info'
+          />
           <span
             className='mx-modal-footer-text'
             onMouseOut={this._handleTooltipToggle.bind(this, false)}
@@ -109,8 +107,8 @@ class Modal extends React.Component {
         <div className='mx-modal' style={styles.scrim}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
           <div
-            className='mx-modal-content'
-            style={[styles.container, this.props.isSmall && styles.small, { padding: this.props.showHeader ? '70px 20px' : '20px 20px' }, this.props.style]}
+            className='mx-modal-container'
+            style={[styles.container, this.props.isSmall && styles.small, this.props.style]}
           >
             <Icon
               className='mx-modal-close'
@@ -119,7 +117,7 @@ class Modal extends React.Component {
               style={styles.close}
               type='close-solid'
             />
-            {this._renderHeader()}
+            {this._renderTitleBar()}
             {this.props.children}
             {this._renderFooter()}
           </div>
@@ -134,7 +132,7 @@ class Modal extends React.Component {
 
 const styles = {
   scrim: {
-    zIndex: 100,
+    zIndex: 1000,
     position: 'fixed',
     top: 0,
     right: 0,
@@ -142,21 +140,20 @@ const styles = {
     left: 0
   },
   overlay: {
-    background: 'rgba(255,255,255,0.9)',
-    zIndex: 0
+    background: 'rgba(255,255,255,0.9)'
   },
   close: {
     position: 'absolute',
     top: 0,
     right: 0,
     margin: '-16px -15px 0 0',
-    cursor: 'pointer',
-    zIndex: 110
+    cursor: 'pointer'
   },
   container: {
     fontFamily: StyleConstants.FontFamily,
     boxSizing: 'border-box',
     position: 'fixed',
+    zIndex: 1001,
     backgroundColor: '#FFFFFF',
     boxShadow: '0 0 30px 5px rgba(0,0,0,0.1)',
     borderRadius: '2px',
@@ -173,41 +170,25 @@ const styles = {
       right: 10
     }
   },
-  header: {
+  titleBar: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
-    height: '50px',
-    left: 0,
-    position: 'absolute',
-    top: 0,
-    width: '100%'
+    padding: '15px 20px'
   },
-  headerText: {
+  title: {
     color: StyleConstants.Colors.ASH,
     fontSize: '13px',
-    left: '20px',
-    marginTop: '10px',
-    padding: '10px 0',
-    position: 'absolute',
     textTransform: 'uppercase'
   },
   footer: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
-    bottom: 0,
-    height: '50px',
-    left: 0,
-    position: 'absolute',
-    width: '100%'
+    padding: '15px 20px'
   },
   footerText: {
-    fontSize: '11px',
-    left: '30px',
-    marginTop: '10px',
-    padding: '10px',
-    position: 'absolute'
+    fontSize: '11px'
   },
   hoverText: {
     position: 'relative',
-    top: '2px'
+    top: 2
   },
   tooltip: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -215,32 +196,29 @@ const styles = {
     borderStyle: 'solid',
     borderWidth: '1px',
     boxSizing: 'border-box',
-    bottom: '55px',
-    height: '95px',
-    left: '20px',
+    bottom: 55,
+    height: 95,
+    left: 20,
     position: 'absolute',
-    width: '250px'
+    width: 250
   },
   tooltipIcon: {
-    left: '20px',
-    marginTop: '16px',
-    position: 'absolute'
   },
   tooltipContent: {
     color: StyleConstants.Colors.ASH,
     fontSize: '12px',
     lineHeight: 1.45,
-    paddingLeft: '12px',
-    paddingRight: '5px',
-    paddingTop: '8px',
+    paddingLeft: 12,
+    paddingRight: 5,
+    paddingTop: 8,
     position: 'absolute',
     textAlign: 'left',
     top: '30%'
   },
   tooltipTitle: {
     fontSize: '12px',
-    paddingLeft: '8px',
-    paddingTop: '10px',
+    paddingLeft: 8,
+    paddingTop: 10,
     position: 'absolute'
   },
   primaryButton: {
@@ -248,11 +226,11 @@ const styles = {
     color: '#FFF',
     cursor: 'pointer',
     float: 'right',
-    height: '30px',
+    height: 30,
     margin: '0 20px 0 10px',
     position: 'relative',
     textAlign: 'center',
-    top: '10px',
+    top: 10,
     width: 'auto'
   },
   primaryButtonText: {
@@ -261,7 +239,7 @@ const styles = {
     fontWeight: 600,
     padding: '10px 10px',
     position: 'relative',
-    top: '8px'
+    top: 8
   },
   secondaryButton: {
     backgroundColor: StyleConstants.Colors.FOG,
@@ -269,10 +247,10 @@ const styles = {
     color: '#FFF',
     cursor: 'pointer',
     float: 'right',
-    height: '30px',
-    margin: '0',
+    height: 30,
+    margin: 0,
     position: 'relative',
-    top: '10px',
+    top: 10,
     width: 'auto',
     textAlign: 'center'
   },
@@ -282,10 +260,10 @@ const styles = {
     fontWeight: 600,
     padding: '10px 10px',
     position: 'relative',
-    top: '8px'
+    top: 8
   },
   small: {
-    width: '400px',
+    width: 400,
     textAlign: 'center'
   }
 };
@@ -298,11 +276,11 @@ Modal.propTypes = {
   onRequestClose: React.PropTypes.func,
   onSecondaryButtonClick: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
-  showHeader: React.PropTypes.bool,
+  showTitleBar: React.PropTypes.bool,
   showPrimaryButton: React.PropTypes.bool,
   showSecondaryButton: React.PropTypes.bool,
   footerText: React.PropTypes.string,
-  headerText: React.PropTypes.string,
+  title: React.PropTypes.string,
   textPrimaryButton: React.PropTypes.string,
   textSecondaryButton: React.PropTypes.string,
   tooltip: React.PropTypes.string,
@@ -316,11 +294,11 @@ Modal.defaultProps = {
   onPrimaryButtonClick () {},
   onSecondaryButtonClick () {},
   showFooter: false,
-  showHeader: false,
+  showTitleBar: false,
   showPrimaryButton: false,
   showSecondaryButton: false,
   footerText: '',
-  headerText: '',
+  title: '',
   textPrimaryButton: 'Primary',
   textSecondaryButton: 'Secondary',
   tooltip: null,
