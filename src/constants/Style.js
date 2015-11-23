@@ -29,7 +29,15 @@ module.exports = {
     STRAWBERRY: '#E22727' //Anything red
   },
 
-  FontSize: '13px',
+  FontSizes: {
+    JUMBO: '30px',
+    XXLARGE: '21px',
+    XLARGE: '17px',
+    MEDIUM: '13px',
+    SMALL: '11px',
+    TINY: '10px'
+  },
+
   FontFamily: 'Helvetica, Arial, sans-serif',
   BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)'
 };

@@ -23,9 +23,7 @@ class Modal extends React.Component {
     if (this.props.showTitleBar) {
       return (
         <div className='mx-modal-title-bar' style={styles.titleBar}>
-          <span className='mx-modal-title' style={styles.title}>
-            {this.props.title}
-          </span>
+          {this.props.title}
         </div>
       );
     }
@@ -35,7 +33,6 @@ class Modal extends React.Component {
     if (this.props.showFooter) {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
-          {this._renderOnHoverText()}
           <Icon
             className='mx-modal-tooltip-icon'
             onMouseOut={this._handleTooltipToggle.bind(this, false)}
@@ -78,20 +75,12 @@ class Modal extends React.Component {
     }
   }
 
-  _renderOnHoverText () {
+  _renderTooltip () {
     if (this.state.showTooltip) {
       return (
         <div style={styles.tooltip}>
-          <div style={[styles.tooltipTitle, { color: this.props.color }]}>
-            <Icon
-              className='mx-modal-tooltip-label-icon'
-              size={18}
-              style={{ color: this.props.color }}
-              type={'attention'}
-            />
-            <span className='mx-modal-tooltip-label' style={[styles.hoverText, { color: this.props.color }]}>
-              {this.props.tooltipTitle}
-            </span>
+          <div className='mx-modal-tooltip-label' style={[styles.tooltipTitle, { color: this.props.color }]}>
+            {this.props.tooltipTitle}
           </div>
           <div className='mx-modal-tooltip-content' style={styles.tooltipContent}>
             {this.props.tooltip}
@@ -113,12 +102,15 @@ class Modal extends React.Component {
             <Icon
               className='mx-modal-close'
               onClick={this.props.onRequestClose}
-              size='32'
+              size={24}
               style={styles.close}
               type='close-solid'
             />
             {this._renderTitleBar()}
-            {this.props.children}
+            <div className='mx-modal-content' style={styles.content}>
+              {this.props.children}
+              {this._renderTooltip()}
+            </div>
             {this._renderFooter()}
           </div>
         </div>
@@ -146,8 +138,9 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0,
-    margin: '-16px -15px 0 0',
-    cursor: 'pointer'
+    margin: '-12px -12px 0 0',
+    cursor: 'pointer',
+    color: StyleConstants.Colors.CHARCOAL
   },
   container: {
     fontFamily: StyleConstants.FontFamily,
@@ -172,23 +165,20 @@ const styles = {
   },
   titleBar: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
-    padding: '15px 20px'
-  },
-  title: {
+    padding: '15px 20px',
     color: StyleConstants.Colors.ASH,
-    fontSize: '13px',
+    fontSize: StyleConstants.FontSizes.SMALL,
     textTransform: 'uppercase'
+  },
+  content: {
+    position: 'relative'
   },
   footer: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
     padding: '15px 20px'
   },
   footerText: {
-    fontSize: '11px'
-  },
-  hoverText: {
-    position: 'relative',
-    top: 2
+    fontSize: StyleConstants.FontSizes.SMALL
   },
   tooltip: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -196,30 +186,22 @@ const styles = {
     borderStyle: 'solid',
     borderWidth: '1px',
     boxSizing: 'border-box',
-    bottom: 55,
-    height: 95,
-    left: 20,
+    bottom: 10,
+    left: 10,
     position: 'absolute',
-    width: 250
+    width: 250,
+    maxWidth: '100%',
+    padding: 10
   },
-  tooltipIcon: {
+  tooltipTitle: {
+    fontSize: StyleConstants.FontSizes.SMALL,
+    marginBottom: 5
   },
   tooltipContent: {
     color: StyleConstants.Colors.ASH,
-    fontSize: '12px',
-    lineHeight: 1.45,
-    paddingLeft: 12,
-    paddingRight: 5,
-    paddingTop: 8,
-    position: 'absolute',
+    fontSize: StyleConstants.FontSizes.TINY,
+    lineHeight: '1.5em',
     textAlign: 'left',
-    top: '30%'
-  },
-  tooltipTitle: {
-    fontSize: '12px',
-    paddingLeft: 8,
-    paddingTop: 10,
-    position: 'absolute'
   },
   primaryButton: {
     borderRadius: '2px',
@@ -235,7 +217,7 @@ const styles = {
   },
   primaryButtonText: {
     color: StyleConstants.Colors.INVERSE_SECONDARY,
-    fontSize: '13px',
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     fontWeight: 600,
     padding: '10px 10px',
     position: 'relative',
@@ -256,7 +238,7 @@ const styles = {
   },
   secondaryButtonText: {
     color: StyleConstants.Colors.CHARCOAL,
-    fontSize: '13px',
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     fontWeight: 600,
     padding: '10px 10px',
     position: 'relative',
