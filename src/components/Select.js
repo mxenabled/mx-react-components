@@ -135,7 +135,7 @@ const styles = {
     border: '1px solid #E5E5E5',
     cursor: 'pointer',
     fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSize,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     padding: '11px 10px 12px',
     position: 'relative',
     appearance: 'none',

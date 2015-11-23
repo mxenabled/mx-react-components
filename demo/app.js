@@ -520,9 +520,27 @@ const Demo = React.createClass({
           <span style={styles.button} onClick={this._handleSmallModalClick}>Show Small Modal</span>
         </div>
         <Modal
+          buttons={[
+            {
+              label: 'Secondary',
+              onClick: this._handleModalSecondaryClick,
+              type: 'secondary'
+            },
+            {
+              label: 'Primary',
+              onClick: this._handleModalPrimaryClick,
+              type: 'primary'
+            }
+          ]}
           isOpen={this.state.showModal}
           isSmall={this.state.showSmallModal}
           onRequestClose={this._handleModalClose}
+          showFooter={true}
+          showTitleBar={true}
+          tooltipLabel='This is the footer text.'
+          title='This is the header text'
+          tooltip='This is my tooltip content'
+          tooltipTitle='This is my tooltip title'
         >
           <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
           <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto' }} />

@@ -354,7 +354,7 @@ const styles = {
   },
   calendarDayText: {
     borderRadius: '100%',
-    fontSize: StyleConstants.FontSize,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     fontWeight: 'normal',
     left: '50%',
     position: 'absolute',
@@ -396,7 +396,7 @@ const styles = {
     backgroundColor: '#FFFFFF',
     color: '#000000',
     fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSize,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     WebkitAppearance: 'none',
     width: '100%',
 
@@ -445,7 +445,7 @@ const styles = {
   input: {
     backgroundColor: 'transparent',
     border: 'none',
-    fontSize: StyleConstants.FontSize,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     outline: 'none',
     paddingBottom: '10px',
     paddingLeft: '5px',
@@ -494,7 +494,7 @@ const styles = {
   selectedDate: {
     color: '#606060',
     cursor: 'pointer',
-    fontSize: StyleConstants.FontSize,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     padding: '5px 0 5px 5px',
     verticalAlign: 'middle',
     width: '100%',
@@ -508,7 +508,7 @@ const styles = {
     color: '#f2f2f2',
     textAlign: 'center',
     padding: '7px 0px 7px 0px',
-    fontSize: StyleConstants.FontSize,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     margin: '1px'
   }
 };
