@@ -39,14 +39,14 @@ class Modal extends React.Component {
               onMouseOut={this._handleTooltipToggle.bind(this, false)}
               onMouseOver={this._handleTooltipToggle.bind(this, true)}
               size={18}
-              style={{ color: this.props.brandColor }}
+              style={{ color: this.props.color }}
               type='info'
             />
             <span
               className='mx-modal-tooltip-label-text'
               onMouseOut={this._handleTooltipToggle.bind(this, false)}
               onMouseOver={this._handleTooltipToggle.bind(this, true)}
-              style={[styles.tooltipLabelText, { color: this.props.brandColor }]}
+              style={[styles.tooltipLabelText, { color: this.props.color }]}
             >
               {this.props.tooltipLabel}
             </span>
@@ -201,7 +201,7 @@ const styles = {
     color: StyleConstants.Colors.ASH,
     fontSize: StyleConstants.FontSizes.TINY,
     lineHeight: '1.5em',
-    textAlign: 'left',
+    textAlign: 'left'
   },
   buttons: {
     textAlign: 'right'
@@ -217,11 +217,11 @@ const styles = {
   },
   primaryButton: {
     backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.INVERSE_SECONDARY,
+    color: StyleConstants.Colors.INVERSE_SECONDARY
   },
   secondaryButton: {
     backgroundColor: StyleConstants.Colors.FOG,
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.CHARCOAL
   },
   small: {
     width: 400,
@@ -246,9 +246,9 @@ Modal.propTypes = {
   onRequestClose: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
   showTitleBar: React.PropTypes.bool,
-  tooltipLabel: React.PropTypes.string,
   title: React.PropTypes.string,
   tooltip: React.PropTypes.string,
+  tooltipLabel: React.PropTypes.string,
   tooltipTitle: React.PropTypes.string
 };
 
@@ -259,9 +259,9 @@ Modal.defaultProps = {
   isSmall: false,
   showFooter: false,
   showTitleBar: false,
-  tooltipLabel: '',
   title: '',
   tooltip: null,
+  tooltipLabel: '',
   tooltipTitle: null
 };
 
