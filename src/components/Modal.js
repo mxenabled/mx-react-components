@@ -84,14 +84,14 @@ class Modal extends React.Component {
     if (this.state.hoveringInfoIcon) {
       return (
         <div style={styles.infoBox}>
-          <div style={[styles.infoTitle, { color: this.props.brandColor || StyleConstants.Colors.PRIMARY }]}>
+          <div style={[styles.infoTitle, { color: this.props.color }]}>
             <Icon
               className='mx-modal-title-info-icon'
               size={18}
-              style={{ color: this.props.brandColor || StyleConstants.Colors.PRIMARY }}
+              style={{ color: this.props.color }}
               type={'attention'}
             />
-            <span className='mx-modal-info-title' style={[styles.hoverText, { color: this.props.brandColor || StyleConstants.Colors.PRIMARY }]}>
+            <span className='mx-modal-info-title' style={[styles.hoverText, { color: this.props.color }]}>
               {this.props.textInfoTitle}
             </span>
           </div>
@@ -291,7 +291,7 @@ const styles = {
 };
 
 Modal.propTypes = {
-  brandColor: React.PropTypes.string,
+  color: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
   isSmall: React.PropTypes.bool,
   onPrimaryButtonClick: React.PropTypes.func,
@@ -310,7 +310,7 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  brandColor: '#359BCF',
+  color: StyleConstants.Colors.PRIMARY,
   isOpen: false,
   isSmall: false,
   onPrimaryButtonClick () {},
