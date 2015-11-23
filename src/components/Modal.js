@@ -24,7 +24,7 @@ class Modal extends React.Component {
       return (
         <div className='mx-modal-header' style={styles.header}>
           <span className='mx-modal-header-text' style={styles.headerText}>
-            {this.props.textHeader}
+            {this.props.headerText}
           </span>
         </div>
       );
@@ -52,7 +52,7 @@ class Modal extends React.Component {
             onMouseOver={this._handleTooltipToggle.bind(this, true)}
             style={[styles.footerText, { color: this.props.brandColor }]}
           >
-            {this.props.textFooter}
+            {this.props.footerText}
           </span>
           {this.props.showPrimaryButton ? (
             <div
@@ -301,12 +301,12 @@ Modal.propTypes = {
   showHeader: React.PropTypes.bool,
   showPrimaryButton: React.PropTypes.bool,
   showSecondaryButton: React.PropTypes.bool,
-  textFooter: React.PropTypes.string,
-  textHeader: React.PropTypes.string,
-  tooltip: React.PropTypes.string,
-  tooltipTitle: React.PropTypes.string,
+  footerText: React.PropTypes.string,
+  headerText: React.PropTypes.string,
   textPrimaryButton: React.PropTypes.string,
-  textSecondaryButton: React.PropTypes.string
+  textSecondaryButton: React.PropTypes.string,
+  tooltip: React.PropTypes.string,
+  tooltipTitle: React.PropTypes.string
 };
 
 Modal.defaultProps = {
@@ -315,16 +315,16 @@ Modal.defaultProps = {
   isSmall: false,
   onPrimaryButtonClick () {},
   onSecondaryButtonClick () {},
-  textFooter: '',
-  tooltip: null,
-  tooltipTitle: null,
-  textHeader: '',
-  textPrimaryButton: 'Primary',
-  textSecondaryButton: 'Secondary',
   showFooter: false,
   showHeader: false,
   showPrimaryButton: false,
-  showSecondaryButton: false
+  showSecondaryButton: false,
+  footerText: '',
+  headerText: '',
+  textPrimaryButton: 'Primary',
+  textSecondaryButton: 'Secondary',
+  tooltip: null,
+  tooltipTitle: null
 };
 
 module.exports = Radium(Modal);
