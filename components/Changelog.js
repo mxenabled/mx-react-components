@@ -5,6 +5,10 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>1.3.0</h3>
+        <ul>
+          <li>Modal - Introduce new features/props to component (<a href='https://github.com/mxenabled/mx-react-components/pull/115'>#115</a>)</li>
+        </ul>
 
         <h3>1.2.8</h3>
         <ul>
