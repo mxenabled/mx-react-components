@@ -60,7 +60,6 @@ const ModalDocs = React.createClass({
             }
           ]}
           isOpen={this.state.showModal}
-          isSmall={this.state.showSmallModal}
           onRequestClose={this._handleModalClose}
           showFooter={true}
           showTitleBar={true}
@@ -70,7 +69,7 @@ const ModalDocs = React.createClass({
           tooltipTitle='This is my tooltip title'
         >
           <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-          <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto' }} />
+          <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
         </Modal>
 
         <h3>Usage</h3>
@@ -99,10 +98,6 @@ const ModalDocs = React.createClass({
         <h5>isRelative <label>Boolean</label></h5>
         <p>Default: 'false'</p>
         <p>If set to 'true', then the modal will be positioned absolute instead of fixed.</p>
-
-        <h5>isSmall <label>Boolean</label></h5>
-        <p>Default: 'false'</p>
-        <p>If set to 'true', then the modal will have a fixed width of 400px and padding of 30px.</p>
 
         <h5>onRequestClose <label>Function</label></h5>
         <p>A method that is called when the close button or scrim area is clicked by a user. Use this method to tell the Modal when it should close.</p>
@@ -150,7 +145,6 @@ const ModalDocs = React.createClass({
         }
       ]}
       isOpen={this.state.showModal}
-      isSmall={this.state.showSmallModal}
       onRequestClose={_handleModalClose}
       showFooter={true}
       showTitleBar={true}
