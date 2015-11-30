@@ -6,7 +6,7 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-class DatePicker extends React.Component {
+class DatePickerFullScreen extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -270,7 +270,7 @@ class DatePicker extends React.Component {
   }
 }
 
-DatePicker.propTypes = {
+DatePickerFullScreen.propTypes = {
   calendarScrimFixedPosition: React.PropTypes.bool,
   caretWrapperStyle: React.PropTypes.object,
   closeOnDateSelect: React.PropTypes.bool,
@@ -290,7 +290,7 @@ DatePicker.propTypes = {
   useInputForSelectedDate: React.PropTypes.bool
 };
 
-DatePicker.defaultProps = {
+DatePickerFullScreen.defaultProps = {
   calendarScrimFixedPosition: false,
   closeOnDateSelect: false,
   format: 'MMM D, YYYY',
@@ -514,4 +514,4 @@ const styles = {
   }
 };
 
-module.exports = Radium(DatePicker);
+module.exports = Radium(DatePickerFullScreen);
