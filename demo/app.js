@@ -12,7 +12,8 @@ const {
   TimeBasedLineChart,
   ToggleSwitch,
   TypeAhead,
-  DatePicker
+  DatePicker,
+  DatePickerFullScreen
 } = require('../src/Index');
 
 const styles = {
@@ -689,6 +690,28 @@ const Demo = React.createClass({
           showDayBorders={false}
           onDateSelect={this._handleDateSelect}
         />
+
+        <br/><br/>
+        <div style={{
+          border: '1px solid #E3E6E7' ,
+          boxSizing: 'border-box',
+          height: 400,
+          padding: '10px',
+          position: 'relative',
+          width: '100%'
+        }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', paddingBottom: 10 }}>
+            Full Parent Date Picker
+          </div>
+          <DatePickerFullScreen
+            closeOnDateSelect={true}
+            defaultDate={this.state.selectedDatePickerDate}
+            showDayBorders={false}
+            title='Select A Date'
+            onDateSelect={this._handleDateSelect}
+          />
+        </div>
+        <br/><br/>
       </div>
     );
   },
