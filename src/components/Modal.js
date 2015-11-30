@@ -92,7 +92,7 @@ class Modal extends React.Component {
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay, this.props.isRelative && styles.relative]}></div>
           <div
             className='mx-modal-container'
-            style={[styles.container, this.props.isSmall && styles.small, this.props.style, this.props.isRelative && styles.relative]}
+            style={[styles.container, this.props.style]}
           >
             <Icon
               className='mx-modal-close'
@@ -151,7 +151,8 @@ const styles = {
     borderRadius: '2px',
     top: 20,
     maxWidth: 'calc(100% - 40px)',
-    display: 'inline-block'
+    display: 'inline-block',
+    textAlign: 'left'
   },
   titleBar: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -240,7 +241,6 @@ Modal.propTypes = {
   color: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
   isRelative: React.PropTypes.bool,
-  isSmall: React.PropTypes.bool,
   onRequestClose: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
   showTitleBar: React.PropTypes.bool,
@@ -255,7 +255,6 @@ Modal.defaultProps = {
   color: StyleConstants.Colors.PRIMARY,
   isOpen: false,
   isRelative: false,
-  isSmall: false,
   showFooter: false,
   showTitleBar: false,
   title: '',
