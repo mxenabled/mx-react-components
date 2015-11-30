@@ -542,8 +542,10 @@ const Demo = React.createClass({
           tooltip='This is my tooltip content'
           tooltipTitle='This is my tooltip title'
         >
-          <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-          <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto' }} />
+          <div style={{ padding: 20 }}>
+            <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
+            <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto', margin: 'auto' }} />
+          </div>
         </Modal>
 
         <br/><br/>
