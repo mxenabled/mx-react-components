@@ -88,11 +88,11 @@ class Modal extends React.Component {
   render () {
     if (this.props.isOpen)
       return (
-        <div className='mx-modal' style={styles.scrim}>
-          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay]}></div>
+        <div className='mx-modal' style={[styles.scrim, this.props.isRelative && styles.relative]}>
+          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay, this.props.isRelative && styles.relative]}></div>
           <div
             className='mx-modal-container'
-            style={[styles.container, this.props.isSmall && styles.small, this.props.style]}
+            style={[styles.container, this.props.isSmall && styles.small, this.props.style, this.props.isRelative && styles.relative]}
           >
             <Icon
               className='mx-modal-close'
@@ -124,7 +124,11 @@ const styles = {
     top: 0,
     right: 0,
     bottom: 0,
-    left: 0
+    left: 0,
+    textAlign: 'center'
+  },
+  relative: {
+    position: 'absolute'
   },
   overlay: {
     background: 'rgba(255,255,255,0.9)'
@@ -140,23 +144,14 @@ const styles = {
   container: {
     fontFamily: StyleConstants.FontFamily,
     boxSizing: 'border-box',
-    position: 'fixed',
+    position: 'relative',
     zIndex: 1001,
     backgroundColor: '#FFFFFF',
     boxShadow: '0 0 30px 5px rgba(0,0,0,0.1)',
     borderRadius: '2px',
-    width: '60%',
-    top: '5%',
-    left: 0,
-    right: 0,
-    margin: 'auto',
-
-    '@media (max-width: 768px)': {
-      width: 'auto',
-      top: 30,
-      left: 10,
-      right: 10
-    }
+    top: 20,
+    maxWidth: 'calc(100% - 40px)',
+    display: 'inline-block'
   },
   titleBar: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -166,7 +161,9 @@ const styles = {
     textTransform: 'uppercase'
   },
   content: {
-    position: 'relative'
+    position: 'relative',
+    maxHeight: 'calc(100% - 140px)',
+    overflow: 'auto'
   },
   footer: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -242,6 +239,7 @@ Modal.propTypes = {
   })),
   color: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
+  isRelative: React.PropTypes.bool,
   isSmall: React.PropTypes.bool,
   onRequestClose: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
@@ -256,6 +254,7 @@ Modal.defaultProps = {
   buttons: [],
   color: StyleConstants.Colors.PRIMARY,
   isOpen: false,
+  isRelative: false,
   isSmall: false,
   showFooter: false,
   showTitleBar: false,
