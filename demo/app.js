@@ -533,7 +533,6 @@ const Demo = React.createClass({
             }
           ]}
           isOpen={this.state.showModal}
-          isSmall={this.state.showSmallModal}
           onRequestClose={this._handleModalClose}
           showFooter={true}
           showTitleBar={true}
@@ -544,7 +543,7 @@ const Demo = React.createClass({
         >
           <div style={{ padding: 20 }}>
             <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-            <img src='http://www.mx.com/images/home/top-t-i.png' style={{ maxWidth: '100%', height: 'auto', margin: 'auto' }} />
+            <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
           </div>
         </Modal>
 
