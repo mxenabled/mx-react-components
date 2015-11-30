@@ -93,18 +93,26 @@ const ModalDocs = React.createClass({
         <p>A css color string to be used as the accent color of the modal: primary button, tooltip title, etc.</p>
 
         <h5>isOpen <label>Boolean</label></h5>
+        <p>Default: 'false'</p>
         <p>Determines if the modal is visible or hidden</p>
 
+        <h5>isRelative <label>Boolean</label></h5>
+        <p>Default: 'false'</p>
+        <p>If set to 'true', then the modal will be positioned absolute instead of fixed.</p>
+
         <h5>isSmall <label>Boolean</label></h5>
+        <p>Default: 'false'</p>
         <p>If set to 'true', then the modal will have a fixed width of 400px and padding of 30px.</p>
 
         <h5>onRequestClose <label>Function</label></h5>
         <p>A method that is called when the close button or scrim area is clicked by a user. Use this method to tell the Modal when it should close.</p>
 
         <h5>showFooter <label>Boolean</label></h5>
+        <p>Default: 'false'</p>
         <p>Determines if the footer section, which contains the tooltip and buttons, is displayed.</p>
 
         <h5>showTitleBar <label>Boolean</label></h5>
+        <p>Default: 'false'</p>
         <p>Determines if the title bar section, which contains the title, is displayed.</p>
 
         <h5>title <label>String</label></h5>
