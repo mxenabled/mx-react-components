@@ -140,7 +140,17 @@ class TimeBasedLineChart extends React.Component {
 
     if (this.props.alwaysShowZeroYTick) {
       if (ticks.indexOf(0) === -1) {
-        ticks.push(0);
+        let shouldAddZeroToTicks = true;
+
+        ticks.forEach(tick => {
+          if ((tick <= 1000 && tick > 0) || (tick >= -1000 && tick < 0)) {
+            shouldAddZeroToTicks = false;
+          }
+        });
+
+        if (shouldAddZeroToTicks) {
+          ticks.push(0);
+        }
       }
     }
 
