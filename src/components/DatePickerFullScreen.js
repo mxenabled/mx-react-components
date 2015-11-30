@@ -221,16 +221,17 @@ class DatePickerFullScreen extends React.Component {
 
     return (
       <div
+        className='mx-date-picker-full-screen'
         style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex='0'
       >
-        <div key='selectedDateWrapper' style={[
+        <div className='mx-date-picker-full-screen-selected-date' key='selectedDateWrapper' style={[
           styles.selectedDateWrapper,
           this.props.selectedDateWrapperStyle
         ]}>
           {this._renderSelectedDate()}
         </div>
-        <div key='calendarModal' style={[
+        <div className='mx-date-picker-full-screen-calendar-scrim' key='calendarModal' style={[
           styles.calendarModal,
           this.state.showCalendar && styles.calendarShow,
           this.props.calendarScrimFixedPosition && { position: 'fixed' }
@@ -242,9 +243,9 @@ class DatePickerFullScreen extends React.Component {
               type='close'
             />
           </div>
-          <div style={styles.calendarWrapper}>
+          <div className='mx-date-picker-full-screen-calendar-wrapper' style={styles.calendarWrapper}>
             {this._renderTitle(styles)}
-            <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
+            <div className='mx-date-picker-full-screen-calendar-header' key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
               <Icon
                 onClick={this._handlePreviousClick.bind(this)}
                 size='32px'
@@ -298,7 +299,7 @@ DatePickerFullScreen.defaultProps = {
   onDateSelect () {},
   showCaret: true,
   showDayBorders: false,
-  title: null,
+  title: 'Select A Date',
   useInputForSelectedDate: true
 };
 
