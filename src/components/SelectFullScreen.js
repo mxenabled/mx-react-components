@@ -61,17 +61,17 @@ class SelectFullScreen extends React.Component {
             {(() => {
               if (this.props.children) {
                 return (
-                  <div className='mx-select-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+                  <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
                     {this.props.children}
                   </div>
                 );
               } else {
                 return (
-                  <div className='mx-select-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+                  <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
                     {this.props.options.map(option => {
                       return (
                         <div
-                          className='mx-select-option'
+                          className='mx-select-full-screen-option'
                           key={option.displayValue + option.value}
                           onClick={this._handleOptionClick.bind(this, option)}
                           ref={option.displayValue + option.value}
@@ -94,13 +94,10 @@ class SelectFullScreen extends React.Component {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select' style={this.props.style}>
-        <div className='mx-select-custom'
-          style={[styles.component, this.props.dropdownStyle]}
-          tabIndex='0'
-        >
+      <div className='mx-select-full-screen' style={this.props.style}>
+        <div style={styles.component} tabIndex='0'>
           <div
-            className='mx-select-selected'
+            className='mx-select-full-screen-selected'
             key='selected'
             onClick={this._handleClick.bind(this)}
             style={[styles.selected, this.props.selectedStyle]}
@@ -121,7 +118,6 @@ class SelectFullScreen extends React.Component {
 
 SelectFullScreen.propTypes = {
   closeIcon: React.PropTypes.string,
-  dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
   isFixed: React.PropTypes.bool,
   onChange: React.PropTypes.func,
   options: React.PropTypes.array,
