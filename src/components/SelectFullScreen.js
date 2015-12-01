@@ -121,8 +121,8 @@ class SelectFullScreen extends React.Component {
 
 SelectFullScreen.propTypes = {
   closeIcon: React.PropTypes.string,
-  isFixed: React.PropTypes.bool,
   dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  isFixed: React.PropTypes.bool,
   onChange: React.PropTypes.func,
   options: React.PropTypes.array,
   optionsHeaderText: React.PropTypes.string,
@@ -130,7 +130,7 @@ SelectFullScreen.propTypes = {
   optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
   placeholderText: React.PropTypes.string,
   selected: React.PropTypes.object,
-  selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array])
 };
 
 SelectFullScreen.defaultProps = {
