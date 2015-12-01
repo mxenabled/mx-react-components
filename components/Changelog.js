@@ -6,6 +6,29 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.4.1</h3>
+        <ul>
+          <li>New DatePickerFullScreen component (<a href='https://github.com/mxenabled/mx-react-components/pull/122'>#122</a>)</li>
+          <li>New SelectFullScreen component (<a href='https://github.com/mxenabled/mx-react-components/pull/123'>#123</a>)</li>
+        </ul>
+
+        <h3>1.4.0</h3>
+        <ul>
+          <li>Modal component positioning and text alignment fix (<a href='https://github.com/mxenabled/mx-react-components/pull/120'>#120</a>)</li>
+        </ul>
+
+        <h3>1.3.1</h3>
+        <ul>
+          <li>TimeBasedLineChart zero y axis fix (<a href='https://github.com/mxenabled/mx-react-components/pull/118'>#118</a>)</li>
+          <li>Update how Modal component is centered (<a href='https://github.com/mxenabled/mx-react-components/pull/119'>#119</a>)</li>
+        </ul>
+
+        <h3>1.3.0</h3>
+        <ul>
+          <li>Add new features to the Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/115'>#115</a>)</li>
+          <li>Fixes and updates to the Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/116'>#116</a>)</li>
+        </ul>
+
         <h3>1.2.8</h3>
         <ul>
           <li>DatePicker - revert UTC date changes (<a href='https://github.com/mxenabled/mx-react-components/pull/110'>#110</a>)</li>
