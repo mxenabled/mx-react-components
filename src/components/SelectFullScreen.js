@@ -5,8 +5,6 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
-
 class SelectFullScreen extends React.Component {
   constructor (props) {
     super(props);
@@ -18,12 +16,14 @@ class SelectFullScreen extends React.Component {
 
   _handleClick () {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: true
     });
   }
 
   _handleCloseClick () {
-
+    this.setState({
+      isOpen: false
+    });
   }
 
   _handleOptionClick (option) {
@@ -45,55 +45,48 @@ class SelectFullScreen extends React.Component {
 
   _renderOptions () {
     if (this.state.isOpen) {
-      if (this.props.children) {
-        return (
-          <div style={styles.optionsScrim}>
-            <div style={styles.closeIcon}>
-              <Icon
-                onClick={this._handleCloseClick.bind(this)}
-                size='28'
-                type={'close'}
-              />
-            </div>
-            <div style={styles.optionsHeader}>
-              {this.props.optionsHeaderText}
-            </div>
-            <div className='mx-select-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
-              {this.props.children}
-            </div>
+      return (
+        <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
+          <div style={styles.closeIcon}>
+            <Icon
+              onClick={this._handleCloseClick.bind(this)}
+              size='32px'
+              style={{ color: StyleConstants.Colors.CHARCOAL }}
+              type={this.props.closeIcon}
+            />
           </div>
-        );
-      } else {
-        return (
-          <div style={styles.optionsScrim}>
-            <div style={styles.closeIcon}>
-              <Icon
-                onClick={this._handleCloseClick.bind(this)}
-                size='28'
-                type={'close'}
-              />
-            </div>
-            <div style={styles.optionsHeader}>
-              {this.props.optionsHeaderText}
-            </div>
-            <div className='mx-select-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
-              {this.props.options.map(option => {
+          <div style={styles.optionsHeader}>
+            {this.props.optionsHeaderText}
+          </div>
+            {(() => {
+              if (this.props.children) {
                 return (
-                  <div
-                    className='mx-select-option'
-                    key={option.displayValue + option.value}
-                    onClick={this._handleOptionClick.bind(this, option)}
-                    ref={option.displayValue + option.value}
-                    style={[styles.option, this.props.optionStyle]}
-                  >
-                  {option.displayValue}
+                  <div className='mx-select-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+                    {this.props.children}
                   </div>
                 );
-              })}
-            </div>
-          </div>
-        );
-      }
+              } else {
+                return (
+                  <div className='mx-select-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+                    {this.props.options.map(option => {
+                      return (
+                        <div
+                          className='mx-select-option'
+                          key={option.displayValue + option.value}
+                          onClick={this._handleOptionClick.bind(this, option)}
+                          ref={option.displayValue + option.value}
+                          style={[styles.option, this.props.optionStyle]}
+                        >
+                        {option.displayValue}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              }
+            })()}
+        </div>
+      );
     }
   }
 
@@ -103,11 +96,15 @@ class SelectFullScreen extends React.Component {
     return (
       <div className='mx-select' style={this.props.style}>
         <div className='mx-select-custom'
-          onClick={this._handleClick.bind(this)}
           style={[styles.component, this.props.dropdownStyle]}
           tabIndex='0'
         >
-          <div className='mx-select-selected' key='selected' style={this.props.selectedStyle}>
+          <div
+            className='mx-select-selected'
+            key='selected'
+            onClick={this._handleClick.bind(this)}
+            style={[styles.selected, this.props.selectedStyle]}
+          >
             {selected.displayValue}
             <Icon
               size='20'
@@ -122,19 +119,50 @@ class SelectFullScreen extends React.Component {
   }
 }
 
+SelectFullScreen.propTypes = {
+  closeIcon: React.PropTypes.string,
+  isFixed: React.PropTypes.bool,
+  dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  onChange: React.PropTypes.func,
+  options: React.PropTypes.array,
+  optionsHeaderText: React.PropTypes.string,
+  optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+  placeholderText: React.PropTypes.string,
+  selected: React.PropTypes.object,
+  selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+};
+
+SelectFullScreen.defaultProps = {
+  closeIcon: 'close',
+  isFixed: false,
+  onChange () {},
+  options: [],
+  optionsHeaderText: 'Select An Option',
+  placeholderText: 'Select One',
+  selected: false
+};
+
 const styles = {
   caret: {
-    color: '#CCCCCC',
+    color: StyleConstants.Colors.FOG,
     cursor: 'pointer',
     position: 'absolute',
-    right: '-5px',
+    right: -5,
     top: '50%',
     transform: 'translateY(-50%)'
   },
+  closeIcon: {
+    color: StyleConstants.Colors.CHARCOAL,
+    cursor: 'pointer',
+    position: 'absolute',
+    right: 20,
+    top: 20
+  },
   component: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: '3px',
-    border: '1px solid #E5E5E5',
+    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    borderRadius: 3,
+    border: '1px solid ' + StyleConstants.Colors.FOG,
     cursor: 'pointer',
     fontFamily: StyleConstants.FontFamily,
     fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -146,7 +174,7 @@ const styles = {
     borderColor: StyleConstants.Colors.RED
   },
   optionsScrim: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
     bottom: 0,
     height: '100%',
     left: 0,
@@ -168,8 +196,8 @@ const styles = {
   },
   option: {
     cursor: 'pointer',
-    backgroundColor: '#FFFFFF',
-    padding: '10px',
+    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    padding: 10,
     whiteSpace: 'nowrap',
     opacity: 0.4,
 
@@ -180,36 +208,17 @@ const styles = {
     }
   },
   optionsHeader: {
-    color: StyleConstants.Colors.CHARCOL,
+    color: StyleConstants.Colors.CHARCOAL,
     fontSize: StyleConstants.FontSizes.XXLARGE,
     fontWeight: 'bold',
     left: '50%',
     position: 'absolute',
     top: 20,
     transform: 'translateX(-50%)'
+  },
+  selected: {
+    position: 'relative'
   }
-};
-
-SelectFullScreen.propTypes = {
-  dropdownPositionFixed: React.PropTypes.bool,
-  dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  onChange: React.PropTypes.func,
-  options: React.PropTypes.array,
-  optionsHeaderText: React.PropTypes.string,
-  optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  placeholderText: React.PropTypes.string,
-  selected: React.PropTypes.object,
-  selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-};
-
-SelectFullScreen.defaultProps = {
-  dropdownPositionFixed: false,
-  onChange () {},
-  options: [],
-  optionsHeaderText: 'Select An Option',
-  placeholderText: 'Select One',
-  selected: false
 };
 
 module.exports = Radium(SelectFullScreen);
