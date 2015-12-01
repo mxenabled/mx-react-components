@@ -9,6 +9,7 @@ const {
   Modal,
   RangeSelector,
   Select,
+  SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
   TypeAhead,
@@ -634,6 +635,40 @@ const Demo = React.createClass({
               color: '#359BCF'
             }}
           />
+        </div>
+
+        <br/><br/>
+        <div style={{
+          border: '1px solid #E3E6E7' ,
+          boxSizing: 'border-box',
+          height: 400,
+          padding: '10px',
+          position: 'relative',
+          width: '100%'
+        }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', paddingBottom: 10 }}>
+            Full Parent Select
+          </div>
+          <SelectFullScreen
+            onChange={this._handleSelectChange}
+            options={icons}
+            optionHoverStyle={{
+              backgroundColor: '#359BCF',
+              color: '#fff'
+            }}
+            placeholderText='Pick One'
+            selected={this.state.icon}
+          />
+          <br/><br/>
+          <div style={{ textAlign: 'center' }}>
+            <Icon
+              type={this.state.icon.value}
+              size={150}
+              style={{
+                color: '#359BCF'
+              }}
+            />
+          </div>
         </div>
 
         <br/><br/>
