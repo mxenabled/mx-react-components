@@ -240,7 +240,7 @@ class DatePickerFullScreen extends React.Component {
             <Icon
               onClick={this._handleCloseClick.bind(this)}
               size='32px'
-              type='close'
+              type={this.props.closeIcon}
             />
           </div>
           <div className='mx-date-picker-full-screen-calendar-wrapper' style={styles.calendarWrapper}>
@@ -273,6 +273,7 @@ class DatePickerFullScreen extends React.Component {
 
 DatePickerFullScreen.propTypes = {
   caretWrapperStyle: React.PropTypes.object,
+  closeIcon: React.PropTypes.string,
   closeOnDateSelect: React.PropTypes.bool,
   defaultDate: React.PropTypes.number,
   format: React.PropTypes.string,
@@ -292,6 +293,7 @@ DatePickerFullScreen.propTypes = {
 };
 
 DatePickerFullScreen.defaultProps = {
+  closeIcon: 'close',
   closeOnDateSelect: false,
   format: 'MMM D, YYYY',
   isFixed: false,
