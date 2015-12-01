@@ -55,9 +55,10 @@ class SelectFullScreen extends React.Component {
               type={this.props.closeIcon}
             />
           </div>
-          <div style={styles.optionsHeader}>
-            {this.props.optionsHeaderText}
-          </div>
+          <div style={styles.content}>
+            <div style={styles.optionsHeader}>
+              {this.props.optionsHeaderText}
+            </div>
             {(() => {
               if (this.props.children) {
                 return (
@@ -85,6 +86,7 @@ class SelectFullScreen extends React.Component {
                 );
               }
             })()}
+          </div>
         </div>
       );
     }
@@ -166,6 +168,13 @@ const styles = {
     boxSizing: 'border-box',
     outline: 'none'
   },
+  content: {
+    left: '50%',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 300
+  },
   invalid: {
     borderColor: StyleConstants.Colors.RED
   },
@@ -174,7 +183,6 @@ const styles = {
     bottom: 0,
     height: '100%',
     left: 0,
-    opacity: '0.95',
     position: 'absolute',
     right: 0,
     top: 0,
@@ -182,12 +190,8 @@ const styles = {
   },
   optionsWrapper: {
     border: '1px solid ' + StyleConstants.Colors.FOG,
-    left: '50%',
-    height: '70%',
+    height: 250,
     overflow: 'auto',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
     width: 300
   },
   option: {
@@ -207,10 +211,7 @@ const styles = {
     color: StyleConstants.Colors.CHARCOAL,
     fontSize: StyleConstants.FontSizes.XXLARGE,
     fontWeight: 'bold',
-    left: '50%',
-    position: 'absolute',
-    top: 20,
-    transform: 'translateX(-50%)'
+    paddingBottom: 10
   },
   selected: {
     position: 'relative'
