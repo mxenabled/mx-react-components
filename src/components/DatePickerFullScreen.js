@@ -424,7 +424,6 @@ const styles = {
     display: 'none',
     left: 0,
     margin: 0,
-    opacity: '0.95',
     padding: 0,
     position: 'absolute',
     right: 0,
