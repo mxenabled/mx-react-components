@@ -19,14 +19,13 @@ const Changelog = React.createClass({
 
         <h3>1.3.1</h3>
         <ul>
-          <li>TimeBasedLineChart zero y axis fix (<a href='https://github.com/mxenabled/mx-react-components/pull/118'>#118</a>)</li>
-          <li>Update how Modal component is centered (<a href='https://github.com/mxenabled/mx-react-components/pull/119'>#119</a>)</li>
+          <li>Modal - Update the way we center Modal content, add an isRelative prop (<a href='https://github.com/mxenabled/mx-react-components/pull/119'>#119</a>)</li>
+          <li>TimeBasedLineChart - Don't render zero axis if to close to another tick. (<a href='https://github.com/mxenabled/mx-react-components/pull/118'>#118</a>)</li>
         </ul>
 
         <h3>1.3.0</h3>
         <ul>
-          <li>Add new features to the Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/115'>#115</a>)</li>
-          <li>Fixes and updates to the Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/116'>#116</a>)</li>
+          <li>Modal - Introduce new features/props to component (<a href='https://github.com/mxenabled/mx-react-components/pull/115'>#115</a>)</li>
         </ul>
 
         <h3>1.2.8</h3>
