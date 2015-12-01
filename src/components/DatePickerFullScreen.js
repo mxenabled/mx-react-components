@@ -240,6 +240,7 @@ class DatePickerFullScreen extends React.Component {
             <Icon
               onClick={this._handleCloseClick.bind(this)}
               size='32px'
+              style={{ color: StyleConstants.Colors.CHARCOAL }}
               type={this.props.closeIcon}
             />
           </div>
