@@ -11,5 +11,6 @@ module.exports = {
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
   TypeAhead: require('./components/TypeAhead'),
-  DatePicker: require('./components/DatePicker')
+  DatePicker: require('./components/DatePicker'),
+  DatePickerFullScreen: require('./components/DatePickerFullScreen')
 };
