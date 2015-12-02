@@ -52,7 +52,7 @@ class SelectFullScreen extends React.Component {
   }
 
   _renderOptions () {
-    if (this.state.isOpen && this.props.isOpen) {
+    if (this.state.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
           <div onClick={this._handleCloseClick.bind(this)} style={styles.close}>
@@ -67,27 +67,20 @@ class SelectFullScreen extends React.Component {
             <div style={styles.optionsHeader}>
               {this.props.optionsHeaderText}
             </div>
-            {this.props.children ? (
-              <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
-                {this.props.children}
-              </div>
-            ) : (
-              <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
-                {this.props.options.map(option => {
-                  return (
-                    <div
-                      className='mx-select-full-screen-option'
-                      key={option.displayValue + option.value}
-                      onClick={this._handleOptionClick.bind(this, option)}
-                      ref={option.displayValue + option.value}
-                      style={[styles.option, this.props.optionStyle]}
-                    >
-                    {option.displayValue}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+              {this.props.options.map(option => {
+                return (
+                  <div
+                    className='mx-select-full-screen-option'
+                    key={option.displayValue + option.value}
+                    onClick={this._handleOptionClick.bind(this, option)}
+                    ref={option.displayValue + option.value}
+                  >
+                    {this.props.optionFormatter(option)}
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       );
@@ -116,7 +109,6 @@ class SelectFullScreen extends React.Component {
 SelectFullScreen.propTypes = {
   closeIcon: React.PropTypes.string,
   isFixed: React.PropTypes.bool,
-  isOpen: React.PropTypes.bool,
   onChange: React.PropTypes.func,
   options: React.PropTypes.array,
   optionsHeaderText: React.PropTypes.string,
@@ -130,8 +122,14 @@ SelectFullScreen.propTypes = {
 SelectFullScreen.defaultProps = {
   closeIcon: 'close',
   isFixed: false,
-  isOpen: true,
   onChange () {},
+  optionFormatter (option) {
+    return (
+      <div key={option.displayValue + option.value + '_value'} style={styles.option}>
+        {option.displayValue}
+      </div>
+    );
+  },
   options: [],
   optionsHeaderText: 'Select An Option',
   placeholderText: 'Select One',
