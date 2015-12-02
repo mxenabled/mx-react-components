@@ -55,10 +55,9 @@ class SelectFullScreen extends React.Component {
     if (this.state.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
-          <div style={styles.close}>
+          <div onClick={this._handleCloseClick.bind(this)} style={styles.close}>
             <Icon
-              onClick={this._handleCloseClick.bind(this)}
-              size='32px'
+              size={20}
               style={styles.closeIcon}
               type={this.props.closeIcon}
             />
