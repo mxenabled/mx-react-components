@@ -9,8 +9,16 @@ class SelectFullScreen extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      isOpen: false,
+      isOpen: props.isOpen,
       selected: false
+    };
+  }
+
+  componentDidMount () {
+    window.onkeyup = e => {
+      if (e.keyCode === 27) {
+        this._handleCloseClick();
+      }
     };
   }
 
@@ -47,45 +55,40 @@ class SelectFullScreen extends React.Component {
     if (this.state.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
-          <div style={styles.closeIcon}>
+          <div style={styles.close}>
             <Icon
               onClick={this._handleCloseClick.bind(this)}
               size='32px'
-              style={{ color: StyleConstants.Colors.CHARCOAL }}
+              style={styles.closeIcon}
               type={this.props.closeIcon}
             />
+            <div style={styles.closeText}>ESC</div>
           </div>
           <div style={styles.content}>
             <div style={styles.optionsHeader}>
               {this.props.optionsHeaderText}
             </div>
-            {(() => {
-              if (this.props.children) {
-                return (
-                  <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
-                    {this.props.children}
-                  </div>
-                );
-              } else {
-                return (
-                  <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
-                    {this.props.options.map(option => {
-                      return (
-                        <div
-                          className='mx-select-full-screen-option'
-                          key={option.displayValue + option.value}
-                          onClick={this._handleOptionClick.bind(this, option)}
-                          ref={option.displayValue + option.value}
-                          style={[styles.option, this.props.optionStyle]}
-                        >
-                        {option.displayValue}
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              }
-            })()}
+            {this.props.children ? (
+              <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+                {this.props.children}
+              </div>
+            ) : (
+              <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+                {this.props.options.map(option => {
+                  return (
+                    <div
+                      className='mx-select-full-screen-option'
+                      key={option.displayValue + option.value}
+                      onClick={this._handleOptionClick.bind(this, option)}
+                      ref={option.displayValue + option.value}
+                      style={[styles.option, this.props.optionStyle]}
+                    >
+                    {option.displayValue}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       );
@@ -96,23 +99,16 @@ class SelectFullScreen extends React.Component {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select-full-screen' style={this.props.style}>
-        <div style={styles.component} tabIndex='0'>
-          <div
-            className='mx-select-full-screen-selected'
-            key='selected'
-            onClick={this._handleClick.bind(this)}
-            style={[styles.selected, this.props.selectedStyle]}
-          >
-            {selected.displayValue}
-            <Icon
-              size='20'
-              style={styles.caret}
-              type={this.state.isOpen ? 'caret-up' : 'caret-down'}
-            />
-          </div>
-          {this._renderOptions()}
+      <div className='mx-select-full-screen' style={[styles.component, this.props.style]}>
+        <div
+          className='mx-select-full-screen-selected'
+          key='selected'
+          onClick={this._handleClick.bind(this)}
+          style={this.props.selectedStyle}
+        >
+          {selected.displayValue}
         </div>
+        {this._renderOptions()}
       </div>
     );
   }
@@ -121,6 +117,7 @@ class SelectFullScreen extends React.Component {
 SelectFullScreen.propTypes = {
   closeIcon: React.PropTypes.string,
   isFixed: React.PropTypes.bool,
+  isOpen: React.PropTypes.bool,
   onChange: React.PropTypes.func,
   options: React.PropTypes.array,
   optionsHeaderText: React.PropTypes.string,
@@ -134,6 +131,7 @@ SelectFullScreen.propTypes = {
 SelectFullScreen.defaultProps = {
   closeIcon: 'close',
   isFixed: false,
+  isOpen: false,
   onChange () {},
   options: [],
   optionsHeaderText: 'Select An Option',
@@ -142,29 +140,25 @@ SelectFullScreen.defaultProps = {
 };
 
 const styles = {
-  caret: {
-    color: StyleConstants.Colors.FOG,
-    cursor: 'pointer',
-    position: 'absolute',
-    right: -5,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  closeIcon: {
-    color: StyleConstants.Colors.CHARCOAL,
-    cursor: 'pointer',
+  close: {
     position: 'absolute',
     right: 20,
-    top: 20
+    top: 15,
+    textAlign: 'center',
+    cursor: 'pointer',
+    color: StyleConstants.Colors.ASH
+  },
+  closeIcon: {
+    color: StyleConstants.Colors.ASH
+  },
+  closeText: {
+    fontSize: StyleConstants.FontSizes.TINY
   },
   component: {
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
-    borderRadius: 3,
-    border: '1px solid ' + StyleConstants.Colors.FOG,
     cursor: 'pointer',
     fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    padding: '11px 10px 12px',
+    fontSize: StyleConstants.FontSizes.LARGE,
+    color: StyleConstants.Colors.CHARCOAL,
     boxSizing: 'border-box',
     outline: 'none'
   },
@@ -175,11 +169,8 @@ const styles = {
     transform: 'translate(-50%, -50%)',
     width: 300
   },
-  invalid: {
-    borderColor: StyleConstants.Colors.RED
-  },
   optionsScrim: {
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    backgroundColor: '#fff',
     bottom: 0,
     height: '100%',
     left: 0,
@@ -196,10 +187,10 @@ const styles = {
   },
   option: {
     cursor: 'pointer',
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    backgroundColor: '#fff',
     padding: 10,
     whiteSpace: 'nowrap',
-    opacity: 0.4,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
 
     ':hover': {
       backgroundColor: StyleConstants.Colors.PRIMARY,
@@ -212,9 +203,6 @@ const styles = {
     fontSize: StyleConstants.FontSizes.XXLARGE,
     fontWeight: 'bold',
     paddingBottom: 10
-  },
-  selected: {
-    position: 'relative'
   }
 };
 
