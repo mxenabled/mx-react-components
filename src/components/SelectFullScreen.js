@@ -9,7 +9,7 @@ class SelectFullScreen extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      isOpen: props.isOpen,
+      isOpen: false,
       selected: false
     };
   }
@@ -52,7 +52,7 @@ class SelectFullScreen extends React.Component {
   }
 
   _renderOptions () {
-    if (this.state.isOpen) {
+    if (this.state.isOpen && this.props.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
           <div onClick={this._handleCloseClick.bind(this)} style={styles.close}>
@@ -130,7 +130,7 @@ SelectFullScreen.propTypes = {
 SelectFullScreen.defaultProps = {
   closeIcon: 'close',
   isFixed: false,
-  isOpen: false,
+  isOpen: true,
   onChange () {},
   options: [],
   optionsHeaderText: 'Select An Option',
