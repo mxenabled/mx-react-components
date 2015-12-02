@@ -18,6 +18,14 @@ class DatePickerFullScreen extends React.Component {
     };
   }
 
+  componentDidMount () {
+    window.onkeyup = e => {
+      if (e.keyCode === 27) {
+        this._handleCloseClick();
+      }
+    };
+  }
+
   _getInputValueByDate (date) {
     let inputValue = null;
 
@@ -173,7 +181,6 @@ class DatePickerFullScreen extends React.Component {
           <div style={[styles.placeholderText, this.props.placeholderTextStyle]}>
             {this.props.placeholderText || 'Select A Date'}
           </div>
-          {this._renderCaret()}
         </div>
       );
     } else {
@@ -184,7 +191,6 @@ class DatePickerFullScreen extends React.Component {
           style={styles.selectedDate}
         >
           {this.state.inputValue}
-          {this._renderCaret()}
         </div>
       );
     }
@@ -195,21 +201,6 @@ class DatePickerFullScreen extends React.Component {
       return (
         <div key='title' style={styles.title}>
           {this.props.title}
-        </div>
-      );
-    }
-  }
-
-  _renderCaret () {
-    if (this.props.showCaret) {
-      return (
-        <div style={[styles.caretWrapper, this.props.caretWrapperStyle]}>
-          <Icon
-            onClick={this._toggleCalendar.bind(this)}
-            size='20'
-            style={styles.caret}
-            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-          />
         </div>
       );
     }
@@ -236,13 +227,13 @@ class DatePickerFullScreen extends React.Component {
           this.state.showCalendar && styles.calendarShow,
           this.props.isFixed && { position: 'fixed' }
         ]}>
-          <div style={styles.closeIcon}>
+          <div onClick={this._handleCloseClick.bind(this)} style={styles.close}>
             <Icon
-              onClick={this._handleCloseClick.bind(this)}
-              size='32px'
-              style={{ color: StyleConstants.Colors.CHARCOAL }}
+              size={20}
+              style={styles.closeIcon}
               type={this.props.closeIcon}
             />
+            <div style={styles.closeText}>ESC</div>
           </div>
           <div className='mx-date-picker-full-screen-calendar-wrapper' style={styles.calendarWrapper}>
             {this._renderTitle(styles)}
@@ -273,7 +264,6 @@ class DatePickerFullScreen extends React.Component {
 }
 
 DatePickerFullScreen.propTypes = {
-  caretWrapperStyle: React.PropTypes.object,
   closeIcon: React.PropTypes.string,
   closeOnDateSelect: React.PropTypes.bool,
   defaultDate: React.PropTypes.number,
@@ -286,7 +276,6 @@ DatePickerFullScreen.propTypes = {
   placeholderText: React.PropTypes.string,
   placeholderTextStyle: React.PropTypes.object,
   selectedDateWrapperStyle: React.PropTypes.object,
-  showCaret: React.PropTypes.bool,
   showDayBorders: React.PropTypes.bool,
   style: React.PropTypes.object,
   title: React.PropTypes.string,
@@ -300,26 +289,12 @@ DatePickerFullScreen.defaultProps = {
   isFixed: false,
   locale: 'en',
   onDateSelect () {},
-  showCaret: true,
   showDayBorders: false,
   title: 'Select A Date',
   useInputForSelectedDate: true
 };
 
 const styles = {
-  caret: {
-    color: StyleConstants.Colors.FOG,
-    cursor: 'pointer',
-    position: 'absolute',
-    right: 5,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  caretWrapper: {
-    position: 'absolute',
-    top: '50%',
-    right: 5
-  },
   calendarDay: {
     color: StyleConstants.Colors.ASH,
     float: 'left',
@@ -397,20 +372,28 @@ const styles = {
   calendarShow: {
     display: 'block'
   },
-  closeIcon: {
-    cursor: 'pointer',
+  close: {
     position: 'absolute',
     right: 20,
-    top: 20
+    top: 15,
+    textAlign: 'center',
+    cursor: 'pointer',
+    color: StyleConstants.Colors.ASH
+  },
+  closeIcon: {
+    color: StyleConstants.Colors.ASH
+  },
+  closeText: {
+    fontSize: StyleConstants.FontSizes.TINY
   },
   clearFix: {
     clear: 'both',
     marginBottom: 15
   },
   component: {
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    backgroundColor: '#fff',
     fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
+    fontSize: StyleConstants.FontSizes.LARGE,
     width: '100%',
 
     ':focus': {
@@ -419,7 +402,7 @@ const styles = {
     }
   },
   calendarModal: {
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    backgroundColor: '#fff',
     bottom: 0,
     display: 'none',
     left: 0,
@@ -439,12 +422,8 @@ const styles = {
     width: 300
   },
   selectedDateWrapper: {
-    borderColor: StyleConstants.Colors.FOG,
-    borderRadius: '3px 3px 3px 3px',
-    borderStyle: 'solid',
-    borderWidth: '1px 1px 1px 1px',
     position: 'relative',
-    padding: '5px 5px 5px 5px'
+    cursor: 'pointer'
   },
   currentDay: {
     backgroundColor: StyleConstants.Colors.BLUE,
