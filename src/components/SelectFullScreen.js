@@ -78,7 +78,7 @@ class SelectFullScreen extends React.Component {
                   >
                     {this.props.optionFormatter(option)}
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -110,6 +110,7 @@ SelectFullScreen.propTypes = {
   closeIcon: React.PropTypes.string,
   isFixed: React.PropTypes.bool,
   onChange: React.PropTypes.func,
+  optionFormatter: React.PropTypes.func,
   options: React.PropTypes.array,
   optionsHeaderText: React.PropTypes.string,
   optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
