@@ -51,6 +51,10 @@ const Components = React.createClass({
                   displayValue: 'Select'
                 },
                 {
+                  value: 'select-full-screen',
+                  displayValue: 'Select Full Screen'
+                },
+                {
                   value: 'toggle-switch',
                   displayValue: 'Toggle Switch'
                 },
@@ -84,6 +88,7 @@ const Components = React.createClass({
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/select'>Select</Link>
+            <Link to='/components/select-full-screen'>Select Full Screen</Link>
             <Link to='/components/toggle-switch'>Toggle Switch</Link>
             <Link to='/components/type-ahead'>Type Ahead</Link>
 

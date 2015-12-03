@@ -14,6 +14,7 @@ const Loader = require('components/LoaderDocs');
 const Modal = require('components/ModalDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const Select = require('components/SelectDocs');
+const SelectFullScreen = require('components/SelectFullScreenDocs');
 const Spin = require('components/SpinDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
@@ -48,6 +49,7 @@ ReactDOM.render((
         <Route component={Modal} path='modal' />
         <Route component={RangeSelector} path='range-selector' />
         <Route component={Select} path='select' />
+        <Route component={SelectFullScreen} path='select-full-screen' />
         <Route component={Spin} path='spin' />
         <Route component={ToggleSwitch} path='toggle-switch' />
         <Route component={TypeAhead} path='type-ahead' />
