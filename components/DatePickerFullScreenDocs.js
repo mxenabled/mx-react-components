@@ -20,6 +20,7 @@ const DatePickerFullScreenDocs = React.createClass({
           defaultDate={moment().unix()}
           showDayBorders={false}
           title='Select A Date'
+          useInputForSelectedDate={false}
         />
 
         <h3>Usage</h3>
