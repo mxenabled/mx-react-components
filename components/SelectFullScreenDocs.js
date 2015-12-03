@@ -58,7 +58,9 @@ const SelectFullScreenDocs = React.createClass({
 
         <h3>Demo</h3>
         <SelectFullScreen
+          isFixed={true}
           options={options}
+          selected={{ value: '1', displayValue: 'Option 1' }}
         />
 
         <h3>Usage</h3>
@@ -113,6 +115,7 @@ const SelectFullScreenDocs = React.createClass({
         <Markdown>
   {`
     <Select
+      isFixed={true}
       options={[
         {
           value: '1',
