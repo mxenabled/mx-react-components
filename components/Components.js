@@ -39,6 +39,10 @@ const Components = React.createClass({
                   displayValue: 'Date Picker'
                 },
                 {
+                  value: 'date-picker-full-screen',
+                  displayValue: 'Date Picker Full Screen'
+                },
+                {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
                 },
@@ -77,6 +81,7 @@ const Components = React.createClass({
 
             <h3>Form</h3>
             <Link to='/components/date-picker'>Date Picker</Link>
+            <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/select'>Select</Link>
             <Link to='/components/toggle-switch'>Toggle Switch</Link>
