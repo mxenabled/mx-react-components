@@ -163,7 +163,7 @@ const styles = {
   },
   content: {
     position: 'relative',
-    maxHeight: '100%',
+    maxHeight: '100% - 140px',
     overflow: 'auto'
   },
   footer: {
