@@ -102,7 +102,7 @@ class Modal extends React.Component {
               type='close-solid'
             />
             {this._renderTitleBar()}
-            <div className='mx-modal-content' style={styles.content}>
+            <div className='mx-modal-content' style={[styles.content, this.props.contentStyle]}>
               {this.props.children}
               {this._renderTooltip()}
             </div>
@@ -239,6 +239,7 @@ Modal.propTypes = {
     type: React.PropTypes.oneOf(['primary', 'secondary'])
   })),
   color: React.PropTypes.string,
+  contentStyle: React.PropTypes.object,
   isOpen: React.PropTypes.bool,
   isRelative: React.PropTypes.bool,
   onRequestClose: React.PropTypes.func,
