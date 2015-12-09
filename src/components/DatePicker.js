@@ -132,7 +132,11 @@ class DatePicker extends React.Component {
         >
           <div
             key={startDate.format('DDDD')}
-            style={[styles.calendarDayContent, noSelectDay ? styles.calendarDayDisabled : isCurrentDay && styles.currentDay]}
+            style={[
+              styles.calendarDayContent,
+              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && { backgroundColor: this.props.selectedDateColor, color: '#FFFFFF' },
+              { ':hover': { backgroundColor: this.props.selectedDateColor, color: '#FFFFFF' } }
+            ]}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
           </div>
@@ -277,6 +281,7 @@ DatePicker.propTypes = {
   placeholderText: React.PropTypes.string,
   placeholderTextStyle: React.PropTypes.object,
   scrimStyle: React.PropTypes.object,
+  selectedDateColor: React.PropTypes.string,
   selectedDateWrapperStyle: React.PropTypes.object,
   showCaret: React.PropTypes.bool,
   showDayBorders: React.PropTypes.bool,
@@ -290,6 +295,7 @@ DatePicker.defaultProps = {
   format: 'MMM D, YYYY',
   locale: 'en',
   onDateSelect () {},
+  selectedDateColor: '#359BCF',
   scrimStyle: {},
   showCaret: true,
   showDayBorders: false,
@@ -344,13 +350,7 @@ const styles = {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%) translateX(-50%)',
-    width: '32px',
-
-    ':hover': {
-      backgroundColor: '#359BCF',
-      color: '#FFFFFF',
-      cursor: 'pointer'
-    }
+    width: '32px'
   },
   calendarDayText: {
     borderRadius: '100%',
@@ -435,10 +435,10 @@ const styles = {
     position: 'relative',
     padding: '5px 5px 5px 5px'
   },
-  currentDay: {
-    backgroundColor: '#359BCF',
-    color: '#FFFFFF'
-  },
+  // currentDay: {
+  //   backgroundColor: '#359BCF',
+  //   color: '#FFFFFF'
+  // },
   currentMonth: {
     color: '#606060'
   },
