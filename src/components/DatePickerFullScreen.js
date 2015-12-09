@@ -146,7 +146,11 @@ class DatePickerFullScreen extends React.Component {
         >
           <div
             key={startDate.format('DDDD')}
-            style={[styles.calendarDayContent, noSelectDay ? styles.calendarDayDisabled : isCurrentDay && styles.currentDay]}
+            style={[
+              styles.calendarDayContent,
+              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && { backgroundColor: this.props.selectedDateColor, color: StyleConstants.Colors.INVERSE_PRIMARY },
+              { ':hover': { backgroundColor: this.props.selectedDateColor, color: StyleConstants.Colors.INVERSE_PRIMARY, cursor: 'pointer' } }
+            ]}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
           </div>
@@ -275,6 +279,7 @@ DatePickerFullScreen.propTypes = {
   onDateSelect: React.PropTypes.func,
   placeholderText: React.PropTypes.string,
   placeholderTextStyle: React.PropTypes.object,
+  selectedDateColor: React.PropTypes.string,
   selectedDateWrapperStyle: React.PropTypes.object,
   showDayBorders: React.PropTypes.bool,
   style: React.PropTypes.object,
@@ -289,6 +294,7 @@ DatePickerFullScreen.defaultProps = {
   isFixed: false,
   locale: 'en',
   onDateSelect () {},
+  selectedDateColor: StyleConstants.Colors.BLUE,
   showDayBorders: false,
   title: 'Select A Date',
   useInputForSelectedDate: true
@@ -328,13 +334,7 @@ const styles = {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%) translateX(-50%)',
-    width: 32,
-
-    ':hover': {
-      backgroundColor: StyleConstants.Colors.BLUE,
-      color: StyleConstants.Colors.INVERSE_PRIMARY,
-      cursor: 'pointer'
-    }
+    width: 32
   },
   calendarDayText: {
     borderRadius: '100%',

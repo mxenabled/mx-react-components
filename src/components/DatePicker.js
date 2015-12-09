@@ -134,8 +134,8 @@ class DatePicker extends React.Component {
             key={startDate.format('DDDD')}
             style={[
               styles.calendarDayContent,
-              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && { backgroundColor: this.props.selectedDateColor, color: '#FFFFFF' },
-              { ':hover': { backgroundColor: this.props.selectedDateColor, color: '#FFFFFF' } }
+              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && { backgroundColor: this.props.selectedDateColor, color: StyleConstants.Colors.INVERSE_PRIMARY },
+              { ':hover': { backgroundColor: this.props.selectedDateColor, color: StyleConstants.Colors.INVERSE_PRIMARY, cursor: 'pointer' } }
             ]}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
@@ -295,7 +295,7 @@ DatePicker.defaultProps = {
   format: 'MMM D, YYYY',
   locale: 'en',
   onDateSelect () {},
-  selectedDateColor: '#359BCF',
+  selectedDateColor: StyleConstants.Colors.BLUE,
   scrimStyle: {},
   showCaret: true,
   showDayBorders: false,
@@ -305,39 +305,39 @@ DatePicker.defaultProps = {
 
 const styles = {
   caret: {
-    color: '#CCCCCC',
+    color: StyleConstants.Colors.ASH,
     cursor: 'pointer',
     position: 'absolute',
-    right: '5px',
+    right: 5,
     top: '50%',
     transform: 'translateY(-50%)'
   },
   caretWrapper: {
     position: 'absolute',
     top: '50%',
-    right: '5px'
+    right: 5
   },
   calendarDay: {
-    color: '#DDDDDD',
+    color: StyleConstants.Colors.ASH,
     float: 'left',
     paddingBottom: '11%',
     position: 'relative',
     width: '13.5%'
   },
   borderBottom: {
-    borderBottom: '#E5E5E5',
+    borderBottom: StyleConstants.Colors.FOG,
     borderBottomStyle: 'solid',
-    borderBottomWidth: '1px'
+    borderBottomWidth: 1
   },
   borderRight: {
-    borderRight: '#E5E5E5',
+    borderRight: StyleConstants.Colors.FOG,
     borderRightStyle: 'solid',
-    borderRightWidth: '1px'
+    borderRightWidth: 1
   },
   borderLeft: {
-    borderLeft: '#E5E5E5',
+    borderLeft: StyleConstants.Colors.FOG,
     borderLeftStyle: 'solid',
-    borderLeftWidth: '1px'
+    borderLeftWidth: 1
   },
   calendarContainer: {
     width: '100%',
@@ -345,12 +345,12 @@ const styles = {
   },
   calendarDayContent: {
     borderRadius: '50%',
-    height: '32px',
+    height: 32,
     left: '50%',
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%) translateX(-50%)',
-    width: '32px'
+    width: 32
   },
   calendarDayText: {
     borderRadius: '100%',
@@ -364,14 +364,14 @@ const styles = {
   calendarDayDisabled: {
     ':hover': {
       background: 'none',
-      color: '#DDDDDD'
+      color: StyleConstants.Colors.PORCELAIN
     }
   },
   calendarHeader: {
-    color: '#606060',
-    borderBottom: '#E5E5E5',
-    borderBottomWidth: '1px',
-    fontSize: '15px',
+    color: StyleConstants.Colors.CHARCOAL,
+    borderBottom: StyleConstants.Colors.FOG,
+    borderBottomWidth: 1,
+    fontSize: StyleConstants.FontSizes.XLARGE,
     fontWeight: 'normal',
     padding: '5px 0px 7px 0px',
     position: 'relative',
@@ -379,9 +379,9 @@ const styles = {
     textTransform: 'none'
   },
   calendarIcon: {
-    color: '#DDDDDD',
+    color: StyleConstants.Colors.PORCELAIN,
     position: 'absolute',
-    right: '12.8px',
+    right: 12.8,
     top: '50%',
     transform: 'translateY(-50%)'
   },
@@ -390,10 +390,10 @@ const styles = {
   },
   clearFix: {
     clear: 'both',
-    marginBottom: '15px'
+    marginBottom: 15
   },
   component: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
     color: '#000000',
     fontFamily: StyleConstants.FontFamily,
     fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -401,7 +401,7 @@ const styles = {
     width: '100%',
 
     '@media (max-width: 768px)': {
-      fontSize: '8px'
+      fontSize: 8
     },
 
     ':focus': {
@@ -410,16 +410,16 @@ const styles = {
     }
   },
   calendarWrapper: {
-    backgroundColor: '#FFFFFF',
-    borderBottomLeftRadius: '3px',
-    borderBottomRightRadius: '3px',
-    borderColor: '#E5E5E5',
+    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
+    borderColor: StyleConstants.Colors.FOG,
     borderStyle: 'solid',
-    borderWidth: '1px',
+    borderWidth: 1,
     boxShadow: StyleConstants.BoxShadow,
     boxSizing: 'border-box',
     display: 'none',
-    maxWidth: '270px',
+    maxWidth: 270,
     padding: '0px 0px 0px 0px',
     margin: '0 0 40px 0',
     position: 'absolute',
@@ -427,30 +427,25 @@ const styles = {
     zIndex: 10
   },
   selectedDateWrapper: {
-    borderBottomWidth: '1px',
-    borderColor: '#E5E5E5',
+    borderColor: StyleConstants.Colors.FOG,
     borderRadius: '3px 3px 3px 3px',
     borderStyle: 'solid',
     borderWidth: '1px 1px 1px 1px',
     position: 'relative',
     padding: '5px 5px 5px 5px'
   },
-  // currentDay: {
-  //   backgroundColor: '#359BCF',
-  //   color: '#FFFFFF'
-  // },
   currentMonth: {
-    color: '#606060'
+    color: StyleConstants.Colors.CHARCOAL
   },
   input: {
     backgroundColor: 'transparent',
     border: 'none',
     fontSize: StyleConstants.FontSizes.MEDIUM,
     outline: 'none',
-    paddingBottom: '10px',
-    paddingLeft: '5px',
+    paddingBottom: 10,
+    paddingLeft: 5,
     position: 'relative',
-    top: '5px',
+    top: 5,
     WebkitAppearance: 'none',
     width: '80%',
     zIndex: 2,
@@ -477,11 +472,11 @@ const styles = {
     transform: 'translateY(-50%)'
   },
   placeholderText: {
-    color: '#AAAAAA',
-    fontSize: '14px',
-    paddingLeft: '5px',
+    color: StyleConstants.Colors.CHARCOAL,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
+    paddingLeft: 5,
     position: 'absolute',
-    top: '10px'
+    top: 10
   },
   scrim: {
     position: 'fixed',
@@ -492,7 +487,7 @@ const styles = {
     left: 0
   },
   selectedDate: {
-    color: '#606060',
+    color: StyleConstants.Colors.CHARCOAL,
     cursor: 'pointer',
     fontSize: StyleConstants.FontSizes.MEDIUM,
     padding: '5px 0 5px 5px',
@@ -500,16 +495,16 @@ const styles = {
     width: '100%',
 
     ':hover': {
-      color: '#359BCF'
+      color: StyleConstants.Colors.BLUE
     }
   },
   title: {
-    backgroundColor: '#666666',
-    color: '#f2f2f2',
+    backgroundColor: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.PORCELAIN,
     textAlign: 'center',
     padding: '7px 0px 7px 0px',
     fontSize: StyleConstants.FontSizes.MEDIUM,
-    margin: '1px'
+    margin: 1
   }
 };
 
