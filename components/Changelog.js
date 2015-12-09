@@ -6,6 +6,16 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.4.7</h3>
+        <ul>
+          <li>Add new contentStyle prop to Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/125'>#125</a>)</li>
+        </ul>
+
+        <h3>1.4.2 - 1.4.6</h3>
+        <ul>
+          <li>Bug Fixes to SelectFullScreen and DatePickerFullScreen components (<a href='https://github.com/mxenabled/mx-react-components/commits/master'>Commit History</a>)</li>
+        </ul>
+
         <h3>1.4.1</h3>
         <ul>
           <li>New DatePickerFullScreen component (<a href='https://github.com/mxenabled/mx-react-components/pull/122'>#122</a>)</li>

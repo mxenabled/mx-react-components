@@ -91,6 +91,9 @@ const ModalDocs = React.createClass({
         <h5>color <label>String</label></h5>
         <p>A css color string to be used as the accent color of the modal: primary button, tooltip title, etc.</p>
 
+        <h5>contentStyle <label>Object</label></h5>
+        <p>A style object used to style the content div that wrapps the modal's content</p>
+
         <h5>isOpen <label>Boolean</label></h5>
         <p>Default: 'false'</p>
         <p>Determines if the modal is visible or hidden</p>
