@@ -10,7 +10,7 @@ class DatePickerFullScreen extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentDate: null,
+      currentDate: moment().unix(),
       selectedDate: this.props.defaultDate,
       showCalendar: false
     };
@@ -24,21 +24,15 @@ class DatePickerFullScreen extends React.Component {
     };
   }
 
-  _getSelectedDate () {
-    const selectedDate = this.state.selectedDate;
-
-    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
-  }
-
   _handleCloseClick () {
     this.setState({
       showCalendar: false
     });
   }
 
-  _handleDateSelect (date) {
+  _handleDateSelect (selectedDate) {
     const updatedState = {
-      selectedDate: date
+      selectedDate
     };
 
     if (this.props.closeOnDateSelect) {
@@ -47,28 +41,18 @@ class DatePickerFullScreen extends React.Component {
 
     this.setState(updatedState);
 
-    this.props.onDateSelect(date);
+    this.props.onDateSelect(selectedDate);
   }
 
   _handlePreviousClick () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    currentDate = moment(currentDate.startOf('month').subtract(1, 'm'), this.props.format);
-
     this.setState({
-      currentDate
+      currentDate: moment.unix(this.state.currentDate).locale(this.props.locale).startOf('month').subtract(1, 'm').unix()
     });
   }
 
   _handleNextClick () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    currentDate = moment(currentDate.endOf('month').add(1, 'd'), this.props.format);
-
     this.setState({
-      currentDate
+      currentDate: moment.unix(this.state.currentDate).locale(this.props.locale).endOf('month').add(1, 'd').unix()
     });
   }
 
@@ -78,14 +62,14 @@ class DatePickerFullScreen extends React.Component {
     });
   }
 
-  _renderMonthTable (currentDate, selectedDate) {
+  _renderMonthTable () {
     const days = [];
-    const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
-    const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
+    const startDate = moment(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment(this.state.currentDate).endOf('month').endOf('week');
 
     while (startDate.isBefore(endDate)) {
-      const isCurrentMonth = startDate.month() === currentDate.month();
-      const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
+      const isCurrentMonth = startDate.month() === moment(this.state.currentDate).month();
+      const isCurrentDay = startDate.format(this.props.format) === moment(this.state.selectedDate).format(this.props.format);
       const active = this.props.minimumDate ? startDate.isAfter(moment.unix(this.props.minimumDate)) : true;
 
       days.push((
@@ -110,13 +94,10 @@ class DatePickerFullScreen extends React.Component {
   }
 
   render () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
     return (
       <div className='mx-date-picker-full-screen' style={[styles.component, this.props.style]}>
         <div key='selectedDate' onClick={this._toggleCalendar.bind(this)} style={[styles.placeholder, this.state.selectedDate && styles.selectedDate]}>
-          {selectedDate ? selectedDate.format(this.props.format) : 'Select A Date'}
+          {this.state.selectedDate ? moment.unix(this.state.selectedDate).locale(this.props.locale).format(this.props.format) : 'Select A Date'}
         </div>
         {this.state.showCalendar ? (
           <div className='mx-date-picker-full-screen-calendar-scrim' key='modal' style={[styles.modal, this.props.isFixed && { position: 'fixed' }]}>
@@ -137,7 +118,7 @@ class DatePickerFullScreen extends React.Component {
                   style={styles.navIcon}
                   type='caret-left'
                 />
-                {currentDate.format('MMMM YYYY')}
+                {moment.unix(this.state.currentDate).format('MMMM YYYY')}
                 <Icon
                   onClick={this._handleNextClick.bind(this)}
                   size='32px'
@@ -146,8 +127,9 @@ class DatePickerFullScreen extends React.Component {
                 />
               </div>
               <div style={styles.calendar}>
-                {this._renderMonthTable(currentDate, selectedDate)}
+                {this._renderMonthTable()}
               </div>
+              <div onClick={this._handleDateSelect.bind(this, null)} style={styles.clearButton}>Clear Date</div>
             </div>
           </div>
         ) : null }
@@ -299,6 +281,16 @@ const styles = {
   },
   currentMonth: {
     color: StyleConstants.Colors.CHARCOAL
+  },
+  clearButton: {
+    fontSize: StyleConstants.FontSizes.LARGE,
+    backgroundColor: StyleConstants.Colors.FOG,
+    color: StyleConstants.Colors.CHARCOAL,
+    fontWeight: 500,
+    padding: '7px 14px',
+    borderRadius: 2,
+    textAlign: 'center',
+    cursor: 'pointer'
   }
 };
 
