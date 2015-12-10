@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.4.8</h3>
+        <ul>
+          <li>Add selectedDateColor prop to DatePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/126'>#126</a>)</li>
+        </ul>
+
         <h3>1.4.7</h3>
         <ul>
           <li>Add new contentStyle prop to Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/125'>#125</a>)</li>

@@ -60,6 +60,10 @@ const DatePickerDocs = React.createClass({
         <h5>scrimStyle <label>Object | Array</label></h5>
         <p>A style object or Radium array that is used to modify the scrim element's styles.</p>
 
+        <h5>selectedDateColor <label>String</label></h5>
+        <p>Default: #359BCF</p>
+        <p>Color to be used for the selected date and day hover state on the calendar.</p>
+
         <h5>showCaret <label>Boolean</label></h5>
         <p>Default: true</p>
         <p>If set to 'false', the caret icon will not be shown in the selected box.</p>
