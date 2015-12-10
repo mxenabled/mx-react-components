@@ -114,6 +114,17 @@ class DatePicker extends React.Component {
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
     const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
+    const dayHoverStyle = {
+      ':hover': {
+        backgroundColor: this.props.selectedDateColor,
+        color: StyleConstants.Colors.INVERSE_PRIMARY,
+        cursor: 'pointer'
+      }
+    };
+    const selectedDayStyle = {
+      backgroundColor: this.props.selectedDateColor,
+      color: StyleConstants.Colors.INVERSE_PRIMARY
+    };
 
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
@@ -134,8 +145,8 @@ class DatePicker extends React.Component {
             key={startDate.format('DDDD')}
             style={[
               styles.calendarDayContent,
-              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && { backgroundColor: this.props.selectedDateColor, color: StyleConstants.Colors.INVERSE_PRIMARY },
-              { ':hover': { backgroundColor: this.props.selectedDateColor, color: StyleConstants.Colors.INVERSE_PRIMARY, cursor: 'pointer' } }
+              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && selectedDayStyle,
+              dayHoverStyle
             ]}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
