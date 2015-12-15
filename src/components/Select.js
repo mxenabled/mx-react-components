@@ -1,4 +1,5 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const Radium = require('radium');
 
 const Icon = require('./Icon');
@@ -11,6 +12,7 @@ class Select extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      highlightedValue: null,
       isOpen: false,
       selected: false
     };
@@ -18,7 +20,8 @@ class Select extends React.Component {
 
   _handleScrimClick () {
     this.setState({
-      isOpen: false
+      isOpen: false,
+      highlightedValue: null
     });
   }
 
@@ -33,7 +36,8 @@ class Select extends React.Component {
   _handleOptionClick (option) {
     this.setState({
       selected: option,
-      isOpen: false
+      isOpen: false,
+      highlightedValue: null
     });
 
     this.props.onChange(option);
@@ -45,6 +49,62 @@ class Select extends React.Component {
     })[0];
 
     this._handleOptionClick(selectedOption);
+  }
+
+  _handleInputKeyDown (e) {
+    const highlightedValue = this.state.highlightedValue;
+
+    if (e.keyCode === 13 && highlightedValue) {
+      this._handleOptionClick(highlightedValue);
+    }
+
+    if (e.keyCode === 40) {
+      e.preventDefault();
+
+      const nextIndex = this.props.options.indexOf(highlightedValue) + 1;
+
+      if (nextIndex < this.props.options.length) {
+        this.setState({
+          highlightedValue: this.props.options[nextIndex]
+        });
+
+        this._scrollListDown(nextIndex);
+      }
+    }
+
+    if (e.keyCode === 38) {
+      e.preventDefault();
+
+      const previousIndex = this.props.options.indexOf(highlightedValue) - 1;
+
+      if (previousIndex > -1) {
+        this.setState({
+          highlightedValue: this.props.options[previousIndex]
+        });
+
+        this._scrollListUp(previousIndex);
+      }
+    }
+  }
+
+  _scrollListDown(nextIndex) {
+    const ul = ReactDOM.findDOMNode(this.refs.optionList);
+    const activeLi = ul.children[nextIndex];
+    const heightFromTop = nextIndex * activeLi.clientHeight;
+
+    if (heightFromTop > ul.clientHeight) {
+      ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
+    }
+  }
+
+  _scrollListUp(prevIndex) {
+    const ul = ReactDOM.findDOMNode(this.refs.optionList);
+    const activeLi = ul.children[prevIndex];
+    const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
+
+    if (heightFromBottom > ul.clientHeight) {
+      ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
+    }
   }
 
   _renderScrim () {
@@ -66,7 +126,7 @@ class Select extends React.Component {
         );
       } else {
         return (
-          <ul className='mx-select-options' style={[styles.options, this.props.optionsStyle]}>
+          <ul className='mx-select-options' ref='optionList' style={[styles.options, this.props.optionsStyle]}>
             {this.props.options.map(option => {
               return (
                 <li
@@ -74,7 +134,7 @@ class Select extends React.Component {
                   key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(this, option)}
                   ref={option.displayValue + option.value}
-                  style={[styles.option, this.props.optionStyle]}
+                  style={[styles.option, this.props.optionStyle, option === this.state.highlightedValue && styles.activeItem]}
                 >
                 {option.displayValue}
                 </li>
@@ -93,6 +153,7 @@ class Select extends React.Component {
       <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
         <div className='mx-select-custom'
         onClick={this._handleClick.bind(this)}
+        onKeyDown={this._handleInputKeyDown.bind(this)}
         style={[styles.component, this.props.dropdownStyle]}
         tabIndex='0'
         >
@@ -155,6 +216,11 @@ const styles = {
   },
   selected: {
     position: 'relative'
+  },
+  activeItem: {
+    backgroundColor: StyleConstants.Colors.PRIMARY,
+    color: StyleConstants.Colors.INVERSE_PRIMARY,
+    opacity: 1
   },
   invalid: {
     borderColor: StyleConstants.Colors.RED
