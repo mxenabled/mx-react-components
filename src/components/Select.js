@@ -87,7 +87,7 @@ class Select extends React.Component {
     }
   }
 
-  _scrollListDown(nextIndex) {
+  _scrollListDown (nextIndex) {
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
     const activeLi = ul.children[nextIndex];
     const heightFromTop = nextIndex * activeLi.clientHeight;
@@ -97,7 +97,7 @@ class Select extends React.Component {
     }
   }
 
-  _scrollListUp(prevIndex) {
+  _scrollListUp (prevIndex) {
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
     const activeLi = ul.children[prevIndex];
     const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
