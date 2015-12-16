@@ -34,22 +34,7 @@ class Modal extends React.Component {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
           <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
-            <Icon
-              className='mx-modal-tooltip-label-icon'
-              onMouseOut={this._handleTooltipToggle.bind(this, false)}
-              onMouseOver={this._handleTooltipToggle.bind(this, true)}
-              size={18}
-              style={{ color: this.props.color }}
-              type='info'
-            />
-            <span
-              className='mx-modal-tooltip-label-text'
-              onMouseOut={this._handleTooltipToggle.bind(this, false)}
-              onMouseOver={this._handleTooltipToggle.bind(this, true)}
-              style={[styles.tooltipLabelText, { color: this.props.color }]}
-            >
-              {this.props.tooltipLabel}
-            </span>
+            {this._renderTooltipIconAndLabel()}
           </div>
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
@@ -82,6 +67,33 @@ class Modal extends React.Component {
           </div>
         </div>
       );
+    }
+  }
+
+  _renderTooltipIconAndLabel () {
+    if (this.props.tooltip) {
+      return (
+        <div>
+          <Icon
+            className='mx-modal-tooltip-label-icon'
+            onMouseOut={this._handleTooltipToggle.bind(this, false)}
+            onMouseOver={this._handleTooltipToggle.bind(this, true)}
+            size={18}
+            style={{ color: this.props.color }}
+            type='info'
+          />
+          <span
+            className='mx-modal-tooltip-label-text'
+            onMouseOut={this._handleTooltipToggle.bind(this, false)}
+            onMouseOver={this._handleTooltipToggle.bind(this, true)}
+            style={[styles.tooltipLabelText, { color: this.props.color }]}
+          >
+            {this.props.tooltipLabel}
+          </span>
+        </div>
+      );
+    } else {
+      return null;
     }
   }
 
