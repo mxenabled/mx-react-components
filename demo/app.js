@@ -131,6 +131,10 @@ const icons = [
     displayValue: 'Checking'
   },
   {
+    value: 'clock',
+    displayValue: 'Clock'
+  },
+  {
     value: 'close',
     displayValue: 'Close'
   },
