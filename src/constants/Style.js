@@ -33,6 +33,7 @@ module.exports = {
     JUMBO: '30px',
     XXLARGE: '21px',
     XLARGE: '17px',
+    LARGE: '15px',
     MEDIUM: '13px',
     SMALL: '11px',
     TINY: '10px'

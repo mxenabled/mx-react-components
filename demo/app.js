@@ -486,7 +486,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
-      selectedDatePickerDate: moment().unix(),
+      selectedDatePickerDate: null,
       showModal: false,
       showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -750,7 +750,6 @@ const Demo = React.createClass({
           <DatePickerFullScreen
             closeOnDateSelect={true}
             defaultDate={this.state.selectedDatePickerDate}
-            showDayBorders={false}
             title='Select A Date'
             onDateSelect={this._handleDateSelect}
           />
