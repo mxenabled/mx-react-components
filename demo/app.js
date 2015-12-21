@@ -99,6 +99,10 @@ const icons = [
     displayValue: 'Backspace'
   },
   {
+    value: 'calendar-plus',
+    displayValue: 'Calendar Plus'
+  },
+  {
     value: 'campaigns',
     displayValue: 'Campaigns'
   },
