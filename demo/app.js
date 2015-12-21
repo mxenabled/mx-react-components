@@ -579,18 +579,18 @@ const Demo = React.createClass({
         />
 
         <br/><br/>
-        <TimeBasedLineChart
-          breakPointDate={moment().startOf(dataType).unix()}
-          breakPointLabel={dataType == 'day' ? 'Today' : 'This Month'}
-          data={lineChartData[dataType]}
-          height={400}
-          hoverCallBack={this._handleLineChartHover}
-          margin={{ top: 30, right: 75, bottom: 30, left: 75 }}
-          rangeType={dataType}
-          shadeAreaBelowZero={true}
-          style={{ margin: '0 auto'}}
-          width={700}
-        />
+        <div style={{ textAlign: 'center' }}>
+          <TimeBasedLineChart
+            breakPointDate={moment().startOf(dataType).unix()}
+            breakPointLabel={dataType == 'day' ? 'Today' : 'This Month'}
+            data={lineChartData[dataType]}
+            height={400}
+            hoverCallBack={this._handleLineChartHover}
+            rangeType={dataType}
+            shadeAreaBelowZero={true}
+            width={700}
+          />
+        </div>
 
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
