@@ -726,7 +726,7 @@ TimeBasedLineChart.propTypes = {
   staticXAxis: React.PropTypes.bool,
   width: React.PropTypes.number,
   yAxisFormatter: React.PropTypes.func,
-  zeroState: React.PropTypes.node,
+  zeroState: React.PropTypes.node
 };
 
 TimeBasedLineChart.defaultProps = {
