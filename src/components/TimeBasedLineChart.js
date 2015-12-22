@@ -204,13 +204,8 @@ class TimeBasedLineChart extends React.Component {
   }
 
   _renderChart () {
-    const data = this.props.data;
-
     this._renderChartBase();
-
-    if (data.length > 0) {
-      this._renderLineChart();
-    }
+    this._renderLineChart();
   }
 
   _renderChartBase () {
@@ -240,8 +235,6 @@ class TimeBasedLineChart extends React.Component {
         .attr('class', 'grid-line')
         .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
     }
-
-    chart.on('mouseleave', this._handleChartMouseLeave.bind(this));
   }
 
   _renderLineChart () {
@@ -636,18 +629,15 @@ class TimeBasedLineChart extends React.Component {
   }
 
   render () {
-    this._renderChart();
-
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
           <div>
             {this._renderTooltip()}
-            <svg className='mx-time-based-line-chart-svg' ref='chart' />
+            {this._renderChart()}
           </div>
-        ) : (
-          <div>{this.props.zeroState}</div>
-        )}
+        ) : this.props.zeroState}
+        <svg className='mx-time-based-line-chart-svg' onMouseLeave={this._handleChartMouseLeave.bind(this)} ref='chart' />
       </div>
     );
   }
@@ -704,6 +694,12 @@ const styles = {
     display: 'inline-block',
     position: 'absolute',
     zIndex: '1'
+  },
+  zeroState: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
@@ -749,7 +745,7 @@ TimeBasedLineChart.defaultProps = {
   yAxisFormatter (d) {
     return numeral(d).format('0a');
   },
-  zeroState: 'No Data Found'
+  zeroState: <div style={styles.zeroState}>No Data Found</div>
 };
 
 module.exports = Radium(TimeBasedLineChart);
