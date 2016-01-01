@@ -95,7 +95,7 @@ class RangeSelector extends React.Component {
   _handleClickStartOnTrack (e) {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
 
-    let newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+    const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
 
     //click point is less than lower selector
     if (newPixels < this.state.lowerPixels) {
@@ -107,19 +107,19 @@ class RangeSelector extends React.Component {
     //click point is higher than upper selector
     if (newPixels > this.state.upperPixels) {
       this.setState({
-	dragging: 'Upper'
+        dragging: 'Upper'
       });
     }
 
     //click point is higher than lower selector && also lower than midway point between selectors
     if (newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2)) {
       this.setState({
-	dragging: 'Lower'
+        dragging: 'Lower'
       });
     }
 
     //click point is lower than upper selector && also greater than midway point between selectors
-    if (newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels-this.state.lowerPixels) / 2)) {
+    if (newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2)) {
       this.setState({
         dragging: 'Upper'
       });
@@ -128,7 +128,6 @@ class RangeSelector extends React.Component {
 
   _handleClickOnTrack (e) {
     if (this.state.dragging) {
- 
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const pixelInterval = this.props.interval * this.state.width / this.state.range;
       const newState = {
@@ -234,7 +233,7 @@ class RangeSelector extends React.Component {
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-    	padding: '30px 0',
+        padding: '30px 0',
         margin: '0 10px',
         visibility: this.state.showPresets ? 'hidden' : 'visible'
       },
@@ -358,9 +357,10 @@ class RangeSelector extends React.Component {
         >
           {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
 	<div
-	  className='mx-rangeselector-track-holder' style={styles.trackHolder}
+	  className='mx-rangeselector-track-holder' 
 	  onMouseDown={this._handleClickStartOnTrack.bind(this)}
 	  onMouseUp={this._handleClickOnTrack.bind(this)}
+	  style={styles.trackHolder}
 	>
 	  <div className='mx-rangeselector-track' style={styles.track}></div>
             <div className='mx-rangeselector-selected' style={styles.selected}>
