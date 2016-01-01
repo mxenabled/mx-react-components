@@ -357,12 +357,12 @@ class RangeSelector extends React.Component {
         >
           {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
 	<div
-	  className='mx-rangeselector-track-holder' 
-	  onMouseDown={this._handleClickStartOnTrack.bind(this)}
-	  onMouseUp={this._handleClickOnTrack.bind(this)}
-	  style={styles.trackHolder}
+          className='mx-rangeselector-track-holder'
+          onMouseDown={this._handleClickStartOnTrack.bind(this)}
+          onMouseUp={this._handleClickOnTrack.bind(this)}
+          style={styles.trackHolder}
 	>
-	  <div className='mx-rangeselector-track' style={styles.track}></div>
+          <div className='mx-rangeselector-track' style={styles.track}></div>
             <div className='mx-rangeselector-selected' style={styles.selected}>
               <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
                 {this.state.selectedLabel}
