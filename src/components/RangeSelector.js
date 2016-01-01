@@ -92,6 +92,69 @@ class RangeSelector extends React.Component {
     });
   }
 
+  _handleClickStartOnTrack (e) {
+	const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+
+	let newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+
+	//click point is less than lower selector
+	if (newPixels < this.state.lowerPixels) {
+	  this.setState({
+		dragging: 'Lower'
+	  });
+	}
+
+	//click point is higher than upper selector
+	if (newPixels > this.state.upperPixels) {
+	  this.setState({
+		dragging: 'Upper'
+	  });
+	}
+
+	//click point is higher than lower selector && also lower than midway point between selectors
+	if (newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2)) {
+	  this.setState({
+		dragging: 'Lower'
+	  });
+	}
+
+	//click point is lower than upper selector && also greater than midway point between selectors
+	if (newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels-this.state.lowerPixels) / 2)) {
+	  this.setState({
+	    dragging: 'Upper'
+	  });
+	}
+  }
+
+  _handleClickOnTrack (e) {
+    if (this.state.dragging) {
+
+	  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+	  const pixelInterval = this.props.interval * this.state.width / this.state.range;
+	  const newState = {
+	    selectedLabel: null
+	  };
+
+	  let newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+
+	  //make sure we snap to our interval
+	  newPixels = Math.round(newPixels / pixelInterval) * pixelInterval;
+
+	  //convert our pixels to a 0-based scale
+	  const newPosition = (newPixels * this.state.range / this.state.width) + this.props.lowerBound;
+
+	  //covert our 0-based value to actual value
+	  const newValue = Math.round(newPosition / this.props.interval) * this.props.interval;
+
+	  newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPixels;
+	  newState[this.state.dragging.toLowerCase() + 'Value'] = newValue;
+
+	  this.setState(newState);
+
+	  e.preventDefault();
+	}
+  }
+
   _handleDragging (e) {
     if (this.state.dragging) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -171,14 +234,20 @@ class RangeSelector extends React.Component {
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-        padding: '45px 0',
+    	padding: '45px 0',
         margin: '0 10px',
-        visibility: this.state.showPresets ? 'hidden' : 'visible'
+        visibility: this.state.showPresets ? 'hidden' : 'visible',
+		border: '1px solid red'
       },
       track: {
         height: '1px',
         background: '#ccc'
       },
+	  trackHolder: {
+		padding: '15px 0',
+		cursor: 'pointer',
+		border: '1px solid blue'
+	  },
       lowerToggle: {
         width: '20px',
         height: '20px',
@@ -290,12 +359,18 @@ class RangeSelector extends React.Component {
           style={styles.range}
         >
           {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
-          <div className='mx-rangeselector-track' style={styles.track}></div>
-          <div className='mx-rangeselector-selected' style={styles.selected}>
-            <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
-              {this.state.selectedLabel}
+		  <div
+		    className='mx-rangeselector-track-holder' style={styles.trackHolder}
+			onMouseDown={this._handleClickStartOnTrack.bind(this)}
+			onMouseUp={this._handleClickOnTrack.bind(this)}
+		  >
+		    <div className='mx-rangeselector-track' style={styles.track}></div>
+            <div className='mx-rangeselector-selected' style={styles.selected}>
+              <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
+                {this.state.selectedLabel}
+              </div>
             </div>
-          </div>
+		  </div>
           <div
             className='mx-rangeselector-lower-toggle'
             onMouseDown={this._handleDragStart.bind(this, 'Lower')}
