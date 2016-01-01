@@ -234,10 +234,9 @@ class RangeSelector extends React.Component {
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-    	padding: '45px 0',
+    	padding: '30px 0',
         margin: '0 10px',
-        visibility: this.state.showPresets ? 'hidden' : 'visible',
-		border: '1px solid red'
+        visibility: this.state.showPresets ? 'hidden' : 'visible'
       },
       track: {
         height: '1px',
@@ -245,8 +244,7 @@ class RangeSelector extends React.Component {
       },
 	  trackHolder: {
 		padding: '15px 0',
-		cursor: 'pointer',
-		border: '1px solid blue'
+		cursor: 'pointer'
 	  },
       lowerToggle: {
         width: '20px',
