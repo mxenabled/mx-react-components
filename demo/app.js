@@ -99,6 +99,10 @@ const icons = [
     displayValue: 'Backspace'
   },
   {
+    value: 'calendar',
+    displayValue: 'Calendar'
+  },
+  {
     value: 'calendar-plus',
     displayValue: 'Calendar Plus'
   },
@@ -121,6 +125,10 @@ const icons = [
   {
     value: 'caret-up',
     displayValue: 'Caret Up'
+  },
+  {
+    value: 'chart',
+    displayValue: 'Chart'
   },
   {
     value: 'check',
