@@ -97,7 +97,7 @@ class RangeSelector extends React.Component {
     this.setState({
       trackClicked: true
     });
-    
+
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
 
     const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
@@ -122,7 +122,7 @@ class RangeSelector extends React.Component {
         dragging: 'Lower'
       });
     }
-    
+
     //click point is lower than upper selector && also greater than midway point between selectors
     if (newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2)) {
       this.setState({
@@ -130,7 +130,7 @@ class RangeSelector extends React.Component {
       });
     }
   }
-  
+
   //this method now handles both the dragging of the toggle, and moving it when track is clicked
   _handleDragging (e) {
     if (this.state.dragging) {
@@ -180,7 +180,7 @@ class RangeSelector extends React.Component {
     if (this.state.trackClicked) {
       this._handleDragging(e);
     }
-    
+
     if (this.state.dragging) {
       this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
     }
