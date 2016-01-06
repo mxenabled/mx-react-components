@@ -59,6 +59,11 @@ const ModalDocs = React.createClass({
               type: 'primary'
             }
           ]}
+          footerContent={(
+            <div style={{ color: '#ACB0B3', fontSize: '12px', padding: '2px 0' }}>
+              Footer Content
+            </div>
+          )}
           isOpen={this.state.showModal}
           onRequestClose={this._handleModalClose}
           showFooter={true}
@@ -150,6 +155,11 @@ const ModalDocs = React.createClass({
           type: 'primary'
         }
       ]}
+      footerContent={(
+        <div>
+          Footer content
+        </div>
+      )}
       isOpen={this.state.showModal}
       onRequestClose={_handleModalClose}
       showFooter={true}
