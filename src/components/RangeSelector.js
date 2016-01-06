@@ -122,7 +122,7 @@ class RangeSelector extends React.Component {
         dragging: 'Lower'
       });
     }
-
+    
     //click point is lower than upper selector && also greater than midway point between selectors
     if (newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2)) {
       this.setState({
