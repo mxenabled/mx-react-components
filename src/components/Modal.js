@@ -33,9 +33,8 @@ class Modal extends React.Component {
     if (this.props.showFooter) {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
-          <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
-            {this._renderTooltipIconAndLabel()}
-          </div>
+          {this._renderTooltipIconAndLabel()}
+          {this._renderTextLinks()}
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
               return (
@@ -50,6 +49,27 @@ class Modal extends React.Component {
               );
             })}
           </div>
+        </div>
+      );
+    }
+  }
+
+  _renderTextLinks () {
+    if (this.props.textLinks.length) {
+      return (
+        <div className='mx-modal-text-links' style={styles.textLinksContainer}>
+          {this.props.textLinks.map((link, i) => {
+            return (
+              <div
+                className={'mx-modal-link ' + link.className}
+                key={i}
+                onClick={link.onClick}
+                style={[styles.textLink, link.style]}
+              >
+                {link.text}
+              </div>
+            );
+          })}
         </div>
       );
     }
@@ -73,7 +93,7 @@ class Modal extends React.Component {
   _renderTooltipIconAndLabel () {
     if (this.props.tooltip) {
       return (
-        <div>
+        <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
           <Icon
             className='mx-modal-tooltip-label-icon'
             onMouseOut={this._handleTooltipToggle.bind(this, false)}
@@ -184,6 +204,21 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between'
   },
+  textLink: {
+    color: StyleConstants.Colors.ASH,
+    display: 'inline-block',
+    fontSize: StyleConstants.FontSizes.MEDIUM,
+    cursor: 'pointer',
+    paddingRight: 10,
+
+    ':hover': {
+      color: StyleConstants.Colors.PRIMARY,
+    }
+  },
+  textLinksContainer: {
+    padding: '8px 0',
+    textAlign: 'left'
+  },
   tooltipLabel: {
     padding: '5px 0'
   },
@@ -257,6 +292,15 @@ Modal.propTypes = {
   onRequestClose: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
   showTitleBar: React.PropTypes.bool,
+  textLinks: React.PropTypes.arrayOf(React.PropTypes.shape({
+    className: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    style: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
+    text: React.PropTypes.string
+  })),
   title: React.PropTypes.string,
   tooltip: React.PropTypes.string,
   tooltipLabel: React.PropTypes.string,
@@ -270,6 +314,7 @@ Modal.defaultProps = {
   isRelative: false,
   showFooter: false,
   showTitleBar: false,
+  textLinks: [],
   title: '',
   tooltip: null,
   tooltipLabel: '',
