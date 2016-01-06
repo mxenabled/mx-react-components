@@ -7,12 +7,12 @@ const Changelog = React.createClass({
         <h1>Change Log</h1>
         <h3>1.5.3</h3>
         <ul>
-          <li>Add new prop to Modal component to allow for content in footer (<a href='https://github.com/mxenabled/mx-react-components/pull/135'>#135</a>)</li>
+          <li>Add new `contentFooter` prop to Modal component to allow for content in footer (<a href='https://github.com/mxenabled/mx-react-components/pull/135'>#135</a>)</li>
         </ul>
 
         <h3>1.5.2</h3>
         <ul>
-          <li>Add new calendar and chart icons to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/134'>#134</a>)</li>
+          <li>Icon: `calendar` and `chart` icons added (<a href='https://github.com/mxenabled/mx-react-components/pull/134'>#134</a>)</li>
         </ul>
 
         <h3>1.5.1</h3>
@@ -22,8 +22,8 @@ const Changelog = React.createClass({
 
         <h3>1.5.0</h3>
         <ul>
-          <li>Add new calendar plus icon to Icons component (<a href='https://github.com/mxenabled/mx-react-components/pull/130'>#130</a>)</li>
-          <li>Fix TimeBasedLineChart spacing (<a href='https://github.com/mxenabled/mx-react-components/pull/131'>#131</a>)</li>
+          <li>TimeBasedLineChart: `zeroState` prop added, default `margins` updated, `style` prop is no longer used (<a href='https://github.com/mxenabled/mx-react-components/pull/131'>#131</a>)</li>
+          <li>Icon: `calendar-plus` icon added (<a href='https://github.com/mxenabled/mx-react-components/pull/130'>#130</a>)</li>
         </ul>
 
         <h3>1.4.10</h3>
