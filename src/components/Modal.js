@@ -101,8 +101,6 @@ class Modal extends React.Component {
           </span>
         </div>
       );
-    } else {
-      return null;
     }
   }
 
