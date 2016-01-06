@@ -33,9 +33,8 @@ class Modal extends React.Component {
     if (this.props.showFooter) {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
-          <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
-            {this._renderTooltipIconAndLabel()}
-          </div>
+          {this._renderTooltipIconAndLabel()}
+          {this._renderFooterContent()}
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
               return (
@@ -50,6 +49,16 @@ class Modal extends React.Component {
               );
             })}
           </div>
+        </div>
+      );
+    }
+  }
+
+  _renderFooterContent () {
+    if (this.props.footerContent) {
+      return (
+        <div className='mx-modal-footer-content' style={styles.footerContent}>
+          {this.props.footerContent}
         </div>
       );
     }
@@ -73,7 +82,7 @@ class Modal extends React.Component {
   _renderTooltipIconAndLabel () {
     if (this.props.tooltip) {
       return (
-        <div>
+        <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
           <Icon
             className='mx-modal-tooltip-label-icon'
             onMouseOut={this._handleTooltipToggle.bind(this, false)}
@@ -92,8 +101,6 @@ class Modal extends React.Component {
           </span>
         </div>
       );
-    } else {
-      return null;
     }
   }
 
@@ -184,6 +191,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between'
   },
+  footerContent: {
+    padding: '5px 0',
+    textAlign: 'left'
+  },
   tooltipLabel: {
     padding: '5px 0'
   },
@@ -252,6 +263,7 @@ Modal.propTypes = {
   })),
   color: React.PropTypes.string,
   contentStyle: React.PropTypes.object,
+  footerContent: React.PropTypes.node,
   isOpen: React.PropTypes.bool,
   isRelative: React.PropTypes.bool,
   onRequestClose: React.PropTypes.func,

@@ -50,6 +50,11 @@ const styles = {
     cursor: 'pointer',
     fontSize: '14px',
     WebkitFontSmoothing: 'antialiased'
+  },
+  modalFooterContent: {
+    color: '#ACB0B3',
+    fontSize: '12px',
+    padding: '2px 0'
   }
 };
 
@@ -499,6 +504,11 @@ const Demo = React.createClass({
               type: 'primary'
             }
           ]}
+          footerContent={(
+            <div style={styles.modalFooterContent}>
+              Footer Content
+            </div>
+          )}
           isOpen={this.state.showModal}
           onRequestClose={this._handleModalClose}
           showFooter={true}
