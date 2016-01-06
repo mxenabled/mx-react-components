@@ -34,7 +34,7 @@ class Modal extends React.Component {
       return (
         <div className='mx-modal-footer' style={styles.footer}>
           {this._renderTooltipIconAndLabel()}
-          {this._renderTextLinks()}
+          {this._renderFooterContent()}
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
               return (
@@ -54,22 +54,11 @@ class Modal extends React.Component {
     }
   }
 
-  _renderTextLinks () {
-    if (this.props.textLinks.length) {
+  _renderFooterContent () {
+    if (this.props.footerContent) {
       return (
-        <div className='mx-modal-text-links' style={styles.textLinksContainer}>
-          {this.props.textLinks.map((link, i) => {
-            return (
-              <div
-                className={'mx-modal-link ' + link.className}
-                key={i}
-                onClick={link.onClick}
-                style={[styles.textLink, link.style]}
-              >
-                {link.text}
-              </div>
-            );
-          })}
+        <div className='mx-modal-footer-content' style={styles.footerContent}>
+          {this.props.footerContent}
         </div>
       );
     }
@@ -204,19 +193,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between'
   },
-  textLink: {
-    color: StyleConstants.Colors.ASH,
-    display: 'inline-block',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    cursor: 'pointer',
-    paddingRight: 10,
-
-    ':hover': {
-      color: StyleConstants.Colors.PRIMARY,
-    }
-  },
-  textLinksContainer: {
-    padding: '8px 0',
+  footerContent: {
+    padding: '5px 0',
     textAlign: 'left'
   },
   tooltipLabel: {
@@ -292,15 +270,7 @@ Modal.propTypes = {
   onRequestClose: React.PropTypes.func,
   showFooter: React.PropTypes.bool,
   showTitleBar: React.PropTypes.bool,
-  textLinks: React.PropTypes.arrayOf(React.PropTypes.shape({
-    className: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    style: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    text: React.PropTypes.string
-  })),
+  footerContent: React.PropTypes.node,
   title: React.PropTypes.string,
   tooltip: React.PropTypes.string,
   tooltipLabel: React.PropTypes.string,
@@ -314,7 +284,6 @@ Modal.defaultProps = {
   isRelative: false,
   showFooter: false,
   showTitleBar: false,
-  textLinks: [],
   title: '',
   tooltip: null,
   tooltipLabel: '',
