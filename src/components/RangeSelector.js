@@ -20,7 +20,8 @@ class RangeSelector extends React.Component {
       selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
       showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
       upperPixels: 1,
-      upperValue
+      upperValue,
+      trackClicked: false
     };
   }
 
@@ -92,7 +93,11 @@ class RangeSelector extends React.Component {
     });
   }
 
-  _handleClickStartOnTrack (e) {
+  _handleTrackMouseDown (e) {
+    this.setState({
+      trackClicked: true
+    });
+    
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
 
     const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
@@ -125,35 +130,8 @@ class RangeSelector extends React.Component {
       });
     }
   }
-
-  _handleClickOnTrack (e) {
-    if (this.state.dragging) {
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const pixelInterval = this.props.interval * this.state.width / this.state.range;
-      const newState = {
-        selectedLabel: null
-      };
-
-      let newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
-
-      //make sure we snap to our interval
-      newPixels = Math.round(newPixels / pixelInterval) * pixelInterval;
-
-      //convert our pixels to a 0-based scale
-      const newPosition = (newPixels * this.state.range / this.state.width) + this.props.lowerBound;
-
-      //covert our 0-based value to actual value
-      const newValue = Math.round(newPosition / this.props.interval) * this.props.interval;
-
-      newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPixels;
-      newState[this.state.dragging.toLowerCase() + 'Value'] = newValue;
-
-      this.setState(newState);
-
-      e.preventDefault();
-    }
-  }
-
+  
+  //this method now handles both the dragging of the toggle, and moving it when track is clicked
   _handleDragging (e) {
     if (this.state.dragging) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -198,7 +176,11 @@ class RangeSelector extends React.Component {
     }
   }
 
-  _handleDragEnd () {
+  _handleDragEnd (e) {
+    if (this.state.trackClicked) {
+      this._handleDragging(e);
+    }
+    
     if (this.state.dragging) {
       this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
     }
@@ -358,8 +340,7 @@ class RangeSelector extends React.Component {
           {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
 	<div
           className='mx-rangeselector-track-holder'
-          onMouseDown={this._handleClickStartOnTrack.bind(this)}
-          onMouseUp={this._handleClickOnTrack.bind(this)}
+          onMouseDown={this._handleTrackMouseDown.bind(this)}
           style={styles.trackHolder}
 	>
           <div className='mx-rangeselector-track' style={styles.track}></div>
