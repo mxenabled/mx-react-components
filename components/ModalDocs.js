@@ -94,6 +94,9 @@ const ModalDocs = React.createClass({
         <h5>contentStyle <label>Object</label></h5>
         <p>A style object used to style the content div that wrapps the modal's content</p>
 
+        <h5>footerContent <label>Node</label></h5>
+        <p>A node used to add jsx to the footer element of the modal.</p>
+
         <h5>isOpen <label>Boolean</label></h5>
         <p>Default: 'false'</p>
         <p>Determines if the modal is visible or hidden</p>

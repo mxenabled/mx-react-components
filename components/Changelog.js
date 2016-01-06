@@ -5,6 +5,31 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>1.5.3</h3>
+        <ul>
+          <li>Add new prop to Modal component to allow for content in footer (<a href='https://github.com/mxenabled/mx-react-components/pull/135'>#135</a>)</li>
+        </ul>
+
+        <h3>1.5.2</h3>
+        <ul>
+          <li>Add new calendar and chart icons to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/134'>#134</a>)</li>
+        </ul>
+
+        <h3>1.5.1</h3>
+        <ul>
+          <li>Fix TimeBasedLineChart bugs (<a href='https://github.com/mxenabled/mx-react-components/pull/132'>#132</a>)</li>
+        </ul>
+
+        <h3>1.5.0</h3>
+        <ul>
+          <li>Add new calendar plus icon to Icons component (<a href='https://github.com/mxenabled/mx-react-components/pull/130'>#130</a>)</li>
+          <li>Fix TimeBasedLineChart spacing (<a href='https://github.com/mxenabled/mx-react-components/pull/131'>#131</a>)</li>
+        </ul>
+
+        <h3>1.4.10</h3>
+        <ul>
+          <li>Update Babel dependency. (<a href='https://github.com/mxenabled/mx-react-components/commit/0093a46c25991b04dbbb747d97c82b33a28be370'>see commit</a>)</li>
+        </ul>
 
         <h3>1.4.9</h3>
         <ul>
