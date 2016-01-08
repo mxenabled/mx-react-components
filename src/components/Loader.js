@@ -84,7 +84,7 @@ Loader.defaultProps = {
   isLoading: false,
   isRelative: false,
   isSmall: false,
-  loaderText: "LOADING..."
+  loaderText: 'LOADING...'
 };
 
 module.exports = Loader;
