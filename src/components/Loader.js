@@ -6,6 +6,7 @@ const StyleConstants = require('../constants/Style');
 
 class Loader extends React.Component {
   render () {
+	console.log("this is this.props.loaderText", this.props.loaderText);
     if (this.props.isLoading) {
       const styles = {
         component: {
@@ -58,7 +59,7 @@ class Loader extends React.Component {
             {this.props.isSmall ? (
               null
             ) : (
-              <div className='mx-loader-text' style={styles.text} >LOADING...</div>
+              <div className='mx-loader-text' style={styles.text} > {this.props.loaderText} </div>
             )}
           </div>
         </div>
@@ -75,14 +76,16 @@ Loader.propTypes = {
   color: React.PropTypes.string,
   isLoading: React.PropTypes.bool,
   isRelative: React.PropTypes.bool,
-  isSmall: React.PropTypes.bool
+  isSmall: React.PropTypes.bool,
+  loaderText: React.PropTypes.string
 };
 
 Loader.defaultProps = {
   color: StyleConstants.Colors.PRIMARY,
   isLoading: false,
   isRelative: false,
-  isSmall: false
+  isSmall: false,
+  loaderText: "LOADING..."
 };
 
 module.exports = Loader;
