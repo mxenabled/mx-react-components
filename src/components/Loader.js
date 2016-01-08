@@ -6,7 +6,6 @@ const StyleConstants = require('../constants/Style');
 
 class Loader extends React.Component {
   render () {
-	console.log("this is this.props.loaderText", this.props.loaderText);
     if (this.props.isLoading) {
       const styles = {
         component: {
