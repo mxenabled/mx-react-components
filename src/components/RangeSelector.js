@@ -94,9 +94,9 @@ class RangeSelector extends React.Component {
   }
 
   _handleTrackMouseDown (e) {
-    this.setState({
+    const updatedState = {
       trackClicked: true
-    });
+    };
 
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
 
@@ -129,6 +129,8 @@ class RangeSelector extends React.Component {
         dragging: 'Upper'
       });
     }
+    
+    this.setState(updatedState);
   }
 
   //this method now handles both the dragging of the toggle, and moving it when track is clicked
@@ -170,8 +172,17 @@ class RangeSelector extends React.Component {
       newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPixels;
       newState[this.state.dragging.toLowerCase() + 'Value'] = newValue;
 
-      this.setState(newState);
-
+      this.setState(newState, () => {
+        this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
+        
+        if (this.state.trackClicked) {
+          this.setState({
+            dragging: false,
+            trackClicked: false
+          });
+        }
+      });
+      
       e.preventDefault();
     }
   }
@@ -179,15 +190,12 @@ class RangeSelector extends React.Component {
   _handleDragEnd (e) {
     if (this.state.trackClicked) {
       this._handleDragging(e);
+    } else {
+      this.setState({
+        dragging: false,
+        trackClicked: false
+      });
     }
-
-    if (this.state.dragging) {
-      this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
-    }
-
-    this.setState({
-      dragging: false
-    });
   }
 
   _handleToggleViews () {
