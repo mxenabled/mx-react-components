@@ -129,7 +129,7 @@ class RangeSelector extends React.Component {
         dragging: 'Upper'
       });
     }
-    
+
     this.setState(updatedState);
   }
 
@@ -174,7 +174,7 @@ class RangeSelector extends React.Component {
 
       this.setState(newState, () => {
         this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
-        
+
         if (this.state.trackClicked) {
           this.setState({
             dragging: false,
@@ -182,7 +182,7 @@ class RangeSelector extends React.Component {
           });
         }
       });
-      
+
       e.preventDefault();
     }
   }
