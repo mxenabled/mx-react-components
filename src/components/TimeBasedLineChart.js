@@ -3,6 +3,7 @@ const ReactDom = require('react-dom');
 const Radium = require('radium');
 
 const d3 = require('d3');
+const { isEqual } = require('lodash');
 const moment = require('moment');
 const numeral = require('numeral');
 
@@ -41,6 +42,10 @@ class TimeBasedLineChart extends React.Component {
         adjustedWidth
       });
     }
+  }
+
+  shouldComponentUpdate (newProps, newState) {
+    return !isEqual(newProps.data, this.props.data) || !isEqual(newState.hoveredData, this.state.hoveredData);
   }
 
   _getAreaBelowZero (data) {
@@ -481,8 +486,8 @@ class TimeBasedLineChart extends React.Component {
     const sliceWidth = this._getSliceMiddle();
     const xScale = this._getXScaleValue(currentDate.unix());
 
-    const left = isAfterMidPoint ? 'auto' : xScale + this.props.margin.left + sliceWidth + 10;
-    const right = isAfterMidPoint ? this.state.adjustedWidth + this.props.margin.right + sliceWidth + 10 - xScale : 'auto';
+    const left = isAfterMidPoint ? 'auto' : xScale + this.props.margin.left + sliceWidth;
+    const right = isAfterMidPoint ? this.state.adjustedWidth + this.props.margin.right + sliceWidth - xScale : 'auto';
     const textAlign = isAfterMidPoint ? 'right' : 'left';
     const top = this.props.children ? this._getYScaleValue(d.value) - 5 + this.props.margin.top : this._getYScaleValue(d.value) - 5;
 
@@ -498,6 +503,7 @@ class TimeBasedLineChart extends React.Component {
       tooltipPosition: position
     });
 
+    this._renderSvgTooltipComponents();
     this.props.onDataPointHover(d);
   }
 
@@ -608,8 +614,6 @@ class TimeBasedLineChart extends React.Component {
       const hoveredData = this.state.hoveredData;
       const position = this.state.tooltipPosition;
 
-      this._renderSvgTooltipComponents();
-
       if (this.props.children) {
         return (
           <div className='mx-time-based-line-chart-tool-tip-wrapper' style={[styles.tooltipWrapper, position]}>
@@ -651,14 +655,14 @@ const styles = {
     display: 'inline-block'
   },
   credit: {
-    backgroundColor: '#30B53C'
+    backgroundColor: StyleConstants.Colors.LIME
   },
   debit: {
-    backgroundColor: '#C93030'
+    backgroundColor: StyleConstants.Colors.STRAWBERRY
   },
   defaultToolTip: {
     backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: '#FFFFFF',
+    color: StyleConstants.Colors.WHITE,
     padding: '3px 5px 3px 5px',
     transform: 'translateY(32px)'
   },
@@ -666,9 +670,8 @@ const styles = {
     opacity: 0
   },
   gridLineTick: {
-    'stroke': '#ccc',
-    'opacity': 1,
-    'stroke-width': '0.5px'
+    'stroke': StyleConstants.Colors.ASH,
+    'stroke-width': 0.5
   },
   svg: {
     'display': 'block',
@@ -677,23 +680,23 @@ const styles = {
     'width': '100%'
   },
   text: {
-    'fill': '#999',
-    'font-size': '12px',
+    'color': StyleConstants.Colors.CHARCOAL,
+    'font-size': StyleConstants.FontSizes.MEDIUM,
     'font-weight': 'normal'
   },
   tooltip: {
-    color: '#FFF',
+    color: StyleConstants.Colors.WHITE,
     display: 'inline-block',
-    fontSize: '11px',
-    marginBottom: '3px',
-    marginTop: '3px',
-    minWidth: '50px',
-    padding: '5px'
+    fontSize: StyleConstants.FontSizes.SMALL,
+    marginBottom: 3,
+    marginTop: 3,
+    minWidth: 50,
+    padding: 5
   },
   tooltipWrapper: {
     display: 'inline-block',
     position: 'absolute',
-    zIndex: '1'
+    zIndex: 1
   },
   zeroState: {
     position: 'absolute',
