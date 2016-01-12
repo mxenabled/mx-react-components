@@ -280,14 +280,14 @@ class TimeBasedLineChart extends React.Component {
       const isPast = i === 0;
 
       const group = chart.append('g')
-        .attr('class', 'group-' + i)
+        .attr('class', 'group')
         .attr('transform', 'translate(' + this.props.margin.left + ',' + this.props.margin.top + ')');
 
       //Lines ================================
       const dash = !isPast && this.props.dashedFutureLine ? '2, 2' : 'none';
 
       const lineGroup = group.append('g')
-        .attr('class', 'line-group-' + i);
+        .attr('class', 'line-group');
 
       lineGroup.append('svg:path')
         .attr('class', 'mx-time-based-line-chart-line')
