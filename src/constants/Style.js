@@ -22,6 +22,7 @@ module.exports = {
     CHARCOAL: '#56595A',  //Base Color 7
     FOG: '#E3E6E7',       //Base Color 1
     PORCELAIN: '#F7F8F8', //Base Color 0
+    WHITE: '#FFFFFF',
 
     //Status Colors
     BANANA: '#FBB600',    //Anything yellow
