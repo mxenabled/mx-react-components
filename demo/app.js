@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 const moment = require('moment');
 
 const {
+  BarChart,
   DonutChart,
   Icon,
   Loader,
@@ -523,6 +524,22 @@ const Demo = React.createClass({
             <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
           </div>
         </Modal>
+
+        <br/><br/>
+        <BarChart
+          data={[
+            {
+              label: 'Data Point 1',
+              name: 'Data Point 1',
+              value: 50
+            },
+            {
+              label: 'Data Point 2',
+              name: 'Data Point 2',
+              value: 80
+            }
+          ]}
+        />
 
         <br/><br/>
         <DonutChart

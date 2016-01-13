@@ -10,7 +10,10 @@ module.exports = {
     FONT: '#2E323F',
     LIGHT_FONT: '#999999',
 
+    GRID_COLOR: '#CCCCCC',
+
     BASE_ARC: '#F5F5F5',
+
     ORANGE: '#ca3a31',
     YELLOW: '#f6a01e',
     GREEN: '#00a89c',
