@@ -165,9 +165,9 @@ const styles = {
     boxSizing: 'border-box',
     position: 'relative',
     zIndex: 1001,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: StyleConstants.Colors.WHITE,
     boxShadow: '0 0 30px 5px rgba(0,0,0,0.1)',
-    borderRadius: '2px',
+    borderRadius: 2,
     top: 20,
     maxWidth: 'calc(100% - 40px)',
     display: 'inline-block',
@@ -175,6 +175,8 @@ const styles = {
   },
   titleBar: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
     padding: '15px 20px',
     color: StyleConstants.Colors.ASH,
     fontSize: StyleConstants.FontSizes.SMALL,
@@ -187,7 +189,9 @@ const styles = {
   },
   footer: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
-    padding: '15px 20px',
+    borderBottomLeftRadius: 2,
+    borderBottomRightRadius: 2,
+    padding: '10px 20px',
     display: 'flex',
     justifyContent: 'space-between'
   },
@@ -205,7 +209,7 @@ const styles = {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
     borderColor: StyleConstants.Colors.FOG,
     borderStyle: 'solid',
-    borderWidth: '1px',
+    borderWidth: 1,
     boxSizing: 'border-box',
     bottom: 10,
     left: 10,
@@ -215,12 +219,12 @@ const styles = {
     padding: 10
   },
   tooltipTitle: {
-    fontSize: StyleConstants.FontSizes.SMALL,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     marginBottom: 5
   },
   tooltipContent: {
     color: StyleConstants.Colors.ASH,
-    fontSize: StyleConstants.FontSizes.TINY,
+    fontSize: StyleConstants.FontSizes.SMALL,
     lineHeight: '1.5em',
     textAlign: 'left'
   },
@@ -229,7 +233,7 @@ const styles = {
   },
   button: {
     display: 'inline-block',
-    borderRadius: '2px',
+    borderRadius: 2,
     cursor: 'pointer',
     fontSize: StyleConstants.FontSizes.MEDIUM,
     fontWeight: 600,
