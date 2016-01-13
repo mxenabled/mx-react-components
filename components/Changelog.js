@@ -5,6 +5,11 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>1.5.5</h3>
+        <ul>
+          <li>Minor style changes to the `Modal` component (<a href='https://github.com/mxenabled/mx-react-components/pull/138'>#138</a>)</li>
+        </ul>
+
         <h3>1.5.4</h3>
         <ul>
           <li>Bug fixes for `TimeBasedLineChart` component (<a href='https://github.com/mxenabled/mx-react-components/pull/137'>#137</a>)</li>
