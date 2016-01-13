@@ -33,6 +33,7 @@
     "object-assign": "^4.0.1",
     "radium": "^0.14.1",
     "react": "^0.14.0",
+    "react-addons-transition-group": "^0.14.6",
     "react-dom": "^0.14.0"
   },
   "devDependencies": {
