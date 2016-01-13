@@ -588,7 +588,7 @@ const Demo = React.createClass({
           <span style={styles.button} onClick={this._handleTransitionClick.bind(null, 'slide')}>Slide Transition</span>
         </div>
         <br/><br/>
-        <Transition shouldAnimate={this.state.showSlideTransition} type='slide'>
+        <Transition isShown={this.state.showSlideTransition} type='slide'>
             <div style={{
               backgroundColor: '#F7F8F8',
               border: '1px solid #E3E6E7' ,
@@ -605,7 +605,7 @@ const Demo = React.createClass({
           <span style={styles.button} onClick={this._handleTransitionClick.bind(null, 'fade')}>Fade Transition</span>
         </div>
         <br/><br/>
-        <Transition shouldAnimate={this.state.showFadeTransition} type='fade'>
+        <Transition isShown={this.state.showFadeTransition} type='fade'>
             <div style={{
               backgroundColor: '#F7F8F8',
               border: '1px solid #E3E6E7' ,

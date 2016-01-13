@@ -24,7 +24,7 @@ class Transition extends React.Component {
   render () {
     return (
       <TransitionGroup>
-        {this.props.shouldAnimate && this._renderTransition()}
+        {this.props.isShown && this._renderTransition()}
       </TransitionGroup>
     );
   }
@@ -33,12 +33,13 @@ class Transition extends React.Component {
 Transition.propTypes = {
   children: React.PropTypes.node,
   duration: React.PropTypes.number, // In milliseconds
-  shouldAnimate: React.PropTypes.bool,
+  isShown: React.PropTypes.bool,
   type: React.PropTypes.string
 };
 
 Transition.defaultProps = {
   duration: 500,
+  isShown: false,
   type: 'slide'
 };
 
