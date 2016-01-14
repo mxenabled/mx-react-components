@@ -219,8 +219,7 @@ const styles = {
   },
   activeItem: {
     backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.INVERSE_PRIMARY,
-    opacity: 1
+    color: StyleConstants.Colors.WHITE
   },
   invalid: {
     borderColor: StyleConstants.Colors.RED
