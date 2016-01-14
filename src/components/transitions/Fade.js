@@ -1,31 +1,30 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const Fade = React.createClass({
-  propTypes: {
-    children: React.PropTypes.object,
-    duration: React.PropTypes.number
-  },
+class Fade extends React.Component {
+  constructor (props) {
+    super(props);
+  }
 
   componentWillAppear (callback) {
     setTimeout(callback, 1); // need at least one tick to fire transition
-  },
+  }
 
   componentDidAppear () {
     const el = ReactDOM.findDOMNode(this.refs.component);
 
     el.style.opacity = 0;
-  },
+  }
 
   componentWillEnter (callback) {
     setTimeout(callback, 1);
-  },
+  }
 
   componentDidEnter () {
     const el = ReactDOM.findDOMNode(this.refs.component);
 
     el.style.opacity = 1;
-  },
+  }
 
   componentWillLeave (callback) {
     const el = ReactDOM.findDOMNode(this.refs.component);
@@ -33,7 +32,7 @@ const Fade = React.createClass({
     el.style.opacity = 0;
 
     setTimeout(callback, this.props.duration); // matches transition duration
-  },
+  }
 
   render () {
     const style = {
@@ -47,6 +46,11 @@ const Fade = React.createClass({
       </div>
     );
   }
-});
+}
+
+Fade.PropTypes = {
+  children: React.PropTypes.object,
+  duration: React.PropTypes.number
+};
 
 module.exports = Fade;
