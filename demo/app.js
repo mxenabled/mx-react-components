@@ -12,6 +12,7 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
+  Transition,
   TypeAhead,
   DatePicker,
   DatePickerFullScreen
@@ -447,6 +448,9 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
+      showFadeTransition: false,
+      showSlideTransition: false,
+      transitionType: 'slide',
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
   },
@@ -483,10 +487,21 @@ const Demo = React.createClass({
     })
   },
 
+  _handleTransitionClick (transitionType) {
+    if (transitionType === 'slide') {
+      this.setState({
+        showSlideTransition: !this.state.showSlideTransition,
+      });
+    } else {
+      this.setState({
+        showFadeTransition: !this.state.showFadeTransition,
+      });
+    }
+  },
+
   render () {
     return (
       <div>
-        <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <span style={styles.button} onClick={this._handleModalClick}>Show Default Modal</span>
           <span style={styles.button} onClick={this._handleSmallModalClick}>Show Small Modal</span>
@@ -567,6 +582,40 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center' }}>
           <ToggleSwitch />
         </div>
+
+        <br/><br/>
+        <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <span style={styles.button} onClick={this._handleTransitionClick.bind(null, 'slide')}>Slide Transition</span>
+        </div>
+        <br/><br/>
+        <Transition isShown={this.state.showSlideTransition} type='slide'>
+            <div style={{
+              backgroundColor: '#F7F8F8',
+              border: '1px solid #E3E6E7' ,
+              boxSizing: 'border-box',
+              height: 400,
+              padding: '10px',
+              position: 'relative',
+              width: '100%'
+            }}></div>
+        </Transition>
+
+        <br/><br/>
+        <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <span style={styles.button} onClick={this._handleTransitionClick.bind(null, 'fade')}>Fade Transition</span>
+        </div>
+        <br/><br/>
+        <Transition isShown={this.state.showFadeTransition} type='fade'>
+            <div style={{
+              backgroundColor: '#F7F8F8',
+              border: '1px solid #E3E6E7' ,
+              boxSizing: 'border-box',
+              height: 400,
+              padding: '10px',
+              position: 'relative',
+              width: '100%'
+            }}></div>
+        </Transition>
 
         <br/><br/>
         <TypeAhead
