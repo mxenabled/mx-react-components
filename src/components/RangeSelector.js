@@ -173,13 +173,13 @@ class RangeSelector extends React.Component {
       newState[this.state.dragging.toLowerCase() + 'Value'] = newValue;
 
       if (this.state.trackClicked) {
-      	newState.dragging = false;
-      	newState.trackClicked = false;
+        newState.dragging = false;
+        newState.trackClicked = false;
       }
       this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
-      
+
       this.setState(newState);
-      
+
       e.preventDefault();
     }
   }
