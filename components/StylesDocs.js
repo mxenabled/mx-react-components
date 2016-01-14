@@ -1,7 +1,5 @@
 const React = require('react');
 
-const { Styles } = require('mx-react-components');
-
 const Markdown = require('components/Markdown');
 
 const StylesDocs = React.createClass({
