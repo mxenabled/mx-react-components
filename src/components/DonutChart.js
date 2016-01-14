@@ -208,7 +208,7 @@ const styles = {
     transform: 'translate(-50%, -50%)'
   },
   label: {
-    color: StyleConstants.Colors.LIGHT_FONT,
+    color: StyleConstants.Colors.FOG,
     fontSize: '0.4em',
     marginTop: '5px'
   },
@@ -252,7 +252,7 @@ DonutChart.defaultProps = {
   baseArcColor: StyleConstants.Colors.BASE_ARC,
   colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
   data: [],
-  dataPointColors: [StyleConstants.Colors.SECONDARY].concat(d3.scale.category20b().range()),
+  dataPointColors: [StyleConstants.Colors.LIME].concat(d3.scale.category20b().range()),
   dataPointRadius: 5,
   dataPoints: [],
   formatter (value) {

@@ -242,7 +242,7 @@ const styles = {
   },
   primaryButton: {
     backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.INVERSE_SECONDARY
+    color: StyleConstants.Colors.WHITE
   },
   secondaryButton: {
     backgroundColor: StyleConstants.Colors.FOG,

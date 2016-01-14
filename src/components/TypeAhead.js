@@ -321,13 +321,13 @@ const styles = {
     ':focus': {
       backgroundColor: '#FFFFFF',
       boxShadow: 'none',
-      color: StyleConstants.Colors.FONT,
+      color: StyleConstants.Colors.CHARCOAL,
       outline: 'none'
     }
   },
   activeItem: {
     backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.INVERSE_PRIMARY
+    color: StyleConstants.Colors.WHITE
   },
   clearFix: {
     clear: 'both'
@@ -335,7 +335,7 @@ const styles = {
   input: {
     backgroundColor: '#FFFFFF',
     borderWidth: 0,
-    color: StyleConstants.Colors.FONT,
+    color: StyleConstants.Colors.CHARCOAL,
     fontSize: '13px',
     minWidth: '33%',
     outline: 'none',
@@ -380,7 +380,7 @@ const styles = {
     position: 'relative'
   },
   item: {
-    color: StyleConstants.Colors.LIGHT_FONT,
+    color: StyleConstants.Colors.FOG,
     cursor: 'pointer',
     paddingTop: '10px',
     paddingRight: '10px',
@@ -395,11 +395,11 @@ const styles = {
     },
     ':hover': {
       backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.INVERSE_PRIMARY
+      color: StyleConstants.Colors.WHITE
     }
   },
   removeIcon: {
-    color: StyleConstants.Colors.LIGHT_FONT,
+    color: StyleConstants.Colors.FOG,
     marginLeft: '5px',
     cursor: 'pointer'
   }

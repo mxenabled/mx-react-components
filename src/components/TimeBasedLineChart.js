@@ -730,7 +730,7 @@ TimeBasedLineChart.propTypes = {
 
 TimeBasedLineChart.defaultProps = {
   alwaysShowZeroYTick: false,
-  areaBelowZeroColor: StyleConstants.Colors.RED,
+  areaBelowZeroColor: StyleConstants.Colors.STRAWBERRY,
   breakPointDate: moment().startOf('day').unix(),
   breakPointLabel: 'Today',
   dashedFutureLine: true,

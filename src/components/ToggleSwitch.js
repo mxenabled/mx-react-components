@@ -83,14 +83,14 @@ class ToggleSwitch extends React.Component {
         transition: 'all .1s'
       },
       toggle: {
-        backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+        backgroundColor: StyleConstants.Colors.WHITE,
         borderRadius: '100%',
         height: this.props.toggleStyle.height || '20px',
         position: 'absolute',
         width: this.props.toggleStyle.width || '20px'
       },
       track: {
-        backgroundColor: StyleConstants.Colors.LIGHT_FONT,
+        backgroundColor: StyleConstants.Colors.FOG,
         borderRadius: this.props.trackStyle.height || '20px',
         cursor: 'pointer',
         display: 'inline-block',
@@ -146,7 +146,7 @@ ToggleSwitch.propTypes = {
 ToggleSwitch.defaultProps = {
   activeColor: StyleConstants.Colors.PRIMARY,
   defaultPosition: 'left',
-  inactiveColor: StyleConstants.Colors.LIGHT_FONT,
+  inactiveColor: StyleConstants.Colors.FOG,
   leftLabel: 'On',
   onToggle () {},
   rightLabel: 'Off',
