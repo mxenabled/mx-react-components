@@ -3,7 +3,6 @@ module.exports = {
     PRIMARY: '#359BCF',
     DARK_PRIMARY: '#2E323F',
     INVERSE_PRIMARY: '#FFFFFF',
-    WHITE: '#FFFFFF',
 
     SECONDARY: '#F7B148',
     INVERSE_SECONDARY: '#FFFFFF',
