@@ -27,7 +27,10 @@ module.exports = {
     //Status Colors
     BANANA: '#FBB600',    //Anything yellow
     LIME: '#2EBE51',      //Anything green
-    STRAWBERRY: '#E22727' //Anything red
+    STRAWBERRY: '#E22727', //Anything red
+
+    //Scrim
+    SCRIM: 'rgba(247,248,248,0.9)'
   },
 
   FontSizes: {
