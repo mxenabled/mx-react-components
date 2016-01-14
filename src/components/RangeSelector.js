@@ -94,44 +94,26 @@ class RangeSelector extends React.Component {
   }
 
   _handleTrackMouseDown (e) {
-    const updatedState = {
-      trackClicked: true
-    };
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+  const updatedState = {
+    trackClicked: true
+  };
+  const clickBelowLower = newPixels < this.state.lowerPixels;
+  const clickAboveUpper = newPixels > this.state.upperPixels;
+  const clickCloserToLower = newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2);
+  const clickCloserToUpper = newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2);
 
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-
-    const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
-
-    //click point is less than lower selector
-    if (newPixels < this.state.lowerPixels) {
-      this.setState({
-        dragging: 'Lower'
-      });
-    }
-
-    //click point is higher than upper selector
-    if (newPixels > this.state.upperPixels) {
-      this.setState({
-        dragging: 'Upper'
-      });
-    }
-
-    //click point is higher than lower selector && also lower than midway point between selectors
-    if (newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2)) {
-      this.setState({
-        dragging: 'Lower'
-      });
-    }
-
-    //click point is lower than upper selector && also greater than midway point between selectors
-    if (newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2)) {
-      this.setState({
-        dragging: 'Upper'
-      });
-    }
-
-    this.setState(updatedState);
+  if (clickBelowLower || clickCloserToLower) {
+    updatedState.dragging = 'Lower';
   }
+
+  if (clickAboveUpper || clickCloserToUpper) {
+    updatedState.dragging = 'Upper';
+  }
+
+  this.setState(updatedState);
+}
 
   //this method now handles both the dragging of the toggle, and moving it when track is clicked
   _handleDragging (e) {
