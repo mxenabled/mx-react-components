@@ -227,7 +227,6 @@ const styles = {
     textAlign: 'left'
   },
   buttons: {
-    alignSelf: 'flex-end',
     textAlign: 'right'
   },
   button: {
