@@ -174,7 +174,7 @@ class DatePickerFullScreen extends React.Component {
             onBlur={this._handleInputBlur.bind(this)}
             onChange={this._handleInputChange.bind(this)}
             onClick={this._toggleCalendar.bind(this)}
-            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY }]}
+            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: StyleConstants.Colors.WHITE }]}
             type='text'
             value={this.state.inputValue}
           />
@@ -331,8 +331,8 @@ const styles = {
     width: 32,
 
     ':hover': {
-      backgroundColor: StyleConstants.Colors.BLUE,
-      color: StyleConstants.Colors.INVERSE_PRIMARY,
+      backgroundColor: StyleConstants.Colors.PRIMARY,
+      color: StyleConstants.Colors.WHITE,
       cursor: 'pointer'
     }
   },
@@ -426,8 +426,8 @@ const styles = {
     cursor: 'pointer'
   },
   currentDay: {
-    backgroundColor: StyleConstants.Colors.BLUE,
-    color: StyleConstants.Colors.INVERSE_PRIMARY
+    backgroundColor: StyleConstants.Colors.PRIMARY,
+    color: StyleConstants.Colors.WHITE
   },
   currentMonth: {
     color: StyleConstants.Colors.CHARCOAL

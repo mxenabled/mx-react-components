@@ -1,4 +1,5 @@
 module.exports = {
+  Button: require('./components/Button'),
   DonutChart: require('./components/DonutChart'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
@@ -12,5 +13,7 @@ module.exports = {
   ToggleSwitch: require('./components/ToggleSwitch'),
   TypeAhead: require('./components/TypeAhead'),
   DatePicker: require('./components/DatePicker'),
-  DatePickerFullScreen: require('./components/DatePickerFullScreen')
+  DatePickerFullScreen: require('./components/DatePickerFullScreen'),
+
+  Styles: require('./constants/Style')
 };

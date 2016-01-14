@@ -157,7 +157,7 @@ const styles = {
     position: 'relative'
   },
   invalid: {
-    borderColor: StyleConstants.Colors.RED
+    borderColor: StyleConstants.Colors.STRAWBERRY
   },
   options: {
     backgroundColor: '#FFFFFF',
@@ -185,7 +185,7 @@ const styles = {
 
     ':hover': {
       backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.INVERSE_PRIMARY,
+      color: StyleConstants.Colors.WHITE,
       opacity: 1
     }
   },

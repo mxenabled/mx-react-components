@@ -192,7 +192,7 @@ const styles = {
 
     ':hover': {
       backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.INVERSE_PRIMARY,
+      color: StyleConstants.Colors.WHITE,
       opacity: 1
     }
   },

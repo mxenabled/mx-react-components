@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 const moment = require('moment');
 
 const {
+  Button,
   DonutChart,
   Icon,
   Loader,
@@ -18,39 +19,6 @@ const {
 } = require('../src/Index');
 
 const styles = {
-  block: {
-    boxSizing: 'border-box',
-    float: 'left',
-    width: '20%',
-    fontFamily: 'Helvetica, Arial, sans-serif',
-    fontSize: '13px',
-    color: '#666666',
-    textAlign: 'center',
-    borderRight: '1px solid #e5e5e5',
-    borderBottom: '1px solid #e5e5e5',
-    borderLeft: '1px solid #e5e5e5',
-    padding: '30px 0',
-    marginRight: '-1px'
-  },
-  type: {
-    backgroundColor: '#f5f5f5',
-    border: '1px solid #e5e5e5',
-    borderRadius: '2px',
-    display: 'inline-block',
-    margin: '5px 0',
-    padding: '3px 5px'
-  },
-  button: {
-    borderRadius: '3px',
-    background: '#359BCF',
-    padding: '10px 20px',
-    display: 'inline-block',
-    margin: '0 5px',
-    color: '#fff',
-    cursor: 'pointer',
-    fontSize: '14px',
-    WebkitFontSmoothing: 'antialiased'
-  },
   modalFooterContent: {
     color: '#ACB0B3',
     fontSize: '12px',
@@ -488,8 +456,16 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <span style={styles.button} onClick={this._handleModalClick}>Show Default Modal</span>
-          <span style={styles.button} onClick={this._handleSmallModalClick}>Show Small Modal</span>
+          <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
+          <br/><br/>
+          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
+          <br/><br/>
+          <Button type='base'>Base Button</Button>
+          <br/><br/>
+          <Button type='neutral'>Neutral Button</Button>
+          <br/><br/>
+          <Button type='disabled'>Disabled Button</Button>
+
         </div>
         <Modal
           buttons={[

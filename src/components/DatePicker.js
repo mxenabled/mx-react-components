@@ -117,13 +117,13 @@ class DatePicker extends React.Component {
     const dayHoverStyle = {
       ':hover': {
         backgroundColor: this.props.selectedDateColor,
-        color: StyleConstants.Colors.INVERSE_PRIMARY,
+        color: StyleConstants.Colors.WHITE,
         cursor: 'pointer'
       }
     };
     const selectedDayStyle = {
       backgroundColor: this.props.selectedDateColor,
-      color: StyleConstants.Colors.INVERSE_PRIMARY
+      color: StyleConstants.Colors.WHITE
     };
 
     while (startDate.isBefore(endDate)) {
@@ -306,7 +306,7 @@ DatePicker.defaultProps = {
   format: 'MMM D, YYYY',
   locale: 'en',
   onDateSelect () {},
-  selectedDateColor: StyleConstants.Colors.BLUE,
+  selectedDateColor: StyleConstants.Colors.PRIMARY,
   scrimStyle: {},
   showCaret: true,
   showDayBorders: false,
@@ -404,7 +404,7 @@ const styles = {
     marginBottom: 15
   },
   component: {
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    backgroundColor: StyleConstants.Colors.WHITE,
     color: '#000000',
     fontFamily: StyleConstants.FontFamily,
     fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -421,7 +421,7 @@ const styles = {
     }
   },
   calendarWrapper: {
-    backgroundColor: StyleConstants.Colors.INVERSE_PRIMARY,
+    backgroundColor: StyleConstants.Colors.WHITE,
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
     borderColor: StyleConstants.Colors.FOG,
@@ -506,7 +506,7 @@ const styles = {
     width: '100%',
 
     ':hover': {
-      color: StyleConstants.Colors.BLUE
+      color: StyleConstants.Colors.PRIMARY
     }
   },
   title: {
