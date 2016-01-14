@@ -35,6 +35,10 @@ const Components = React.createClass({
                   displayValue: 'Spin'
                 },
                 {
+                  value: 'button',
+                  displayValue: 'Button'
+                },
+                {
                   value: 'date-picker',
                   displayValue: 'Date Picker'
                 },
@@ -69,6 +73,10 @@ const Components = React.createClass({
                 {
                   value: 'time-based-line-chart',
                   displayValue: 'Time Based Line Chart'
+                },
+                {
+                  value: 'styles',
+                  displayValue: 'Styles'
                 }
               ]}
               selected={null}
@@ -84,6 +92,7 @@ const Components = React.createClass({
             <Link to='/components/spin'>Spin</Link>
 
             <h3>Form</h3>
+            <Link to='/components/button'>Button</Link>
             <Link to='/components/date-picker'>Date Picker</Link>
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
@@ -95,6 +104,9 @@ const Components = React.createClass({
             <h3>Charts (D3)</h3>
             <Link to='/components/donut'>Donut</Link>
             <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>
+
+            <h3>Helpers</h3>
+            <Link to='/components/styles'>Styles</Link>
           </div>
         </div>
 

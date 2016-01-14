@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const { Route, IndexRoute, Router } = require('react-router');
 
+const Button = require('components/ButtonDocs');
 const Changelog = require('components/Changelog');
 const Components = require('components/Components');
 const DatePicker = require('components/DatePickerDocs');
@@ -41,6 +42,7 @@ ReactDOM.render((
     <Route component={App} path='/'>
       <Route component={Components} path='components'>
         <IndexRoute component={Changelog} />
+        <Route component={Button} path='button' />
         <Route component={DatePicker} path='date-picker' />
         <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DonutChart} path='donut' />
