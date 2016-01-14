@@ -9,7 +9,7 @@ class Loader extends React.Component {
     if (this.props.isLoading) {
       const styles = {
         component: {
-          backgroundColor: StyleConstants.ScrimColor,
+          backgroundColor: 'rgba(255,255,255,0.9)',
           bottom: 0,
           color: '#999',
           fontFamily: StyleConstants.FontFamily,
