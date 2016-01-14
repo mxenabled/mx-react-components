@@ -55,13 +55,11 @@ class Modal extends React.Component {
   }
 
   _renderFooterContent () {
-    if (this.props.footerContent) {
-      return (
-        <div className='mx-modal-footer-content' style={styles.footerContent}>
-          {this.props.footerContent}
-        </div>
-      );
-    }
+    return (
+      <div className='mx-modal-footer-content' style={styles.footerContent}>
+        {this.props.footerContent}
+      </div>
+    );
   }
 
   _renderTooltip () {
