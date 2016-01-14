@@ -14,6 +14,7 @@ const Changelog = React.createClass({
           <li>RangeSelector - clicking on the track now moves the closes toggle (<a href='https://github.com/mxenabled/mx-react-components/pull/133'>#133</a>)</li>
           <li>Select - using up/down keys now scrolls options (<a href='https://github.com/mxenabled/mx-react-components/pull/128'>#128</a>)</li>
         </ul>
+        <p>New Contributors: <a href='http://github.com/lukeschunk'>lukeschunk</a></p>
 
         <h3>1.5.6</h3>
         <ul>
