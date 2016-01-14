@@ -5,6 +5,16 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+
+        <h3>1.6.0</h3>
+        <ul>
+          <li>Add Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/144'>#144</a>)</li>
+          <li>Expose Style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/144'>#144</a>)</li>
+          <li>Loader - allow editing of loading text (<a href='https://github.com/mxenabled/mx-react-components/pull/136'>#136</a>)</li>
+          <li>RangeSelector - clicking on the track now moves the closes toggle (<a href='https://github.com/mxenabled/mx-react-components/pull/133'>#133</a>)</li>
+          <li>Select - using up/down keys now scrolls options (<a href='https://github.com/mxenabled/mx-react-components/pull/128'>#128</a>)</li>
+        </ul>
+
         <h3>1.5.6</h3>
         <ul>
           <li>Changes scrim color for the `Modal` component (<a href='https://github.com/mxenabled/mx-react-components/pull/143'>#143</a>)</li>
