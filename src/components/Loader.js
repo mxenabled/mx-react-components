@@ -58,7 +58,7 @@ class Loader extends React.Component {
             {this.props.isSmall ? (
               null
             ) : (
-              <div className='mx-loader-text' style={styles.text} > {this.props.loaderText} </div>
+              <div className='mx-loader-text' style={styles.text} > {this.props.children} </div>
             )}
           </div>
         </div>
@@ -75,8 +75,7 @@ Loader.propTypes = {
   color: React.PropTypes.string,
   isLoading: React.PropTypes.bool,
   isRelative: React.PropTypes.bool,
-  isSmall: React.PropTypes.bool,
-  loaderText: React.PropTypes.string
+  isSmall: React.PropTypes.bool
 };
 
 Loader.defaultProps = {
@@ -84,7 +83,7 @@ Loader.defaultProps = {
   isLoading: false,
   isRelative: false,
   isSmall: false,
-  loaderText: 'LOADING...'
+  children: 'LOADING...'
 };
 
 module.exports = Loader;
