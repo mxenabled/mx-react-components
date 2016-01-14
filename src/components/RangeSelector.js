@@ -20,7 +20,8 @@ class RangeSelector extends React.Component {
       selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
       showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
       upperPixels: 1,
-      upperValue
+      upperValue,
+      trackClicked: false
     };
   }
 
@@ -92,6 +93,29 @@ class RangeSelector extends React.Component {
     });
   }
 
+  _handleTrackMouseDown (e) {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+    const updatedState = {
+      trackClicked: true
+    };
+    const clickBelowLower = newPixels < this.state.lowerPixels;
+    const clickAboveUpper = newPixels > this.state.upperPixels;
+    const clickCloserToLower = newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2);
+    const clickCloserToUpper = newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2);
+
+    if (clickBelowLower || clickCloserToLower) {
+      updatedState.dragging = 'Lower';
+    }
+
+    if (clickAboveUpper || clickCloserToUpper) {
+      updatedState.dragging = 'Upper';
+    }
+
+    this.setState(updatedState);
+  }
+
+  //this method now handles both the dragging of the toggle, and moving it when track is clicked
   _handleDragging (e) {
     if (this.state.dragging) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -130,20 +154,27 @@ class RangeSelector extends React.Component {
       newState[this.state.dragging.toLowerCase() + 'Pixels'] = newPixels;
       newState[this.state.dragging.toLowerCase() + 'Value'] = newValue;
 
+      if (this.state.trackClicked) {
+        newState.dragging = false;
+        newState.trackClicked = false;
+      }
+      this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
+
       this.setState(newState);
 
       e.preventDefault();
     }
   }
 
-  _handleDragEnd () {
-    if (this.state.dragging) {
-      this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
+  _handleDragEnd (e) {
+    if (this.state.trackClicked) {
+      this._handleDragging(e);
+    } else {
+      this.setState({
+        dragging: false,
+        trackClicked: false
+      });
     }
-
-    this.setState({
-      dragging: false
-    });
   }
 
   _handleToggleViews () {
@@ -171,13 +202,17 @@ class RangeSelector extends React.Component {
         display: this.state.showPresets ? 'block' : 'none'
       },
       range: {
-        padding: '45px 0',
+        padding: '30px 0',
         margin: '0 10px',
         visibility: this.state.showPresets ? 'hidden' : 'visible'
       },
       track: {
         height: '1px',
         background: '#ccc'
+      },
+      trackHolder: {
+        padding: '15px 0',
+        cursor: 'pointer'
       },
       lowerToggle: {
         width: '20px',
@@ -290,12 +325,18 @@ class RangeSelector extends React.Component {
           style={styles.range}
         >
           {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews.bind(this)} style={styles.showPresets}>Groups</div> : null}
+	<div
+          className='mx-rangeselector-track-holder'
+          onMouseDown={this._handleTrackMouseDown.bind(this)}
+          style={styles.trackHolder}
+	>
           <div className='mx-rangeselector-track' style={styles.track}></div>
-          <div className='mx-rangeselector-selected' style={styles.selected}>
-            <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
-              {this.state.selectedLabel}
+            <div className='mx-rangeselector-selected' style={styles.selected}>
+              <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
+                {this.state.selectedLabel}
+              </div>
             </div>
-          </div>
+	</div>
           <div
             className='mx-rangeselector-lower-toggle'
             onMouseDown={this._handleDragStart.bind(this, 'Lower')}
