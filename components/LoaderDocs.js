@@ -24,6 +24,9 @@ const LoaderDocs = React.createClass({
           <div style={style}>
             <Loader color='red' isLoading={true} isRelative={true} />
           </div>
+          <div style={style}>
+            <Loader isLoading={true} isRelative={true}>Custom Loading Message</Loader>
+          </div>
         </div>
 
         <h3>Usage</h3>
@@ -39,6 +42,10 @@ const LoaderDocs = React.createClass({
         <h5>isSmall <label>Boolean</label></h5>
         <p>If this is set to 'true', then the word "Loading" will not be displayed and the loading cirle's size will be reduced to 30x30 pixels.</p>
 
+        <h5>children <label>Node</label></h5>
+        <p>Default: 'LOADING...'</p>
+        <p>If set, this value will be displayed below the loading circle.</p>
+
         <h3>Example</h3>
         <Markdown>
   {`
@@ -46,7 +53,9 @@ const LoaderDocs = React.createClass({
       isLoading={true}
       isRelative={true}
       isSmall={true}
-    />
+    >
+      Custom Loading Message
+    </Loader>
   `}
         </Markdown>
       </div>
