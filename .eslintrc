@@ -172,22 +172,23 @@
     "object-shorthand": [2, "always"],
     "prefer-const": 2,
 
+    "jsx-quotes": [2, "prefer-single"],
+
     "strict": [2, "never"],
     "react/display-name": [2, {"acceptTranspilerName": true}],
     "react/jsx-boolean-value": [2, "always-multiline"],
     "react/jsx-no-undef": 2,
-    "react/jsx-quotes": [2, "single"],
     "react/jsx-sort-prop-types": [2, {"ignoreCase": true}],
     "react/jsx-sort-props": 2,
     "react/jsx-uses-react": [2, {"pragma": true}],
     "react/jsx-uses-vars": 2,
     "react/no-did-mount-set-state": 0,
     "react/no-did-update-set-state": 2,
-    "react/no-multi-comp": 2,
+    "react/no-multi-comp": 0,
     "react/no-unknown-property": 2,
     "react/prop-types": [2, { "ignore": ["style", "children"] }],
     "react/react-in-jsx-scope": 2,
-    "react/require-extension": 2,
+    "react/require-extension": 0,
     "react/self-closing-comp": 2,
     "react/sort-comp": [2, {
       order: [
