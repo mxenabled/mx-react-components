@@ -57,7 +57,7 @@ class Modal extends React.Component {
   _renderFooterContent () {
     return (
       <div className='mx-modal-footer-content' style={styles.footerContent}>
-        {this.props.footerContent ? this.props.footerContent : null}
+        {this.props.footerContent}
       </div>
     );
   }
