@@ -58,7 +58,7 @@ class Loader extends React.Component {
             {this.props.isSmall ? (
               null
             ) : (
-              <div className='mx-loader-text' style={styles.text} >LOADING...</div>
+              <div className='mx-loader-text' style={styles.text} > {this.props.children} </div>
             )}
           </div>
         </div>
@@ -82,7 +82,8 @@ Loader.defaultProps = {
   color: StyleConstants.Colors.PRIMARY,
   isLoading: false,
   isRelative: false,
-  isSmall: false
+  isSmall: false,
+  children: 'LOADING...'
 };
 
 module.exports = Loader;
