@@ -43,5 +43,5 @@ module.exports = {
   },
 
   FontFamily: 'Helvetica, Arial, sans-serif',
-  BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
+  BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)'
 };
