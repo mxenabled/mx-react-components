@@ -17,6 +17,7 @@ const RangeSelector = require('components/RangeSelectorDocs');
 const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
 const Spin = require('components/SpinDocs');
+const Styles = require('components/StylesDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
 const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
@@ -53,6 +54,7 @@ ReactDOM.render((
         <Route component={Select} path='select' />
         <Route component={SelectFullScreen} path='select-full-screen' />
         <Route component={Spin} path='spin' />
+        <Route component={Styles} path='styles' />
         <Route component={ToggleSwitch} path='toggle-switch' />
         <Route component={TypeAhead} path='type-ahead' />
         <Route component={TimeBasedLineChart} path='time-based-line-chart' />
