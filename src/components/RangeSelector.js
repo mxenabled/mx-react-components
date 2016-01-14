@@ -94,26 +94,26 @@ class RangeSelector extends React.Component {
   }
 
   _handleTrackMouseDown (e) {
-  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-  const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
-  const updatedState = {
-    trackClicked: true
-  };
-  const clickBelowLower = newPixels < this.state.lowerPixels;
-  const clickAboveUpper = newPixels > this.state.upperPixels;
-  const clickCloserToLower = newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2);
-  const clickCloserToUpper = newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2);
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+    const updatedState = {
+      trackClicked: true
+    };
+    const clickBelowLower = newPixels < this.state.lowerPixels;
+    const clickAboveUpper = newPixels > this.state.upperPixels;
+    const clickCloserToLower = newPixels > this.state.lowerPixels && newPixels < (this.state.lowerPixels + (this.state.upperPixels - this.state.lowerPixels) / 2);
+    const clickCloserToUpper = newPixels < this.state.upperPixels && newPixels > (this.state.upperPixels - (this.state.upperPixels - this.state.lowerPixels) / 2);
 
-  if (clickBelowLower || clickCloserToLower) {
-    updatedState.dragging = 'Lower';
+    if (clickBelowLower || clickCloserToLower) {
+      updatedState.dragging = 'Lower';
+    }
+
+    if (clickAboveUpper || clickCloserToUpper) {
+      updatedState.dragging = 'Upper';
+    }
+
+    this.setState(updatedState);
   }
-
-  if (clickAboveUpper || clickCloserToUpper) {
-    updatedState.dragging = 'Upper';
-  }
-
-  this.setState(updatedState);
-}
 
   //this method now handles both the dragging of the toggle, and moving it when track is clicked
   _handleDragging (e) {
