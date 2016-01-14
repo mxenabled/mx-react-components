@@ -150,7 +150,7 @@ const styles = {
     position: 'absolute'
   },
   overlay: {
-    background: 'rgba(255,255,255,0.9)'
+    backgroundColor: StyleConstants.ScrimColor
   },
   close: {
     position: 'absolute',
