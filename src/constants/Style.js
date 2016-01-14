@@ -41,5 +41,5 @@ module.exports = {
 
   FontFamily: 'Helvetica, Arial, sans-serif',
   BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
-  ScrimColor: 'rgba(247, 248, 248,0.9)'
+  ScrimColor: 'rgba(247,248,248,0.9)'
 };
