@@ -28,9 +28,10 @@ module.exports = {
 
   FontSizes: {
     JUMBO: 30,
-    XXLARGE: 20,
+    XXLARGE: 21,
     XLARGE: 17,
-    MEDIUM: 15,
+    LARGE: 15,
+    MEDIUM: 13,
     SMALL: 11,
     TINY: 10
   },
