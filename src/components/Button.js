@@ -42,7 +42,8 @@ const Button = React.createClass({
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         cursor: 'pointer',
-        transition: 'all .2s ease-in'
+        transition: 'all .2s ease-in',
+        minWidth: 50
       },
       primary: {
         backgroundColor: this.props.primaryColor,
