@@ -148,8 +148,10 @@ const Button = React.createClass({
         fill: StyleConstants.Colors.FOG
       },
       icon: {
-        margin: '-6px -5px -5px -5px',
-        paddingRight: this.props.children ? 10 : 0
+        marginTop: -6,
+        marginBottom: -5,
+        marginLeft: -5,
+        marginRight: this.props.children ? 5 : -5
       }
     };
 
