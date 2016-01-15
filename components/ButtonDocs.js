@@ -15,14 +15,27 @@ const ButtonDocs = React.createClass({
 
         <h3>Demo</h3>
         <div className='flex'>
-          <Button style={style}>Primary</Button>
+          <Button>Primary</Button>
           <Button style={style} type='secondary'>Secondary</Button>
           <Button style={style} type='base'>Base</Button>
           <Button style={style} type='nertral'>Neurral</Button>
           <Button style={style} type='disabled'>Disabled</Button>
         </div>
+        <br/><br/>
+        <div className='flex'>
+          <Button icon='add'>Icon</Button>
+          <Button icon='delete' style={style} />
+        </div>
+        <br/><br/>
+        <div className='flex'>
+          <Button type='primaryOutline'>Primary Outline</Button>
+          <Button style={style} type='secondaryOutline'>Secondary Outline</Button>
+        </div>
 
         <h3>Usage</h3>
+        <h5>icon <label>String</label></h5>
+        <p>This can be any of the Icon component values. If defined, an icon will be shown to the left of the button content.</p>
+
         <h5>primaryColor <label>String</label></h5>
         <p>Default: Styles.Colors.PRIMARY</p>
         <p>The primary color used with the button styles.</p>

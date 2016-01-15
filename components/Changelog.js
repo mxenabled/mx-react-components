@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.6.2</h3>
+        <ul>
+          <li>Button: Add icon prop and outline types (<a href='https://github.com/mxenabled/mx-react-components/pull/146'>#146</a>)</li>
+        </ul>
+
         <h3>1.6.0</h3>
         <ul>
           <li>Add Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/144'>#144</a>)</li>
