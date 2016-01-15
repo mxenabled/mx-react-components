@@ -37,7 +37,7 @@ const Button = React.createClass({
         borderWidth: 1,
         borderColor: 'transparent',
         display: 'inline-block',
-        padding: '10px 14px',
+        padding: '7px 14px',
         textAlign: 'center',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
