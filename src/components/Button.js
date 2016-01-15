@@ -37,7 +37,7 @@ const Button = React.createClass({
         borderWidth: 1,
         borderColor: 'transparent',
         display: 'inline-block',
-        padding: '7px 14px',
+        padding: '10px 14px',
         textAlign: 'center',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
@@ -148,61 +148,13 @@ const Button = React.createClass({
       },
       icon: {
         margin: '-6px -5px -5px -5px',
-        paddingRight: 7
-      },
-      iconprimary: {
-        fill: StyleConstants.Colors.WHITE
-      },
-      iconprimaryOutline: {
-        fill: this.props.primaryColor,
-        transition: 'all .2s ease-in',
-
-        ':hover': {
-          fill: StyleConstants.Colors.WHITE,
-          transition: 'all .2s ease-in'
-        },
-        ':active': {
-          fill: StyleConstants.Colors.WHITE,
-          transition: 'all .2s ease-in'
-        }
-      },
-      iconsecondary: {
-        fill: StyleConstants.Colors.CHARCOAL
-      },
-      iconsecondaryOutline: {
-        fill: StyleConstants.Colors.ASH,
-        transition: 'all .2s ease-in',
-
-        ':hover': {
-          fill: StyleConstants.Colors.WHITE,
-          transition: 'all .2s ease-in'
-        },
-        ':active': {
-          fill: StyleConstants.Colors.WHITE,
-          transition: 'all .2s ease-in'
-        }
-      },
-      iconbase: {
-        fill: this.props.primaryColor,
-        transition: 'all .2s ease-in',
-
-        ':hover': {
-          fill: StyleUtils.adjustColor(this.props.primaryColor, -8),
-          transition: 'all .2s ease-in'
-        },
-        ':active': {
-          fill: StyleUtils.adjustColor(this.props.primaryColor, -16),
-          transition: 'all .2s ease-in'
-        }
-      },
-      icondisabled: {
-        fill: StyleConstants.Colors.FOG
-      },
+        paddingRight: this.props.children ? 10 : 0
+      }
     };
 
     return (
       <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
-        {this.props.icon ? <Icon style={[styles.icon, styles['icon' + this.props.type]]} type={this.props.icon} /> : null}
+        {this.props.icon ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
         {this.props.children}
       </div>
     );

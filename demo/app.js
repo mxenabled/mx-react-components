@@ -466,6 +466,8 @@ const Demo = React.createClass({
           <br/><br/>
           <Button icon='add'>Button With Icon</Button>
           <br/><br/>
+          <Button icon='delete' type='primaryOutline' />
+          <br/><br/>
           <Button type='base'>Base Button</Button>
           <br/><br/>
           <Button type='neutral'>Neutral Button</Button>
