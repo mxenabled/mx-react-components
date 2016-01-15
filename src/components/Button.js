@@ -5,8 +5,6 @@ const StyleConstants = require('../constants/Style');
 
 const Icon = require('../components/Icon');
 
-const StyleUtils = require('../utils/Style');
-
 const Button = React.createClass({
   propTypes: {
     icon: React.PropTypes.string,
@@ -53,13 +51,13 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -8),
-          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -8),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -8),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -8),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -16),
-          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
           transition: 'all .2s ease-in'
         }
       },
@@ -77,8 +75,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -16),
-          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -92,13 +90,13 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.FOG, -5),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.FOG, -5),
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -5),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -5),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.FOG, -10),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.FOG, -10),
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -10),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -10),
           transition: 'all .2s ease-in'
         }
       },
@@ -117,8 +115,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -10),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -10),
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -131,13 +129,13 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          color: StyleUtils.adjustColor(this.props.primaryColor, -8),
-          fill: StyleUtils.adjustColor(this.props.primaryColor, -8),
+          color: StyleConstants.adjustColor(this.props.primaryColor, -8),
+          fill: StyleConstants.adjustColor(this.props.primaryColor, -8),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          color: StyleUtils.adjustColor(this.props.primaryColor, -16),
-          fill: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          color: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          fill: StyleConstants.adjustColor(this.props.primaryColor, -16),
           transition: 'all .2s ease-in'
         }
       },
