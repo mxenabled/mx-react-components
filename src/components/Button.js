@@ -3,10 +3,13 @@ const Radium = require('radium');
 
 const StyleConstants = require('../constants/Style');
 
+const Icon = require('../components/Icon');
+
 const StyleUtils = require('../utils/Style');
 
 const Button = React.createClass({
   propTypes: {
+    icon: React.PropTypes.string,
     primaryColor: React.PropTypes.string,
     type: React.PropTypes.oneOf([
       'base',
@@ -45,6 +48,7 @@ const Button = React.createClass({
         backgroundColor: this.props.primaryColor,
         borderColor: this.props.primaryColor,
         color: StyleConstants.Colors.WHITE,
+        fill: StyleConstants.Colors.WHITE,
         transition: 'all .2s ease-in',
 
         ':hover': {
@@ -62,17 +66,20 @@ const Button = React.createClass({
         backgroundColor: 'transparent',
         borderColor: this.props.primaryColor,
         color: this.props.primaryColor,
+        fill: this.props.primaryColor,
         transition: 'all .2s ease-in',
 
         ':hover': {
           backgroundColor: this.props.primaryColor,
           color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
           backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -16),
           borderColor: StyleUtils.adjustColor(this.props.primaryColor, -16),
           color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
         }
       },
@@ -80,6 +87,7 @@ const Button = React.createClass({
         backgroundColor: StyleConstants.Colors.FOG,
         borderColor: StyleConstants.Colors.FOG,
         color: StyleConstants.Colors.CHARCOAL,
+        fill: StyleConstants.Colors.CHARCOAL,
         transition: 'all .2s ease-in',
 
         ':hover': {
@@ -97,43 +105,104 @@ const Button = React.createClass({
         backgroundColor: 'transparent',
         borderColor: StyleConstants.Colors.ASH,
         color: StyleConstants.Colors.ASH,
+        fill: StyleConstants.Colors.ASH,
         transition: 'all .2s ease-in',
 
         ':hover': {
           backgroundColor: StyleConstants.Colors.ASH,
           borderColor: StyleConstants.Colors.ASH,
           color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
           backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -10),
           borderColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -10),
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
         }
       },
       base: {
         backgroundColor: 'transparent',
         color: this.props.primaryColor,
+        fill: this.props.primaryColor,
         transition: 'all .2s ease-in',
 
         ':hover': {
           color: StyleUtils.adjustColor(this.props.primaryColor, -8),
+          fill: StyleUtils.adjustColor(this.props.primaryColor, -8),
           transition: 'all .2s ease-in'
         },
         ':active': {
           color: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          fill: StyleUtils.adjustColor(this.props.primaryColor, -16),
           transition: 'all .2s ease-in'
         }
       },
       disabled: {
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         borderColor: StyleConstants.Colors.PORCELAIN,
-        color: StyleConstants.Colors.FOG
-      }
+        color: StyleConstants.Colors.FOG,
+        fill: StyleConstants.Colors.FOG
+      },
+      icon: {
+        margin: '-6px -5px -5px -5px',
+        paddingRight: 7
+      },
+      iconprimary: {
+        fill: StyleConstants.Colors.WHITE
+      },
+      iconprimaryOutline: {
+        fill: this.props.primaryColor,
+        transition: 'all .2s ease-in',
+
+        ':hover': {
+          fill: StyleConstants.Colors.WHITE,
+          transition: 'all .2s ease-in'
+        },
+        ':active': {
+          fill: StyleConstants.Colors.WHITE,
+          transition: 'all .2s ease-in'
+        }
+      },
+      iconsecondary: {
+        fill: StyleConstants.Colors.CHARCOAL
+      },
+      iconsecondaryOutline: {
+        fill: StyleConstants.Colors.ASH,
+        transition: 'all .2s ease-in',
+
+        ':hover': {
+          fill: StyleConstants.Colors.WHITE,
+          transition: 'all .2s ease-in'
+        },
+        ':active': {
+          fill: StyleConstants.Colors.WHITE,
+          transition: 'all .2s ease-in'
+        }
+      },
+      iconbase: {
+        fill: this.props.primaryColor,
+        transition: 'all .2s ease-in',
+
+        ':hover': {
+          fill: StyleUtils.adjustColor(this.props.primaryColor, -8),
+          transition: 'all .2s ease-in'
+        },
+        ':active': {
+          fill: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          transition: 'all .2s ease-in'
+        }
+      },
+      icondisabled: {
+        fill: StyleConstants.Colors.FOG
+      },
     };
 
     return (
       <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
+        {this.props.icon ? <Icon style={[styles.icon, styles['icon' + this.props.type]]} type={this.props.icon} /> : null}
         {this.props.children}
       </div>
     );
