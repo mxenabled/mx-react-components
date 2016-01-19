@@ -380,7 +380,7 @@ const styles = {
     position: 'relative'
   },
   item: {
-    color: StyleConstants.Colors.FOG,
+    color: StyleConstants.Colors.ASH,
     cursor: 'pointer',
     paddingTop: '10px',
     paddingRight: '10px',
@@ -399,7 +399,7 @@ const styles = {
     }
   },
   removeIcon: {
-    color: StyleConstants.Colors.FOG,
+    color: StyleConstants.Colors.ASH,
     marginLeft: '5px',
     cursor: 'pointer'
   }
