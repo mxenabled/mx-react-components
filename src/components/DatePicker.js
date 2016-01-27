@@ -6,17 +6,53 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-class DatePicker extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
+const DatePicker = React.createClass({
+  propTypes: {
+    calendarWrapperStyle: React.PropTypes.object,
+    caretWrapperStyle: React.PropTypes.object,
+    closeOnDateSelect: React.PropTypes.bool,
+    defaultDate: React.PropTypes.number,
+    format: React.PropTypes.string,
+    inputStyle: React.PropTypes.object,
+    locale: React.PropTypes.string,
+    minimumDate: React.PropTypes.number,
+    onDateSelect: React.PropTypes.func,
+    placeholderText: React.PropTypes.string,
+    placeholderTextStyle: React.PropTypes.object,
+    scrimStyle: React.PropTypes.object,
+    selectedDateColor: React.PropTypes.string,
+    selectedDateWrapperStyle: React.PropTypes.object,
+    showCaret: React.PropTypes.bool,
+    showDayBorders: React.PropTypes.bool,
+    style: React.PropTypes.object,
+    title: React.PropTypes.string,
+    useInputForSelectedDate: React.PropTypes.bool
+  },
+
+  getDefaultProps () {
+    return {
+      closeOnDateSelect: false,
+      format: 'MMM D, YYYY',
+      locale: 'en',
+      onDateSelect () {},
+      selectedDateColor: StyleConstants.Colors.PRIMARY,
+      scrimStyle: {},
+      showCaret: true,
+      showDayBorders: false,
+      title: null,
+      useInputForSelectedDate: true
+    };
+  },
+
+  getInitialState () {
+    return {
       currentDate: null,
       inputValue: this._getInputValueByDate(this.props.defaultDate),
       isValid: true,
       selectedDate: this.props.defaultDate,
       showCalendar: false
     };
-  }
+  },
 
   _getInputValueByDate (date) {
     let inputValue = null;
@@ -32,13 +68,13 @@ class DatePicker extends React.Component {
     }
 
     return inputValue;
-  }
+  },
 
   _getSelectedDate () {
     const selectedDate = this.state.selectedDate;
 
     return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
-  }
+  },
 
   _handleDateSelect (date) {
     if (this.props.closeOnDateSelect) {
@@ -52,7 +88,7 @@ class DatePicker extends React.Component {
     });
 
     this.props.onDateSelect(date);
-  }
+  },
 
   _handleInputBlur (evt) {
     if (evt.target.value.length === 0) {
@@ -67,13 +103,13 @@ class DatePicker extends React.Component {
         inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
       });
     }
-  }
+  },
 
   _handleInputChange (evt) {
     this.setState({
       inputValue: evt.target.value
     });
-  }
+  },
 
   _handlePreviousClick () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
@@ -84,7 +120,7 @@ class DatePicker extends React.Component {
     this.setState({
       currentDate
     });
-  }
+  },
 
   _handleNextClick () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
@@ -95,19 +131,19 @@ class DatePicker extends React.Component {
     this.setState({
       currentDate
     });
-  }
+  },
 
   _handleScrimClick () {
     this.setState({
       showCalendar: false
     });
-  }
+  },
 
   _toggleCalendar () {
     this.setState({
       showCalendar: !this.state.showCalendar
     });
-  }
+  },
 
   _renderMonthTable (currentDate, selectedDate) {
     const days = [];
@@ -135,7 +171,7 @@ class DatePicker extends React.Component {
       day = (
         <div
           key={startDate.month() + '-' + startDate.date()}
-          onClick={!noSelectDay ? this._handleDateSelect.bind(this, startDate.unix()) : null}
+          onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
           style={[
             styles.calendarDay,
             (!noSelectDay && isCurrentMonth) && styles.currentMonth
@@ -162,15 +198,15 @@ class DatePicker extends React.Component {
     }
 
     return days;
-  }
+  },
 
   _renderScrim (styles) {
     if (this.state.showCalendar) {
       return (
-        <div onClick={this._handleScrimClick.bind(this)} style={[styles.scrim, this.props.scrimStyle]}/>
+        <div onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]}/>
       );
     }
-  }
+  },
 
   _renderSelectedDate () {
     if (this.props.useInputForSelectedDate) {
@@ -180,9 +216,9 @@ class DatePicker extends React.Component {
         <div>
           <input
             key='input'
-            onBlur={this._handleInputBlur.bind(this)}
-            onChange={this._handleInputChange.bind(this)}
-            onClick={this._toggleCalendar.bind(this)}
+            onBlur={this._handleInputBlur}
+            onChange={this._handleInputChange}
+            onClick={this._toggleCalendar}
             style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: '#FFFFFF' }]}
             type='text'
             value={this.state.inputValue}
@@ -197,7 +233,7 @@ class DatePicker extends React.Component {
       return (
         <div
           key='selectedDate'
-          onClick={this._toggleCalendar.bind(this)}
+          onClick={this._toggleCalendar}
           style={styles.selectedDate}
         >
           {this.state.inputValue}
@@ -205,7 +241,7 @@ class DatePicker extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   _renderTitle (styles) {
     if (this.props.title) {
@@ -215,14 +251,14 @@ class DatePicker extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   _renderCaret () {
     if (this.props.showCaret) {
       return (
         <div style={[styles.caretWrapper, this.props.caretWrapperStyle]}>
           <Icon
-            onClick={this._toggleCalendar.bind(this)}
+            onClick={this._toggleCalendar}
             size='20'
             style={styles.caret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
@@ -230,7 +266,7 @@ class DatePicker extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   render () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
@@ -255,14 +291,14 @@ class DatePicker extends React.Component {
           {this._renderTitle(styles)}
           <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
             <Icon
-              onClick={this._handlePreviousClick.bind(this)}
+              onClick={this._handlePreviousClick}
               size='32px'
               style={[styles.navIcon, styles.navLeft, this.props.showDayBorders && styles.borderRight]}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
-              onClick={this._handleNextClick.bind(this)}
+              onClick={this._handleNextClick}
               size='32px'
               style={[styles.navIcon, styles.navRight, this.props.showDayBorders && styles.borderLeft]}
               type='caret-right'
@@ -277,42 +313,7 @@ class DatePicker extends React.Component {
       </div>
     );
   }
-}
-
-DatePicker.propTypes = {
-  calendarWrapperStyle: React.PropTypes.object,
-  caretWrapperStyle: React.PropTypes.object,
-  closeOnDateSelect: React.PropTypes.bool,
-  defaultDate: React.PropTypes.number,
-  format: React.PropTypes.string,
-  inputStyle: React.PropTypes.object,
-  locale: React.PropTypes.string,
-  minimumDate: React.PropTypes.number,
-  onDateSelect: React.PropTypes.func,
-  placeholderText: React.PropTypes.string,
-  placeholderTextStyle: React.PropTypes.object,
-  scrimStyle: React.PropTypes.object,
-  selectedDateColor: React.PropTypes.string,
-  selectedDateWrapperStyle: React.PropTypes.object,
-  showCaret: React.PropTypes.bool,
-  showDayBorders: React.PropTypes.bool,
-  style: React.PropTypes.object,
-  title: React.PropTypes.string,
-  useInputForSelectedDate: React.PropTypes.bool
-};
-
-DatePicker.defaultProps = {
-  closeOnDateSelect: false,
-  format: 'MMM D, YYYY',
-  locale: 'en',
-  onDateSelect () {},
-  selectedDateColor: StyleConstants.Colors.PRIMARY,
-  scrimStyle: {},
-  showCaret: true,
-  showDayBorders: false,
-  title: null,
-  useInputForSelectedDate: true
-};
+});
 
 const styles = {
   caret: {
