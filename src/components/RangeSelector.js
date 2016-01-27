@@ -9,16 +9,16 @@ class RangeSelector extends React.Component {
   constructor (props) {
     super(props);
 
-    const lowerValue = this.props.defaultLowerValue;
-    const upperValue = this.props.defaultUpperValue;
+    const lowerValue = props.defaultLowerValue;
+    const upperValue = props.defaultUpperValue;
 
     this.state = {
       dragging: null,
       lowerPixels: 0,
       lowerValue,
-      range: this.props.upperBound - this.props.lowerBound,
-      selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
-      showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
+      range: props.upperBound - props.lowerBound,
+      selectedLabel: this._getSelectedLabel(lowerValue, upperValue, props),
+      showPresets: !!props.presets.length && !lowerValue && !upperValue,
       upperPixels: 1,
       upperValue,
       trackClicked: false
@@ -35,9 +35,9 @@ class RangeSelector extends React.Component {
     window.removeEventListener('resize', _throttle(this._setDefaultRangeValues.bind(this), 300));
   }
 
-  _getSelectedLabel (lowerValue, upperValue) {
-    if (this.props.presets) {
-      const preset = this.props.presets.filter(preset => {
+  _getSelectedLabel (lowerValue, upperValue, props = this.props) {
+    if (props.presets) {
+      const preset = props.presets.filter(preset => {
         return preset.lowerValue === lowerValue && preset.upperValue === upperValue;
       })[0];
 

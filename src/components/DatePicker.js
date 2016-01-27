@@ -11,21 +11,21 @@ class DatePicker extends React.Component {
     super(props);
     this.state = {
       currentDate: null,
-      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      inputValue: this._getInputValueByDate(props.defaultDate, props),
       isValid: true,
-      selectedDate: this.props.defaultDate,
+      selectedDate: props.defaultDate,
       showCalendar: false
     };
   }
 
-  _getInputValueByDate (date) {
+  _getInputValueByDate (date, props = this.props) {
     let inputValue = null;
 
     if (date) {
       const newDate = moment.unix(date);
 
       if (newDate.isValid()) {
-        inputValue = newDate.format(this.props.format);
+        inputValue = newDate.format(props.format);
       } else {
         inputValue = date;
       }

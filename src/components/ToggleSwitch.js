@@ -6,7 +6,7 @@ class ToggleSwitch extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      activePosition: this.props.defaultPosition
+      activePosition: props.defaultPosition
     };
   }
 
