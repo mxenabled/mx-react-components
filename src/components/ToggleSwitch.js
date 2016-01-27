@@ -47,7 +47,7 @@ const ToggleSwitch = React.createClass({
   getInitialState () {
     return {
       activePosition: this.props.defaultPosition
-    }
+    };
   },
 
   _handleLeftLabelClick () {
