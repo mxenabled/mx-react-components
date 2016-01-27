@@ -9,24 +9,128 @@ const numeral = require('numeral');
 
 const StyleConstants = require('../constants/Style');
 
-class TimeBasedLineChart extends React.Component {
-  constructor (props) {
-    super(props);
+const styles = {
+  component: {
+    fontFamily: StyleConstants.FontFamily,
+    position: 'relative',
+    boxSizing: 'content-box',
+    display: 'inline-block'
+  },
+  credit: {
+    backgroundColor: StyleConstants.Colors.LIME
+  },
+  debit: {
+    backgroundColor: StyleConstants.Colors.STRAWBERRY
+  },
+  defaultToolTip: {
+    backgroundColor: StyleConstants.Colors.PRIMARY,
+    color: StyleConstants.Colors.WHITE,
+    padding: '3px 5px 3px 5px',
+    transform: 'translateY(32px)'
+  },
+  domain: {
+    opacity: 0
+  },
+  gridLineTick: {
+    'stroke': StyleConstants.Colors.ASH,
+    'stroke-width': 0.5
+  },
+  svg: {
+    'display': 'block',
+    'height': '100%',
+    'position': 'relative',
+    'width': '100%'
+  },
+  text: {
+    'color': StyleConstants.Colors.CHARCOAL,
+    'font-size': StyleConstants.FontSizes.MEDIUM,
+    'font-weight': 'normal'
+  },
+  tooltip: {
+    color: StyleConstants.Colors.WHITE,
+    display: 'inline-block',
+    fontSize: StyleConstants.FontSizes.SMALL,
+    marginBottom: 3,
+    marginTop: 3,
+    minWidth: 50,
+    padding: 5
+  },
+  tooltipWrapper: {
+    display: 'inline-block',
+    position: 'absolute',
+    zIndex: 1
+  },
+  zeroState: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
+const TimeBasedLineChart = React.createClass({
+  propTypes: {
+    alwaysShowZeroYTick: React.PropTypes.bool,
+    areaBelowZeroColor: React.PropTypes.string,
+    breakPointDate: React.PropTypes.number,
+    breakPointLabel: React.PropTypes.string,
+    children: React.PropTypes.node,
+    dashedFutureLine: React.PropTypes.bool,
+    data: React.PropTypes.array,
+    height: React.PropTypes.number,
+    lineColor: React.PropTypes.string,
+    margin: React.PropTypes.object,
+    onDataPointHover: React.PropTypes.func,
+    rangeType: React.PropTypes.oneOf(['day', 'month']),
+    shadeAreaBelowZero: React.PropTypes.bool,
+    showBreakPoint: React.PropTypes.bool,
+    showTooltips: React.PropTypes.bool,
+    staticXAxis: React.PropTypes.bool,
+    width: React.PropTypes.number,
+    yAxisFormatter: React.PropTypes.func,
+    zeroState: React.PropTypes.node
+  },
+
+  getDefaultProps () {
+    return {
+      alwaysShowZeroYTick: false,
+      areaBelowZeroColor: StyleConstants.Colors.STRAWBERRY,
+      breakPointDate: moment().startOf('day').unix(),
+      breakPointLabel: 'Today',
+      dashedFutureLine: true,
+      data: [],
+      height: 400,
+      lineColor: StyleConstants.Colors.PRIMARY,
+      margin: { top: 30, right: 0, bottom: 20, left: 50 },
+      onDataPointHover: () => {},
+      rangeType: 'day',
+      shadeAreaBelowZero: false,
+      showBreakPoint: true,
+      showTooltips: true,
+      staticXAxis: true,
+      width: 550,
+      yAxisFormatter (d) {
+        return numeral(d).format('0a');
+      },
+      zeroState: <div style={styles.zeroState}>No Data Found</div>
+    };
+  },
+
+  getInitialState () {
     const adjustedWidth = this.props.width - this.props.margin.right - this.props.margin.left;
     const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
 
-    this.state = {
+    return {
       adjustedHeight,
       adjustedWidth
     };
-  }
+  },
 
   componentDidMount () {
     this.setState({
       chartEl: ReactDom.findDOMNode(this.refs.chart)
     });
-  }
+  },
 
   componentWillReceiveProps (newProps) {
     if (newProps.height !== null || newProps.width !== null || newProps.margin !== null) {
@@ -42,11 +146,11 @@ class TimeBasedLineChart extends React.Component {
         adjustedWidth
       });
     }
-  }
+  },
 
   shouldComponentUpdate (newProps, newState) {
     return !isEqual(newProps.data, this.props.data) || !isEqual(newState.hoveredData, this.state.hoveredData);
-  }
+  },
 
   _getAreaBelowZero (data) {
     const area = d3.svg.area()
@@ -59,7 +163,7 @@ class TimeBasedLineChart extends React.Component {
       .y1(this._getYScaleValue(0));
 
     return area(data);
-  }
+  },
 
   _getFlatLine (data) {
     const flatLine = d3.svg.line()
@@ -71,7 +175,7 @@ class TimeBasedLineChart extends React.Component {
       .y(this.state.adjustedHeight);
 
     return flatLine(data);
-  }
+  },
 
   _getLine (data) {
     const line = d3.svg.line()
@@ -85,15 +189,15 @@ class TimeBasedLineChart extends React.Component {
       });
 
     return line(data);
-  }
+  },
 
   _getSliceMiddle () {
     return this._getSliceWidth() / 2;
-  }
+  },
 
   _getSliceWidth () {
     return Math.floor(this.state.adjustedWidth / this.props.data.length);
-  }
+  },
 
   _getSplitData () {
     const future = [];
@@ -117,7 +221,7 @@ class TimeBasedLineChart extends React.Component {
     });
 
     return [past, future];
-  }
+  },
 
   _getYAxisTicks (data, numTicks = 4) {
     const maxValue = d3.max(this.props.data, d => {
@@ -160,7 +264,7 @@ class TimeBasedLineChart extends React.Component {
     }
 
     return ticks;
-  }
+  },
 
   _getXScaleFunction () {
     let maxDate = this.props.data[this.props.data.length - 1].timeStamp;
@@ -172,13 +276,13 @@ class TimeBasedLineChart extends React.Component {
     return d3.time.scale()
       .range([0, this.state.adjustedWidth])
       .domain([minDate, maxDate]);
-  }
+  },
 
   _getXScaleValue (value) {
     const xScale = this._getXScaleFunction();
 
     return xScale(value);
-  }
+  },
 
   _getYScaleFunction () {
     const maxValue = d3.max(this.props.data, d => {
@@ -200,18 +304,18 @@ class TimeBasedLineChart extends React.Component {
     return d3.scale.linear()
       .range([this.state.adjustedHeight, 0])
       .domain([minValue, maxValue]);
-  }
+  },
 
   _getYScaleValue (value) {
     const yScale = this._getYScaleFunction();
 
     return yScale(value) - 10;
-  }
+  },
 
   _renderChart () {
     this._renderChartBase();
     this._renderLineChart();
-  }
+  },
 
   _renderChartBase () {
     const margin = this.props.margin;
@@ -240,7 +344,7 @@ class TimeBasedLineChart extends React.Component {
         .attr('class', 'grid-line')
         .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
     }
-  }
+  },
 
   _renderLineChart () {
     const chart = d3.select(this.state.chartEl);
@@ -451,7 +555,7 @@ class TimeBasedLineChart extends React.Component {
 
           return isPast && isBreakPointDate ? 'none' : 'block';
         })
-        .on('mouseover', this._handleDataPointMouseOver.bind(this));
+        .on('mouseover', this._handleDataPointMouseOver);
     });
 
     //Update the axes
@@ -476,7 +580,7 @@ class TimeBasedLineChart extends React.Component {
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.grid-line .tick').style(styles.gridLineTick);
-  }
+  },
 
   _handleDataPointMouseOver (d) {
     const graphMiddleTimeStamp = this.props.data[Math.floor(this.props.data.length / 2)].timeStamp;
@@ -505,7 +609,7 @@ class TimeBasedLineChart extends React.Component {
 
     this._renderSvgTooltipComponents();
     this.props.onDataPointHover(d);
-  }
+  },
 
   _handleChartMouseLeave () {
     this.setState({
@@ -514,7 +618,7 @@ class TimeBasedLineChart extends React.Component {
     });
 
     this._removeSvgTooltipComponents();
-  }
+  },
 
   _removeSvgTooltipComponents () {
     const dots = d3.select(this.state.chartEl).selectAll('.dot-group');
@@ -524,7 +628,7 @@ class TimeBasedLineChart extends React.Component {
     dots.selectAll('.mx-time-based-line-chart-hover-above').remove();
     dots.selectAll('.mx-time-based-line-chart-hover-below').remove();
     dots.selectAll('.mx-time-based-line-chart-hover-dot').remove();
-  }
+  },
 
   _renderSvgTooltipComponents () {
     const hoveredData = this.state.hoveredData;
@@ -607,7 +711,7 @@ class TimeBasedLineChart extends React.Component {
       .style('fill', '#fff')
       .style('stroke', this.props.lineColor)
       .style('stroke-width', '2px');
-  }
+  },
 
   _renderTooltip () {
     if (this.props.showTooltips && this.state.tooltipPosition) {
@@ -630,7 +734,7 @@ class TimeBasedLineChart extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   render () {
     return (
@@ -641,114 +745,10 @@ class TimeBasedLineChart extends React.Component {
             {this._renderChart()}
           </div>
         ) : this.props.zeroState}
-        <svg className='mx-time-based-line-chart-svg' onMouseLeave={this._handleChartMouseLeave.bind(this)} ref='chart' />
+        <svg className='mx-time-based-line-chart-svg' onMouseLeave={this._handleChartMouseLeave} ref='chart' />
       </div>
     );
   }
-}
-
-const styles = {
-  component: {
-    fontFamily: StyleConstants.FontFamily,
-    position: 'relative',
-    boxSizing: 'content-box',
-    display: 'inline-block'
-  },
-  credit: {
-    backgroundColor: StyleConstants.Colors.LIME
-  },
-  debit: {
-    backgroundColor: StyleConstants.Colors.STRAWBERRY
-  },
-  defaultToolTip: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.WHITE,
-    padding: '3px 5px 3px 5px',
-    transform: 'translateY(32px)'
-  },
-  domain: {
-    opacity: 0
-  },
-  gridLineTick: {
-    'stroke': StyleConstants.Colors.ASH,
-    'stroke-width': 0.5
-  },
-  svg: {
-    'display': 'block',
-    'height': '100%',
-    'position': 'relative',
-    'width': '100%'
-  },
-  text: {
-    'color': StyleConstants.Colors.CHARCOAL,
-    'font-size': StyleConstants.FontSizes.MEDIUM,
-    'font-weight': 'normal'
-  },
-  tooltip: {
-    color: StyleConstants.Colors.WHITE,
-    display: 'inline-block',
-    fontSize: StyleConstants.FontSizes.SMALL,
-    marginBottom: 3,
-    marginTop: 3,
-    minWidth: 50,
-    padding: 5
-  },
-  tooltipWrapper: {
-    display: 'inline-block',
-    position: 'absolute',
-    zIndex: 1
-  },
-  zeroState: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
-
-TimeBasedLineChart.propTypes = {
-  alwaysShowZeroYTick: React.PropTypes.bool,
-  areaBelowZeroColor: React.PropTypes.string,
-  breakPointDate: React.PropTypes.number,
-  breakPointLabel: React.PropTypes.string,
-  children: React.PropTypes.node,
-  dashedFutureLine: React.PropTypes.bool,
-  data: React.PropTypes.array,
-  height: React.PropTypes.number,
-  lineColor: React.PropTypes.string,
-  margin: React.PropTypes.object,
-  onDataPointHover: React.PropTypes.func,
-  rangeType: React.PropTypes.oneOf(['day', 'month']),
-  shadeAreaBelowZero: React.PropTypes.bool,
-  showBreakPoint: React.PropTypes.bool,
-  showTooltips: React.PropTypes.bool,
-  staticXAxis: React.PropTypes.bool,
-  width: React.PropTypes.number,
-  yAxisFormatter: React.PropTypes.func,
-  zeroState: React.PropTypes.node
-};
-
-TimeBasedLineChart.defaultProps = {
-  alwaysShowZeroYTick: false,
-  areaBelowZeroColor: StyleConstants.Colors.STRAWBERRY,
-  breakPointDate: moment().startOf('day').unix(),
-  breakPointLabel: 'Today',
-  dashedFutureLine: true,
-  data: [],
-  height: 400,
-  lineColor: StyleConstants.Colors.PRIMARY,
-  margin: { top: 30, right: 0, bottom: 20, left: 50 },
-  onDataPointHover: () => {},
-  rangeType: 'day',
-  shadeAreaBelowZero: false,
-  showBreakPoint: true,
-  showTooltips: true,
-  staticXAxis: true,
-  width: 550,
-  yAxisFormatter (d) {
-    return numeral(d).format('0a');
-  },
-  zeroState: <div style={styles.zeroState}>No Data Found</div>
-};
+});
 
 module.exports = Radium(TimeBasedLineChart);
