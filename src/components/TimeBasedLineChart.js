@@ -13,8 +13,8 @@ class TimeBasedLineChart extends React.Component {
   constructor (props) {
     super(props);
 
-    const adjustedWidth = this.props.width - this.props.margin.right - this.props.margin.left;
-    const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
+    const adjustedWidth = props.width - props.margin.right - props.margin.left;
+    const adjustedHeight = props.height - props.margin.top - props.margin.bottom;
 
     this.state = {
       adjustedHeight,

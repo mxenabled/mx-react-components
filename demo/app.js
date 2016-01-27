@@ -725,12 +725,6 @@ const Demo = React.createClass({
     });
   },
 
-  _handleSelectChange (option) {
-    this.setState({
-      icon: option
-    });
-  },
-
   _handleModalClick () {
     this.setState({
       showModal: true,
