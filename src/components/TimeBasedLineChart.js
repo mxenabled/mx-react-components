@@ -68,6 +68,50 @@ const styles = {
   }
 };
 
+const Svg = React.createClass({
+  render () {
+    return (
+      <svg {...this.props}>
+        {this.props.children}
+      </svg>
+    );
+  }
+});
+
+const SvgCircle = React.createClass({
+  render () {
+    return (
+      <circle {...this.props} />
+    );
+  }
+});
+
+const SvgGroup = React.createClass({
+  render () {
+    return (
+      <g {...this.props}>
+        {this.props.children}
+      </g>
+    );
+  }
+});
+
+const SvgLine = React.createClass({
+  render () {
+    return (
+      <path {...this.props} />
+    );
+  }
+});
+
+const SvgRectangle = React.createClass({
+  render () {
+    return (
+      <rect {...this.props} />
+    );
+  }
+});
+
 const TimeBasedLineChart = React.createClass({
   propTypes: {
     alwaysShowZeroYTick: React.PropTypes.bool,
@@ -313,37 +357,24 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _renderChart () {
-    this._renderChartBase();
+    // this._renderChartBase();
     this._renderLineChart();
   },
 
-  _renderChartBase () {
-    const margin = this.props.margin;
-    const width = this.props.width;
-    const height = this.props.height;
+  _renderXAxis () {
     const chart = d3.select(this.state.chartEl);
-    const data = this.props.data;
+    console.log('Chart', chart);
+    const xAxisFormat = this.props.rangeType === 'day' ? 'MMM D' : 'MMM';
 
-    chart.style(styles.svg);
+    const xAxis = d3.svg.axis()
+      .scale(this._getXScaleFunction())
+      .orient('bottom')
+      .tickFormat(d => {
+        return moment.unix(d).format(xAxisFormat);
+      })
+      .ticks(8);
 
-    chart.selectAll('g').remove();
-
-    chart.attr('width', width)
-      .attr('height', height);
-
-    if (data.length > 0) {
-      chart.append('g')
-        .attr('class', 'x-axis')
-        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (height - margin.bottom) + ')');
-
-      chart.append('g')
-        .attr('class', 'y-axis')
-        .attr('transform', 'translate(' + (margin.left + 20) + ',' + (margin.top - 10) + ')');
-
-      chart.append('g')
-        .attr('class', 'grid-line')
-        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
-    }
+    chart.select('g.x-axis').call(xAxis);
   },
 
   _renderLineChart () {
@@ -393,13 +424,13 @@ const TimeBasedLineChart = React.createClass({
       const lineGroup = group.append('g')
         .attr('class', 'line-group');
 
-      lineGroup.append('svg:path')
-        .attr('class', 'mx-time-based-line-chart-line')
-        .attr('stroke', color)
-        .attr('stroke-width', '2px')
-        .attr('stroke-dasharray', dash)
-        .attr('fill', 'none')
-        .attr('d', this._getLine(dataSet));
+      // lineGroup.append('svg:path')
+      //   .attr('class', 'mx-time-based-line-chart-line')
+      //   .attr('stroke', color)
+      //   .attr('stroke-width', '2px')
+      //   .attr('stroke-dasharray', dash)
+      //   .attr('fill', 'none')
+      //   .attr('d', this._getLine(dataSet));
 
       //Area Below 0 ================
       if (this.props.shadeAreaBelowZero) {
@@ -736,16 +767,62 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
+  _renderChartBase () {
+    const margin = this.props.margin;
+    const width = this.props.width;
+    const height = this.props.height;
+    const chart = d3.select(this.state.chartEl);
+    const data = this.props.data;
+
+    chart.style(styles.svg);
+
+    chart.selectAll('g').remove();
+
+    chart.attr('width', width)
+      .attr('height', height);
+
+    if (data.length > 0) {
+      chart.append('g')
+        .attr('class', 'x-axis')
+        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (height - margin.bottom) + ')');
+
+      chart.append('g')
+        .attr('class', 'y-axis')
+        .attr('transform', 'translate(' + (margin.left + 20) + ',' + (margin.top - 10) + ')');
+
+      chart.append('g')
+        .attr('class', 'grid-line')
+        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
+    }
+  },
+
   render () {
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
-          <div>
-            {this._renderTooltip()}
-            {this._renderChart()}
-          </div>
-        ) : this.props.zeroState}
-        <svg className='mx-time-based-line-chart-svg' onMouseLeave={this._handleChartMouseLeave} ref='chart' />
+          <Svg
+            className='mx-time-based-line-chart-svg'
+            height={this.props.height}
+            onMouseLeave={this._handleChartMouseLeave}
+            ref='chart'
+            style={styles.svg}
+            width={this.props.width}
+          >
+            <SvgGroup className='x-axis' style={{ transform: 'translate(' + (this.props.margin.left - this._getSliceMiddle()) + ',' + (this.props.height - this.props.margin.bottom) + ')' }} />
+            <SvgGroup className='y-axis' style={{ transform: 'translate(' + (this.props.margin.left + 20) + ',' + (this.props.margin.top - 10) + ')' }}/>
+            <SvgGroup className='grid-lines' style={{ transform: 'translate(' + (this.props.margin.left - this._getSliceMiddle()) + ',' + (this.props.margin.top - 10) + ')' }} />
+            <SvgGroup className='line-group'>
+              <SvgLine
+                d={this._getLine(this.props.data)}
+                fill='none'
+                stroke={StyleConstants.Colors.PRIMARY}
+                strokeDasharray={this.props.dashed ? '2, 2' : 'none'}
+                strokeWidth={2}
+              />
+            </SvgGroup>
+            {this._renderXAxis()}
+          </Svg>
+        ) : this.props.zeroState }
       </div>
     );
   }
