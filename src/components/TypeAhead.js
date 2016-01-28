@@ -6,23 +6,40 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-class TypeAhead extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
+const TypeAhead = React.createClass({
+  propTypes: {
+    items: React.PropTypes.array,
+    onItemRemove: React.PropTypes.func,
+    onItemSelect: React.PropTypes.func,
+    placeholderText: React.PropTypes.string,
+    preSelectedItems: React.PropTypes.array
+  },
+
+  getDefaultProps () {
+    return {
+      items: [],
+      onItemRemove () {},
+      onItemSelect () {},
+      placeholderText: 'Select Filters',
+      preSelectedItems: []
+    };
+  },
+
+  getInitialState () {
+    return {
       highlightedValue: null,
       isOpen: false,
       searchString: '',
-      selectedItems: props.preSelectedItems
+      selectedItems: this.props.preSelectedItems
     };
-  }
+  },
 
   _getFilteredItems () {
     return this.props.items.filter(item => {
       return this.state.selectedItems.indexOf(item) === -1 &&
              item.toLowerCase().indexOf(this.state.searchString.toLowerCase()) > -1;
     });
-  }
+  },
 
   _handleBlur () {
     this.setState({
@@ -30,7 +47,7 @@ class TypeAhead extends React.Component {
       isOpen: false,
       searchString: ''
     });
-  }
+  },
 
   _handleFocus () {
     this.setState({
@@ -38,13 +55,13 @@ class TypeAhead extends React.Component {
     });
 
     ReactDOM.findDOMNode(this.refs.input).focus();
-  }
+  },
 
   _handleItemMouseOver () {
     this.setState({
       highlightedValue: null
     });
-  }
+  },
 
   _handleSelectAll () {
     this.props.onItemSelect(null, this.props.items);
@@ -54,7 +71,7 @@ class TypeAhead extends React.Component {
       searchString: '',
       selectedItems: this.props.items
     });
-  }
+  },
 
   _handleClearAll () {
     this.props.onItemSelect(null, []);
@@ -64,7 +81,7 @@ class TypeAhead extends React.Component {
       searchString: '',
       selectedItems: []
     });
-  }
+  },
 
   _handleItemSelect (item) {
     //add to selectedItems
@@ -81,7 +98,7 @@ class TypeAhead extends React.Component {
     });
 
     ReactDOM.findDOMNode(this.refs.input).focus();
-  }
+  },
 
   _handleItemRemove (item) {
     const selectedItems = this.state.selectedItems.filter(selectedItem => {
@@ -95,7 +112,7 @@ class TypeAhead extends React.Component {
     });
 
     ReactDOM.findDOMNode(this.refs.input).focus();
-  }
+  },
 
   _handleInputKeyDown (e) {
     const searchString = e.target.value;
@@ -171,7 +188,7 @@ class TypeAhead extends React.Component {
 
       ReactDOM.findDOMNode(this.refs.input).blur();
     }
-  }
+  },
 
   _scrollList (nextIndex, scrollDirection) {
     const filteredItems = this._getFilteredItems();
@@ -196,13 +213,13 @@ class TypeAhead extends React.Component {
         ul.scrollTop = filteredItems.length * activeLi.clientHeight;
       }
     }
-  }
+  },
 
   _handleInputChange (e) {
     this.setState({
       searchString: e.target.value
     });
-  }
+  },
 
   _renderSelectedItems () {
     return this.state.selectedItems.map((item, index) => {
@@ -210,14 +227,14 @@ class TypeAhead extends React.Component {
         <div className='mx-typeahead-selected' key={index} style={styles.itemTag}>
           {item}
           <Icon
-            onClick={this._handleItemRemove.bind(this, item)}
+            onClick={this._handleItemRemove.bind(null, item)}
             size='15px'
             style={styles.removeIcon}
             type='close'
           />
         </div>);
     });
-  }
+  },
 
   _renderItemList () {
     return (
@@ -226,8 +243,8 @@ class TypeAhead extends React.Component {
           <div
             className='mx-typeahead-select-all'
             key='selectAllItem'
-            onMouseDown={this._handleSelectAll.bind(this)}
-            onMouseOver={this._handleItemMouseOver.bind(this)}
+            onMouseDown={this._handleSelectAll}
+            onMouseOver={this._handleItemMouseOver}
             style={styles.item}
           >
             Select All
@@ -240,8 +257,8 @@ class TypeAhead extends React.Component {
           <div
             className='mx-typeahead-clear-all'
             key='clearAllItem'
-            onMouseDown={this._handleClearAll.bind(this)}
-            onMouseOver={this._handleItemMouseOver.bind(this)}
+            onMouseDown={this._handleClearAll}
+            onMouseOver={this._handleItemMouseOver}
             style={styles.item}
           >
             Clear
@@ -255,8 +272,8 @@ class TypeAhead extends React.Component {
             <div
               className='mx-typeahead-option'
               key={index}
-              onMouseDown={this._handleItemSelect.bind(this, item)}
-              onMouseOver={this._handleItemMouseOver.bind(this)}
+              onMouseDown={this._handleItemSelect.bind(null, item)}
+              onMouseOver={this._handleItemMouseOver}
               ref={index}
               style={[styles.item, (item === this.state.highlightedValue) && styles.activeItem]}
             >
@@ -266,14 +283,14 @@ class TypeAhead extends React.Component {
         })}
       </div>
     );
-  }
+  },
 
   render () {
     return (
       <div
         className='mx-typeahead'
-        onBlur={this._handleBlur.bind(this)}
-        onFocus={this._handleFocus.bind(this)}
+        onBlur={this._handleBlur}
+        onFocus={this._handleFocus}
         style={[styles.component, this.props.style]}
         tabIndex='0'
       >
@@ -282,8 +299,8 @@ class TypeAhead extends React.Component {
         <input
           className='mx-typeahead-input'
           key='input'
-          onChange={this._handleInputChange.bind(this)}
-          onKeyDown={this._handleInputKeyDown.bind(this)}
+          onChange={this._handleInputChange}
+          onKeyDown={this._handleInputKeyDown}
           placeholder={!this.state.selectedItems.length ? this.props.placeholderText : null}
           ref='input'
           style={styles.input}
@@ -297,7 +314,7 @@ class TypeAhead extends React.Component {
       </div>
     );
   }
-}
+});
 
 const styles = {
   component: {
@@ -403,22 +420,6 @@ const styles = {
     marginLeft: '5px',
     cursor: 'pointer'
   }
-};
-
-TypeAhead.propTypes = {
-  items: React.PropTypes.array,
-  onItemRemove: React.PropTypes.func,
-  onItemSelect: React.PropTypes.func,
-  placeholderText: React.PropTypes.string,
-  preSelectedItems: React.PropTypes.array
-};
-
-TypeAhead.defaultProps = {
-  items: [],
-  onItemRemove () {},
-  onItemSelect () {},
-  placeholderText: 'Select Filters',
-  preSelectedItems: []
 };
 
 module.exports = Radium(TypeAhead);
