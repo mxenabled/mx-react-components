@@ -61,8 +61,14 @@ const DonutChart = React.createClass({
 
   getInitialState () {
     return {
-      activeIndex: this.props.activeIndex
+      activeIndex: -1
     };
+  },
+
+  componentDidMount () {
+    this.setState({
+      activeIndex: this.props.activeIndex
+    });
   },
 
   componentWillReceiveProps (newProps) {
