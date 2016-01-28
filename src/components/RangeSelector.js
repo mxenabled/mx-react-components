@@ -56,11 +56,11 @@ const RangeSelector = React.createClass({
   componentDidMount () {
     this._setDefaultRangeValues();
 
-    window.addEventListener('resize', _throttle(this._setDefaultRangeValues.bind(null), 300));
+    window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
   },
 
   componentWillUnmount () {
-    window.removeEventListener('resize', _throttle(this._setDefaultRangeValues.bind(null), 300));
+    window.removeEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
   },
 
   _getSelectedLabel (lowerValue, upperValue) {
