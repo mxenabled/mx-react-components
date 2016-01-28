@@ -5,19 +5,58 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-class Modal extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
+const Modal = React.createClass({
+  propTypes: {
+    buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
+      className: React.PropTypes.string,
+      label: React.PropTypes.string,
+      onClick: React.PropTypes.func,
+      style: React.PropTypes.oneOfType([
+        React.PropTypes.array,
+        React.PropTypes.object
+      ]),
+      type: React.PropTypes.oneOf(['primary', 'secondary'])
+    })),
+    color: React.PropTypes.string,
+    contentStyle: React.PropTypes.object,
+    footerContent: React.PropTypes.node,
+    isOpen: React.PropTypes.bool,
+    isRelative: React.PropTypes.bool,
+    onRequestClose: React.PropTypes.func,
+    showFooter: React.PropTypes.bool,
+    showTitleBar: React.PropTypes.bool,
+    title: React.PropTypes.string,
+    tooltip: React.PropTypes.string,
+    tooltipLabel: React.PropTypes.string,
+    tooltipTitle: React.PropTypes.string
+  },
+
+  getDefaultProps () {
+    return {
+      buttons: [],
+      color: StyleConstants.Colors.PRIMARY,
+      isOpen: false,
+      isRelative: false,
+      showFooter: false,
+      showTitleBar: false,
+      title: '',
+      tooltip: null,
+      tooltipLabel: '',
+      tooltipTitle: null
+    };
+  },
+
+  getInitialState () {
+    return {
       showTooltip: false
     };
-  }
+  },
 
   _handleTooltipToggle (show) {
     this.setState({
       showTooltip: show
     });
-  }
+  },
 
   _renderTitleBar () {
     if (this.props.showTitleBar) {
@@ -27,7 +66,7 @@ class Modal extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   _renderFooter () {
     if (this.props.showFooter) {
@@ -52,7 +91,7 @@ class Modal extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   _renderFooterContent () {
     return (
@@ -60,7 +99,7 @@ class Modal extends React.Component {
         {this.props.footerContent}
       </div>
     );
-  }
+  },
 
   _renderTooltip () {
     if (this.state.showTooltip) {
@@ -75,7 +114,7 @@ class Modal extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   _renderTooltipIconAndLabel () {
     if (this.props.tooltip) {
@@ -100,7 +139,7 @@ class Modal extends React.Component {
         </div>
       );
     }
-  }
+  },
 
   render () {
     if (this.props.isOpen)
@@ -132,7 +171,7 @@ class Modal extends React.Component {
         null
       );
   }
-}
+});
 
 const styles = {
   scrim: {
@@ -250,44 +289,6 @@ const styles = {
     width: 400,
     textAlign: 'center'
   }
-};
-
-Modal.propTypes = {
-  buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
-    className: React.PropTypes.string,
-    label: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    style: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    type: React.PropTypes.oneOf(['primary', 'secondary'])
-  })),
-  color: React.PropTypes.string,
-  contentStyle: React.PropTypes.object,
-  footerContent: React.PropTypes.node,
-  isOpen: React.PropTypes.bool,
-  isRelative: React.PropTypes.bool,
-  onRequestClose: React.PropTypes.func,
-  showFooter: React.PropTypes.bool,
-  showTitleBar: React.PropTypes.bool,
-  title: React.PropTypes.string,
-  tooltip: React.PropTypes.string,
-  tooltipLabel: React.PropTypes.string,
-  tooltipTitle: React.PropTypes.string
-};
-
-Modal.defaultProps = {
-  buttons: [],
-  color: StyleConstants.Colors.PRIMARY,
-  isOpen: false,
-  isRelative: false,
-  showFooter: false,
-  showTitleBar: false,
-  title: '',
-  tooltip: null,
-  tooltipLabel: '',
-  tooltipTitle: null
 };
 
 module.exports = Radium(Modal);
