@@ -268,12 +268,10 @@ const styles = {
     backgroundColor: '#FFFFFF',
     padding: '10px',
     whiteSpace: 'nowrap',
-    opacity: 0.4,
 
     ':hover': {
       backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.WHITE,
-      opacity: 1
+      color: StyleConstants.Colors.WHITE
     }
   },
   scrim: {
