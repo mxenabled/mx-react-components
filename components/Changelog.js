@@ -6,6 +6,44 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.6.7</h3>
+        <ul>
+          <li>ToggleSwitch: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/153'>#153</a>)</li>
+          <li>TypeAhead: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/164'>#164</a>)</li>
+          <li>Spin: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/163'>#163</a>)</li>
+          <li>SelectFullScreen: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/162'>#162</a>)</li>
+          <li>Select: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/161'>#161</a>)</li>
+          <li>Modal: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/160'>#160</a>)</li>
+          <li>RangeSelector: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/154'>#154</a>)</li>
+          <li>DatePickerFullScreen: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/156'>#156</a>)</li>
+          <li>DatePicker: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/155'>#155</a>)</li>
+          <li>DonutChart: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/157'>#157</a>)</li>
+          <li>Icon: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/158'>#158</a>)</li>
+          <li>RajaIcon: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/159'>#159</a>)</li>
+          <li>Loader: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/148'>#148</a>)</li>
+          <li>Removed duplicate keys in demo app (<a href='https://github.com/mxenabled/mx-react-components/pull/152'>#152</a>)</li>
+        </ul>
+
+        <h3>1.6.6</h3>
+        <ul>
+          <li>Icon: Add fat arrows (<a href='https://github.com/mxenabled/mx-react-components/pull/149'>#149</a>)</li>
+        </ul>
+
+        <h3>1.6.5</h3>
+        <ul>
+          <li>TypeAhead: Adjust colors (<a href='https://github.com/mxenabled/mx-react-components/commit/3a20b237a707582a79c5d499ccc47f18dc6a2d8a'>see commit</a>)</li>
+        </ul>
+
+        <h3>1.6.4</h3>
+        <ul>
+          <li>Button: Move adjustColor to styles (<a href='https://github.com/mxenabled/mx-react-components/commit/6a3abad0bd1c3dc4a8951a6b8b3d190b9c0d08ee'>see commit</a>)</li>
+        </ul>
+
+        <h3>1.6.3</h3>
+        <ul>
+          <li>Button: Remove padding and change margin to longhand values (<a href='https://github.com/mxenabled/mx-react-components/commit/27725e56aab3cec3299be9be6756c82d78c3e819'>see commit</a>)</li>
+        </ul>
+
         <h3>1.6.2</h3>
         <ul>
           <li>Button: Add icon prop and outline types (<a href='https://github.com/mxenabled/mx-react-components/pull/146'>#146</a>)</li>

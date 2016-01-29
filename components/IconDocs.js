@@ -82,6 +82,10 @@ const icons = [
     displayValue: 'Arrow Down'
   },
   {
+    value: 'arrow-down-fat',
+    displayValue: 'Arrow Down Fat'
+  },
+  {
     value: 'arrow-left',
     displayValue: 'Arrow Left'
   },
@@ -92,6 +96,10 @@ const icons = [
   {
     value: 'arrow-up',
     displayValue: 'Arrow Up'
+  },
+  {
+    value: 'arrow-up-fat',
+    displayValue: 'Arrow Up Fat'
   },
   {
     value: 'attention',
