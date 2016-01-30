@@ -68,38 +68,117 @@ const styles = {
   }
 };
 
-const Svg = React.createClass({
+const YAxis = React.createClass({
+  componentWillMount () {
+    const yAxis = d3.svg.axis()
+      .scale(this.props.yScaleFunction())
+      .orient('left')
+      .tickValues(this.props.ticks)
+      .tickFormat(this.props.yAxisFormat);
+
+    this.setState({
+      yAxis
+    });
+  },
+
+  componentDidMount () {
+    this._renderAxis();
+  },
+
+  componentDidUpdate () {
+    this._renderAxis();
+  },
+
+  _renderAxis () {
+    d3.select(this.refs.yAxis).call(this.state.yAxis);
+  },
+
   render () {
-    return (
-      <svg {...this.props}>
-        {this.props.children}
-      </svg>
-    );
+    return <g ref='yAxis' transform={this.props.translation} />;
   }
 });
 
-const SvgCircle = React.createClass({
+const YGridLines = React.createClass({
+  componentWillMount () {
+
+  },
+
+  componentDidMount () {
+
+  },
+
+  componentDidUpdate () {
+
+  },
+
+  _renderYGridLines () {
+
+  },
+
   render () {
-    return (
-      <circle {...this.props} />
-    );
+    return null;
   }
 });
 
-const SvgGroup = React.createClass({
+const TimeAxis = React.createClass({
+  componentWillMount () {
+    const timeAxis = d3.svg.axis()
+      .scale(this.props.xScaleFunction())
+      .tickFormat(d => {
+        return moment.unix(d).format(this.props.timeAxisFormat);
+      })
+      .ticks(8);
+
+    this.setState({
+      timeAxis
+    });
+  },
+
+  componentDidMount () {
+    this._renderAxis();
+  },
+
+  componentDidUpdate () {
+    this._renderAxis();
+  },
+
+  _renderAxis () {
+    d3.select(this.refs.timeAxis).call(this.state.timeAxis);
+  },
+
+  render () {
+    return <g ref='timeAxis' transform={this.props.translation} />;
+  }
+});
+
+const LineChart = React.createClass({
+  componentWillMount () {
+    const line = d3.svg.line()
+      .x(d => {
+        const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix();
+
+        return this.props.getXScaleValue(currentDate);
+      })
+      .y(d => {
+        return this.props.getYScaleValue(d.value);
+      });
+
+    this.setState({
+      line
+    });
+  },
+
   render () {
     return (
-      <g {...this.props}>
-        {this.props.children}
+      <g transform={this.props.translation}>
+        <path
+          d={this.state.line(this.props.data)}
+          fill='none'
+          stroke={this.props.lineColor}
+          strokeDasharray={this.props.dashed ? '2, 2' : 'none'}
+          strokeWidth={2}
+        />
       </g>
-    );
-  }
-});
-
-const SvgLine = React.createClass({
-  render () {
-    return (
-      <path {...this.props} />
     );
   }
 });
@@ -363,7 +442,6 @@ const TimeBasedLineChart = React.createClass({
 
   _renderXAxis () {
     const chart = d3.select(this.state.chartEl);
-    console.log('Chart', chart);
     const xAxisFormat = this.props.rangeType === 'day' ? 'MMM D' : 'MMM';
 
     const xAxis = d3.svg.axis()
@@ -384,28 +462,28 @@ const TimeBasedLineChart = React.createClass({
     const yTicks = this._getYAxisTicks(this.props.data);
 
     //Draw the xAxis labels
-    const xAxis = d3.svg.axis()
-      .scale(this._getXScaleFunction())
-      .orient('bottom')
-      .tickFormat(d => {
-        return moment.unix(d).format(xAxisFormat);
-      })
-      .ticks(8);
+    // const xAxis = d3.svg.axis()
+    //   .scale(this._getXScaleFunction())
+    //   .orient('bottom')
+    //   .tickFormat(d => {
+    //     return moment.unix(d).format(xAxisFormat);
+    //   })
+    //   .ticks(8);
 
-    //Draw the yAxis labels
-    const yAxis = d3.svg.axis()
-      .scale(this._getYScaleFunction())
-      .orient('left')
-      .tickValues(yTicks)
-      .tickFormat(this.props.yAxisFormatter);
+    // //Draw the yAxis labels
+    // const yAxis = d3.svg.axis()
+    //   .scale(this._getYScaleFunction())
+    //   .orient('left')
+    //   .tickValues(yTicks)
+    //   .tickFormat(this.props.yAxisFormatter);
 
-    //Draw the horizontal grid lines
-    const yGrid = d3.svg.axis()
-      .scale(this._getYScaleFunction())
-      .orient('left')
-      .tickValues(yTicks)
-      .tickSize(-this.state.adjustedWidth, 0, 0)
-      .tickFormat('');
+    // //Draw the horizontal grid lines
+    // const yGrid = d3.svg.axis()
+    //   .scale(this._getYScaleFunction())
+    //   .orient('left')
+    //   .tickValues(yTicks)
+    //   .tickSize(-this.state.adjustedWidth, 0, 0)
+    //   .tickFormat('');
 
     //Add the groups
     data.forEach((dataSet, i) => {
@@ -767,61 +845,88 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
-  _renderChartBase () {
+  _getYAxisTranslation () {
+    const height = this.props.height;
     const margin = this.props.margin;
     const width = this.props.width;
-    const height = this.props.height;
-    const chart = d3.select(this.state.chartEl);
-    const data = this.props.data;
 
-    chart.style(styles.svg);
-
-    chart.selectAll('g').remove();
-
-    chart.attr('width', width)
-      .attr('height', height);
-
-    if (data.length > 0) {
-      chart.append('g')
-        .attr('class', 'x-axis')
-        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (height - margin.bottom) + ')');
-
-      chart.append('g')
-        .attr('class', 'y-axis')
-        .attr('transform', 'translate(' + (margin.left + 20) + ',' + (margin.top - 10) + ')');
-
-      chart.append('g')
-        .attr('class', 'grid-line')
-        .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
-    }
+    return 'translate(' + margin.left + ',' + margin.top + ')';
   },
+
+  _getLineTranslation () {
+    return 'translate(' + this.props.margin.left + ', 0)';
+  },
+
+  _getTimeAxisTranslation () {
+    const height = this.props.height;
+    const margin = this.props.margin;
+    const width = this.props.width;
+
+    return 'translate(' + (margin.left) + ',' + (height - margin.bottom) + ')';
+  },
+
+  // _renderChartBase () {
+  //   const margin = this.props.margin;
+  //   const width = this.props.width;
+  //   const height = this.props.height;
+  //   const chart = d3.select(this.state.chartEl);
+  //   const data = this.props.data;
+
+  //   chart.style(styles.svg);
+
+  //   chart.selectAll('g').remove();
+
+  //   chart.attr('width', width)
+  //     .attr('height', height);
+
+  //   if (data.length > 0) {
+  //     chart.append('g')
+  //       .attr('class', 'x-axis')
+  //       .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (height - margin.bottom) + ')');
+
+  //     chart.append('g')
+  //       .attr('class', 'y-axis')
+  //       .attr('transform', 'translate(' + (margin.left + 20) + ',' + (margin.top - 10) + ')');
+
+  //     chart.append('g')
+  //       .attr('class', 'grid-line')
+  //       .attr('transform', 'translate(' + (margin.left - this._getSliceMiddle()) + ',' + (margin.top - 10) + ')');
+  //   }
+  // },
 
   render () {
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
-          <Svg
-            className='mx-time-based-line-chart-svg'
+          <svg
             height={this.props.height}
-            onMouseLeave={this._handleChartMouseLeave}
-            ref='chart'
-            style={styles.svg}
             width={this.props.width}
+            style={{ backgroundColor: StyleConstants.Colors.PORCELAIN }}
           >
-            <SvgGroup className='x-axis' style={{ transform: 'translate(' + (this.props.margin.left - this._getSliceMiddle()) + ',' + (this.props.height - this.props.margin.bottom) + ')' }} />
-            <SvgGroup className='y-axis' style={{ transform: 'translate(' + (this.props.margin.left + 20) + ',' + (this.props.margin.top - 10) + ')' }}/>
-            <SvgGroup className='grid-lines' style={{ transform: 'translate(' + (this.props.margin.left - this._getSliceMiddle()) + ',' + (this.props.margin.top - 10) + ')' }} />
-            <SvgGroup className='line-group'>
-              <SvgLine
-                d={this._getLine(this.props.data)}
-                fill='none'
-                stroke={StyleConstants.Colors.PRIMARY}
-                strokeDasharray={this.props.dashed ? '2, 2' : 'none'}
-                strokeWidth={2}
-              />
-            </SvgGroup>
-            {this._renderXAxis()}
-          </Svg>
+            <YAxis
+              yAxisFormat={this.props.yAxisFormatter}
+              data={this.props.data}
+              ticks={this._getYAxisTicks(this.props.data)}
+              translation={this._getYAxisTranslation()}
+              yScaleFunction={this._getYScaleFunction}
+            />
+            <YGridLines
+              translation={this._getYAxisTranslation()}
+            />
+            <LineChart
+              data={this.props.data}
+              getXScaleValue={this._getXScaleValue}
+              getYScaleValue={this._getYScaleValue}
+              lineColor={this.props.lineColor}
+              translation={this._getLineTranslation()}
+            />
+            <TimeAxis
+              data={this.props.data}
+              timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
+              translation={this._getTimeAxisTranslation()}
+              xScaleFunction={this._getXScaleFunction}
+            />
+          </svg>
         ) : this.props.zeroState }
       </div>
     );
