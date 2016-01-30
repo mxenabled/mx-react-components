@@ -6,6 +6,7 @@ const {
   Button,
   DonutChart,
   Icon,
+  Input,
   Loader,
   Modal,
   RangeSelector,
@@ -677,6 +678,12 @@ const Demo = React.createClass({
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
+
+		<br/><br/>
+		<div style={{ padding: '100px', position: 'relative' }}>
+		  <Input isLoading={true} isRelative={true} />
+		</div>
+
 
         <br/><br/>
         <DatePicker
