@@ -4,7 +4,6 @@ const moment = require('moment');
 
 const {
   Button,
-  Input,
   DonutChart,
   Icon,
   Loader,
@@ -465,9 +464,9 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
+          <Button onClick={this._handleModalClick}>Show Default Something Something (Primary Button)</Button>
           <br/><br/>
-          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
+          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Mommy Modal (Tertiary Button)</Button>
           <br/><br/> 
           <Button type='primaryOutline'>Primary Outline Button</Button>
           <br/><br/>
