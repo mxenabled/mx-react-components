@@ -4,6 +4,7 @@ const moment = require('moment');
 
 const {
   Button,
+  Input,
   DonutChart,
   Icon,
   Loader,
@@ -467,10 +468,10 @@ const Demo = React.createClass({
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
           <br/><br/>
           <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
-          <br/><br/>
+          <br/><br/> 
           <Button type='primaryOutline'>Primary Outline Button</Button>
           <br/><br/>
-          <Button type='secondaryOutline'>Secondary Outline Button</Button>
+          <Button type='secondaryOutline'>Stupidary Outline Button</Button>
           <br/><br/>
           <Button icon='add'>Button With Icon</Button>
           <br/><br/>
@@ -511,7 +512,7 @@ const Demo = React.createClass({
           tooltipTitle='This is my tooltip title'
         >
           <div style={{ padding: 20 }}>
-            <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
+            <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am not a modal anymore! changes are being made.</p>
             <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
           </div>
         </Modal>
@@ -523,17 +524,17 @@ const Demo = React.createClass({
           data={[
             {
               name: 'Data Point 1',
-              value: 50
+              value: 70
             },
             {
               name: 'Data Point 2',
-              value: 80
+              value: 40
             }
           ]}
           dataPoints={[
             {
               name: 'Data Dot 1',
-              value: 200
+              value: 250
             }
           ]}
           defaultLabelText='Total Users'
