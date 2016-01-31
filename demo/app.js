@@ -15,7 +15,8 @@ const {
   ToggleSwitch,
   TypeAhead,
   DatePicker,
-  DatePickerFullScreen
+  DatePickerFullScreen,
+  Input
 } = require('../src/Index');
 
 const styles = {
@@ -456,12 +457,126 @@ const Demo = React.createClass({
   _handleDateSelect (selectedDatePickerDate) {
     this.setState({
       selectedDatePickerDate
-    })
+    });
+  },
+
+  _handleNumberInputChange (number) {
+    this.setState({
+      inputNumber: number
+    });
+  },
+
+  _handlePasswordInputChange (password) {
+    this.setState({
+      inputPassword: password
+    });
+  },
+
+  _handleTextInputChange (text) {
+    this.setState({
+      inputText: text
+    });
+  },
+
+  _handleEmailInputChange (email) {
+    this.setState({
+      inputEmail: email
+    });
+  },
+
+  _handleEmptyInput (text) {
+    this.setState({
+      inputEmpty: text
+    });
+  },
+
+  _handleSubmitInputChange(e) {
+    alert(`You have just submitted ${e} as your email address.`);
+  },
+
+  _handleMoneyInputChange(e) {
+    this.setState({
+      inputMoney: e
+    });
+  },
+
+  _handleMoneySubmit(e) {
+    alert(`You have just submitted ${e} dollars`);
   },
 
   render () {
     return (
       <div>
+        <div style={{width: '50%', margin: '0 auto' }}>
+          <h1 style={{textAlign: 'center'}}>Input Examples</h1>
+
+          <Input onTextChange={this._handleEmptyInput} />
+          <h3>Current Value of Default Input: <span>{this.state.inputEmpty}</span></h3>
+
+          <Input 
+            type='number'
+            value='23' 
+            placeholderText='Enter in a number'
+            prefix='$' label="Type Number"
+            suffix='.00'
+            onTextChange={this._handleNumberInputChange}
+          />
+          <h3>Current Number Value: <span>{this.state.inputNumber}</span></h3>
+
+          <Input
+            type='password'
+            value='password'
+            placeholderText='Enter in a password'
+            label="Type Password"
+            onTextChange={this._handlePasswordInputChange}
+            button='clear'
+          />
+          <h3>Current Password Value: <span>{this.state.inputPassword}</span></h3>
+          
+          <Input
+            icon='search'
+            autofocus={true}
+            options={['required']}
+            type='text'
+            placeholderText='Enter in a text'
+            label="Type Text"
+            onTextChange={this._handleTextInputChange}
+          />
+          <h3>Current Text Value: <span>{this.state.inputText}</span></h3>
+          
+          <Input
+            icon='envelope'
+            options={['required']}
+            type='email'
+            placeholderText='Enter in a email address'
+            label='Type Email'
+            onTextChange={this._handleEmailInputChange}
+            button='submit'
+            onSubmit={this._handleSubmitInputChange}
+          />
+          <h3>Current Email Value: <span>{this.state.inputEmail}</span></h3>
+
+          <Input
+            options={['disabled']}
+            label='Disabled Input'
+            placeholderText='This is disabled'
+          />
+
+          <br/>
+          <Input 
+            icon='user'
+            type='number'
+            prefix='$'
+            suffix='.00'
+            label='Final Example'
+            onTextChange={this._handleMoneyInputChange}
+            button='submit'
+            onSubmit={this._handleMoneySubmit}
+            placeholderText='Enter Amount'
+          />
+          <h3>Current Money Value: $<span>{this.state.inputMoney}</span>.00</h3>
+
+        </div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
