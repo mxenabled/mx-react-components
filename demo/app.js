@@ -464,13 +464,11 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <Button onClick={this._handleModalClick}>Show Something Something (Primary Button)</Button>
+          <Button onClick={this._handleModalClick}>Show Something (Primary Button)</Button>
           <br/><br/>
           <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Tertiary Button)</Button>
           <br/><br/> 
           <Button type='primaryOutline'>Primary Outline Button</Button>
-          <br/><br/>
-          <Input type='primaryOutline'>Primary Outline Input</Input>
           <br/><br/>
           <Button type='secondaryOutline'>Illegal Outline Button</Button>
           <br/><br/>
