@@ -470,6 +470,8 @@ const Demo = React.createClass({
           <br/><br/> 
           <Button type='primaryOutline'>Primary Outline Button</Button>
           <br/><br/>
+          <Input type='primaryOutline'>Primary Outline Input</Input>
+          <br/><br/>
           <Button type='secondaryOutline'>Stupidary Outline Button</Button>
           <br/><br/>
           <Button icon='add'>Button With Icon</Button>
