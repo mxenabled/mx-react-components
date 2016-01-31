@@ -412,6 +412,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+	  inputValue: 0,
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
       showModal: false,
@@ -432,6 +433,11 @@ const Demo = React.createClass({
 
   componentWillUnmount () {
     window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleInputValueChange (textValue) {
+      this.setState({inputValue: textValue});
+	  console.log("this is app textValue", textValue);
   },
 
   _handleSelectChange (option) {
@@ -681,7 +687,7 @@ const Demo = React.createClass({
 
 		<br/><br/>
 		<div style={{ padding: '0px 300px 0px', position: 'relative' }}>
-		  <InputBox isLoading={true} isRelative={true} />
+		  <InputBox handleInputValueChange={this._handleInputValueChange} />
 		</div>
 
 
