@@ -58,6 +58,7 @@ const styles = {
 const Input = React.createClass({
   propTypes: {
     currency: React.PropTypes.bool,
+    custom: React.PropTypes.string,
     email: React.PropTypes.bool,
     handleInputValueChange: React.PropTypes.func,
     icon: React.PropTypes.string,
@@ -125,6 +126,10 @@ const Input = React.createClass({
 	  if(this.props.text) {
 	    return true;
   	}
+    //Checks Against Custom Value
+    if(this.props.custom === inputTextValue) {
+      return true;
+    }
   },
 
   render () {

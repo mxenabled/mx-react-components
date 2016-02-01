@@ -473,9 +473,9 @@ const Demo = React.createClass({
         <div style={{ padding: '20px 300px 0px', position: 'relative' }}>
           <Input
             handleInputValueChange={this._handleInputValueChange}
-            email={true}
-            label="Input Example: Email "
-            placeholderText="Please Enter a Valid Email Address..."
+            custom="C964RTS"
+            label="Custom Example - Please Enter: C964RTS"
+            placeholderText="Please Enter the Text Above..."
           />
         </div>
 
