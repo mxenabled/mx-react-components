@@ -9,6 +9,7 @@ const Icon = require('../components/Icon');
 const styles = {
   component: {
     width: '100%',
+    margin: '0 auto'
   },
   icon: {
     color: 'green',
@@ -24,13 +25,15 @@ const styles = {
     fontSize: '12px'
   },
   inputHolder: {
-    width: 'inherit',
     fontSize: '12px',
     height: '18px',
+    display: 'inline-block',
     padding: '5px',
     outline: 'none',
+    margin: '0 auto',
     border: '1px solid rgb(229, 229, 229)',
     borderRadius: '3px',
+    width: '100%',
 
 	  ':focus': {
 		  outline: 'focus-ring-color auto 4px',
@@ -39,6 +42,16 @@ const styles = {
 	  ':hover': {
 		  backgroundColor: 'rgb(249, 249, 249)'
 	  }
+  },
+  label: {
+    display: 'block',
+    fontFamily: 'sans-serif',
+    fontSize: '14px',
+    marginBottom: '8px',
+    marginLeft: '3px'
+  },
+  prefix: {
+    fontFamily: 'sans-serif'
   }
 };
 
@@ -48,6 +61,7 @@ const InputBox = React.createClass({
     email: React.PropTypes.bool,
     handleInputValueChange: React.PropTypes.func,
     icon: React.PropTypes.string,
+    label: React.PropTypes.string,
     phone: React.PropTypes.bool,
     placeholderText: React.PropTypes.string,
     prefix: React.PropTypes.string,
@@ -58,6 +72,7 @@ const InputBox = React.createClass({
 	  return{
       currency: false,
 		  email: false,
+      label: "",
 		  phone: false,
       placeholderText: "Placeholder Text...",
 		  prefix: "",
@@ -80,6 +95,7 @@ const InputBox = React.createClass({
   _handleChange(event) {
 	  const textValue = event.target.value;
 
+    //onChange Handler - lets parent know about change
 	  this.props.handleInputValueChange(textValue);
 
 	  this._handleValidate(textValue);
@@ -101,11 +117,11 @@ const InputBox = React.createClass({
 	  if(this.props.phone) {
 		  return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test( inputTextValue );
 	  }
-	  //Validates for other
+	  //Validates for currency
 	  if(this.props.currency) {
 		  return /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/.test( inputTextValue );
 	  }
-    //Allows any characters - standard input
+    //Allows any characters; standard input
 	  if(this.props.text) {
 	    return true;
   	}
@@ -114,8 +130,12 @@ const InputBox = React.createClass({
   render () {
     return (
       <div className='input-box' style={styles.component}>
+        <label style={styles.label}>
+          {this.props.label}
+        </label>
         <div style={styles.inputHolder} >
-          <span> {this.props.prefix} </span>
+
+          <span style={styles.prefix}> {this.props.prefix} </span>
 			    <input
             onChange={this._handleChange}
             placeholder={this.props.placeholderText}
@@ -129,6 +149,7 @@ const InputBox = React.createClass({
 				    style={styles.icon}
 			    />
 		    </div>
+
       </div>
     );
   }

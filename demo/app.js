@@ -688,9 +688,10 @@ const Demo = React.createClass({
 		<div style={{ padding: '0px 300px 0px', position: 'relative' }}>
 		  <InputBox handleInputValueChange={this._handleInputValueChange}
 		  			phone={true}
+            label="Phone Number"
 					placeholderText="Please Enter a Valid Phone Number..."
 			/>
-		  <div>  {this.state.inputValue} </div>
+
 		</div>
 
 
