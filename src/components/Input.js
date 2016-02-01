@@ -10,11 +10,24 @@ const styles = {
   component: {
 	width: '100%',
 
-},
-input: {
+  },
+  icon: {
+    color: 'green',
+	display: 'inline-block'
+  },
+  input: {
+	outline: 'none',
+	border: 'none',
+	backgroundColor: 'transparent',
+	width: '90%',
+	margin: '0 auto',
+	display: 'inline-block',
+	fontSize: '12px'
+  },
+  inputHolder: {
 	width: 'inherit',
 	fontSize: '12px',
-	height: '30px',
+	height: '18px',
 	padding: '5px',
 	outline: 'none',
 	border: '1px solid rgb(229, 229, 229)',
@@ -56,7 +69,7 @@ const InputBox = React.createClass({
 		  email: false,
 		  phone: true,
 		  currency: false,
-		  prefix: "$",
+		  prefix: "",
 		  placeholderText: "Placeholder Text..."
 
 		//   prefix: "$$",
@@ -97,19 +110,26 @@ const InputBox = React.createClass({
 	  return true;
   },
   _getValidIcon () {
-	  let isValid = this.state.valid ? 'check' : 'help';
+	  let isValid = this.state.valid ? 'check' : '';
 	  return isValid;
   },
   render () {
       return (
 
         <div className='input-box' style={styles.component}>
+		<div style={styles.inputHolder} >
+			{this.props.prefix}
 			<input onChange={this._handleChange}
 			 style={styles.input} type="text"
 			 placeholder={this.props.placeholderText}
-
+			 value={this.props.defaultValueProp}
 			 />
-			 <Icon size={20} type={this._getValidIcon()}/>
+			 <Icon size={20}
+				   type={this._getValidIcon()}
+				   style={styles.icon}
+			  />
+		</div>
+
 			 <div style={styles.isValid}>
 
 			 </div>
