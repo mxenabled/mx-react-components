@@ -1,9 +1,5 @@
 const React = require('react');
 const Radium = require('radium');
-
-const Spin = require('./Spin');
-
-const StyleConstants = require('../constants/Style');
 const Icon = require('../components/Icon');
 
 const styles = {
@@ -77,7 +73,7 @@ const Input = React.createClass({
       phone: false,
       placeholderText: 'Placeholder Text...',
       prefix: '',
-      text: false,
+      text: false
     };
   },
 
@@ -90,7 +86,6 @@ const Input = React.createClass({
   _getValidIcon () {
     //Returns the 'check' type icon if the input is valid
     const isValid = this.state.valid ? 'check' : '';
-    
     return isValid;
   },
 
@@ -104,6 +99,7 @@ const Input = React.createClass({
 
   _handleValidate (textValue) {
     const isValid = this._validateText(textValue);
+
     this.setState({
       valid: isValid
     });
@@ -112,15 +108,15 @@ const Input = React.createClass({
   _validateText (inputTextValue) {
     //Validates for Email (version 1)
     if (this.props.email) {
-      return (/^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/).test( inputTextValue );
+      return (/^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/).test(inputTextValue);
     }
     //Validates for Phone
     if (this.props.phone) {
-      return (/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/).test( inputTextValue );
+      return (/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/).test(inputTextValue);
     }
     //Validates for currency
     if (this.props.currency) {
-      return /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/.test( inputTextValue );
+      return (/^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/).test(inputTextValue);
     }
     //Allows any characters; standard input
     if (this.props.text) {
@@ -148,8 +144,8 @@ const Input = React.createClass({
             type='text'
           />
           <Icon
-            size={20}
             type={this._getValidIcon()}
+            size={20}
             style={styles.icon}
           />
         </div>
