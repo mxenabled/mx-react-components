@@ -4,11 +4,17 @@ const StyleConstants = require('../constants/Style.js');
 
 const Input = React.createClass({
   propTypes: {
-    inputType: React.PropTypes.string,
+    inputType: React.PropTypes.oneOf([
+      'number',
+      'email',
+      'text',
+      'password'
+    ]),
     defaultValue: React.PropTypes.string,
     inputLabel: React.PropTypes.string,
     isRequired: React.PropTypes.bool,
     placeholderText: React.PropTypes.string,
+    prefix: React.PropTypes.string,
     onChange: React.PropTypes.func,
   },
 
@@ -19,13 +25,14 @@ const Input = React.createClass({
       inputLabel: '',
       isRequired: false,
       placeholderText: '',
+      prefix: '',
       onChange () {},
     }
   },
 
   getInitialState () {
     return {
-      inputString: this.props.defaultValue ? this.props.defaultValue : '',
+      inputString: this.props.defaultValue,
       isValid: true,
       validationMessage: ''
     }
@@ -63,7 +70,15 @@ const Input = React.createClass({
     return (
       <div className="input-wrapper" key='wrapper' style={styles.component}>
         <label style={styles.label}>{this.props.inputLabel}</label>
-        <div className="input-outer" key='outer' style={[styles.outer, !this.state.isValid && styles.invalid]}>
+        <div
+          className="input-outer"
+          key='outer'
+          style={[
+            styles.outer,
+            !this.state.isValid && styles.invalid
+          ]}
+        >
+          <span className="input-prefix" style={styles.prefix}>{this.props.prefix}</span>
           <input
           type={this.props.inputType}
           placeholder={this.props.placeholderText}
@@ -73,6 +88,7 @@ const Input = React.createClass({
           onChange={this._handleChange}
           onBlur={this._validateInput}
           />
+          <span className='input-suffix' style={styles.suffix}>{this.props.suffix}</span>
         </div>
         <span style={styles.message}>{this.state.validationMessage}</span>
       </div>
@@ -107,7 +123,7 @@ const styles = {
 
     ':focus': {
       backgroundColor: '#FFFFFF',
-      boxShadow: 'none',
+      boxShadow: '0 0 5px #359BCF',
       color: StyleConstants.Colors.CHARCOAL,
       outline: 'none'
     }
@@ -119,8 +135,8 @@ const styles = {
     backgroundColor: '#FFFFFF',
     borderWidth: 0,
     color: StyleConstants.Colors.CHARCOAL,
-    fontSize: '13px',
-    minWidth: '95%',
+    fontSize: StyleConstants.FontSizes.MEDIUM,
+    minWidth: '90%',
     outline: 'none',
     WebkitAppearance: 'none',
 
@@ -132,12 +148,21 @@ const styles = {
   },
   label: {
     color: StyleConstants.Colors.CHARCOAL,
-    marginLeft: '10px'
+    marginLeft: '10px',
+  },
+  prefix: {
+    float: 'left',
+    fontSize: StyleConstants.FontSizes.LARGE
+  },
+  suffix: {
+    fontSize: StyleConstants.FontSizes.LARGE,
+    float: 'right'
   },
   message: {
     fontSize: StyleConstants.FontSizes.MEDIUM,
     color: '#EF0505',
     marginLeft: '10px',
+    float: 'left'
   }
 }
 

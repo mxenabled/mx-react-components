@@ -472,6 +472,8 @@ const Demo = React.createClass({
               inputLabel='Email'
               isRequired={true}
               placeholderText='Email Address'
+              prefix="$"
+              suffix=".com"
             />
           </div>
           <br/><br/>
