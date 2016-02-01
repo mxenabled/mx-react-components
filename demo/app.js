@@ -424,6 +424,7 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
+      inputValue: '',
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
   },
@@ -460,6 +461,12 @@ const Demo = React.createClass({
     })
   },
 
+  _handleInput (value) {
+    this.setState({
+      inputValue: value
+    })
+  },
+
   render () {
     return (
       <div>
@@ -471,6 +478,7 @@ const Demo = React.createClass({
               inputLabel='Enter Your Email'
               inputType='email'
               isRequired={true}
+              onChange={this._handleInput}
               placeholderText='example@example.com'
             />
           </div>
