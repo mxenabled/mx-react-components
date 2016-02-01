@@ -4,12 +4,7 @@ const ReactDOM = require('react-dom');
 const StyleConstants = require('../constants/Style');
 
 const Input = React.createClass( {
-    // _handleFocus () {
-    // this.setState({
-    //   ReactDOM.findDOMNode(this.refs.input).value = "$0.00"
-    // });
 
-    // ReactDOM.findDOMNode(this.refs.input).focus();
 
     getInitialState: function() {
         return {price: ''};
