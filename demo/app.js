@@ -465,13 +465,13 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <Button onClick={this._handleModalClick}>Show Something (Primary Button)</Button>
+          <Button onClick={this._handleModalClick}>Show Primary Modal (Primary Button)</Button>
           <br/><br/>
-          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Tertiary Button)</Button>
+          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Secondary Modal (Tertiary Button)</Button>
           <br/><br/> 
           <Button type='primaryOutline'>Primary Outline Button</Button>
           <br/><br/>
-          <Button type='secondaryOutline'>Illegal Outline Button</Button>
+          <Button type='secondaryOutline'>Secondary Outline Button</Button>
           <br/><br/>
           <Button icon='add'>Button With Icon</Button>
           <br/><br/>
@@ -512,7 +512,7 @@ const Demo = React.createClass({
           tooltipTitle='This is my tooltip title'
         >
           <div style={{ padding: 20 }}>
-            <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am not a modal anymore! changes are being made.</p>
+            <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
             <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
           </div>
         </Modal>
@@ -562,17 +562,37 @@ const Demo = React.createClass({
           <ToggleSwitch />
         </div>
 
+        <div>
         <br/><br/>
         <Input
           items={[
-            'My Humps',
-            'My Humps',
-            'My Lovely Lady Lumps',
-            'Check it Out',
-            'Something else entirely'
+            'What is your mother"s maiden name?',
+            'What was the name of your first pet?',
+            'What is the name of the street that you grew up on?',
+            'What is the first and last name of your first crush?',
+            'What was your first major in college?'
           ]}
-            placeholderText='Pick your Poison',
+            placeholderText='Please select your security question:'
           />
+          <br/><br/>
+          </div>
+          <br/><br/>
+
+        <TypeAhead
+          items={[
+            'JPMorgan Chase',
+            'Bank of America',
+            'Citigroup',
+            'Wells Fargo',
+            'The Bank of New York Mellon',
+            'U.S. Bancorp',
+            'HSBC Bank USA',
+            'Capital One',
+            'PNC Financial Services',
+            'State Street Corporation'
+          ]}
+          placeholderText='Select a Bank'
+        />
 
         <br/><br/>
         <Select
