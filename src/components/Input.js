@@ -13,14 +13,17 @@ const InputBox = React.createClass({
 	  handleInputValueChange: React.PropTypes.func,
 	  email: React.PropTypes.bool,
 	  phone: React.PropTypes.bool,
-	  currency: React.PropTypes.bool
+	  currency: React.PropTypes.bool,
+	  placeholderText: React.PropTypes.string
   },
   getDefaultProps() {
 	  return{
 		  inputValue: "test",
 		  email: false,
 		  phone: false,
-		  currency: true
+		  currency: true,
+		  prefix: "$",
+		  placeholderText: "Placeholder Text..."
 		//   prefix: "$$",
 		//   suffix: '.00'
 	  };
@@ -106,7 +109,7 @@ const InputBox = React.createClass({
         <div className='input-box' style={styles.component}>
 			<input onChange={this._handleChange}
 			 style={styles.input} type="text"
-			 placeholder="This Is An Input Box"
+			 placeholder={this.props.placeholderText}
 			 />
 			 <div style={styles.isValid}>
 			 {isValid}
