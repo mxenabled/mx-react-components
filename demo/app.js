@@ -6,6 +6,7 @@ const {
   Button,
   DonutChart,
   Icon,
+  Input,
   Loader,
   Modal,
   RangeSelector,
@@ -515,6 +516,10 @@ const Demo = React.createClass({
             <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
           </div>
         </Modal>
+
+       // //<Input
+       //  animateOnHover={true}
+       //  />
 
         <br/><br/>
         <DonutChart
