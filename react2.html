@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React Component </title>
+    <script src="https://fb.me/react-0.14.6.js"></script>
+    <script src="https://fb.me/react-dom-0.14.6.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <style>
+        body{
+            text-align: center;
+
+        }
+        h1{
+            color: black;
+            background-color: lightblue;
+            font-weight: normal;
+            font-family: Arial;
+            border: 5px solid black;
+            padding: 20px;
+        }
+        form{
+            background-color: lightblue;
+        }
+        label{
+            display: block;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+          <h1>Web Development Languages</h1>
+    </header>
+
+    <div id="app">
+
+    </div>
+
+<script type="text/jsx">
+
+
+var Input = React.createClass({
+
+render: function(){
+    return (
+        <form>
+            <label>{this.props.language} <input type="radio"/></label>
+
+        </form>  
+
+        
+
+           
+        );
+    }
+});
+
+
+React.render(
+    <div>
+        <Input language="Python" /> 
+        <Input language="Ruby" />
+        <Input language="Bootstrap"/>
+        <Input language="HTML5" />
+        <Input language="CSS3" /> 
+        <Input language="Javascript" />
+        <Input language="jQuery" />
+    </div>,
+       document.getElementById("app")
+       );
+</script>
+    
+</body>
+</html>
