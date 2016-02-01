@@ -86,6 +86,7 @@ const Input = React.createClass({
   _getValidIcon () {
     //Returns the 'check' type icon if the input is valid
     const isValid = this.state.valid ? 'check' : '';
+    
     return isValid;
   },
 
@@ -144,9 +145,9 @@ const Input = React.createClass({
             type='text'
           />
           <Icon
-            type={this._getValidIcon()}
             size={20}
             style={styles.icon}
+            type={this._getValidIcon()}
           />
         </div>
       </div>
