@@ -6,14 +6,10 @@ const Button = require('./Button');
 
 const Input = React.createClass({
   propTypes: {
-    placeholderText: React.PropTypes.string,
-    label: React.PropTypes.string,
-    onTextChange: React.PropTypes.func,
-    type: React.PropTypes.oneOf([
-      'number',
-      'password',
-      'text',
-      'email'
+    autofocus: React.PropTypes.bool,
+    button: React.PropTypes.oneOf([
+      'clear',
+      'submit'
     ]),
     icon: React.PropTypes.oneOf([
       'accounts',
@@ -79,19 +75,20 @@ const Input = React.createClass({
       'x-axis',
       'y-axis'
     ]),
+    label: React.PropTypes.string,
+    onSubmit: React.PropTypes.func,
+    onTextChange: React.PropTypes.func,
     options: React.PropTypes.array,
-    autofocus: React.PropTypes.bool,
-    button: React.PropTypes.oneOf([
-      'clear',
-      'submit'
+    placeholderText: React.PropTypes.string,
+    prefix: React.PropTypes.string,
+    suffix: React.PropTypes.string,
+    type: React.PropTypes.oneOf([
+      'number',
+      'password',
+      'text',
+      'email'
     ]),
-    onSubmit: React.PropTypes.func
-  },
-
-  getInitialState () {
-    return {
-      value: this.props.value
-    };
+    value: React.PropTypes.string
   },
 
   getDefaultProps () {
@@ -107,21 +104,27 @@ const Input = React.createClass({
     };
   },
 
-  _handleInputChange(e) {
+  getInitialState () {
+    return {
+      value: this.props.value
+    };
+  },
+
+  _handleInputChange (e) {
     this.setState({
       value: e.target.value
     });
     this.props.onTextChange(e.target.value);
   },
 
-  _handleClear(e) {
+  _handleClear (e) {
     this.setState({
       value: ''
     });
     this.props.onTextChange(e.target.value);
   },
 
-  _handleSubmit(e) {
+  _handleSubmit () {
     this.props.onSubmit(this.state.value);
   },
 
@@ -152,16 +155,16 @@ const Input = React.createClass({
           transform: 'scale(1.01)',
           fontSize: StyleConstants.FontSizes.XXLARGE
         },
-        ':focus': { 
+        ':focus': {
           transform: 'scale(1.01)',
           fontSize: StyleConstants.FontSizes.XXLARGE
         }
       },
       prefix: {
-        float: 'left',
+        float: 'left'
       },
       suffix: {
-        float: 'right',
+        float: 'right'
       },
       addOn: {
         padding: '6px 12px',
@@ -173,36 +176,42 @@ const Input = React.createClass({
       }
     };
 
-    var label;
+    let label;
+
     if (this.props.label) {
       label = <label style={styles.label}>{this.props.label}</label>;
     }
 
-    var prefix;
+    let prefix;
+
     if (this.props.prefix) {
       prefix = <span style={[styles.prefix, styles.addOn]}>{this.props.prefix}</span>;
     }
 
-    var suffix;
+    let suffix;
+
     if (this.props.suffix) {
       suffix = <span style={[styles.suffix, styles.addOn]}>{this.props.suffix}</span>;
     }
 
-    var icon;
+    let icon;
+
     if (this.props.icon) {
-      icon = <Icon type={this.props.icon} style={styles.addOn}/>;
+      icon = <Icon style={styles.addOn} type={this.props.icon} />;
     }
 
-    var options = {};
-    function addOptions(option) {
-      return options[option] = option;
-    };
+    const options = {};
+
+    function addOptions (option) {
+      options[option] = option;
+    }
     this.props.options.forEach(addOptions);
 
-    var button;
-    if (this.props.button == 'clear') {
+    let button;
+
+    if (this.props.button === 'clear') {
       button = <Button onClick={this._handleClear}>Clear</Button>;
-    } else if (this.props.button == 'submit') {
+    } else if (this.props.button === 'submit') {
       button = <Button onClick={this._handleSubmit}>Submit</Button>;
     }
 
@@ -212,14 +221,14 @@ const Input = React.createClass({
         <div style={styles.wrapper}>
           {icon}
           {prefix}
-          <input 
+          <input
+            autoFocus={this.props.autofocus}
+            onChange={this._handleInputChange}
+            placeholder={this.props.placeholderText}
             style={styles.input}
             type={this.props.type}
-            placeholder={this.props.placeholderText}
-            onChange={this._handleInputChange}
             value={this.state.value}
             {...options}
-            autoFocus={this.props.autofocus}
           />
           {suffix}
           {button}
