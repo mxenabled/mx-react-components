@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://fb.me/react-0.14.6.js"></script>
+		<script src="https://fb.me/react-dom-0.14.6.js"></script>
+		<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+	</head>
+<body>
+	<header>
+		<h1>Double Your Money</h1>
+	</header>
+
+	<section class="main-body">
+		<div class="title">
+			<h4>Rule of 72</h4>
+			<p>The Rule of 72 is used to estimate the length of time it will take to double your money based on a annual rate of return.</p>
+		</div>
+		<div class="component">
+
+			
+		</div>
+	</section>	
+</body>
+	<script type="text/jsx">
+		var Options = {
+		formName: "rr",
+		inputName: "rate",
+		balanceLabel: "Beginning Balance",
+		mainLabel: "Interest Rate:",
+		calc: "%",
+		type: "text",
+		btnType: "submit",
+		btntype: "Calculate",
+		placeholder: "Annual Rate",
+		description: "Years Required for Principal to Double",
+		exactLabel: "Exact Answer",
+		ruleLabel: "Rule of 72 Estimate",
+	}
+
+	var Input = React.createClass({
+		getInitialState: function(){
+			return {
+				percentage: 8
+			};
+		},
+		handleChange: function(event){
+			this.setState({percentage: event.target.value});
+		},
+		calculateRate: function(e) {
+			e.preventDefault();
+			var rate = document.forms["rr"]["rate"].value;
+
+			var exResults = (72 / rate).toFixed(2);
+			var ruleEstimate = Math.round(72 / rate);
+
+			var exactResults = document.getElementById("exact");
+				exactResults.value = exResults;
+
+			var estimate = document.getElementById("estimate");
+				estimate.value = ruleEstimate;
+
+		},
+		render: function(){
+
+			var percentage = this.state.percentage;
+			var balance = this.state.balance;
+
+			return <div className="calculator"> 
+						<form name={this.props.formName} onSubmit={this.calculateRate}>
+							<div className="rate">
+								<div className="label-wrapper">
+								<label>{this.props.mainLabel}</label>
+								</div>
+			       			<input type={this.props.type} name={this.props.inputName} className="inputRate" onChange={this.handleChange} value={percentage} onFocus={this.focus} />
+			       			<span className="calc-type">{this.props.calc}</span>
+			       			</div>
+			       			<div className="btn"><input type={this.props.btnType} value={this.props.btntype} className="submitBtn" /></div>
+			      		</form>
+			      		<div className="description">{this.props.description}</div>
+			      		<div className="results">
+			      			<div className="results-row">
+			      			<div className="label-wrapper">
+			      				<label>{this.props.exactLabel}</label>
+			      			</div>		
+			      				<input id="exact" readOnly/>	
+			      			</div>
+			      			<div className="results-row btm">
+			      			<div className="label-wrapper">
+			      				<label>{this.props.ruleLabel}</label>
+			      			</div>		
+			      				<input id="estimate" readOnly/>	
+			      			</div>
+			      		</div>
+			     </div> 
+		}
+	});
+
+var element = React.createElement(Input, Options);
+ReactDOM.render(element, document.querySelector(".component"));
+
+	</script>
+
+</html>
