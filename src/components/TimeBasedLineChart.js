@@ -16,24 +16,12 @@ const styles = {
     boxSizing: 'content-box',
     display: 'inline-block'
   },
-  credit: {
-    backgroundColor: StyleConstants.Colors.LIME
-  },
-  debit: {
-    backgroundColor: StyleConstants.Colors.STRAWBERRY
-  },
-  defaultToolTip: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.WHITE,
-    padding: '3px 5px 3px 5px',
-    transform: 'translateY(32px)'
-  },
   domain: {
     opacity: 0
   },
   gridLineTick: {
     'stroke': StyleConstants.Colors.ASH,
-    'stroke-width': 0.5
+    'strokeWidth': 0.5
   },
   svg: {
     'display': 'block',
@@ -73,7 +61,7 @@ const YAxis = React.createClass({
     const yAxis = d3.svg.axis()
       .scale(this.props.yScaleFunction())
       .orient('left')
-      .tickValues(this.props.ticks)
+      .ticks(5)
       .tickFormat(this.props.yAxisFormat);
 
     this.setState({
@@ -94,29 +82,38 @@ const YAxis = React.createClass({
   },
 
   render () {
-    return <g ref='yAxis' transform={this.props.translation} />;
+    return <g ref='yAxis' style={{ fill: 'none', stroke: StyleConstants.Colors.CHARCOAL }} transform={this.props.translation} />;
   }
 });
 
 const YGridLines = React.createClass({
   componentWillMount () {
+    const yGridLines = d3.svg.axis()
+      .scale(this.props.yScaleFunction())
+      .orient('left')
+      .ticks(5)
+      .tickSize(this.props.tickSize, 0, 0)
+      .tickFormat('');
 
+    this.setState({
+      yGridLines
+    });
   },
 
   componentDidMount () {
-
+    this._renderYGridLines();
   },
 
   componentDidUpdate () {
-
+    this._renderYGridLines();
   },
 
   _renderYGridLines () {
-
+    d3.select(this.refs.yGridLines).call(this.state.yGridLines);
   },
 
   render () {
-    return null;
+    return <g style={styles.gridLineTick} ref='yGridLines' transform={this.props.translation} />;
   }
 });
 
@@ -147,7 +144,7 @@ const TimeAxis = React.createClass({
   },
 
   render () {
-    return <g ref='timeAxis' transform={this.props.translation} />;
+    return <g ref='timeAxis' style={{ fill: 'none', stroke: StyleConstants.Colors.CHARCOAL, strokeWidth: 1 }} transform={this.props.translation} />;
   }
 });
 
@@ -275,6 +272,27 @@ const TimeBasedLineChart = React.createClass({
     return !isEqual(newProps.data, this.props.data) || !isEqual(newState.hoveredData, this.state.hoveredData);
   },
 
+  //Translate axis position via use of margins
+  _getLineTranslation () {
+    const x = this.props.margin.left - 10;
+
+    return 'translate(' + x + ', 0)';
+  },
+
+  _getTimeAxisTranslation () {
+    const x = this.props.margin.left - 10;
+    const y = this.props.height - this.props.margin.bottom - 10;
+
+    return 'translate(' + x + ',' + y + ')';
+  },
+
+  _getYAxisTranslation () {
+    const x = this.props.margin.left - 10;
+    const y = this.props.margin.top - 10;
+
+    return 'translate(' + x + ',' + y + ')';
+  },
+
   _getAreaBelowZero (data) {
     const area = d3.svg.area()
       .x(d => {
@@ -346,48 +364,27 @@ const TimeBasedLineChart = React.createClass({
     return [past, future];
   },
 
-  _getYAxisTicks (data, numTicks = 4) {
-    const maxValue = d3.max(this.props.data, d => {
-      const value = d.above ? d.value + d.above : d.value + 1000;
-      const multiplier = value < 0 ? -1000 : 1000;
+  // _getYAxisTicks (data, numTicks = 4) {
+  //   const maxValue = d3.max(this.props.data, d => {
+  //     return d.value;
+  //   });
 
-      return Math.ceil(value / multiplier) * multiplier;
-    });
+  //   let minValue = d3.min(this.props.data, d => {
+  //     return d.value;
+  //   });
 
-    let minValue = d3.min(this.props.data, d => {
-      const value = d.below ? d.value + d.below : d.value - 1000;
-      const multiplier = value < 0 ? -1000 : 1000;
+  //   console.log('Max Value: ', maxValue);
+  //   console.log('Min Value: ', minValue);
 
-      return Math.ceil(value / multiplier) * multiplier;
-    });
+  //   const ticks = [maxValue, minValue];
+  //   const interval = (maxValue - minValue) / numTicks;
 
-    minValue = minValue > 0 ? 0 : minValue;
+  //   for (let current = minValue; current < maxValue; current += interval) {
+  //     ticks.push(current);
+  //   }
 
-    const ticks = [maxValue, minValue];
-    const interval = (maxValue - minValue) / numTicks;
-
-    for (let current = minValue; current < maxValue; current += interval) {
-      ticks.push(current);
-    }
-
-    if (this.props.alwaysShowZeroYTick) {
-      if (ticks.indexOf(0) === -1) {
-        let shouldAddZeroToTicks = true;
-
-        ticks.forEach(tick => {
-          if ((tick <= 1000 && tick > 0) || (tick >= -1000 && tick < 0)) {
-            shouldAddZeroToTicks = false;
-          }
-        });
-
-        if (shouldAddZeroToTicks) {
-          ticks.push(0);
-        }
-      }
-    }
-
-    return ticks;
-  },
+  //   return ticks;
+  // },
 
   _getXScaleFunction () {
     let maxDate = this.props.data[this.props.data.length - 1].timeStamp;
@@ -435,10 +432,10 @@ const TimeBasedLineChart = React.createClass({
     return yScale(value) - 10;
   },
 
-  _renderChart () {
-    // this._renderChartBase();
-    this._renderLineChart();
-  },
+  // _renderChart () {
+  //   // this._renderChartBase();
+  //   // this._renderLineChart();
+  // },
 
   _renderXAxis () {
     const chart = d3.select(this.state.chartEl);
@@ -459,7 +456,7 @@ const TimeBasedLineChart = React.createClass({
     const chart = d3.select(this.state.chartEl);
     const data = this._getSplitData();
     const xAxisFormat = this.props.rangeType === 'day' ? 'MMM D' : 'MMM';
-    const yTicks = this._getYAxisTicks(this.props.data);
+    // const yTicks = this._getYAxisTicks(this.props.data);
 
     //Draw the xAxis labels
     // const xAxis = d3.svg.axis()
@@ -716,7 +713,7 @@ const TimeBasedLineChart = React.createClass({
       tooltipPosition: position
     });
 
-    this._renderSvgTooltipComponents();
+    // this._renderSvgTooltipComponents();
     this.props.onDataPointHover(d);
   },
 
@@ -845,26 +842,6 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
-  _getYAxisTranslation () {
-    const height = this.props.height;
-    const margin = this.props.margin;
-    const width = this.props.width;
-
-    return 'translate(' + margin.left + ',' + margin.top + ')';
-  },
-
-  _getLineTranslation () {
-    return 'translate(' + this.props.margin.left + ', 0)';
-  },
-
-  _getTimeAxisTranslation () {
-    const height = this.props.height;
-    const margin = this.props.margin;
-    const width = this.props.width;
-
-    return 'translate(' + (margin.left) + ',' + (height - margin.bottom) + ')';
-  },
-
   // _renderChartBase () {
   //   const margin = this.props.margin;
   //   const width = this.props.width;
@@ -894,6 +871,14 @@ const TimeBasedLineChart = React.createClass({
   //   }
   // },
 
+    // //Draw the horizontal grid lines
+    // const yGrid = d3.svg.axis()
+    //   .scale(this._getYScaleFunction())
+    //   .orient('left')
+    //   .tickValues(yTicks)
+    //   .tickSize(-this.state.adjustedWidth, 0, 0)
+    //   .tickFormat('');
+
   render () {
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
@@ -906,12 +891,13 @@ const TimeBasedLineChart = React.createClass({
             <YAxis
               yAxisFormat={this.props.yAxisFormatter}
               data={this.props.data}
-              ticks={this._getYAxisTicks(this.props.data)}
               translation={this._getYAxisTranslation()}
               yScaleFunction={this._getYScaleFunction}
             />
             <YGridLines
+              tickSize={this.state.adjustedWidth * -1}
               translation={this._getYAxisTranslation()}
+              yScaleFunction={this._getYScaleFunction}
             />
             <LineChart
               data={this.props.data}
