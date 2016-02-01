@@ -465,7 +465,15 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <Input defaultValue='Default Value' inputType='' inputLabel='' placeholderText='A placeholder'/>
+          <div style={{width: '50%', margin: '0 auto'}}>
+            <Input
+              defaultValue=''
+              inputType='email'
+              inputLabel='Email'
+              isRequired={true}
+              placeholderText='Email Address'
+            />
+          </div>
           <br/><br/>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
           <br/><br/>
