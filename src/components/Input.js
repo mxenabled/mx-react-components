@@ -62,11 +62,13 @@ const Input = React.createClass({
     switch (this.props.inputType) {
       case 'email':
         const emailRe = /[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/ig;
+
         valid = emailRe.test(currentVal);
         if (!valid) message = 'This field requires an email address';
         break;
       case 'password':
         const passRe = /^[a-zA-Z0-9]+$/;
+
         valid = passRe.test(currentVal);
         if (!valid) message = 'Your password may only contain letters and numbers';
         break;
@@ -76,8 +78,8 @@ const Input = React.createClass({
       case 'number':
         valid = true;
         break;
-      // default:
-      //   valid = true;
+      default:
+        valid = true;
     }
 
     this.setState({
