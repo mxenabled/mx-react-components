@@ -2,6 +2,7 @@ module.exports = {
   Button: require('./components/Button'),
   DonutChart: require('./components/DonutChart'),
   Icon: require('./components/Icon'),
+  Input: require('./components/Input'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
   RajaIcon: require('./components/RajaIcon'),
