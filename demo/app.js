@@ -412,7 +412,6 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
-	  inputValue: 0,
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
       showModal: false,
@@ -688,6 +687,7 @@ const Demo = React.createClass({
 		<br/><br/>
 		<div style={{ padding: '0px 300px 0px', position: 'relative' }}>
 		  <InputBox handleInputValueChange={this._handleInputValueChange} />
+		  <div> {this.state.inputValue} </div>
 		</div>
 
 
