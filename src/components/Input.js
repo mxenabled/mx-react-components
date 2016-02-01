@@ -55,7 +55,7 @@ const styles = {
   }
 };
 
-const InputBox = React.createClass({
+const Input = React.createClass({
   propTypes: {
     currency: React.PropTypes.bool,
     email: React.PropTypes.bool,
@@ -155,4 +155,4 @@ const InputBox = React.createClass({
   }
 });
 
-module.exports = Radium(InputBox);
+module.exports = Radium(Input);

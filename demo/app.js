@@ -6,7 +6,7 @@ const {
   Button,
   DonutChart,
   Icon,
-  InputBox,
+  Input,
   Loader,
   Modal,
   RangeSelector,
@@ -435,8 +435,9 @@ const Demo = React.createClass({
   },
 
   _handleInputValueChange (textValue) {
-      this.setState({inputValue: textValue});
-	  console.log("this is app textValue", textValue);
+    this.setState({
+      inputValue: textValue
+    });
   },
 
   _handleSelectChange (option) {
@@ -460,6 +461,24 @@ const Demo = React.createClass({
   render () {
     return (
       <div>
+        <div style={{ padding: '90px 300px 0px', position: 'relative' }}>
+          <Input
+            handleInputValueChange={this._handleInputValueChange}
+            phone={true}
+            label="Input Example: Phone Number"
+            placeholderText="Please Enter a Valid Phone Number..."
+          />
+        </div>
+        <br/><br/>
+        <div style={{ padding: '20px 300px 0px', position: 'relative' }}>
+          <Input
+            handleInputValueChange={this._handleInputValueChange}
+            email={true}
+            label="Input Example: Email "
+            placeholderText="Please Enter a Valid Email Address..."
+          />
+        </div>
+
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
@@ -684,15 +703,7 @@ const Demo = React.createClass({
           <Loader isLoading={true} isRelative={true} />
         </div>
 
-		<br/><br/>
-		<div style={{ padding: '0px 300px 0px', position: 'relative' }}>
-		  <InputBox handleInputValueChange={this._handleInputValueChange}
-		  			phone={true}
-            label="Phone Number"
-					placeholderText="Please Enter a Valid Phone Number..."
-			/>
 
-		</div>
 
 
         <br/><br/>
