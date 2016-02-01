@@ -15,7 +15,8 @@ const {
   ToggleSwitch,
   TypeAhead,
   DatePicker,
-  DatePickerFullScreen
+  DatePickerFullScreen,
+  Input,
 } = require('../src/Index');
 
 const styles = {
@@ -464,6 +465,8 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <Input defaultValue='Default Value' inputType='' inputLabel='' placeholderText='A placeholder'/>
+          <br/><br/>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
           <br/><br/>
           <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
