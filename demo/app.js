@@ -550,6 +550,7 @@ const Demo = React.createClass({
             height={400}
             hoverCallBack={this._handleLineChartHover}
             rangeType={'day'}
+            showBreakPoint={true}
             shadeAreaBelowZero={true}
             width={700}
           />
