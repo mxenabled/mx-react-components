@@ -4,6 +4,7 @@ const moment = require('moment');
 
 const {
   Button,
+  Input,
   DonutChart,
   Icon,
   Loader,
@@ -517,6 +518,7 @@ const Demo = React.createClass({
         </Modal>
 
         <br/><br/>
+        <Input />
         <DonutChart
           animateOnHover={true}
           chartTotal={300}
@@ -561,6 +563,16 @@ const Demo = React.createClass({
         </div>
 
         <br/><br/>
+        <Input
+          items={[
+            'My Humps',
+            'My Humps',
+            'My Lovely Lady Lumps',
+            'Check it Out',
+            ]}
+            placeholderText='Pick your Poison'
+            />
+            
         <TypeAhead
           items={[
             'JPMorgan Chase',
