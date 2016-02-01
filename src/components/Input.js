@@ -86,7 +86,7 @@ const Input = React.createClass({
   _getValidIcon () {
     //Returns the 'check' type icon if the input is valid
     const isValid = this.state.valid ? 'check' : '';
-    
+
     return isValid;
   },
 
