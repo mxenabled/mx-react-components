@@ -8,79 +8,75 @@ const Icon = require('../components/Icon');
 
 const styles = {
   component: {
-	width: '100%',
-
+    width: '100%',
   },
   icon: {
     color: 'green',
-	display: 'inline-block'
+    display: 'inline-block'
   },
   input: {
-	outline: 'none',
-	border: 'none',
-	backgroundColor: 'transparent',
-	width: '90%',
-	margin: '0 auto',
-	display: 'inline-block',
-	fontSize: '12px'
+    outline: 'none',
+    border: 'none',
+    backgroundColor: 'transparent',
+    width: '90%',
+    margin: '0 auto',
+    display: 'inline-block',
+    fontSize: '12px'
   },
   inputHolder: {
-	width: 'inherit',
-	fontSize: '12px',
-	height: '18px',
-	padding: '5px',
-	outline: 'none',
-	border: '1px solid rgb(229, 229, 229)',
-	borderRadius: '3px',
+    width: 'inherit',
+    fontSize: '12px',
+    height: '18px',
+    padding: '5px',
+    outline: 'none',
+    border: '1px solid rgb(229, 229, 229)',
+    borderRadius: '3px',
 
-	':focus': {
-		outline: 'default',
-		backgroundColor: 'white',
-		border: '2px solid blue'
-	},
-	':hover': {
-		backgroundColor: 'rgb(249, 249, 249)'
-
-	}
-},
-valid: {
-	color: 'blue'
-},
-notValid: {
-	color: 'red'
-}
+	  ':focus': {
+		  outline: 'focus-ring-color auto 4px',
+		  backgroundColor: 'white'
+	  },
+	  ':hover': {
+		  backgroundColor: 'rgb(249, 249, 249)'
+	  }
+  }
 };
 
 const InputBox = React.createClass({
   propTypes: {
-	  inputValue: React.PropTypes.string,
-	  prefix: React.PropTypes.string,
-	  suffix: React.PropTypes.string,
-	  handleInputValueChange: React.PropTypes.func,
-	  email: React.PropTypes.bool,
-	  phone: React.PropTypes.bool,
-	  currency: React.PropTypes.bool,
-	  placeholderText: React.PropTypes.string,
-	  icon: React.PropTypes.string
+    currency: React.PropTypes.bool,
+    email: React.PropTypes.bool,
+    handleInputValueChange: React.PropTypes.func,
+    icon: React.PropTypes.string,
+    phone: React.PropTypes.bool,
+    placeholderText: React.PropTypes.string,
+    prefix: React.PropTypes.string,
+    text: React.PropTypes.bool
   },
+
   getDefaultProps() {
 	  return{
-		  inputValue: "test",
+      currency: false,
 		  email: false,
-		  phone: true,
-		  currency: false,
+		  phone: false,
+      placeholderText: "Placeholder Text...",
 		  prefix: "",
-		  placeholderText: "Placeholder Text..."
-
-		//   prefix: "$$",
-		//   suffix: '.00'
+      text: false,
 	  };
   },
+
   getInitialState () {
-	  return {
-		  valid: false
-	  }
+    return {
+      valid: false
+    }
   },
+
+  _getValidIcon () {
+    //Returns the 'check' type icon if the input is valid
+    let isValid = this.state.valid ? 'check' : '';
+    return isValid;
+  },
+
   _handleChange(event) {
 	  const textValue = event.target.value;
 
@@ -88,12 +84,14 @@ const InputBox = React.createClass({
 
 	  this._handleValidate(textValue);
   },
+
   _handleValidate(textValue) {
-	let isValid = this._validateText(textValue);
-	this.setState({
-		valid: isValid
-	});
+	  let isValid = this._validateText(textValue);
+	    this.setState({
+		    valid: isValid
+	    });
   },
+
   _validateText(inputTextValue) {
 	  //Validates for Email (version 1)
 	  if(this.props.email) {
@@ -107,38 +105,33 @@ const InputBox = React.createClass({
 	  if(this.props.currency) {
 		  return /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*\.[0-9]{2}$/.test( inputTextValue );
 	  }
-	  return true;
+    //Allows any characters - standard input
+	  if(this.props.text) {
+	    return true;
+  	}
   },
-  _getValidIcon () {
-	  let isValid = this.state.valid ? 'check' : '';
-	  return isValid;
-  },
+
   render () {
-      return (
-
-        <div className='input-box' style={styles.component}>
-		<div style={styles.inputHolder} >
-			{this.props.prefix}
-			<input onChange={this._handleChange}
-			 style={styles.input} type="text"
-			 placeholder={this.props.placeholderText}
-			 value={this.props.defaultValueProp}
-			 />
-			 <Icon size={20}
-				   type={this._getValidIcon()}
-				   style={styles.icon}
-			  />
-		</div>
-
-			 <div style={styles.isValid}>
-
-			 </div>
-
-        </div>
-      );
+    return (
+      <div className='input-box' style={styles.component}>
+        <div style={styles.inputHolder} >
+          <span> {this.props.prefix} </span>
+			    <input
+            onChange={this._handleChange}
+            placeholder={this.props.placeholderText}
+            style={styles.input}
+            type="text"
+            value={this.props.defaultValueProp}
+			    />
+          <Icon
+            size={20}
+				    type={this._getValidIcon()}
+				    style={styles.icon}
+			    />
+		    </div>
+      </div>
+    );
   }
 });
-
-
 
 module.exports = Radium(InputBox);
