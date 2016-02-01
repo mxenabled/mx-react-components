@@ -569,25 +569,10 @@ const Demo = React.createClass({
             'My Humps',
             'My Lovely Lady Lumps',
             'Check it Out',
-            ]}
-            placeholderText='Pick your Poison'
-            />
-            
-        <TypeAhead
-          items={[
-            'JPMorgan Chase',
-            'Bank of America',
-            'Citigroup',
-            'Wells Fargo',
-            'The Bank of New York Mellon',
-            'U.S. Bancorp',
-            'HSBC Bank USA',
-            'Capital One',
-            'PNC Financial Services',
-            'State Street Corporation'
+            'Something else entirely'
           ]}
-          placeholderText='Select a Bank'
-        />
+            placeholderText='Pick your Poison',
+          />
 
         <br/><br/>
         <Select
