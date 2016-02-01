@@ -465,15 +465,13 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <div style={{width: '50%', margin: '0 auto'}}>
+          <div style={{ width: '50%', margin: '0 auto' }}>
             <Input
               defaultValue=''
+              inputLabel='Enter Your Email'
               inputType='email'
-              inputLabel='Email'
               isRequired={true}
-              placeholderText='Email Address'
-              prefix="$"
-              suffix=".com"
+              placeholderText='example@example.com'
             />
           </div>
           <br/><br/>

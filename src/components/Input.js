@@ -1,21 +1,22 @@
 const React = require('react');
 const Radium = require('radium');
-const StyleConstants = require('../constants/Style.js');
+const StyleConstants = require('../constants/Style');
 
 const Input = React.createClass({
   propTypes: {
+    defaultValue: React.PropTypes.string,
+    inputLabel: React.PropTypes.string,
     inputType: React.PropTypes.oneOf([
       'number',
       'email',
       'text',
       'password'
     ]),
-    defaultValue: React.PropTypes.string,
-    inputLabel: React.PropTypes.string,
     isRequired: React.PropTypes.bool,
+    onChange: React.PropTypes.func,
     placeholderText: React.PropTypes.string,
     prefix: React.PropTypes.string,
-    onChange: React.PropTypes.func,
+    suffix: React.PropTypes.string
   },
 
   getDefaultProps () {
@@ -25,9 +26,10 @@ const Input = React.createClass({
       inputLabel: '',
       isRequired: false,
       placeholderText: '',
-      prefix: '',
       onChange () {},
-    }
+      prefix: '',
+      suffix: ''
+    };
   },
 
   getInitialState () {
@@ -35,64 +37,86 @@ const Input = React.createClass({
       inputString: this.props.defaultValue,
       isValid: true,
       validationMessage: ''
-    }
+    };
   },
 
   _handleChange (e) {
     this.setState({
       inputString: e.target.value
-    })
-    this.props.onChange(this.state.inputString)
+    });
+    this.props.onChange(e.target.value);
   },
 
   _validateInput () {
     const currentVal = this.state.inputString;
-    let isValid;
+    let valid;
     let message = '';
-    if (!currentVal && !this.props.isRequired) return;
-    switch(this.props.inputType) {
+
+    if (!currentVal && !this.props.isRequired) {
+      this.setState({
+        isValid: true,
+        validationMessage: ''
+      });
+      return;
+    }
+    switch (this.props.inputType) {
       case 'email':
         const emailRe = /[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/ig;
-        isValid = emailRe.test(currentVal);
-        if (!isValid) message = 'This field requires an email address'
+        valid = emailRe.test(currentVal);
+        if (!valid) message = 'This field requires an email address';
+        break;
+      case 'password':
+        const passRe = /^[a-zA-Z0-9]+$/;
+        valid = passRe.test(currentVal);
+        if (!valid) message = 'Your password may only contain letters and numbers';
+        break;
+      case 'text':
+        valid = true;
         break;
       case 'number':
+        valid = true;
         break;
+      // default:
+      //   valid = true;
     }
 
     this.setState({
-      isValid: isValid,
+      isValid: valid,
       validationMessage: message
-    })
+    });
   },
 
-  render() {
+  render () {
     return (
-      <div className="input-wrapper" key='wrapper' style={styles.component}>
+      <div className='input-wrapper' key='wrapper' style={styles.component}>
         <label style={styles.label}>{this.props.inputLabel}</label>
         <div
-          className="input-outer"
+          className='input-outer'
           key='outer'
           style={[
             styles.outer,
-            !this.state.isValid && styles.invalid
+            !this.state.isValid && styles.invalid,
+            this.state.isValid && styles.outerHover
           ]}
         >
-          <span className="input-prefix" style={styles.prefix}>{this.props.prefix}</span>
+          <span className='input-prefix' style={styles.prefix}>{this.props.prefix}</span>
           <input
-          type={this.props.inputType}
-          placeholder={this.props.placeholderText}
-          style={styles.input}
-          value={this.state.inputString}
-          key='input'
-          onChange={this._handleChange}
-          onBlur={this._validateInput}
+            key='input'
+            onBlur={this._validateInput}
+            onChange={this._handleChange}
+            placeholder={this.props.placeholderText}
+            style={[
+              styles.input,
+              this.props.prefix && this.props.suffix && styles.shrinkInput
+            ]}
+            type={this.props.inputType}
+            value={this.state.inputString}
           />
           <span className='input-suffix' style={styles.suffix}>{this.props.suffix}</span>
         </div>
         <span style={styles.message}>{this.state.validationMessage}</span>
       </div>
-    )
+    );
   }
 });
 
@@ -128,6 +152,11 @@ const styles = {
       outline: 'none'
     }
   },
+  outerHover: {
+    ':hover': {
+      borderColor: '#000'
+    }
+  },
   invalid: {
     borderColor: '#EF0505'
   },
@@ -136,7 +165,7 @@ const styles = {
     borderWidth: 0,
     color: StyleConstants.Colors.CHARCOAL,
     fontSize: StyleConstants.FontSizes.MEDIUM,
-    minWidth: '90%',
+    minWidth: '95%',
     outline: 'none',
     WebkitAppearance: 'none',
 
@@ -146,9 +175,12 @@ const styles = {
       outline: 'none'
     }
   },
+  shrinkInput: {
+    minWidth: '90%'
+  },
   label: {
     color: StyleConstants.Colors.CHARCOAL,
-    marginLeft: '10px',
+    marginLeft: '10px'
   },
   prefix: {
     float: 'left',
@@ -164,6 +196,6 @@ const styles = {
     marginLeft: '10px',
     float: 'left'
   }
-}
+};
 
 module.exports = Radium(Input);
