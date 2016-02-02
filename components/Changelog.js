@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.6.8</h3>
+        <ul>
+          <li>Select: Removed opacity of the options (<a href='https://github.com/mxenabled/mx-react-components/pull/166'>#166</a>)</li>
+        </ul>
+
         <h3>1.6.7</h3>
         <ul>
           <li>ToggleSwitch: Reverted component to createClass (<a href='https://github.com/mxenabled/mx-react-components/pull/153'>#153</a>)</li>
