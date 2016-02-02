@@ -16,6 +16,10 @@ const styles = {
     stroke: StyleConstants.Colors.ASH,
     strokeWidth: 1,
   },
+  circle: {
+    fill: StyleConstants.Colors.WHITE,
+    strokeWidth: 2
+  },
   component: {
     fontFamily: StyleConstants.FontFamily,
     position: 'relative',
@@ -95,25 +99,9 @@ const Line = React.createClass({
 });
 
 // Circles
-const Circles = React.createClass({
-  componentWillMount () {
-
-  },
-
-  componentDidMount () {
-
-  },
-
-  componentDidUpdate () {
-
-  },
-
-  _renderCircles () {
-
-  },
-
+const Circle = React.createClass({
   render () {
-    return null;
+    return <circle className='circle' {...this.props} />;
   }
 });
 
@@ -354,6 +342,11 @@ const TimeBasedLineChart = React.createClass({
     chart.select('g.y-axis').selectAll('line')
       .style('stroke', this._getYAxisColor);
 
+    // Style Circles
+    chart.selectAll('.circle')
+      .style(styles.circle)
+      .style('stroke', this.props.lineColor);
+
     // Style rest of chart elements
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
@@ -442,6 +435,12 @@ const TimeBasedLineChart = React.createClass({
               lineColor={this.props.lineColor}
               translation={this._getLineTranslation()}
             />
+            {this.props.data.map((item, index) => {
+              const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
+              const cy = this._getYScaleValue(item.value);
+
+              return <Circle cx={cx} cy={cy} key={index} r={3} transform={this._getLineTranslation()} />;
+            })}
             <TimeAxis
               data={this.props.data}
               timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
