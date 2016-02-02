@@ -34,36 +34,6 @@ const styles = {
     'font-size': StyleConstants.FontSizes.MEDIUM,
     'font-weight': 'normal'
   },
-  tooltipLabel: {
-    boxSizing: 'border-box',
-    color: StyleConstants.Colors.FOG,
-    display: 'inline-block',
-    textAlign: 'left',
-    fontFamily: StyleConstants.Fonts.REGULAR,
-    width: '50%'
-  },
-  tooltipLabelValueWrapper: {
-    paddingBottom: 5,
-    width: '100%'
-  },
-  tooltipValue: {
-    boxSizing: 'border-box',
-    color: StyleConstants.Colors.WHITE,
-    display: 'inline-block',
-    fontFamily: StyleConstants.Fonts.SEMIBOLD,
-    textAlign: 'right',
-    paddingLeft: 5,
-    width: '50%'
-  },
-  tooltipWrapper: {
-    backgroundColor: StyleConstants.Colors.CHARCOAL,
-    borderRadius: 2,
-    boxShadow: StyleConstants.BoxShadow,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    minWidth: 150,
-    padding: 15,
-    position: 'absolute'
-  },
   xAxisLabel: {
     fill: StyleConstants.Colors.ASH,
     stroke: 'none'
@@ -459,24 +429,14 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
-  // Render Functions
-  _renderTooltip () {
-    if (this.state.hoveredItem) {
-      const x = this._getXScaleValue(this.state.hoveredItem.timeStamp);
-      const y = this._getYScaleValue(this.state.hoveredItem.value);
+  _renderCircles () {
+    if (this.props.data.length <= 45) {
+      return this.props.data.map((item, index) => {
+        const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
+        const cy = this._getYScaleValue(item.value);
 
-      return (
-        <div style={[styles.tooltipWrapper, { left: x, top: y, transform: 'translate(-25%, -110%)' }]}>
-          {this.props.tooltipDisplayItems.map((item, index) => {
-            return (
-              <div key={'tooltip-' + index} style={styles.tooltipLabelValueWrapper}>
-                <div style={styles.tooltipLabel}>{item.label}</div>
-                <div style={styles.tooltipValue}>{this._getFormattedValueForTooltip(this.state.hoveredItem[item.key], item.type)}</div>
-              </div>
-            );
-          })}
-        </div>
-      );
+        return <Circle cx={cx} cy={cy} key={index} r={3} transform={this._getLineTranslation()} />;
+      });
     }
   },
 
@@ -518,12 +478,7 @@ const TimeBasedLineChart = React.createClass({
                 lineColor={this.props.lineColor}
                 translation={this._getLineTranslation()}
               />
-              {this.props.data.map((item, index) => {
-                const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
-                const cy = this._getYScaleValue(item.value);
-
-                return <Circle cx={cx} cy={cy} key={index} r={3} transform={this._getLineTranslation()} />;
-              })}
+              {this._renderCircles()}
               <TimeAxis
                 data={this.props.data}
                 timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
@@ -538,7 +493,6 @@ const TimeBasedLineChart = React.createClass({
                 />
               ) : null}
             </svg>
-            {this._renderTooltip()}
           </div>
         ) : this.props.zeroState }
       </div>

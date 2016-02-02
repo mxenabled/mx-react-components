@@ -552,18 +552,6 @@ const Demo = React.createClass({
             rangeType={'day'}
             showBreakPoint={true}
             shadeAreaBelowZero={true}
-            tooltipDisplayItems={[
-              {
-                key: 'timeStamp',
-                label: 'Date',
-                type: 'date'
-              },
-              {
-                key: 'value',
-                label: 'End Balance',
-                type: 'money'
-              }
-            ]}
             width={700}
           />
         </div>
