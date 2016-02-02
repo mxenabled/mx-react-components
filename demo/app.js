@@ -348,7 +348,7 @@ const lineChartData = [
   },
   {
     timeStamp: moment().startOf('day').unix(),
-    value: 1400
+    value: 0
   },
   {
     timeStamp: moment().add(1, 'days').startOf('day').unix(),
@@ -552,6 +552,18 @@ const Demo = React.createClass({
             rangeType={'day'}
             showBreakPoint={true}
             shadeAreaBelowZero={true}
+            tooltipDisplayItems={[
+              {
+                key: 'timeStamp',
+                label: 'Date',
+                type: 'date'
+              },
+              {
+                key: 'value',
+                label: 'End Balance',
+                type: 'money'
+              }
+            ]}
             width={700}
           />
         </div>

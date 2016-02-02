@@ -34,6 +34,36 @@ const styles = {
     'font-size': StyleConstants.FontSizes.MEDIUM,
     'font-weight': 'normal'
   },
+  tooltipLabel: {
+    boxSizing: 'border-box',
+    color: StyleConstants.Colors.FOG,
+    display: 'inline-block',
+    textAlign: 'left',
+    fontFamily: StyleConstants.Fonts.REGULAR,
+    width: '50%'
+  },
+  tooltipLabelValueWrapper: {
+    paddingBottom: 5,
+    width: '100%'
+  },
+  tooltipValue: {
+    boxSizing: 'border-box',
+    color: StyleConstants.Colors.WHITE,
+    display: 'inline-block',
+    fontFamily: StyleConstants.Fonts.SEMIBOLD,
+    textAlign: 'right',
+    paddingLeft: 5,
+    width: '50%'
+  },
+  tooltipWrapper: {
+    backgroundColor: StyleConstants.Colors.CHARCOAL,
+    borderRadius: 2,
+    boxShadow: StyleConstants.BoxShadow,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
+    minWidth: 150,
+    padding: 15,
+    position: 'absolute'
+  },
   xAxisLabel: {
     fill: StyleConstants.Colors.ASH,
     stroke: 'none'
@@ -252,10 +282,12 @@ const TimeBasedLineChart = React.createClass({
   getInitialState () {
     const adjustedWidth = this.props.width - this.props.margin.right - this.props.margin.left;
     const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
+    const hoveredItem = { value: 1400, timeStamp: moment().startOf('day').unix() };
 
     return {
       adjustedHeight,
-      adjustedWidth
+      adjustedWidth,
+      hoveredItem
     };
   },
 
@@ -409,6 +441,45 @@ const TimeBasedLineChart = React.createClass({
     return yScale(value) - 10;
   },
 
+  // Format Helpers
+  _getFormattedValueForTooltip (value, type) {
+    switch (type) {
+      case 'date':
+        return moment.unix(value).format(this.props.rangeType === 'day' ? 'M/D/YY' : 'M/YY');
+        break;
+      case 'money':
+        return numeral(value).format('$0,0');
+        break;
+      case 'number':
+        return numeral(value).format('0,0');
+        break;
+      default:
+        return value;
+        break;
+    }
+  },
+
+  // Render Functions
+  _renderTooltip () {
+    if (this.state.hoveredItem) {
+      const x = this._getXScaleValue(this.state.hoveredItem.timeStamp);
+      const y = this._getYScaleValue(this.state.hoveredItem.value);
+
+      return (
+        <div style={[styles.tooltipWrapper, { left: x, top: y, transform: 'translate(-25%, -110%)' }]}>
+          {this.props.tooltipDisplayItems.map((item, index) => {
+            return (
+              <div key={'tooltip-' + index} style={styles.tooltipLabelValueWrapper}>
+                <div style={styles.tooltipLabel}>{item.label}</div>
+                <div style={styles.tooltipValue}>{this._getFormattedValueForTooltip(this.state.hoveredItem[item.key], item.type)}</div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  },
+
   render () {
     //Items left
     // - Break Point Label
@@ -418,53 +489,57 @@ const TimeBasedLineChart = React.createClass({
     // - Dotted future line?  - Get with Derek
     // - Fix Y Axis Ticks
     // - Fix X Axis Ticks
+    // - Fix X Axis not aligning with line correctly
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
-          <svg
-            height={this.props.height}
-            width={this.props.width}
-            ref='chart'
-          >
-            <YAxis
-              yAxisFormat={this.props.yAxisFormatter}
-              data={this.props.data}
-              translation={this._getYAxisTranslation()}
-              yScaleFunction={this._getYScaleFunction}
-            />
-            <YGridLines
-              tickSize={this.state.adjustedWidth * -1}
-              translation={this._getYAxisTranslation()}
-              yScaleFunction={this._getYScaleFunction}
-            />
-            <Line
-              data={this.props.data}
-              getXScaleValue={this._getXScaleValue}
-              getYScaleValue={this._getYScaleValue}
-              lineColor={this.props.lineColor}
-              translation={this._getLineTranslation()}
-            />
-            {this.props.data.map((item, index) => {
-              const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
-              const cy = this._getYScaleValue(item.value);
-
-              return <Circle cx={cx} cy={cy} key={index} r={3} transform={this._getLineTranslation()} />;
-            })}
-            <TimeAxis
-              data={this.props.data}
-              timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
-              translation={this._getTimeAxisTranslation()}
-              xScaleFunction={this._getXScaleFunction}
-            />
-            {this.props.showBreakPoint ? (
-              <BreakPointLine
-                height={this.state.adjustedHeight}
-                translation={this._getLineTranslation()}
-                xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
+          <div>
+            <svg
+              height={this.props.height}
+              width={this.props.width}
+              ref='chart'
+            >
+              <YAxis
+                yAxisFormat={this.props.yAxisFormatter}
+                data={this.props.data}
+                translation={this._getYAxisTranslation()}
+                yScaleFunction={this._getYScaleFunction}
               />
-            ) : null}
-          </svg>
+              <YGridLines
+                tickSize={this.state.adjustedWidth * -1}
+                translation={this._getYAxisTranslation()}
+                yScaleFunction={this._getYScaleFunction}
+              />
+              <Line
+                data={this.props.data}
+                getXScaleValue={this._getXScaleValue}
+                getYScaleValue={this._getYScaleValue}
+                lineColor={this.props.lineColor}
+                translation={this._getLineTranslation()}
+              />
+              {this.props.data.map((item, index) => {
+                const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
+                const cy = this._getYScaleValue(item.value);
+
+                return <Circle cx={cx} cy={cy} key={index} r={3} transform={this._getLineTranslation()} />;
+              })}
+              <TimeAxis
+                data={this.props.data}
+                timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
+                translation={this._getTimeAxisTranslation()}
+                xScaleFunction={this._getXScaleFunction}
+              />
+              {this.props.showBreakPoint ? (
+                <BreakPointLine
+                  height={this.state.adjustedHeight}
+                  translation={this._getLineTranslation()}
+                  xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
+                />
+              ) : null}
+            </svg>
+            {this._renderTooltip()}
+          </div>
         ) : this.props.zeroState }
       </div>
     );
