@@ -113,6 +113,7 @@ const TimeAxis = React.createClass({
       .tickFormat(d => {
         return moment.unix(d).format(this.props.timeAxisFormat);
       })
+      //Don't forget to remove this!!!!!!!!!!!!!!!
       .tickValues([moment().startOf('day').unix()])
       .ticks(1);
 
@@ -409,6 +410,15 @@ const TimeBasedLineChart = React.createClass({
   },
 
   render () {
+    //Items left
+    // - Break Point Label
+    // - Hover tool tip
+    // - Hover Date Label on x axis
+    // - Hover expanded circle behind circle
+    // - Dotted future line?  - Get with Derek
+    // - Fix Y Axis Ticks
+    // - Fix X Axis Ticks
+
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
@@ -451,7 +461,7 @@ const TimeBasedLineChart = React.createClass({
               <BreakPointLine
                 height={this.state.adjustedHeight}
                 translation={this._getLineTranslation()}
-                xValue={this._getXScaleValue(moment().startOf('day').unix())}
+                xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
               />
             ) : null}
           </svg>
