@@ -12,8 +12,7 @@ const StyleConstants = require('../constants/Style');
 const styles = {
   breakPointLine: {
     fill: 'none',
-    opacity: 0.3,
-    stroke: StyleConstants.Colors.ASH,
+    stroke: StyleConstants.Colors.FOG,
     strokeWidth: 1,
   },
   circle: {
@@ -113,9 +112,7 @@ const TimeAxis = React.createClass({
       .tickFormat(d => {
         return moment.unix(d).format(this.props.timeAxisFormat);
       })
-      //Don't forget to remove this!!!!!!!!!!!!!!!
-      .tickValues([moment().startOf('day').unix()])
-      .ticks(1);
+      .ticks(10);
 
     this.setState({
       timeAxis
@@ -144,8 +141,9 @@ const YAxis = React.createClass({
     const yAxis = d3.svg.axis()
       .scale(this.props.yScaleFunction())
       .orient('left')
-      .ticks(5)
-      .tickFormat(this.props.yAxisFormat);
+      .tickFormat(this.props.yAxisFormat)
+      .ticks(this.props.tickValues.length)
+      .tickValues(this.props.tickValues);
 
     this.setState({
       yAxis
@@ -174,9 +172,10 @@ const YGridLines = React.createClass({
     const yGridLines = d3.svg.axis()
       .scale(this.props.yScaleFunction())
       .orient('left')
-      .ticks(5)
       .tickSize(this.props.tickSize, 0, 0)
-      .tickFormat('');
+      .tickFormat('')
+      .ticks(this.props.tickValues.length)
+      .tickValues(this.props.tickValues);
 
     this.setState({
       yGridLines
@@ -234,7 +233,7 @@ const TimeBasedLineChart = React.createClass({
       data: [],
       height: 400,
       lineColor: StyleConstants.Colors.PRIMARY,
-      margin: { top: 30, right: 0, bottom: 20, left: 50 },
+      margin: { top: 20, right: 0, bottom: 20, left: 50 },
       onDataPointHover: () => {},
       rangeType: 'day',
       shadeAreaBelowZero: false,
@@ -252,12 +251,10 @@ const TimeBasedLineChart = React.createClass({
   getInitialState () {
     const adjustedWidth = this.props.width - this.props.margin.right - this.props.margin.left;
     const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
-    const hoveredItem = { value: 1400, timeStamp: moment().startOf('day').unix() };
 
     return {
       adjustedHeight,
-      adjustedWidth,
-      hoveredItem
+      adjustedWidth
     };
   },
 
@@ -289,11 +286,17 @@ const TimeBasedLineChart = React.createClass({
     return !isEqual(newProps.data, this.props.data) || !isEqual(newState.hoveredData, this.state.hoveredData);
   },
 
-  // Translate axis position via use of margins
+  // Translate positions via use of margins
+  _getBreakPointTranslation () {
+    const x = this.props.margin.left - 10;
+
+    return 'translate(' + x + ', -10)';
+  },
+
   _getLineTranslation () {
     const x = this.props.margin.left - 10;
 
-    return 'translate(' + x + ', 0)';
+    return 'translate(' + x + ', 10)';
   },
 
   _getTimeAxisTranslation () {
@@ -310,53 +313,21 @@ const TimeBasedLineChart = React.createClass({
     return 'translate(' + x + ',' + y + ')';
   },
 
-  // Style Helpers
-  _getYAxisColor (d) {
-    if (d === 0) {
-      return '#000';
-    }
-
-    return StyleConstants.Colors.ASH;
-  },
-
-  _styleChart () {
-    const chart = d3.select(this.refs.chart);
-
-    // X Axis
-    // Style x axis labels
-    chart.select('g.x-axis').selectAll('text')
-      .style(styles.xAxisLabel)
-      .style('text-anchor', () => {
-        return 'middle';
-      });
-
-    // Style x axis ticks
-    chart.select('g.x-axis').selectAll('line')
-      .style({ stroke: StyleConstants.Colors.ASH });
-
-    // Y Axis
-    // Style y axis labels
-    chart.select('g.y-axis').selectAll('text')
-      .style(styles.yAxisLabel)
-      .style('fill', this._getYAxisColor)
-      .attr('transform', 'translate(-10,0)');
-
-    // Style y axis ticks
-    chart.select('g.y-axis').selectAll('line')
-      .style('stroke', this._getYAxisColor);
-
-    // Style Circles
-    chart.selectAll('.circle')
-      .style(styles.circle)
-      .style('stroke', this.props.lineColor);
-
-    // Style rest of chart elements
-    chart.selectAll('text').style(styles.text);
-    chart.selectAll('.domain').style(styles.domain);
-    chart.selectAll('.grid-line .tick').style('stroke', this._getYAxisColor);
-  },
-
   // Alignment/Spacing Helpers
+  _getDataMinMaxValues () {
+    const max = d3.max(this.props.data, d => {
+      return Math.ceil(d.value / 1000) * 1000;
+    });
+
+    let min = d3.min(this.props.data, d => {
+      return Math.floor(d.value / 1000) * 1000;
+    });
+
+    min = min >= 0 ? -1000 : min;
+
+    return { min, max };
+  },
+
   _getSliceMiddle () {
     return this._getSliceWidth() / 2;
   },
@@ -384,51 +355,89 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getYScaleFunction () {
-    const maxValue = d3.max(this.props.data, d => {
-      const value = d.above ? d.value + d.above : d.value + 1000;
-      const multiplier = value < 0 ? -1000 : 1000;
-
-      return Math.ceil(value / multiplier) * multiplier;
-    });
-
-    let minValue = d3.min(this.props.data, d => {
-      const value = d.below ? d.value + d.below : d.value - 1000;
-      const multiplier = value < 0 ? -1000 : 1000;
-
-      return Math.ceil(value / multiplier) * multiplier;
-    });
-
-    minValue = minValue > 0 ? 0 : minValue;
+    const minMaxValues = this._getDataMinMaxValues();
 
     return d3.scale.linear()
       .range([this.state.adjustedHeight, 0])
-      .domain([minValue, maxValue]);
+      .domain([minMaxValues.min, minMaxValues.max]);
   },
 
   _getYScaleValue (value) {
     const yScale = this._getYScaleFunction();
 
-    return yScale(value) - 10;
+    return yScale(value);
   },
 
-  // Format Helpers
-  _getFormattedValueForTooltip (value, type) {
-    switch (type) {
-      case 'date':
-        return moment.unix(value).format(this.props.rangeType === 'day' ? 'M/D/YY' : 'M/YY');
-        break;
-      case 'money':
-        return numeral(value).format('$0,0');
-        break;
-      case 'number':
-        return numeral(value).format('0,0');
-        break;
-      default:
-        return value;
-        break;
+  // Axis Ticks
+  _getYAxisTickValues () {
+    const minMaxValues = this._getDataMinMaxValues();
+    const increment = minMaxValues.max > 1000 ? 1000 : 500;
+    const values = [];
+
+    for (let min = minMaxValues.min; min <= minMaxValues.max; min += increment) {
+      values.push(min);
     }
+
+    return values;
   },
 
+  // Style Helpers
+  _styleChart () {
+    const chart = d3.select(this.refs.chart);
+
+    // X Axis
+    // Style x axis labels
+    chart.select('g.x-axis').selectAll('text')
+      .style(styles.xAxisLabel)
+      .style('text-anchor', () => {
+        return 'middle';
+      });
+
+    // Style x axis ticks
+    chart.select('g.x-axis').selectAll('line')
+      .style({ stroke: StyleConstants.Colors.FOG });
+
+    // Y Axis
+    // Style y axis labels
+    chart.select('g.y-axis').selectAll('text')
+      .style(styles.yAxisLabel)
+      .style('fill', d => {
+        if (d === 0) {
+          return StyleConstants.Colors.CHARCOAL;
+        }
+
+        return StyleConstants.Colors.ASH;
+      })
+      .attr('transform', 'translate(-10,0)');
+
+    // Style y axis ticks
+    chart.select('g.y-axis').selectAll('line')
+      .style('stroke', d => {
+        if (d === 0) {
+          return StyleConstants.Colors.CHARCOAL;
+        }
+
+        return StyleConstants.Colors.FOG
+      });
+
+    // Style Circles
+    chart.selectAll('.circle')
+      .style(styles.circle)
+      .style('stroke', this.props.lineColor);
+
+    // Style rest of chart elements
+    chart.selectAll('text').style(styles.text);
+    chart.selectAll('.domain').style(styles.domain);
+    chart.selectAll('.grid-line .tick').style('stroke', d => {
+      if (d === 0) {
+        return StyleConstants.Colors.CHARCOAL;
+      }
+
+      return StyleConstants.Colors.FOG;
+    });
+  },
+
+  // Render Functions
   _renderCircles () {
     if (this.props.data.length <= 45) {
       return this.props.data.map((item, index) => {
@@ -446,10 +455,8 @@ const TimeBasedLineChart = React.createClass({
     // - Hover tool tip
     // - Hover Date Label on x axis
     // - Hover expanded circle behind circle
-    // - Dotted future line?  - Get with Derek
-    // - Fix Y Axis Ticks
+    // - Color past half of graph
     // - Fix X Axis Ticks
-    // - Fix X Axis not aligning with line correctly
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
@@ -463,11 +470,13 @@ const TimeBasedLineChart = React.createClass({
               <YAxis
                 yAxisFormat={this.props.yAxisFormatter}
                 data={this.props.data}
+                tickValues={this._getYAxisTickValues()}
                 translation={this._getYAxisTranslation()}
                 yScaleFunction={this._getYScaleFunction}
               />
               <YGridLines
                 tickSize={this.state.adjustedWidth * -1}
+                tickValues={this._getYAxisTickValues()}
                 translation={this._getYAxisTranslation()}
                 yScaleFunction={this._getYScaleFunction}
               />
@@ -488,7 +497,7 @@ const TimeBasedLineChart = React.createClass({
               {this.props.showBreakPoint ? (
                 <BreakPointLine
                   height={this.state.adjustedHeight}
-                  translation={this._getLineTranslation()}
+                  translation={this._getBreakPointTranslation()}
                   xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
                 />
               ) : null}
