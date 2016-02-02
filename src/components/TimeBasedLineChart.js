@@ -242,7 +242,7 @@ const TimeBasedLineChart = React.createClass({
       staticXAxis: true,
       width: 550,
       yAxisFormatter (d) {
-        return numeral(d).format('0a');
+        return numeral(d).format('0');
       },
       zeroState: <div style={styles.zeroState}>No Data Found</div>
     };
@@ -288,32 +288,32 @@ const TimeBasedLineChart = React.createClass({
 
   // Translate positions via use of margins
   _getBreakPointTranslation () {
-    const x = this.props.margin.left - 10;
+    const x = this.props.margin.left;
 
     return 'translate(' + x + ', -10)';
   },
 
   _getLineTranslation () {
-    const x = this.props.margin.left - 10;
+    const x = this.props.margin.left;
 
     return 'translate(' + x + ', 10)';
   },
 
   _getTimeAxisTranslation () {
-    const x = this.props.margin.left - 10;
+    const x = this.props.margin.left;
     const y = this.props.height - this.props.margin.bottom - 10;
 
     return 'translate(' + x + ',' + y + ')';
   },
 
   _getYAxisTranslation () {
-    const x = this.props.margin.left - 10;
+    const x = this.props.margin.left;
     const y = this.props.margin.top - 10;
 
     return 'translate(' + x + ',' + y + ')';
   },
 
-  // Alignment/Spacing Helpers
+  //Parse Data
   _getDataMinMaxValues () {
     const max = d3.max(this.props.data, d => {
       return Math.ceil(d.value / 1000) * 1000;
@@ -323,11 +323,10 @@ const TimeBasedLineChart = React.createClass({
       return Math.floor(d.value / 1000) * 1000;
     });
 
-    min = min >= 0 ? -1000 : min;
-
     return { min, max };
   },
 
+  // Alignment/Spacing Helpers
   _getSliceMiddle () {
     return this._getSliceWidth() / 2;
   },
@@ -370,11 +369,20 @@ const TimeBasedLineChart = React.createClass({
 
   // Axis Ticks
   _getYAxisTickValues () {
+    // Magic Voodoo from the interwebs. See link for more details
+    // http://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axis
+    // This ensures that the tick values are logical increments or steps.
     const minMaxValues = this._getDataMinMaxValues();
-    const increment = minMaxValues.max > 1000 ? 1000 : 500;
+    const range = minMaxValues.max - minMaxValues.min;
+    const tempStep = range / 6;
+    const magnitude = Math.floor(Math.log10(tempStep));
+    const magnitudePower = Math.pow(10, magnitude);
+    const magnitudeMultiplier = parseInt(tempStep / magnitudePower + 0.5);
+    const stepSize = magnitudeMultiplier * magnitudePower;
+
     const values = [];
 
-    for (let min = minMaxValues.min; min <= minMaxValues.max; min += increment) {
+    for (let min = minMaxValues.min; min <= minMaxValues.max; min += stepSize) {
       values.push(min);
     }
 
@@ -480,6 +488,13 @@ const TimeBasedLineChart = React.createClass({
                 translation={this._getYAxisTranslation()}
                 yScaleFunction={this._getYScaleFunction}
               />
+              {this.props.showBreakPoint ? (
+                <BreakPointLine
+                  height={this.state.adjustedHeight}
+                  translation={this._getBreakPointTranslation()}
+                  xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
+                />
+              ) : null}
               <Line
                 data={this.props.data}
                 getXScaleValue={this._getXScaleValue}
@@ -494,13 +509,6 @@ const TimeBasedLineChart = React.createClass({
                 translation={this._getTimeAxisTranslation()}
                 xScaleFunction={this._getXScaleFunction}
               />
-              {this.props.showBreakPoint ? (
-                <BreakPointLine
-                  height={this.state.adjustedHeight}
-                  translation={this._getBreakPointTranslation()}
-                  xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
-                />
-              ) : null}
             </svg>
           </div>
         ) : this.props.zeroState }
