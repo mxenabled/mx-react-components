@@ -42,10 +42,6 @@ const styles = {
   domain: {
     opacity: 0
   },
-  text: {
-    'color': StyleConstants.Colors.CHARCOAL,
-    'fontSize': StyleConstants.FontSizes.MEDIUM
-  },
   verticalLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.ASH,
@@ -233,7 +229,7 @@ const TimeBasedLineChart = React.createClass({
     areaBelowZeroColor: React.PropTypes.string,
     breakPointDate: React.PropTypes.number,
     breakPointLabel: React.PropTypes.string,
-    data: React.PropTypes.array,
+    data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
     hoveredDataPointDetails: React.PropTypes.array.isRequired,
     lineColor: React.PropTypes.string,
@@ -251,16 +247,15 @@ const TimeBasedLineChart = React.createClass({
       areaBelowZeroColor: StyleConstants.Colors.STRAWBERRY,
       breakPointDate: moment().startOf('day').unix(),
       breakPointLabel: 'Today',
-      data: [],
       height: 400,
       lineColor: StyleConstants.Colors.PRIMARY,
-      margin: { top: 20, right: 0, bottom: 20, left: 50 },
+      margin: { top: 20, right: 20, bottom: 20, left: 75 },
       rangeType: 'day',
       shadeAreaBelowZero: false,
       showBreakPoint: true,
       width: 550,
       yAxisFormatter (d) {
-        return numeral(d).format('0.0a');
+        return numeral(d).format('0.00a');
       },
       zeroState: <div style={styles.zeroState}>No Data Found</div>
     };
@@ -426,7 +421,6 @@ const TimeBasedLineChart = React.createClass({
   _styleChart () {
     const chart = d3.select(this.refs.chart);
 
-    // X Axis
     // Style x axis labels
     chart.select('g.x-axis').selectAll('text')
       .style(styles.xAxisLabel)
@@ -438,7 +432,6 @@ const TimeBasedLineChart = React.createClass({
     chart.select('g.x-axis').selectAll('line')
       .style({ stroke: StyleConstants.Colors.FOG });
 
-    // Y Axis
     // Style y axis labels
     chart.select('g.y-axis').selectAll('text')
       .style(styles.yAxisLabel)
@@ -467,7 +460,9 @@ const TimeBasedLineChart = React.createClass({
       .style('stroke', this.props.lineColor);
 
     // Style rest of chart elements
-    chart.selectAll('text').style(styles.text);
+    chart.selectAll('text')
+         .style('font-family', StyleConstants.Fonts.REGULAR)
+         .style('font-size', StyleConstants.FontSizes.MEDIUM);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.grid-line .tick').style('stroke', d => {
       if (d === 0) {
