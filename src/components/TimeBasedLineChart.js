@@ -136,6 +136,7 @@ const TimeAxis = React.createClass({
       .tickFormat(d => {
         return moment.unix(d).format(this.props.timeAxisFormat);
       })
+      .tickSize(10, 10)
       .ticks(10);
 
     this.setState({
@@ -461,8 +462,8 @@ const TimeBasedLineChart = React.createClass({
 
     // Style rest of chart elements
     chart.selectAll('text')
-         .style('font-family', StyleConstants.Fonts.REGULAR)
-         .style('font-size', StyleConstants.FontSizes.MEDIUM);
+      .style('font-family', StyleConstants.Fonts.REGULAR)
+      .style('font-size', StyleConstants.FontSizes.MEDIUM);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.grid-line .tick').style('stroke', d => {
       if (d === 0) {
@@ -470,7 +471,14 @@ const TimeBasedLineChart = React.createClass({
       }
 
       return StyleConstants.Colors.FOG;
-    });
+    })
+      .style('stroke-dasharray', d => {
+        if (d === 0) {
+          return 'none';
+        }
+
+        return '4,4';
+      });
   },
 
   // Render functions
