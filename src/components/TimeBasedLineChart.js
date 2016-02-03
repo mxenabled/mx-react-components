@@ -104,6 +104,13 @@ const Circle = React.createClass({
   }
 });
 
+// Rectangles
+const Slice = React.createClass({
+  render () {
+    return <rect className='slice' {...this.props} />
+  }
+});
+
 // Axis
 const TimeAxis = React.createClass({
   componentWillMount () {
@@ -202,22 +209,16 @@ const YGridLines = React.createClass({
 // Main Component
 const TimeBasedLineChart = React.createClass({
   propTypes: {
-    alwaysShowZeroYTick: React.PropTypes.bool,
     areaBelowZeroColor: React.PropTypes.string,
     breakPointDate: React.PropTypes.number,
     breakPointLabel: React.PropTypes.string,
-    children: React.PropTypes.node,
-    dashedFutureLine: React.PropTypes.bool,
     data: React.PropTypes.array,
     height: React.PropTypes.number,
     lineColor: React.PropTypes.string,
     margin: React.PropTypes.object,
-    onDataPointHover: React.PropTypes.func,
     rangeType: React.PropTypes.oneOf(['day', 'month']),
     shadeAreaBelowZero: React.PropTypes.bool,
     showBreakPoint: React.PropTypes.bool,
-    showTooltips: React.PropTypes.bool,
-    staticXAxis: React.PropTypes.bool,
     width: React.PropTypes.number,
     yAxisFormatter: React.PropTypes.func,
     zeroState: React.PropTypes.node
@@ -225,24 +226,19 @@ const TimeBasedLineChart = React.createClass({
 
   getDefaultProps () {
     return {
-      alwaysShowZeroYTick: false,
       areaBelowZeroColor: StyleConstants.Colors.STRAWBERRY,
       breakPointDate: moment().startOf('day').unix(),
       breakPointLabel: 'Today',
-      dashedFutureLine: true,
       data: [],
       height: 400,
       lineColor: StyleConstants.Colors.PRIMARY,
       margin: { top: 20, right: 0, bottom: 20, left: 50 },
-      onDataPointHover: () => {},
       rangeType: 'day',
       shadeAreaBelowZero: false,
       showBreakPoint: true,
-      showTooltips: true,
-      staticXAxis: true,
       width: 550,
       yAxisFormatter (d) {
-        return numeral(d).format('0');
+        return numeral(d).format('0.0a');
       },
       zeroState: <div style={styles.zeroState}>No Data Found</div>
     };
@@ -284,6 +280,13 @@ const TimeBasedLineChart = React.createClass({
 
   shouldComponentUpdate (newProps, newState) {
     return !isEqual(newProps.data, this.props.data) || !isEqual(newState.hoveredData, this.state.hoveredData);
+  },
+
+  // Call backs
+  _handleChartMouseOver (hoveredDataPoint) {
+    this.setState({
+      hoveredDataPoint
+    });
   },
 
   // Translate positions via use of margins
@@ -492,7 +495,7 @@ const TimeBasedLineChart = React.createClass({
                 <BreakPointLine
                   height={this.state.adjustedHeight}
                   translation={this._getBreakPointTranslation()}
-                  xValue={this._getXScaleValue(moment().startOf(this.props.rangeType).unix())}
+                  xValue={this._getXScaleValue(this.props.breakPointDate)}
                 />
               ) : null}
               <Line
@@ -509,6 +512,21 @@ const TimeBasedLineChart = React.createClass({
                 translation={this._getTimeAxisTranslation()}
                 xScaleFunction={this._getXScaleFunction}
               />
+              {this.props.data.map((dataPoint, index) => {
+                return (
+                  <Slice
+                    dataPoint={dataPoint}
+                    height={this.state.adjustedHeight}
+                    key={'slice-' + index}
+                    onMouseOver={this._handleChartMouseOver.bind(null, dataPoint)}
+                    style={styles.domain}
+                    transform={this._getLineTranslation()}
+                    width={this._getSliceWidth()}
+                    x={this._getXScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this._getSliceMiddle()}
+                    y={0}
+                  />
+                );
+              })}
             </svg>
           </div>
         ) : this.props.zeroState }
