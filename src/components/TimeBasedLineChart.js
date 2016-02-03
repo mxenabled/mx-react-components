@@ -498,7 +498,6 @@ const TimeBasedLineChart = React.createClass({
     // - Break Point Label
     // - Color past half of graph
     // - Fix X Axis Ticks
-    // - Y Axis Formatting needs tweaked
     // - Animations
 
     return (
@@ -530,14 +529,23 @@ const TimeBasedLineChart = React.createClass({
                 xScaleFunction={this._getXScaleFunction}
               />
               {this.props.showBreakPoint ? (
-                <g className='break-point' ref='breakPoint' transform={this._getVerticalLineTranslation()}>
-                  <line
-                    x1={this._getXScaleValue(this.props.breakPointDate)}
-                    x2={this._getXScaleValue(this.props.breakPointDate)}
-                    y1={this.props.margin.top}
-                    y2={this.state.adjustedHeight}
-                    style={styles.breakPointLine}
-                  />
+                <g className='break-point-items' ref='breakPointItems' transform={this._getVerticalLineTranslation()}>
+                  <g className='break-point' ref='breakPoint'>
+                    <line
+                      x1={this._getXScaleValue(this.props.breakPointDate)}
+                      x2={this._getXScaleValue(this.props.breakPointDate)}
+                      y1={this.props.margin.top}
+                      y2={this.state.adjustedHeight}
+                      style={styles.breakPointLine}
+                    />
+                    <text
+                      style={styles.dateTooltipText}
+                      x={this._getXScaleValue(this.props.breakPointDate) + 10}
+                      y={40}
+                    >
+                      {this.props.breakPointLabel}
+                    </text>
+                  </g>
                 </g>
               ) : null}
               <Line
