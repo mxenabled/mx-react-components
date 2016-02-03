@@ -19,6 +19,12 @@ const styles = {
   },
 
   // Chart
+  breakPointLabel: {
+    fill: StyleConstants.Colors.ASH,
+    stroke: 'none',
+    fontFamily: StyleConstants.Fonts.REGULAR,
+    fontSize: StyleConstants.FontSizes.MEDIUM
+  },
   breakPointLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.FOG,
@@ -517,6 +523,28 @@ const TimeBasedLineChart = React.createClass({
               width={this.props.width}
               ref='chart'
             >
+              <g className='future-shade-pattern' ref='futureShadePattern'>
+                <pattern
+                  height={4}
+                  id='diagonalHatch'
+                  patternUnits='userSpaceOnUse'
+                  width={4}
+                >
+                  <path
+                    d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
+                    stroke={StyleConstants.Colors.FOG}
+                    strokeWidth={1}
+                  />
+                </pattern>
+                <rect
+                  fill={'url(#diagonalHatch)'}
+                  height={this.state.adjustedHeight}
+                  transform={this._getLineTranslation()}
+                  width={this.state.adjustedWidth}
+                  x={this._getXScaleValue(this.props.breakPointDate)}
+                  y={0}
+                />
+              </g>
               <YAxis
                 yAxisFormat={this.props.yAxisFormatter}
                 data={this.props.data}
@@ -547,7 +575,7 @@ const TimeBasedLineChart = React.createClass({
                       style={styles.breakPointLine}
                     />
                     <text
-                      style={styles.dateTooltipText}
+                      style={styles.breakPointLabel}
                       x={this._getXScaleValue(this.props.breakPointDate) + 10}
                       y={40}
                     >
