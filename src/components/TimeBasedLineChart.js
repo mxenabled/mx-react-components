@@ -53,15 +53,13 @@ const styles = {
 const BreakPointLine = React.createClass({
   render () {
     return (
-      <g className='break-point-line' ref='breakPointLine' transform={this.props.translation}>
-        <line
-          x1={this.props.xValue}
-          x2={this.props.xValue}
-          y1={20}
-          y2={this.props.height + 20}
-          style={styles.breakPointLine}
-        />
-      </g>
+      <line
+        x1={this.props.xValue}
+        x2={this.props.xValue}
+        y1={20}
+        y2={this.props.height + 20}
+        style={styles.breakPointLine}
+      />
     );
   }
 });
@@ -492,11 +490,12 @@ const TimeBasedLineChart = React.createClass({
                 yScaleFunction={this._getYScaleFunction}
               />
               {this.props.showBreakPoint ? (
-                <BreakPointLine
-                  height={this.state.adjustedHeight}
-                  translation={this._getBreakPointTranslation()}
-                  xValue={this._getXScaleValue(this.props.breakPointDate)}
-                />
+                <g className='break-point' ref='breakPoint' transform={this._getBreakPointTranslation()}>
+                  <BreakPointLine
+                    height={this.state.adjustedHeight}
+                    xValue={this._getXScaleValue(this.props.breakPointDate)}
+                  />
+                </g>
               ) : null}
               <Line
                 data={this.props.data}
@@ -505,28 +504,32 @@ const TimeBasedLineChart = React.createClass({
                 lineColor={this.props.lineColor}
                 translation={this._getLineTranslation()}
               />
-              {this._renderCircles()}
+              <g className='circles' ref='svgCircles'>
+                {this._renderCircles()}
+              </g>
               <TimeAxis
                 data={this.props.data}
                 timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
                 translation={this._getTimeAxisTranslation()}
                 xScaleFunction={this._getXScaleFunction}
               />
-              {this.props.data.map((dataPoint, index) => {
-                return (
-                  <Slice
-                    dataPoint={dataPoint}
-                    height={this.state.adjustedHeight}
-                    key={'slice-' + index}
-                    onMouseOver={this._handleChartMouseOver.bind(null, dataPoint)}
-                    style={styles.domain}
-                    transform={this._getLineTranslation()}
-                    width={this._getSliceWidth()}
-                    x={this._getXScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this._getSliceMiddle()}
-                    y={0}
-                  />
-                );
-              })}
+              <g className='slices' ref='svgSlices'>
+                {this.props.data.map((dataPoint, index) => {
+                  return (
+                    <Slice
+                      dataPoint={dataPoint}
+                      height={this.state.adjustedHeight}
+                      key={'slice-' + index}
+                      onMouseOver={this._handleChartMouseOver.bind(null, dataPoint)}
+                      style={styles.domain}
+                      transform={this._getLineTranslation()}
+                      width={this._getSliceWidth()}
+                      x={this._getXScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this._getSliceMiddle()}
+                      y={0}
+                    />
+                  );
+                })}
+              </g>
             </svg>
           </div>
         ) : this.props.zeroState }
