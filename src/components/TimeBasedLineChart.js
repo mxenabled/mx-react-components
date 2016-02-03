@@ -10,6 +10,15 @@ const numeral = require('numeral');
 const StyleConstants = require('../constants/Style');
 
 const styles = {
+  // Component
+  component: {
+    fontFamily: StyleConstants.FontFamily,
+    position: 'relative',
+    boxSizing: 'content-box',
+    display: 'inline-block'
+  },
+
+  // Chart
   breakPointLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.FOG,
@@ -18,12 +27,6 @@ const styles = {
   circle: {
     fill: StyleConstants.Colors.WHITE,
     strokeWidth: 2
-  },
-  component: {
-    fontFamily: StyleConstants.FontFamily,
-    position: 'relative',
-    boxSizing: 'content-box',
-    display: 'inline-block'
   },
   dateTooltip: {
     borderRadius: 2,
@@ -41,8 +44,7 @@ const styles = {
   },
   text: {
     'color': StyleConstants.Colors.CHARCOAL,
-    'font-size': StyleConstants.FontSizes.MEDIUM,
-    'font-weight': 'normal'
+    'fontSize': StyleConstants.FontSizes.MEDIUM
   },
   verticalLine: {
     fill: 'none',
@@ -57,6 +59,39 @@ const styles = {
     stroke: 'none',
     textAnchor: 'start'
   },
+
+  // Hovered Data Point
+  hoveredDataPointDetail: {
+    boxSizing: 'border-box',
+    display: 'inline-block',
+    float: 'left',
+    paddingLeft: 10
+  },
+  hoveredDataPointDetails: {
+    padding: 20,
+    width: '100%'
+  },
+  hoveredDataPointLabel: {
+    boxSizing: 'border-box',
+    color: StyleConstants.Colors.ASH,
+    display: 'inline-block',
+    fontFamily: StyleConstants.Fonts.LIGHT,
+    fontSize: StyleConstants.FontSizes.LARGE,
+    textAlign: 'left',
+    width: 60
+  },
+  hoveredDataPointValue: {
+    boxSizing: 'border-box',
+    color: StyleConstants.Colors.CHARCOAL,
+    display: 'inline-block',
+    fontFamily: StyleConstants.Fonts.SEMIBOLD,
+    fontSize: StyleConstants.FontSizes.LARGE,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    width: 130
+  },
+
+  // Zero State
   zeroState: {
     position: 'absolute',
     top: '50%',
@@ -200,6 +235,7 @@ const TimeBasedLineChart = React.createClass({
     breakPointLabel: React.PropTypes.string,
     data: React.PropTypes.array,
     height: React.PropTypes.number,
+    hoveredDataPointDetails: React.PropTypes.array.isRequired,
     lineColor: React.PropTypes.string,
     margin: React.PropTypes.object,
     rangeType: React.PropTypes.oneOf(['day', 'month']),
@@ -307,6 +343,20 @@ const TimeBasedLineChart = React.createClass({
     });
 
     return { min, max };
+  },
+
+  _getFormatedValue (value, type, format) {
+    switch (type) {
+      case 'date':
+        return moment.unix(value).format(format);
+        break;
+      case 'number':
+        return numeral(value).format(format);
+        break;
+      default:
+        return value;
+        break;
+    }
   },
 
   // Alignment/Spacing Helpers
@@ -426,6 +476,26 @@ const TimeBasedLineChart = React.createClass({
 
       return StyleConstants.Colors.FOG;
     });
+  },
+
+  // Render functions
+  _renderHoveredDataPointDetails () {
+    if (this.state.hoveredDataPoint) {
+      return this.props.hoveredDataPointDetails.map((item, index) => {
+        const value = this.state.hoveredDataPoint[item.key];
+
+        return (
+          <div style={styles.hoveredDataPointDetail} key={'details-' + index}>
+            <div style={styles.hoveredDataPointLabel}>
+              {item.label}
+            </div>
+            <div style={styles.hoveredDataPointValue}>
+              {value || value === 0 ? this._getFormatedValue(value, item.type, item.format) : 'N/A'}
+            </div>
+          </div>
+        );
+      });
+    }
   },
 
   render () {
@@ -549,6 +619,9 @@ const TimeBasedLineChart = React.createClass({
                 })}
               </g>
             </svg>
+            <div style={styles.hoveredDataPointDetails}>
+              {this._renderHoveredDataPointDetails()}
+            </div>
           </div>
         ) : this.props.zeroState }
       </div>
