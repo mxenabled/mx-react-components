@@ -33,6 +33,11 @@ const styles = {
     'font-size': StyleConstants.FontSizes.MEDIUM,
     'font-weight': 'normal'
   },
+  verticalLine: {
+    fill: 'none',
+    stroke: StyleConstants.Colors.ASH,
+    strokeWidth: 1,
+  },
   xAxisLabel: {
     fill: StyleConstants.Colors.ASH,
     stroke: 'none'
@@ -50,20 +55,6 @@ const styles = {
 };
 
 // Line
-const BreakPointLine = React.createClass({
-  render () {
-    return (
-      <line
-        x1={this.props.xValue}
-        x2={this.props.xValue}
-        y1={20}
-        y2={this.props.height + 20}
-        style={styles.breakPointLine}
-      />
-    );
-  }
-});
-
 const Line = React.createClass({
   componentWillMount () {
     const line = d3.svg.line()
@@ -91,6 +82,20 @@ const Line = React.createClass({
           strokeWidth={2}
         />
       </g>
+    );
+  }
+});
+
+const VerticalLine = React.createClass({
+  render () {
+    return (
+      <line
+        x1={this.props.xValue}
+        x2={this.props.xValue}
+        y1={this.props.y1Value}
+        y2={this.props.y2Value}
+        style={this.props.style}
+      />
     );
   }
 });
@@ -276,10 +281,6 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
-  shouldComponentUpdate (newProps, newState) {
-    return !isEqual(newProps.data, this.props.data) || !isEqual(newState.hoveredData, this.state.hoveredData);
-  },
-
   // Call backs
   _handleChartMouseOver (hoveredDataPoint) {
     this.setState({
@@ -288,10 +289,8 @@ const TimeBasedLineChart = React.createClass({
   },
 
   // Translate positions via use of margins
-  _getBreakPointTranslation () {
-    const x = this.props.margin.left;
-
-    return 'translate(' + x + ', -10)';
+  _getVerticalLineTranslation () {
+    return 'translate(' + this.props.margin.left + ', -10)';
   },
 
   _getLineTranslation () {
@@ -453,7 +452,7 @@ const TimeBasedLineChart = React.createClass({
         const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
         const cy = this._getYScaleValue(item.value);
 
-        return <Circle cx={cx} cy={cy} key={index} r={3} transform={this._getLineTranslation()} />;
+        return <Circle cx={cx} cy={cy} key={index} r={3} />;
       });
     }
   },
@@ -466,6 +465,9 @@ const TimeBasedLineChart = React.createClass({
     // - Hover expanded circle behind circle
     // - Color past half of graph
     // - Fix X Axis Ticks
+    // - Y Axis Formatting needs tweaked
+    // - Animations
+    // - Clear hoveredDataPoint on chart leave
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
@@ -490,10 +492,12 @@ const TimeBasedLineChart = React.createClass({
                 yScaleFunction={this._getYScaleFunction}
               />
               {this.props.showBreakPoint ? (
-                <g className='break-point' ref='breakPoint' transform={this._getBreakPointTranslation()}>
-                  <BreakPointLine
-                    height={this.state.adjustedHeight}
+                <g className='break-point' ref='breakPoint' transform={this._getVerticalLineTranslation()}>
+                  <VerticalLine
+                    y1Value={this.props.margin.top}
+                    y2Value={this.state.adjustedHeight}
                     xValue={this._getXScaleValue(this.props.breakPointDate)}
+                    style={styles.breakPointLine}
                   />
                 </g>
               ) : null}
@@ -504,9 +508,28 @@ const TimeBasedLineChart = React.createClass({
                 lineColor={this.props.lineColor}
                 translation={this._getLineTranslation()}
               />
-              <g className='circles' ref='svgCircles'>
+              <g className='circles' ref='svgCircles' transform={this._getLineTranslation()}>
                 {this._renderCircles()}
               </g>
+              {this.state.hoveredDataPoint ? (
+                <g className='tooltip' ref='tooltip'>
+                  <g transform={this._getVerticalLineTranslation()}>
+                    <VerticalLine
+                      y1Value={this.state.adjustedHeight + this.props.margin.top}
+                      y2Value={this._getYScaleValue(this.state.hoveredDataPoint.value) + this.props.margin.top}
+                      xValue={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp)}
+                      style={styles.verticalLine}
+                    />
+                  </g>
+                  <g transform={this._getLineTranslation()}>
+                    <Circle
+                      cx={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp)}
+                      cy={this._getYScaleValue(this.state.hoveredDataPoint.value)}
+                      r={5}
+                    />
+                  </g>
+                </g>
+              ) : null}
               <TimeAxis
                 data={this.props.data}
                 timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
