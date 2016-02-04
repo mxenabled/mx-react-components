@@ -75,8 +75,7 @@ const styles = {
   hoveredDataPointDetail: {
     boxSizing: 'border-box',
     display: 'inline-block',
-    float: 'left',
-    paddingLeft: 10
+    float: 'left'
   },
   hoveredDataPointDetails: {
     padding: 20,
@@ -84,21 +83,22 @@ const styles = {
   },
   hoveredDataPointLabel: {
     boxSizing: 'border-box',
-    color: StyleConstants.Colors.ASH,
+    color: StyleConstants.Colors.CHARCOAL,
     display: 'inline-block',
     fontFamily: StyleConstants.Fonts.REGULAR,
-    fontSize: StyleConstants.FontSizes.LARGE,
-    textAlign: 'left',
-    width: 60
+    fontSize: StyleConstants.FontSizes.MEDIUM,
+    paddingRight: 5,
+    textAlign: 'right',
+    width: 100
   },
   hoveredDataPointValue: {
     boxSizing: 'border-box',
     color: StyleConstants.Colors.CHARCOAL,
     display: 'inline-block',
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
-    fontSize: StyleConstants.FontSizes.LARGE,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
     textAlign: 'left',
-    width: 130
+    width: 100
   },
 
   // Zero State
@@ -545,6 +545,7 @@ const TimeBasedLineChart = React.createClass({
     // - move break point and line circles to their own components
     // - transition line circles
     // - ease in linear on hover circle/line/date-block
+    // - style keys for the suck
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
