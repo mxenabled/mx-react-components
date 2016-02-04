@@ -10,6 +10,11 @@ const numeral = require('numeral');
 const StyleConstants = require('../constants/Style');
 
 const styles = {
+  // NOTE: D3 doesn't like camel cased key names for
+  // styles.  Because of this styles in this file may
+  // resemble the following.  'font-size'  DO NOT
+  // change or chart styles will break.
+
   // Component
   component: {
     fontFamily: StyleConstants.FontFamily,
@@ -21,37 +26,41 @@ const styles = {
   // Chart
   breakPointLabel: {
     fill: StyleConstants.Colors.ASH,
+    'font-family': StyleConstants.Fonts.REGULAR,
+    'font-size': StyleConstants.FontSizes.SMALL,
     stroke: 'none',
-    fontFamily: StyleConstants.Fonts.REGULAR,
-    fontSize: StyleConstants.FontSizes.MEDIUM
   },
   breakPointLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.FOG,
-    strokeWidth: 1,
+    'stroke-width': 1,
   },
   circle: {
     fill: StyleConstants.Colors.WHITE,
-    strokeWidth: 2
+    'stroke-width': 2
   },
   dateTooltip: {
-    borderRadius: 2,
     fill: StyleConstants.Colors.CHARCOAL,
     stroke: 'none'
   },
   dateTooltipText: {
     fill: StyleConstants.Colors.FOG,
     stroke: 'none',
-    fontFamily: StyleConstants.Fonts.REGULAR,
-    fontSize: StyleConstants.FontSizes.MEDIUM
+    'font-family': StyleConstants.Fonts.REGULAR,
+    'font-size': StyleConstants.FontSizes.MEDIUM
   },
   domain: {
     opacity: 0
   },
+  text: {
+    'font-family': StyleConstants.Fonts.REGULAR,
+    'font-size': StyleConstants.FontSizes.MEDIUM,
+    stroke: 'none'
+  },
   verticalLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.ASH,
-    strokeWidth: 1,
+    'stroke-width': 1,
   },
   xAxisLabel: {
     fill: StyleConstants.Colors.ASH,
@@ -59,7 +68,7 @@ const styles = {
   },
   yAxisLabel: {
     stroke: 'none',
-    textAnchor: 'start'
+    'text-anchor': 'end'
   },
 
   // Hovered Data Point
@@ -77,7 +86,7 @@ const styles = {
     boxSizing: 'border-box',
     color: StyleConstants.Colors.ASH,
     display: 'inline-block',
-    fontFamily: StyleConstants.Fonts.LIGHT,
+    fontFamily: StyleConstants.Fonts.REGULAR,
     fontSize: StyleConstants.FontSizes.LARGE,
     textAlign: 'left',
     width: 60
@@ -88,7 +97,6 @@ const styles = {
     display: 'inline-block',
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
     fontSize: StyleConstants.FontSizes.LARGE,
-    fontWeight: 'bold',
     textAlign: 'left',
     width: 130
   },
@@ -238,11 +246,11 @@ const TimeBasedLineChart = React.createClass({
     breakPointLabel: React.PropTypes.string,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
-    hoveredDataPointDetails: React.PropTypes.array.isRequired,
+    hoveredDataPointDetails: React.PropTypes.array,
     lineColor: React.PropTypes.string,
     margin: React.PropTypes.object,
     rangeType: React.PropTypes.oneOf(['day', 'month']),
-    shadeAreaBelowZero: React.PropTypes.bool,
+    shadeFutureOnGraph: React.PropTypes.bool,
     showBreakPoint: React.PropTypes.bool,
     width: React.PropTypes.number,
     yAxisFormatter: React.PropTypes.func,
@@ -258,7 +266,7 @@ const TimeBasedLineChart = React.createClass({
       lineColor: StyleConstants.Colors.PRIMARY,
       margin: { top: 20, right: 20, bottom: 20, left: 75 },
       rangeType: 'day',
-      shadeAreaBelowZero: false,
+      shadeFutureOnGraph: true,
       showBreakPoint: true,
       width: 550,
       yAxisFormatter (d) {
@@ -430,9 +438,10 @@ const TimeBasedLineChart = React.createClass({
 
     // Style x axis labels
     chart.select('g.x-axis').selectAll('text')
+      .attr('y', 20)
       .style(styles.xAxisLabel)
       .style('text-anchor', () => {
-        return 'middle';
+        return 'start';
       });
 
     // Style x axis ticks
@@ -467,9 +476,7 @@ const TimeBasedLineChart = React.createClass({
       .style('stroke', this.props.lineColor);
 
     // Style rest of chart elements
-    chart.selectAll('text')
-      .style('font-family', StyleConstants.Fonts.REGULAR)
-      .style('font-size', StyleConstants.FontSizes.MEDIUM);
+    chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.grid-line .tick').style('stroke', d => {
       if (d === 0) {
@@ -489,7 +496,7 @@ const TimeBasedLineChart = React.createClass({
 
   // Render functions
   _renderHoveredDataPointDetails () {
-    if (this.state.hoveredDataPoint) {
+    if (this.props.hoveredDataPointDetails && this.state.hoveredDataPoint) {
       return this.props.hoveredDataPointDetails.map((item, index) => {
         const value = this.state.hoveredDataPoint[item.key];
 
@@ -509,8 +516,6 @@ const TimeBasedLineChart = React.createClass({
 
   render () {
     //Items left
-    // - Break Point Label
-    // - Color past half of graph
     // - Fix X Axis Ticks
     // - Animations
 
@@ -523,28 +528,30 @@ const TimeBasedLineChart = React.createClass({
               width={this.props.width}
               ref='chart'
             >
-              <g className='future-shade-pattern' ref='futureShadePattern'>
-                <pattern
-                  height={4}
-                  id='diagonalHatch'
-                  patternUnits='userSpaceOnUse'
-                  width={4}
-                >
-                  <path
-                    d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
-                    stroke={StyleConstants.Colors.FOG}
-                    strokeWidth={1}
+              {this.props.shadeFutureOnGraph ? (
+                <g className='future-shade-pattern' ref='futureShadePattern'>
+                  <pattern
+                    height={4}
+                    id='diagonalHatch'
+                    patternUnits='userSpaceOnUse'
+                    width={4}
+                  >
+                    <path
+                      d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
+                      stroke={StyleConstants.Colors.FOG}
+                      strokeWidth={1}
+                    />
+                  </pattern>
+                  <rect
+                    fill={'url(#diagonalHatch)'}
+                    height={this.state.adjustedHeight}
+                    transform={this._getLineTranslation()}
+                    width={this.state.adjustedWidth - this._getXScaleValue(this.props.breakPointDate)}
+                    x={this._getXScaleValue(this.props.breakPointDate)}
+                    y={0}
                   />
-                </pattern>
-                <rect
-                  fill={'url(#diagonalHatch)'}
-                  height={this.state.adjustedHeight}
-                  transform={this._getLineTranslation()}
-                  width={this.state.adjustedWidth}
-                  x={this._getXScaleValue(this.props.breakPointDate)}
-                  y={0}
-                />
-              </g>
+                </g>
+              ) : null}
               <YAxis
                 yAxisFormat={this.props.yAxisFormatter}
                 data={this.props.data}
@@ -571,7 +578,7 @@ const TimeBasedLineChart = React.createClass({
                       x1={this._getXScaleValue(this.props.breakPointDate)}
                       x2={this._getXScaleValue(this.props.breakPointDate)}
                       y1={this.props.margin.top}
-                      y2={this.state.adjustedHeight}
+                      y2={this.state.adjustedHeight + this.props.margin.bottom}
                       style={styles.breakPointLine}
                     />
                     <text
