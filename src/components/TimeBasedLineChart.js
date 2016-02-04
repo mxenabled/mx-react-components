@@ -110,7 +110,29 @@ const styles = {
   }
 };
 
-// Line
+const BreakPointGroup = React.createClass({
+  render () {
+    return (
+      <g className='break-point-items' ref='breakPointItems' transform={this.props.translation}>
+        <line
+          className='break-point-line'
+          x1={this.props.xScaleValue(this.props.breakPointDate)}
+          x2={this.props.xScaleValue(this.props.breakPointDate)}
+          y1={this.props.margin.top}
+          y2={this.props.adjustedHeight + this.props.margin.bottom}
+        />
+        <text
+          className='break-point-label'
+          x={this.props.xScaleValue(this.props.breakPointDate) + 10}
+          y={40}
+        >
+          {this.props.breakPointLabel}
+        </text>
+      </g>
+    );
+  }
+});
+
 const ChartLineGroup = React.createClass({
   componentWillMount () {
     const flatLine = d3.svg.line()
@@ -249,7 +271,58 @@ const HoveredDataPointGroup = React.createClass({
   }
 });
 
-// Axis
+const ShadedRectangleGroup = React.createClass({
+  render () {
+    return (
+      <g className='future-shade-pattern' ref='futureShadePattern'>
+        <pattern
+          height={4}
+          id='diagonalHatch'
+          patternUnits='userSpaceOnUse'
+          width={4}
+        >
+          <path
+            d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
+            stroke={StyleConstants.Colors.FOG}
+            strokeWidth={1}
+          />
+        </pattern>
+        <rect
+          fill={'url(#diagonalHatch)'}
+          height={this.props.adjustedHeight}
+          transform={this.props.translation}
+          width={this.props.adjustedWidth - this.props.xScaleValue(this.props.breakPointDate)}
+          x={this.props.xScaleValue(this.props.breakPointDate)}
+          y={0}
+        />
+      </g>
+    );
+  }
+});
+
+const SlicesGroup = React.createClass({
+  render () {
+    return (
+      <g className='slices' ref='slices'>
+        {this.props.data.map((dataPoint, index) => {
+          return (
+            <rect
+              height={this.props.adjustedHeight}
+              key={'slice-' + index}
+              onMouseOver={this.props.handleChartMouseOver.bind(null, dataPoint)}
+              opacity={0}
+              transform={this.props.translation}
+              width={this.props.sliceWidth}
+              x={this.props.xScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this.props.sliceMiddle}
+              y={0}
+            />
+          );
+        })}
+      </g>
+    );
+  }
+});
+
 const TimeAxisGroup = React.createClass({
   componentWillMount () {
     const timeAxis = d3.svg.axis()
@@ -351,82 +424,6 @@ const YGridLinesGroup = React.createClass({
   }
 });
 
-// Misc chart components
-const BreakPointGroup = React.createClass({
-  render () {
-    return (
-      <g className='break-point-items' ref='breakPointItems' transform={this.props.translation}>
-        <line
-          className='break-point-line'
-          x1={this.props.xScaleValue(this.props.breakPointDate)}
-          x2={this.props.xScaleValue(this.props.breakPointDate)}
-          y1={this.props.margin.top}
-          y2={this.props.adjustedHeight + this.props.margin.bottom}
-        />
-        <text
-          className='break-point-label'
-          x={this.props.xScaleValue(this.props.breakPointDate) + 10}
-          y={40}
-        >
-          {this.props.breakPointLabel}
-        </text>
-      </g>
-    );
-  }
-});
-
-const SlicesGroup = React.createClass({
-  render () {
-    return (
-      <g className='slices' ref='slices'>
-        {this.props.data.map((dataPoint, index) => {
-          return (
-            <rect
-              height={this.props.adjustedHeight}
-              key={'slice-' + index}
-              onMouseOver={this.props.handleChartMouseOver.bind(null, dataPoint)}
-              opacity={0}
-              transform={this.props.translation}
-              width={this.props.sliceWidth}
-              x={this.props.xScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this.props.sliceMiddle}
-              y={0}
-            />
-          );
-        })}
-      </g>
-    );
-  }
-});
-
-const ShadedRectangleGroup = React.createClass({
-  render () {
-    return (
-      <g className='future-shade-pattern' ref='futureShadePattern'>
-        <pattern
-          height={4}
-          id='diagonalHatch'
-          patternUnits='userSpaceOnUse'
-          width={4}
-        >
-          <path
-            d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
-            stroke={StyleConstants.Colors.FOG}
-            strokeWidth={1}
-          />
-        </pattern>
-        <rect
-          fill={'url(#diagonalHatch)'}
-          height={this.props.adjustedHeight}
-          transform={this.props.translation}
-          width={this.props.adjustedWidth - this.props.xScaleValue(this.props.breakPointDate)}
-          x={this.props.xScaleValue(this.props.breakPointDate)}
-          y={0}
-        />
-      </g>
-    );
-  }
-});
-
 // Main Component
 const TimeBasedLineChart = React.createClass({
   propTypes: {
@@ -459,7 +456,7 @@ const TimeBasedLineChart = React.createClass({
       showBreakPoint: true,
       width: 550,
       yAxisFormatter (d) {
-        return numeral(d).format('0.00a');
+        return numeral(d).format('0.0a');
       },
       zeroState: <div style={styles.zeroState}>No Data Found</div>
     };
@@ -513,30 +510,6 @@ const TimeBasedLineChart = React.createClass({
   },
 
   // Helper Functions
-  _getVerticalLineTranslation () {
-    return 'translate(' + this.props.margin.left + ', -10)';
-  },
-
-  _getLineTranslation () {
-    const x = this.props.margin.left;
-
-    return 'translate(' + x + ', 10)';
-  },
-
-  _getTimeAxisTranslation () {
-    const x = this.props.margin.left - 10;
-    const y = this.props.height - this.props.margin.bottom - 10;
-
-    return 'translate(' + x + ',' + y + ')';
-  },
-
-  _getYAxisTranslation () {
-    const x = this.props.margin.left;
-    const y = this.props.margin.top - 10;
-
-    return 'translate(' + x + ',' + y + ')';
-  },
-
   _getDataMinMaxValues () {
     const max = d3.max(this.props.data, d => {
       return Math.ceil(d.value / 1000) * 1000;
@@ -563,6 +536,29 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
+  // Translation Helpers
+  _getLineTranslation () {
+    return 'translate(' + this.props.margin.left + ', 10)';
+  },
+
+  _getTimeAxisTranslation () {
+    const x = this.props.margin.left - 10;
+    const y = this.props.height - this.props.margin.bottom - 10;
+
+    return 'translate(' + x + ',' + y + ')';
+  },
+
+  _getVerticalLineTranslation () {
+    return 'translate(' + this.props.margin.left + ', -10)';
+  },
+
+  _getYAxisTranslation () {
+    const y = this.props.margin.top - 10;
+
+    return 'translate(' + this.props.margin.left + ',' + y + ')';
+  },
+
+  // Position Helpers
   _getSliceMiddle () {
     return this._getSliceWidth() / 2;
   },
@@ -571,6 +567,7 @@ const TimeBasedLineChart = React.createClass({
     return Math.floor(this.state.adjustedWidth / this.props.data.length);
   },
 
+  // D3 Scale Functions
   _getXScaleFunction () {
     let maxDate = this.props.data[this.props.data.length - 1].timeStamp;
     let minDate = this.props.data[0].timeStamp;
@@ -604,9 +601,6 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getYAxisTickValues () {
-    // Magic Voodoo from the interwebs. See link for more details
-    // http://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axis
-    // This ensures that the tick values are logical increments or steps.
     const minMaxValues = this._getDataMinMaxValues();
     const range = minMaxValues.max - minMaxValues.min;
     const tempStep = range / 6;
