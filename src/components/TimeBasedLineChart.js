@@ -166,6 +166,75 @@ const ChartLineGroup = React.createClass({
   }
 });
 
+const CirclesGroup = React.createClass({
+  render () {
+    return (
+      <g className='circle-group' ref='circleGroup' transform={this.props.translation}>
+        {this.props.data.length <= 45 ? (
+          this.props.data.map((item, index) => {
+            const cx = this.props.xScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
+            const cy = this.props.yScaleValue(item.value);
+
+            return (
+              <circle
+                className='circle'
+                cx={cx}
+                cy={cy}
+                key={index}
+                r={3}
+              />
+            );
+          })
+        ) : null}
+      </g>
+    );
+  }
+});
+
+const HoveredDataPointGroup = React.createClass({
+  render () {
+    return (
+      <g className='hover-state' ref='hoverState'>
+        <g className='hover-state-line' ref='hoverStateLine' transform={this.props.translation}>
+          <line
+            x1={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp)}
+            x2={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp)}
+            y1={this.props.adjustedHeight}
+            y2={this.props.yScaleValue(this.props.hoveredDataPoint.value)}
+            style={styles.verticalLine}
+          />
+        </g>
+        <g className='hover-state-date-rect' ref='hoverStateDateRect' transform={this.props.translation}>
+          <rect
+            height={30}
+            style={styles.dateTooltip}
+            width={60}
+            x={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp) - 30}
+            y={this.props.adjustedHeight}
+          />
+        </g>
+        <g className='hover-state-circle' ref='hoverStateCircle' transform={this.props.translation}>
+          <circle
+            className='circle'
+            cx={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp)}
+            cy={this.props.yScaleValue(this.props.hoveredDataPoint.value)}
+            r={5}
+          />
+        </g>
+        <g className='hover-state-date-text' ref='hoverStateDateText' transform={this.props.translation}>
+          <text
+            style={styles.dateTooltipText}
+            x={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp) - 20}
+            y={this.props.adjustedHeight + 20}
+          >
+            {moment.unix(this.props.hoveredDataPoint.timeStamp).format(this.props.rangeType === 'day' ? 'MMM DD' : 'MMM')}
+          </text>
+        </g>
+      </g>
+    );
+  }
+});
+
 // Axis
 const TimeAxisGroup = React.createClass({
   componentWillMount () {
@@ -631,7 +700,6 @@ const TimeBasedLineChart = React.createClass({
   render () {
     //Items left
     // - Fix X Axis Ticks
-    // - move break point and line circles to their own components
     // - transition line circles
     // - ease in linear on hover circle/line/date-block
     // - style keys for the suck
@@ -689,69 +757,31 @@ const TimeBasedLineChart = React.createClass({
                 getXScaleValue={this._getXScaleValue}
                 getYScaleValue={this._getYScaleValue}
                 lineColor={this.props.lineColor}
+                rangeType={this.props.rangeType}
                 translation={this._getLineTranslation()}
               />
-              <g className='circle-group' ref='circleGroup' transform={this._getLineTranslation()}>
-                {this.props.data.length <= 45 ? (
-                  this.props.data.map((item, index) => {
-                    const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
-                    const cy = this._getYScaleValue(item.value);
-
-                    return (
-                      <circle
-                        className='circle'
-                        cx={cx}
-                        cy={cy}
-                        key={index}
-                        r={3}
-                      />
-                    );
-                  })
-                ) : null}
-              </g>
+              <CirclesGroup
+                data={this.props.data}
+                rangeType={this.props.rangeType}
+                translation={this._getLineTranslation()}
+                xScaleValue={this._getXScaleValue}
+                yScaleValue={this._getYScaleValue}
+              />
               {this.state.hoveredDataPoint ? (
-                <g className='hover-state' ref='hoverState'>
-                  <g className='hover-state-line' ref='hoverStateLine' transform={this._getVerticalLineTranslation()}>
-                    <line
-                      x1={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp)}
-                      x2={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp)}
-                      y1={this.state.adjustedHeight + this.props.margin.top}
-                      y2={this._getYScaleValue(this.state.hoveredDataPoint.value) + this.props.margin.top}
-                      style={styles.verticalLine}
-                    />
-                  </g>
-                  <g className='hover-state-date-rect' ref='hoverStateDateRect' transform={this._getLineTranslation()}>
-                    <rect
-                      height={30}
-                      style={styles.dateTooltip}
-                      width={60}
-                      x={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp) - 30}
-                      y={this.state.adjustedHeight}
-                    />
-                  </g>
-                  <g className='hover-state-circle' ref='hoverStateCircle' transform={this._getLineTranslation()}>
-                    <circle
-                      className='circle'
-                      cx={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp)}
-                      cy={this._getYScaleValue(this.state.hoveredDataPoint.value)}
-                      r={5}
-                    />
-                  </g>
-                  <g className='hover-state-date-text' ref='hoverStateDateText' transform={this._getLineTranslation()}>
-                    <text
-                      style={styles.dateTooltipText}
-                      x={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp) - 20}
-                      y={this.state.adjustedHeight + 20}
-                    >
-                      {moment.unix(this.state.hoveredDataPoint.timeStamp).format(this.props.rangeType === 'day' ? 'MMM DD' : 'MMM')}
-                    </text>
-                  </g>
-                </g>
+                <HoveredDataPointGroup
+                  adjustedHeight={this.state.adjustedHeight}
+                  hoveredDataPoint={this.state.hoveredDataPoint}
+                  rangeType={this.props.rangeType}
+                  translation={this._getLineTranslation()}
+                  xScaleValue={this._getXScaleValue}
+                  yScaleValue={this._getYScaleValue}
+                />
               ) : null}
               <SlicesGroup
                 adjustedHeight={this.state.adjustedHeight}
                 data={this.props.data}
                 handleChartMouseOver={this._handleChartMouseOver}
+                rangeType={this.props.rangeType}
                 sliceMiddle={this._getSliceMiddle()}
                 sliceWidth={this._getSliceWidth()}
                 translation={this._getLineTranslation()}
