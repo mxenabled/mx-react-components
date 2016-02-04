@@ -111,8 +111,18 @@ const styles = {
 };
 
 // Line
-const Line = React.createClass({
+const ChartLine = React.createClass({
   componentWillMount () {
+    const flatLine = d3.svg.line()
+      .x(d => {
+        const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix();
+
+        return this.props.getXScaleValue(currentDate);
+      })
+      .y(d => {
+        return this.props.adjustedHeight;
+      });
+
     const line = d3.svg.line()
       .x(d => {
         const currentDate = moment.unix(d.timeStamp).startOf(this.props.rangeType).unix();
@@ -124,16 +134,30 @@ const Line = React.createClass({
       });
 
     this.setState({
+      flatLine,
       line
     });
   },
 
+  componentDidMount () {
+    this._animateLine();
+  },
+
+  componentDidUpdate () {
+    this._animateLine();
+  },
+
+  _animateLine () {
+    d3.select(this.refs.chartLine).transition().attr('d', this.state.line(this.props.data));
+  },
+
   render () {
     return (
-      <g className='chart-line' ref='chartLine' transform={this.props.translation}>
+      <g className='chart-line-group' ref='chartLineGroup' transform={this.props.translation}>
         <path
-          d={this.state.line(this.props.data)}
+          d={this.state.flatLine(this.props.data)}
           fill='none'
+          ref='chartLine'
           stroke={this.props.lineColor}
           strokeWidth={2}
         />
@@ -517,7 +541,10 @@ const TimeBasedLineChart = React.createClass({
   render () {
     //Items left
     // - Fix X Axis Ticks
-    // - Animations
+    // - details spacing to match new design from Derek
+    // - move break point and line circles to their own components
+    // - transition line circles
+    // - ease in linear on hover circle/line/date-block
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
@@ -591,20 +618,30 @@ const TimeBasedLineChart = React.createClass({
                   </g>
                 </g>
               ) : null}
-              <Line
+              <ChartLine
+                adjustedHeight={this.state.adjustedHeight}
                 data={this.props.data}
                 getXScaleValue={this._getXScaleValue}
                 getYScaleValue={this._getYScaleValue}
                 lineColor={this.props.lineColor}
                 translation={this._getLineTranslation()}
               />
-              <g className='circles' ref='svgCircles' transform={this._getLineTranslation()}>
+              <g className='circle-group' ref='circleGroup' transform={this._getLineTranslation()}>
                 {this.props.data.length <= 45 ? (
                   this.props.data.map((item, index) => {
                     const cx = this._getXScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
                     const cy = this._getYScaleValue(item.value);
 
-                    return <circle className='circle' cx={cx} cy={cy} key={index} r={3} style={styles.circle} />;
+                    return (
+                      <circle
+                        className='circle'
+                        cx={cx}
+                        cy={cy}
+                        key={index}
+                        r={3}
+                        style={styles.circle}
+                      />
+                    );
                   })
                 ) : null}
               </g>
