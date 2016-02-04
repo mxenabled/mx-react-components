@@ -561,7 +561,7 @@ const TimeBasedLineChart = React.createClass({
     minDate = moment.unix(minDate).startOf(this.props.rangeType).unix();
 
     return d3.time.scale()
-      .range([0, this.state.adjustedWidth])
+      .range([0, this.state.adjustedWidth - 10])
       .domain([minDate, maxDate]);
   },
 
@@ -616,7 +616,7 @@ const TimeBasedLineChart = React.createClass({
       .attr('y', 20)
       .style(styles.xAxisLabel)
       .style('text-anchor', () => {
-        return 'start';
+        return this.props.rangeType === 'day' ? 'middle' : 'start';
       });
 
     // Style x axis ticks
@@ -708,7 +708,6 @@ const TimeBasedLineChart = React.createClass({
 
   render () {
     //Items left
-    // - Fix X Axis Ticks
     // - transition line circles
     // - ease in linear on hover circle/line/date-block
 
