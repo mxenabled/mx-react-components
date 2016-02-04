@@ -197,17 +197,17 @@ const HoveredDataPointGroup = React.createClass({
       <g className='hover-state' ref='hoverState'>
         <g className='hover-state-line' ref='hoverStateLine' transform={this.props.translation}>
           <line
+            className='hovered-data-point-line'
             x1={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp)}
             x2={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp)}
             y1={this.props.adjustedHeight}
             y2={this.props.yScaleValue(this.props.hoveredDataPoint.value)}
-            style={styles.verticalLine}
           />
         </g>
         <g className='hover-state-date-rect' ref='hoverStateDateRect' transform={this.props.translation}>
           <rect
+            className='hovered-data-point-date'
             height={30}
-            style={styles.dateTooltip}
             width={60}
             x={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp) - 30}
             y={this.props.adjustedHeight}
@@ -223,7 +223,7 @@ const HoveredDataPointGroup = React.createClass({
         </g>
         <g className='hover-state-date-text' ref='hoverStateDateText' transform={this.props.translation}>
           <text
-            style={styles.dateTooltipText}
+            className='hovered-data-point-date-text'
             x={this.props.xScaleValue(this.props.hoveredDataPoint.timeStamp) - 20}
             y={this.props.adjustedHeight + 20}
           >
@@ -658,6 +658,16 @@ const TimeBasedLineChart = React.createClass({
     chart.selectAll('.break-point-line')
       .style(styles.breakPointLine);
 
+    // Style Hovered Data Point Items
+    chart.selectAll('.hovered-data-point-line')
+      .style(styles.verticalLine);
+
+    chart.selectAll('.hovered-data-point-date')
+      .style(styles.dateTooltip);
+
+    chart.selectAll('.hovered-data-point-date-text')
+      .style(styles.dateTooltipText);
+
     // Style rest of chart elements
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
@@ -702,7 +712,6 @@ const TimeBasedLineChart = React.createClass({
     // - Fix X Axis Ticks
     // - transition line circles
     // - ease in linear on hover circle/line/date-block
-    // - style keys for the suck
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
