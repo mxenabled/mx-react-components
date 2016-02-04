@@ -166,30 +166,6 @@ const ChartLine = React.createClass({
   }
 });
 
-// Break Point
-const BreakPointGroup = React.createClass({
-  render () {
-    return (
-      <g className='break-point-items' ref='breakPointItems' transform={this.props.verticalLineTranslation}>
-        <line
-          className='break-point-line'
-          x1={this.props.xScaleValue(this.props.breakPointDate)}
-          x2={this.props.xScaleValue(this.props.breakPointDate)}
-          y1={this.props.margin.top}
-          y2={this.props.adjustedHeight + this.props.margin.bottom}
-        />
-        <text
-          className='break-point-label'
-          x={this.props.xScaleValue(this.props.breakPointDate) + 10}
-          y={40}
-        >
-          {this.props.breakPointLabel}
-        </text>
-      </g>
-    );
-  }
-});
-
 // Axis
 const TimeAxis = React.createClass({
   componentWillMount () {
@@ -283,6 +259,59 @@ const YGridLines = React.createClass({
 
   render () {
     return <g className='grid-line' ref='yGridLines' transform={this.props.translation} />;
+  }
+});
+
+// Misc chart components
+const BreakPointGroup = React.createClass({
+  render () {
+    return (
+      <g className='break-point-items' ref='breakPointItems' transform={this.props.verticalLineTranslation}>
+        <line
+          className='break-point-line'
+          x1={this.props.xScaleValue(this.props.breakPointDate)}
+          x2={this.props.xScaleValue(this.props.breakPointDate)}
+          y1={this.props.margin.top}
+          y2={this.props.adjustedHeight + this.props.margin.bottom}
+        />
+        <text
+          className='break-point-label'
+          x={this.props.xScaleValue(this.props.breakPointDate) + 10}
+          y={40}
+        >
+          {this.props.breakPointLabel}
+        </text>
+      </g>
+    );
+  }
+});
+
+const ShadedRectangleGroup = React.createClass({
+  render () {
+    return (
+      <g className='future-shade-pattern' ref='futureShadePattern'>
+        <pattern
+          height={4}
+          id='diagonalHatch'
+          patternUnits='userSpaceOnUse'
+          width={4}
+        >
+          <path
+            d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
+            stroke={StyleConstants.Colors.FOG}
+            strokeWidth={1}
+          />
+        </pattern>
+        <rect
+          fill={'url(#diagonalHatch)'}
+          height={this.props.adjustedHeight}
+          transform={this.props.lineTranslation}
+          width={this.props.adjustedWidth - this.props.xScaleValue(this.props.breakPointDate)}
+          x={this.props.xScaleValue(this.props.breakPointDate)}
+          y={0}
+        />
+      </g>
+    );
   }
 });
 
@@ -587,28 +616,13 @@ const TimeBasedLineChart = React.createClass({
               ref='chart'
             >
               {this.props.shadeFutureOnGraph ? (
-                <g className='future-shade-pattern' ref='futureShadePattern'>
-                  <pattern
-                    height={4}
-                    id='diagonalHatch'
-                    patternUnits='userSpaceOnUse'
-                    width={4}
-                  >
-                    <path
-                      d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
-                      stroke={StyleConstants.Colors.FOG}
-                      strokeWidth={1}
-                    />
-                  </pattern>
-                  <rect
-                    fill={'url(#diagonalHatch)'}
-                    height={this.state.adjustedHeight}
-                    transform={this._getLineTranslation()}
-                    width={this.state.adjustedWidth - this._getXScaleValue(this.props.breakPointDate)}
-                    x={this._getXScaleValue(this.props.breakPointDate)}
-                    y={0}
-                  />
-                </g>
+                <ShadedRectangleGroup
+                  adjustedHeight={this.state.adjustedHeight}
+                  adjustedWidth={this.state.adjustedWidth}
+                  breakPointDate={this.props.breakPointDate}
+                  lineTranslation={this._getLineTranslation()}
+                  xScaleValue={this._getXScaleValue}
+                />
               ) : null}
               <YAxis
                 yAxisFormat={this.props.yAxisFormatter}
