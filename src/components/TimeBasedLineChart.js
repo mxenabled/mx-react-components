@@ -166,6 +166,30 @@ const ChartLine = React.createClass({
   }
 });
 
+// Break Point
+const BreakPointGroup = React.createClass({
+  render () {
+    return (
+      <g className='break-point-items' ref='breakPointItems' transform={this.props.verticalLineTranslation}>
+        <line
+          className='break-point-line'
+          x1={this.props.xScaleValue(this.props.breakPointDate)}
+          x2={this.props.xScaleValue(this.props.breakPointDate)}
+          y1={this.props.margin.top}
+          y2={this.props.adjustedHeight + this.props.margin.bottom}
+        />
+        <text
+          className='break-point-label'
+          x={this.props.xScaleValue(this.props.breakPointDate) + 10}
+          y={40}
+        >
+          {this.props.breakPointLabel}
+        </text>
+      </g>
+    );
+  }
+});
+
 // Axis
 const TimeAxis = React.createClass({
   componentWillMount () {
@@ -499,6 +523,13 @@ const TimeBasedLineChart = React.createClass({
       .style(styles.circle)
       .style('stroke', this.props.lineColor);
 
+    // Style Break Point Items
+    chart.selectAll('.break-point-label')
+      .style(styles.breakPointLabel);
+
+    chart.selectAll('.break-point-line')
+      .style(styles.breakPointLine);
+
     // Style rest of chart elements
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
@@ -541,7 +572,6 @@ const TimeBasedLineChart = React.createClass({
   render () {
     //Items left
     // - Fix X Axis Ticks
-    // - details spacing to match new design from Derek
     // - move break point and line circles to their own components
     // - transition line circles
     // - ease in linear on hover circle/line/date-block
@@ -600,24 +630,14 @@ const TimeBasedLineChart = React.createClass({
                 xScaleFunction={this._getXScaleFunction}
               />
               {this.props.showBreakPoint ? (
-                <g className='break-point-items' ref='breakPointItems' transform={this._getVerticalLineTranslation()}>
-                  <g className='break-point' ref='breakPoint'>
-                    <line
-                      x1={this._getXScaleValue(this.props.breakPointDate)}
-                      x2={this._getXScaleValue(this.props.breakPointDate)}
-                      y1={this.props.margin.top}
-                      y2={this.state.adjustedHeight + this.props.margin.bottom}
-                      style={styles.breakPointLine}
-                    />
-                    <text
-                      style={styles.breakPointLabel}
-                      x={this._getXScaleValue(this.props.breakPointDate) + 10}
-                      y={40}
-                    >
-                      {this.props.breakPointLabel}
-                    </text>
-                  </g>
-                </g>
+                <BreakPointGroup
+                  adjustedHeight={this.state.adjustedHeight}
+                  breakPointDate={this.props.breakPointDate}
+                  breakPointLabel={this.props.breakPointLabel}
+                  margin={this.props.margin}
+                  verticalLineTranslation={this._getVerticalLineTranslation()}
+                  xScaleValue={this._getXScaleValue}
+                />
               ) : null}
               <ChartLine
                 adjustedHeight={this.state.adjustedHeight}
@@ -640,7 +660,6 @@ const TimeBasedLineChart = React.createClass({
                         cy={cy}
                         key={index}
                         r={3}
-                        style={styles.circle}
                       />
                     );
                   })
@@ -672,7 +691,6 @@ const TimeBasedLineChart = React.createClass({
                       cx={this._getXScaleValue(this.state.hoveredDataPoint.timeStamp)}
                       cy={this._getYScaleValue(this.state.hoveredDataPoint.value)}
                       r={5}
-                      style={styles.circle}
                     />
                   </g>
                   <g className='hover-state-date-text' ref='hoverStateDateText' transform={this._getLineTranslation()}>
@@ -693,7 +711,7 @@ const TimeBasedLineChart = React.createClass({
                       height={this.state.adjustedHeight}
                       key={'slice-' + index}
                       onMouseOver={this._handleChartMouseOver.bind(null, dataPoint)}
-                      style={styles.domain}
+                      opacity={0}
                       transform={this._getLineTranslation()}
                       width={this._getSliceWidth()}
                       x={this._getXScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this._getSliceMiddle()}
