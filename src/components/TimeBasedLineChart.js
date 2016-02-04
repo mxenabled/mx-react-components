@@ -268,7 +268,6 @@ const TimeAxisGroup = React.createClass({
       <g
         className='x-axis'
         ref='timeAxis'
-        style={{ fill: 'none', stroke: StyleConstants.Colors.CHARCOAL, strokeWidth: 1 }}
         transform={this.props.translation}
       />
     );
@@ -505,7 +504,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getTimeAxisTranslation () {
-    const x = this.props.margin.left;
+    const x = this.props.margin.left - 10;
     const y = this.props.height - this.props.margin.bottom - 10;
 
     return 'translate(' + x + ',' + y + ')';
