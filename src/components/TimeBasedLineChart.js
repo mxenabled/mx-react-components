@@ -499,14 +499,20 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
-  // Call backs
+  // Handle functions
+  _handleChartMouseLeave () {
+    this.setState({
+      hoveredDataPoint: null
+    });
+  },
+
   _handleChartMouseOver (hoveredDataPoint) {
     this.setState({
       hoveredDataPoint
     });
   },
 
-  // Translate positions via use of margins
+  // Helper Functions
   _getVerticalLineTranslation () {
     return 'translate(' + this.props.margin.left + ', -10)';
   },
@@ -531,7 +537,6 @@ const TimeBasedLineChart = React.createClass({
     return 'translate(' + x + ',' + y + ')';
   },
 
-  //Parse Data
   _getDataMinMaxValues () {
     const max = d3.max(this.props.data, d => {
       return Math.ceil(d.value / 1000) * 1000;
@@ -558,7 +563,6 @@ const TimeBasedLineChart = React.createClass({
     }
   },
 
-  // Alignment/Spacing Helpers
   _getSliceMiddle () {
     return this._getSliceWidth() / 2;
   },
@@ -599,7 +603,6 @@ const TimeBasedLineChart = React.createClass({
     return yScale(value);
   },
 
-  // Axis Ticks
   _getYAxisTickValues () {
     // Magic Voodoo from the interwebs. See link for more details
     // http://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axis
@@ -621,7 +624,6 @@ const TimeBasedLineChart = React.createClass({
     return values;
   },
 
-  // Style Helpers
   _styleChart () {
     const chart = d3.select(this.refs.chart);
 
@@ -641,22 +643,14 @@ const TimeBasedLineChart = React.createClass({
     chart.select('g.y-axis').selectAll('text')
       .style(styles.yAxisLabel)
       .style('fill', d => {
-        if (d === 0) {
-          return StyleConstants.Colors.CHARCOAL;
-        }
-
-        return StyleConstants.Colors.ASH;
+        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH;
       })
       .attr('transform', 'translate(-10,0)');
 
     // Style y axis ticks
     chart.select('g.y-axis').selectAll('line')
       .style('stroke', d => {
-        if (d === 0) {
-          return StyleConstants.Colors.CHARCOAL;
-        }
-
-        return StyleConstants.Colors.FOG
+        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
       });
 
     // Style Circles
@@ -685,18 +679,10 @@ const TimeBasedLineChart = React.createClass({
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.grid-line .tick').style('stroke', d => {
-        if (d === 0) {
-          return StyleConstants.Colors.CHARCOAL;
-        }
-
-        return StyleConstants.Colors.FOG;
+        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
       })
       .style('stroke-dasharray', d => {
-        if (d === 0) {
-          return 'none';
-        }
-
-        return '4,4';
+        return d === 0 ? 'none' : '4,4';
       });
   },
 
@@ -721,18 +707,15 @@ const TimeBasedLineChart = React.createClass({
   },
 
   render () {
-    //Items left
-    // - transition line circles
-    // - ease in linear on hover circle/line/date-block
-
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
           <div>
             <svg
               height={this.props.height}
-              width={this.props.width}
+              onMouseLeave={this._handleChartMouseLeave}
               ref='chart'
+              width={this.props.width}
             >
               {this.props.shadeFutureOnGraph ? (
                 <ShadedRectangleGroup
