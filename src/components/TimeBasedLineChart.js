@@ -111,7 +111,7 @@ const styles = {
 };
 
 // Line
-const ChartLine = React.createClass({
+const ChartLineGroup = React.createClass({
   componentWillMount () {
     const flatLine = d3.svg.line()
       .x(d => {
@@ -167,7 +167,7 @@ const ChartLine = React.createClass({
 });
 
 // Axis
-const TimeAxis = React.createClass({
+const TimeAxisGroup = React.createClass({
   componentWillMount () {
     const timeAxis = d3.svg.axis()
       .scale(this.props.xScaleFunction())
@@ -195,11 +195,18 @@ const TimeAxis = React.createClass({
   },
 
   render () {
-    return <g className='x-axis' ref='timeAxis' style={{ fill: 'none', stroke: StyleConstants.Colors.CHARCOAL, strokeWidth: 1 }} transform={this.props.translation} />;
+    return (
+      <g
+        className='x-axis'
+        ref='timeAxis'
+        style={{ fill: 'none', stroke: StyleConstants.Colors.CHARCOAL, strokeWidth: 1 }}
+        transform={this.props.translation}
+      />
+    );
   }
 });
 
-const YAxis = React.createClass({
+const YAxisGroup = React.createClass({
   componentWillMount () {
     const yAxis = d3.svg.axis()
       .scale(this.props.yScaleFunction())
@@ -230,7 +237,7 @@ const YAxis = React.createClass({
   }
 });
 
-const YGridLines = React.createClass({
+const YGridLinesGroup = React.createClass({
   componentWillMount () {
     const yGridLines = d3.svg.axis()
       .scale(this.props.yScaleFunction())
@@ -266,7 +273,7 @@ const YGridLines = React.createClass({
 const BreakPointGroup = React.createClass({
   render () {
     return (
-      <g className='break-point-items' ref='breakPointItems' transform={this.props.verticalLineTranslation}>
+      <g className='break-point-items' ref='breakPointItems' transform={this.props.translation}>
         <line
           className='break-point-line'
           x1={this.props.xScaleValue(this.props.breakPointDate)}
@@ -281,6 +288,29 @@ const BreakPointGroup = React.createClass({
         >
           {this.props.breakPointLabel}
         </text>
+      </g>
+    );
+  }
+});
+
+const SlicesGroup = React.createClass({
+  render () {
+    return (
+      <g className='slices' ref='slices'>
+        {this.props.data.map((dataPoint, index) => {
+          return (
+            <rect
+              height={this.props.adjustedHeight}
+              key={'slice-' + index}
+              onMouseOver={this.props.handleChartMouseOver.bind(null, dataPoint)}
+              opacity={0}
+              transform={this.props.translation}
+              width={this.props.sliceWidth}
+              x={this.props.xScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this.props.sliceMiddle}
+              y={0}
+            />
+          );
+        })}
       </g>
     );
   }
@@ -305,7 +335,7 @@ const ShadedRectangleGroup = React.createClass({
         <rect
           fill={'url(#diagonalHatch)'}
           height={this.props.adjustedHeight}
-          transform={this.props.lineTranslation}
+          transform={this.props.translation}
           width={this.props.adjustedWidth - this.props.xScaleValue(this.props.breakPointDate)}
           x={this.props.xScaleValue(this.props.breakPointDate)}
           y={0}
@@ -620,24 +650,24 @@ const TimeBasedLineChart = React.createClass({
                   adjustedHeight={this.state.adjustedHeight}
                   adjustedWidth={this.state.adjustedWidth}
                   breakPointDate={this.props.breakPointDate}
-                  lineTranslation={this._getLineTranslation()}
+                  translation={this._getLineTranslation()}
                   xScaleValue={this._getXScaleValue}
                 />
               ) : null}
-              <YAxis
+              <YAxisGroup
                 yAxisFormat={this.props.yAxisFormatter}
                 data={this.props.data}
                 tickValues={this._getYAxisTickValues()}
                 translation={this._getYAxisTranslation()}
                 yScaleFunction={this._getYScaleFunction}
               />
-              <YGridLines
+              <YGridLinesGroup
                 tickSize={this.state.adjustedWidth * -1}
                 tickValues={this._getYAxisTickValues()}
                 translation={this._getYAxisTranslation()}
                 yScaleFunction={this._getYScaleFunction}
               />
-              <TimeAxis
+              <TimeAxisGroup
                 data={this.props.data}
                 timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
                 translation={this._getTimeAxisTranslation()}
@@ -649,11 +679,11 @@ const TimeBasedLineChart = React.createClass({
                   breakPointDate={this.props.breakPointDate}
                   breakPointLabel={this.props.breakPointLabel}
                   margin={this.props.margin}
-                  verticalLineTranslation={this._getVerticalLineTranslation()}
+                  translation={this._getVerticalLineTranslation()}
                   xScaleValue={this._getXScaleValue}
                 />
               ) : null}
-              <ChartLine
+              <ChartLineGroup
                 adjustedHeight={this.state.adjustedHeight}
                 data={this.props.data}
                 getXScaleValue={this._getXScaleValue}
@@ -718,22 +748,15 @@ const TimeBasedLineChart = React.createClass({
                   </g>
                 </g>
               ) : null}
-              <g className='slices' ref='svgSlices'>
-                {this.props.data.map((dataPoint, index) => {
-                  return (
-                    <rect
-                      height={this.state.adjustedHeight}
-                      key={'slice-' + index}
-                      onMouseOver={this._handleChartMouseOver.bind(null, dataPoint)}
-                      opacity={0}
-                      transform={this._getLineTranslation()}
-                      width={this._getSliceWidth()}
-                      x={this._getXScaleValue(moment.unix(dataPoint.timeStamp).startOf(this.props.rangeType).unix()) - this._getSliceMiddle()}
-                      y={0}
-                    />
-                  );
-                })}
-              </g>
+              <SlicesGroup
+                adjustedHeight={this.state.adjustedHeight}
+                data={this.props.data}
+                handleChartMouseOver={this._handleChartMouseOver}
+                sliceMiddle={this._getSliceMiddle()}
+                sliceWidth={this._getSliceWidth()}
+                translation={this._getLineTranslation()}
+                xScaleValue={this._getXScaleValue}
+              />
             </svg>
             <div style={styles.hoveredDataPointDetails}>
               {this._renderHoveredDataPointDetails()}
