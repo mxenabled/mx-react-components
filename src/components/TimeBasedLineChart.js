@@ -167,13 +167,27 @@ const ChartLineGroup = React.createClass({
 });
 
 const CirclesGroup = React.createClass({
+  componentDidMount () {
+    this._animateCircles();
+  },
+
+  componentDidUpdate () {
+    this._animateCircles();
+  },
+
+  _animateCircles () {
+    d3.select(this.refs.circleGroup).selectAll('.circle').data(this.props.data).transition().attr('cy', d => {
+      return this.props.yScaleValue(d.value);
+    });
+  },
+
   render () {
     return (
       <g className='circle-group' ref='circleGroup' transform={this.props.translation}>
         {this.props.data.length <= 45 ? (
           this.props.data.map((item, index) => {
             const cx = this.props.xScaleValue(moment.unix(item.timeStamp).startOf(this.props.rangeType).unix());
-            const cy = this.props.yScaleValue(item.value);
+            const cy = this.props.adjustedHeight;
 
             return (
               <circle
@@ -671,12 +685,12 @@ const TimeBasedLineChart = React.createClass({
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.grid-line .tick').style('stroke', d => {
-      if (d === 0) {
-        return StyleConstants.Colors.CHARCOAL;
-      }
+        if (d === 0) {
+          return StyleConstants.Colors.CHARCOAL;
+        }
 
-      return StyleConstants.Colors.FOG;
-    })
+        return StyleConstants.Colors.FOG;
+      })
       .style('stroke-dasharray', d => {
         if (d === 0) {
           return 'none';
@@ -768,6 +782,7 @@ const TimeBasedLineChart = React.createClass({
                 translation={this._getLineTranslation()}
               />
               <CirclesGroup
+                adjustedHeight={this.state.adjustedHeight}
                 data={this.props.data}
                 rangeType={this.props.rangeType}
                 translation={this._getLineTranslation()}
