@@ -6,7 +6,7 @@ const ChartUtils = require('../../utils/Chart');
 const AxisGroup = React.createClass({
   propTypes: {
     axis: React.PropTypes.string.isRequired,
-    axisFormat: React.PropTypes.string.isRequired,
+    axisFormatFunction: React.PropTypes.func.isRequired,
     data: React.PropTypes.array.isRequired,
     orientation: React.PropTypes.string.isRequired,
     scaleFunction: React.PropTypes.func.isRequired,
@@ -25,7 +25,7 @@ const AxisGroup = React.createClass({
     const axisFunction = d3.svg.axis()
       .scale(this.props.scaleFunction())
       .orient(this.props.orientation)
-      .tickFormat(this.props.axisFormat)
+      .tickFormat(this.props.axisFormatFunction)
       .ticks(tickValues.length)
       .tickValues(tickValues);
 
