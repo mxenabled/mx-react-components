@@ -188,7 +188,7 @@ const Select = React.createClass({
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
-          {this._renderOptions()}
+          {this.props.options.length ? this._renderOptions() : null}
         </div>
 
         {isMobile ? (
