@@ -20,20 +20,6 @@ const TimeXAxisGroup = React.createClass({
     };
   },
 
-  componentWillMount () {
-    const timeAxisFunction = d3.svg.axis()
-      .scale(this.props.xScaleFunction())
-      .tickFormat(d => {
-        return moment.unix(d).format(this.props.timeAxisFormat);
-      })
-      .tickSize(this.props.tickSize, this.props.tickSize)
-      .ticks(this.props.numberOfTicks);
-
-    this.setState({
-      timeAxisFunction
-    });
-  },
-
   componentDidMount () {
     this._renderAxis();
   },
@@ -43,7 +29,15 @@ const TimeXAxisGroup = React.createClass({
   },
 
   _renderAxis () {
-    d3.select(this.refs.timeAxis).call(this.state.timeAxisFunction);
+    const timeAxisFunction = d3.svg.axis()
+    .scale(this.props.xScaleFunction())
+    .tickFormat(d => {
+      return moment.unix(d).format(this.props.timeAxisFormat);
+    })
+    .tickSize(this.props.tickSize, this.props.tickSize)
+    .ticks(this.props.numberOfTicks);
+
+    d3.select(this.refs.timeAxis).call(timeAxisFunction);
   },
 
   render () {
