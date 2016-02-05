@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>1.6.9</h3>
+        <ul>
+          <li>Select: Hides the shadow when there is no options to show (<a href='https://github.com/mxenabled/mx-react-components/pull/174'>#174</a>)</li>
+        </ul>
+
         <h3>1.6.8</h3>
         <ul>
           <li>Select: Removed opacity of the options (<a href='https://github.com/mxenabled/mx-react-components/pull/166'>#166</a>)</li>
