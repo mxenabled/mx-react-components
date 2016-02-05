@@ -97,8 +97,7 @@ const styles = {
     fontFamily: StyleConstants.Fonts.REGULAR,
     fontSize: StyleConstants.FontSizes.MEDIUM,
     paddingRight: 5,
-    textAlign: 'right',
-    width: 100
+    textAlign: 'right'
   },
   hoveredDataPointValue: {
     boxSizing: 'border-box',
@@ -107,7 +106,7 @@ const styles = {
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
     fontSize: StyleConstants.FontSizes.MEDIUM,
     textAlign: 'left',
-    width: 100
+    width: 90
   },
 
   // Zero State
