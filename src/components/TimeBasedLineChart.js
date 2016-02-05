@@ -1,5 +1,4 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 const Radium = require('radium');
 
 const d3 = require('d3');
@@ -38,12 +37,12 @@ const styles = {
     fill: StyleConstants.Colors.ASH,
     'font-family': StyleConstants.Fonts.REGULAR,
     'font-size': StyleConstants.FontSizes.SMALL,
-    stroke: 'none',
+    stroke: 'none'
   },
   breakPointLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.FOG,
-    'stroke-width': 1,
+    'stroke-width': 1
   },
   circle: {
     fill: StyleConstants.Colors.WHITE,
@@ -70,7 +69,7 @@ const styles = {
   verticalLine: {
     fill: 'none',
     stroke: StyleConstants.Colors.ASH,
-    'stroke-width': 1,
+    'stroke-width': 1
   },
   xAxisLabel: {
     fill: StyleConstants.Colors.ASH,
@@ -121,13 +120,19 @@ const styles = {
 };
 
 const HoveredDataPointGroup = React.createClass({
-  props: {
+  propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     hoveredDataPoint: React.PropTypes.object.isRequired,
     rangeType: React.PropTypes.string.isRequried,
-    translation: React.PropTypes.string.isRequired,
+    translation: React.PropTypes.string,
     xScaleValueFunction: React.PropTypes.func.isRequired,
     yScaleValueFunction: React.PropTypes.func.isRequired
+  },
+
+  getDefaultProps () {
+    return {
+      translation: 'translate(0,0)'
+    };
   },
 
   render () {
@@ -225,10 +230,6 @@ const TimeBasedLineChart = React.createClass({
     this._styleChart();
   },
 
-  componentDidUpdate () {
-    this._styleChart();
-  },
-
   componentWillReceiveProps (newProps) {
     if (newProps.height !== null || newProps.width !== null || newProps.margin !== null) {
       const height = newProps.height || this.props.height;
@@ -243,6 +244,10 @@ const TimeBasedLineChart = React.createClass({
         adjustedWidth
       });
     }
+  },
+
+  componentDidUpdate () {
+    this._styleChart();
   },
 
   // Handle functions
@@ -260,17 +265,21 @@ const TimeBasedLineChart = React.createClass({
 
   // Helper Functions
   _getFormatedValue (value, type, format) {
+    let formattedValue = '';
+
     switch (type) {
       case 'date':
-        return moment.unix(value).format(format);
+        formattedValue = moment.unix(value).format(format);
         break;
       case 'number':
-        return numeral(value).format(format);
+        formattedValue = numeral(value).format(format);
         break;
       default:
-        return value;
+        formattedValue = value;
         break;
     }
+
+    return formattedValue;
   },
 
   // Translation Helpers
@@ -384,11 +393,11 @@ const TimeBasedLineChart = React.createClass({
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
     chart.selectAll('.y-grid-line .tick').style('stroke', d => {
-        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
-      })
-      .style('stroke-dasharray', d => {
-        return d === 0 ? 'none' : '4,4';
-      });
+      return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
+    })
+    .style('stroke-dasharray', d => {
+      return d === 0 ? 'none' : '4,4';
+    });
   },
 
   // Render functions
@@ -398,7 +407,7 @@ const TimeBasedLineChart = React.createClass({
         const value = this.state.hoveredDataPoint[item.key];
 
         return (
-          <div style={styles.hoveredDataPointDetail} key={'details-' + index}>
+          <div key={'details-' + index} style={styles.hoveredDataPointDetail}>
             <div style={styles.hoveredDataPointLabel}>
               {item.label}
             </div>
@@ -436,16 +445,16 @@ const TimeBasedLineChart = React.createClass({
                 axisFormat={this.props.yAxisFormatter}
                 data={this.props.data}
                 orientation='left'
-                translation={this._getYAxisTranslation()}
                 scaleFunction={this._getYScaleFunction}
+                translation={this._getYAxisTranslation()}
               />
               <GridLinesGroup
                 axis='y'
                 data={this.props.data}
                 orientation='left'
+                scaleFunction={this._getYScaleFunction}
                 tickSize={this.state.adjustedWidth * -1}
                 translation={this._getYAxisTranslation()}
-                scaleFunction={this._getYScaleFunction}
               />
               <TimeXAxisGroup
                 data={this.props.data}
@@ -466,10 +475,10 @@ const TimeBasedLineChart = React.createClass({
               <LineGroup
                 adjustedHeight={this.state.adjustedHeight}
                 data={this.props.data}
-                xScaleValueFunction={this._getXScaleValue}
-                yScaleValueFunction={this._getYScaleValue}
                 lineColor={this.props.lineColor}
                 translation={this._getLineTranslation()}
+                xScaleValueFunction={this._getXScaleValue}
+                yScaleValueFunction={this._getYScaleValue}
               />
               <CirclesGroup
                 adjustedHeight={this.state.adjustedHeight}

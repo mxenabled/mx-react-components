@@ -6,7 +6,7 @@ const Chart = {
       return Math.ceil(d[axis] / 1000) * 1000;
     });
 
-    let min = d3.min(data, d => {
+    const min = d3.min(data, d => {
       return Math.floor(d[axis] / 1000) * 1000;
     });
 
@@ -19,7 +19,7 @@ const Chart = {
     const tempStep = range / 6;
     const magnitude = Math.floor(Math.log10(tempStep));
     const magnitudePower = Math.pow(10, magnitude);
-    const magnitudeMultiplier = parseInt(tempStep / magnitudePower + 0.5);
+    const magnitudeMultiplier = parseInt(tempStep / magnitudePower + 0.5, 10);
     const stepSize = magnitudeMultiplier * magnitudePower;
 
     const values = [];

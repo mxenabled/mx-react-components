@@ -1,10 +1,9 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const StyleConstants = require('../../constants/Style');
 
 const ShadedRectangleGroup = React.createClass({
-  props: {
+  propTypes: {
     fillColor: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
     translation: React.PropTypes.string,

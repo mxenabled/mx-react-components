@@ -1,8 +1,7 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const BreakPointGroup = React.createClass({
-  props: {
+  propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     breakPointDate: React.PropTypes.number.isRequired,
     breakPointLabel: React.PropTypes.string.isRequired,
@@ -14,7 +13,7 @@ const BreakPointGroup = React.createClass({
   getDefaultProps () {
     return {
       translation: 'translate(0,0)'
-    }
+    };
   },
 
   render () {

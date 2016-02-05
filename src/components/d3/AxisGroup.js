@@ -1,18 +1,16 @@
 const React = require('react');
-const ReactDom = require('react-dom');
-
 const d3 = require('d3');
 
 const ChartUtils = require('../../utils/Chart');
 
 const AxisGroup = React.createClass({
-  props: {
+  propTypes: {
     axis: React.PropTypes.string.isRequired,
+    axisFormat: React.PropTypes.string.isRequired,
     data: React.PropTypes.array.isRequired,
     orientation: React.PropTypes.string.isRequired,
-    translation: React.PropTypes.string,
-    axisFormat: React.PropTypes.string.isRequired,
-    scaleFunction: React.PropTypes.func.isRequired
+    scaleFunction: React.PropTypes.func.isRequired,
+    translation: React.PropTypes.string
   },
 
   getDefaultProps () {

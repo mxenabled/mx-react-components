@@ -1,8 +1,7 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const SlicesGroup = React.createClass({
-  props: {
+  propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     data: React.PropTypes.array.isRequired,
     handleChartMouseOver: React.PropTypes.func.isRequired,

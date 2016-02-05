@@ -1,11 +1,10 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const d3 = require('d3');
 const moment = require('moment');
 
 const TimeXAxisGroup = React.createClass({
-  props: {
+  propTypes: {
     numberOfTicks: React.PropTypes.number,
     tickSize: React.PropTypes.number,
     timeAxisFormat: React.PropTypes.string.isRequired,

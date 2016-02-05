@@ -1,10 +1,9 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const StyleConstants = require('../../constants/Style');
 
 const CirclesGroup = React.createClass({
-  props: {
+  propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     data: React.PropTypes.array.isRequired,
     shouldAnimate: React.PropTypes.bool,

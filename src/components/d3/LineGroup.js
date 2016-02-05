@@ -1,19 +1,18 @@
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const d3 = require('d3');
 
 const StyleConstants = require('../../constants/Style');
 
 const LineGroup = React.createClass({
-  props: {
+  propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     data: React.PropTypes.array.isRequired,
     lineColor: React.PropTypes.string,
     shouldAnimate: React.PropTypes.bool,
-    translate: React.PropTypes.string,
+    translation: React.PropTypes.string,
     xScaleValueFunction: React.PropTypes.func.isRequired,
-    yScaleValueFunction: React.PropTypes.func.isRequired,
+    yScaleValueFunction: React.PropTypes.func.isRequired
   },
 
   getDefaultProps () {
@@ -29,7 +28,7 @@ const LineGroup = React.createClass({
       .x(d => {
         return this.props.xScaleValueFunction(d.x);
       })
-      .y(d => {
+      .y(() => {
         return this.props.adjustedHeight;
       });
 
