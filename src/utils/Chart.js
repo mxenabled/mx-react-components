@@ -1,20 +1,20 @@
 const d3 = require('d3');
 
 const Chart = {
-  getDataMinMaxValues (data, key) {
+  getDataMinMaxValues (data, axis) {
     const max = d3.max(data, d => {
-      return Math.ceil(d[key] / 1000) * 1000;
+      return Math.ceil(d[axis] / 1000) * 1000;
     });
 
     let min = d3.min(data, d => {
-      return Math.floor(d[key] / 1000) * 1000;
+      return Math.floor(d[axis] / 1000) * 1000;
     });
 
     return { min, max };
   },
 
-  getYAxisTickValues (data) {
-    const minMaxValues = this.getDataMinMaxValues(data, 'y');
+  getAxisTickValues (data, axis) {
+    const minMaxValues = this.getDataMinMaxValues(data, axis);
     const range = minMaxValues.max - minMaxValues.min;
     const tempStep = range / 6;
     const magnitude = Math.floor(Math.log10(tempStep));

@@ -7,12 +7,13 @@ const moment = require('moment');
 const numeral = require('numeral');
 
 const BreakPointGroup = require('./d3/BreakPointGroup');
+const GridLinesGroup = require('./d3/GridLinesGroup');
 const CirclesGroup = require('./d3/CirclesGroup');
 const LineGroup = require('./d3/LineGroup');
 const ShadedRectangleGroup = require('./d3/ShadedRectangleGroup');
 const SlicesGroup = require('./d3/SlicesGroup');
 const TimeXAxisGroup = require('./d3/TimeXAxisGroup');
-const YAxisGroup = require('./d3/YAxisGroup');
+const AxisGroup = require('./d3/AxisGroup');
 
 const StyleConstants = require('../constants/Style');
 
@@ -169,43 +170,6 @@ const HoveredDataPointGroup = React.createClass({
         </g>
       </g>
     );
-  }
-});
-
-const YGridLinesGroup = React.createClass({
-  //Need to move this out to it's own component
-  //
-  //
-  componentWillMount () {
-    const tickValues = ChartUtils.getYAxisTickValues(this.props.data)
-
-    const yGridLines = d3.svg.axis()
-      .scale(this.props.yScaleFunction())
-      .orient(this.props.orientation)
-      .tickSize(this.props.tickSize, 0, 0)
-      .tickFormat('')
-      .ticks(tickValues.length)
-      .tickValues(tickValues);
-
-    this.setState({
-      yGridLines
-    });
-  },
-
-  componentDidMount () {
-    this._renderYGridLines();
-  },
-
-  componentDidUpdate () {
-    this._renderYGridLines();
-  },
-
-  _renderYGridLines () {
-    d3.select(this.refs.yGridLines).call(this.state.yGridLines);
-  },
-
-  render () {
-    return <g className='grid-line' ref='yGridLines' transform={this.props.translation} />;
   }
 });
 
@@ -369,7 +333,7 @@ const TimeBasedLineChart = React.createClass({
     const chart = d3.select(this.refs.chart);
 
     // Style x axis labels
-    chart.select('g.x-axis').selectAll('text')
+    chart.select('g.time-axis').selectAll('text')
       .attr('y', 12)
       .style(styles.xAxisLabel)
       .style('text-anchor', () => {
@@ -377,7 +341,7 @@ const TimeBasedLineChart = React.createClass({
       });
 
     // Style x axis ticks
-    chart.select('g.x-axis').selectAll('line')
+    chart.select('g.time-axis').selectAll('line')
       .style({ stroke: StyleConstants.Colors.FOG });
 
     // Style y axis labels
@@ -419,7 +383,7 @@ const TimeBasedLineChart = React.createClass({
     // Style rest of chart elements
     chart.selectAll('text').style(styles.text);
     chart.selectAll('.domain').style(styles.domain);
-    chart.selectAll('.grid-line .tick').style('stroke', d => {
+    chart.selectAll('.y-grid-line .tick').style('stroke', d => {
         return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
       })
       .style('stroke-dasharray', d => {
@@ -467,18 +431,21 @@ const TimeBasedLineChart = React.createClass({
                   y={0}
                 />
               ) : null}
-              <YAxisGroup
-                yAxisFormat={this.props.yAxisFormatter}
+              <AxisGroup
+                axis='y'
+                axisFormat={this.props.yAxisFormatter}
                 data={this.props.data}
+                orientation='left'
                 translation={this._getYAxisTranslation()}
-                yScaleFunction={this._getYScaleFunction}
+                scaleFunction={this._getYScaleFunction}
               />
-              <YGridLinesGroup
+              <GridLinesGroup
+                axis='y'
                 data={this.props.data}
                 orientation='left'
                 tickSize={this.state.adjustedWidth * -1}
                 translation={this._getYAxisTranslation()}
-                yScaleFunction={this._getYScaleFunction}
+                scaleFunction={this._getYScaleFunction}
               />
               <TimeXAxisGroup
                 data={this.props.data}
