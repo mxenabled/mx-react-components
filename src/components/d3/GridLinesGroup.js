@@ -6,7 +6,7 @@ const ChartUtils = require('../../utils/Chart');
 
 const GridLinesGroup = React.createClass({
   propTypes: {
-    axis: React.PropTypes.string.isRequried,
+    axis: React.PropTypes.string.isRequired,
     data: React.PropTypes.array.isRequired,
     orientation: React.PropTypes.string,
     scaleFunction: React.PropTypes.func.isRequired,

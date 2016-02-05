@@ -123,7 +123,7 @@ const HoveredDataPointGroup = React.createClass({
   propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     hoveredDataPoint: React.PropTypes.object.isRequired,
-    rangeType: React.PropTypes.string.isRequried,
+    rangeType: React.PropTypes.string.isRequired,
     translation: React.PropTypes.string,
     xScaleValueFunction: React.PropTypes.func.isRequired,
     yScaleValueFunction: React.PropTypes.func.isRequired
@@ -442,7 +442,7 @@ const TimeBasedLineChart = React.createClass({
               ) : null}
               <AxisGroup
                 axis='y'
-                axisFormat={this.props.yAxisFormatter}
+                axisFormatFunction={this.props.yAxisFormatter}
                 data={this.props.data}
                 orientation='left'
                 scaleFunction={this._getYScaleFunction}
