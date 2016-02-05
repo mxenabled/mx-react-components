@@ -21,7 +21,15 @@ const GridLinesGroup = React.createClass({
     };
   },
 
-  componentWillMount () {
+  componentDidMount () {
+    this._renderGridLines();
+  },
+
+  componentDidUpdate () {
+    this._renderGridLines();
+  },
+
+  _renderGridLines () {
     const tickValues = ChartUtils.getAxisTickValues(this.props.data, this.props.axis);
 
     const gridLinesFunction = d3.svg.axis()
@@ -32,21 +40,7 @@ const GridLinesGroup = React.createClass({
       .ticks(tickValues.length)
       .tickValues(tickValues);
 
-    this.setState({
-      gridLinesFunction
-    });
-  },
-
-  componentDidMount () {
-    this._renderGridLines();
-  },
-
-  componentDidUpdate () {
-    this._renderGridLines();
-  },
-
-  _renderGridLines () {
-    d3.select(this.refs[this.props.axis + 'GridLines']).call(this.state.gridLinesFunction);
+    d3.select(this.refs[this.props.axis + 'GridLines']).call(gridLinesFunction);
   },
 
   render () {

@@ -19,21 +19,6 @@ const AxisGroup = React.createClass({
     };
   },
 
-  componentWillMount () {
-    const tickValues = ChartUtils.getAxisTickValues(this.props.data, this .props.axis);
-
-    const axisFunction = d3.svg.axis()
-      .scale(this.props.scaleFunction())
-      .orient(this.props.orientation)
-      .tickFormat(this.props.axisFormatFunction)
-      .ticks(tickValues.length)
-      .tickValues(tickValues);
-
-    this.setState({
-      axisFunction
-    });
-  },
-
   componentDidMount () {
     this._renderAxis();
   },
@@ -43,7 +28,15 @@ const AxisGroup = React.createClass({
   },
 
   _renderAxis () {
-    d3.select(this.refs[this.props.axis + 'Axis']).call(this.state.axisFunction);
+    const tickValues = ChartUtils.getAxisTickValues(this.props.data, this .props.axis);
+    const axisFunction = d3.svg.axis()
+      .scale(this.props.scaleFunction())
+      .orient(this.props.orientation)
+      .tickFormat(this.props.axisFormatFunction)
+      .ticks(tickValues.length)
+      .tickValues(tickValues);
+
+    d3.select(this.refs[this.props.axis + 'Axis']).call(axisFunction);
   },
 
   render () {
