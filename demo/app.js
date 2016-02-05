@@ -287,128 +287,128 @@ const icons = [
 
 const lineChartData = [
   {
-    timeStamp: moment().subtract(15, 'days').startOf('day').unix(),
-    value: 800
+    x: moment().subtract(15, 'days').startOf('day').unix(),
+    y: 800
   },
   {
-    timeStamp: moment().subtract(14, 'days').startOf('day').unix(),
-    value: 900
+    x: moment().subtract(14, 'days').startOf('day').unix(),
+    y: 900
   },
   {
-    timeStamp: moment().subtract(13, 'days').startOf('day').unix(),
-    value: 1200
+    x: moment().subtract(13, 'days').startOf('day').unix(),
+    y: 1200
   },
   {
-    timeStamp: moment().subtract(12, 'days').startOf('day').unix(),
-    value: 850
+    x: moment().subtract(12, 'days').startOf('day').unix(),
+    y: 850
   },
   {
-    timeStamp: moment().subtract(11, 'days').startOf('day').unix(),
-    value: 660
+    x: moment().subtract(11, 'days').startOf('day').unix(),
+    y: 660
   },
   {
-    timeStamp: moment().subtract(10, 'days').startOf('day').unix(),
-    value: 720
+    x: moment().subtract(10, 'days').startOf('day').unix(),
+    y: 720
   },
   {
-    timeStamp: moment().subtract(9, 'days').startOf('day').unix(),
-    value: 900
+    x: moment().subtract(9, 'days').startOf('day').unix(),
+    y: 900
   },
   {
-    timeStamp: moment().subtract(8, 'days').startOf('day').unix(),
-    value: 700
+    x: moment().subtract(8, 'days').startOf('day').unix(),
+    y: 700
   },
   {
-    timeStamp: moment().subtract(7, 'days').startOf('day').unix(),
-    value: 600
+    x: moment().subtract(7, 'days').startOf('day').unix(),
+    y: 600
   },
   {
-    timeStamp: moment().subtract(6, 'days').startOf('day').unix(),
-    value: 1200
+    x: moment().subtract(6, 'days').startOf('day').unix(),
+    y: 1200
   },
   {
-    timeStamp: moment().subtract(5, 'days').startOf('day').unix(),
-    value: 900
+    x: moment().subtract(5, 'days').startOf('day').unix(),
+    y: 900
   },
   {
-    timeStamp: moment().subtract(4, 'days').startOf('day').unix(),
-    value: 800
+    x: moment().subtract(4, 'days').startOf('day').unix(),
+    y: 800
   },
   {
-    timeStamp: moment().subtract(3, 'days').startOf('day').unix(),
-    value: 600
+    x: moment().subtract(3, 'days').startOf('day').unix(),
+    y: 600
   },
   {
-    timeStamp: moment().subtract(2, 'days').startOf('day').unix(),
-    value: 1600
+    x: moment().subtract(2, 'days').startOf('day').unix(),
+    y: 1600
   },
   {
-    timeStamp: moment().subtract(1, 'days').startOf('day').unix(),
-    value: 1700
+    x: moment().subtract(1, 'days').startOf('day').unix(),
+    y: 1700
   },
   {
-    timeStamp: moment().startOf('day').unix(),
-    value: 0
+    x: moment().startOf('day').unix(),
+    y: 500
   },
   {
-    timeStamp: moment().add(1, 'days').startOf('day').unix(),
-    value: 1200
+    x: moment().add(1, 'days').startOf('day').unix(),
+    y: 1200
   },
   {
-    timeStamp: moment().add(2, 'days').startOf('day').unix(),
-    value: 1200
+    x: moment().add(2, 'days').startOf('day').unix(),
+    y: 1200
   },
   {
-    timeStamp: moment().add(3, 'days').startOf('day').unix(),
-    value: 1700
+    x: moment().add(3, 'days').startOf('day').unix(),
+    y: 1700
   },
   {
-    timeStamp: moment().add(4, 'days').startOf('day').unix(),
-    value: 1100
+    x: moment().add(4, 'days').startOf('day').unix(),
+    y: 1100
   },
   {
-    timeStamp: moment().add(5, 'days').startOf('day').unix(),
-    value: 1000
+    x: moment().add(5, 'days').startOf('day').unix(),
+    y: 1000
   },
   {
-    timeStamp: moment().add(6, 'days').startOf('day').unix(),
-    value: 900
+    x: moment().add(6, 'days').startOf('day').unix(),
+    y: 900
   },
   {
-    timeStamp: moment().add(7, 'days').startOf('day').unix(),
-    value: 1000
+    x: moment().add(7, 'days').startOf('day').unix(),
+    y: 1000
   },
   {
-    timeStamp: moment().add(8, 'days').startOf('day').unix(),
-    value: 850
+    x: moment().add(8, 'days').startOf('day').unix(),
+    y: 850
   },
   {
-    timeStamp: moment().add(9, 'days').startOf('day').unix(),
-    value: 1500
+    x: moment().add(9, 'days').startOf('day').unix(),
+    y: 1500
   },
   {
-    timeStamp: moment().add(10, 'days').startOf('day').unix(),
-    value: 1100
+    x: moment().add(10, 'days').startOf('day').unix(),
+    y: 1100
   },
   {
-    timeStamp: moment().add(11, 'days').startOf('day').unix(),
-    value: 1000
+    x: moment().add(11, 'days').startOf('day').unix(),
+    y: 1000
   },
   {
-    timeStamp: moment().add(12, 'days').startOf('day').unix(),
-    value: 800
+    x: moment().add(12, 'days').startOf('day').unix(),
+    y: 800
   },
   {
-    timeStamp: moment().add(13, 'days').startOf('day').unix(),
-    value: 1100
+    x: moment().add(13, 'days').startOf('day').unix(),
+    y: 1100
   },
   {
-    timeStamp: moment().add(14, 'days').startOf('day').unix(),
-    value: 1300
+    x: moment().add(14, 'days').startOf('day').unix(),
+    y: 1300
   },
   {
-    timeStamp: moment().add(15, 'days').startOf('day').unix(),
-    value: 2200
+    x: moment().add(15, 'days').startOf('day').unix(),
+    y: 2200
   }
 ];
 
@@ -548,15 +548,27 @@ const Demo = React.createClass({
             breakPointLabel={'Today'}
             data={this.state.lineChartData}
             height={400}
-            hoverCallBack={this._handleLineChartHover}
+            hoveredDataPointDetails={[
+              {
+                format: 'MMM DD, YYYY',
+                key: 'x',
+                label: 'Date',
+                type: 'date'
+              },
+              {
+                format: '$0,0',
+                key: 'y',
+                label: 'Ending Balance',
+                type: 'number'
+              }
+            ]}
             rangeType={'day'}
             showBreakPoint={true}
-            shadeAreaBelowZero={true}
             width={700}
           />
         </div>
 
-        <br/><br/>
+        <br/><br/><br/><br/>
         <div style={{ textAlign: 'center' }}>
           <ToggleSwitch />
         </div>
