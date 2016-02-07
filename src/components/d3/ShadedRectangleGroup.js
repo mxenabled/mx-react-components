@@ -20,6 +20,10 @@ const ShadedRectangleGroup = React.createClass({
   },
 
   render () {
+    const xValue = this.props.x < 0 ? 0 : this.props.x;
+    const width = this.props.width < 0 ? 0 : this.props.width;
+    const adjustedWidth = width - xValue;
+
     return (
       <g className='future-shade-pattern' ref='futureShadePattern'>
         <pattern
@@ -38,8 +42,8 @@ const ShadedRectangleGroup = React.createClass({
           fill={'url(#diagonalHatch)'}
           height={this.props.height}
           transform={this.props.translation}
-          width={this.props.width}
-          x={this.props.x}
+          width={adjustedWidth}
+          x={xValue}
           y={this.props.y}
         />
       </g>

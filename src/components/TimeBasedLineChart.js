@@ -434,7 +434,7 @@ const TimeBasedLineChart = React.createClass({
                 <ShadedRectangleGroup
                   height={this.state.adjustedHeight}
                   translation={this._getLineTranslation()}
-                  width={this.state.adjustedWidth - this._getXScaleValue(this.props.breakPointDate)}
+                  width={this.state.adjustedWidth}
                   x={this._getXScaleValue(this.props.breakPointDate)}
                   y={0}
                 />
