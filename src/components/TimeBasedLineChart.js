@@ -287,8 +287,9 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getTimeAxisTranslation () {
-    const x = this.props.margin.left - 10;
-    const y = this.props.height - this.props.margin.bottom - 10;
+    const offSet = 10;
+    const x = this.props.margin.left - offSet;
+    const y = this.props.height - this.props.margin.bottom - offSet;
 
     return 'translate(' + x + ',' + y + ')';
   },
@@ -298,7 +299,8 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getYAxisTranslation () {
-    const y = this.props.margin.top - 10;
+    const offSet = 10;
+    const y = this.props.margin.top - offSet;
 
     return 'translate(' + this.props.margin.left + ',' + y + ')';
   },
@@ -311,9 +313,10 @@ const TimeBasedLineChart = React.createClass({
   _getXScaleFunction () {
     const maxDate = this.props.data[this.props.data.length - 1].x;
     const minDate = this.props.data[0].x;
+    const offSet = 10;
 
     return d3.time.scale()
-      .range([0, this.state.adjustedWidth - 10])
+      .range([0, this.state.adjustedWidth - offSet])
       .domain([minDate, maxDate]);
   },
 
@@ -335,6 +338,18 @@ const TimeBasedLineChart = React.createClass({
     const yScale = this._getYScaleFunction();
 
     return yScale(value);
+  },
+
+  _getShadedRectangleWidth () {
+    const calculatedWidth = this.state.adjustedWidth - this._getShadedRectangleXValue();
+
+    return calculatedWidth < 0 ? 0 : calculatedWidth;
+  },
+
+  _getShadedRectangleXValue () {
+    const breakPointXValue = this._getXScaleValue(this.props.breakPointDate);
+
+    return breakPointXValue < 0 ? 0 : breakPointXValue;
   },
 
   _styleChart () {
@@ -434,8 +449,8 @@ const TimeBasedLineChart = React.createClass({
                 <ShadedRectangleGroup
                   height={this.state.adjustedHeight}
                   translation={this._getLineTranslation()}
-                  width={this.state.adjustedWidth}
-                  x={this._getXScaleValue(this.props.breakPointDate)}
+                  width={this._getShadedRectangleWidth()}
+                  x={this._getShadedRectangleXValue()}
                   y={0}
                 />
               ) : null}

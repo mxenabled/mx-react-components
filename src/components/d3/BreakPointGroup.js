@@ -17,6 +17,8 @@ const BreakPointGroup = React.createClass({
   },
 
   render () {
+    const breakPointLabelOffSet = 10;
+
     return (
       <g className='break-point-items' ref='breakPointItems' transform={this.props.translation}>
         <line
@@ -28,7 +30,7 @@ const BreakPointGroup = React.createClass({
         />
         <text
           className='break-point-label'
-          x={this.props.xScaleValueFunction(this.props.breakPointDate) + 10}
+          x={this.props.xScaleValueFunction(this.props.breakPointDate) + breakPointLabelOffSet}
           y={40}
         >
           {this.props.breakPointLabel}
