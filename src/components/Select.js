@@ -8,22 +8,44 @@ const StyleConstants = require('../constants/Style');
 
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
 
-class Select extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
+const Select = React.createClass({
+  propTypes: {
+    dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    onChange: React.PropTypes.func,
+    options: React.PropTypes.array,
+    optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    placeholderText: React.PropTypes.string,
+    scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    selected: React.PropTypes.object,
+    selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    valid: React.PropTypes.bool
+  },
+
+  getDefaultProps () {
+    return {
+      onChange () {},
+      options: [],
+      placeholderText: 'Select One',
+      selected: false,
+      valid: true
+    };
+  },
+
+  getInitialState () {
+    return {
       highlightedValue: null,
       isOpen: false,
       selected: false
     };
-  }
+  },
 
   _handleScrimClick () {
     this.setState({
       isOpen: false,
       highlightedValue: null
     });
-  }
+  },
 
   _handleClick () {
     if (!isMobile) {
@@ -31,7 +53,7 @@ class Select extends React.Component {
         isOpen: !this.state.isOpen
       });
     }
-  }
+  },
 
   _handleOptionClick (option) {
     this.setState({
@@ -41,7 +63,7 @@ class Select extends React.Component {
     });
 
     this.props.onChange(option);
-  }
+  },
 
   _handleSelectChange (e) {
     const selectedOption = this.props.options.filter(option => {
@@ -49,7 +71,7 @@ class Select extends React.Component {
     })[0];
 
     this._handleOptionClick(selectedOption);
-  }
+  },
 
   _handleInputKeyDown (e) {
     const highlightedValue = this.state.highlightedValue;
@@ -85,7 +107,7 @@ class Select extends React.Component {
         this._scrollListUp(previousIndex);
       }
     }
-  }
+  },
 
   _scrollListDown (nextIndex) {
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
@@ -95,7 +117,7 @@ class Select extends React.Component {
     if (heightFromTop > ul.clientHeight) {
       ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
     }
-  }
+  },
 
   _scrollListUp (prevIndex) {
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
@@ -105,16 +127,16 @@ class Select extends React.Component {
     if (heightFromBottom > ul.clientHeight) {
       ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
     }
-  }
+  },
 
   _renderScrim () {
     if (this.state.isOpen) {
       return (
         <div className='mx-select-scrim'
-        onClick={this._handleScrimClick.bind(this)} style={[styles.scrim, this.props.scrimStyle]} />
+        onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
       );
     }
-  }
+  },
 
   _renderOptions () {
     if (this.state.isOpen) {
@@ -132,7 +154,7 @@ class Select extends React.Component {
                 <li
                   className='mx-select-option'
                   key={option.displayValue + option.value}
-                  onClick={this._handleOptionClick.bind(this, option)}
+                  onClick={this._handleOptionClick.bind(null, option)}
                   ref={option.displayValue + option.value}
                   style={[styles.option, this.props.optionStyle, option === this.state.highlightedValue && styles.activeItem]}
                 >
@@ -144,7 +166,7 @@ class Select extends React.Component {
         );
       }
     }
-  }
+  },
 
   render () {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
@@ -152,8 +174,8 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
         <div className='mx-select-custom'
-        onClick={this._handleClick.bind(this)}
-        onKeyDown={this._handleInputKeyDown.bind(this)}
+        onClick={this._handleClick}
+        onKeyDown={this._handleInputKeyDown}
         style={[styles.component, this.props.dropdownStyle]}
         tabIndex='0'
         >
@@ -166,11 +188,11 @@ class Select extends React.Component {
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
-          {this._renderOptions()}
+          {this.props.options.length ? this._renderOptions() : null}
         </div>
 
         {isMobile ? (
-          <select className='mx-select-default' onChange={this._handleSelectChange.bind(this)} ref='defaultSelect' style={styles.select} value={selected.value}>
+          <select className='mx-select-default' onChange={this._handleSelectChange} ref='defaultSelect' style={styles.select} value={selected.value}>
             {this.props.options.map(option => {
               return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
             })}
@@ -179,7 +201,7 @@ class Select extends React.Component {
       </div>
     );
   }
-}
+});
 
 const styles = {
   caret: {
@@ -246,12 +268,10 @@ const styles = {
     backgroundColor: '#FFFFFF',
     padding: '10px',
     whiteSpace: 'nowrap',
-    opacity: 0.4,
 
     ':hover': {
       backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.WHITE,
-      opacity: 1
+      color: StyleConstants.Colors.WHITE
     }
   },
   scrim: {
@@ -262,27 +282,6 @@ const styles = {
     bottom: 0,
     left: 0
   }
-};
-
-Select.propTypes = {
-  dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  onChange: React.PropTypes.func,
-  options: React.PropTypes.array,
-  optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  placeholderText: React.PropTypes.string,
-  scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  selected: React.PropTypes.object,
-  selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-  valid: React.PropTypes.bool
-};
-
-Select.defaultProps = {
-  onChange () {},
-  options: [],
-  placeholderText: 'Select One',
-  selected: false,
-  valid: true
 };
 
 module.exports = Radium(Select);
