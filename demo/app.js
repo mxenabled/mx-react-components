@@ -558,7 +558,7 @@ const Demo = React.createClass({
               {
                 format: '$0,0',
                 key: 'y',
-                label: 'Ending Balance',
+                label: 'Value',
                 type: 'number'
               }
             ]}
