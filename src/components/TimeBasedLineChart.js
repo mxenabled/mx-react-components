@@ -180,7 +180,6 @@ const HoveredDataPointGroup = React.createClass({
 // Main Component
 const TimeBasedLineChart = React.createClass({
   propTypes: {
-    areaBelowZeroColor: React.PropTypes.string,
     breakPointDate: React.PropTypes.number,
     breakPointLabel: React.PropTypes.string,
     data: React.PropTypes.array.isRequired,
@@ -198,7 +197,6 @@ const TimeBasedLineChart = React.createClass({
 
   getDefaultProps () {
     return {
-      areaBelowZeroColor: StyleConstants.Colors.STRAWBERRY,
       breakPointDate: moment().startOf('day').unix(),
       breakPointLabel: 'Today',
       height: 400,
