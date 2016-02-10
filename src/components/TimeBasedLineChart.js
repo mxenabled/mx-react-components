@@ -44,6 +44,12 @@ const styles = {
     stroke: StyleConstants.Colors.FOG,
     'stroke-width': 1
   },
+  chartMargins: {
+    top: 20,
+    right: 20,
+    bottom: 20,
+    left: 75
+  },
   circle: {
     fill: StyleConstants.Colors.WHITE,
     'stroke-width': 2
@@ -209,7 +215,7 @@ const TimeBasedLineChart = React.createClass({
       breakPointLabel: 'Today',
       height: 400,
       lineColor: StyleConstants.Colors.PRIMARY,
-      margin: { top: 20, right: 20, bottom: 20, left: 75 },
+      margin: styles.chartMargins,
       rangeType: 'day',
       shadeFutureOnGraph: true,
       showBreakPoint: true,
