@@ -451,8 +451,8 @@ const TimeBasedLineChart = React.createClass({
     const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 
     return (
-      <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height, width: this.props.width }]}>
-        {this.props.data.length ? (
+      <div className='mx-time-based-line-chart' style={[styles.component, { height, width }]}>
+        {data.length ? (
           <div>
             <svg
               height={height}
