@@ -66,7 +66,7 @@ const LineGroup = React.createClass({
     const { data, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
 
     return (
-      <g className='chart-line-group' ref='chartLineGroup' transform={this.props.translation}>
+      <g className='chart-line-group' ref='chartLineGroup' transform={translation}>
         <path
           d={shouldAnimate ? this.state.flatLine(data) : this.state.line(data) }
           fill='none'

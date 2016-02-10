@@ -448,7 +448,7 @@ const TimeBasedLineChart = React.createClass({
 
   render () {
     const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, width, zeroState, yAxisFormatter } = this.props;
-    const { adjustedHeight, adjustedWidth, hoveredDataPoint} = this.state;
+    const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>

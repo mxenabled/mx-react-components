@@ -28,8 +28,8 @@ const BreakPointGroup = React.createClass({
           className='break-point-line'
           x1={breakPointXValue}
           x2={breakPointXValue}
-          y1={this.props.margin.top}
-          y2={this.props.adjustedHeight + this.props.margin.bottom}
+          y1={margin.top}
+          y2={adjustedHeight + margin.bottom}
         />
         <text
           className='break-point-label'
