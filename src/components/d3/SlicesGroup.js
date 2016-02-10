@@ -22,7 +22,7 @@ const SlicesGroup = React.createClass({
               opacity={0}
               transform={this.props.translation}
               width={this.props.sliceWidth}
-              x={this.props.xScaleValueFunction(dataPoint.x) - (this.props.sliceWidth / 2)}
+              x={this.props.xScaleValueFunction(dataPoint.x) - this.props.sliceWidth / 2}
               y={0}
             />
           );
