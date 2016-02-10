@@ -434,6 +434,7 @@ const TimeBasedLineChart = React.createClass({
 
   render () {
     const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, width, zeroState, yAxisFormatter } = this.props;
+    const { adjustedHeight, adjustedWidth, hoveredDataPoint} = this.state;
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
@@ -447,7 +448,7 @@ const TimeBasedLineChart = React.createClass({
             >
               {this.props.shadeFutureOnGraph ? (
                 <ShadedRectangleGroup
-                  height={this.state.adjustedHeight}
+                  height={adjustedHeight}
                   translation={this._getLineTranslation()}
                   width={this._getShadedRectangleWidth()}
                   x={this._getShadedRectangleXValue()}
@@ -467,7 +468,7 @@ const TimeBasedLineChart = React.createClass({
                 data={data}
                 orientation='left'
                 scaleFunction={this._getYScaleFunction}
-                tickSize={this.state.adjustedWidth * -1}
+                tickSize={adjustedWidth * -1}
                 translation={this._getYAxisTranslation()}
               />
               <TimeXAxisGroup
@@ -478,7 +479,7 @@ const TimeBasedLineChart = React.createClass({
               />
               {this.props.showBreakPoint ? (
                 <BreakPointGroup
-                  adjustedHeight={this.state.adjustedHeight}
+                  adjustedHeight={adjustedHeight}
                   breakPointDate={breakPointDate}
                   breakPointLabel={breakPointLabel}
                   margin={margin}
@@ -487,7 +488,7 @@ const TimeBasedLineChart = React.createClass({
                 />
               ) : null}
               <LineGroup
-                adjustedHeight={this.state.adjustedHeight}
+                adjustedHeight={adjustedHeight}
                 data={data}
                 lineColor={lineColor}
                 translation={this._getLineTranslation()}
@@ -495,7 +496,7 @@ const TimeBasedLineChart = React.createClass({
                 yScaleValueFunction={this._getYScaleValue}
               />
               <CirclesGroup
-                adjustedHeight={this.state.adjustedHeight}
+                adjustedHeight={adjustedHeight}
                 data={data}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
@@ -503,8 +504,8 @@ const TimeBasedLineChart = React.createClass({
               />
               {this.state.hoveredDataPoint ? (
                 <HoveredDataPointGroup
-                  adjustedHeight={this.state.adjustedHeight}
-                  hoveredDataPoint={this.state.hoveredDataPoint}
+                  adjustedHeight={adjustedHeight}
+                  hoveredDataPoint={hoveredDataPoint}
                   rangeType={rangeType}
                   translation={this._getLineTranslation()}
                   xScaleValueFunction={this._getXScaleValue}
@@ -512,7 +513,7 @@ const TimeBasedLineChart = React.createClass({
                 />
               ) : null}
               <SlicesGroup
-                adjustedHeight={this.state.adjustedHeight}
+                adjustedHeight={adjustedHeight}
                 data={data}
                 handleChartMouseOver={this._handleChartMouseOver}
                 sliceWidth={this._getSliceWidth()}
