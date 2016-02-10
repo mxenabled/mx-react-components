@@ -172,8 +172,8 @@ const HoveredDataPointGroup = React.createClass({
         <g className='hover-state-circle' ref='hoverStateCircle' transform={translation}>
           <circle
             className='circle'
-            cx={this.props.xScaleValueFunction(this.props.hoveredDataPoint.x)}
-            cy={this.props.yScaleValueFunction(this.props.hoveredDataPoint.y)}
+            cx={xScaleValueFunction(hoveredDataPoint.x)}
+            cy={yScaleValueFunction(hoveredDataPoint.y)}
             r={5}
           />
         </g>
