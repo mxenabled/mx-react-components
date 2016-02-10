@@ -135,27 +135,35 @@ const HoveredDataPointGroup = React.createClass({
   },
 
   render () {
+    const { adjustedHeight, hoveredDataPoint, rangeType, translation, xScaleValueFunction, yScaleValueFunction } = this.props;
+    const hoveredDataPointXScaleValue = xScaleValueFunction(hoveredDataPoint.x);
+    const hoveredDataPointYScaleValue = yScaleValueFunction(hoveredDataPoint.y);
+    const dateRectangleHeight = 30;
+    const dateRectangleWidth = 60;
+    const dateRectangleMiddle = dateRectangleWidth / 2;
+    const dateTextOffset = 20;
+
     return (
       <g className='hover-state' ref='hoverState'>
-        <g className='hover-state-line' ref='hoverStateLine' transform={this.props.translation}>
+        <g className='hover-state-line' ref='hoverStateLine' transform={translation}>
           <line
             className='hovered-data-point-line'
-            x1={this.props.xScaleValueFunction(this.props.hoveredDataPoint.x)}
-            x2={this.props.xScaleValueFunction(this.props.hoveredDataPoint.x)}
-            y1={this.props.adjustedHeight}
-            y2={this.props.yScaleValueFunction(this.props.hoveredDataPoint.y)}
+            x1={hoveredDataPointXScaleValue}
+            x2={hoveredDataPointXScaleValue}
+            y1={adjustedHeight}
+            y2={hoveredDataPointYScaleValue}
           />
         </g>
-        <g className='hover-state-date-rect' ref='hoverStateDateRect' transform={this.props.translation}>
+        <g className='hover-state-date-rect' ref='hoverStateDateRect' transform={translation}>
           <rect
             className='hovered-data-point-date'
-            height={30}
-            width={60}
-            x={this.props.xScaleValueFunction(this.props.hoveredDataPoint.x) - 30}
-            y={this.props.adjustedHeight}
+            height={dateRectangleHeight}
+            width={dateRectangleWidth}
+            x={hoveredDataPointXScaleValue - dateRectangleMiddle}
+            y={adjustedHeight}
           />
         </g>
-        <g className='hover-state-circle' ref='hoverStateCircle' transform={this.props.translation}>
+        <g className='hover-state-circle' ref='hoverStateCircle' transform={translation}>
           <circle
             className='circle'
             cx={this.props.xScaleValueFunction(this.props.hoveredDataPoint.x)}
@@ -163,13 +171,13 @@ const HoveredDataPointGroup = React.createClass({
             r={5}
           />
         </g>
-        <g className='hover-state-date-text' ref='hoverStateDateText' transform={this.props.translation}>
+        <g className='hover-state-date-text' ref='hoverStateDateText' transform={translation}>
           <text
             className='hovered-data-point-date-text'
-            x={this.props.xScaleValueFunction(this.props.hoveredDataPoint.x) - 20}
-            y={this.props.adjustedHeight + 20}
+            x={hoveredDataPointXScaleValue - dateTextOffset}
+            y={adjustedHeight + dateTextOffset}
           >
-            {moment.unix(this.props.hoveredDataPoint.x).format(this.props.rangeType === 'day' ? 'MMM DD' : 'MMM')}
+            {moment.unix(hoveredDataPoint.x).format(rangeType === 'day' ? 'MMM DD' : 'MMM')}
           </text>
         </g>
       </g>
