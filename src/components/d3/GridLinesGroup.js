@@ -44,7 +44,13 @@ const GridLinesGroup = React.createClass({
   },
 
   render () {
-    return <g className={this.props.axis + '-grid-line'} ref={this.props.axis + 'GridLines'} transform={this.props.translation} />;
+    return (
+      <g
+        className={this.props.axis + '-grid-line'}
+        ref={this.props.axis + 'GridLines'}
+        transform={this.props.translation}
+      />
+    );
   }
 });
 
