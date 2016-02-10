@@ -2,13 +2,19 @@ const d3 = require('d3');
 
 const Chart = {
   getDataMinMaxValues (data, axis) {
-    const max = d3.max(data, d => {
-      return Math.ceil(d[axis] / 1000) * 1000;
+    let max = d3.max(data, d => {
+      return d[axis];
     });
 
-    const min = d3.min(data, d => {
-      return Math.floor(d[axis] / 1000) * 1000;
+    let min = d3.min(data, d => {
+      return d[axis];
     });
+
+    const maxDigits = Math.ceil(max).toString().length - 1;
+    const multiplier = Math.pow(10, maxDigits);
+
+    max = Math.ceil(max / multiplier) * multiplier;
+    min = Math.floor(min / multiplier) * multiplier;
 
     return { min, max };
   },
