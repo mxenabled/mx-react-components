@@ -11,10 +11,12 @@ const Chart = {
     });
 
     const maxDigits = Math.ceil(max).toString().length - 1;
-    const multiplier = Math.pow(10, maxDigits);
+    const minDigits = Math.floor(min).toString().length - 1;
+    const maxMultiplier = Math.pow(10, maxDigits);
+    const minMultiplier = Math.pow(10, minDigits);
 
-    max = Math.ceil(max / multiplier) * multiplier;
-    min = Math.floor(min / multiplier) * multiplier;
+    max = Math.ceil(max / maxMultiplier) * maxMultiplier;
+    min = Math.floor(min / minMultiplier) * minMultiplier;
 
     return { min, max };
   },
