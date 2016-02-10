@@ -10,6 +10,7 @@ const LineGroup = React.createClass({
     data: React.PropTypes.array.isRequired,
     lineColor: React.PropTypes.string,
     shouldAnimate: React.PropTypes.bool,
+    strokeWidth: React.PropTypes.number,
     translation: React.PropTypes.string,
     xScaleValueFunction: React.PropTypes.func.isRequired,
     yScaleValueFunction: React.PropTypes.func.isRequired
@@ -19,6 +20,7 @@ const LineGroup = React.createClass({
     return {
       lineColor: StyleConstants.Colors.CHARCOAL,
       shouldAnimate: true,
+      strokeWidth: 2,
       translation: 'translate(0,0)'
     };
   },
@@ -61,14 +63,16 @@ const LineGroup = React.createClass({
   },
 
   render () {
+    const { data, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
+
     return (
       <g className='chart-line-group' ref='chartLineGroup' transform={this.props.translation}>
         <path
-          d={this.props.shouldAnimate ? this.state.flatLine(this.props.data) : this.state.line(this.props.data) }
+          d={shouldAnimate ? this.state.flatLine(data) : this.state.line(data) }
           fill='none'
           ref='chartLine'
-          stroke={this.props.lineColor}
-          strokeWidth={2}
+          stroke={lineColor}
+          strokeWidth={strokeWidth}
         />
       </g>
     );
