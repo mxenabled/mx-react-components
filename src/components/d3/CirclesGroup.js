@@ -38,12 +38,15 @@ const CirclesGroup = React.createClass({
   },
 
   render () {
+    const { adjustedHeight, circleRadius, data, shouldAnimate, translation, xScaleValueFunction, yScaleValueFunction } = this.props;
+    const preventCircleOverlapCutOff = 45;
+
     return (
-      <g className='circle-group' ref='circleGroup' transform={this.props.translation}>
-        {this.props.data.length <= 45 ? (
-          this.props.data.map((item, index) => {
-            const cx = this.props.xScaleValueFunction(item.x);
-            const cy = this.props.shouldAnimate ? this.props.adjustedHeight : this.props.yScaleValueFunction(item.y);
+      <g className='circle-group' ref='circleGroup' transform={translation}>
+        {data.length <= preventCircleOverlapCutOff ? (
+          data.map((item, index) => {
+            const cx = xScaleValueFunction(item.x);
+            const cy = shouldAnimate ? adjustedHeight : yScaleValueFunction(item.y);
 
             return (
               <circle
@@ -52,7 +55,7 @@ const CirclesGroup = React.createClass({
                 cy={cy}
                 fill={StyleConstants.Colors.WHITE}
                 key={index}
-                r={this.props.circleRadius}
+                r={circleRadius}
                 stroke={StyleConstants.Colors.CHARCOAL}
               />
             );
