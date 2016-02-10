@@ -433,15 +433,17 @@ const TimeBasedLineChart = React.createClass({
   },
 
   render () {
+    const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, width, zeroState, yAxisFormatter } = this.props;
+
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height: this.props.height + 'px', width: this.props.width + 'px' }]}>
         {this.props.data.length ? (
           <div>
             <svg
-              height={this.props.height}
+              height={height}
               onMouseLeave={this._handleChartMouseLeave}
               ref='chart'
-              width={this.props.width}
+              width={width}
             >
               {this.props.shadeFutureOnGraph ? (
                 <ShadedRectangleGroup
@@ -454,47 +456,47 @@ const TimeBasedLineChart = React.createClass({
               ) : null}
               <AxisGroup
                 axis='y'
-                axisFormatFunction={this.props.yAxisFormatter}
-                data={this.props.data}
+                axisFormatFunction={yAxisFormatter}
+                data={data}
                 orientation='left'
                 scaleFunction={this._getYScaleFunction}
                 translation={this._getYAxisTranslation()}
               />
               <GridLinesGroup
                 axis='y'
-                data={this.props.data}
+                data={data}
                 orientation='left'
                 scaleFunction={this._getYScaleFunction}
                 tickSize={this.state.adjustedWidth * -1}
                 translation={this._getYAxisTranslation()}
               />
               <TimeXAxisGroup
-                data={this.props.data}
-                timeAxisFormat={this.props.rangeType === 'day' ? 'MMM D' : 'MMM'}
+                data={data}
+                timeAxisFormat={rangeType === 'day' ? 'MMM D' : 'MMM'}
                 translation={this._getTimeAxisTranslation()}
                 xScaleFunction={this._getXScaleFunction}
               />
               {this.props.showBreakPoint ? (
                 <BreakPointGroup
                   adjustedHeight={this.state.adjustedHeight}
-                  breakPointDate={this.props.breakPointDate}
-                  breakPointLabel={this.props.breakPointLabel}
-                  margin={this.props.margin}
+                  breakPointDate={breakPointDate}
+                  breakPointLabel={breakPointLabel}
+                  margin={margin}
                   translation={this._getVerticalLineTranslation()}
                   xScaleValueFunction={this._getXScaleValue}
                 />
               ) : null}
               <LineGroup
                 adjustedHeight={this.state.adjustedHeight}
-                data={this.props.data}
-                lineColor={this.props.lineColor}
+                data={data}
+                lineColor={lineColor}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
               />
               <CirclesGroup
                 adjustedHeight={this.state.adjustedHeight}
-                data={this.props.data}
+                data={data}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
@@ -503,7 +505,7 @@ const TimeBasedLineChart = React.createClass({
                 <HoveredDataPointGroup
                   adjustedHeight={this.state.adjustedHeight}
                   hoveredDataPoint={this.state.hoveredDataPoint}
-                  rangeType={this.props.rangeType}
+                  rangeType={rangeType}
                   translation={this._getLineTranslation()}
                   xScaleValueFunction={this._getXScaleValue}
                   yScaleValueFunction={this._getYScaleValue}
@@ -511,7 +513,7 @@ const TimeBasedLineChart = React.createClass({
               ) : null}
               <SlicesGroup
                 adjustedHeight={this.state.adjustedHeight}
-                data={this.props.data}
+                data={data}
                 handleChartMouseOver={this._handleChartMouseOver}
                 sliceWidth={this._getSliceWidth()}
                 translation={this._getLineTranslation()}
@@ -522,7 +524,7 @@ const TimeBasedLineChart = React.createClass({
               {this._renderHoveredDataPointDetails()}
             </div>
           </div>
-        ) : this.props.zeroState }
+        ) : zeroState }
       </div>
     );
   }
