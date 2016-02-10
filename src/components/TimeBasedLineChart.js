@@ -275,7 +275,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   // Helper Functions
-  _getFormatedValue (value, type, format) {
+  _getFormattedValue (value, type, format) {
     let formattedValue = '';
 
     switch (type) {
@@ -438,7 +438,7 @@ const TimeBasedLineChart = React.createClass({
               {item.label}
             </div>
             <div style={styles.hoveredDataPointValue}>
-              {value || value === 0 ? this._getFormatedValue(value, item.type, item.format) : 'N/A'}
+              {value || value === 0 ? this._getFormattedValue(value, item.type, item.format) : 'N/A'}
             </div>
           </div>
         );
