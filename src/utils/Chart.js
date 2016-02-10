@@ -14,9 +14,10 @@ const Chart = {
   },
 
   getAxisTickValues (data, axis) {
+    const estimatedNumberOfTicks = 6;
     const minMaxValues = this.getDataMinMaxValues(data, axis);
     const range = minMaxValues.max - minMaxValues.min;
-    const tempStep = range / 6;
+    const tempStep = range / estimatedNumberOfTicks;
     const magnitude = Math.floor(Math.log10(tempStep));
     const magnitudePower = Math.pow(10, magnitude);
     const magnitudeMultiplier = parseInt(tempStep / magnitudePower + 0.5, 10);
