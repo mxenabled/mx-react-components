@@ -17,23 +17,26 @@ const BreakPointGroup = React.createClass({
   },
 
   render () {
+    const { adjustedHeight, breakPointDate, breakPointLabel, margin, translation, xScaleValueFunction } = this.props;
+    const breakPointXValue = xScaleValueFunction(breakPointDate);
     const breakPointLabelOffSet = 10;
+    const breakPointLabelYPosition = 40;
 
     return (
-      <g className='break-point-items' ref='breakPointItems' transform={this.props.translation}>
+      <g className='break-point-items' ref='breakPointItems' transform={translation}>
         <line
           className='break-point-line'
-          x1={this.props.xScaleValueFunction(this.props.breakPointDate)}
-          x2={this.props.xScaleValueFunction(this.props.breakPointDate)}
+          x1={breakPointXValue}
+          x2={breakPointXValue}
           y1={this.props.margin.top}
           y2={this.props.adjustedHeight + this.props.margin.bottom}
         />
         <text
           className='break-point-label'
-          x={this.props.xScaleValueFunction(this.props.breakPointDate) + breakPointLabelOffSet}
-          y={40}
+          x={breakPointXValue + breakPointLabelOffSet}
+          y={breakPointLabelYPosition}
         >
-          {this.props.breakPointLabel}
+          {breakPointLabel}
         </text>
       </g>
     );
