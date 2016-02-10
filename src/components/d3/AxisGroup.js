@@ -40,7 +40,13 @@ const AxisGroup = React.createClass({
   },
 
   render () {
-    return <g className={this.props.axis + '-axis'} ref={this.props.axis + 'Axis'} transform={this.props.translation} />;
+    return (
+      <g
+        className={this.props.axis + '-axis'}
+        ref={this.props.axis + 'Axis'}
+        transform={this.props.translation}
+      />
+    );
   }
 });
 
