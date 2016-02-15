@@ -15,8 +15,7 @@ const Button = React.createClass({
       'neutral',
       'primary',
       'primaryOutline',
-      'secondary',
-      'secondaryOutline'
+      'secondary'
     ])
   },
 
@@ -83,24 +82,6 @@ const Button = React.createClass({
         }
       },
       secondary: {
-        backgroundColor: StyleConstants.Colors.FOG,
-        borderColor: StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.CHARCOAL,
-        fill: StyleConstants.Colors.CHARCOAL,
-        transition: 'all .2s ease-in',
-
-        ':hover': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -5),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -5),
-          transition: 'all .2s ease-in'
-        },
-        ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -10),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.FOG, -10),
-          transition: 'all .2s ease-in'
-        }
-      },
-      secondaryOutline: {
         backgroundColor: 'transparent',
         borderColor: StyleConstants.Colors.ASH,
         color: StyleConstants.Colors.ASH,
