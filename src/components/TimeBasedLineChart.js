@@ -494,6 +494,7 @@ const TimeBasedLineChart = React.createClass({
               {showBreakPoint ? (
                 <BreakPointGroup
                   adjustedHeight={adjustedHeight}
+                  adjustedWidth={adjustedWidth}
                   breakPointDate={breakPointDate}
                   breakPointLabel={breakPointLabel}
                   margin={margin}
