@@ -12,8 +12,8 @@ const Chart = {
 
     const maxDigits = Math.ceil(max).toString().length - 1;
     const minDigits = Math.floor(min).toString().length - 1;
-    const maxMultiplier = Math.pow(10, maxDigits);
-    const minMultiplier = Math.pow(10, minDigits);
+    const maxMultiplier = Math.pow(10, maxDigits) < 100 ? 100 : Math.pow(10, maxDigits);
+    const minMultiplier = Math.pow(10, minDigits) < 100 ? 100 : Math.pow(10, maxDigits);
 
     max = Math.ceil(max / maxMultiplier) * maxMultiplier;
     min = Math.floor(min / minMultiplier) * minMultiplier;
