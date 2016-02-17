@@ -2,6 +2,7 @@ module.exports = {
   Button: require('./components/Button'),
   DonutChart: require('./components/DonutChart'),
   Icon: require('./components/Icon'),
+  //Input: require('./components/Input'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
   RajaIcon: require('./components/RajaIcon'),
@@ -14,6 +15,6 @@ module.exports = {
   TypeAhead: require('./components/TypeAhead'),
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),
-
+  //react2: require('./components/react2'),
   Styles: require('./constants/Style')
 };
