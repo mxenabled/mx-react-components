@@ -11,7 +11,6 @@ const DatePicker = React.createClass({
     calendarWrapperStyle: React.PropTypes.object,
     caretWrapperStyle: React.PropTypes.object,
     closeOnDateSelect: React.PropTypes.bool,
-    defaultDate: React.PropTypes.number,
     format: React.PropTypes.string,
     inputStyle: React.PropTypes.object,
     locale: React.PropTypes.string,
@@ -20,6 +19,7 @@ const DatePicker = React.createClass({
     placeholderText: React.PropTypes.string,
     placeholderTextStyle: React.PropTypes.object,
     scrimStyle: React.PropTypes.object,
+    selectedDate: React.PropTypes.number,
     selectedDateColor: React.PropTypes.string,
     selectedDateWrapperStyle: React.PropTypes.object,
     showCaret: React.PropTypes.bool,
@@ -35,6 +35,7 @@ const DatePicker = React.createClass({
       format: 'MMM D, YYYY',
       locale: 'en',
       onDateSelect () {},
+      selectedDate: moment().unix(),
       selectedDateColor: StyleConstants.Colors.PRIMARY,
       scrimStyle: {},
       showCaret: true,
@@ -47,9 +48,8 @@ const DatePicker = React.createClass({
   getInitialState () {
     return {
       currentDate: null,
-      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      inputValue: this._getInputValueByDate(this.props.selectedDate),
       isValid: true,
-      selectedDate: this.props.defaultDate,
       showCalendar: false
     };
   },
@@ -71,20 +71,20 @@ const DatePicker = React.createClass({
   },
 
   _getSelectedDate () {
-    const selectedDate = this.state.selectedDate;
+    const selectedDate = this.props.selectedDate;
 
-    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
+    return selectedDate && moment.unix(selectedDate).isValid() ? this.props.selectedDate : moment().unix();
   },
 
   _handleDateSelect (date) {
     if (this.props.closeOnDateSelect) {
-      this._handleScrimClick();
+      this.setState({
+        showCalendar: false
+      });
     }
 
     this.setState({
-      inputValue: moment.unix(date).format(this.props.format),
-      isValid: true,
-      selectedDate: date
+      inputValue: moment.unix(date).format(this.props.format)
     });
 
     this.props.onDateSelect(date);
@@ -95,12 +95,11 @@ const DatePicker = React.createClass({
       this.props.onDateSelect(null);
 
       this.setState({
-        inputValue: null,
-        selectedDate: null
+        inputValue: null
       });
     } else {
       this.setState({
-        inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
+        inputValue: moment.unix(this.props.selectedDate).format(this.props.format)
       });
     }
   },
@@ -145,7 +144,7 @@ const DatePicker = React.createClass({
     });
   },
 
-  _renderMonthTable (currentDate, selectedDate) {
+  _renderMonthTable (currentDate) {
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
@@ -164,7 +163,7 @@ const DatePicker = React.createClass({
 
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
-      const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
+      const isCurrentDay = startDate.format(this.props.format) === moment.unix(this.props.selectedDate).format(this.props.format);
       let day;
       const noSelectDay = startDate.isBefore(minimumDate);
 
@@ -305,7 +304,7 @@ const DatePicker = React.createClass({
             />
           </div>
           <div style={styles.calendarContainer}>
-            {this._renderMonthTable(currentDate, selectedDate)}
+            {this._renderMonthTable(currentDate)}
           </div>
           <div style={styles.clearFix}></div>
         </div>
