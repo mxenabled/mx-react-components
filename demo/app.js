@@ -6,6 +6,7 @@ const {
   Button,
   DonutChart,
   Icon,
+  Input,
   Loader,
   Modal,
   RangeSelector,
@@ -441,6 +442,12 @@ const Demo = React.createClass({
     window.removeEventListener('resize', this._handleWindowResize);
   },
 
+  _handleInputValueChange (textValue) {
+    this.setState({
+      inputValue: textValue
+    });
+  },
+
   _handleSelectChange (option) {
     this.setState({
       icon: option
@@ -462,6 +469,24 @@ const Demo = React.createClass({
   render () {
     return (
       <div>
+        <div style={{ padding: '90px 300px 0px', position: 'relative' }}>
+          <Input
+            handleInputValueChange={this._handleInputValueChange}
+            phone={true}
+            label="Input Example: Phone Number"
+            placeholderText="Please Enter a Valid Phone Number..."
+          />
+        </div>
+        <br/><br/>
+        <div style={{ padding: '20px 300px 0px', position: 'relative' }}>
+          <Input
+            handleInputValueChange={this._handleInputValueChange}
+            custom="C964RTS"
+            label="Custom Example - Please Enter: C964RTS"
+            placeholderText="Please Enter the Text Above..."
+          />
+        </div>
+
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
@@ -696,6 +721,9 @@ const Demo = React.createClass({
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
+
+
+
 
         <br/><br/>
         <DatePicker
