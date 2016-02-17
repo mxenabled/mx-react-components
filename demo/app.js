@@ -15,7 +15,8 @@ const {
   ToggleSwitch,
   TypeAhead,
   DatePicker,
-  DatePickerFullScreen
+  DatePickerFullScreen,
+  Input,
 } = require('../src/Index');
 
 const styles = {
@@ -423,6 +424,7 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
+      inputValue: '',
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     }
   },
@@ -459,11 +461,28 @@ const Demo = React.createClass({
     })
   },
 
+  _handleInput (value) {
+    this.setState({
+      inputValue: value
+    })
+  },
+
   render () {
     return (
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+          <div style={{ width: '50%', margin: '0 auto' }}>
+            <Input
+              defaultValue=''
+              inputLabel='Enter Your Email'
+              inputType='email'
+              isRequired={true}
+              onChange={this._handleInput}
+              placeholderText='example@example.com'
+            />
+          </div>
+          <br/><br/>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
           <br/><br/>
           <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
