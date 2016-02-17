@@ -192,6 +192,10 @@ const icons = [
     displayValue: 'Home'
   },
   {
+    value: 'import',
+    displayValue: 'Import'
+  },
+  {
     value: 'info',
     displayValue: 'Info'
   },
