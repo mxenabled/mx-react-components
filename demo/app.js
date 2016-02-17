@@ -148,6 +148,10 @@ const icons = [
     displayValue: 'Delete'
   },
   {
+    value: 'document',
+    displayValue: 'Document'
+  },
+  {
     value: 'download',
     displayValue: 'Download'
   },
@@ -186,6 +190,10 @@ const icons = [
   {
     value: 'home',
     displayValue: 'Home'
+  },
+  {
+    value: 'import',
+    displayValue: 'Import'
   },
   {
     value: 'info',
