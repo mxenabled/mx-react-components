@@ -148,6 +148,10 @@ const icons = [
     displayValue: 'Delete'
   },
   {
+    value: 'document',
+    displayValue: 'Document'
+  },
+  {
     value: 'download',
     displayValue: 'Download'
   },
