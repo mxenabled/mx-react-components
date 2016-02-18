@@ -4,6 +4,7 @@ const moment = require('moment');
 
 const {
   Button,
+  Input,
   DonutChart,
   Icon,
   Loader,
@@ -472,10 +473,10 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
+          <Button onClick={this._handleModalClick}>Show Primary Modal (Primary Button)</Button>
           <br/><br/>
-          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
-          <br/><br/>
+          <Button onClick={this._handleSmallModalClick} type='secondary'>Show Secondary Modal (Tertiary Button)</Button>
+          <br/><br/> 
           <Button type='primaryOutline'>Primary Outline Button</Button>
           <br/><br/>
           <Button icon='add'>Button With Icon</Button>
@@ -523,23 +524,24 @@ const Demo = React.createClass({
         </Modal>
 
         <br/><br/>
+        <Input />
         <DonutChart
           animateOnHover={true}
           chartTotal={300}
           data={[
             {
               name: 'Data Point 1',
-              value: 50
+              value: 70
             },
             {
               name: 'Data Point 2',
-              value: 80
+              value: 40
             }
           ]}
           dataPoints={[
             {
               name: 'Data Dot 1',
-              value: 200
+              value: 250
             }
           ]}
           defaultLabelText='Total Users'
@@ -579,7 +581,22 @@ const Demo = React.createClass({
           <ToggleSwitch />
         </div>
 
+        <div>
         <br/><br/>
+        <Input
+          items={[
+            'What is your mother"s maiden name?',
+            'What was the name of your first pet?',
+            'What is the name of the street that you grew up on?',
+            'What is the first and last name of your first crush?',
+            'What was your first major in college?'
+          ]}
+            placeholderText='Please select your security question:'
+          />
+          <br/><br/>
+          </div>
+          <br/><br/>
+
         <TypeAhead
           items={[
             'JPMorgan Chase',
