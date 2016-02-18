@@ -54,6 +54,15 @@ const DatePicker = React.createClass({
     };
   },
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.defaultDate !== this.props.defaultDate) {
+      this.setState({
+        selectedDate: nextProps.defaultDate,
+        inputValue: moment.unix(nextProps.defaultDate).format(this.props.format)
+      });
+    }
+  },
+
   _getInputValueByDate (date) {
     let inputValue = null;
 
@@ -74,13 +83,6 @@ const DatePicker = React.createClass({
     const selectedDate = this.state.selectedDate;
 
     return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
-  },
-
-  _changeSelectedDate (selectedDate) {
-    this.setState({
-      selectedDate,
-      inputValue: moment.unix(selectedDate).format(this.props.format)
-    });
   },
 
   _handleDateSelect (date) {
