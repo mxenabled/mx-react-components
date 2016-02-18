@@ -76,6 +76,13 @@ const DatePicker = React.createClass({
     return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
   },
 
+  _changeSelectedDate (selectedDate) {
+    this.setState({
+      selectedDate,
+      inputValue: moment.unix(selectedDate).format(this.props.format)
+    });
+  },
+
   _handleDateSelect (date) {
     if (this.props.closeOnDateSelect) {
       this._handleScrimClick();
