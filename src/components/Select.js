@@ -135,6 +135,8 @@ const Select = React.createClass({
         <div className='mx-select-scrim'
         onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
       );
+    } else {
+      return null;
     }
   },
 
@@ -165,6 +167,8 @@ const Select = React.createClass({
           </ul>
         );
       }
+    } else {
+      return null;
     }
   },
 

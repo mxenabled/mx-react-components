@@ -1,5 +1,5 @@
 language: node_js
 before_install:
-  - npm install -g eslint@1.10.0
+  - npm install -g eslint
 script:
   - npm test

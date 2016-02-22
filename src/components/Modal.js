@@ -65,6 +65,8 @@ const Modal = React.createClass({
           {this.props.title}
         </div>
       );
+    } else {
+      return null;
     }
   },
 
@@ -90,6 +92,8 @@ const Modal = React.createClass({
           </div>
         </div>
       );
+    } else {
+      return null;
     }
   },
 
@@ -113,6 +117,8 @@ const Modal = React.createClass({
           </div>
         </div>
       );
+    } else {
+      return null;
     }
   },
 
@@ -138,6 +144,8 @@ const Modal = React.createClass({
           </span>
         </div>
       );
+    } else {
+      return null;
     }
   },
 

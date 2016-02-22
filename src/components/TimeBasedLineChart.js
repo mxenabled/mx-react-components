@@ -443,6 +443,8 @@ const TimeBasedLineChart = React.createClass({
           </div>
         );
       });
+    } else {
+      return null;
     }
   },
 

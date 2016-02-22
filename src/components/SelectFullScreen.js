@@ -116,6 +116,8 @@ const SelectFullScreen = React.createClass({
           </div>
         </div>
       );
+    } else {
+      return null;
     }
   },
 

@@ -432,7 +432,7 @@ const Demo = React.createClass({
       showModal: false,
       showSmallModal: false,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
-    }
+    };
   },
 
   componentDidMount () {
@@ -464,7 +464,34 @@ const Demo = React.createClass({
   _handleDateSelect (selectedDatePickerDate) {
     this.setState({
       selectedDatePickerDate
-    })
+    });
+  },
+
+  _handleLineChartHover (data) {
+    this.setState({
+      lineChartHoverValue: data.value
+    });
+  },
+
+  _handleModalClick () {
+    this.setState({
+      showModal: true,
+      showSmallModal: false
+    });
+  },
+
+  _handleSmallModalClick () {
+    this.setState({
+      showModal: true,
+      showSmallModal: true
+    });
+  },
+
+  _handleModalClose () {
+    this.setState({
+      showModal: false,
+      showSmallModal: false
+    });
   },
 
   render () {
@@ -511,9 +538,9 @@ const Demo = React.createClass({
           onRequestClose={this._handleModalClose}
           showFooter={true}
           showTitleBar={true}
-          tooltipLabel='This is the footer text.'
           title='This is the header text'
           tooltip='This is my tooltip content'
+          tooltipLabel='This is the footer text.'
           tooltipTitle='This is my tooltip title'
         >
           <div style={{ padding: 20 }}>
@@ -600,14 +627,14 @@ const Demo = React.createClass({
         <Select
           isMobile={false}
           onChange={this._handleSelectChange}
-          options={icons}
-          optionStyle={{
-            color: '#333'
-          }}
           optionHoverStyle={{
             backgroundColor: '#359BCF',
             color: '#fff'
           }}
+          optionStyle={{
+            color: '#333'
+          }}
+          options={icons}
           placeholderText='Pick One'
           selected={this.state.icon}
           valid={true}
@@ -616,17 +643,17 @@ const Demo = React.createClass({
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
           <Icon
-            type={this.state.icon.value}
             size={150}
             style={{
               color: '#359BCF'
             }}
+            type={this.state.icon.value}
           />
         </div>
 
         <br/><br/>
         <div style={{
-          border: '1px solid #E3E6E7' ,
+          border: '1px solid #E3E6E7',
           boxSizing: 'border-box',
           height: 400,
           padding: '10px',
@@ -638,22 +665,22 @@ const Demo = React.createClass({
           </div>
           <SelectFullScreen
             onChange={this._handleSelectChange}
-            options={icons}
             optionHoverStyle={{
               backgroundColor: '#359BCF',
               color: '#fff'
             }}
+            options={icons}
             placeholderText='Pick One'
             selected={this.state.icon}
           />
           <br/><br/>
           <div style={{ textAlign: 'center' }}>
             <Icon
-              type={this.state.icon.value}
               size={150}
               style={{
                 color: '#359BCF'
               }}
+              type={this.state.icon.value}
             />
           </div>
         </div>
@@ -663,6 +690,7 @@ const Demo = React.createClass({
           defaultLowerValue={18}
           defaultUpperValue={30}
           interval={1}
+          lowerBound={-25}
           presets={[
             {
               lowerValue: 0,
@@ -695,9 +723,8 @@ const Demo = React.createClass({
               label: 'Silent'
             }
           ]}
-          lowerBound={-25}
-          upperBound={100}
           selectedColor='#359BCF'
+          upperBound={100}
         />
 
         <br/><br/>
@@ -709,13 +736,13 @@ const Demo = React.createClass({
         <DatePicker
           closeOnDateSelect={true}
           defaultDate={this.state.selectedDatePickerDate}
-          showDayBorders={false}
           onDateSelect={this._handleDateSelect}
+          showDayBorders={false}
         />
 
         <br/><br/>
         <div style={{
-          border: '1px solid #E3E6E7' ,
+          border: '1px solid #E3E6E7',
           boxSizing: 'border-box',
           height: 400,
           padding: '10px',
@@ -728,41 +755,14 @@ const Demo = React.createClass({
           <DatePickerFullScreen
             closeOnDateSelect={true}
             defaultDate={this.state.selectedDatePickerDate}
+            onDateSelect={this._handleDateSelect}
             showDayBorders={false}
             title='Select A Date'
-            onDateSelect={this._handleDateSelect}
           />
         </div>
         <br/><br/>
       </div>
     );
-  },
-
-  _handleLineChartHover (data) {
-    this.setState({
-      lineChartHoverValue: data.value
-    });
-  },
-
-  _handleModalClick () {
-    this.setState({
-      showModal: true,
-      showSmallModal: false
-    });
-  },
-
-  _handleSmallModalClick () {
-    this.setState({
-      showModal: true,
-      showSmallModal: true
-    });
-  },
-
-  _handleModalClose () {
-    this.setState({
-      showModal: false,
-      showSmallModal: false
-    });
   }
 });
 

@@ -174,10 +174,8 @@ const DatePicker = React.createClass({
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
       const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
-      let day;
       const noSelectDay = startDate.isBefore(minimumDate);
-
-      day = (
+      const day = (
         <div
           key={startDate.month() + '-' + startDate.date()}
           onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
@@ -196,7 +194,8 @@ const DatePicker = React.createClass({
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
           </div>
-        </div>);
+        </div>
+      );
 
       if (this.props.showDayBorders) {
         day.props.style.push([styles.borderRight, styles.borderBottom]);
@@ -214,6 +213,8 @@ const DatePicker = React.createClass({
       return (
         <div onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]}/>
       );
+    } else {
+      return null;
     }
   },
 
@@ -259,6 +260,8 @@ const DatePicker = React.createClass({
           {this.props.title}
         </div>
       );
+    } else {
+      return null;
     }
   },
 
@@ -274,6 +277,8 @@ const DatePicker = React.createClass({
           />
         </div>
       );
+    } else {
+      return null;
     }
   },
 

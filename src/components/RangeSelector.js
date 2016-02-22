@@ -70,6 +70,8 @@ const RangeSelector = React.createClass({
       })[0];
 
       return preset ? preset.label : null;
+    } else {
+      return null;
     }
   },
 

@@ -85,6 +85,8 @@ const ToggleSwitch = React.createClass({
       return (
         <span className='left-label' onClick={this._handleLeftLabelClick} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
       );
+    } else {
+      return null;
     }
   },
 
@@ -93,6 +95,8 @@ const ToggleSwitch = React.createClass({
       return (
         <span className='right-label' onClick={this._handleRightLabelClick} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
       );
+    } else {
+      return null;
     }
   },
 

@@ -136,7 +136,11 @@ const DonutChart = React.createClass({
             </g>
           );
         });
+      } else {
+        return null;
       }
+    } else {
+      return null;
     }
   },
 
@@ -154,6 +158,8 @@ const DonutChart = React.createClass({
           <path d={baseArc()} fill={this.props.baseArcColor}></path>
         </g>
       );
+    } else {
+      return null;
     }
   },
 
@@ -219,6 +225,8 @@ const DonutChart = React.createClass({
           </div>
         );
       }
+    } else {
+      return null;
     }
   },
 
