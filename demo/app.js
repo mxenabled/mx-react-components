@@ -15,7 +15,8 @@ const {
   ToggleSwitch,
   TypeAhead,
   DatePicker,
-  DatePickerFullScreen
+  DatePickerFullScreen,
+  ImageUploader
 } = require('../src/Index');
 
 const styles = {
@@ -427,6 +428,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+      fileBeingDragged: false,
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
       showModal: false,
@@ -437,6 +439,8 @@ const Demo = React.createClass({
 
   componentDidMount () {
     window.addEventListener('resize', this._handleWindowResize);
+    window.addEventListener('mouseover', this._handleMouseOver);
+    window.addEventListener('mouseout', this._handleMouseOut);
 
     setTimeout(() => {
       this.setState({
@@ -447,6 +451,24 @@ const Demo = React.createClass({
 
   componentWillUnmount () {
     window.removeEventListener('resize', this._handleWindowResize);
+    window.removeEventListener('mouseover', this._handleMouseOver);
+    window.removeEventListener('mouseout', this._handleMouseOut);
+  },
+
+  _handleMouseOut () {
+    this.setState({
+      fileBeingDragged: false
+    });
+  },
+
+  _handleMouseOver (e) {
+    const mouseClicked = 1;
+
+    if (e.buttons === mouseClicked) {
+      this.setState({
+        fileBeingDragged: true
+      });
+    }
   },
 
   _handleSelectChange (option) {
@@ -492,6 +514,10 @@ const Demo = React.createClass({
       showModal: false,
       showSmallModal: false
     });
+  },
+
+  _handleOnFileSuccess () {
+
   },
 
   render () {
@@ -760,6 +786,11 @@ const Demo = React.createClass({
             title='Select A Date'
           />
         </div>
+        <br/><br/>
+        <ImageUploader
+          fileBeingDragged={this.state.fileBeingDragged}
+          onFileSuccess={this._handleOnFileSuccess}
+        />
         <br/><br/>
       </div>
     );
