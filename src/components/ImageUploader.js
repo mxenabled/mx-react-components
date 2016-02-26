@@ -10,7 +10,7 @@ const Button = require('./Button');
 const ImageUploader = React.createClass({
   propTypes: {
     allowedFileTypes: React.PropTypes.array,
-    brandColor: React.PropTypes.string,
+    color: React.PropTypes.string,
     fileBeingDragged: React.PropTypes.bool,
     maxFileSize: React.PropTypes.number,
     onFileError: React.PropTypes.func,
@@ -21,7 +21,7 @@ const ImageUploader = React.createClass({
   getDefaultProps () {
     return {
       allowedFileTypes: ['png', 'jpg', 'gif'],
-      brandColor: StyleConstants.Colors.PRIMARY,
+      color: StyleConstants.Colors.PRIMARY,
       fileBeingDragged: false,
       maxFileSize: 150, //in kB
       onFileError: () => {},
@@ -149,7 +149,7 @@ const ImageUploader = React.createClass({
             </div>
             <Button
               onClick={this._handleRemoveFile}
-              primaryColor={this.props.brandColor}
+              primaryColor={this.props.color}
               style={styles.removeButton}
             >
               Remove
@@ -231,7 +231,7 @@ const ImageUploader = React.createClass({
         paddingTop: 10
       },
       fileBeingDragged: {
-        border: '1px dashed ' + this.props.brandColor,
+        border: '1px dashed ' + this.props.color,
         height: 150
       },
       dropFileContainer: {
@@ -242,11 +242,11 @@ const ImageUploader = React.createClass({
         transform: 'translate(50%, -50%)'
       },
       dropFileIcon: {
-        color: this.props.brandColor,
+        color: this.props.color,
         marginBottom: 10
       },
       dropFileText: {
-        color: this.props.brandColor,
+        color: this.props.color,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.LARGE
       }
