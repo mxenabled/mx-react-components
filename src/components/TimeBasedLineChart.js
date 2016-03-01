@@ -422,16 +422,12 @@ const TimeBasedLineChart = React.createClass({
     // Style y axis labels
     chart.select('g.y-axis').selectAll('text')
       .style(styles.yAxisLabel)
-      .style('fill', d => {
-        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH;
-      })
+      .style('fill', StyleConstants.Colors.ASH)
       .attr('transform', 'translate(-10,0)');
 
     // Style y axis ticks
     chart.select('g.y-axis').selectAll('line')
-      .style('stroke', d => {
-        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
-      });
+      .style('stroke', StyleConstants.Colors.FOG);
 
     // Style Circles
     chart.selectAll('.circle')
@@ -456,14 +452,14 @@ const TimeBasedLineChart = React.createClass({
       .style(styles.dateTooltipText);
 
     // Style rest of chart elements
-    chart.selectAll('text').style(styles.text);
-    chart.selectAll('.domain').style(styles.domain);
-    chart.selectAll('.y-grid-line .tick').style('stroke', d => {
-      return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
-    })
-    .style('stroke-dasharray', d => {
-      return d === 0 ? 'none' : '4,4';
-    });
+    chart.selectAll('text')
+      .style(styles.text);
+
+    chart.selectAll('.domain')
+      .style(styles.domain);
+
+    chart.selectAll('.y-grid-line .tick')
+      .style('stroke', StyleConstants.Colors.FOG);
 
     chart.select('text.zero-line-label')
       .style(styles.zeroLineLabel);
