@@ -398,8 +398,10 @@ const TimeBasedLineChart = React.createClass({
   _getZeroLineData () {
     const maxDate = this.props.data.length ? this.props.data[this.props.data.length - 1].x : 0;
     const minDate = this.props.data.length ? this.props.data[0].x : 0;
+    const secondMaxDate = this.props.data.length ? this.props.data[this.props.data.length - 2].x : 0;
+    const offSet = (maxDate - secondMaxDate) / 2;
 
-    return [{ x: minDate, y: 0 }, { x: maxDate, y: 0 }];
+    return [{ x: minDate, y: 0 }, { x: maxDate + offSet, y: 0 }];
   },
 
   _styleChart () {
@@ -503,6 +505,15 @@ const TimeBasedLineChart = React.createClass({
               ref='chart'
               width={width}
             >
+              {shadeFutureOnGraph ? (
+                <ShadedHatchPatternRectangleGroup
+                  height={adjustedHeight}
+                  translation={this._getLineTranslation()}
+                  width={this._getShadedRectangleWidth()}
+                  x={this._getShadedRectangleXValue()}
+                  y={0}
+                />
+              ) : null}
               {shadeBelowZero ? (
                 <ShadedAreaRectangleGroup
                   fillColor={StyleConstants.Colors.STRAWBERRY}
@@ -511,15 +522,6 @@ const TimeBasedLineChart = React.createClass({
                   width={adjustedWidth}
                   x={0}
                   y={this._getShadedRectangleYValue()}
-                />
-              ) : null}
-              {shadeFutureOnGraph ? (
-                <ShadedHatchPatternRectangleGroup
-                  height={adjustedHeight}
-                  translation={this._getLineTranslation()}
-                  width={this._getShadedRectangleWidth()}
-                  x={this._getShadedRectangleXValue()}
-                  y={0}
                 />
               ) : null}
               <AxisGroup
