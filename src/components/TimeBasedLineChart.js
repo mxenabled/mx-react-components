@@ -85,6 +85,9 @@ const styles = {
     stroke: 'none',
     'text-anchor': 'end'
   },
+  zeroLineLabel: {
+    stroke: StyleConstants.Colors.STRAWBERRY
+  },
 
   // Hovered Data Point
   hoveredDataPointDetail: {
@@ -366,11 +369,24 @@ const TimeBasedLineChart = React.createClass({
     return breakPointXValue < 0 ? 0 : breakPointXValue;
   },
 
+  _getZeroLabelXValue () {
+    const maxDate = this.props.data.length ? this.props.data[this.props.data.length - 1].x : 0;
+    const offSet = 15;
+
+    return this._getXScaleValue(maxDate + this.props.margin.right) + offSet;
+  },
+
+  _getZeroLabelYValue () {
+    const offSet = 2;
+
+    return this._getYScaleValue(0 - this.props.margin.top) + offSet;
+  },
+
   _getZeroLineData () {
     const maxDate = this.props.data.length ? this.props.data[this.props.data.length - 1].x : 0;
     const minDate = this.props.data.length ? this.props.data[0].x : 0;
 
-    return [{ x: minDate + this.props.margin.left, y: 0 }, { x: maxDate + this.props.margin.right, y: 0 }];
+    return [{ x: minDate, y: 0 }, { x: maxDate, y: 0 }];
   },
 
   _styleChart () {
@@ -433,6 +449,9 @@ const TimeBasedLineChart = React.createClass({
     .style('stroke-dasharray', d => {
       return d === 0 ? 'none' : '4,4';
     });
+
+    chart.select('text.zero-line-label')
+      .style(styles.zeroLineLabel);
   },
 
   // Render functions
@@ -460,7 +479,6 @@ const TimeBasedLineChart = React.createClass({
   render () {
     const { alwaysShowZeroLine, breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeFutureOnGraph, showBreakPoint, width, zeroState, yAxisFormatter } = this.props;
     const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
-    const zeroLineData = this._getZeroLineData();
 
     return (
       <div className='mx-time-based-line-chart' style={[styles.component, { height, width }]}>
@@ -515,16 +533,26 @@ const TimeBasedLineChart = React.createClass({
                 />
               ) : null}
               {alwaysShowZeroLine ? (
-                <LineGroup
-                  adjustedHeight={adjustedHeight}
-                  dashLine={true}
-                  data={zeroLineData}
-                  lineColor={StyleConstants.Colors.STRAWBERRY}
-                  shouldAnimate={false}
-                  translation={this._getLineTranslation()}
-                  xScaleValueFunction={this._getXScaleValue}
-                  yScaleValueFunction={this._getYScaleValue}
-                />
+                <g className='zero-line'>
+                  <LineGroup
+                    adjustedHeight={adjustedHeight}
+                    dashLine={true}
+                    data={this._getZeroLineData()}
+                    lineColor={StyleConstants.Colors.STRAWBERRY}
+                    shouldAnimate={false}
+                    translation={this._getLineTranslation()}
+                    xScaleValueFunction={this._getXScaleValue}
+                    yScaleValueFunction={this._getYScaleValue}
+                  />
+                  <text
+                    className='zero-line-label'
+                    transform={this._getLineTranslation()}
+                    x={this._getZeroLabelXValue()}
+                    y={this._getZeroLabelYValue()}
+                  >
+                    0
+                  </text>
+                </g>
               ) : null}
               <LineGroup
                 adjustedHeight={adjustedHeight}
