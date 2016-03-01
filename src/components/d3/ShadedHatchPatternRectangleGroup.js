@@ -2,7 +2,7 @@ const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
-const ShadedRectangleGroup = React.createClass({
+const ShadedHatchPatternRectangleGroup = React.createClass({
   propTypes: {
     fillColor: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
@@ -21,7 +21,7 @@ const ShadedRectangleGroup = React.createClass({
 
   render () {
     return (
-      <g className='future-shade-pattern' ref='futureShadePattern'>
+      <g className='shaded-hatch-pattern' ref='ShadeHatchPattern'>
         <pattern
           height={4}
           id='diagonalHatch'
@@ -47,4 +47,4 @@ const ShadedRectangleGroup = React.createClass({
   }
 });
 
-module.exports = ShadedRectangleGroup;
+module.exports = ShadedHatchPatternRectangleGroup;
