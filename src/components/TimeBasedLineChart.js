@@ -390,9 +390,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getZeroLabelYValue () {
-    const offSet = 2;
-
-    return this._getYScaleValue(0 - this.props.margin.top) + offSet;
+    return this._getYScaleValue(0 - this.props.margin.top);
   },
 
   _getZeroLineData () {
