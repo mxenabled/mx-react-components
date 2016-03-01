@@ -9,7 +9,8 @@ const BreakPointGroup = require('./d3/BreakPointGroup');
 const GridLinesGroup = require('./d3/GridLinesGroup');
 const CirclesGroup = require('./d3/CirclesGroup');
 const LineGroup = require('./d3/LineGroup');
-const ShadedRectangleGroup = require('./d3/ShadedRectangleGroup');
+const ShadedAreaRectangleGroup = require('./d3/ShadedAreaRectangleGroup');
+const ShadedHatchPatternRectangleGroup = require('./d3/ShadedHatchPatternRectangleGroup');
 const SlicesGroup = require('./d3/SlicesGroup');
 const TimeXAxisGroup = require('./d3/TimeXAxisGroup');
 const AxisGroup = require('./d3/AxisGroup');
@@ -206,6 +207,7 @@ const TimeBasedLineChart = React.createClass({
     lineColor: React.PropTypes.string,
     margin: React.PropTypes.object,
     rangeType: React.PropTypes.oneOf(['day', 'month']),
+    shadeBelowZero: React.PropTypes.bool,
     shadeFutureOnGraph: React.PropTypes.bool,
     showBreakPoint: React.PropTypes.bool,
     width: React.PropTypes.number,
@@ -222,6 +224,7 @@ const TimeBasedLineChart = React.createClass({
       lineColor: StyleConstants.Colors.PRIMARY,
       margin: styles.chartMargins,
       rangeType: 'day',
+      shadeBelowZero: false,
       shadeFutureOnGraph: true,
       showBreakPoint: true,
       width: 550,
@@ -357,6 +360,12 @@ const TimeBasedLineChart = React.createClass({
     return yScale(value);
   },
 
+  _getShadedRectangleHeight () {
+    const calculatedHeight = this.state.adjustedHeight - this._getShadedRectangleYValue();
+
+    return calculatedHeight < 0 ? 0 : calculatedHeight;
+  },
+
   _getShadedRectangleWidth () {
     const calculatedWidth = this.state.adjustedWidth - this._getShadedRectangleXValue();
 
@@ -367,6 +376,10 @@ const TimeBasedLineChart = React.createClass({
     const breakPointXValue = this._getXScaleValue(this.props.breakPointDate);
 
     return breakPointXValue < 0 ? 0 : breakPointXValue;
+  },
+
+  _getShadedRectangleYValue () {
+    return this._getYScaleValue(0);
   },
 
   _getZeroLabelXValue () {
@@ -477,7 +490,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   render () {
-    const { alwaysShowZeroLine, breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeFutureOnGraph, showBreakPoint, width, zeroState, yAxisFormatter } = this.props;
+    const { alwaysShowZeroLine, breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, width, zeroState, yAxisFormatter } = this.props;
     const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 
     return (
@@ -490,8 +503,18 @@ const TimeBasedLineChart = React.createClass({
               ref='chart'
               width={width}
             >
+              {shadeBelowZero ? (
+                <ShadedAreaRectangleGroup
+                  fillColor={StyleConstants.Colors.STRAWBERRY}
+                  height={this._getShadedRectangleHeight()}
+                  translation={this._getLineTranslation()}
+                  width={adjustedWidth}
+                  x={0}
+                  y={this._getShadedRectangleYValue()}
+                />
+              ) : null}
               {shadeFutureOnGraph ? (
-                <ShadedRectangleGroup
+                <ShadedHatchPatternRectangleGroup
                   height={adjustedHeight}
                   translation={this._getLineTranslation()}
                   width={this._getShadedRectangleWidth()}
