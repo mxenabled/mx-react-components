@@ -383,7 +383,8 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getZeroLabelXValue () {
-    const maxDate = this.props.data.length ? this.props.data[this.props.data.length - 1].x : 0;
+    const data = this.props.data;
+    const maxDate = data.length ? data[this.props.data.length - 1].x : 0;
     const offSet = 15;
 
     return this._getXScaleValue(maxDate + this.props.margin.right) + offSet;
@@ -394,9 +395,10 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getZeroLineData () {
-    const maxDate = this.props.data.length ? this.props.data[this.props.data.length - 1].x : 0;
-    const minDate = this.props.data.length ? this.props.data[0].x : 0;
-    const secondMaxDate = this.props.data.length ? this.props.data[this.props.data.length - 2].x : 0;
+    const data = this.props.data;
+    const maxDate = data.length ? data[this.props.data.length - 1].x : 0;
+    const minDate = data.length ? data[0].x : 0;
+    const secondMaxDate = data.length ? data[this.props.data.length - 2].x : 0;
     const offSet = (maxDate - secondMaxDate) / 2;
 
     return [{ x: minDate, y: 0 }, { x: maxDate + offSet, y: 0 }];
