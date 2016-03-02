@@ -51,8 +51,8 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -8),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -8),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
           transition: 'all .2s ease-in'
         },
         ':active': {
