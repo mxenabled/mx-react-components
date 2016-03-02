@@ -6,7 +6,7 @@
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
     "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js",
-    "test": "eslint src"
+    "eslint": "eslint src"
   },
   "repository": {
     "type": "git",
