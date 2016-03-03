@@ -24,31 +24,6 @@ const FileUpload = React.createClass({
     };
   },
 
-  componentDidMount () {
-    window.addEventListener('mouseover', this._handleMouseOver);
-    window.addEventListener('mouseout', this._handleMouseOut);
-  },
-
-  componentWillUnmount () {
-    window.removeEventListener('mouseover', this._handleMouseOver);
-    window.removeEventListener('mouseout', this._handleMouseOut);
-  },
-
-  _handleMouseOver (e) {
-    if (e.buttons === 1) {
-      this.setState({
-        dragging: true,
-        invalidMessage: null
-      });
-    }
-  },
-
-  _handleMouseOut () {
-    this.setState({
-      dragging: false
-    });
-  },
-
   _handleFileSelect (e) {
     const file = e.target.files[0];
 
@@ -60,6 +35,20 @@ const FileUpload = React.createClass({
   _onDragOver (e) {
     e.stopPropagation();
     e.preventDefault();
+
+    this.setState({
+      dragging: true,
+      invalidMessage: null
+    });
+  },
+
+  _onDragLeave (e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    this.setState({
+      dragging: false
+    });
   },
 
   _onDrop (e) {
@@ -80,7 +69,7 @@ const FileUpload = React.createClass({
     const isInvalidType = this.props.allowedfileTypes.indexOf(file.type) < 0;
 
     if (isTooBig || isInvalidType) {
-      const invalidMessage = isTooBig ? 'This file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'This file type is not accepted.';
+      const invalidMessage = isTooBig ? 'This file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'This file type is not accepted';
 
       this.setState({
         dragging: false,
@@ -120,10 +109,12 @@ const FileUpload = React.createClass({
     return (
       <div
         onClick={this._onDropzoneClick}
+        onDragLeave={this._onDragLeave}
         onDragOver={this._onDragOver}
         onDrop={this._onDrop}
         style={[styles.dropzone, this.state.dragging && styles.dragging, this.props.uploadedFile && styles.dropzoneLoaded]}
       >
+
         {this.props.uploadedFile ? (
           <div style={styles.fileInfo}>
             {this.state.imageSource ? (
@@ -136,9 +127,20 @@ const FileUpload = React.createClass({
             <Button icon='delete' onClick={this._removeImage} style={styles.button} type='secondary' />
           </div>
         ) : (
-          <div>{this.state.dragging ? 'Drop file here to upload' : 'Drag and drop files here or click to browse'}</div>
+          <div style={styles.dropzoneChild}>
+            {this.state.dragging ? (
+              <div style={[styles.centered, styles.draggingText]}>
+                <Icon size={60} style={styles.importIcon} type='import' />
+                <div>Drop file here to upload</div>
+              </div>
+            ) : (
+              <div style={styles.centered}>
+              {this.state.invalidMessage ? <div style={styles.invalidMessage}>{this.state.invalidMessage}</div> : null}
+              <div>Drag and drop files here or click to browse</div>
+              </div>
+            )}
+          </div>
         )}
-        {this.state.invalidMessage ? <div style={styles.invalidMessage}>{this.state.invalidMessage}</div> : null}
         <input
           name='files'
           onChange={this._handleFileSelect}
@@ -153,47 +155,65 @@ const FileUpload = React.createClass({
 
 const styles = {
   dropzone: {
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    fontFamily: StyleConstants.Fonts.REGULAR,
-    textAlign: 'center',
-    position: 'relative',
-    borderRadius: 3,
-    padding: 40,
-    color: StyleConstants.Colors.ASH,
     backgroundColor: StyleConstants.Colors.PORCELAIN,
-    border: '1px solid ' + StyleConstants.Colors.FOG
-  },
-  dragging: {
-    backgroundColor: StyleConstants.Colors.WHITE,
-    border: '1px dashed ' + StyleConstants.Colors.PRIMARY
-  },
-  dropzoneLoaded: {
-    padding: 20
+    border: '1px solid ' + StyleConstants.Colors.FOG,
+    borderRadius: 3,
+    color: StyleConstants.Colors.ASH,
+    fontFamily: StyleConstants.Fonts.REGULAR,
+    fontSize: StyleConstants.FontSizes.MEDIUM,
+    height: 100,
+    position: 'relative'
   },
   hiddenInput: {
-    visibility: 'hidden',
-    position: 'absolute'
+    position: 'absolute',
+    visibility: 'hidden'
   },
-  fileIcon: {
-    color: StyleConstants.Colors.ASH
+
+  // Dragging Styles
+  dragging: {
+    backgroundColor: StyleConstants.Colors.WHITE,
+    border: '1px dashed ' + StyleConstants.Colors.PRIMARY,
+    height: 150
   },
-  fileInfo: {
-    fontSize: StyleConstants.FontSizes.SMALL,
-    lineHeight: '1.2em',
-    textAlign: 'center'
+  importIcon: {
+    color: StyleConstants.Colors.PRIMARY
+  },
+  draggingText: {
+    color: StyleConstants.Colors.PRIMARY,
+    fontFamily: StyleConstants.Fonts.SEMIBOLD,
+    fontSize: StyleConstants.FontSizes.LARGE
+  },
+
+  // Loaded Styles
+  dropzoneLoaded: {
+    height: 'auto',
+    padding: 20
   },
   previewImage: {
-    maxWidth: '90%',
-    marginBottom: 10
+    marginBottom: 10,
+    maxWidth: '90%'
+  },
+  documentIcon: {
+    color: StyleConstants.Colors.ASH
   },
   button: {
     marginTop: 10
   },
-  invalidMessage: {
-    marginTop: 10
+
+  // Dropzone Text
+  dropzoneChild: {
+    height: '100%',
+    pointerEvents: 'none'
   },
-  documentIcon: {
-    color: StyleConstants.Colors.ASH
+  centered: {
+    left: '50%',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate(-50%, -50%)'
+  },
+  invalidMessage: {
+    fontSize: StyleConstants.FontSizes.LARGE,
+    marginBottom: 10
   }
 };
 
