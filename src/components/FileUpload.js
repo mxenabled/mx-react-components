@@ -1,14 +1,13 @@
-const React = require('react');
-const Radium = require('Radium');
 const numeral = require('numeral');
+const Radium = require('Radium');
+const React = require('react');
 
 const StyleConstants = require('../constants/Style');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
-const Loader = require('./Loader');
 
-const DropZone = React.createClass({
+const FileUpload = React.createClass({
   propTypes: {
     allowedfileTypes: React.PropTypes.array,
     maxFileSize: React.PropTypes.number,
@@ -125,7 +124,6 @@ const DropZone = React.createClass({
         onDrop={this._onDrop}
         style={[styles.dropzone, this.state.dragging && styles.dragging, this.props.uploadedFile && styles.dropzoneLoaded]}
       >
-        <Loader isLoading={this.state.loading} isRelative={true} isSmall={true} />
         {this.props.uploadedFile ? (
           <div style={styles.fileInfo}>
             {this.state.imageSource ? (
@@ -199,4 +197,4 @@ const styles = {
   }
 };
 
-module.exports = Radium(DropZone);
+module.exports = Radium(FileUpload);
