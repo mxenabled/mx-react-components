@@ -506,12 +506,13 @@ const Demo = React.createClass({
     return (
       <div>
         <br/><br/>
-        <DropZone
-          dragging={true}
-          onFileAdd={this._handleFileChange}
-          onFileRemove={this._handleFileChange}
-          uploadedFile={this.state.uploadedFile}
-        />
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <DropZone
+            onFileAdd={this._handleFileChange}
+            onFileRemove={this._handleFileChange}
+            uploadedFile={this.state.uploadedFile}
+          />
+        </div>
 
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>

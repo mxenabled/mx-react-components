@@ -130,7 +130,6 @@ const styles = {
     fontFamily: StyleConstants.Fonts.REGULAR,
     textAlign: 'center',
     position: 'relative',
-    width: '100%',
     borderRadius: 3,
     padding: 40,
     color: StyleConstants.Colors.ASH,
