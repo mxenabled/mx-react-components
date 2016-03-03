@@ -3,7 +3,7 @@ module.exports = {
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),
   DonutChart: require('./components/DonutChart'),
-  DropZone: require('./components/DropZone'),
+  FileUpload: require('./components/FileUpload'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),

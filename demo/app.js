@@ -7,7 +7,7 @@ const {
   DatePicker,
   DatePickerFullScreen,
   DonutChart,
-  DropZone,
+  FileUpload,
   Icon,
   Loader,
   Modal,
@@ -507,7 +507,7 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
-          <DropZone
+          <FileUpload
             allowedfileTypes={['image/jpeg', 'text/csv', 'image/tiff']}
             maxFileSize={3000}
             onFileAdd={this._handleFileChange}
