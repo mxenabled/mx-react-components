@@ -5,9 +5,13 @@ const numeral = require('numeral');
 const StyleConstants = require('../constants/Style');
 
 const Button = require('./Button');
+const Icon = require('./Icon');
+const Loader = require('./Loader');
 
 const DropZone = React.createClass({
   propTypes: {
+    allowedfileTypes: React.PropTypes.array,
+    maxFileSize: React.PropTypes.number,
     onFileAdd: React.PropTypes.func,
     onFileRemove: React.PropTypes.func,
     uploadedFile: React.PropTypes.any
@@ -16,7 +20,8 @@ const DropZone = React.createClass({
   getInitialState () {
     return {
       dragging: false,
-      imageSource: null
+      imageSource: null,
+      invalidMessage: null
     };
   },
 
@@ -33,7 +38,8 @@ const DropZone = React.createClass({
   _handleMouseOver (e) {
     if (e.buttons === 1) {
       this.setState({
-        dragging: true
+        dragging: true,
+        invalidMessage: null
       });
     }
   },
@@ -47,7 +53,9 @@ const DropZone = React.createClass({
   _handleFileSelect (e) {
     const file = e.target.files[0];
 
-    this._processFile(file);
+    if (file) {
+      this._processFile(file);
+    }
   },
 
   _onDragOver (e) {
@@ -65,21 +73,38 @@ const DropZone = React.createClass({
   },
 
   _onDropzoneClick () {
-    this.refs.hiddenInput.click();
+    this._input.click();
   },
 
   _processFile (file) {
-    const reader = new FileReader();
+    const isTooBig = this.props.maxFileSize < file.size / 1000;
+    const isInvalidType = this.props.allowedfileTypes.indexOf(file.type) < 0;
 
-    reader.readAsDataURL(file);
+    if (isTooBig || isInvalidType) {
+      const invalidMessage = isTooBig ? 'This file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'This file type is not accepted.';
 
-    reader.onload = function () {
       this.setState({
         dragging: false,
-        imageSource: reader.result
+        imageSource: null,
+        invalidMessage
       });
-      this.props.onFileAdd(file);
-    }.bind(this);
+      this.props.onFileRemove();
+    } else {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const imageSource = file.type.match('image*') ? reader.result : null;
+
+        this.setState({
+          dragging: false,
+          imageSource,
+          invalidMessage: null
+        });
+        this.props.onFileAdd(file);
+      };
+    }
   },
 
   _removeImage (e) {
@@ -100,20 +125,26 @@ const DropZone = React.createClass({
         onDrop={this._onDrop}
         style={[styles.dropzone, this.state.dragging && styles.dragging, this.props.uploadedFile && styles.dropzoneLoaded]}
       >
+        <Loader isLoading={this.state.loading} isRelative={true} isSmall={true} />
         {this.props.uploadedFile ? (
           <div style={styles.fileInfo}>
-            <img src={this.state.imageSource} style={styles.previewImage} />
+            {this.state.imageSource ? (
+              <img src={this.state.imageSource} style={styles.previewImage} />
+            ) : (
+              <Icon size={60} style={styles.documentIcon} type='document' />
+            )}
             <div>{this.props.uploadedFile.name}</div>
             <div>{numeral(this.props.uploadedFile.size / 1000).format('0.0')}k</div>
             <Button icon='delete' onClick={this._removeImage} style={styles.button} type='secondary' />
           </div>
         ) : (
-          <div>Drag and drop files here or click to browse</div>
+          <div>{this.state.dragging ? 'Drop file here to upload' : 'Drag and drop files here or click to browse'}</div>
         )}
+        {this.state.invalidMessage ? <div style={styles.invalidMessage}>{this.state.invalidMessage}</div> : null}
         <input
           name='files'
           onChange={this._handleFileSelect}
-          ref='hiddenInput'
+          ref={(ref) => (this._input = ref)}
           style={styles.hiddenInput}
           type='file'
         />
@@ -159,6 +190,12 @@ const styles = {
   },
   button: {
     marginTop: 10
+  },
+  invalidMessage: {
+    marginTop: 10
+  },
+  documentIcon: {
+    color: StyleConstants.Colors.ASH
   }
 };
 

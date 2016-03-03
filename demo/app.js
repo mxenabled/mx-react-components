@@ -508,6 +508,8 @@ const Demo = React.createClass({
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <DropZone
+            allowedfileTypes={['image/jpeg', 'text/csv', 'image/tiff']}
+            maxFileSize={3000}
             onFileAdd={this._handleFileChange}
             onFileRemove={this._handleFileChange}
             uploadedFile={this.state.uploadedFile}
