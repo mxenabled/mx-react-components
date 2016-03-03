@@ -14,6 +14,7 @@ module.exports = {
   TypeAhead: require('./components/TypeAhead'),
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),
+  ImageUploader: require('./components/ImageUploader'),
 
   Styles: require('./constants/Style')
 };
