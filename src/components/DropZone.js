@@ -8,11 +8,9 @@ const Button = require('./Button');
 
 const DropZone = React.createClass({
   propTypes: {
-    dragging: React.PropTypes.bool,
     onFileAdd: React.PropTypes.func,
     onFileRemove: React.PropTypes.func,
-    uploadedFile: React.PropTypes.any,
-    validationMessage: React.PropTypes.string
+    uploadedFile: React.PropTypes.any
   },
 
   getInitialState () {
