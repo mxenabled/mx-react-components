@@ -9,7 +9,7 @@ const Icon = require('./Icon');
 
 const FileUpload = React.createClass({
   propTypes: {
-    allowedfileTypes: React.PropTypes.array,
+    allowedFileTypes: React.PropTypes.array,
     maxFileSize: React.PropTypes.number,
     onFileAdd: React.PropTypes.func,
     onFileRemove: React.PropTypes.func,
@@ -66,7 +66,7 @@ const FileUpload = React.createClass({
 
   _processFile (file) {
     const isTooBig = this.props.maxFileSize < file.size / 1000;
-    const isInvalidType = this.props.allowedfileTypes.indexOf(file.type) < 0;
+    const isInvalidType = this.props.allowedFileTypes.indexOf(file.type) < 0;
 
     if (isTooBig || isInvalidType) {
       const invalidMessage = isTooBig ? 'This file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'This file type is not accepted';
