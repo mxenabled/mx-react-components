@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
-const _throttle = require('lodash/function/throttle');
+const _throttle = require('lodash/throttle');
 
 const StyleConstants = require('../constants/Style');
 
