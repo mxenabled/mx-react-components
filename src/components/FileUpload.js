@@ -1,5 +1,5 @@
 const numeral = require('numeral');
-const Radium = require('Radium');
+const Radium = require('radium');
 const React = require('react');
 
 const StyleConstants = require('../constants/Style');
