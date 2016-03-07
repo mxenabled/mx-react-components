@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>2.0.2</h3>
+        <ul>
+          <li>Fix duplicate module error (<a href='https://github.com/mxenabled/mx-react-components/pull/197'>#197</a>)</li>
+        </ul>
+
         <h3>2.0.0</h3>
         <ul>
           <li>Update Lodash to 4.6.1 (<a href='https://github.com/mxenabled/mx-react-components/pull/193'>#193</a>)</li>

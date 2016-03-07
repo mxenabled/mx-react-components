@@ -83210,6 +83210,26 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '2.0.2'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          'Fix duplicate module error (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/197' },
+	            '#197'
+	          ),
+	          ')'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '2.0.0'
 	      ),
 	      React.createElement(
