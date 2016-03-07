@@ -6,6 +6,23 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>2.0.0</h3>
+        <ul>
+          <li>Update Lodash to 4.6.1 (<a href='https://github.com/mxenabled/mx-react-components/pull/193'>#193</a>)</li>
+          <li>Add FileUpload component (<a href='https://github.com/mxenabled/mx-react-components/pull/192'>#192</a>)</li>
+          <li>Darkened hover effect on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/191'>#191</a>)</li>
+          <li>Rename NPM `test` script to `eslint` (<a href='https://github.com/mxenabled/mx-react-components/pull/190'>#190</a>)</li>
+          <li>Add zero y-axis tick to TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/189'>#189</a>)</li>
+          <li>Change DonutChart to return data object instead of index (<a href='https://github.com/mxenabled/mx-react-components/pull/186'>#186</a>)</li>
+          <li>Add update method for selectedDate to DatePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/183'>#183</a>)</li>
+          <li>Add document icon to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/181'>#181</a>)</li>
+          <li>Fix y-axis padding on TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/180'>#180</a>)</li>
+          <li>Fix break point label on LimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/179'>#179</a>)</li>
+          <li>Remove secondaryOutline button from Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/178'>#178</a>)</li>
+          <li>Fix for select options dropshadow in Select component (<a href='https://github.com/mxenabled/mx-react-components/pull/177'>#177</a>)</li>
+          <li>Refactor TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/175'>#175</a>)</li>
+        </ul>
+
         <h3>1.6.9</h3>
         <ul>
           <li>Select: Hides the shadow when there is no options to show (<a href='https://github.com/mxenabled/mx-react-components/pull/174'>#174</a>)</li>
