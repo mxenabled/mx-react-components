@@ -198,7 +198,6 @@ const HoveredDataPointGroup = React.createClass({
 // Main Component
 const TimeBasedLineChart = React.createClass({
   propTypes: {
-    alwaysShowZeroLine: React.PropTypes.bool,
     breakPointDate: React.PropTypes.number,
     breakPointLabel: React.PropTypes.string,
     data: React.PropTypes.array.isRequired,
@@ -210,6 +209,7 @@ const TimeBasedLineChart = React.createClass({
     shadeBelowZero: React.PropTypes.bool,
     shadeFutureOnGraph: React.PropTypes.bool,
     showBreakPoint: React.PropTypes.bool,
+    showZeroLine: React.PropTypes.bool,
     width: React.PropTypes.number,
     yAxisFormatter: React.PropTypes.func,
     zeroState: React.PropTypes.node
@@ -217,7 +217,6 @@ const TimeBasedLineChart = React.createClass({
 
   getDefaultProps () {
     return {
-      alwaysShowZeroLine: false,
       breakPointDate: moment().startOf('day').unix(),
       breakPointLabel: 'Today',
       height: 400,
@@ -227,6 +226,7 @@ const TimeBasedLineChart = React.createClass({
       shadeBelowZero: false,
       shadeFutureOnGraph: true,
       showBreakPoint: true,
+      showZeroLine: false,
       width: 550,
       yAxisFormatter (d) {
         return numeral(d).format('0.0a');
@@ -494,7 +494,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   render () {
-    const { alwaysShowZeroLine, breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, width, zeroState, yAxisFormatter } = this.props;
+    const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
     const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 
     return (
@@ -559,7 +559,7 @@ const TimeBasedLineChart = React.createClass({
                   xScaleValueFunction={this._getXScaleValue}
                 />
               ) : null}
-              {alwaysShowZeroLine && this._yRangeContainsZero() ? (
+              {showZeroLine && this._yRangeContainsZero() ? (
                 <g className='zero-line'>
                   <LineGroup
                     adjustedHeight={adjustedHeight}
