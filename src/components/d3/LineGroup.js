@@ -74,7 +74,7 @@ const LineGroup = React.createClass({
           fill='none'
           ref='chartLine'
           stroke={lineColor}
-          strokeDasharray={dashLine ? '4,4' : '0,0'}
+          strokeDasharray={dashLine ? '4,4' : 'none'}
           strokeWidth={strokeWidth}
         />
       </g>
