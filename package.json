@@ -15,7 +15,7 @@
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "eslint": "~2.2.0",
+    "eslint": "~1.6.0",
     "eslint-loader": "~1.1.0",
     "eslint-plugin-react": "~3.10.0",
     "live-server": "^0.8.1",
@@ -24,12 +24,13 @@
   },
   "dependencies": {
     "highlight.js": "^8.8.0",
-    "history": "^2.0.0-rc2",
+    "history": "^2.0.0",
     "marked": "^0.3.5",
     "moment": "^2.10.6",
     "mx-react-components": "^2.0.4",
+    "radium": "^0.14.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-router": "^v1.0.0-rc3"
+    "react-router": "^2.0.0"
   }
 }
