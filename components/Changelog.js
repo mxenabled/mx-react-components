@@ -6,6 +6,16 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>2.0.4</h3>
+        <ul>
+          <li>Fix IE 11/Edge issues in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/199'>#199</a>)</li>
+        </ul>
+
+        <h3>2.0.3</h3>
+        <ul>
+          <li>Lock eslint to 2.2.x and Radium to 0.14.x to prevent bugs introduced in latest versions(<a href='https://github.com/mxenabled/mx-react-components/pull/198'>#198</a>)</li>
+        </ul>
+
         <h3>2.0.2</h3>
         <ul>
           <li>Fix duplicate module error (<a href='https://github.com/mxenabled/mx-react-components/pull/197'>#197</a>)</li>

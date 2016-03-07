@@ -32,7 +32,6 @@ const TimeBasedLineChartDocs = React.createClass({
 
         <h3>Demo</h3>
         <TimeBasedLineChart
-          alwaysShowZeroYTick={true}
           breakPointDate={moment().startOf('month').unix()}
           breakPointLabel={'This Month'}
           dashedFutureLine={false}
@@ -41,15 +40,12 @@ const TimeBasedLineChartDocs = React.createClass({
           margin={{ top: 30, right: 0, bottom: 30, left: 75 }}
           rangeType={'month'}
           shadeAreaBelowZero={true}
+          showZeroYTick={true}
           style={{ boxSizing: 'content-box' }}
           width={700}
         />
 
         <h3>Usage</h3>
-        <h5>alwaysShowZeroYTick <label>Boolean</label></h5>
-        <p>Default: false</p>
-        <p>If set to 'true', then a tick, label, and line will be displayed for the '0' yAxis value.</p>
-
         <h5>areaBelowZeroColor <label>String</label></h5>
         <p>Default: rgb(238, 66, 53)</p>
         <p>A CSS color value that sets the color of the area below zero.</p>
@@ -124,6 +120,10 @@ const TimeBasedLineChartDocs = React.createClass({
         <p>Default: true</p>
         <p>Set this to 'false' if you don't want to display a tooltip when hovering over the data points.</p>
 
+        <h5>showZeroYTick <label>Boolean</label></h5>
+        <p>Default: false</p>
+        <p>If set to 'true', then a tick, label, and line will be displayed for the '0' yAxis value.</p>
+
         <h5>staticXAxis <label>Boolean</label></h5>
         <p>Default: true</p>
         <p>If set to false, the x axis labels will only be shown when hovering over a data point and a static x axis label will be displayed under the breakpoint.</p>
@@ -155,7 +155,6 @@ const TimeBasedLineChartDocs = React.createClass({
     }
 
     <TimeBasedLineChart
-      alwaysShowZeroYTick={true}
       breakPointDate={moment().startOf('month').unix()}
       breakPointLabel={'This Month'}
       dashedFutureLine={false}
@@ -164,6 +163,7 @@ const TimeBasedLineChartDocs = React.createClass({
       margin={{ top: 30, right: 0, bottom: 30, left: 75 }}
       rangeType={'month'}
       shadeAreaBelowZero={true}
+      showZeroYTick={true}
       style={{ boxSizing: 'content-box' }}
       width={700}
     />
