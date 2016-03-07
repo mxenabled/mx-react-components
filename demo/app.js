@@ -11,6 +11,7 @@ const {
   Icon,
   Loader,
   Modal,
+  PieChart,
   RangeSelector,
   Select,
   SelectFullScreen,
@@ -779,6 +780,28 @@ const Demo = React.createClass({
             title='Select A Date'
           />
         </div>
+        <br/><br/>
+        <PieChart
+          data={[
+            {
+              name: 'Data Point 1',
+              value: 50
+            },
+            {
+              name: 'Data Point 2',
+              value: 80
+            },
+            {
+              name: 'Data Point 3',
+              value: 200
+            },
+            {
+              name: 'Data Point 4',
+              value: 100
+            }
+          ]}
+          showDataLabel={true}
+        />
         <br/><br/>
       </div>
     );
