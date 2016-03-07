@@ -31,7 +31,7 @@
     "moment": "^2.10.3",
     "numeral": "^1.5.3",
     "object-assign": "^4.0.1",
-    "radium": "^0.14.1",
+    "radium": "^0.16.6",
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
   },

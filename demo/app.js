@@ -4,7 +4,10 @@ const moment = require('moment');
 
 const {
   Button,
+  DatePicker,
+  DatePickerFullScreen,
   DonutChart,
+  FileUpload,
   Icon,
   Loader,
   Modal,
@@ -13,9 +16,7 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
-  TypeAhead,
-  DatePicker,
-  DatePickerFullScreen
+  TypeAhead
 } = require('../src/Index');
 
 const styles = {
@@ -431,6 +432,7 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
+      uploadedFile: null,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     };
   },
@@ -494,9 +496,26 @@ const Demo = React.createClass({
     });
   },
 
+  _handleFileChange (uploadedFile) {
+    this.setState({
+      uploadedFile
+    });
+  },
+
   render () {
     return (
       <div>
+        <br/><br/>
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <FileUpload
+            allowedFileTypes={['image/jpeg', 'text/csv', 'image/tiff']}
+            maxFileSize={3000}
+            onFileAdd={this._handleFileChange}
+            onFileRemove={this._handleFileChange}
+            uploadedFile={this.state.uploadedFile}
+          />
+        </div>
+
         <br/><br/>
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
