@@ -494,6 +494,12 @@ const Demo = React.createClass({
     });
   },
 
+  _handleButtonClick () {
+    this.setState({
+      isActive : !this.state.isActive
+    })
+  },
+
   render () {
     return (
       <div>
@@ -514,6 +520,8 @@ const Demo = React.createClass({
           <Button type='neutral'>Neutral Button</Button>
           <br/><br/>
           <Button type='disabled'>Disabled Button</Button>
+          <br/><br/>
+          <Button onClick={this._handleButtonClick} isActive={this.state.isActive} actionText='Loading...'>Action Button</Button>
 
         </div>
         <Modal
