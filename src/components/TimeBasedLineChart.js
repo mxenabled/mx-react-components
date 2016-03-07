@@ -269,6 +269,12 @@ const TimeBasedLineChart = React.createClass({
     this._styleChart();
   },
 
+  _yRangeContainsZero () {
+    const minMaxValues = ChartUtils.getDataMinMaxValues(this.props.data, 'y');
+
+    return minMaxValues.min <= 0 && minMaxValues.max >= 0;
+  },
+
   // Handle functions
   _handleChartMouseLeave () {
     this.setState({
@@ -553,7 +559,7 @@ const TimeBasedLineChart = React.createClass({
                   xScaleValueFunction={this._getXScaleValue}
                 />
               ) : null}
-              {alwaysShowZeroLine ? (
+              {alwaysShowZeroLine && this._yRangeContainsZero() ? (
                 <g className='zero-line'>
                   <LineGroup
                     adjustedHeight={adjustedHeight}
