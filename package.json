@@ -31,7 +31,7 @@
     "moment": "^2.10.3",
     "numeral": "^1.5.3",
     "object-assign": "^4.0.1",
-    "radium": "^0.16.6",
+    "radium": "^0.14.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
   },
@@ -41,7 +41,7 @@
     "babel-loader": "^6.0.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-react": "^6.0.0",
-    "eslint": "^2.0.0",
+    "eslint": "~2.2.0",
     "eslint-config-mx": "^1.0.3",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
