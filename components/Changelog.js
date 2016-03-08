@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>2.0.5</h3>
+        <ul>
+          <li>Add isRequired to props and fix validation bugs in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/202'>#202</a>)</li>
+        </ul>
+
         <h3>2.0.4</h3>
         <ul>
           <li>Fix IE 11/Edge issues in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/199'>#199</a>)</li>
