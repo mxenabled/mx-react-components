@@ -599,6 +599,18 @@ const Demo = React.createClass({
     });
   },
 
+  _handleSpinnerClick () {
+    this.setState({
+      spinnerIsActive: !this.state.spinnerIsActive
+    });
+  },
+
+  _handleSpinnerWithTextClick () {
+    this.setState({
+      spinnerWithTextIsActive: !this.state.spinnerWithTextIsActive
+    });
+  },
+
   render () {
     const navConfig = {
       duration: 200,
@@ -646,8 +658,9 @@ const Demo = React.createClass({
           <br/><br/>
           <Button type='disabled'>Disabled Button</Button>
           <br/><br/>
-          <Button onClick={this._handleButtonClick} isActive={this.state.isActive} actionText='Loading...'>Action Button</Button>
-
+          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}>Spinner</Button>
+          <br/><br/>
+          <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Spinner with text</Button>
         </div>
         <Modal
           buttons={[
