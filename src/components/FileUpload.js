@@ -11,8 +11,8 @@ const FileUpload = React.createClass({
   propTypes: {
     allowedFileTypes: React.PropTypes.array,
     maxFileSize: React.PropTypes.number,
-    onFileAdd: React.PropTypes.func,
-    onFileRemove: React.PropTypes.func,
+    onFileAdd: React.PropTypes.func.isRequired,
+    onFileRemove: React.PropTypes.func.isRequired,
     uploadedFile: React.PropTypes.any
   },
 
@@ -66,7 +66,7 @@ const FileUpload = React.createClass({
 
   _processFile (file) {
     const isTooBig = this.props.maxFileSize < file.size / 1000;
-    const isInvalidType = this.props.allowedFileTypes.indexOf(file.type) < 0;
+    const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
 
     if (isTooBig || isInvalidType) {
       const invalidMessage = isTooBig ? 'This file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'This file type is not accepted';
@@ -162,7 +162,8 @@ const styles = {
     fontFamily: StyleConstants.Fonts.REGULAR,
     fontSize: StyleConstants.FontSizes.MEDIUM,
     height: 100,
-    position: 'relative'
+    position: 'relative',
+    textAlign: 'center'
   },
   hiddenInput: {
     position: 'absolute',
