@@ -1,13 +1,15 @@
 const React = require('react');
-const { Link, History } = require('react-router');
+const { Link } = require('react-router');
 
 const { Select } = require('mx-react-components');
 
 const Components = React.createClass({
-  mixins: [History],
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
 
   _handleChange (selected) {
-    this.history.pushState(null, '/components/' + selected.value);
+    this.context.router.push('/components/' + selected.value);
   },
 
   render () {
