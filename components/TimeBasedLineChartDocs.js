@@ -11,15 +11,15 @@ const TimeBasedLineChartDocs = React.createClass({
 
     for (let i = 6; i > 0; i--) {
       lineChartData.push({
-        timeStamp: moment().subtract(i, 'months').startOf('month').unix(),
-        value: Math.floor(Math.random() * 1000)
+        x: moment().subtract(i, 'months').startOf('month').unix(),
+        y: Math.floor(Math.random() * 1000)
       });
     }
 
     for (let i = 0; i < 6; i++) {
       lineChartData.push({
-        timeStamp: moment().add(i, 'months').startOf('month').unix(),
-        value: Math.floor(Math.random() * 1000)
+        x: moment().add(i, 'months').startOf('month').unix(),
+        y: Math.floor(Math.random() * 1000)
       });
     }
 
