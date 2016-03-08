@@ -23,10 +23,6 @@ const Button = React.createClass({
     ])
   },
 
-  componentDidMount () {
-    // console.log('this.props.isActive', this.props.isActive);
-  },
-
   getDefaultProps () {
     return {
       isActive: false,
@@ -35,10 +31,29 @@ const Button = React.createClass({
     };
   },
 
-  _renderButtonText () {
-    return (
-      this.props.isActive ? this.props.actionText : this.props.children
-    );
+  _renderButtonContent () {
+    const circleStyles = {
+      display: 'inline-block',
+      borderRadius: '100%',
+      width: this.props.actionText ? 5 : 11,
+      height: this.props.actionText ? 5 : 11,
+      margin: '0 5',
+      borderTop: '2px solid',
+      borderRight: '2px solid',
+      borderBottom: '2px solid transparent',
+      borderLeft: '2px solid transparent'
+    };
+
+    if (this.props.isActive) {
+      return (
+        <div>
+          <Spin><div style={circleStyles} /></Spin>
+          {this.props.actionText}
+        </div>
+      );
+    } else {
+      return this.props.children;
+    }
   },
 
   render () {
@@ -152,7 +167,7 @@ const Button = React.createClass({
     return (
       <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
         {this.props.icon ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
-        {this._renderButtonText()}
+        {this._renderButtonContent()}
       </div>
     );
   }
