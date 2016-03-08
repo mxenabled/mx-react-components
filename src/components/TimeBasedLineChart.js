@@ -9,7 +9,8 @@ const BreakPointGroup = require('./d3/BreakPointGroup');
 const GridLinesGroup = require('./d3/GridLinesGroup');
 const CirclesGroup = require('./d3/CirclesGroup');
 const LineGroup = require('./d3/LineGroup');
-const ShadedRectangleGroup = require('./d3/ShadedRectangleGroup');
+const ShadedAreaRectangleGroup = require('./d3/ShadedAreaRectangleGroup');
+const ShadedHatchPatternRectangleGroup = require('./d3/ShadedHatchPatternRectangleGroup');
 const SlicesGroup = require('./d3/SlicesGroup');
 const TimeXAxisGroup = require('./d3/TimeXAxisGroup');
 const AxisGroup = require('./d3/AxisGroup');
@@ -84,6 +85,9 @@ const styles = {
   yAxisLabel: {
     stroke: 'none',
     'text-anchor': 'end'
+  },
+  zeroLineLabel: {
+    stroke: StyleConstants.Colors.STRAWBERRY
   },
 
   // Hovered Data Point
@@ -202,8 +206,10 @@ const TimeBasedLineChart = React.createClass({
     lineColor: React.PropTypes.string,
     margin: React.PropTypes.object,
     rangeType: React.PropTypes.oneOf(['day', 'month']),
+    shadeBelowZero: React.PropTypes.bool,
     shadeFutureOnGraph: React.PropTypes.bool,
     showBreakPoint: React.PropTypes.bool,
+    showZeroLine: React.PropTypes.bool,
     width: React.PropTypes.number,
     yAxisFormatter: React.PropTypes.func,
     zeroState: React.PropTypes.node
@@ -217,8 +223,10 @@ const TimeBasedLineChart = React.createClass({
       lineColor: StyleConstants.Colors.PRIMARY,
       margin: styles.chartMargins,
       rangeType: 'day',
+      shadeBelowZero: false,
       shadeFutureOnGraph: true,
       showBreakPoint: true,
+      showZeroLine: false,
       width: 550,
       yAxisFormatter (d) {
         return numeral(d).format('0.0a');
@@ -259,6 +267,12 @@ const TimeBasedLineChart = React.createClass({
 
   componentDidUpdate () {
     this._styleChart();
+  },
+
+  _yRangeContainsZero () {
+    const minMaxValues = ChartUtils.getDataMinMaxValues(this.props.data, 'y');
+
+    return minMaxValues.min <= 0 && minMaxValues.max >= 0;
   },
 
   // Handle functions
@@ -352,6 +366,12 @@ const TimeBasedLineChart = React.createClass({
     return yScale(value);
   },
 
+  _getShadedRectangleHeight () {
+    const calculatedHeight = this.state.adjustedHeight - this._getShadedRectangleYValue();
+
+    return calculatedHeight < 0 ? 0 : calculatedHeight;
+  },
+
   _getShadedRectangleWidth () {
     const calculatedWidth = this.state.adjustedWidth - this._getShadedRectangleXValue();
 
@@ -362,6 +382,32 @@ const TimeBasedLineChart = React.createClass({
     const breakPointXValue = this._getXScaleValue(this.props.breakPointDate);
 
     return breakPointXValue < 0 ? 0 : breakPointXValue;
+  },
+
+  _getShadedRectangleYValue () {
+    return this._getYScaleValue(0);
+  },
+
+  _getZeroLabelXValue () {
+    const data = this.props.data;
+    const maxDate = data.length ? data[data.length - 1].x : 0;
+    const offSet = 15;
+
+    return this._getXScaleValue(maxDate + this.props.margin.right) + offSet;
+  },
+
+  _getZeroLabelYValue () {
+    return this._getYScaleValue(0 - this.props.margin.top);
+  },
+
+  _getZeroLineData () {
+    const data = this.props.data;
+    const maxDate = data.length ? data[data.length - 1].x : 0;
+    const minDate = data.length ? data[0].x : 0;
+    const secondMaxDate = data.length ? data[data.length - 2].x : 0;
+    const offSet = (maxDate - secondMaxDate) / 2;
+
+    return [{ x: minDate, y: 0 }, { x: maxDate + offSet, y: 0 }];
   },
 
   _styleChart () {
@@ -382,16 +428,12 @@ const TimeBasedLineChart = React.createClass({
     // Style y axis labels
     chart.select('g.y-axis').selectAll('text')
       .style(styles.yAxisLabel)
-      .style('fill', d => {
-        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH;
-      })
+      .style('fill', StyleConstants.Colors.ASH)
       .attr('transform', 'translate(-10,0)');
 
     // Style y axis ticks
     chart.select('g.y-axis').selectAll('line')
-      .style('stroke', d => {
-        return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
-      });
+      .style('stroke', StyleConstants.Colors.FOG);
 
     // Style Circles
     chart.selectAll('.circle')
@@ -416,14 +458,17 @@ const TimeBasedLineChart = React.createClass({
       .style(styles.dateTooltipText);
 
     // Style rest of chart elements
-    chart.selectAll('text').style(styles.text);
-    chart.selectAll('.domain').style(styles.domain);
-    chart.selectAll('.y-grid-line .tick').style('stroke', d => {
-      return d === 0 ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.FOG;
-    })
-    .style('stroke-dasharray', d => {
-      return d === 0 ? 'none' : '4,4';
-    });
+    chart.selectAll('text')
+      .style(styles.text);
+
+    chart.selectAll('.domain')
+      .style(styles.domain);
+
+    chart.selectAll('.y-grid-line .tick')
+      .style('stroke', StyleConstants.Colors.FOG);
+
+    chart.select('text.zero-line-label')
+      .style(styles.zeroLineLabel);
   },
 
   // Render functions
@@ -449,7 +494,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   render () {
-    const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeFutureOnGraph, showBreakPoint, width, zeroState, yAxisFormatter } = this.props;
+    const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
     const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 
     return (
@@ -463,12 +508,22 @@ const TimeBasedLineChart = React.createClass({
               width={width}
             >
               {shadeFutureOnGraph ? (
-                <ShadedRectangleGroup
+                <ShadedHatchPatternRectangleGroup
                   height={adjustedHeight}
                   translation={this._getLineTranslation()}
                   width={this._getShadedRectangleWidth()}
                   x={this._getShadedRectangleXValue()}
                   y={0}
+                />
+              ) : null}
+              {shadeBelowZero ? (
+                <ShadedAreaRectangleGroup
+                  fillColor={StyleConstants.Colors.STRAWBERRY}
+                  height={this._getShadedRectangleHeight()}
+                  translation={this._getLineTranslation()}
+                  width={adjustedWidth}
+                  x={0}
+                  y={this._getShadedRectangleYValue()}
                 />
               ) : null}
               <AxisGroup
@@ -503,6 +558,28 @@ const TimeBasedLineChart = React.createClass({
                   translation={this._getVerticalLineTranslation()}
                   xScaleValueFunction={this._getXScaleValue}
                 />
+              ) : null}
+              {showZeroLine && this._yRangeContainsZero() ? (
+                <g className='zero-line'>
+                  <LineGroup
+                    adjustedHeight={adjustedHeight}
+                    dashLine={true}
+                    data={this._getZeroLineData()}
+                    lineColor={StyleConstants.Colors.STRAWBERRY}
+                    shouldAnimate={false}
+                    translation={this._getLineTranslation()}
+                    xScaleValueFunction={this._getXScaleValue}
+                    yScaleValueFunction={this._getYScaleValue}
+                  />
+                  <text
+                    className='zero-line-label'
+                    transform={this._getLineTranslation()}
+                    x={this._getZeroLabelXValue()}
+                    y={this._getZeroLabelYValue()}
+                  >
+                    0
+                  </text>
+                </g>
               ) : null}
               <LineGroup
                 adjustedHeight={adjustedHeight}

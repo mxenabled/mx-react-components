@@ -2,9 +2,10 @@ const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
-const ShadedRectangleGroup = React.createClass({
+const ShadedAreaRectangleGroup = React.createClass({
   propTypes: {
     fillColor: React.PropTypes.string,
+    fillOpacity: React.PropTypes.number,
     height: React.PropTypes.number.isRequired,
     translation: React.PropTypes.string,
     width: React.PropTypes.number.isRequired,
@@ -15,27 +16,17 @@ const ShadedRectangleGroup = React.createClass({
   getDefaultProps () {
     return {
       fillColor: StyleConstants.Colors.FOG,
+      fillOpacity: 0.1,
       translation: 'translate(0,0)'
     };
   },
 
   render () {
     return (
-      <g className='future-shade-pattern' ref='futureShadePattern'>
-        <pattern
-          height={4}
-          id='diagonalHatch'
-          patternUnits='userSpaceOnUse'
-          width={4}
-        >
-          <path
-            d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
-            stroke={this.props.fillColor}
-            strokeWidth={1}
-          />
-        </pattern>
+      <g className='shaded-area' ref='ShadedArea'>
         <rect
-          fill={'url(#diagonalHatch)'}
+          fill={this.props.fillColor}
+          fillOpacity={this.props.fillOpacity}
           height={this.props.height}
           transform={this.props.translation}
           width={this.props.width}
@@ -47,4 +38,4 @@ const ShadedRectangleGroup = React.createClass({
   }
 });
 
-module.exports = ShadedRectangleGroup;
+module.exports = ShadedAreaRectangleGroup;

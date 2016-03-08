@@ -80,7 +80,7 @@ const DonutChart = React.createClass({
   },
 
   _handleClick (index) {
-    this.props.onClick(index);
+    this.props.onClick(this.props.data[index]);
   },
 
   _handleMouseEnter (index) {
@@ -90,7 +90,7 @@ const DonutChart = React.createClass({
       });
     }
 
-    this.props.onMouseEnter(index);
+    this.props.onMouseEnter(this.props.data[index]);
   },
 
   _handleMouseLeave () {

@@ -7,6 +7,7 @@ const StyleConstants = require('../../constants/Style');
 const LineGroup = React.createClass({
   propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
+    dashLine: React.PropTypes.bool,
     data: React.PropTypes.array.isRequired,
     lineColor: React.PropTypes.string,
     shouldAnimate: React.PropTypes.bool,
@@ -18,6 +19,7 @@ const LineGroup = React.createClass({
 
   getDefaultProps () {
     return {
+      dashLine: false,
       lineColor: StyleConstants.Colors.CHARCOAL,
       shouldAnimate: true,
       strokeWidth: 2,
@@ -63,7 +65,7 @@ const LineGroup = React.createClass({
   },
 
   render () {
-    const { data, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
+    const { data, dashLine, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
 
     return (
       <g className='chart-line-group' ref='chartLineGroup' transform={translation}>
@@ -72,6 +74,7 @@ const LineGroup = React.createClass({
           fill='none'
           ref='chartLine'
           stroke={lineColor}
+          strokeDasharray={dashLine ? '4,4' : 'none'}
           strokeWidth={strokeWidth}
         />
       </g>
