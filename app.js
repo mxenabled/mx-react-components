@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const { Route, IndexRoute, Router } = require('react-router');
+const { hashHistory, Route, IndexRoute, Router } = require('react-router');
 
 const Button = require('components/ButtonDocs');
 const Changelog = require('components/Changelog');
@@ -39,7 +39,7 @@ const App = React.createClass({
 });
 
 ReactDOM.render((
-  <Router>
+  <Router history={hashHistory}>
     <Route component={App} path='/'>
       <Route component={Components} path='components'>
         <IndexRoute component={Changelog} />
