@@ -801,6 +801,18 @@ const Demo = React.createClass({
             }
           ]}
           showDataLabel={true}
+        >
+          Hello Pie Chart
+        </PieChart>
+        <br/><br/>
+        <PieChart
+          data={[
+            {
+              name: 'Data Point 4',
+              value: 100
+            }
+          ]}
+          showDataLabel={true}
         />
         <br/><br/>
       </div>
