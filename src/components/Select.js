@@ -27,7 +27,6 @@ const Select = React.createClass({
       onChange () {},
       options: [],
       placeholderText: 'Select One',
-      selected: false,
       valid: true
     };
   },
