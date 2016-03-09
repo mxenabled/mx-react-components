@@ -34,8 +34,7 @@ const Select = React.createClass({
   getInitialState () {
     return {
       highlightedValue: null,
-      isOpen: false,
-      selected: false
+      isOpen: false
     };
   },
 
