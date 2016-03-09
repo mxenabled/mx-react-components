@@ -75,35 +75,6 @@ const FileUpload = React.createClass({
     this._input.click();
   },
 
-  _validateFile (file) {
-    const isTooBig = this.props.maxFileSize < file.size / 1000;
-    const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
-
-    if (isTooBig || isInvalidType) {
-      const invalidMessage = isTooBig ? 'The selected file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'The selected file type is not accepted';
-
-      this.setState({
-        dragging: false,
-        invalidMessage
-      });
-
-      this.props.onFileRemove(this.props.uploadedFile);
-    } else {
-      this.props.onFileAdd(file);
-    }
-  },
-
-  _removeImage (e) {
-    e.stopPropagation();
-    e.preventDefault();
-
-    this.setState({
-      imageSource: null,
-      invalidMessage: null
-    });
-    this.props.onFileRemove();
-  },
-
   _readFile (file) {
     if (file) {
       const reader = new FileReader();
@@ -121,6 +92,17 @@ const FileUpload = React.createClass({
     }
   },
 
+  _removeFile (e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    this.setState({
+      imageSource: null,
+      invalidMessage: null
+    });
+    this.props.onFileRemove();
+  },
+
   _renderInvalidMessage () {
     if (this.state.invalidMessage) {
       return (
@@ -131,6 +113,24 @@ const FileUpload = React.createClass({
       );
     } else {
       return null;
+    }
+  },
+
+  _validateFile (file) {
+    const isTooBig = this.props.maxFileSize < file.size / 1000;
+    const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
+
+    if (isTooBig || isInvalidType) {
+      const invalidMessage = isTooBig ? 'The selected file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'The selected file type is not accepted';
+
+      this.setState({
+        dragging: false,
+        invalidMessage
+      });
+
+      this.props.onFileRemove(this.props.uploadedFile);
+    } else {
+      this.props.onFileAdd(file);
     }
   },
 
@@ -159,7 +159,7 @@ const FileUpload = React.createClass({
               <div>
                 <div>{this.props.uploadedFile.name}</div>
                 <div>{numeral(this.props.uploadedFile.size / 1000).format('0.0')}k</div>
-                <Button icon='delete' onClick={this._removeImage} style={styles.button} type='secondary' />
+                <Button icon='delete' onClick={this._removeFile} style={styles.button} type='secondary' />
               </div>
             ) : null}
           </div>
