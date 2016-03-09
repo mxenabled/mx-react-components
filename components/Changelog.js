@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>2.0.6</h3>
+        <ul>
+          <li>Add imageURL to FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/204'>#204</a>)</li>
+        </ul>
+
         <h3>2.0.5</h3>
         <ul>
           <li>Add isRequired to props and fix validation bugs in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/202'>#202</a>)</li>
