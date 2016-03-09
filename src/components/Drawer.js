@@ -10,7 +10,8 @@ const Drawer = React.createClass({
   getDefaultProps () {
     return {
       duration: 500,
-      isOpen: false
+      isOpen: false,
+      easing: [.28, .14, .34, 1.04]
     };
   },
 
@@ -26,9 +27,10 @@ const Drawer = React.createClass({
 
   _renderTransition (isOpen) {
     const el = this.refs.component;
-    const transition = isOpen ? { left: 0 } : { left: 400 };
+    const transition = isOpen ? { right: -800 } : { right: 0 };
     const options = {
-      duration: this.props.duration
+      duration: this.props.duration,
+      easing: this.props.easing
     };
 
     Velocity(el, transition, options);
@@ -45,12 +47,11 @@ const Drawer = React.createClass({
 });
 
 const styles = {
-  left: 0,
   top: 0,
   bottom: 0,
-  right: 0,
-  position: 'relative',
-  width: 400,
+  right: -800,
+  position: 'absolute',
+  width: 800,
   backgroundColor: '#eaeaea'
 };
 
