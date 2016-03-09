@@ -10,6 +10,7 @@ const Icon = require('./Icon');
 const FileUpload = React.createClass({
   propTypes: {
     allowedFileTypes: React.PropTypes.array,
+    imageUrl: React.PropTypes.string,
     maxFileSize: React.PropTypes.number,
     onFileAdd: React.PropTypes.func.isRequired,
     onFileRemove: React.PropTypes.func.isRequired,
@@ -24,11 +25,21 @@ const FileUpload = React.createClass({
     };
   },
 
+  componentDidMount () {
+    this._readFile(this.props.uploadedFile);
+  },
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.uploadedFile !== this.props.uploadedFile) {
+      this._readFile(newProps.uploadedFile);
+    }
+  },
+
   _handleFileSelect (e) {
     const file = e.target.files[0];
 
     if (file) {
-      this._processFile(file);
+      this._validateFile(file);
     }
   },
 
@@ -57,27 +68,44 @@ const FileUpload = React.createClass({
 
     const file = e.dataTransfer.files[0];
 
-    this._processFile(file);
+    this._validateFile(file);
   },
 
   _onDropzoneClick () {
     this._input.click();
   },
 
-  _processFile (file) {
+  _validateFile (file) {
     const isTooBig = this.props.maxFileSize < file.size / 1000;
     const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
 
     if (isTooBig || isInvalidType) {
-      const invalidMessage = isTooBig ? 'This file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'This file type is not accepted';
+      const invalidMessage = isTooBig ? 'The selected file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'The selected file type is not accepted';
 
       this.setState({
         dragging: false,
-        imageSource: null,
         invalidMessage
       });
-      this.props.onFileRemove();
+
+      this.props.onFileRemove(this.props.uploadedFile);
     } else {
+      this.props.onFileAdd(file);
+    }
+  },
+
+  _removeImage (e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    this.setState({
+      imageSource: null,
+      invalidMessage: null
+    });
+    this.props.onFileRemove();
+  },
+
+  _readFile (file) {
+    if (file) {
       const reader = new FileReader();
 
       reader.readAsDataURL(file);
@@ -87,44 +115,53 @@ const FileUpload = React.createClass({
 
         this.setState({
           dragging: false,
-          imageSource,
-          invalidMessage: null
+          imageSource
         });
-        this.props.onFileAdd(file);
       };
     }
   },
 
-  _removeImage (e) {
-    e.stopPropagation();
-    e.preventDefault();
-
-    this.setState({
-      imageSource: null
-    });
-    this.props.onFileRemove();
+  _renderInvalidMessage () {
+    if (this.state.invalidMessage) {
+      return (
+        <div style={styles.invalidMessage}>
+          <Icon style={styles.invalidIcon} type='attention' />
+          {this.state.invalidMessage}
+        </div>
+      );
+    } else {
+      return null;
+    }
   },
 
   render () {
+    const dropzoneLoaded = this.props.imageUrl || this.props.uploadedFile;
+    const imageSource = this.state.imageSource || this.props.imageUrl;
+
     return (
       <div
         onClick={this._onDropzoneClick}
         onDragLeave={this._onDragLeave}
         onDragOver={this._onDragOver}
         onDrop={this._onDrop}
-        style={[styles.dropzone, this.state.dragging && styles.dragging, this.props.uploadedFile && styles.dropzoneLoaded]}
+        style={[styles.dropzone, this.state.dragging && styles.dragging, dropzoneLoaded && styles.dropzoneLoaded]}
       >
-
-        {this.props.uploadedFile ? (
+        {dropzoneLoaded ? (
           <div style={styles.fileInfo}>
-            {this.state.imageSource ? (
-              <img src={this.state.imageSource} style={styles.previewImage} />
+            {this._renderInvalidMessage()}
+            <div>Drag and drop file here or click to browse</div>
+            {imageSource ? (
+              <img src={imageSource} style={[styles.previewImage, this.state.dragging && styles.faded]} />
             ) : (
               <Icon size={60} style={styles.documentIcon} type='document' />
             )}
-            <div>{this.props.uploadedFile.name}</div>
-            <div>{numeral(this.props.uploadedFile.size / 1000).format('0.0')}k</div>
-            <Button icon='delete' onClick={this._removeImage} style={styles.button} type='secondary' />
+            {this.props.uploadedFile ? (
+              <div>
+                <div>{this.props.uploadedFile.name}</div>
+                <div>{numeral(this.props.uploadedFile.size / 1000).format('0.0')}k</div>
+                <Button icon='delete' onClick={this._removeImage} style={styles.button} type='secondary' />
+              </div>
+            ) : null}
           </div>
         ) : (
           <div style={styles.dropzoneChild}>
@@ -135,8 +172,8 @@ const FileUpload = React.createClass({
               </div>
             ) : (
               <div style={styles.centered}>
-              {this.state.invalidMessage ? <div style={styles.invalidMessage}>{this.state.invalidMessage}</div> : null}
-              <div>Drag and drop files here or click to browse</div>
+              {this._renderInvalidMessage()}
+              <div>Drag and drop file here or click to browse</div>
               </div>
             )}
           </div>
@@ -184,6 +221,9 @@ const styles = {
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
     fontSize: StyleConstants.FontSizes.LARGE
   },
+  faded: {
+    opacity: 0.5
+  },
 
   // Loaded Styles
   dropzoneLoaded: {
@@ -191,6 +231,7 @@ const styles = {
     padding: 20
   },
   previewImage: {
+    marginTop: 10,
     marginBottom: 10,
     maxWidth: '90%'
   },
@@ -215,6 +256,9 @@ const styles = {
   invalidMessage: {
     fontSize: StyleConstants.FontSizes.LARGE,
     marginBottom: 10
+  },
+  invalidIcon: {
+    color: StyleConstants.Colors.ASH
   }
 };
 
