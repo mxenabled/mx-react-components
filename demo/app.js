@@ -433,6 +433,8 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
+      sliceValue: null,
+      sliceIndex: null,
       uploadedFile: null,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     };
@@ -500,6 +502,39 @@ const Demo = React.createClass({
   _handleFileChange (uploadedFile) {
     this.setState({
       uploadedFile
+    });
+  },
+
+  _handlePieClick (sliceValue, sliceIndex, e) {
+    if (this.state.sliceValue) {
+      this.setState({
+        sliceValue: null,
+        sliceIndex: null
+      });
+    } else {
+      this.setState({
+        sliceValue,
+        sliceIndex
+      });
+    }
+
+  },
+
+  _handlePieBlur () {
+
+  },
+
+  _handlePieEnter (sliceValue, sliceIndex) {
+    this.setState({
+      sliceValue,
+      sliceIndex
+    });
+  },
+
+  _handlePieLeave () {
+    this.setState({
+      sliceValue: null,
+      sliceIndex: null
     });
   },
 
@@ -781,39 +816,56 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
-        <PieChart
-          data={[
-            {
-              name: 'Data Point 1',
-              value: 50
-            },
-            {
-              name: 'Data Point 2',
-              value: 80
-            },
-            {
-              name: 'Data Point 3',
-              value: 200
-            },
-            {
-              name: 'Data Point 4',
-              value: 100
-            }
-          ]}
-          showDataLabel={true}
-        >
-          Hello Pie Chart
-        </PieChart>
+        <div onClick={this._handlePieBlur}>
+          <PieChart
+            data={[
+              {
+                name: 'Data Point 1',
+                value: 50
+              },
+              {
+                name: 'Data Point 2',
+                value: 80
+              },
+              {
+                name: 'Data Point 3',
+                value: 200
+              },
+              {
+                name: 'Data Point 4',
+                value: 100
+              }
+            ]}
+            onClick={this._handlePieClick}
+            showDataLabel={true}
+            style={{ opacity: this.state.sliceValue ? 0.5 : 1, zIndex: 1 }}
+          >
+            <div>
+              {this.state.sliceValue ? (
+                <PieChart
+                  data={[
+                    {
+                      name: 'Data Point 4',
+                      value: 100
+                    },
+                    {
+                      name: 'Data Point 5',
+                      value: 76
+                    },
+                    {
+                      name: 'Data Point 5',
+                      value: 45
+                    }
+                  ]}
+                  height={245}
+                  showDataLabel={true}
+                  width={210}
+                />
+              ) : null}
+            </div>
+          </PieChart>
+        </div>
         <br/><br/>
-        <PieChart
-          data={[
-            {
-              name: 'Data Point 4',
-              value: 100
-            }
-          ]}
-          showDataLabel={true}
-        />
         <br/><br/>
       </div>
     );

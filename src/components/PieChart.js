@@ -14,6 +14,7 @@ const PieChart = React.createClass({
     onMouseEnter: React.PropTypes.func,
     onMouseLeave: React.PropTypes.func,
     showDataLabel: React.PropTypes.bool,
+    style: React.PropTypes.object,
     title: React.PropTypes.string,
     width: React.PropTypes.number
   },
@@ -27,15 +28,27 @@ const PieChart = React.createClass({
       onMouseEnter () {},
       onMouseLeave () {},
       showDataLabel: true,
-      title: '',
       width: 300
     };
   },
 
   componentDidMount () {
-    const dom = ReactDOM.findDOMNode(this);
+    const dom = ReactDOM.findDOMNode(this.refs.chart);
 
     this._renderChart(dom);
+  },
+
+  _renderShowLabels () {
+    const styles = this.styles();
+
+    return (
+      <div
+        className='mx-donutchart-data'
+        style={styles.center}
+      >
+        {this.props.children}
+      </div>
+    );
   },
 
   _renderChart (dom) {
@@ -44,6 +57,13 @@ const PieChart = React.createClass({
     const expandWidth = 10;
     const strokeWidth = 3;
     const radius = Math.min(width, height) / 2 - expandWidth;
+    const arc = d3.svg.arc()
+      .outerRadius(radius)
+      .innerRadius(radius / 2);
+
+    const arcOver = d3.svg.arc()
+      .outerRadius(radius + expandWidth)
+      .innerRadius(radius / 2);
 
     const pieChart = d3.select(dom)
       .append('svg')
@@ -53,21 +73,13 @@ const PieChart = React.createClass({
       .append('g')
       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-    const arc = d3.svg.arc()
-      .outerRadius(radius)
-      .innerRadius(radius / 2);
-
-    const arcOver = d3.svg.arc()
-      .outerRadius(radius + expandWidth)
-      .innerRadius(radius / 2);
-
     const pie = d3.layout.pie()
       .sort(null)
       .value((d) => {
         return d.value;
       });
 
-    const g = pieChart.selectAll('.arc')
+    pieChart.selectAll('.arc')
       .data(pie(data))
       .enter().append('g')
       .attr('class', 'mx-donutchart-g')
@@ -78,9 +90,9 @@ const PieChart = React.createClass({
         return colors[i];
       })
       .on('click', function (d, i) {
-        thisGlobal.props.onClick(d, i);
+        thisGlobal.props.onClick(d.value, i);
       })
-      .on('mouseenter', function (d, i) {
+      .on('mouseover', function (d, i) {
         d3.select(this)
           .transition()
           .duration(duration)
@@ -88,7 +100,7 @@ const PieChart = React.createClass({
 
         thisGlobal.props.onMouseEnter(d.value, i);
       })
-      .on('mouseleave', function (d, i) {
+      .on('mouseout', function (d, i) {
         d3.select(this)
           .transition()
           .duration(duration)
@@ -112,11 +124,32 @@ const PieChart = React.createClass({
   },
 
   render () {
+    const styles = this.styles();
+
     return (
-      <div className='mx-donutchart'></div>
+      <div style={styles.component}>
+        {this.props.showDataLabel ? this._renderShowLabels() : null}
+        <div className='mx-donutchart' ref='chart' style={this.props.style}></div>
+      </div>
     );
+  },
+
+  styles () {
+    return {
+      component: {
+        position: 'relative',
+        zIndex: 1
+      },
+      center: {
+        position: 'absolute',
+        top: '50%',
+        left: this.props.width / 2,
+        textAlign: 'center',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 2
+      }
+    };
   }
 });
-
 
 module.exports = PieChart;
