@@ -505,7 +505,7 @@ const Demo = React.createClass({
     });
   },
 
-  _handlePieClick (sliceValue, sliceIndex, e) {
+  _handlePieClick (sliceValue, sliceIndex) {
     if (this.state.sliceValue) {
       this.setState({
         sliceValue: null,
@@ -517,25 +517,6 @@ const Demo = React.createClass({
         sliceIndex
       });
     }
-
-  },
-
-  _handlePieBlur () {
-
-  },
-
-  _handlePieEnter (sliceValue, sliceIndex) {
-    this.setState({
-      sliceValue,
-      sliceIndex
-    });
-  },
-
-  _handlePieLeave () {
-    this.setState({
-      sliceValue: null,
-      sliceIndex: null
-    });
   },
 
   render () {
@@ -816,8 +797,9 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
-        <div onClick={this._handlePieBlur}>
+        <div>
           <PieChart
+            arcWidth={2}
             data={[
               {
                 name: 'Data Point 1',
@@ -836,13 +818,14 @@ const Demo = React.createClass({
                 value: 100
               }
             ]}
-            onClick={this._handlePieClick}
+            onPieClick={this._handlePieClick}
             showDataLabel={true}
-            style={{ opacity: this.state.sliceValue ? 0.5 : 1, zIndex: 1 }}
+            style={{ opacity: this.state.sliceValue ? 0.5 : 1 }}
           >
             <div>
               {this.state.sliceValue ? (
                 <PieChart
+                  animationTypeOnLoad='pop'
                   data={[
                     {
                       name: 'Data Point 4',
@@ -860,7 +843,9 @@ const Demo = React.createClass({
                   height={245}
                   showDataLabel={true}
                   width={210}
-                />
+                >
+                  {this.state.sliceValue}
+                </PieChart>
               ) : null}
             </div>
           </PieChart>

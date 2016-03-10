@@ -6,27 +6,34 @@ const StyleConstants = require('../constants/Style');
 
 const PieChart = React.createClass({
   propTypes: {
+    animateDuration: React.PropTypes.number,
+    animationTypeOnLoad: React.PropTypes.oneOf(['roll', 'pop']),
+    arcWidth: React.PropTypes.number,
     colors: React.PropTypes.array,
     data: React.PropTypes.array.isRequired,
-    duration: React.PropTypes.number,
     height: React.PropTypes.number,
-    onClick: React.PropTypes.func,
+    hoverExpandDistance: React.PropTypes.number,
+    onLabelClick: React.PropTypes.func,
     onMouseEnter: React.PropTypes.func,
     onMouseLeave: React.PropTypes.func,
+    onPieClick: React.PropTypes.func,
     showDataLabel: React.PropTypes.bool,
     style: React.PropTypes.object,
-    title: React.PropTypes.string,
     width: React.PropTypes.number
   },
 
   getDefaultProps () {
     return {
+      animationTypeOnLoad: 'roll',
+      animateDuration: 500,
+      arcWidth: 2,
       colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
-      duration: 500,
       height: 350,
-      onClick () {},
+      hoverExpandDistance: 10,
+      onLabelClick () {},
       onMouseEnter () {},
       onMouseLeave () {},
+      onPieClick () {},
       showDataLabel: true,
       width: 300
     };
@@ -44,6 +51,7 @@ const PieChart = React.createClass({
     return (
       <div
         className='mx-donutchart-data'
+        onClick={this.props.onLabelClick}
         style={styles.center}
       >
         {this.props.children}
@@ -52,18 +60,17 @@ const PieChart = React.createClass({
   },
 
   _renderChart (dom) {
-    const { width, height, duration, data, colors } = this.props;
+    const { animateDuration, arcWidth, height, width, hoverExpandDistance, data, colors } = this.props;
     const thisGlobal = this;
-    const expandWidth = 10;
-    const strokeWidth = 3;
-    const radius = Math.min(width, height) / 2 - expandWidth;
+    const strokeWidth = 2;
+    const radius = Math.min(width, height) / 2 - hoverExpandDistance;
     const arc = d3.svg.arc()
       .outerRadius(radius)
-      .innerRadius(radius / 2);
+      .innerRadius(radius / arcWidth);
 
     const arcOver = d3.svg.arc()
-      .outerRadius(radius + expandWidth)
-      .innerRadius(radius / 2);
+      .outerRadius(radius + hoverExpandDistance)
+      .innerRadius(radius / arcWidth);
 
     const pieChart = d3.select(dom)
       .append('svg')
@@ -79,48 +86,68 @@ const PieChart = React.createClass({
         return d.value;
       });
 
-    pieChart.selectAll('.arc')
+    const g = pieChart.selectAll('.arc')
       .data(pie(data))
       .enter().append('g')
       .attr('class', 'mx-donutchart-g')
       .attr('stroke-width', strokeWidth)
       .attr('stroke', StyleConstants.Colors.WHITE)
       .append('path')
+      .each(function (d) {
+        this._current = d;
+      })
       .style('fill', (d, i) => {
         return colors[i];
       })
       .on('click', function (d, i) {
-        thisGlobal.props.onClick(d.value, i);
+        thisGlobal.props.onPieClick(d.value, i);
       })
-      .on('mouseover', function (d, i) {
+      .on('mouseenter', function (d, i) {
         d3.select(this)
           .transition()
-          .duration(duration)
+          .duration(animateDuration)
           .attr('d', arcOver);
 
         thisGlobal.props.onMouseEnter(d.value, i);
       })
-      .on('mouseout', function (d, i) {
+      .on('mouseleave', function (d, i) {
         d3.select(this)
           .transition()
-          .duration(duration)
+          .duration(animateDuration)
           .attr('d', arc);
 
         thisGlobal.props.onMouseLeave(d.value, i);
-      })
-      .transition().delay((d, i) => {
-        return i * duration / 2;
-      })
-      .ease('linear')
-      .attrTween('d', (d) => {
-        const i = d3.interpolate(d.startAngle, d.endAngle);
-
-        return (t) => {
-          d.endAngle = i(t);
-
-          return arc(d);
-        };
       });
+
+    if (this.props.animationTypeOnLoad === 'roll') {
+      g.transition().delay(function (d, i) {
+        return i * animateDuration / 2;
+      })
+        .ease('linear')
+        .attrTween('d', function (a) {
+          const i = d3.interpolate(a.startAngle, a.endAngle);
+
+          return (t) => {
+            a.endAngle = i(t);
+
+            return arc(a);
+          };
+        });
+    } else {
+      g.transition()
+        .ease('bounce')
+        .duration(animateDuration)
+        .attrTween('d', function (a) {
+          const i = d3.interpolate(this._current, a);
+          const k = d3.interpolate(0, arc.outerRadius()());
+
+          this._current = i(0);
+
+          return function (t) {
+            return arc.innerRadius(k(t) / 2).outerRadius(k(t))(i(t));
+          };
+        });
+    }
   },
 
   render () {
