@@ -1,3 +1,4 @@
+const _find = require('lodash/find');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const moment = require('moment');
@@ -7,6 +8,7 @@ const {
   DatePicker,
   DatePickerFullScreen,
   DonutChart,
+  Drawer,
   FileUpload,
   Icon,
   Loader,
@@ -424,12 +426,31 @@ const lineChartData = [
 const Demo = React.createClass({
   getInitialState () {
     return {
+      drawerSiblings: [
+        {
+          id: 1,
+          selected: true
+        },
+        {
+          id: 2,
+          selected: false
+        },
+        {
+          id: 3,
+          selected: false
+        },
+        {
+          id: 4,
+          selected: false
+        }
+      ],
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
       },
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
+      showDrawer: false,
       showModal: false,
       showSmallModal: false,
       uploadedFile: null,
@@ -502,9 +523,35 @@ const Demo = React.createClass({
     });
   },
 
+  _nextSibling () {
+    console.log('next');
+  },
+
+  _previousSibling () {
+    console.log('previous');
+  },
+
+  _toggleDrawer () {
+    this.setState({
+      showDrawer: !this.state.showDrawer
+    });
+  },
+
   render () {
+    const drawerSiblingContent = {
+      currentSiblingIndex: _find(this.state.drawerSiblings, { selected: true }).id,
+      nextSibling: this._nextSibling,
+      previousSibling: this._previousSibling,
+      totalSiblings: this.state.drawerSiblings.length
+    };
+
     return (
       <div>
+        <br/><br/>
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
+          <Button onClick={this._toggleDrawer} style={{ position: 'absolute', left: 15, top: 15 }}>Toggle Drawer</Button>
+          <Drawer isOpen={this.state.showDrawer} onClose={this._toggleDrawer} siblingContent={drawerSiblingContent}/>
+        </div>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
