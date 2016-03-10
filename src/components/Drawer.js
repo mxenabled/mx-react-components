@@ -10,7 +10,13 @@ const Drawer = React.createClass({
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
     isOpen: React.PropTypes.bool,
-    onClose: React.PropTypes.func.isRequired
+    onClose: React.PropTypes.func.isRequired,
+    siblingContent: React.PropTypes.shape({
+      currentSibling: React.PropTypes.number.isRequired,
+      nextSibling: React.PropTypes.func.isRequired,
+      previousSibling: React.PropTypes.func.isRequired,
+      totalSiblings: React.PropTypes.number.isRequired
+    })
   },
 
   getDefaultProps () {
@@ -31,16 +37,29 @@ const Drawer = React.createClass({
     }
   },
 
+  _renderSiblingContent () {
+    return (
+      <div ref='siblingContent' style={styles.siblingContent}>
+        <Icon onClick={this.props.onClose} size={25} style={styles.icon} type='caret-left'/> {this.props.siblingContent.currentSibling} of {this.props.siblingContent.totalSiblings} <Icon onClick={this.props.onClose} size={25} style={styles.icon} type='caret-right'/>
+      </div>
+    );
+  },
+
   _renderTransition (isOpen) {
     const el = this.refs.component;
     const transition = isOpen ? { right: -800 } : { right: 0 };
     const options = {
-      complete: this._slideArrow.bind(this, isOpen),
+      complete: this._slideArrowAndSiblingContent.bind(this, isOpen),
       duration: this.props.duration,
       easing: this.props.easing
     };
 
     Velocity(el, transition, options);
+  },
+
+  _slideArrowAndSiblingContent (isOpen) {
+    this._slideArrow(isOpen);
+    this._slideSiblingContent(isOpen);
   },
 
   _slideArrow (isOpen) {
@@ -54,11 +73,25 @@ const Drawer = React.createClass({
     Velocity(el, transition, options);
   },
 
+  _slideSiblingContent (isOpen) {
+    const el = this.refs.siblingContent;
+    const transition = isOpen ? { top: -15 } : { top: 15 };
+    const options = {
+      duration: 200,
+      easing: this.props.easing
+    };
+
+    Velocity(el, transition, options);
+  },
+
   render () {
     return (
       <div ref='component' style={styles.component}>
         <nav style={styles.nav}>
-          <span ref='arrow' style={styles.iconContainer}><Icon onClick={this.props.onClose} size={25} style={styles.icon}type='arrow-left'/></span>
+          <span ref='arrow' style={styles.iconContainer}>
+            <Icon onClick={this.props.onClose} size={25} style={styles.icon}type='arrow-left'/>
+          </span>
+          {this.props.siblingContent ? this._renderSiblingContent() : null}
         </nav>
         <header></header>
         <div></div>
@@ -90,8 +123,14 @@ const styles = {
     borderBottom: 'solid 1px ' + StyleConstants.Colors.ASH,
     height: 15,
     padding: '15px 25px'
+  },
+  siblingContent: {
+    fontFamily: StyleConstants.Fonts.THIN,
+    color: StyleConstants.Colors.ASH,
+    position: 'absolute',
+    right: 25,
+    top: -15
   }
 };
 
 module.exports = Drawer;
-
