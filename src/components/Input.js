@@ -5,7 +5,7 @@ const Input = React.createClass({
   render () {
     return (
       <div>
-        TESTING INPUT
+        <input type={this.props.inputType} />
       </div>
     );
   }

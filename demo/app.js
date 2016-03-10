@@ -508,7 +508,7 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <h1>MyCode</h1>
-        <Input />
+        <Input inputType='number'/>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
