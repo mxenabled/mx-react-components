@@ -9,6 +9,7 @@ const {
   DonutChart,
   FileUpload,
   Icon,
+  Input,
   Loader,
   Modal,
   RangeSelector,
@@ -505,6 +506,9 @@ const Demo = React.createClass({
   render () {
     return (
       <div>
+        <br/><br/>
+        <h1>MyCode</h1>
+        <Input />
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload

@@ -5,6 +5,7 @@ module.exports = {
   DonutChart: require('./components/DonutChart'),
   FileUpload: require('./components/FileUpload'),
   Icon: require('./components/Icon'),
+  Input: require('./components/Input'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
   RajaIcon: require('./components/RajaIcon'),
