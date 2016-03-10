@@ -12,7 +12,7 @@ const Drawer = React.createClass({
     isOpen: React.PropTypes.bool,
     onClose: React.PropTypes.func.isRequired,
     siblingContent: React.PropTypes.shape({
-      currentSibling: React.PropTypes.number.isRequired,
+      currentSiblingIndex: React.PropTypes.number.isRequired,
       nextSibling: React.PropTypes.func.isRequired,
       previousSibling: React.PropTypes.func.isRequired,
       totalSiblings: React.PropTypes.number.isRequired
@@ -40,7 +40,9 @@ const Drawer = React.createClass({
   _renderSiblingContent () {
     return (
       <div ref='siblingContent' style={styles.siblingContent}>
-        <Icon onClick={this.props.onClose} size={25} style={styles.icon} type='caret-left'/> {this.props.siblingContent.currentSibling} of {this.props.siblingContent.totalSiblings} <Icon onClick={this.props.onClose} size={25} style={styles.icon} type='caret-right'/>
+        <Icon onClick={this.props.siblingContent.previousSibling} size={25} style={styles.icon} type='caret-left'/>
+        {this.props.siblingContent.currentSiblingIndex} of {this.props.siblingContent.totalSiblings}
+        <Icon onClick={this.props.siblingContent.nextSibling} size={25} style={styles.icon} type='caret-right'/>
       </div>
     );
   },
