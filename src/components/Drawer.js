@@ -41,7 +41,7 @@ const Drawer = React.createClass({
     const styles = this.styles();
 
     return (
-      <div ref='siblingContent' style={styles.siblingContent}>
+      <div ref={(ref) => (this._siblingContent = ref)} style={styles.siblingContent}>
         <Icon onClick={this.props.siblingContent.previousSibling} size={25} style={styles.icon} type='caret-left'/>
         {this.props.siblingContent.currentSiblingIndex} of {this.props.siblingContent.totalSiblings}
         <Icon onClick={this.props.siblingContent.nextSibling} size={25} style={styles.icon} type='caret-right'/>
@@ -50,7 +50,7 @@ const Drawer = React.createClass({
   },
 
   _renderTransition (isOpen) {
-    const el = this.refs.component;
+    const el = this._component;
     const transition = isOpen ? { right: -800 } : { right: 0 };
     const options = {
       complete: this._slideArrowAndSiblingContent.bind(this, isOpen),
@@ -67,7 +67,7 @@ const Drawer = React.createClass({
   },
 
   _slideArrow (isOpen) {
-    const el = this.refs.arrow;
+    const el = this._arrow;
     const transition = isOpen ? { left: -25 } : { left: 25 };
     const options = {
       duration: 200,
@@ -78,8 +78,8 @@ const Drawer = React.createClass({
   },
 
   _slideSiblingContent (isOpen) {
-    const el = this.refs.siblingContent;
-    const transition = isOpen ? { top: -12 } : { top: 12 };
+    const el = this._siblingContent;
+    const transition = isOpen ? { top: -25 } : { top: 12 };
     const options = {
       duration: 200,
       easing: this.props.easing
@@ -92,9 +92,9 @@ const Drawer = React.createClass({
     const styles = this.styles();
 
     return (
-      <div ref='component' style={styles.component}>
+      <div ref={(ref) => (this._component = ref)} style={styles.component}>
         <nav style={styles.nav}>
-          <span ref='arrow' style={styles.iconContainer}>
+          <span ref={(ref) => (this._arrow = ref)} style={styles.iconContainer}>
             <Icon onClick={this.props.onClose} size={25} style={styles.icon}type='arrow-left'/>
           </span>
           {this.props.siblingContent ? this._renderSiblingContent() : null}
@@ -136,7 +136,7 @@ const Drawer = React.createClass({
         color: StyleConstants.Colors.ASH,
         position: 'absolute',
         right: 25,
-        top: -12
+        top: -25
       }
     };
   }
