@@ -81,5 +81,21 @@ module.exports = {
     }
 
     return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+  },
+
+  adjustOpacity (col, op) {
+    let color = col;
+
+    if (color[0] === '#') {
+      color = color.slice(1);
+    }
+
+    const num = parseInt(color, 16);
+    const r = (num >> 16) & 255;
+    const g = (num >> 8) & 255;
+    const b = num & 255;
+    const rgba = [r, g, b, op].join();
+
+    return 'rgba(' + rgba + ')';
   }
 };

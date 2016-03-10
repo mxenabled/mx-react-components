@@ -32,28 +32,60 @@ const Button = React.createClass({
   },
 
   _renderButtonContent () {
+    const spinnerColor = this._getSpinnerColor(this.props.type);
+
     const circleStyles = {
       display: 'inline-block',
+      verticalAlign: 'middle',
       borderRadius: '100%',
-      width: this.props.actionText ? 5 : 11,
-      height: this.props.actionText ? 5 : 11,
-      margin: '0 5',
+      width: this.props.actionText ? 9 : 11,
+      height: this.props.actionText ? 9 : 11,
+      margin: this.props.actionText ? '0 5' : 0,
       borderTop: '2px solid',
-      borderRight: '2px solid',
-      borderBottom: '2px solid transparent',
-      borderLeft: '2px solid transparent'
+      borderRight: '2px solid ' + spinnerColor.base,
+      borderBottom: '2px solid ' + spinnerColor.base,
+      borderLeft: '2px solid ' + spinnerColor.base
+
+      // ':hover': {
+      //   borderRight: '2px solid ' + spinnerColor.hover,
+      //   borderBottom: '2px solid ' + spinnerColor.hover,
+      //   borderLeft: '2px solid ' + spinnerColor.hover
+      // }
     };
 
     if (this.props.isActive) {
       return (
         <div>
-          <Spin><div style={circleStyles} /></Spin>
+          <Spin>
+            <div style={circleStyles} />
+          </Spin>
           {this.props.actionText}
         </div>
       );
     } else {
       return this.props.children;
     }
+  },
+
+  _getSpinnerColor (type) {
+    const color = {};
+
+    switch (type) {
+      case 'secondary':
+        color.base = StyleConstants.Colors.FOG;
+        break;
+      case 'primaryOutline':
+      case 'base':
+        color.base = StyleConstants.adjustOpacity(StyleConstants.Colors.PRIMARY, 0.5);
+        break;
+      case 'neutral':
+        color.base = StyleConstants.Colors.ASH;
+        break;
+      default:
+        color.base = StyleConstants.adjustOpacity(StyleConstants.Colors.WHITE, 0.5);
+    }
+
+    return color;
   },
 
   render () {
