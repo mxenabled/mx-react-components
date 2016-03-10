@@ -99,8 +99,9 @@ const Drawer = React.createClass({
           </span>
           {this.props.siblingContent ? this._renderSiblingContent() : null}
         </nav>
-        <header></header>
-        <div></div>
+        <div>
+          {this.props.children}
+        </div>
       </div>
     );
   },
@@ -113,7 +114,8 @@ const Drawer = React.createClass({
         right: -800,
         position: 'absolute',
         width: 800,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: StyleConstants.Colors.PORCELAIN
       },
       icon: {
         color: StyleConstants.Colors.ASH
