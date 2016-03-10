@@ -551,7 +551,7 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
           <Button onClick={this._toggleDrawer} style={{ position: 'absolute', left: 15, top: 15 }}>Toggle Drawer</Button>
           <Drawer isOpen={this.state.showDrawer} onClose={this._toggleDrawer} siblingContent={drawerSiblingContent}>
-            <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif'}}>Insert Custom Content Here</div>
+            <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
           </Drawer>
         </div>
         <br/><br/>
