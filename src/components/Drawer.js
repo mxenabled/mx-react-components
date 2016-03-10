@@ -38,6 +38,8 @@ const Drawer = React.createClass({
   },
 
   _renderSiblingContent () {
+    const styles = this.styles();
+
     return (
       <div ref='siblingContent' style={styles.siblingContent}>
         <Icon onClick={this.props.siblingContent.previousSibling} size={25} style={styles.icon} type='caret-left'/>
@@ -77,7 +79,7 @@ const Drawer = React.createClass({
 
   _slideSiblingContent (isOpen) {
     const el = this.refs.siblingContent;
-    const transition = isOpen ? { top: -15 } : { top: 15 };
+    const transition = isOpen ? { top: -12 } : { top: 12 };
     const options = {
       duration: 200,
       easing: this.props.easing
@@ -87,6 +89,8 @@ const Drawer = React.createClass({
   },
 
   render () {
+    const styles = this.styles();
+
     return (
       <div ref='component' style={styles.component}>
         <nav style={styles.nav}>
@@ -99,40 +103,42 @@ const Drawer = React.createClass({
         <div></div>
       </div>
     );
+  },
+
+  styles () {
+    return {
+      component: {
+        top: 0,
+        bottom: 0,
+        right: -800,
+        position: 'absolute',
+        width: 800,
+        overflow: 'hidden'
+      },
+      icon: {
+        color: StyleConstants.Colors.ASH
+      },
+      iconContainer: {
+        position: 'absolute',
+        left: -25,
+        top: 12
+      },
+      nav: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderBottom: 'solid 1px ' + StyleConstants.Colors.ASH,
+        height: 15,
+        padding: '15px 25px'
+      },
+      siblingContent: {
+        fontFamily: StyleConstants.Fonts.THIN,
+        color: StyleConstants.Colors.ASH,
+        position: 'absolute',
+        right: 25,
+        top: -12
+      }
+    };
   }
 
 });
-
-const styles = {
-  component: {
-    top: 0,
-    bottom: 0,
-    right: -800,
-    position: 'absolute',
-    width: 800,
-    overflow: 'hidden'
-  },
-  icon: {
-    color: StyleConstants.Colors.ASH
-  },
-  iconContainer: {
-    position: 'absolute',
-    left: -25,
-    top: 12
-  },
-  nav: {
-    backgroundColor: StyleConstants.Colors.PORCELAIN,
-    borderBottom: 'solid 1px ' + StyleConstants.Colors.ASH,
-    height: 15,
-    padding: '15px 25px'
-  },
-  siblingContent: {
-    fontFamily: StyleConstants.Fonts.THIN,
-    color: StyleConstants.Colors.ASH,
-    position: 'absolute',
-    right: 25,
-    top: -15
-  }
-};
 
 module.exports = Drawer;
