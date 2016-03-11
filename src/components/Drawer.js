@@ -40,13 +40,12 @@ const Drawer = React.createClass({
   _renderNavContent () {
     const styles = this.styles();
 
-    return (
+    return this.props.navContent ?
       <div ref={(ref) => (this._navContent = ref)} style={styles.navContent}>
         <Icon onClick={this.props.navContent.onPreviousClick} size={25} style={styles.icon} type='caret-left'/>
         {this.props.navContent.label}
         <Icon onClick={this.props.navContent.onNextClick} size={25} style={styles.icon} type='caret-right'/>
-      </div>
-    );
+      </div> : null;
   },
 
   _renderTransition (isOpen) {
@@ -97,7 +96,7 @@ const Drawer = React.createClass({
           <span ref={(ref) => (this._arrow = ref)} style={styles.iconContainer}>
             <Icon onClick={this.props.onClose} size={25} style={styles.icon}type='arrow-left'/>
           </span>
-          {this.props.navContent ? this._renderNavContent() : null}
+          {this._renderNavContent()}
         </nav>
         <div>
           {this.props.children}
