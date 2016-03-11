@@ -539,6 +539,7 @@ const Demo = React.createClass({
 
   render () {
     const navContent = {
+      duration: 200,
       onNextClick: this._nextSibling,
       label: _find(this.state.drawerSiblings, { selected: true }).id + ' of ' + this.state.drawerSiblings.length,
       onPreviousClick: this._previousSibling
