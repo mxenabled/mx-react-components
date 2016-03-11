@@ -10,13 +10,12 @@ const Drawer = React.createClass({
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
     isOpen: React.PropTypes.bool,
-    onClose: React.PropTypes.func.isRequired,
-    siblingContent: React.PropTypes.shape({
-      currentSiblingIndex: React.PropTypes.number.isRequired,
-      nextSibling: React.PropTypes.func.isRequired,
-      previousSibling: React.PropTypes.func.isRequired,
-      totalSiblings: React.PropTypes.number.isRequired
-    })
+    navContent: React.PropTypes.shape({
+      label: React.PropTypes.string.isRequired,
+      onNextClick: React.PropTypes.func.isRequired,
+      onPreviousClick: React.PropTypes.func.isRequired
+    }),
+    onClose: React.PropTypes.func.isRequired
   },
 
   getDefaultProps () {
@@ -37,14 +36,14 @@ const Drawer = React.createClass({
     }
   },
 
-  _renderSiblingContent () {
+  _renderNavContent () {
     const styles = this.styles();
 
     return (
-      <div ref={(ref) => (this._siblingContent = ref)} style={styles.siblingContent}>
-        <Icon onClick={this.props.siblingContent.previousSibling} size={25} style={styles.icon} type='caret-left'/>
-        {this.props.siblingContent.currentSiblingIndex} of {this.props.siblingContent.totalSiblings}
-        <Icon onClick={this.props.siblingContent.nextSibling} size={25} style={styles.icon} type='caret-right'/>
+      <div ref={(ref) => (this._navContent = ref)} style={styles.navContent}>
+        <Icon onClick={this.props.navContent.onPreviousClick} size={25} style={styles.icon} type='caret-left'/>
+        {this.props.navContent.label}
+        <Icon onClick={this.props.navContent.onNextClick} size={25} style={styles.icon} type='caret-right'/>
       </div>
     );
   },
@@ -53,7 +52,7 @@ const Drawer = React.createClass({
     const el = this._component;
     const transition = isOpen ? { right: -800 } : { right: 0 };
     const options = {
-      complete: this._slideArrowAndSiblingContent.bind(this, isOpen),
+      complete: this._doNavAnimation.bind(this, isOpen),
       duration: this.props.duration,
       easing: this.props.easing
     };
@@ -61,9 +60,9 @@ const Drawer = React.createClass({
     Velocity(el, transition, options);
   },
 
-  _slideArrowAndSiblingContent (isOpen) {
+  _doNavAnimation (isOpen) {
     this._slideArrow(isOpen);
-    this._slideSiblingContent(isOpen);
+    this._slideNavContent(isOpen);
   },
 
   _slideArrow (isOpen) {
@@ -77,8 +76,8 @@ const Drawer = React.createClass({
     Velocity(el, transition, options);
   },
 
-  _slideSiblingContent (isOpen) {
-    const el = this._siblingContent;
+  _slideNavContent (isOpen) {
+    const el = this._navContent;
     const transition = isOpen ? { top: -25 } : { top: 12 };
     const options = {
       duration: 200,
@@ -97,7 +96,7 @@ const Drawer = React.createClass({
           <span ref={(ref) => (this._arrow = ref)} style={styles.iconContainer}>
             <Icon onClick={this.props.onClose} size={25} style={styles.icon}type='arrow-left'/>
           </span>
-          {this.props.siblingContent ? this._renderSiblingContent() : null}
+          {this.props.navContent ? this._renderNavContent() : null}
         </nav>
         <div>
           {this.props.children}
@@ -131,7 +130,7 @@ const Drawer = React.createClass({
         height: 15,
         padding: '15px 25px'
       },
-      siblingContent: {
+      navContent: {
         fontFamily: StyleConstants.Fonts.THIN,
         color: StyleConstants.Colors.ASH,
         position: 'absolute',
