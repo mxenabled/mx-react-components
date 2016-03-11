@@ -8,8 +8,10 @@ const StyleConstants = require('../constants/Style');
 
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
 
+
 const Select = React.createClass({
   propTypes: {
+    color: React.PropTypes.string,
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
@@ -24,10 +26,10 @@ const Select = React.createClass({
 
   getDefaultProps () {
     return {
+      color: StyleConstants.Colors.PRIMARY,
       onChange () {},
       options: [],
       placeholderText: 'Select One',
-      selected: false,
       valid: true
     };
   },
@@ -149,6 +151,8 @@ const Select = React.createClass({
 
   _renderScrim () {
     if (this.state.isOpen) {
+      const styles = this.styles();
+
       return (
         <div className='mx-select-scrim'
         onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
@@ -160,6 +164,8 @@ const Select = React.createClass({
 
   _renderOptions () {
     if (this.state.isOpen) {
+      const styles = this.styles();
+
       if (this.props.children) {
         return (
           <div className='mx-select-options' style={[styles.options, this.props.optionsStyle]}>
@@ -197,6 +203,7 @@ const Select = React.createClass({
   },
 
   render () {
+    const styles = this.styles();
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
@@ -228,83 +235,86 @@ const Select = React.createClass({
         ) : null }
       </div>
     );
+  },
+
+  styles () {
+    return {
+      caret: {
+        color: '#CCCCCC',
+        cursor: 'pointer',
+        position: 'absolute',
+        right: '-5px',
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      component: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: '3px',
+        border: '1px solid #E5E5E5',
+        cursor: 'pointer',
+        fontFamily: StyleConstants.FontFamily,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        padding: '11px 10px 12px',
+        position: 'relative',
+        appearance: 'none',
+        WebkitAppearance: 'none',
+        boxSizing: 'border-box',
+        outline: 'none'
+      },
+      select: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        WebkitAppearance: 'none',
+        opacity: 0
+      },
+      selected: {
+        position: 'relative'
+      },
+      activeItem: {
+        backgroundColor: this.props.color,
+        color: StyleConstants.Colors.WHITE
+      },
+      invalid: {
+        borderColor: StyleConstants.Colors.STRAWBERRY
+      },
+      options: {
+        backgroundColor: '#FFFFFF',
+        border: '1px solid #E5E5E5',
+        borderRadius: '0 0 3px 3px',
+        left: '-1px',
+        right: '-1px',
+        margin: '10px 0 0 0',
+        padding: '0',
+        minWidth: '100%',
+        position: 'absolute',
+        zIndex: 10,
+        fontSize: '12px',
+        boxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
+        boxSizing: 'border-box',
+        maxHeight: '260px',
+        overflow: 'auto'
+      },
+      option: {
+        cursor: 'pointer',
+        backgroundColor: '#FFFFFF',
+        padding: '10px',
+        whiteSpace: 'nowrap'
+      },
+      scrim: {
+        position: 'fixed',
+        zIndex: 9,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      }
+    };
   }
 });
 
-const styles = {
-  caret: {
-    color: '#CCCCCC',
-    cursor: 'pointer',
-    position: 'absolute',
-    right: '-5px',
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  component: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: '3px',
-    border: '1px solid #E5E5E5',
-    cursor: 'pointer',
-    fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    padding: '11px 10px 12px',
-    position: 'relative',
-    appearance: 'none',
-    WebkitAppearance: 'none',
-    boxSizing: 'border-box',
-    outline: 'none'
-  },
-  select: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    WebkitAppearance: 'none',
-    opacity: 0
-  },
-  selected: {
-    position: 'relative'
-  },
-  activeItem: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.WHITE
-  },
-  invalid: {
-    borderColor: StyleConstants.Colors.STRAWBERRY
-  },
-  options: {
-    backgroundColor: '#FFFFFF',
-    border: '1px solid #E5E5E5',
-    borderRadius: '0 0 3px 3px',
-    left: '-1px',
-    right: '-1px',
-    margin: '10px 0 0 0',
-    padding: '0',
-    minWidth: '100%',
-    position: 'absolute',
-    zIndex: 10,
-    fontSize: '12px',
-    boxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
-    boxSizing: 'border-box',
-    maxHeight: '260px',
-    overflow: 'auto'
-  },
-  option: {
-    cursor: 'pointer',
-    backgroundColor: '#FFFFFF',
-    padding: '10px',
-    whiteSpace: 'nowrap'
-  },
-  scrim: {
-    position: 'fixed',
-    zIndex: 9,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  }
-};
 
 module.exports = Radium(Select);
