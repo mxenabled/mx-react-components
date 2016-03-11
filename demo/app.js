@@ -9,6 +9,7 @@ const {
   DonutChart,
   FileUpload,
   Icon,
+  Input,
   Loader,
   Modal,
   RangeSelector,
@@ -781,6 +782,13 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
+        <Input
+            className='InputForm'
+            prefixSymbol='$'
+            suffixSymbol='USD'
+            defaultValue='0.00' />
+        <br/><br/>
+
       </div>
     );
   }
