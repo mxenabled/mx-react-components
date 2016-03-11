@@ -5,19 +5,19 @@ const StyleConstants = require('../constants/Style');
 
 const Input = React.createClass({
   propTypes: {
-    inputType: React.PropTypes.string, 
+    label: React.PropTypes.string,
     prefix: React.PropTypes.string,
-    suffix: React.PropTypes.string
+    suffix: React.PropTypes.string,
+    type: React.PropTypes.string
   },
 
   render () {
     return (
-      <div style={styles.component} id='com'>
-        <label style={[styles.iLabel]} htmlFor='test'>{this.props.label}</label>
-
-        <div style={[styles.inputContainer]}>
+      <div style={styles.component}>
+        <label htmlFor='test' style={[styles.iLabel]}>{this.props.label}</label>
+          <div style={[styles.inputContainer]}>
           {this.props.prefix ? <div style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
-          <input style={[styles.float, styles.input, styles.primary]}id='test' />
+          <input style={[styles.float, styles.input, styles.primary]} type={this.props.type} />
           {this.props.suffix ? <div style={[styles.float, styles.suffix, styles.center]}>{this.props.suffix}</div> : null}
           <br style={[styles.clearfix]}/>
         </div>
@@ -36,7 +36,7 @@ const styles = {
     justifyContent: 'center'
   },
   component: {
-    // border: `1px Solid ${StyleConstants.Colors.BLUE}`,
+      // border: `1px Solid ${StyleConstants.Colors.BLUE}`,
     borderRadius: 2,
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
     fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -82,8 +82,7 @@ const styles = {
       background: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -10),
       border: 'none',
       outline: 'none'
-    },    
-
+    }
   },
   suffix: {
     background: StyleConstants.Colors.PRIMARY,

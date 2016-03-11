@@ -508,10 +508,10 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <h1>MyCode</h1>
-        <div style={{width:'80%', margin:'auto', border:'1px solid'}}>
-          <Input inputType='number' label='Money:' prefix='$' suffix='.00'/>
-          <Input inputType='number' label='Percent:' suffix='%'/>
-          <Input inputType='text' label='Name:'/>
+        <div style={{ width: '80%', margin: 'auto', border: '1px solid' }}>
+          <Input label='Money:' prefix='$' suffix='.00' type='number' />
+          <Input label='Percent:' suffix='%' type='number'/>
+          <Input label='Name:' type='text' />
         </div>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
