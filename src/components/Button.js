@@ -32,8 +32,6 @@ const Button = React.createClass({
   },
 
   _renderButtonContent () {
-    const spinnerColor = this.props.type === 'neutral' ? StyleConstants.Colors.ASH : StyleConstants.adjustOpacity(StyleConstants.Colors.FOG, 0.5);
-
     const circleStyles = {
       display: 'inline-block',
       verticalAlign: 'middle',
@@ -42,9 +40,9 @@ const Button = React.createClass({
       height: this.props.actionText ? 9 : 11,
       margin: this.props.actionText ? '0 5' : 0,
       borderTop: '2px solid',
-      borderRight: '2px solid ' + spinnerColor,
-      borderBottom: '2px solid ' + spinnerColor,
-      borderLeft: '2px solid ' + spinnerColor
+      borderRight: '2px solid ' + StyleConstants.Colors.FOG,
+      borderBottom: '2px solid ' + StyleConstants.Colors.FOG,
+      borderLeft: '2px solid ' + StyleConstants.Colors.FOG
     };
 
     if (this.props.isActive) {
