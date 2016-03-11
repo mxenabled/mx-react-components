@@ -45,6 +45,7 @@ const Select = React.createClass({
 
   componentDidMount () {
     styles.option[':hover'].backgroundColor = this.props.color || StyleConstants.Colors.PRIMARY;
+    styles.activeItem.backgroundColor = this.props.color || StyleConstants.Colors.PRIMARY;
   },
 
   _handleScrimClick () {
@@ -251,7 +252,6 @@ const styles = {
     position: 'relative'
   },
   activeItem: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
     color: StyleConstants.Colors.WHITE
   },
   invalid: {
