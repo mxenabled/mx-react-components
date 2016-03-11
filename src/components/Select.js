@@ -27,7 +27,6 @@ const Select = React.createClass({
       onChange () {},
       options: [],
       placeholderText: 'Select One',
-      selected: false,
       valid: true
     };
   },
@@ -35,8 +34,7 @@ const Select = React.createClass({
   getInitialState () {
     return {
       highlightedValue: null,
-      isOpen: false,
-      selected: false
+      isOpen: false
     };
   },
 
