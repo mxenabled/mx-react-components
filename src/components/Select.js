@@ -8,8 +8,10 @@ const StyleConstants = require('../constants/Style');
 
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
 
+
 const Select = React.createClass({
   propTypes: {
+    color: React.PropTypes.string,
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
@@ -24,6 +26,7 @@ const Select = React.createClass({
 
   getDefaultProps () {
     return {
+      color: null,
       onChange () {},
       options: [],
       placeholderText: 'Select One',
@@ -38,6 +41,10 @@ const Select = React.createClass({
       isOpen: false,
       selected: false
     };
+  },
+
+  componentDidMount () {
+    styles.option[':hover'].backgroundColor = this.props.color || StyleConstants.Colors.PRIMARY;
   },
 
   _handleScrimClick () {
@@ -274,7 +281,6 @@ const styles = {
     whiteSpace: 'nowrap',
 
     ':hover': {
-      backgroundColor: StyleConstants.Colors.PRIMARY,
       color: StyleConstants.Colors.WHITE
     }
   },
