@@ -538,11 +538,10 @@ const Demo = React.createClass({
   },
 
   render () {
-    const drawerSiblingContent = {
-      currentSiblingIndex: _find(this.state.drawerSiblings, { selected: true }).id,
-      nextSibling: this._nextSibling,
-      previousSibling: this._previousSibling,
-      totalSiblings: this.state.drawerSiblings.length
+    const navContent = {
+      onNextClick: this._nextSibling,
+      label: _find(this.state.drawerSiblings, { selected: true }).id + ' of ' + this.state.drawerSiblings.length,
+      onPreviousClick: this._previousSibling
     };
 
     return (
@@ -550,7 +549,7 @@ const Demo = React.createClass({
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
           <Button onClick={this._toggleDrawer} style={{ position: 'absolute', left: 15, top: 15 }}>Toggle Drawer</Button>
-          <Drawer isOpen={this.state.showDrawer} onClose={this._toggleDrawer} siblingContent={drawerSiblingContent}>
+          <Drawer isOpen={this.state.showDrawer} navContent={navContent} onClose={this._toggleDrawer}>
             <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
           </Drawer>
         </div>
