@@ -26,7 +26,7 @@ const Select = React.createClass({
 
   getDefaultProps () {
     return {
-      color: null,
+      color: StyleConstants.Colors.PRIMARY,
       onChange () {},
       options: [],
       placeholderText: 'Select One',
@@ -42,8 +42,8 @@ const Select = React.createClass({
   },
 
   componentDidMount () {
-    styles.option[':hover'].backgroundColor = this.props.color || StyleConstants.Colors.PRIMARY;
-    styles.activeItem.backgroundColor = this.props.color || StyleConstants.Colors.PRIMARY;
+    styles.option[':hover'].backgroundColor = this.props.color;
+    styles.activeItem.backgroundColor = this.props.color;
   },
 
   _handleScrimClick () {
