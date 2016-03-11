@@ -36,8 +36,20 @@ const Select = React.createClass({
     return {
       highlightedValue: null,
       isOpen: false,
-      selected: false
+      selected: false,
+      hoverItem: null
     };
+  },
+  
+  getBackgroundColor (option) {
+    console.log("THIS IS OPTION IN GET BACKGROUND COLOR", option);
+    console.log("This is this.state.hoverItem", this.state.hoverItem);
+    if(option.value === this.state.hoverItem) {
+      return {
+        backgroundColor: StyleConstants.Colors.PRIMARY,
+        color: StyleConstants.Colors.WHITE
+      }
+    }
   },
 
   _handleScrimClick () {
@@ -59,10 +71,16 @@ const Select = React.createClass({
     this.setState({
       selected: option,
       isOpen: false,
-      highlightedValue: null
+      highlightedValue: option
     });
 
     this.props.onChange(option);
+  },
+  
+  _handleOptionMouseOver (option) {
+    this.setState({
+      hoverItem: option.value
+    })
   },
 
   _handleSelectChange (e) {
@@ -157,8 +175,9 @@ const Select = React.createClass({
                   className='mx-select-option'
                   key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(null, option)}
+                  onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   ref={option.displayValue + option.value}
-                  style={[styles.option, this.props.optionStyle, option === this.state.highlightedValue && styles.activeItem]}
+                  style={[styles.option, this.props.optionStyle, option === this.state.highlightedValue && styles.activeItem, this.getBackgroundColor(option)]}
                 >
                 {option.displayValue}
                 </li>
@@ -272,11 +291,10 @@ const styles = {
     backgroundColor: '#FFFFFF',
     padding: '10px',
     whiteSpace: 'nowrap',
-
-    ':hover': {
-      backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.WHITE
-    }
+    // ':hover': {
+    //   backgroundColor: StyleConstants.Colors.PRIMARY,
+    //   color: StyleConstants.Colors.WHITE
+    // }
   },
   scrim: {
     position: 'fixed',
