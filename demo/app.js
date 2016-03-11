@@ -509,8 +509,9 @@ const Demo = React.createClass({
         <br/><br/>
         <h1>MyCode</h1>
         <div style={{width:'80%', margin:'auto', border:'1px solid'}}>
-          <Input inputType='number'/>
-          <Input inputType='number'/>
+          <Input inputType='number' label='Money:' prefix='$' suffix='.00'/>
+          <Input inputType='number' label='Percent:' suffix='%'/>
+          <Input inputType='text' label='Name:'/>
         </div>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>

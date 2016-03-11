@@ -13,12 +13,12 @@ const Input = React.createClass({
   render () {
     return (
       <div style={styles.component} id='com'>
-        <label style={[styles.iLabel]} htmlFor='test'>Button Icon</label>
+        <label style={[styles.iLabel]} htmlFor='test'>{this.props.label}</label>
 
         <div style={[styles.inputContainer]}>
-          <div style={[styles.float, styles.prefix]} id='pre'>$</div>
+          {this.props.prefix ? <div style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
           <input style={[styles.float, styles.input, styles.primary]}id='test' />
-          <div style={[styles.float, styles.suffix, styles.center]} id='suf'>.00</div>
+          {this.props.suffix ? <div style={[styles.float, styles.suffix, styles.center]}>{this.props.suffix}</div> : null}
           <br style={[styles.clearfix]}/>
         </div>
       </div>
