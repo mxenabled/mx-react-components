@@ -11,7 +11,7 @@ const Drawer = React.createClass({
     easing: React.PropTypes.array,
     isOpen: React.PropTypes.bool,
     navContent: React.PropTypes.shape({
-      duration: React.PropTypes.number
+      duration: React.PropTypes.number,
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
@@ -127,7 +127,7 @@ const Drawer = React.createClass({
       },
       nav: {
         backgroundColor: StyleConstants.Colors.PORCELAIN,
-        borderBottom: 'solid 1px ' + StyleConstants.Colors.ASH,
+        borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
         height: 15,
         padding: '15px 25px'
       },
