@@ -1,5 +1,7 @@
 const React = require('react');
 const Radium = require('radium');
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
 
 const StyleConstants = require('../constants/Style');
 
@@ -8,16 +10,28 @@ const Input = React.createClass({
     label: React.PropTypes.string,
     prefix: React.PropTypes.string,
     suffix: React.PropTypes.string,
-    type: React.PropTypes.string
+    type: React.PropTypes.string,
+    windowWidth: React.PropTypes.number
+  },
+
+  _calculateInputWidth () {
+    ctx.font = '15px ProximaNovaSemibold';
+    let width = 0;
+
+    width += this.props.prefix ? ctx.measureText(this.props.prefix).width + 20 : 0;
+    width += this.props.suffix ? ctx.measureText(this.props.suffix).width + 20 : 0;
+    return `${this.props.windowWidth * 0.9 - width}px`;
   },
 
   render () {
+    const width = this._calculateInputWidth();
+
     return (
-      <div style={styles.component}>
-        <label htmlFor='test' style={[styles.iLabel]}>{this.props.label}</label>
+      <div style={ [styles.component, { width: this.props.windowWidth * 0.9 }]}>
+        <label htmlFor='test' style={ [styles.iLabel] }>{ this.props.label }</label>
           <div style={[styles.inputContainer]}>
           {this.props.prefix ? <div style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
-          <input style={[styles.float, styles.input, styles.primary]} type={this.props.type} />
+          <input style={ [styles.float, { width }, styles.primary] } type={ this.props.type }/>
           {this.props.suffix ? <div style={[styles.float, styles.suffix, styles.center]}>{this.props.suffix}</div> : null}
           <br style={[styles.clearfix]}/>
         </div>
@@ -40,8 +54,8 @@ const styles = {
     borderRadius: 2,
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
     fontSize: StyleConstants.FontSizes.MEDIUM,
-    margin: '0 auto 15px auto',
-    width: '90%'
+    margin: '0 auto 15px auto'
+
   },
   float: {
     // border: `1px Solid ${StyleConstants.Colors.BLUE}`,
@@ -53,7 +67,7 @@ const styles = {
     padding: '0px 10px 0px 10px'
   },
   input: {
-    width: '90%'
+
   },
   inputContainer: {
     // position: 'relative'

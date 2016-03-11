@@ -508,10 +508,31 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <h1>MyCode</h1>
-        <div style={{ width: '80%', margin: 'auto', border: '1px solid' }}>
-          <Input label='Money:' prefix='$' suffix='.00' type='number' />
-          <Input label='Percent:' suffix='%' type='number'/>
-          <Input label='Name:' type='text' />
+        <div style={{ width: '100%', margin: 'auto', border: '1px solid' }}>
+          <Input
+            label='Money:'
+            prefix='$'
+            suffix='.00'
+            type='number'
+            windowWidth={this.state.windowWidth}
+            />
+          <Input
+            label='Percent:'
+            suffix='%'
+            type='number'
+            windowWidth={this.state.windowWidth}
+            />
+          <Input
+            label='Website Url:'
+            prefix='http://www.'
+            type='text'
+            windowWidth={this.state.windowWidth}
+             />
+          <Input
+            label='Name:'
+            type='text'
+            windowWidth={this.state.windowWidth}
+             />
         </div>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
