@@ -175,7 +175,12 @@ const Select = React.createClass({
                   onClick={this._handleOptionClick.bind(null, option)}
                   onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   ref={option.displayValue + option.value}
-                  style={[styles.option, this.props.optionStyle, option === this.state.highlightedValue && styles.activeItem, this.getBackgroundColor(option)]}
+                  style={[
+                    styles.option, 
+                    this.props.optionStyle, 
+                    option === this.state.highlightedValue && styles.activeItem, 
+                    this.getBackgroundColor(option)
+                  ]}
                 >
                 {option.displayValue}
                 </li>
@@ -288,11 +293,7 @@ const styles = {
     cursor: 'pointer',
     backgroundColor: '#FFFFFF',
     padding: '10px',
-    whiteSpace: 'nowrap',
-    // ':hover': {
-    //   backgroundColor: StyleConstants.Colors.PRIMARY,
-    //   color: StyleConstants.Colors.WHITE
-    // }
+    whiteSpace: 'nowrap'
   },
   scrim: {
     position: 'fixed',
