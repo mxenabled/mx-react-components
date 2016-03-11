@@ -11,6 +11,7 @@ const Drawer = React.createClass({
     easing: React.PropTypes.array,
     isOpen: React.PropTypes.bool,
     navContent: React.PropTypes.shape({
+      duration: React.PropTypes.number
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
@@ -69,7 +70,7 @@ const Drawer = React.createClass({
     const el = this._arrow;
     const transition = isOpen ? { left: -25 } : { left: 25 };
     const options = {
-      duration: 200,
+      duration: this.props.navContent.duration | this.props.duration,
       easing: this.props.easing
     };
 
@@ -80,7 +81,7 @@ const Drawer = React.createClass({
     const el = this._navContent;
     const transition = isOpen ? { top: -25 } : { top: 12 };
     const options = {
-      duration: 200,
+      duration: this.props.navContent.duration | this.props.duration,
       easing: this.props.easing
     };
 
