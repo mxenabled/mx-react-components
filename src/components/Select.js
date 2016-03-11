@@ -42,8 +42,6 @@ const Select = React.createClass({
   },
   
   getBackgroundColor (option) {
-    console.log("THIS IS OPTION IN GET BACKGROUND COLOR", option);
-    console.log("This is this.state.hoverItem", this.state.hoverItem);
     if(option.value === this.state.hoverItem) {
       return {
         backgroundColor: StyleConstants.Colors.PRIMARY,
