@@ -7,11 +7,19 @@ const StyleConstants = require('../constants/Style');
 
 const Input = React.createClass({
   propTypes: {
+    defaultValue: React.PropTypes.string,
     label: React.PropTypes.string,
+    placeholder: React.PropTypes.string,
     prefix: React.PropTypes.string,
     suffix: React.PropTypes.string,
     type: React.PropTypes.string,
     windowWidth: React.PropTypes.number
+  },
+
+  getInitailState(){
+    return{
+      blank:''
+    }
   },
 
   _calculateInputWidth () {
@@ -25,13 +33,14 @@ const Input = React.createClass({
 
   render () {
     const width = this._calculateInputWidth();
-
+    console.log('sdf')
     return (
       <div style={ [styles.component, { width: this.props.windowWidth * 0.9 }]}>
         <label htmlFor='test' style={ [styles.iLabel] }>{ this.props.label }</label>
           <div style={[styles.inputContainer]}>
           {this.props.prefix ? <div style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
-          <input style={ [styles.float, { width }, styles.primary] } type={ this.props.type }/>
+          <input defaultValue={ this.props.defaultValue } placeholder={this.props.placeholder} style={ [styles.float, { width }, styles.primary] }
+          type={ this.props.type }/>
           {this.props.suffix ? <div style={[styles.float, styles.suffix, styles.center]}>{this.props.suffix}</div> : null}
           <br style={[styles.clearfix]}/>
         </div>
