@@ -40,13 +40,15 @@ const Select = React.createClass({
       hoverItem: null
     };
   },
-  
+
   getBackgroundColor (option) {
-    if(option.value === this.state.hoverItem) {
+    if (option.value === this.state.hoverItem) {
       return {
         backgroundColor: StyleConstants.Colors.PRIMARY,
         color: StyleConstants.Colors.WHITE
-      }
+      };
+    } else {
+      return null;
     }
   },
 
@@ -74,11 +76,11 @@ const Select = React.createClass({
 
     this.props.onChange(option);
   },
-  
+
   _handleOptionMouseOver (option) {
     this.setState({
       hoverItem: option.value
-    })
+    });
   },
 
   _handleSelectChange (e) {
@@ -176,9 +178,9 @@ const Select = React.createClass({
                   onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   ref={option.displayValue + option.value}
                   style={[
-                    styles.option, 
-                    this.props.optionStyle, 
-                    option === this.state.highlightedValue && styles.activeItem, 
+                    styles.option,
+                    this.props.optionStyle,
+                    option === this.state.highlightedValue && styles.activeItem,
                     this.getBackgroundColor(option)
                   ]}
                 >
