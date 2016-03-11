@@ -17,7 +17,7 @@ const Input = React.createClass({
 
         <div style={[styles.inputContainer]}>
           <div style={[styles.float, styles.prefix]} id='pre'>$</div>
-          <input style={[styles.float, styles.input]}id='test' />
+          <input style={[styles.float, styles.input, styles.primary]}id='test' />
           <div style={[styles.float, styles.suffix, styles.center]} id='suf'>.00</div>
           <br style={[styles.clearfix]}/>
         </div>
@@ -53,7 +53,7 @@ const styles = {
     padding: '0px 10px 0px 10px'
   },
   input: {
-    width:'90%'
+    width: '90%'
   },
   inputContainer: {
     // position: 'relative'
@@ -72,15 +72,26 @@ const styles = {
     lineHeight: '30px'
 
   },
+  primary: {
+    ':hover': {
+      background: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -20),
+      border: 'none',
+      outline: 'none'
+    },
+    ':focus': {
+      background: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -10),
+      border: 'none',
+      outline: 'none'
+    },    
+
+  },
   suffix: {
     background: StyleConstants.Colors.PRIMARY,
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
     color: StyleConstants.Colors.WHITE,
     lineHeight: '30px'
+  }
+};
 
-
-  } 
-}
-
-;module.exports = Radium(Input);
+module.exports = Radium(Input);
