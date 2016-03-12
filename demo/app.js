@@ -508,7 +508,7 @@ const Demo = React.createClass({
       <div>
         <br/><br/>
         <h1>MyCode</h1>
-        <div style={{ margin: 'auto', width: '70%'}}>
+        <div style={{ margin: 'auto', width: '70%' }}>
           <Input
             label='Money:'
             placeholder='20'

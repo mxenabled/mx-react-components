@@ -1,9 +1,7 @@
 const React = require('react');
 const Radium = require('radium');
 const ReactDOM = require('react-dom');
-const _throttle = require('lodash/throttle');
 const _debounce = require('lodash/debounce');
-
 const StyleConstants = require('../constants/Style');
 
 const Input = React.createClass({
@@ -86,6 +84,7 @@ const Input = React.createClass({
       },
       inputContainer: {
         // position: 'relative'
+        overfow: 'none'
       },
       iLabel: {
         color: StyleConstants.Colors.PRIMARY,
@@ -122,11 +121,10 @@ const Input = React.createClass({
       }
     };
 
-    console.log('Render');
     return (
       <div ref='inputField' style={ [styles.component] }>
         <label htmlFor='test' style={ [styles.iLabel] }>{ this.props.label }</label>
-          <div style={[styles.inputContainer]}>
+        <div style={[styles.inputContainer]}>
           {this.props.prefix ? <div ref='prefix' style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
           <input defaultValue={ this.props.defaultValue } placeholder={this.props.placeholder} style={ [styles.float, styles.input, styles.primary] }
           type={ this.props.type }/>
