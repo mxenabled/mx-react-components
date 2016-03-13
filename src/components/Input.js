@@ -8,26 +8,26 @@ const Input = React.createClass({
   propTypes: {
     defaultValue: React.PropTypes.string,
     label: React.PropTypes.string,
+    onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     prefix: React.PropTypes.string,
     suffix: React.PropTypes.string,
     type: React.PropTypes.string,
-    windowWidth: React.PropTypes.number
+    value: React.PropTypes.string
   },
-
 
   componentDidMount () {
     this._calculateInputWidth();
-
-    // window.addEventListener('resize', _debounce(this._calculateInputWidth, 500));
-    window.addEventListener('resize', _debounce(this._doneResizing), 200);
+    window.addEventListener('resize', _debounce(this._calculateInputWidth, 200));
   },
 
   componentWillUnmount () {
-    // window.removeEventListener('resize', _debounce(this._calculateInputWidth, 500));
-    window.removeEventListener('resize', _debounce(this._doneResizing), 200);
+    window.removeEventListener('resize', _debounce(this._calculateInputWidth, 200));
   },
 
+  //allows for input fields to dynamically adjust size based on whether
+  //there is a prefix and/or suffix and also dependent on size of those
+  //divs.
   _calculateInputWidth () {
     const component = ReactDOM.findDOMNode(this.refs.inputField);
     const componentStyles = window.getComputedStyle(component);
@@ -35,6 +35,7 @@ const Input = React.createClass({
 
     let width = 0;
 
+    //Determine width of prefix and suffix divs and calculate input width
     width += this.props.prefix ? ReactDOM.findDOMNode(this.refs.prefix).clientWidth + 1 : 0;
     width += this.props.suffix ? ReactDOM.findDOMNode(this.refs.suffix).clientWidth + 1 : 0;
     const inputWidth = parseInt(componentWidth - width, 0);
@@ -43,13 +44,6 @@ const Input = React.createClass({
       componentWidth,
       inputWidth
     });
-  },
-
-  _doneResizing () {
-    resizeTimer = setTimeout(function () {
-      this._calculateInputWidth();
-    }.bind(this), 250);
-    clearTimeout(resizeTimer);
   },
 
   render () {
@@ -63,15 +57,12 @@ const Input = React.createClass({
         justifyContent: 'center'
       },
       component: {
-          // border: `1px Solid ${StyleConstants.Colors.BLUE}`,
         borderRadius: 2,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         margin: '0 auto 15px auto'
-
       },
       float: {
-        // border: `1px Solid ${StyleConstants.Colors.BLUE}`,
         display: 'inline',
         float: 'left',
         fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -81,10 +72,6 @@ const Input = React.createClass({
       },
       input: {
         width: this.state.inputWidth || '100%'
-      },
-      inputContainer: {
-        // position: 'relative'
-        overfow: 'none'
       },
       iLabel: {
         color: StyleConstants.Colors.PRIMARY,
@@ -98,7 +85,6 @@ const Input = React.createClass({
         borderTopLeftRadius: 4,
         color: StyleConstants.Colors.WHITE,
         lineHeight: '30px'
-
       },
       primary: {
         ':hover': {
@@ -124,10 +110,10 @@ const Input = React.createClass({
     return (
       <div ref='inputField' style={ [styles.component] }>
         <label htmlFor='test' style={ [styles.iLabel] }>{ this.props.label }</label>
-        <div style={[styles.inputContainer]}>
+        <div>
           {this.props.prefix ? <div ref='prefix' style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
-          <input defaultValue={ this.props.defaultValue } placeholder={this.props.placeholder} style={ [styles.float, styles.input, styles.primary] }
-          type={ this.props.type }/>
+          <input onChange={ this.props.onChange } placeholder={ this.props.placeholder } style={ [styles.float, styles.input, styles.primary] }
+            type={ this.props.type } value={this.props.value}/>
           {this.props.suffix ? <div ref='suffix' style={[styles.float, styles.suffix, styles.center]}>{this.props.suffix}</div> : null}
           <br style={[styles.clearfix]}/>
         </div>

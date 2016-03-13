@@ -429,6 +429,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+      input4: 'Default Value',
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
       showModal: false,
@@ -503,35 +504,49 @@ const Demo = React.createClass({
     });
   },
 
+  _handleInputChange (str, e) {
+    this.setState({
+      [str]: e.target.value
+    });
+  },
+
   render () {
     return (
       <div>
         <br/><br/>
-        <h1>MyCode</h1>
+        <h1 style={{ textAlign: 'center', margin: 'auto', width: '70%' }}>MyCode</h1>
         <div style={{ margin: 'auto', width: '70%' }}>
           <Input
             label='Money:'
+            onChange={ (e) => this._handleInputChange('input1', e) }
             placeholder='20'
             prefix='$'
+            ref='input1'
             suffix='.00'
             type='number'
+            value={this.state.input1}
             />
           <Input
             label='Percent:'
+            onChange={ (e) => this._handleInputChange('input2', e) }
             placeholder='20'
             suffix='%'
             type='number'
+            value={this.state.input2}
             />
           <Input
             label='Website Url:'
+            onChange={ (e) => this._handleInputChange('input3', e) }
             placeholder='MX.com'
             prefix='http://www.'
             type='text'
+            value={this.state.input3}
              />
           <Input
-            defaultValue='James Yeates'
             label='Name:'
+            onChange={ (e) => this._handleInputChange('input4', e) }
             type='text'
+            value={this.state.input4}
              />
         </div>
         <br/><br/>
