@@ -112,8 +112,9 @@ const Input = React.createClass({
         <label htmlFor='test' style={ [styles.iLabel] }>{ this.props.label }</label>
         <div>
           {this.props.prefix ? <div ref='prefix' style={[styles.float, styles.prefix]} >{this.props.prefix}</div> : null }
-          <input onChange={ this.props.onChange } placeholder={ this.props.placeholder } style={ [styles.float, styles.input, styles.primary] }
-            type={ this.props.type } value={this.props.value}/>
+          <input onChange={ this.props.onChange } placeholder={ this.props.placeholder }
+                 style={ [styles.float, styles.input, styles.primary] }
+                 type={ this.props.type } value={this.props.value}/>
           {this.props.suffix ? <div ref='suffix' style={[styles.float, styles.suffix, styles.center]}>{this.props.suffix}</div> : null}
           <br style={[styles.clearfix]}/>
         </div>
