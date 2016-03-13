@@ -79,7 +79,7 @@ const Input = React.createClass({
       this.setState({ valid: false });
     } else if (this.props.validate && this.props.validateOn === 'Input' && !this.state.pattern.test(e.target.value)) {
       this.setState({ valid: false });
-    } else {
+    } else if (this.props.validateOn === 'Input') {
       this.setState({ valid: true });
     }
   },
@@ -169,10 +169,7 @@ const Input = React.createClass({
         fontSize: StyleConstants.FontSizes.MEDIUM,
         padding: '6px 12px',
         boxSizing: 'border-box',
-        width: '1%',
-        //position: 'absolute',
-        //right: '0px'
-        //float: 'right'
+        width: '1%'
       }
     };
     let divStyle;
@@ -205,11 +202,11 @@ const Input = React.createClass({
     }
 
     return (
-        <div style={ {display: 'block' } }>
+        <div style={ { display: 'block' } }>
           <label htmlFor={this.props.id}
                  style={lableStyle}>{this.props.label}</label>
-          <div style={divStyle}>
-            <div  style={ {display: 'table-row' } }>
+          <div style={ divStyle }>
+            <div style={ { display: 'table-row' } }>
               {this.props.prefix ? <span style={styles.prefix}>{this.props.prefix}</span> : null}
               <input
                   id={this.props.id}
