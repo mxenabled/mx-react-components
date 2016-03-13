@@ -16,7 +16,8 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
-  TypeAhead
+  TypeAhead,
+  Input
 } = require('../src/Index');
 
 const styles = {
@@ -502,9 +503,52 @@ const Demo = React.createClass({
     });
   },
 
+  _handleInputChange () {
+
+  },
+
   render () {
     return (
       <div>
+        <br/><br/>
+        <Input
+            id='testInput'
+            label='Text Input (Im a label)'
+            onChange={this._handleInputChange}
+            pattern='^[AB]+$'
+            placeholderText='I will update on input. Also, if you missed it, this is a placeholder!'
+            type='text'
+            validate={true}
+            validateMsg='As or Bs only please.'
+            validateOn='Input'
+            />
+        <br/><br/>
+        <Input
+            id='emailInput'
+            label='Email Input'
+            onChange={this._handleInputChange}
+            placeholderText='I will update on blur.'
+            required={true}
+            type='email'
+            validate={true}
+            validateMsg='Please enter a valid email address'
+            validateOn='Blur'
+            />
+        <br/><br/>
+        <Input
+            id='intInput'
+            label='Integer Input'
+            onChange={this._handleInputChange}
+            pattern='^[-]?\d+$'
+            placeholderText='I will update on blur.'
+            postfix='.000000000'
+            prefix='$'
+            required={true}
+            type='text'
+            validate={true}
+            validateMsg='Please enter a valid integer'
+            validateOn='Blur'
+            />
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
