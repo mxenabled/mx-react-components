@@ -2,8 +2,12 @@
 
 ## first-timers-only
 
+<<<<<<< HEAD
 Issues tagged with `first-timers-only` should only be completed by someone who has never contributed to an open source project before. 
 The purpose of this is to encourage and help more people learn how to contribute. See https://medium.com/@kentcdodds/first-timers-only-78281ea47455 for more details.
+=======
+Issues tagged with `first-timers-only` should only be completed by someone who has never contributed to an open source project before. The purpose of this is to encourage and help more people learn how to contribute. See https://medium.com/@kentcdodds/first-timers-only-78281ea47455 for more details.
+>>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
 
 ## Questions/Help
 

@@ -16,8 +16,12 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
+<<<<<<< HEAD
   TypeAhead,
   Input
+=======
+  TypeAhead
+>>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
 } = require('../src/Index');
 
 const styles = {
@@ -781,6 +785,7 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
+<<<<<<< HEAD
         
         <Input 
             prefix="$" 
@@ -791,12 +796,18 @@ const Demo = React.createClass({
             validate="number" 
         />
         
+=======
+>>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
       </div>
     );
   }
 });
 
+<<<<<<< HEAD
 
 
 ReactDOM.render(<Demo />, document.getElementById('demo'));
 
+=======
+ReactDOM.render(<Demo />, document.getElementById('demo'));
+>>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
