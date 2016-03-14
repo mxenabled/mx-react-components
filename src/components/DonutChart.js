@@ -84,6 +84,12 @@ const DonutChart = React.createClass({
       this._setupD3Functions();
       this._animateChart();
     }
+
+    if (newProps.activeIndex !== this.props.activeIndex) {
+      this.setState({
+        activeIndex: newProps.activeIndex
+      });
+    }
   },
 
   _setupD3Functions () {
@@ -157,12 +163,20 @@ const DonutChart = React.createClass({
   _handleMouseEnter (point) {
     if (this.props.animateOnHover) {
       d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.hoveredArc(point.arc));
+
+      this.setState({
+        activeIndex: point.index
+      });
     }
   },
 
   _handleMouseLeave (point) {
     if (this.props.animateOnHover) {
       d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.standardArc(point.arc));
+
+      this.setState({
+        activeIndex: -1
+      });
     }
   },
 
@@ -173,8 +187,8 @@ const DonutChart = React.createClass({
           <g
             key={i}
             onClick={this._handleClick.bind(null, i)}
-            onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, ref: 'arc-' + this.props.id + i })}
-            onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, ref: 'arc-' + this.props.id + i })}
+            onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, index: i, ref: 'arc-' + this.props.id + i })}
+            onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, index: i, ref: 'arc-' + this.props.id + i })}
           >
             <path
               className={'arc-' + this.props.id}
