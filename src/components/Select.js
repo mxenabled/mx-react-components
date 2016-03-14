@@ -192,7 +192,7 @@ const Select = React.createClass({
                     this.getBackgroundColor(option)
                   ]}
                 >
-                {option.displayValue} 
+                {option.displayValue}
                 {option === this.state.highlightedValue ? <Icon size='20' style={styles.check} type='check' /> : null }
                 </li>
               );
