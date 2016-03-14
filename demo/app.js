@@ -1,3 +1,8 @@
+////This is where my lack of experience is is really hurting me. 
+////I am not exactly sure what was wanted here. 
+////I am sure however that I will learn it eventually. 
+////Thanks for giving me the opportunity to learn and to try this out.
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const moment = require('moment');
@@ -644,6 +649,7 @@ const Demo = React.createClass({
 
         <br/><br/>
         <Select
+          color='#74D6B9'
           isMobile={false}
           onChange={this._handleSelectChange}
           optionHoverStyle={{
