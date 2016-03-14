@@ -25,6 +25,7 @@ const DonutChart = React.createClass({
     formatter: React.PropTypes.func,
     height: React.PropTypes.number,
     hoverExpandDistance: React.PropTypes.number,
+    id: React.PropTypes.string,
     onClick: React.PropTypes.func,
     opacity: React.PropTypes.number,
     padAngle: React.PropTypes.number,
@@ -51,6 +52,7 @@ const DonutChart = React.createClass({
       },
       height: 150,
       hoverExpandDistance: 5,
+      id: 'donut-chart',
       onClick () {},
       opacity: 1,
       padAngle: 0.02,
@@ -116,23 +118,22 @@ const DonutChart = React.createClass({
         this._bounceAnimate();
         break;
       default:
-        this._rollAnimate();
         break;
     }
   },
 
   _bounceAnimate () {
-    d3.selectAll('.arc')
+    d3.selectAll('.arc-' + this.props.id)
       .transition()
       .ease('bounce')
       .duration(this.props.animationDuration)
       .attrTween('d', (d, i, a) => {
-        return d3.interpolate(this.state.loadBouncePaths[i], a);
+        return d3.interpolate(this.state.bounceArcAnimationStartPaths[i], a);
       });
   },
 
   _rollAnimate () {
-    d3.selectAll('.arc')
+    d3.selectAll('.arc-' + this.props.id)
       .transition()
       .ease('bounce')
       .duration(this.props.animationDuration)
@@ -146,11 +147,15 @@ const DonutChart = React.createClass({
   },
 
   _handleMouseEnter (point) {
-    d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.hoveredArc(point.arc));
+    if (this.props.animateOnHover) {
+      d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.hoveredArc(point.arc));
+    }
   },
 
   _handleMouseLeave (point) {
-    d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.standardArc(point.arc));
+    if (this.props.animateOnHover) {
+      d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.standardArc(point.arc));
+    }
   },
 
   _renderArcs () {
@@ -160,15 +165,15 @@ const DonutChart = React.createClass({
           <g
             key={i}
             onClick={this._handleClick.bind(null, i)}
-            onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, ref: 'arc' + i })}
-            onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, ref: 'arc' + i })}
+            onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, ref: 'arc-' + this.props.id + i })}
+            onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, ref: 'arc-' + this.props.id + i })}
           >
             <path
-              className='arc'
+              className={'arc-' + this.props.id}
               d={this.state.standardArc(point)}
               fill={this.props.colors[i]}
               opacity={this.props.opacity}
-              ref={'arc' + i}
+              ref={'arc-' + this.props.id + i}
             />
           </g>
         );
@@ -268,7 +273,7 @@ const DonutChart = React.createClass({
         <svg
           className='mx-donutchart-svg'
           height={this.props.height}
-          ref='donutChart'
+          ref={this.props.id}
           width={this.props.width}
         >
           <g className='mx-donutchart-g' transform={position}>
