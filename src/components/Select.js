@@ -57,7 +57,8 @@ const Select = React.createClass({
   _handleScrimClick () {
     this.setState({
       isOpen: false,
-      highlightedValue: null
+      highlightedValue: null,
+      hoverItem: null
     });
   },
 
@@ -73,7 +74,8 @@ const Select = React.createClass({
     this.setState({
       selected: option,
       isOpen: false,
-      highlightedValue: option
+      highlightedValue: option,
+      hoverItem: null
     });
 
     this.props.onChange(option);
@@ -190,7 +192,8 @@ const Select = React.createClass({
                     this.getBackgroundColor(option)
                   ]}
                 >
-                {option.displayValue}
+                {option.displayValue} 
+                {option === this.state.highlightedValue ? <Icon size='20' style={styles.check} type='check' /> : null }
                 </li>
               );
             })}
@@ -247,6 +250,11 @@ const Select = React.createClass({
         top: '50%',
         transform: 'translateY(-50%)'
       },
+      check: {
+        color: StyleConstants.Colors.PRIMARY,
+        position: 'absolute',
+        right: 10
+      },
       component: {
         backgroundColor: '#FFFFFF',
         borderRadius: '3px',
@@ -275,8 +283,7 @@ const Select = React.createClass({
         position: 'relative'
       },
       activeItem: {
-        backgroundColor: this.props.color,
-        color: StyleConstants.Colors.WHITE
+        color: StyleConstants.Colors.PRIMARY
       },
       invalid: {
         borderColor: StyleConstants.Colors.STRAWBERRY
