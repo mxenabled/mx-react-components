@@ -9,6 +9,7 @@ const DonutChart = React.createClass({
   propTypes: {
     activeOffset: React.PropTypes.number,
     animateOnHover: React.PropTypes.bool,
+    animationDuration: React.PropTypes.number,
     animationTypeOnLoad: React.PropTypes.oneOf(['roll', 'pop']),
     arcWidth: React.PropTypes.number,
     baseArcColor: React.PropTypes.string,
@@ -23,6 +24,7 @@ const DonutChart = React.createClass({
     defaultLabelValue: React.PropTypes.string,
     formatter: React.PropTypes.func,
     height: React.PropTypes.number,
+    hoverExpandDistance: React.PropTypes.number,
     onClick: React.PropTypes.func,
     opacity: React.PropTypes.number,
     padAngle: React.PropTypes.number,
@@ -35,6 +37,7 @@ const DonutChart = React.createClass({
     return {
       activeOffset: 0,
       animateOnHover: false,
+      animationDuration: 500,
       animationTypeOnLoad: 'roll',
       arcWidth: 10,
       baseArcColor: StyleConstants.Colors.BASE_ARC,
@@ -47,6 +50,7 @@ const DonutChart = React.createClass({
         return value;
       },
       height: 150,
+      hoverExpandDistance: 5,
       onClick () {},
       opacity: 1,
       padAngle: 0.02,
@@ -61,11 +65,13 @@ const DonutChart = React.createClass({
   },
 
   componentDidMount () {
-    this._animateChart();
+    if (this.props.data.length) {
+      this._animateChart();
+    }
   },
 
   componentWillReceiveProps (newProps) {
-    if (!_isEqual(this.props.data, newProps.data)) {
+    if (!_isEqual(this.props.data, newProps.data) && this.props.data.length) {
       this._setupD3Functions();
       this._animateChart();
     }
@@ -83,11 +89,10 @@ const DonutChart = React.createClass({
     const values = pie(dataSets);
     const radius = Math.min(this.props.width, this.props.height) / 2.5;
     const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
-    const hoveredArc = d3.svg.arc().outerRadius(radius + 5).innerRadius(radius - this.props.arcWidth);
+    const hoveredArc = d3.svg.arc().outerRadius(radius + this.props.hoverExpandDistance).innerRadius(radius - this.props.arcWidth);
     const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth).startAngle(0).endAngle(2 * Math.PI);
-    const zeroArc = d3.svg.arc().outerRadius(20).innerRadius(10);
     const loadBouncePaths = values.map(point => {
-      return zeroArc(point);
+      return hoveredArc(point);
     });
 
     this.setState({
@@ -107,7 +112,7 @@ const DonutChart = React.createClass({
       case 'roll':
         this._rollAnimate();
         break;
-      case 'bounce':
+      case 'pop':
         this._bounceAnimate();
         break;
       default:
@@ -120,7 +125,7 @@ const DonutChart = React.createClass({
     d3.selectAll('.arc')
       .transition()
       .ease('bounce')
-      .duration(500)
+      .duration(this.props.animationDuration)
       .attrTween('d', (d, i, a) => {
         return d3.interpolate(this.state.loadBouncePaths[i], a);
       });
@@ -130,7 +135,7 @@ const DonutChart = React.createClass({
     d3.selectAll('.arc')
       .transition()
       .ease('bounce')
-      .duration(500)
+      .duration(this.props.animationDuration)
       .attrTween('transform', function () {
         return d3.interpolateString('rotate(0)', 'rotate(360)');
       });
