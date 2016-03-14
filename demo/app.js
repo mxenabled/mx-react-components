@@ -16,12 +16,8 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
-<<<<<<< HEAD
   TypeAhead,
   Input
-=======
-  TypeAhead
->>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
 } = require('../src/Index');
 
 const styles = {
