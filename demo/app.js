@@ -644,7 +644,7 @@ const Demo = React.createClass({
 
         <br/><br/>
         <Select
-          color='#74D6B9'
+          color='#359BCF'
           isMobile={false}
           onChange={this._handleSelectChange}
           optionHoverStyle={{
