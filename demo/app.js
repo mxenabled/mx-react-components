@@ -424,6 +424,20 @@ const lineChartData = [
 const Demo = React.createClass({
   getInitialState () {
     return {
+      donutChartData: [
+        {
+          name: 'Data Point 1',
+          value: 50
+        },
+        {
+          name: 'Data Point 2',
+          value: 80
+        },
+        {
+          name: 'Data Point 3',
+          value: 200
+        }
+      ],
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
@@ -449,6 +463,19 @@ const Demo = React.createClass({
 
   componentWillUnmount () {
     window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleAddDataToChart () {
+    const donutChartData = this.state.donutChartData;
+
+    donutChartData.push({
+      name: 'Data Point',
+      value: Math.floor(Math.random() * (150 - 30 + 1)) + 30
+    });
+
+    this.setState({
+      donutChartData
+    });
   },
 
   _handleSelectChange (option) {
@@ -573,7 +600,7 @@ const Demo = React.createClass({
           <div style={{ display: 'inline-block', padding: 20 }}>
             <DonutChart
               animateOnHover={true}
-              animationDuration={1500}
+              animationDuration={500}
               animationTypeOnLoad='roll'
               chartTotal={300}
               data={[
@@ -601,28 +628,16 @@ const Demo = React.createClass({
           <div style={{ display: 'inline-block', padding: 20 }}>
             <DonutChart
               animateOnHover={true}
-              animationDuration={1500}
+              animationDuration={500}
               animationTypeOnLoad='pop'
               arcWidth={30}
-              data={[
-                {
-                  name: 'Data Point 1',
-                  value: 50
-                },
-                {
-                  name: 'Data Point 2',
-                  value: 80
-                },
-                {
-                  name: 'Data Point 3',
-                  value: 200
-                }
-              ]}
+              data={this.state.donutChartData}
               height={200}
               id='donut-2'
               showDataLabel={false}
               width={200}
             />
+            <Button onClick={this._handleAddDataToChart}>Add Data to Chart</Button>
           </div>
         </div>
         <br/><br/>
