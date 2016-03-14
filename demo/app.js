@@ -16,7 +16,8 @@ const {
   SelectFullScreen,
   TimeBasedLineChart,
   ToggleSwitch,
-  TypeAhead
+  TypeAhead,
+  Input
 } = require('../src/Index');
 
 const styles = {
@@ -781,9 +782,23 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
+        
+        <Input 
+            prefix="$" 
+            suffix=".00" 
+            placeholder="money" 
+            defaultvalue="100" 
+            label="My Cool input field"
+            validate="number" 
+        />
+        
       </div>
     );
   }
 });
 
+
+
 ReactDOM.render(<Demo />, document.getElementById('demo'));
+
+
