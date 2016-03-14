@@ -37,6 +37,10 @@ const Drawer = React.createClass({
     }
   },
 
+  componentWillUnmount () {
+    console.log('component unmounting');
+  },
+
   _renderNavContent () {
     const styles = this.styles();
 
@@ -51,8 +55,14 @@ const Drawer = React.createClass({
   _renderTransition (isOpen) {
     const el = this._component;
     const transition = isOpen ? { right: -800 } : { right: 0 };
+    let onComplete = this._doNavAnimation.bind(this, isOpen);
+
+    if (isOpen) {
+      onComplete = this.props.onClose;
+    }
+
     const options = {
-      complete: this._doNavAnimation.bind(this, isOpen),
+      complete: onComplete,
       duration: this.props.duration,
       easing: this.props.easing
     };
@@ -63,6 +73,10 @@ const Drawer = React.createClass({
   _doNavAnimation (isOpen) {
     this._slideArrow(isOpen);
     this._slideNavContent(isOpen);
+  },
+
+  _handleCloseClick () {
+    this._renderTransition(true);
   },
 
   _slideArrow (isOpen) {
@@ -94,7 +108,7 @@ const Drawer = React.createClass({
       <div ref={(ref) => (this._component = ref)} style={styles.component}>
         <nav style={styles.nav}>
           <span ref={(ref) => (this._arrow = ref)} style={styles.iconContainer}>
-            <Icon onClick={this.props.onClose} size={25} style={styles.icon}type='arrow-left'/>
+            <Icon onClick={this._handleCloseClick} size={25} style={styles.icon}type='arrow-left'/>
           </span>
           {this._renderNavContent()}
         </nav>

@@ -450,7 +450,7 @@ const Demo = React.createClass({
       },
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
-      showDrawer: false,
+      showDrawer: true,
       showModal: false,
       showSmallModal: false,
       uploadedFile: null,
@@ -524,11 +524,9 @@ const Demo = React.createClass({
   },
 
   _nextSibling () {
-    console.log('next');
   },
 
   _previousSibling () {
-    console.log('previous');
   },
 
   _toggleDrawer () {
@@ -548,12 +546,14 @@ const Demo = React.createClass({
     return (
       <div>
         <br/><br/>
-        <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
           <Button onClick={this._toggleDrawer} style={{ position: 'absolute', left: 15, top: 15 }}>Toggle Drawer</Button>
-          <Drawer isOpen={this.state.showDrawer} navContent={navContent} onClose={this._toggleDrawer}>
-            <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
-          </Drawer>
-        </div>
+          {this.state.showDrawer ?
+          <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
+            <p>Drawer</p>
+            <Drawer navContent={navContent} onClose={this._toggleDrawer}>
+              <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
+            </Drawer>
+          </div> : null}
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
