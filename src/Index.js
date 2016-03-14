@@ -9,6 +9,7 @@ module.exports = {
   Modal: require('./components/Modal'),
   RajaIcon: require('./components/RajaIcon'),
   RangeSelector: require('./components/RangeSelector'),
+  PieChart: require('./components/PieChart'),
   Select: require('./components/Select'),
   SelectFullScreen: require('./components/SelectFullScreen'),
   Spin: require('./components/Spin'),

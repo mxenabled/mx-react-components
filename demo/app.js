@@ -11,6 +11,7 @@ const {
   Icon,
   Loader,
   Modal,
+  PieChart,
   RangeSelector,
   Select,
   SelectFullScreen,
@@ -432,6 +433,8 @@ const Demo = React.createClass({
       selectedDatePickerDate: moment().unix(),
       showModal: false,
       showSmallModal: false,
+      sliceValue: null,
+      sliceIndex: null,
       uploadedFile: null,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
     };
@@ -500,6 +503,20 @@ const Demo = React.createClass({
     this.setState({
       uploadedFile
     });
+  },
+
+  _handlePieClick (sliceValue, sliceIndex) {
+    if (this.state.sliceValue) {
+      this.setState({
+        sliceValue: null,
+        sliceIndex: null
+      });
+    } else {
+      this.setState({
+        sliceValue,
+        sliceIndex
+      });
+    }
   },
 
   render () {
@@ -780,6 +797,61 @@ const Demo = React.createClass({
             title='Select A Date'
           />
         </div>
+        <br/><br/>
+        <div>
+          <PieChart
+            arcWidth={2}
+            data={[
+              {
+                name: 'Data Point 1',
+                value: 50
+              },
+              {
+                name: 'Data Point 2',
+                value: 80
+              },
+              {
+                name: 'Data Point 3',
+                value: 200
+              },
+              {
+                name: 'Data Point 4',
+                value: 100
+              }
+            ]}
+            onPieClick={this._handlePieClick}
+            showDataLabel={true}
+            style={{ opacity: this.state.sliceValue ? 0.5 : 1 }}
+          >
+            <div>
+              {this.state.sliceValue ? (
+                <PieChart
+                  animationTypeOnLoad='pop'
+                  data={[
+                    {
+                      name: 'Data Point 4',
+                      value: 100
+                    },
+                    {
+                      name: 'Data Point 5',
+                      value: 76
+                    },
+                    {
+                      name: 'Data Point 5',
+                      value: 45
+                    }
+                  ]}
+                  height={245}
+                  showDataLabel={true}
+                  width={210}
+                >
+                  {this.state.sliceValue}
+                </PieChart>
+              ) : null}
+            </div>
+          </PieChart>
+        </div>
+        <br/><br/>
         <br/><br/>
       </div>
     );
