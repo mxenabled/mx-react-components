@@ -1,3 +1,4 @@
+const _isEqual = require('lodash');
 const React = require('react');
 const Radium = require('radium');
 const d3 = require('d3');
@@ -6,9 +7,9 @@ const StyleConstants = require('../constants/Style');
 
 const DonutChart = React.createClass({
   propTypes: {
-    activeIndex: React.PropTypes.number,
     activeOffset: React.PropTypes.number,
     animateOnHover: React.PropTypes.bool,
+    animationTypeOnLoad: React.PropTypes.oneOf(['roll', 'pop']),
     arcWidth: React.PropTypes.number,
     baseArcColor: React.PropTypes.string,
     chartTotal: React.PropTypes.number,
@@ -23,8 +24,6 @@ const DonutChart = React.createClass({
     formatter: React.PropTypes.func,
     height: React.PropTypes.number,
     onClick: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
     opacity: React.PropTypes.number,
     padAngle: React.PropTypes.number,
     showBaseArc: React.PropTypes.bool,
@@ -34,9 +33,9 @@ const DonutChart = React.createClass({
 
   getDefaultProps () {
     return {
-      activeIndex: -1,
       activeOffset: 0,
       animateOnHover: false,
+      animationTypeOnLoad: 'roll',
       arcWidth: 10,
       baseArcColor: StyleConstants.Colors.BASE_ARC,
       colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
@@ -49,96 +48,126 @@ const DonutChart = React.createClass({
       },
       height: 150,
       onClick () {},
-      onMouseEnter () {},
-      onMouseLeave () {},
       opacity: 1,
-      padAngle: 0.01,
+      padAngle: 0.02,
       showBaseArc: true,
       showDataLabel: true,
       width: 150
     };
   },
 
-  getInitialState () {
-    return {
-      activeIndex: -1
-    };
+  componentWillMount () {
+    this._setupD3Functions();
   },
 
   componentDidMount () {
-    this.setState({
-      activeIndex: this.props.activeIndex
-    });
+    this._animateChart();
   },
 
   componentWillReceiveProps (newProps) {
-    if (newProps.activeIndex !== this.props.activeIndex) {
-      this.setState({
-        activeIndex: newProps.activeIndex
-      });
+    if (!_isEqual(this.props.data, newProps.data)) {
+      this._setupD3Functions();
+      this._animateChart();
     }
   },
 
-  _handleClick (index) {
-    this.props.onClick(this.props.data[index]);
+  _setupD3Functions () {
+    const dataSets = this.props.data.map(item => {
+      return item.value;
+    });
+    const valueTotal = dataSets.reduce((a, b) => {
+      return a + b;
+    });
+    const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
+    const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
+    const values = pie(dataSets);
+    const radius = Math.min(this.props.width, this.props.height) / 2.5;
+    const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
+    const hoveredArc = d3.svg.arc().outerRadius(radius + 5).innerRadius(radius - this.props.arcWidth);
+    const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth).startAngle(0).endAngle(2 * Math.PI);
+    const zeroArc = d3.svg.arc().outerRadius(20).innerRadius(10);
+    const loadBouncePaths = values.map(point => {
+      return zeroArc(point);
+    });
+
+    this.setState({
+      baseArc,
+      endAngle,
+      hoveredArc,
+      pie,
+      radius,
+      standardArc,
+      values,
+      loadBouncePaths
+    });
   },
 
-  _handleMouseEnter (index) {
-    if (this.props.animateOnHover) {
-      this.setState({
-        activeIndex: index
-      });
+  _animateChart () {
+    switch (this.props.animationTypeOnLoad) {
+      case 'roll':
+        this._rollAnimate();
+        break;
+      case 'bounce':
+        this._bounceAnimate();
+        break;
+      default:
+        this._rollAnimate();
+        break;
     }
-
-    this.props.onMouseEnter(this.props.data[index]);
   },
 
-  _handleMouseLeave () {
-    if (this.props.animateOnHover) {
-      this.setState({
-        activeIndex: -1
+  _bounceAnimate () {
+    d3.selectAll('.arc')
+      .transition()
+      .ease('bounce')
+      .duration(500)
+      .attrTween('d', (d, i, a) => {
+        return d3.interpolate(this.state.loadBouncePaths[i], a);
       });
-    }
+  },
 
-    this.props.onMouseLeave();
+  _rollAnimate () {
+    d3.selectAll('.arc')
+      .transition()
+      .ease('bounce')
+      .duration(500)
+      .attrTween('transform', function () {
+        return d3.interpolateString('rotate(0)', 'rotate(360)');
+      });
+  },
+
+  _handleClick () {
+
+  },
+
+  _handleMouseEnter (point) {
+    d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.hoveredArc(point.arc));
+  },
+
+  _handleMouseLeave (point) {
+    d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.standardArc(point.arc));
   },
 
   _renderArcs () {
-    if (this.props.data.length > 0) {
-      const dataSets = this.props.data.map(item => {
-        return item.value;
+    if (this.props.data.length) {
+      return this.state.values.map((point, i) => {
+        return (
+          <g
+            key={i}
+            onClick={this._handleClick.bind(null, i)}
+            onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, ref: 'arc' + i })}
+            onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, ref: 'arc' + i })}
+          >
+            <path
+              className='arc'
+              d={this.state.standardArc(point)}
+              fill={this.props.colors[i]}
+              opacity={this.props.opacity}
+              ref={'arc' + i}
+            />
+          </g>
+        );
       });
-
-      const valueTotal = dataSets.reduce((a, b) => {
-        return a + b;
-      });
-
-      if (valueTotal) {
-        const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
-        const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
-        const values = pie(dataSets);
-        const radius = Math.min(this.props.width, this.props.height) / 2;
-        const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
-        const hoverArc = d3.svg.arc().outerRadius(radius).innerRadius(radius - this.props.arcWidth);
-
-
-        return values.map((point, i) => {
-          const arc = this.state.activeIndex === i && this.props.animateOnHover ? hoverArc : standardArc;
-
-          return (
-            <g
-              key={i}
-              onClick={this._handleClick.bind(null, i)}
-              onMouseEnter={this._handleMouseEnter.bind(null, i)}
-              onMouseLeave={this._handleMouseLeave}
-            >
-              <path d={arc(point)} fill={this.props.colors[i]} opacity={this.props.opacity} />
-            </g>
-          );
-        });
-      } else {
-        return null;
-      }
     } else {
       return null;
     }
@@ -146,16 +175,9 @@ const DonutChart = React.createClass({
 
   _renderBaseArc () {
     if (this.props.showBaseArc) {
-      const radius = (Math.min(this.props.width, this.props.height) / 2);
-
-      const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset)
-                                  .innerRadius(radius - this.props.arcWidth)
-                                  .startAngle(0)
-                                  .endAngle(2 * Math.PI);
-
       return (
-        <g key={baseArc}>
-          <path d={baseArc()} fill={this.props.baseArcColor}></path>
+        <g>
+          <path d={this.state.baseArc()} fill={this.props.baseArcColor}></path>
         </g>
       );
     } else {
@@ -168,14 +190,12 @@ const DonutChart = React.createClass({
       return dataPoint.value;
     });
 
-    const radius = Math.min(this.props.width, this.props.height) / 2;
-
     return dataPoints.map((dataPoint, index) => {
       const endAngle = dataPoint / this.props.chartTotal;
 
       const dataPointArc = d3.svg.arc()
-        .outerRadius(radius - this.props.activeOffset)
-        .innerRadius(radius - this.props.arcWidth)
+        .outerRadius(this.state.radius - this.props.activeOffset)
+        .innerRadius(this.state.radius - this.props.arcWidth)
         .startAngle(0)
         .endAngle(endAngle * 2 * 2 * Math.PI);
 
@@ -243,6 +263,7 @@ const DonutChart = React.createClass({
         <svg
           className='mx-donutchart-svg'
           height={this.props.height}
+          ref='donutChart'
           width={this.props.width}
         >
           <g className='mx-donutchart-g' transform={position}>
