@@ -1,4 +1,3 @@
-const _isEqual = require('lodash');
 const React = require('react');
 const Radium = require('radium');
 const d3 = require('d3');
@@ -80,7 +79,7 @@ const DonutChart = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
-    if (!_isEqual(this.props.data, newProps.data) && this.props.data.length) {
+    if (this.props.data.length) {
       this._setupD3Functions();
       this._animateChart();
     }
