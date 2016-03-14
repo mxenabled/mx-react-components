@@ -39,7 +39,6 @@ const DonutChart = React.createClass({
       activeOffset: 0,
       animateOnHover: false,
       animationDuration: 500,
-      animationTypeOnLoad: 'roll',
       arcWidth: 10,
       baseArcColor: StyleConstants.Colors.BASE_ARC,
       colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
@@ -89,12 +88,13 @@ const DonutChart = React.createClass({
     const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
     const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
     const values = pie(dataSets);
-    const radius = Math.min(this.props.width, this.props.height) / 2.5;
+    const radius = Math.min(this.props.width, this.props.height) / 2.2;
     const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
     const hoveredArc = d3.svg.arc().outerRadius(radius + this.props.hoverExpandDistance).innerRadius(radius - this.props.arcWidth);
     const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth).startAngle(0).endAngle(2 * Math.PI);
-    const loadBouncePaths = values.map(point => {
-      return hoveredArc(point);
+    const bounceArcAnimationStart = d3.svg.arc().outerRadius(10).innerRadius(5);
+    const bounceArcAnimationStartPaths = values.map(point => {
+      return bounceArcAnimationStart(point);
     });
 
     this.setState({
@@ -105,7 +105,7 @@ const DonutChart = React.createClass({
       radius,
       standardArc,
       values,
-      loadBouncePaths
+      bounceArcAnimationStartPaths
     });
   },
 
