@@ -573,6 +573,7 @@ const Demo = React.createClass({
           <div style={{ display: 'inline-block', padding: 20 }}>
             <DonutChart
               animateOnHover={true}
+              animationDuration={1500}
               animationTypeOnLoad='roll'
               chartTotal={300}
               data={[
@@ -594,12 +595,13 @@ const Demo = React.createClass({
               defaultLabelText='Total Users'
               defaultLabelValue='300'
               hoverExpandDistance={2}
-              key='Donut1'
+              id='donut-1'
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
             <DonutChart
               animateOnHover={true}
+              animationDuration={1500}
               animationTypeOnLoad='pop'
               arcWidth={30}
               data={[
@@ -617,7 +619,7 @@ const Demo = React.createClass({
                 }
               ]}
               height={200}
-              key='Donut2'
+              id='donut-2'
               showDataLabel={false}
               width={200}
             />
