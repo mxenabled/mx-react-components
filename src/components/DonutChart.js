@@ -7,6 +7,7 @@ const StyleConstants = require('../constants/Style');
 
 const DonutChart = React.createClass({
   propTypes: {
+    activeIndex: React.PropTypes.number,
     activeOffset: React.PropTypes.number,
     animateOnHover: React.PropTypes.bool,
     animationDuration: React.PropTypes.number,
@@ -36,6 +37,7 @@ const DonutChart = React.createClass({
 
   getDefaultProps () {
     return {
+      activeIndex: -1,
       activeOffset: 0,
       animateOnHover: false,
       animationDuration: 500,
@@ -58,6 +60,12 @@ const DonutChart = React.createClass({
       showBaseArc: true,
       showDataLabel: true,
       width: 150
+    };
+  },
+
+  getInitialState () {
+    return {
+      activeIndex: -1
     };
   },
 
