@@ -569,30 +569,60 @@ const Demo = React.createClass({
         </Modal>
 
         <br/><br/>
-        <DonutChart
-          animateOnHover={true}
-          chartTotal={300}
-          data={[
-            {
-              name: 'Data Point 1',
-              value: 50
-            },
-            {
-              name: 'Data Point 2',
-              value: 80
-            }
-          ]}
-          dataPoints={[
-            {
-              name: 'Data Dot 1',
-              value: 200
-            }
-          ]}
-          defaultLabelText='Total Users'
-          defaultLabelValue='300'
-          style={{ margin: '0 auto' }}
-        />
-
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', padding: 20 }}>
+            <DonutChart
+              animateOnHover={true}
+              animationTypeOnLoad='roll'
+              chartTotal={300}
+              data={[
+                {
+                  name: 'Data Point 1',
+                  value: 50
+                },
+                {
+                  name: 'Data Point 2',
+                  value: 80
+                }
+              ]}
+              dataPoints={[
+                {
+                  name: 'Data Dot 1',
+                  value: 200
+                }
+              ]}
+              defaultLabelText='Total Users'
+              defaultLabelValue='300'
+              hoverExpandDistance={2}
+              key='Donut1'
+            />
+          </div>
+          <div style={{ display: 'inline-block', padding: 20 }}>
+            <DonutChart
+              animateOnHover={true}
+              animationTypeOnLoad='pop'
+              arcWidth={30}
+              data={[
+                {
+                  name: 'Data Point 1',
+                  value: 50
+                },
+                {
+                  name: 'Data Point 2',
+                  value: 80
+                },
+                {
+                  name: 'Data Point 3',
+                  value: 200
+                }
+              ]}
+              height={200}
+              key='Donut2'
+              showDataLabel={false}
+              width={200}
+            />
+          </div>
+        </div>
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
           <TimeBasedLineChart
