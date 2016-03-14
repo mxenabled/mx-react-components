@@ -3,7 +3,17 @@ const React = require('react');
 const Changelog = React.createClass({
   render () {
     return (
-      <div>
+        <div>
+        <h1>Change Log</h1>
+
+        <h3>2.1.0</h3>
+        <ul>
+          <li>Removed default prop for selected on Select (<a href='https://github.com/mxenabled/mx-react-components/pull/201'>#201</a>)</li>
+          <li>Added ability to pass color prop to Select (<a href='https://github.com/mxenabled/mx-react-components/pull/208'>#208</a>)</li>
+          <li>Fixed bug with multiple Hover states, and added new active style on Select (<a href='https://github.com/mxenabled/mx-react-components/pull/207'>#207</a>)</li>
+        </ul>
+        <p>New Contributors: <a href='https://github.com/r-walsh'>r-walsh</a></p>
+
         <h1>Change Log</h1>
 
         <h3>2.0.5</h3>
