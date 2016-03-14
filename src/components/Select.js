@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
@@ -188,7 +189,7 @@ const Select = React.createClass({
                   style={[
                     styles.option,
                     this.props.optionStyle,
-                    option === this.state.highlightedValue && styles.activeItem,
+                    _.isEqual(option, this.state.highlightedValue) && styles.activeItem,
                     this.getBackgroundColor(option)
                   ]}
                 >
