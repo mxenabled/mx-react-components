@@ -6,6 +6,7 @@ const {
   Button,
   DatePicker,
   DatePickerFullScreen,
+  Drawer,
   DonutChart,
   FileUpload,
   Icon,
@@ -430,6 +431,7 @@ const Demo = React.createClass({
       },
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
+      showDrawer: false,
       showModal: false,
       showSmallModal: false,
       uploadedFile: null,
@@ -502,9 +504,27 @@ const Demo = React.createClass({
     });
   },
 
+  _onDrawerClose () {
+    this.setState({
+      showDrawer: false
+    });
+  },
+
+  _onHandleShowDrawerClick () {
+    this.setState({
+      showDrawer: true
+    });
+  },
+
   render () {
     return (
       <div>
+        <br/><br/>
+        <Button onClick={this._onHandleShowDrawerClick}>Show Drawer</Button>
+        <div style={{ textAlign: 'center', height: '500', margin: 'auto', overflow: 'hidden', position: 'relative', background: 'red' }}>
+        {this.state.showDrawer ?
+          <Drawer onClose={this._onDrawerClose} /> : null}
+        </div>
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
