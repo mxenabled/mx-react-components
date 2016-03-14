@@ -26,23 +26,15 @@
   },
   "homepage": "http://moneydesktop.github.io/mx-react-components/",
   "dependencies": {
-<<<<<<< HEAD
     "babel-preset-react": "^6.5.0",
-=======
->>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
     "d3": "^3.5.6",
     "lodash": "^4.6.1",
     "moment": "^2.10.3",
     "numeral": "^1.5.3",
     "object-assign": "^4.0.1",
     "radium": "^0.14.0",
-<<<<<<< HEAD
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
-=======
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
->>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

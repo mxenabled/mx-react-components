@@ -15,10 +15,6 @@ module.exports = {
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
   TypeAhead: require('./components/TypeAhead'),
-<<<<<<< HEAD
   Input: require('./components/Input'),
-=======
-
->>>>>>> b54331504d05b7fdf76d9a0f95099e39d1798d83
   Styles: require('./constants/Style')
 };
