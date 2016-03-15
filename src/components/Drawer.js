@@ -32,10 +32,6 @@ const Drawer = React.createClass({
     }
   },
 
-  componentWillUnmount () {
-    console.log('component unmounting');
-  },
-
   _renderNav () {
     const styles = this.styles();
 
