@@ -230,7 +230,13 @@ const Select = React.createClass({
         </div>
 
         {isMobile ? (
-          <select className='mx-select-default' onChange={this._handleSelectChange} ref='defaultSelect' style={styles.select} value={selected.value}>
+          <select
+            className='mx-select-default'
+            onChange={this._handleSelectChange}
+            ref='defaultSelect'
+            style={styles.select}
+            value={selected.value}
+          >
             {this.props.options.map(option => {
               return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
             })}

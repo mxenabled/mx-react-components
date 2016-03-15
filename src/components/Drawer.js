@@ -32,18 +32,24 @@ const Drawer = React.createClass({
     }
   },
 
-  componentWillUnmount () {
-    console.log('component unmounting');
-  },
-
   _renderNav () {
     const styles = this.styles();
 
     return this.props.navConfig ?
       <nav ref={(ref) => (this._nav = ref)} style={styles.nav}>
-        <Icon onClick={this.props.navConfig.onPreviousClick} size={25} style={styles.icons} type='caret-left'/>
+        <Icon
+          onClick={this.props.navConfig.onPreviousClick}
+          size={25}
+          style={styles.icons}
+          type='caret-left'
+        />
         {this.props.navConfig.label}
-        <Icon onClick={this.props.navConfig.onNextClick} size={25} style={styles.icons} type='caret-right'/>
+        <Icon
+          onClick={this.props.navConfig.onNextClick}
+          size={25}
+          style={styles.icons}
+          type='caret-right'
+        />
       </nav> : null;
   },
 
@@ -95,7 +101,12 @@ const Drawer = React.createClass({
       <div ref={(ref) => (this._component = ref)} style={styles.component}>
         <header style={styles.header}>
           <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
-            <Icon onClick={this._handleCloseClick} size={25} style={styles.icons}type='arrow-left'/>
+            <Icon
+              onClick={this._handleCloseClick}
+              size={25}
+              style={styles.icons}
+              type='arrow-left'
+            />
           </span>
           {this._renderNav()}
         </header>
