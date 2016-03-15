@@ -48,11 +48,11 @@ const Drawer = React.createClass({
   },
 
   _handleCloseClick () {
+
   },
 
   _animateComponent (transition) {
     const el = this._component;
-//    const transition = { right: 0 };
     const options = {
       duration: this.props.duration,
       easing: this.props.easing
@@ -63,7 +63,6 @@ const Drawer = React.createClass({
 
   _animateBackArrow (transition) {
     const el = this._backArrow;
-//    const transition = { left: 25 };
     const options = {
       delay: this.props.duration,
       duration: this.props.duration,
@@ -75,7 +74,6 @@ const Drawer = React.createClass({
 
   _animateNav (transition) {
     const el = this._nav;
-//    const transition = { top: 12 };
     const options = {
       delay: this.props.duration,
       duration: this.props.duration,
