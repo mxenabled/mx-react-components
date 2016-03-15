@@ -9,9 +9,7 @@ const Drawer = React.createClass({
   propTypes: {
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
-    isOpen: React.PropTypes.bool,
     navContent: React.PropTypes.shape({
-      duration: React.PropTypes.number,
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
@@ -22,19 +20,21 @@ const Drawer = React.createClass({
   getDefaultProps () {
     return {
       duration: 500,
-      isOpen: false,
       easing: [0.28, 0.14, 0.34, 1.04]
     };
   },
 
   componentDidMount () {
-    this._renderTransition(this.props.isOpen);
-  },
+    const el = this._component;
+    const transition = { right: 0 };
+    const options = {
+      duration: this.props.duration,
+      easing: this.props.easing
+    };
 
-  componentWillReceiveProps (newProps) {
-    if (newProps.isOpen !== this.props.isOpen) {
-      this._renderTransition(newProps.isOpen);
-    }
+    Velocity(el, transition, options);
+    this._slideArrow();
+    this._slideNavContent();
   },
 
   componentWillUnmount () {
@@ -52,17 +52,14 @@ const Drawer = React.createClass({
       </div> : null;
   },
 
-  _renderTransition (isOpen) {
-    const el = this._component;
-    const transition = isOpen ? { right: -800 } : { right: 0 };
-    let onComplete = this._doNavAnimation.bind(this, isOpen);
+  _handleCloseClick () {
+  },
 
-    if (isOpen) {
-      onComplete = this.props.onClose;
-    }
-
+  _slideArrow () {
+    const el = this._arrow;
+    const transition = { left: 25 };
     const options = {
-      complete: onComplete,
+      delay: this.props.duration,
       duration: this.props.duration,
       easing: this.props.easing
     };
@@ -70,31 +67,12 @@ const Drawer = React.createClass({
     Velocity(el, transition, options);
   },
 
-  _doNavAnimation (isOpen) {
-    this._slideArrow(isOpen);
-    this._slideNavContent(isOpen);
-  },
-
-  _handleCloseClick () {
-    this._renderTransition(true);
-  },
-
-  _slideArrow (isOpen) {
-    const el = this._arrow;
-    const transition = isOpen ? { left: -25 } : { left: 25 };
-    const options = {
-      duration: this.props.navContent.duration | this.props.duration,
-      easing: this.props.easing
-    };
-
-    Velocity(el, transition, options);
-  },
-
-  _slideNavContent (isOpen) {
+  _slideNavContent () {
     const el = this._navContent;
-    const transition = isOpen ? { top: -25 } : { top: 12 };
+    const transition = { top: 12 };
     const options = {
-      duration: this.props.navContent.duration | this.props.duration,
+      delay: this.props.duration,
+      duration: this.props.duration,
       easing: this.props.easing
     };
 
