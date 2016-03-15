@@ -26,9 +26,9 @@ const Drawer = React.createClass({
 
   componentDidMount () {
     this._animateComponent({ right: 0 });
-    this._animateBackArrow({ left: 25 });
+    this._animateBackArrow();
     if (this.props.navConfig) {
-      this._animateNav({ top: 12 });
+      this._animateNav();
     }
   },
 
@@ -48,7 +48,10 @@ const Drawer = React.createClass({
   },
 
   _handleCloseClick () {
-
+    this._animateComponent({ right: -800 })
+    .then(() => {
+      this.props.onClose();
+    });
   },
 
   _animateComponent (transition) {
@@ -58,11 +61,12 @@ const Drawer = React.createClass({
       easing: this.props.easing
     };
 
-    Velocity(el, transition, options);
+    return Velocity(el, transition, options);
   },
 
-  _animateBackArrow (transition) {
+  _animateBackArrow () {
     const el = this._backArrow;
+    const transition = { left: 25 };
     const options = {
       delay: this.props.duration,
       duration: this.props.duration,
@@ -72,8 +76,9 @@ const Drawer = React.createClass({
     Velocity(el, transition, options);
   },
 
-  _animateNav (transition) {
+  _animateNav () {
     const el = this._nav;
+    const transition = { top: 12 };
     const options = {
       delay: this.props.duration,
       duration: this.props.duration,
