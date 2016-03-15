@@ -25,7 +25,7 @@ const Drawer = React.createClass({
   },
 
   componentDidMount () {
-    this._animateComponent({ right: 0 });
+    this._animateComponent({ left: '20%' });
     this._animateBackArrow();
     if (this.props.navConfig) {
       this._animateNav();
@@ -48,7 +48,7 @@ const Drawer = React.createClass({
   },
 
   _handleCloseClick () {
-    this._animateComponent({ right: -800 })
+    this._animateComponent({ left: '100%' })
     .then(() => {
       this.props.onClose();
     });
@@ -78,7 +78,7 @@ const Drawer = React.createClass({
 
   _animateNav () {
     const el = this._nav;
-    const transition = { top: 12 };
+    const transition = { top: '50%' };
     const options = {
       delay: this.props.duration,
       duration: this.props.duration,
@@ -111,9 +111,9 @@ const Drawer = React.createClass({
       component: {
         top: 0,
         bottom: 0,
-        right: -800,
+        left: '100%',
         position: 'absolute',
-        width: 800,
+        width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN
       },
@@ -122,21 +122,24 @@ const Drawer = React.createClass({
       },
       backArrow: {
         position: 'absolute',
-        left: -25,
-        top: 12
+        right: '100%',
+        top: '50%',
+        transform: 'translateY(-50%)'
       },
       header: {
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
         height: 15,
-        padding: '15px 25px'
+        padding: '15px 25px',
+        position: 'relative'
       },
       nav: {
         fontFamily: StyleConstants.Fonts.THIN,
         color: StyleConstants.Colors.ASH,
         position: 'absolute',
         right: 25,
-        top: -25
+        top: '-100%',
+        transform: 'translateY(-50%)'
       }
     };
   }
