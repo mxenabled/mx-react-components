@@ -9,7 +9,7 @@ const Drawer = React.createClass({
   propTypes: {
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
-    navContent: React.PropTypes.shape({
+    navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
@@ -33,30 +33,32 @@ const Drawer = React.createClass({
     };
 
     Velocity(el, transition, options);
-    this._slideArrow();
-    this._slideNavContent();
+    this._animateBackArrow();
+    if (this.props.navConfig) {
+      this._animateNav();
+    }
   },
 
   componentWillUnmount () {
     console.log('component unmounting');
   },
 
-  _renderNavContent () {
+  _renderNav () {
     const styles = this.styles();
 
-    return this.props.navContent ?
-      <div ref={(ref) => (this._navContent = ref)} style={styles.navContent}>
-        <Icon onClick={this.props.navContent.onPreviousClick} size={25} style={styles.icon} type='caret-left'/>
-        {this.props.navContent.label}
-        <Icon onClick={this.props.navContent.onNextClick} size={25} style={styles.icon} type='caret-right'/>
-      </div> : null;
+    return this.props.navConfig ?
+      <nav ref={(ref) => (this._nav = ref)} style={styles.nav}>
+        <Icon onClick={this.props.navConfig.onPreviousClick} size={25} style={styles.icons} type='caret-left'/>
+        {this.props.navConfig.label}
+        <Icon onClick={this.props.navConfig.onNextClick} size={25} style={styles.icons} type='caret-right'/>
+      </nav> : null;
   },
 
   _handleCloseClick () {
   },
 
-  _slideArrow () {
-    const el = this._arrow;
+  _animateBackArrow () {
+    const el = this._backArrow;
     const transition = { left: 25 };
     const options = {
       delay: this.props.duration,
@@ -67,8 +69,8 @@ const Drawer = React.createClass({
     Velocity(el, transition, options);
   },
 
-  _slideNavContent () {
-    const el = this._navContent;
+  _animateNav () {
+    const el = this._nav;
     const transition = { top: 12 };
     const options = {
       delay: this.props.duration,
@@ -84,12 +86,12 @@ const Drawer = React.createClass({
 
     return (
       <div ref={(ref) => (this._component = ref)} style={styles.component}>
-        <nav style={styles.nav}>
-          <span ref={(ref) => (this._arrow = ref)} style={styles.iconContainer}>
-            <Icon onClick={this._handleCloseClick} size={25} style={styles.icon}type='arrow-left'/>
+        <header style={styles.header}>
+          <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrowContainer}>
+            <Icon onClick={this._handleCloseClick} size={25} style={styles.icons}type='arrow-left'/>
           </span>
-          {this._renderNavContent()}
-        </nav>
+          {this._renderNav()}
+        </header>
         <div>
           {this.props.children}
         </div>
@@ -108,21 +110,21 @@ const Drawer = React.createClass({
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN
       },
-      icon: {
+      icons: {
         color: StyleConstants.Colors.ASH
       },
-      iconContainer: {
+      backArrowContainer: {
         position: 'absolute',
         left: -25,
         top: 12
       },
-      nav: {
+      header: {
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
         height: 15,
         padding: '15px 25px'
       },
-      navContent: {
+      nav: {
         fontFamily: StyleConstants.Fonts.THIN,
         color: StyleConstants.Colors.ASH,
         position: 'absolute',
