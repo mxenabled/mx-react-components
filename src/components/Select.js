@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _isEqual = require('lodash/isEqual');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
@@ -8,7 +8,6 @@ const Icon = require('./Icon');
 const StyleConstants = require('../constants/Style');
 
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
-
 
 const Select = React.createClass({
   propTypes: {
@@ -189,7 +188,7 @@ const Select = React.createClass({
                   style={[
                     styles.option,
                     this.props.optionStyle,
-                    _.isEqual(option, this.state.highlightedValue) && styles.activeItem,
+                    _isEqual(option, this.state.highlightedValue) && styles.activeItem,
                     this.getBackgroundColor(option)
                   ]}
                 >
