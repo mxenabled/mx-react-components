@@ -536,7 +536,7 @@ const Demo = React.createClass({
   },
 
   render () {
-    const navContent = {
+    const navConfig = {
       duration: 200,
       onNextClick: this._nextSibling,
       label: _find(this.state.drawerSiblings, { selected: true }).id + ' of ' + this.state.drawerSiblings.length,
@@ -550,7 +550,7 @@ const Demo = React.createClass({
           {this.state.showDrawer ?
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
             <p>Drawer</p>
-            <Drawer navContent={navContent} onClose={this._toggleDrawer}>
+            <Drawer navConfig={navConfig} onClose={this._toggleDrawer}>
               <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
             </Drawer>
           </div> : null}
