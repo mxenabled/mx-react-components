@@ -336,7 +336,12 @@ const RangeSelector = React.createClass({
         <div className='mx-rangeselector-presets' style={styles.presets}>
           {this.props.presets.map((preset, i) => {
             return (
-              <div className='mx-rangeselector-preset' key={preset.label + i} onClick={this._handlePresetClick.bind(null, preset)} style={styles.preset} >
+              <div
+                className='mx-rangeselector-preset'
+                key={preset.label + i}
+                onClick={this._handlePresetClick.bind(null, preset)}
+                style={styles.preset}
+              >
                 {preset.label}
               </div>
             );

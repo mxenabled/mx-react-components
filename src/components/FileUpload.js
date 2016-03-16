@@ -159,7 +159,12 @@ const FileUpload = React.createClass({
               <div>
                 <div>{this.props.uploadedFile.name}</div>
                 <div>{numeral(this.props.uploadedFile.size / 1000).format('0.0')}k</div>
-                <Button icon='delete' onClick={this._removeFile} style={styles.button} type='secondary' />
+                <Button
+                  icon='delete'
+                  onClick={this._removeFile}
+                  style={styles.button}
+                  type='secondary'
+                />
               </div>
             ) : null}
           </div>

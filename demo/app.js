@@ -1,4 +1,5 @@
 const _clone = require('lodash/clone');
+const _find = require('lodash/find');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const moment = require('moment');
@@ -8,6 +9,7 @@ const {
   DatePicker,
   DatePickerFullScreen,
   DonutChart,
+  Drawer,
   FileUpload,
   Icon,
   Loader,
@@ -426,12 +428,31 @@ const Demo = React.createClass({
   getInitialState () {
     return {
       donutChartData: [],
+      drawerSiblings: [
+        {
+          id: 1,
+          selected: true
+        },
+        {
+          id: 2,
+          selected: false
+        },
+        {
+          id: 3,
+          selected: false
+        },
+        {
+          id: 4,
+          selected: false
+        }
+      ],
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
       },
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
+      showDrawer: true,
       showModal: false,
       showSmallModal: false,
       uploadedFile: null,
@@ -531,9 +552,36 @@ const Demo = React.createClass({
     });
   },
 
+  _handleNextSiblingClick () {
+  },
+
+  _handlePreviousSiblingClick () {
+  },
+
+  _toggleDrawer () {
+    this.setState({
+      showDrawer: !this.state.showDrawer
+    });
+  },
+
   render () {
+    const navConfig = {
+      duration: 200,
+      onNextClick: this._handleNextSiblingClick,
+      label: _find(this.state.drawerSiblings, { selected: true }).id + ' of ' + this.state.drawerSiblings.length,
+      onPreviousClick: this._handlePreviousSiblingClick
+    };
+
     return (
       <div>
+        <br/><br/>
+          <Button onClick={this._toggleDrawer} style={{ position: 'absolute', left: 15, top: 15 }}>Toggle Drawer</Button>
+          {this.state.showDrawer ?
+          <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
+            <Drawer navConfig={navConfig} onClose={this._toggleDrawer}>
+              <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
+            </Drawer>
+          </div> : null}
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
@@ -699,7 +747,7 @@ const Demo = React.createClass({
 
         <br/><br/>
         <Select
-          color='#74D6B9'
+          color='#359BCF'
           isMobile={false}
           onChange={this._handleSelectChange}
           optionHoverStyle={{

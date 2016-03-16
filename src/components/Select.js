@@ -1,3 +1,4 @@
+const _isEqual = require('lodash/isEqual');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
@@ -7,7 +8,6 @@ const Icon = require('./Icon');
 const StyleConstants = require('../constants/Style');
 
 const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
-
 
 const Select = React.createClass({
   propTypes: {
@@ -37,14 +37,28 @@ const Select = React.createClass({
   getInitialState () {
     return {
       highlightedValue: null,
-      isOpen: false
+      isOpen: false,
+      selected: false,
+      hoverItem: null
     };
+  },
+
+  getBackgroundColor (option) {
+    if (option.value === this.state.hoverItem) {
+      return {
+        backgroundColor: StyleConstants.Colors.PRIMARY,
+        color: StyleConstants.Colors.WHITE
+      };
+    } else {
+      return null;
+    }
   },
 
   _handleScrimClick () {
     this.setState({
       isOpen: false,
-      highlightedValue: null
+      highlightedValue: null,
+      hoverItem: null
     });
   },
 
@@ -60,10 +74,17 @@ const Select = React.createClass({
     this.setState({
       selected: option,
       isOpen: false,
-      highlightedValue: null
+      highlightedValue: option,
+      hoverItem: null
     });
 
     this.props.onChange(option);
+  },
+
+  _handleOptionMouseOver (option) {
+    this.setState({
+      hoverItem: option.value
+    });
   },
 
   _handleSelectChange (e) {
@@ -162,10 +183,17 @@ const Select = React.createClass({
                   className='mx-select-option'
                   key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(null, option)}
+                  onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   ref={option.displayValue + option.value}
-                  style={[styles.option, this.props.optionStyle, option === this.state.highlightedValue && styles.activeItem]}
+                  style={[
+                    styles.option,
+                    this.props.optionStyle,
+                    _isEqual(option, this.state.highlightedValue) && styles.activeItem,
+                    this.getBackgroundColor(option)
+                  ]}
                 >
                 {option.displayValue}
+                {option === this.state.highlightedValue ? <Icon size='20' style={styles.check} type='check' /> : null }
                 </li>
               );
             })}
@@ -202,7 +230,13 @@ const Select = React.createClass({
         </div>
 
         {isMobile ? (
-          <select className='mx-select-default' onChange={this._handleSelectChange} ref='defaultSelect' style={styles.select} value={selected.value}>
+          <select
+            className='mx-select-default'
+            onChange={this._handleSelectChange}
+            ref='defaultSelect'
+            style={styles.select}
+            value={selected.value}
+          >
             {this.props.options.map(option => {
               return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
             })}
@@ -221,6 +255,11 @@ const Select = React.createClass({
         right: '-5px',
         top: '50%',
         transform: 'translateY(-50%)'
+      },
+      check: {
+        color: StyleConstants.Colors.PRIMARY,
+        position: 'absolute',
+        right: 10
       },
       component: {
         backgroundColor: '#FFFFFF',
@@ -250,8 +289,7 @@ const Select = React.createClass({
         position: 'relative'
       },
       activeItem: {
-        backgroundColor: this.props.color,
-        color: StyleConstants.Colors.WHITE
+        color: StyleConstants.Colors.PRIMARY
       },
       invalid: {
         borderColor: StyleConstants.Colors.STRAWBERRY
@@ -277,12 +315,7 @@ const Select = React.createClass({
         cursor: 'pointer',
         backgroundColor: '#FFFFFF',
         padding: '10px',
-        whiteSpace: 'nowrap',
-
-        ':hover': {
-          backgroundColor: this.props.color,
-          color: StyleConstants.Colors.WHITE
-        }
+        whiteSpace: 'nowrap'
       },
       scrim: {
         position: 'fixed',
