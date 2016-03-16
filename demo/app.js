@@ -601,9 +601,11 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center' }}>
           <div style={{ display: 'inline-block', padding: 20 }}>
             <DonutChart
+              activeOffset={5}
               animateOnHover={true}
-              animationDuration={500}
+              animationDuration={750}
               animationTypeOnLoad='roll'
+              arcWidth={15}
               chartTotal={300}
               data={[
                 {
