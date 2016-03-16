@@ -5,7 +5,8 @@
   "main": "dist/Index.js",
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
-    "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js"
+    "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js",
+    "test": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,6 @@
     "lodash": "^4.6.1",
     "moment": "^2.10.3",
     "numeral": "^1.5.3",
-    "object-assign": "^4.0.1",
     "radium": "^0.14.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
