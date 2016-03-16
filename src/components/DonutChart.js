@@ -147,11 +147,11 @@ const DonutChart = React.createClass({
     const nextArcData = this.state.values[nextActiveIndex];
 
     if (currentArcData) {
-      d3.select(this.refs['arc-' + this.props.id + currentActiveIndex]).transition().duration(this.props.animationDuration).attr('d', this.state.standardArc(currentArcData));
+      d3.select(this.refs['arc-' + this.props.id + currentActiveIndex]).transition().duration(200).attr('d', this.state.standardArc(currentArcData));
     }
 
     if (nextArcData) {
-      d3.select(this.refs['arc-' + this.props.id + nextActiveIndex]).transition().duration(this.props.animationDuration).attr('d', this.state.hoveredArc(nextArcData));
+      d3.select(this.refs['arc-' + this.props.id + nextActiveIndex]).transition().duration(200).attr('d', this.state.hoveredArc(nextArcData));
     }
   },
 
