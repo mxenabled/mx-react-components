@@ -99,7 +99,7 @@ const Drawer = React.createClass({
 
     return (
       <div>
-        <div style={styles.scrim}></div>
+        <div onClick={this._handleCloseClick} style={styles.scrim}></div>
         <div ref={(ref) => (this._component = ref)} style={styles.component}>
           <header style={styles.header}>
             <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
