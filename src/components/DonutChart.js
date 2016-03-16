@@ -142,10 +142,60 @@ const DonutChart = React.createClass({
     }
   },
 
+  _animateActiveArc (currentActiveIndex, nextActiveIndex) {
+    const currentArcData = this.state.values[currentActiveIndex];
+    const nextArcData = this.state.values[nextActiveIndex];
+
+    if (currentArcData) {
+      d3.select(this.refs['arc-' + this.props.id + currentActiveIndex]).transition().duration(this.props.animationDuration).attr('d', this.state.standardArc(currentArcData));
+    }
+
+    if (nextArcData) {
+      d3.select(this.refs['arc-' + this.props.id + nextActiveIndex]).transition().duration(this.props.animationDuration).attr('d', this.state.hoveredArc(nextArcData));
+    }
+  },
+
   _bounceAnimate () {
     d3.selectAll('.arc-' + this.props.id)
       .transition()
-      .ease('bounce')
+      .ease(t => {
+        let time = t;
+        let value = 0;
+
+        const b0 = 1 - time;
+        const b1 = b0 * (1 - b0) + b0;
+        const b2 = b0 * (1 - b1) + b1;
+        const x0 = 2 * Math.sqrt(time);
+        const x1 = x0 * Math.sqrt(time);
+        const x2 = x1 * Math.sqrt(time) + 0.9;
+        const t0 = 1 / (1 + x0 + x1 + x2);
+        const t1 = t0 + t0 * x0;
+        const t2 = t1 + t0 * x1;
+        const m0 = t0 + t0 * x0 / 2;
+        const m1 = t1 + t0 * x1 / 2;
+        const m2 = t2 + t0 * x2 / 2;
+        const a = 1 / (t0 * t0);
+
+        switch (true) {
+          case time >= (1 - time):
+            value = 1;
+            break;
+          case time < t0:
+            value = a * time * time;
+            break;
+          case time < t1:
+            value = a * (time -= m0) * time + b0;
+            break;
+          case time < t2:
+            value = a * (time -= m1) * time + b1;
+            break;
+          default:
+            value = a * (time -= m2) * time + b2;
+            break;
+        }
+
+        return value;
+      })
       .duration(this.props.animationDuration)
       .attrTween('d', (d, i, a) => {
         return d3.interpolate(this.state.bounceArcAnimationStartPaths[i], a);
