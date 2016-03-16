@@ -15,6 +15,7 @@ const DonutChartDocs = React.createClass({
 
         <h3>Demo</h3>
         <DonutChart
+          animateOnHover={true}
           chartTotal={300}
           data={[
             {
@@ -43,16 +44,12 @@ const DonutChartDocs = React.createClass({
         <h5>activeIndex <label>Number</label></h5>
         <p>Required for hover animations and data labels. Used to determine which slice is currently active. Represented visually by making the slice slightly larger or zoomed in and displaying the data label.</p>
 
-        <h5>activeIndex <label>Number</label></h5>
-        <p>Default: -1</p>
-        <p>A number used to represent the currently selected arc slice of the chart for animation purposes.</p>
-
         <h5>activeOffset <label>Number</label></h5>
         <p>Default: 3</p>
         <p>A number, in pixels, that the slice will increase on mouse hover.</p>
 
         <h5>animateOnHover <label>Boolean</label></h5>
-        <p>Default: true</p>
+        <p>Default: false</p>
         <p>Show animation on hover</p>
 
         <h5>animationDuration <label>number</label></h5>
