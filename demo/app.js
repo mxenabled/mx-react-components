@@ -625,23 +625,27 @@ const Demo = React.createClass({
               ]}
               defaultLabelText='Total Users'
               defaultLabelValue='300'
-              hoverExpandDistance={2}
               id='donut-1'
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
-            <DonutChart
-              animateOnHover={true}
-              animationDuration={500}
-              animationTypeOnLoad='pop'
-              arcWidth={30}
-              data={this.state.donutChartData}
-              height={200}
-              id='donut-2'
-              showDataLabel={false}
-              width={200}
-            />
-            <Button onClick={this._handleAddDataToChart}>Add Data to Chart</Button>
+            {this.state.donutChartData.length ? (
+              <DonutChart
+                activeOffset={5}
+                animateOnHover={true}
+                animationDuration={1000}
+                animationTypeOnLoad='pop'
+                arcWidth={30}
+                data={_clone(this.state.donutChartData)}
+                height={200}
+                id='donut-2'
+                showDataLabel={false}
+                width={200}
+              />
+            ) : null}
+            <div style={{ marginTop: 10 }}>
+              <Button onClick={this._handleAddDataToChart}>Add Data to Chart</Button>
+            </div>
           </div>
         </div>
         <br/><br/>
