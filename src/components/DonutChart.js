@@ -305,6 +305,8 @@ const DonutChart = React.createClass({
   },
 
   _renderDataLabel () {
+    const styles = this.styles();
+
     if (this.props.showDataLabel) {
       if (this.props.children) {
         return (
@@ -344,7 +346,8 @@ const DonutChart = React.createClass({
 
   render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
-    const fontSize = Math.min(this.props.width, this.props.height) * 0.2 + 'px';
+    const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
+    const styles = this.styles();
 
     return (
       <div
@@ -366,29 +369,31 @@ const DonutChart = React.createClass({
         </svg>
       </div>
     );
+  },
+
+  styles () {
+    return {
+      component: {
+        position: 'relative',
+        fontFamily: StyleConstants.FontFamily
+      },
+      center: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        textAlign: 'center',
+        transform: 'translate(-50%, -50%)'
+      },
+      label: {
+        color: StyleConstants.Colors.FOG,
+        fontSize: '0.4em',
+        marginTop: 5
+      },
+      value: {
+        fontWeight: 300
+      }
+    };
   }
 });
-
-const styles = {
-  component: {
-    position: 'relative',
-    fontFamily: StyleConstants.FontFamily
-  },
-  center: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    textAlign: 'center',
-    transform: 'translate(-50%, -50%)'
-  },
-  label: {
-    color: StyleConstants.Colors.FOG,
-    fontSize: '0.4em',
-    marginTop: '5px'
-  },
-  value: {
-    fontWeight: 300
-  }
-};
 
 module.exports = Radium(DonutChart);
