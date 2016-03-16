@@ -15,7 +15,11 @@ const DonutChartDocs = React.createClass({
 
         <h3>Demo</h3>
         <DonutChart
+          activeOffset={5}
           animateOnHover={true}
+          animationDuration={750}
+          animationTypeOnLoad='roll'
+          arcWidth={15}
           chartTotal={300}
           data={[
             {
@@ -25,10 +29,6 @@ const DonutChartDocs = React.createClass({
             {
               name: 'Data Point 2',
               value: 80
-            },
-            {
-              name: 'Data Point 3',
-              value: 20
             }
           ]}
           dataPoints={[
@@ -37,7 +37,9 @@ const DonutChartDocs = React.createClass({
               value: 200
             }
           ]}
-          showBaseArc={true}
+          defaultLabelText='Total Users'
+          defaultLabelValue='300'
+          id='donut-1'
         />
 
         <h3>Usage</h3>
@@ -157,10 +159,11 @@ const DonutChartDocs = React.createClass({
         <Markdown>
   {`
     <DonutChart
-      activeIndex={1}
-      activeOffset={10}
-      arcWidth={40}
-      baseArcColor='#f5f5f5'
+      activeOffset={5}
+      animateOnHover={true}
+      animationDuration={750}
+      animationTypeOnLoad='roll'
+      arcWidth={15}
       chartTotal={300}
       data={[
         {
@@ -170,20 +173,17 @@ const DonutChartDocs = React.createClass({
         {
           name: 'Data Point 2',
           value: 80
-        },
-        {
-          name: 'Data Point 3',
-          value: 20
         }
       ]}
-      dataPointRadius={16}
       dataPoints={[
         {
           name: 'Data Dot 1',
           value: 200
         }
       ]}
-      showBaseArc={true}
+      defaultLabelText='Total Users'
+      defaultLabelValue='300'
+      id='donut-1'
     />
   `}
         </Markdown>
