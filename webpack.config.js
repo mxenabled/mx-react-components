@@ -19,7 +19,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader'
       }
-    ]
+    ],
+    noParse: [/autoit.js/]
   },
   output: {
     filename: './bundle.js'
