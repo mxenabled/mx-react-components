@@ -1,3 +1,4 @@
+const _clone = require('lodash/clone');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const moment = require('moment');
@@ -424,20 +425,7 @@ const lineChartData = [
 const Demo = React.createClass({
   getInitialState () {
     return {
-      donutChartData: [
-        {
-          name: 'Data Point 1',
-          value: 50
-        },
-        {
-          name: 'Data Point 2',
-          value: 80
-        },
-        {
-          name: 'Data Point 3',
-          value: 200
-        }
-      ],
+      donutChartData: [],
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
@@ -456,7 +444,21 @@ const Demo = React.createClass({
 
     setTimeout(() => {
       this.setState({
-        lineChartData
+        lineChartData,
+        donutChartData: [
+          {
+            name: 'Data Point 1',
+            value: 50
+          },
+          {
+            name: 'Data Point 2',
+            value: 80
+          },
+          {
+            name: 'Data Point 3',
+            value: 200
+          }
+        ]
       });
     }, 3000);
   },
