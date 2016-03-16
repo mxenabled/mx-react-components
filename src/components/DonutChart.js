@@ -205,60 +205,59 @@ const DonutChart = React.createClass({
   _rollAnimate () {
     d3.selectAll('.arc-' + this.props.id)
       .transition()
-      .ease('bounce')
       .duration(this.props.animationDuration)
       .attrTween('transform', function () {
         return d3.interpolateString('rotate(0)', 'rotate(360)');
       });
   },
 
-  _handleClick () {
-
+  _handleClick (index) {
+    this.props.onClick(this.props.data[index]);
   },
 
   _handleMouseEnter (point) {
-    if (this.props.animateOnHover) {
-      d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.hoveredArc(point.arc));
-
-      this.setState({
-        activeIndex: point.index
-      });
+    if (this.props.animateOnHover && this.state.activeIndex !== point.index) {
+      d3.select(this.refs[point.ref]).transition().duration(200).attr('d', this.state.hoveredArc(point.arc));
     }
+
+    this.props.onMouseEnter(this.props.data[point.index], point.index);
+
+    this.setState({
+      activeIndex: point.index
+    });
   },
 
   _handleMouseLeave (point) {
     if (this.props.animateOnHover) {
-      d3.select(this.refs[point.ref]).transition().duration(500).attr('d', this.state.standardArc(point.arc));
-
-      this.setState({
-        activeIndex: -1
-      });
+      d3.select(this.refs[point.ref]).transition().duration(200).attr('d', this.state.standardArc(point.arc));
     }
+
+    this.props.onMouseLeave();
+
+    this.setState({
+      activeIndex: -1
+    });
   },
 
   _renderArcs () {
-    if (this.props.data.length) {
-      return this.state.values.map((point, i) => {
-        return (
-          <g
-            key={i}
-            onClick={this._handleClick.bind(null, i)}
-            onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, index: i, ref: 'arc-' + this.props.id + i })}
-            onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, index: i, ref: 'arc-' + this.props.id + i })}
-          >
-            <path
-              className={'arc-' + this.props.id}
-              d={this.state.standardArc(point)}
-              fill={this.props.colors[i]}
-              opacity={this.props.opacity}
-              ref={'arc-' + this.props.id + i}
-            />
-          </g>
-        );
-      });
-    } else {
-      return null;
-    }
+    return this.state.values.map((point, i) => {
+      return (
+        <g
+          key={i}
+          onClick={this._handleClick.bind(null, i)}
+          onMouseEnter={this._handleMouseEnter.bind(null, { arc: point, index: i, ref: 'arc-' + this.props.id + i })}
+          onMouseLeave={this._handleMouseLeave.bind(null, { arc: point, index: i, ref: 'arc-' + this.props.id + i })}
+        >
+          <path
+            className={'arc-' + this.props.id}
+            d={this.state.standardArc(point)}
+            fill={this.props.colors[i]}
+            opacity={this.props.opacity}
+            ref={'arc-' + this.props.id + i}
+          />
+        </g>
+      );
+    });
   },
 
   _renderBaseArc () {
