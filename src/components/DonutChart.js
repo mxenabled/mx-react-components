@@ -89,23 +89,29 @@ const DonutChart = React.createClass({
       this.setState({
         activeIndex: newProps.activeIndex
       });
+
+      this._animateActiveArc(this.props.activeIndex, newProps.activeIndex);
     }
   },
 
-  _setupD3Functions () {
-    const dataSets = this.props.data.map(item => {
+  shouldComponentUpdate (nextProps, nextState) {
+    return !_isEqual(this.props, nextProps) || !_isEqual(this.state, nextState);
+  },
+
+  _setupD3Functions (props) {
+    const dataSets = props.data.map(item => {
       return item.value;
     });
-    const valueTotal = dataSets.reduce((a, b) => {
+    const valueTotal = dataSets.length ? dataSets.reduce((a, b) => {
       return a + b;
-    });
-    const endAngle = this.props.chartTotal ? valueTotal / this.props.chartTotal : 1;
-    const pie = d3.layout.pie().sort(null).padAngle(this.props.padAngle).endAngle(endAngle * 2 * Math.PI);
+    }) : 0;
+    const endAngle = props.chartTotal ? valueTotal / props.chartTotal : 1;
+    const pie = d3.layout.pie().sort(null).padAngle(props.padAngle).endAngle(endAngle * 2 * Math.PI);
     const values = pie(dataSets);
-    const radius = Math.min(this.props.width, this.props.height) / 2.2;
-    const standardArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth);
-    const hoveredArc = d3.svg.arc().outerRadius(radius + this.props.hoverExpandDistance).innerRadius(radius - this.props.arcWidth);
-    const baseArc = d3.svg.arc().outerRadius(radius - this.props.activeOffset).innerRadius(radius - this.props.arcWidth).startAngle(0).endAngle(2 * Math.PI);
+    const radius = Math.min(props.width, props.height) / 2;
+    const standardArc = d3.svg.arc().outerRadius(radius - props.activeOffset).innerRadius(radius - props.arcWidth);
+    const hoveredArc = d3.svg.arc().outerRadius(radius).innerRadius(radius - props.arcWidth);
+    const baseArc = d3.svg.arc().outerRadius(radius - props.activeOffset).innerRadius(radius - props.arcWidth).startAngle(0).endAngle(2 * Math.PI);
     const bounceArcAnimationStart = d3.svg.arc().outerRadius(10).innerRadius(5);
     const bounceArcAnimationStartPaths = values.map(point => {
       return bounceArcAnimationStart(point);
