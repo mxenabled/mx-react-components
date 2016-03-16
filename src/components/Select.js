@@ -193,7 +193,7 @@ const Select = React.createClass({
                   ]}
                 >
                 {option.displayValue}
-                {option === this.state.highlightedValue ? <Icon size='20' style={styles.check} type='check' /> : null }
+                {_isEqual(option, this.state.highlightedValue) ? <Icon size='20' style={styles.check} type='check' /> : null }
                 </li>
               );
             })}
