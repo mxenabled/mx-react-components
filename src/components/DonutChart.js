@@ -159,26 +159,31 @@ const DonutChart = React.createClass({
     d3.selectAll('.arc-' + this.props.id)
       .transition()
       .ease(t => {
+        // See Penner's Equation and D3 docs on custom easing function
+        // for details on variable names.
+        const constantMultiplier = 2;
+        const maxValue = 1;
+        const timePadding = 0.9;
         let time = t;
         let value = 0;
 
-        const b0 = 1 - time;
-        const b1 = b0 * (1 - b0) + b0;
-        const b2 = b0 * (1 - b1) + b1;
-        const x0 = 2 * Math.sqrt(time);
+        const b0 = maxValue - time;
+        const b1 = b0 * (maxValue - b0) + b0;
+        const b2 = b0 * (maxValue - b1) + b1;
+        const x0 = constantMultiplier * Math.sqrt(time);
         const x1 = x0 * Math.sqrt(time);
-        const x2 = x1 * Math.sqrt(time) + 0.9;
-        const t0 = 1 / (1 + x0 + x1 + x2);
+        const x2 = x1 * Math.sqrt(time) + timePadding;
+        const t0 = maxValue / (maxValue + x0 + x1 + x2);
         const t1 = t0 + t0 * x0;
         const t2 = t1 + t0 * x1;
-        const m0 = t0 + t0 * x0 / 2;
-        const m1 = t1 + t0 * x1 / 2;
-        const m2 = t2 + t0 * x2 / 2;
-        const a = 1 / (t0 * t0);
+        const m0 = t0 + t0 * x0 / constantMultiplier;
+        const m1 = t1 + t0 * x1 / constantMultiplier;
+        const m2 = t2 + t0 * x2 / constantMultiplier;
+        const a = maxValue / (t0 * t0);
 
         switch (true) {
-          case time >= (1 - time):
-            value = 1;
+          case time >= (maxValue - time):
+            value = maxValue;
             break;
           case time < t0:
             value = a * time * time;
