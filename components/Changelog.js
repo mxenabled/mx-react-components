@@ -36,8 +36,6 @@ const Changelog = React.createClass({
         </ul>
         <p>New Contributors: <a href='https://github.com/r-walsh'>r-walsh</a></p>
 
-        <h1>Change Log</h1>
-
         <h3>2.0.5</h3>
         <ul>
           <li>Add isRequired to props and fix validation bugs in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/202'>#202</a>)</li>
