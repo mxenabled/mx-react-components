@@ -1,3 +1,4 @@
+const _isEqual = require('lodash/isEqual');
 const React = require('react');
 const Radium = require('radium');
 const d3 = require('d3');
@@ -64,23 +65,21 @@ const DonutChart = React.createClass({
 
   getInitialState () {
     return {
-      activeIndex: -1
+      activeIndex: this.props.activeIndex || -1
     };
   },
 
   componentWillMount () {
-    this._setupD3Functions();
+    this._setupD3Functions(this.props);
   },
 
   componentDidMount () {
-    if (this.props.data.length) {
-      this._animateChart();
-    }
+    this._animateChart();
   },
 
   componentWillReceiveProps (newProps) {
-    if (this.props.data.length) {
-      this._setupD3Functions();
+    if (!_isEqual(this.props.data, newProps.data)) {
+      this._setupD3Functions(newProps);
       this._animateChart();
     }
 
