@@ -43,6 +43,10 @@ const DonutChartDocs = React.createClass({
         <h5>activeIndex <label>Number</label></h5>
         <p>Required for hover animations and data labels. Used to determine which slice is currently active. Represented visually by making the slice slightly larger or zoomed in and displaying the data label.</p>
 
+        <h5>activeIndex <label>Number</label></h5>
+        <p>Default: -1</p>
+        <p>A number used to represent the currently selected arc slice of the chart for animation purposes.</p>
+
         <h5>activeOffset <label>Number</label></h5>
         <p>Default: 3</p>
         <p>A number, in pixels, that the slice will increase on mouse hover.</p>
@@ -51,9 +55,13 @@ const DonutChartDocs = React.createClass({
         <p>Default: true</p>
         <p>Show animation on hover</p>
 
-        <h5>animateOnLoad <label>Boolean</label></h5>
-        <p>Default: true</p>
-        <p>Show animation on load</p>
+        <h5>animationDuration <label>number</label></h5>
+        <p>Default: 500</p>
+        <p>Determines how long the load animation is in milliseconds</p>
+
+        <h5>animationTypeOnLoad <label>string</label></h5>
+        <p>Default: roll</p>
+        <p>Determines which of two animations will be used when chart is loaded or data is changed.  Roll will rotate the chart in while pop will bounce the chart in.</p>
 
         <h5>arcWidth <label>Number</label></h5>
         <p>Default: 80</p>
@@ -114,6 +122,10 @@ const DonutChartDocs = React.createClass({
         <h5>height <label>Number</label></h5>
         <p>Default: 360</p>
         <p>Height, in pixels, of the entire component.</p>
+
+        <h5>id <label>string</label></h5>
+        <p>Default: donut-chart</p>
+        <p>An id used to give the chart unique classNames/references so that multiple charts on a page don't attempt to animate each other.</p>
 
         <h5>onClick <label>Function</label></h5>
         <p>A method to be called when a pie slice is clicked. It will be passed the index of the clicke data point.</p>
