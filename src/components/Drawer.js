@@ -134,7 +134,7 @@ const Drawer = React.createClass({
         boxShadow: StyleConstants.BoxShadow
       },
       content: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: StyleConstants.Colors.WHITE,
         height: '100%'
       },
       scrim: {
