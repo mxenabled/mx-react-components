@@ -1,11 +1,13 @@
 {
   "name": "mx-react-components",
-  "version": "2.2.2",
+  "version": "0.0.0-semantically-released",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
+    "commit": "git-cz",
     "release": "eslint src && babel src --out-dir dist",
-    "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js"
+    "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -43,12 +45,20 @@
     "babel-plugin-transform-object-assign": "^6.5.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-react": "^6.0.0",
+    "commitizen": "^2.7.2",
+    "cz-conventional-changelog": "^1.1.5",
     "eslint": "~2.2.0",
     "eslint-config-mx": "^1.1.0",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^3.0.0",
     "live-server": "^0.8.1",
     "node-libs-browser": "^0.5.2",
+    "semantic-release": "^4.3.5",
     "webpack": "^1.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
