@@ -103,7 +103,12 @@ const Drawer = React.createClass({
         <div ref={(ref) => (this._component = ref)} style={styles.component}>
           <header style={styles.header}>
             <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
-              <Icon onClick={this._handleCloseClick} size={25} style={styles.icons}type='arrow-left'/>
+              <Icon
+                onClick={this._handleCloseClick}
+                size={25}
+                style={styles.icons}
+                type='arrow-left'
+              />
             </span>
             {this._renderNav()}
           </header>
