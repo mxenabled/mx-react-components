@@ -1,3 +1,4 @@
+const _clone = require('lodash/clone');
 const _find = require('lodash/find');
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -426,6 +427,7 @@ const lineChartData = [
 const Demo = React.createClass({
   getInitialState () {
     return {
+      donutChartData: [],
       drawerSiblings: [
         {
           id: 1,
@@ -463,13 +465,40 @@ const Demo = React.createClass({
 
     setTimeout(() => {
       this.setState({
-        lineChartData
+        lineChartData,
+        donutChartData: [
+          {
+            name: 'Data Point 1',
+            value: 50
+          },
+          {
+            name: 'Data Point 2',
+            value: 80
+          },
+          {
+            name: 'Data Point 3',
+            value: 200
+          }
+        ]
       });
     }, 3000);
   },
 
   componentWillUnmount () {
     window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleAddDataToChart () {
+    const donutChartData = this.state.donutChartData;
+
+    donutChartData.push({
+      name: 'Data Point',
+      value: Math.floor(Math.random() * (150 - 30 + 1)) + 30
+    });
+
+    this.setState({
+      donutChartData
+    });
   },
 
   _handleSelectChange (option) {
@@ -617,30 +646,56 @@ const Demo = React.createClass({
         </Modal>
 
         <br/><br/>
-        <DonutChart
-          animateOnHover={true}
-          chartTotal={300}
-          data={[
-            {
-              name: 'Data Point 1',
-              value: 50
-            },
-            {
-              name: 'Data Point 2',
-              value: 80
-            }
-          ]}
-          dataPoints={[
-            {
-              name: 'Data Dot 1',
-              value: 200
-            }
-          ]}
-          defaultLabelText='Total Users'
-          defaultLabelValue='300'
-          style={{ margin: '0 auto' }}
-        />
-
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', padding: 20 }}>
+            <DonutChart
+              activeOffset={5}
+              animateOnHover={true}
+              animationDuration={750}
+              animationTypeOnLoad='roll'
+              arcWidth={15}
+              chartTotal={300}
+              data={[
+                {
+                  name: 'Data Point 1',
+                  value: 50
+                },
+                {
+                  name: 'Data Point 2',
+                  value: 80
+                }
+              ]}
+              dataPoints={[
+                {
+                  name: 'Data Dot 1',
+                  value: 200
+                }
+              ]}
+              defaultLabelText='Total Users'
+              defaultLabelValue='300'
+              id='donut-1'
+            />
+          </div>
+          <div style={{ display: 'inline-block', padding: 20 }}>
+            {this.state.donutChartData.length ? (
+              <DonutChart
+                activeOffset={5}
+                animateOnHover={true}
+                animationDuration={1000}
+                animationTypeOnLoad='pop'
+                arcWidth={30}
+                data={_clone(this.state.donutChartData)}
+                height={200}
+                id='donut-2'
+                showDataLabel={false}
+                width={200}
+              />
+            ) : null}
+            <div style={{ marginTop: 10 }}>
+              <Button onClick={this._handleAddDataToChart}>Add Data to Chart</Button>
+            </div>
+          </div>
+        </div>
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
           <TimeBasedLineChart
