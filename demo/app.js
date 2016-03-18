@@ -44,6 +44,14 @@ const icons = [
     displayValue: 'Add Solid'
   },
   {
+    value: 'Android',
+    displayValue: 'Android'
+  },
+  {
+    value: 'Apple',
+    displayValue: 'Apple'
+  },
+  {
     value: 'arrow-down',
     displayValue: 'Arrow Down'
   },
@@ -290,6 +298,10 @@ const icons = [
   {
     value: 'visit',
     displayValue: 'Visit'
+  },
+  {
+    value: 'Windows',
+    displayValue: 'Windows'
   },
   {
     value: 'x-axis',
