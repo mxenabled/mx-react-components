@@ -5,6 +5,13 @@ const Changelog = React.createClass({
     return (
         <div>
         <h1>Change Log</h1>
+
+        <h3>2.2.4</h3>
+        <ul>
+          <li>Adds rocket icon to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/224'>#224</a>)</li>
+          <li>Adds scrim with box shadow and click handler to Drawer Component (<a href='https://github.com/mxenabled/mx-react-components/pull/223'>#223</a>)</li>
+        </ul>
+
         <h3>2.2.3</h3>
         <ul>
           <li>Adds animations to the DonutChart component (<a href='https://github.com/mxenabled/mx-react-components/pull/221'>#221</a>)</li>
