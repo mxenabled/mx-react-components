@@ -456,7 +456,8 @@ const Demo = React.createClass({
       },
       lineChartData: [],
       selectedDatePickerDate: moment().unix(),
-      showDrawer: true,
+      showDrawer: false,
+      showDrawerButtonType: 'primary',
       showModal: false,
       showSmallModal: false,
       uploadedFile: null,
@@ -562,9 +563,17 @@ const Demo = React.createClass({
   _handlePreviousSiblingClick () {
   },
 
-  _toggleDrawer () {
+  _handleShowDrawerClick () {
     this.setState({
-      showDrawer: !this.state.showDrawer
+      showDrawer: true,
+      showDrawerButtonType: 'disabled'
+    });
+  },
+
+  _onHideDrawer () {
+    this.setState({
+      showDrawer: false,
+      showDrawerButtonType: 'primary'
     });
   },
 
@@ -579,10 +588,10 @@ const Demo = React.createClass({
     return (
       <div>
         <br/><br/>
-          <Button onClick={this._toggleDrawer} style={{ position: 'absolute', left: 15, top: 15 }}>Toggle Drawer</Button>
+          <Button onClick={this._handleShowDrawerClick} style={{ position: 'absolute', left: 15, top: 15 }} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
           {this.state.showDrawer ?
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
-            <Drawer navConfig={navConfig} onClose={this._toggleDrawer}>
+            <Drawer navConfig={navConfig} onClose={this._onHideDrawer}>
               <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
             </Drawer>
           </div> : null}

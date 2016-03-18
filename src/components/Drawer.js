@@ -98,20 +98,23 @@ const Drawer = React.createClass({
     const styles = this.styles();
 
     return (
-      <div ref={(ref) => (this._component = ref)} style={styles.component}>
-        <header style={styles.header}>
-          <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
-            <Icon
-              onClick={this._handleCloseClick}
-              size={25}
-              style={styles.icons}
-              type='arrow-left'
-            />
-          </span>
-          {this._renderNav()}
-        </header>
-        <div>
-          {this.props.children}
+      <div>
+        <div onClick={this._handleCloseClick} style={styles.scrim}></div>
+        <div ref={(ref) => (this._component = ref)} style={styles.component}>
+          <header style={styles.header}>
+            <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
+              <Icon
+                onClick={this._handleCloseClick}
+                size={25}
+                style={styles.icons}
+                type='arrow-left'
+              />
+            </span>
+            {this._renderNav()}
+          </header>
+          <div style={styles.content}>
+            {this.props.children}
+          </div>
         </div>
       </div>
     );
@@ -120,13 +123,29 @@ const Drawer = React.createClass({
   styles () {
     return {
       component: {
+        zIndex: 1001,
         top: 0,
         bottom: 0,
         left: '100%',
         position: 'absolute',
         width: '80%',
         overflow: 'hidden',
-        backgroundColor: StyleConstants.Colors.PORCELAIN
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        boxShadow: StyleConstants.BoxShadow
+      },
+      content: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        height: '100%'
+      },
+      scrim: {
+        zIndex: 1000,
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        textAlign: 'center',
+        backgroundColor: StyleConstants.Colors.SCRIM
       },
       icons: {
         color: StyleConstants.Colors.ASH
