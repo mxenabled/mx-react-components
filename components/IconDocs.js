@@ -78,6 +78,14 @@ const icons = [
     displayValue: 'Add Solid'
   },
   {
+    value: 'Android',
+    displayValue: 'Android'
+  },
+  {
+    value: 'Apple',
+    displayValue: 'Apple'
+  },
+  {
     value: 'arrow-down',
     displayValue: 'Arrow Down'
   },
@@ -227,7 +235,7 @@ const icons = [
   },
   {
     value: 'md-credit',
-    displayValue: 'Creidt (MD)'
+    displayValue: 'Credit (MD)'
   },
   {
     value: 'md-debts',
@@ -256,6 +264,10 @@ const icons = [
   {
     value: 'play-solid',
     displayValue: 'Play Solid'
+  },
+  {
+    value: 'rocket',
+    displayValue: 'Rocket'
   },
   {
     value: 'savings',
@@ -288,6 +300,10 @@ const icons = [
   {
     value: 'visit',
     displayValue: 'Visit'
+  },
+  {
+    value: 'Windows',
+    displayValue: 'Windows'
   },
   {
     value: 'x-axis',
