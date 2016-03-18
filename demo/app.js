@@ -256,6 +256,10 @@ const icons = [
     displayValue: 'Play Solid'
   },
   {
+    value: 'rocket',
+    displayValue: 'Rocket'
+  },
+  {
     value: 'savings',
     displayValue: 'Savings'
   },
