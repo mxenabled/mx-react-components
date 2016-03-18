@@ -64,6 +64,9 @@ const SelectDocs = React.createClass({
         />
 
         <h3>Usage</h3>
+        <h5>color <label>String</label></h5>
+        <p>Color that changes hover state color on menu options.</p>
+
         <h5>dropdownStyle <label>Object | Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the 'div' element that wraps the selected option and options menu elements.</p>
 

@@ -61,8 +61,8 @@ const TimeBasedLineChartDocs = React.createClass({
   <Markdown lang='js'>
   {`
     [{
-      timeStamp: 1446063248, //unix timestamp, required
-      value: 10 //number or string
+      x: 1446063248, //unix timestamp, required
+      y: 10 //number or string
     }]
   `}
   </Markdown>

@@ -3,8 +3,38 @@ const React = require('react');
 const Changelog = React.createClass({
   render () {
     return (
-      <div>
+        <div>
         <h1>Change Log</h1>
+        <h3>2.2.3</h3>
+        <ul>
+          <li>Adds animations to the DonutChart component (<a href='https://github.com/mxenabled/mx-react-components/pull/221'>#221</a>)</li>
+          <li>Select Component bug fix (<a href='https://github.com/mxenabled/mx-react-components/pull/220'>#220</a>)</li>
+          <li>Update travis integration commands (<a href='https://github.com/mxenabled/mx-react-components/commit/4f8b7eee4302f97cef957882192e59e61f4e0b03'>see commit</a>)</li>
+        </ul>
+
+        <h3>2.2.2</h3>
+        <ul>
+          <li>Adds babel-cli dependency so npm release script will run (<a href='https://github.com/mxenabled/mx-react-components/commit/5bb479dfb9abb7c7647de90f7f326ac4e6a4e2f2'>see commit</a>)</li>
+        </ul>
+
+        <h3>2.2.1</h3>
+        <ul>
+          <li>Select Component bug fix (<a href='https://github.com/mxenabled/mx-react-components/pull/215'>#215</a>)</li>
+        </ul>
+
+        <h3>2.2.0</h3>
+        <ul>
+          <li>Adds new Drawer component (<a href='https://github.com/mxenabled/mx-react-components/pull/206'>#206</a>)</li>
+          <li>Adds new eslint rule and brings code up to compliance (<a href='https://github.com/mxenabled/mx-react-components/pull/217'>#217</a>)</li>
+        </ul>
+
+        <h3>2.1.0</h3>
+        <ul>
+          <li>Removed default prop for selected on Select (<a href='https://github.com/mxenabled/mx-react-components/pull/201'>#201</a>)</li>
+          <li>Added ability to pass color prop to Select (<a href='https://github.com/mxenabled/mx-react-components/pull/208'>#208</a>)</li>
+          <li>Fixed bug with multiple Hover states, and added new active style on Select (<a href='https://github.com/mxenabled/mx-react-components/pull/207'>#207</a>)</li>
+        </ul>
+        <p>New Contributors: <a href='https://github.com/r-walsh'>r-walsh</a></p>
 
         <h3>2.0.6</h3>
         <ul>

@@ -15,6 +15,11 @@ const DonutChartDocs = React.createClass({
 
         <h3>Demo</h3>
         <DonutChart
+          activeOffset={5}
+          animateOnHover={true}
+          animationDuration={750}
+          animationTypeOnLoad='roll'
+          arcWidth={15}
           chartTotal={300}
           data={[
             {
@@ -24,10 +29,6 @@ const DonutChartDocs = React.createClass({
             {
               name: 'Data Point 2',
               value: 80
-            },
-            {
-              name: 'Data Point 3',
-              value: 20
             }
           ]}
           dataPoints={[
@@ -36,7 +37,9 @@ const DonutChartDocs = React.createClass({
               value: 200
             }
           ]}
-          showBaseArc={true}
+          defaultLabelText='Total Users'
+          defaultLabelValue='300'
+          id='donut-1'
         />
 
         <h3>Usage</h3>
@@ -48,12 +51,16 @@ const DonutChartDocs = React.createClass({
         <p>A number, in pixels, that the slice will increase on mouse hover.</p>
 
         <h5>animateOnHover <label>Boolean</label></h5>
-        <p>Default: true</p>
+        <p>Default: false</p>
         <p>Show animation on hover</p>
 
-        <h5>animateOnLoad <label>Boolean</label></h5>
-        <p>Default: true</p>
-        <p>Show animation on load</p>
+        <h5>animationDuration <label>number</label></h5>
+        <p>Default: 500</p>
+        <p>Determines how long the load animation is in milliseconds</p>
+
+        <h5>animationTypeOnLoad <label>string</label></h5>
+        <p>Default: roll</p>
+        <p>Determines which of two animations will be used when chart is loaded or data is changed.  Roll will rotate the chart in while pop will bounce the chart in.</p>
 
         <h5>arcWidth <label>Number</label></h5>
         <p>Default: 80</p>
@@ -115,6 +122,10 @@ const DonutChartDocs = React.createClass({
         <p>Default: 360</p>
         <p>Height, in pixels, of the entire component.</p>
 
+        <h5>id <label>string</label></h5>
+        <p>Default: donut-chart</p>
+        <p>An id used to give the chart unique classNames/references so that multiple charts on a page don't attempt to animate each other.</p>
+
         <h5>onClick <label>Function</label></h5>
         <p>A method to be called when a pie slice is clicked. It will be passed the index of the clicke data point.</p>
 
@@ -148,10 +159,11 @@ const DonutChartDocs = React.createClass({
         <Markdown>
   {`
     <DonutChart
-      activeIndex={1}
-      activeOffset={10}
-      arcWidth={40}
-      baseArcColor='#f5f5f5'
+      activeOffset={5}
+      animateOnHover={true}
+      animationDuration={750}
+      animationTypeOnLoad='roll'
+      arcWidth={15}
       chartTotal={300}
       data={[
         {
@@ -161,20 +173,17 @@ const DonutChartDocs = React.createClass({
         {
           name: 'Data Point 2',
           value: 80
-        },
-        {
-          name: 'Data Point 3',
-          value: 20
         }
       ]}
-      dataPointRadius={16}
       dataPoints={[
         {
           name: 'Data Dot 1',
           value: 200
         }
       ]}
-      showBaseArc={true}
+      defaultLabelText='Total Users'
+      defaultLabelValue='300'
+      id='donut-1'
     />
   `}
         </Markdown>
