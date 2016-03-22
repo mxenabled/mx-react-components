@@ -6,6 +6,11 @@ const Changelog = React.createClass({
         <div>
         <h1>Change Log</h1>
 
+        <h3>2.2.6</h3>
+        <ul>
+          <li>Fixes case on Apple, Android, Windows icon values (<a href='https://github.com/mxenabled/mx-react-components/pull/226'>#226</a>)</li>
+        </ul>
+
         <h3>2.2.5</h3>
         <ul>
           <li>Adds Apple, Android, Windows icon to Icon component (<a href='https://github.com/mxenabled/mx-react-components/commit/b55a98ba55c5da39cb210acb0e5c9544272bce0a'>see commit</a>)</li>
