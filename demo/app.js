@@ -564,6 +564,7 @@ const Demo = React.createClass({
   },
 
   _handleFileChange (uploadedFile) {
+    console.log('uploaded file', uploadedFile), ;
     this.setState({
       uploadedFile
     });
@@ -610,7 +611,7 @@ const Demo = React.createClass({
         <br/><br/>
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
-            allowedFileTypes={['image/jpeg', 'text/csv', 'image/tiff']}
+            allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
             maxFileSize={3000}
             onFileAdd={this._handleFileChange}
             onFileRemove={this._handleFileChange}
