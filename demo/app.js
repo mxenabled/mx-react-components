@@ -564,7 +564,6 @@ const Demo = React.createClass({
   },
 
   _handleFileChange (uploadedFile) {
-    console.log('uploaded file', uploadedFile), ;
     this.setState({
       uploadedFile
     });
