@@ -44,11 +44,11 @@ const icons = [
     displayValue: 'Add Solid'
   },
   {
-    value: 'Android',
+    value: 'android',
     displayValue: 'Android'
   },
   {
-    value: 'Apple',
+    value: 'apple',
     displayValue: 'Apple'
   },
   {
@@ -300,7 +300,7 @@ const icons = [
     displayValue: 'Visit'
   },
   {
-    value: 'Windows',
+    value: 'windows',
     displayValue: 'Windows'
   },
   {
