@@ -32,26 +32,27 @@ const Button = React.createClass({
   },
 
   _renderButtonContent () {
-    const circleStyles = {
+    const spinnerStyles = {
+      verticalAlign: 'initial',
+      marginTop: -6,
+      marginBottom: -5,
+      marginLeft: -5,
+      marginRight: -5,
+      padding: !this.props.actionText && this.props.children ? 3 : 0
+    };
+
+    const actionTextStyles = {
       display: 'inline-block',
-      verticalAlign: 'middle',
-      borderRadius: '100%',
-      width: this.props.actionText ? 9 : 11,
-      height: this.props.actionText ? 9 : 11,
-      margin: this.props.actionText ? '0 5' : 0,
-      borderTop: '2px solid',
-      borderRight: '2px solid ' + StyleConstants.Colors.FOG,
-      borderBottom: '2px solid ' + StyleConstants.Colors.FOG,
-      borderLeft: '2px solid ' + StyleConstants.Colors.FOG
+      paddingLeft: 10
     };
 
     if (this.props.isActive) {
       return (
         <div>
-          <Spin>
-            <div style={circleStyles} />
-          </Spin>
-          {this.props.actionText}
+        <Spin>
+            <Icon size='20' style={spinnerStyles} type='sync' />
+        </Spin>
+          {this.props.actionText ? <div style={actionTextStyles}> {this.props.actionText} </div> : null }
         </div>
       );
     } else {
@@ -169,7 +170,7 @@ const Button = React.createClass({
 
     return (
       <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
-        {this.props.icon ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
+        {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
         {this._renderButtonContent()}
       </div>
     );

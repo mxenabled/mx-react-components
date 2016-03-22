@@ -599,6 +599,12 @@ const Demo = React.createClass({
     });
   },
 
+  _handleSpinnerIconOnlyClick () {
+    this.setState({
+      spinnerIconOnlyIsActive: !this.state.spinnerIconOnlyIsActive
+    });
+  },
+
   _handleSpinnerClick () {
     this.setState({
       spinnerIsActive: !this.state.spinnerIsActive
@@ -658,9 +664,11 @@ const Demo = React.createClass({
           <br/><br/>
           <Button type='disabled'>Disabled Button</Button>
           <br/><br/>
-          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}>Spinner</Button>
+          <Button icon='add' isActive={this.state.spinnerIconOnlyIsActive} onClick={this._handleSpinnerIconOnlyClick} type='primaryOutline' />
           <br/><br/>
-          <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Spinner with text</Button>
+          <Button icon='delete' isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick} type='secondary'>Button with text & without actionText</Button>
+          <br/><br/>
+          <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
         </div>
         <Modal
           buttons={[
