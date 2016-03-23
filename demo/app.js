@@ -593,12 +593,6 @@ const Demo = React.createClass({
     });
   },
 
-  _handleButtonClick () {
-    this.setState({
-      isActive: !this.state.isActive
-    });
-  },
-
   _handleSpinnerIconOnlyClick () {
     this.setState({
       spinnerIconOnlyIsActive: !this.state.spinnerIconOnlyIsActive
