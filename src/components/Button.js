@@ -1,13 +1,17 @@
 const React = require('react');
 const Radium = require('radium');
 
+const Spin = require('./Spin');
+
 const StyleConstants = require('../constants/Style');
 
 const Icon = require('../components/Icon');
 
 const Button = React.createClass({
   propTypes: {
+    actionText: React.PropTypes.string,
     icon: React.PropTypes.string,
+    isActive: React.PropTypes.bool,
     primaryColor: React.PropTypes.string,
     type: React.PropTypes.oneOf([
       'base',
@@ -21,9 +25,39 @@ const Button = React.createClass({
 
   getDefaultProps () {
     return {
+      isActive: false,
       primaryColor: StyleConstants.Colors.PRIMARY,
       type: 'primary'
     };
+  },
+
+  _renderButtonContent () {
+    const spinnerStyles = {
+      verticalAlign: 'initial',
+      marginTop: -6,
+      marginBottom: -5,
+      marginLeft: -5,
+      marginRight: -5,
+      padding: !this.props.actionText && this.props.children ? 3 : 0
+    };
+
+    const actionTextStyles = {
+      display: 'inline-block',
+      paddingLeft: 10
+    };
+
+    if (this.props.isActive) {
+      return (
+        <div>
+        <Spin direction='counterclockwise'>
+            <Icon size='20' style={spinnerStyles} type='spinner' />
+        </Spin>
+          {this.props.actionText ? <div style={actionTextStyles}> {this.props.actionText} </div> : null }
+        </div>
+      );
+    } else {
+      return this.props.children;
+    }
   },
 
   render () {
@@ -50,13 +84,13 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -20),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -20),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
           transition: 'all .2s ease-in'
         }
       },
@@ -74,8 +108,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -96,8 +130,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -136,8 +170,8 @@ const Button = React.createClass({
 
     return (
       <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
-        {this.props.icon ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
-        {this.props.children}
+        {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
+        {this._renderButtonContent()}
       </div>
     );
   }
