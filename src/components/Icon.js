@@ -647,6 +647,18 @@ const Icon = React.createClass({
             <circle cx='256' cy='256' r='27.9' />
           </g>
         );
+      case 'spinner':
+        return (
+          <g>
+            <circle cx='145.3' cy='178.9' r='39.2'/>
+            <circle cx='100.6' cy='313.1' r='33.6'/>
+            <circle cx='198.5' cy='433.4' r='30.8'/>
+            <circle cx='343.9' cy='433.4' r='25.2'/>
+            <circle cx='430.6' cy='313.1' r='22.4'/>
+            <circle cx='402.6' cy='178.9' r='16.8'/>
+            <circle cx='267' cy='97.8' r='41.9'/>
+          </g>
+        );
       case 'sync':
         return (
           <g>

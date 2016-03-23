@@ -280,6 +280,10 @@ const icons = [
     displayValue: 'Segments'
   },
   {
+    value: 'spinner',
+    displayValue: 'Spinner'
+  },
+  {
     value: 'sync',
     displayValue: 'Sync'
   },
