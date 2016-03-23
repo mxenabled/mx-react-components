@@ -50,13 +50,13 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -20),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -20),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
           transition: 'all .2s ease-in'
         }
       },
@@ -74,8 +74,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -96,8 +96,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
