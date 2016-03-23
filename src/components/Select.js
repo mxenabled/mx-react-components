@@ -35,7 +35,6 @@ const Select = React.createClass({
   },
 
   getInitialState () {
-    console.log("getInitial Stateis running");
     return {
       highlightedValue: null,
       isOpen: false,
@@ -65,41 +64,29 @@ const Select = React.createClass({
   },
 
   _handleClick () {
-    
-
-    console.log("handle Click is running", document.getElementById('test'));
     if (!isMobile) {
       this.setState({
         isOpen: !this.state.isOpen
       }, () => {
-        if (document.getElementById('test')) {
-          const divy = document.getElementById('test');
-          divy.scrollTop = this.state.scrollLocation
+        if (document.getElementById('items')) {
+          const items = document.getElementById('items');
+
+          items.scrollTop = this.state.scrollLocation;
         }
       });
     }
   },
 
-  // test () {
-  //   const divy = document.getElementById('test');
-  //   console.log("this is divy", divy);
-  //   divy.scrollTop = 1200;
-  // },
-
   _handleOptionClick (option) {
-    const divy = document.getElementById('test');
-    
-    console.log('this is divy.scrollTop', divy.scrollTop);
-    
+    const items = document.getElementById('items');
+
     this.setState({
       selected: option,
       isOpen: false,
       highlightedValue: option,
       hoverItem: null,
-      scrollLocation: divy.scrollTop
+      scrollLocation: items.scrollTop
     });
-    
-    
 
     this.props.onChange(option);
   },
@@ -155,7 +142,6 @@ const Select = React.createClass({
   },
 
   _scrollListDown (nextIndex) {
-    console.log("scrollListDown", nextIndex);
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
     const activeLi = ul.children[nextIndex];
     const heightFromTop = nextIndex * activeLi.clientHeight;
@@ -166,7 +152,6 @@ const Select = React.createClass({
   },
 
   _scrollListUp (prevIndex) {
-    console.log("UPUP UP", prevIndex);
     const ul = ReactDOM.findDOMNode(this.refs.optionList);
     const activeLi = ul.children[prevIndex];
     const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
@@ -201,9 +186,13 @@ const Select = React.createClass({
         );
       } else {
         return (
-          <ul id='test' className='mx-select-options' ref='optionList' style={[styles.options, this.props.optionsStyle]}>
+          <ul
+          className='mx-select-options'
+          id='items'
+          ref='optionList'
+          style={[styles.options, this.props.optionsStyle]}
+          >
             {this.props.options.map(option => {
-            
               return (
                 <li
                   className='mx-select-option'
