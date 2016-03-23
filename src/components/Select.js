@@ -65,14 +65,15 @@ const Select = React.createClass({
   },
 
   _handleClick () {
-    const divy = document.getElementById('test');
+    
 
     console.log("handle Click is running", document.getElementById('test'));
     if (!isMobile) {
       this.setState({
         isOpen: !this.state.isOpen
       }, () => {
-        if (divy) {
+        if (document.getElementById('test')) {
+          const divy = document.getElementById('test');
           divy.scrollTop = this.state.scrollLocation
         }
       });
