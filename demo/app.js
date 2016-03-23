@@ -658,9 +658,11 @@ const Demo = React.createClass({
           <br/><br/>
           <Button type='disabled'>Disabled Button</Button>
           <br/><br/>
-          <Button icon='add' isActive={this.state.spinnerIconOnlyIsActive} onClick={this._handleSpinnerIconOnlyClick} type='primaryOutline' />
+          <Button icon='add' isActive={this.state.spinnerIconOnlyIsActive} onClick={this._handleSpinnerIconOnlyClick}
+            type='primaryOutline' />
           <br/><br/>
-          <Button icon='delete' isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick} type='secondary'>Button with text & without actionText</Button>
+          <Button icon='delete' isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}
+            type='secondary'>Button with text & without actionText</Button>
           <br/><br/>
           <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
         </div>
