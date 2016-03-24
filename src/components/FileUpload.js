@@ -40,6 +40,10 @@ const FileUpload = React.createClass({
 
     if (file) {
       this._validateFile(file);
+
+      this.setState({
+        invalidMessage: null
+      });
     }
   },
 
