@@ -32,27 +32,15 @@ const Button = React.createClass({
   },
 
   _renderButtonContent () {
-    const spinnerStyles = {
-      verticalAlign: 'initial',
-      marginTop: -6,
-      marginBottom: -5,
-      marginLeft: -5,
-      marginRight: -5,
-      padding: !this.props.actionText && this.props.children ? 3 : 0
-    };
-
-    const actionTextStyles = {
-      display: 'inline-block',
-      paddingLeft: 10
-    };
+    const styles = this.styles();
 
     if (this.props.isActive) {
       return (
         <div>
         <Spin direction='counterclockwise'>
-            <Icon size='20' style={spinnerStyles} type='spinner' />
+            <Icon size='20' style={[styles.icon, styles.spinnerStyles]} type='spinner' />
         </Spin>
-          {this.props.actionText ? <div style={actionTextStyles}> {this.props.actionText} </div> : null }
+          {this.props.actionText ? <div style={styles.actionTextStyles}> {this.props.actionText} </div> : null }
         </div>
       );
     } else {
@@ -61,7 +49,18 @@ const Button = React.createClass({
   },
 
   render () {
-    const styles = {
+    const styles = this.styles();
+
+    return (
+      <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
+        {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
+        {this._renderButtonContent()}
+      </div>
+    );
+  },
+
+  styles () {
+    return {
       component: {
         borderRadius: 2,
         borderStyle: 'solid',
@@ -165,15 +164,17 @@ const Button = React.createClass({
         marginBottom: -5,
         marginLeft: -5,
         marginRight: this.props.children ? 5 : -5
+      },
+      spinnerStyles: {
+        verticalAlign: 'initial',
+        marginRight: -5,
+        padding: !this.props.actionText && this.props.children ? 3 : 0
+      },
+      actionTextStyles: {
+        display: 'inline-block',
+        paddingLeft: 10
       }
     };
-
-    return (
-      <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
-        {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
-        {this._renderButtonContent()}
-      </div>
-    );
   }
 });
 
