@@ -1,6 +1,7 @@
 const React = require('react');
 const Radium = require('radium');
 
+const Button = require('./Button');
 const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
@@ -20,6 +21,10 @@ const Modal = React.createClass({
     color: React.PropTypes.string,
     contentStyle: React.PropTypes.object,
     footerContent: React.PropTypes.node,
+    footerStyle: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     isOpen: React.PropTypes.bool,
     isRelative: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
@@ -73,20 +78,22 @@ const Modal = React.createClass({
   _renderFooter () {
     if (this.props.showFooter) {
       return (
-        <div className='mx-modal-footer' style={styles.footer}>
+        <div className='mx-modal-footer' style={[styles.footer, this.props.footerStyle]}>
           {this._renderTooltipIconAndLabel()}
           {this._renderFooterContent()}
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
               return (
-                <div
+                <Button
                   className={'mx-modal-button ' + button.className}
+                  icon={button.icon}
                   key={button.type + i}
                   onClick={button.onClick}
-                  style={[styles.button, styles[button.type + 'Button'], button.style]}
+                  style={[styles.button, button.style]}
+                  type={button.type}
                 >
                   {button.label}
-                </div>
+                </Button>
               );
             })}
           </div>
@@ -277,21 +284,7 @@ const styles = {
     textAlign: 'right'
   },
   button: {
-    display: 'inline-block',
-    borderRadius: 2,
-    cursor: 'pointer',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    fontWeight: 600,
-    padding: '7px 14px',
     marginLeft: 5
-  },
-  primaryButton: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.WHITE
-  },
-  secondaryButton: {
-    backgroundColor: StyleConstants.Colors.FOG,
-    color: StyleConstants.Colors.CHARCOAL
   },
   small: {
     width: 400,

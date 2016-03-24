@@ -644,11 +644,13 @@ const Demo = React.createClass({
         <Modal
           buttons={[
             {
+              icon: 'close',
               label: 'Secondary',
               onClick: this._handleModalSecondaryClick,
               type: 'secondary'
             },
             {
+              icon: 'rocket',
               label: 'Primary',
               onClick: this._handleModalPrimaryClick,
               type: 'primary'
@@ -659,6 +661,7 @@ const Demo = React.createClass({
               Footer Content
             </div>
           )}
+          footerStyle={{ padding: '40px 20px' }}
           isOpen={this.state.showModal}
           onRequestClose={this._handleModalClose}
           showFooter={true}
@@ -753,7 +756,7 @@ const Demo = React.createClass({
         </div>
 
         <br/><br/><br/><br/>
-        <div style={{ textAlign: 'center' }}>
+        <div>
           <ToggleSwitch />
         </div>
 
