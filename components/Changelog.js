@@ -6,6 +6,12 @@ const Changelog = React.createClass({
         <div>
         <h1>Change Log</h1>
 
+        <h3>2.2.7</h3>
+        <ul>
+          <li>Adds footerStyle and incorporates Button component in Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/232'>#232</a>)</li>
+          <li>Fixes issue with validation messages not resetting on FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/225'>#225</a>)</li>
+        </ul>
+
         <h3>2.2.6</h3>
         <ul>
           <li>Fixes case on Apple, Android, Windows icon values (<a href='https://github.com/mxenabled/mx-react-components/pull/226'>#226</a>)</li>
