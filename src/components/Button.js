@@ -31,30 +31,20 @@ const Button = React.createClass({
     };
   },
 
-  _renderButtonContent () {
-    const styles = this.styles();
-
-    if (this.props.isActive) {
-      return (
-        <div>
-        <Spin direction='counterclockwise'>
-            <Icon size='20' style={[styles.icon, styles.spinner]} type='spinner' />
-        </Spin>
-          {this.props.actionText ? <div style={styles.actionText}> {this.props.actionText} </div> : null }
-        </div>
-      );
-    } else {
-      return this.props.children;
-    }
-  },
-
   render () {
     const styles = this.styles();
 
     return (
       <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
         {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
-        {this._renderButtonContent()}
+        {this.props.isActive ? (
+          <div>
+            <Spin direction='counterclockwise'>
+                <Icon size='20' style={[styles.icon, styles.spinner]} type='spinner' />
+            </Spin>
+              {this.props.actionText ? <div style={styles.actionText}> {this.props.actionText} </div> : null }
+          </div>
+        ) : this.props.children}
       </div>
     );
   },
