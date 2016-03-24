@@ -165,12 +165,12 @@ const Button = React.createClass({
         marginLeft: -5,
         marginRight: this.props.children ? 5 : -5
       },
-      spinnerStyles: {
+      spinner: {
         verticalAlign: 'initial',
         marginRight: -5,
         padding: !this.props.actionText && this.props.children ? 3 : 0
       },
-      actionTextStyles: {
+      actionText: {
         display: 'inline-block',
         paddingLeft: 10
       }
