@@ -6,6 +6,11 @@ const Changelog = React.createClass({
         <div>
         <h1>Change Log</h1>
 
+        <h3>2.2.8</h3>
+        <ul>
+          <li>Add spinner option to Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/231'>#231</a>)</li>
+        </ul>
+
         <h3>2.2.7</h3>
         <ul>
           <li>Adds footerStyle and incorporates Button component in Modal component (<a href='https://github.com/mxenabled/mx-react-components/pull/232'>#232</a>)</li>
