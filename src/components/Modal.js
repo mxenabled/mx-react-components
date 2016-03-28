@@ -85,8 +85,10 @@ const Modal = React.createClass({
             {this.props.buttons.map((button, i) => {
               return (
                 <Button
+                  actionText={'Loading'}
                   className={'mx-modal-button ' + button.className}
                   icon={button.icon}
+                  isActive={button.isActive}
                   key={button.type + i}
                   onClick={button.onClick}
                   style={[styles.button, button.style]}
