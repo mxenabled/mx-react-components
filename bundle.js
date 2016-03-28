@@ -80562,6 +80562,26 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '2.2.9'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          'Add spinner option to Modal buttons (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/233' },
+	            '#233'
+	          ),
+	          ')'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '2.2.8'
 	      ),
 	      React.createElement(
