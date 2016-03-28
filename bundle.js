@@ -80562,6 +80562,26 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '2.2.10'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          'Fix activeText on Modal buttons (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/234' },
+	            '#234'
+	          ),
+	          ')'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '2.2.9'
 	      ),
 	      React.createElement(
