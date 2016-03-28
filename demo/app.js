@@ -593,6 +593,24 @@ const Demo = React.createClass({
     });
   },
 
+  _handleSpinnerIconOnlyClick () {
+    this.setState({
+      spinnerIconOnlyIsActive: !this.state.spinnerIconOnlyIsActive
+    });
+  },
+
+  _handleSpinnerClick () {
+    this.setState({
+      spinnerIsActive: !this.state.spinnerIsActive
+    });
+  },
+
+  _handleSpinnerWithTextClick () {
+    this.setState({
+      spinnerWithTextIsActive: !this.state.spinnerWithTextIsActive
+    });
+  },
+
   render () {
     const navConfig = {
       duration: 200,
@@ -639,7 +657,14 @@ const Demo = React.createClass({
           <Button type='neutral'>Neutral Button</Button>
           <br/><br/>
           <Button type='disabled'>Disabled Button</Button>
-
+          <br/><br/>
+          <Button icon='add' isActive={this.state.spinnerIconOnlyIsActive} onClick={this._handleSpinnerIconOnlyClick}
+            type='primaryOutline' />
+          <br/><br/>
+          <Button icon='delete' isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}
+            type='secondary'>Button with text & without actionText</Button>
+          <br/><br/>
+          <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
         </div>
         <Modal
           buttons={[
