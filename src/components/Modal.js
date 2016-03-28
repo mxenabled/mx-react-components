@@ -9,7 +9,10 @@ const StyleConstants = require('../constants/Style');
 const Modal = React.createClass({
   propTypes: {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
+      actionText: React.PropTypes.string,
       className: React.PropTypes.string,
+      isActive: React.PropTypes.bool,
+      icon: React.PropTypes.string,
       label: React.PropTypes.string,
       onClick: React.PropTypes.func,
       style: React.PropTypes.oneOfType([
@@ -85,8 +88,10 @@ const Modal = React.createClass({
             {this.props.buttons.map((button, i) => {
               return (
                 <Button
+                  actionText={'Loading'}
                   className={'mx-modal-button ' + button.className}
                   icon={button.icon}
+                  isActive={button.isActive}
                   key={button.type + i}
                   onClick={button.onClick}
                   style={[styles.button, button.style]}
