@@ -80580,6 +80580,16 @@
 	        )
 	      ),
 	      React.createElement(
+	        'p',
+	        null,
+	        'New Contributors: ',
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/iheartrachie' },
+	          'iheartrachie'
+	        )
+	      ),
+	      React.createElement(
 	        'h3',
 	        null,
 	        '2.2.7'

@@ -10,6 +10,7 @@ const Changelog = React.createClass({
         <ul>
           <li>Add spinner option to Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/231'>#231</a>)</li>
         </ul>
+        <p>New Contributors: <a href='https://github.com/iheartrachie'>iheartrachie</a></p>
 
         <h3>2.2.7</h3>
         <ul>
