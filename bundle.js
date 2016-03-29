@@ -80562,6 +80562,26 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '2.2.11'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          'Update credit card icon in Icon component (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/235' },
+	            '#235'
+	          ),
+	          ')'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '2.2.10'
 	      ),
 	      React.createElement(
