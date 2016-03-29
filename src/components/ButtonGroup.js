@@ -3,6 +3,8 @@ const Radium = require('radium');
 
 const Button = require('./Button');
 
+const StyleConstants = require('../constants/Style');
+
 const ButtonGroup = React.createClass({
   propTypes: {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -21,13 +23,14 @@ const ButtonGroup = React.createClass({
   getDefaultProps () {
     return {
       buttons: [],
-      type: 'primary'
+      type: 'primaryOutline'
     };
   },
 
   render () {
     const styles = this.styles();
     const buttonType = this.props.type;
+    const hasHoverStyles = buttonType === 'base' || buttonType === 'neutral';
 
     return (
       <div {...this.props}>
@@ -38,7 +41,10 @@ const ButtonGroup = React.createClass({
           return (
             <Button
               key={index}
-              style={[styles.component, isFirstChild && styles.firstChild, isLastChild && styles.lastChild]}
+              style={[styles.component,
+                hasHoverStyles && styles.hoverStyles,
+                isFirstChild && styles.firstChild,
+                isLastChild && styles.lastChild]}
               type={buttonType}>
                 {button.text}
             </Button>);
@@ -59,6 +65,15 @@ const ButtonGroup = React.createClass({
       lastChild: {
         borderRadius: '0 2px 2px 0',
         borderRightWidth: 1
+      },
+      hoverStyles: {
+        borderRightWidth: 1,
+        ':hover': {
+          borderColor: StyleConstants.Colors.FOG,
+          borderRadius: 2,
+          borderStyle: 'solid',
+          borderWidth: '1px 1px 1px 1px'
+        }
       }
     };
   }

@@ -676,7 +676,8 @@ const Demo = React.createClass({
           <ButtonGroup
             buttons={[
               { text: 'Button 1' },
-              { text: 'Button 2' }
+              { text: 'Button 2' },
+              { text: 'Button 3' }
             ]}
             type='neutral' />
         </div>
