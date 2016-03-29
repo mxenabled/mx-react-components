@@ -6,7 +6,7 @@ const Changelog = React.createClass({
         <div>
         <h1>Change Log</h1>
 
-      <h3>2.2.11</h3>
+      <h3>2.2.12</h3>
       <ul>
         <li>Update credit card icon in Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/235'>#235</a>)</li>
       </ul>
