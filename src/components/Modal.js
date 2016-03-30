@@ -63,7 +63,7 @@ const Modal = React.createClass({
     if (this.props.isOpen) {
       console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.');
     }
-  /*eslint-enable */    
+  /*eslint-enable */
   },
 
   _handleTooltipToggle (show) {
