@@ -74,13 +74,13 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
 
         ':hover': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -15),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
           transition: 'all .2s ease-in'
         }
       },
@@ -98,8 +98,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -120,8 +120,8 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -10),
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -136,19 +136,35 @@ const Button = React.createClass({
         ':hover': {
           color: StyleConstants.adjustColor(this.props.primaryColor, -8),
           fill: StyleConstants.adjustColor(this.props.primaryColor, -8),
-          transition: 'all .2s ease-in'
+          transition: 'all .2s ease-in',
+          borderColor: StyleConstants.Colors.FOG,
+          borderRadius: 2,
+          borderWidth: 1
         },
         ':active': {
           color: StyleConstants.adjustColor(this.props.primaryColor, -16),
           fill: StyleConstants.adjustColor(this.props.primaryColor, -16),
-          transition: 'all .2s ease-in'
+          transition: 'all .2s ease-in',
+          backgroundColor: StyleConstants.Colors.PORCELAIN
+        }
+      },
+      neutral: {
+        backgroundColor: 'transparent',
+        borderColor: StyleConstants.Colors.FOG,
+        borderRadius: 2,
+        borderWidth: 1,
+        color: this.props.primaryColor,
+        ':hover': {
+          backgroundColor: StyleConstants.Colors.PORCELAIN
+        },
+        ':active': {
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.PORCELAIN, -15)
         }
       },
       disabled: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
-        borderColor: StyleConstants.Colors.PORCELAIN,
-        color: StyleConstants.Colors.FOG,
-        fill: StyleConstants.Colors.FOG
+        backgroundColor: 'transparent',
+        borderColor: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.FOG
       },
       icon: {
         marginTop: -3,
