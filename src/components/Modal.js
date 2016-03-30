@@ -58,6 +58,14 @@ const Modal = React.createClass({
     };
   },
 
+  componentDidMount () {
+  /*eslint-disable */
+    if (this.props.isOpen) {
+      console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.');
+    }
+  /*eslint-enable */    
+  },
+
   _handleTooltipToggle (show) {
     this.setState({
       showTooltip: show
@@ -160,12 +168,6 @@ const Modal = React.createClass({
   },
 
   render () {
-    /*eslint-disable */
-    if (this.props.isOpen) {
-      console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.');
-    }
-    /*eslint-enable */
-
     return (
       <div className='mx-modal' style={[styles.scrim, this.props.isRelative && styles.relative]}>
         <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay, this.props.isRelative && styles.relative]}></div>
