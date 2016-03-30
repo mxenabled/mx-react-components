@@ -160,8 +160,8 @@ const Modal = React.createClass({
   },
 
   render () {
-    if(this.props.isOpen) {
-      console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.')
+    if (this.props.isOpen) {
+      console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.');
     }
 
     return (
