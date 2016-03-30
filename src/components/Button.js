@@ -63,7 +63,8 @@ const Button = React.createClass({
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         cursor: 'pointer',
         transition: 'all .2s ease-in',
-        minWidth: 50
+        minWidth: 50,
+        minHeight: 15
       },
       primary: {
         backgroundColor: this.props.primaryColor,
@@ -150,15 +151,16 @@ const Button = React.createClass({
         fill: StyleConstants.Colors.FOG
       },
       icon: {
-        marginTop: -6,
+        marginTop: -3,
         marginBottom: -5,
         marginLeft: -5,
-        marginRight: this.props.children ? 5 : -5
+        marginRight: this.props.children ? 5 : -5,
+        verticalAlign: 'initial'
       },
       spinner: {
-        verticalAlign: 'initial',
+        marginTop: -6,
         marginRight: -5,
-        padding: !this.props.actionText && this.props.children ? 3 : 0
+        padding: !this.props.actionText ? 3 : 0
       },
       actionText: {
         display: 'inline-block',
