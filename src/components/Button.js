@@ -63,7 +63,7 @@ const Button = React.createClass({
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         cursor: 'pointer',
         transition: 'all .2s ease-in',
-        minWidth: 50,
+        minWidth: 16,
         minHeight: 15
       },
       primary: {
@@ -174,8 +174,8 @@ const Button = React.createClass({
         verticalAlign: 'initial'
       },
       spinner: {
-        marginTop: -6,
         marginRight: -5,
+        marginTop: -6,
         padding: !this.props.actionText ? 3 : 0
       },
       actionText: {
