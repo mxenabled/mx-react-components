@@ -679,7 +679,7 @@ const Demo = React.createClass({
               { text: 'Mar 2015 - Feb 2016' }
             ]}
             controlArrows={true}
-            type='neutral' />
+            type='disabled' />
         </div>
         <Modal
           buttons={[
