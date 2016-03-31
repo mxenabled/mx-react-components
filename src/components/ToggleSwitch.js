@@ -70,14 +70,14 @@ const ToggleSwitch = React.createClass({
     this.props.onToggle(activePosition);
   },
 
-  _handleToggle () {
+  _handleToggle (event) {
     const activePosition = this.state.activePosition === 'left' ? 'right' : 'left';
 
     this.setState({
       activePosition
     });
 
-    this.props.onToggle(activePosition);
+    this.props.onToggle(activePosition, event);
   },
 
   _renderLeftLabel (styles) {
