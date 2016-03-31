@@ -11,7 +11,8 @@ const ButtonGroup = React.createClass({
       icon: React.PropTypes.string,
       text: React.PropTypes.string
     })),
-    controlAarows: React.PropTypes.bool,
+    controlArrows: React.PropTypes.bool,
+    primaryColor: React.PropTypes.string,
     type: React.PropTypes.oneOf([
       'base',
       'disabled',
@@ -24,12 +25,13 @@ const ButtonGroup = React.createClass({
   getDefaultProps () {
     return {
       buttons: [],
-      controlAarows: false,
+      controlArrows: false,
+      primaryColor: StyleConstants.Colors.PRIMARY,
       type: 'primaryOutline'
     };
   },
 
-  _getAarows () {
+  _getArrows () {
     this.props.buttons.unshift({ icon: 'caret-left' });
     this.props.buttons.push({ icon: 'caret-right' });
   },
@@ -37,23 +39,26 @@ const ButtonGroup = React.createClass({
   render () {
     const styles = this.styles();
     const buttonType = this.props.type;
-    const hasHoverStyles = buttonType === 'base' || buttonType === 'neutral';
 
     return (
       <div {...this.props}>
-        {this.props.controlAarows ? this._getAarows : null}
+        {this.props.controlArrows ? this._getArrows() : null}
         {this.props.buttons.map(function (button, index, arr) {
           const isFirstChild = index === 0;
           const isLastChild = index === arr.length - 1;
+          const isOnlyChild = isFirstChild && isLastChild;
 
           return (
             <Button
               icon={button.icon}
               key={index}
-              style={[styles.component,
-                hasHoverStyles && styles.buttonHover,
+              style={[
+                styles.component,
+                styles[buttonType],
                 isFirstChild && styles.firstChild,
-                isLastChild && styles.lastChild]}
+                isLastChild && styles.lastChild,
+                isOnlyChild && styles.onlyChild
+              ]}
               type={buttonType}>
                 {button.text}
             </Button>);
@@ -66,8 +71,8 @@ const ButtonGroup = React.createClass({
     return {
       component: {
         borderRadius: 0,
-        borderRightWidth: 0,
-        verticalAlign: 'middle'
+        borderWidth: 1,
+        borderRightWidth: 0
       },
       firstChild: {
         borderRadius: '2px 0 0 2px'
@@ -76,13 +81,15 @@ const ButtonGroup = React.createClass({
         borderRadius: '0 2px 2px 0',
         borderRightWidth: 1
       },
-      buttonHover: {
-        borderRightWidth: 1,
+      onlyChild: {
+        borderRadius: 2,
+        borderWidth: 1
+      },
+      base: {
+        borderRight: '1px solid transparent',
         ':hover': {
-          borderColor: StyleConstants.Colors.FOG,
           borderRadius: 2,
-          borderStyle: 'solid',
-          borderWidth: '1px 1px 1px 1px'
+          borderRight: '1px solid initial'
         }
       }
     };
