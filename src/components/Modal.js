@@ -60,7 +60,7 @@ const Modal = React.createClass({
 
   componentDidMount () {
   /*eslint-disable */
-    if (this.props.isOpen) {
+    if (this.props.isOpen !== null) {
       console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.');
     }
   /*eslint-enable */
