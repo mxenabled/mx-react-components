@@ -132,12 +132,14 @@ const Button = React.createClass({
         color: this.props.primaryColor,
         fill: this.props.primaryColor,
         transition: 'all .2s ease-in',
-        border: '1px solid transparent',
+        borderColor: 'transparent',
+        borderRadius: 2,
+        borderWidth: 1,
         ':hover': {
           color: StyleConstants.adjustColor(this.props.primaryColor, -8),
           fill: StyleConstants.adjustColor(this.props.primaryColor, -8),
           transition: 'all .2s ease-in',
-          border: '1px solid' + StyleConstants.Colors.FOG
+          borderColor: StyleConstants.Colors.FOG
         },
         ':active': {
           color: StyleConstants.adjustColor(this.props.primaryColor, -16),
@@ -148,7 +150,9 @@ const Button = React.createClass({
       },
       neutral: {
         backgroundColor: 'transparent',
-        border: '1px solid' + StyleConstants.Colors.FOG,
+        borderColor: StyleConstants.Colors.FOG,
+        borderRadius: 2,
+        borderWidth: 1,
         color: this.props.primaryColor,
         ':hover': {
           backgroundColor: StyleConstants.Colors.PORCELAIN
@@ -172,7 +176,7 @@ const Button = React.createClass({
       spinner: {
         marginRight: -5,
         marginTop: -6,
-        padding: !this.props.actionText ? 3 : 0
+        padding: this.props.actionText ? 0 : 3
       },
       actionText: {
         display: 'inline-block',
