@@ -673,14 +673,14 @@ const Demo = React.createClass({
             ]}
             controlArrows={true}
             type='primaryOutline' />
-            <br/><br/>
-            <ButtonGroup
-              buttons={[
-                { icon: 'download' },
-                { icon: 'search' },
-                { icon: 'add' }
-              ]}
-              type='base' />
+          <br/><br/>
+          <ButtonGroup
+            buttons={[
+              { icon: 'download' },
+              { icon: 'search' },
+              { icon: 'add' }
+            ]}
+            type='base' />
         </div>
         <Modal
           buttons={[
