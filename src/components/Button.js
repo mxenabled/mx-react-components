@@ -165,7 +165,8 @@ const Button = React.createClass({
       disabled: {
         backgroundColor: 'transparent',
         borderColor: StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.FOG
+        color: StyleConstants.Colors.FOG,
+        fill: StyleConstants.Colors.FOG
       },
       icon: {
         marginTop: -3,
