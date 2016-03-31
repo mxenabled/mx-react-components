@@ -6,6 +6,12 @@ const Changelog = React.createClass({
         <div>
         <h1>Change Log</h1>
 
+      <h3>2.2.13</h3>
+      <ul>
+        <li>Return event along with value on Toggle component (<a href='https://github.com/mxenabled/mx-react-components/pull/241'>#241</a>)</li>
+        <li>Fix styling on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/240'>#240</a>)</li>
+      </ul>
+
       <h3>2.2.12</h3>
       <ul>
         <li>Update credit card icon in Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/235'>#235</a>)</li>

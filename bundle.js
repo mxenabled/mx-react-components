@@ -80562,6 +80562,37 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '2.2.13'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          'Return event along with value on Toggle component (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/241' },
+	            '#241'
+	          ),
+	          ')'
+	        ),
+	        React.createElement(
+	          'li',
+	          null,
+	          'Fix styling on Button component (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/240' },
+	            '#240'
+	          ),
+	          ')'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '2.2.12'
 	      ),
 	      React.createElement(
