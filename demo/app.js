@@ -669,17 +669,18 @@ const Demo = React.createClass({
           <br/><br/>
           <ButtonGroup
             buttons={[
-              { text: 'ButtonGroup 1' },
-              { text: 'ButtonGroup 2' }
-            ]}
-            type='neutral' />
-          <br/><br/>
-          <ButtonGroup
-            buttons={[
               { text: 'Mar 2015 - Feb 2016' }
             ]}
             controlArrows={true}
-            type='disabled' />
+            type='primaryOutline' />
+            <br/><br/>
+            <ButtonGroup
+              buttons={[
+                { icon: 'download' },
+                { icon: 'search' },
+                { icon: 'add' }
+              ]}
+              type='base' />
         </div>
         <Modal
           buttons={[
