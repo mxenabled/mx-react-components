@@ -154,6 +154,7 @@ const Button = React.createClass({
         borderRadius: 2,
         borderWidth: 1,
         color: this.props.primaryColor,
+        fill: this.props.primaryColor,
         ':hover': {
           backgroundColor: StyleConstants.Colors.PORCELAIN
         },
