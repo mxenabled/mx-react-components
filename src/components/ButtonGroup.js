@@ -39,6 +39,7 @@ const ButtonGroup = React.createClass({
   render () {
     const styles = this.styles();
     const buttonType = this.props.type;
+    const primaryColor = this.props.primaryColor;
 
     return (
       <div {...this.props}>
@@ -52,6 +53,7 @@ const ButtonGroup = React.createClass({
             <Button
               icon={button.icon}
               key={index}
+              primaryColor={primaryColor}
               style={[
                 styles.component,
                 styles[buttonType],
