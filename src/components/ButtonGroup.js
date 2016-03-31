@@ -10,7 +10,7 @@ const ButtonGroup = React.createClass({
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       icon: React.PropTypes.string,
       text: React.PropTypes.string
-    })),
+    }).isRequired),
     controlArrows: React.PropTypes.bool,
     primaryColor: React.PropTypes.string,
     type: React.PropTypes.oneOf([
