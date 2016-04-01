@@ -33,18 +33,19 @@ const ButtonGroup = React.createClass({
     const styles = this.styles();
     const buttonType = this.props.type;
     const primaryColor = this.props.primaryColor;
+    const buttons = this.props.buttons;
 
     return (
       <div {...this.props}>
-        {this.props.buttons.map(function (button, index, arr) {
-          const isFirstChild = index === 0;
-          const isLastChild = index === arr.length - 1;
+        {this.props.buttons.map(function (button, i) {
+          const isFirstChild = i === 0;
+          const isLastChild = i === buttons.length - 1;
           const isOnlyChild = isFirstChild && isLastChild;
 
           return (
             <Button
               icon={button.icon}
-              key={index}
+              key={i}
               primaryColor={primaryColor}
               style={[
                 styles.component,
@@ -53,7 +54,8 @@ const ButtonGroup = React.createClass({
                 isLastChild && styles.lastChild,
                 isOnlyChild && styles.onlyChild
               ]}
-              type={buttonType}>
+              type={buttonType}
+            >
                 {button.text}
             </Button>);
         })}
