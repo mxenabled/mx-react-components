@@ -53,7 +53,7 @@ const ButtonGroup = React.createClass({
               ]}
               type={this.props.type}
             >
-                {button.text}
+              {button.text}
             </Button>);
         })}
       </div>
