@@ -31,30 +31,27 @@ const ButtonGroup = React.createClass({
 
   render () {
     const styles = this.styles();
-    const buttonType = this.props.type;
-    const primaryColor = this.props.primaryColor;
-    const buttons = this.props.buttons;
 
     return (
       <div {...this.props}>
-        {this.props.buttons.map(function (button, i) {
+        {this.props.buttons.map((button, i) => {
           const isFirstChild = i === 0;
-          const isLastChild = i === buttons.length - 1;
+          const isLastChild = i === this.props.buttons.length - 1;
           const isOnlyChild = isFirstChild && isLastChild;
 
           return (
             <Button
               icon={button.icon}
               key={i}
-              primaryColor={primaryColor}
+              primaryColor={this.props.primaryColor}
               style={[
                 styles.component,
-                styles[buttonType],
+                styles[this.props.type],
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
                 isOnlyChild && styles.onlyChild
               ]}
-              type={buttonType}
+              type={this.props.type}
             >
                 {button.text}
             </Button>);

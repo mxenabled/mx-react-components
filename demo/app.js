@@ -669,10 +669,12 @@ const Demo = React.createClass({
           <br/><br/>
           <ButtonGroup
             buttons={[
-              { text: 'Mar 2015 - Feb 2016' }
+              { icon: 'caret-left' },
+              { text: 'Mar 2015 - Feb 2016' },
+              { icon: 'caret-right' }
             ]}
-            controlArrows={true}
-            type='primaryOutline' />
+            type='primaryOutline'
+          />
           <br/><br/>
           <ButtonGroup
             buttons={[
@@ -680,7 +682,8 @@ const Demo = React.createClass({
               { icon: 'search' },
               { icon: 'add' }
             ]}
-            type='base' />
+            type='base'
+          />
         </div>
         <Modal
           buttons={[
