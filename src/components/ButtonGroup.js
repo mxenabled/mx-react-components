@@ -11,7 +11,6 @@ const ButtonGroup = React.createClass({
       icon: React.PropTypes.string,
       text: React.PropTypes.string
     }).isRequired),
-    controlArrows: React.PropTypes.bool,
     primaryColor: React.PropTypes.string,
     type: React.PropTypes.oneOf([
       'base',
@@ -25,15 +24,9 @@ const ButtonGroup = React.createClass({
   getDefaultProps () {
     return {
       buttons: [],
-      controlArrows: false,
       primaryColor: StyleConstants.Colors.PRIMARY,
       type: 'primaryOutline'
     };
-  },
-
-  _getArrows () {
-    this.props.buttons.unshift({ icon: 'caret-left' });
-    this.props.buttons.push({ icon: 'caret-right' });
   },
 
   render () {
@@ -43,7 +36,6 @@ const ButtonGroup = React.createClass({
 
     return (
       <div {...this.props}>
-        {this.props.controlArrows ? this._getArrows() : null}
         {this.props.buttons.map(function (button, index, arr) {
           const isFirstChild = index === 0;
           const isLastChild = index === arr.length - 1;
