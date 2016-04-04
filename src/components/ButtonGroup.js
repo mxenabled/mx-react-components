@@ -54,7 +54,8 @@ const ButtonGroup = React.createClass({
               type={this.props.type}
             >
               {button.text}
-            </Button>);
+            </Button>
+          );
         })}
       </div>
     );
