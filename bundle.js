@@ -80562,6 +80562,26 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '2.2.14'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          'Add adjustHexColor to Styles constants (',
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/mxenabled/mx-react-components/pull/243' },
+	            '#243'
+	          ),
+	          ')'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '2.2.13'
 	      ),
 	      React.createElement(

@@ -3,8 +3,14 @@ const React = require('react');
 const Changelog = React.createClass({
   render () {
     return (
-        <div>
-        <h1>Change Log</h1>
+      <div>
+      <h1>Change Log</h1>
+
+      <h3>2.2.14</h3>
+      <ul>
+        <li>Add adjustHexColor to Styles constants (<a href='https://github.com/mxenabled/mx-react-components/pull/243'>#243</a>)</li>
+      </ul>
+
 
       <h3>2.2.13</h3>
       <ul>
