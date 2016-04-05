@@ -14,6 +14,7 @@ const {
   Icon,
   Loader,
   Modal,
+  NavigationModal,
   RangeSelector,
   Select,
   SelectFullScreen,
@@ -619,6 +620,17 @@ const Demo = React.createClass({
       onPreviousClick: this._handlePreviousSiblingClick
     };
 
+    const navItems = [
+      {
+        content: 'View Details',
+        onClick: this._handleNavModalClick1
+      },
+      {
+        content: 'Edit Settings',
+        onClick: this._handleNavModalClick2
+      }
+    ];
+
     return (
       <div>
         <br/><br/>
@@ -638,6 +650,10 @@ const Demo = React.createClass({
             onFileRemove={this._handleFileChange}
             uploadedFile={this.state.uploadedFile}
           />
+        </div>
+
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <NavigationModal items={navItems}/>
         </div>
 
         <br/><br/>
