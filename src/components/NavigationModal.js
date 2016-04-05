@@ -14,7 +14,7 @@ const NavigationModal = React.createClass({
     items: React.PropTypes.arrayOf(React.PropTypes.shape({
       content: React.PropTypes.node,
       onClick: React.PropTypes.func
-    })),
+    })).isRequired,
     modalItemStyle: React.PropTypes.object,
     modalStyle: React.PropTypes.object
   },
