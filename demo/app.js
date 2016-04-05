@@ -607,7 +607,7 @@ const Demo = React.createClass({
 
   _handleSpinnerWithTextClick () {
     this.setState({
-      spinnernpWithTextIsActive: !this.state.spinnerWithTextIsActive
+      spinnerWithTextIsActive: !this.state.spinnerWithTextIsActive
     });
   },
 
