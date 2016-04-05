@@ -623,11 +623,11 @@ const Demo = React.createClass({
     const navItems = [
       {
         content: 'View Details',
-        onClick: this._handleNavModalClick1
+        onClick: this._handleNavModalClick
       },
       {
         content: 'Edit Settings',
-        onClick: this._handleNavModalClick2
+        onClick: this._handleNavModalClick
       }
     ];
 
