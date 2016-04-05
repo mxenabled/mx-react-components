@@ -8,6 +8,7 @@ module.exports = {
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
+  NavigationModal: require('./components/NavigationModal'),
   RajaIcon: require('./components/RajaIcon'),
   RangeSelector: require('./components/RangeSelector'),
   Select: require('./components/Select'),
