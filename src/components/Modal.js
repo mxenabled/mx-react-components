@@ -28,7 +28,6 @@ const Modal = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
-    isOpen: React.PropTypes.bool,
     isRelative: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
     showFooter: React.PropTypes.bool,
@@ -43,7 +42,6 @@ const Modal = React.createClass({
     return {
       buttons: [],
       color: StyleConstants.Colors.PRIMARY,
-      isOpen: false,
       isRelative: false,
       showFooter: false,
       showTitleBar: false,
@@ -58,6 +56,14 @@ const Modal = React.createClass({
     return {
       showTooltip: false
     };
+  },
+
+  componentDidMount () {
+  /*eslint-disable */
+    if (this.props.isOpen !== null) {
+      console.warn('WARNING: The prop "isOpen" is depracated in this version of the component. Please handle Modal opening from its parent.');
+    }
+  /*eslint-enable */
   },
 
   _handleTooltipToggle (show) {
@@ -162,34 +168,29 @@ const Modal = React.createClass({
   },
 
   render () {
-    if (this.props.isOpen)
-      return (
-        <div className='mx-modal' style={[styles.scrim, this.props.isRelative && styles.relative]}>
-          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay, this.props.isRelative && styles.relative]}></div>
-          <div
-            className='mx-modal-container'
-            style={[styles.container, this.props.style]}
-          >
-            <Icon
-              className='mx-modal-close'
-              onClick={this.props.onRequestClose}
-              size={24}
-              style={styles.close}
-              type='close-solid'
-            />
-            {this._renderTitleBar()}
-            <div className='mx-modal-content' style={[styles.content, this.props.contentStyle]}>
-              {this.props.children}
-              {this._renderTooltip()}
-            </div>
-            {this._renderFooter()}
+    return (
+      <div className='mx-modal' style={[styles.scrim, this.props.isRelative && styles.relative]}>
+        <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay, this.props.isRelative && styles.relative]}></div>
+        <div
+          className='mx-modal-container'
+          style={[styles.container, this.props.style]}
+        >
+          <Icon
+            className='mx-modal-close'
+            onClick={this.props.onRequestClose}
+            size={24}
+            style={styles.close}
+            type='close-solid'
+          />
+          {this._renderTitleBar()}
+          <div className='mx-modal-content' style={[styles.content, this.props.contentStyle]}>
+            {this.props.children}
+            {this._renderTooltip()}
           </div>
+          {this._renderFooter()}
         </div>
-      );
-    else
-      return (
-        null
-      );
+      </div>
+    );
   }
 });
 

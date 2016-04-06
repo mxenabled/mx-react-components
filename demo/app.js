@@ -666,41 +666,42 @@ const Demo = React.createClass({
           <br/><br/>
           <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
         </div>
-        <Modal
-          buttons={[
-            {
-              icon: 'close',
-              label: 'Secondary',
-              onClick: this._handleModalSecondaryClick,
-              type: 'secondary'
-            },
-            {
-              icon: 'rocket',
-              label: 'Primary',
-              onClick: this._handleModalPrimaryClick,
-              type: 'primary'
-            }
-          ]}
-          footerContent={(
-            <div style={styles.modalFooterContent}>
-              Footer Content
+        {this.state.showModal ? (
+          <Modal
+            buttons={[
+              {
+                icon: 'close',
+                label: 'Secondary',
+                onClick: this._handleModalSecondaryClick,
+                type: 'secondary'
+              },
+              {
+                icon: 'rocket',
+                label: 'Primary',
+                onClick: this._handleModalPrimaryClick,
+                type: 'primary'
+              }
+            ]}
+            footerContent={(
+              <div style={styles.modalFooterContent}>
+                Footer Content
+              </div>
+            )}
+            footerStyle={{ padding: '40px 20px' }}
+            onRequestClose={this._handleModalClose}
+            showFooter={true}
+            showTitleBar={true}
+            title='This is the header text'
+            tooltip='This is my tooltip content'
+            tooltipLabel='This is the footer text.'
+            tooltipTitle='This is my tooltip title'
+          >
+            <div style={{ padding: 20 }}>
+              <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
+              <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
             </div>
-          )}
-          footerStyle={{ padding: '40px 20px' }}
-          isOpen={this.state.showModal}
-          onRequestClose={this._handleModalClose}
-          showFooter={true}
-          showTitleBar={true}
-          title='This is the header text'
-          tooltip='This is my tooltip content'
-          tooltipLabel='This is the footer text.'
-          tooltipTitle='This is my tooltip title'
-        >
-          <div style={{ padding: 20 }}>
-            <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-            <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
-          </div>
-        </Modal>
+          </Modal>
+      ) : null}
 
         <br/><br/>
         <div style={{ textAlign: 'center' }}>
