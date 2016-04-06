@@ -14,14 +14,21 @@ const FileUpload = React.createClass({
     maxFileSize: React.PropTypes.number,
     onFileAdd: React.PropTypes.func.isRequired,
     onFileRemove: React.PropTypes.func.isRequired,
+    onFileValidation: React.PropTypes.func,
+    style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
     uploadedFile: React.PropTypes.any
+  },
+
+  getDefaultProps () {
+    return {
+      onFileValidation () {}
+    };
   },
 
   getInitialState () {
     return {
       dragging: false,
-      imageSource: null,
-      invalidMessage: null
+      imageSource: null
     };
   },
 
@@ -40,10 +47,6 @@ const FileUpload = React.createClass({
 
     if (file) {
       this._validateFile(file);
-
-      this.setState({
-        invalidMessage: null
-      });
     }
   },
 
@@ -52,8 +55,7 @@ const FileUpload = React.createClass({
     e.preventDefault();
 
     this.setState({
-      dragging: true,
-      invalidMessage: null
+      dragging: true
     });
   },
 
@@ -100,42 +102,38 @@ const FileUpload = React.createClass({
     e.stopPropagation();
     e.preventDefault();
 
+    this._input.value = null;
+
     this.setState({
-      imageSource: null,
-      invalidMessage: null
+      imageSource: null
     });
     this.props.onFileRemove();
-  },
-
-  _renderInvalidMessage () {
-    if (this.state.invalidMessage) {
-      return (
-        <div style={styles.invalidMessage}>
-          <Icon style={styles.invalidIcon} type='attention' />
-          {this.state.invalidMessage}
-        </div>
-      );
-    } else {
-      return null;
-    }
   },
 
   _validateFile (file) {
     const isTooBig = this.props.maxFileSize < file.size / 1000;
     const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
+    const validationMessages = [];
 
     if (isTooBig || isInvalidType) {
-      const invalidMessage = isTooBig ? 'The selected file exceeds maximum size of ' + this.props.maxFileSize + 'k' : 'The selected file type is not accepted';
-
       this.setState({
-        dragging: false,
-        invalidMessage
+        dragging: false
       });
 
       this.props.onFileRemove(this.props.uploadedFile);
     } else {
       this.props.onFileAdd(file);
     }
+
+    if (isTooBig) {
+      validationMessages.push('file_size');
+    }
+
+    if (isInvalidType) {
+      validationMessages.push('file_type');
+    }
+
+    this.props.onFileValidation(validationMessages);
   },
 
   render () {
@@ -148,12 +146,11 @@ const FileUpload = React.createClass({
         onDragLeave={this._onDragLeave}
         onDragOver={this._onDragOver}
         onDrop={this._onDrop}
-        style={[styles.dropzone, this.state.dragging && styles.dragging, dropzoneLoaded && styles.dropzoneLoaded]}
+        style={[styles.dropzone, this.state.dragging && styles.dragging, dropzoneLoaded && styles.dropzoneLoaded, this.props.style]}
       >
         {dropzoneLoaded ? (
           <div style={styles.fileInfo}>
-            {this._renderInvalidMessage()}
-            <div>Drag and drop file here or click to browse</div>
+            {this.props.children}
             {imageSource ? (
               <img src={imageSource} style={[styles.previewImage, this.state.dragging && styles.faded]} />
             ) : (
@@ -181,8 +178,7 @@ const FileUpload = React.createClass({
               </div>
             ) : (
               <div style={styles.centered}>
-              {this._renderInvalidMessage()}
-              <div>Drag and drop file here or click to browse</div>
+                {this.props.children}
               </div>
             )}
           </div>
@@ -212,8 +208,7 @@ const styles = {
     textAlign: 'center'
   },
   hiddenInput: {
-    position: 'absolute',
-    visibility: 'hidden'
+    display: 'none'
   },
 
   // Dragging Styles
