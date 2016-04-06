@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'ProximaNovaThin';
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/thin.eot');
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/thin.eot?iefix') format('eot'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/thin.woff') format('woff'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/thin.ttf') format('truetype'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/thin.svg#webfontFl2IlMVK') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNovaLight';
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/light.eot');
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/light.eot?iefix') format('eot'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/light.woff') format('woff'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/light.ttf') format('truetype'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/light.svg#webfontgjwfewia') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNovaRegular';
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/regular.eot');
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/regular.eot?iefix') format('eot'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/regular.woff') format('woff'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/regular.ttf') format('truetype'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/regular.svg#webfonttLdMzI8n') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNovaRegularItalic';
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/italic.eot');
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/italic.eot?iefix') format('eot'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/italic.woff') format('woff'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/italic.ttf') format('truetype'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/italic.svg#webfontjQHW7Ll4') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNovaSemibold';
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/semibold.eot');
+  src: url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/semibold.eot?iefix') format('eot'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/semibold.woff') format('woff'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/semibold.ttf') format('truetype'),
+       url('//s3.amazonaws.com/MD_Assets/fonts/proxima-nova/semibold.svg#webfont0AWgWg75') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+* { box-sizing: border-box; }
+
+body, html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'ProximaNovaRegular', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #56595A;
+  background: #f4f4f5;
+}
+
+input, textarea, select {
+  -webkit-font-smoothing: antialiased;
+  color: #56595A;
+  font-size: 13px;
+}
+
+i, em {
+  font-family: 'ProximaNovaRegularItalic', Helvetica, Arial, sans-serif;
+}
+
+b, strong {
+  font-family: 'ProximaNovaSemibold', Helvetica, Arial, sans-serif;
+}
