@@ -19,12 +19,6 @@ const FileUpload = React.createClass({
     uploadedFile: React.PropTypes.any
   },
 
-  getDefaultProps () {
-    return {
-      onFileValidation () {}
-    };
-  },
-
   getInitialState () {
     return {
       dragging: false,
@@ -125,15 +119,17 @@ const FileUpload = React.createClass({
       this.props.onFileAdd(file);
     }
 
-    if (isTooBig) {
-      validationMessages.push('file_size');
-    }
+    if (this.props.onFileValidation) {
+      if (isTooBig) {
+        validationMessages.push('file_size');
+      }
 
-    if (isInvalidType) {
-      validationMessages.push('file_type');
-    }
+      if (isInvalidType) {
+        validationMessages.push('file_type');
+      }
 
-    this.props.onFileValidation(validationMessages);
+      this.props.onFileValidation(validationMessages);
+    }
   },
 
   render () {
