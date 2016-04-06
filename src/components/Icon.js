@@ -771,7 +771,7 @@ const Icon = React.createClass({
         display: 'inline-block',
         verticalAlign: 'middle'
       }, this.props.style)
-    }
+    };
   }
 });
 
