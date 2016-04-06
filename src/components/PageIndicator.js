@@ -5,7 +5,7 @@ const StyleConstants = require('../constants/Style');
 const PageIndicator = React.createClass({
   propTypes: {
     activeIndex: React.PropTypes.number,
-    count: React.PropTypes.number,
+    count: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func
   },
 
