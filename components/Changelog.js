@@ -6,6 +6,16 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
+      <h3>2.3.0</h3>
+      <ul>
+        <li>Display Unsplash.it image in demo</li>
+        <li>Icon: Radium dependency removed. `style` prop now only accepts an object</li>
+        <li>PageIndicator: component added (<a href='https://github.com/mxenabled/mx-react-components/pull/249'>#249</a>)</li>
+        <li>ButtonGroup: component added (<a href='https://github.com/mxenabled/mx-react-components/pull/242'>#242</a>)</li>
+        <li>Proxima Nova fonts added to demo</li>
+        <li>Modal: `isOpen` prop deprecated (<a href='https://github.com/mxenabled/mx-react-components/pull/238'>#238</a>)</li>
+      </ul>
+
       <h3>2.2.14</h3>
       <ul>
         <li>Add adjustHexColor to Styles constants (<a href='https://github.com/mxenabled/mx-react-components/pull/243'>#243</a>)</li>
