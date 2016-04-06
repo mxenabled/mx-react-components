@@ -15,6 +15,7 @@ const {
   Icon,
   Loader,
   Modal,
+  PageIndicator,
   RangeSelector,
   Select,
   SelectFullScreen,
@@ -472,6 +473,7 @@ const Demo = React.createClass({
         displayValue: 'Accounts'
       },
       lineChartData: [],
+      pageIndicatorIndex: 0,
       selectedDatePickerDate: moment().unix(),
       showDrawer: false,
       showDrawerButtonType: 'primary',
@@ -609,6 +611,18 @@ const Demo = React.createClass({
   _handleSpinnerWithTextClick () {
     this.setState({
       spinnerWithTextIsActive: !this.state.spinnerWithTextIsActive
+    });
+  },
+
+  _handlePageIndicatorClick (index) {
+    this.setState({
+      pageIndicatorIndex: index
+    });
+  },
+
+  _handleNextPageIndicatorClick () {
+    this.setState({
+      pageIndicatorIndex: this.state.pageIndicatorIndex === 2 ? 0 : this.state.pageIndicatorIndex + 1
     });
   },
 
@@ -961,6 +975,13 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
+
+        <div style={{ textAlign: 'center', fontSize: 20 }}>
+          Current Page Indicator Index: {this.state.pageIndicatorIndex}
+          <br/><br/>
+          <Button onClick={this._handleNextPageIndicatorClick}>Next Page</Button>
+          <PageIndicator activeIndex={this.state.pageIndicatorIndex} count={3} onClick={this._handlePageIndicatorClick} />
+        </div>
       </div>
     );
   }
