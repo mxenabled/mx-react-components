@@ -6,6 +6,7 @@ const moment = require('moment');
 
 const {
   Button,
+  ButtonGroup,
   DatePicker,
   DatePickerFullScreen,
   DonutChart,
@@ -665,6 +666,24 @@ const Demo = React.createClass({
             type='secondary'>Button with text & without actionText</Button>
           <br/><br/>
           <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
+          <br/><br/>
+          <ButtonGroup
+            buttons={[
+              { icon: 'caret-left' },
+              { text: 'Mar 2015 - Feb 2016' },
+              { icon: 'caret-right' }
+            ]}
+            type='primaryOutline'
+          />
+          <br/><br/>
+          <ButtonGroup
+            buttons={[
+              { icon: 'download' },
+              { icon: 'search' },
+              { icon: 'add' }
+            ]}
+            type='base'
+          />
         </div>
         {this.state.showModal ? (
           <Modal

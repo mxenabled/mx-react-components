@@ -154,6 +154,7 @@ const Button = React.createClass({
         borderRadius: 2,
         borderWidth: 1,
         color: this.props.primaryColor,
+        fill: this.props.primaryColor,
         ':hover': {
           backgroundColor: StyleConstants.Colors.PORCELAIN
         },
@@ -164,7 +165,8 @@ const Button = React.createClass({
       disabled: {
         backgroundColor: 'transparent',
         borderColor: StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.FOG
+        color: StyleConstants.Colors.FOG,
+        fill: StyleConstants.Colors.FOG
       },
       icon: {
         marginTop: -3,
