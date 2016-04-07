@@ -25,7 +25,7 @@ const Input = React.createClass({
       <input
         {...this.props}
         name={this.props.name}
-        style={[styles.wrapper, !this.props.valid && styles.error, this.props.style]}
+        style={Object.assign({}, styles.wrapper, this.props.style)}
         type={this.props.type}
       />
     );
@@ -35,7 +35,7 @@ const Input = React.createClass({
     return {
       wrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
         borderRadius: 3,
         padding: 10,
         width: '100%',
@@ -47,9 +47,6 @@ const Input = React.createClass({
           outline: 'none',
           boxShadow: 'none'
         }
-      },
-      error: {
-        borderColor: StyleConstants.Colors.STRAWBERRY
       }
     };
   }

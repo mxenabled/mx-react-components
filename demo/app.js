@@ -956,6 +956,7 @@ const Demo = React.createClass({
         />
         <SimpleInput
           placeholder='Type something'
+          valid={true}
         />
         <br/><br/>
         <div style={{
