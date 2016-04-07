@@ -7,10 +7,6 @@ const Input = React.createClass({
   propTypes: {
     name: React.PropTypes.string,
     placeholder: React.PropTypes.string,
-    style: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
     type: React.PropTypes.string,
     valid: React.PropTypes.bool
   },
