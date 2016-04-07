@@ -6,6 +6,16 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
+      <h3>2.3.2</h3>
+      <ul>
+        <li>Fix deprecation warning in Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/253'>#253</a>)</li>
+      </ul>
+
+      <h3>2.3.1</h3>
+      <ul>
+        <li>Remove fill mapping to props.color in Icon (<a href='https://github.com/mxenabled/mx-react-components/commit/496f2d6085358f9511df28124002e6b563a6bdd8'>See Commit</a>)</li>
+      </ul>
+
       <h3>2.3.0</h3>
       <ul>
         <li>Display Unsplash.it image in demo</li>
