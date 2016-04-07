@@ -1,17 +1,15 @@
 const React = require('react');
-const Radium = require('radium');
 
 const Icon = React.createClass({
   propTypes: {
     size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    style: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]),
+    style: React.PropTypes.object,
     type: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
       size: 24,
-      style: {},
       type: 'accounts'
     };
   },
@@ -748,13 +746,7 @@ const Icon = React.createClass({
   },
 
   render () {
-    const styles = {
-      fill: this.props.style.color,
-      width: this.props.size,
-      height: this.props.size,
-      display: 'inline-block',
-      verticalAlign: 'middle'
-    };
+    const styles = this.styles();
 
     return (
       <svg
@@ -762,13 +754,24 @@ const Icon = React.createClass({
         className='mx-icon'
         fit={true}
         preserveAspectRatio='xMidYMid meet'
-        style={[styles, this.props.style]}
+        style={styles.component}
         viewBox='0 0 512 512'
       >
         {this._renderSvg()}
       </svg>
     );
+  },
+
+  styles () {
+    return {
+      component: Object.assign({
+        width: this.props.size,
+        height: this.props.size,
+        display: 'inline-block',
+        verticalAlign: 'middle'
+      }, this.props.style)
+    };
   }
 });
 
-module.exports = Radium(Icon);
+module.exports = Icon;

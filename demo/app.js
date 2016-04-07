@@ -6,6 +6,7 @@ const moment = require('moment');
 
 const {
   Button,
+  ButtonGroup,
   DatePicker,
   DatePickerFullScreen,
   DonutChart,
@@ -14,6 +15,7 @@ const {
   Icon,
   Loader,
   Modal,
+  PageIndicator,
   RangeSelector,
   Select,
   SelectFullScreen,
@@ -472,6 +474,7 @@ const Demo = React.createClass({
         displayValue: 'Accounts'
       },
       lineChartData: [],
+      pageIndicatorIndex: 0,
       selectedDatePickerDate: moment().unix(),
       showDrawer: false,
       showDrawerButtonType: 'primary',
@@ -612,6 +615,18 @@ const Demo = React.createClass({
     });
   },
 
+  _handlePageIndicatorClick (index) {
+    this.setState({
+      pageIndicatorIndex: index
+    });
+  },
+
+  _handleNextPageIndicatorClick () {
+    this.setState({
+      pageIndicatorIndex: this.state.pageIndicatorIndex === 2 ? 0 : this.state.pageIndicatorIndex + 1
+    });
+  },
+
   render () {
     const navConfig = {
       duration: 200,
@@ -666,6 +681,24 @@ const Demo = React.createClass({
             type='secondary'>Button with text & without actionText</Button>
           <br/><br/>
           <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
+          <br/><br/>
+          <ButtonGroup
+            buttons={[
+              { icon: 'caret-left' },
+              { text: 'Mar 2015 - Feb 2016' },
+              { icon: 'caret-right' }
+            ]}
+            type='primaryOutline'
+          />
+          <br/><br/>
+          <ButtonGroup
+            buttons={[
+              { icon: 'download' },
+              { icon: 'search' },
+              { icon: 'add' }
+            ]}
+            type='base'
+          />
         </div>
         {this.state.showModal ? (
           <Modal
@@ -699,7 +732,7 @@ const Demo = React.createClass({
           >
             <div style={{ padding: 20 }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-              <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
+              <img src='https://unsplash.it/1000/600?random' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
             </div>
           </Modal>
       ) : null}
@@ -945,6 +978,13 @@ const Demo = React.createClass({
           />
         </div>
         <br/><br/>
+
+        <div style={{ textAlign: 'center', fontSize: 20 }}>
+          Current Page Indicator Index: {this.state.pageIndicatorIndex}
+          <br/><br/>
+          <Button onClick={this._handleNextPageIndicatorClick}>Next Page</Button>
+          <PageIndicator activeIndex={this.state.pageIndicatorIndex} count={3} onClick={this._handlePageIndicatorClick} />
+        </div>
       </div>
     );
   }
