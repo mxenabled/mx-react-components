@@ -1,6 +1,5 @@
 const React = require('react');
 const Radium = require('radium');
-const _has = require('lodash/has');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
@@ -61,7 +60,7 @@ const Modal = React.createClass({
 
   componentDidMount () {
   /*eslint-disable */
-    if (_has(this.props, 'isOpen')) {
+    if (this.props.hasOwnProperty('isOpen')) {
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
     }
   /*eslint-enable */
