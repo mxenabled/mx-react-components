@@ -12,6 +12,7 @@ module.exports = {
   RangeSelector: require('./components/RangeSelector'),
   Select: require('./components/Select'),
   SelectFullScreen: require('./components/SelectFullScreen'),
+  SimpleInput: require('./components/SimpleInput'),
   Spin: require('./components/Spin'),
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
