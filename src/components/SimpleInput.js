@@ -6,6 +6,10 @@ const StyleConstants = require('../constants/Style');
 const Input = React.createClass({
   propTypes: {
     placeholder: React.PropTypes.string,
+    style: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     type: React.PropTypes.string,
     valid: React.PropTypes.bool
   },
