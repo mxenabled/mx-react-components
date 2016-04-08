@@ -5,7 +5,6 @@ const StyleConstants = require('../constants/Style');
 
 const Input = React.createClass({
   propTypes: {
-    name: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     type: React.PropTypes.string,
     valid: React.PropTypes.bool
@@ -24,7 +23,6 @@ const Input = React.createClass({
     return (
       <input
         {...this.props}
-        name={this.props.name}
         style={Object.assign({}, styles.wrapper, this.props.style)}
         type={this.props.type}
       />
