@@ -285,6 +285,13 @@ const DatePicker = React.createClass({
   render () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
+    let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
+    let rightNavIconStyle = Object.assign({}, styles.navIcon, styles.navRight);
+
+    if (this.props.showDayBorders) {
+      leftNavIconStyle = Object.assign(leftNavIconStyle, styles.borderRight);
+      rightNavIconStyle = Object.assign(rightNavIconStyle, styles.borderLeft);
+    }
 
     return (
       <div
@@ -307,14 +314,14 @@ const DatePicker = React.createClass({
             <Icon
               onClick={this._handlePreviousClick}
               size='32px'
-              style={[styles.navIcon, styles.navLeft, this.props.showDayBorders && styles.borderRight]}
+              style={leftNavIconStyle}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
               onClick={this._handleNextClick}
               size='32px'
-              style={[styles.navIcon, styles.navRight, this.props.showDayBorders && styles.borderLeft]}
+              style={rightNavIconStyle}
               type='caret-right'
             />
           </div>
