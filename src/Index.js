@@ -12,6 +12,7 @@ module.exports = {
   PageIndicator: require('./components/PageIndicator'),
   RajaIcon: require('./components/RajaIcon'),
   RangeSelector: require('./components/RangeSelector'),
+  SearchInput: require('./components/SearchInput'),
   Select: require('./components/Select'),
   SelectFullScreen: require('./components/SelectFullScreen'),
   SimpleInput: require('./components/SimpleInput'),

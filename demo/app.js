@@ -17,6 +17,7 @@ const {
   Modal,
   PageIndicator,
   RangeSelector,
+  SearchInput,
   Select,
   SelectFullScreen,
   SimpleInput,
@@ -958,6 +959,8 @@ const Demo = React.createClass({
           placeholder='Type something'
           valid={true}
         />
+        <br/><br/>
+        <SearchInput />
         <br/><br/>
         <div style={{
           border: '1px solid #E3E6E7',
