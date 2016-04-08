@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
+      <h3>2.3.3</h3>
+      <ul>
+        <li>Remove validation warning and add onValidation prop in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/248'>#248</a>)</li>
+      </ul>
+
       <h3>2.3.2</h3>
       <ul>
         <li>Fix deprecation warning in Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/253'>#253</a>)</li>
