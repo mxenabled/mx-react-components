@@ -19,6 +19,7 @@ const {
   RangeSelector,
   Select,
   SelectFullScreen,
+  SimpleInput,
   TimeBasedLineChart,
   ToggleSwitch,
   TypeAhead
@@ -953,7 +954,10 @@ const Demo = React.createClass({
           onDateSelect={this._handleDateSelect}
           showDayBorders={false}
         />
-
+        <SimpleInput
+          placeholder='Type something'
+          valid={true}
+        />
         <br/><br/>
         <div style={{
           border: '1px solid #E3E6E7',
