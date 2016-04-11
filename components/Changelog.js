@@ -8,8 +8,8 @@ const Changelog = React.createClass({
 
       <h3>2.3.4</h3>
       <ul>
-        <li>Add SimpleInput component(<a href='https://github.com/mxenabled/mx-react-components/pull/255'>#255</a>)</li>
-        <li>Add SearchInput component(<a href='https://github.com/mxenabled/mx-react-components/pull/252'>#252</a>)</li>
+        <li>Add SimpleInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/255'>#252</a>)</li>
+        <li>Add SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/252'>#255</a>)</li>
       </ul>
       <h3>2.3.3</h3>
       <ul>
