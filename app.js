@@ -16,6 +16,7 @@ const Modal = require('components/ModalDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
+const SimpleInput = require('components/SimpleInputDocs');
 const Spin = require('components/SpinDocs');
 const Styles = require('components/StylesDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
@@ -53,6 +54,7 @@ ReactDOM.render((
         <Route component={RangeSelector} path='range-selector' />
         <Route component={Select} path='select' />
         <Route component={SelectFullScreen} path='select-full-screen' />
+        <Route component={SimpleInput} path='simple-input' />
         <Route component={Spin} path='spin' />
         <Route component={Styles} path='styles' />
         <Route component={ToggleSwitch} path='toggle-switch' />
