@@ -100,6 +100,7 @@ const Components = React.createClass({
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/select'>Select</Link>
             <Link to='/components/select-full-screen'>Select Full Screen</Link>
+            <Link to='/components/simple-input'>Simple Input</Link>
             <Link to='/components/toggle-switch'>Toggle Switch</Link>
             <Link to='/components/type-ahead'>Type Ahead</Link>
 
