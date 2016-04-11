@@ -169,10 +169,10 @@ const Button = React.createClass({
         fill: StyleConstants.Colors.FOG
       },
       icon: {
-        marginBottom: this.props.children ? -5 : -3,
+        marginBottom: -3,
         marginLeft: -5,
         marginRight: this.props.children ? 5 : -5,
-        marginTop: this.props.children ? -5 : -4,
+        marginTop: -4,
         verticalAlign: 'middle'
       },
       spinner: {
