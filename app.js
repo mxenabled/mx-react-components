@@ -14,7 +14,6 @@ const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
 const Modal = require('components/ModalDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
-const SearchInput = require('components/SearchInputDocs');
 const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
 const SimpleInput = require('components/SimpleInputDocs');
@@ -53,7 +52,6 @@ ReactDOM.render((
         <Route component={Loader} path='loader' />
         <Route component={Modal} path='modal' />
         <Route component={RangeSelector} path='range-selector' />
-        <Route component={SearchInput} path='search-input' />
         <Route component={Select} path='select' />
         <Route component={SelectFullScreen} path='select-full-screen' />
         <Route component={SimpleInput} path='simple-input' />
