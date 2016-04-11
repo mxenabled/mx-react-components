@@ -98,6 +98,7 @@ const Components = React.createClass({
             <Link to='/components/date-picker'>Date Picker</Link>
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
+            <Link to='/components/search-input'>Search Input</Link>
             <Link to='/components/select'>Select</Link>
             <Link to='/components/select-full-screen'>Select Full Screen</Link>
             <Link to='/components/simple-input'>Simple Input</Link>
