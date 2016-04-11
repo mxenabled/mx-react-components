@@ -14,6 +14,7 @@ const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
 const Modal = require('components/ModalDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
+const SearchInput = require('components/SearchInputDocs');
 const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
 const SimpleInput = require('components/SimpleInputDocs');
