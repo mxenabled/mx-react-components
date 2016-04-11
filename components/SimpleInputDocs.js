@@ -9,7 +9,7 @@ const SimpleInputDocs = React.createClass({
     return (
       <div>
         <h1>
-          SimpleInput
+          Simple Input
           <label>A simple input field used in forms</label>
         </h1>
 
@@ -20,10 +20,10 @@ const SimpleInputDocs = React.createClass({
 
         <h3>Usage</h3>
         <h5>placeholder <label>String</label></h5>
-        <p>a placeholder text appears in Input field before you type.</p>
+        <p>The text to show before the user starts typing or when the input field is empty.</p>
 
         <h5>valid <label>Boolean</label></h5>
-        <p>Indicates whether the value of Input field is valid. If it is not valid, Input field will have a red border.</p>
+        <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red border.</p>
 
         <h3>Example</h3>
          <Markdown>
