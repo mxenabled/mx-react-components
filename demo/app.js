@@ -640,6 +640,22 @@ const Demo = React.createClass({
     });
   },
 
+  _handleInputFocus () {
+    this.setState({
+      statusMessage: null,
+      showHint: false
+    });
+  },
+
+  _handleInputStatusMessage () {
+    this.setState({
+      statusMessage: {
+        type: 'success',
+        message: 'Saved!'
+      }
+    });
+  },
+
   render () {
     const navConfig = {
       duration: 200,
@@ -976,7 +992,7 @@ const Demo = React.createClass({
           hint='Click to Edit'
           label='Display Input'
           onBlur={this._handleInputStatusMessage}
-          onFocus={this._handleInputHideHint}
+          onFocus={this._handleInputFocus}
           onMouseOut={this._handleInputHideHint}
           onMouseOver={this._handleInputShowHint}
           placeholder='Type something'
