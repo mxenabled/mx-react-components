@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
+      <h3>2.3.5</h3>
+      <ul>
+        <li>Removed gray border from SearchInput component</li>
+      </ul>
+
       <h3>2.3.4</h3>
       <ul>
         <li>Add SimpleInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/255'>#252</a>)</li>
