@@ -54,7 +54,6 @@ const SearchInput = React.createClass({
         width: '100%'
       },
       searchBar: {
-        border: '1px solid ' + StyleConstants.Colors.FOG,
         position: 'relative',
         marginBottom: 10
       },
