@@ -23,9 +23,7 @@ const DisplayInput = React.createClass({
 
   getDefaultProps () {
     return {
-      isRequired: false,
       primaryColor: StyleConstants.Colors.PRIMARY,
-      type: 'text',
       valid: true
     };
   },

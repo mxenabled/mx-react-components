@@ -653,7 +653,8 @@ const Demo = React.createClass({
       statusMessage: {
         type: 'success',
         message: 'Saved!'
-      }
+      },
+      valid: true
     });
   },
 
@@ -1000,7 +1001,7 @@ const Demo = React.createClass({
           placeholder='Type something'
           showHint={this.state.showHint}
           status={this.state.statusMessage}
-          valid={true}
+          valid={this.state.valid}
         />
         <br/><br/>
         <div style={{
