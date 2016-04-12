@@ -14,10 +14,6 @@ const DisplayInput = React.createClass({
       type: React.PropTypes.string,
       message: React.PropTypes.string
     }),
-    style: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
     valid: React.PropTypes.bool
   },
 
