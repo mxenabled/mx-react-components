@@ -5,9 +5,7 @@ const StyleConstants = require('../constants/Style');
 
 const DisplayInput = React.createClass({
   propTypes: {
-    error: React.PropTypes.string,
     hint: React.PropTypes.string,
-    isRequired: React.PropTypes.bool,
     label: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     primaryColor: React.PropTypes.string,
@@ -20,7 +18,6 @@ const DisplayInput = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
-    type: React.PropTypes.string,
     valid: React.PropTypes.bool
   },
 
@@ -38,16 +35,24 @@ const DisplayInput = React.createClass({
 
     return (
       <div style={Object.assign({}, styles.wrapper)}>
-        {this.props.label ? <div key={this.props.label} style={styles.label}>{this.props.label}</div> : null}
+        {this.props.label ?
+          <div key='label' style={styles.label}>
+            <div style={styles.labelText}>{this.props.label}</div>
+          </div> : null
+        }
         <input
           {...this.props}
-          key={this.props.type}
+          key='input'
           label={this.props.label}
           style={styles.input}
-          type={this.props.type}
+          type='text'
         />
-        {this.props.showHint && !this.props.status ? <div key='hint' style={styles.hint}>{this.props.hint}</div> : null}
-        {this.props.status ? <div key='status' style={styles[this.props.status.type]}>{this.props.status.message}</div> : null}
+        <div style={styles.hint}>
+          <div style={styles.hintText}>
+            {this.props.showHint && !this.props.status ? <div>{this.props.hint}</div> : null}
+            {this.props.status ? <div style={styles[this.props.status.type]}>{this.props.status.message}</div> : null}
+          </div>
+        </div>
       </div>
     );
   },
@@ -60,7 +65,9 @@ const DisplayInput = React.createClass({
         borderRadius: 3,
         borderRight: '1px solid transparent',
         borderTop: '1px solid transparent',
-        padding: '10px 10px 0 10px',
+        height: 43,
+        paddingLeft: 130,
+        paddingRight: 100,
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
@@ -79,10 +86,11 @@ const DisplayInput = React.createClass({
       input: {
         backgroundColor: 'transparent',
         border: '1px solid transparent',
+        float: 'left',
         fontSize: StyleConstants.FontSizes.LARGE,
         padding: 10,
         WebkitAppearance: 'none',
-        width: '78%',
+        width: '100%',
 
         ':focus': {
           boxShadow: 'none',
@@ -93,25 +101,48 @@ const DisplayInput = React.createClass({
       label: {
         color: StyleConstants.Colors.ASH,
         display: 'inline-block',
+        float: 'left',
         fontSize: StyleConstants.FontSizes.SMALL,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        minWidth: 130,
+        height: '100%',
+        marginLeft: -130,
+        position: 'relative',
+        width: 130,
 
         ':focus': {
           color: this.props.primaryColor
         }
       },
 
-      error: {
-        color: StyleConstants.Colors.STRAWBERRY,
-        display: 'inline-block',
-        width: '10%'
+      labelText: {
+        bottom: 14,
+        left: 5,
+        position: 'absolute'
       },
 
       hint: {
         color: this.props.primaryColor,
         display: 'inline-block',
-        width: '10%'
+        float: 'left',
+        height: '100%',
+        marginRight: -100,
+        position: 'relative',
+        textAlign: 'right',
+        width: 100
+      },
+
+      hintText: {
+        bottom: 14,
+        position: 'absolute',
+        right: 5
+      },
+
+      error: {
+        color: StyleConstants.Colors.STRAWBERRY
+      },
+
+      success: {
+        color: this.props.primaryColor
       }
     };
   }
