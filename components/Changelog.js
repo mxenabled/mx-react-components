@@ -8,7 +8,7 @@ const Changelog = React.createClass({
 
       <h3>2.3.5</h3>
       <ul>
-        <li>Removed gray border from SearchInput component</li>
+        <li>Removed gray border from SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/258'>#258</a>)</li>
       </ul>
 
       <h3>2.3.4</h3>
