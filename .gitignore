@@ -31,4 +31,3 @@ dist
 
 # Webpack files
 demo/bundle.js
-src/bundle.js
