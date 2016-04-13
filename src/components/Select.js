@@ -193,7 +193,7 @@ const Select = React.createClass({
                   ]}
                 >
                 {option.displayValue}
-                {_isEqual(option, this.state.highlightedValue) ? <Icon size='20' style={styles.check} type='check' /> : null }
+                {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} style={styles.check} type='check' /> : null }
                 </li>
               );
             })}
@@ -221,7 +221,7 @@ const Select = React.createClass({
           <div className='mx-select-selected' key='selected' style={[styles.selected, this.props.selectedStyle]}>
             {selected.displayValue}
             <Icon
-              size='20'
+              size={20}
               style={styles.caret}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />

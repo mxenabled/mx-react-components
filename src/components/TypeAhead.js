@@ -228,7 +228,7 @@ const TypeAhead = React.createClass({
           {item}
           <Icon
             onClick={this._handleItemRemove.bind(null, item)}
-            size='15px'
+            size={15}
             style={styles.removeIcon}
             type='close'
           />

@@ -271,7 +271,7 @@ const DatePicker = React.createClass({
         <div style={[styles.caretWrapper, this.props.caretWrapperStyle]}>
           <Icon
             onClick={this._toggleCalendar}
-            size='20'
+            size={20}
             style={styles.caret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
@@ -296,7 +296,7 @@ const DatePicker = React.createClass({
     return (
       <div
         style={[styles.component, styles.clearFix, this.props.style]}
-        tabIndex='0'
+        tabIndex={0}
       >
         <div key='selectedDateWrapper' style={[
           styles.selectedDateWrapper,
@@ -313,14 +313,14 @@ const DatePicker = React.createClass({
           <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
             <Icon
               onClick={this._handlePreviousClick}
-              size='32px'
+              size={32}
               style={leftNavIconStyle}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
               onClick={this._handleNextClick}
-              size='32px'
+              size={32}
               style={rightNavIconStyle}
               type='caret-right'
             />
@@ -494,13 +494,13 @@ const styles = {
   },
   navLeft: {
     position: 'absolute',
-    left: '0',
+    left: 0,
     top: '50%',
     transform: 'translateY(-50%)'
   },
   navRight: {
     position: 'absolute',
-    right: '0',
+    right: 0,
     top: '50%',
     transform: 'translateY(-50%)'
   },
