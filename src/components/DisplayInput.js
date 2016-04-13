@@ -28,7 +28,7 @@ const DisplayInput = React.createClass({
     const styles = this.styles();
 
     return (
-      <div style={Object.assign({}, styles.wrapper)}>
+      <div style={styles.wrapper}>
         {this.props.label ?
           <div key='label' style={styles.label}>
             <div style={styles.labelText}>{this.props.label}</div>
