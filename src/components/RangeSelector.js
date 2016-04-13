@@ -360,18 +360,18 @@ const RangeSelector = React.createClass({
           style={styles.range}
         >
           {this.props.presets.length ? <div className='mx-rangeselector-toggle' onClick={this._handleToggleViews} style={styles.showPresets}>Groups</div> : null}
-	<div
-          className='mx-rangeselector-track-holder'
-          onMouseDown={this._handleTrackMouseDown}
-          style={styles.trackHolder}
-	>
-          <div className='mx-rangeselector-track' style={styles.track}></div>
+          <div
+            className='mx-rangeselector-track-holder'
+            onMouseDown={this._handleTrackMouseDown}
+            style={styles.trackHolder}
+          >
+            <div className='mx-rangeselector-track' style={styles.track}></div>
             <div className='mx-rangeselector-selected' style={styles.selected}>
               <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
-                {this.state.selectedLabel}
+              {this.state.selectedLabel}
               </div>
             </div>
-	</div>
+          </div>
           <div
             className='mx-rangeselector-lower-toggle'
             onMouseDown={this._handleDragStart.bind(null, 'Lower')}
