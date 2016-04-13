@@ -29,10 +29,10 @@ const DisplayInput = React.createClass({
 
     return (
       <div style={styles.wrapper}>
-        {this.props.label ?
-          <div key='label' style={styles.label}>
+        {this.props.label ? (
+          <div style={styles.label}>
             <div style={styles.labelText}>{this.props.label}</div>
-          </div> : null
+          </div>) : null
         }
         <input
           {...this.props}
@@ -43,8 +43,8 @@ const DisplayInput = React.createClass({
         />
         <div style={styles.hint}>
           <div style={styles.hintText}>
-            {this.props.showHint && !this.props.status ? <div>{this.props.hint}</div> : null}
-            {this.props.status ? <div style={styles[this.props.status.type]}>{this.props.status.message}</div> : null}
+            {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
+            {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
           </div>
         </div>
       </div>
