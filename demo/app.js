@@ -861,7 +861,7 @@ const Demo = React.createClass({
           <Icon
             size={150}
             style={{
-              color: '#359BCF'
+              fill: '#359BCF'
             }}
             type={this.state.icon.value}
           />
@@ -894,7 +894,7 @@ const Demo = React.createClass({
             <Icon
               size={150}
               style={{
-                color: '#359BCF'
+                fill: '#359BCF'
               }}
               type={this.state.icon.value}
             />

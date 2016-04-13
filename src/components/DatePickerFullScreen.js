@@ -40,6 +40,16 @@ const DatePickerFullScreen = React.createClass({
     };
   },
 
+  getInitialState () {
+    return {
+      currentDate: null,
+      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      isValid: true,
+      selectedDate: this.props.defaultDate,
+      showCalendar: false
+    };
+  },
+
   componentDidMount () {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
