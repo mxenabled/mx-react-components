@@ -1,4 +1,5 @@
 const React = require('react');
+const Radium = require('radium');
 
 const Button = require('./Button');
 
@@ -89,4 +90,4 @@ const ButtonGroup = React.createClass({
   }
 });
 
-module.exports = ButtonGroup;
+module.exports = Radium(ButtonGroup);

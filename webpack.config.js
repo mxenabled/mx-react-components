@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
   module: {
     preLoaders: [
@@ -10,6 +12,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
+        include: /src/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
@@ -19,5 +22,12 @@ module.exports = {
       }
     ]
   },
-  devtool: 'eval'
+  plugins: [],
+  resolve: {
+    alias: {
+      components: path.join(__dirname, 'src/components'),
+      constants: path.join(__dirname, 'src/constants'),
+      utils: path.join(__dirname, 'src/utils')
+    }
+  }
 };
