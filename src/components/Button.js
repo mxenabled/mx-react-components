@@ -40,7 +40,7 @@ const Button = React.createClass({
         {this.props.isActive ? (
           <div>
             <Spin direction='counterclockwise'>
-                <Icon size='20' style={[styles.icon, styles.spinner]} type='spinner' />
+                <Icon size='20' style={styles.spinner} type='spinner' />
             </Spin>
               {this.props.actionText ? <div style={styles.actionText}> {this.props.actionText} </div> : null }
           </div>
@@ -51,7 +51,7 @@ const Button = React.createClass({
 
   styles () {
     return {
-      component: {
+      component: Object.assign({
         borderRadius: 2,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -65,7 +65,7 @@ const Button = React.createClass({
         transition: 'all .2s ease-in',
         minWidth: 16,
         minHeight: 15
-      },
+      }, this.props.style),
       primary: {
         backgroundColor: this.props.primaryColor,
         borderColor: this.props.primaryColor,
@@ -169,16 +169,17 @@ const Button = React.createClass({
         fill: StyleConstants.Colors.FOG
       },
       icon: {
-        marginTop: -3,
-        marginBottom: -5,
+        marginBottom: -3,
         marginLeft: -5,
         marginRight: this.props.children ? 5 : -5,
-        verticalAlign: 'initial'
+        marginTop: -4,
+        verticalAlign: 'middle'
       },
       spinner: {
+        marginBottom: -3,
+        marginLeft: -5,
         marginRight: -5,
-        marginTop: -6,
-        padding: this.props.actionText ? 0 : 3
+        marginTop: -4
       },
       actionText: {
         display: 'inline-block',

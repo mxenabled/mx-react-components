@@ -63,11 +63,11 @@ const ButtonGroup = React.createClass({
 
   styles () {
     return {
-      component: {
+      component: Object.assign({
         borderRadius: 0,
         borderWidth: 1,
         borderRightWidth: 0
-      },
+      }, this.props.style),
       firstChild: {
         borderRadius: '2px 0 0 2px'
       },
