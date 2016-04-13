@@ -30,7 +30,7 @@ const DisplayInput = React.createClass({
     return (
       <div style={styles.wrapper}>
         {this.props.label ? (
-          <div style={styles.label}>
+          <div key='label' style={styles.label}>
             <div style={styles.labelText}>{this.props.label}</div>
           </div>) : null}
         <input
