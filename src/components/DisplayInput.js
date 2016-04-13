@@ -55,10 +55,7 @@ const DisplayInput = React.createClass({
     return {
       wrapper: Object.assign({
         borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.ASH : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-        borderLeft: '1px solid transparent',
         borderRadius: 3,
-        borderRight: '1px solid transparent',
-        borderTop: '1px solid transparent',
         height: 43,
         paddingLeft: this.props.label ? 130 : 0,
         paddingRight: this.props.hint || this.props.status ? 100 : 0,
@@ -69,9 +66,6 @@ const DisplayInput = React.createClass({
 
         ':focus': {
           borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-          borderLeft: '1px solid transparent',
-          borderRight: '1px solid transparent',
-          borderTop: '1px solid transparent',
           boxShadow: 'none',
           outline: 'none'
         }
