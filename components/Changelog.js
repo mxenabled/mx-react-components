@@ -6,6 +6,18 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
+      <h3>3.0.0</h3>
+      <ul>
+        <li>Updates to React v15.0.1 (<a href='https://github.com/mxenabled/mx-react-components/pull/262'>#258</a>)</li>
+      </ul>
+
+      <h3>2.3.6</h3>
+      <ul>
+        <li>Added Radium on button component (<a href='https://github.com/mxenabled/mx-react-components/pull/264'>#264</a>)</li>
+        <li>Edited styles on button component (<a href='https://github.com/mxenabled/mx-react-components/pull/257'>#257</a>)</li>
+      </ul>
+
+
       <h3>2.3.5</h3>
       <ul>
         <li>Removed gray border from SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/258'>#258</a>)</li>
