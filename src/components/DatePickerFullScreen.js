@@ -40,6 +40,16 @@ const DatePickerFullScreen = React.createClass({
     };
   },
 
+  getInitialState () {
+    return {
+      currentDate: null,
+      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      isValid: true,
+      selectedDate: this.props.defaultDate,
+      showCalendar: false
+    };
+  },
+
   componentDidMount () {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
@@ -270,14 +280,14 @@ const DatePickerFullScreen = React.createClass({
             <div className='mx-date-picker-full-screen-calendar-header' key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
               <Icon
                 onClick={this._handlePreviousClick}
-                size='32px'
+                size={32}
                 style={leftNavIconStyle}
                 type='caret-left'
               />
               {currentDate.format('MMMM YYYY')}
               <Icon
                 onClick={this._handleNextClick}
-                size='32px'
+                size={32}
                 style={rightNavIconStyle}
                 type='caret-right'
               />
@@ -455,13 +465,13 @@ const styles = {
   },
   navLeft: {
     position: 'absolute',
-    left: '0',
+    left: 0,
     top: '50%',
     transform: 'translateY(-50%)'
   },
   navRight: {
     position: 'absolute',
-    right: '0',
+    right: 0,
     top: '50%',
     transform: 'translateY(-50%)'
   },
