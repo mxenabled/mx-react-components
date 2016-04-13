@@ -32,8 +32,7 @@ const DisplayInput = React.createClass({
         {this.props.label ? (
           <div style={styles.label}>
             <div style={styles.labelText}>{this.props.label}</div>
-          </div>) : null
-        }
+          </div>) : null}
         <input
           {...this.props}
           key='input'
