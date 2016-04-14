@@ -43,7 +43,7 @@ const ButtonGroupDocs = React.createClass({
         <p>The name of the <a href='/components/icon'>icon</a></p>
 
         <h5>text <label>String</label></h5>
-        <p>The text to be displayed in the button</a></p>
+        <p>The text to be displayed in the button</p>
 
         <h5>primaryColor <label>String</label></h5>
         <p>Default: Styles.Colors.PRIMARY</p>
