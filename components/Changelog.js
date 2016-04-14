@@ -6,7 +6,7 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
-      <h3>3.1.0</h3>
+      <h3>3.0.1</h3>
       <ul>
         <li>Added DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/261'>#261</a>)</li>
       </ul>
