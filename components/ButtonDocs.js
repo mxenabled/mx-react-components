@@ -36,16 +36,16 @@ const ButtonDocs = React.createClass({
         <h3>Demo</h3>
         <div className='flex'>
           <Button>Primary</Button>
-          <Button style={style} type='primaryOutline'>Primary Outline</Button>
-          <Button style={style} type='secondary'>Secondary</Button>
-          <Button style={style} type='base'>Base</Button>
-          <Button style={style} type='neutral'>Neurral</Button>
-          <Button style={style} type='disabled'>Disabled</Button>
+          <Button type='primaryOutline'>Primary Outline</Button>
+          <Button type='secondary'>Secondary</Button>
+          <Button type='base'>Base</Button>
+          <Button type='neutral'>Neurral</Button>
+          <Button type='disabled'>Disabled</Button>
         </div>
         <br/><br/>
         <div className='flex'>
-          <Button icon='add' style={style}>Icon</Button>
-          <Button icon='delete' style={style} />
+          <Button icon='add'>Icon</Button>
+          <Button icon='delete' />
         </div>
         <br/><br/>
         <div className='flex'>
@@ -53,11 +53,10 @@ const ButtonDocs = React.createClass({
             actionText='Loading...'
             isActive={this.state.buttonIsActive}
             onClick={this._handleButtonClick}
-            style={style}
           >
             Loading Button
           </Button>
-          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick} style={style}>Loading Button (spinner only)</Button>
+          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}>Loading Button (spinner only)</Button>
         </div>
 
         <h3>Usage</h3>
