@@ -3,11 +3,13 @@ const ReactDOM = require('react-dom');
 const { hashHistory, Route, IndexRoute, Router } = require('react-router');
 
 const Button = require('components/ButtonDocs');
+const ButtonGroup = require('components/ButtonGroupDocs');
 const Changelog = require('components/Changelog');
 const Components = require('components/Components');
 const DatePicker = require('components/DatePickerDocs');
 const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
 const DonutChart = require('components/DonutChartDocs');
+const DisplayInput = require('components/DisplayInputDocs');
 const Header = require('components/Header');
 const Home = require('components/Home');
 const Icon = require('components/IconDocs');
@@ -26,13 +28,15 @@ const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
 
 const App = React.createClass({
   render () {
+    const currentYear = new Date().getFullYear();
+
     return (
       <div>
         <Header />
         {this.props.children}
         <footer>
           <div className='container'>
-            &copy; Copyright 2015 - MX
+            &copy; Copyright {currentYear} - MX
           </div>
         </footer>
       </div>
@@ -46,6 +50,7 @@ ReactDOM.render((
       <Route component={Components} path='components'>
         <IndexRoute component={Changelog} />
         <Route component={Button} path='button' />
+        <Route component={ButtonGroup} path='button-group' />
         <Route component={DatePicker} path='date-picker' />
         <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DonutChart} path='donut' />
@@ -57,6 +62,7 @@ ReactDOM.render((
         <Route component={Select} path='select' />
         <Route component={SelectFullScreen} path='select-full-screen' />
         <Route component={SimpleInput} path='simple-input' />
+        <Route component={DisplayInput} path='display-input' />
         <Route component={Spin} path='spin' />
         <Route component={Styles} path='styles' />
         <Route component={ToggleSwitch} path='toggle-switch' />
