@@ -25,6 +25,13 @@ module.exports = {
   output: {
     filename: './bundle.js'
   },
+  plugins:[
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ],
   resolve: {
     alias: {
       components: path.join(__dirname, 'components')
