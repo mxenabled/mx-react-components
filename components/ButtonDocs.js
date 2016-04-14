@@ -7,7 +7,7 @@ const Markdown = require('components/Markdown');
 const ButtonDocs = React.createClass({
   _handleButtonClick () {
     this.setState({
-      buttonIsActive: !this.state.spinnerIsActive
+      buttonIsActive: !this.state.buttonIsActive
     });
   },
 
