@@ -36,7 +36,7 @@ const ButtonDocs = React.createClass({
         <h3>Demo</h3>
         <div className='flex'>
           <Button>Primary</Button>
-          <Button style={style} tyle='primaryOutline'>Primary Outline</Button>
+          <Button style={style} type='primaryOutline'>Primary Outline</Button>
           <Button style={style} type='secondary'>Secondary</Button>
           <Button style={style} type='base'>Base</Button>
           <Button style={style} type='neutral'>Neurral</Button>
@@ -44,13 +44,20 @@ const ButtonDocs = React.createClass({
         </div>
         <br/><br/>
         <div className='flex'>
-          <Button icon='add'>Icon</Button>
+          <Button icon='add' style={style}>Icon</Button>
           <Button icon='delete' style={style} />
         </div>
         <br/><br/>
         <div className='flex'>
-          <Button actionText='Loading...' isActive={this.state.buttonIsActive} onClick={this._handleButtonClick}>Loading Button</Button>
-          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}>Loading Button (spinner only)</Button>
+          <Button
+            actionText='Loading...'
+            isActive={this.state.buttonIsActive}
+            onClick={this._handleButtonClick}
+            style={style}
+          >
+            Loading Button
+          </Button>
+          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick} style={style}>Loading Button (spinner only)</Button>
         </div>
 
         <h3>Usage</h3>
