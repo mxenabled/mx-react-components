@@ -9,6 +9,7 @@ const {
   ButtonGroup,
   DatePicker,
   DatePickerFullScreen,
+  DisplayInput,
   DonutChart,
   Drawer,
   FileUpload,
@@ -628,6 +629,35 @@ const Demo = React.createClass({
     });
   },
 
+  _handleInputShowHint () {
+    this.setState({
+      showHint: true
+    });
+  },
+
+  _handleInputHideHint () {
+    this.setState({
+      showHint: false
+    });
+  },
+
+  _handleInputFocus () {
+    this.setState({
+      statusMessage: null,
+      showHint: false
+    });
+  },
+
+  _handleInputStatusMessage () {
+    this.setState({
+      statusMessage: {
+        type: 'success',
+        message: 'Saved!'
+      },
+      valid: true
+    });
+  },
+
   render () {
     const navConfig = {
       duration: 200,
@@ -961,6 +991,18 @@ const Demo = React.createClass({
         />
         <br/><br/>
         <SearchInput />
+        <DisplayInput
+          hint='Click to Edit'
+          label='Display Input'
+          onBlur={this._handleInputStatusMessage}
+          onFocus={this._handleInputFocus}
+          onMouseOut={this._handleInputHideHint}
+          onMouseOver={this._handleInputShowHint}
+          placeholder='Type something'
+          showHint={this.state.showHint}
+          status={this.state.statusMessage}
+          valid={this.state.valid}
+        />
         <br/><br/>
         <div style={{
           border: '1px solid #E3E6E7',

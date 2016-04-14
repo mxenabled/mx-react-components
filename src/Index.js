@@ -3,6 +3,7 @@ module.exports = {
   ButtonGroup: require('./components/ButtonGroup'),
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),
+  DisplayInput: require('./components/DisplayInput'),
   DonutChart: require('./components/DonutChart'),
   Drawer: require('./components/Drawer'),
   FileUpload: require('./components/FileUpload'),
