@@ -5,6 +5,14 @@ const { Button } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const ButtonDocs = React.createClass({
+
+  getInitialState () {
+    return {
+      buttonIsActive: false,
+      spinnerIsActive: false
+    };
+  },
+
   _handleButtonClick () {
     this.setState({
       buttonIsActive: !this.state.buttonIsActive

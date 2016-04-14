@@ -5,6 +5,15 @@ const { DisplayInput } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const DisplayInputDocs = React.createClass({
+
+  getInitialState () {
+    return {
+      showHint: false,
+      statusMessage: null,
+      valid: true
+    };
+  },
+
   _handleInputShowHint () {
     this.setState({
       showHint: true
@@ -82,15 +91,8 @@ const DisplayInputDocs = React.createClass({
          <Markdown>
   {`
     <DisplayInput
-      hint='Click to Edit'
       label='Display Input'
-      onBlur={this._handleInputStatusMessage}
-      onFocus={this._handleInputFocus}
-      onMouseOut={this._handleInputHideHint}
-      onMouseOver={this._handleInputShowHint}
       placeholder='Type something'
-      showHint={this.state.showHint}
-      status={this.state.statusMessage}
       valid={true}
     />
   `}
