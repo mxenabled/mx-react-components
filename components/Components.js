@@ -41,12 +41,20 @@ const Components = React.createClass({
                   displayValue: 'Button'
                 },
                 {
+                  value: 'button-group',
+                  displayValue: 'Button Group'
+                },
+                {
                   value: 'date-picker',
                   displayValue: 'Date Picker'
                 },
                 {
                   value: 'date-picker-full-screen',
                   displayValue: 'Date Picker Full Screen'
+                },
+                {
+                  value: 'display-input',
+                  displayValue: 'Display Input'
                 },
                 {
                   value: 'range-selector',
