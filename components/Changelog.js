@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
       <h1>Change Log</h1>
 
+      <h3>3.0.2</h3>
+      <ul>
+        <li>Fixed how styles were called on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/266'>#266</a>)</li>
+      </ul>
+
       <h3>3.0.1</h3>
       <ul>
         <li>Added DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/261'>#261</a>)</li>

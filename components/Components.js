@@ -103,10 +103,12 @@ const Components = React.createClass({
 
             <h3>Form</h3>
             <Link to='/components/button'>Button</Link>
+            <Link to='/components/button-group'>Button Group</Link>
             <Link to='/components/date-picker'>Date Picker</Link>
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/search-input'>Search Input</Link>
+            <Link to='/components/display-input'>Display Input</Link>
             <Link to='/components/select'>Select</Link>
             <Link to='/components/select-full-screen'>Select Full Screen</Link>
             <Link to='/components/simple-input'>Simple Input</Link>

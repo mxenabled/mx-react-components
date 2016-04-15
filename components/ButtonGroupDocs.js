@@ -23,7 +23,8 @@ const ButtonGroupDocs = React.createClass({
           ]}
           type='primaryOutline'
         />
-        <br/><br/>
+      </div>
+      <div>
         <ButtonGroup
           buttons={[
             { icon: 'download' },
@@ -36,7 +37,7 @@ const ButtonGroupDocs = React.createClass({
 
         <h3>Usage</h3>
         <h5>buttons <label>Array of Objects</label></h5>
-        <p>Default: []</p>
+        <p>Default: An empty array</p>
         <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>icon</label>, <label>text</label>, or both.</p>
 
         <h5>icon <label>String</label></h5>
