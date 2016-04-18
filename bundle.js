@@ -85553,21 +85553,6 @@
 	      React.createElement(
 	        'h5',
 	        null,
-	        'imageUrl ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If provided, a thumbnail of the file will be shown in the uploader.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
 	        'maxFileSize ',
 	        React.createElement(
 	          'label',

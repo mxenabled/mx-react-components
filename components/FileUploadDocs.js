@@ -40,9 +40,6 @@ const FileUploadDocs = React.createClass({
         <h5>allowedFileTypes <label>Array</label></h5>
         <p>An array of file types and extensions allowed for upload.</p>
 
-        <h5>imageUrl <label>String</label></h5>
-        <p>If provided, a thumbnail of the file will be shown in the uploader.</p>
-
         <h5>maxFileSize <label>Number</label></h5>
         <p>Sets the maximum file size allowed. Measured in byes.</p>
 
