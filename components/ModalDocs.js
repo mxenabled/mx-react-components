@@ -76,7 +76,7 @@ const ModalDocs = React.createClass({
             tooltipLabel='This is the footer text.'
             tooltipTitle='This is my tooltip title'
           >
-            <div style={{ padding: 20 }}>
+            <div style={{ padding: 20, textAlign: 'center' }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
               <img src='https://unsplash.it/1000/600?random' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
             </div>
@@ -88,18 +88,18 @@ const ModalDocs = React.createClass({
         <h5>buttons <label>Array</label></h5>
         <p>An array of objects with the properties: actionText, className, isActive, icon, label, onClick, style, and type. Used to display button in the footer of the modal. Example:</p>
         <Markdown>
-{`
-  [{
-    actionText: '',
-    className: 'my-button-class',
-    isActive: false,
-    icon: '',
-    label: 'Click Me',
-    onClick: function () { //do something },
-    style: { marginTop: 10 }, //a style object or Radium array
-    type: 'primary' //either 'primary' or 'secondary'
-  }]
-`}
+          {`
+            [{
+              actionText: '',
+              className: 'my-button-class',
+              isActive: false,
+              icon: '',
+              label: 'Click Me',
+              onClick: function () { //do something },
+              style: { marginTop: 10 }, //a style object or Radium array
+              type: 'primary' //either 'primary' or 'secondary'
+            }]
+          `}
         </Markdown>
 
         <h5>color <label>String</label></h5>
@@ -143,41 +143,41 @@ const ModalDocs = React.createClass({
 
         <h3>Example</h3>
         <Markdown>
-{`
-  let isOpen = true;
+          {`
+            let isOpen = true;
 
-  _handleModalClose () {
-    isOpen = false;
-  }
+            _handleModalClose () {
+              isOpen = false;
+            }
 
-  <Modal
-    buttons={[
-      {
-        label: 'Secondary',
-        onClick: this._handleModalSecondaryClick,
-        type: 'secondary'
-      },
-      {
-        label: 'Primary',
-        onClick: this._handleModalPrimaryClick,
-        type: 'primary'
-      }
-    ]}
-    footerContent={(
-      <div>
-        Footer content
-      </div>
-    )}
-    isOpen={this.state.showModal}
-    onRequestClose={_handleModalClose}
-    showFooter={true}
-    showTitleBar={true}
-    tooltipLabel='This is the footer text.'
-    title='This is the header text'
-    tooltip='This is my tooltip content'
-    tooltipTitle='This is my tooltip title'
-  >
-`}
+            <Modal
+              buttons={[
+                {
+                  label: 'Secondary',
+                  onClick: this._handleModalSecondaryClick,
+                  type: 'secondary'
+                },
+                {
+                  label: 'Primary',
+                  onClick: this._handleModalPrimaryClick,
+                  type: 'primary'
+                }
+              ]}
+              footerContent={(
+                <div>
+                  Footer content
+                </div>
+              )}
+              isOpen={this.state.showModal}
+              onRequestClose={_handleModalClose}
+              showFooter={true}
+              showTitleBar={true}
+              tooltipLabel='This is the footer text.'
+              title='This is the header text'
+              tooltip='This is my tooltip content'
+              tooltipTitle='This is my tooltip title'
+            >
+          `}
         </Markdown>
       </div>
     );

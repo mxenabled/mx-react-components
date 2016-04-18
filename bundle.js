@@ -86351,7 +86351,7 @@
 	        },
 	        React.createElement(
 	          'div',
-	          { style: { padding: 20 } },
+	          { style: { padding: 20, textAlign: 'center' } },
 	          React.createElement(
 	            'p',
 	            { style: { fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' } },
@@ -86383,7 +86383,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n  [{\n    actionText: \'\',\n    className: \'my-button-class\',\n    isActive: false,\n    icon: \'\',\n    label: \'Click Me\',\n    onClick: function () { //do something },\n    style: { marginTop: 10 }, //a style object or Radium array\n    type: \'primary\' //either \'primary\' or \'secondary\'\n  }]\n'
+	        '\n            [{\n              actionText: \'\',\n              className: \'my-button-class\',\n              isActive: false,\n              icon: \'\',\n              label: \'Click Me\',\n              onClick: function () { //do something },\n              style: { marginTop: 10 }, //a style object or Radium array\n              type: \'primary\' //either \'primary\' or \'secondary\'\n            }]\n          '
 	      ),
 	      React.createElement(
 	        'h5',
@@ -86588,7 +86588,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n  let isOpen = true;\n\n  _handleModalClose () {\n    isOpen = false;\n  }\n\n  <Modal\n    buttons={[\n      {\n        label: \'Secondary\',\n        onClick: this._handleModalSecondaryClick,\n        type: \'secondary\'\n      },\n      {\n        label: \'Primary\',\n        onClick: this._handleModalPrimaryClick,\n        type: \'primary\'\n      }\n    ]}\n    footerContent={(\n      <div>\n        Footer content\n      </div>\n    )}\n    isOpen={this.state.showModal}\n    onRequestClose={_handleModalClose}\n    showFooter={true}\n    showTitleBar={true}\n    tooltipLabel=\'This is the footer text.\'\n    title=\'This is the header text\'\n    tooltip=\'This is my tooltip content\'\n    tooltipTitle=\'This is my tooltip title\'\n  >\n'
+	        '\n            let isOpen = true;\n\n            _handleModalClose () {\n              isOpen = false;\n            }\n\n            <Modal\n              buttons={[\n                {\n                  label: \'Secondary\',\n                  onClick: this._handleModalSecondaryClick,\n                  type: \'secondary\'\n                },\n                {\n                  label: \'Primary\',\n                  onClick: this._handleModalPrimaryClick,\n                  type: \'primary\'\n                }\n              ]}\n              footerContent={(\n                <div>\n                  Footer content\n                </div>\n              )}\n              isOpen={this.state.showModal}\n              onRequestClose={_handleModalClose}\n              showFooter={true}\n              showTitleBar={true}\n              tooltipLabel=\'This is the footer text.\'\n              title=\'This is the header text\'\n              tooltip=\'This is my tooltip content\'\n              tooltipTitle=\'This is my tooltip title\'\n            >\n          '
 	      )
 	    );
 	  }
