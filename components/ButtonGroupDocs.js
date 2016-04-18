@@ -24,6 +24,7 @@ const ButtonGroupDocs = React.createClass({
             type='primaryOutline'
           />
         </div>
+        <br/><br/>
         <div>
           <ButtonGroup
             buttons={[

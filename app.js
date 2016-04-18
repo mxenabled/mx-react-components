@@ -10,6 +10,7 @@ const DatePicker = require('components/DatePickerDocs');
 const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
 const DisplayInput = require('components/DisplayInputDocs');
 const DonutChart = require('components/DonutChartDocs');
+const FileUpload = require('components/FileUploadDocs');
 const Header = require('components/Header');
 const Home = require('components/Home');
 const Icon = require('components/IconDocs');
@@ -55,6 +56,7 @@ ReactDOM.render((
         <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DisplayInput} path='display-input' />
         <Route component={DonutChart} path='donut' />
+        <Route component={FileUpload} path='file-upload' />
         <Route component={Icon} path='icon' />
         <Route component={Loader} path='loader' />
         <Route component={Modal} path='modal' />

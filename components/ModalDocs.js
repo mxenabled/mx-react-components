@@ -52,13 +52,13 @@ const ModalDocs = React.createClass({
               {
                 icon: 'close',
                 label: 'Secondary',
-                onClick: this._handleModalSecondaryClick,
+                onClick: this._handleModalClose,
                 type: 'secondary'
               },
               {
                 icon: 'rocket',
                 label: 'Primary',
-                onClick: this._handleModalPrimaryClick,
+                onClick: this._handleModalClose,
                 type: 'primary'
               }
             ]}

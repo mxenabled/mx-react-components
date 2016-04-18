@@ -65,21 +65,22 @@
 	var DatePickerFullScreen = __webpack_require__(608);
 	var DisplayInput = __webpack_require__(609);
 	var DonutChart = __webpack_require__(610);
-	var Header = __webpack_require__(611);
-	var Home = __webpack_require__(612);
-	var Icon = __webpack_require__(613);
-	var Loader = __webpack_require__(614);
-	var Modal = __webpack_require__(615);
-	var RangeSelector = __webpack_require__(616);
-	var SearchInput = __webpack_require__(617);
-	var Select = __webpack_require__(618);
-	var SelectFullScreen = __webpack_require__(619);
-	var SimpleInput = __webpack_require__(620);
-	var Spin = __webpack_require__(621);
-	var Styles = __webpack_require__(622);
-	var TimeBasedLineChart = __webpack_require__(623);
-	var ToggleSwitch = __webpack_require__(624);
-	var TypeAhead = __webpack_require__(625);
+	var FileUpload = __webpack_require__(611);
+	var Header = __webpack_require__(612);
+	var Home = __webpack_require__(613);
+	var Icon = __webpack_require__(614);
+	var Loader = __webpack_require__(615);
+	var Modal = __webpack_require__(616);
+	var RangeSelector = __webpack_require__(617);
+	var SearchInput = __webpack_require__(618);
+	var Select = __webpack_require__(619);
+	var SelectFullScreen = __webpack_require__(620);
+	var SimpleInput = __webpack_require__(621);
+	var Spin = __webpack_require__(622);
+	var Styles = __webpack_require__(623);
+	var TimeBasedLineChart = __webpack_require__(624);
+	var ToggleSwitch = __webpack_require__(625);
+	var TypeAhead = __webpack_require__(626);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -122,6 +123,7 @@
 	      React.createElement(Route, { component: DatePickerFullScreen, path: 'date-picker-full-screen' }),
 	      React.createElement(Route, { component: DisplayInput, path: 'display-input' }),
 	      React.createElement(Route, { component: DonutChart, path: 'donut' }),
+	      React.createElement(Route, { component: FileUpload, path: 'file-upload' }),
 	      React.createElement(Route, { component: Icon, path: 'icon' }),
 	      React.createElement(Route, { component: Loader, path: 'loader' }),
 	      React.createElement(Route, { component: Modal, path: 'modal' }),
@@ -81355,6 +81357,8 @@
 	          type: 'primaryOutline'
 	        })
 	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        null,
@@ -85477,6 +85481,204 @@
 
 	var React = __webpack_require__(1);
 
+	var _require = __webpack_require__(219);
+
+	var FileUpload = _require.FileUpload;
+
+
+	var Markdown = __webpack_require__(448);
+
+	var FileUploadDocs = React.createClass({
+	  displayName: 'FileUploadDocs',
+	  getInitialState: function getInitialState() {
+	    return {
+	      uploadedFile: null
+	    };
+	  },
+	  _handleFileChange: function _handleFileChange(uploadedFile) {
+	    this.setState({
+	      uploadedFile: uploadedFile
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'File Upload',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Adds drop zone component that will accept a file, either by dragging or through a file browser, and return that file.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'flex' },
+	        React.createElement(FileUpload, {
+	          allowedFileTypes: ['image/jpeg', 'text/csv', 'image/png'],
+	          maxFileSize: 3000,
+	          onFileAdd: this._handleFileChange,
+	          onFileRemove: this._handleFileChange,
+	          uploadedFile: this.state.uploadedFile
+	        })
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'allowedFileTypes ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of file types and extensions allowed for upload.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'imageUrl ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If provided, a thumbnail of the file will be shown in the uploader.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'maxFileSize ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Sets the maximum file size allowed. Measured in byes.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'OnFileAdd ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Event handler for when a file is added.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'OnFileRemove ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Event handler for when a file is removed.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'OnFileValidation ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Event handler for when a file is invalid (too large or wrong file type).'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'style ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object used to style the div that wraps the uploader\'s content'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'uploadedFile ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Any'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The uploaded file'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        null,
+	        '\n    getInitialState () {\n      return {\n        uploadedFile: null\n      };\n    },\n\n    _handleFileChange (uploadedFile) {\n      this.setState({\n        uploadedFile\n      });\n    }\n\n    <FileUpload\n      allowedFileTypes={[\'image/jpeg\', \'text/csv\', \'image/png\']}\n      maxFileSize={3000}\n      onFileAdd={this._handleFileChange}\n      onFileRemove={this._handleFileChange}\n      uploadedFile={this.state.uploadedFile}\n    />\n  '
+	      )
+	    );
+	  }
+	});
+
+	module.exports = FileUploadDocs;
+
+/***/ },
+/* 612 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
 	var _require = __webpack_require__(161);
 
 	var Link = _require.Link;
@@ -85542,7 +85744,7 @@
 	module.exports = Header;
 
 /***/ },
-/* 612 */
+/* 613 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85763,7 +85965,7 @@
 	module.exports = Home;
 
 /***/ },
-/* 613 */
+/* 614 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86072,7 +86274,7 @@
 	module.exports = IconDocs;
 
 /***/ },
-/* 614 */
+/* 615 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86248,7 +86450,7 @@
 	module.exports = LoaderDocs;
 
 /***/ },
-/* 615 */
+/* 616 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86327,12 +86529,12 @@
 	          buttons: [{
 	            icon: 'close',
 	            label: 'Secondary',
-	            onClick: this._handleModalSecondaryClick,
+	            onClick: this._handleModalClose,
 	            type: 'secondary'
 	          }, {
 	            icon: 'rocket',
 	            label: 'Primary',
-	            onClick: this._handleModalPrimaryClick,
+	            onClick: this._handleModalClose,
 	            type: 'primary'
 	          }],
 	          footerContent: React.createElement(
@@ -86597,7 +86799,7 @@
 	module.exports = ModalDocs;
 
 /***/ },
-/* 616 */
+/* 617 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86842,7 +87044,7 @@
 	module.exports = RangeSelectorDocs;
 
 /***/ },
-/* 617 */
+/* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86962,7 +87164,7 @@
 	module.exports = SearchInputDocs;
 
 /***/ },
-/* 618 */
+/* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87223,7 +87425,7 @@
 	module.exports = SelectDocs;
 
 /***/ },
-/* 619 */
+/* 620 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87494,7 +87696,7 @@
 	module.exports = SelectFullScreenDocs;
 
 /***/ },
-/* 620 */
+/* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87584,7 +87786,7 @@
 	module.exports = SimpleInputDocs;
 
 /***/ },
-/* 621 */
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87695,7 +87897,7 @@
 	module.exports = SpinDocs;
 
 /***/ },
-/* 622 */
+/* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87817,7 +88019,7 @@
 	module.exports = StylesDocs;
 
 /***/ },
-/* 623 */
+/* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88188,7 +88390,7 @@
 	module.exports = TimeBasedLineChartDocs;
 
 /***/ },
-/* 624 */
+/* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88414,7 +88616,7 @@
 	module.exports = ToggleSwitchDocs;
 
 /***/ },
-/* 625 */
+/* 626 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
