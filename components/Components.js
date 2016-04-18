@@ -21,22 +21,6 @@ const Components = React.createClass({
               onChange={this._handleChange}
               options={[
                 {
-                  value: 'icon',
-                  displayValue: 'Icon'
-                },
-                {
-                  value: 'loader',
-                  displayValue: 'Loader'
-                },
-                {
-                  value: 'modal',
-                  displayValue: 'Modal'
-                },
-                {
-                  value: 'spin',
-                  displayValue: 'Spin'
-                },
-                {
                   value: 'button',
                   displayValue: 'Button'
                 },
@@ -57,6 +41,22 @@ const Components = React.createClass({
                   displayValue: 'Display Input'
                 },
                 {
+                  value: 'donut',
+                  displayValue: 'Donut'
+                },
+                {
+                  value: 'icon',
+                  displayValue: 'Icon'
+                },
+                {
+                  value: 'loader',
+                  displayValue: 'Loader'
+                },
+                {
+                  value: 'modal',
+                  displayValue: 'Modal'
+                },
+                {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
                 },
@@ -69,24 +69,24 @@ const Components = React.createClass({
                   displayValue: 'Select Full Screen'
                 },
                 {
-                  value: 'toggle-switch',
-                  displayValue: 'Toggle Switch'
+                  value: 'spin',
+                  displayValue: 'Spin'
                 },
                 {
-                  value: 'type-ahead',
-                  displayValue: 'Type Ahead'
-                },
-                {
-                  value: 'donut',
-                  displayValue: 'Donut'
+                  value: 'styles',
+                  displayValue: 'Styles'
                 },
                 {
                   value: 'time-based-line-chart',
                   displayValue: 'Time Based Line Chart'
                 },
                 {
-                  value: 'styles',
-                  displayValue: 'Styles'
+                  value: 'toggle-switch',
+                  displayValue: 'Toggle Switch'
+                },
+                {
+                  value: 'type-ahead',
+                  displayValue: 'Type Ahead'
                 }
               ]}
               selected={null}
@@ -106,9 +106,9 @@ const Components = React.createClass({
             <Link to='/components/button-group'>Button Group</Link>
             <Link to='/components/date-picker'>Date Picker</Link>
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
+            <Link to='/components/display-input'>Display Input</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/search-input'>Search Input</Link>
-            <Link to='/components/display-input'>Display Input</Link>
             <Link to='/components/select'>Select</Link>
             <Link to='/components/select-full-screen'>Select Full Screen</Link>
             <Link to='/components/simple-input'>Simple Input</Link>

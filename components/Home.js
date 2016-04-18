@@ -54,7 +54,7 @@ const Home = React.createClass({
             <p>The repo can be found at https://github.com/mxenabled/mx-react-components</p>
 
             <h3>Install the node modules</h3>
-            <p>You may need to install some modules like babel and esw globally so you have access to their cli's.</p>
+            <p>You may need to install some modules like babel and esw globally so you have access to their cli&#39;s.</p>
             <p><code>npm install</code></p>
 
             <h3>Run the demo</h3>

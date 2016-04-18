@@ -74,7 +74,7 @@ const ModalDocs = React.createClass({
           tooltipTitle='This is my tooltip title'
         >
           <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-          <img src='http://www.mx.com/images/home/top-t-i.png' style={[{ maxWidth: '100%', height: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
+          <img src='./images/sample-image.jpg' style={[{ maxWidth: '100%', height: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
         </Modal>
 
         <h3>Usage</h3>
@@ -97,7 +97,7 @@ const ModalDocs = React.createClass({
         <p>A css color string to be used as the accent color of the modal: primary button, tooltip title, etc.</p>
 
         <h5>contentStyle <label>Object</label></h5>
-        <p>A style object used to style the content div that wrapps the modal's content</p>
+        <p>A style object used to style the content div that wrapps the modal&#39;s content</p>
 
         <h5>footerContent <label>Node</label></h5>
         <p>A node used to add jsx to the footer element of the modal.</p>
@@ -135,41 +135,41 @@ const ModalDocs = React.createClass({
 
         <h3>Example</h3>
         <Markdown>
-  {`
-    let isOpen = true;
+          {`
+            let isOpen = true;
 
-    _handleModalClose () {
-      isOpen = false;
-    }
+            _handleModalClose () {
+              isOpen = false;
+            }
 
-    <Modal
-      buttons={[
-        {
-          label: 'Secondary',
-          onClick: this._handleModalSecondaryClick,
-          type: 'secondary'
-        },
-        {
-          label: 'Primary',
-          onClick: this._handleModalPrimaryClick,
-          type: 'primary'
-        }
-      ]}
-      footerContent={(
-        <div>
-          Footer content
-        </div>
-      )}
-      isOpen={this.state.showModal}
-      onRequestClose={_handleModalClose}
-      showFooter={true}
-      showTitleBar={true}
-      tooltipLabel='This is the footer text.'
-      title='This is the header text'
-      tooltip='This is my tooltip content'
-      tooltipTitle='This is my tooltip title'
-    >
-  `}
+            <Modal
+              buttons={[
+                {
+                  label: 'Secondary',
+                  onClick: this._handleModalSecondaryClick,
+                  type: 'secondary'
+                },
+                {
+                  label: 'Primary',
+                  onClick: this._handleModalPrimaryClick,
+                  type: 'primary'
+                }
+              ]}
+              footerContent={(
+                <div>
+                  Footer content
+                </div>
+              )}
+              isOpen={this.state.showModal}
+              onRequestClose={_handleModalClose}
+              showFooter={true}
+              showTitleBar={true}
+              tooltipLabel='This is the footer text.'
+              title='This is the header text'
+              tooltip='This is my tooltip content'
+              tooltipTitle='This is my tooltip title'
+            >
+          `}
         </Markdown>
       </div>
     );

@@ -63,8 +63,8 @@
 	var Components = __webpack_require__(606);
 	var DatePicker = __webpack_require__(607);
 	var DatePickerFullScreen = __webpack_require__(608);
-	var DonutChart = __webpack_require__(609);
-	var DisplayInput = __webpack_require__(610);
+	var DisplayInput = __webpack_require__(609);
+	var DonutChart = __webpack_require__(610);
 	var Header = __webpack_require__(611);
 	var Home = __webpack_require__(612);
 	var Icon = __webpack_require__(613);
@@ -77,9 +77,9 @@
 	var SimpleInput = __webpack_require__(620);
 	var Spin = __webpack_require__(621);
 	var Styles = __webpack_require__(622);
-	var ToggleSwitch = __webpack_require__(623);
-	var TypeAhead = __webpack_require__(624);
-	var TimeBasedLineChart = __webpack_require__(625);
+	var TimeBasedLineChart = __webpack_require__(623);
+	var ToggleSwitch = __webpack_require__(624);
+	var TypeAhead = __webpack_require__(625);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -120,6 +120,7 @@
 	      React.createElement(Route, { component: ButtonGroup, path: 'button-group' }),
 	      React.createElement(Route, { component: DatePicker, path: 'date-picker' }),
 	      React.createElement(Route, { component: DatePickerFullScreen, path: 'date-picker-full-screen' }),
+	      React.createElement(Route, { component: DisplayInput, path: 'display-input' }),
 	      React.createElement(Route, { component: DonutChart, path: 'donut' }),
 	      React.createElement(Route, { component: Icon, path: 'icon' }),
 	      React.createElement(Route, { component: Loader, path: 'loader' }),
@@ -129,12 +130,11 @@
 	      React.createElement(Route, { component: Select, path: 'select' }),
 	      React.createElement(Route, { component: SelectFullScreen, path: 'select-full-screen' }),
 	      React.createElement(Route, { component: SimpleInput, path: 'simple-input' }),
-	      React.createElement(Route, { component: DisplayInput, path: 'display-input' }),
 	      React.createElement(Route, { component: Spin, path: 'spin' }),
 	      React.createElement(Route, { component: Styles, path: 'styles' }),
+	      React.createElement(Route, { component: TimeBasedLineChart, path: 'time-based-line-chart' }),
 	      React.createElement(Route, { component: ToggleSwitch, path: 'toggle-switch' }),
-	      React.createElement(Route, { component: TypeAhead, path: 'type-ahead' }),
-	      React.createElement(Route, { component: TimeBasedLineChart, path: 'time-based-line-chart' })
+	      React.createElement(Route, { component: TypeAhead, path: 'type-ahead' })
 	    ),
 	    React.createElement(IndexRoute, { component: Home })
 	  )
@@ -83872,18 +83872,6 @@
 	          React.createElement(Select, {
 	            onChange: this._handleChange,
 	            options: [{
-	              value: 'icon',
-	              displayValue: 'Icon'
-	            }, {
-	              value: 'loader',
-	              displayValue: 'Loader'
-	            }, {
-	              value: 'modal',
-	              displayValue: 'Modal'
-	            }, {
-	              value: 'spin',
-	              displayValue: 'Spin'
-	            }, {
 	              value: 'button',
 	              displayValue: 'Button'
 	            }, {
@@ -83899,6 +83887,18 @@
 	              value: 'display-input',
 	              displayValue: 'Display Input'
 	            }, {
+	              value: 'donut',
+	              displayValue: 'Donut'
+	            }, {
+	              value: 'icon',
+	              displayValue: 'Icon'
+	            }, {
+	              value: 'loader',
+	              displayValue: 'Loader'
+	            }, {
+	              value: 'modal',
+	              displayValue: 'Modal'
+	            }, {
 	              value: 'range-selector',
 	              displayValue: 'Range Selector'
 	            }, {
@@ -83908,20 +83908,20 @@
 	              value: 'select-full-screen',
 	              displayValue: 'Select Full Screen'
 	            }, {
+	              value: 'spin',
+	              displayValue: 'Spin'
+	            }, {
+	              value: 'styles',
+	              displayValue: 'Styles'
+	            }, {
+	              value: 'time-based-line-chart',
+	              displayValue: 'Time Based Line Chart'
+	            }, {
 	              value: 'toggle-switch',
 	              displayValue: 'Toggle Switch'
 	            }, {
 	              value: 'type-ahead',
 	              displayValue: 'Type Ahead'
-	            }, {
-	              value: 'donut',
-	              displayValue: 'Donut'
-	            }, {
-	              value: 'time-based-line-chart',
-	              displayValue: 'Time Based Line Chart'
-	            }, {
-	              value: 'styles',
-	              displayValue: 'Styles'
 	            }],
 	            selected: null,
 	            valid: true
@@ -83982,6 +83982,11 @@
 	          ),
 	          React.createElement(
 	            Link,
+	            { to: '/components/display-input' },
+	            'Display Input'
+	          ),
+	          React.createElement(
+	            Link,
 	            { to: '/components/range-selector' },
 	            'Range Selector'
 	          ),
@@ -83989,11 +83994,6 @@
 	            Link,
 	            { to: '/components/search-input' },
 	            'Search Input'
-	          ),
-	          React.createElement(
-	            Link,
-	            { to: '/components/display-input' },
-	            'Display Input'
 	          ),
 	          React.createElement(
 	            Link,
@@ -84699,6 +84699,212 @@
 
 	var _require = __webpack_require__(219);
 
+	var DisplayInput = _require.DisplayInput;
+
+
+	var Markdown = __webpack_require__(448);
+
+	var DisplayInputDocs = React.createClass({
+	  displayName: 'DisplayInputDocs',
+	  getInitialState: function getInitialState() {
+	    return {
+	      showHint: false,
+	      statusMessage: null,
+	      valid: true
+	    };
+	  },
+	  _handleInputShowHint: function _handleInputShowHint() {
+	    this.setState({
+	      showHint: true
+	    });
+	  },
+	  _handleInputHideHint: function _handleInputHideHint() {
+	    this.setState({
+	      showHint: false
+	    });
+	  },
+	  _handleInputFocus: function _handleInputFocus() {
+	    this.setState({
+	      statusMessage: null,
+	      showHint: false
+	    });
+	  },
+	  _handleInputStatusMessage: function _handleInputStatusMessage() {
+	    this.setState({
+	      statusMessage: {
+	        type: 'success',
+	        message: 'Saved!'
+	      },
+	      valid: true
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Display Input',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Special type of input, used primary to display details but allows for the user to edit or add data.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(DisplayInput, {
+	        hint: 'Click to Edit',
+	        label: 'Display Input',
+	        onBlur: this._handleInputStatusMessage,
+	        onFocus: this._handleInputFocus,
+	        onMouseOut: this._handleInputHideHint,
+	        onMouseOver: this._handleInputShowHint,
+	        placeholder: 'Type something',
+	        showHint: this.state.showHint,
+	        status: this.state.statusMessage,
+	        valid: true
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'hint ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Hint text to display to user on input hover'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'label ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Input label shown to the left of the input field'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'placeholder ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The text to show before the user starts typing or when the input field is empty.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'primaryColor ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A string that changes the brand color if there is one. Used on input focus and for the hint color'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'showHint ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A boolean that controls when the hint text is displayed.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'status ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An Object that contains a status type (\'error\' or \'success\') and a status message that is displayed to the right of the input field'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'valid ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        null,
+	        '\n          <DisplayInput\n            label=\'Display Input\'\n            placeholder=\'Type something\'\n            valid={true}\n          />\n        '
+	      )
+	    );
+	  }
+	});
+
+	module.exports = DisplayInputDocs;
+
+/***/ },
+/* 610 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(219);
+
 	var DonutChart = _require.DonutChart;
 
 
@@ -85262,212 +85468,6 @@
 	});
 
 	module.exports = DonutChartDocs;
-
-/***/ },
-/* 610 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(219);
-
-	var DisplayInput = _require.DisplayInput;
-
-
-	var Markdown = __webpack_require__(448);
-
-	var DisplayInputDocs = React.createClass({
-	  displayName: 'DisplayInputDocs',
-	  getInitialState: function getInitialState() {
-	    return {
-	      showHint: false,
-	      statusMessage: null,
-	      valid: true
-	    };
-	  },
-	  _handleInputShowHint: function _handleInputShowHint() {
-	    this.setState({
-	      showHint: true
-	    });
-	  },
-	  _handleInputHideHint: function _handleInputHideHint() {
-	    this.setState({
-	      showHint: false
-	    });
-	  },
-	  _handleInputFocus: function _handleInputFocus() {
-	    this.setState({
-	      statusMessage: null,
-	      showHint: false
-	    });
-	  },
-	  _handleInputStatusMessage: function _handleInputStatusMessage() {
-	    this.setState({
-	      statusMessage: {
-	        type: 'success',
-	        message: 'Saved!'
-	      },
-	      valid: true
-	    });
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Display Input',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Special type of input, used primary to display details but allows for the user to edit or add data.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(DisplayInput, {
-	        hint: 'Click to Edit',
-	        label: 'Display Input',
-	        onBlur: this._handleInputStatusMessage,
-	        onFocus: this._handleInputFocus,
-	        onMouseOut: this._handleInputHideHint,
-	        onMouseOver: this._handleInputShowHint,
-	        placeholder: 'Type something',
-	        showHint: this.state.showHint,
-	        status: this.state.statusMessage,
-	        valid: true
-	      }),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'hint ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Hint text to display to user on input hover'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'label ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Input label shown to the left of the input field'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'placeholder ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The text to show before the user starts typing or when the input field is empty.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'primaryColor ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A string that changes the brand color if there is one. Used on input focus and for the hint color'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'showHint ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A boolean that controls when the hint text is displayed.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'status ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An Object that contains a status type (\'error\' or \'success\') and a status message that is displayed to the right of the input field'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'valid ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      ),
-	      React.createElement(
-	        Markdown,
-	        null,
-	        '\n          <DisplayInput\n            label=\'Display Input\'\n            placeholder=\'Type something\'\n            valid={true}\n          />\n        '
-	      )
-	    );
-	  }
-	});
-
-	module.exports = DisplayInputDocs;
 
 /***/ },
 /* 611 */
@@ -86352,7 +86352,7 @@
 	          { style: { fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' } },
 	          'I am a modal!'
 	        ),
-	        React.createElement('img', { src: 'http://www.mx.com/images/home/top-t-i.png', style: [{ maxWidth: '100%', height: 'auto' }, this.state.showSmallModal && { width: 400 }] })
+	        React.createElement('img', { src: './images/sample-image.jpg', style: [{ maxWidth: '100%', height: 'auto' }, this.state.showSmallModal && { width: 400 }] })
 	      ),
 	      React.createElement(
 	        'h3',
@@ -86587,7 +86587,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n    let isOpen = true;\n\n    _handleModalClose () {\n      isOpen = false;\n    }\n\n    <Modal\n      buttons={[\n        {\n          label: \'Secondary\',\n          onClick: this._handleModalSecondaryClick,\n          type: \'secondary\'\n        },\n        {\n          label: \'Primary\',\n          onClick: this._handleModalPrimaryClick,\n          type: \'primary\'\n        }\n      ]}\n      footerContent={(\n        <div>\n          Footer content\n        </div>\n      )}\n      isOpen={this.state.showModal}\n      onRequestClose={_handleModalClose}\n      showFooter={true}\n      showTitleBar={true}\n      tooltipLabel=\'This is the footer text.\'\n      title=\'This is the header text\'\n      tooltip=\'This is my tooltip content\'\n      tooltipTitle=\'This is my tooltip title\'\n    >\n  '
+	        '\n            let isOpen = true;\n\n            _handleModalClose () {\n              isOpen = false;\n            }\n\n            <Modal\n              buttons={[\n                {\n                  label: \'Secondary\',\n                  onClick: this._handleModalSecondaryClick,\n                  type: \'secondary\'\n                },\n                {\n                  label: \'Primary\',\n                  onClick: this._handleModalPrimaryClick,\n                  type: \'primary\'\n                }\n              ]}\n              footerContent={(\n                <div>\n                  Footer content\n                </div>\n              )}\n              isOpen={this.state.showModal}\n              onRequestClose={_handleModalClose}\n              showFooter={true}\n              showTitleBar={true}\n              tooltipLabel=\'This is the footer text.\'\n              title=\'This is the header text\'\n              tooltip=\'This is my tooltip content\'\n              tooltipTitle=\'This is my tooltip title\'\n            >\n          '
 	      )
 	    );
 	  }
@@ -87792,389 +87792,6 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(219);
-
-	var ToggleSwitch = _require.ToggleSwitch;
-
-
-	var Markdown = __webpack_require__(448);
-
-	var ToggleSwitchDocs = React.createClass({
-	  displayName: 'ToggleSwitchDocs',
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'ToggleSwitch',
-	        React.createElement(
-	          'label',
-	          null,
-	          'An iOS style toggle for controlling boolean type values.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(ToggleSwitch, {
-	        defaultPosition: 'right',
-	        trackStyle: { boxSizing: 'content-box' }
-	      }),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'activeColor ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: `#359BCF`'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A css color value that sets the color of the active left or right label.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'defaultPosition ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String: `left`, `right`'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: `left`'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Sets the default start position of the toggle. '
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'inactiveColor ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: `#999999`'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A css color value that sets the color of the inactive left or right label.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'leftLabel ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: `On`'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The text to display on the left side of the component.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'onToggle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A method that will be called whenever the toggle is clicked, or changes position. The method will be passed the active position, either `left` or `right`.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'leftLabel ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: `Off`'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The text to display on the right side of the component.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'showLabels ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Boolean'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: `true`'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'If set to `false`, then the left and right labels will not be rendered.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'toggleStyle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object or Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A style object or Radium array that modifies the css styles of the toggle element.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'trackStyle ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Object or Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A style object or Radium array that modifies the css styles of the track element.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      ),
-	      React.createElement(
-	        Markdown,
-	        null,
-	        '\n    <ToggleSwitch\n      defaultPosition=\'right\'\n    />\n  '
-	      )
-	    );
-	  }
-	});
-
-	module.exports = ToggleSwitchDocs;
-
-/***/ },
-/* 624 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(219);
-
-	var TypeAhead = _require.TypeAhead;
-
-
-	var Markdown = __webpack_require__(448);
-
-	var TypeAheadDocs = React.createClass({
-	  displayName: 'TypeAheadDocs',
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h1',
-	        null,
-	        'TypeAhead',
-	        React.createElement(
-	          'label',
-	          null,
-	          'An interactive list selector, commonly used in forms.'
-	        )
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Demo'
-	      ),
-	      React.createElement(TypeAhead, {
-	        items: ['JPMorgan Chase', 'Bank of America', 'Citigroup', 'Wells Fargo', 'The Bank of New York Mellon', 'U.S. Bancorp', 'HSBC Bank USA', 'Capital One', 'PNC Financial Services', 'State Street Corporation'],
-	        placeholderText: 'Select a Bank',
-	        preSelectedItems: ['Bank of America', 'Wells Fargo']
-	      }),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Usage'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'items ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An array of Strings used for the options list. Example:'
-	      ),
-	      React.createElement(
-	        Markdown,
-	        { lang: 'js' },
-	        '\n    [\n      \'JPMorgan Chase\',\n      \'Bank of America\',\n      \'Citigroup\',\n      \'Wells Fargo\',\n      \'The Bank of New York Mellon\',\n      \'U.S. Bancorp\',\n      \'HSBC Bank USA\',\n      \'Capital One\',\n      \'PNC Financial Services\',\n      \'State Street Corporation\'\n    ]\n  '
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'onItemRemove ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A method to be called whenever an item is removed by the user. It will be passed 2 parameters: the item removed, an updated array of selected items. Example:'
-	      ),
-	      React.createElement(
-	        Markdown,
-	        { lang: 'js' },
-	        '\n    _handleItemRemoved (item, selectedItems) {\n      console.log(item + \' was removed from the list\');\n    }\n\n    <TypeAhead\n      // ..other props\n      onItemRemove={_handleItemRemoved)\n    />\n  '
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'onItemSelect ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Function'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'A method to be called whenever an item is selected by the user. It will be passed 2 parameters: the item selected, an updated array of selected items. Example:'
-	      ),
-	      React.createElement(
-	        Markdown,
-	        { lang: 'js' },
-	        '\n    _handleItemSelected (item, selectedItems) {\n      console.log(item + \' was selected from the list\');\n    }\n\n    <TypeAhead\n      // ..other props\n      onItemSelect={_handleItemSelected)\n    />\n  '
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'placeholderText ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'String'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Default: \'Select Filters\''
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'The text to display by default when no items have been selected.'
-	      ),
-	      React.createElement(
-	        'h5',
-	        null,
-	        'preSelectedItems ',
-	        React.createElement(
-	          'label',
-	          null,
-	          'Array'
-	        )
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'An array of Strings to be displayed as selected options by default. These values should be contained in the items Array. These values will be the starting point of the TypeAhead\'s selected values state. Once the user begins interacting with the TypeAhead, they will be ignored.'
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Example'
-	      ),
-	      React.createElement(
-	        Markdown,
-	        null,
-	        '\n    <TypeAhead\n      items={[\n        \'JPMorgan Chase\',\n        \'Bank of America\',\n        \'Citigroup\',\n        \'Wells Fargo\',\n        \'The Bank of New York Mellon\',\n        \'U.S. Bancorp\',\n        \'HSBC Bank USA\',\n        \'Capital One\',\n        \'PNC Financial Services\',\n        \'State Street Corporation\'\n      ]}\n      placeholderText=\'Select a Bank\'\n      preSelectedItems={[\n        \'Bank of America\',\n        \'Wells Fargo\'\n      ]}\n    />\n  '
-	      )
-	    );
-	  }
-	});
-
-	module.exports = TypeAheadDocs;
-
-/***/ },
-/* 625 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
 	var moment = __webpack_require__(250);
 
 	var _require = __webpack_require__(219);
@@ -88538,6 +88155,389 @@
 	});
 
 	module.exports = TimeBasedLineChartDocs;
+
+/***/ },
+/* 624 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(219);
+
+	var ToggleSwitch = _require.ToggleSwitch;
+
+
+	var Markdown = __webpack_require__(448);
+
+	var ToggleSwitchDocs = React.createClass({
+	  displayName: 'ToggleSwitchDocs',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'ToggleSwitch',
+	        React.createElement(
+	          'label',
+	          null,
+	          'An iOS style toggle for controlling boolean type values.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(ToggleSwitch, {
+	        defaultPosition: 'right',
+	        trackStyle: { boxSizing: 'content-box' }
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'activeColor ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: `#359BCF`'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A css color value that sets the color of the active left or right label.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'defaultPosition ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String: `left`, `right`'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: `left`'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Sets the default start position of the toggle. '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'inactiveColor ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: `#999999`'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A css color value that sets the color of the inactive left or right label.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'leftLabel ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: `On`'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The text to display on the left side of the component.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onToggle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A method that will be called whenever the toggle is clicked, or changes position. The method will be passed the active position, either `left` or `right`.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'leftLabel ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: `Off`'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The text to display on the right side of the component.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'showLabels ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Boolean'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: `true`'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'If set to `false`, then the left and right labels will not be rendered.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'toggleStyle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object or Radium array that modifies the css styles of the toggle element.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'trackStyle ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Object or Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A style object or Radium array that modifies the css styles of the track element.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        null,
+	        '\n    <ToggleSwitch\n      defaultPosition=\'right\'\n    />\n  '
+	      )
+	    );
+	  }
+	});
+
+	module.exports = ToggleSwitchDocs;
+
+/***/ },
+/* 625 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(219);
+
+	var TypeAhead = _require.TypeAhead;
+
+
+	var Markdown = __webpack_require__(448);
+
+	var TypeAheadDocs = React.createClass({
+	  displayName: 'TypeAheadDocs',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'TypeAhead',
+	        React.createElement(
+	          'label',
+	          null,
+	          'An interactive list selector, commonly used in forms.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(TypeAhead, {
+	        items: ['JPMorgan Chase', 'Bank of America', 'Citigroup', 'Wells Fargo', 'The Bank of New York Mellon', 'U.S. Bancorp', 'HSBC Bank USA', 'Capital One', 'PNC Financial Services', 'State Street Corporation'],
+	        placeholderText: 'Select a Bank',
+	        preSelectedItems: ['Bank of America', 'Wells Fargo']
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'items ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of Strings used for the options list. Example:'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    [\n      \'JPMorgan Chase\',\n      \'Bank of America\',\n      \'Citigroup\',\n      \'Wells Fargo\',\n      \'The Bank of New York Mellon\',\n      \'U.S. Bancorp\',\n      \'HSBC Bank USA\',\n      \'Capital One\',\n      \'PNC Financial Services\',\n      \'State Street Corporation\'\n    ]\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onItemRemove ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A method to be called whenever an item is removed by the user. It will be passed 2 parameters: the item removed, an updated array of selected items. Example:'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    _handleItemRemoved (item, selectedItems) {\n      console.log(item + \' was removed from the list\');\n    }\n\n    <TypeAhead\n      // ..other props\n      onItemRemove={_handleItemRemoved)\n    />\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'onItemSelect ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A method to be called whenever an item is selected by the user. It will be passed 2 parameters: the item selected, an updated array of selected items. Example:'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    _handleItemSelected (item, selectedItems) {\n      console.log(item + \' was selected from the list\');\n    }\n\n    <TypeAhead\n      // ..other props\n      onItemSelect={_handleItemSelected)\n    />\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'placeholderText ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'String'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: \'Select Filters\''
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The text to display by default when no items have been selected.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'preSelectedItems ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Array'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'An array of Strings to be displayed as selected options by default. These values should be contained in the items Array. These values will be the starting point of the TypeAhead\'s selected values state. Once the user begins interacting with the TypeAhead, they will be ignored.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        null,
+	        '\n    <TypeAhead\n      items={[\n        \'JPMorgan Chase\',\n        \'Bank of America\',\n        \'Citigroup\',\n        \'Wells Fargo\',\n        \'The Bank of New York Mellon\',\n        \'U.S. Bancorp\',\n        \'HSBC Bank USA\',\n        \'Capital One\',\n        \'PNC Financial Services\',\n        \'State Street Corporation\'\n      ]}\n      placeholderText=\'Select a Bank\'\n      preSelectedItems={[\n        \'Bank of America\',\n        \'Wells Fargo\'\n      ]}\n    />\n  '
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TypeAheadDocs;
 
 /***/ }
 /******/ ]);
