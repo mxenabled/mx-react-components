@@ -669,8 +669,8 @@ const Demo = React.createClass({
     return (
       <div>
         <br/><br/>
-          <Button onClick={this._handleShowDrawerClick} style={{ position: 'absolute', left: 15, top: 15 }} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
-          {this.state.showDrawer ?
+        <Button onClick={this._handleShowDrawerClick} style={{ position: 'absolute', left: 15, top: 15 }} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
+        {this.state.showDrawer ?
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
             <Drawer navConfig={navConfig} onClose={this._onHideDrawer}>
               <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>

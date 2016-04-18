@@ -40,7 +40,7 @@ const Button = React.createClass({
         {this.props.isActive ? (
           <div>
             <Spin direction='counterclockwise'>
-                <Icon size={20} style={styles.spinner} type='spinner' />
+              <Icon size={20} style={styles.spinner} type='spinner' />
             </Spin>
               {this.props.actionText ? <div style={styles.actionText}> {this.props.actionText} </div> : null }
           </div>
