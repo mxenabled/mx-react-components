@@ -86321,14 +86321,16 @@
 	          'Show Small Modal'
 	        )
 	      ),
-	      React.createElement(
+	      this.state.showModal ? React.createElement(
 	        Modal,
 	        {
 	          buttons: [{
+	            icon: 'close',
 	            label: 'Secondary',
 	            onClick: this._handleModalSecondaryClick,
 	            type: 'secondary'
 	          }, {
+	            icon: 'rocket',
 	            label: 'Primary',
 	            onClick: this._handleModalPrimaryClick,
 	            type: 'primary'
@@ -86338,7 +86340,7 @@
 	            { style: { color: '#ACB0B3', fontSize: '12px', padding: '2px 0' } },
 	            'Footer Content'
 	          ),
-	          isOpen: this.state.showModal,
+	          footerStyle: { padding: '40px 20px' },
 	          onRequestClose: this._handleModalClose,
 	          showFooter: true,
 	          showTitleBar: true,
@@ -86348,12 +86350,16 @@
 	          tooltipTitle: 'This is my tooltip title'
 	        },
 	        React.createElement(
-	          'p',
-	          { style: { fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' } },
-	          'I am a modal!'
-	        ),
-	        React.createElement('img', { src: './images/sample-image.jpg', style: [{ maxWidth: '100%', height: 'auto' }, this.state.showSmallModal && { width: 400 }] })
-	      ),
+	          'div',
+	          { style: { padding: 20 } },
+	          React.createElement(
+	            'p',
+	            { style: { fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' } },
+	            'I am a modal!'
+	          ),
+	          React.createElement('img', { src: 'https://unsplash.it/1000/600?random', style: [{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }] })
+	        )
+	      ) : null,
 	      React.createElement(
 	        'h3',
 	        null,
@@ -86372,12 +86378,12 @@
 	      React.createElement(
 	        'p',
 	        null,
-	        'An array of objects with the properties: className, label, onClick, style, and type. Used to display button in the footer of the modal. Example:'
+	        'An array of objects with the properties: actionText, className, isActive, icon, label, onClick, style, and type. Used to display button in the footer of the modal. Example:'
 	      ),
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n            [{\n              className: \'my-button-class\',\n              label: \'Click Me\',\n              onClick: function () { //do something },\n              style: { marginTop: 10 }, //a style object or Radium array\n              type: \'primary\' //either \'primary\' or \'secondary\'\n            }]\n          '
+	        '\n            [{\n              actionText: \'\',\n              className: \'my-button-class\',\n              isActive: false,\n              icon: \'\',\n              label: \'Click Me\',\n              onClick: function () { //do something },\n              style: { marginTop: 10 }, //a style object or Radium array\n              type: \'primary\' //either \'primary\' or \'secondary\'\n            }]\n          '
 	      ),
 	      React.createElement(
 	        'h5',
@@ -86427,22 +86433,17 @@
 	      React.createElement(
 	        'h5',
 	        null,
-	        'isOpen ',
+	        'footerStyle ',
 	        React.createElement(
 	          'label',
 	          null,
-	          'Boolean'
+	          'Object or Array'
 	        )
 	      ),
 	      React.createElement(
 	        'p',
 	        null,
-	        'Default: \'false\''
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Determines if the modal is visible or hidden'
+	        'A style object used to style the footer div that wrapps the modal\'s footer'
 	      ),
 	      React.createElement(
 	        'h5',
