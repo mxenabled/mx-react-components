@@ -75,17 +75,17 @@ const SelectFullScreenDocs = React.createClass({
 
         <h5>optionFormatter <label>Function</label></h5>
         <p>Default:
-        <Markdown>
-          {`
-            optionFormatter (option) {
-              return (
-                <div key={option.displayValue + option.value + '_value'} style={styles.option}>
-                  {option.displayValue}
-                </div>
-              );
-            }
-          `}
-        </Markdown>
+          <Markdown>
+            {`
+              optionFormatter (option) {
+                return (
+                  <div key={option.displayValue + option.value + '_value'} style={styles.option}>
+                    {option.displayValue}
+                  </div>
+                );
+              }
+            `}
+          </Markdown>
         </p>
         <p>A function that formats each option.</p>
 

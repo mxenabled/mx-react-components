@@ -32,15 +32,15 @@ const SpinDocs = React.createClass({
         <p>The time it takes the element to make 1 full rotation in milliseconds. Default: 1000</p>
 
         <h3>Example</h3>
-         <Markdown>
-  {`
-    <Spin>
-      <Icon
-        size={50}
-        type='sync'
-      />
-    </Spin>
-  `}
+        <Markdown>
+          {`
+            <Spin>
+              <Icon
+                size={50}
+                type='sync'
+              />
+            </Spin>
+          `}
         </Markdown>
       </div>
     );

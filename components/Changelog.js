@@ -4,81 +4,81 @@ const Changelog = React.createClass({
   render () {
     return (
       <div>
-      <h1>Change Log</h1>
+        <h1>Change Log</h1>
 
-      <h3>3.0.2</h3>
-      <ul>
-        <li>Fixed how styles were called on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/266'>#266</a>)</li>
-      </ul>
+        <h3>3.0.2</h3>
+        <ul>
+          <li>Fixed how styles were called on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/266'>#266</a>)</li>
+        </ul>
 
-      <h3>3.0.1</h3>
-      <ul>
-        <li>Added DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/261'>#261</a>)</li>
-      </ul>
+        <h3>3.0.1</h3>
+        <ul>
+          <li>Added DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/261'>#261</a>)</li>
+        </ul>
 
-      <h3>3.0.0</h3>
-      <ul>
-        <li>Updates to React v15.0.1 (<a href='https://github.com/mxenabled/mx-react-components/pull/262'>#258</a>)</li>
-      </ul>
+        <h3>3.0.0</h3>
+        <ul>
+          <li>Updates to React v15.0.1 (<a href='https://github.com/mxenabled/mx-react-components/pull/262'>#258</a>)</li>
+        </ul>
 
-      <h3>2.3.6</h3>
-      <ul>
-        <li>Added Radium on button component (<a href='https://github.com/mxenabled/mx-react-components/pull/264'>#264</a>)</li>
-        <li>Edited styles on button component (<a href='https://github.com/mxenabled/mx-react-components/pull/257'>#257</a>)</li>
-      </ul>
-
-
-      <h3>2.3.5</h3>
-      <ul>
-        <li>Removed gray border from SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/258'>#258</a>)</li>
-      </ul>
-
-      <h3>2.3.4</h3>
-      <ul>
-        <li>Add SimpleInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/255'>#252</a>)</li>
-        <li>Add SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/252'>#255</a>)</li>
-      </ul>
-      <h3>2.3.3</h3>
-      <ul>
-        <li>Remove validation warning and add onValidation prop in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/248'>#248</a>)</li>
-      </ul>
-
-      <h3>2.3.2</h3>
-      <ul>
-        <li>Fix deprecation warning in Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/253'>#253</a>)</li>
-      </ul>
-
-      <h3>2.3.1</h3>
-      <ul>
-        <li>Remove fill mapping to props.color in Icon (<a href='https://github.com/mxenabled/mx-react-components/commit/496f2d6085358f9511df28124002e6b563a6bdd8'>See Commit</a>)</li>
-      </ul>
-
-      <h3>2.3.0</h3>
-      <ul>
-        <li>Display Unsplash.it image in demo</li>
-        <li>Icon: Radium dependency removed. `style` prop now only accepts an object</li>
-        <li>PageIndicator: component added (<a href='https://github.com/mxenabled/mx-react-components/pull/249'>#249</a>)</li>
-        <li>ButtonGroup: component added (<a href='https://github.com/mxenabled/mx-react-components/pull/242'>#242</a>)</li>
-        <li>Proxima Nova fonts added to demo</li>
-        <li>Modal: `isOpen` prop deprecated (<a href='https://github.com/mxenabled/mx-react-components/pull/238'>#238</a>)</li>
-      </ul>
-
-      <h3>2.2.14</h3>
-      <ul>
-        <li>Add adjustHexColor to Styles constants (<a href='https://github.com/mxenabled/mx-react-components/pull/243'>#243</a>)</li>
-      </ul>
+        <h3>2.3.6</h3>
+        <ul>
+          <li>Added Radium on button component (<a href='https://github.com/mxenabled/mx-react-components/pull/264'>#264</a>)</li>
+          <li>Edited styles on button component (<a href='https://github.com/mxenabled/mx-react-components/pull/257'>#257</a>)</li>
+        </ul>
 
 
-      <h3>2.2.13</h3>
-      <ul>
-        <li>Return event along with value on Toggle component (<a href='https://github.com/mxenabled/mx-react-components/pull/241'>#241</a>)</li>
-        <li>Fix styling on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/240'>#240</a>)</li>
-      </ul>
+        <h3>2.3.5</h3>
+        <ul>
+          <li>Removed gray border from SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/258'>#258</a>)</li>
+        </ul>
 
-      <h3>2.2.12</h3>
-      <ul>
-        <li>Update credit card icon in Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/235'>#235</a>)</li>
-      </ul>
+        <h3>2.3.4</h3>
+        <ul>
+          <li>Add SimpleInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/255'>#252</a>)</li>
+          <li>Add SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/252'>#255</a>)</li>
+        </ul>
+        <h3>2.3.3</h3>
+        <ul>
+          <li>Remove validation warning and add onValidation prop in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/248'>#248</a>)</li>
+        </ul>
+
+        <h3>2.3.2</h3>
+        <ul>
+          <li>Fix deprecation warning in Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/253'>#253</a>)</li>
+        </ul>
+
+        <h3>2.3.1</h3>
+        <ul>
+          <li>Remove fill mapping to props.color in Icon (<a href='https://github.com/mxenabled/mx-react-components/commit/496f2d6085358f9511df28124002e6b563a6bdd8'>See Commit</a>)</li>
+        </ul>
+
+        <h3>2.3.0</h3>
+        <ul>
+          <li>Display Unsplash.it image in demo</li>
+          <li>Icon: Radium dependency removed. `style` prop now only accepts an object</li>
+          <li>PageIndicator: component added (<a href='https://github.com/mxenabled/mx-react-components/pull/249'>#249</a>)</li>
+          <li>ButtonGroup: component added (<a href='https://github.com/mxenabled/mx-react-components/pull/242'>#242</a>)</li>
+          <li>Proxima Nova fonts added to demo</li>
+          <li>Modal: `isOpen` prop deprecated (<a href='https://github.com/mxenabled/mx-react-components/pull/238'>#238</a>)</li>
+        </ul>
+
+        <h3>2.2.14</h3>
+        <ul>
+          <li>Add adjustHexColor to Styles constants (<a href='https://github.com/mxenabled/mx-react-components/pull/243'>#243</a>)</li>
+        </ul>
+
+
+        <h3>2.2.13</h3>
+        <ul>
+          <li>Return event along with value on Toggle component (<a href='https://github.com/mxenabled/mx-react-components/pull/241'>#241</a>)</li>
+          <li>Fix styling on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/240'>#240</a>)</li>
+        </ul>
+
+        <h3>2.2.12</h3>
+        <ul>
+          <li>Update credit card icon in Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/235'>#235</a>)</li>
+        </ul>
 
         <h3>2.2.10</h3>
         <ul>

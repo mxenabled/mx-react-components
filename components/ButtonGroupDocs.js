@@ -15,24 +15,24 @@ const ButtonGroupDocs = React.createClass({
 
         <h3>Demo</h3>
         <div className='flex'>
-        <ButtonGroup
-          buttons={[
-            { icon: 'caret-left' },
-            { text: 'Mar 2015 - Feb 2016' },
-            { icon: 'caret-right' }
-          ]}
-          type='primaryOutline'
-        />
-      </div>
-      <div>
-        <ButtonGroup
-          buttons={[
-            { icon: 'download' },
-            { icon: 'search' },
-            { icon: 'add' }
-          ]}
-          type='base'
-        />
+          <ButtonGroup
+            buttons={[
+              { icon: 'caret-left' },
+              { text: 'Mar 2015 - Feb 2016' },
+              { icon: 'caret-right' }
+            ]}
+            type='primaryOutline'
+          />
+        </div>
+        <div>
+          <ButtonGroup
+            buttons={[
+              { icon: 'download' },
+              { icon: 'search' },
+              { icon: 'add' }
+            ]}
+            type='base'
+          />
         </div>
 
         <h3>Usage</h3>

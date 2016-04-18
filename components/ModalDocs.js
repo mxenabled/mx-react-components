@@ -81,17 +81,17 @@ const ModalDocs = React.createClass({
 
         <h5>buttons <label>Array</label></h5>
         <p>An array of objects with the properties: className, label, onClick, style, and type. Used to display button in the footer of the modal. Example:</p>
-  <Markdown>
-    {`
-      [{
-        className: 'my-button-class',
-        label: 'Click Me',
-        onClick: function () { //do something },
-        style: { marginTop: 10 }, //a style object or Radium array
-        type: 'primary' //either 'primary' or 'secondary'
-      }]
-    `}
-  </Markdown>
+        <Markdown>
+          {`
+            [{
+              className: 'my-button-class',
+              label: 'Click Me',
+              onClick: function () { //do something },
+              style: { marginTop: 10 }, //a style object or Radium array
+              type: 'primary' //either 'primary' or 'secondary'
+            }]
+          `}
+        </Markdown>
 
         <h5>color <label>String</label></h5>
         <p>A css color string to be used as the accent color of the modal: primary button, tooltip title, etc.</p>

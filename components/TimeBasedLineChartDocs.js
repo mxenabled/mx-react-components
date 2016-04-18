@@ -58,14 +58,14 @@ const TimeBasedLineChartDocs = React.createClass({
 
         <h5>data <label>Arrray</label></h5>
         <p>An array of data objects that are used to set the x axis, y axis, and line values. Example:</p>
-  <Markdown lang='js'>
-  {`
-    [{
-      x: 1446063248, //unix timestamp, required
-      y: 10 //number or string
-    }]
-  `}
-  </Markdown>
+        <Markdown lang='js'>
+        {`
+          [{
+            x: 1446063248, //unix timestamp, required
+            y: 10 //number or string
+          }]
+        `}
+        </Markdown>
 
         <h5>height <label>Number</label></h5>
         <p>Default: 400</p>
@@ -77,16 +77,16 @@ const TimeBasedLineChartDocs = React.createClass({
 
         <h5>margin <label>Object</label></h5>
         <p>A object that contains top, right, bottom, and left margin values. These can be used to adjust the spacing around the chart. Default:</p>
-  <Markdown lang='js'>
-  {`
-    {
-      top: 20,
-      right: 50,
-      bottom: 20,
-      left: 50
-    }
-  `}
-  </Markdown>
+        <Markdown lang='js'>
+        {`
+          {
+            top: 20,
+            right: 50,
+            bottom: 20,
+            left: 50
+          }
+        `}
+        </Markdown>
 
         <h5>rangeType <label>String ('day', 'month')</label></h5>
         <p>Default: 'day'</p>

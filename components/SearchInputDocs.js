@@ -33,12 +33,12 @@ const SearchInputDocs = React.createClass({
 
 
         <h3>Example</h3>
-         <Markdown>
-  {`
-    <SearchInput
-      placeholder='Type to search'
-    />
-  `}
+        <Markdown>
+        {`
+          <SearchInput
+            placeholder='Type to search'
+          />
+        `}
         </Markdown>
       </div>
     );

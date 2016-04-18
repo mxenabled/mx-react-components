@@ -26,14 +26,14 @@ const SimpleInputDocs = React.createClass({
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red border.</p>
 
         <h3>Example</h3>
-         <Markdown>
-  {`
-    <SimpleInput
-      placeholder='Type something'
-      type='text'
-      valid={false}
-    />
-  `}
+        <Markdown>
+          {`
+            <SimpleInput
+              placeholder='Type something'
+              type='text'
+              valid={false}
+            />
+          `}
         </Markdown>
       </div>
     );

@@ -88,14 +88,14 @@ const DisplayInputDocs = React.createClass({
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.</p>
 
         <h3>Example</h3>
-         <Markdown>
-  {`
-    <DisplayInput
-      label='Display Input'
-      placeholder='Type something'
-      valid={true}
-    />
-  `}
+        <Markdown>
+        {`
+          <DisplayInput
+            label='Display Input'
+            placeholder='Type something'
+            valid={true}
+          />
+        `}
         </Markdown>
       </div>
     );
