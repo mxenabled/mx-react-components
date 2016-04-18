@@ -66,6 +66,24 @@ const StylesDocs = React.createClass({
   `}
         </Markdown>
 
+        <h5>Adjust Color</h5>
+        <p>Takes a HEX color and adjust amount and returns a HEX value of the new color. Negative numbers darken whereas positive numbers lighten the color.</p>
+
+        <Markdown lang='js'>
+  {`
+    color: Styles.adjustColor(Styles.Colors.PRIMARY, -15); //#359BCF is adjusted and returned as #268CC0
+  `}
+        </Markdown>
+
+        <h5>Adjust HEX Opacity</h5>
+        <p>Takes a HEX color and opacity amount and returns a rgba value of the new color.</p>
+
+        <Markdown lang='js'>
+  {`
+    color: Styles.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)
+  `}
+        </Markdown>
+
         <h3>Example</h3>
         <Markdown lang='js'>
   {`

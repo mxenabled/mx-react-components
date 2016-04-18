@@ -86383,7 +86383,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n            [{\n              actionText: \'\',\n              className: \'my-button-class\',\n              isActive: false,\n              icon: \'\',\n              label: \'Click Me\',\n              onClick: function () { //do something },\n              style: { marginTop: 10 }, //a style object or Radium array\n              type: \'primary\' //either \'primary\' or \'secondary\'\n            }]\n          '
+	        '\n    [{\n      actionText: \'\',\n      className: \'my-button-class\',\n      isActive: false,\n      icon: \'\',\n      label: \'Click Me\',\n      onClick: function () { //do something },\n      style: { marginTop: 10 }, //a style object or Radium array\n      type: \'primary\' //either \'primary\' or \'secondary\'\n    }]\n  '
 	      ),
 	      React.createElement(
 	        'h5',
@@ -86588,7 +86588,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n            let isOpen = true;\n\n            _handleModalClose () {\n              isOpen = false;\n            }\n\n            <Modal\n              buttons={[\n                {\n                  label: \'Secondary\',\n                  onClick: this._handleModalSecondaryClick,\n                  type: \'secondary\'\n                },\n                {\n                  label: \'Primary\',\n                  onClick: this._handleModalPrimaryClick,\n                  type: \'primary\'\n                }\n              ]}\n              footerContent={(\n                <div>\n                  Footer content\n                </div>\n              )}\n              isOpen={this.state.showModal}\n              onRequestClose={_handleModalClose}\n              showFooter={true}\n              showTitleBar={true}\n              tooltipLabel=\'This is the footer text.\'\n              title=\'This is the header text\'\n              tooltip=\'This is my tooltip content\'\n              tooltipTitle=\'This is my tooltip title\'\n            >\n          '
+	        '\n    let isOpen = true;\n\n    _handleModalClose () {\n      isOpen = false;\n    }\n\n    <Modal\n      buttons={[\n        {\n          label: \'Secondary\',\n          onClick: this._handleModalSecondaryClick,\n          type: \'secondary\'\n        },\n        {\n          label: \'Primary\',\n          onClick: this._handleModalPrimaryClick,\n          type: \'primary\'\n        }\n      ]}\n      footerContent={(\n        <div>\n          Footer content\n        </div>\n      )}\n      isOpen={this.state.showModal}\n      onRequestClose={_handleModalClose}\n      showFooter={true}\n      showTitleBar={true}\n      tooltipLabel=\'This is the footer text.\'\n      title=\'This is the header text\'\n      tooltip=\'This is my tooltip content\'\n      tooltipTitle=\'This is my tooltip title\'\n    >\n  '
 	      )
 	    );
 	  }
@@ -87769,6 +87769,36 @@
 	        Markdown,
 	        { lang: 'js' },
 	        '\n    Styles.Fonts.THIN // ProximaNovaThin, Helvetica, Arial, sans-serif\n    Styles.Fonts.LIGHT // ProximaNovaLight, Helvetica, Arial, sans-serif\n    Styles.Fonts.REGULAR // ProximaNovaRegular, Helvetica, Arial, sans-serif\n    Styles.Fonts.ITALIC // ProximaNovaRegularItalic, Helvetica, Arial, sans-serif\n    Styles.Fonts.SEMIBOLD // ProximaNovaSemibold, Helvetica, Arial, sans-serif\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'Adjust Color'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Takes a HEX color and adjust amount and returns a HEX value of the new color. Negative numbers darken whereas positive numbers lighten the color.'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    color: Styles.adjustColor(Styles.Colors.PRIMARY, -15); //#359BCF is adjusted and returned as #268CC0\n  '
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'Adjust HEX Opacity'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Takes a HEX color and opacity amount and returns a rgba value of the new color.'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        { lang: 'js' },
+	        '\n    color: Styles.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)\n  '
 	      ),
 	      React.createElement(
 	        'h3',
