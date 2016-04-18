@@ -86383,7 +86383,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n            [{\n              actionText: \'\',\n              className: \'my-button-class\',\n              isActive: false,\n              icon: \'\',\n              label: \'Click Me\',\n              onClick: function () { //do something },\n              style: { marginTop: 10 }, //a style object or Radium array\n              type: \'primary\' //either \'primary\' or \'secondary\'\n            }]\n          '
+	        '\n  [{\n    actionText: \'\',\n    className: \'my-button-class\',\n    isActive: false,\n    icon: \'\',\n    label: \'Click Me\',\n    onClick: function () { //do something },\n    style: { marginTop: 10 }, //a style object or Radium array\n    type: \'primary\' //either \'primary\' or \'secondary\'\n  }]\n'
 	      ),
 	      React.createElement(
 	        'h5',
