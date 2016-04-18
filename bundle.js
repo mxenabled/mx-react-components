@@ -85521,7 +85521,7 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'flex' },
+	        { style: { textAlign: 'center', width: '80%', margin: 'auto' } },
 	        React.createElement(FileUpload, {
 	          allowedFileTypes: ['image/jpeg', 'text/csv', 'image/png'],
 	          maxFileSize: 3000,

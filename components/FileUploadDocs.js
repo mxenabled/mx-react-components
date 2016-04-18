@@ -26,7 +26,7 @@ const FileUploadDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <div className='flex'>
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
             maxFileSize={3000}
