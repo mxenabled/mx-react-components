@@ -143,41 +143,41 @@ const ModalDocs = React.createClass({
 
         <h3>Example</h3>
         <Markdown>
-          {`
-            let isOpen = true;
+{`
+  let isOpen = true;
 
-            _handleModalClose () {
-              isOpen = false;
-            }
+  _handleModalClose () {
+    isOpen = false;
+  }
 
-            <Modal
-              buttons={[
-                {
-                  label: 'Secondary',
-                  onClick: this._handleModalSecondaryClick,
-                  type: 'secondary'
-                },
-                {
-                  label: 'Primary',
-                  onClick: this._handleModalPrimaryClick,
-                  type: 'primary'
-                }
-              ]}
-              footerContent={(
-                <div>
-                  Footer content
-                </div>
-              )}
-              isOpen={this.state.showModal}
-              onRequestClose={_handleModalClose}
-              showFooter={true}
-              showTitleBar={true}
-              tooltipLabel='This is the footer text.'
-              title='This is the header text'
-              tooltip='This is my tooltip content'
-              tooltipTitle='This is my tooltip title'
-            >
-          `}
+  <Modal
+    buttons={[
+      {
+        label: 'Secondary',
+        onClick: this._handleModalSecondaryClick,
+        type: 'secondary'
+      },
+      {
+        label: 'Primary',
+        onClick: this._handleModalPrimaryClick,
+        type: 'primary'
+      }
+    ]}
+    footerContent={(
+      <div>
+        Footer content
+      </div>
+    )}
+    isOpen={this.state.showModal}
+    onRequestClose={_handleModalClose}
+    showFooter={true}
+    showTitleBar={true}
+    tooltipLabel='This is the footer text.'
+    title='This is the header text'
+    tooltip='This is my tooltip content'
+    tooltipTitle='This is my tooltip title'
+  >
+`}
         </Markdown>
       </div>
     );
