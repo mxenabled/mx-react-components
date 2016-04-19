@@ -156,8 +156,11 @@ const Select = React.createClass({
       const styles = this.styles();
 
       return (
-        <div className='mx-select-scrim'
-        onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
+        <div
+          className='mx-select-scrim'
+          onClick={this._handleScrimClick}
+          style={[styles.scrim, this.props.scrimStyle]}
+       />
       );
     } else {
       return null;
@@ -212,10 +215,10 @@ const Select = React.createClass({
     return (
       <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
         <div className='mx-select-custom'
-        onClick={this._handleClick}
-        onKeyDown={this._handleInputKeyDown}
-        style={[styles.component, this.props.dropdownStyle]}
-        tabIndex='0'
+          onClick={this._handleClick}
+          onKeyDown={this._handleInputKeyDown}
+          style={[styles.component, this.props.dropdownStyle]}
+          tabIndex='0'
         >
           {this._renderScrim()}
           <div className='mx-select-selected' key='selected' style={[styles.selected, this.props.selectedStyle]}>
