@@ -1,6 +1,5 @@
 const React = require('react');
 
-const { Button } = require('mx-react-components');
 const { PageIndicator } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
@@ -18,12 +17,6 @@ const PageIndicatorDocs = React.createClass({
     });
   },
 
-  _handleNextPageIndicatorClick () {
-    this.setState({
-      pageIndicatorIndex: this.state.pageIndicatorIndex === 2 ? 0 : this.state.pageIndicatorIndex + 1
-    });
-  },
-
   render () {
     return (
       <div>
@@ -35,8 +28,6 @@ const PageIndicatorDocs = React.createClass({
         <h3>Demo</h3>
         <div style={{ textAlign: 'center', fontSize: 20 }}>
           Current Page Indicator Index: {this.state.pageIndicatorIndex}
-          <br/><br/>
-          <Button onClick={this._handleNextPageIndicatorClick}>Next Page</Button>
           <PageIndicator activeIndex={this.state.pageIndicatorIndex} count={3} onClick={this._handlePageIndicatorClick} />
         </div>
 

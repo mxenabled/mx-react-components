@@ -86795,11 +86795,7 @@
 
 	var _require = __webpack_require__(219);
 
-	var Button = _require.Button;
-
-	var _require2 = __webpack_require__(219);
-
-	var PageIndicator = _require2.PageIndicator;
+	var PageIndicator = _require.PageIndicator;
 
 
 	var Markdown = __webpack_require__(448);
@@ -86814,11 +86810,6 @@
 	  _handlePageIndicatorClick: function _handlePageIndicatorClick(index) {
 	    this.setState({
 	      pageIndicatorIndex: index
-	    });
-	  },
-	  _handleNextPageIndicatorClick: function _handleNextPageIndicatorClick() {
-	    this.setState({
-	      pageIndicatorIndex: this.state.pageIndicatorIndex === 2 ? 0 : this.state.pageIndicatorIndex + 1
 	    });
 	  },
 	  render: function render() {
@@ -86845,13 +86836,6 @@
 	        { style: { textAlign: 'center', fontSize: 20 } },
 	        'Current Page Indicator Index: ',
 	        this.state.pageIndicatorIndex,
-	        React.createElement('br', null),
-	        React.createElement('br', null),
-	        React.createElement(
-	          Button,
-	          { onClick: this._handleNextPageIndicatorClick },
-	          'Next Page'
-	        ),
 	        React.createElement(PageIndicator, { activeIndex: this.state.pageIndicatorIndex, count: 3, onClick: this._handlePageIndicatorClick })
 	      ),
 	      React.createElement(
