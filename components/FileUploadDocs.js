@@ -22,7 +22,7 @@ const FileUploadDocs = React.createClass({
       <div>
         <h1>
           File Upload
-          <label>Adds drop zone component that will accept a file, either by dragging or through a file browser, and return that file.</label>
+          <label>A drop zone component that will accept a file, either by dragging or through a file browser, and return that file.</label>
         </h1>
 
         <h3>Demo</h3>

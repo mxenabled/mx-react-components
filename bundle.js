@@ -85511,7 +85511,7 @@
 	        React.createElement(
 	          'label',
 	          null,
-	          'Adds drop zone component that will accept a file, either by dragging or through a file browser, and return that file.'
+	          'A drop zone component that will accept a file, either by dragging or through a file browser, and return that file.'
 	        )
 	      ),
 	      React.createElement(
