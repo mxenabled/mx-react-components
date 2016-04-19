@@ -71,16 +71,17 @@
 	var Icon = __webpack_require__(614);
 	var Loader = __webpack_require__(615);
 	var Modal = __webpack_require__(616);
-	var RangeSelector = __webpack_require__(617);
-	var SearchInput = __webpack_require__(618);
-	var Select = __webpack_require__(619);
-	var SelectFullScreen = __webpack_require__(620);
-	var SimpleInput = __webpack_require__(621);
-	var Spin = __webpack_require__(622);
-	var Styles = __webpack_require__(623);
-	var TimeBasedLineChart = __webpack_require__(624);
-	var ToggleSwitch = __webpack_require__(625);
-	var TypeAhead = __webpack_require__(626);
+	var PageIndicator = __webpack_require__(617);
+	var RangeSelector = __webpack_require__(618);
+	var SearchInput = __webpack_require__(619);
+	var Select = __webpack_require__(620);
+	var SelectFullScreen = __webpack_require__(621);
+	var SimpleInput = __webpack_require__(622);
+	var Spin = __webpack_require__(623);
+	var Styles = __webpack_require__(624);
+	var TimeBasedLineChart = __webpack_require__(625);
+	var ToggleSwitch = __webpack_require__(626);
+	var TypeAhead = __webpack_require__(627);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -127,6 +128,7 @@
 	      React.createElement(Route, { component: Icon, path: 'icon' }),
 	      React.createElement(Route, { component: Loader, path: 'loader' }),
 	      React.createElement(Route, { component: Modal, path: 'modal' }),
+	      React.createElement(Route, { component: PageIndicator, path: 'page-indicator' }),
 	      React.createElement(Route, { component: RangeSelector, path: 'range-selector' }),
 	      React.createElement(Route, { component: SearchInput, path: 'search-input' }),
 	      React.createElement(Route, { component: Select, path: 'select' }),
@@ -86793,6 +86795,146 @@
 
 	var _require = __webpack_require__(219);
 
+	var Button = _require.Button;
+
+	var _require2 = __webpack_require__(219);
+
+	var PageIndicator = _require2.PageIndicator;
+
+
+	var Markdown = __webpack_require__(448);
+
+	var PageIndicatorDocs = React.createClass({
+	  displayName: 'PageIndicatorDocs',
+	  getInitialState: function getInitialState() {
+	    return {
+	      pageIndicatorIndex: 0
+	    };
+	  },
+	  _handlePageIndicatorClick: function _handlePageIndicatorClick(index) {
+	    this.setState({
+	      pageIndicatorIndex: index
+	    });
+	  },
+	  _handleNextPageIndicatorClick: function _handleNextPageIndicatorClick() {
+	    this.setState({
+	      pageIndicatorIndex: this.state.pageIndicatorIndex === 2 ? 0 : this.state.pageIndicatorIndex + 1
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Page Indicator',
+	        React.createElement(
+	          'label',
+	          null,
+	          'A component used to indicate simple paginated data such as onboarding slides.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Demo'
+	      ),
+	      React.createElement(
+	        'div',
+	        { style: { textAlign: 'center', fontSize: 20 } },
+	        'Current Page Indicator Index: ',
+	        this.state.pageIndicatorIndex,
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        React.createElement(
+	          Button,
+	          { onClick: this._handleNextPageIndicatorClick },
+	          'Next Page'
+	        ),
+	        React.createElement(PageIndicator, { activeIndex: this.state.pageIndicatorIndex, count: 3, onClick: this._handlePageIndicatorClick })
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Usage'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'activeIndex ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'Default: 0'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The index of the active "page" or dot.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'count ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'Number'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'The number of "pages" or dots to display.'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        'OnClick ',
+	        React.createElement(
+	          'label',
+	          null,
+	          'function'
+	        )
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'A function to be called when a dot is clicked. The function will be passed the index of the clicked dot.'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Example'
+	      ),
+	      React.createElement(
+	        Markdown,
+	        null,
+	        '\n    getInitialState () {\n      return {\n        pageIndicatorIndex: 0\n      };\n    },\n\n    _handlePageIndicatorClick (index) {\n      this.setState({\n        pageIndicatorIndex: index\n      });\n    },\n\n    <PageIndicator activeIndex={this.state.pageIndicatorIndex} count={3} onClick={this._handlePageIndicatorClick} />\n  '
+	      )
+	    );
+	  }
+	});
+
+	module.exports = PageIndicatorDocs;
+
+/***/ },
+/* 618 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(219);
+
 	var RangeSelector = _require.RangeSelector;
 
 
@@ -87029,7 +87171,7 @@
 	module.exports = RangeSelectorDocs;
 
 /***/ },
-/* 618 */
+/* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87149,7 +87291,7 @@
 	module.exports = SearchInputDocs;
 
 /***/ },
-/* 619 */
+/* 620 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87410,7 +87552,7 @@
 	module.exports = SelectDocs;
 
 /***/ },
-/* 620 */
+/* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87681,7 +87823,7 @@
 	module.exports = SelectFullScreenDocs;
 
 /***/ },
-/* 621 */
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87771,7 +87913,7 @@
 	module.exports = SimpleInputDocs;
 
 /***/ },
-/* 622 */
+/* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87882,7 +88024,7 @@
 	module.exports = SpinDocs;
 
 /***/ },
-/* 623 */
+/* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88004,7 +88146,7 @@
 	module.exports = StylesDocs;
 
 /***/ },
-/* 624 */
+/* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88375,7 +88517,7 @@
 	module.exports = TimeBasedLineChartDocs;
 
 /***/ },
-/* 625 */
+/* 626 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88601,7 +88743,7 @@
 	module.exports = ToggleSwitchDocs;
 
 /***/ },
-/* 626 */
+/* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

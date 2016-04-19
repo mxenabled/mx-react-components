@@ -16,6 +16,7 @@ const Home = require('components/Home');
 const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
 const Modal = require('components/ModalDocs');
+const PageIndicator = require('components/PageIndicatorDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const SearchInput = require('components/SearchInputDocs');
 const Select = require('components/SelectDocs');
@@ -60,6 +61,7 @@ ReactDOM.render((
         <Route component={Icon} path='icon' />
         <Route component={Loader} path='loader' />
         <Route component={Modal} path='modal' />
+        <Route component={PageIndicator} path='page-indicator' />
         <Route component={RangeSelector} path='range-selector' />
         <Route component={SearchInput} path='search-input' />
         <Route component={Select} path='select' />
