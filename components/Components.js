@@ -45,6 +45,10 @@ const Components = React.createClass({
                   displayValue: 'Donut'
                 },
                 {
+                  value: 'file-upload',
+                  displayValue: 'File Upload'
+                },
+                {
                   value: 'icon',
                   displayValue: 'Icon'
                 },
@@ -55,6 +59,10 @@ const Components = React.createClass({
                 {
                   value: 'modal',
                   displayValue: 'Modal'
+                },
+                {
+                  value: 'page-indicator',
+                  displayValue: 'Page Indicator'
                 },
                 {
                   value: 'range-selector',
@@ -99,6 +107,7 @@ const Components = React.createClass({
             <Link to='/components/icon'>Icon</Link>
             <Link to='/components/loader'>Loader</Link>
             <Link to='/components/modal'>Modal</Link>
+            <Link to='/components/page-indicator'>Page Indicator</Link>
             <Link to='/components/spin'>Spin</Link>
 
             <h3>Form</h3>
@@ -107,6 +116,7 @@ const Components = React.createClass({
             <Link to='/components/date-picker'>Date Picker</Link>
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/display-input'>Display Input</Link>
+            <Link to='/components/file-upload'>File Upload</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/search-input'>Search Input</Link>
             <Link to='/components/select'>Select</Link>

@@ -83896,6 +83896,9 @@
 	              value: 'donut',
 	              displayValue: 'Donut'
 	            }, {
+	              value: 'file-upload',
+	              displayValue: 'File Upload'
+	            }, {
 	              value: 'icon',
 	              displayValue: 'Icon'
 	            }, {
@@ -83904,6 +83907,9 @@
 	            }, {
 	              value: 'modal',
 	              displayValue: 'Modal'
+	            }, {
+	              value: 'page-indicator',
+	              displayValue: 'Page Indicator'
 	            }, {
 	              value: 'range-selector',
 	              displayValue: 'Range Selector'
@@ -83958,6 +83964,11 @@
 	          ),
 	          React.createElement(
 	            Link,
+	            { to: '/components/page-indicator' },
+	            'Page Indicator'
+	          ),
+	          React.createElement(
+	            Link,
 	            { to: '/components/spin' },
 	            'Spin'
 	          ),
@@ -83990,6 +84001,11 @@
 	            Link,
 	            { to: '/components/display-input' },
 	            'Display Input'
+	          ),
+	          React.createElement(
+	            Link,
+	            { to: '/components/file-upload' },
+	            'File Upload'
 	          ),
 	          React.createElement(
 	            Link,
