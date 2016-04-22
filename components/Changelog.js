@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.1</h3>
+        <ul>
+          <li>
+            Added new icons to Icon component: cash, investment, key and desktop (<a href='https://github.com/mxenabled/mx-react-components/pull/271'>#271</a>, <a href='https://github.com/mxenabled/mx-react-components/pull/270'>#270</a>)
+          </li>
+        </ul>
         <h3>3.0.2</h3>
         <ul>
           <li>Fixed how styles were called on Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/266'>#266</a>)</li>
