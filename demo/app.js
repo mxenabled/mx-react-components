@@ -125,6 +125,10 @@ const icons = [
     displayValue: 'Caret Up'
   },
   {
+    value: 'cash',
+    displayValue: 'Cash'
+  },
+  {
     value: 'chart',
     displayValue: 'Chart'
   },
@@ -215,6 +219,14 @@ const icons = [
   {
     value: 'info',
     displayValue: 'Info'
+  },
+  {
+    value: 'investment',
+    displayValue: 'Investment'
+  },
+  {
+    value: 'key',
+    displayValue: 'Key'
   },
   {
     value: 'link',
