@@ -169,6 +169,10 @@ const icons = [
     displayValue: 'Delete'
   },
   {
+    value: 'desktop',
+    displayValue: 'Desktop'
+  },
+  {
     value: 'document',
     displayValue: 'Document'
   },
