@@ -64,8 +64,7 @@ const Button = React.createClass({
         cursor: 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
-        minHeight: 15,
-        lineHeight: 1
+        height: 30
       }, this.props.style),
       primary: {
         backgroundColor: this.props.primaryColor,
