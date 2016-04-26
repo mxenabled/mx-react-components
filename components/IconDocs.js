@@ -114,12 +114,28 @@ const icons = [
     displayValue: 'Attention'
   },
   {
+    value: 'attention-solid',
+    displayValue: 'Attention Solid'
+  },
+  {
     value: 'auto',
     displayValue: 'Auto'
   },
   {
     value: 'backspace',
     displayValue: 'Backspace'
+  },
+  {
+    value: 'bike',
+    displayValue: 'Bike'
+  },
+  {
+    value: 'calendar',
+    displayValue: 'Calendar'
+  },
+  {
+    value: 'calendar-plus',
+    displayValue: 'Calendar Plus'
   },
   {
     value: 'campaigns',
@@ -142,6 +158,14 @@ const icons = [
     displayValue: 'Caret Up'
   },
   {
+    value: 'cash',
+    displayValue: 'Cash'
+  },
+  {
+    value: 'chart',
+    displayValue: 'Chart'
+  },
+  {
     value: 'check',
     displayValue: 'Check'
   },
@@ -152,6 +176,10 @@ const icons = [
   {
     value: 'checking',
     displayValue: 'Checking'
+  },
+  {
+    value: 'clock',
+    displayValue: 'Clock'
   },
   {
     value: 'close',
@@ -174,12 +202,24 @@ const icons = [
     displayValue: 'Delete'
   },
   {
+    value: 'desktop',
+    displayValue: 'Desktop'
+  },
+  {
+    value: 'document',
+    displayValue: 'Document'
+  },
+  {
     value: 'download',
     displayValue: 'Download'
   },
   {
     value: 'edit',
     displayValue: 'Edit'
+  },
+  {
+    value: 'education',
+    displayValue: 'Education'
   },
   {
     value: 'envelope',
@@ -206,6 +246,10 @@ const icons = [
     displayValue: 'Hamburger'
   },
   {
+    value: 'health',
+    displayValue: 'Health'
+  },
+  {
     value: 'help',
     displayValue: 'Help'
   },
@@ -214,8 +258,24 @@ const icons = [
     displayValue: 'Home'
   },
   {
+    value: 'import',
+    displayValue: 'Import'
+  },
+  {
     value: 'info',
     displayValue: 'Info'
+  },
+  {
+    value: 'investment',
+    displayValue: 'Investment'
+  },
+  {
+    value: 'key',
+    displayValue: 'Key'
+  },
+  {
+    value: 'link',
+    displayValue: 'Link'
   },
   {
     value: 'list-view',
@@ -224,6 +284,10 @@ const icons = [
   {
     value: 'loans',
     displayValue: 'Loans'
+  },
+  {
+    value: 'map',
+    displayValue: 'Map'
   },
   {
     value: 'md-cash',
@@ -266,6 +330,10 @@ const icons = [
     displayValue: 'Play Solid'
   },
   {
+    value: 'retirement',
+    displayValue: 'Retirement'
+  },
+  {
     value: 'rocket',
     displayValue: 'Rocket'
   },
@@ -280,6 +348,10 @@ const icons = [
   {
     value: 'segments',
     displayValue: 'Segments'
+  },
+  {
+    value: 'spinner',
+    displayValue: 'Spinner'
   },
   {
     value: 'sync',

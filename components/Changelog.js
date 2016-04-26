@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.2</h3>
+        <ul>
+          <li>
+            Added new icons to Icon component: bike, education, health, map, and retirement (<a href='https://github.com/mxenabled/mx-react-components/pull/277'>#277</a>)
+          </li>
+        </ul>
         <h3>3.1.1</h3>
         <ul>
           <li>
