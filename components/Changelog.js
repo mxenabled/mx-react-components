@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.3</h3>
+        <ul>
+          <li>
+            Fixed bugs with the ButtonGroup component in Firefox and other Button style bugs (<a href='https://github.com/mxenabled/mx-react-components/pull/278'>#278</a>)
+          </li>
+        </ul>
         <h3>3.1.2</h3>
         <ul>
           <li>
