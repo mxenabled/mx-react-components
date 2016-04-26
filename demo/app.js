@@ -97,6 +97,10 @@ const icons = [
     displayValue: 'Backspace'
   },
   {
+    value: 'bike',
+    displayValue: 'Bike'
+  },
+  {
     value: 'calendar',
     displayValue: 'Calendar'
   },
@@ -185,6 +189,10 @@ const icons = [
     displayValue: 'Edit'
   },
   {
+    value: 'education',
+    displayValue: 'Education'
+  },
+  {
     value: 'envelope',
     displayValue: 'Envelope'
   },
@@ -207,6 +215,10 @@ const icons = [
   {
     value: 'hamburger',
     displayValue: 'Hamburger'
+  },
+  {
+    value: 'health',
+    displayValue: 'Health'
   },
   {
     value: 'help',
@@ -243,6 +255,10 @@ const icons = [
   {
     value: 'loans',
     displayValue: 'Loans'
+  },
+  {
+    value: 'map',
+    displayValue: 'Map'
   },
   {
     value: 'md-cash',
@@ -283,6 +299,10 @@ const icons = [
   {
     value: 'play-solid',
     displayValue: 'Play Solid'
+  },
+  {
+    value: 'retirement',
+    displayValue: 'Retirement'
   },
   {
     value: 'rocket',
