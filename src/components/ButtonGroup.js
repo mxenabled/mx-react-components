@@ -44,13 +44,12 @@ const ButtonGroup = React.createClass({
               icon={button.icon}
               key={i}
               primaryColor={this.props.primaryColor}
-              style={[
+              style={Object.assign({},
                 styles.component,
                 styles[this.props.type],
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
-                isOnlyChild && styles.onlyChild
-              ]}
+                isOnlyChild && styles.onlyChild)}
               type={this.props.type}
             >
               {button.text}
@@ -66,7 +65,8 @@ const ButtonGroup = React.createClass({
       component: Object.assign({
         borderRadius: 0,
         borderWidth: 1,
-        borderRightWidth: 0
+        borderRightWidth: 0,
+        verticalAlign: 'middle'
       }, this.props.style),
       firstChild: {
         borderRadius: '2px 0 0 2px'
