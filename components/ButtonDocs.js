@@ -42,12 +42,12 @@ const ButtonDocs = React.createClass({
           <Button style={style} type='neutral'>Neurral</Button>
           <Button style={style} type='disabled'>Disabled</Button>
         </div>
-        <br/><br/>
+        <br /><br />
         <div className='flex'>
           <Button icon='add'>Icon</Button>
           <Button icon='delete' style={style} />
         </div>
-        <br/><br/>
+        <br /><br />
         <div className='flex'>
           <Button
             actionText='Loading...'

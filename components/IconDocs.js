@@ -35,12 +35,12 @@ const IconDocs = React.createClass({
           selected={this.state.icon}
           valid={true}
         />
-        <br/><br/>
+        <br /><br />
         <Icon
           size={50}
           type={this.state.icon.value}
         />
-        <br/>
+        <br />
         <div>({this.state.icon.value})</div>
 
         <h3>Usage</h3>

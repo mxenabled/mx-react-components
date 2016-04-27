@@ -6,12 +6,29 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.5</h3>
+        <ul>
+          <li>
+            Add box shadow constants to styles (<a href='https://github.com/mxenabled/mx-react-components/pull/282'>#282</a>)
+            Fix new eslint errors after upgrading to eslint@2.7.0 and eslint-config-mx@1.2.7(<a href='https://github.com/mxenabled/mx-react-components/pull/281'>#281</a>)
+          </li>
+        </ul>
+
+        <h3>3.1.4</h3>
+        <ul>
+          <li>
+            Allow children in toggleSwitch to access component state (<a href='https://github.com/mxenabled/mx-react-components/pull/268'>#268</a>)
+          </li>
+        </ul>
+        <p>New Contributors: <a href='https://github.com/phantomxc'>phantomxc</a></p>
+
         <h3>3.1.3</h3>
         <ul>
           <li>
             Fixed bugs with the ButtonGroup component in Firefox and other Button style bugs (<a href='https://github.com/mxenabled/mx-react-components/pull/278'>#278</a>)
           </li>
         </ul>
+
         <h3>3.1.2</h3>
         <ul>
           <li>
