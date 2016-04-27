@@ -379,7 +379,7 @@ const styles = {
     marginBottom: '20px',
     border: '1px solid #E5E5E5',
     borderRadius: '0 0 3px 3px',
-    boxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
+    boxShadow: StyleConstants.ShadowHigh,
     zIndex: 10
   },
   itemTag: {

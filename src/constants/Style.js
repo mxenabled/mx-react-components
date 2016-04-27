@@ -43,7 +43,10 @@ module.exports = {
     SEMIBOLD: 'ProximaNovaSemibold, Helvetica, Arial, sans-serif'
   },
 
-  BoxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
+  //Box Shadows
+  ShadowLow: '0 1px 2px rgba(0,0,0,0.1)',
+  ShadowMed: '0 2px 6px rgba(0,0,0,0.1)',
+  ShadowHigh: '0 10px 30px 5px rgba(0,0,0,0.1)',
 
   adjustColor (col, amt) {
     let color = col;
