@@ -160,7 +160,7 @@ const Select = React.createClass({
           className='mx-select-scrim'
           onClick={this._handleScrimClick}
           style={[styles.scrim, this.props.scrimStyle]}
-       />
+        />
       );
     } else {
       return null;

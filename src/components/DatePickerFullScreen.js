@@ -256,17 +256,25 @@ const DatePickerFullScreen = React.createClass({
         style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex='0'
       >
-        <div className='mx-date-picker-full-screen-selected-date' key='selectedDateWrapper' style={[
-          styles.selectedDateWrapper,
-          this.props.selectedDateWrapperStyle
-        ]}>
+        <div
+          className='mx-date-picker-full-screen-selected-date'
+          key='selectedDateWrapper'
+          style={[
+            styles.selectedDateWrapper,
+            this.props.selectedDateWrapperStyle
+          ]}
+        >
           {this._renderSelectedDate()}
         </div>
-        <div className='mx-date-picker-full-screen-calendar-scrim' key='calendarModal' style={[
-          styles.calendarModal,
-          this.state.showCalendar && styles.calendarShow,
-          this.props.isFixed && { position: 'fixed' }
-        ]}>
+        <div
+          className='mx-date-picker-full-screen-calendar-scrim'
+          key='calendarModal'
+          style={[
+            styles.calendarModal,
+            this.state.showCalendar && styles.calendarShow,
+            this.props.isFixed && { position: 'fixed' }
+          ]}
+        >
           <div onClick={this._handleCloseClick} style={styles.close}>
             <Icon
               size={20}

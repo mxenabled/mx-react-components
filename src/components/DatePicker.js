@@ -211,7 +211,7 @@ const DatePicker = React.createClass({
   _renderScrim (styles) {
     if (this.state.showCalendar) {
       return (
-        <div onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]}/>
+        <div onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
       );
     } else {
       return null;
@@ -298,17 +298,23 @@ const DatePicker = React.createClass({
         style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex={0}
       >
-        <div key='selectedDateWrapper' style={[
-          styles.selectedDateWrapper,
-          this.props.selectedDateWrapperStyle
-        ]}>
+        <div
+          key='selectedDateWrapper'
+          style={[
+            styles.selectedDateWrapper,
+            this.props.selectedDateWrapperStyle
+          ]}
+        >
           {this._renderSelectedDate()}
         </div>
-        <div key='calendarWrapper' style={[
-          styles.calendarWrapper,
-          this.props.calendarWrapperStyle,
-          this.state.showCalendar && styles.calendarShow
-        ]}>
+        <div
+          key='calendarWrapper'
+          style={[
+            styles.calendarWrapper,
+            this.props.calendarWrapperStyle,
+            this.state.showCalendar && styles.calendarShow
+          ]}
+        >
           {this._renderTitle(styles)}
           <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
             <Icon

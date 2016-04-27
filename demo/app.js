@@ -704,7 +704,7 @@ const Demo = React.createClass({
 
     return (
       <div>
-        <br/><br/>
+        <br /><br />
         <Button onClick={this._handleShowDrawerClick} style={{ position: 'absolute', left: 15, top: 15 }} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
         {this.state.showDrawer ?
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
@@ -712,7 +712,7 @@ const Demo = React.createClass({
               <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
             </Drawer>
           </div> : null}
-        <br/><br/>
+        <br /><br />
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
@@ -723,32 +723,40 @@ const Demo = React.createClass({
           />
         </div>
 
-        <br/><br/>
+        <br /><br />
         <div style={{ textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif' }}>
           <Button onClick={this._handleModalClick}>Show Default Modal (Primary Button)</Button>
-          <br/><br/>
+          <br /><br />
           <Button onClick={this._handleSmallModalClick} type='secondary'>Show Small Modal (Secondary Button)</Button>
-          <br/><br/>
+          <br /><br />
           <Button type='primaryOutline'>Primary Outline Button</Button>
-          <br/><br/>
+          <br /><br />
           <Button icon='add'>Button With Icon</Button>
-          <br/><br/>
+          <br /><br />
           <Button icon='delete' type='primaryOutline' />
-          <br/><br/>
+          <br /><br />
           <Button type='base'>Base Button</Button>
-          <br/><br/>
+          <br /><br />
           <Button type='neutral'>Neutral Button</Button>
-          <br/><br/>
+          <br /><br />
           <Button type='disabled'>Disabled Button</Button>
-          <br/><br/>
-          <Button icon='add' isActive={this.state.spinnerIconOnlyIsActive} onClick={this._handleSpinnerIconOnlyClick}
-            type='primaryOutline' />
-          <br/><br/>
-          <Button icon='delete' isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick}
-            type='secondary'>Button with text & without actionText</Button>
-          <br/><br/>
+          <br /><br />
+          <Button
+            icon='add'
+            isActive={this.state.spinnerIconOnlyIsActive}
+            onClick={this._handleSpinnerIconOnlyClick}
+            type='primaryOutline'
+          />
+          <br /><br />
+          <Button
+            icon='delete'
+            isActive={this.state.spinnerIsActive}
+            onClick={this._handleSpinnerClick}
+            type='secondary'
+          >Button with text & without actionText</Button>
+          <br /><br />
           <Button actionText='Spinning...' isActive={this.state.spinnerWithTextIsActive} onClick={this._handleSpinnerWithTextClick}>Button with text and actionText</Button>
-          <br/><br/>
+          <br /><br />
           <ButtonGroup
             buttons={[
               { icon: 'caret-left' },
@@ -757,7 +765,7 @@ const Demo = React.createClass({
             ]}
             type='primaryOutline'
           />
-          <br/><br/>
+          <br /><br />
           <ButtonGroup
             buttons={[
               { icon: 'download' },
@@ -804,7 +812,7 @@ const Demo = React.createClass({
           </Modal>
       ) : null}
 
-        <br/><br/>
+        <br /><br />
         <div style={{ textAlign: 'center' }}>
           <div style={{ display: 'inline-block', padding: 20 }}>
             <DonutChart
@@ -855,7 +863,7 @@ const Demo = React.createClass({
             </div>
           </div>
         </div>
-        <br/><br/>
+        <br /><br />
         <div style={{ textAlign: 'center' }}>
           <TimeBasedLineChart
             breakPointDate={moment().startOf('day').unix()}
@@ -882,12 +890,12 @@ const Demo = React.createClass({
           />
         </div>
 
-        <br/><br/><br/><br/>
+        <br /><br /><br /><br />
         <div>
           <ToggleSwitch />
         </div>
 
-        <br/><br/>
+        <br /><br />
         <TypeAhead
           items={[
             'JPMorgan Chase',
@@ -904,7 +912,7 @@ const Demo = React.createClass({
           placeholderText='Select a Bank'
         />
 
-        <br/><br/>
+        <br /><br />
         <Select
           color='#359BCF'
           isMobile={false}
@@ -922,7 +930,7 @@ const Demo = React.createClass({
           valid={true}
         />
 
-        <br/><br/>
+        <br /><br />
         <div style={{ textAlign: 'center' }}>
           <Icon
             size={150}
@@ -933,15 +941,17 @@ const Demo = React.createClass({
           />
         </div>
 
-        <br/><br/>
-        <div style={{
-          border: '1px solid #E3E6E7',
-          boxSizing: 'border-box',
-          height: 400,
-          padding: '10px',
-          position: 'relative',
-          width: '100%'
-        }}>
+        <br /><br />
+        <div
+          style={{
+            border: '1px solid #E3E6E7',
+            boxSizing: 'border-box',
+            height: 400,
+            padding: '10px',
+            position: 'relative',
+            width: '100%'
+          }}
+        >
           <div style={{ fontSize: '16px', fontWeight: 'bold', paddingBottom: 10 }}>
             Full Parent Select
           </div>
@@ -955,7 +965,7 @@ const Demo = React.createClass({
             placeholderText='Pick One'
             selected={this.state.icon}
           />
-          <br/><br/>
+          <br /><br />
           <div style={{ textAlign: 'center' }}>
             <Icon
               size={150}
@@ -967,7 +977,7 @@ const Demo = React.createClass({
           </div>
         </div>
 
-        <br/><br/>
+        <br /><br />
         <RangeSelector
           defaultLowerValue={18}
           defaultUpperValue={30}
@@ -1009,12 +1019,12 @@ const Demo = React.createClass({
           upperBound={100}
         />
 
-        <br/><br/>
+        <br /><br />
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
 
-        <br/><br/>
+        <br /><br />
         <DatePicker
           closeOnDateSelect={true}
           defaultDate={this.state.selectedDatePickerDate}
@@ -1025,7 +1035,7 @@ const Demo = React.createClass({
           placeholder='Type something'
           valid={true}
         />
-        <br/><br/>
+        <br /><br />
         <SearchInput />
         <DisplayInput
           hint='Click to Edit'
@@ -1039,15 +1049,17 @@ const Demo = React.createClass({
           status={this.state.statusMessage}
           valid={this.state.valid}
         />
-        <br/><br/>
-        <div style={{
-          border: '1px solid #E3E6E7',
-          boxSizing: 'border-box',
-          height: 400,
-          padding: '10px',
-          position: 'relative',
-          width: '100%'
-        }}>
+        <br /><br />
+        <div
+          style={{
+            border: '1px solid #E3E6E7',
+            boxSizing: 'border-box',
+            height: 400,
+            padding: '10px',
+            position: 'relative',
+            width: '100%'
+          }}
+        >
           <div style={{ fontSize: '16px', fontWeight: 'bold', paddingBottom: 10 }}>
             Full Parent Date Picker
           </div>
@@ -1059,11 +1071,11 @@ const Demo = React.createClass({
             title='Select A Date'
           />
         </div>
-        <br/><br/>
+        <br /><br />
 
         <div style={{ textAlign: 'center', fontSize: 20 }}>
           Current Page Indicator Index: {this.state.pageIndicatorIndex}
-          <br/><br/>
+          <br /><br />
           <Button onClick={this._handleNextPageIndicatorClick}>Next Page</Button>
           <PageIndicator activeIndex={this.state.pageIndicatorIndex} count={3} onClick={this._handlePageIndicatorClick} />
         </div>
