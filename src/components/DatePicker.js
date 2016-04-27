@@ -455,7 +455,7 @@ const styles = {
     borderColor: StyleConstants.Colors.FOG,
     borderStyle: 'solid',
     borderWidth: 1,
-    boxShadow: StyleConstants.BoxShadow,
+    boxShadow: StyleConstants.ShadowHigh,
     boxSizing: 'border-box',
     display: 'none',
     maxWidth: 270,

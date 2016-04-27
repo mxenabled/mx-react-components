@@ -131,7 +131,7 @@ const Drawer = React.createClass({
         width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
-        boxShadow: StyleConstants.BoxShadow
+        boxShadow: StyleConstants.ShadowHigh
       },
       content: {
         backgroundColor: StyleConstants.Colors.WHITE,

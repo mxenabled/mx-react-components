@@ -309,7 +309,7 @@ const Select = React.createClass({
         position: 'absolute',
         zIndex: 10,
         fontSize: '12px',
-        boxShadow: '0 30px 30px 10px rgba(0,0,0,0.1)',
+        boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         maxHeight: '260px',
         overflow: 'auto'

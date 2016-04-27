@@ -224,7 +224,7 @@ const styles = {
     position: 'relative',
     zIndex: 1001,
     backgroundColor: StyleConstants.Colors.WHITE,
-    boxShadow: '0 0 30px 5px rgba(0,0,0,0.1)',
+    boxShadow: StyleConstants.ShadowHigh,
     borderRadius: 2,
     top: 20,
     maxWidth: 'calc(100% - 40px)',
