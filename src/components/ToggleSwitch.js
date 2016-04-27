@@ -100,6 +100,13 @@ const ToggleSwitch = React.createClass({
     }
   },
 
+  _getChildren () {
+    // Let all the children of the toggle switch be aware of the activePosition
+    return React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, { activePosition: this.state.activePosition });
+    });
+  },
+
   render () {
     const styles = {
       activeLabel: {
@@ -152,7 +159,7 @@ const ToggleSwitch = React.createClass({
         {this._renderLeftLabel(styles)}
         <div className='toggle-switch-track' onClick={this._handleToggle} style={[styles.track, this.props.trackStyle]} >
           <div className='toggle-switch-toggle' style={[styles.toggle, styles[this.state.activePosition], this.props.toggleStyle]}></div>
-          {this.props.children}
+          {this._getChildren()}
         </div>
         {this._renderRightLabel(styles)}
       </div>
