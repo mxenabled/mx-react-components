@@ -83,7 +83,7 @@ const Loader = React.createClass({
       );
     } else {
       return (
-        <div/>
+        <div />
       );
     }
   }
