@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.6</h3>
+        <ul>
+          <li>
+            Add two new icons: no and subtract (<a href='https://github.com/mxenabled/mx-react-components/pull/282'>#283</a>)
+          </li>
+        </ul>
         <h3>3.1.5</h3>
         <ul>
           <li>
