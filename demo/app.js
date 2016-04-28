@@ -289,6 +289,10 @@ const icons = [
     displayValue: 'MX'
   },
   {
+    value: 'no',
+    displayValue: 'NO'
+  },
+  {
     value: 'phone',
     displayValue: 'Phone'
   },
@@ -323,6 +327,10 @@ const icons = [
   {
     value: 'spinner',
     displayValue: 'Spinner'
+  },
+  {
+    value: 'subtract',
+    displayValue: 'Subtract'
   },
   {
     value: 'sync',
