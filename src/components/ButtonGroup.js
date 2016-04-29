@@ -9,6 +9,7 @@ const ButtonGroup = React.createClass({
   propTypes: {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       icon: React.PropTypes.string,
+      style: React.PropTypes.object,
       text: React.PropTypes.string
     }).isRequired),
     primaryColor: React.PropTypes.string,

@@ -815,7 +815,7 @@ const Demo = React.createClass({
           >
             <div style={{ padding: 20 }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-              <img src='https://unsplash.it/1000/600?random' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
+              <img src='https://unsplash.it/1000/600?random' style={Object.assign({ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 })} />
             </div>
           </Modal>
       ) : null}

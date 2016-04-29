@@ -1,5 +1,4 @@
 const React = require('react');
-const Radium = require('radium');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
@@ -15,10 +14,7 @@ const Modal = React.createClass({
       icon: React.PropTypes.string,
       label: React.PropTypes.string,
       onClick: React.PropTypes.func,
-      style: React.PropTypes.oneOfType([
-        React.PropTypes.array,
-        React.PropTypes.object
-      ]),
+      style: React.PropTypes.object,
       type: React.PropTypes.oneOf(['primary', 'secondary'])
     })),
     color: React.PropTypes.string,
@@ -32,6 +28,7 @@ const Modal = React.createClass({
     onRequestClose: React.PropTypes.func,
     showFooter: React.PropTypes.bool,
     showTitleBar: React.PropTypes.bool,
+    style: React.PropTypes.object,
     title: React.PropTypes.string,
     tooltip: React.PropTypes.string,
     tooltipLabel: React.PropTypes.string,
@@ -87,7 +84,7 @@ const Modal = React.createClass({
   _renderFooter () {
     if (this.props.showFooter) {
       return (
-        <div className='mx-modal-footer' style={[styles.footer, this.props.footerStyle]}>
+        <div className='mx-modal-footer' style={Object.assign({}, styles.footer, this.props.footerStyle)}>
           {this._renderTooltipIconAndLabel()}
           {this._renderFooterContent()}
           <div className='mx-modal-buttons'>
@@ -100,7 +97,7 @@ const Modal = React.createClass({
                   isActive={button.isActive}
                   key={button.type + i}
                   onClick={button.onClick}
-                  style={[styles.button, button.style]}
+                  style={Object.assign({}, styles.button, button.style)}
                   type={button.type}
                 >
                   {button.label}
@@ -127,7 +124,7 @@ const Modal = React.createClass({
     if (this.state.showTooltip) {
       return (
         <div style={styles.tooltip}>
-          <div className='mx-modal-tooltip-title' style={[styles.tooltipTitle, { color: this.props.color }]}>
+          <div className='mx-modal-tooltip-title' style={Object.assign({}, styles.tooltipTitle, { color: this.props.color })}>
             {this.props.tooltipTitle}
           </div>
           <div className='mx-modal-tooltip-content' style={styles.tooltipContent}>
@@ -156,7 +153,7 @@ const Modal = React.createClass({
             className='mx-modal-tooltip-label-text'
             onMouseOut={this._handleTooltipToggle.bind(null, false)}
             onMouseOver={this._handleTooltipToggle.bind(null, true)}
-            style={[styles.tooltipLabelText, { color: this.props.color }]}
+            style={Object.assign({}, styles.tooltipLabelText, { color: this.props.color })}
           >
             {this.props.tooltipLabel}
           </span>
@@ -169,11 +166,11 @@ const Modal = React.createClass({
 
   render () {
     return (
-      <div className='mx-modal' style={[styles.scrim, this.props.isRelative && styles.relative]}>
-        <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={[styles.scrim, styles.overlay, this.props.isRelative && styles.relative]}></div>
+      <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
+        <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
         <div
           className='mx-modal-container'
-          style={[styles.container, this.props.style]}
+          style={Object.assign({}, styles.container, this.props.style)}
         >
           <Icon
             className='mx-modal-close'
@@ -183,7 +180,7 @@ const Modal = React.createClass({
             type='close-solid'
           />
           {this._renderTitleBar()}
-          <div className='mx-modal-content' style={[styles.content, this.props.contentStyle]}>
+          <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
             {this.props.children}
             {this._renderTooltip()}
           </div>
@@ -298,4 +295,4 @@ const styles = {
   }
 };
 
-module.exports = Radium(Modal);
+module.exports = Modal;
