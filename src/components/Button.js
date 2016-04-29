@@ -65,7 +65,8 @@ const Button = React.createClass({
         cursor: 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
-        height: 30
+        height: 30,
+        lineHeight: '1.2em'
       }, this.props.style),
       primary: {
         backgroundColor: this.props.primaryColor,
@@ -173,14 +174,14 @@ const Button = React.createClass({
         marginBottom: -3,
         marginLeft: -5,
         marginRight: this.props.children ? 5 : -5,
-        marginTop: -4,
+        marginTop: -3,
         verticalAlign: 'middle'
       },
       spinner: {
         marginBottom: -3,
         marginLeft: -5,
         marginRight: -5,
-        marginTop: -4
+        marginTop: -3
       },
       actionText: {
         display: 'inline-block',
