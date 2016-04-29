@@ -8,49 +8,34 @@ const StyleConstants = require('../constants/Style');
 
 const DatePicker = React.createClass({
   propTypes: {
-    calendarWrapperStyle: React.PropTypes.object,
-    caretWrapperStyle: React.PropTypes.object,
     closeOnDateSelect: React.PropTypes.bool,
     defaultDate: React.PropTypes.number,
     format: React.PropTypes.string,
-    inputStyle: React.PropTypes.object,
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
     onDateSelect: React.PropTypes.func,
     placeholderText: React.PropTypes.string,
-    placeholderTextStyle: React.PropTypes.object,
-    scrimStyle: React.PropTypes.object,
-    selectedDateColor: React.PropTypes.string,
-    selectedDateWrapperStyle: React.PropTypes.object,
-    showCaret: React.PropTypes.bool,
-    showDayBorders: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    title: React.PropTypes.string,
-    useInputForSelectedDate: React.PropTypes.bool
+    primaryColor: React.PropTypes.string,
+    style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
       closeOnDateSelect: false,
+      currentDate: null,
       format: 'MMM D, YYYY',
+      isValid: true,
       locale: 'en',
       onDateSelect () {},
-      selectedDateColor: StyleConstants.Colors.PRIMARY,
-      scrimStyle: {},
-      showCaret: true,
-      showDayBorders: false,
-      title: null,
-      useInputForSelectedDate: true
+      primaryColor: StyleConstants.Colors.PRIMARY,
+      showCalendar: false
     };
   },
 
   getInitialState () {
     return {
-      currentDate: null,
       inputValue: this._getInputValueByDate(this.props.defaultDate),
-      isValid: true,
-      selectedDate: this.props.defaultDate,
-      showCalendar: false
+      selectedDate: this.props.defaultDate
     };
   },
 
@@ -64,7 +49,7 @@ const DatePicker = React.createClass({
   },
 
   _getInputValueByDate (date) {
-    let inputValue = null;
+    let inputValue = '';
 
     if (date) {
       const newDate = moment.unix(date);
@@ -104,8 +89,8 @@ const DatePicker = React.createClass({
       this.props.onDateSelect(null);
 
       this.setState({
-        inputValue: null,
-        selectedDate: null
+        inputValue: '',
+        selectedDate: ''
       });
     } else {
       this.setState({
@@ -154,20 +139,36 @@ const DatePicker = React.createClass({
     });
   },
 
+  _renderDayTitles () {
+    const styles = this.styles();
+    const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+    return (
+      <div style={styles.calendarDayTitleWrapper}>
+        {days.map((day, i) => {
+          return (
+            <div key={i} style={styles.calendarDayTitle}>{day}</div>
+          );
+        })}
+      </div>
+    );
+  },
+
   _renderMonthTable (currentDate, selectedDate) {
+    const styles = this.styles();
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
     const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
     const dayHoverStyle = {
       ':hover': {
-        backgroundColor: this.props.selectedDateColor,
-        color: StyleConstants.Colors.WHITE,
+        border: '1px solid' + this.props.primaryColor,
+        borderRadius: 3,
         cursor: 'pointer'
       }
     };
     const selectedDayStyle = {
-      backgroundColor: this.props.selectedDateColor,
+      backgroundColor: this.props.primaryColor,
       color: StyleConstants.Colors.WHITE
     };
 
@@ -197,10 +198,6 @@ const DatePicker = React.createClass({
         </div>
       );
 
-      if (this.props.showDayBorders) {
-        day.props.style.push([styles.borderRight, styles.borderBottom]);
-      }
-
       days.push(day);
       startDate.add(1, 'd');
     }
@@ -211,7 +208,7 @@ const DatePicker = React.createClass({
   _renderScrim (styles) {
     if (this.state.showCalendar) {
       return (
-        <div onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
+        <div onClick={this._handleScrimClick} style={styles.scrim} />
       );
     } else {
       return null;
@@ -219,79 +216,50 @@ const DatePicker = React.createClass({
   },
 
   _renderSelectedDate () {
-    if (this.props.useInputForSelectedDate) {
-      const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
+    const styles = this.styles();
 
-      return (
-        <div>
-          <input
-            key='input'
-            onBlur={this._handleInputBlur}
-            onChange={this._handleInputChange}
-            onClick={this._toggleCalendar}
-            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: '#FFFFFF' }]}
-            type='text'
-            value={this.state.inputValue}
-          />
-          <div style={[styles.placeholderText, this.props.placeholderTextStyle]}>
-            {this.props.placeholderText || 'Select A Date'}
-          </div>
-          {this._renderCaret()}
-        </div>
-      );
-    } else {
-      return (
-        <div
-          key='selectedDate'
+    return (
+      <div>
+        <Icon
           onClick={this._toggleCalendar}
-          style={styles.selectedDate}
-        >
-          {this.state.inputValue}
-          {this._renderCaret()}
-        </div>
-      );
-    }
-  },
-
-  _renderTitle (styles) {
-    if (this.props.title) {
-      return (
-        <div key='title' style={styles.title}>
-          {this.props.title}
-        </div>
-      );
-    } else {
-      return null;
-    }
+          style={styles.calendarIcon}
+          type='calendar'
+        />
+        <input
+          key='input'
+          onBlur={this._handleInputBlur}
+          onChange={this._handleInputChange}
+          onClick={this._toggleCalendar}
+          placeholder={this.props.placeholderText || 'Select A Date'}
+          style={styles.input}
+          type='text'
+          value={this.state.inputValue}
+        />
+        {this._renderCaret()}
+      </div>
+    );
   },
 
   _renderCaret () {
-    if (this.props.showCaret) {
-      return (
-        <div style={[styles.caretWrapper, this.props.caretWrapperStyle]}>
-          <Icon
-            onClick={this._toggleCalendar}
-            size={20}
-            style={styles.caret}
-            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-          />
-        </div>
-      );
-    } else {
-      return null;
-    }
+    const styles = this.styles();
+
+    return (
+      <div style={styles.caretWrapper}>
+        <Icon
+          onClick={this._toggleCalendar}
+          style={styles.caret}
+          type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+        />
+      </div>
+    );
   },
 
   render () {
+    const styles = this.styles();
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
     let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
     let rightNavIconStyle = Object.assign({}, styles.navIcon, styles.navRight);
-
-    if (this.props.showDayBorders) {
-      leftNavIconStyle = Object.assign(leftNavIconStyle, styles.borderRight);
-      rightNavIconStyle = Object.assign(rightNavIconStyle, styles.borderLeft);
-    }
 
     return (
       <div
@@ -300,10 +268,7 @@ const DatePicker = React.createClass({
       >
         <div
           key='selectedDateWrapper'
-          style={[
-            styles.selectedDateWrapper,
-            this.props.selectedDateWrapperStyle
-          ]}
+          style={styles.selectedDateWrapper}
         >
           {this._renderSelectedDate()}
         </div>
@@ -311,27 +276,26 @@ const DatePicker = React.createClass({
           key='calendarWrapper'
           style={[
             styles.calendarWrapper,
-            this.props.calendarWrapperStyle,
             this.state.showCalendar && styles.calendarShow
           ]}
         >
-          {this._renderTitle(styles)}
-          <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
+          <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: 'none' }, styles.clearFix]}>
             <Icon
               onClick={this._handlePreviousClick}
-              size={32}
+              size={20}
               style={leftNavIconStyle}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
               onClick={this._handleNextClick}
-              size={32}
+              size={20}
               style={rightNavIconStyle}
               type='caret-right'
             />
           </div>
           <div style={styles.calendarContainer}>
+            {this._renderDayTitles()}
             {this._renderMonthTable(currentDate, selectedDate)}
           </div>
           <div style={styles.clearFix}></div>
@@ -339,212 +303,171 @@ const DatePicker = React.createClass({
         {this._renderScrim(styles)}
       </div>
     );
+  },
+
+  styles () {
+    return {
+      caret: {
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH,
+        position: 'absolute',
+        right: 5,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      caretWrapper: {
+        position: 'absolute',
+        top: '50%',
+        right: 5
+      },
+      calendarDay: {
+        color: StyleConstants.Colors.FOG,
+        float: 'left',
+        height: 30,
+        marginBottom: 2,
+        position: 'relative',
+        width: 35
+      },
+      calendarDayTitleWrapper: {
+        marginBottom: 2,
+        textAlign: 'center',
+        width: '100%'
+      },
+      calendarDayTitle: {
+        color: StyleConstants.Colors.ASH,
+        float: 'left',
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        height: 30,
+        padding: 9,
+        position: 'relative',
+        width: 35
+      },
+      calendarDayContent: {
+        borderRadius: 3,
+        height: 30,
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)',
+        width: 35
+      },
+      calendarDayText: {
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)'
+      },
+      calendarDayDisabled: {
+        ':hover': {
+          background: 'none',
+          color: StyleConstants.Colors.FOG
+        }
+      },
+      calendarHeader: {
+        color: StyleConstants.Colors.CHARCOAL,
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: 30,
+        padding: '7px 0',
+        position: 'relative',
+        textAlign: 'center'
+      },
+      calendarIcon: {
+        fill: this.props.primaryColor,
+        margin: '2px 3px -3px'
+      },
+      calendarShow: {
+        display: 'block'
+      },
+      clearFix: {
+        clear: 'both',
+        marginBottom: 15
+      },
+      component: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        color: StyleConstants.Colors.BLACK,
+        fontFamily: StyleConstants.FontFamily,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        WebkitAppearance: 'none',
+        width: '100%',
+
+        ':focus': {
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+      calendarWrapper: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        borderBottomLeftRadius: 3,
+        borderBottomRightRadius: 3,
+        borderColor: StyleConstants.Colors.FOG,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxShadow: StyleConstants.ShadowHigh,
+        boxSizing: 'border-box',
+        display: 'none',
+        height: 275,
+        width: 287,
+        padding: 20,
+        marginTop: 10,
+        position: 'absolute',
+        zIndex: 10
+      },
+      selectedDateWrapper: {
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        cursor: 'pointer',
+        position: 'relative',
+        padding: 5
+      },
+      currentMonth: {
+        color: StyleConstants.Colors.CHARCOAL
+      },
+      input: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        outline: 'none',
+        paddingBottom: 10,
+        paddingLeft: 5,
+        position: 'relative',
+        top: 5,
+        WebkitAppearance: 'none',
+        width: '80%',
+        zIndex: 2,
+
+        ':focus': {
+          border: 'none',
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+      navIcon: {
+        cursor: 'pointer'
+      },
+      navLeft: {
+        position: 'absolute',
+        left: 7,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      navRight: {
+        position: 'absolute',
+        right: 7,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      scrim: {
+        position: 'fixed',
+        zIndex: 9,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      }
+    };
   }
 });
-
-const styles = {
-  caret: {
-    color: StyleConstants.Colors.ASH,
-    cursor: 'pointer',
-    position: 'absolute',
-    right: 5,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  caretWrapper: {
-    position: 'absolute',
-    top: '50%',
-    right: 5
-  },
-  calendarDay: {
-    color: StyleConstants.Colors.ASH,
-    float: 'left',
-    paddingBottom: '11%',
-    position: 'relative',
-    width: '13.5%'
-  },
-  borderBottom: {
-    borderBottom: StyleConstants.Colors.FOG,
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1
-  },
-  borderRight: {
-    borderRight: StyleConstants.Colors.FOG,
-    borderRightStyle: 'solid',
-    borderRightWidth: 1
-  },
-  borderLeft: {
-    borderLeft: StyleConstants.Colors.FOG,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 1
-  },
-  calendarContainer: {
-    width: '100%',
-    padding: '0px 2px 10px 6px'
-  },
-  calendarDayContent: {
-    borderRadius: '50%',
-    height: 32,
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%) translateX(-50%)',
-    width: 32
-  },
-  calendarDayText: {
-    borderRadius: '100%',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    fontWeight: 'normal',
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%) translateX(-50%)'
-  },
-  calendarDayDisabled: {
-    ':hover': {
-      background: 'none',
-      color: StyleConstants.Colors.PORCELAIN
-    }
-  },
-  calendarHeader: {
-    color: StyleConstants.Colors.CHARCOAL,
-    borderBottom: StyleConstants.Colors.FOG,
-    borderBottomWidth: 1,
-    fontSize: StyleConstants.FontSizes.XLARGE,
-    fontWeight: 'normal',
-    padding: '5px 0px 7px 0px',
-    position: 'relative',
-    textAlign: 'center',
-    textTransform: 'none'
-  },
-  calendarIcon: {
-    color: StyleConstants.Colors.PORCELAIN,
-    position: 'absolute',
-    right: 12.8,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  calendarShow: {
-    display: 'block'
-  },
-  clearFix: {
-    clear: 'both',
-    marginBottom: 15
-  },
-  component: {
-    backgroundColor: StyleConstants.Colors.WHITE,
-    color: '#000000',
-    fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    WebkitAppearance: 'none',
-    width: '100%',
-
-    '@media (max-width: 768px)': {
-      fontSize: 8
-    },
-
-    ':focus': {
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  calendarWrapper: {
-    backgroundColor: StyleConstants.Colors.WHITE,
-    borderBottomLeftRadius: 3,
-    borderBottomRightRadius: 3,
-    borderColor: StyleConstants.Colors.FOG,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    boxShadow: StyleConstants.ShadowHigh,
-    boxSizing: 'border-box',
-    display: 'none',
-    maxWidth: 270,
-    padding: '0px 0px 0px 0px',
-    margin: '0 0 40px 0',
-    position: 'absolute',
-    width: '100%',
-    zIndex: 10
-  },
-  selectedDateWrapper: {
-    borderColor: StyleConstants.Colors.FOG,
-    borderRadius: '3px 3px 3px 3px',
-    borderStyle: 'solid',
-    borderWidth: '1px 1px 1px 1px',
-    position: 'relative',
-    padding: '5px 5px 5px 5px'
-  },
-  currentMonth: {
-    color: StyleConstants.Colors.CHARCOAL
-  },
-  input: {
-    backgroundColor: 'transparent',
-    border: 'none',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    outline: 'none',
-    paddingBottom: 10,
-    paddingLeft: 5,
-    position: 'relative',
-    top: 5,
-    WebkitAppearance: 'none',
-    width: '80%',
-    zIndex: 2,
-
-    ':focus': {
-      border: 'none',
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  navIcon: {
-    cursor: 'pointer'
-  },
-  navLeft: {
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  navRight: {
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  placeholderText: {
-    color: StyleConstants.Colors.CHARCOAL,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    paddingLeft: 5,
-    position: 'absolute',
-    top: 10
-  },
-  scrim: {
-    position: 'fixed',
-    zIndex: 9,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  },
-  selectedDate: {
-    color: StyleConstants.Colors.CHARCOAL,
-    cursor: 'pointer',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    padding: '5px 0 5px 5px',
-    verticalAlign: 'middle',
-    width: '100%',
-
-    ':hover': {
-      color: StyleConstants.Colors.PRIMARY
-    }
-  },
-  title: {
-    backgroundColor: StyleConstants.Colors.CHARCOAL,
-    color: StyleConstants.Colors.PORCELAIN,
-    textAlign: 'center',
-    padding: '7px 0px 7px 0px',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    margin: 1
-  }
-};
 
 module.exports = Radium(DatePicker);
