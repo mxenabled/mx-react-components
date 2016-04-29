@@ -13,6 +13,7 @@ const Button = React.createClass({
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     primaryColor: React.PropTypes.string,
+    style: React.PropTypes.object,
     type: React.PropTypes.oneOf([
       'base',
       'disabled',
@@ -35,7 +36,7 @@ const Button = React.createClass({
     const styles = this.styles();
 
     return (
-      <div {...this.props} style={[styles.component, styles[this.props.type], this.props.style]}>
+      <div {...this.props} style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}>
         {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
         {this.props.isActive ? (
           <div>
