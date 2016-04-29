@@ -6,6 +6,27 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.8</h3>
+        <ul>
+          <li>
+            Fix button text margin in Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/285'>#285</a>)
+          </li>
+        </ul>
+
+        <h3>3.1.7</h3>
+        <ul>
+          <li>
+            Fix TypeError for Modal component in Firefox (<a href='https://github.com/mxenabled/mx-react-components/pull/284'>#284</a>)
+          </li>
+        </ul>
+
+        <h3>3.1.6</h3>
+        <ul>
+          <li>
+            Add 'No' and 'Subtract' icons in Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/283'>#283</a>)
+          </li>
+        </ul>
+
         <h3>3.1.5</h3>
         <ul>
           <li>
