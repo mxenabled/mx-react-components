@@ -166,6 +166,7 @@ const DatePicker = React.createClass({
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
       const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
+      const isToday = startDate.format(this.props.format) === moment().format(this.props.format);
       const noSelectDay = startDate.isBefore(minimumDate);
       const day = (
         <div
@@ -180,8 +181,10 @@ const DatePicker = React.createClass({
             key={startDate.format('DDDD')}
             style={[
               styles.calendarDayContent,
-              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && styles.selectedDay,
-              styles.dayHover
+              styles.dayHover,
+              noSelectDay && styles.calendarDayDisabled,
+              isCurrentDay && styles.selectedDay,
+              (isToday && !isCurrentDay) && styles.currentDay
             ]}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
@@ -415,6 +418,9 @@ const DatePicker = React.createClass({
         cursor: 'pointer',
         position: 'relative',
         padding: 5
+      },
+      currentDay: {
+        backgroundColor: StyleConstants.Colors.FOG
       },
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
