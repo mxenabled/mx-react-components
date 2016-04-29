@@ -201,6 +201,10 @@ const icons = [
     displayValue: 'Export'
   },
   {
+    value: 'filter',
+    displayValue: 'Filter'
+  },
+  {
     value: 'folder',
     displayValue: 'Folder'
   },
@@ -270,7 +274,7 @@ const icons = [
   },
   {
     value: 'md-credit',
-    displayValue: 'Creidt (MD)'
+    displayValue: 'Credit (MD)'
   },
   {
     value: 'md-debts',
