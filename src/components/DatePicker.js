@@ -172,20 +172,17 @@ const DatePicker = React.createClass({
         <div
           key={startDate.month() + '-' + startDate.date()}
           onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
-          style={[
-            styles.calendarDay,
-            (!noSelectDay && isCurrentMonth) && styles.currentMonth
-          ]}
+          style={styles.calendarDay}
         >
           <div
             key={startDate.format('DDDD')}
-            style={[
+            style={Object.assign({},
               styles.calendarDayContent,
-              styles.dayHover,
               noSelectDay && styles.calendarDayDisabled,
               isCurrentDay && styles.selectedDay,
-              (isToday && !isCurrentDay) && styles.currentDay
-            ]}
+              (isToday && !isCurrentDay) && styles.currentDay,
+              (!noSelectDay && isCurrentMonth && !isCurrentDay) && styles.currentMonth
+            )}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
           </div>
@@ -253,7 +250,11 @@ const DatePicker = React.createClass({
 
     return (
       <div
-        style={[styles.component, styles.clearFix, this.props.style]}
+        style={Object.assign({},
+          styles.component,
+          styles.clearFix,
+          this.props.style
+        )}
         tabIndex={0}
       >
         <div
@@ -266,7 +267,12 @@ const DatePicker = React.createClass({
           key='calendarWrapper'
           style={styles.calendarWrapper}
         >
-          <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: 'none' }, styles.clearFix]}>
+          <div key='calendarHeader'
+            style={Object.assign({},
+              styles.calendarHeader,
+              styles.clearFix
+            )}
+          >
             <Icon
               onClick={this._handlePreviousClick}
               size={20}
@@ -336,7 +342,13 @@ const DatePicker = React.createClass({
         position: 'absolute',
         top: '50%',
         transform: 'translateY(-50%) translateX(-50%)',
-        width: 35
+        width: 35,
+
+        ':hover': {
+          border: '1px solid' + this.props.primaryColor,
+          borderRadius: 3,
+          cursor: 'pointer'
+        }
       },
       calendarDayText: {
         left: '50%',
@@ -398,13 +410,6 @@ const DatePicker = React.createClass({
         right: 0,
         width: 287,
         zIndex: 10
-      },
-      dayHover: {
-        ':hover': {
-          border: '1px solid' + this.props.primaryColor,
-          borderRadius: 3,
-          cursor: 'pointer'
-        }
       },
       selectedDay: {
         backgroundColor: this.props.primaryColor,
