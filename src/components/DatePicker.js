@@ -187,11 +187,9 @@ const DatePicker = React.createClass({
           style={styles.calendarIcon}
           type='calendar'
         />
-          {this.state.inputValue ? (
-            <div style={styles.inputValue}>{this.state.inputValue}</div>
-          ) : (
-            <div style={styles.placeholder}>{this.props.placeholderText}</div>
-          )}
+        <div style={styles.inputValue}>
+          {this.state.inputValue || this.props.placeholderText}
+        </div>
         <div style={styles.caretWrapper}>
           <Icon
             style={styles.caret}
@@ -284,7 +282,10 @@ const DatePicker = React.createClass({
         width: 35
       },
       calendarIcon: {
-        margin: '-6px 6px -3px -3px'
+        left: 10,
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)'
       },
       calendarWeekContent: {
         color: StyleConstants.Colors.ASH,
@@ -424,12 +425,11 @@ const DatePicker = React.createClass({
         top: '50%',
         transform: 'translateY(-50%)'
       },
-      placeholder: {
-        color: StyleConstants.Colors.ASH,
-        display: 'inline-block'
-      },
       inputValue: {
-        display: 'inline-block'
+        color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        display: 'inline-block',
+        left: 40,
+        position: 'absolute'
       },
       scrim: {
         position: 'fixed',
