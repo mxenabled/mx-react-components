@@ -27,6 +27,7 @@ const DatePicker = React.createClass({
       isValid: true,
       locale: 'en',
       onDateSelect () {},
+      placeholderText: 'Select A Date',
       primaryColor: StyleConstants.Colors.PRIMARY,
       showCalendar: false
     };
@@ -82,27 +83,6 @@ const DatePicker = React.createClass({
     });
 
     this.props.onDateSelect(date);
-  },
-
-  _handleInputBlur (evt) {
-    if (evt.target.value.length === 0) {
-      this.props.onDateSelect(null);
-
-      this.setState({
-        inputValue: '',
-        selectedDate: ''
-      });
-    } else {
-      this.setState({
-        inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
-      });
-    }
-  },
-
-  _handleInputChange (evt) {
-    this.setState({
-      inputValue: evt.target.value
-    });
   },
 
   _handlePreviousClick () {
@@ -196,47 +176,28 @@ const DatePicker = React.createClass({
     return days;
   },
 
-  _renderScrim (styles) {
-    if (this.state.showCalendar) {
-      return (
-        <div onClick={this._handleScrimClick} style={styles.scrim} />
-      );
-    } else {
-      return null;
-    }
-  },
-
   _renderSelectedDate (styles) {
     return (
-      <div>
+      <div
+        key='dateDisplay'
+        onClick={this._toggleCalendar}
+        style={styles.dateDisplay}
+      >
         <Icon
-          onClick={this._toggleCalendar}
           style={styles.calendarIcon}
           type='calendar'
         />
-        <input
-          key='input'
-          onBlur={this._handleInputBlur}
-          onChange={this._handleInputChange}
-          onClick={this._toggleCalendar}
-          placeholder={this.props.placeholderText || 'Select A Date'}
-          style={styles.input}
-          type='text'
-          value={this.state.inputValue}
-        />
-        {this._renderCaret(styles)}
-      </div>
-    );
-  },
-
-  _renderCaret (styles) {
-    return (
-      <div style={styles.caretWrapper}>
-        <Icon
-          onClick={this._toggleCalendar}
-          style={styles.caret}
-          type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-        />
+          {this.state.inputValue ? (
+            <div style={styles.inputValue}>{this.state.inputValue}</div>
+          ) : (
+            <div style={styles.placeholder}>{this.props.placeholderText}</div>
+          )}
+        <div style={styles.caretWrapper}>
+          <Icon
+            style={styles.caret}
+            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+          />
+        </div>
       </div>
     );
   },
@@ -293,7 +254,9 @@ const DatePicker = React.createClass({
           </div>
           <div style={styles.clearFix}></div>
         </div>
-        {this._renderScrim(styles)}
+        {(this.state.showCalendar) ? (
+          <div onClick={this._handleScrimClick} style={styles.scrim} />
+        ) : null }
       </div>
     );
   },
@@ -319,6 +282,9 @@ const DatePicker = React.createClass({
         marginBottom: 2,
         position: 'relative',
         width: 35
+      },
+      calendarIcon: {
+        margin: '-6px 6px -3px -3px'
       },
       calendarWeekContent: {
         color: StyleConstants.Colors.ASH,
@@ -370,10 +336,6 @@ const DatePicker = React.createClass({
         position: 'relative',
         textAlign: 'center'
       },
-      calendarIcon: {
-        fill: this.props.primaryColor,
-        margin: '2px 3px -3px'
-      },
       clearFix: {
         clear: 'both',
         marginBottom: 15
@@ -421,8 +383,9 @@ const DatePicker = React.createClass({
         borderStyle: 'solid',
         borderWidth: 1,
         cursor: 'pointer',
+        height: 40,
         position: 'relative',
-        padding: 5
+        padding: 13
       },
       currentDay: {
         backgroundColor: StyleConstants.Colors.FOG
@@ -430,18 +393,14 @@ const DatePicker = React.createClass({
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
       },
-      input: {
+      dateDisplay: {
         backgroundColor: 'transparent',
         border: 'none',
         cursor: 'pointer',
+        fill: this.props.primaryColor,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         outline: 'none',
-        paddingBottom: 10,
-        paddingLeft: 5,
-        position: 'relative',
-        top: 5,
         WebkitAppearance: 'none',
-        width: '80%',
         zIndex: 2,
 
         ':focus': {
@@ -464,6 +423,13 @@ const DatePicker = React.createClass({
         right: 7,
         top: '50%',
         transform: 'translateY(-50%)'
+      },
+      placeholder: {
+        color: StyleConstants.Colors.ASH,
+        display: 'inline-block'
+      },
+      inputValue: {
+        display: 'inline-block'
       },
       scrim: {
         position: 'fixed',
