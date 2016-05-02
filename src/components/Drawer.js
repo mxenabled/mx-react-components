@@ -1,3 +1,4 @@
+const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
 
@@ -176,4 +177,4 @@ const Drawer = React.createClass({
 
 });
 
-module.exports = Drawer;
+module.exports = Radium(Drawer);
