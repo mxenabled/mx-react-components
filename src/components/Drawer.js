@@ -16,14 +16,16 @@ const Drawer = React.createClass({
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
     }),
-    onClose: React.PropTypes.func.isRequired
+    onClose: React.PropTypes.func.isRequired,
+    title: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
       buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       duration: 500,
-      easing: [0.28, 0.14, 0.34, 1.04]
+      easing: [0.28, 0.14, 0.34, 1.04],
+      title: ''
     };
   },
 
@@ -89,6 +91,9 @@ const Drawer = React.createClass({
                 type={'base'}
               />
             </span>
+            <span style={styles.title}>
+              {this.props.title}
+            </span>
             {this._renderNav()}
           </header>
           <div style={styles.content}>
@@ -141,6 +146,12 @@ const Drawer = React.createClass({
         height: 15,
         padding: '15px 25px',
         position: 'relative'
+      },
+      title: {
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        width: '50%',
+        whiteSpace: 'nowrap'
       },
       nav: {
         fontFamily: StyleConstants.Fonts.THIN,
