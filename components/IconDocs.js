@@ -170,6 +170,10 @@ const icons = [
     displayValue: 'Check'
   },
   {
+    value: 'check-skinny',
+    displayValue: 'Check Skinny'
+  },
+  {
     value: 'check-solid',
     displayValue: 'Check Solid'
   },
@@ -184,6 +188,10 @@ const icons = [
   {
     value: 'close',
     displayValue: 'Close'
+  },
+  {
+    value: 'close-skinny',
+    displayValue: 'Close Skinny'
   },
   {
     value: 'close-solid',
