@@ -115,7 +115,15 @@ const Drawer = React.createClass({
         width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
-        boxShadow: StyleConstants.ShadowHigh
+        boxShadow: StyleConstants.ShadowHigh,
+
+        '@media (max-width: 750px)': {
+          width: '100%'
+        },
+        '@media (min-width: 1200px)': {
+          width: 960
+        }
+      },
       componentWrapper: {
         bottom: 0,
         left: 0,
@@ -144,6 +152,10 @@ const Drawer = React.createClass({
         paddingLeft: 20,
         textAlign: 'left',
         width: '25%',
+
+        '@media (max-width: 750px)': {
+          paddingLeft: 10
+        }
       },
       header: {
         alignItems: 'center',
@@ -169,8 +181,18 @@ const Drawer = React.createClass({
         textAlign: 'right',
         width: '25%',
         whiteSpace: 'nowrap',
+
+        '@media (max-width: 750px)': {
+          paddingRight: 10
+        }
+      },
       navLabel: {
         padding: '7px 14px',
+
+        '@media (max-width: 750px)': {
+          display: 'none',
+          padding: 0
+        }
       }
     };
   }
