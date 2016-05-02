@@ -6,6 +6,20 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.10</h3>
+        <ul>
+          <li>
+            Added 'check-skinny' and 'close-skinny' icons in the Icon component(<a href='https://github.com/mxenabled/mx-react-components/pull/288'>#288</a>)
+          </li>
+        </ul>
+
+        <h3>3.1.9</h3>
+        <ul>
+          <li>
+            Added 'sort' icon in the Icon component(<a href='https://github.com/mxenabled/mx-react-components/pull/288'>#286</a>)
+          </li>
+        </ul>
+
         <h3>3.1.8</h3>
         <ul>
           <li>
