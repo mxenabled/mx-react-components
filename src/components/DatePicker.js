@@ -35,34 +35,9 @@ const DatePicker = React.createClass({
 
   getInitialState () {
     return {
-      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      inputValue: this.props.defaultDate,
       selectedDate: this.props.defaultDate
     };
-  },
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.defaultDate !== this.props.defaultDate) {
-      this.setState({
-        selectedDate: nextProps.defaultDate,
-        inputValue: moment.unix(nextProps.defaultDate).format(this.props.format)
-      });
-    }
-  },
-
-  _getInputValueByDate (date) {
-    let inputValue = '';
-
-    if (date) {
-      const newDate = moment.unix(date);
-
-      if (newDate.isValid()) {
-        inputValue = newDate.format(this.props.format);
-      } else {
-        inputValue = date;
-      }
-    }
-
-    return inputValue;
   },
 
   _getSelectedDate () {
@@ -204,8 +179,6 @@ const DatePicker = React.createClass({
     const styles = this.styles();
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-    let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
-    let rightNavIconStyle = Object.assign({}, styles.navIcon, styles.navRight);
 
     return (
       <div
@@ -220,7 +193,7 @@ const DatePicker = React.createClass({
           key='selectedDateWrapper'
           style={styles.selectedDateWrapper}
         >
-          {this._renderSelectedDate(styles)}
+          {selectedDate(styles)}
         </div>
         <div
           key='calendarWrapper'
@@ -235,14 +208,14 @@ const DatePicker = React.createClass({
             <Icon
               onClick={this._handlePreviousClick}
               size={20}
-              style={leftNavIconStyle}
+              style={Object.assign({}, styles.navIcon, styles.navLeft)}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
               onClick={this._handleNextClick}
               size={20}
-              style={rightNavIconStyle}
+              style={Object.assign({}, styles.navIcon, styles.navRight)}
               type='caret-right'
             />
           </div>
