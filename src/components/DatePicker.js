@@ -234,18 +234,6 @@ const DatePicker = React.createClass({
 
   styles () {
     return {
-      caret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH,
-        position: 'absolute',
-        right: 5,
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      caretWrapper: {
-        position: 'absolute',
-        top: '50%',
-        right: 5
-      },
       calendarDay: {
         color: StyleConstants.Colors.FOG,
         float: 'left',
@@ -253,6 +241,41 @@ const DatePicker = React.createClass({
         marginBottom: 2,
         position: 'relative',
         width: 35
+      },
+      calendarDayContent: {
+        borderRadius: 3,
+        height: 30,
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)',
+        width: 35,
+
+        ':hover': {
+          border: '1px solid' + this.props.primaryColor,
+          borderRadius: 3,
+          cursor: 'pointer'
+        }
+      },
+      calendarDayDisabled: {
+        ':hover': {
+          background: 'none',
+          color: StyleConstants.Colors.FOG
+        }
+      },
+      calendarDayText: {
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)'
+      },
+      calendarHeader: {
+        color: StyleConstants.Colors.CHARCOAL,
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: 30,
+        padding: '7px 0',
+        position: 'relative',
+        textAlign: 'center'
       },
       calendarIcon: {
         left: 10,
@@ -275,40 +298,34 @@ const DatePicker = React.createClass({
         top: '50%',
         transform: 'translateY(-50%) translateX(-50%)'
       },
-      calendarDayContent: {
-        borderRadius: 3,
-        height: 30,
-        left: '50%',
+      calendarWrapper: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        borderBottomLeftRadius: 3,
+        borderBottomRightRadius: 3,
+        borderColor: StyleConstants.Colors.FOG,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxShadow: StyleConstants.ShadowHigh,
+        boxSizing: 'border-box',
+        display: this.state.showCalendar ? 'block' : 'none',
+        marginTop: 10,
+        padding: '20px 20px 0 20px',
+        position: 'absolute',
+        right: 0,
+        width: 287,
+        zIndex: 10
+      },
+      caret: {
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH,
+        position: 'absolute',
+        right: 5,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      caretWrapper: {
         position: 'absolute',
         top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)',
-        width: 35,
-
-        ':hover': {
-          border: '1px solid' + this.props.primaryColor,
-          borderRadius: 3,
-          cursor: 'pointer'
-        }
-      },
-      calendarDayText: {
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)'
-      },
-      calendarDayDisabled: {
-        ':hover': {
-          background: 'none',
-          color: StyleConstants.Colors.FOG
-        }
-      },
-      calendarHeader: {
-        color: StyleConstants.Colors.CHARCOAL,
-        fontSize: StyleConstants.FontSizes.LARGE,
-        height: 30,
-        padding: '7px 0',
-        position: 'relative',
-        textAlign: 'center'
+        right: 5
       },
       clearFix: {
         clear: 'both',
@@ -329,37 +346,6 @@ const DatePicker = React.createClass({
           boxShadow: 'none',
           outline: 'none'
         }
-      },
-      calendarWrapper: {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        borderBottomLeftRadius: 3,
-        borderBottomRightRadius: 3,
-        borderColor: StyleConstants.Colors.FOG,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        boxShadow: StyleConstants.ShadowHigh,
-        boxSizing: 'border-box',
-        display: this.state.showCalendar ? 'block' : 'none',
-        marginTop: 10,
-        padding: '20px 20px 0 20px',
-        position: 'absolute',
-        right: 0,
-        width: 287,
-        zIndex: 10
-      },
-      selectedDay: {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE
-      },
-      selectedDateWrapper: {
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
-        borderRadius: 3,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        cursor: 'pointer',
-        height: 40,
-        position: 'relative',
-        padding: 13
       },
       currentDay: {
         backgroundColor: StyleConstants.Colors.FOG
@@ -383,6 +369,12 @@ const DatePicker = React.createClass({
           outline: 'none'
         }
       },
+      inputValue: {
+        color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        display: 'inline-block',
+        left: 40,
+        position: 'absolute'
+      },
       navIcon: {
         cursor: 'pointer'
       },
@@ -398,11 +390,19 @@ const DatePicker = React.createClass({
         top: '50%',
         transform: 'translateY(-50%)'
       },
-      inputValue: {
-        color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
-        display: 'inline-block',
-        left: 40,
-        position: 'absolute'
+      selectedDay: {
+        backgroundColor: this.props.primaryColor,
+        color: StyleConstants.Colors.WHITE
+      },
+      selectedDateWrapper: {
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        cursor: 'pointer',
+        height: 40,
+        position: 'relative',
+        padding: 13
       },
       scrim: {
         position: 'fixed',
