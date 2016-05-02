@@ -28,11 +28,6 @@ const Drawer = React.createClass({
   },
 
   componentDidMount () {
-    this._animateComponent({ left: '20%' });
-    this._animateBackArrow();
-    if (this.props.navConfig) {
-      this._animateNav();
-    }
   },
 
   },
@@ -54,30 +49,9 @@ const Drawer = React.createClass({
     return Velocity(el, transition, options);
   },
 
-  _animateBackArrow () {
-    const el = this._backArrow;
-    const transition = { left: 25 };
-    const options = {
-      delay: this.props.duration,
-      duration: this.props.duration,
-      easing: this.props.easing
-    };
-
-    Velocity(el, transition, options);
-  },
-
-  _animateNav () {
-    const el = this._nav;
-    const transition = { top: '50%' };
-    const options = {
-      delay: this.props.duration,
-      duration: this.props.duration,
-      easing: this.props.easing
-    };
   _renderNav () {
     const styles = this.styles();
 
-    Velocity(el, transition, options);
     return this.props.navConfig ? (
       <nav style={styles.nav}>
         <Button
@@ -107,7 +81,6 @@ const Drawer = React.createClass({
         <div onClick={this._handleCloseClick} style={styles.scrim}></div>
         <div ref={(ref) => (this._component = ref)} style={styles.component}>
           <header style={styles.header}>
-            <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
             <span style={styles.backArrow}>
               <Button
                 icon='arrow-left'
