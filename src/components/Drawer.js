@@ -30,8 +30,25 @@ const Drawer = React.createClass({
   },
 
   componentDidMount () {
+    this._animateComponent({ left: this._getAnimationDistance() });
   },
 
+  _getAnimationDistance () {
+    const greaterThan1200ComponentWidth = 960;
+    const maxResolutionBreakPoint = 1200;
+    const minResoultionBreakPoint = 750;
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth >= maxResolutionBreakPoint) {
+      //Resolution - 960 from the left
+      return windowWidth - greaterThan1200ComponentWidth;
+    } else if (windowWidth <= minResoultionBreakPoint) {
+      //All the way over to the left
+      return 0;
+    } else {
+      //20% from the left
+      return '20%';
+    }
   },
 
   _handleCloseClick () {
