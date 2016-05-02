@@ -79,7 +79,7 @@ const Drawer = React.createClass({
     const styles = this.styles();
 
     return (
-      <div>
+      <div style={styles.componentWrapper}>
         <div onClick={this._handleCloseClick} style={styles.scrim}></div>
         <div ref={(ref) => (this._component = ref)} style={styles.component}>
           <header style={styles.header}>
@@ -111,11 +111,17 @@ const Drawer = React.createClass({
         top: 0,
         bottom: 0,
         left: '100%',
-        position: 'absolute',
+        position: 'relative',
         width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         boxShadow: StyleConstants.ShadowHigh
+      componentWrapper: {
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0
       },
       content: {
         backgroundColor: StyleConstants.Colors.WHITE,
