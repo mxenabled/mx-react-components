@@ -147,6 +147,9 @@ const Drawer = React.createClass({
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
         height: 15,
         padding: '15px 25px',
+        color: StyleConstants.Colors.ASH,
+        fontFamily: StyleConstants.Fonts.NORMAL,
+        fontSize: StyleConstants.FontSizes.LARGE,
         position: 'relative'
       },
       title: {
