@@ -186,6 +186,9 @@ const Button = React.createClass({
       actionText: {
         display: 'inline-block',
         paddingLeft: 10
+      },
+      test: {
+        display: 'block'
       }
     };
   }
