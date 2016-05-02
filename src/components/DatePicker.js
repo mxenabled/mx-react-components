@@ -181,11 +181,7 @@ const DatePicker = React.createClass({
 
     return (
       <div
-        style={Object.assign({},
-          styles.component,
-          styles.clearFix,
-          this.props.style
-        )}
+        style={styles.component}
         tabIndex={0}
       >
         <div
@@ -199,22 +195,19 @@ const DatePicker = React.createClass({
           style={styles.calendarWrapper}
         >
           <div key='calendarHeader'
-            style={Object.assign({},
-              styles.calendarHeader,
-              styles.clearFix
-            )}
+            style={styles.calendarHeader}
           >
             <Icon
               onClick={this._handlePreviousClick}
               size={20}
-              style={Object.assign({}, styles.navIcon, styles.navLeft)}
+              style={styles.navLeft}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
               onClick={this._handleNextClick}
               size={20}
-              style={Object.assign({}, styles.navIcon, styles.navRight)}
+              style={styles.navRight}
               type='caret-right'
             />
           </div>
@@ -269,9 +262,11 @@ const DatePicker = React.createClass({
         transform: 'translateY(-50%) translateX(-50%)'
       },
       calendarHeader: {
+        clear: 'both',
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.LARGE,
         height: 30,
+        marginBottom: 15,
         padding: '7px 0',
         position: 'relative',
         textAlign: 'center'
@@ -330,13 +325,15 @@ const DatePicker = React.createClass({
         clear: 'both',
         marginBottom: 15
       },
-      component: {
+      component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
+        clear: 'both',
         color: StyleConstants.Colors.BLACK,
         display: 'inline-block',
         float: 'right',
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
+        marginBottom: 15,
         position: 'relative',
         WebkitAppearance: 'none',
         width: '100%',
@@ -345,7 +342,7 @@ const DatePicker = React.createClass({
           boxShadow: 'none',
           outline: 'none'
         }
-      },
+      }, this.props.style),
       currentDay: {
         backgroundColor: StyleConstants.Colors.FOG
       },
@@ -374,16 +371,15 @@ const DatePicker = React.createClass({
         left: 40,
         position: 'absolute'
       },
-      navIcon: {
-        cursor: 'pointer'
-      },
       navLeft: {
+        cursor: 'pointer',
         position: 'absolute',
         left: 7,
         top: '50%',
         transform: 'translateY(-50%)'
       },
       navRight: {
+        cursor: 'pointer',
         position: 'absolute',
         right: 7,
         top: '50%',
