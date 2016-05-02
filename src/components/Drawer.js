@@ -2,12 +2,13 @@ const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
 
-const StyleConstants = require('../constants/Style');
+const Button = require('../components/Button');
 
-const Icon = require('../components/Icon');
+const StyleConstants = require('../constants/Style');
 
 const Drawer = React.createClass({
   propTypes: {
+    buttonPrimaryColor: React.PropTypes.string,
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
     navConfig: React.PropTypes.shape({
@@ -20,6 +21,7 @@ const Drawer = React.createClass({
 
   getDefaultProps () {
     return {
+      buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       duration: 500,
       easing: [0.28, 0.14, 0.34, 1.04]
     };
@@ -33,25 +35,6 @@ const Drawer = React.createClass({
     }
   },
 
-  _renderNav () {
-    const styles = this.styles();
-
-    return this.props.navConfig ?
-      <nav ref={(ref) => (this._nav = ref)} style={styles.nav}>
-        <Icon
-          onClick={this.props.navConfig.onPreviousClick}
-          size={25}
-          style={styles.icons}
-          type='caret-left'
-        />
-        {this.props.navConfig.label}
-        <Icon
-          onClick={this.props.navConfig.onNextClick}
-          size={25}
-          style={styles.icons}
-          type='caret-right'
-        />
-      </nav> : null;
   },
 
   _handleCloseClick () {
@@ -91,8 +74,29 @@ const Drawer = React.createClass({
       duration: this.props.duration,
       easing: this.props.easing
     };
+  _renderNav () {
+    const styles = this.styles();
 
     Velocity(el, transition, options);
+    return this.props.navConfig ? (
+      <nav style={styles.nav}>
+        <Button
+          icon='caret-left'
+          onClick={this.props.navConfig.onPreviousClick}
+          primaryColor={this.props.buttonPrimaryColor}
+          type='base'
+        />
+        <span style={styles.navLabel}>
+          {this.props.navConfig.label}
+        </span>
+        <Button
+          icon='caret-right'
+          onClick={this.props.navConfig.onNextClick}
+          primaryColor={this.props.buttonPrimaryColor}
+          type='base'
+        />
+      </nav>
+    ) : null;
   },
 
   render () {
@@ -104,11 +108,12 @@ const Drawer = React.createClass({
         <div ref={(ref) => (this._component = ref)} style={styles.component}>
           <header style={styles.header}>
             <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
-              <Icon
+            <span style={styles.backArrow}>
+              <Button
+                icon='arrow-left'
                 onClick={this._handleCloseClick}
-                size={25}
-                style={styles.icons}
-                type='arrow-left'
+                primaryColor={this.props.buttonPrimaryColor}
+                type={'base'}
               />
             </span>
             {this._renderNav()}
