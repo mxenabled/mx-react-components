@@ -135,10 +135,6 @@ const Drawer = React.createClass({
         color: StyleConstants.Colors.ASH
       },
       backArrow: {
-        position: 'absolute',
-        right: '100%',
-        top: '50%',
-        transform: 'translateY(-50%)'
       },
       header: {
         backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -156,14 +152,9 @@ const Drawer = React.createClass({
       nav: {
         fontFamily: StyleConstants.Fonts.THIN,
         color: StyleConstants.Colors.ASH,
-        position: 'absolute',
-        right: 25,
-        top: '-100%',
-        transform: 'translateY(-50%)'
       }
     };
   }
-
 });
 
 module.exports = Radium(Drawer);
