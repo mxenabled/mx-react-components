@@ -141,15 +141,21 @@ const Drawer = React.createClass({
         color: StyleConstants.Colors.ASH
       },
       backArrow: {
+        paddingLeft: 20,
+        textAlign: 'left',
+        width: '25%',
       },
       header: {
+        alignItems: 'center',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
-        height: 15,
-        padding: '15px 25px',
         color: StyleConstants.Colors.ASH,
+        display: 'flex',
         fontFamily: StyleConstants.Fonts.NORMAL,
         fontSize: StyleConstants.FontSizes.LARGE,
+        height: 45,
+        justifyContent: 'center',
+        padding: '7px 7px',
         position: 'relative'
       },
       title: {
@@ -159,8 +165,12 @@ const Drawer = React.createClass({
         whiteSpace: 'nowrap'
       },
       nav: {
-        fontFamily: StyleConstants.Fonts.THIN,
-        color: StyleConstants.Colors.ASH,
+        paddingRight: 20,
+        textAlign: 'right',
+        width: '25%',
+        whiteSpace: 'nowrap',
+      navLabel: {
+        padding: '7px 14px',
       }
     };
   }
