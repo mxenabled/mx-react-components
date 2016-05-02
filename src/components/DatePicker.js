@@ -193,7 +193,7 @@ const DatePicker = React.createClass({
           key='selectedDateWrapper'
           style={styles.selectedDateWrapper}
         >
-          {selectedDate(styles)}
+          {this._renderSelectedDate(styles)}
         </div>
         <div
           key='calendarWrapper'
