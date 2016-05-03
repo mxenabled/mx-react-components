@@ -154,7 +154,6 @@ const DatePicker = React.createClass({
     return (
       <div
         key='dateDisplay'
-        onClick={this._toggleCalendar}
         style={styles.dateDisplay}
       >
         <Icon
@@ -186,6 +185,7 @@ const DatePicker = React.createClass({
       >
         <div
           key='selectedDateWrapper'
+          onClick={this._toggleCalendar}
           style={styles.selectedDateWrapper}
         >
           {this._renderSelectedDate(styles)}
@@ -294,11 +294,8 @@ const DatePicker = React.createClass({
       },
       calendarWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderBottomLeftRadius: 3,
-        borderBottomRightRadius: 3,
-        borderColor: StyleConstants.Colors.FOG,
-        borderStyle: 'solid',
-        borderWidth: 1,
+        border: '1px solid ' + StyleConstants.Colors.FOG,
+        borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         display: this.state.showCalendar ? 'block' : 'none',
