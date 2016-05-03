@@ -23,9 +23,6 @@ const DatePickerDocs = React.createClass({
         />
 
         <h3>Usage</h3>
-        <h5>caretWrapperStyle <label>Object</label></h5>
-        <p>Style object used to style the wrapping div around the caret icon that shows the open/close status of the component.</p>
-
         <h5>closeOnDateSelect <label>Boolean</label></h5>
         <p>Default: false</p>
         <p>If set to `true`, the calendar will be close after the user selects a data.</p>
@@ -36,9 +33,6 @@ const DatePickerDocs = React.createClass({
         <h5>format <label>String</label></h5>
         <p>Default: 'YYYY-MM-DD'</p>
         <p>This is used to determine the format of the selected date. It should follow the Moment.js conventions outlined <a href='http://momentjs.com/docs/#/parsing/string-format/' target='_blank'>here</a>.</p>
-
-        <h5>inputStyle <label>Object</label></h5>
-        <p>Style object used to style the selected date input.</p>
 
         <h5>locale <label>String</label></h5>
         <p>Default: 'en'</p>
@@ -54,26 +48,9 @@ const DatePickerDocs = React.createClass({
         <p>Default: Select A Date</p>
         <p>A string used as placeholder text for the selected date input when it is empty.</p>
 
-        <h5>placeholderTextStyle <label>Object</label></h5>
-        <p>A style object used to style the placeholderText.</p>
-
-        <h5>scrimStyle <label>Object | Array</label></h5>
-        <p>A style object or Radium array that is used to modify the scrim element's styles.</p>
-
-        <h5>selectedDateColor <label>String</label></h5>
-        <p>Default: #359BCF</p>
-        <p>Color to be used for the selected date and day hover state on the calendar.</p>
-
-        <h5>showCaret <label>Boolean</label></h5>
-        <p>Default: true</p>
-        <p>If set to 'false', the caret icon will not be shown in the selected box.</p>
-
-        <h5>showDayBorders <label>Boolean</label></h5>
-        <p>Default: false</p>
-        <p>If set to 'true', then borders will be shown around each date in the calendar.</p>
-
-        <h5>title <label>String</label></h5>
-        <p>If a value is provided, it will be displayed above the calendar.</p>
+        <h5>primaryColor <label>String</label></h5>
+        <p>Default: PRIMARY</p>
+        <p>The color used for input focus, selected date highlight, and hover border.</p>
 
         <h5>useInputForSelectedDate <label>Boolean</label></h5>
         <p>Default: true</p>
@@ -82,10 +59,16 @@ const DatePickerDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
+    _handleDateSelect (selectedDatePickerDate) {
+      this.setState({
+        selectedDatePickerDate
+      });
+    },
+
     <DatePicker
       closeOnDateSelect={true}
-      title='Select A Date'
-      useInputForSelectedDate={false}
+      onDateSelect={this._handleDateSelect}
+      showDayBorders={false}
     />
   `}
         </Markdown>
