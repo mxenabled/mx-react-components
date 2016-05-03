@@ -1062,7 +1062,6 @@ const Demo = React.createClass({
         <br /><br />
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
           showDayBorders={false}
         />
