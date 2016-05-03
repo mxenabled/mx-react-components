@@ -1,5 +1,4 @@
 const React = require('react');
-const moment = require('moment');
 
 const { DatePicker } = require('mx-react-components');
 
@@ -17,7 +16,6 @@ const DatePickerDocs = React.createClass({
         <h3>Demo</h3>
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={moment().unix()}
           title='Select A Date'
           useInputForSelectedDate={false}
         />
