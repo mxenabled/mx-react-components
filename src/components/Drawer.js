@@ -189,6 +189,7 @@ const Drawer = React.createClass({
       },
       title: {
         overflow: 'hidden',
+        textAlign: 'center',
         textOverflow: 'ellipsis',
         width: '50%',
         whiteSpace: 'nowrap'
