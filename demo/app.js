@@ -101,12 +101,20 @@ const icons = [
     displayValue: 'Bike'
   },
   {
+    value: 'bill-pay',
+    displayValue: 'Bill Pay'
+  },
+  {
     value: 'calendar',
     displayValue: 'Calendar'
   },
   {
     value: 'calendar-plus',
     displayValue: 'Calendar Plus'
+  },
+  {
+    value: 'camera',
+    displayValue: 'Camera'
   },
   {
     value: 'campaigns',
@@ -347,6 +355,10 @@ const icons = [
   {
     value: 'sync',
     displayValue: 'Sync'
+  },
+  {
+    value: 'transfer',
+    displayValue: 'Transfer'
   },
   {
     value: 'transactions',
