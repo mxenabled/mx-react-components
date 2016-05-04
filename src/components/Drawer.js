@@ -89,7 +89,7 @@ const Drawer = React.createClass({
           type='base'
         />
       </nav>
-    ) : null;
+    ) : <div style={styles.nav} />;
   },
 
   render () {
@@ -128,7 +128,7 @@ const Drawer = React.createClass({
         top: 0,
         bottom: 0,
         left: '100%',
-        position: 'relative',
+        position: 'absolute',
         width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -182,13 +182,13 @@ const Drawer = React.createClass({
         display: 'flex',
         fontFamily: StyleConstants.Fonts.NORMAL,
         fontSize: StyleConstants.FontSizes.LARGE,
-        height: 45,
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative'
       },
       title: {
         overflow: 'hidden',
+        textAlign: 'center',
         textOverflow: 'ellipsis',
         width: '50%',
         whiteSpace: 'nowrap'
