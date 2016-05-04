@@ -98,7 +98,7 @@ const Drawer = React.createClass({
     return (
       <div style={styles.componentWrapper}>
         <div onClick={this._handleCloseClick} style={styles.scrim}></div>
-        <div ref={(ref) => (this._component = ref)} style={styles.component}>
+        <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
           <header style={styles.header}>
             <span style={styles.backArrow}>
               <Button
