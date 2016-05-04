@@ -90,6 +90,7 @@ const Drawer = React.createClass({
         />
       </nav>
     ) : null;
+    ) : <div style={styles.nav} />;
   },
 
   render () {
