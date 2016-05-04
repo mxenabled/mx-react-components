@@ -128,7 +128,7 @@ const Drawer = React.createClass({
         top: 0,
         bottom: 0,
         left: '100%',
-        position: 'relative',
+        position: 'absolute',
         width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
