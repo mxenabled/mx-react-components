@@ -149,6 +149,10 @@ const icons = [
     displayValue: 'Check'
   },
   {
+    value: 'check-skinny',
+    displayValue: 'Check Skinny'
+  },
+  {
     value: 'check-solid',
     displayValue: 'Check Solid'
   },
@@ -163,6 +167,10 @@ const icons = [
   {
     value: 'close',
     displayValue: 'Close'
+  },
+  {
+    value: 'close-skinny',
+    displayValue: 'Close Skinny'
   },
   {
     value: 'close-solid',
@@ -207,6 +215,10 @@ const icons = [
   {
     value: 'export',
     displayValue: 'Export'
+  },
+  {
+    value: 'filter',
+    displayValue: 'Filter'
   },
   {
     value: 'folder',
@@ -278,7 +290,7 @@ const icons = [
   },
   {
     value: 'md-credit',
-    displayValue: 'Creidt (MD)'
+    displayValue: 'Credit (MD)'
   },
   {
     value: 'md-debts',
@@ -725,15 +737,30 @@ const Demo = React.createClass({
     return (
       <div>
         <br /><br />
-        <Button onClick={this._handleShowDrawerClick} style={{ position: 'absolute', left: 15, top: 15 }} type={this.state.showDrawerButtonType}>Toggle Drawer</Button>
-        {this.state.showDrawer ?
-          <div style={{ textAlign: 'center', width: '80%', margin: 'auto', position: 'relative', height: '200', overflow: 'hidden' }}>
-            <Drawer navConfig={navConfig} onClose={this._onHideDrawer}>
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <Button
+            onClick={this._handleShowDrawerClick}
+            type={this.state.showDrawerButtonType}
+          >
+            Toggle Drawer
+          </Button>
+        </div>
+        {this.state.showDrawer ? (
+          <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+            <Drawer
+              navConfig={navConfig}
+              onClose={this._onHideDrawer}
+              title='This is the drawer component'
+            >
               <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
             </Drawer>
-          </div> : null}
+          </div>
+        ) : null}
         <br /><br />
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <div style={{ paddingBottom: 10 }}>
+            File Upload - Dropzone
+          </div>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
             maxFileSize={3000}
@@ -1047,7 +1074,6 @@ const Demo = React.createClass({
         <br /><br />
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
           showDayBorders={false}
         />

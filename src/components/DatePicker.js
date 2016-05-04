@@ -8,25 +8,15 @@ const StyleConstants = require('../constants/Style');
 
 const DatePicker = React.createClass({
   propTypes: {
-    calendarWrapperStyle: React.PropTypes.object,
-    caretWrapperStyle: React.PropTypes.object,
     closeOnDateSelect: React.PropTypes.bool,
     defaultDate: React.PropTypes.number,
     format: React.PropTypes.string,
-    inputStyle: React.PropTypes.object,
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
     onDateSelect: React.PropTypes.func,
     placeholderText: React.PropTypes.string,
-    placeholderTextStyle: React.PropTypes.object,
-    scrimStyle: React.PropTypes.object,
-    selectedDateColor: React.PropTypes.string,
-    selectedDateWrapperStyle: React.PropTypes.object,
-    showCaret: React.PropTypes.bool,
-    showDayBorders: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    title: React.PropTypes.string,
-    useInputForSelectedDate: React.PropTypes.bool
+    primaryColor: React.PropTypes.string,
+    style: React.PropTypes.object
   },
 
   getDefaultProps () {
@@ -35,48 +25,18 @@ const DatePicker = React.createClass({
       format: 'MMM D, YYYY',
       locale: 'en',
       onDateSelect () {},
-      selectedDateColor: StyleConstants.Colors.PRIMARY,
-      scrimStyle: {},
-      showCaret: true,
-      showDayBorders: false,
-      title: null,
-      useInputForSelectedDate: true
+      placeholderText: 'Select A Date',
+      primaryColor: StyleConstants.Colors.PRIMARY
     };
   },
 
   getInitialState () {
     return {
       currentDate: null,
-      inputValue: this._getInputValueByDate(this.props.defaultDate),
-      isValid: true,
+      inputValue: this.props.defaultDate,
       selectedDate: this.props.defaultDate,
       showCalendar: false
     };
-  },
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.defaultDate !== this.props.defaultDate) {
-      this.setState({
-        selectedDate: nextProps.defaultDate,
-        inputValue: moment.unix(nextProps.defaultDate).format(this.props.format)
-      });
-    }
-  },
-
-  _getInputValueByDate (date) {
-    let inputValue = null;
-
-    if (date) {
-      const newDate = moment.unix(date);
-
-      if (newDate.isValid()) {
-        inputValue = newDate.format(this.props.format);
-      } else {
-        inputValue = date;
-      }
-    }
-
-    return inputValue;
   },
 
   _getSelectedDate () {
@@ -97,27 +57,6 @@ const DatePicker = React.createClass({
     });
 
     this.props.onDateSelect(date);
-  },
-
-  _handleInputBlur (evt) {
-    if (evt.target.value.length === 0) {
-      this.props.onDateSelect(null);
-
-      this.setState({
-        inputValue: null,
-        selectedDate: null
-      });
-    } else {
-      this.setState({
-        inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
-      });
-    }
-  },
-
-  _handleInputChange (evt) {
-    this.setState({
-      inputValue: evt.target.value
-    });
   },
 
   _handlePreviousClick () {
@@ -154,52 +93,55 @@ const DatePicker = React.createClass({
     });
   },
 
-  _renderMonthTable (currentDate, selectedDate) {
+  _renderDayTitles (styles) {
+    const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+    return (
+      <div>
+        {days.map((day, i) => {
+          return (
+            <div key={i} style={styles.calendarWeekContent}>
+              <div style={styles.calendarWeekText}>
+                {day}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
+
+  _renderMonthTable (currentDate, selectedDate, styles) {
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
     const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
-    const dayHoverStyle = {
-      ':hover': {
-        backgroundColor: this.props.selectedDateColor,
-        color: StyleConstants.Colors.WHITE,
-        cursor: 'pointer'
-      }
-    };
-    const selectedDayStyle = {
-      backgroundColor: this.props.selectedDateColor,
-      color: StyleConstants.Colors.WHITE
-    };
 
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
       const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
+      const isToday = startDate.format(this.props.format) === moment().format(this.props.format);
       const noSelectDay = startDate.isBefore(minimumDate);
       const day = (
         <div
           key={startDate.month() + '-' + startDate.date()}
           onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
-          style={[
-            styles.calendarDay,
-            (!noSelectDay && isCurrentMonth) && styles.currentMonth
-          ]}
+          style={styles.calendarDay}
         >
           <div
             key={startDate.format('DDDD')}
-            style={[
+            style={Object.assign({},
               styles.calendarDayContent,
-              noSelectDay ? styles.calendarDayDisabled : isCurrentDay && selectedDayStyle,
-              dayHoverStyle
-            ]}
+              noSelectDay && styles.calendarDayDisabled,
+              isCurrentDay && styles.selectedDay,
+              (isToday && !isCurrentDay) && styles.currentDay,
+              (!noSelectDay && isCurrentMonth && !isCurrentDay) && styles.currentMonth
+            )}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
           </div>
         </div>
       );
-
-      if (this.props.showDayBorders) {
-        day.props.style.push([styles.borderRight, styles.borderBottom]);
-      }
 
       days.push(day);
       startDate.add(1, 'd');
@@ -208,343 +150,262 @@ const DatePicker = React.createClass({
     return days;
   },
 
-  _renderScrim (styles) {
-    if (this.state.showCalendar) {
-      return (
-        <div onClick={this._handleScrimClick} style={[styles.scrim, this.props.scrimStyle]} />
-      );
-    } else {
-      return null;
-    }
-  },
-
-  _renderSelectedDate () {
-    if (this.props.useInputForSelectedDate) {
-      const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
-
-      return (
-        <div>
-          <input
-            key='input'
-            onBlur={this._handleInputBlur}
-            onChange={this._handleInputChange}
-            onClick={this._toggleCalendar}
-            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: '#FFFFFF' }]}
-            type='text'
-            value={this.state.inputValue}
-          />
-          <div style={[styles.placeholderText, this.props.placeholderTextStyle]}>
-            {this.props.placeholderText || 'Select A Date'}
-          </div>
-          {this._renderCaret()}
+  _renderSelectedDate (styles) {
+    return (
+      <div
+        key='dateDisplay'
+        style={styles.dateDisplay}
+      >
+        <Icon
+          style={styles.calendarIcon}
+          type='calendar'
+        />
+        <div style={styles.inputValue}>
+          {this.state.inputValue || this.props.placeholderText}
         </div>
-      );
-    } else {
-      return (
-        <div
-          key='selectedDate'
-          onClick={this._toggleCalendar}
-          style={styles.selectedDate}
-        >
-          {this.state.inputValue}
-          {this._renderCaret()}
-        </div>
-      );
-    }
-  },
-
-  _renderTitle (styles) {
-    if (this.props.title) {
-      return (
-        <div key='title' style={styles.title}>
-          {this.props.title}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  },
-
-  _renderCaret () {
-    if (this.props.showCaret) {
-      return (
-        <div style={[styles.caretWrapper, this.props.caretWrapperStyle]}>
+        <div style={styles.caretWrapper}>
           <Icon
-            onClick={this._toggleCalendar}
-            size={20}
             style={styles.caret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         </div>
-      );
-    } else {
-      return null;
-    }
+      </div>
+    );
   },
 
   render () {
+    const styles = this.styles();
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-    let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
-    let rightNavIconStyle = Object.assign({}, styles.navIcon, styles.navRight);
-
-    if (this.props.showDayBorders) {
-      leftNavIconStyle = Object.assign(leftNavIconStyle, styles.borderRight);
-      rightNavIconStyle = Object.assign(rightNavIconStyle, styles.borderLeft);
-    }
 
     return (
       <div
-        style={[styles.component, styles.clearFix, this.props.style]}
+        style={styles.component}
         tabIndex={0}
       >
         <div
           key='selectedDateWrapper'
-          style={[
-            styles.selectedDateWrapper,
-            this.props.selectedDateWrapperStyle
-          ]}
+          onClick={this._toggleCalendar}
+          style={styles.selectedDateWrapper}
         >
-          {this._renderSelectedDate()}
+          {this._renderSelectedDate(styles)}
         </div>
         <div
           key='calendarWrapper'
-          style={[
-            styles.calendarWrapper,
-            this.props.calendarWrapperStyle,
-            this.state.showCalendar && styles.calendarShow
-          ]}
+          style={styles.calendarWrapper}
         >
-          {this._renderTitle(styles)}
-          <div key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
+          <div key='calendarHeader'
+            style={styles.calendarHeader}
+          >
             <Icon
               onClick={this._handlePreviousClick}
-              size={32}
-              style={leftNavIconStyle}
+              size={20}
+              style={styles.navLeft}
               type='caret-left'
             />
             {currentDate.format('MMMM YYYY')}
             <Icon
               onClick={this._handleNextClick}
-              size={32}
-              style={rightNavIconStyle}
+              size={20}
+              style={styles.navRight}
               type='caret-right'
             />
           </div>
           <div style={styles.calendarContainer}>
-            {this._renderMonthTable(currentDate, selectedDate)}
+            {this._renderDayTitles(styles)}
+            {this._renderMonthTable(currentDate, selectedDate, styles)}
           </div>
           <div style={styles.clearFix}></div>
         </div>
-        {this._renderScrim(styles)}
+        {(this.state.showCalendar) ? (
+          <div onClick={this._handleScrimClick} style={styles.scrim} />
+        ) : null }
       </div>
     );
+  },
+
+  styles () {
+    return {
+      calendarDay: {
+        color: StyleConstants.Colors.FOG,
+        float: 'left',
+        height: 30,
+        marginBottom: 2,
+        position: 'relative',
+        width: 35
+      },
+      calendarDayContent: {
+        borderRadius: 3,
+        height: 30,
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)',
+        width: 35,
+
+        ':hover': {
+          border: '1px solid' + this.props.primaryColor,
+          borderRadius: 3,
+          cursor: 'pointer'
+        }
+      },
+      calendarDayDisabled: {
+        ':hover': {
+          background: 'none',
+          color: StyleConstants.Colors.FOG
+        }
+      },
+      calendarDayText: {
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)'
+      },
+      calendarHeader: {
+        clear: 'both',
+        color: StyleConstants.Colors.CHARCOAL,
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: 30,
+        marginBottom: 15,
+        padding: '7px 0',
+        position: 'relative',
+        textAlign: 'center'
+      },
+      calendarIcon: {
+        left: 10,
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      calendarWeekContent: {
+        color: StyleConstants.Colors.ASH,
+        float: 'left',
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        height: 30,
+        marginBottom: 2,
+        position: 'relative',
+        width: 35
+      },
+      calendarWeekText: {
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)'
+      },
+      calendarWrapper: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        border: '1px solid ' + StyleConstants.Colors.FOG,
+        borderRadius: 3,
+        boxShadow: StyleConstants.ShadowHigh,
+        boxSizing: 'border-box',
+        display: this.state.showCalendar ? 'block' : 'none',
+        marginTop: 10,
+        padding: '20px 20px 0 20px',
+        position: 'absolute',
+        right: 0,
+        width: 287,
+        zIndex: 10
+      },
+      caret: {
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH,
+        position: 'absolute',
+        right: 5,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      caretWrapper: {
+        position: 'absolute',
+        top: '50%',
+        right: 5
+      },
+      clearFix: {
+        clear: 'both',
+        marginBottom: 15
+      },
+      component: Object.assign({
+        backgroundColor: StyleConstants.Colors.WHITE,
+        clear: 'both',
+        color: StyleConstants.Colors.BLACK,
+        display: 'inline-block',
+        float: 'right',
+        fontFamily: StyleConstants.FontFamily,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        marginBottom: 15,
+        position: 'relative',
+        WebkitAppearance: 'none',
+        width: '100%',
+
+        ':focus': {
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      }, this.props.style),
+      currentDay: {
+        backgroundColor: StyleConstants.Colors.FOG
+      },
+      currentMonth: {
+        color: StyleConstants.Colors.CHARCOAL
+      },
+      dateDisplay: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        fill: this.props.primaryColor,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        outline: 'none',
+        WebkitAppearance: 'none',
+        zIndex: 2,
+
+        ':focus': {
+          border: 'none',
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+      inputValue: {
+        color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        display: 'inline-block',
+        left: 40,
+        position: 'absolute'
+      },
+      navLeft: {
+        cursor: 'pointer',
+        position: 'absolute',
+        left: 7,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      navRight: {
+        cursor: 'pointer',
+        position: 'absolute',
+        right: 7,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      selectedDay: {
+        backgroundColor: this.props.primaryColor,
+        color: StyleConstants.Colors.WHITE
+      },
+      selectedDateWrapper: {
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        cursor: 'pointer',
+        height: 40,
+        position: 'relative',
+        padding: 13
+      },
+      scrim: {
+        position: 'fixed',
+        zIndex: 9,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+      }
+    };
   }
 });
-
-const styles = {
-  caret: {
-    color: StyleConstants.Colors.ASH,
-    cursor: 'pointer',
-    position: 'absolute',
-    right: 5,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  caretWrapper: {
-    position: 'absolute',
-    top: '50%',
-    right: 5
-  },
-  calendarDay: {
-    color: StyleConstants.Colors.ASH,
-    float: 'left',
-    paddingBottom: '11%',
-    position: 'relative',
-    width: '13.5%'
-  },
-  borderBottom: {
-    borderBottom: StyleConstants.Colors.FOG,
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1
-  },
-  borderRight: {
-    borderRight: StyleConstants.Colors.FOG,
-    borderRightStyle: 'solid',
-    borderRightWidth: 1
-  },
-  borderLeft: {
-    borderLeft: StyleConstants.Colors.FOG,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 1
-  },
-  calendarContainer: {
-    width: '100%',
-    padding: '0px 2px 10px 6px'
-  },
-  calendarDayContent: {
-    borderRadius: '50%',
-    height: 32,
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%) translateX(-50%)',
-    width: 32
-  },
-  calendarDayText: {
-    borderRadius: '100%',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    fontWeight: 'normal',
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%) translateX(-50%)'
-  },
-  calendarDayDisabled: {
-    ':hover': {
-      background: 'none',
-      color: StyleConstants.Colors.PORCELAIN
-    }
-  },
-  calendarHeader: {
-    color: StyleConstants.Colors.CHARCOAL,
-    borderBottom: StyleConstants.Colors.FOG,
-    borderBottomWidth: 1,
-    fontSize: StyleConstants.FontSizes.XLARGE,
-    fontWeight: 'normal',
-    padding: '5px 0px 7px 0px',
-    position: 'relative',
-    textAlign: 'center',
-    textTransform: 'none'
-  },
-  calendarIcon: {
-    color: StyleConstants.Colors.PORCELAIN,
-    position: 'absolute',
-    right: 12.8,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  calendarShow: {
-    display: 'block'
-  },
-  clearFix: {
-    clear: 'both',
-    marginBottom: 15
-  },
-  component: {
-    backgroundColor: StyleConstants.Colors.WHITE,
-    color: '#000000',
-    fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    WebkitAppearance: 'none',
-    width: '100%',
-
-    '@media (max-width: 768px)': {
-      fontSize: 8
-    },
-
-    ':focus': {
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  calendarWrapper: {
-    backgroundColor: StyleConstants.Colors.WHITE,
-    borderBottomLeftRadius: 3,
-    borderBottomRightRadius: 3,
-    borderColor: StyleConstants.Colors.FOG,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    boxShadow: StyleConstants.ShadowHigh,
-    boxSizing: 'border-box',
-    display: 'none',
-    maxWidth: 270,
-    padding: '0px 0px 0px 0px',
-    margin: '0 0 40px 0',
-    position: 'absolute',
-    width: '100%',
-    zIndex: 10
-  },
-  selectedDateWrapper: {
-    borderColor: StyleConstants.Colors.FOG,
-    borderRadius: '3px 3px 3px 3px',
-    borderStyle: 'solid',
-    borderWidth: '1px 1px 1px 1px',
-    position: 'relative',
-    padding: '5px 5px 5px 5px'
-  },
-  currentMonth: {
-    color: StyleConstants.Colors.CHARCOAL
-  },
-  input: {
-    backgroundColor: 'transparent',
-    border: 'none',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    outline: 'none',
-    paddingBottom: 10,
-    paddingLeft: 5,
-    position: 'relative',
-    top: 5,
-    WebkitAppearance: 'none',
-    width: '80%',
-    zIndex: 2,
-
-    ':focus': {
-      border: 'none',
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  navIcon: {
-    cursor: 'pointer'
-  },
-  navLeft: {
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  navRight: {
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  placeholderText: {
-    color: StyleConstants.Colors.CHARCOAL,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    paddingLeft: 5,
-    position: 'absolute',
-    top: 10
-  },
-  scrim: {
-    position: 'fixed',
-    zIndex: 9,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  },
-  selectedDate: {
-    color: StyleConstants.Colors.CHARCOAL,
-    cursor: 'pointer',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    padding: '5px 0 5px 5px',
-    verticalAlign: 'middle',
-    width: '100%',
-
-    ':hover': {
-      color: StyleConstants.Colors.PRIMARY
-    }
-  },
-  title: {
-    backgroundColor: StyleConstants.Colors.CHARCOAL,
-    color: StyleConstants.Colors.PORCELAIN,
-    textAlign: 'center',
-    padding: '7px 0px 7px 0px',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    margin: 1
-  }
-};
 
 module.exports = Radium(DatePicker);

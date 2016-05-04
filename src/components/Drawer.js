@@ -1,12 +1,14 @@
+const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
 
-const StyleConstants = require('../constants/Style');
+const Button = require('../components/Button');
 
-const Icon = require('../components/Icon');
+const StyleConstants = require('../constants/Style');
 
 const Drawer = React.createClass({
   propTypes: {
+    buttonPrimaryColor: React.PropTypes.string,
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
     navConfig: React.PropTypes.shape({
@@ -14,43 +16,39 @@ const Drawer = React.createClass({
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
     }),
-    onClose: React.PropTypes.func.isRequired
+    onClose: React.PropTypes.func.isRequired,
+    title: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
+      buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       duration: 500,
-      easing: [0.28, 0.14, 0.34, 1.04]
+      easing: [0.28, 0.14, 0.34, 1.04],
+      title: ''
     };
   },
 
   componentDidMount () {
-    this._animateComponent({ left: '20%' });
-    this._animateBackArrow();
-    if (this.props.navConfig) {
-      this._animateNav();
-    }
+    this._animateComponent({ left: this._getAnimationDistance() });
   },
 
-  _renderNav () {
-    const styles = this.styles();
+  _getAnimationDistance () {
+    const greaterThan1200ComponentWidth = 960;
+    const maxResolutionBreakPoint = 1200;
+    const minResoultionBreakPoint = 750;
+    const windowWidth = window.innerWidth;
 
-    return this.props.navConfig ?
-      <nav ref={(ref) => (this._nav = ref)} style={styles.nav}>
-        <Icon
-          onClick={this.props.navConfig.onPreviousClick}
-          size={25}
-          style={styles.icons}
-          type='caret-left'
-        />
-        {this.props.navConfig.label}
-        <Icon
-          onClick={this.props.navConfig.onNextClick}
-          size={25}
-          style={styles.icons}
-          type='caret-right'
-        />
-      </nav> : null;
+    if (windowWidth >= maxResolutionBreakPoint) {
+      //Resolution - 960 from the left
+      return windowWidth - greaterThan1200ComponentWidth;
+    } else if (windowWidth <= minResoultionBreakPoint) {
+      //All the way over to the left
+      return 0;
+    } else {
+      //20% from the left
+      return '20%';
+    }
   },
 
   _handleCloseClick () {
@@ -70,45 +68,48 @@ const Drawer = React.createClass({
     return Velocity(el, transition, options);
   },
 
-  _animateBackArrow () {
-    const el = this._backArrow;
-    const transition = { left: 25 };
-    const options = {
-      delay: this.props.duration,
-      duration: this.props.duration,
-      easing: this.props.easing
-    };
+  _renderNav () {
+    const styles = this.styles();
 
-    Velocity(el, transition, options);
-  },
-
-  _animateNav () {
-    const el = this._nav;
-    const transition = { top: '50%' };
-    const options = {
-      delay: this.props.duration,
-      duration: this.props.duration,
-      easing: this.props.easing
-    };
-
-    Velocity(el, transition, options);
+    return this.props.navConfig ? (
+      <nav style={styles.nav}>
+        <Button
+          icon='caret-left'
+          onClick={this.props.navConfig.onPreviousClick}
+          primaryColor={this.props.buttonPrimaryColor}
+          type='base'
+        />
+        <span style={styles.navLabel}>
+          {this.props.navConfig.label}
+        </span>
+        <Button
+          icon='caret-right'
+          onClick={this.props.navConfig.onNextClick}
+          primaryColor={this.props.buttonPrimaryColor}
+          type='base'
+        />
+      </nav>
+    ) : <div style={styles.nav} />;
   },
 
   render () {
     const styles = this.styles();
 
     return (
-      <div>
+      <div style={styles.componentWrapper}>
         <div onClick={this._handleCloseClick} style={styles.scrim}></div>
         <div ref={(ref) => (this._component = ref)} style={styles.component}>
           <header style={styles.header}>
-            <span ref={(ref) => (this._backArrow = ref)} style={styles.backArrow}>
-              <Icon
+            <span style={styles.backArrow}>
+              <Button
+                icon='arrow-left'
                 onClick={this._handleCloseClick}
-                size={25}
-                style={styles.icons}
-                type='arrow-left'
+                primaryColor={this.props.buttonPrimaryColor}
+                type={'base'}
               />
+            </span>
+            <span style={styles.title}>
+              {this.props.title}
             </span>
             {this._renderNav()}
           </header>
@@ -131,7 +132,21 @@ const Drawer = React.createClass({
         width: '80%',
         overflow: 'hidden',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
-        boxShadow: StyleConstants.ShadowHigh
+        boxShadow: StyleConstants.ShadowHigh,
+
+        '@media (max-width: 750px)': {
+          width: '100%'
+        },
+        '@media (min-width: 1200px)': {
+          width: 960
+        }
+      },
+      componentWrapper: {
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0
       },
       content: {
         backgroundColor: StyleConstants.Colors.WHITE,
@@ -151,29 +166,53 @@ const Drawer = React.createClass({
         color: StyleConstants.Colors.ASH
       },
       backArrow: {
-        position: 'absolute',
-        right: '100%',
-        top: '50%',
-        transform: 'translateY(-50%)'
+        paddingLeft: 20,
+        textAlign: 'left',
+        width: '25%',
+
+        '@media (max-width: 750px)': {
+          paddingLeft: 10
+        }
       },
       header: {
+        alignItems: 'center',
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
-        height: 15,
-        padding: '15px 25px',
+        color: StyleConstants.Colors.ASH,
+        display: 'flex',
+        fontFamily: StyleConstants.Fonts.NORMAL,
+        fontSize: StyleConstants.FontSizes.LARGE,
+        justifyContent: 'center',
+        padding: '7px 7px',
         position: 'relative'
       },
+      title: {
+        overflow: 'hidden',
+        textAlign: 'center',
+        textOverflow: 'ellipsis',
+        width: '50%',
+        whiteSpace: 'nowrap'
+      },
       nav: {
-        fontFamily: StyleConstants.Fonts.THIN,
-        color: StyleConstants.Colors.ASH,
-        position: 'absolute',
-        right: 25,
-        top: '-100%',
-        transform: 'translateY(-50%)'
+        paddingRight: 20,
+        textAlign: 'right',
+        width: '25%',
+        whiteSpace: 'nowrap',
+
+        '@media (max-width: 750px)': {
+          paddingRight: 10
+        }
+      },
+      navLabel: {
+        padding: '7px 14px',
+
+        '@media (max-width: 750px)': {
+          display: 'none',
+          padding: 0
+        }
       }
     };
   }
-
 });
 
-module.exports = Drawer;
+module.exports = Radium(Drawer);
