@@ -6,6 +6,20 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.14</h3>
+        <ul>
+          <li>
+            Add bill pay, camera and transfer icons to the Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/293'>#293</a>)
+          </li>
+        </ul>
+
+        <h3>3.1.13</h3>
+        <ul>
+          <li>
+            Fix positioning in Drawer header and button text alignment (<a href='https://github.com/mxenabled/mx-react-components/pull/292'>#292</a>)
+          </li>
+        </ul>
+
         <h3>3.1.12</h3>
         <ul>
           <li>
