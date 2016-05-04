@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.15</h3>
+        <ul>
+          <li>
+            Add style object to the Drawer component (<a href='https://github.com/mxenabled/mx-react-components/pull/294'>#294</a>)
+          </li>
+        </ul>
         <h3>3.1.14</h3>
         <ul>
           <li>
