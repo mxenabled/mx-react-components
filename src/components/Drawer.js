@@ -182,7 +182,6 @@ const Drawer = React.createClass({
         display: 'flex',
         fontFamily: StyleConstants.Fonts.NORMAL,
         fontSize: StyleConstants.FontSizes.LARGE,
-        height: 45,
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative'
