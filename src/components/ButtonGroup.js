@@ -9,6 +9,7 @@ const ButtonGroup = React.createClass({
   propTypes: {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       icon: React.PropTypes.string,
+      onClick: React.PropTypes.func,
       style: React.PropTypes.object,
       text: React.PropTypes.string
     }).isRequired),
@@ -44,6 +45,7 @@ const ButtonGroup = React.createClass({
             <Button
               icon={button.icon}
               key={i}
+              onClick={button.onClick}
               primaryColor={this.props.primaryColor}
               style={Object.assign({},
                 styles.component,
