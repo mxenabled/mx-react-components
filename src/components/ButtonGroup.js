@@ -48,12 +48,12 @@ const ButtonGroup = React.createClass({
               onClick={button.onClick}
               primaryColor={this.props.primaryColor}
               style={Object.assign({},
-                button.style,
                 styles.component,
                 styles[this.props.type],
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
-                isOnlyChild && styles.onlyChild)}
+                isOnlyChild && styles.onlyChild,
+                button.style)}
               type={this.props.type}
             >
               {button.text}

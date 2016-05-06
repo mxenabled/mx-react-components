@@ -38,7 +38,7 @@ const Button = React.createClass({
     return (
       <div {...this.props} style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}>
         {(this.props.icon && !this.props.isActive && !this.props.children) ? <Icon size={20} style={styles.iconOnly} type={this.props.icon} /> : null}
-        {this.props.icon && !this.props.isActive && this.props.children ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
+        {(this.props.icon && !this.props.isActive && this.props.children) ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
         {this.props.isActive ? (
           <div>
             <Spin direction='counterclockwise'>
