@@ -157,6 +157,7 @@ const DatePicker = React.createClass({
         style={styles.dateDisplay}
       >
         <Icon
+          size={20}
           style={styles.calendarIcon}
           type='calendar'
         />
@@ -165,6 +166,7 @@ const DatePicker = React.createClass({
         </div>
         <div style={styles.caretWrapper}>
           <Icon
+            size={20}
             style={styles.caret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
@@ -372,7 +374,9 @@ const DatePicker = React.createClass({
         color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
         display: 'inline-block',
         left: 40,
-        position: 'absolute'
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)'
       },
       month: {
         left: '50%',
@@ -416,9 +420,9 @@ const DatePicker = React.createClass({
         borderStyle: 'solid',
         borderWidth: 1,
         cursor: 'pointer',
-        height: 12,
+        height: 13,
         position: 'relative',
-        padding: 13
+        padding: '11px 10px 12px'
       },
       scrim: {
         position: 'fixed',
