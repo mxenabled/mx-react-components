@@ -48,6 +48,7 @@ const ButtonGroup = React.createClass({
               onClick={button.onClick}
               primaryColor={this.props.primaryColor}
               style={Object.assign({},
+                button.style,
                 styles.component,
                 styles[this.props.type],
                 isFirstChild && styles.firstChild,
