@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.16</h3>
+        <ul>
+          <li>
+            Fixed styles in the ButtonGroup component (<a href='https://github.com/mxenabled/mx-react-components/pull/296'>#296</a>)
+          </li>
+        </ul>
         <h3>3.1.15</h3>
         <ul>
           <li>
