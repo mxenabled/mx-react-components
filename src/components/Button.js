@@ -37,7 +37,8 @@ const Button = React.createClass({
 
     return (
       <div {...this.props} style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}>
-        {this.props.icon && !this.props.isActive ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
+        {(this.props.icon && !this.props.isActive && !this.props.children) ? <Icon size={20} style={styles.iconOnly} type={this.props.icon} /> : null}
+        {this.props.icon && !this.props.isActive && this.props.children ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
         {this.props.isActive ? (
           <div>
             <Spin direction='counterclockwise'>
@@ -65,7 +66,8 @@ const Button = React.createClass({
         cursor: 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
-        height: 13
+        height: 13,
+        position: 'relative'
       }, this.props.style),
       primary: {
         backgroundColor: this.props.primaryColor,
@@ -168,6 +170,12 @@ const Button = React.createClass({
         borderColor: StyleConstants.Colors.FOG,
         color: StyleConstants.Colors.FOG,
         fill: StyleConstants.Colors.FOG
+      },
+      iconOnly: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
       },
       icon: {
         marginBottom: -4,
