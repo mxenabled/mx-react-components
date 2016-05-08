@@ -1,4 +1,5 @@
 module.exports = {
+  BarChart: require('./components/BarChart'),
   Button: require('./components/Button'),
   ButtonGroup: require('./components/ButtonGroup'),
   DatePicker: require('./components/DatePicker'),
