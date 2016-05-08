@@ -56,11 +56,13 @@ const Rect = React.createClass({
   },
 
   _handleMouseOver (label, value, x, y) {
+    const animateDuration = 500;
+
     this.props.onHover(label, value, x, y);
 
     this.setState({
       hovering: true,
-      milliseconds: this.props.animateOnHover ? 500 : this.state.milliseconds
+      milliseconds: this.props.animateOnHover ? animateDuration : this.state.milliseconds
     });
   },
 
@@ -75,7 +77,7 @@ const Rect = React.createClass({
   },
 
   render () {
-    const animateHeight = d3.ease('back-out', .5);
+    const animateHeight = d3.ease('back-out', 0.5);
     const height = this.props.height * animateHeight(Math.min(1, this.state.milliseconds / 1000));
     const y = this.props.height - height + this.props.y;
     const style = {
