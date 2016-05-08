@@ -17,6 +17,7 @@ const SetIntervalMixin = {
 
 const Rect = React.createClass({
   propTypes: {
+    animateOnHover: React.PropTypes.bool,
     color: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
     hoverColor: React.PropTypes.string,
@@ -30,16 +31,6 @@ const Rect = React.createClass({
   },
 
   mixins: [SetIntervalMixin],
-
-  getDefaultProps () {
-    return {
-      color: StyleConstants.Colors.ASH,
-      hoverColor: StyleConstants.Colors.PRIMARY,
-      onClick: () => {},
-      onHover: () => {},
-      width: 30
-    };
-  },
 
   getInitialState () {
     return {
@@ -64,12 +55,12 @@ const Rect = React.createClass({
     });
   },
 
-  _handleMouseOver (label, value, x, y, height) {
+  _handleMouseOver (label, value, x, y) {
     this.props.onHover(label, value, x, y);
 
     this.setState({
       hovering: true,
-      milliseconds: height === this.props.height ? 250 : 500
+      milliseconds: this.props.animateOnHover ? 500 : this.state.milliseconds
     });
   },
 
@@ -84,7 +75,7 @@ const Rect = React.createClass({
   },
 
   render () {
-    const animateHeight = d3.ease('back-out');
+    const animateHeight = d3.ease('back-out', .5);
     const height = this.props.height * animateHeight(Math.min(1, this.state.milliseconds / 1000));
     const y = this.props.height - height + this.props.y;
     const style = {
@@ -97,7 +88,7 @@ const Rect = React.createClass({
         height={height}
         onClick={this._handleOnClick}
         onMouseOut={this._handleMouseOut}
-        onMouseOver={this._handleMouseOver.bind(null, this.props.label, this.props.value, this.props.x, y, height)}
+        onMouseOver={this._handleMouseOver.bind(null, this.props.label, this.props.value, this.props.x, y)}
         style={style}
         width={this.props.width}
         x={this.props.x}
@@ -110,6 +101,7 @@ const Rect = React.createClass({
 
 const BarChart = React.createClass({
   propTypes: {
+    animateOnHover: React.PropTypes.bool,
     color: React.PropTypes.string,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
@@ -121,7 +113,12 @@ const BarChart = React.createClass({
 
   getDefaultProps () {
     return {
+      animateOnHover: false,
+      color: StyleConstants.Colors.ASH,
       height: 300,
+      hoverColor: StyleConstants.Colors.PRIMARY,
+      onClick: () => {},
+      onHover: () => {},
       width: 500
     };
   },
@@ -175,6 +172,7 @@ const BarChart = React.createClass({
 
       return (
         <Rect
+          animateOnHover={this.props.animateOnHover}
           color={this.props.color}
           height={height}
           hoverColor={this.props.hoverColor}

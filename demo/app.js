@@ -1147,6 +1147,7 @@ const Demo = React.createClass({
             </span>
           ) : null}
           <BarChart
+            animateOnHover={true}
             data={[
               {
                 label: 'Jan',
