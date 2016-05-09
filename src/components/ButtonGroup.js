@@ -67,6 +67,7 @@ const ButtonGroup = React.createClass({
   styles () {
     return {
       component: Object.assign({
+        boxSizing: 'border-box',
         borderRadius: 0,
         borderWidth: 1,
         borderRightWidth: 0,

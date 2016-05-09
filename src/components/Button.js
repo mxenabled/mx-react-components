@@ -37,15 +37,17 @@ const Button = React.createClass({
 
     return (
       <div {...this.props} style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}>
-        {(this.props.icon && !this.props.isActive) ? <Icon size={20} style={this.props.children ? styles.icon : styles.iconOnly} type={this.props.icon} /> : null}
-        {this.props.isActive ? (
-          <div>
+        <div style={styles.children}>
+          {(this.props.icon && !this.props.isActive) ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
+          {this.props.isActive ? (
             <Spin direction='counterclockwise'>
               <Icon size={20} style={styles.spinner} type='spinner' />
             </Spin>
-              {this.props.actionText ? <div style={styles.actionText}> {this.props.actionText} </div> : null }
+          ) : null }
+          <div style={styles.buttonText}>
+            {this.props.isActive ? this.props.actionText : this.props.children}
           </div>
-        ) : this.props.children}
+        </div>
       </div>
     );
   },
@@ -57,17 +59,22 @@ const Button = React.createClass({
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: 'transparent',
+        boxSizing: 'border-box',
         display: 'inline-block',
-        padding: '7px 14px',
-        textAlign: 'center',
+        padding: '4px 14px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         cursor: 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
-        height: 13,
         position: 'relative'
       }, this.props.style),
+      children: {
+        justifyContent: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        lineHeight: '20px'
+      },
       primary: {
         backgroundColor: this.props.primaryColor,
         borderColor: this.props.primaryColor,
@@ -170,27 +177,11 @@ const Button = React.createClass({
         color: StyleConstants.Colors.FOG,
         fill: StyleConstants.Colors.FOG
       },
-      iconOnly: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-      },
       icon: {
-        marginBottom: -4,
-        marginLeft: -6,
-        marginRight: this.props.children ? 5 : -5,
-        marginTop: -4
+        marginRight: this.props.children ? 5 : 0
       },
-      spinner: {
-        marginBottom: -3,
-        marginLeft: -6,
-        marginRight: -5,
-        marginTop: -5
-      },
-      actionText: {
-        display: 'inline-block',
-        paddingLeft: 10
+      buttonText: {
+        marginLeft: (this.props.isActive && this.props.actionText) ? 10 : 0
       }
     };
   }
