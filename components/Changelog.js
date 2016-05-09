@@ -6,24 +6,34 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
-        <h3>3.1.167/h3>
+        <h3>3.1.18/h3>
+        <ul>
+          <li>
+            Use Flex for icon and text centering on buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/302'>#302</a>)
+          </li>
+        </ul>
+
+        <h3>3.1.17/h3>
         <ul>
           <li>
             Fixed styles in Button and ButtonGroup components (<a href='https://github.com/mxenabled/mx-react-components/pull/299'>#299</a>)
           </li>
         </ul>
+
         <h3>3.1.16</h3>
         <ul>
           <li>
             Fixed styles in the ButtonGroup component (<a href='https://github.com/mxenabled/mx-react-components/pull/296'>#296</a>)
           </li>
         </ul>
+
         <h3>3.1.15</h3>
         <ul>
           <li>
             Add style object to the Drawer component (<a href='https://github.com/mxenabled/mx-react-components/pull/294'>#294</a>)
           </li>
         </ul>
+
         <h3>3.1.14</h3>
         <ul>
           <li>
