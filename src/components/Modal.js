@@ -14,6 +14,7 @@ const Modal = React.createClass({
       icon: React.PropTypes.string,
       label: React.PropTypes.string,
       onClick: React.PropTypes.func,
+      primaryColor: React.PropTypes.string,
       style: React.PropTypes.object,
       type: React.PropTypes.oneOf(['primary', 'secondary'])
     })),
@@ -97,6 +98,7 @@ const Modal = React.createClass({
                   isActive={button.isActive}
                   key={button.type + i}
                   onClick={button.onClick}
+                  primaryColor={button.primaryColor}
                   style={Object.assign({}, styles.button, button.style)}
                   type={button.type}
                 >
