@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.19</h3>
+        <ul>
+          <li>
+            Fix left margin for buttons with an icon (<a href='https://github.com/mxenabled/mx-react-components/pull/303'>#303</a>)
+          </li>
+        </ul>
+
         <h3>3.1.18</h3>
         <ul>
           <li>
