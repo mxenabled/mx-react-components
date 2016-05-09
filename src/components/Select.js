@@ -39,7 +39,8 @@ const Select = React.createClass({
       highlightedValue: null,
       isOpen: false,
       selected: false,
-      hoverItem: null
+      hoverItem: null,
+      scrollLocation: 0
     };
   },
 
@@ -66,16 +67,25 @@ const Select = React.createClass({
     if (!isMobile) {
       this.setState({
         isOpen: !this.state.isOpen
+      }, () => {
+        if (document.getElementById('items')) {
+          const items = document.getElementById('items');
+
+          items.scrollTop = this.state.scrollLocation;
+        }
       });
     }
   },
 
   _handleOptionClick (option) {
+    const items = document.getElementById('items');
+
     this.setState({
       selected: option,
       isOpen: false,
       highlightedValue: option,
-      hoverItem: null
+      hoverItem: null,
+      scrollLocation: items.scrollTop
     });
 
     this.props.onChange(option);
@@ -179,7 +189,12 @@ const Select = React.createClass({
         );
       } else {
         return (
-          <ul className='mx-select-options' ref='optionList' style={[styles.options, this.props.optionsStyle]}>
+          <ul
+          className='mx-select-options'
+          id='items'
+          ref='optionList'
+          style={[styles.options, this.props.optionsStyle]}
+          >
             {this.props.options.map(option => {
               return (
                 <li
