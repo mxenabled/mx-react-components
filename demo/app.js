@@ -521,7 +521,6 @@ const lineChartData = [
 const Demo = React.createClass({
   getInitialState () {
     return {
-      barchartHovering: false,
       barchartHoverValue: null,
       barchartHoverLabel: null,
       barchartX: null,
