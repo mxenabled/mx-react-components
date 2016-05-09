@@ -52,7 +52,8 @@ const ButtonGroup = React.createClass({
                 styles[this.props.type],
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
-                isOnlyChild && styles.onlyChild)}
+                isOnlyChild && styles.onlyChild,
+                button.style)}
               type={this.props.type}
             >
               {button.text}
