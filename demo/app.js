@@ -522,7 +522,6 @@ const Demo = React.createClass({
   getInitialState () {
     return {
       barchartHoverValue: null,
-      barchartHoverLabel: null,
       barchartX: null,
       barchartY: null,
       donutChartData: [],
