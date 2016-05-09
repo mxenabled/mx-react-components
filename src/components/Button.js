@@ -41,7 +41,7 @@ const Button = React.createClass({
           {(this.props.icon && !this.props.isActive) ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
           {this.props.isActive ? (
             <Spin direction='counterclockwise'>
-              <Icon size={20} style={styles.spinner} type='spinner' />
+              <Icon size={20} type='spinner' />
             </Spin>
           ) : null }
           <div style={styles.buttonText}>
@@ -178,6 +178,7 @@ const Button = React.createClass({
         fill: StyleConstants.Colors.FOG
       },
       icon: {
+        marginLeft: this.props.children ? -4 : 0,
         marginRight: this.props.children ? 5 : 0
       },
       buttonText: {
