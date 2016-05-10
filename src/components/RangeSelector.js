@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _throttle = require('lodash/throttle');
+const _debounce = require('lodash/debounce');
 
 const StyleConstants = require('../constants/Style');
 
@@ -57,6 +58,13 @@ const RangeSelector = React.createClass({
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
+
+    this._handlePropCallback = _debounce((who) => {
+      // Who represents which switch is actually being moved.
+      const currentValue = this.state[who.toLowerCase() + 'Value'];
+
+      this.props['on' + who + 'DragStop'](currentValue);
+    }, 300);
   },
 
   componentWillUnmount () {
@@ -188,8 +196,8 @@ const RangeSelector = React.createClass({
         newState.dragging = false;
         newState.trackClicked = false;
       }
-      this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
 
+      this._handlePropCallback(this.state.dragging);
       this.setState(newState);
 
       e.preventDefault();
