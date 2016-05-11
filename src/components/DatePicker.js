@@ -33,7 +33,7 @@ const DatePicker = React.createClass({
   getInitialState () {
     return {
       currentDate: null,
-      inputValue: this.props.defaultDate,
+      inputValue: moment.unix(this.props.defaultDate).format(this.props.format),
       selectedDate: this.props.defaultDate,
       showCalendar: false
     };
@@ -157,6 +157,7 @@ const DatePicker = React.createClass({
         style={styles.dateDisplay}
       >
         <Icon
+          size={20}
           style={styles.calendarIcon}
           type='calendar'
         />
@@ -165,6 +166,7 @@ const DatePicker = React.createClass({
         </div>
         <div style={styles.caretWrapper}>
           <Icon
+            size={20}
             style={styles.caret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
@@ -197,19 +199,25 @@ const DatePicker = React.createClass({
           <div key='calendarHeader'
             style={styles.calendarHeader}
           >
-            <Icon
-              onClick={this._handlePreviousClick}
-              size={20}
-              style={styles.navLeft}
-              type='caret-left'
-            />
-            {currentDate.format('MMMM YYYY')}
-            <Icon
-              onClick={this._handleNextClick}
-              size={20}
-              style={styles.navRight}
-              type='caret-right'
-            />
+            <div key='navLeft' style={Object.assign({}, styles.navWrapper, { float: 'left' })}>
+              <Icon
+                onClick={this._handlePreviousClick}
+                size={20}
+                style={styles.navLeft}
+                type='caret-left'
+              />
+            </div>
+            <div style={styles.month}>
+              {currentDate.format('MMMM YYYY')}
+            </div>
+            <div key='navRight' style={Object.assign({}, styles.navWrapper, { float: 'right' })}>
+              <Icon
+                onClick={this._handleNextClick}
+                size={20}
+                style={styles.navRight}
+                type='caret-right'
+              />
+            </div>
           </div>
           <div style={styles.calendarContainer}>
             {this._renderDayTitles(styles)}
@@ -267,7 +275,6 @@ const DatePicker = React.createClass({
         fontSize: StyleConstants.FontSizes.LARGE,
         height: 30,
         marginBottom: 15,
-        padding: '7px 0',
         position: 'relative',
         textAlign: 'center'
       },
@@ -281,6 +288,7 @@ const DatePicker = React.createClass({
         color: StyleConstants.Colors.ASH,
         float: 'left',
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: StyleConstants.FontSizes.SMALL,
         height: 30,
         marginBottom: 2,
         position: 'relative',
@@ -366,21 +374,41 @@ const DatePicker = React.createClass({
         color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
         display: 'inline-block',
         left: 40,
-        position: 'absolute'
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      month: {
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
       },
       navLeft: {
-        cursor: 'pointer',
         position: 'absolute',
         left: 7,
         top: '50%',
         transform: 'translateY(-50%)'
       },
       navRight: {
-        cursor: 'pointer',
         position: 'absolute',
         right: 7,
         top: '50%',
         transform: 'translateY(-50%)'
+      },
+      navWrapper: {
+        borderColor: 'transparent',
+        borderRadius: 2,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        cursor: 'pointer',
+        height: 30,
+
+        width: 35,
+
+        ':hover': {
+          borderColor: StyleConstants.Colors.FOG
+        }
       },
       selectedDay: {
         backgroundColor: this.props.primaryColor,
@@ -392,9 +420,9 @@ const DatePicker = React.createClass({
         borderStyle: 'solid',
         borderWidth: 1,
         cursor: 'pointer',
-        height: 40,
+        height: 13,
         position: 'relative',
-        padding: 13
+        padding: '11px 10px 12px'
       },
       scrim: {
         position: 'fixed',
