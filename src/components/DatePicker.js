@@ -22,6 +22,7 @@ const DatePicker = React.createClass({
   getDefaultProps () {
     return {
       closeOnDateSelect: false,
+      defaultDate: moment.unix(),
       format: 'MMM D, YYYY',
       locale: 'en',
       onDateSelect () {},
@@ -32,17 +33,17 @@ const DatePicker = React.createClass({
 
   getInitialState () {
     return {
-      currentDate: null,
-      inputValue: moment.unix(this.props.defaultDate).format(this.props.format),
-      selectedDate: this.props.defaultDate,
-      showCalendar: false
+      currentDate: this.props.defaultDate,
+      showCalendar: true
     };
   },
 
-  _getSelectedDate () {
-    const selectedDate = this.state.selectedDate;
-
-    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
+  componentWillReceiveProps (newProps) {
+    if (newProps.defaultDate !== this.props.defaultDate) {
+      this.setState({
+        currentDate: newProps.defaultDate
+      });
+    }
   },
 
   _handleDateSelect (date) {
@@ -50,20 +51,11 @@ const DatePicker = React.createClass({
       this._handleScrimClick();
     }
 
-    this.setState({
-      inputValue: moment.unix(date).format(this.props.format),
-      isValid: true,
-      selectedDate: date
-    });
-
     this.props.onDateSelect(date);
   },
 
   _handlePreviousClick () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    currentDate = moment(currentDate.startOf('month').subtract(1, 'm'), this.props.format);
+    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
 
     this.setState({
       currentDate
@@ -71,10 +63,7 @@ const DatePicker = React.createClass({
   },
 
   _handleNextClick () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    currentDate = moment(currentDate.endOf('month').add(1, 'd'), this.props.format);
+    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
 
     this.setState({
       currentDate
@@ -93,43 +82,26 @@ const DatePicker = React.createClass({
     });
   },
 
-  _renderDayTitles (styles) {
-    const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
-    return (
-      <div>
-        {days.map((day, i) => {
-          return (
-            <div key={i} style={styles.calendarWeekContent}>
-              <div style={styles.calendarWeekText}>
-                {day}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  },
-
-  _renderMonthTable (currentDate, selectedDate, styles) {
+  _renderMonthTable () {
+    const styles = this.styles();
     const days = [];
-    const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
-    const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
-    const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
+    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
-    while (startDate.isBefore(endDate)) {
-      const isCurrentMonth = startDate.month() === currentDate.month();
-      const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
-      const isToday = startDate.format(this.props.format) === moment().format(this.props.format);
-      const noSelectDay = startDate.isBefore(minimumDate);
+    while (moment(startDate).isBefore(endDate)) {
+      const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
+      const isCurrentDay = startDate.isSame(moment.unix(this.props.defaultDate), 'day');
+      const isToday = startDate.isSame(moment(), 'day');
+      const noSelectDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
+
       const day = (
         <div
-          key={startDate.month() + '-' + startDate.date()}
+          key={startDate}
           onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
           style={styles.calendarDay}
         >
           <div
-            key={startDate.format('DDDD')}
+            key={startDate}
             style={Object.assign({},
               styles.calendarDayContent,
               noSelectDay && styles.calendarDayDisabled,
@@ -144,7 +116,7 @@ const DatePicker = React.createClass({
       );
 
       days.push(day);
-      startDate.add(1, 'd');
+      startDate = startDate.add(1, 'd');
     }
 
     return days;
@@ -162,7 +134,7 @@ const DatePicker = React.createClass({
           type='calendar'
         />
         <div style={styles.inputValue}>
-          {this.state.inputValue || this.props.placeholderText}
+          {this.props.defaultDate ? moment.unix(this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
         </div>
         <div style={styles.caretWrapper}>
           <Icon
@@ -177,8 +149,6 @@ const DatePicker = React.createClass({
 
   render () {
     const styles = this.styles();
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
     return (
       <div
@@ -208,7 +178,7 @@ const DatePicker = React.createClass({
               />
             </div>
             <div style={styles.month}>
-              {currentDate.format('MMMM YYYY')}
+              {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
             </div>
             <div key='navRight' style={Object.assign({}, styles.navWrapper, { float: 'right' })}>
               <Icon
@@ -220,8 +190,16 @@ const DatePicker = React.createClass({
             </div>
           </div>
           <div style={styles.calendarContainer}>
-            {this._renderDayTitles(styles)}
-            {this._renderMonthTable(currentDate, selectedDate, styles)}
+            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+              return (
+                <div key={i} style={styles.calendarWeekContent}>
+                  <div style={styles.calendarWeekText}>
+                    {day}
+                  </div>
+                </div>
+              );
+            })}
+            {this._renderMonthTable()}
           </div>
           <div style={styles.clearFix}></div>
         </div>
@@ -332,6 +310,7 @@ const DatePicker = React.createClass({
       },
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
+        boxSizing: 'border-box',
         clear: 'both',
         color: StyleConstants.Colors.BLACK,
         display: 'inline-block',
@@ -371,7 +350,7 @@ const DatePicker = React.createClass({
         }
       },
       inputValue: {
-        color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        color: this.state.currentDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
         display: 'inline-block',
         left: 40,
         position: 'absolute',
