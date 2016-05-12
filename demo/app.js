@@ -1073,7 +1073,7 @@ const Demo = React.createClass({
 
         <br /><br />
         <DatePicker
-          closeOnDateSelect={false}
+          closeOnDateSelect={true}
           defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
         />
