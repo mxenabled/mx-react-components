@@ -1073,11 +1073,13 @@ const Demo = React.createClass({
 
         <br /><br />
         <DatePicker
-          closeOnDateSelect={true}
+          closeOnDateSelect={false}
           defaultDate={this.state.selectedDatePickerDate}
+          minimumDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
-          showDayBorders={false}
         />
+
+        <br /><br />
         <SimpleInput
           placeholder='Type something'
           valid={true}
