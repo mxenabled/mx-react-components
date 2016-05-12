@@ -5,6 +5,7 @@ const ReactDOM = require('react-dom');
 const moment = require('moment');
 
 const {
+  BarChart,
   Button,
   ButtonGroup,
   DatePicker,
@@ -520,6 +521,9 @@ const lineChartData = [
 const Demo = React.createClass({
   getInitialState () {
     return {
+      barchartHoverValue: null,
+      barchartX: null,
+      barchartY: null,
       donutChartData: [],
       drawerSiblings: [
         {
@@ -726,6 +730,14 @@ const Demo = React.createClass({
     });
   },
 
+  _handleBarChartHover (barchartHoverLabel, barchartHoverValue, barchartX, barchartY) {
+    this.setState({
+      barchartHoverValue,
+      barchartX,
+      barchartY
+    });
+  },
+
   render () {
     const navConfig = {
       duration: 200,
@@ -748,6 +760,7 @@ const Demo = React.createClass({
         {this.state.showDrawer ? (
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
             <Drawer
+              headerStyle={{ backgroundColor: '#fff' }}
               navConfig={navConfig}
               onClose={this._onHideDrawer}
               title='This is the drawer component'
@@ -1126,6 +1139,70 @@ const Demo = React.createClass({
           <br /><br />
           <Button onClick={this._handleNextPageIndicatorClick}>Next Page</Button>
           <PageIndicator activeIndex={this.state.pageIndicatorIndex} count={3} onClick={this._handlePageIndicatorClick} />
+        </div>
+        <br /><br />
+        <div style={{ position: 'relative' }}>
+          {this.state.barchartHoverValue ? (
+            <span style={{ position: 'absolute', top: this.state.barchartY - 20, left: this.state.barchartX + 10 }}>
+              {this.state.barchartHoverValue}
+            </span>
+          ) : null}
+          <BarChart
+            animateOnHover={true}
+            data={[
+              {
+                label: 'Jan',
+                value: 125.25
+              },
+              {
+                label: 'Feb',
+                value: 545.25
+              },
+              {
+                label: 'Mar',
+                value: 789.25
+              },
+              {
+                label: 'Apr',
+                value: 254.25
+              },
+              {
+                label: 'May',
+                value: 782.25
+              },
+              {
+                label: 'Jun',
+                value: 1200.75
+              },
+              {
+                label: 'Jul',
+                value: 852.25
+              },
+              {
+                label: 'Aug',
+                value: 965.25
+              },
+              {
+                label: 'Sep',
+                value: 145.25
+              },
+              {
+                label: 'Oct',
+                value: 987.25
+              },
+              {
+                label: 'Nov',
+                value: 633.25
+              },
+              {
+                label: 'Dec',
+                value: 1248.25
+              }
+            ]}
+            height={200}
+            onHover={this._handleBarChartHover}
+            width={700}
+          />
         </div>
       </div>
     );
