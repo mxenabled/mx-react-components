@@ -22,7 +22,6 @@ const DatePicker = React.createClass({
   getDefaultProps () {
     return {
       closeOnDateSelect: false,
-      defaultDate: moment.unix(),
       format: 'MMM D, YYYY',
       locale: 'en',
       onDateSelect () {},
@@ -33,13 +32,13 @@ const DatePicker = React.createClass({
 
   getInitialState () {
     return {
-      currentDate: this.props.defaultDate,
+      currentDate: this.props.defaultDate || moment().unix(),
       showCalendar: false
     };
   },
 
   componentWillReceiveProps (newProps) {
-    if (newProps.defaultDate !== this.props.defaultDate) {
+    if (newProps.defaultDate && newProps.defaultDate !== this.props.defaultDate) {
       this.setState({
         currentDate: newProps.defaultDate
       });

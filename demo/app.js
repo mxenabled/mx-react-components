@@ -545,7 +545,7 @@ const Demo = React.createClass({
       },
       lineChartData: [],
       pageIndicatorIndex: 0,
-      selectedDatePickerDate: moment().unix(),
+      selectedDatePickerDate: null,
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
@@ -1075,7 +1075,6 @@ const Demo = React.createClass({
         <DatePicker
           closeOnDateSelect={false}
           defaultDate={this.state.selectedDatePickerDate}
-          minimumDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
         />
 
