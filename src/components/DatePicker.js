@@ -16,6 +16,7 @@ const DatePicker = React.createClass({
     onDateSelect: React.PropTypes.func,
     placeholderText: React.PropTypes.string,
     primaryColor: React.PropTypes.string,
+    selectedDate: React.PropTypes.number,
     style: React.PropTypes.object
   },
 
@@ -32,13 +33,26 @@ const DatePicker = React.createClass({
 
   getInitialState () {
     return {
-      currentDate: this.props.defaultDate || moment().unix(),
+      currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
       showCalendar: false
     };
   },
 
+  componentDidMount () {
+    if (this.props.defaultDate) {
+      console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
+    }
+  },
+
   componentWillReceiveProps (newProps) {
+    if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
+      this.setState({
+        currentDate: newProps.selectedDate
+      });
+    }
+
     if (newProps.defaultDate && newProps.defaultDate !== this.props.defaultDate) {
+      console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
       this.setState({
         currentDate: newProps.defaultDate
       });
@@ -89,7 +103,7 @@ const DatePicker = React.createClass({
 
     while (moment(startDate).isBefore(endDate)) {
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
-      const isSelectedDay = startDate.isSame(moment.unix(this.props.defaultDate), 'day');
+      const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate || this.props.defaultDate), 'day');
       const isToday = startDate.isSame(moment(), 'day');
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
 
@@ -127,7 +141,7 @@ const DatePicker = React.createClass({
             type='calendar'
           />
           <div style={styles.selectedDateText}>
-            {this.props.defaultDate ? moment.unix(this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
+            {(this.props.selectedDate || this.props.defaultDate) ? moment.unix(this.props.selectedDate || this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
           </div>
           <Icon
             style={styles.selectedDateCaret}
@@ -200,7 +214,7 @@ const DatePicker = React.createClass({
       },
       selectedDateText: {
         flex: '1',
-        color: this.props.defaultDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
+        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
       },
       selectedDateCaret: {
         fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
