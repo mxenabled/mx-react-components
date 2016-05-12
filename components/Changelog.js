@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.24</h3>
+        <ul>
+          <li>
+            Allow users of the Drawer component to pass custom styles for the header and content sections  (<a href='https://github.com/mxenabled/mx-react-components/pull/305'>#305</a>)
+          </li>
+        </ul>
         <h3>3.1.23</h3>
         <ul>
           <li>
