@@ -761,6 +761,7 @@ const Demo = React.createClass({
           <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
             <Drawer
               navConfig={navConfig}
+              navStyle={{ backgroundColor: '#fff' }}
               onClose={this._onHideDrawer}
               title='This is the drawer component'
             >
