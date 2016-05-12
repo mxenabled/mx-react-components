@@ -9,8 +9,16 @@ const StyleConstants = require('../constants/Style');
 const Drawer = React.createClass({
   propTypes: {
     buttonPrimaryColor: React.PropTypes.string,
+    contentStyle: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
+    headerStyle: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
@@ -99,7 +107,7 @@ const Drawer = React.createClass({
       <div style={styles.componentWrapper}>
         <div onClick={this._handleCloseClick} style={styles.scrim}></div>
         <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
-          <header style={styles.header}>
+          <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
             <span style={styles.backArrow}>
               <Button
                 icon='arrow-left'
@@ -113,7 +121,7 @@ const Drawer = React.createClass({
             </span>
             {this._renderNav()}
           </header>
-          <div style={styles.content}>
+          <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
             {this.props.children}
           </div>
         </div>
@@ -205,6 +213,8 @@ const Drawer = React.createClass({
       },
       navLabel: {
         padding: '7px 14px',
+        position: 'relative',
+        bottom: 5,
 
         '@media (max-width: 750px)': {
           display: 'none',
