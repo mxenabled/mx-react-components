@@ -15,15 +15,15 @@ const Drawer = React.createClass({
     ]),
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
+    headerStyle: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
       onPreviousClick: React.PropTypes.func.isRequired
     }),
-    navStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
     onClose: React.PropTypes.func.isRequired,
     title: React.PropTypes.string
   },
@@ -107,7 +107,7 @@ const Drawer = React.createClass({
       <div style={styles.componentWrapper}>
         <div onClick={this._handleCloseClick} style={styles.scrim}></div>
         <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
-          <header style={Object.assign({}, styles.header, this.props.navStyle)}>
+          <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
             <span style={styles.backArrow}>
               <Button
                 icon='arrow-left'
