@@ -6,12 +6,24 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.26</h3>
+        <ul>
+          <li>Add updateOnDrag to RangeSelector and remove debounce (<a href='https://github.com/mxenabled/mx-react-components/pull/307'>#307</a>)</li>
+        </ul>
+
+        <h3>3.1.25</h3>
+        <ul>
+          <li>Fix width issue with DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/304'>#304</a>)</li>
+          <li>Clean up DatePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/306'>#306</a>)</li>
+        </ul>
+
         <h3>3.1.24</h3>
         <ul>
           <li>
             Allow users of the Drawer component to pass custom styles for the header and content sections  (<a href='https://github.com/mxenabled/mx-react-components/pull/305'>#305</a>)
           </li>
         </ul>
+
         <h3>3.1.23</h3>
         <ul>
           <li>
@@ -121,6 +133,8 @@ const Changelog = React.createClass({
         <ul>
           <li>
             Add box shadow constants to styles (<a href='https://github.com/mxenabled/mx-react-components/pull/282'>#282</a>)
+          </li>
+          <li>
             Fix new eslint errors after upgrading to eslint@2.7.0 and eslint-config-mx@1.2.7(<a href='https://github.com/mxenabled/mx-react-components/pull/281'>#281</a>)
           </li>
         </ul>
