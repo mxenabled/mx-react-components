@@ -97,12 +97,6 @@ const RangeSelector = React.createClass({
     });
   },
 
-  _handlePropCallback (dragging) {
-    const currentValue = this.state[dragging.toLowerCase() + 'Value'];
-
-    this.props['on' + dragging + 'DragStop'](currentValue);
-  },
-
   _handlePresetClick (preset) {
     //convert our values to a 0-based scale
     const lowerPosition = preset.lowerValue - (this.props.lowerBound);
