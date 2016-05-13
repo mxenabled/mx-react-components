@@ -2,7 +2,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _throttle = require('lodash/throttle');
-const _debounce = require('lodash/debounce');
 
 const StyleConstants = require('../constants/Style');
 
@@ -151,7 +150,7 @@ const RangeSelector = React.createClass({
       updatedState.dragging = 'Upper';
     }
 
-    this.setState(updatedState);
+    this.setState(updatedState, this._handleDragging(e));
   },
 
   //this method now handles both the dragging of the toggle, and moving it when track is clicked
@@ -199,7 +198,7 @@ const RangeSelector = React.createClass({
       }
 
       if (this.props.updateOnDrag || this.state.trackClicked) {
-        this._handlePropCallback(this.state.dragging);
+        this.props['on' + this.state.dragging + 'DragStop'](newValue);
       }
 
       this.setState(newState);
@@ -209,18 +208,19 @@ const RangeSelector = React.createClass({
   },
 
   _handleDragEnd (e) {
-    if (!this.props.updateOnDrag) {
-      this._handlePropCallback(this.state.dragging);
-    }
+    if (this.state.dragging) {
+      if (this.state.trackClicked) {
+        this._handleDragging(e);
+      } else {
+        if (!this.state.updateOnDrag) {
+          this.props['on' + this.state.dragging + 'DragStop'](this.state[this.state.dragging.toLowerCase() + 'Value']);
+        }
 
-
-    if (this.state.trackClicked) {
-      this._handleDragging(e);
-    } else {
-      this.setState({
-        dragging: false,
-        trackClicked: false
-      });
+        this.setState({
+          dragging: false,
+          trackClicked: false
+        });
+      }
     }
   },
 
@@ -258,6 +258,7 @@ const RangeSelector = React.createClass({
           onMouseLeave={this._handleDragEnd}
           onMouseMove={this._handleDragging}
           onMouseUp={this._handleDragEnd}
+          onTouchEnd={this._handleDragEnd}
           onTouchMove={this._handleDragging}
           ref='rangeSelector'
           style={styles.range}
@@ -286,8 +287,6 @@ const RangeSelector = React.createClass({
           <div
             className='mx-rangeselector-lower-toggle'
             onMouseDown={this._handleDragStart.bind(null, 'Lower')}
-            onMouseUp={this._handleDragEnd}
-            onTouchEnd={this._handleDragEnd}
             onTouchStart={this._handleDragStart.bind(null, 'Lower')}
             style={styles.lowerToggle}
           >
@@ -298,8 +297,6 @@ const RangeSelector = React.createClass({
           <div
             className='mx-rangeselector-upper-toggle'
             onMouseDown={this._handleDragStart.bind(null, 'Upper')}
-            onMouseUp={this._handleDragEnd}
-            onTouchEnd={this._handleDragEnd}
             onTouchStart={this._handleDragStart.bind(null, 'Upper')}
             style={styles.upperToggle}
           >
