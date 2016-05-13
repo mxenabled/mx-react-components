@@ -17,6 +17,7 @@ const RangeSelector = React.createClass({
     onUpperDragStop: React.PropTypes.func,
     presets: React.PropTypes.array,
     selectedColor: React.PropTypes.string,
+    updateOnDrag: React.PropTypes.bool,
     upperBound: React.PropTypes.number
   },
 
@@ -33,6 +34,7 @@ const RangeSelector = React.createClass({
       onUpperDragStop () {},
       presets: [],
       selectedColor: StyleConstants.Colors.PRIMARY,
+      updateOnDrag: false,
       upperBound: 100
     };
   },
@@ -58,13 +60,6 @@ const RangeSelector = React.createClass({
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
-
-    this._handlePropCallback = _debounce((who) => {
-      // Who represents which switch is actually being moved.
-      const currentValue = this.state[who.toLowerCase() + 'Value'];
-
-      this.props['on' + who + 'DragStop'](currentValue);
-    }, 300);
   },
 
   componentWillUnmount () {
@@ -101,6 +96,12 @@ const RangeSelector = React.createClass({
       upperPixels,
       width
     });
+  },
+
+  _handlePropCallback (dragging) {
+    const currentValue = this.state[dragging.toLowerCase() + 'Value'];
+
+    this.props['on' + dragging + 'DragStop'](currentValue);
   },
 
   _handlePresetClick (preset) {
@@ -197,7 +198,10 @@ const RangeSelector = React.createClass({
         newState.trackClicked = false;
       }
 
-      this._handlePropCallback(this.state.dragging);
+      if (this.props.updateOnDrag || this.state.trackClicked) {
+        this._handlePropCallback(this.state.dragging);
+      }
+
       this.setState(newState);
 
       e.preventDefault();
@@ -205,6 +209,11 @@ const RangeSelector = React.createClass({
   },
 
   _handleDragEnd (e) {
+    if (!this.props.updateOnDrag) {
+      this._handlePropCallback(this.state.dragging);
+    }
+
+
     if (this.state.trackClicked) {
       this._handleDragging(e);
     } else {
@@ -223,7 +232,88 @@ const RangeSelector = React.createClass({
   },
 
   render () {
-    const styles = {
+    const styles = this.styles();
+
+    return (
+      <div className='mx-rangeselector' style={[styles.component, this.props.style]}>
+        <div className='mx-rangeselector-presets' style={styles.presets}>
+          {this.props.presets.map((preset, i) => {
+            return (
+              <div
+                className='mx-rangeselector-preset'
+                key={preset.label + i}
+                onClick={this._handlePresetClick.bind(null, preset)}
+                style={styles.preset}
+              >
+                {preset.label}
+              </div>
+            );
+          })}
+          <div className='mx-rangeselector-preset' onClick={this._handleToggleViews} style={styles.preset} >
+            Custom
+          </div>
+        </div>
+        <div
+          className='mx-rangeselector-range'
+          onMouseLeave={this._handleDragEnd}
+          onMouseMove={this._handleDragging}
+          onMouseUp={this._handleDragEnd}
+          onTouchMove={this._handleDragging}
+          ref='rangeSelector'
+          style={styles.range}
+        >
+          {this.props.presets.length ? (
+            <div
+              className='mx-rangeselector-toggle'
+              onClick={this._handleToggleViews}
+              style={styles.showPresets}
+            >
+              Groups
+            </div>
+            ) : null}
+          <div
+            className='mx-rangeselector-track-holder'
+            onMouseDown={this._handleTrackMouseDown}
+            style={styles.trackHolder}
+          >
+            <div className='mx-rangeselector-track' style={styles.track}></div>
+            <div className='mx-rangeselector-selected' style={styles.selected}>
+              <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
+                {this.state.selectedLabel}
+              </div>
+            </div>
+          </div>
+          <div
+            className='mx-rangeselector-lower-toggle'
+            onMouseDown={this._handleDragStart.bind(null, 'Lower')}
+            onMouseUp={this._handleDragEnd}
+            onTouchEnd={this._handleDragEnd}
+            onTouchStart={this._handleDragStart.bind(null, 'Lower')}
+            style={styles.lowerToggle}
+          >
+            <label className='mx-rangeselector-lower-toggle-label' style={styles.lowerToggleLabel}>
+              {this.props.formatter(this.state.lowerValue)}
+            </label>
+          </div>
+          <div
+            className='mx-rangeselector-upper-toggle'
+            onMouseDown={this._handleDragStart.bind(null, 'Upper')}
+            onMouseUp={this._handleDragEnd}
+            onTouchEnd={this._handleDragEnd}
+            onTouchStart={this._handleDragStart.bind(null, 'Upper')}
+            style={styles.upperToggle}
+          >
+            <label className='mx-rangeselector-upper-toggle-label' style={styles.upperToggleLabel}>
+              {this.props.formatter(this.state.upperValue)}
+            </label>
+          </div>
+        </div>
+      </div>
+    );
+  },
+
+  styles () {
+    return {
       component: {
         position: 'relative',
         fontSize: '11px',
@@ -338,83 +428,6 @@ const RangeSelector = React.createClass({
         opacity: 0.5
       }
     };
-
-    return (
-      <div className='mx-rangeselector' style={[styles.component, this.props.style]}>
-        <div className='mx-rangeselector-presets' style={styles.presets}>
-          {this.props.presets.map((preset, i) => {
-            return (
-              <div
-                className='mx-rangeselector-preset'
-                key={preset.label + i}
-                onClick={this._handlePresetClick.bind(null, preset)}
-                style={styles.preset}
-              >
-                {preset.label}
-              </div>
-            );
-          })}
-          <div className='mx-rangeselector-preset' onClick={this._handleToggleViews} style={styles.preset} >
-            Custom
-          </div>
-        </div>
-        <div
-          className='mx-rangeselector-range'
-          onMouseLeave={this._handleDragEnd}
-          onMouseMove={this._handleDragging}
-          onMouseUp={this._handleDragEnd}
-          onTouchMove={this._handleDragging}
-          ref='rangeSelector'
-          style={styles.range}
-        >
-          {this.props.presets.length ? (
-            <div
-              className='mx-rangeselector-toggle'
-              onClick={this._handleToggleViews}
-              style={styles.showPresets}
-            >
-              Groups
-            </div>
-            ) : null}
-          <div
-            className='mx-rangeselector-track-holder'
-            onMouseDown={this._handleTrackMouseDown}
-            style={styles.trackHolder}
-          >
-            <div className='mx-rangeselector-track' style={styles.track}></div>
-            <div className='mx-rangeselector-selected' style={styles.selected}>
-              <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
-                {this.state.selectedLabel}
-              </div>
-            </div>
-          </div>
-          <div
-            className='mx-rangeselector-lower-toggle'
-            onMouseDown={this._handleDragStart.bind(null, 'Lower')}
-            onMouseUp={this._handleDragEnd}
-            onTouchEnd={this._handleDragEnd}
-            onTouchStart={this._handleDragStart.bind(null, 'Lower')}
-            style={styles.lowerToggle}
-          >
-            <label className='mx-rangeselector-lower-toggle-label' style={styles.lowerToggleLabel}>
-              {this.props.formatter(this.state.lowerValue)}
-            </label>
-          </div>
-          <div
-            className='mx-rangeselector-upper-toggle'
-            onMouseDown={this._handleDragStart.bind(null, 'Upper')}
-            onMouseUp={this._handleDragEnd}
-            onTouchEnd={this._handleDragEnd}
-            onTouchStart={this._handleDragStart.bind(null, 'Upper')}
-            style={styles.upperToggle}
-          >
-            <label className='mx-rangeselector-upper-toggle-label' style={styles.upperToggleLabel}>
-              {this.props.formatter(this.state.upperValue)}
-            </label>
-          </div>
-        </div>
-      </div>
-    );
   }
 });
 
