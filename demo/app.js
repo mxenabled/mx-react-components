@@ -549,7 +549,7 @@ const Demo = React.createClass({
       },
       lineChartData: [],
       pageIndicatorIndex: 0,
-      selectedDatePickerDate: moment().unix(),
+      selectedDatePickerDate: null,
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
@@ -1089,8 +1089,9 @@ const Demo = React.createClass({
           closeOnDateSelect={true}
           defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
-          showDayBorders={false}
         />
+
+        <br /><br />
         <SimpleInput
           placeholder='Type something'
           valid={true}

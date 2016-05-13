@@ -16,6 +16,7 @@ const DatePicker = React.createClass({
     onDateSelect: React.PropTypes.func,
     placeholderText: React.PropTypes.string,
     primaryColor: React.PropTypes.string,
+    selectedDate: React.PropTypes.number,
     style: React.PropTypes.object
   },
 
@@ -32,17 +33,30 @@ const DatePicker = React.createClass({
 
   getInitialState () {
     return {
-      currentDate: null,
-      inputValue: moment.unix(this.props.defaultDate).format(this.props.format),
-      selectedDate: this.props.defaultDate,
+      currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
       showCalendar: false
     };
   },
 
-  _getSelectedDate () {
-    const selectedDate = this.state.selectedDate;
+  componentDidMount () {
+    if (this.props.defaultDate) {
+      console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
+    }
+  },
 
-    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
+  componentWillReceiveProps (newProps) {
+    if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
+      this.setState({
+        currentDate: newProps.selectedDate
+      });
+    }
+
+    if (newProps.defaultDate && newProps.defaultDate !== this.props.defaultDate) {
+      console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
+      this.setState({
+        currentDate: newProps.defaultDate
+      });
+    }
   },
 
   _handleDateSelect (date) {
@@ -50,20 +64,11 @@ const DatePicker = React.createClass({
       this._handleScrimClick();
     }
 
-    this.setState({
-      inputValue: moment.unix(date).format(this.props.format),
-      isValid: true,
-      selectedDate: date
-    });
-
     this.props.onDateSelect(date);
   },
 
   _handlePreviousClick () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    currentDate = moment(currentDate.startOf('month').subtract(1, 'm'), this.props.format);
+    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
 
     this.setState({
       currentDate
@@ -71,10 +76,7 @@ const DatePicker = React.createClass({
   },
 
   _handleNextClick () {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    currentDate = moment(currentDate.endOf('month').add(1, 'd'), this.props.format);
+    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
 
     this.setState({
       currentDate
@@ -93,137 +95,91 @@ const DatePicker = React.createClass({
     });
   },
 
-  _renderDayTitles (styles) {
-    const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
-    return (
-      <div>
-        {days.map((day, i) => {
-          return (
-            <div key={i} style={styles.calendarWeekContent}>
-              <div style={styles.calendarWeekText}>
-                {day}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  },
-
-  _renderMonthTable (currentDate, selectedDate, styles) {
+  _renderMonthTable () {
+    const styles = this.styles();
     const days = [];
-    const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
-    const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
-    const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
+    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
-    while (startDate.isBefore(endDate)) {
-      const isCurrentMonth = startDate.month() === currentDate.month();
-      const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
-      const isToday = startDate.format(this.props.format) === moment().format(this.props.format);
-      const noSelectDay = startDate.isBefore(minimumDate);
+    while (moment(startDate).isBefore(endDate)) {
+      const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
+      const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate || this.props.defaultDate), 'day');
+      const isToday = startDate.isSame(moment(), 'day');
+      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
+
       const day = (
         <div
-          key={startDate.month() + '-' + startDate.date()}
-          onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
-          style={styles.calendarDay}
+          key={startDate}
+          onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
+          style={Object.assign({},
+            styles.calendarDay,
+            isCurrentMonth && styles.currentMonth,
+            disabledDay && styles.calendarDayDisabled,
+            isToday && styles.today,
+            isSelectedDay && styles.selectedDay
+          )}
         >
-          <div
-            key={startDate.format('DDDD')}
-            style={Object.assign({},
-              styles.calendarDayContent,
-              noSelectDay && styles.calendarDayDisabled,
-              isCurrentDay && styles.selectedDay,
-              (isToday && !isCurrentDay) && styles.currentDay,
-              (!noSelectDay && isCurrentMonth && !isCurrentDay) && styles.currentMonth
-            )}
-          >
-            <div style={styles.calendarDayText}>{startDate.date()}</div>
-          </div>
+          {startDate.date()}
         </div>
       );
 
       days.push(day);
-      startDate.add(1, 'd');
+      startDate = startDate.add(1, 'd');
     }
 
     return days;
   },
 
-  _renderSelectedDate (styles) {
+  render () {
+    const styles = this.styles();
+
     return (
-      <div
-        key='dateDisplay'
-        style={styles.dateDisplay}
-      >
-        <Icon
-          size={20}
-          style={styles.calendarIcon}
-          type='calendar'
-        />
-        <div style={styles.inputValue}>
-          {this.state.inputValue || this.props.placeholderText}
-        </div>
-        <div style={styles.caretWrapper}>
+      <div style={styles.component}>
+        <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
             size={20}
-            style={styles.caret}
+            style={styles.selectedDateIcon}
+            type='calendar'
+          />
+          <div style={styles.selectedDateText}>
+            {(this.props.selectedDate || this.props.defaultDate) ? moment.unix(this.props.selectedDate || this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
+          </div>
+          <Icon
+            size={20}
+            style={styles.selectedDateCaret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         </div>
-      </div>
-    );
-  },
-
-  render () {
-    const styles = this.styles();
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
-
-    return (
-      <div
-        style={styles.component}
-        tabIndex={0}
-      >
-        <div
-          key='selectedDateWrapper'
-          onClick={this._toggleCalendar}
-          style={styles.selectedDateWrapper}
-        >
-          {this._renderSelectedDate(styles)}
-        </div>
-        <div
-          key='calendarWrapper'
-          style={styles.calendarWrapper}
-        >
-          <div key='calendarHeader'
-            style={styles.calendarHeader}
-          >
-            <div key='navLeft' style={Object.assign({}, styles.navWrapper, { float: 'left' })}>
-              <Icon
-                onClick={this._handlePreviousClick}
-                size={20}
-                style={styles.navLeft}
-                type='caret-left'
-              />
+        <div style={styles.calendarWrapper}>
+          <div style={styles.calendarHeader}>
+            <Icon
+              onClick={this._handlePreviousClick}
+              size={20}
+              style={styles.calendayHeaderNav}
+              type='caret-left'
+            />
+            <div>
+              {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
             </div>
-            <div style={styles.month}>
-              {currentDate.format('MMMM YYYY')}
-            </div>
-            <div key='navRight' style={Object.assign({}, styles.navWrapper, { float: 'right' })}>
-              <Icon
-                onClick={this._handleNextClick}
-                size={20}
-                style={styles.navRight}
-                type='caret-right'
-              />
-            </div>
+            <Icon
+              onClick={this._handleNextClick}
+              size={20}
+              style={styles.calendayHeaderNav}
+              type='caret-right'
+            />
           </div>
-          <div style={styles.calendarContainer}>
-            {this._renderDayTitles(styles)}
-            {this._renderMonthTable(currentDate, selectedDate, styles)}
+          <div style={styles.calendarWeek}>
+            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+              return (
+                <div key={i} style={styles.calendarWeekDay}>
+                  {day}
+                </div>
+              );
+            })}
           </div>
-          <div style={styles.clearFix}></div>
+          <div style={styles.calendarTable}>
+            {this._renderMonthTable()}
+          </div>
         </div>
         {(this.state.showCalendar) ? (
           <div onClick={this._handleScrimClick} style={styles.scrim} />
@@ -234,72 +190,43 @@ const DatePicker = React.createClass({
 
   styles () {
     return {
-      calendarDay: {
-        color: StyleConstants.Colors.FOG,
-        float: 'left',
-        height: 30,
-        marginBottom: 2,
-        position: 'relative',
-        width: 35
-      },
-      calendarDayContent: {
+      component: Object.assign({
+        backgroundColor: StyleConstants.Colors.WHITE,
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
         borderRadius: 3,
-        height: 30,
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)',
-        width: 35,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.BLACK,
+        display: 'inline-block',
+        fontFamily: StyleConstants.FontFamily,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        position: 'relative',
+        width: '100%'
+      }, this.props.style),
 
-        ':hover': {
-          border: '1px solid' + this.props.primaryColor,
-          borderRadius: 3,
-          cursor: 'pointer'
-        }
+      // Selected Date styles
+      selectedDateWrapper: {
+        alignItems: 'center',
+        cursor: 'pointer',
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '10px 15px',
+        position: 'relative'
       },
-      calendarDayDisabled: {
-        ':hover': {
-          background: 'none',
-          color: StyleConstants.Colors.FOG
-        }
+      selectedDateIcon: {
+        fill: this.props.primaryColor,
+        marginRight: 5
       },
-      calendarDayText: {
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)'
+      selectedDateText: {
+        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        flex: 1
       },
-      calendarHeader: {
-        clear: 'both',
-        color: StyleConstants.Colors.CHARCOAL,
-        fontSize: StyleConstants.FontSizes.LARGE,
-        height: 30,
-        marginBottom: 15,
-        position: 'relative',
-        textAlign: 'center'
+      selectedDateCaret: {
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
       },
-      calendarIcon: {
-        left: 10,
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      calendarWeekContent: {
-        color: StyleConstants.Colors.ASH,
-        float: 'left',
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.SMALL,
-        height: 30,
-        marginBottom: 2,
-        position: 'relative',
-        width: 35
-      },
-      calendarWeekText: {
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)'
-      },
+
+      //Calendar Styles
       calendarWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
@@ -308,129 +235,96 @@ const DatePicker = React.createClass({
         boxSizing: 'border-box',
         display: this.state.showCalendar ? 'block' : 'none',
         marginTop: 10,
-        padding: '20px 20px 0 20px',
+        padding: 20,
         position: 'absolute',
         right: 0,
         width: 287,
         zIndex: 10
       },
-      caret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH,
-        position: 'absolute',
-        right: 5,
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      caretWrapper: {
-        position: 'absolute',
-        top: '50%',
-        right: 5
-      },
-      clearFix: {
-        clear: 'both',
-        marginBottom: 15
-      },
-      component: Object.assign({
-        backgroundColor: StyleConstants.Colors.WHITE,
-        clear: 'both',
-        color: StyleConstants.Colors.BLACK,
-        display: 'inline-block',
-        float: 'right',
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+
+      //Calendar Header
+      calendarHeader: {
+        alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
+        display: 'flex',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: 30,
+        justifyContent: 'space-between',
         marginBottom: 15,
         position: 'relative',
-        WebkitAppearance: 'none',
-        width: '100%',
+        textAlign: 'center'
+      },
+      calendayHeaderNav: {
+        width: 35
+      },
 
-        ':focus': {
-          boxShadow: 'none',
-          outline: 'none'
-        }
-      }, this.props.style),
-      currentDay: {
-        backgroundColor: StyleConstants.Colors.FOG
-      },
-      currentMonth: {
-        color: StyleConstants.Colors.CHARCOAL
-      },
-      dateDisplay: {
-        backgroundColor: 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-        fill: this.props.primaryColor,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        outline: 'none',
-        WebkitAppearance: 'none',
-        zIndex: 2,
-
-        ':focus': {
-          border: 'none',
-          boxShadow: 'none',
-          outline: 'none'
-        }
-      },
-      inputValue: {
-        color: this.state.inputValue ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
-        display: 'inline-block',
-        left: 40,
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      month: {
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translate(-50%, -50%)'
-      },
-      navLeft: {
-        position: 'absolute',
-        left: 7,
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      navRight: {
-        position: 'absolute',
-        right: 7,
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      navWrapper: {
-        borderColor: 'transparent',
-        borderRadius: 2,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        cursor: 'pointer',
+      //Calendar week
+      calendarWeek: {
+        alignItems: 'center',
+        color: StyleConstants.Colors.ASH,
+        display: 'flex',
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: StyleConstants.FontSizes.SMALL,
         height: 30,
+        justifyContent: 'space-around',
+        marginBottom: 2
+      },
+      calendarWeekDay: {
+        textAlign: 'center',
+        width: 35
+      },
 
+      //Calenday table
+      calendarTable: {
+        alignItems: 'center',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around'
+      },
+      calendarDay: {
+        alignItems: 'center',
+        borderRadius: 3,
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.FOG,
+        cursor: 'pointer',
+        display: 'flex',
+        height: 30,
+        justifyContent: 'center',
+        maringBottom: 2,
         width: 35,
 
         ':hover': {
-          borderColor: StyleConstants.Colors.FOG
+          border: '1px solid' + this.props.primaryColor
         }
+      },
+      calendarDayDisabled: {
+        color: StyleConstants.Colors.FOG,
+
+        ':hover': {
+          cursor: 'default',
+          border: 'none'
+        }
+      },
+
+      today: {
+        backgroundColor: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.WHITE
+      },
+      currentMonth: {
+        color: StyleConstants.Colors.CHARCOAL
       },
       selectedDay: {
         backgroundColor: this.props.primaryColor,
         color: StyleConstants.Colors.WHITE
       },
-      selectedDateWrapper: {
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
-        borderRadius: 3,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        cursor: 'pointer',
-        height: 13,
-        position: 'relative',
-        padding: '11px 10px 12px'
-      },
+
       scrim: {
-        position: 'fixed',
-        zIndex: 9,
-        top: 0,
-        right: 0,
         bottom: 0,
-        left: 0
+        left: 0,
+        position: 'fixed',
+        right: 0,
+        top: 0,
+        zIndex: 9
       }
     };
   }
