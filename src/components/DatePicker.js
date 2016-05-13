@@ -255,7 +255,7 @@ const DatePicker = React.createClass({
         textAlign: 'center'
       },
       calendayHeaderNav: {
-        width: 30
+        width: 35
       },
 
       //Calendar week
@@ -271,7 +271,7 @@ const DatePicker = React.createClass({
       },
       calendarWeekDay: {
         textAlign: 'center',
-        width: 30
+        width: 35
       },
 
       //Calenday table
