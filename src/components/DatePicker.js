@@ -34,7 +34,7 @@ const DatePicker = React.createClass({
   getInitialState () {
     return {
       currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
-      showCalendar: false
+      showCalendar: true
     };
   },
 
@@ -155,6 +155,7 @@ const DatePicker = React.createClass({
             <Icon
               onClick={this._handlePreviousClick}
               size={20}
+              style={styles.calendayHeaderNav}
               type='caret-left'
             />
             <div>
@@ -162,6 +163,7 @@ const DatePicker = React.createClass({
             </div>
             <Icon
               onClick={this._handleNextClick}
+              style={styles.calendayHeaderNav}
               size={20}
               type='caret-right'
             />
@@ -169,7 +171,7 @@ const DatePicker = React.createClass({
           <div style={styles.calendarWeek}>
             {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
               return (
-                <div key={i}>
+                <div key={i} style={styles.calendarWeekDay}>
                   {day}
                 </div>
               );
@@ -189,36 +191,36 @@ const DatePicker = React.createClass({
   styles () {
     return {
       component: Object.assign({
-        boxSizing: 'border-box',
         backgroundColor: StyleConstants.Colors.WHITE,
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxSizing: 'border-box',
         color: StyleConstants.Colors.BLACK,
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         position: 'relative',
-        width: '100%',
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
-        borderRadius: 3,
-        borderStyle: 'solid',
-        borderWidth: 1
+        width: '100%'
       }, this.props.style),
 
       // Selected Date styles
       selectedDateWrapper: {
-        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
         cursor: 'pointer',
-        position: 'relative',
-        padding: '10px 15px'
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '10px 15px',
+        position: 'relative'
       },
       selectedDateIcon: {
-        marginRight: 5,
-        fill: this.props.primaryColor
+        fill: this.props.primaryColor,
+        marginRight: 5
       },
       selectedDateText: {
-        flex: '1',
-        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
+        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        flex: 1
       },
       selectedDateCaret: {
         fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
@@ -242,47 +244,54 @@ const DatePicker = React.createClass({
 
       //Calendar Header
       calendarHeader: {
-        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
         color: StyleConstants.Colors.CHARCOAL,
+        display: 'flex',
         fontSize: StyleConstants.FontSizes.LARGE,
-        marginBottom: 15,
         height: 30,
+        justifyContent: 'space-between',
+        marginBottom: 15,
         position: 'relative',
         textAlign: 'center'
+      },
+      calendayHeaderNav: {
+        width: 30
       },
 
       //Calendar week
       calendarWeek: {
-        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around',
         color: StyleConstants.Colors.ASH,
+        display: 'flex',
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
         height: 30,
+        justifyContent: 'space-around',
         marginBottom: 2
+      },
+      calendarWeekDay: {
+        textAlign: 'center',
+        width: 30
       },
 
       //Calenday table
       calendarTable: {
+        alignItems: 'center',
         display: 'flex',
         flexWrap: 'wrap',
-        alignItems: 'center',
         justifyContent: 'space-around'
       },
       calendarDay: {
-        boxSizing: 'border-box',
-        display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        color: StyleConstants.Colors.FOG,
         borderRadius: 3,
-        height: 30,
-        width: 35,
-        maringBottom: 2,
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.FOG,
         cursor: 'pointer',
+        display: 'flex',
+        height: 30,
+        justifyContent: 'center',
+        maringBottom: 2,
+        width: 35,
 
         ':hover': {
           border: '1px solid' + this.props.primaryColor
@@ -298,8 +307,8 @@ const DatePicker = React.createClass({
       },
 
       today: {
-        color: StyleConstants.Colors.WHITE,
-        backgroundColor: StyleConstants.Colors.FOG
+        backgroundColor: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.WHITE
       },
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
@@ -310,12 +319,12 @@ const DatePicker = React.createClass({
       },
 
       scrim: {
-        position: 'fixed',
-        zIndex: 9,
-        top: 0,
-        right: 0,
         bottom: 0,
-        left: 0
+        left: 0,
+        position: 'fixed',
+        right: 0,
+        top: 0,
+        zIndex: 9
       }
     };
   }
