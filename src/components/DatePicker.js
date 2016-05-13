@@ -34,7 +34,7 @@ const DatePicker = React.createClass({
   getInitialState () {
     return {
       currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
-      showCalendar: true
+      showCalendar: false
     };
   },
 
@@ -163,8 +163,8 @@ const DatePicker = React.createClass({
             </div>
             <Icon
               onClick={this._handleNextClick}
-              style={styles.calendayHeaderNav}
               size={20}
+              style={styles.calendayHeaderNav}
               type='caret-right'
             />
           </div>
