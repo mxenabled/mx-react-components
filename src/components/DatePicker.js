@@ -137,6 +137,7 @@ const DatePicker = React.createClass({
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
+            size={20}
             style={styles.selectedDateIcon}
             type='calendar'
           />
@@ -144,6 +145,7 @@ const DatePicker = React.createClass({
             {(this.props.selectedDate || this.props.defaultDate) ? moment.unix(this.props.selectedDate || this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
           </div>
           <Icon
+            size={20}
             style={styles.selectedDateCaret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
@@ -152,6 +154,7 @@ const DatePicker = React.createClass({
           <div style={styles.calendarHeader}>
             <Icon
               onClick={this._handlePreviousClick}
+              size={20}
               type='caret-left'
             />
             <div>
@@ -159,6 +162,7 @@ const DatePicker = React.createClass({
             </div>
             <Icon
               onClick={this._handleNextClick}
+              size={20}
               type='caret-right'
             />
           </div>
@@ -206,7 +210,7 @@ const DatePicker = React.createClass({
         justifyContent: 'space-between',
         cursor: 'pointer',
         position: 'relative',
-        padding: 7
+        padding: '10px 15px'
       },
       selectedDateIcon: {
         marginRight: 5,
