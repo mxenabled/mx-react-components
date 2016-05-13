@@ -60,7 +60,6 @@ const DisplayInput = React.createClass({
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
-        width: '100%',
 
         ':focus': {
           borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
