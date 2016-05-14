@@ -45,6 +45,16 @@ const DatePicker = React.createClass({
   },
 
   _handleDateSelect (date) {
+    // clears date when clicking on it again
+    if (this.state.selectedStartDate === date) {
+      this.state.selectedStartDate = null;
+      return;
+    }
+    if (this.state.selectedEndDate === date) {
+      this.state.selectedEndDate = null;
+      return;
+    }
+
     if (!this.state.selectedStartDate || this.state.selectedStartDate > date) {
       this.state.selectedStartDate = date;
     } else if (this.state.selectedStartDate < date) {
@@ -94,6 +104,7 @@ const DatePicker = React.createClass({
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
       const isSelectedStartDay = startDate.isSame(moment.unix(this.state.selectedStartDate), 'day');
       const isSelectedEndDay = startDate.isSame(moment.unix(this.state.selectedEndDate), 'day');
+      const isBetween = startDate.isBetween(moment.unix(this.state.selectedStartDate), moment.unix(this.state.selectedEndDate));
       const isToday = startDate.isSame(moment(), 'day');
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
 
@@ -105,9 +116,10 @@ const DatePicker = React.createClass({
             styles.calendarDay,
             isCurrentMonth && styles.currentMonth,
             disabledDay && styles.calendarDayDisabled,
-            isToday && styles.today,
+            (isToday && !isBetween) && styles.today,
             isSelectedStartDay && Object.assign({}, styles.selectedDay, styles.selectedStartDay),
-            isSelectedEndDay && Object.assign({}, styles.selectedDay, styles.selectedEndDay)
+            isSelectedEndDay && Object.assign({}, styles.selectedDay, styles.selectedEndDay),
+            isBetween && styles.betweenDay
           )}
         >
           {startDate.date()}
@@ -133,8 +145,12 @@ const DatePicker = React.createClass({
             type='calendar'
           />
           <div style={styles.selectedDateText}>
-            {(this.state.selectedStartDate && this.state.selectedEndDate) ? (
-              <span>{moment.unix(this.state.selectedStartDate).format(this.props.format)}</span> - <span>{moment.unix(this.state.selectedEndDate).format(this.props.format)}</span>
+            {this.state.selectedStartDate && this.state.selectedEndDate ? (
+              <div>
+                <span>{moment.unix(this.state.selectedStartDate).format(this.props.format)}</span>
+                <span> - </span>
+                <span>{moment.unix(this.state.selectedEndDate).format(this.props.format)}</span>
+              </div>
             ) : this.props.placeholderText}
           </div>
           <Icon
@@ -212,7 +228,7 @@ const DatePicker = React.createClass({
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedStartDate || this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        color: (this.state.selectedStartDate && this.state.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
         flex: 1
       },
       selectedDateCaret: {
@@ -283,7 +299,7 @@ const DatePicker = React.createClass({
         display: 'flex',
         height: 30,
         justifyContent: 'center',
-        maringBottom: 2,
+        marginBottom: 2,
         width: 35,
 
         ':hover': {
@@ -314,6 +330,10 @@ const DatePicker = React.createClass({
       },
       selectedEndDay: {
         borderRadius: '0 3px 3px 0'
+      },
+      betweenDay: {
+        backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.5),
+        borderRadius: 0
       },
       scrim: {
         bottom: 0,
