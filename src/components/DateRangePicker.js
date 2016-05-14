@@ -45,7 +45,6 @@ const DatePicker = React.createClass({
   },
 
   _handleDateSelect (date) {
-    // clears date when clicking on it again
     if (this.state.selectedStartDate === date) {
       this.state.selectedStartDate = null;
       return;
@@ -64,6 +63,11 @@ const DatePicker = React.createClass({
     console.log(this.state.selectedStartDate, this.state.selectedEndDate);
 
     this.props.onDateSelect(this.state.selectedStartDate, this.state.selectedEndDate);
+  },
+
+  _handleDateHover (date) {
+    this.state.activeSelectDate = date;
+    console.log(moment.unix(date).format(this.props.format));
   },
 
   _handlePreviousClick () {
@@ -101,25 +105,27 @@ const DatePicker = React.createClass({
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
     while (moment(startDate).isBefore(endDate)) {
+      const isToday = startDate.isSame(moment(), 'day');
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
+      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
       const isSelectedStartDay = startDate.isSame(moment.unix(this.state.selectedStartDate), 'day');
       const isSelectedEndDay = startDate.isSame(moment.unix(this.state.selectedEndDate), 'day');
-      const isBetween = startDate.isBetween(moment.unix(this.state.selectedStartDate), moment.unix(this.state.selectedEndDate));
-      const isToday = startDate.isSame(moment(), 'day');
-      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
+      const isActiveRange = startDate.isBetween(moment.unix(this.state.selectedStartDate), moment.unix(this.state.activeSelectDate));
+      const isSelectedRange = startDate.isBetween(moment.unix(this.state.selectedStartDate), moment.unix(this.state.selectedEndDate));
 
       const day = (
         <div
           key={startDate}
           onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
+          onMouseOver={(disabledDay || !this.state.selectedStartDate || this.state.selectedEndDate) ? null : this._handleDateHover.bind(null, startDate.unix())}
           style={Object.assign({},
             styles.calendarDay,
             isCurrentMonth && styles.currentMonth,
             disabledDay && styles.calendarDayDisabled,
-            (isToday && !isBetween) && styles.today,
+            (isToday && (!isActiveRange || !isSelectedRange)) && styles.today,
             isSelectedStartDay && Object.assign({}, styles.selectedDay, styles.selectedStartDay),
             isSelectedEndDay && Object.assign({}, styles.selectedDay, styles.selectedEndDay),
-            isBetween && styles.betweenDay
+            (isSelectedRange || isActiveRange) && styles.betweenDay
           )}
         >
           {startDate.date()}
