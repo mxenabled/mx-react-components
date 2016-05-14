@@ -290,7 +290,7 @@ const DatePicker = React.createClass({
         display: 'flex',
         height: 30,
         justifyContent: 'center',
-        maringBottom: 2,
+        marginBottom: 2,
         width: 35,
 
         ':hover': {
