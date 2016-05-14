@@ -279,18 +279,6 @@ const Demo = React.createClass({
     });
   },
 
-  _handleEndtDateSelect (selectedEndDate) {
-    this.setState({
-      selectedEndDate
-    });
-  },
-
-  _handleStartDateSelect (selectedEndDate) {
-    this.setState({
-      selectedEndDate
-    });
-  },
-
   _handleLineChartHover (data) {
     this.setState({
       lineChartHoverValue: data.value
