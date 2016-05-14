@@ -60,14 +60,11 @@ const DatePicker = React.createClass({
       this.state.selectedEndDate = date;
     }
 
-    console.log(this.state.selectedStartDate, this.state.selectedEndDate);
-
     this.props.onDateSelect(this.state.selectedStartDate, this.state.selectedEndDate);
   },
 
   _handleDateHover (date) {
     this.state.activeSelectDate = date;
-    console.log(moment.unix(date).format(this.props.format));
   },
 
   _handlePreviousClick () {
