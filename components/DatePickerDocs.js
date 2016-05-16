@@ -62,7 +62,7 @@ const DatePickerDocs = React.createClass({
     <DatePicker
       closeOnDateSelect={true}
       onDateSelect={this._handleDateSelect}
-      showDayBorders={false}
+      selectedDate={moment.unix()}
     />
   `}
         </Markdown>
