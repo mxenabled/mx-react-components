@@ -25,9 +25,6 @@ const DatePickerDocs = React.createClass({
         <p>Default: false</p>
         <p>If set to `true`, the calendar will be close after the user selects a data.</p>
 
-        <h5>defaultDate <label>Number (unix timestamp)</label></h5>
-        <p>This sets the default selected date on component mount.</p>
-
         <h5>format <label>String</label></h5>
         <p>Default: 'YYYY-MM-DD'</p>
         <p>This is used to determine the format of the selected date. It should follow the Moment.js conventions outlined <a href='http://momentjs.com/docs/#/parsing/string-format/' target='_blank'>here</a>.</p>
@@ -50,9 +47,8 @@ const DatePickerDocs = React.createClass({
         <p>Default: PRIMARY</p>
         <p>The color used for input focus, selected date highlight, and hover border.</p>
 
-        <h5>useInputForSelectedDate <label>Boolean</label></h5>
-        <p>Default: true</p>
-        <p>If set to 'true', the user will be able to edit the selected date by typing. If set to 'false', the user will only be able to change the selected date by interacting with the calendar.</p>
+        <h5>selectedDate <label>Number (unix timestamp)</label></h5>
+        <p>This sets the selected date on the component. Can be used to set a default date.</p>
 
         <h3>Example</h3>
         <Markdown>
