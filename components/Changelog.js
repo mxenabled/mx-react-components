@@ -6,7 +6,7 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
-        <h3>3.1.27/h3>
+        <h3>3.1.27</h3>
         <ul>
           <li>Fixed a typo in the DatePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/308'>#308</a>)</li>
         </ul>
