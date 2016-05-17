@@ -202,6 +202,10 @@ const icons = [
     displayValue: 'Download'
   },
   {
+    value: 'duplicate',
+    displayValue: 'Duplicate'
+  },
+  {
     value: 'edit',
     displayValue: 'Edit'
   },
@@ -260,6 +264,10 @@ const icons = [
   {
     value: 'investment',
     displayValue: 'Investment'
+  },
+  {
+    value: 'kabob_horizontal',
+    displayValue: 'Kabob Horizontal'
   },
   {
     value: 'key',
