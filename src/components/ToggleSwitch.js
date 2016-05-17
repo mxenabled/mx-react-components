@@ -6,14 +6,13 @@ const Icon = require('./Icon');
 const ToggleSwitch = React.createClass({
   propTypes: {
     checked: React.PropTypes.bool,
-    checkedByDefault: React.PropTypes.bool,
     falseIcon: React.PropTypes.element,
     leftLabel: React.PropTypes.string,
     onToggle: React.PropTypes.func,
     rightLabel: React.PropTypes.string,
     showIcons: React.PropTypes.bool,
     showLabels: React.PropTypes.bool,
-    styles: React.PropTypes.object,
+    style: React.PropTypes.object,
     trueIcon: React.PropTypes.element
   },
 
@@ -25,7 +24,7 @@ const ToggleSwitch = React.createClass({
       rightLabel: 'On',
       showLabels: false,
       showIcons: true,
-      styles: {}
+      style: {}
     };
   },
 
@@ -34,8 +33,6 @@ const ToggleSwitch = React.createClass({
 
     if ('checked' in this.props) {
       checked = this.props.checked;
-    } else if ('checkedByDefault' in this.props) {
-      checked = this.props.checkedByDefault;
     }
     return {
       checked: !!checked
@@ -74,8 +71,8 @@ const ToggleSwitch = React.createClass({
     if (!this.props.showIcons) {
       return null;
     }
-    const trueIcon = this.props.trueIcon ? this.props.trueIcon : <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type='check-skinny' />;
-    const falseIcon = this.props.falseIcon ? this.props.falseIcon : <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type='close-skinny' />;
+    const trueIcon = this.props.trueIcon || <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type='check-skinny' />;
+    const falseIcon = this.props.falseIcon || <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type='close-skinny' />;
 
     return (
       <span>
@@ -148,7 +145,7 @@ const ToggleSwitch = React.createClass({
       falseTrack: {
         backgroundColor: StyleConstants.Colors.ASH
       }
-    }, this.props.styles);
+    }, this.props.style);
 
     return (
       <div className='toggle-switch-component' style={styles.component}>
