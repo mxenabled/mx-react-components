@@ -74,8 +74,8 @@ const ToggleSwitch = React.createClass({
     if (!this.props.showIcons) {
       return null;
     }
-    let trueIcon = this.props.trueIcon ? this.props.trueIcon : <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type='check-skinny' />;
-    let falseIcon = this.props.falseIcon ? this.props.falseIcon : <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type='close-skinny' />;
+    const trueIcon = this.props.trueIcon ? this.props.trueIcon : <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type='check-skinny' />;
+    const falseIcon = this.props.falseIcon ? this.props.falseIcon : <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type='close-skinny' />;
 
     return (
       <span>
@@ -95,14 +95,14 @@ const ToggleSwitch = React.createClass({
       icon: {
         fill: StyleConstants.Colors.WHITE,
         position: 'absolute',
-        top: '0px',
+        top: 0,
         zIndex: 2
       },
       trueIcon: {
-        left: '0px'
+        left: 0
       },
       falseIcon: {
-        right: '0px'
+        right: 0
       },
       label: {
         cursor: 'pointer',
