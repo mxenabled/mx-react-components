@@ -6,6 +6,10 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.28</h3>
+        <ul>
+          <li>Adds new icons duplicate and kabob horizontal to the Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/311'>#311</a>)</li>
+        </ul>
         <h3>3.1.27</h3>
         <ul>
           <li>Fixed a typo in the DatePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/308'>#308</a>)</li>
