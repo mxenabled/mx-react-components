@@ -132,6 +132,8 @@ const Drawer = React.createClass({
   styles () {
     return {
       component: {
+        border: '1px solid ' + StyleConstants.Colors.FOG,
+        boxSizing: 'border-box',
         zIndex: 1001,
         top: 0,
         bottom: 0,
