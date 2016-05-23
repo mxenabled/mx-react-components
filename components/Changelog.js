@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.30</h3>
+        <ul>
+          <li>Return event on click and name transitions for DonutChart animations (<a href='https://github.com/mxenabled/mx-react-components/pull/315'>#315</a>)</li>
+        </ul>
+
         <h3>3.1.29</h3>
         <ul>
           <li>Disabled onClick for `disabled` type button components (<a href='https://github.com/mxenabled/mx-react-components/pull/313'>#313</a>)</li>
