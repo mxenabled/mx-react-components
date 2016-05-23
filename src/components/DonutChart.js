@@ -216,8 +216,8 @@ const DonutChart = React.createClass({
       });
   },
 
-  _handleClick (index) {
-    this.props.onClick(this.props.data[index]);
+  _handleClick (index, event) {
+    this.props.onClick(this.props.data[index], event);
   },
 
   _handleMouseEnter (point) {
