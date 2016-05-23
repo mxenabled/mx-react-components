@@ -18,7 +18,7 @@ const ToggleSwitch = React.createClass({
 
   getDefaultProps () {
     return {
-      checkedByDefault: false,
+      checked: false,
       leftLabel: 'Off',
       onToggle () {},
       rightLabel: 'On',
@@ -29,13 +29,8 @@ const ToggleSwitch = React.createClass({
   },
 
   getInitialState () {
-    let checked = false;
-
-    if ('checked' in this.props) {
-      checked = this.props.checked;
-    }
     return {
-      checked: !!checked
+      checked: this.props.checked
     };
   },
 
@@ -82,7 +77,26 @@ const ToggleSwitch = React.createClass({
   },
 
   render () {
-    const styles = Object.assign({}, {
+    const styles = this.styles();
+
+    return (
+      <div className='toggle-switch-component' style={styles.component}>
+        {this._renderLeftLabel(styles)}
+        <div
+          className='toggle-switch-track'
+          onClick={this._handleToggle}
+          style={Object.assign({}, styles.track, styles[this.state.checked + 'Track'])}
+        >
+          <div className='toggle-switch-toggle' style={Object.assign({}, styles.toggle, styles[this.state.checked + 'Toggle'])}></div>
+          {this._renderIcons(styles)}
+        </div>
+        {this._renderRightLabel(styles)}
+      </div>
+    );
+  },
+
+  styles () {
+    return Object.assign({}, {
       component: {
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
@@ -146,22 +160,8 @@ const ToggleSwitch = React.createClass({
         backgroundColor: StyleConstants.Colors.ASH
       }
     }, this.props.style);
-
-    return (
-      <div className='toggle-switch-component' style={styles.component}>
-        {this._renderLeftLabel(styles)}
-        <div
-          className='toggle-switch-track'
-          onClick={this._handleToggle}
-          style={Object.assign({}, styles.track, styles[this.state.checked + 'Track'])}
-        >
-          <div className='toggle-switch-toggle' style={Object.assign({}, styles.toggle, styles[this.state.checked + 'Toggle'])}></div>
-          {this._renderIcons(styles)}
-        </div>
-        {this._renderRightLabel(styles)}
-      </div>
-    );
   }
+
 });
 
 module.exports = Radium(ToggleSwitch);
