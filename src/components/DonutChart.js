@@ -147,17 +147,17 @@ const DonutChart = React.createClass({
     const nextArcData = this.state.values[nextActiveIndex];
 
     if (currentArcData) {
-      d3.select(this.refs['arc-' + this.props.id + currentActiveIndex]).transition().duration(200).attr('d', this.state.standardArc(currentArcData));
+      d3.select(this.refs['arc-' + this.props.id + currentActiveIndex]).transition('currentArc').duration(200).attr('d', this.state.standardArc(currentArcData));
     }
 
     if (nextArcData) {
-      d3.select(this.refs['arc-' + this.props.id + nextActiveIndex]).transition().duration(200).attr('d', this.state.hoveredArc(nextArcData));
+      d3.select(this.refs['arc-' + this.props.id + nextActiveIndex]).transition('nextArc').duration(200).attr('d', this.state.hoveredArc(nextArcData));
     }
   },
 
   _bounceAnimate () {
     d3.selectAll('.arc-' + this.props.id)
-      .transition()
+      .transition('bounce')
       .ease(t => {
         // See Penner's Equation and D3 docs on custom easing function
         // for details on variable names.
@@ -209,20 +209,20 @@ const DonutChart = React.createClass({
 
   _rollAnimate () {
     d3.selectAll('.arc-' + this.props.id)
-      .transition()
+      .transition('roll')
       .duration(this.props.animationDuration)
       .attrTween('transform', function () {
         return d3.interpolateString('rotate(0)', 'rotate(360)');
       });
   },
 
-  _handleClick (index) {
-    this.props.onClick(this.props.data[index]);
+  _handleClick (index, event) {
+    this.props.onClick(this.props.data[index], event);
   },
 
   _handleMouseEnter (point) {
     if (this.props.animateOnHover && this.state.activeIndex !== point.index) {
-      d3.select(this.refs[point.ref]).transition().duration(200).attr('d', this.state.hoveredArc(point.arc));
+      d3.select(this.refs[point.ref]).transition('mouseEnter').duration(200).attr('d', this.state.hoveredArc(point.arc));
     }
 
     this.props.onMouseEnter(this.props.data[point.index], point.index);
@@ -234,7 +234,7 @@ const DonutChart = React.createClass({
 
   _handleMouseLeave (point) {
     if (this.props.animateOnHover) {
-      d3.select(this.refs[point.ref]).transition().duration(200).attr('d', this.state.standardArc(point.arc));
+      d3.select(this.refs[point.ref]).transition('mouseLeave').duration(200).attr('d', this.state.standardArc(point.arc));
     }
 
     this.props.onMouseLeave();
