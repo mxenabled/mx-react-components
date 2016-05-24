@@ -190,7 +190,7 @@ const Drawer = React.createClass({
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
         color: StyleConstants.Colors.ASH,
         display: 'flex',
-        fontFamily: StyleConstants.Fonts.NORMAL,
+        fontFamily: StyleConstants.Fonts.REGULAR,
         fontSize: StyleConstants.FontSizes.LARGE,
         justifyContent: 'center',
         padding: '7px 7px',
