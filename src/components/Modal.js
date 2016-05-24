@@ -251,7 +251,6 @@ const styles = {
     position: 'relative',
     maxHeight: 'calc(100% - 140px)',
     overflow: 'auto'
-    //flex: '1 2 100%'
   },
   footer: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
