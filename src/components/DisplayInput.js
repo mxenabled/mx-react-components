@@ -7,6 +7,7 @@ const DisplayInput = React.createClass({
   propTypes: {
     hint: React.PropTypes.string,
     label: React.PropTypes.string,
+    labelStyle: React.PropTypes.object,
     placeholder: React.PropTypes.string,
     primaryColor: React.PropTypes.string,
     showHint: React.PropTypes.bool,
@@ -31,7 +32,9 @@ const DisplayInput = React.createClass({
       <div style={styles.wrapper}>
         {this.props.label ? (
           <div key='label' style={styles.label}>
-            <div style={styles.labelText}>{this.props.label}</div>
+            <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+              {this.props.label}
+            </div>
           </div>) : null}
         <input
           {...this.props}
@@ -108,12 +111,13 @@ const DisplayInput = React.createClass({
       hint: {
         color: this.props.primaryColor,
         display: 'inline-block',
-        float: 'left',
+        float: 'right',
         height: '100%',
         marginRight: -100,
         position: 'relative',
         textAlign: 'right',
-        width: 100
+        top: '50%',
+        transform: 'translateY(-50%)'
       },
 
       hintText: {
