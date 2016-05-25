@@ -18,6 +18,7 @@ module.exports = {
   Select: require('./components/Select'),
   SelectFullScreen: require('./components/SelectFullScreen'),
   SimpleInput: require('./components/SimpleInput'),
+  SimpleSelect: require('./components/SimpleSelect'),
   Spin: require('./components/Spin'),
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
