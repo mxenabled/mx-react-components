@@ -72,6 +72,9 @@ const DisplayInputDocs = React.createClass({
         <h5>label <label>String</label></h5>
         <p>Input label shown to the left of the input field</p>
 
+        <h5>labelStyle <label>Object</label></h5>
+        <p>Styles for the input label</p>
+
         <h5>placeholder <label>String</label></h5>
         <p>The text to show before the user starts typing or when the input field is empty.</p>
 
