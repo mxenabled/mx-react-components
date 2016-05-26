@@ -859,10 +859,14 @@ const Demo = React.createClass({
           <SimpleSelect
             align='right'
             items={[
-              { text: 'Menu Item 1' },
+              {
+                icon: 'add',
+                text: 'Menu Item 1'
+              },
               { text: 'Menu Item 2' },
               { text: 'Menu Item 3' }
             ]}
+            onScrimClick={this._handleSimpleSelectClick}
             showItems={this.state.showSimpleSelectItems}
           />
         </div>

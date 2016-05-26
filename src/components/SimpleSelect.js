@@ -7,39 +7,28 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
-    align: React.PropTypes.string,
     items: React.PropTypes.array,
     itemStyles: React.PropTypes.object,
     onItemSelect: React.PropTypes.func,
+    onScrimClick: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
+    showItems: React.PropTypes.bool,
     styles: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
-      align: 'left',
       closeOnDateSelect: false,
       items: [],
       onItemSelect () {},
-      primaryColor: StyleConstants.Colors.PRIMARY
-    };
-  },
-
-  getInitialState () {
-    return {
-      showItems: true
+      onScrimClick () {},
+      primaryColor: StyleConstants.Colors.PRIMARY,
+      showItems: false
     };
   },
 
   _handleItemSelect (item) {
     this.props.onItemSelect(item);
-    this._handleScrimClick();
-  },
-
-  _handleScrimClick () {
-    this.setState({
-      showItems: false
-    });
   },
 
   render () {
@@ -47,8 +36,8 @@ const SimpleSelect = React.createClass({
 
     return (
       <div>
-      {this.state.showItems ? (
-        <div style={styles.wrapper}>
+      {this.props.showItems ? (
+        <div>
           <div style={Object.assign({}, styles.component)}>
               {this.props.items.map((item, i) => {
                 return (
@@ -57,12 +46,15 @@ const SimpleSelect = React.createClass({
                     onClick={this._handleItemSelect.bind(null, item)}
                     style={Object.assign({}, styles.item, this.props.itemStyles)}
                   >
+                    {item.icon ? (
+                      <Icon type={item.icon} />
+                    ) : null}
                     {item.text}
                   </div>
                 );
               })}
           </div>
-          <div onClick={this._handleScrimClick} style={styles.scrim} />
+          <div onClick={this.props.onScrimClick} style={styles.scrim} />
         </div>
       ) : null }
       </div>
@@ -77,20 +69,13 @@ const SimpleSelect = React.createClass({
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.BLACK,
-        display: this.state.showItems ? 'inline-block' : 'none',
+        fill: StyleConstants.Colors.BLACK,
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         position: 'absolute',
-        transform: this.props.align === 'left' ? 'translateX(calc(-100% - 30px))' : 'translateX(calc(100% - 120px))',
         width: 150,
         zIndex: 10
       }, this.props.style),
-
-      wrapper: {
-        margin: '0 auto',
-        position: 'relative',
-        width: 0
-      },
 
       item: {
         padding: '14px 20px',
