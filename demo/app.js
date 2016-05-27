@@ -1157,6 +1157,7 @@ const Demo = React.createClass({
           ) : null}
           <BarChart
             animateOnHover={true}
+            colorWhenClicked='#359BCF'
             data={[
               {
                 label: 'Jan',
