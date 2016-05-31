@@ -6,6 +6,7 @@ const Markdown = require('components/Markdown');
 
 const options = [
   {
+    icon: 'add',
     value: '1',
     displayValue: 'Option 1'
   },
@@ -74,7 +75,7 @@ const SelectDocs = React.createClass({
         <p>A function that is called when a new value has been selected.</p>
 
         <h5>options <label>Array</label></h5>
-        <p>An array of option objects with the follow key/value pairs: value: String/Number, displayValue: String.</p>
+        <p>An array of option objects with the follow key/value pairs: icon: String, value: String/Number, displayValue: String.</p>
 
         <h5>optionsStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the options wrapper element.</p>
@@ -103,6 +104,7 @@ const SelectDocs = React.createClass({
     <Select
       options={[
         {
+          icon: 'add',
           value: '1',
           displayValue: 'Option 1'
         },

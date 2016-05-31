@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.34</h3>
+        <ul>
+          <li>Add icon option to select items (<a href='https://github.com/mxenabled/mx-react-components/pull/322'>#322</a>)</li>
+        </ul>
+
         <h3>3.1.33</h3>
         <ul>
           <li>Adds the ability set the color of each bar in the Barchart component (<a href='https://github.com/mxenabled/mx-react-components/pull/321'>#321</a>)</li>
