@@ -13,6 +13,7 @@ const Select = React.createClass({
   propTypes: {
     color: React.PropTypes.string,
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    icon: React.PropTypes.string,
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
     optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
@@ -47,7 +48,8 @@ const Select = React.createClass({
     if (option.value === this.state.hoverItem) {
       return {
         backgroundColor: StyleConstants.Colors.PRIMARY,
-        color: StyleConstants.Colors.WHITE
+        color: StyleConstants.Colors.WHITE,
+        fill: StyleConstants.Colors.WHITE
       };
     } else {
       return null;
@@ -173,13 +175,13 @@ const Select = React.createClass({
 
       if (this.props.children) {
         return (
-          <div className='mx-select-options' style={[styles.options, this.props.optionsStyle]}>
+          <div className='mx-select-options' style={styles.options}>
             {this.props.children}
           </div>
         );
       } else {
         return (
-          <ul className='mx-select-options' ref='optionList' style={[styles.options, this.props.optionsStyle]}>
+          <ul className='mx-select-options' ref='optionList' style={styles.options}>
             {this.props.options.map(option => {
               return (
                 <li
@@ -188,13 +190,20 @@ const Select = React.createClass({
                   onClick={this._handleOptionClick.bind(null, option)}
                   onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   ref={option.displayValue + option.value}
-                  style={[
+                  style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,
-                    _isEqual(option, this.state.highlightedValue) && styles.activeItem,
+                    _isEqual(option, this.state.highlightedValue) ? styles.activeItem : null,
                     this.getBackgroundColor(option)
-                  ]}
+                  )}
                 >
+                {option.icon ? (
+                  <Icon
+                    size={20}
+                    style={styles.optionIcon}
+                    type={option.icon}
+                  />
+                ) : null}
                 {option.displayValue}
                 {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} style={styles.check} type='check' /> : null }
                 </li>
@@ -213,15 +222,22 @@ const Select = React.createClass({
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select' style={[this.props.style, { position: 'relative' }]}>
+      <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
           onClick={this._handleClick}
           onKeyDown={this._handleInputKeyDown}
-          style={[styles.component, this.props.dropdownStyle]}
+          style={styles.component}
           tabIndex='0'
         >
           {this._renderScrim()}
-          <div className='mx-select-selected' key='selected' style={[styles.selected, this.props.selectedStyle]}>
+          <div className='mx-select-selected' key='selected' style={styles.selected}>
+            {selected.icon ? (
+              <Icon
+                size={20}
+                style={styles.optionIcon}
+                type={selected.icon}
+              />
+            ) : null}
             {selected.displayValue}
             <Icon
               size={20}
@@ -264,20 +280,21 @@ const Select = React.createClass({
         position: 'absolute',
         right: 10
       },
-      component: {
-        backgroundColor: '#FFFFFF',
-        borderRadius: '3px',
-        border: '1px solid #E5E5E5',
-        cursor: 'pointer',
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        padding: '11px 10px 12px',
-        position: 'relative',
-        appearance: 'none',
-        WebkitAppearance: 'none',
-        boxSizing: 'border-box',
-        outline: 'none'
-      },
+      component: Object.assign({},
+        {
+          backgroundColor: '#FFFFFF',
+          borderRadius: '3px',
+          border: '1px solid #E5E5E5',
+          cursor: 'pointer',
+          fontFamily: StyleConstants.FontFamily,
+          fontSize: StyleConstants.FontSizes.MEDIUM,
+          padding: '11px 10px 12px',
+          position: 'relative',
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          boxSizing: 'border-box',
+          outline: 'none'
+        }, this.props.dropdownStyle),
       select: {
         position: 'absolute',
         top: 0,
@@ -288,37 +305,43 @@ const Select = React.createClass({
         WebkitAppearance: 'none',
         opacity: 0
       },
-      selected: {
-        position: 'relative'
-      },
+      selected: Object.assign({},
+        {
+          position: 'relative'
+        }, this.props.selectedStyle),
       activeItem: {
+        fill: StyleConstants.Colors.PRIMARY,
         color: StyleConstants.Colors.PRIMARY
       },
       invalid: {
         borderColor: StyleConstants.Colors.STRAWBERRY
       },
-      options: {
-        backgroundColor: '#FFFFFF',
-        border: '1px solid #E5E5E5',
-        borderRadius: '0 0 3px 3px',
-        left: '-1px',
-        right: '-1px',
-        margin: '10px 0 0 0',
-        padding: '0',
-        minWidth: '100%',
-        position: 'absolute',
-        zIndex: 10,
-        fontSize: '12px',
-        boxShadow: StyleConstants.ShadowHigh,
-        boxSizing: 'border-box',
-        maxHeight: '260px',
-        overflow: 'auto'
-      },
+      options: Object.assign({},
+        {
+          backgroundColor: '#FFFFFF',
+          border: '1px solid #E5E5E5',
+          borderRadius: '0 0 3px 3px',
+          left: '-1px',
+          right: '-1px',
+          margin: '10px 0 0 0',
+          padding: '0',
+          minWidth: '100%',
+          position: 'absolute',
+          zIndex: 10,
+          fontSize: '12px',
+          boxShadow: StyleConstants.ShadowHigh,
+          boxSizing: 'border-box',
+          maxHeight: '260px',
+          overflow: 'auto'
+        }, this.props.optionsStyle),
       option: {
         cursor: 'pointer',
         backgroundColor: '#FFFFFF',
         padding: '10px',
         whiteSpace: 'nowrap'
+      },
+      optionIcon: {
+        marginRight: 5
       },
       scrim: {
         position: 'fixed',
