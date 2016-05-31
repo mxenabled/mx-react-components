@@ -1157,53 +1157,64 @@ const Demo = React.createClass({
           ) : null}
           <BarChart
             animateOnHover={true}
-            colorWhenClicked='#359BCF'
             data={[
               {
+                color: '#E3E6E7',
                 label: 'Jan',
                 value: 125.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Feb',
                 value: 545.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Mar',
                 value: 789.25
               },
               {
+                color: '#359BCF',
                 label: 'Apr',
                 value: 254.25
               },
               {
+                color: '#E3E6E7',
                 label: 'May',
                 value: 782.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Jun',
                 value: 1200.75
               },
               {
+                color: '#E3E6E7',
                 label: 'Jul',
                 value: 852.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Aug',
                 value: 965.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Sep',
                 value: 145.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Oct',
                 value: 987.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Nov',
                 value: 633.25
               },
               {
+                color: '#E3E6E7',
                 label: 'Dec',
                 value: 1248.25
               }
