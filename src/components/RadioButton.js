@@ -34,8 +34,7 @@ const RadioButton = React.createClass({
       component: {
         cursor: 'pointer',
         display: 'flex',
-        alignItems: 'center',
-        width: '100%'
+        alignItems: 'center'
       },
       radioButton: Object.assign({}, {
         display: 'flex',
