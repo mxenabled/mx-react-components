@@ -196,15 +196,15 @@ const Select = React.createClass({
                     this.getBackgroundColor(option)
                   )}
                 >
-                {option.icon ? (
-                  <Icon
-                    size={20}
-                    style={styles.optionIcon}
-                    type={option.icon}
-                  />
-                ) : null}
-                {option.displayValue}
-                {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} style={styles.check} type='check' /> : null }
+                  {option.icon ? (
+                    <Icon
+                      size={20}
+                      style={styles.optionIcon}
+                      type={option.icon}
+                    />
+                  ) : null}
+                  <div style={styles.optionText}>{option.displayValue}</div>
+                  {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} style={styles.check} type='check' /> : null }
                 </li>
               );
             })}
@@ -237,10 +237,9 @@ const Select = React.createClass({
                 type={selected.icon}
               />
             ) : null}
-            {selected.displayValue}
+            <div style={styles.optionText}>{selected.displayValue}</div>
             <Icon
               size={20}
-              style={styles.caret}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
@@ -266,19 +265,6 @@ const Select = React.createClass({
 
   styles () {
     return {
-      caret: {
-        color: '#CCCCCC',
-        cursor: 'pointer',
-        position: 'absolute',
-        right: '-5px',
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-      check: {
-        color: StyleConstants.Colors.PRIMARY,
-        position: 'absolute',
-        right: 10
-      },
       component: Object.assign({},
         {
           backgroundColor: '#FFFFFF',
@@ -306,6 +292,9 @@ const Select = React.createClass({
       },
       selected: Object.assign({},
         {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           position: 'relative'
         }, this.props.selectedStyle),
       activeItem: {
@@ -334,6 +323,8 @@ const Select = React.createClass({
           overflow: 'auto'
         }, this.props.optionsStyle),
       option: {
+        display: 'flex',
+        alignItems: 'center',
         cursor: 'pointer',
         backgroundColor: '#FFFFFF',
         padding: '10px',
@@ -341,6 +332,9 @@ const Select = React.createClass({
       },
       optionIcon: {
         marginRight: 5
+      },
+      optionText: {
+        flex: '1 0 0%'
       },
       scrim: {
         position: 'fixed',
