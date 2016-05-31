@@ -267,13 +267,13 @@ const Select = React.createClass({
     return {
       component: Object.assign({},
         {
-          backgroundColor: '#FFFFFF',
-          borderRadius: '3px',
-          border: '1px solid #E5E5E5',
+          backgroundColor: StyleConstants.Colors.WHITE,
+          borderRadius: 3,
+          border: '1px solid ' + StyleConstants.Colors.FOG,
           cursor: 'pointer',
           fontFamily: StyleConstants.FontFamily,
           fontSize: StyleConstants.FontSizes.MEDIUM,
-          padding: '11px 10px 12px',
+          padding: '9px 10px',
           position: 'relative',
           appearance: 'none',
           WebkitAppearance: 'none',
