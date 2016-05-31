@@ -186,7 +186,7 @@ const Drawer = React.createClass({
       },
       header: {
         alignItems: 'center',
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        backgroundColor: StyleConstants.Colors.WHITE,
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
         color: StyleConstants.Colors.ASH,
         display: 'flex',
