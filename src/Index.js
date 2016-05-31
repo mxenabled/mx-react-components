@@ -12,6 +12,7 @@ module.exports = {
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
   PageIndicator: require('./components/PageIndicator'),
+  RadioButton: require('./components/RadioButton'),
   RajaIcon: require('./components/RajaIcon'),
   RangeSelector: require('./components/RangeSelector'),
   SearchInput: require('./components/SearchInput'),
