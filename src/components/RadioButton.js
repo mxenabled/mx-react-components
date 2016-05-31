@@ -4,7 +4,8 @@ const StyleConstants = require('../constants/Style');
 
 const RadioButton = React.createClass({
   propTypes: {
-    activeStyle: React.PropTypes.object,
+    activeButtonStyle: React.PropTypes.object,
+    buttonStyle: React.PropTypes.object,
     checked: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     style: React.PropTypes.object
@@ -31,11 +32,11 @@ const RadioButton = React.createClass({
 
   styles () {
     return {
-      component: {
+      component: Object.assign({}, {
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center'
-      },
+      }, this.props.style),
       radioButton: Object.assign({}, {
         display: 'flex',
         alignItems: 'center',
@@ -46,13 +47,13 @@ const RadioButton = React.createClass({
         border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: '100%',
         backgroundColor: StyleConstants.Colors.WHITE
-      }, this.props.style),
+      }, this.props.buttonStyle),
       radioButtonActive: Object.assign({}, {
         width: '60%',
         height: '60%',
         borderRadius: '100%',
         backgroundColor: StyleConstants.Colors.PRIMARY
-      }, this.props.activeStyle)
+      }, this.props.activeButtonStyle)
     };
   }
 });
