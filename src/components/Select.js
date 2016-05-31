@@ -13,7 +13,6 @@ const Select = React.createClass({
   propTypes: {
     color: React.PropTypes.string,
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    icon: React.PropTypes.string,
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
     optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
