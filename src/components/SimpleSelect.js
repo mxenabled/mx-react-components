@@ -7,7 +7,6 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
-    brandColor: React.PropTypes.string,
     componentStyles: React.PropTypes.object,
     containerStyles: React.PropTypes.object,
     iconSize: React.PropTypes.number,
@@ -22,7 +21,6 @@ const SimpleSelect = React.createClass({
 
   getDefaultProps () {
     return {
-      brandColor: StyleConstants.Colors.PRIMARY,
       closeOnDateSelect: false,
       items: [],
       onItemSelect () {},
