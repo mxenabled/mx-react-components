@@ -856,7 +856,9 @@ const Demo = React.createClass({
               icon='gear'
               onClick={this._handleSimpleSelectClick}
               type='base'
-            >This is a menu Button</Button>
+            >
+              This is a menu Button
+            </Button>
             <SimpleSelect
               items={[
                 { text: 'Menu Item 1' },
