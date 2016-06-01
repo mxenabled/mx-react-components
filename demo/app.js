@@ -24,6 +24,7 @@ const {
   Select,
   SelectFullScreen,
   SimpleInput,
+  SimpleSelect,
   TimeBasedLineChart,
   ToggleSwitch,
   TypeAhead
@@ -563,6 +564,7 @@ const Demo = React.createClass({
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
+      showMenu: false,
       showSmallModal: false,
       uploadedFile: null,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -696,6 +698,12 @@ const Demo = React.createClass({
   _handleSpinnerWithTextClick () {
     this.setState({
       spinnerWithTextIsActive: !this.state.spinnerWithTextIsActive
+    });
+  },
+
+  _handleSimpleSelectClick () {
+    this.setState({
+      showMenu: !this.state.showMenu
     });
   },
 
@@ -850,6 +858,26 @@ const Demo = React.createClass({
             ]}
             type='base'
           />
+          <br /><br />
+          <div style={{ margin: '0 auto', width: 177 }}>
+            <Button
+              icon='gear'
+              onClick={this._handleSimpleSelectClick}
+              type='base'
+            >
+              This is a menu Button
+            </Button>
+            {this.state.showMenu ? (
+              <SimpleSelect
+                items={[
+                  { text: 'Menu Item 1' },
+                  { text: 'Menu Item 2' },
+                  { text: 'Menu Item 3' }
+                ]}
+                onScrimClick={this._handleSimpleSelectClick}
+              />
+            ) : null}
+          </div>
         </div>
         {this.state.showModal ? (
           <Modal
