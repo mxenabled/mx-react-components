@@ -7,13 +7,13 @@ const Markdown = require('components/Markdown');
 const RadioButtonDocs = React.createClass({
   getInitialState () {
     return {
-      selected: false
+      selected: 'default'
     };
   },
 
-  _handleRadioClick () {
+  _handleRadioClick (selected) {
     this.setState({
-      selected: !this.state.selected
+      selected
     });
   },
 
@@ -26,13 +26,18 @@ const RadioButtonDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <RadioButton checked={!this.state.selected}>Default Style</RadioButton>
+        <RadioButton
+          checked={this.state.selected === 'default'}
+          onClick={this._handleRadioClick.bind(null, 'default')}
+        >
+          Default Style
+        </RadioButton>
         <RadioButton
           activeButtonStyle={{ backgroundColor: '#FBB600' }}
           buttonStyle={{ height: 30, width: 30 }}
-          checked={this.state.selected}
+          checked={this.state.selected === 'custom'}
           color='#FBB600'
-          onClick={this._handleRadioClick}
+          onClick={this._handleRadioClick.bind(null, 'custom')}
           style={{ marginTop: 20 }}
         >
           Custom Style
