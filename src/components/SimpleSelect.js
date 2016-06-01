@@ -11,7 +11,7 @@ const SimpleSelect = React.createClass({
     containerStyles: React.PropTypes.object,
     iconSize: React.PropTypes.number,
     iconStyles: React.PropTypes.object,
-    items: React.PropTypes.array,
+    items: React.PropTypes.array.isRequired,
     itemStyles: React.PropTypes.object,
     onItemSelect: React.PropTypes.func,
     onScrimClick: React.PropTypes.func,
