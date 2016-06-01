@@ -34,8 +34,7 @@ const IconDocs = React.createClass({
             return (
               <div key={icon.value} style={{ width: 80, height: 80, textAlign: 'center', padding: 20 }}>
                 <Icon key={icon.value} size={40} type={icon.value} />
-                <div style={{ color: Styles.Colors.ASH, marginTop: 5 }}>{icon.displayValue}</div>
-                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL }}>({icon.value})</div>
+                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
               </div>
             );
           })}
