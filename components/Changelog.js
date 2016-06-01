@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.35</h3>
+        <ul>
+          <li>Add Radio Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/323'>#323</a>)</li>
+          <li>Change default header color on Drawer component from PORCELAIN to WHITE (<a href='https://github.com/mxenabled/mx-react-components/pull/317'>#317</a>)</li>
+        </ul>
+        <p>New Contributors: <a href='https://github.com/derek-boman'>derek-boman</a></p>
+
         <h3>3.1.34</h3>
         <ul>
           <li>Add icon option to select items (<a href='https://github.com/mxenabled/mx-react-components/pull/322'>#322</a>)</li>

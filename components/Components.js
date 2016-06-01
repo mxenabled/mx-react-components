@@ -65,6 +65,10 @@ const Components = React.createClass({
                   displayValue: 'Page Indicator'
                 },
                 {
+                  value: 'radio-button',
+                  displayValue: 'Radio Button'
+                },
+                {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
                 },
@@ -117,6 +121,7 @@ const Components = React.createClass({
             <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/display-input'>Display Input</Link>
             <Link to='/components/file-upload'>File Upload</Link>
+            <Link to='/components/range-selector'>Radio Button</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
             <Link to='/components/search-input'>Search Input</Link>
             <Link to='/components/select'>Select</Link>
