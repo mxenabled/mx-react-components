@@ -32,7 +32,7 @@ const IconDocs = React.createClass({
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
           {icons.map(icon => {
             return (
-              <div key={icon.value} style={{ textAlign: 'center', padding: 20 }}>
+              <div key={icon.value} style={{ flex: '1 0 0%', textAlign: 'center', padding: 20 }}>
                 <Icon key={icon.value} size={40} type={icon.value} />
                 <div style={{ color: Styles.Colors.ASH, marginTop: 5 }}>{icon.displayValue}</div>
                 <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL }}>({icon.value})</div>
@@ -238,10 +238,6 @@ const icons = [
   {
     value: 'envelope',
     displayValue: 'Envelope'
-  },
-  {
-    value: 'export',
-    displayValue: 'Export'
   },
   {
     value: 'folder',
