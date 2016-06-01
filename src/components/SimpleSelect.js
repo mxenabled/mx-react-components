@@ -14,7 +14,7 @@ const SimpleSelect = React.createClass({
     menuStyles: React.PropTypes.object,
     onScrimClick: React.PropTypes.func,
     showMenu: React.PropTypes.bool,
-    styles: React.PropTypes.object
+    style: React.PropTypes.object
   },
 
   getDefaultProps () {
