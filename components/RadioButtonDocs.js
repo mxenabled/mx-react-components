@@ -27,7 +27,6 @@ const RadioButtonDocs = React.createClass({
 
         <h3>Demo</h3>
         <RadioButton checked={!this.state.selected}>Default Style</RadioButton>
-        <br /><br />
         <RadioButton
           activeButtonStyle={{ backgroundColor: '#FBB600' }}
           buttonStyle={{ height: 30, width: 30 }}
@@ -49,6 +48,9 @@ const RadioButtonDocs = React.createClass({
         <h5>checked <label>Boolean</label></h5>
         <p>A boolean indicating if the radio button should show as checked.</p>
 
+        <h5>children <label>Boolean</label></h5>
+        <p>Optional content included between opening and closing tags such as a label.</p>
+
         <h5>color <label>String</label></h5>
         <p>A string with a valid CSS color to use for the checked indicator. Defaults to <span style={{ color: Styles.Colors.PRIMARY }}>{Styles.Colors.PRIMARY}</span>. This can also be overridden with the activeButtonStyle prop.</p>
 
@@ -67,8 +69,10 @@ const RadioButtonDocs = React.createClass({
               checked={true}
               color='#FBB600'
               onClick={this._handleRadioClick}
-              style={{ marginLeft: 20 }}
-            />
+              style={{ marginTop: 20 }}
+            >
+              Label
+            </RadioButton>
           `}
         </Markdown>
       </div>
