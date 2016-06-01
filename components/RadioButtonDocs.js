@@ -33,7 +33,7 @@ const RadioButtonDocs = React.createClass({
           checked={this.state.selected}
           color='#FBB600'
           onClick={this._handleRadioClick}
-          style={{ marginLeft: 20 }}
+          style={{ marginTop: 20 }}
         >
           Custom Style
         </RadioButton>
