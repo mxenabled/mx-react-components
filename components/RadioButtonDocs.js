@@ -11,7 +11,7 @@ const RadioButtonDocs = React.createClass({
     };
   },
 
-  _handleChange () {
+  _handleRadioClick () {
     this.setState({
       selected: !this.state.selected
     });
@@ -26,8 +26,14 @@ const RadioButtonDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
+        <RadioButton checked={!this.state.selected} />
         <RadioButton
-          placeholder='Type something'
+          activeButtonStyle={{ backgroundColor: '#FBB600' }}
+          buttonStyle={{ height: 30, width: 30 }}
+          checked={!this.state.selected}
+          color='#FBB600'
+          onClick={this._handleRadioClick}
+          style={{ marginLeft: 20 }}
         />
 
         <h3>Usage</h3>
