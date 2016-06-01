@@ -7,12 +7,14 @@ const RadioButton = React.createClass({
     activeButtonStyle: React.PropTypes.object,
     buttonStyle: React.PropTypes.object,
     checked: React.PropTypes.bool,
+    color: React.PropTypes.string,
     onClick: React.PropTypes.func,
     style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
+      color: StyleConstants.Colors.PRIMARY,
       onClick: () => {}
     };
   },
@@ -52,7 +54,7 @@ const RadioButton = React.createClass({
         width: '60%',
         height: '60%',
         borderRadius: '100%',
-        backgroundColor: StyleConstants.Colors.PRIMARY
+        backgroundColor: this.props.color
       }, this.props.activeButtonStyle)
     };
   }
