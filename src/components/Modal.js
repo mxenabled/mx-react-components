@@ -181,12 +181,14 @@ const Modal = React.createClass({
             style={styles.close}
             type='close-solid'
           />
-          {this._renderTitleBar()}
-          <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
-            {this.props.children}
-            {this._renderTooltip()}
+          <div style={styles.contentWrapper}>
+            {this._renderTitleBar()}
+            <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
+              {this.props.children}
+              {this._renderTooltip()}
+            </div>
+            {this._renderFooter()}
           </div>
-          {this._renderFooter()}
         </div>
       </div>
     );
@@ -229,6 +231,12 @@ const styles = {
     maxWidth: 'calc(100% - 40px)',
     display: 'inline-block',
     textAlign: 'left'
+  },
+  contentWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxHeight: 'calc(100% - 40px)',
+    overFlow: 'auto'
   },
   titleBar: {
     backgroundColor: StyleConstants.Colors.PORCELAIN,
