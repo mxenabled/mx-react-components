@@ -25,6 +25,9 @@ const RadioButtonDocs = React.createClass({
           <label>A simple radio button used in forms</label>
         </h1>
 
+        <h3>Default Demo</h3>
+        <RadioButton checked={!this.state.selected} />
+
         <h3>Usage</h3>
         <h5>activeButtonStyle <label>Object</label></h5>
         <p>A style object that modifies the css styles of the inner 'div' element that creates the checked indicator for the radio button.</p>
