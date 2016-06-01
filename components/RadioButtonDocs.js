@@ -25,8 +25,10 @@ const RadioButtonDocs = React.createClass({
           <label>A simple radio button used in forms</label>
         </h1>
 
-        <h3>Demo</h3>
+        <h3>Default Demo</h3>
         <RadioButton checked={!this.state.selected} />
+
+        <h3>Styled Demo</h3>
         <RadioButton
           activeButtonStyle={{ backgroundColor: '#FBB600' }}
           buttonStyle={{ height: 30, width: 30 }}
