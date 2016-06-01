@@ -7,12 +7,11 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
-    componentStyles: React.PropTypes.object,
-    containerStyles: React.PropTypes.object,
     iconSize: React.PropTypes.number,
     iconStyles: React.PropTypes.object,
     items: React.PropTypes.array.isRequired,
     itemStyles: React.PropTypes.object,
+    menuStyles: React.PropTypes.object,
     onScrimClick: React.PropTypes.func,
     showMenu: React.PropTypes.bool,
     styles: React.PropTypes.object
@@ -31,10 +30,10 @@ const SimpleSelect = React.createClass({
     const styles = this.styles();
 
     return (
-      <div style={Object.assign({}, styles.container, this.props.containerStyles)}>
+      <div style={styles.component}>
       {this.props.showMenu ? (
         <div>
-          <div style={Object.assign({}, styles.component, this.props.componentStyles)}>
+          <div style={Object.assign({}, styles.menu, this.props.menuStyles)}>
               {this.props.items.map((item, i) => {
                 return (
                   <div
@@ -60,6 +59,11 @@ const SimpleSelect = React.createClass({
   styles () {
     return {
       component: Object.assign({
+        marginTop: 10,
+        position: 'relative'
+      }, this.props.style),
+
+      menu: {
         alignSelf: 'stretch',
         backgroundColor: StyleConstants.Colors.WHITE,
         borderRadius: 3,
@@ -73,11 +77,6 @@ const SimpleSelect = React.createClass({
         fontSize: StyleConstants.FontSizes.MEDIUM,
         position: 'absolute',
         zIndex: 10
-      }, this.props.style),
-
-      container: {
-        marginTop: 10,
-        position: 'relative'
       },
 
       item: {

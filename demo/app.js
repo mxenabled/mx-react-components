@@ -866,7 +866,7 @@ const Demo = React.createClass({
                 { text: 'Menu Item 3' }
               ]}
               onScrimClick={this._handleSimpleSelectClick}
-              showItems={this.state.showSimpleSelectItems}
+              showMenu={this.state.showSimpleSelectItems}
             />
           </div>
         </div>
