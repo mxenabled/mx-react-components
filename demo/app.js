@@ -18,6 +18,7 @@ const {
   Loader,
   Modal,
   PageIndicator,
+  RadioButton,
   RangeSelector,
   SearchInput,
   Select,
@@ -557,6 +558,7 @@ const Demo = React.createClass({
       },
       lineChartData: [],
       pageIndicatorIndex: 0,
+      radioChecked: false,
       selectedDatePickerDate: null,
       showDrawer: false,
       showDrawerButtonType: 'primary',
@@ -743,6 +745,12 @@ const Demo = React.createClass({
       barchartHoverValue,
       barchartX,
       barchartY
+    });
+  },
+
+  _handleRadioButtonClick () {
+    this.setState({
+      radioChecked: !this.state.radioChecked
     });
   },
 
@@ -1091,6 +1099,10 @@ const Demo = React.createClass({
         <div style={{ padding: '100px', position: 'relative' }}>
           <Loader isLoading={true} isRelative={true} />
         </div>
+
+        <br /><br />
+        <RadioButton checked={this.state.radioChecked} onClick={this._handleRadioButtonClick}>On</RadioButton>
+        <RadioButton checked={!this.state.radioChecked} onClick={this._handleRadioButtonClick}>Off</RadioButton>
 
         <br /><br />
         <DatePicker
