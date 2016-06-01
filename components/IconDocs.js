@@ -30,7 +30,12 @@ const IconDocs = React.createClass({
 
         <h3>Demo</h3>
         {icons.map(icon => {
-          return <Icon key={icon.value} type={icon.value} />;
+          return (
+            <div key={icon.value}>
+              <Icon key={icon.value} size={40} type={icon.value} />;
+              <div>{icon.value}</div>
+            </div>
+          );
         })}
 
         <h3>Usage</h3>
