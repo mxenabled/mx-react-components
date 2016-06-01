@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Icon, Select } = require('mx-react-components');
+const { Icon, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -33,7 +33,8 @@ const IconDocs = React.createClass({
           return (
             <div key={icon.value} style={{ display: 'inline-block', textAlign: 'center', padding: 20 }}>
               <Icon key={icon.value} size={40} type={icon.value} />
-              <div>{icon.value}</div>
+              <div style={{ color: Styles.Colors.ASH }}>{icon.displayValue}</div>
+              <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL }}>({icon.value})</div>
             </div>
           );
         })}
