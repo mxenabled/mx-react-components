@@ -14,7 +14,7 @@ const SimpleSelect = React.createClass({
     items: React.PropTypes.array.isRequired,
     itemStyles: React.PropTypes.object,
     onScrimClick: React.PropTypes.func,
-    showItems: React.PropTypes.bool,
+    showMenu: React.PropTypes.bool,
     styles: React.PropTypes.object
   },
 
@@ -23,7 +23,7 @@ const SimpleSelect = React.createClass({
       closeOnDateSelect: false,
       items: [],
       onScrimClick () {},
-      showItems: false
+      showMenu: false
     };
   },
 
@@ -32,7 +32,7 @@ const SimpleSelect = React.createClass({
 
     return (
       <div style={Object.assign({}, styles.container, this.props.containerStyles)}>
-      {this.props.showItems ? (
+      {this.props.showMenu ? (
         <div>
           <div style={Object.assign({}, styles.component, this.props.componentStyles)}>
               {this.props.items.map((item, i) => {
