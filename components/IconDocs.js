@@ -29,19 +29,9 @@ const IconDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <Select
-          onChange={this._handleSelectChange}
-          options={icons}
-          selected={this.state.icon}
-          valid={true}
-        />
-        <br /><br />
-        <Icon
-          size={50}
-          type={this.state.icon.value}
-        />
-        <br />
-        <div>({this.state.icon.value})</div>
+        {icons.map(icon => {
+          return <Icon key={icon.value} type={icon.value} />;
+        })}
 
         <h3>Usage</h3>
         <h5>size <label>Number, String</label></h5>
