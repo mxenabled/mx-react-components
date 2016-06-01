@@ -32,7 +32,7 @@ const IconDocs = React.createClass({
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
           {icons.map(icon => {
             return (
-              <div key={icon.value} style={{ width: 80, height: 80, textAlign: 'center', padding: 20 }}>
+              <div key={icon.value} style={{ width: 100, height: 100, textAlign: 'center' }}>
                 <Icon key={icon.value} size={40} type={icon.value} />
                 <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
               </div>
