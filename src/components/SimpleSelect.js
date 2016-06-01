@@ -13,7 +13,6 @@ const SimpleSelect = React.createClass({
     iconStyles: React.PropTypes.object,
     items: React.PropTypes.array.isRequired,
     itemStyles: React.PropTypes.object,
-    onItemClick: React.PropTypes.func,
     onScrimClick: React.PropTypes.func,
     showItems: React.PropTypes.bool,
     styles: React.PropTypes.object
@@ -23,14 +22,9 @@ const SimpleSelect = React.createClass({
     return {
       closeOnDateSelect: false,
       items: [],
-      onItemClick () {},
       onScrimClick () {},
       showItems: false
     };
-  },
-
-  _handleItemSelect (item) {
-    this.props.onItemClick(item);
   },
 
   render () {
