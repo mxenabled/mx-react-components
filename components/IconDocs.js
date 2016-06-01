@@ -29,15 +29,17 @@ const IconDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        {icons.map(icon => {
-          return (
-            <div key={icon.value} style={{ display: 'inline-block', textAlign: 'center', padding: 20 }}>
-              <Icon key={icon.value} size={40} type={icon.value} />
-              <div style={{ color: Styles.Colors.ASH }}>{icon.displayValue}</div>
-              <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL }}>({icon.value})</div>
-            </div>
-          );
-        })}
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+          {icons.map(icon => {
+            return (
+              <div key={icon.value} style={{ textAlign: 'center', padding: 20 }}>
+                <Icon key={icon.value} size={40} type={icon.value} />
+                <div style={{ color: Styles.Colors.ASH, marginTop: 5 }}>{icon.displayValue}</div>
+                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL }}>({icon.value})</div>
+              </div>
+            );
+          })}
+        </div>
 
         <h3>Usage</h3>
         <h5>size <label>Number, String</label></h5>
