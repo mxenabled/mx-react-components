@@ -53,12 +53,12 @@ const RadioButtonDocs = React.createClass({
         <Markdown>
           {`
             <RadioButton
-              activeButtonStyle={ backgroundColor: '#FBB600' }
-              buttonStyle={ height: 30, width: 30 }
-              checked={false}
+              activeButtonStyle={{ backgroundColor: '#FBB600' }}
+              buttonStyle={{ height: 30, width: 30 }}
+              checked={true}
               color='#FBB600'
               onClick={this._handleRadioClick}
-              style={ marginLeft: 20}
+              style={{ marginLeft: 20 }}
             />
           `}
         </Markdown>
