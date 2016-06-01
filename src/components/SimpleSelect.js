@@ -49,7 +49,7 @@ const SimpleSelect = React.createClass({
                     style={Object.assign({}, styles.item, this.props.itemStyles)}
                   >
                     {item.icon ? (
-                      <Icon size={this.props.iconSize} styles={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
+                      <Icon size={this.props.iconSize || 20} styles={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
                     ) : null}
                     {item.text}
                   </div>
