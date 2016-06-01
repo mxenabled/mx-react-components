@@ -5,6 +5,18 @@ const { RadioButton, Styles } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const RadioButtonDocs = React.createClass({
+  getInitialState () {
+    return {
+      selected: false
+    };
+  },
+
+  _handleRadioClick () {
+    this.setState({
+      selected: !this.state.selected
+    });
+  },
+
   render () {
     return (
       <div>
