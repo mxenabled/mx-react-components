@@ -562,7 +562,7 @@ const Demo = React.createClass({
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
-      showSimpleSelectItems: false,
+      showMenu: false,
       showSmallModal: false,
       uploadedFile: null,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -701,7 +701,7 @@ const Demo = React.createClass({
 
   _handleSimpleSelectClick () {
     this.setState({
-      showSimpleSelectItems: !this.state.showSimpleSelectItems
+      showMenu: !this.state.showMenu
     });
   },
 
@@ -859,15 +859,16 @@ const Demo = React.createClass({
             >
               This is a menu Button
             </Button>
-            <SimpleSelect
-              items={[
-                { text: 'Menu Item 1' },
-                { text: 'Menu Item 2' },
-                { text: 'Menu Item 3' }
-              ]}
-              onScrimClick={this._handleSimpleSelectClick}
-              showMenu={this.state.showSimpleSelectItems}
-            />
+            {this.state.showMenu ? (
+              <SimpleSelect
+                items={[
+                  { text: 'Menu Item 1' },
+                  { text: 'Menu Item 2' },
+                  { text: 'Menu Item 3' }
+                ]}
+                onScrimClick={this._handleSimpleSelectClick}
+              />
+            ) : null}
           </div>
         </div>
         {this.state.showModal ? (

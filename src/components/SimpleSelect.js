@@ -13,15 +13,13 @@ const SimpleSelect = React.createClass({
     itemStyles: React.PropTypes.object,
     menuStyles: React.PropTypes.object,
     onScrimClick: React.PropTypes.func,
-    showMenu: React.PropTypes.bool,
     style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
       items: [],
-      onScrimClick () {},
-      showMenu: false
+      onScrimClick () {}
     };
   },
 
@@ -30,27 +28,23 @@ const SimpleSelect = React.createClass({
 
     return (
       <div style={styles.component}>
-      {this.props.showMenu ? (
-        <div>
-          <div style={Object.assign({}, styles.menu, this.props.menuStyles)}>
-              {this.props.items.map((item, i) => {
-                return (
-                  <div
-                    key={i}
-                    onClick={item.onClick}
-                    style={Object.assign({}, styles.item, this.props.itemStyles)}
-                  >
-                    {item.icon ? (
-                      <Icon size={this.props.iconSize || 20} styles={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
-                    ) : null}
-                    {item.text}
-                  </div>
-                );
-              })}
-          </div>
-          <div onClick={this.props.onScrimClick} style={styles.scrim} />
+        <div style={Object.assign({}, styles.menu, this.props.menuStyles)}>
+            {this.props.items.map((item, i) => {
+              return (
+                <div
+                  key={i}
+                  onClick={item.onClick}
+                  style={Object.assign({}, styles.item, this.props.itemStyles)}
+                >
+                  {item.icon ? (
+                    <Icon size={this.props.iconSize || 20} styles={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
+                  ) : null}
+                  {item.text}
+                </div>
+              );
+            })}
         </div>
-      ) : null }
+        <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
     );
   },
@@ -58,7 +52,7 @@ const SimpleSelect = React.createClass({
   styles () {
     return {
       component: Object.assign({
-        marginTop: 10,
+        height: 0,
         position: 'relative'
       }, this.props.style),
 
@@ -74,6 +68,7 @@ const SimpleSelect = React.createClass({
         fill: StyleConstants.Colors.BLACK,
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
+        marginTop: 10,
         position: 'absolute',
         zIndex: 10
       },
