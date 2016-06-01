@@ -19,7 +19,6 @@ const SimpleSelect = React.createClass({
 
   getDefaultProps () {
     return {
-      closeOnDateSelect: false,
       items: [],
       onScrimClick () {},
       showMenu: false
