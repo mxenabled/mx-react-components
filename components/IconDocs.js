@@ -31,7 +31,7 @@ const IconDocs = React.createClass({
         <h3>Demo</h3>
         {icons.map(icon => {
           return (
-            <div key={icon.value} style={{ display: 'inline-block', textAlign: 'center' }}>
+            <div key={icon.value} style={{ display: 'inline-block', textAlign: 'center', padding: 20 }}>
               <Icon key={icon.value} size={40} type={icon.value} />
               <div>{icon.value}</div>
             </div>
