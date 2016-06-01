@@ -1,5 +1,7 @@
 const React = require('react');
 
+const { RadioButton, Styles } = require('mx-react-components');
+
 const Markdown = require('components/Markdown');
 
 const RadioButtonDocs = React.createClass({
@@ -20,6 +22,9 @@ const RadioButtonDocs = React.createClass({
 
         <h5>checked <label>Boolean</label></h5>
         <p>A boolean indicating if the radio button should show as checked.</p>
+
+        <h5>color <label>String</label></h5>
+        <p>A string with a valid CSS color to use for the checked indicator. Defaults to <span style={{ color: Styles.Colors.PRIMARY }}>{Styles.Colors.PRIMARY}</span>. This can also be overridden with the activeButtonStyle prop.</p>
 
         <h5>onClick <label>Function</label></h5>
         <p>A callback function that will be triggered on component click.</p>
