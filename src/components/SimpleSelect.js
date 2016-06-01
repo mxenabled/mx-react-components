@@ -7,22 +7,26 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
+    brandColor: React.PropTypes.string,
+    componentStyles: React.PropTypes.object,
+    containerStyles: React.PropTypes.object,
+    iconSize: React.PropTypes.number,
+    iconStyles: React.PropTypes.object,
     items: React.PropTypes.array,
     itemStyles: React.PropTypes.object,
     onItemSelect: React.PropTypes.func,
     onScrimClick: React.PropTypes.func,
-    primaryColor: React.PropTypes.string,
     showItems: React.PropTypes.bool,
     styles: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
+      brandColor: StyleConstants.Colors.PRIMARY,
       closeOnDateSelect: false,
       items: [],
       onItemSelect () {},
       onScrimClick () {},
-      primaryColor: StyleConstants.Colors.PRIMARY,
       showItems: false
     };
   },
@@ -35,19 +39,19 @@ const SimpleSelect = React.createClass({
     const styles = this.styles();
 
     return (
-      <div>
+      <div style={Object.assign({}, styles.container, this.props.containerStyles)}>
       {this.props.showItems ? (
         <div>
-          <div style={Object.assign({}, styles.component)}>
+          <div style={Object.assign({}, styles.component, this.props.componentStyles)}>
               {this.props.items.map((item, i) => {
                 return (
                   <div
                     key={i}
-                    onClick={this._handleItemSelect.bind(null, item)}
+                    onClick={item.onClick}
                     style={Object.assign({}, styles.item, this.props.itemStyles)}
                   >
                     {item.icon ? (
-                      <Icon type={item.icon} />
+                      <Icon size={this.props.iconSize} styles={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
                     ) : null}
                     {item.text}
                   </div>
@@ -64,20 +68,29 @@ const SimpleSelect = React.createClass({
   styles () {
     return {
       component: Object.assign({
+        alignSelf: 'stretch',
         backgroundColor: StyleConstants.Colors.WHITE,
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.BLACK,
+        display: 'felx',
+        flexDirection: 'column',
         fill: StyleConstants.Colors.BLACK,
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         position: 'absolute',
-        width: 150,
         zIndex: 10
       }, this.props.style),
 
+      container: {
+        marginTop: 10,
+        position: 'relative'
+      },
+
       item: {
+        boxSizing: 'border-box',
+        height: 40,
         padding: '14px 20px',
         textAlign: 'left',
 

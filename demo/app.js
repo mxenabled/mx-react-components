@@ -851,24 +851,22 @@ const Demo = React.createClass({
             type='base'
           />
           <br /><br />
-          <Button
-            icon='gear'
-            onClick={this._handleSimpleSelectClick}
-            type='base'
-          >This is a menu Button</Button>
-          <SimpleSelect
-            align='right'
-            items={[
-              {
-                icon: 'add',
-                text: 'Menu Item 1'
-              },
-              { text: 'Menu Item 2' },
-              { text: 'Menu Item 3' }
-            ]}
-            onScrimClick={this._handleSimpleSelectClick}
-            showItems={this.state.showSimpleSelectItems}
-          />
+          <div style={{ margin: '0 auto', width: 177 }}>
+            <Button
+              icon='gear'
+              onClick={this._handleSimpleSelectClick}
+              type='base'
+            >This is a menu Button</Button>
+            <SimpleSelect
+              items={[
+                { text: 'Menu Item 1' },
+                { text: 'Menu Item 2' },
+                { text: 'Menu Item 3' }
+              ]}
+              onScrimClick={this._handleSimpleSelectClick}
+              showItems={this.state.showSimpleSelectItems}
+            />
+          </div>
         </div>
         {this.state.showModal ? (
           <Modal
