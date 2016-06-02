@@ -5,6 +5,12 @@ const { DatePicker } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const DatePickerDocs = React.createClass({
+  getInitialState () {
+    return {
+      selectedDate: null
+    };
+  },
+
   _handleDateSelect (selectedDate) {
     this.setState({
       selectedDate
