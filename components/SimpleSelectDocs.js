@@ -22,7 +22,7 @@ const SimpleSelectDocs = React.createClass({
       <div>
         <h1>
           SimpleSelect
-          <label>A simple menu used to display a list of icons and/or text. Normally used in conjunction with a <a href='/components/button'>Button</a> to toggle show/hide.</label>
+          <label>A simple menu used to display a list of icons and/or text. Normally used in conjunction with a <a href='#/components/button'>Button</a> to toggle show/hide.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -55,7 +55,7 @@ const SimpleSelectDocs = React.createClass({
         <h5>ficonStyles <label>Object</label></h5>
         <p>Styles for the icons in menu items if used.</p>
 
-        <h5>items <label>Array</label> <strong>Required</strong></h5>
+        <h5>items <label>Array</label> *Required*</h5>
         <p>An array of objects that specify <em>icon</em>, <em>text</em>, and/or <em>onClick</em> of the item..</p>
 
         <h5>itemStyle <label>Object</label></h5>
