@@ -11,7 +11,7 @@ const SimpleSelectDocs = React.createClass({
     };
   },
 
-  _handleSimpleSelectClick () {
+  _handleClick () {
     this.setState({
       showMenu: !this.state.showMenu
     });
@@ -29,19 +29,22 @@ const SimpleSelectDocs = React.createClass({
         <div style={{ width: 177 }}>
           <Button
             icon='gear'
-            onClick={this._handleSimpleSelectClick}
+            onClick={this._handleClick}
+            type={'neutral'}
           >
             Settings
           </Button>
-          <SimpleSelect
-            items={[
-              { text: 'Menu Item 1' },
-              { text: 'Menu Item 2' },
-              { text: 'Menu Item 3' }
-            ]}
-            onScrimClick={this._handleSimpleSelectClick}
-            showItems={this.state.showSimpleSelectItems}
-          />
+          {this.state.showMenu ? (
+            <SimpleSelect
+              items={[
+                { text: 'Menu Item 1' },
+                { text: 'Menu Item 2' },
+                { text: 'Menu Item 3' }
+              ]}
+              onScrimClick={this._handleClick}
+              showItems={this.state.showMenu}
+            />
+          ) : null}
         </div>
 
         <h3>Usage</h3>
@@ -71,7 +74,7 @@ const SimpleSelectDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
-    _handleSimpleSelectClick () {
+    _handleClick () {
       this.setState({
         showMenu: !this.state.showMenu
       });
@@ -80,19 +83,22 @@ const SimpleSelectDocs = React.createClass({
     <div style={{ width: 177 }}>
       <Button
         icon='gear'
-        onClick={this._handleSimpleSelectClick}
+        onClick={this._handleClick}
+        type={'neutral'}
       >
         Settings
       </Button>
-      <SimpleSelect
-        items={[
-          { text: 'Menu Item 1' },
-          { text: 'Menu Item 2' },
-          { text: 'Menu Item 3' }
-        ]}
-        onScrimClick={this._handleSimpleSelectClick}
-        showItems={this.state.showSimpleSelectItems}
-      />
+      {this.state.showMenu ? (
+        <SimpleSelect
+          items={[
+            { text: 'Menu Item 1' },
+            { text: 'Menu Item 2' },
+            { text: 'Menu Item 3' }
+          ]}
+          onScrimClick={this._handleClick}
+          showItems={this.state.showMenu}
+        />
+      ) : null}
     </div>
   `}
         </Markdown>

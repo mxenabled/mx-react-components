@@ -39,7 +39,7 @@ const ButtonDocs = React.createClass({
           <Button style={style} type='primaryOutline'>Primary Outline</Button>
           <Button style={style} type='secondary'>Secondary</Button>
           <Button style={style} type='base'>Base</Button>
-          <Button style={style} type='neutral'>Neurral</Button>
+          <Button style={style} type='neutral'>Neutral</Button>
           <Button style={style} type='disabled'>Disabled</Button>
         </div>
         <br /><br />
