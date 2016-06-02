@@ -23,6 +23,7 @@ const SearchInput = require('components/SearchInputDocs');
 const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
 const SimpleInput = require('components/SimpleInputDocs');
+const SimpleSelect = require('components/SimpleSelectDocs');
 const Spin = require('components/SpinDocs');
 const Styles = require('components/StylesDocs');
 const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
@@ -69,6 +70,7 @@ ReactDOM.render((
         <Route component={Select} path='select' />
         <Route component={SelectFullScreen} path='select-full-screen' />
         <Route component={SimpleInput} path='simple-input' />
+        <Route component={SimpleSelect} path='simple-select' />
         <Route component={Spin} path='spin' />
         <Route component={Styles} path='styles' />
         <Route component={TimeBasedLineChart} path='time-based-line-chart' />
