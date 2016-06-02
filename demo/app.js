@@ -861,7 +861,7 @@ const Demo = React.createClass({
             type='base'
           />
           <br /><br />
-          <Tooltip placement='right'>Text for the tool tip</Tooltip>
+          <Tooltip placement='bottom' style={{ fill: Styles.Colors.PRIMARY }}>Text for the tool tip</Tooltip>
 
           <br /><br />
           <div style={{ margin: '0 auto', width: 177 }}>
