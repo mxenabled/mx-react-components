@@ -30,7 +30,7 @@ const SimpleSelectDocs = React.createClass({
           <Button
             icon='gear'
             onClick={this._handleClick}
-            type={'neutral'}
+            type='neutral'
           >
             Settings
           </Button>
@@ -84,7 +84,7 @@ const SimpleSelectDocs = React.createClass({
       <Button
         icon='gear'
         onClick={this._handleClick}
-        type={'neutral'}
+        type='neutral'
       >
         Settings
       </Button>
