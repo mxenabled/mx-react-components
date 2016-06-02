@@ -25,8 +25,10 @@ const {
   SelectFullScreen,
   SimpleInput,
   SimpleSelect,
+  Styles,
   TimeBasedLineChart,
   ToggleSwitch,
+  Tooltip,
   TypeAhead
 } = require('../src/Index');
 
@@ -858,6 +860,9 @@ const Demo = React.createClass({
             ]}
             type='base'
           />
+          <br /><br />
+          <Tooltip placement='right' style={{ fill: Styles.Colors.PRIMARY }}>Text for the tool tip</Tooltip>
+
           <br /><br />
           <div style={{ margin: '0 auto', width: 177 }}>
             <Button
