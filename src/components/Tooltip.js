@@ -100,6 +100,7 @@ const Tooltip = React.createClass({
     return {
       component: Object.assign({}, {
         display: 'inline-block',
+        fill: StyleConstants.Colors.ASH,
         position: 'relative'
       }, this.props.style),
       tooltip: Object.assign({},
