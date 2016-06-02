@@ -5,6 +5,12 @@ const { DatePicker } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const DatePickerDocs = React.createClass({
+  _handleDateSelect (selectedDatePickerDate) {
+    this.setState({
+      selectedDatePickerDate
+    });
+  },
+
   render () {
     return (
       <div>
@@ -16,8 +22,7 @@ const DatePickerDocs = React.createClass({
         <h3>Demo</h3>
         <DatePicker
           closeOnDateSelect={true}
-          title='Select A Date'
-          useInputForSelectedDate={false}
+          onDateSelect={this._handleDateSelect}
         />
 
         <h3>Usage</h3>
