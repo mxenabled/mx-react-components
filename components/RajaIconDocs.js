@@ -34,7 +34,12 @@ const RajaIconDocs = React.createClass({
           {AppConstants.RajaIcons.map(icon => {
             return (
               <div key={icon.value} style={{ width: 100, height: 100, textAlign: 'center' }}>
-                <RajaIcon key={icon.value} size={40} type={icon.value} />
+                <RajaIcon
+                  key={icon.value}
+                  size={40}
+                  style={{ color: Styles.Colors.CHARCOAL }}
+                  type={icon.value}
+                />
                 <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
               </div>
             );
