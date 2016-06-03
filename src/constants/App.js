@@ -360,5 +360,320 @@ module.exports = {
       value: 'y-axis',
       displayValue: 'Y Axis'
     }
+  ],
+
+  RajaIcons: [
+    {
+      value: 'about'
+    },
+    {
+      value: 'airplane'
+    },
+    {
+      value: 'appliances'
+    },
+    {
+      value: 'atm'
+    },
+    {
+      value: 'auto'
+    },
+    {
+      value: 'bike'
+    },
+    {
+      value: 'boat'
+    },
+    {
+      value: 'briefvalue:'
+    },
+    {
+      value: 'bubble_budgets'
+    },
+    {
+      value: 'budget_increase'
+    },
+    {
+      value: 'budget_decrease'
+    },
+    {
+      value: 'business'
+    },
+    {
+      value: 'card'
+    },
+    {
+      value: 'cash'
+    },
+    {
+      value: 'chair'
+    },
+    {
+      value: 'check_mark'
+    },
+    {
+      value: 'checkbook'
+    },
+    {
+      value: 'circle'
+    },
+    {
+      value: 'circle_1'
+    },
+    {
+      value: 'circle_2'
+    },
+    {
+      value: 'circle_3'
+    },
+    {
+      value: 'circle_4'
+    },
+    {
+      value: 'circle_flag'
+    },
+    {
+      value: 'circle_question_mark'
+    },
+    {
+      value: 'clock'
+    },
+    {
+      value: 'close'
+    },
+    {
+      value: 'coin'
+    },
+    {
+      value: 'color_palette'
+    },
+    {
+      value: 'computer'
+    },
+    {
+      value: 'conversation'
+    },
+    {
+      value: 'credit'
+    },
+    {
+      value: 'debts'
+    },
+    {
+      value: 'donut_graph'
+    },
+    {
+      value: 'down'
+    },
+    {
+      value: 'download'
+    },
+    {
+      value: 'duplicate'
+    },
+    {
+      value: 'electronics'
+    },
+    {
+      value: 'film_projector'
+    },
+    {
+      value: 'flag'
+    },
+    {
+      value: 'food'
+    },
+    {
+      value: 'gear'
+    },
+    {
+      value: 'gift'
+    },
+    {
+      value: 'goals_icon'
+    },
+    {
+      value: 'golf_clubs'
+    },
+    {
+      value: 'gps_arrow'
+    },
+    {
+      value: 'graduation_cap'
+    },
+    {
+      value: 'guitar'
+    },
+    {
+      value: 'happy'
+    },
+    {
+      value: 'heart'
+    },
+    {
+      value: 'home'
+    },
+    {
+      value: 'institution'
+    },
+    {
+      value: 'insurance'
+    },
+    {
+      value: 'investments'
+    },
+    {
+      value: 'jewelry'
+    },
+    {
+      value: 'left'
+    },
+    {
+      value: 'lightbulb'
+    },
+    {
+      value: 'loan'
+    },
+    {
+      value: 'lock'
+    },
+    {
+      value: 'logout'
+    },
+    {
+      value: 'mail'
+    },
+    {
+      value: 'md_logo'
+    },
+    {
+      value: 'merchant'
+    },
+    {
+      value: 'motorcycle'
+    },
+    {
+      value: 'net_worth'
+    },
+    {
+      value: 'no'
+    },
+    {
+      value: 'not_cleared'
+    },
+    {
+      value: 'no_mail'
+    },
+    {
+      value: 'no_phone'
+    },
+    {
+      value: 'palm_tree'
+    },
+    {
+      value: 'password'
+    },
+    {
+      value: 'pencil'
+    },
+    {
+      value: 'personal'
+    },
+    {
+      value: 'personal_care'
+    },
+    {
+      value: 'pets'
+    },
+    {
+      value: 'phone'
+    },
+    {
+      value: 'plus'
+    },
+    {
+      value: 'plus_card'
+    },
+    {
+      value: 'power'
+    },
+    {
+      value: 'printer'
+    },
+    {
+      value: 'property'
+    },
+    {
+      value: 'question_mark'
+    },
+    {
+      value: 'real_estate'
+    },
+    {
+      value: 'refresh'
+    },
+    {
+      value: 'retirement'
+    },
+    {
+      value: 'right'
+    },
+    {
+      value: 'savings'
+    },
+    {
+      value: 'sad'
+    },
+    {
+      value: 'search'
+    },
+    {
+      value: 'share'
+    },
+    {
+      value: 'shopping_bag'
+    },
+    {
+      value: 'skydiving'
+    },
+    {
+      value: 'split'
+    },
+    {
+      value: 'sports_equipment'
+    },
+    {
+      value: 'tabular'
+    },
+    {
+      value: 'taxes'
+    },
+    {
+      value: 'transactions'
+    },
+    {
+      value: 'transfer'
+    },
+    {
+      value: 'trash'
+    },
+    {
+      value: 'up'
+    },
+    {
+      value: 'vacation'
+    },
+    {
+      value: 'vertical_bar_graph'
+    },
+    {
+      value: 'wallet'
+    },
+    {
+      value: 'warning'
+    },
+    {
+      value: 'wedding'
+    }
   ]
 };
