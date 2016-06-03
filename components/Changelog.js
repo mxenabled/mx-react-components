@@ -6,6 +6,17 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.39</h3>
+        <ul>
+          <li>Add RajaIcons to AppConstants (<a href='https://github.com/mxenabled/mx-react-components/pull/330'>#330</a>)</li>
+        </ul>
+
+        <h3>3.1.38</h3>
+        <ul>
+          <li>Add AppConstants with an Icons array (<a href='https://github.com/mxenabled/mx-react-components/pull/329'>#329</a>)</li>
+          <li>Fix FileUpload icon colors (<a href='https://github.com/mxenabled/mx-react-components/pull/328'>#328</a>)</li>
+        </ul>
+
         <h3>3.1.37</h3>
         <ul>
           <li>Remove pointer cursor on disabled buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/327'>#327</a>)</li>
