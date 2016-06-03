@@ -6,6 +6,18 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.37</h3>
+        <ul>
+          <li>Remove pointer cursor on disabled buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/327'>#327</a>)</li>
+          <li>Add Tooltip component  (<a href='https://github.com/mxenabled/mx-react-components/pull/326'>#326</a>)</li>
+          <li>Add Icons constant so list of icons can be reused and easily updated  (<a href='https://github.com/mxenabled/mx-react-components/pull/325'>#325</a>)</li>
+        </ul>
+
+        <h3>3.1.36</h3>
+        <ul>
+          <li>Add SimpleSelect component  (<a href='https://github.com/mxenabled/mx-react-components/pull/324'>#324</a>)</li>
+        </ul>
+
         <h3>3.1.35</h3>
         <ul>
           <li>Add Radio Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/323'>#323</a>)</li>
