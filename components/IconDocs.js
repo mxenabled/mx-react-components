@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Icon, Styles, Icons } = require('mx-react-components');
+const { Icon, Styles, AppConstants } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -30,7 +30,7 @@ const IconDocs = React.createClass({
 
         <h3>Demo</h3>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-          {Icons.Icons.map(icon => {
+          {AppConstants.Icons.Icons.map(icon => {
             return (
               <div key={icon.value} style={{ width: 100, height: 100, textAlign: 'center' }}>
                 <Icon key={icon.value} size={40} type={icon.value} />
