@@ -181,10 +181,6 @@ module.exports = {
       displayValue: 'Envelope'
     },
     {
-      value: 'export',
-      displayValue: 'Export'
-    },
-    {
       value: 'filter',
       displayValue: 'Filter'
     },
