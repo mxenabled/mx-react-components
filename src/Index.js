@@ -23,6 +23,7 @@ module.exports = {
   Spin: require('./components/Spin'),
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
+  Tooltip: require('./components/Tooltip'),
   TypeAhead: require('./components/TypeAhead'),
 
   Styles: require('./constants/Style')
