@@ -32,7 +32,7 @@ const {
   TypeAhead
 } = require('../src/Index');
 
-const Icons = require('../src/constants/Icons');
+const { Icons } = require('../src/constants/App');
 
 const styles = {
   modalFooterContent: {

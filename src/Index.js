@@ -26,5 +26,6 @@ module.exports = {
   Tooltip: require('./components/Tooltip'),
   TypeAhead: require('./components/TypeAhead'),
 
+  AppConstants: require('./constants/App'),
   Styles: require('./constants/Style')
 };
