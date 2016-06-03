@@ -26,8 +26,11 @@ const RajaIconDocs = React.createClass({
         <h1>
           Raja Icon
           <label>A set of predfined svg icons inspired by the MX products</label>
-          <strong>NOTE: These are legacy icons and are not maintained. New icons are added to the Icon component</strong>
         </h1>
+
+        <h3>
+          <strong>NOTE: These are legacy icons and are not maintained. New icons are added to the Icon component</strong>
+        </h3>
 
         <h3>Demo</h3>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -37,7 +40,7 @@ const RajaIconDocs = React.createClass({
                 <RajaIcon
                   key={icon.value}
                   size={40}
-                  style={{ color: Styles.Colors.CHARCOAL }}
+                  style={{ color: '#000' }}
                   type={icon.value}
                 />
                 <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
