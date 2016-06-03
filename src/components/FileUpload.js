@@ -214,7 +214,7 @@ const styles = {
     height: 150
   },
   importIcon: {
-    color: StyleConstants.Colors.PRIMARY
+    fill: StyleConstants.Colors.PRIMARY
   },
   draggingText: {
     color: StyleConstants.Colors.PRIMARY,
@@ -236,7 +236,7 @@ const styles = {
     maxWidth: '90%'
   },
   documentIcon: {
-    color: StyleConstants.Colors.ASH
+    fill: StyleConstants.Colors.ASH
   },
   button: {
     marginTop: 10
