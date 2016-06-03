@@ -66,7 +66,7 @@ const Button = React.createClass({
         padding: '4px 14px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        cursor: 'pointer',
+        cursor: this.props.type === 'disabled' ? 'default' : 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
         position: 'relative'
