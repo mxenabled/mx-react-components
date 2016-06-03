@@ -69,6 +69,10 @@ const Components = React.createClass({
                   displayValue: 'Radio Button'
                 },
                 {
+                  value: 'raja-icon',
+                  displayValue: 'Raja Icon'
+                },
+                {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
                 },
@@ -109,6 +113,7 @@ const Components = React.createClass({
           <div className='links'>
             <h3>General</h3>
             <Link to='/components/icon'>Icon</Link>
+            <Link to='/components/raja-icon'>Icon</Link>
             <Link to='/components/loader'>Loader</Link>
             <Link to='/components/modal'>Modal</Link>
             <Link to='/components/page-indicator'>Page Indicator</Link>

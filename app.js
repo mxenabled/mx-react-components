@@ -18,6 +18,7 @@ const Loader = require('components/LoaderDocs');
 const Modal = require('components/ModalDocs');
 const PageIndicator = require('components/PageIndicatorDocs');
 const RadioButton = require('components/RadioButtonDocs');
+const RajaIcon = require('components/RajaIconDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const SearchInput = require('components/SearchInputDocs');
 const Select = require('components/SelectDocs');
@@ -65,6 +66,7 @@ ReactDOM.render((
         <Route component={Modal} path='modal' />
         <Route component={PageIndicator} path='page-indicator' />
         <Route component={RadioButton} path='radio-button' />
+        <Route component={RajaIcon} path='raja-icon' />
         <Route component={RangeSelector} path='range-selector' />
         <Route component={SearchInput} path='search-input' />
         <Route component={Select} path='select' />
