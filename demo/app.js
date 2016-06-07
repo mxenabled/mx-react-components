@@ -8,6 +8,7 @@ const {
   BarChart,
   Button,
   ButtonGroup,
+  Column,
   DatePicker,
   DatePickerFullScreen,
   DisplayInput,
@@ -20,6 +21,7 @@ const {
   PageIndicator,
   RadioButton,
   RangeSelector,
+  Row,
   SearchInput,
   Select,
   SelectFullScreen,
@@ -260,9 +262,9 @@ const Demo = React.createClass({
   },
 
   _handleWindowResize () {
-    this.setState({
-      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
-    });
+    // this.setState({
+    //   windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    // });
   },
 
   _handleDateSelect (selectedDatePickerDate) {
@@ -413,6 +415,83 @@ const Demo = React.createClass({
 
     return (
       <div>
+        <br /><br />
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <Row>
+            <Column
+              col-lg={9}
+              col-md={6}
+              off-lg={3}
+              off-md={4}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={4}
+              col-md={3}
+              col-sm={12}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={4}
+              col-md={9}
+              col-sm={12}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={4}
+              col-md={12}
+              col-sm={12}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={3}
+              col-md={6}
+              col-sm={9}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={3}
+              col-md={6}
+              col-sm={9}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={6}
+              col-md={12}
+              col-sm={12}
+            >
+              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+            </Column>
+            <Column
+              col-lg={6}
+              col-md={9}
+              col-sm={12}
+            >
+              <Row>
+                <Column
+                  col-lg={6}
+                  col-md={6}
+                  col-sm={6}
+                >
+                  <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+                </Column>
+                <Column
+                  col-lg={6}
+                  col-md={6}
+                  col-sm={6}
+                >
+                  <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+                </Column>
+              </Row>
+            </Column>
+          </Row>
+        </div>
         <br /><br />
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Button
