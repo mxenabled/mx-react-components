@@ -2,17 +2,23 @@ const React = require('react');
 
 const Column = React.createClass({
   propTypes: {
+    'break-lg': React.PropTypes.number,
+    'break-md': React.PropTypes.number,
+    'break-sm': React.PropTypes.number,
     'col-lg': React.PropTypes.number,
     'col-md': React.PropTypes.number,
     'col-sm': React.PropTypes.number,
     'off-lg': React.PropTypes.number,
     'off-md': React.PropTypes.number,
     'off-sm': React.PropTypes.number,
-    style: React.PropTypes.Object
+    style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
+      'break-lg': 1000,
+      'break-md': 500,
+      'break-sm': 250,
       'col-lg': 12,
       'col-md': 12,
       'col-sm': 12,
@@ -46,9 +52,9 @@ const Column = React.createClass({
     const width = document.documentElement.clientWidth || document.body.clientWidth;
     let screenWidth = 'sm';
 
-    if (width > 1000) {
+    if (width > this.props['break-lg']) {
       screenWidth = 'lg';
-    } else if (width > 500) {
+    } else if (width > this.props['break-md']) {
       screenWidth = 'md';
     }
 

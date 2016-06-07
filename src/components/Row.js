@@ -2,7 +2,7 @@ const React = require('react');
 
 const Row = React.createClass({
   propTypes: {
-    style: React.PropTypes.Object
+    style: React.PropTypes.object
   },
 
   render () {

@@ -419,6 +419,7 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Row>
             <Column
+              break-md={800}
               col-lg={9}
               col-md={6}
               off-lg={3}
