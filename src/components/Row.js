@@ -1,6 +1,9 @@
 const React = require('react');
 
 const Row = React.createClass({
+  propTypes: {
+    style: React.PropTypes.Object
+  },
 
   render () {
     const styles = this.styles();
@@ -14,12 +17,12 @@ const Row = React.createClass({
 
   styles () {
     return {
-      component: {
+      component: Object.assign({}, {
         boxSizing: 'border-box',
         display: 'flex',
         flexWrap: 'wrap',
         margin: '0 -10px'
-      }
+      }, this.props.style)
     };
   }
 });

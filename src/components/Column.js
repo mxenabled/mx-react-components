@@ -7,7 +7,8 @@ const Column = React.createClass({
     'col-sm': React.PropTypes.number,
     'off-lg': React.PropTypes.number,
     'off-md': React.PropTypes.number,
-    'off-sm': React.PropTypes.number
+    'off-sm': React.PropTypes.number,
+    style: React.PropTypes.Object
   },
 
   getDefaultProps () {
@@ -71,14 +72,14 @@ const Column = React.createClass({
     const offset = this.props['off-' + this.state.screenWidth];
 
     return {
-      component: {
+      component: Object.assign({}, {
         boxSizing: 'border-box',
         flexGrow: 0,
         flexShrink: 0,
         flexBasis: (cols / 12 * 100) + '%',
         padding: '0 10px',
         marginLeft: (offset / 12 * 100) + '%'
-      }
+      }, this.props.style)
     };
   }
 });
