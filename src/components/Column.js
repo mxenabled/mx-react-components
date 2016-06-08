@@ -56,9 +56,9 @@ const Column = React.createClass({
     const width = document.documentElement.clientWidth || document.body.clientWidth;
     let screenWidth = 'Sm';
 
-    if (width > this.props.breakLg) {
+    if (width >= this.props.breakLg) {
       screenWidth = 'Lg';
-    } else if (width > this.props.breakMd) {
+    } else if (width >= this.props.breakMd) {
       screenWidth = 'Md';
     }
 
