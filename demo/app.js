@@ -41,6 +41,14 @@ const styles = {
     color: '#ACB0B3',
     fontSize: '12px',
     padding: '2px 0'
+  },
+  responsiveDiv: {
+    boxSizing: 'border-box',
+    backgroundColor: Styles.Colors.PORCELAIN,
+    border: '1px solid' + Styles.Colors.FOG,
+    borderRadius: 3,
+    padding: 10,
+    width: '100%'
   }
 };
 
@@ -262,9 +270,9 @@ const Demo = React.createClass({
   },
 
   _handleWindowResize () {
-    // this.setState({
-    //   windowWidth: document.documentElement.clientWidth || document.body.clientWidth
-    // });
+    this.setState({
+      windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    });
   },
 
   _handleDateSelect (selectedDatePickerDate) {
@@ -419,75 +427,77 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Row>
             <Column
-              break-md={800}
-              col-lg={9}
-              col-md={6}
-              off-lg={3}
-              off-md={4}
+              breakMd={800}
+              colLg={9}
+              colMd={6}
+              offLg={3}
+              offMd={4}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>1</div>
             </Column>
             <Column
-              col-lg={4}
-              col-md={3}
-              col-sm={12}
+              colLg={4}
+              colMd={3}
+              colSm={12}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>2</div>
             </Column>
             <Column
-              col-lg={4}
-              col-md={9}
-              col-sm={12}
+              colLg={4}
+              colMd={9}
+              colSm={12}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>3</div>
             </Column>
             <Column
-              col-lg={4}
-              col-md={12}
-              col-sm={12}
+              colLg={4}
+              colMd={12}
+              colSm={12}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>5</div>
             </Column>
             <Column
-              col-lg={3}
-              col-md={6}
-              col-sm={9}
+              colLg={3}
+              colMd={6}
+              colSm={9}
+              ordMd={-1}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>6</div>
             </Column>
             <Column
-              col-lg={3}
-              col-md={6}
-              col-sm={9}
+              colLg={3}
+              colMd={6}
+              colSm={9}
+              ordMd={-2}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>7</div>
             </Column>
             <Column
-              col-lg={6}
-              col-md={12}
-              col-sm={12}
+              colLg={6}
+              colMd={12}
+              colSm={12}
             >
-              <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+              <div style={styles.responsiveDiv}>8</div>
             </Column>
             <Column
-              col-lg={6}
-              col-md={9}
-              col-sm={12}
+              colLg={6}
+              colMd={9}
+              colSm={12}
             >
               <Row>
                 <Column
-                  col-lg={6}
-                  col-md={6}
-                  col-sm={6}
+                  colLg={6}
+                  colMd={6}
+                  colSm={6}
                 >
-                  <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+                  <div style={styles.responsiveDiv}>9</div>
                 </Column>
                 <Column
-                  col-lg={6}
-                  col-md={6}
-                  col-sm={6}
+                  colLg={6}
+                  colMd={6}
+                  colSm={6}
                 >
-                  <div style={{ backgroundColor: Styles.Colors.PORCELAIN, border: '1px solid' + Styles.Colors.FOG, borderRadius: 3, width: '100%', height: 40 }}></div>
+                  <div style={styles.responsiveDiv}>10</div>
                 </Column>
               </Row>
             </Column>
