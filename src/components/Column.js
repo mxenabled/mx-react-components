@@ -2,32 +2,33 @@ const React = require('react');
 
 const Column = React.createClass({
   propTypes: {
-    'breakLg': React.PropTypes.number,
-    'breakMd': React.PropTypes.number,
-    'breakSm': React.PropTypes.number,
-    'colLg': React.PropTypes.number,
-    'colMd': React.PropTypes.number,
-    'colSm': React.PropTypes.number,
-    'offLg': React.PropTypes.number,
-    'offMd': React.PropTypes.number,
-    'offSm': React.PropTypes.number,
-    'ordLg': React.PropTypes.number,
-    'ordMd': React.PropTypes.number,
-    'ordSm': React.PropTypes.number,
+    breakLg: React.PropTypes.number,
+    breakMd: React.PropTypes.number,
+    breakSm: React.PropTypes.number,
+    colLg: React.PropTypes.number,
+    colMd: React.PropTypes.number,
+    colSm: React.PropTypes.number,
+    columnCount: React.PropTypes.number,
+    offLg: React.PropTypes.number,
+    offMd: React.PropTypes.number,
+    offSm: React.PropTypes.number,
+    ordLg: React.PropTypes.number,
+    ordMd: React.PropTypes.number,
+    ordSm: React.PropTypes.number,
     style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
-      'breakLg': 1000,
-      'breakMd': 500,
-      'breakSm': 320,
-      'colLg': 12,
-      'colMd': 12,
-      'colSm': 12,
-      'offLg': 0,
-      'offMd': 0,
-      'offSm': 0
+      breakLg: 1200,
+      breakMd: 750,
+      colLg: 12,
+      colMd: 12,
+      colSm: 12,
+      columnCount: 12,
+      offLg: 0,
+      offMd: 0,
+      offSm: 0
     };
   },
 
@@ -78,10 +79,10 @@ const Column = React.createClass({
     return {
       component: Object.assign({}, {
         boxSizing: 'border-box',
-        flexBasis: (this.props['col' + this.state.screenWidth] / 12 * 100) + '%',
+        flexBasis: (this.props['col' + this.state.screenWidth] / this.props.columnCount * 100) + '%',
         flexGrow: 0,
         flexShrink: 0,
-        marginLeft: (this.props['off' + this.state.screenWidth] / 12 * 100) + '%',
+        marginLeft: (this.props['off' + this.state.screenWidth] / this.props.columnCount * 100) + '%',
         order: this.props['ord' + this.state.screenWidth],
         padding: '0 10px'
       }, this.props.style)
