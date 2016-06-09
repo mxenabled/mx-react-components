@@ -1,3 +1,4 @@
+const _isNumber = require('lodash/isNumber');
 const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
@@ -8,6 +9,7 @@ const StyleConstants = require('../constants/Style');
 
 const Drawer = React.createClass({
   propTypes: {
+    animateLeftDistance: React.PropTypes.number,
     buttonPrimaryColor: React.PropTypes.string,
     contentStyle: React.PropTypes.oneOfType([
       React.PropTypes.array,
@@ -42,6 +44,10 @@ const Drawer = React.createClass({
   },
 
   _getAnimationDistance () {
+    if (_isNumber(this.props.animateLeftDistance)) {
+      return this.props.animateLeftDistance + '%';
+    }
+
     const greaterThan1200ComponentWidth = 960;
     const maxResolutionBreakPoint = 1200;
     const minResoultionBreakPoint = 750;
