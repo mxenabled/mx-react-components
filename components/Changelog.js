@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.40</h3>
+        <ul>
+          <li>Changes bottom border on DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/332'>#332</a>)</li>
+        </ul>
+
         <h3>3.1.39</h3>
         <ul>
           <li>Add RajaIcons to AppConstants (<a href='https://github.com/mxenabled/mx-react-components/pull/330'>#330</a>)</li>
