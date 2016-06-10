@@ -10,6 +10,7 @@ const {
   ButtonGroup,
   DatePicker,
   DatePickerFullScreen,
+  DateTimePicker,
   DisplayInput,
   DonutChart,
   Drawer,
@@ -779,9 +780,18 @@ const Demo = React.createClass({
         <br /><br />
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
+          selectedDate={this.state.selectedDatePickerDate}
         />
+
+        <br /><br />
+        <DateTimePicker
+          closeOnDateSelect={true}
+          onDateSelect={this._handleDateSelect}
+          selectedDate={this.state.selectedDatePickerDate}
+        >
+          <div style={{ padding: 20 }}>at</div>
+        </DateTimePicker>
 
         <br /><br />
         <SimpleInput
