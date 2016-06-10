@@ -150,22 +150,11 @@ const DatePicker = React.createClass({
     });
   },
 
-  _isActiveRange (start, end, active, date) {
-    let isActive;
+  _isActiveRange (selectedStart, selectedEnd, active, date) {
+    const start = selectedStart || active;
+    const end = selectedEnd || active;
 
-    if (start && end) {
-      isActive = date.isSameOrAfter(moment.unix(start)) && date.isSameOrBefore(moment.unix(end));
-    } else if (!start && end) {
-      isActive = date.isSameOrAfter(moment.unix(active)) && date.isSameOrBefore(moment.unix(end));
-    } else if (start && !end) {
-      if (start < active) {
-        isActive = date.isSameOrAfter(moment.unix(start)) && date.isSameOrBefore(moment.unix(active));
-      } else {
-        isActive = date.isSameOrAfter(moment.unix(active)) && date.isSameOrBefore(moment.unix(start));
-      }
-    }
-
-    return isActive;
+    return date.isSameOrAfter(moment.unix(start)) && date.isSameOrBefore(moment.unix(end));
   },
 
   _whereInDateRange (selectedStart, selectedEnd, active, date) {
@@ -174,9 +163,9 @@ const DatePicker = React.createClass({
 
     let where;
 
-    if (date.isSameOrBefore(moment.unix(start))) {
+    if (date.isSame(moment.unix(start))) {
       where = 'Start';
-    } else if (date.isSameOrAfter(moment.unix(end))) {
+    } else if (date.isSame(moment.unix(end))) {
       where = 'End';
     }
 
@@ -196,7 +185,7 @@ const DatePicker = React.createClass({
       const isToday = startDate.isSame(moment(), 'day');
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
-      const isActiveRange = this._isActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
+      const isActiveRange = (selectedStartDate || selectedEndDate) ? this._isActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) : false;
       const whereInRange = this._whereInDateRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
 
       // const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
