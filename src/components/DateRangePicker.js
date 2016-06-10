@@ -47,19 +47,29 @@ const DatePicker = React.createClass({
   _handleDateSelect (date) {
     const selectedStartDate = this.props.selectedStartDate;
     const selectedEndDate = this.props.selectedEndDate;
-    let updatedDates;
+    let updatedDates = [null, null];
 
-    updatedDates = this._noStartOrEndDate(date, selectedStartDate, selectedEndDate);
+    updatedDates = this._startAndEndDate(date, selectedStartDate, selectedEndDate);
     updatedDates = updatedDates || this._noEndDate(date, selectedStartDate, selectedEndDate);
     updatedDates = updatedDates || this._noStartDate(date, selectedStartDate, selectedEndDate);
-    updatedDates = updatedDates || this._startAndEndDate(date, selectedStartDate, selectedEndDate);
+    updatedDates = updatedDates || this._noStartOrEndDate(date, selectedStartDate, selectedEndDate);
     updatedDates = updatedDates || this._deselectDate(date, selectedStartDate, selectedEndDate);
 
     this.props.onDateSelect(updatedDates[0], updatedDates[1]);
   },
 
-  _noStartOrEndDate (selected, start, end) {
-    return (!start && !end) ? [selected, end] : null;
+  _startAndEndDate (selected, start, end) {
+    let updatedDates;
+
+    if (start && end) {
+      if (selected < start && selected < end) {
+        updatedDates = [selected, end];
+      } else if ((selected > start && selected < end) || selected > end) {
+        updatedDates = [start, selected];
+      }
+    }
+
+    return updatedDates;
   },
 
   _noEndDate (selected, start, end) {
@@ -90,26 +100,20 @@ const DatePicker = React.createClass({
     return updatedDates;
   },
 
-  _startAndEndDate (selected, start, end) {
-    let updatedDates;
-
-    if (start && end) {
-      if (selected < start && selected < end) {
-        updatedDates = [selected, end];
-      } else if ((selected > start && selected < end) || selected > end) {
-        updatesDates = [start, selected];
-      }
-    }
-
-    return updatedDates;
+  _noStartOrEndDate (selected, start, end) {
+    return (!start && !end) ? [selected, end] : null;
   },
 
   _deselectDate (selected, start, end) {
+    let updatedDates;
+
     if (selected === start) {
-      this.props.onDateSelect(null, end);
+      updatedDates = [null, end];
     } else if (selected === end) {
-      this.props.onDateSelect(start, null);
+      updatedDates = [start, null];
     }
+
+    return updatedDates;
   },
 
   _handleDateHover (activeSelectDate) {
@@ -170,9 +174,9 @@ const DatePicker = React.createClass({
 
     let where;
 
-    if (date.isSame(moment.unix(start))) {
+    if (date.isSameOrBefore(moment.unix(start))) {
       where = 'Start';
-    } else if (date.isSame(moment.unix(end))) {
+    } else if (date.isSameOrAfter(moment.unix(end))) {
       where = 'End';
     }
 
