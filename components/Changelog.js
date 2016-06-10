@@ -6,6 +6,16 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.42</h3>
+        <ul>
+          <li>Drawer component - Add new showScrim prop to control showing scrim for Drawer (<a href='https://github.com/mxenabled/mx-react-components/pull/334'>#334</a>)</li>
+        </ul>
+
+        <h3>3.1.41</h3>
+        <ul>
+          <li>Drawer component - Add new animateLeftDistance prop to control animate in distance (<a href='https://github.com/mxenabled/mx-react-components/pull/333'>#333</a>)</li>
+        </ul>
+
         <h3>3.1.40</h3>
         <ul>
           <li>Changes bottom border on DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/332'>#332</a>)</li>
