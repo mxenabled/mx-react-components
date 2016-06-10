@@ -45,26 +45,39 @@ const DatePicker = React.createClass({
   },
 
   _handleDateSelect (date) {
-    if (this.state.selectedStartDate === date) {
-      this.state.selectedStartDate = null;
-      return;
+    if (this.props.selectedStartDate === date) {
+      this.props.onDateSelect(null, this.props.selectedEndDate);
+    } else if (this.props.selectedEndDate === date) {
+      this.props.onDateSelect(this.props.selectedStartDate, null);
+    } else if (!this.props.selectedStartDate && !this.props.selectedEndDate) {
+      this.props.onDateSelect(date, this.props.selectedEndDate);
+    } else if (this.props.selectedStartDate && !this.props.selectedEndDate) {
+      if (date > this.props.selectedStartDate) {
+        this.props.onDateSelect(this.props.selectedStartDate, date);
+      } else {
+        this.props.onDateSelect(date, this.props.selectedStartDate);
+      }
+    } else if (!this.props.selectedStartDate && this.props.selectedEndDate) {
+      if (date < this.props.selectedEndDate) {
+        this.props.onDateSelect(date, this.props.selectedEndDate);
+      } else {
+        this.props.onDateSelect(this.props.selectedEndDate, date);
+      }
+    } else if (this.props.selectedStartDate && this.props.selectedEndDate) {
+      if (date < this.props.selectedStartDate && date < this.props.selectedEndDate) {
+        this.props.onDateSelect(date, this.props.selectedEndDate);
+      } else if (date > this.props.selectedStartDate && date < this.props.selectedEndDate) {
+        this.props.onDateSelect(this.props.selectedStartDate, date);
+      } else if (date > this.props.selectedEndDate) {
+        this.props.onDateSelect(this.props.selectedStartDate, date);
+      }
     }
-    if (this.state.selectedEndDate === date) {
-      this.state.selectedEndDate = null;
-      return;
-    }
-
-    if (!this.state.selectedStartDate || this.state.selectedStartDate > date) {
-      this.state.selectedStartDate = date;
-    } else if (this.state.selectedStartDate < date) {
-      this.state.selectedEndDate = date;
-    }
-
-    this.props.onDateSelect(this.state.selectedStartDate, this.state.selectedEndDate);
   },
 
-  _handleDateHover (date) {
-    this.state.activeSelectDate = date;
+  _handleDateHover (activeSelectDate) {
+    this.setState({
+      activeSelectDate
+    });
   },
 
   _handlePreviousClick () {
@@ -105,16 +118,16 @@ const DatePicker = React.createClass({
       const isToday = startDate.isSame(moment(), 'day');
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
-      const isSelectedStartDay = startDate.isSame(moment.unix(this.state.selectedStartDate), 'day');
-      const isSelectedEndDay = startDate.isSame(moment.unix(this.state.selectedEndDate), 'day');
-      const isActiveRange = startDate.isBetween(moment.unix(this.state.selectedStartDate), moment.unix(this.state.activeSelectDate));
-      const isSelectedRange = startDate.isBetween(moment.unix(this.state.selectedStartDate), moment.unix(this.state.selectedEndDate));
-
+      const isSelectedStartDay = startDate.isSame(moment.unix(this.props.selectedStartDate), 'day');
+      const isSelectedEndDay = startDate.isSame(moment.unix(this.props.selectedEndDate), 'day');
+      const isActiveRange = this.props.selectedStartDate ? startDate.isBetween(moment.unix(this.props.selectedStartDate), moment.unix(this.state.activeSelectDate)) :
+                                                           startDate.isBetween(moment.unix(this.state.activeSelectDate), moment.unix(this.props.selectedEndDate));
+      const isSelectedRange = startDate.isBetween(moment.unix(this.props.selectedStartDate), moment.unix(this.props.selectedEndDate));
       const day = (
         <div
           key={startDate}
           onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
-          onMouseOver={(disabledDay || !this.state.selectedStartDate || this.state.selectedEndDate) ? null : this._handleDateHover.bind(null, startDate.unix())}
+          onMouseEnter={disabledDay ? null : this._handleDateHover.bind(null, startDate.unix())}
           style={Object.assign({},
             styles.calendarDay,
             isCurrentMonth && styles.currentMonth,
@@ -148,11 +161,11 @@ const DatePicker = React.createClass({
             type='calendar'
           />
           <div style={styles.selectedDateText}>
-            {this.state.selectedStartDate && this.state.selectedEndDate ? (
+            {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
-                <span>{moment.unix(this.state.selectedStartDate).format(this.props.format)}</span>
+                <span>{moment.unix(this.props.selectedStartDate).format(this.props.format)}</span>
                 <span> - </span>
-                <span>{moment.unix(this.state.selectedEndDate).format(this.props.format)}</span>
+                <span>{moment.unix(this.props.selectedEndDate).format(this.props.format)}</span>
               </div>
             ) : this.props.placeholderText}
           </div>
@@ -231,7 +244,7 @@ const DatePicker = React.createClass({
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.state.selectedStartDate && this.state.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
         flex: 1
       },
       selectedDateCaret: {
