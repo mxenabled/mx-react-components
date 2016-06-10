@@ -48,19 +48,11 @@ const DatePicker = React.createClass({
     const selectedStartDate = this.props.selectedStartDate;
     const selectedEndDate = this.props.selectedEndDate;
 
-    this._deselectDate(date, selectedStartDate, selectedEndDate);
     this._noStartOrEndDate(date, selectedStartDate, selectedEndDate);
     this._noEndDate(date, selectedStartDate, selectedEndDate);
     this._noStartDate(date, selectedStartDate, selectedEndDate);
     this._startAndEndDate(date, selectedStartDate, selectedEndDate);
-  },
-
-  _deselectDate (selected, start, end) {
-    if (selected === start) {
-      this.props.onDateSelect(null, end);
-    } else if (selected === end) {
-      this.props.onDateSelect(start, null);
-    }
+    this._deselectDate(date, selectedStartDate, selectedEndDate);
   },
 
   _noStartOrEndDate (selected, start, end) {
@@ -96,6 +88,14 @@ const DatePicker = React.createClass({
       } else if ((selected > start && selected < end) || selected > end) {
         this.props.onDateSelect(start, selected);
       }
+    }
+  },
+
+  _deselectDate (selected, start, end) {
+    if (selected === start) {
+      this.props.onDateSelect(null, end);
+    } else if (selected === end) {
+      this.props.onDateSelect(start, null);
     }
   },
 
@@ -141,10 +141,40 @@ const DatePicker = React.createClass({
     } else if (!start && end) {
       isActive = date.isBetween(moment.unix(active), moment.unix(end));
     } else if (start && !end) {
-      isActive = date.isBetween(moment.unix(start), moment.unix(active));
+      if (start < active) {
+        isActive = date.isBetween(moment.unix(start), moment.unix(active));
+      } else {
+        isActive = date.isBetween(moment.unix(active), moment.unix(start));
+      }
     }
 
     return isActive;
+  },
+
+  _whereInSelectingRange (start, end, active, date) {
+    const isSame = date.isSame(moment.unix(active));
+    let where = null;
+
+    if (start && end) {
+      where = 'Middle';
+    } else if (!start && end) {
+      where = 'Start';
+    } else if (start && !end) {
+      where = 'End';
+    }
+
+    return isSame ? where : null;
+  },
+
+  _whereInSelectedRange (start, end, date) {
+    let where = null;
+
+    if (date.isSame(moment.unix(start))) {
+      where = 'Start';
+    } else if (date.isSame(moment.unix(end))) {
+      where = 'End';
+    }
+    return where;
   },
 
   _renderMonthTable () {
@@ -160,10 +190,13 @@ const DatePicker = React.createClass({
       const isToday = startDate.isSame(moment(), 'day');
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
-      const isSelectedStartDay = startDate.isSame(moment.unix(selectedStartDate), 'day');
-      const isSelectedEndDay = startDate.isSame(moment.unix(selectedEndDate), 'day');
+
       const isActiveRange = this._isActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
-      const selectingRange = (selectedStartDate && !selectedEndDate || !selectedStartDate && selectedEndDate) && startDate.isSame(moment.unix(activeSelectDate), 'day');
+      const selectingDay = this._whereInSelectingRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
+
+      const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
+      const selectedDay = this._whereInSelectedRange(selectedStartDate, selectedEndDate, startDate);
+
       const day = (
         <div
           key={startDate}
@@ -174,9 +207,9 @@ const DatePicker = React.createClass({
             isCurrentMonth && styles.currentMonth,
             disabledDay && styles.calendarDayDisabled,
             (isToday && !isActiveRange) && styles.today,
-            (isActiveRange || selectingRange) && styles.betweenDay,
-            isSelectedStartDay && Object.assign({}, styles.selectedDay, styles.selectedStartDay),
-            isSelectedEndDay && Object.assign({}, styles.selectedDay, styles.selectedEndDay)
+
+            isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + selectingDay]),
+            isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + selectedDay])
           )}
         >
           {startDate.date()}
@@ -378,24 +411,44 @@ const DatePicker = React.createClass({
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
       },
+
+      //Selected and Selecting Range
       selectedDay: {
         backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE,
-
-        ':hover': {
-          backgroundColor: this.props.primaryColor
-        }
+        color: StyleConstants.Colors.WHITE
       },
-      selectedStartDay: {
+      selectedStart: {
         borderRadius: '3px 0 0 3px'
       },
-      selectedEndDay: {
+      selectedEnd: {
         borderRadius: '0 3px 3px 0'
       },
       betweenDay: {
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.5),
-        borderRadius: 0
+        borderRadius: 0,
+
+        ':hover': {
+          border: '1px solid' + this.props.primaryColor,
+          backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.5)
+        }
       },
+      betweenDayStart: {
+        ':hover': {
+          borderRadius: '3px 0 0 3px'
+        }
+      },
+      betweenDayEnd: {
+        ':hover': {
+          borderRadius: '0 3px 3px 0'
+        }
+      },
+      betweenDayMiddle: {
+        ':hover': {
+          borderRadius: 0
+        }
+      },
+
+      //Scrim
       scrim: {
         bottom: 0,
         left: 0,
