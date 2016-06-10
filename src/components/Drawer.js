@@ -27,6 +27,7 @@ const Drawer = React.createClass({
       onPreviousClick: React.PropTypes.func.isRequired
     }),
     onClose: React.PropTypes.func.isRequired,
+    showScrim: React.PropTypes.bool,
     title: React.PropTypes.string
   },
 
@@ -35,6 +36,7 @@ const Drawer = React.createClass({
       buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       duration: 500,
       easing: [0.28, 0.14, 0.34, 1.04],
+      showScrim: true,
       title: ''
     };
   },
@@ -111,7 +113,7 @@ const Drawer = React.createClass({
 
     return (
       <div style={styles.componentWrapper}>
-        <div onClick={this._handleCloseClick} style={styles.scrim}></div>
+        <div onClick={this._handleCloseClick} style={styles.scrim} />
         <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
           <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
             <span style={styles.backArrow}>
@@ -176,7 +178,7 @@ const Drawer = React.createClass({
         bottom: 0,
         left: 0,
         textAlign: 'center',
-        backgroundColor: StyleConstants.Colors.SCRIM
+        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
       },
       icons: {
         color: StyleConstants.Colors.ASH
