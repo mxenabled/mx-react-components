@@ -154,7 +154,15 @@ const DatePicker = React.createClass({
     const start = selectedStart || active;
     const end = selectedEnd || active;
 
-    return date.isSameOrAfter(moment.unix(start)) && date.isSameOrBefore(moment.unix(end));
+    let isActive;
+
+    if (start < end) {
+      isActive = date.isSameOrAfter(moment.unix(start)) && date.isSameOrBefore(moment.unix(end));
+    } else {
+      isActive = date.isSameOrBefore(moment.unix(start)) && date.isSameOrAfter(moment.unix(end));
+    }
+
+    return isActive;
   },
 
   _whereInDateRange (selectedStart, selectedEnd, active, date) {
@@ -163,10 +171,18 @@ const DatePicker = React.createClass({
 
     let where;
 
-    if (date.isSame(moment.unix(start))) {
-      where = 'Start';
-    } else if (date.isSame(moment.unix(end))) {
-      where = 'End';
+    if (start < end) {
+      if (date.isSame(moment.unix(start))) {
+        where = 'Start';
+      } else if (date.isSame(moment.unix(end))) {
+        where = 'End';
+      }
+    } else if (start > end) {
+      if (date.isSame(moment.unix(start))) {
+        where = 'End';
+      } else if (date.isSame(moment.unix(end))) {
+        where = 'Start';
+      }
     }
 
     return where;
@@ -187,9 +203,7 @@ const DatePicker = React.createClass({
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
       const isActiveRange = (selectedStartDate || selectedEndDate) ? this._isActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) : false;
       const whereInRange = this._whereInDateRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
-
-      // const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
-      // const selectedDay = this._whereInDateRange(selectedStartDate, selectedEndDate);
+      const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
 
       const day = (
         <div
@@ -201,9 +215,8 @@ const DatePicker = React.createClass({
             isCurrentMonth && styles.currentMonth,
             disabledDay && styles.calendarDayDisabled,
             (isToday && !isActiveRange) && styles.today,
-            isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange])
-
-            //isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + selectedDay])
+            isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
+            isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
           )}
         >
           {startDate.date()}
