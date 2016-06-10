@@ -66,9 +66,7 @@ const DatePicker = React.createClass({
     } else if (this.props.selectedStartDate && this.props.selectedEndDate) {
       if (date < this.props.selectedStartDate && date < this.props.selectedEndDate) {
         this.props.onDateSelect(date, this.props.selectedEndDate);
-      } else if (date > this.props.selectedStartDate && date < this.props.selectedEndDate) {
-        this.props.onDateSelect(this.props.selectedStartDate, date);
-      } else if (date > this.props.selectedEndDate) {
+      } else if ((date > this.props.selectedStartDate && date < this.props.selectedEndDate) || date > this.props.selectedEndDate) {
         this.props.onDateSelect(this.props.selectedStartDate, date);
       }
     }
