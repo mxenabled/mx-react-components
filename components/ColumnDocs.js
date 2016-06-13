@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Row, Column } = require('mx-react-components');
+const { Row, Column, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
