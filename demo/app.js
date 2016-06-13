@@ -11,6 +11,7 @@ const {
   Column,
   DatePicker,
   DatePickerFullScreen,
+  DateRangePicker,
   DisplayInput,
   DonutChart,
   Drawer,
@@ -278,6 +279,13 @@ const Demo = React.createClass({
   _handleDateSelect (selectedDatePickerDate) {
     this.setState({
       selectedDatePickerDate
+    });
+  },
+
+  _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
+    this.setState({
+      selectedStartDate,
+      selectedEndDate
     });
   },
 
@@ -870,6 +878,13 @@ const Demo = React.createClass({
           closeOnDateSelect={true}
           defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
+        />
+
+        <br /><br />
+        <DateRangePicker
+          onDateSelect={this._handleDateRangeSelect}
+          selectedEndDate={this.state.selectedEndDate}
+          selectedStartDate={this.state.selectedStartDate}
         />
 
         <br /><br />
