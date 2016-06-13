@@ -11,8 +11,8 @@ const RowDocs = React.createClass({
     return (
       <div>
         <h1>
-          Row
-          <label>A row component used to wrap a Column for a response grid.</label>
+          Row & Column
+          <label>Row and column components to be used in a response grid.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -27,9 +27,29 @@ const RowDocs = React.createClass({
           </Row>
         </div>
 
-        <h3>Usage</h3>
-        <h5>style <label>Object or Array</label></h5>
+        <h3>Row Usage</h3>
+
+        <h5>style <label>Object</label></h5>
         <p>A style object used to style the div that wraps the uploader&#39;s content</p>
+
+        <h5>children <label>Node</label></h5>
+        <p>This should be one or more {`
+            <Column />
+        `} nodes to be displayed.</p>
+
+        <h3>Column Usage</h3>
+
+        <h5>breakpoint*<label>Number</label></h5>
+        <p>A number representing the screen width (greater than or equal to) at which to display the corresponding content.</p>
+        <p>Defaults:</p>
+        <ul>
+          <li>*Large: 1200</li>
+          <li>*Medium: 750</li>
+        </ul>
+
+
+        <h5>columnCount <label>Number</label></h5>
+        <p>A number representing the number of columns to diplay. Default: 12</p>
 
         <h5>children <label>Node</label></h5>
         <p>This should be one or more {`
