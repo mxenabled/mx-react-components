@@ -202,7 +202,7 @@ const Demo = React.createClass({
       lineChartData: [],
       pageIndicatorIndex: 0,
       radioChecked: false,
-      selectedDatePickerDate: null,
+      selectedDatePickerDate: moment().unix(),
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,

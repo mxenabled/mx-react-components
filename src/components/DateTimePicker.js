@@ -55,12 +55,16 @@ const DatePicker = React.createClass({
     }
   },
 
-  _handleDateSelect (date) {
-    if (this.props.closeOnDateSelect) {
-      this._handleScrimClick();
-    }
+  _handleDateFocus () {
+    this.setState({
+      showCalendar: true
+    });
+  },
 
-    this.props.onDateSelect(date);
+  _handleDateBlur () {
+    this.setState({
+      showCalendar: false
+    });
   },
 
   _handlePreviousClick () {
@@ -81,32 +85,44 @@ const DatePicker = React.createClass({
 
   _handleScrimClick () {
     this.setState({
-      showCalendar: false,
+      showCalendar: false
+    });
+  },
+
+  _handleDateSelect (date) {
+    if (this.props.closeOnDateSelect) {
+      this._handleScrimClick();
+    }
+
+    this.props.onDateSelect(date);
+  },
+
+  _handleTimeFocus () {
+    this.refs.timeInput.focus();
+
+    this.setState({
+      showTimes: true
+    });
+  },
+
+  _handleTimeBlur () {
+    this.setState({
       showTimes: false
     });
   },
 
-  _handleTimeEnter (activeTime) {
-    this.setState({
-      activeTime
-    });
-  },
+  _handleTimeSelect (e) {
+    const selectedDate = this.props.selectedDate ? moment.unix(this.props.selectedDate) : moment();
 
-  _handleTimeLeave () {
-    this.setState({
-      activeTime: null
-    });
-  },
+    const time = e.target.value.split(':');
+    const hour = time[0];
+    const minute = time[1].substring(0, 2);
+    const date = selectedDate.hour(hour).minute(minute).second(0).unix();
 
-  _toggleCalendar () {
-    this.setState({
-      showCalendar: !this.state.showCalendar
-    });
-  },
+    this.props.onDateSelect(date);
 
-  _toggleTimes () {
     this.setState({
-      showTimes: !this.state.showTimes
+      showTimes: false
     });
   },
 
@@ -147,17 +163,15 @@ const DatePicker = React.createClass({
 
   render () {
     const styles = this.styles();
-    const times = [];
-    let timeCounter = moment().startOf('day');
-
-    while (timeCounter.isSame(moment(), 'day')) {
-      times.push(timeCounter);
-      timeCounter = moment(timeCounter).add(this.props.timeIncrement, 'minutes');
-    }
 
     return (
       <div style={styles.component}>
-        <div onClick={this._toggleCalendar} style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}>
+        <div
+          onBlur={this._handleDateBlur}
+          onFocus={this._handleDateFocus}
+          style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
+          tabIndex={0}
+        >
           <Icon
             size={20}
             style={styles.selectedIcon}
@@ -208,37 +222,25 @@ const DatePicker = React.createClass({
         <div>
           {this.props.children}
         </div>
-        <div onClick={this._toggleTimes} style={Object.assign({}, styles.selectWrapper, this.state.showTimes ? styles.activeSelectWrapper : null)}>
+        <div
+          onBlur={this._handleTimeBlur}
+          onFocus={this._handleTimeFocus}
+          style={Object.assign({}, styles.selectWrapper, this.state.showTimes ? styles.activeSelectWrapper : null)}
+          tabIndex={1}
+        >
           <Icon
             size={20}
             style={styles.selectedIcon}
             type='clock'
           />
-          <div style={styles.selectedText}>
-            {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
-          </div>
-          <Icon
-            size={20}
-            style={styles.selectedTimeCaret}
-            type={this.state.showTimes ? 'caret-up' : 'caret-down'}
+          <input
+            defaultValue={this.props.selectedDate ? moment.unix(this.props.selectedDate).format('HH:mm') : ''}
+            name='time'
+            onBlur={this._handleTimeSelect}
+            ref='timeInput'
+            style={styles.timeInput}
+            type='time'
           />
-          {this.state.showTimes ? (
-            <div style={styles.timeWrapper}>
-              {times.map(time => {
-                return (
-                  <div
-                    key={time}
-                    onClick={this._handleDateSelect.bind(null, time.unix())}
-                    onMouseEnter={this._handleTimeEnter.bind(null, time.unix())}
-                    onMouseLeave={this._handleTimeLeave}
-                    style={Object.assign({}, styles.timeOption, this.state.activeTime === time.unix() ? styles.activeTimeOption : null)}
-                  >
-                    {time.format(this.props.timeFormat)}
-                  </div>
-                );
-              })}
-            </div>
-          ) : null}
         </div>
         <div>
           {moment(this.state.selectedDate).format('z')}
@@ -258,9 +260,8 @@ const DatePicker = React.createClass({
         width: '100%'
       }, this.props.style),
 
-      // Selecte styles
+      // Selected styles
       selectWrapper: {
-        fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         color: StyleConstants.Colors.CHARCOAL,
         boxSizing: 'border-box',
@@ -273,9 +274,10 @@ const DatePicker = React.createClass({
         alignItems: 'center',
         cursor: 'pointer',
         display: 'flex',
-        justifyContent: 'space-between',
         padding: '10px 15px',
-        position: 'relative'
+        position: 'relative',
+        outline: 'none',
+        boxShadow: 'none'
       },
       activeSelectWrapper: {
         borderColor: this.props.primaryColor
@@ -296,17 +298,12 @@ const DatePicker = React.createClass({
       },
 
       // Time Styles
-      timeWrapper: {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
-        borderRadius: 3,
-        boxShadow: StyleConstants.ShadowHigh,
-        boxSizing: 'border-box',
-        padding: 20,
-        position: 'absolute',
-        top: 50,
-        right: 0,
-        zIndex: 10
+      timeInput: {
+        fontFamily: StyleConstants.Fonts.REGULAR,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        border: 'none',
+        outline: 'none',
+        boxShadow: 'none'
       },
       timeOption: {
         textAlign: 'right',
