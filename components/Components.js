@@ -77,8 +77,8 @@ const Components = React.createClass({
                   displayValue: 'Range Selector'
                 },
                 {
-                  value: 'row',
-                  displayValue: 'Grid Row'
+                  value: 'row-column',
+                  displayValue: 'Grid Row & Column'
                 },
                 {
                   value: 'select',
@@ -145,8 +145,7 @@ const Components = React.createClass({
             <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>
 
             <h3>Responsive Grid</h3>
-            <Link to='/components/row'>Row</Link>
-            <Link to='/components/column'>Column</Link>
+            <Link to='/components/row-column'>Row & Column</Link>
 
             <h3>Helpers</h3>
             <Link to='/components/styles'>Styles</Link>
