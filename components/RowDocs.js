@@ -50,7 +50,9 @@ const RowDocs = React.createClass({
             </Column>
             <Column
               columnLarge={2}
+              columnMedium={4}
               offsetLarge={10}
+              offsetMedium={4}
               orderLarge={-1}
               style={styles.column}
             >
@@ -65,8 +67,8 @@ const RowDocs = React.createClass({
             <label>Button:</label>
             <ul>
               <li>Large: 17% width, 83% offset, first in order</li>
-              <li>Medium: 100% width, last in order (default)</li>
-              <li>Small: 100% width, last in order (default</li>
+              <li>Medium: 33% width, 33% offset, last in order</li>
+              <li>Small: 100% width, last in order (default)</li>
             </ul>
           </Column>
           <Column columnLarge={6}>
@@ -221,8 +223,8 @@ const RowDocs = React.createClass({
         padding: 10,
         width: '100%'
       },
-      listRow: {
-        marginTop: 20
+      responsiveButton: {
+        width: '100%'
       }
     };
   }
