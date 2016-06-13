@@ -15,43 +15,42 @@ const RowDocs = React.createClass({
           <label>Row and column components to be used in a response grid.</label>
         </h1>
 
-        <h3>
-          Demo
-          <label>Button:</label>
-          <ul>
-            <li>Large: 16% width, 87% offset, first in order</li>
-            <li>Medium: 100% width, last in order (default)</li>
-            <li>Small: 100% width, last in order (default</li>
-          </ul>
+        <h3>Demo</h3>
+        <label>Button:</label>
+        <ul>
+          <li>Large: 16% width, 87% offset, first in order</li>
+          <li>Medium: 100% width, last in order (default)</li>
+          <li>Small: 100% width, last in order (default</li>
+        </ul>
 
-          <label>First column:</label>
-          <ul>
-            <li>Large: 50% width</li>
-            <li>Medium: 66% width, 33% offset</li>
-            <li>Small: 100% width (default)</li>
-          </ul>
+        <label>First column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 66% width, 33% offset</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
 
-          <label>Second column:</label>
-          <ul>
-            <li>Large: 50% width</li>
-            <li>Medium: 50% width</li>
-            <li>Small: 100% width (default)</li>
-          </ul>
+        <label>Second column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 50% width</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
 
-          <label>Third column:</label>
-          <ul>
-            <li>Large: 50% width</li>
-            <li>Medium: 50% width</li>
-            <li>Small: 100% width (default)</li>
-          </ul>
+        <label>Third column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 50% width</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
 
-          <label>Fourth column:</label>
-          <ul>
-            <li>Large: 50% width</li>
-            <li>Medium: 100% width, breakpoint of 1000px</li>
-            <li>Small: 100% width (default)</li>
-          </ul>
-        </h3>
+        <label>Fourth column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 100% width, breakpoint of 1000px</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
+
         <div style={styles.container}>
           <Row>
             <Column
@@ -177,7 +176,7 @@ const RowDocs = React.createClass({
               <Column
                 breakpointMedium={1000}
                 columnLarge={6}
-                columnMedium={100}
+                columnMedium={12}
                 style={styles.column}
               >
                 <div>Fourth Column</div>
