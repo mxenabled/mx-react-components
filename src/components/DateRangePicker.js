@@ -54,7 +54,6 @@ const DatePicker = React.createClass({
     updatedDates = updatedDates || this._noEndDate(date, selectedStartDate, selectedEndDate);
     updatedDates = updatedDates || this._noStartDate(date, selectedStartDate, selectedEndDate);
     updatedDates = updatedDates || this._noStartOrEndDate(date, selectedStartDate, selectedEndDate);
-    updatedDates = updatedDates || this._deselectDate(date, selectedStartDate, selectedEndDate);
 
     this.props.onDateSelect(updatedDates[0], updatedDates[1]);
   },
