@@ -16,6 +16,49 @@ const RowDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
+        <div style={styles.container}>
+          <Row>
+            <Column
+              columnLarge={6}
+              columnMedium={9}
+              offsetMedium={3}
+              style={styles.column}
+            >
+              <div style={styles.responsiveDiv}>First Column</div>
+            </Column>
+            <Column
+              columnLarge={6}
+              columnMedium={6}
+              style={styles.column}
+            >
+              <div style={styles.responsiveDiv}>Second Column</div>
+            </Column>
+            <Column
+              columnLarge={6}
+              columnMedium={6}
+              style={styles.column}
+            >
+              <div style={styles.responsiveDiv}>Third Column</div>
+            </Column>
+            <Column
+              breakpointMedium={1000}
+              columnLarge={6}
+              columnMedium={12}
+              style={styles.column}
+            >
+              <div style={styles.responsiveDiv}>Fourth Column</div>
+            </Column>
+            <Column
+              columnLarge={2}
+              offsetLarge={10}
+              orderLarge={-1}
+              style={styles.column}
+            >
+              <Button style={styles.responsiveButton}>Save</Button>
+            </Column>
+          </Row>
+        </div>
+
         <label>Button:</label>
         <ul>
           <li>Large: 16% width, 87% offset, first in order</li>
@@ -50,49 +93,6 @@ const RowDocs = React.createClass({
           <li>Medium: 100% width, breakpoint of 1000px</li>
           <li>Small: 100% width (default)</li>
         </ul>
-
-        <div style={styles.container}>
-          <Row>
-            <Column
-              columnLarge={6}
-              columnMedium={9}
-              offsetMedium={3}
-              style={styles.column}
-            >
-              <div style={styles.responsiveDiv}>First Column</div>
-            </Column>
-            <Column
-              columnLarge={6}
-              columnMedium={6}
-              style={styles.column}
-            >
-              <div style={styles.responsiveDiv}>Second Column</div>
-            </Column>
-            <Column
-              columnLarge={6}
-              columnMedium={6}
-              style={styles.column}
-            >
-              <div style={styles.responsiveDiv}>Third Column</div>
-            </Column>
-            <Column
-              breakpointMedium={1000}
-              columnLarge={6}
-              columnMedium={100}
-              style={styles.column}
-            >
-              <div style={styles.responsiveDiv}>Fourth Column</div>
-            </Column>
-            <Column
-              columnLarge={2}
-              offsetLarge={10}
-              orderLarge={-1}
-              style={styles.column}
-            >
-              <Button style={styles.responsiveButton}>Save</Button>
-            </Column>
-          </Row>
-        </div>
 
         <h3>Row Usage</h3>
 
