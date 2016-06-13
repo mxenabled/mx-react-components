@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Row, Column, Styles } = require('mx-react-components');
+const { Button, Column, Row, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -18,11 +18,30 @@ const RowDocs = React.createClass({
         <h3>Demo</h3>
         <div style={styles.container}>
           <Row>
-            <Column columnLarge={6} style={styles.column}>
+            <Column
+              columnLarge={6}
+              columnMedium={9}
+              offsetMedium={3}
+              style={styles.column}
+            >
               <div style={styles.responsiveDiv}>First Column</div>
             </Column>
             <Column columnLarge={6} style={styles.column}>
               <div style={styles.responsiveDiv}>Second Column</div>
+            </Column>
+            <Column columnLarge={6} style={styles.column}>
+              <div style={styles.responsiveDiv}>Third Column</div>
+            </Column>
+            <Column columnLarge={6} style={styles.column}>
+              <div style={styles.responsiveDiv}>Fourth Column</div>
+            </Column>
+            <Column
+              columnLarge={2}
+              offsetLarge={10}
+              orderLarge={-1}
+              style={styles.column}
+            >
+              <Button style={styles.responsiveButton}>Fourth Column</Button>
             </Column>
           </Row>
         </div>
@@ -51,10 +70,34 @@ const RowDocs = React.createClass({
         <h5>columnCount <label>Number</label></h5>
         <p>A number representing the number of columns to diplay. Default: 12</p>
 
+        <h5>column*<label>Number</label></h5>
+        <p>A number representing the columns span at which to display the enclosed content, based on the columnCount.</p>
+        <p>Defaults:</p>
+        <ul>
+          <li>*Large: 12</li>
+          <li>*Medium: 12</li>
+          <li>*Small: 12</li>
+        </ul>
+
+        <h5>offset*<label>Number</label></h5>
+        <p>A number representing the offset of columns at which to display the enclosed content, based on the columnCount.</p>
+        <p>Defaults:</p>
+        <ul>
+          <li>*Large: 12</li>
+          <li>*Medium: 12</li>
+          <li>*Small: 12</li>
+        </ul>
+
+        <h5>order*<label>Number</label></h5>
+        <p>A number representing the order of columns at which to display the enclosed content. Can be a negative number to rise to the top.</p>
+        <p>Defaults to the element order</p>
+
+        <h5>style <label>Object</label></h5>
+        <p>A style object used to style the div that wraps the uploader&#39;s content</p>
+
+
         <h5>children <label>Node</label></h5>
-        <p>This should be one or more {`
-            <Column />
-        `} nodes to be displayed.</p>
+        <p>The content to be displayed in the column</p>
 
         <h3>Example</h3>
         <Markdown>
@@ -84,6 +127,9 @@ const RowDocs = React.createClass({
         border: '1px solid' + Styles.Colors.FOG,
         borderRadius: 3,
         padding: 10,
+        width: '100%'
+      },
+      responsiveButton: {
         width: '100%'
       }
     };
