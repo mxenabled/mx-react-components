@@ -8,6 +8,7 @@ const {
   BarChart,
   Button,
   ButtonGroup,
+  Column,
   DatePicker,
   DatePickerFullScreen,
   DisplayInput,
@@ -20,6 +21,7 @@ const {
   PageIndicator,
   RadioButton,
   RangeSelector,
+  Row,
   SearchInput,
   Select,
   SelectFullScreen,
@@ -39,6 +41,14 @@ const styles = {
     color: '#ACB0B3',
     fontSize: '12px',
     padding: '2px 0'
+  },
+  responsiveDiv: {
+    boxSizing: 'border-box',
+    backgroundColor: Styles.Colors.PORCELAIN,
+    border: '1px solid' + Styles.Colors.FOG,
+    borderRadius: 3,
+    padding: 10,
+    width: '100%'
   }
 };
 
@@ -413,6 +423,85 @@ const Demo = React.createClass({
 
     return (
       <div>
+        <br /><br />
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <Row>
+            <Column
+              columnLarge={9}
+              columnMedium={6}
+              offsetLarge={3}
+              offsetMedium={4}
+            >
+              <div style={styles.responsiveDiv}>1</div>
+            </Column>
+            <Column
+              columnLarge={4}
+              columnMedium={3}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>2</div>
+            </Column>
+            <Column
+              columnLarge={4}
+              columnMedium={9}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>3</div>
+            </Column>
+            <Column
+              columnLarge={4}
+              columnMedium={12}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>5</div>
+            </Column>
+            <Column
+              columnLarge={3}
+              columnMedium={6}
+              columnSmall={9}
+              orderMedium={-1}
+            >
+              <div style={styles.responsiveDiv}>6</div>
+            </Column>
+            <Column
+              columnLarge={3}
+              columnMedium={6}
+              columnSmall={9}
+              orderMedium={-2}
+            >
+              <div style={styles.responsiveDiv}>7</div>
+            </Column>
+            <Column
+              columnLarge={6}
+              columnMedium={12}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>8</div>
+            </Column>
+            <Column
+              columnLarge={6}
+              columnMedium={9}
+              columnSmall={12}
+            >
+              <Row>
+                <Column
+                  columnLarge={6}
+                  columnMedium={6}
+                  columnSmall={6}
+                >
+                  <div style={styles.responsiveDiv}>9</div>
+                </Column>
+                <Column
+                  columnLarge={6}
+                  columnMedium={6}
+                  columnSmall={6}
+                >
+                  <div style={styles.responsiveDiv}>10</div>
+                </Column>
+              </Row>
+            </Column>
+          </Row>
+        </div>
         <br /><br />
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Button
