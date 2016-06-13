@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.45</h3>
+        <ul>
+          <li>Adds new Calendar component (<a href='https://github.com/mxenabled/mx-react-components/pull/336'>#336</a>)</li>
+        </ul>
+
         <h3>3.1.44</h3>
         <ul>
           <li>Modal - Add showScrim and showCloseIcon props (<a href='https://github.com/mxenabled/mx-react-components/pull/335'>#335</a>)</li>
