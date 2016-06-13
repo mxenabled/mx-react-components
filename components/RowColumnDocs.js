@@ -63,7 +63,7 @@ const RowDocs = React.createClass({
 
         <h3>Responsive Behavior</h3>
         <Row>
-          <Column columnLarge={6}>
+          <Column columnLarge={4} orderLarge={1}>
             <label>Button:</label>
             <ul>
               <li>Large: 17% width, 83% offset, first in order</li>
@@ -71,7 +71,7 @@ const RowDocs = React.createClass({
               <li>Small: 100% width, last in order (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={6}>
+          <Column columnLarge={4} orderLarge={4}>
             <label>First column:</label>
             <ul>
               <li>Large: 50% width</li>
@@ -79,7 +79,7 @@ const RowDocs = React.createClass({
               <li>Small: 100% width (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={6}>
+          <Column columnLarge={4} orderLarge={2}>
             <label>Second column:</label>
             <ul>
               <li>Large: 50% width</li>
@@ -87,7 +87,7 @@ const RowDocs = React.createClass({
               <li>Small: 100% width (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={6}>
+          <Column columnLarge={4} orderLarge={5}>
             <label>Third column:</label>
             <ul>
               <li>Large: 50% width</li>
@@ -95,7 +95,7 @@ const RowDocs = React.createClass({
               <li>Small: 100% width (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={6}>
+          <Column columnLarge={4} orderLarge={3}>
             <label>Fourth column:</label>
             <ul>
               <li>Large: 50% width</li>
