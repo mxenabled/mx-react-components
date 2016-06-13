@@ -72,6 +72,8 @@ const Modal = React.createClass({
 
   _renderTitleBar () {
     if (this.props.showTitleBar) {
+      const styles = this.styles();
+
       return (
         <div className='mx-modal-title-bar' style={styles.titleBar}>
           {this.props.title}
@@ -84,6 +86,8 @@ const Modal = React.createClass({
 
   _renderFooter () {
     if (this.props.showFooter) {
+      const styles = this.styles();
+
       return (
         <div className='mx-modal-footer' style={Object.assign({}, styles.footer, this.props.footerStyle)}>
           {this._renderTooltipIconAndLabel()}
@@ -115,6 +119,8 @@ const Modal = React.createClass({
   },
 
   _renderFooterContent () {
+    const styles = this.styles();
+
     return (
       <div className='mx-modal-footer-content' style={styles.footerContent}>
         {this.props.footerContent}
@@ -124,6 +130,8 @@ const Modal = React.createClass({
 
   _renderTooltip () {
     if (this.state.showTooltip) {
+      const styles = this.styles();
+
       return (
         <div style={styles.tooltip}>
           <div className='mx-modal-tooltip-title' style={Object.assign({}, styles.tooltipTitle, { color: this.props.color })}>
@@ -141,6 +149,8 @@ const Modal = React.createClass({
 
   _renderTooltipIconAndLabel () {
     if (this.props.tooltip) {
+      const styles = this.styles();
+
       return (
         <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
           <Icon
@@ -167,6 +177,8 @@ const Modal = React.createClass({
   },
 
   render () {
+    const styles = this.styles();
+
     return (
       <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
         <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
@@ -190,111 +202,113 @@ const Modal = React.createClass({
         </div>
       </div>
     );
+  },
+
+  styles () {
+    return {
+      scrim: {
+        zIndex: 1000,
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        textAlign: 'center'
+      },
+      relative: {
+        position: 'absolute'
+      },
+      overlay: {
+        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
+      },
+      close: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        margin: '-12px -12px 0 0',
+        cursor: 'pointer',
+        color: StyleConstants.Colors.CHARCOAL
+      },
+      container: {
+        fontFamily: StyleConstants.FontFamily,
+        boxSizing: 'border-box',
+        position: 'relative',
+        zIndex: 1001,
+        backgroundColor: StyleConstants.Colors.WHITE,
+        boxShadow: StyleConstants.ShadowHigh,
+        borderRadius: 2,
+        top: 20,
+        maxWidth: 'calc(100% - 40px)',
+        display: 'inline-block',
+        textAlign: 'left'
+      },
+      titleBar: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderTopLeftRadius: 2,
+        borderTopRightRadius: 2,
+        padding: '15px 20px',
+        color: StyleConstants.Colors.ASH,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        textTransform: 'uppercase'
+      },
+      content: {
+        position: 'relative',
+        maxHeight: 'calc(100% - 140px)',
+        overflow: 'auto'
+      },
+      footer: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderBottomLeftRadius: 2,
+        borderBottomRightRadius: 2,
+        padding: '10px 20px',
+        display: 'flex',
+        justifyContent: 'space-between'
+      },
+      footerContent: {
+        padding: '5px 0',
+        textAlign: 'left'
+      },
+      tooltipLabel: {
+        padding: '5px 0'
+      },
+      tooltipLabelText: {
+        fontSize: StyleConstants.FontSizes.SMALL
+      },
+      tooltip: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderColor: StyleConstants.Colors.FOG,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxSizing: 'border-box',
+        bottom: 10,
+        left: 10,
+        position: 'absolute',
+        width: 250,
+        maxWidth: '100%',
+        padding: 10
+      },
+      tooltipTitle: {
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        marginBottom: 5
+      },
+      tooltipContent: {
+        color: StyleConstants.Colors.ASH,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        lineHeight: '1.5em',
+        textAlign: 'left'
+      },
+      buttons: {
+        textAlign: 'right'
+      },
+      button: {
+        marginLeft: 5
+      },
+      small: {
+        width: 400,
+        textAlign: 'center'
+      }
+    };
   }
 });
-
-const styles = {
-  scrim: {
-    zIndex: 1000,
-    position: 'fixed',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    textAlign: 'center'
-  },
-  relative: {
-    position: 'absolute'
-  },
-  overlay: {
-    backgroundColor: StyleConstants.Colors.SCRIM
-  },
-  close: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    margin: '-12px -12px 0 0',
-    cursor: 'pointer',
-    color: StyleConstants.Colors.CHARCOAL
-  },
-  container: {
-    fontFamily: StyleConstants.FontFamily,
-    boxSizing: 'border-box',
-    position: 'relative',
-    zIndex: 1001,
-    backgroundColor: StyleConstants.Colors.WHITE,
-    boxShadow: StyleConstants.ShadowHigh,
-    borderRadius: 2,
-    top: 20,
-    maxWidth: 'calc(100% - 40px)',
-    display: 'inline-block',
-    textAlign: 'left'
-  },
-  titleBar: {
-    backgroundColor: StyleConstants.Colors.PORCELAIN,
-    borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
-    padding: '15px 20px',
-    color: StyleConstants.Colors.ASH,
-    fontSize: StyleConstants.FontSizes.SMALL,
-    textTransform: 'uppercase'
-  },
-  content: {
-    position: 'relative',
-    maxHeight: 'calc(100% - 140px)',
-    overflow: 'auto'
-  },
-  footer: {
-    backgroundColor: StyleConstants.Colors.PORCELAIN,
-    borderBottomLeftRadius: 2,
-    borderBottomRightRadius: 2,
-    padding: '10px 20px',
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  footerContent: {
-    padding: '5px 0',
-    textAlign: 'left'
-  },
-  tooltipLabel: {
-    padding: '5px 0'
-  },
-  tooltipLabelText: {
-    fontSize: StyleConstants.FontSizes.SMALL
-  },
-  tooltip: {
-    backgroundColor: StyleConstants.Colors.PORCELAIN,
-    borderColor: StyleConstants.Colors.FOG,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    boxSizing: 'border-box',
-    bottom: 10,
-    left: 10,
-    position: 'absolute',
-    width: 250,
-    maxWidth: '100%',
-    padding: 10
-  },
-  tooltipTitle: {
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    marginBottom: 5
-  },
-  tooltipContent: {
-    color: StyleConstants.Colors.ASH,
-    fontSize: StyleConstants.FontSizes.SMALL,
-    lineHeight: '1.5em',
-    textAlign: 'left'
-  },
-  buttons: {
-    textAlign: 'right'
-  },
-  button: {
-    marginLeft: 5
-  },
-  small: {
-    width: 400,
-    textAlign: 'center'
-  }
-};
 
 module.exports = Modal;
