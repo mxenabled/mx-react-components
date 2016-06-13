@@ -62,48 +62,41 @@ const RowDocs = React.createClass({
         </div>
 
         <h3>Responsive Behavior</h3>
-        <Row>
-          <Column columnLarge={4} columnMedium={6}>
-            <label>First column:</label>
-            <ul>
-              <li>Large: 50% width</li>
-              <li>Medium: 66% width, 33% offset</li>
-              <li>Small: 100% width (default)</li>
-            </ul>
-          </Column>
-          <Column columnLarge={4} columnMedium={6}>
-            <label>Second column:</label>
-            <ul>
-              <li>Large: 50% width</li>
-              <li>Medium: 50% width</li>
-              <li>Small: 100% width (default)</li>
-            </ul>
-          </Column>
-          <Column columnLarge={4} columnMedium={6}>
-            <label>Third column:</label>
-            <ul>
-              <li>Large: 50% width</li>
-              <li>Medium: 50% width</li>
-              <li>Small: 100% width (default)</li>
-            </ul>
-          </Column>
-          <Column columnLarge={4} columnMedium={6}>
-            <label>Fourth column:</label>
-            <ul>
-              <li>Large: 50% width</li>
-              <li>Medium: 100% width, large breakpoint of 1000px</li>
-              <li>Small: 100% width (default)</li>
-            </ul>
-          </Column>
-          <Column columnLarge={4} columnMedium={6} orderLarge={-1}>
-            <label>Button:</label>
-            <ul>
-              <li>Large: 17% width, 83% offset, first in order</li>
-              <li>Medium: 33% width, 33% offset, last in order</li>
-              <li>Small: 100% width, last in order (default)</li>
-            </ul>
-          </Column>
-        </Row>
+
+        <label>First column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 66% width, 33% offset</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
+
+        <label>Second column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 50% width</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
+
+        <label>Third column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 50% width</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
+
+        <label>Fourth column:</label>
+        <ul>
+          <li>Large: 50% width</li>
+          <li>Medium: 100% width, large breakpoint of 1000px</li>
+          <li>Small: 100% width (default)</li>
+        </ul>
+
+        <label>Button:</label>
+        <ul>
+          <li>Large: 17% width, 83% offset, first in order</li>
+          <li>Medium: 33% width, 33% offset, last in order</li>
+          <li>Small: 100% width, last in order (default)</li>
+        </ul>
 
         <h3>Row Usage</h3>
 
