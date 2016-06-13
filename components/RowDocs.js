@@ -17,11 +17,11 @@ const RowDocs = React.createClass({
 
         <h3>Demo</h3>
         <div style={styles.container}>
-          <Row style={styles.row}>
-            <Column columnLarge={6}>
+          <Row>
+            <Column columnLarge={6} style={styles.column}>
               <div style={styles.responsiveDiv}>First Column</div>
             </Column>
-            <Column columnLarge={6}>
+            <Column columnLarge={6} style={styles.column}>
               <div style={styles.responsiveDiv}>Second Column</div>
             </Column>
           </Row>
@@ -55,7 +55,7 @@ const RowDocs = React.createClass({
       container: {
         width: '100%'
       },
-      row: {
+      column: {
         marginBottom: 10
       },
       responsiveDiv: {
