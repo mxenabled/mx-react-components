@@ -21,10 +21,7 @@ const Modal = React.createClass({
     color: React.PropTypes.string,
     contentStyle: React.PropTypes.object,
     footerContent: React.PropTypes.node,
-    footerStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
+    footerStyle: React.PropTypes.object,
     isRelative: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
     showFooter: React.PropTypes.bool,
