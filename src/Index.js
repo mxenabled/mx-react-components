@@ -2,6 +2,7 @@ module.exports = {
   BarChart: require('./components/BarChart'),
   Button: require('./components/Button'),
   ButtonGroup: require('./components/ButtonGroup'),
+  Calendar: require('./components/Calendar'),
   Column: require('./components/grid/Column'),
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),

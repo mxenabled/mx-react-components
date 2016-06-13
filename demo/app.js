@@ -8,6 +8,7 @@ const {
   BarChart,
   Button,
   ButtonGroup,
+  Calendar,
   Column,
   DatePicker,
   DatePickerFullScreen,
@@ -212,6 +213,7 @@ const Demo = React.createClass({
       lineChartData: [],
       pageIndicatorIndex: 0,
       radioChecked: false,
+      selectedCalendarDate: null,
       selectedDatePickerDate: null,
       showDrawer: false,
       showDrawerButtonType: 'primary',
@@ -273,6 +275,12 @@ const Demo = React.createClass({
   _handleWindowResize () {
     this.setState({
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
+    });
+  },
+
+  _handleCalendarDateSelect (selectedCalendarDate) {
+    this.setState({
+      selectedCalendarDate
     });
   },
 
@@ -872,6 +880,12 @@ const Demo = React.createClass({
         <br /><br />
         <RadioButton checked={this.state.radioChecked} onClick={this._handleRadioButtonClick}>On</RadioButton>
         <RadioButton checked={!this.state.radioChecked} onClick={this._handleRadioButtonClick}>Off</RadioButton>
+
+        <br /><br />
+        <Calendar
+          onDateSelect={this._handleCalendarDateSelect}
+          selectedDate={this.state.selectedCalendarDate}
+        />
 
         <br /><br />
         <DatePicker
