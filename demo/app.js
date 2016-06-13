@@ -793,7 +793,6 @@ const Demo = React.createClass({
 
         <br /><br />
         <DateRangePicker
-          closeOnDateSelect={true}
           onDateSelect={this._handleDateRangeSelect}
           selectedEndDate={this.state.selectedEndDate}
           selectedStartDate={this.state.selectedStartDate}
