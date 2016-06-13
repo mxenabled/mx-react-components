@@ -16,8 +16,8 @@ const RowDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <div className='flex'>
-          <Row>
+        <div style={styles.container}>
+          <Row style={styles.row}>
             <Column columnLarge={6}>
               <div style={styles.responsiveDiv}>First Column</div>
             </Column>
@@ -52,6 +52,12 @@ const RowDocs = React.createClass({
 
   styles () {
     return {
+      container: {
+        width: '100%'
+      },
+      row: {
+        marginBottom: 10
+      },
       responsiveDiv: {
         boxSizing: 'border-box',
         backgroundColor: Styles.Colors.PORCELAIN,
