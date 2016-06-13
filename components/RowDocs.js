@@ -41,7 +41,7 @@ const RowDocs = React.createClass({
               <div style={styles.responsiveDiv}>Third Column</div>
             </Column>
             <Column
-              breakpointMedium={1000}
+              breakpointLarge={1000}
               columnLarge={6}
               columnMedium={12}
               style={styles.column}
@@ -59,40 +59,49 @@ const RowDocs = React.createClass({
           </Row>
         </div>
 
-        <label>Button:</label>
-        <ul>
-          <li>Large: 16% width, 87% offset, first in order</li>
-          <li>Medium: 100% width, last in order (default)</li>
-          <li>Small: 100% width, last in order (default</li>
-        </ul>
-
-        <label>First column:</label>
-        <ul>
-          <li>Large: 50% width</li>
-          <li>Medium: 66% width, 33% offset</li>
-          <li>Small: 100% width (default)</li>
-        </ul>
-
-        <label>Second column:</label>
-        <ul>
-          <li>Large: 50% width</li>
-          <li>Medium: 50% width</li>
-          <li>Small: 100% width (default)</li>
-        </ul>
-
-        <label>Third column:</label>
-        <ul>
-          <li>Large: 50% width</li>
-          <li>Medium: 50% width</li>
-          <li>Small: 100% width (default)</li>
-        </ul>
-
-        <label>Fourth column:</label>
-        <ul>
-          <li>Large: 50% width</li>
-          <li>Medium: 100% width, breakpoint of 1000px</li>
-          <li>Small: 100% width (default)</li>
-        </ul>
+        <h3>Responsive Behavior</h3>
+        <Row>
+          <Column columnLarge={6}>
+            <label>Button:</label>
+            <ul>
+              <li>Large: 17% width, 83% offset, first in order</li>
+              <li>Medium: 100% width, last in order (default)</li>
+              <li>Small: 100% width, last in order (default</li>
+            </ul>
+          </Column>
+          <Column columnLarge={6}>
+            <label>First column:</label>
+            <ul>
+              <li>Large: 50% width</li>
+              <li>Medium: 66% width, 33% offset</li>
+              <li>Small: 100% width (default)</li>
+            </ul>
+          </Column>
+          <Column columnLarge={6}>
+            <label>Second column:</label>
+            <ul>
+              <li>Large: 50% width</li>
+              <li>Medium: 50% width</li>
+              <li>Small: 100% width (default)</li>
+            </ul>
+          </Column>
+          <Column columnLarge={6}>
+            <label>Third column:</label>
+            <ul>
+              <li>Large: 50% width</li>
+              <li>Medium: 50% width</li>
+              <li>Small: 100% width (default)</li>
+            </ul>
+          </Column>
+          <Column columnLarge={6}>
+            <label>Fourth column:</label>
+            <ul>
+              <li>Large: 50% width</li>
+              <li>Medium: 100% width, large breakpoint of 1000px</li>
+              <li>Small: 100% width (default)</li>
+            </ul>
+          </Column>
+        </Row>
 
         <h3>Row Usage</h3>
 
@@ -212,8 +221,8 @@ const RowDocs = React.createClass({
         padding: 10,
         width: '100%'
       },
-      responsiveButton: {
-        width: '100%'
+      listRow: {
+        marginTop: 20
       }
     };
   }
