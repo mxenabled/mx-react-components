@@ -63,15 +63,7 @@ const RowDocs = React.createClass({
 
         <h3>Responsive Behavior</h3>
         <Row>
-          <Column columnLarge={4} orderLarge={1}>
-            <label>Button:</label>
-            <ul>
-              <li>Large: 17% width, 83% offset, first in order</li>
-              <li>Medium: 33% width, 33% offset, last in order</li>
-              <li>Small: 100% width, last in order (default)</li>
-            </ul>
-          </Column>
-          <Column columnLarge={4} orderLarge={4}>
+          <Column columnLarge={4} columnMedium={6}>
             <label>First column:</label>
             <ul>
               <li>Large: 50% width</li>
@@ -79,7 +71,7 @@ const RowDocs = React.createClass({
               <li>Small: 100% width (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={4} orderLarge={2}>
+          <Column columnLarge={4} columnMedium={6}>
             <label>Second column:</label>
             <ul>
               <li>Large: 50% width</li>
@@ -87,7 +79,7 @@ const RowDocs = React.createClass({
               <li>Small: 100% width (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={4} orderLarge={5}>
+          <Column columnLarge={4} columnMedium={6}>
             <label>Third column:</label>
             <ul>
               <li>Large: 50% width</li>
@@ -95,12 +87,20 @@ const RowDocs = React.createClass({
               <li>Small: 100% width (default)</li>
             </ul>
           </Column>
-          <Column columnLarge={4} orderLarge={3}>
+          <Column columnLarge={4} columnMedium={6}>
             <label>Fourth column:</label>
             <ul>
               <li>Large: 50% width</li>
               <li>Medium: 100% width, large breakpoint of 1000px</li>
               <li>Small: 100% width (default)</li>
+            </ul>
+          </Column>
+          <Column columnLarge={4} columnMedium={6} orderLarge={-1}>
+            <label>Button:</label>
+            <ul>
+              <li>Large: 17% width, 83% offset, first in order</li>
+              <li>Medium: 33% width, 33% offset, last in order</li>
+              <li>Small: 100% width, last in order (default)</li>
             </ul>
           </Column>
         </Row>
