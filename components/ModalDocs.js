@@ -121,9 +121,17 @@ const ModalDocs = React.createClass({
         <h5>onRequestClose <label>Function</label></h5>
         <p>A method that is called when the close button or scrim area is clicked by a user. Use this method to tell the Modal when it should close.</p>
 
+        <h5>showCloseIcon <label>Boolean</label></h5>
+        <p>Default: 'true'</p>
+        <p>Determines if the close icon is displayed in the top right corner of the Modal.  The Modal can still be closed by clicking on the scrim.</p>
+
         <h5>showFooter <label>Boolean</label></h5>
         <p>Default: 'false'</p>
         <p>Determines if the footer section, which contains the tooltip and buttons, is displayed.</p>
+
+        <h5>showScrim <label>Boolean</label></h5>
+        <p>Default: 'true'</p>
+        <p>When set to false, set the scrim background color to transparent.</p>
 
         <h5>showTitleBar <label>Boolean</label></h5>
         <p>Default: 'false'</p>

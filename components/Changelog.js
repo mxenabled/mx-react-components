@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.1.44</h3>
+        <ul>
+          <li>Modal - Add showScrim and showCloseIcon props (<a href='https://github.com/mxenabled/mx-react-components/pull/335'>#335</a>)</li>
+        </ul>
+
         <h3>3.1.43</h3>
         <ul>
           <li>Add Row and Column components for responsive grid (<a href='https://github.com/mxenabled/mx-react-components/pull/331'>#331</a>)</li>
