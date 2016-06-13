@@ -427,74 +427,74 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Row>
             <Column
-              colLg={9}
-              colMd={6}
-              offLg={3}
-              offMd={4}
+              columnLarge={9}
+              columnMedium={6}
+              offsetLarge={3}
+              offsetMedium={4}
             >
               <div style={styles.responsiveDiv}>1</div>
             </Column>
             <Column
-              colLg={4}
-              colMd={3}
-              colSm={12}
+              columnLarge={4}
+              columnMedium={3}
+              columnSmall={12}
             >
               <div style={styles.responsiveDiv}>2</div>
             </Column>
             <Column
-              colLg={4}
-              colMd={9}
-              colSm={12}
+              columnLarge={4}
+              columnMedium={9}
+              columnSmall={12}
             >
               <div style={styles.responsiveDiv}>3</div>
             </Column>
             <Column
-              colLg={4}
-              colMd={12}
-              colSm={12}
+              columnLarge={4}
+              columnMedium={12}
+              columnSmall={12}
             >
               <div style={styles.responsiveDiv}>5</div>
             </Column>
             <Column
-              colLg={3}
-              colMd={6}
-              colSm={9}
-              ordMd={-1}
+              columnLarge={3}
+              columnMedium={6}
+              columnSmall={9}
+              orderMedium={-1}
             >
               <div style={styles.responsiveDiv}>6</div>
             </Column>
             <Column
-              colLg={3}
-              colMd={6}
-              colSm={9}
-              ordMd={-2}
+              columnLarge={3}
+              columnMedium={6}
+              columnSmall={9}
+              orderMedium={-2}
             >
               <div style={styles.responsiveDiv}>7</div>
             </Column>
             <Column
-              colLg={6}
-              colMd={12}
-              colSm={12}
+              columnLarge={6}
+              columnMedium={12}
+              columnSmall={12}
             >
               <div style={styles.responsiveDiv}>8</div>
             </Column>
             <Column
-              colLg={6}
-              colMd={9}
-              colSm={12}
+              columnLarge={6}
+              columnMedium={9}
+              columnSmall={12}
             >
               <Row>
                 <Column
-                  colLg={6}
-                  colMd={6}
-                  colSm={6}
+                  columnLarge={6}
+                  columnMedium={6}
+                  columnSmall={6}
                 >
                   <div style={styles.responsiveDiv}>9</div>
                 </Column>
                 <Column
-                  colLg={6}
-                  colMd={6}
-                  colSm={6}
+                  columnLarge={6}
+                  columnMedium={6}
+                  columnSmall={6}
                 >
                   <div style={styles.responsiveDiv}>10</div>
                 </Column>

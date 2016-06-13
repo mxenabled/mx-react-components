@@ -27,5 +27,4 @@ const Row = React.createClass({
   }
 });
 
-
 module.exports = Row;
