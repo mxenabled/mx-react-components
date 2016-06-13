@@ -5,6 +5,7 @@ const { hashHistory, Route, IndexRoute, Router } = require('react-router');
 const Button = require('components/ButtonDocs');
 const ButtonGroup = require('components/ButtonGroupDocs');
 const Changelog = require('components/Changelog');
+const Column = require('components/ColumnDocs');
 const Components = require('components/Components');
 const DatePicker = require('components/DatePickerDocs');
 const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
@@ -20,6 +21,7 @@ const PageIndicator = require('components/PageIndicatorDocs');
 const RadioButton = require('components/RadioButtonDocs');
 const RajaIcon = require('components/RajaIconDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
+const Row = require('components/RowDocs');
 const SearchInput = require('components/SearchInputDocs');
 const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
@@ -56,6 +58,7 @@ ReactDOM.render((
         <IndexRoute component={Changelog} />
         <Route component={Button} path='button' />
         <Route component={ButtonGroup} path='button-group' />
+        <Route component={Column} path='column' />
         <Route component={DatePicker} path='date-picker' />
         <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DisplayInput} path='display-input' />
@@ -68,6 +71,7 @@ ReactDOM.render((
         <Route component={RadioButton} path='radio-button' />
         <Route component={RajaIcon} path='raja-icon' />
         <Route component={RangeSelector} path='range-selector' />
+        <Route component={Row} path='row' />
         <Route component={SearchInput} path='search-input' />
         <Route component={Select} path='select' />
         <Route component={SelectFullScreen} path='select-full-screen' />
