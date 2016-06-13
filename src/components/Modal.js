@@ -24,6 +24,7 @@ const Modal = React.createClass({
     footerStyle: React.PropTypes.object,
     isRelative: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
+    showCloseIcon: React.PropTypes.bool,
     showFooter: React.PropTypes.bool,
     showTitleBar: React.PropTypes.bool,
     style: React.PropTypes.object,
@@ -38,6 +39,7 @@ const Modal = React.createClass({
       buttons: [],
       color: StyleConstants.Colors.PRIMARY,
       isRelative: false,
+      showCloseIcon: true,
       showFooter: false,
       showTitleBar: false,
       title: '',
@@ -183,13 +185,15 @@ const Modal = React.createClass({
           className='mx-modal-container'
           style={Object.assign({}, styles.container, this.props.style)}
         >
-          <Icon
-            className='mx-modal-close'
-            onClick={this.props.onRequestClose}
-            size={24}
-            style={styles.close}
-            type='close-solid'
-          />
+          {this.props.showCloseIcon ? (
+            <Icon
+              className='mx-modal-close'
+              onClick={this.props.onRequestClose}
+              size={24}
+              style={styles.close}
+              type='close-solid'
+            />
+          ) : null}
           {this._renderTitleBar()}
           <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
             {this.props.children}
