@@ -15,7 +15,43 @@ const RowDocs = React.createClass({
           <label>Row and column components to be used in a response grid.</label>
         </h1>
 
-        <h3>Demo</h3>
+        <h3>
+          Demo
+          <label>Button:</label>
+          <ul>
+            <li>Large: 16% width, 87% offset, first in order</li>
+            <li>Medium: 100% width, last in order (default)</li>
+            <li>Small: 100% width, last in order (default</li>
+          </ul>
+
+          <label>First column:</label>
+          <ul>
+            <li>Large: 50% width</li>
+            <li>Medium: 66% width, 33% offset</li>
+            <li>Small: 100% width (default)</li>
+          </ul>
+
+          <label>Second column:</label>
+          <ul>
+            <li>Large: 50% width</li>
+            <li>Medium: 50% width</li>
+            <li>Small: 100% width (default)</li>
+          </ul>
+
+          <label>Third column:</label>
+          <ul>
+            <li>Large: 50% width</li>
+            <li>Medium: 50% width</li>
+            <li>Small: 100% width (default)</li>
+          </ul>
+
+          <label>Fourth column:</label>
+          <ul>
+            <li>Large: 50% width</li>
+            <li>Medium: 100% width, breakpoint of 1000px</li>
+            <li>Small: 100% width (default)</li>
+          </ul>
+        </h3>
         <div style={styles.container}>
           <Row>
             <Column
@@ -26,13 +62,26 @@ const RowDocs = React.createClass({
             >
               <div style={styles.responsiveDiv}>First Column</div>
             </Column>
-            <Column columnLarge={6} style={styles.column}>
+            <Column
+              columnLarge={6}
+              columnMedium={6}
+              style={styles.column}
+            >
               <div style={styles.responsiveDiv}>Second Column</div>
             </Column>
-            <Column columnLarge={6} style={styles.column}>
+            <Column
+              columnLarge={6}
+              columnMedium={6}
+              style={styles.column}
+            >
               <div style={styles.responsiveDiv}>Third Column</div>
             </Column>
-            <Column columnLarge={6} style={styles.column}>
+            <Column
+              breakpointMedium={1000}
+              columnLarge={6}
+              columnMedium={100}
+              style={styles.column}
+            >
               <div style={styles.responsiveDiv}>Fourth Column</div>
             </Column>
             <Column
@@ -41,7 +90,7 @@ const RowDocs = React.createClass({
               orderLarge={-1}
               style={styles.column}
             >
-              <Button style={styles.responsiveButton}>Fourth Column</Button>
+              <Button style={styles.responsiveButton}>Save</Button>
             </Column>
           </Row>
         </div>
@@ -103,8 +152,43 @@ const RowDocs = React.createClass({
         <Markdown>
           {`
             <Row>
-              <Column columnLarge={6}>
-                <div style={styles.responsiveDiv}>First Column</div>
+              <Column
+                columnLarge={6}
+                columnMedium={9}
+                offsetMedium={3}
+                style={styles.column}
+              >
+                <div>First Column</div>
+              </Column>
+              <Column
+                columnLarge={6}
+                columnMedium={6}
+                style={styles.column}
+              >
+                <div>Second Column</div>
+              </Column>
+              <Column
+                columnLarge={6}
+                columnMedium={6}
+                style={styles.column}
+              >
+                <div}>Third Column</div>
+              </Column>
+              <Column
+                breakpointMedium={1000}
+                columnLarge={6}
+                columnMedium={100}
+                style={styles.column}
+              >
+                <div>Fourth Column</div>
+              </Column>
+              <Column
+                columnLarge={2}
+                offsetLarge={10}
+                orderLarge={-1}
+                style={styles.column}
+              >
+                <Button>Save</Button>
               </Column>
             </Row>
           `}
