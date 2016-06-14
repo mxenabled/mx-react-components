@@ -202,7 +202,7 @@ const Demo = React.createClass({
       lineChartData: [],
       pageIndicatorIndex: 0,
       radioChecked: false,
-      selectedDatePickerDate: moment().unix(),
+      selectedDatePickerDate: null,
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
@@ -786,9 +786,11 @@ const Demo = React.createClass({
 
         <br /><br />
         <DateTimePicker
-          closeOnDateSelect={true}
+          closeOnDateSelect={false}
           onDateSelect={this._handleDateSelect}
           selectedDate={this.state.selectedDatePickerDate}
+          showIcons={true}
+          timeZoneFormat='name'
         >
           <div style={{ padding: 20 }}>at</div>
         </DateTimePicker>

@@ -10,37 +10,53 @@ const DatePicker = React.createClass({
   propTypes: {
     closeOnDateSelect: React.PropTypes.bool,
     dateFormat: React.PropTypes.string,
+    dateIcon: React.PropTypes.string,
     datePlaceholder: React.PropTypes.string,
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
     onDateSelect: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
     selectedDate: React.PropTypes.number,
+    showIcons: React.PropTypes.bool,
     style: React.PropTypes.object,
     timeFormat: React.PropTypes.string,
-    timeIncrement: React.PropTypes.number,
+    timeIcon: React.PropTypes.string,
     timePlaceholder: React.PropTypes.string,
-    timezone: React.PropTypes.string
+    timeZone: React.PropTypes.string,
+    timeZoneFormat: React.PropTypes.oneOf(['abbr', 'name']),
+    timeZoneNames: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
-      closeOnDateSelect: false,
+      closeOnDateSelect: true,
       dateFormat: 'MMM D, YYYY',
+      dateIcon: 'calendar',
       datePlaceholder: 'Select a Date',
       locale: 'en',
       onDateSelect () {},
       primaryColor: StyleConstants.Colors.PRIMARY,
+      showIcons: true,
       timeFormat: 'LT',
-      timeIncrement: 10,
+      timeIcon: 'clock',
       timePlaceholder: 'Select a Time',
-      timezone: 'America/Denver'
+      timeZone: moment.tz.guess(),
+      timeZoneNames: {
+        EST: 'Eastern Standard Time',
+        EDT: 'Eastern Daylight Time',
+        CST: 'Central Standard Time',
+        CDT: 'Central Daylight Time',
+        MST: 'Mountain Standard Time',
+        MDT: 'Mountain Daylight Time',
+        PST: 'Pacific Standard Time',
+        PDT: 'Pacific Daylight Time'
+      }
     };
   },
 
   getInitialState () {
     return {
-      activeTime: null,
+      activeDate: null,
       currentDate: moment().unix(),
       showCalendar: false,
       showTimes: false
@@ -84,22 +100,29 @@ const DatePicker = React.createClass({
   },
 
   _handleScrimClick () {
+    this.refs.dateSelect.blur();
+
     this.setState({
       showCalendar: false
     });
   },
 
-  _handleDateSelect (date) {
+  _handleDateHover (activeDate) {
+    this.setState({
+      activeDate
+    });
+  },
+
+  _handleDateSelect (date, e) {
     if (this.props.closeOnDateSelect) {
       this._handleScrimClick();
     }
 
     this.props.onDateSelect(date);
+    e.stopPropagation();
   },
 
   _handleTimeFocus () {
-    this.refs.timeInput.focus();
-
     this.setState({
       showTimes: true
     });
@@ -113,17 +136,19 @@ const DatePicker = React.createClass({
 
   _handleTimeSelect (e) {
     const selectedDate = this.props.selectedDate ? moment.unix(this.props.selectedDate) : moment();
+    const value = e.target.value.toLowerCase().replace('.', '');
 
-    const time = e.target.value.split(':');
-    const hour = time[0];
-    const minute = time[1].substring(0, 2);
+    const time = value.split(':');
+    const pm = value.includes('pm');
+    const hour = pm ? Number(time[0]) + 12 : Number(time[0]);
+    const minute = Number(time[1].substring(0, 2));
     const date = selectedDate.hour(hour).minute(minute).second(0).unix();
-
-    this.props.onDateSelect(date);
 
     this.setState({
       showTimes: false
     });
+
+    this.props.onDateSelect(date);
   },
 
   _renderMonthTable () {
@@ -137,17 +162,21 @@ const DatePicker = React.createClass({
       const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate), 'day');
       const isToday = startDate.isSame(moment(), 'day');
       const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
+      const isActiveDate = startDate.unix() === this.state.activeDate;
 
       const day = (
         <div
-          key={startDate}
+          key={startDate.unix()}
           onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
+          onMouseEnter={this._handleDateHover.bind(null, startDate.unix())}
+          onMouseLeave={this._handleDateHover}
           style={Object.assign({},
             styles.calendarDay,
-            isCurrentMonth && styles.currentMonth,
-            disabledDay && styles.calendarDayDisabled,
-            isToday && styles.today,
-            isSelectedDay && styles.selectedDay
+            isActiveDate ? styles.calendarDayActive : null,
+            isCurrentMonth ? styles.currentMonth : null,
+            disabledDay ? styles.calendarDayDisabled : null,
+            isToday ? styles.today : null,
+            isSelectedDay ? styles.selectedDay : null
           )}
         >
           {startDate.date()}
@@ -161,6 +190,18 @@ const DatePicker = React.createClass({
     return days;
   },
 
+  _getTimeZone (date) {
+    const timeZoneAbbr = moment.unix(date).tz(this.props.timeZone).format('z');
+
+    if (this.props.timeZoneFormat === 'name') {
+      return this.props.timeZoneNames[timeZoneAbbr] || timeZoneAbbr;
+    } else if (this.props.timeZoneFormat === 'abbr') {
+      return timeZoneAbbr;
+    } else {
+      return null;
+    }
+  },
+
   render () {
     const styles = this.styles();
 
@@ -169,14 +210,17 @@ const DatePicker = React.createClass({
         <div
           onBlur={this._handleDateBlur}
           onFocus={this._handleDateFocus}
+          ref='dateSelect'
           style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
           tabIndex={0}
         >
-          <Icon
-            size={20}
-            style={styles.selectedIcon}
-            type='calendar'
-          />
+          {this.props.showIcons ? (
+            <Icon
+              size={20}
+              style={styles.selectedIcon}
+              type={this.props.dateIcon}
+            />
+          ) : null}
           <div style={styles.selectedText}>
             {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.dateFormat) : this.props.datePlaceholder}
           </div>
@@ -226,24 +270,35 @@ const DatePicker = React.createClass({
           onBlur={this._handleTimeBlur}
           onFocus={this._handleTimeFocus}
           style={Object.assign({}, styles.selectWrapper, this.state.showTimes ? styles.activeSelectWrapper : null)}
-          tabIndex={1}
+          tabIndex={0}
         >
-          <Icon
-            size={20}
-            style={styles.selectedIcon}
-            type='clock'
-          />
-          <input
-            defaultValue={this.props.selectedDate ? moment.unix(this.props.selectedDate).format('HH:mm') : ''}
-            name='time'
-            onBlur={this._handleTimeSelect}
-            ref='timeInput'
-            style={styles.timeInput}
-            type='time'
-          />
-        </div>
-        <div>
-          {moment(this.state.selectedDate).format('z')}
+          {this.props.showIcons ? (
+            <Icon
+              size={20}
+              style={styles.selectedIcon}
+              type='clock'
+            />
+          ) : null}
+          {this.state.showTimes ? (
+            <input
+              autoFocus={true}
+              defaultValue={this.state.showTimes ? moment.unix(this.props.selectedDate).format('HH:mm') : null}
+              name='time'
+              onBlur={this._handleTimeSelect}
+              ref='timeInput'
+              style={styles.timeInput}
+              type='time'
+            />
+          ) : (
+            <div style={styles.timeDisplay}>
+              {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
+            </div>
+          )}
+        {this.props.timeZoneFormat ? (
+          <div style={styles.timeZone}>
+            {this._getTimeZone(this.props.selectedDate)}
+          </div>
+        ) : null}
         </div>
         {this.state.showCalendar || this.state.showTimes ? (
           <div onClick={this._handleScrimClick} style={styles.scrim} />
@@ -262,22 +317,22 @@ const DatePicker = React.createClass({
 
       // Selected styles
       selectWrapper: {
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        color: StyleConstants.Colors.CHARCOAL,
-        boxSizing: 'border-box',
+        alignItems: 'center',
         backgroundColor: StyleConstants.Colors.WHITE,
         borderColor: StyleConstants.Colors.FOG,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
-        flex: '1 0 0%',
-        alignItems: 'center',
+        boxShadow: 'none',
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.CHARCOAL,
         cursor: 'pointer',
         display: 'flex',
-        padding: '10px 15px',
-        position: 'relative',
+        flex: '1 0 0%',
+        fontSize: StyleConstants.FontSizes.MEDIUM,
         outline: 'none',
-        boxShadow: 'none'
+        padding: '10px 15px',
+        position: 'relative'
       },
       activeSelectWrapper: {
         borderColor: this.props.primaryColor
@@ -299,19 +354,21 @@ const DatePicker = React.createClass({
 
       // Time Styles
       timeInput: {
+        flex: 1,
+        boxShadow: 'none',
         fontFamily: StyleConstants.Fonts.REGULAR,
         fontSize: StyleConstants.FontSizes.MEDIUM,
-        border: 'none',
-        outline: 'none',
-        boxShadow: 'none'
+        outline: 'none'
       },
-      timeOption: {
+      timeDisplay: {
+        flex: 1,
+        lineHeight: '1.55em',
+        color: this.props.selectedDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
+      },
+      timeZone: {
+        paddingLeft: 10,
         textAlign: 'right',
-        padding: 10
-      },
-      activeTimeOption: {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE
+        color: StyleConstants.Colors.ASH
       },
 
       //Calendar Styles
@@ -323,8 +380,8 @@ const DatePicker = React.createClass({
         boxSizing: 'border-box',
         padding: 20,
         position: 'absolute',
-        top: 50,
         right: 0,
+        top: 50,
         width: 287,
         zIndex: 10
       },
@@ -378,19 +435,15 @@ const DatePicker = React.createClass({
         height: 30,
         justifyContent: 'center',
         marginBottom: 2,
-        width: 35,
-
-        ':hover': {
-          border: '1px solid' + this.props.primaryColor
-        }
+        width: 35
+      },
+      calendarDayActive: {
+        border: '1px solid' + this.props.primaryColor
       },
       calendarDayDisabled: {
         color: StyleConstants.Colors.FOG,
-
-        ':hover': {
-          cursor: 'default',
-          border: 'none'
-        }
+        border: 'none',
+        cursor: 'default'
       },
 
       today: {
