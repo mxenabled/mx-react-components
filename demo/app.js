@@ -745,7 +745,7 @@ const Demo = React.createClass({
 
         <br /><br /><br /><br />
         <div>
-          <ToggleSwitch />
+          <ToggleSwitch showLabels={true} />
         </div>
 
         <br /><br />

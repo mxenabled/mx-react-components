@@ -1,89 +1,51 @@
 const React = require('react');
 const Radium = require('radium');
 const StyleConstants = require('../constants/Style');
+const Icon = require('./Icon');
 
 const ToggleSwitch = React.createClass({
   propTypes: {
-    activeColor: React.PropTypes.string,
-    children: React.PropTypes.node,
-    componentStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    defaultPosition: React.PropTypes.oneOf(['left', 'right']),
-    inactiveColor: React.PropTypes.string,
-    labelStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
+    checked: React.PropTypes.bool,
+    falseIcon: React.PropTypes.element,
     leftLabel: React.PropTypes.string,
     onToggle: React.PropTypes.func,
     rightLabel: React.PropTypes.string,
+    showIcons: React.PropTypes.bool,
     showLabels: React.PropTypes.bool,
-    toggleStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    trackStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ])
+    style: React.PropTypes.object,
+    trueIcon: React.PropTypes.element
   },
 
   getDefaultProps () {
     return {
-      activeColor: StyleConstants.Colors.PRIMARY,
-      defaultPosition: 'left',
-      inactiveColor: StyleConstants.Colors.FOG,
-      leftLabel: 'On',
+      checked: false,
+      leftLabel: 'Off',
       onToggle () {},
-      rightLabel: 'Off',
-      showLabels: true,
-      toggleStyle: {},
-      trackStyle: {}
+      rightLabel: 'On',
+      showLabels: false,
+      showIcons: true,
+      style: {}
     };
   },
 
   getInitialState () {
     return {
-      activePosition: this.props.defaultPosition
+      checked: this.props.checked
     };
   },
 
-  _handleLeftLabelClick () {
-    const activePosition = 'left';
-
-    this.setState({
-      activePosition
-    });
-
-    this.props.onToggle(activePosition);
-  },
-
-  _handleRightLabelClick () {
-    const activePosition = 'right';
-
-    this.setState({
-      activePosition
-    });
-
-    this.props.onToggle(activePosition);
-  },
-
   _handleToggle (event) {
-    const activePosition = this.state.activePosition === 'left' ? 'right' : 'left';
-
     this.setState({
-      activePosition
+      checked: !this.state.checked
+    }, () => {
+      this.props.onToggle(this.state.checked, event);
     });
-
-    this.props.onToggle(activePosition, event);
   },
 
   _renderLeftLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span className='left-label' onClick={this._handleLeftLabelClick} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'left' && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
+        <span className='left-label' onClick={this._handleToggle} style={[styles.label, !this.state.checked && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
       );
     } else {
       return null;
@@ -93,78 +55,113 @@ const ToggleSwitch = React.createClass({
   _renderRightLabel (styles) {
     if (this.props.showLabels) {
       return (
-        <span className='right-label' onClick={this._handleRightLabelClick} style={[styles.label, this.props.labelStyle, this.state.activePosition === 'right' && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
+        <span className='right-label' onClick={this._handleToggle} style={[styles.label, this.state.checked && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
       );
     } else {
       return null;
     }
   },
 
-  _getChildren () {
-    // Let all the children of the toggle switch be aware of the activePosition
-    return React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, { activePosition: this.state.activePosition });
-    });
+  _renderIcons (styles) {
+    if (!this.props.showIcons) {
+      return null;
+    }
+    const trueIcon = this.props.trueIcon || <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type='check-skinny' />;
+    const falseIcon = this.props.falseIcon || <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type='close-skinny' />;
+
+    return (
+      <span>
+        {trueIcon} {falseIcon}
+      </span>
+    );
   },
 
   render () {
-    const styles = {
-      activeLabel: {
-        color: this.props.activeColor
-      },
+    const styles = this.styles();
+
+    return (
+      <div className='toggle-switch-component' style={styles.component}>
+        {this._renderLeftLabel(styles)}
+        <div
+          className='toggle-switch-track'
+          onClick={this._handleToggle}
+          style={Object.assign({}, styles.track, styles[this.state.checked + 'Track'])}
+        >
+          <div className='toggle-switch-toggle' style={Object.assign({}, styles.toggle, styles[this.state.checked + 'Toggle'])}></div>
+          {this._renderIcons(styles)}
+        </div>
+        {this._renderRightLabel(styles)}
+      </div>
+    );
+  },
+
+  styles () {
+    return Object.assign({}, {
       component: {
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: '12px',
         position: 'relative'
       },
-      inactiveLabel: {
-        color: this.props.inactiveColor
+      icon: {
+        fill: StyleConstants.Colors.WHITE,
+        position: 'absolute',
+        top: 0,
+        zIndex: 2
+      },
+      trueIcon: {
+        left: 0
+      },
+      falseIcon: {
+        right: 0
       },
       label: {
         cursor: 'pointer',
         fontWeight: 'bold'
       },
-      left: {
-        left: this.props.trackStyle.padding || '2px',
-        transition: 'all .1s'
+      inactiveLabel: {
+        color: StyleConstants.Colors.FOG
       },
-      right: {
-        right: this.props.trackStyle.padding || '2px',
-        transition: 'all .1s'
+      activeLabel: {
+        color: StyleConstants.Colors.PRIMARY
       },
       toggle: {
         backgroundColor: StyleConstants.Colors.WHITE,
         borderRadius: '100%',
-        height: this.props.toggleStyle.height || '20px',
+        height: '20px',
         position: 'absolute',
-        width: this.props.toggleStyle.width || '20px'
+        width: '20px',
+        transition: 'all 0.5s ease',
+        zIndex: 3
+      },
+      falseToggle: {
+        left: '2px'
+      },
+      trueToggle: {
+        left: '20px'
       },
       track: {
-        backgroundColor: StyleConstants.Colors.FOG,
-        borderRadius: this.props.trackStyle.height || '20px',
+        borderRadius: '20px',
         cursor: 'pointer',
         display: 'inline-block',
-        height: this.props.trackStyle.height || '20px',
+        height: '20px',
         margin: '0 10px',
-        padding: this.props.trackStyle.padding || '2px',
+        padding: '2px',
         position: 'relative',
+        transition: 'all 0.5s ease',
         verticalAlign: 'middle',
-        width: this.props.trackStyle.width || '38px'
+        width: '38px',
+        zIndex: 1
+      },
+      trueTrack: {
+        backgroundColor: StyleConstants.Colors.CHARCOAL
+      },
+      falseTrack: {
+        backgroundColor: StyleConstants.Colors.ASH
       }
-    };
-
-    return (
-      <div className='toggle-switch-component' style={[styles.component, this.props.componentStyle]}>
-        {this._renderLeftLabel(styles)}
-        <div className='toggle-switch-track' onClick={this._handleToggle} style={[styles.track, this.props.trackStyle]} >
-          <div className='toggle-switch-toggle' style={[styles.toggle, styles[this.state.activePosition], this.props.toggleStyle]}></div>
-          {this._getChildren()}
-        </div>
-        {this._renderRightLabel(styles)}
-      </div>
-    );
+    }, this.props.style);
   }
+
 });
 
 module.exports = Radium(ToggleSwitch);
