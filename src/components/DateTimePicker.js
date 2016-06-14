@@ -8,6 +8,7 @@ const StyleConstants = require('../constants/Style');
 
 const DatePicker = React.createClass({
   propTypes: {
+    calendarStyle: React.PropTypes.object,
     closeOnDateSelect: React.PropTypes.bool,
     dateFormat: React.PropTypes.string,
     dateIcon: React.PropTypes.string,
@@ -61,15 +62,15 @@ const DatePicker = React.createClass({
     };
   },
 
-  _handleDateFocus () {
-    this.setState({
-      showCalendar: true
-    });
-  },
-
   _handleDateBlur () {
     this.setState({
       showCalendar: false
+    });
+  },
+
+  _handleDateFocus () {
+    this.setState({
+      showCalendar: true
     });
   },
 
@@ -90,15 +91,15 @@ const DatePicker = React.createClass({
     this.props.onDateSelect(moment.unix(date).hour(hour).minute(minutes).seconds(0).unix());
   },
 
-  _handleTimeFocus () {
-    this.setState({
-      editTime: true
-    });
-  },
-
   _handleTimeBlur () {
     this.setState({
       editTime: false
+    });
+  },
+
+  _handleTimeFocus () {
+    this.setState({
+      editTime: true
     });
   },
 
@@ -138,6 +139,7 @@ const DatePicker = React.createClass({
       <div style={styles.component}>
         <div
           onBlur={this._handleDateBlur}
+          onClick={this._handleDateClick}
           onFocus={this._handleDateFocus}
           ref='dateSelect'
           style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
@@ -210,8 +212,8 @@ const DatePicker = React.createClass({
   styles () {
     return {
       component: Object.assign({
-        display: 'flex',
         alignItems: 'center',
+        display: 'flex',
         width: '100%'
       }, this.props.style),
 
@@ -251,25 +253,26 @@ const DatePicker = React.createClass({
 
       // Time Styles
       timeInput: {
-        flex: 1,
+        border: 'none',
         boxShadow: 'none',
+        flex: 1,
         fontFamily: StyleConstants.Fonts.REGULAR,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         outline: 'none'
       },
       timeDisplay: {
+        color: this.props.selectedDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
         flex: 1,
-        lineHeight: '1.55em',
-        color: this.props.selectedDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
+        lineHeight: '1.55em'
       },
       timezone: {
+        color: StyleConstants.Colors.ASH,
         paddingLeft: 10,
-        textAlign: 'right',
-        color: StyleConstants.Colors.ASH
+        textAlign: 'right'
       },
 
       //Calendar Styles
-      calendar: {
+      calendar: Object.assign({}, {
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: 3,
@@ -281,7 +284,7 @@ const DatePicker = React.createClass({
         top: 50,
         width: 287,
         zIndex: 10
-      }
+      }, this.props.calendarStyle)
     };
   }
 });
