@@ -1,7 +1,7 @@
 const React = require('react');
-const Radium = require('radium');
 const moment = require('moment-timezone/builds/moment-timezone-with-data.min');
 
+const Calendar = require('./Calendar');
 const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
@@ -56,19 +56,9 @@ const DatePicker = React.createClass({
 
   getInitialState () {
     return {
-      activeDate: null,
-      currentDate: moment().unix(),
       showCalendar: false,
-      showTimes: false
+      editTime: false
     };
-  },
-
-  componentWillReceiveProps (newProps) {
-    if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
-      this.setState({
-        currentDate: newProps.selectedDate
-      });
-    }
   },
 
   _handleDateFocus () {
@@ -83,54 +73,32 @@ const DatePicker = React.createClass({
     });
   },
 
-  _handlePreviousClick () {
-    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
-
-    this.setState({
-      currentDate
-    });
-  },
-
-  _handleNextClick () {
-    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
-
-    this.setState({
-      currentDate
-    });
-  },
-
-  _handleScrimClick () {
-    this.refs.dateSelect.blur();
-
-    this.setState({
-      showCalendar: false
-    });
-  },
-
-  _handleDateHover (activeDate) {
-    this.setState({
-      activeDate
-    });
-  },
-
   _handleDateSelect (date, e) {
+    e.stopPropagation();
+
     if (this.props.closeOnDateSelect) {
-      this._handleScrimClick();
+      this.refs.dateSelect.blur();
+
+      this.setState({
+        showCalendar: false
+      });
     }
 
-    this.props.onDateSelect(date);
-    e.stopPropagation();
+    const hour = this.props.selectedDate ? moment.unix(this.props.selectedDate).hour() : 0;
+    const minutes = this.props.selectedDate ? moment.unix(this.props.selectedDate).minute() : 0;
+
+    this.props.onDateSelect(moment.unix(date).hour(hour).minute(minutes).seconds(0).unix());
   },
 
   _handleTimeFocus () {
     this.setState({
-      showTimes: true
+      editTime: true
     });
   },
 
   _handleTimeBlur () {
     this.setState({
-      showTimes: false
+      editTime: false
     });
   },
 
@@ -145,49 +113,10 @@ const DatePicker = React.createClass({
     const date = selectedDate.hour(hour).minute(minute).second(0).unix();
 
     this.setState({
-      showTimes: false
+      editTime: false
     });
 
     this.props.onDateSelect(date);
-  },
-
-  _renderMonthTable () {
-    const styles = this.styles();
-    const days = [];
-    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
-
-    while (moment(startDate).isBefore(endDate)) {
-      const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
-      const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate), 'day');
-      const isToday = startDate.isSame(moment(), 'day');
-      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
-      const isActiveDate = startDate.unix() === this.state.activeDate;
-
-      const day = (
-        <div
-          key={startDate.unix()}
-          onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
-          onMouseEnter={this._handleDateHover.bind(null, startDate.unix())}
-          onMouseLeave={this._handleDateHover}
-          style={Object.assign({},
-            styles.calendarDay,
-            isActiveDate ? styles.calendarDayActive : null,
-            isCurrentMonth ? styles.currentMonth : null,
-            disabledDay ? styles.calendarDayDisabled : null,
-            isToday ? styles.today : null,
-            isSelectedDay ? styles.selectedDay : null
-          )}
-        >
-          {startDate.date()}
-        </div>
-      );
-
-      days.push(day);
-      startDate = startDate.add(1, 'd');
-    }
-
-    return days;
   },
 
   _getTimeZone (date) {
@@ -230,37 +159,11 @@ const DatePicker = React.createClass({
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         {this.state.showCalendar ? (
-          <div style={styles.calendarWrapper}>
-            <div style={styles.calendarHeader}>
-              <Icon
-                onClick={this._handlePreviousClick}
-                size={20}
-                style={styles.calendayHeaderNav}
-                type='caret-left'
-              />
-              <div>
-                {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
-              </div>
-              <Icon
-                onClick={this._handleNextClick}
-                size={20}
-                style={styles.calendayHeaderNav}
-                type='caret-right'
-              />
-            </div>
-            <div style={styles.calendarWeek}>
-              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
-                return (
-                  <div key={i} style={styles.calendarWeekDay}>
-                    {day}
-                  </div>
-                );
-              })}
-            </div>
-            <div style={styles.calendarTable}>
-              {this._renderMonthTable()}
-            </div>
-          </div>
+          <Calendar
+            {...this.props}
+            onDateSelect={this._handleDateSelect}
+            style={styles.calendar}
+          />
         ) : null}
         </div>
         <div>
@@ -269,7 +172,7 @@ const DatePicker = React.createClass({
         <div
           onBlur={this._handleTimeBlur}
           onFocus={this._handleTimeFocus}
-          style={Object.assign({}, styles.selectWrapper, this.state.showTimes ? styles.activeSelectWrapper : null)}
+          style={Object.assign({}, styles.selectWrapper, this.state.editTime ? styles.activeSelectWrapper : null)}
           tabIndex={0}
         >
           {this.props.showIcons ? (
@@ -279,10 +182,10 @@ const DatePicker = React.createClass({
               type='clock'
             />
           ) : null}
-          {this.state.showTimes ? (
+          {this.state.editTime ? (
             <input
               autoFocus={true}
-              defaultValue={this.state.showTimes ? moment.unix(this.props.selectedDate).format('HH:mm') : null}
+              defaultValue={this.state.editTime ? moment.unix(this.props.selectedDate).format('HH:mm') : null}
               name='time'
               onBlur={this._handleTimeSelect}
               ref='timeInput'
@@ -294,15 +197,12 @@ const DatePicker = React.createClass({
               {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
             </div>
           )}
-        {this.props.timeZoneFormat ? (
-          <div style={styles.timeZone}>
-            {this._getTimeZone(this.props.selectedDate)}
-          </div>
-        ) : null}
+          {this.props.timeZoneFormat ? (
+            <div style={styles.timeZone}>
+              {this._getTimeZone(this.props.selectedDate)}
+            </div>
+          ) : null}
         </div>
-        {this.state.showCalendar || this.state.showTimes ? (
-          <div onClick={this._handleScrimClick} style={styles.scrim} />
-        ) : null}
       </div>
     );
   },
@@ -315,7 +215,7 @@ const DatePicker = React.createClass({
         width: '100%'
       }, this.props.style),
 
-      // Selected styles
+      // Select styles
       selectWrapper: {
         alignItems: 'center',
         backgroundColor: StyleConstants.Colors.WHITE,
@@ -348,9 +248,6 @@ const DatePicker = React.createClass({
       selectedDateCaret: {
         fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
       },
-      selectedTimeCaret: {
-        fill: this.state.showTimes ? this.props.primaryColor : StyleConstants.Colors.ASH
-      },
 
       // Time Styles
       timeInput: {
@@ -372,7 +269,7 @@ const DatePicker = React.createClass({
       },
 
       //Calendar Styles
-      calendarWrapper: {
+      calendar: {
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: 3,
@@ -384,90 +281,9 @@ const DatePicker = React.createClass({
         top: 50,
         width: 287,
         zIndex: 10
-      },
-
-      //Calendar Header
-      calendarHeader: {
-        alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
-        display: 'flex',
-        fontSize: StyleConstants.FontSizes.LARGE,
-        height: 30,
-        justifyContent: 'space-between',
-        marginBottom: 15,
-        position: 'relative',
-        textAlign: 'center'
-      },
-      calendayHeaderNav: {
-        width: 35
-      },
-
-      //Calendar week
-      calendarWeek: {
-        alignItems: 'center',
-        color: StyleConstants.Colors.ASH,
-        display: 'flex',
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.SMALL,
-        height: 30,
-        justifyContent: 'space-around',
-        marginBottom: 2
-      },
-      calendarWeekDay: {
-        textAlign: 'center',
-        width: 35
-      },
-
-      //Calenday table
-      calendarTable: {
-        alignItems: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around'
-      },
-      calendarDay: {
-        alignItems: 'center',
-        borderRadius: 3,
-        boxSizing: 'border-box',
-        color: StyleConstants.Colors.FOG,
-        cursor: 'pointer',
-        display: 'flex',
-        height: 30,
-        justifyContent: 'center',
-        marginBottom: 2,
-        width: 35
-      },
-      calendarDayActive: {
-        border: '1px solid' + this.props.primaryColor
-      },
-      calendarDayDisabled: {
-        color: StyleConstants.Colors.FOG,
-        border: 'none',
-        cursor: 'default'
-      },
-
-      today: {
-        backgroundColor: StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.WHITE
-      },
-      currentMonth: {
-        color: StyleConstants.Colors.CHARCOAL
-      },
-      selectedDay: {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE
-      },
-
-      scrim: {
-        bottom: 0,
-        left: 0,
-        position: 'fixed',
-        right: 0,
-        top: 0,
-        zIndex: 9
       }
     };
   }
 });
 
-module.exports = Radium(DatePicker);
+module.exports = DatePicker;

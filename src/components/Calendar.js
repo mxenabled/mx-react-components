@@ -38,8 +38,8 @@ const Calendar = React.createClass({
     }
   },
 
-  _handleDateSelect (date) {
-    this.props.onDateSelect(date);
+  _handleDateSelect (date, e) {
+    this.props.onDateSelect(date, e);
   },
 
   _handlePreviousClick () {

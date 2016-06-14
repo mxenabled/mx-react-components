@@ -897,7 +897,6 @@ const Demo = React.createClass({
 
         <br /><br />
         <DateTimePicker
-          closeOnDateSelect={false}
           onDateSelect={this._handleDateSelect}
           selectedDate={this.state.selectedDatePickerDate}
           showIcons={true}
