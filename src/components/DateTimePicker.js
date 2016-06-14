@@ -22,9 +22,9 @@ const DatePicker = React.createClass({
     timeFormat: React.PropTypes.string,
     timeIcon: React.PropTypes.string,
     timePlaceholder: React.PropTypes.string,
-    timeZone: React.PropTypes.string,
-    timeZoneFormat: React.PropTypes.oneOf(['abbr', 'name']),
-    timeZoneNames: React.PropTypes.object
+    timezone: React.PropTypes.string,
+    timezoneFormat: React.PropTypes.oneOf(['abbr', 'name']),
+    timezoneNames: React.PropTypes.object
   },
 
   getDefaultProps () {
@@ -40,8 +40,8 @@ const DatePicker = React.createClass({
       timeFormat: 'LT',
       timeIcon: 'clock',
       timePlaceholder: 'Select a Time',
-      timeZone: moment.tz.guess(),
-      timeZoneNames: {
+      timezone: moment.tz.guess(),
+      timezoneNames: {
         EST: 'Eastern Standard Time',
         EDT: 'Eastern Daylight Time',
         CST: 'Central Standard Time',
@@ -119,13 +119,13 @@ const DatePicker = React.createClass({
     this.props.onDateSelect(date);
   },
 
-  _getTimeZone (date) {
-    const timeZoneAbbr = moment.unix(date).tz(this.props.timeZone).format('z');
+  _getTimezone (date) {
+    const timezoneAbbr = date ? moment.unix(date).tz(this.props.timezone).format('z') : moment().tz(this.props.timezone).format('z');
 
-    if (this.props.timeZoneFormat === 'name') {
-      return this.props.timeZoneNames[timeZoneAbbr] || timeZoneAbbr;
-    } else if (this.props.timeZoneFormat === 'abbr') {
-      return timeZoneAbbr;
+    if (this.props.timezoneFormat === 'name') {
+      return this.props.timezoneNames[timezoneAbbr] || timezoneAbbr;
+    } else if (this.props.timezoneFormat === 'abbr') {
+      return timezoneAbbr;
     } else {
       return null;
     }
@@ -197,9 +197,9 @@ const DatePicker = React.createClass({
               {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
             </div>
           )}
-          {this.props.timeZoneFormat ? (
-            <div style={styles.timeZone}>
-              {this._getTimeZone(this.props.selectedDate)}
+          {this.props.timezoneFormat ? (
+            <div style={styles.timezone}>
+              {this._getTimezone(this.props.selectedDate)}
             </div>
           ) : null}
         </div>
@@ -262,7 +262,7 @@ const DatePicker = React.createClass({
         lineHeight: '1.55em',
         color: this.props.selectedDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
       },
-      timeZone: {
+      timezone: {
         paddingLeft: 10,
         textAlign: 'right',
         color: StyleConstants.Colors.ASH

@@ -900,7 +900,7 @@ const Demo = React.createClass({
           onDateSelect={this._handleDateSelect}
           selectedDate={this.state.selectedDatePickerDate}
           showIcons={true}
-          timeZoneFormat='name'
+          timezoneFormat='abbr'
         >
           <div style={{ padding: 20 }}>at</div>
         </DateTimePicker>
