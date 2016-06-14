@@ -8,8 +8,11 @@ const {
   BarChart,
   Button,
   ButtonGroup,
+  Calendar,
+  Column,
   DatePicker,
   DatePickerFullScreen,
+  DateRangePicker,
   DateTimePicker,
   DisplayInput,
   DonutChart,
@@ -21,6 +24,7 @@ const {
   PageIndicator,
   RadioButton,
   RangeSelector,
+  Row,
   SearchInput,
   Select,
   SelectFullScreen,
@@ -40,6 +44,14 @@ const styles = {
     color: '#ACB0B3',
     fontSize: '12px',
     padding: '2px 0'
+  },
+  responsiveDiv: {
+    boxSizing: 'border-box',
+    backgroundColor: Styles.Colors.PORCELAIN,
+    border: '1px solid' + Styles.Colors.FOG,
+    borderRadius: 3,
+    padding: 10,
+    width: '100%'
   }
 };
 
@@ -202,6 +214,7 @@ const Demo = React.createClass({
       lineChartData: [],
       pageIndicatorIndex: 0,
       radioChecked: false,
+      selectedCalendarDate: null,
       selectedDatePickerDate: null,
       showDrawer: false,
       showDrawerButtonType: 'primary',
@@ -266,9 +279,22 @@ const Demo = React.createClass({
     });
   },
 
+  _handleCalendarDateSelect (selectedCalendarDate) {
+    this.setState({
+      selectedCalendarDate
+    });
+  },
+
   _handleDateSelect (selectedDatePickerDate) {
     this.setState({
       selectedDatePickerDate
+    });
+  },
+
+  _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
+    this.setState({
+      selectedStartDate,
+      selectedEndDate
     });
   },
 
@@ -414,6 +440,85 @@ const Demo = React.createClass({
 
     return (
       <div>
+        <br /><br />
+        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+          <Row>
+            <Column
+              columnLarge={9}
+              columnMedium={6}
+              offsetLarge={3}
+              offsetMedium={4}
+            >
+              <div style={styles.responsiveDiv}>1</div>
+            </Column>
+            <Column
+              columnLarge={4}
+              columnMedium={3}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>2</div>
+            </Column>
+            <Column
+              columnLarge={4}
+              columnMedium={9}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>3</div>
+            </Column>
+            <Column
+              columnLarge={4}
+              columnMedium={12}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>5</div>
+            </Column>
+            <Column
+              columnLarge={3}
+              columnMedium={6}
+              columnSmall={9}
+              orderMedium={-1}
+            >
+              <div style={styles.responsiveDiv}>6</div>
+            </Column>
+            <Column
+              columnLarge={3}
+              columnMedium={6}
+              columnSmall={9}
+              orderMedium={-2}
+            >
+              <div style={styles.responsiveDiv}>7</div>
+            </Column>
+            <Column
+              columnLarge={6}
+              columnMedium={12}
+              columnSmall={12}
+            >
+              <div style={styles.responsiveDiv}>8</div>
+            </Column>
+            <Column
+              columnLarge={6}
+              columnMedium={9}
+              columnSmall={12}
+            >
+              <Row>
+                <Column
+                  columnLarge={6}
+                  columnMedium={6}
+                  columnSmall={6}
+                >
+                  <div style={styles.responsiveDiv}>9</div>
+                </Column>
+                <Column
+                  columnLarge={6}
+                  columnMedium={6}
+                  columnSmall={6}
+                >
+                  <div style={styles.responsiveDiv}>10</div>
+                </Column>
+              </Row>
+            </Column>
+          </Row>
+        </div>
         <br /><br />
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Button
@@ -778,6 +883,12 @@ const Demo = React.createClass({
         <RadioButton checked={!this.state.radioChecked} onClick={this._handleRadioButtonClick}>Off</RadioButton>
 
         <br /><br />
+        <Calendar
+          onDateSelect={this._handleCalendarDateSelect}
+          selectedDate={this.state.selectedCalendarDate}
+        />
+
+        <br /><br />
         <DatePicker
           closeOnDateSelect={true}
           onDateSelect={this._handleDateSelect}
@@ -794,6 +905,13 @@ const Demo = React.createClass({
         >
           <div style={{ padding: 20 }}>at</div>
         </DateTimePicker>
+
+        <br /><br />
+        <DateRangePicker
+          onDateSelect={this._handleDateRangeSelect}
+          selectedEndDate={this.state.selectedEndDate}
+          selectedStartDate={this.state.selectedStartDate}
+        />
 
         <br /><br />
         <SimpleInput

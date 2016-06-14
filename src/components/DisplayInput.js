@@ -56,7 +56,7 @@ const DisplayInput = React.createClass({
   styles () {
     return {
       wrapper: Object.assign({
-        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.ASH : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
         height: 43,
         paddingLeft: this.props.label ? 130 : 0,
         paddingRight: this.props.hint || this.props.status ? 100 : 0,
