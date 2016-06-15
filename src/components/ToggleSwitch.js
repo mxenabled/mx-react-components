@@ -47,11 +47,11 @@ const ToggleSwitch = React.createClass({
           onClick={this._handleToggle}
           style={Object.assign({}, styles.track, styles[this.props.checked + 'Track'])}
         >
-          {this.props.showIcons && this.props.checked ? (
+          {this.props.showIcons ? (
             <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type={this.props.trueIcon} />
           ) : null}
           <div className='toggle-switch-toggle' style={styles.toggle}></div>
-          {this.props.showIcons && !this.props.checked ? (
+          {this.props.showIcons ? (
             <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type={this.props.falseIcon} />
           ) : null}
         </div>
@@ -95,6 +95,9 @@ const ToggleSwitch = React.createClass({
       },
       toggle: {
         backgroundColor: StyleConstants.Colors.WHITE,
+        position: 'absolute',
+        left: this.props.checked ? null : 2,
+        right: this.props.checked ? 2 : null,
         borderRadius: '100%',
         height: 20,
         width: 20,
@@ -103,13 +106,11 @@ const ToggleSwitch = React.createClass({
       },
       track: {
         boxSizing: 'border-box',
-        display: 'flex',
-        justifyContent: this.props.checked ? 'flex-end' : 'flex-start',
-        alignItems: 'center',
         borderRadius: 20,
         cursor: 'pointer',
         margin: '0 10px',
         padding: 2,
+        height: 24,
         position: 'relative',
         transition: 'all 0.5s ease',
         verticalAlign: 'middle',
