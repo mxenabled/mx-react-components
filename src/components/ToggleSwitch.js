@@ -25,7 +25,6 @@ const ToggleSwitch = React.createClass({
       rightLabel: 'On',
       showLabels: false,
       showIcons: true,
-      style: {},
       trueIcon: 'check-skinny'
     };
   },
