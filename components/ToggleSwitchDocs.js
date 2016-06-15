@@ -20,44 +20,43 @@ const ToggleSwitchDocs = React.createClass({
         />
 
         <h3>Usage</h3>
-        <h5>activeColor <label>String</label></h5>
-        <p>Default: `#359BCF`</p>
-        <p>A css color value that sets the color of the active left or right label.</p>
+        <h5>checked <label>Boolean</label></h5>
+        <p>Default:`false`</p>
+        <p>The current state of the toggle switch. Think of it like a checkbox.</p>
 
-        <h5>defaultPosition <label>String: `left`, `right`</label></h5>
-        <p>Default: `left`</p>
-        <p>Sets the default start position of the toggle. </p>
-
-        <h5>inactiveColor <label>String</label></h5>
-        <p>Default: `#999999`</p>
-        <p>A css color value that sets the color of the inactive left or right label.</p>
+        <h5>falseIcon<label>Element</label></h5>
+        <p>An Icon that can be displayed while `checked === false`</p>
 
         <h5>leftLabel <label>String</label></h5>
         <p>Default: `On`</p>
         <p>The text to display on the left side of the component.</p>
 
         <h5>onToggle <label>Function</label></h5>
-        <p>A method that will be called whenever the toggle is clicked, or changes position. The method will be passed the active position, either `left` or `right`.</p>
+        <p>A method that will be called whenever the toggle is clicked. The method will be passed the active position, either `true` or `false`.</p>
 
-        <h5>leftLabel <label>String</label></h5>
+        <h5>rightLabel <label>String</label></h5>
         <p>Default: `Off`</p>
         <p>The text to display on the right side of the component.</p>
 
-        <h5>showLabels <label>Boolean</label></h5>
+        <h5>showIcons <label>Boolean</label></h5>
         <p>Default: `true`</p>
-        <p>If set to `false`, then the left and right labels will not be rendered.</p>
+        <p>If set to `false`, the `trueIcon` and `falseIcon` will not be rendered.</p>
 
-        <h5>toggleStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the css styles of the toggle element.</p>
+        <h5>showLabels <label>Boolean</label></h5>
+        <p>Default: `false`</p>
+        <p>If set to `false`, the `leftLabel` and `rightLabel` will not be rendered.</p>
 
-        <h5>trackStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the css styles of the track element.</p>
+        <h5>style <label>Object</label></h5>
+        <p>A style object that allows you to override any style attribute in the component</p>
+
+        <h5>trueIcon<label>Element</label></h5>
+        <p>An Icon that can be displayed while `checked === true`</p>
 
         <h3>Example</h3>
         <Markdown>
   {`
     <ToggleSwitch
-      defaultPosition='right'
+      checked={true}
     />
   `}
         </Markdown>
