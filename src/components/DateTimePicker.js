@@ -181,7 +181,7 @@ const DatePicker = React.createClass({
             <Icon
               size={20}
               style={styles.selectedIcon}
-              type='clock'
+              type={this.props.timeIcon}
             />
           ) : null}
           {this.state.editTime ? (
