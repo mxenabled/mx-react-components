@@ -48,8 +48,15 @@
     "eslint-config-mx": "~1.2.7",
     "eslint-loader": "^1.0.0",
     "eslint-plugin-react": "^5.0.0",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-cli": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "^1.7.0",
     "live-server": "^0.8.1",
     "node-libs-browser": "^0.5.2",
+    "phantomjs-prebuilt": "^2.1.7",
     "webpack": "^1.0.0"
   }
 }
