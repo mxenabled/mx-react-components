@@ -7,6 +7,7 @@ module.exports = {
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),
   DateRangePicker: require('./components/DateRangePicker'),
+  DateTimePicker: require('./components/DateTimePicker'),
   DisplayInput: require('./components/DisplayInput'),
   DonutChart: require('./components/DonutChart'),
   Drawer: require('./components/Drawer'),

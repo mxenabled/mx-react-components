@@ -13,6 +13,7 @@ const {
   DatePicker,
   DatePickerFullScreen,
   DateRangePicker,
+  DateTimePicker,
   DisplayInput,
   DonutChart,
   Drawer,
@@ -890,9 +891,19 @@ const Demo = React.createClass({
         <br /><br />
         <DatePicker
           closeOnDateSelect={true}
-          defaultDate={this.state.selectedDatePickerDate}
           onDateSelect={this._handleDateSelect}
+          selectedDate={this.state.selectedDatePickerDate}
         />
+
+        <br /><br />
+        <DateTimePicker
+          onDateSelect={this._handleDateSelect}
+          selectedDate={this.state.selectedDatePickerDate}
+          showIcons={true}
+          timezoneFormat='abbr'
+        >
+          <div style={{ padding: 20 }}>at</div>
+        </DateTimePicker>
 
         <br /><br />
         <DateRangePicker
