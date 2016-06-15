@@ -57,6 +57,7 @@
     "live-server": "^0.8.1",
     "node-libs-browser": "^0.5.2",
     "phantomjs-prebuilt": "^2.1.7",
+    "react-addons-test-utils": "^15.1.0",
     "webpack": "^1.0.0"
   }
 }
