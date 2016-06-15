@@ -6,9 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
-        <h3>3.2.0</h3>
+        <h3>4.0.0</h3>
         <ul>
-          <li><strong>MULTIPLE BREAKING CHANGES</strong> to the ToggleSwitch componenet. Please review the documentation. Now supports animations and icons.</li>
+          <li><strong>BREAKING CHANGES</strong> to the ToggleSwitch componenet. Please review the documentation. Now supports animations and icons.</li>
+          <li>Update ToggleSwitch component (<a href='https://github.com/mxenabled/mx-react-components/pull/310'>#310</a>)</li>
+          <li>Add DateTimePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/338'>#338</a>)</li>
+          <li>Fix issue with Calendar component border color (<a href='https://github.com/mxenabled/mx-react-components/pull/339'>#339</a>)</li>
         </ul>
 
         <h3>3.1.45</h3>
