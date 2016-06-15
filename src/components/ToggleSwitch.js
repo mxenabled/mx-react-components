@@ -97,9 +97,8 @@ const ToggleSwitch = React.createClass({
         backgroundColor: StyleConstants.Colors.WHITE,
         borderRadius: '100%',
         height: 20,
-        left: this.props.checked ? null : 2,
+        left: this.props.checked ? 20 : 2,
         position: 'absolute',
-        right: this.props.checked ? 2 : null,
         transition: 'all 0.5s ease',
         width: 20,
         zIndex: 3
