@@ -47,12 +47,12 @@ const ToggleSwitch = React.createClass({
           onClick={this._handleToggle}
           style={Object.assign({}, styles.track, styles[this.props.checked + 'Track'])}
         >
-          {this.props.showIcons ? (
-            <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type={this.props.falseIcon} />
+          {this.props.showIcons && this.props.checked ? (
+            <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type={this.props.trueIcon} />
           ) : null}
           <div className='toggle-switch-toggle' style={styles.toggle}></div>
-          {this.props.showIcons ? (
-            <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type={this.props.trueIcon} />
+          {this.props.showIcons && !this.props.checked ? (
+            <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type={this.props.falseIcon} />
           ) : null}
         </div>
         {this.props.showLabels ? (
@@ -104,17 +104,16 @@ const ToggleSwitch = React.createClass({
       track: {
         boxSizing: 'border-box',
         display: 'flex',
-        justifyContent: this.props.checked ? 'flex-start' : 'flex-end',
+        justifyContent: this.props.checked ? 'flex-end' : 'flex-start',
         alignItems: 'center',
         borderRadius: 20,
         cursor: 'pointer',
-        height: 24,
         margin: '0 10px',
         padding: 2,
         position: 'relative',
         transition: 'all 0.5s ease',
         verticalAlign: 'middle',
-        width: 44,
+        width: 42,
         zIndex: 1
       },
       trueTrack: {
