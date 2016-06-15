@@ -82129,6 +82129,25 @@
 	      React.createElement(
 	        'h3',
 	        null,
+	        '3.2.0'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(
+	            'strong',
+	            null,
+	            'MULTIPLE BREAKING CHANGES'
+	          ),
+	          ' to the ToggleSwitch componenet. Please review the documentation. Now supports animations and icons.'
+	        )
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
 	        '3.1.45'
 	      ),
 	      React.createElement(

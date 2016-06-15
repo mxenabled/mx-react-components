@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>3.2.0</h3>
+        <ul>
+          <li><strong>MULTIPLE BREAKING CHANGES</strong> to the ToggleSwitch componenet. Please review the documentation. Now supports animations and icons.</li>
+        </ul>
+
         <h3>3.1.45</h3>
         <ul>
           <li>Adds new Calendar component (<a href='https://github.com/mxenabled/mx-react-components/pull/336'>#336</a>)</li>
