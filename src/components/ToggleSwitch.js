@@ -48,12 +48,12 @@ const ToggleSwitch = React.createClass({
           style={Object.assign({}, styles.track, styles[this.props.checked + 'Track'])}
         >
           {this.props.showIcons ? (
-            <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type={this.props.trueIcon} />
+            <span>
+              <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type={this.props.trueIcon} />
+              <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type={this.props.falseIcon} />
+            </span>
           ) : null}
           <div className='toggle-switch-toggle' style={styles.toggle}></div>
-          {this.props.showIcons ? (
-            <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type={this.props.falseIcon} />
-          ) : null}
         </div>
         {this.props.showLabels ? (
           <div className='right-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.activeLabel : styles.inactiveLabel)}>{this.props.rightLabel}</div>
