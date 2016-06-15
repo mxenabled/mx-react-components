@@ -65,8 +65,8 @@ const ToggleSwitch = React.createClass({
   styles () {
     return Object.assign({}, {
       component: {
-        display: 'flex',
         alignItems: 'center',
+        display: 'flex',
         fontFamily: StyleConstants.Fonts.REGULAR,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         position: 'relative'
@@ -95,22 +95,22 @@ const ToggleSwitch = React.createClass({
       },
       toggle: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        position: 'absolute',
-        left: this.props.checked ? null : 2,
-        right: this.props.checked ? 2 : null,
         borderRadius: '100%',
         height: 20,
-        width: 20,
+        left: this.props.checked ? null : 2,
+        position: 'absolute',
+        right: this.props.checked ? 2 : null,
         transition: 'all 0.5s ease',
+        width: 20,
         zIndex: 3
       },
       track: {
-        boxSizing: 'border-box',
         borderRadius: 20,
+        boxSizing: 'border-box',
         cursor: 'pointer',
+        height: 24,
         margin: '0 10px',
         padding: 2,
-        height: 24,
         position: 'relative',
         transition: 'all 0.5s ease',
         verticalAlign: 'middle',
