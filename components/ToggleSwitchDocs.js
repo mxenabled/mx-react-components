@@ -14,10 +14,7 @@ const ToggleSwitchDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <ToggleSwitch
-          defaultPosition='right'
-          trackStyle={{ boxSizing: 'content-box' }}
-        />
+        <ToggleSwitch />
 
         <h3>Usage</h3>
         <h5>checked <label>Boolean</label></h5>
