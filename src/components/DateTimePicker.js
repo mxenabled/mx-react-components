@@ -19,7 +19,7 @@ const DatePicker = React.createClass({
     primaryColor: React.PropTypes.string,
     selectedDate: React.PropTypes.number,
     showIcons: React.PropTypes.bool,
-    style: React.PropTypes.object,
+    styles: React.PropTypes.object,
     timeFormat: React.PropTypes.string,
     timeIcon: React.PropTypes.string,
     timePlaceholder: React.PropTypes.string,
@@ -210,12 +210,12 @@ const DatePicker = React.createClass({
   },
 
   styles () {
-    return {
-      component: Object.assign({
+    return Object.assign({}, {
+      component: {
         alignItems: 'center',
         display: 'flex',
         width: '100%'
-      }, this.props.style),
+      },
 
       // Select styles
       selectWrapper: {
@@ -285,7 +285,7 @@ const DatePicker = React.createClass({
         width: 287,
         zIndex: 10
       }, this.props.calendarStyle)
-    };
+    }, this.props.styles);
   }
 });
 
