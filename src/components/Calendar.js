@@ -195,7 +195,7 @@ const Calendar = React.createClass({
         width: 35,
 
         ':hover': {
-          border: '1px solid' + this.props.primaryColor
+          border: '1px solid ' + this.props.primaryColor
         }
       },
       calendarDayDisabled: {
