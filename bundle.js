@@ -88292,10 +88292,10 @@
 	      selectedStartDate: null
 	    };
 	  },
-	  _handleDateRangeSelect: function _handleDateRangeSelect(selectedEndDate, selectedStartDate) {
+	  _handleDateRangeSelect: function _handleDateRangeSelect(selectedStartDate, selectedEndDate) {
 	    this.setState({
-	      selectedEndDate: selectedEndDate,
-	      selectedStartDate: selectedStartDate
+	      selectedStartDate: selectedStartDate,
+	      selectedEndDate: selectedEndDate
 	    });
 	  },
 	  render: function render() {
@@ -88496,7 +88496,7 @@
 	      React.createElement(
 	        Markdown,
 	        null,
-	        '\n    _handleDateRangeSelect (selectedEndDate, selectedStartDate) {\n      this.setState({\n        selectedEndDate,\n        selectedStartDate\n      });\n    },\n\n    <DateRangePicker\n      onDateSelect={this._handleDateRangeSelect}\n      selectedEndDate={this.state.selectedEndDate}\n      selectedStartDate={this.state.selectedStartDate}\n    />\n  '
+	        '\n    _handleDateRangeSelect (selectedStartDate, selectedEndDate) {\n      this.setState({\n        selectedStartDate,\n        selectedEndDate\n      });\n    },\n\n    <DateRangePicker\n      onDateSelect={this._handleDateRangeSelect}\n      selectedEndDate={this.state.selectedEndDate}\n      selectedStartDate={this.state.selectedStartDate}\n    />\n  '
 	      )
 	    );
 	  }
