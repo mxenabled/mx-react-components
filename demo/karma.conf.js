@@ -1,6 +1,6 @@
 module.exports = function (config) {
   config.set({
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     singleRun: true,
     frameworks: ['jasmine'],
     files: [
@@ -28,6 +28,12 @@ module.exports = function (config) {
             }
           }
         ]
+      },
+      externals: {
+        'cheerio': 'window',
+        'react/addons': true,
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true
       }
     },
     webpackServer: {
