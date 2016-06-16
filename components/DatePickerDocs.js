@@ -38,7 +38,7 @@ const DatePickerDocs = React.createClass({
         <p>If set to `true`, the calendar will be close after the user selects a data.</p>
 
         <h5>format <label>String</label></h5>
-        <p>Default: 'YYYY-MM-DD'</p>
+        <p>Default: 'MMM D, YYYY'</p>
         <p>This is used to determine the format of the selected date. It should follow the Moment.js conventions outlined <a href='http://momentjs.com/docs/#/parsing/string-format/' target='_blank'>here</a>.</p>
 
         <h5>locale <label>String</label></h5>
