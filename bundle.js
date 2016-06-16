@@ -88292,7 +88292,7 @@
 	      selectedStartDate: null
 	    };
 	  },
-	  _handleDateSelect: function _handleDateSelect(selectedEndDate, selectedStartDate) {
+	  _handleDateRangeSelect: function _handleDateRangeSelect(selectedEndDate, selectedStartDate) {
 	    this.setState({
 	      selectedEndDate: selectedEndDate,
 	      selectedStartDate: selectedStartDate
