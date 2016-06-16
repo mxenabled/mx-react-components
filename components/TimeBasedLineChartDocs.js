@@ -71,6 +71,10 @@ const TimeBasedLineChartDocs = React.createClass({
         <p>Default: 400</p>
         <p>Sets the overall height of the chart.</p>
 
+        <h5>limitLineCircles <label>Bool</label></h5>
+        <p>Default: false</p>
+        <p>If set to true, limits the circles on the line to the beginning, middle, and end of the line.</p>
+
         <h5>lineColor <label>String</label></h5>
         <p>Default: #359BCF</p>
         <p>A CSS color value that sets the color of the data line.</p>

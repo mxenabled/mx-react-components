@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.0.2</h3>
+        <ul>
+          <li>Add limitLineCircles prop to TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/341'>#341</a>)</li>
+        </ul>
+
         <h3>4.0.1</h3>
         <ul>
           <li>Fix box-sizing issue with ToggleSwitch (<a href='https://github.com/mxenabled/mx-react-components/pull/340'>#340</a>)</li>
