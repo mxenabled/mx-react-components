@@ -293,19 +293,9 @@ const TimeBasedLineChart = React.createClass({
   // Helper Functions
   _getDataForLineCircles () {
     if (this.props.limitLineCircles) {
-      const data = [];
-
-      this.props.data.forEach((dataPoint, index) => {
-        const shouldIncludeDataPoint = index === 0 ||
-                                       index === this.props.data.length - 1 ||
-                                       dataPoint.x === this.props.breakPointDate;
-
-        if (shouldIncludeDataPoint) {
-          data.push(dataPoint);
-        }
+      return this.props.data.filter((dataPoint, index) => {
+        return index === 0 || index === this.props.data.length - 1 || dataPoint.x === this.props.breakPointDate;
       });
-
-      return data;
     }
 
     return this.props.data;
