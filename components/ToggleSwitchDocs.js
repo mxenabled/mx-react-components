@@ -21,7 +21,7 @@ const ToggleSwitchDocs = React.createClass({
         <p>Default:`false`</p>
         <p>The current state of the toggle switch. Think of it like a checkbox.</p>
 
-        <h5>falseIcon<label>Element</label></h5>
+        <h5>falseIcon<label>string</label></h5>
         <p>An Icon that can be displayed while `checked === false`</p>
 
         <h5>leftLabel <label>String</label></h5>
@@ -46,16 +46,16 @@ const ToggleSwitchDocs = React.createClass({
         <h5>style <label>Object</label></h5>
         <p>A style object that allows you to override any style attribute in the component</p>
 
-        <h5>trueIcon<label>Element</label></h5>
+        <h5>trueIcon<label>string</label></h5>
         <p>An Icon that can be displayed while `checked === true`</p>
 
         <h3>Example</h3>
         <Markdown>
-  {`
-    <ToggleSwitch
-      checked={true}
-    />
-  `}
+        {`
+          <ToggleSwitch
+            checked={true}
+          />
+        `}
         </Markdown>
       </div>
     );

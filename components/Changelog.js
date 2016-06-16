@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.0.1</h3>
+        <ul>
+          <li>Fix box-sizing issue with ToggleSwitch (<a href='https://github.com/mxenabled/mx-react-components/pull/340'>#340</a>)</li>
+        </ul>
+
         <h3>4.0.0</h3>
         <ul>
           <li><strong>BREAKING CHANGES</strong> to the ToggleSwitch componenet. Please review the documentation. Now supports animations and icons.</li>
