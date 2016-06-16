@@ -12,10 +12,10 @@ const DateRangePickerDocs = React.createClass({
     };
   },
 
-  _handleDateRangeSelect (selectedEndDate, selectedStartDate) {
+  _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
     this.setState({
-      selectedEndDate,
-      selectedStartDate
+      selectedStartDate,
+      selectedEndDate
     });
   },
 
@@ -68,20 +68,20 @@ const DateRangePickerDocs = React.createClass({
 
         <h3>Example</h3>
         <Markdown>
-  {`
-    _handleDateRangeSelect (selectedEndDate, selectedStartDate) {
-      this.setState({
-        selectedEndDate,
-        selectedStartDate
-      });
-    },
+        {`
+          _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
+            this.setState({
+              selectedStartDate,
+              selectedEndDate
+            });
+          },
 
-    <DateRangePicker
-      onDateSelect={this._handleDateRangeSelect}
-      selectedEndDate={this.state.selectedEndDate}
-      selectedStartDate={this.state.selectedStartDate}
-    />
-  `}
+          <DateRangePicker
+            onDateSelect={this._handleDateRangeSelect}
+            selectedEndDate={this.state.selectedEndDate}
+            selectedStartDate={this.state.selectedStartDate}
+          />
+        `}
         </Markdown>
       </div>
     );
