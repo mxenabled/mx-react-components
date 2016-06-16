@@ -738,6 +738,7 @@ const Demo = React.createClass({
                 type: 'number'
               }
             ]}
+            limitLineCircles={true}
             rangeType={'day'}
             showBreakPoint={true}
             width={700}

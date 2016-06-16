@@ -203,6 +203,7 @@ const TimeBasedLineChart = React.createClass({
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
     hoveredDataPointDetails: React.PropTypes.array,
+    limitLineCircles: React.PropTypes.bool,
     lineColor: React.PropTypes.string,
     margin: React.PropTypes.object,
     rangeType: React.PropTypes.oneOf(['day', 'month']),
@@ -220,6 +221,7 @@ const TimeBasedLineChart = React.createClass({
       breakPointDate: moment().startOf('day').unix(),
       breakPointLabel: 'Today',
       height: 400,
+      limitLineCircles: false,
       lineColor: StyleConstants.Colors.PRIMARY,
       margin: styles.chartMargins,
       rangeType: 'day',
@@ -289,6 +291,26 @@ const TimeBasedLineChart = React.createClass({
   },
 
   // Helper Functions
+  _getDataForLineCircles () {
+    if (this.props.limitLineCircles) {
+      const data = [];
+
+      this.props.data.forEach((dataPoint, index) => {
+        const shouldIncludeDataPoint = index === 0 ||
+                                       index === this.props.data.length - 1 ||
+                                       dataPoint.x === this.props.breakPointDate;
+
+        if (shouldIncludeDataPoint) {
+          data.push(dataPoint);
+        }
+      });
+
+      return data;
+    }
+
+    return this.props.data;
+  },
+
   _getFormattedValue (value, type, format) {
     let formattedValue = '';
 
@@ -591,7 +613,7 @@ const TimeBasedLineChart = React.createClass({
               />
               <CirclesGroup
                 adjustedHeight={adjustedHeight}
-                data={data}
+                data={this._getDataForLineCircles()}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
