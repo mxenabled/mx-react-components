@@ -746,7 +746,7 @@ const Demo = React.createClass({
 
         <br /><br /><br /><br />
         <div>
-          <ToggleSwitch showLabels={true} />
+          <ToggleSwitch checked={this.state.radioChecked} onToggle={this._handleRadioButtonClick} showLabels={true} />
         </div>
 
         <br /><br />

@@ -6,74 +6,31 @@ const Icon = require('./Icon');
 const ToggleSwitch = React.createClass({
   propTypes: {
     checked: React.PropTypes.bool,
-    falseIcon: React.PropTypes.element,
+    falseIcon: React.PropTypes.string,
     leftLabel: React.PropTypes.string,
     onToggle: React.PropTypes.func,
     rightLabel: React.PropTypes.string,
     showIcons: React.PropTypes.bool,
     showLabels: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    trueIcon: React.PropTypes.element
+    styles: React.PropTypes.object,
+    trueIcon: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
       checked: false,
+      falseIcon: 'close-skinny',
       leftLabel: 'Off',
       onToggle () {},
       rightLabel: 'On',
       showLabels: false,
       showIcons: true,
-      style: {}
-    };
-  },
-
-  getInitialState () {
-    return {
-      checked: this.props.checked
+      trueIcon: 'check-skinny'
     };
   },
 
   _handleToggle (event) {
-    this.setState({
-      checked: !this.state.checked
-    }, () => {
-      this.props.onToggle(this.state.checked, event);
-    });
-  },
-
-  _renderLeftLabel (styles) {
-    if (this.props.showLabels) {
-      return (
-        <span className='left-label' onClick={this._handleToggle} style={[styles.label, !this.state.checked && styles.activeLabel || styles.inactiveLabel]}>{this.props.leftLabel}</span>
-      );
-    } else {
-      return null;
-    }
-  },
-
-  _renderRightLabel (styles) {
-    if (this.props.showLabels) {
-      return (
-        <span className='right-label' onClick={this._handleToggle} style={[styles.label, this.state.checked && styles.activeLabel || styles.inactiveLabel]}>{this.props.rightLabel}</span>
-      );
-    } else {
-      return null;
-    }
-  },
-
-  _renderIcons (styles) {
-    if (!this.props.showIcons) {
-      return null;
-    }
-    const trueIcon = this.props.trueIcon || <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type='check-skinny' />;
-    const falseIcon = this.props.falseIcon || <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type='close-skinny' />;
-
-    return (
-      <span>
-        {trueIcon} {falseIcon}
-      </span>
-    );
+    this.props.onToggle(event);
   },
 
   render () {
@@ -81,16 +38,25 @@ const ToggleSwitch = React.createClass({
 
     return (
       <div className='toggle-switch-component' style={styles.component}>
-        {this._renderLeftLabel(styles)}
+        {this.props.showLabels ? (
+          <div className='left-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
+        ) : null}
         <div
           className='toggle-switch-track'
           onClick={this._handleToggle}
-          style={Object.assign({}, styles.track, styles[this.state.checked + 'Track'])}
+          style={Object.assign({}, styles.track, styles[this.props.checked + 'Track'])}
         >
-          <div className='toggle-switch-toggle' style={Object.assign({}, styles.toggle, styles[this.state.checked + 'Toggle'])}></div>
-          {this._renderIcons(styles)}
+          {this.props.showIcons ? (
+            <span>
+              <Icon className='true-icon' style={Object.assign({}, styles.icon, styles.trueIcon)} type={this.props.trueIcon} />
+              <Icon className='false-icon' style={Object.assign({}, styles.icon, styles.falseIcon)} type={this.props.falseIcon} />
+            </span>
+          ) : null}
+          <div className='toggle-switch-toggle' style={styles.toggle}></div>
         </div>
-        {this._renderRightLabel(styles)}
+        {this.props.showLabels ? (
+          <div className='right-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.activeLabel : styles.inactiveLabel)}>{this.props.rightLabel}</div>
+        ) : null}
       </div>
     );
   },
@@ -98,9 +64,10 @@ const ToggleSwitch = React.createClass({
   styles () {
     return Object.assign({}, {
       component: {
-        display: 'inline-block',
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: '12px',
+        alignItems: 'center',
+        display: 'flex',
+        fontFamily: StyleConstants.Fonts.REGULAR,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
         position: 'relative'
       },
       icon: {
@@ -128,29 +95,24 @@ const ToggleSwitch = React.createClass({
       toggle: {
         backgroundColor: StyleConstants.Colors.WHITE,
         borderRadius: '100%',
-        height: '20px',
+        height: 20,
+        left: this.props.checked ? 20 : 2,
         position: 'absolute',
-        width: '20px',
         transition: 'all 0.5s ease',
+        width: 20,
         zIndex: 3
       },
-      falseToggle: {
-        left: '2px'
-      },
-      trueToggle: {
-        left: '20px'
-      },
       track: {
-        borderRadius: '20px',
+        borderRadius: 20,
+        boxSizing: 'border-box',
         cursor: 'pointer',
-        display: 'inline-block',
-        height: '20px',
+        height: 24,
         margin: '0 10px',
-        padding: '2px',
+        padding: 2,
         position: 'relative',
         transition: 'all 0.5s ease',
         verticalAlign: 'middle',
-        width: '38px',
+        width: 42,
         zIndex: 1
       },
       trueTrack: {
@@ -159,7 +121,7 @@ const ToggleSwitch = React.createClass({
       falseTrack: {
         backgroundColor: StyleConstants.Colors.ASH
       }
-    }, this.props.style);
+    }, this.props.styles);
   }
 
 });
