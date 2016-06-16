@@ -7,6 +7,7 @@ const ButtonGroup = require('components/ButtonGroupDocs');
 const Changelog = require('components/Changelog');
 const Components = require('components/Components');
 const DatePicker = require('components/DatePickerDocs');
+const DateRangePicker = require('components/DateRangePickerDocs');
 const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
 const DisplayInput = require('components/DisplayInputDocs');
 const DonutChart = require('components/DonutChartDocs');
@@ -58,6 +59,7 @@ ReactDOM.render((
         <Route component={Button} path='button' />
         <Route component={ButtonGroup} path='button-group' />
         <Route component={DatePicker} path='date-picker' />
+        <Route component={DateRangePicker} path='date-range-picker' />
         <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DisplayInput} path='display-input' />
         <Route component={DonutChart} path='donut' />

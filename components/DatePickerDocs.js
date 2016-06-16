@@ -22,7 +22,7 @@ const DatePickerDocs = React.createClass({
       <div>
         <h1>
           DatePicker
-          <label>Used to display and edit a start and end value with the option to define preset start/end values.</label>
+          <label>Used to pick a single date.</label>
         </h1>
 
         <h3>Demo</h3>
