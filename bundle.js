@@ -88135,7 +88135,7 @@
 	      React.createElement(
 	        'p',
 	        null,
-	        'Default: \'YYYY-MM-DD\''
+	        'Default: \'MMM D, YYYY\''
 	      ),
 	      React.createElement(
 	        'p',
@@ -88340,7 +88340,7 @@
 	      React.createElement(
 	        'p',
 	        null,
-	        'Default: \'YYYY-MM-DD\''
+	        'Default: \'MMM D, YYYY\''
 	      ),
 	      React.createElement(
 	        'p',
