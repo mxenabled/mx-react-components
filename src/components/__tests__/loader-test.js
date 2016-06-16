@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react'); // eslint-disable-line no-unused-vars
 const ReactTestUtils = require('react-addons-test-utils');
 const { mount, shallow } = require('enzyme');
 const jasmineEnzyme = require('jasmine-enzyme');
