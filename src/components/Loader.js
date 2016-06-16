@@ -6,6 +6,7 @@ const StyleConstants = require('../constants/Style');
 
 const Loader = React.createClass({
   propTypes: {
+    clickAction: React.PropTypes.func,
     color: React.PropTypes.string,
     isLoading: React.PropTypes.bool,
     isRelative: React.PropTypes.bool,
@@ -20,6 +21,17 @@ const Loader = React.createClass({
       isSmall: false,
       children: 'LOADING...'
     };
+  },
+
+  getInitialState () {
+    return {
+      testClick: false
+    };
+  },
+
+  _handleLoaderClick () {
+    this.props.clickAction();
+    this.setState({ testClick: true });
   },
 
 
@@ -76,7 +88,7 @@ const Loader = React.createClass({
             {this.props.isSmall ? (
               null
             ) : (
-              <div className='mx-loader-text' style={styles.text} > {this.props.children} </div>
+              <div className='mx-loader-text' onClick={this._handleLoaderClick} style={styles.text}> {this.props.children} </div>
             )}
           </div>
         </div>
