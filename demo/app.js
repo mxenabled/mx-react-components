@@ -22,6 +22,7 @@ const {
   Loader,
   Modal,
   PageIndicator,
+  ProgressBar,
   RadioButton,
   RangeSelector,
   Row,
@@ -605,6 +606,9 @@ const Demo = React.createClass({
             ]}
             type='base'
           />
+          <br /><br />
+          <ProgressBar percentage={50} />
+
           <br /><br />
           <Tooltip placement='bottom' style={{ fill: Styles.Colors.PRIMARY }}>Text for the tool tip</Tooltip>
 
