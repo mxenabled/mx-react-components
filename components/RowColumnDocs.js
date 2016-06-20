@@ -123,7 +123,7 @@ const RowDocs = React.createClass({
         <p>A number representing the number of columns to diplay. Default: 12</p>
 
         <h5>column*<label>Number</label></h5>
-        <p>A number representing the columns span at which to display the enclosed content, based on the columnCount.</p>
+        <p>A number representing the columns span at which to display the enclosed content, based on the columnCount. If set to 0, the column will be hidden.</p>
         <p>Defaults:</p>
         <ul>
           <li>*Large: 12</li>

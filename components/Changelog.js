@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.0.3</h3>
+        <ul>
+          <li>Add plus and bubbleds to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/344'>#344</a>)</li>
+          <li>Add hide/show to Column component (<a href='https://github.com/mxenabled/mx-react-components/pull/343'>#343</a>)</li>
+        </ul>
+
         <h3>4.0.2</h3>
         <ul>
           <li>Add limitLineCircles prop to TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/341'>#341</a>)</li>
