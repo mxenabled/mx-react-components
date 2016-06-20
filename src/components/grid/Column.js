@@ -68,11 +68,11 @@ const Column = React.createClass({
   render () {
     const styles = this.styles();
 
-    return (
+    return this.props['column' + this.state.screenWidth] ? (
       <div style={styles.component}>
         {this.props.children}
       </div>
-    );
+      ) : null;
   },
 
   styles () {
