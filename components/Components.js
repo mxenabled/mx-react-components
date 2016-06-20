@@ -69,6 +69,10 @@ const Components = React.createClass({
                   displayValue: 'Page Indicator'
                 },
                 {
+                  value: 'progress-bar',
+                  displayValue: 'Progress Bar'
+                },
+                {
                   value: 'radio-button',
                   displayValue: 'Radio Button'
                 },
@@ -125,6 +129,7 @@ const Components = React.createClass({
             <Link to='/components/loader'>Loader</Link>
             <Link to='/components/modal'>Modal</Link>
             <Link to='/components/page-indicator'>Page Indicator</Link>
+            <Link to='/components/progress-bar'>Progress Bar</Link>
             <Link to='/components/spin'>Spin</Link>
 
             <h3>Form</h3>

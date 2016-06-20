@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.1.0</h3>
+        <ul>
+          <li>Add ProgressBar component (<a href='https://github.com/mxenabled/mx-react-components/pull/345'>#345</a>)</li>
+        </ul>
+
         <h3>4.0.3</h3>
         <ul>
           <li>Add plus and bubbleds to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/344'>#344</a>)</li>
