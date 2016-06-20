@@ -25,7 +25,7 @@ const ProgressBarDocs = React.createClass({
 
         <h3>Usage</h3>
         <h5>baseColor <label>string</label></h5>
-        <p>Default: PRIMARY (#359BCF)</p>
+        <p>Default: FOG (#E3E6E7)</p>
         <p>An hex color string used to set the base of the bar</p>
 
         <h5>children <label>Node</label></h5>
