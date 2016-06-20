@@ -6,17 +6,17 @@ const StyleConstants = require('../constants/Style');
 const ProgressBar = React.createClass({
   propTypes: {
     baseColor: React.PropTypes.string,
-    color: React.PropTypes.string,
     height: React.PropTypes.number,
     percentage: React.PropTypes.number,
+    progressColor: React.PropTypes.string,
     styles: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
       baseColor: StyleConstants.Colors.FOG,
-      color: StyleConstants.Colors.PRIMARY,
-      height: 10
+      height: 10,
+      progressColor: StyleConstants.Colors.PRIMARY
     };
   },
 
@@ -38,7 +38,7 @@ const ProgressBar = React.createClass({
         height: this.props.height
       },
       progress: {
-        backgroundColor: this.props.color,
+        backgroundColor: this.props.progressColor,
         borderRadius: this.props.height / 4,
         height: this.props.height,
         width: this.props.percentage + '%'
