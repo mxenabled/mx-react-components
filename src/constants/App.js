@@ -69,6 +69,10 @@ module.exports = {
       displayValue: 'Bill Pay'
     },
     {
+      value: 'bubbles',
+      displayValue: 'Bubbles'
+    },
+    {
       value: 'calendar',
       displayValue: 'Calendar'
     },
@@ -291,6 +295,10 @@ module.exports = {
     {
       value: 'play-solid',
       displayValue: 'Play Solid'
+    },
+    {
+      value: 'plus',
+      displayValue: 'Plus'
     },
     {
       value: 'retirement',
