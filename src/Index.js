@@ -16,6 +16,7 @@ module.exports = {
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
   PageIndicator: require('./components/PageIndicator'),
+  ProgressBar: require('./components/ProgressBar'),
   RadioButton: require('./components/RadioButton'),
   RajaIcon: require('./components/RajaIcon'),
   Row: require('./components/grid/Row'),
