@@ -47,7 +47,7 @@ const Column = React.createClass({
   },
 
   _getScreenWidth () {
-    const width = document.documentElement.clientWidth || document.body.clientWidth;
+    const width = window.innerWidth;
     let screenWidth = 'Small';
 
     if (width >= this.props.breakpointLarge) {
