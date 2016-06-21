@@ -297,17 +297,15 @@ const DateRangePicker = React.createClass({
 
   _renderSelectedRangeIcon (range) {
     const isSelectedRange = range.startDate === this.props.selectedStartDate && range.endDate === this.props.selectedEndDate;
-    const styles = this.styles();
+    const iconStyle = { fill: isSelectedRange ? this.props.primaryColor : 'transparent' };
 
     return (
-      <div styles={styles.selectedRangeIconWrapper}>
-        {isSelectedRange ? (
-          <Icon
-            size={20}
-            style={styles.selectedRangeIcon}
-            type='check-solid'
-          />
-        ) : null}
+      <div>
+        <Icon
+          size={20}
+          style={iconStyle}
+          type='check-solid'
+        />
       </div>
     );
   },
