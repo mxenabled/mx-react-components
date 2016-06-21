@@ -46,17 +46,17 @@ const DateRangePicker = React.createClass({
         {
           displayValue: 'Last 7 Days',
           endDate: moment().endOf('day').unix(),
-          startDate: moment().subtract(7, 'days').startOf('day').unix()
+          startDate: moment().subtract(6, 'days').startOf('day').unix()
         },
         {
           displayValue: 'Last 30 Days',
           endDate: moment().endOf('day').unix(),
-          startDate: moment().subtract(30, 'days').startOf('day').unix()
+          startDate: moment().subtract(29, 'days').startOf('day').unix()
         },
         {
           displayValue: 'Last 90 Days',
           endDate: moment().endOf('day').unix(),
-          startDate: moment().subtract(90, 'days').startOf('day').unix()
+          startDate: moment().subtract(89, 'days').startOf('day').unix()
         }
       ],
       format: 'MMM D, YYYY',
