@@ -20,7 +20,7 @@ module.exports = {
     GREEN: '#00a89c',
     BLUE: '#359BCF',
     RED: '#EE4235',
-  
+
     // CATEGORY COLORS
     AUTO_TRANSPORT: '#4B9DBC',
     BILLS_UTILITIES: '#EF9B2C',
@@ -42,7 +42,7 @@ module.exports = {
     TAXES: '#32588D',
     TRAVEL: '#e37434',
     UNCATEGORIZED: '#FA5555',
-  
+
     // SCRIM
     SCRIM: 'rgba(247,248,248,0.9)'
   },
