@@ -8,11 +8,11 @@ const StyleConstants = require('../constants/Style');
 
 const DateRangePicker = React.createClass({
   propTypes: {
-    defaultRanges: React.PropTypes.arrayOf({
+    defaultRanges: React.PropTypes.arrayOf(React.PropTypes.shape({
       displayValue: React.PropTypes.string,
       endDate: React.PropTypes.number,
       startDate: React.PropTypes.number
-    }),
+    })),
     format: React.PropTypes.string,
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
