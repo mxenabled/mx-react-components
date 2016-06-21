@@ -914,6 +914,7 @@ const Demo = React.createClass({
           onDateSelect={this._handleDateRangeSelect}
           selectedEndDate={this.state.selectedEndDate}
           selectedStartDate={this.state.selectedStartDate}
+          showDefaultRanges={true}
         />
 
         <br /><br />
