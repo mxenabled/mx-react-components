@@ -6,6 +6,9 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
+const MAX_HOUR = 23;
+const MAX_MINUTE = 59;
+
 const DatePicker = React.createClass({
   propTypes: {
     calendarStyle: React.PropTypes.object,
@@ -113,11 +116,15 @@ const DatePicker = React.createClass({
     const minute = Number(time[1].substring(0, 2));
     const date = selectedDate.hour(hour).minute(minute).second(0).unix();
 
-    this.setState({
-      editTime: false
-    });
+    if (hour > MAX_HOUR || minute > MAX_MINUTE) {
+      e.value.target = '';
+    } else {
+      this.setState({
+        editTime: false
+      });
 
-    this.props.onDateSelect(date);
+      this.props.onDateSelect(date);
+    }
   },
 
   _getTimezone (date) {
