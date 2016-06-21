@@ -8,6 +8,11 @@ const StyleConstants = require('../constants/Style');
 
 const DatePicker = React.createClass({
   propTypes: {
+    defaultRanges: React.PropTypes.arrayOf({
+      displayValue: React.PropTypes.string,
+      endDate: React.PropTypes.number,
+      startDate: React.PropTypes.number
+    }),
     format: React.PropTypes.string,
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
@@ -16,16 +21,50 @@ const DatePicker = React.createClass({
     primaryColor: React.PropTypes.string,
     selectedEndDate: React.PropTypes.number,
     selectedStartDate: React.PropTypes.number,
+    showDefaultRanges: React.PropTypes.bool,
     style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
+      defaultRanges: [
+        {
+          displayValue: 'Today',
+          endDate: moment().endOf('day').unix(),
+          startDate: moment().startOf('day').unix()
+        },
+        {
+          displayValue: 'This Month',
+          endDate: moment().endOf('month').unix(),
+          startDate: moment().startOf('month').unix()
+        },
+        {
+          displayValue: 'Last Month',
+          endDate: moment().subtract(1, 'months').endOf('month').unix(),
+          startDate: moment().subtract(1, 'months').startOf('month').unix()
+        },
+        {
+          displayValue: 'Last 7 Days',
+          endDate: moment().endOf('day').unix(),
+          startDate: moment().subtract(7, 'days').startOf('day').unix()
+        },
+        {
+          displayValue: 'Last 30 Days',
+          endDate: moment().endOf('day').unix(),
+          startDate: moment().subtract(30, 'days').startOf('day').unix()
+        },
+        {
+          displayValue: 'Last 90 Days',
+          endDate: moment().endOf('day').unix(),
+          startDate: moment().subtract(90, 'days').startOf('day').unix()
+        }
+      ],
       format: 'MMM D, YYYY',
       locale: 'en',
       onDateSelect () {},
       placeholderText: 'Select A Date Range',
-      primaryColor: StyleConstants.Colors.PRIMARY
+      primaryColor: StyleConstants.Colors.PRIMARY,
+      showDefaultRanges: false
     };
   },
 
@@ -116,6 +155,10 @@ const DatePicker = React.createClass({
     return updatedDates;
   },
 
+  _handleDefaultRangeSelection (range) {
+    this.props.onDateSelect(range.startDate, range.endDate);
+  },
+
   _handleDateHover (activeSelectDate) {
     this.setState({
       activeSelectDate
@@ -188,6 +231,28 @@ const DatePicker = React.createClass({
     return where;
   },
 
+  _renderDefaultRanges () {
+    const styles = this.styles();
+
+    return (
+      <div style={styles.rangeOptions}>
+        <div style={styles.defaultRangesTitle}>
+          Select a Range
+        </div>
+        {this.props.defaultRanges.map(range => {
+          return (
+            <div style={styles.rangeOption}>
+              {this._renderSelectedRangeIcon(range)}
+              <div onClick={this._handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOptionText}>
+                {range.displayValue}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
+
   _renderMonthTable () {
     const styles = this.styles();
     const days = [];
@@ -230,6 +295,23 @@ const DatePicker = React.createClass({
     return days;
   },
 
+  _renderSelectedRangeIcon (range) {
+    const isSelectedRange = range.startDate === this.props.selectedStartDate && range.endDate === this.props.selectedEndDate;
+    const styles = this.styles();
+
+    return (
+      <div styles={styles.selectedRangeIconWrapper}>
+        {isSelectedRange ? (
+          <Icon
+            size={20}
+            style={styles.selectedRangeIcon}
+            type='check-solid'
+          />
+        ) : null}
+      </div>
+    );
+  },
+
   render () {
     const styles = this.styles();
 
@@ -256,35 +338,38 @@ const DatePicker = React.createClass({
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         </div>
-        <div style={styles.calendarWrapper}>
-          <div style={styles.calendarHeader}>
-            <Icon
-              onClick={this._handlePreviousClick}
-              size={20}
-              style={styles.calendayHeaderNav}
-              type='caret-left'
-            />
-            <div>
-              {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
+        <div style={styles.optionsWrapper}>
+          {this.props.showDefaultRanges && this._renderDefaultRanges()}
+          <div style={styles.calendarWrapper}>
+            <div style={styles.calendarHeader}>
+              <Icon
+                onClick={this._handlePreviousClick}
+                size={20}
+                style={styles.calendayHeaderNav}
+                type='caret-left'
+              />
+              <div>
+                {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
+              </div>
+              <Icon
+                onClick={this._handleNextClick}
+                size={20}
+                style={styles.calendayHeaderNav}
+                type='caret-right'
+              />
             </div>
-            <Icon
-              onClick={this._handleNextClick}
-              size={20}
-              style={styles.calendayHeaderNav}
-              type='caret-right'
-            />
-          </div>
-          <div style={styles.calendarWeek}>
-            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
-              return (
-                <div key={i} style={styles.calendarWeekDay}>
-                  {day}
-                </div>
-              );
-            })}
-          </div>
-          <div style={styles.calendarTable}>
-            {this._renderMonthTable()}
+            <div style={styles.calendarWeek}>
+              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+                return (
+                  <div key={i} style={styles.calendarWeekDay}>
+                    {day}
+                  </div>
+                );
+              })}
+            </div>
+            <div style={styles.calendarTable}>
+              {this._renderMonthTable()}
+            </div>
           </div>
         </div>
         {(this.state.showCalendar) ? (
@@ -333,19 +418,23 @@ const DatePicker = React.createClass({
       },
 
       //Calendar Styles
-      calendarWrapper: {
+      optionsWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
-        display: this.state.showCalendar ? 'block' : 'none',
+        display: this.state.showCalendar ? 'flex' : 'none',
+        justifyContent: 'center',
         marginTop: 10,
-        padding: 20,
         position: 'absolute',
         right: 0,
-        width: 287,
         zIndex: 10
+      },
+      calendarWrapper: {
+        boxSizing: 'border-box',
+        padding: 20,
+        width: 285
       },
 
       //Calendar Header
@@ -417,6 +506,34 @@ const DatePicker = React.createClass({
       },
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
+      },
+
+      //Default Ranges
+      defaultRangesTitle: {
+        fontSize: StyleConstants.FontSizes.LARGE,
+        marginTop: 10,
+        marginBottom: 20
+      },
+      rangeOptions: {
+        borderRight: '1px solid ' + StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.CHARCOAL,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        padding: 20,
+        width: 113
+      },
+      rangeOption: {
+        alignItems: 'center',
+        display: 'flex',
+        marginBottom: 20
+      },
+      rangeOptionText: {
+        width: '80%'
+      },
+      selectedRangeIcon: {
+        fill: this.props.primaryColor
+      },
+      selectedRangeIconWrapper: {
+        width: '20%'
       },
 
       //Selected and Selecting Range
