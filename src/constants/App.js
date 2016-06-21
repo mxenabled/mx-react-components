@@ -45,6 +45,10 @@ module.exports = {
       displayValue: 'Arrow Up Fat'
     },
     {
+      value: 'art',
+      displayValue: 'Art'
+    },
+    {
       value: 'attention',
       displayValue: 'Attention'
     },
@@ -71,6 +75,10 @@ module.exports = {
     {
       value: 'bubbles',
       displayValue: 'Bubbles'
+    },
+    {
+      value: 'business',
+      displayValue: 'Business'
     },
     {
       value: 'calendar',
@@ -153,6 +161,10 @@ module.exports = {
       displayValue: 'Credit Card'
     },
     {
+      value: 'debts',
+      displayValue: 'Debts'
+    },
+    {
       value: 'delete',
       displayValue: 'Delete'
     },
@@ -193,12 +205,24 @@ module.exports = {
       displayValue: 'Folder'
     },
     {
+      value: 'food',
+      displayValue: 'Food'
+    },
+    {
+      value: 'furniture',
+      displayValue: 'Furniture'
+    },
+    {
       value: 'gallery',
       displayValue: 'Gallery'
     },
     {
       value: 'gear',
       displayValue: 'Gear'
+    },
+    {
+      value: 'gifts',
+      displayValue: 'Gifts'
     },
     {
       value: 'hamburger',
@@ -229,12 +253,24 @@ module.exports = {
       displayValue: 'Investment'
     },
     {
+      value: 'jewlery',
+      displayValue: 'Jewlery'
+    },
+    {
       value: 'kabob_horizontal',
       displayValue: 'Kabob Horizontal'
     },
     {
       value: 'key',
       displayValue: 'Key'
+    },
+    {
+      value: 'kids',
+      displayValue: 'Kids'
+    },
+    {
+      value: 'line-of-credit',
+      displayValue: 'Line Of Credit'
     },
     {
       value: 'link',
