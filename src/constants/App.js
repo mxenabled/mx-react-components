@@ -313,12 +313,24 @@ module.exports = {
       displayValue: 'Mobile Phone'
     },
     {
+      value: 'money-banknote',
+      displayValue: 'Money Banknote'
+    },
+    {
       value: 'mx',
       displayValue: 'MX'
     },
     {
+      value: 'net-worth',
+      displayValue: 'Net Worth'
+    },
+    {
       value: 'no',
       displayValue: 'NO'
+    },
+    {
+      value: 'pets',
+      displayValue: 'Pets'
     },
     {
       value: 'phone',
@@ -337,6 +349,10 @@ module.exports = {
       displayValue: 'Plus'
     },
     {
+      value: 'real-estate',
+      displayValue: 'Real Estate'
+    },
+    {
       value: 'retirement',
       displayValue: 'Retirement'
     },
@@ -353,6 +369,10 @@ module.exports = {
       displayValue: 'Search'
     },
     {
+      value: 'shopping',
+      displayValue: 'Shopping'
+    },
+    {
       value: 'segments',
       displayValue: 'Segments'
     },
@@ -361,12 +381,20 @@ module.exports = {
       displayValue: 'Spinner'
     },
     {
+      value: 'sports',
+      displayValue: 'Sports'
+    },
+    {
       value: 'subtract',
       displayValue: 'Subtract'
     },
     {
       value: 'sync',
       displayValue: 'Sync'
+    },
+    {
+      value: 'taxes',
+      displayValue: 'Taxes'
     },
     {
       value: 'transfer',
@@ -379,6 +407,10 @@ module.exports = {
     {
       value: 'user',
       displayValue: 'User'
+    },
+    {
+      value: 'utilities',
+      displayValue: 'Utilities'
     },
     {
       value: 'view',
