@@ -33,7 +33,7 @@ module.exports = {
     GIFTS_CHARITY: '#347AA5',
     HEALTH_FITNESS: '#5C446E',
     HOME: '#FFD84D',
-    INCOME: '#133F49'
+    INCOME: '#133F49',
     INVESTMENTS: '#FF7070',
     KIDS: '#82D196',
     PETS: '#85507B',
