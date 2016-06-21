@@ -517,7 +517,7 @@ const DateRangePicker = React.createClass({
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         padding: 20,
-        width: 113
+        width: 115
       },
       rangeOption: {
         alignItems: 'center',
