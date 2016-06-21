@@ -241,7 +241,7 @@ const DateRangePicker = React.createClass({
         </div>
         {this.props.defaultRanges.map(range => {
           return (
-            <div style={styles.rangeOption}>
+            <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
               {this._renderSelectedRangeIcon(range)}
               <div onClick={this._handleDefaultRangeSelection.bind(null, range)}>
                 {range.displayValue}
