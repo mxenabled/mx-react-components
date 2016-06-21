@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.1.2</h3>
+        <ul>
+          <li>Add default range options to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/348'>#348</a>)</li>
+        </ul>
+
         <h3>4.1.1</h3>
         <ul>
           <li>Change Column component to use window.innerWidth (<a href='https://github.com/mxenabled/mx-react-components/pull/346'>#346</a>)</li>
