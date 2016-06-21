@@ -6,7 +6,7 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const DatePicker = React.createClass({
+const DateRangePicker = React.createClass({
   propTypes: {
     defaultRanges: React.PropTypes.arrayOf({
       displayValue: React.PropTypes.string,
@@ -575,4 +575,4 @@ const DatePicker = React.createClass({
   }
 });
 
-module.exports = Radium(DatePicker);
+module.exports = Radium(DateRangePicker);
