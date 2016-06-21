@@ -523,7 +523,11 @@ const DateRangePicker = React.createClass({
         alignItems: 'center',
         cursor: 'pointer',
         display: 'flex',
-        marginBottom: 20
+        marginBottom: 20,
+
+        ':hover': {
+          color: this.props.primaryColor
+        }
       },
 
       //Selected and Selecting Range
