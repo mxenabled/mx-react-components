@@ -243,7 +243,7 @@ const DateRangePicker = React.createClass({
           return (
             <div style={styles.rangeOption}>
               {this._renderSelectedRangeIcon(range)}
-              <div onClick={this._handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOptionText}>
+              <div onClick={this._handleDefaultRangeSelection.bind(null, range)}>
                 {range.displayValue}
               </div>
             </div>
@@ -525,15 +525,6 @@ const DateRangePicker = React.createClass({
         alignItems: 'center',
         display: 'flex',
         marginBottom: 20
-      },
-      rangeOptionText: {
-        width: '80%'
-      },
-      selectedRangeIcon: {
-        fill: this.props.primaryColor
-      },
-      selectedRangeIconWrapper: {
-        width: '20%'
       },
 
       //Selected and Selecting Range
