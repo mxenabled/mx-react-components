@@ -521,6 +521,7 @@ const DateRangePicker = React.createClass({
       },
       rangeOption: {
         alignItems: 'center',
+        cursor: 'pointer',
         display: 'flex',
         marginBottom: 20
       },
