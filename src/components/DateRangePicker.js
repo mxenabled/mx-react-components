@@ -357,9 +357,9 @@ const DateRangePicker = React.createClass({
               />
             </div>
             <div style={styles.calendarWeek}>
-              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => {
                 return (
-                  <div key={i} style={styles.calendarWeekDay}>
+                  <div key={day} style={styles.calendarWeekDay}>
                     {day}
                   </div>
                 );
