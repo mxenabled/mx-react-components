@@ -193,6 +193,10 @@ module.exports = {
       displayValue: 'Education'
     },
     {
+      value: 'entertainment',
+      displayValue: 'Entertainment'
+    },
+    {
       value: 'envelope',
       displayValue: 'Envelope'
     },
@@ -329,6 +333,10 @@ module.exports = {
       displayValue: 'NO'
     },
     {
+      value: 'personal-care',
+      displayValue: 'Personal Care'
+    },
+    {
       value: 'pets',
       displayValue: 'Pets'
     },
@@ -347,6 +355,10 @@ module.exports = {
     {
       value: 'plus',
       displayValue: 'Plus'
+    },
+    {
+      value: 'property',
+      displayValue: 'Property'
     },
     {
       value: 'real-estate',
@@ -403,6 +415,10 @@ module.exports = {
     {
       value: 'transactions',
       displayValue: 'Transactions'
+    },
+    {
+      value: 'travel',
+      displayValue: 'Travel'
     },
     {
       value: 'user',
