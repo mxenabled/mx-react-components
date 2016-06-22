@@ -45,6 +45,10 @@ module.exports = {
       displayValue: 'Arrow Up Fat'
     },
     {
+      value: 'art',
+      displayValue: 'Art'
+    },
+    {
       value: 'attention',
       displayValue: 'Attention'
     },
@@ -71,6 +75,10 @@ module.exports = {
     {
       value: 'bubbles',
       displayValue: 'Bubbles'
+    },
+    {
+      value: 'business',
+      displayValue: 'Business'
     },
     {
       value: 'calendar',
@@ -153,6 +161,10 @@ module.exports = {
       displayValue: 'Credit Card'
     },
     {
+      value: 'debts',
+      displayValue: 'Debts'
+    },
+    {
       value: 'delete',
       displayValue: 'Delete'
     },
@@ -181,6 +193,10 @@ module.exports = {
       displayValue: 'Education'
     },
     {
+      value: 'entertainment',
+      displayValue: 'Entertainment'
+    },
+    {
       value: 'envelope',
       displayValue: 'Envelope'
     },
@@ -193,12 +209,24 @@ module.exports = {
       displayValue: 'Folder'
     },
     {
+      value: 'food',
+      displayValue: 'Food'
+    },
+    {
+      value: 'furniture',
+      displayValue: 'Furniture'
+    },
+    {
       value: 'gallery',
       displayValue: 'Gallery'
     },
     {
       value: 'gear',
       displayValue: 'Gear'
+    },
+    {
+      value: 'gifts',
+      displayValue: 'Gifts'
     },
     {
       value: 'hamburger',
@@ -229,12 +257,24 @@ module.exports = {
       displayValue: 'Investment'
     },
     {
+      value: 'jewlery',
+      displayValue: 'Jewlery'
+    },
+    {
       value: 'kabob_horizontal',
       displayValue: 'Kabob Horizontal'
     },
     {
       value: 'key',
       displayValue: 'Key'
+    },
+    {
+      value: 'kids',
+      displayValue: 'Kids'
+    },
+    {
+      value: 'line-of-credit',
+      displayValue: 'Line Of Credit'
     },
     {
       value: 'link',
@@ -277,12 +317,28 @@ module.exports = {
       displayValue: 'Mobile Phone'
     },
     {
+      value: 'money-banknote',
+      displayValue: 'Money Banknote'
+    },
+    {
       value: 'mx',
       displayValue: 'MX'
     },
     {
+      value: 'net-worth',
+      displayValue: 'Net Worth'
+    },
+    {
       value: 'no',
       displayValue: 'NO'
+    },
+    {
+      value: 'personal-care',
+      displayValue: 'Personal Care'
+    },
+    {
+      value: 'pets',
+      displayValue: 'Pets'
     },
     {
       value: 'phone',
@@ -301,6 +357,14 @@ module.exports = {
       displayValue: 'Plus'
     },
     {
+      value: 'property',
+      displayValue: 'Property'
+    },
+    {
+      value: 'real-estate',
+      displayValue: 'Real Estate'
+    },
+    {
       value: 'retirement',
       displayValue: 'Retirement'
     },
@@ -317,12 +381,20 @@ module.exports = {
       displayValue: 'Search'
     },
     {
+      value: 'shopping',
+      displayValue: 'Shopping'
+    },
+    {
       value: 'segments',
       displayValue: 'Segments'
     },
     {
       value: 'spinner',
       displayValue: 'Spinner'
+    },
+    {
+      value: 'sports',
+      displayValue: 'Sports'
     },
     {
       value: 'subtract',
@@ -333,6 +405,10 @@ module.exports = {
       displayValue: 'Sync'
     },
     {
+      value: 'taxes',
+      displayValue: 'Taxes'
+    },
+    {
       value: 'transfer',
       displayValue: 'Transfer'
     },
@@ -341,8 +417,16 @@ module.exports = {
       displayValue: 'Transactions'
     },
     {
+      value: 'travel',
+      displayValue: 'Travel'
+    },
+    {
       value: 'user',
       displayValue: 'User'
+    },
+    {
+      value: 'utilities',
+      displayValue: 'Utilities'
     },
     {
       value: 'view',
