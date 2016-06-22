@@ -83,76 +83,31 @@ const DateRangePicker = React.createClass({
     }
   },
 
+  _endDateIsBeforeStartDate (startDate, endDate) {
+    return moment.unix(endDate).isBefore(moment.unix(startDate));
+  },
+
   _handleDateSelect (date) {
-    const selectedStartDate = this.props.selectedStartDate;
-    const selectedEndDate = this.props.selectedEndDate;
-    let updatedDates = [null, null];
+    let endDate;
+    let startDate;
+    const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
+    const existingRangeEmpty = !this.props.selectedStartDate && !this.props.selectedEndDate;
 
-    updatedDates = this._deselectDate(date, selectedStartDate, selectedEndDate);
-    updatedDates = updatedDates || this._startAndEndDate(date, selectedStartDate, selectedEndDate);
-    updatedDates = updatedDates || this._noEndDate(date, selectedStartDate, selectedEndDate);
-    updatedDates = updatedDates || this._noStartDate(date, selectedStartDate, selectedEndDate);
-    updatedDates = updatedDates || this._noStartOrEndDate(date, selectedStartDate, selectedEndDate);
-
-    this.props.onDateSelect(updatedDates[0], updatedDates[1]);
-  },
-
-  _startAndEndDate (selected, start, end) {
-    let updatedDates;
-
-    if (start && end) {
-      if (selected < start && selected < end) {
-        updatedDates = [selected, end];
-      } else if ((selected > start && selected < end) || selected > end) {
-        updatedDates = [start, selected];
-      }
+    if (existingRangeComplete || existingRangeEmpty) {
+      startDate = date;
+      endDate = null;
+    } else {
+      startDate = this.props.selectedStartDate;
+      endDate = date;
     }
 
-    return updatedDates;
-  },
+    const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
 
-  _noEndDate (selected, start, end) {
-    let updatedDates;
-
-    if (start && !end) {
-      if (selected > start) {
-        updatedDates = [start, selected];
-      } else {
-        updatedDates = [selected, start];
-      }
+    if (modifiedRangeCompleteButDatesInversed) {
+      this.props.onDateSelect(endDate, startDate);
+    } else {
+      this.props.onDateSelect(startDate, endDate);
     }
-
-    return updatedDates;
-  },
-
-  _noStartDate (selected, start, end) {
-    let updatedDates;
-
-    if (!start && end) {
-      if (selected < end) {
-        updatedDates = [selected, end];
-      } else {
-        updatedDates = [end, selected];
-      }
-    }
-
-    return updatedDates;
-  },
-
-  _noStartOrEndDate (selected, start, end) {
-    return (!start && !end) ? [selected, end] : null;
-  },
-
-  _deselectDate (selected, start, end) {
-    let updatedDates;
-
-    if (selected === start) {
-      updatedDates = [null, end];
-    } else if (selected === end) {
-      updatedDates = [start, null];
-    }
-
-    return updatedDates;
   },
 
   _handleDefaultRangeSelection (range) {
