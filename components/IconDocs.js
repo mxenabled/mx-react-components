@@ -5,21 +5,6 @@ const { Icon, Styles, AppConstants } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const IconDocs = React.createClass({
-  getInitialState () {
-    return {
-      icon: {
-        value: 'accounts',
-        displayValue: 'Accounts'
-      }
-    };
-  },
-
-  _handleSelectChange (option) {
-    this.setState({
-      icon: option
-    });
-  },
-
   render () {
     return (
       <div>
@@ -49,12 +34,12 @@ const IconDocs = React.createClass({
 
         <h3>Example</h3>
         <Markdown>
-  {`
-    <Icon
-      size={50}
-      type='accounts'
-    />
-  `}
+          {`
+            <Icon
+              size={50}
+              type='accounts'
+            />
+          `}
         </Markdown>
       </div>
     );
