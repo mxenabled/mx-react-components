@@ -6,6 +6,16 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.1.4</h3>
+        <ul>
+          <li>Adds new Icons including art, business, cash, debts, etc. (<a href='https://github.com/mxenabled/mx-react-components/pull/351'>#351</a>)</li>
+        </ul>
+
+        <h3>4.1.3</h3>
+        <ul>
+          <li>Adds hours and minutes validation to DateTimePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/350'>#350</a>)</li>
+        </ul>
+
         <h3>4.1.2</h3>
         <ul>
           <li>Add default range options to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/348'>#348</a>)</li>
