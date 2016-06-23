@@ -70,6 +70,14 @@ module.exports = {
   ShadowMed: '0 2px 6px rgba(0,0,0,0.1)',
   ShadowHigh: '0 10px 30px 5px rgba(0,0,0,0.1)',
 
+  Spacing: {
+    XLARGE: 30,
+    LARGE: 20,
+    MEDIUM: 15,
+    SMALL: 10,
+    XSMALL: 5
+  },
+
   adjustColor (col, amt) {
     let color = col;
     let usePound = false;
