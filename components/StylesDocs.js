@@ -14,8 +14,6 @@ const StylesDocs = React.createClass({
         </h1>
 
         <h3>Usage</h3>
-
-        <h5>Colors</h5>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
           {Object.keys(Styles.Colors).map(color => {
             return (
@@ -26,6 +24,7 @@ const StylesDocs = React.createClass({
             );
           })}
         </div>
+        <h5>Colors</h5>
         <Markdown lang='js'>
           {`
             Styles.Colors.ASH // #ACB0B3
