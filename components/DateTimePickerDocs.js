@@ -31,12 +31,17 @@ const DateTimePickerDocs = React.createClass({
           onDateSelect={this._handleDateSelect}
           selectedDate={this.state.selectedDate}
           timezoneFormat='name'
-        />
+        >
+          <div style={{ padding: 20 }}>@</div>
+        </DateTimePicker>
 
         <h3>Usage</h3>
 
         <h5>calendarStyle <label>Object</label></h5>
         <p>Style object to be used on the pop-up calendar component.</p>
+
+        <h5>children <label>Node</label></h5>
+        <p>Content to be displayed between the date and time select boxes.</p>
 
         <h5>closeOnDateSelect <label>Boolean</label></h5>
         <p>Default: true</p>
@@ -112,7 +117,9 @@ const DateTimePickerDocs = React.createClass({
             onDateSelect={this._handleDateSelect}
             selectedDate={this.state.selectedDate}
             timezoneFormat='name'
-          />
+          >
+            <div style={{ padding: 20 }}>@</div>
+          </DateTimePicker>
         `}
         </Markdown>
       </div>
