@@ -20,7 +20,7 @@ const StylesDocs = React.createClass({
           {Object.keys(Styles.Colors).map(color => {
             return (
               <div key={color} style={{ width: 100, height: 100, textAlign: 'center' }}>
-                <div key={color} style={{ width: 80, height: 80, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
+                <div key={color} style={{ width: 60, height: 60, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
                 <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({color})</div>
               </div>
             );
