@@ -65,7 +65,7 @@ const Column = React.createClass({
     const styles = this.styles();
     const span = Object.assign(defaultSpan, this.props.span);
 
-    return span ? (
+    return span[this.state.windowSize] ? (
       <div style={styles.component}>
         {this.props.children}
       </div>
@@ -73,8 +73,8 @@ const Column = React.createClass({
   },
 
   styles () {
-    const span = Object.assign(defaultSpan, this.props.span);
-    const offset = Object.assign(defaultOffset, this.props.offset);
+    const span = Object.assign({}, defaultSpan, this.props.span);
+    const offset = Object.assign({}, defaultOffset, this.props.offset);
 
     return {
       component: Object.assign({}, {
