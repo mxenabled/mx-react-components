@@ -1,5 +1,7 @@
 const React = require('react');
 
+const { Styles } = require('mx-react-components');
+
 const Markdown = require('components/Markdown');
 
 const StylesDocs = React.createClass({
@@ -14,6 +16,16 @@ const StylesDocs = React.createClass({
         <h3>Usage</h3>
 
         <h5>Colors</h5>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+          {Object.keys(Styles.Colors).map(color => {
+            return (
+              <div key={color} style={{ width: 100, height: 100, textAlign: 'center' }}>
+                <div key={color} style={{ width: 80, height: 80, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
+                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({color})</div>
+              </div>
+            );
+          })}
+        </div>
         <Markdown lang='js'>
           {`
             Styles.Colors.ASH // #ACB0B3
