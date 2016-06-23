@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.1.6</h3>
+        <ul>
+          <li>Fix issue with midnight and noon in DateTimePicker for non-chrome browsers. (<a href='https://github.com/mxenabled/mx-react-components/pull/355'>#355</a>)</li>
+          <li>Add Spacing to Style constants. (<a href='https://github.com/mxenabled/mx-react-components/pull/354'>#354</a>)</li>
+          <li>Change params to objects for Column component. (<a href='https://github.com/mxenabled/mx-react-components/pull/353'>#353</a>)</li>
+        </ul>
+
         <h3>4.1.5</h3>
         <ul>
           <li>Bug fix and minor tweaks to DateRangePicker. (<a href='https://github.com/mxenabled/mx-react-components/pull/352'>#352</a>)</li>
