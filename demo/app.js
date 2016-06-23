@@ -445,74 +445,52 @@ const Demo = React.createClass({
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <Row>
             <Column
-              columnLarge={9}
-              columnMedium={6}
-              offsetLarge={3}
-              offsetMedium={4}
+              offset={{ large: 3, medium: 4, small: 1 }}
+              span={{ large: 9, medium: 6, small: 1 }}
             >
               <div style={styles.responsiveDiv}>1</div>
             </Column>
-            <Column
-              columnLarge={4}
-              columnMedium={3}
-              columnSmall={12}
-            >
+            <Column span={{ large: 4, medium: 3, small: 10 }} >
               <div style={styles.responsiveDiv}>2</div>
             </Column>
             <Column
-              columnLarge={4}
-              columnMedium={9}
-              columnSmall={12}
+              span={{ large: 4, medium: 9 }}
             >
               <div style={styles.responsiveDiv}>3</div>
             </Column>
             <Column
-              columnLarge={4}
-              columnMedium={12}
-              columnSmall={12}
+              span={{ large: 4 }}
             >
               <div style={styles.responsiveDiv}>5</div>
             </Column>
             <Column
-              columnLarge={3}
-              columnMedium={6}
-              columnSmall={9}
-              orderMedium={-1}
+              order={{ medium: -1 }}
+              span={{ large: 3, medium: 6, small: 9 }}
             >
               <div style={styles.responsiveDiv}>6</div>
             </Column>
             <Column
-              columnLarge={3}
-              columnMedium={6}
-              columnSmall={9}
-              orderMedium={-2}
+              order={{ medium: -2 }}
+              span={{ large: 3, medium: 6, small: 9 }}
             >
               <div style={styles.responsiveDiv}>7</div>
             </Column>
             <Column
-              columnLarge={6}
-              columnMedium={12}
-              columnSmall={12}
+              span={{ large: 6 }}
             >
               <div style={styles.responsiveDiv}>8</div>
             </Column>
             <Column
-              columnLarge={6}
-              columnMedium={9}
-              columnSmall={12}
+              span={{ large: 6, medium: 9 }}
             >
               <Row>
                 <Column
-                  columnLarge={6}
-                  columnMedium={6}
-                  columnSmall={6}
+                  span={{ large: 6, medium: 6, small: 6 }}
                 >
                   <div style={styles.responsiveDiv}>9</div>
                 </Column>
                 <Column
-                  columnLarge={6}
-                  columnMedium={6}
-                  columnSmall={6}
+                  span={{ large: 6, medium: 6, small: 6 }}
                 >
                   <div style={styles.responsiveDiv}>10</div>
                 </Column>
