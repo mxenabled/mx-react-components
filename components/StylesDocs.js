@@ -19,7 +19,7 @@ const StylesDocs = React.createClass({
             return (
               <div key={color} style={{ height: 100, width: 100, textAlign: 'center', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
                 <div key={color} style={{ width: 60, height: 60, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
-                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 10, flex: '1 0 100%' }}>({color})</div>
+                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5, flex: '1 0 100%' }}>({color})</div>
               </div>
             );
           })}
