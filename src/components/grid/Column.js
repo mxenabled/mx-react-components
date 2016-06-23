@@ -1,40 +1,35 @@
 const React = require('react');
 
+const defaultBreakpoints = { large: 1200, medium: 750, small: 320 };
+const defaultSpan = { large: 12, medium: 12, small: 12 };
+const defaultOffset = { large: 0, medium: 0, small: 0 };
+
+const defaultShape = {
+  large: React.PropTypes.number,
+  medium: React.PropTypes.number,
+  small: React.PropTypes.number
+};
+
 const Column = React.createClass({
   propTypes: {
-    breakpointLarge: React.PropTypes.number,
-    breakpointMedium: React.PropTypes.number,
-    breakpointSmall: React.PropTypes.number,
+    breakpoints: React.PropTypes.shape(defaultShape),
     columnCount: React.PropTypes.number,
-    columnLarge: React.PropTypes.number,
-    columnMedium: React.PropTypes.number,
-    columnSmall: React.PropTypes.number,
-    offsetLarge: React.PropTypes.number,
-    offsetMedium: React.PropTypes.number,
-    offsetSmall: React.PropTypes.number,
-    orderLarge: React.PropTypes.number,
-    orderMediumpoint: React.PropTypes.number,
-    orderSmall: React.PropTypes.number,
+    offset: React.PropTypes.shape(defaultShape),
+    order: React.PropTypes.shape(defaultShape),
+    span: React.PropTypes.shape(defaultShape),
     style: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
-      breakpointLarge: 1200,
-      breakpointMedium: 750,
       columnCount: 12,
-      columnLarge: 12,
-      columnMedium: 12,
-      columnSmall: 12,
-      offsetLarge: 0,
-      offsetMedium: 0,
-      offsetSmall: 0
+      order: {}
     };
   },
 
   getInitialState () {
     return {
-      screenWidth: this._getScreenWidth()
+      windowSize: this._getWindowSize()
     };
   },
 
@@ -46,29 +41,31 @@ const Column = React.createClass({
     window.removeEventListener('resize', this._handleWindowResize);
   },
 
-  _getScreenWidth () {
+  _getWindowSize () {
+    const breakpoints = Object.assign({}, defaultBreakpoints, this.props.breakpoints);
     const width = window.innerWidth;
-    let screenWidth = 'Small';
+    let windowSize = 'small';
 
-    if (width >= this.props.breakpointLarge) {
-      screenWidth = 'Large';
-    } else if (width >= this.props.breakpointMedium) {
-      screenWidth = 'Medium';
+    if (width >= breakpoints.large) {
+      windowSize = 'large';
+    } else if (width >= breakpoints.medium) {
+      windowSize = 'medium';
     }
 
-    return screenWidth;
+    return windowSize;
   },
 
   _handleWindowResize () {
     this.setState({
-      screenWidth: this._getScreenWidth()
+      windowSize: this._getWindowSize()
     });
   },
 
   render () {
     const styles = this.styles();
+    const span = Object.assign(defaultSpan, this.props.span);
 
-    return this.props['column' + this.state.screenWidth] ? (
+    return span ? (
       <div style={styles.component}>
         {this.props.children}
       </div>
@@ -76,15 +73,19 @@ const Column = React.createClass({
   },
 
   styles () {
+    const span = Object.assign(defaultSpan, this.props.span);
+    const offset = Object.assign(defaultOffset, this.props.offset);
+
     return {
       component: Object.assign({}, {
         boxSizing: 'border-box',
-        flexBasis: (this.props['column' + this.state.screenWidth] / this.props.columnCount * 100) + '%',
+        flexBasis: (span[this.state.windowSize] / this.props.columnCount * 100) + '%',
         flexGrow: 0,
         flexShrink: 0,
-        marginLeft: (this.props['offset' + this.state.screenWidth] / this.props.columnCount * 100) + '%',
-        order: this.props['order' + this.state.screenWidth],
-        padding: '0 10px'
+        marginLeft: (offset[this.state.windowSize] / this.props.columnCount * 100) + '%',
+        order: this.props.order[this.state.windowSize],
+        paddingLeft: 10,
+        paddingRight: 10
       }, this.props.style)
     };
   }
