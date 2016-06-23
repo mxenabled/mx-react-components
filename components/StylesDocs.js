@@ -19,9 +19,9 @@ const StylesDocs = React.createClass({
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
           {Object.keys(Styles.Colors).map(color => {
             return (
-              <div key={color} style={{ width: 100, height: 100, textAlign: 'center' }}>
+              <div key={color} style={{ padding: 20, textAlign: 'center', border: 'thin red solid' }}>
                 <div key={color} style={{ width: 60, height: 60, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
-                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({color})</div>
+                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 10 }}>({color})</div>
               </div>
             );
           })}
