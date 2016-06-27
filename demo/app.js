@@ -432,6 +432,8 @@ const Demo = React.createClass({
   },
 
   render () {
+    console.warn('Note, Key and Bike Icons will be deprecated in next major release');
+
     const navConfig = {
       duration: 200,
       onNextClick: this._handleNextSiblingClick,
