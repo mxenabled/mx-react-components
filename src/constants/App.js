@@ -65,6 +65,10 @@ module.exports = {
       displayValue: 'Backspace'
     },
     {
+      value: 'bike',
+      displayValue: 'Bike'
+    },
+    {
       value: 'bill-pay',
       displayValue: 'Bill Pay'
     },
@@ -259,6 +263,10 @@ module.exports = {
     {
       value: 'kabob_horizontal',
       displayValue: 'Kabob Horizontal'
+    },
+    {
+      value: 'key',
+      displayValue: 'Key'
     },
     {
       value: 'kids',
