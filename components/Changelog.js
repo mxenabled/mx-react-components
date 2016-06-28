@@ -5,6 +5,11 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        
+        <h3>4.1.7</h3>
+        <ul>
+          <li>Fixed line-of-credit icon. (<a href='https://github.com/mxenabled/mx-react-components/pull/356'>#356</a>)</li>
+        </ul>
 
         <h3>4.1.6</h3>
         <ul>
