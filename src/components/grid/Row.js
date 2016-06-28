@@ -9,7 +9,7 @@ const Row = React.createClass({
     const styles = this.styles();
 
     return (
-      <div style={styles.component}>
+      <div {...this.props} style={styles.component}>
         {this.props.children}
       </div>
     );
