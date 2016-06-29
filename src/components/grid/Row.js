@@ -1,3 +1,4 @@
+const Radium = require('radium');
 const React = require('react');
 
 const Row = React.createClass({
@@ -27,4 +28,4 @@ const Row = React.createClass({
   }
 });
 
-module.exports = Row;
+module.exports = Radium(Row);
