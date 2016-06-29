@@ -1,4 +1,10 @@
 module.exports = {
+  BreakPoints: {
+    large: 1200,
+    medium: 750,
+    small: 320
+  },
+
   Colors: {
     // GRAYSCALE
     ASH: '#ACB0B3',
