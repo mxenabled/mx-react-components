@@ -385,7 +385,7 @@ const DonutChart = React.createClass({
         transform: 'translate(-50%, -50%)'
       },
       label: {
-        color: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.ASH,
         fontSize: '0.4em',
         marginTop: 5
       },
