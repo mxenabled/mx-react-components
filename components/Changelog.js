@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.1.9</h3>
+        <ul>
+          <li>Add checks for time and fallback to minimumDate on Calendar. (<a href='https://github.com/mxenabled/mx-react-components/pull/359'>#359</a>)</li>
+        </ul>
+
         <h3>4.1.8</h3>
         <ul>
           <li>Row tweaks to allow onClick and hover state for a row. (<a href='https://github.com/mxenabled/mx-react-components/pull/357'>#357</a>)</li>
