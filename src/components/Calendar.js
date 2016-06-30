@@ -26,7 +26,7 @@ const Calendar = React.createClass({
 
   getInitialState () {
     return {
-      currentDate: this.props.selectedDate || moment().unix()
+      currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
     };
   },
 
