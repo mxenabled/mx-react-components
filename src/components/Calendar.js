@@ -68,7 +68,7 @@ const Calendar = React.createClass({
       const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
       const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate), 'day');
       const isToday = startDate.isSame(moment(), 'day');
-      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
+      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
 
       const day = (
         <div
