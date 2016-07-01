@@ -1,4 +1,10 @@
 module.exports = {
+  BreakPoints: {
+    large: 1200,
+    medium: 750,
+    small: 320
+  },
+
   Colors: {
     // GRAYSCALE
     ASH: '#ACB0B3',
@@ -123,5 +129,19 @@ module.exports = {
     const b = parseInt(color.slice(5, 7), 16);
 
     return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity + ')';
+  },
+
+  getWindowSize () {
+    const breakPoints = this.BreakPoints;
+    const width = window.innerWidth;
+    let windowSize = 'small';
+
+    if (width >= breakPoints.large) {
+      windowSize = 'large';
+    } else if (width >= breakPoints.medium) {
+      windowSize = 'medium';
+    }
+
+    return windowSize;
   }
 };

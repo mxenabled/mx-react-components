@@ -1,6 +1,6 @@
 const React = require('react');
 
-const defaultBreakpoints = { large: 1200, medium: 750, small: 320 };
+const { BreakPoints } = require('../../constants/Style');
 const defaultSpan = { large: 12, medium: 12, small: 12 };
 const defaultOffset = { large: 0, medium: 0, small: 0 };
 
@@ -42,7 +42,7 @@ const Column = React.createClass({
   },
 
   _getWindowSize () {
-    const breakpoints = Object.assign({}, defaultBreakpoints, this.props.breakpoints);
+    const breakpoints = Object.assign({}, BreakPoints, this.props.breakpoints);
     const width = window.innerWidth;
     let windowSize = 'small';
 
