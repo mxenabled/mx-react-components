@@ -1,6 +1,6 @@
 {
   "name": "mx-react-components-docs",
-  "version": "4.1.9",
+  "version": "4.1.10",
   "description": "A collection of generic React UI components",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "history": "^2.0.0",
     "marked": "^0.3.5",
     "moment": "^2.10.6",
-    "mx-react-components": "^4.1.9",
+    "mx-react-components": "^4.1.10",
     "radium": "^0.17.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",

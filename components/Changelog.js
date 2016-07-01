@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.1.10</h3>
+        <ul>
+          <li>Add BreakPoint resolutions to Style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/358'>#358</a>)</li>
+        </ul>
+
         <h3>4.1.9</h3>
         <ul>
           <li>Add checks for time and fallback to minimumDate on Calendar. (<a href='https://github.com/mxenabled/mx-react-components/pull/359'>#359</a>)</li>
