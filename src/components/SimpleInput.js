@@ -34,7 +34,7 @@ const Input = React.createClass({
 
   componentDidMount () {
     if (this.props.style) {
-      console.warn('The style prop is depricated and will be removed in a future release. Please used styles.');
+      console.warn('The style prop is deprecated and will be removed in a future release. Please used styles.');
     }
   },
 
