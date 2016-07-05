@@ -1,5 +1,4 @@
 const React = require('react');
-const Radium = require('radium');
 
 const Input = require('./SimpleInput');
 
@@ -49,4 +48,4 @@ const SearchInput = React.createClass({
   }
 });
 
-module.exports = Radium(SearchInput);
+module.exports = SearchInput;

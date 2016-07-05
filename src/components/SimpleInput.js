@@ -1,5 +1,4 @@
 const React = require('react');
-const Radium = require('radium');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
@@ -110,4 +109,4 @@ const Input = React.createClass({
   }
 });
 
-module.exports = Radium(Input);
+module.exports = Input;
