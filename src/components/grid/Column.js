@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { BreakPoints } = require('../../constants/Style');
+const StyleConstants = require('../../constants/Style');
 const defaultSpan = { large: 12, medium: 12, small: 12 };
 const defaultOffset = { large: 0, medium: 0, small: 0 };
 
@@ -17,7 +17,8 @@ const Column = React.createClass({
     offset: React.PropTypes.shape(defaultShape),
     order: React.PropTypes.shape(defaultShape),
     span: React.PropTypes.shape(defaultShape),
-    style: React.PropTypes.object
+    style: React.PropTypes.object,
+    windowWidth: React.PropTypes.number
   },
 
   getDefaultProps () {
@@ -29,35 +30,13 @@ const Column = React.createClass({
 
   getInitialState () {
     return {
-      windowSize: this._getWindowSize()
+      windowSize: StyleConstants.getWindowSize(this.props.windowWidth)
     };
   },
 
-  componentDidMount () {
-    window.addEventListener('resize', this._handleWindowResize);
-  },
-
-  componentWillUnmount () {
-    window.removeEventListener('resize', this._handleWindowResize);
-  },
-
-  _getWindowSize () {
-    const breakpoints = Object.assign({}, BreakPoints, this.props.breakpoints);
-    const width = window.innerWidth;
-    let windowSize = 'small';
-
-    if (width >= breakpoints.large) {
-      windowSize = 'large';
-    } else if (width >= breakpoints.medium) {
-      windowSize = 'medium';
-    }
-
-    return windowSize;
-  },
-
-  _handleWindowResize () {
+  componentWillReceiveProps (newProps) {
     this.setState({
-      windowSize: this._getWindowSize()
+      windowSize: StyleConstants.getWindowSize(newProps.windowWidth)
     });
   },
 
