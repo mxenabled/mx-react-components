@@ -2,7 +2,9 @@ const React = require('react');
 const moment = require('moment-timezone/builds/moment-timezone-with-data.min');
 
 const Calendar = require('./Calendar');
+const Column = require('./grid/Column');
 const Icon = require('./Icon');
+const Row = require('./grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
@@ -147,76 +149,89 @@ const DatePicker = React.createClass({
     const styles = this.styles();
 
     return (
-      <div style={styles.component}>
-        <div
-          onBlur={this._handleDateBlur}
-          onClick={this._handleDateClick}
-          onFocus={this._handleDateFocus}
-          ref='dateSelect'
-          style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
-          tabIndex={0}
+      <Row style={styles.component}>
+        <Column
+          span={{ large: 5, medium: 5, small: 12 }}
         >
-          {this.props.showIcons ? (
+          <div
+            onBlur={this._handleDateBlur}
+            onClick={this._handleDateClick}
+            onFocus={this._handleDateFocus}
+            ref='dateSelect'
+            style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
+            tabIndex={0}
+          >
+            {this.props.showIcons ? (
+              <Icon
+                size={20}
+                style={styles.selectedIcon}
+                type={this.props.dateIcon}
+              />
+            ) : null}
+            <div style={styles.selectedText}>
+              {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.dateFormat) : this.props.datePlaceholder}
+            </div>
             <Icon
               size={20}
-              style={styles.selectedIcon}
-              type={this.props.dateIcon}
+              style={styles.selectedDateCaret}
+              type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+            />
+          {this.state.showCalendar ? (
+            <Calendar
+              {...this.props}
+              onDateSelect={this._handleDateSelect}
+              style={styles.calendar}
             />
           ) : null}
-          <div style={styles.selectedText}>
-            {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.dateFormat) : this.props.datePlaceholder}
           </div>
-          <Icon
-            size={20}
-            style={styles.selectedDateCaret}
-            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-          />
-        {this.state.showCalendar ? (
-          <Calendar
-            {...this.props}
-            onDateSelect={this._handleDateSelect}
-            style={styles.calendar}
-          />
+        </Column>
+        {this.props.children ? (
+          <Column
+            span={{ large: 1, medium: 1, small: 12 }}
+            style={styles.children}
+          >
+              {this.props.children}
+          </Column>
         ) : null}
-        </div>
-        <div>
-          {this.props.children}
-        </div>
-        <div
-          onBlur={this._handleTimeBlur}
-          onFocus={this._handleTimeFocus}
-          style={Object.assign({}, styles.selectWrapper, this.state.editTime ? styles.activeSelectWrapper : null)}
-          tabIndex={0}
+        <Column
+          span={{ large: 6, medium: 6, small: 12 }}
         >
-          {this.props.showIcons ? (
-            <Icon
-              size={20}
-              style={styles.selectedIcon}
-              type={this.props.timeIcon}
-            />
-          ) : null}
-          {this.state.editTime ? (
-            <input
-              autoFocus={true}
-              defaultValue={this.state.editTime ? moment.unix(this.props.selectedDate).format('HH:mm') : null}
-              name='time'
-              onBlur={this._handleTimeSelect}
-              ref='timeInput'
-              style={styles.timeInput}
-              type='time'
-            />
-          ) : (
-            <div style={styles.timeDisplay}>
-              {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
-            </div>
-          )}
-          {this.props.timezoneFormat ? (
-            <div style={styles.timezone}>
-              {this._getTimezone(this.props.selectedDate)}
-            </div>
-          ) : null}
-        </div>
-      </div>
+          <div
+            onBlur={this._handleTimeBlur}
+            onFocus={this._handleTimeFocus}
+            style={Object.assign({}, styles.selectWrapper, this.state.editTime ? styles.activeSelectWrapper : null)}
+            tabIndex={0}
+          >
+            {this.props.showIcons ? (
+              <Icon
+                size={20}
+                style={styles.selectedIcon}
+                type={this.props.timeIcon}
+              />
+            ) : null}
+            {this.state.editTime ? (
+              <input
+                autoFocus={true}
+                defaultValue={this.state.editTime ? moment.unix(this.props.selectedDate).format('HH:mm') : null}
+                name='time'
+                onBlur={this._handleTimeSelect}
+                ref='timeInput'
+                style={styles.timeInput}
+                type='time'
+              />
+            ) : (
+              <div style={styles.timeDisplay}>
+                {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
+              </div>
+            )}
+            {this.props.timezoneFormat ? (
+              <div style={styles.timezone}>
+                {this._getTimezone(this.props.selectedDate)}
+              </div>
+            ) : null}
+          </div>
+        </Column>
+      </Row>
     );
   },
 
@@ -224,8 +239,10 @@ const DatePicker = React.createClass({
     return Object.assign({}, {
       component: {
         alignItems: 'center',
-        display: 'flex',
-        width: '100%'
+        display: 'flex'
+      },
+      children: {
+        textAlign: 'center'
       },
 
       // Select styles
