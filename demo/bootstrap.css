@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=d3537a883edb6777d86afaa49a3902f0)
- * Config saved to config.json and https://gist.github.com/d3537a883edb6777d86afaa49a3902f0
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=8d6190e3b2c069939f24fe9f7c4c5c1b)
+ * Config saved to config.json and https://gist.github.com/8d6190e3b2c069939f24fe9f7c4c5c1b
  */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -19,19 +19,19 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-@media (min-width: 768px) {
+@media (min-width: 320px) {
   .container {
-    width: 320px;
+    width: 740px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 750px) {
   .container {
-    width: 750px;
+    width: 960px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1200px;
+    width: 1160px;
   }
 }
 .container-fluid {
@@ -206,7 +206,7 @@
 .col-xs-offset-0 {
   margin-left: 0%;
 }
-@media (min-width: 768px) {
+@media (min-width: 320px) {
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
   }
@@ -364,7 +364,7 @@
     margin-left: 0%;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 750px) {
   .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
     float: left;
   }
@@ -680,8 +680,8 @@
     margin-left: 0%;
   }
 }
-/*.clearfix:before,
-.clearfix:after,*/
+.clearfix:before,
+.clearfix:after,
 .container:before,
 .container:after,
 .container-fluid:before,
@@ -691,7 +691,7 @@
   content: " ";
   display: table;
 }
-/*.clearfix:after,*/
+.clearfix:after,
 .container:after,
 .container-fluid:after,
 .row:after {
@@ -753,7 +753,7 @@
 .visible-lg-inline-block {
   display: none !important;
 }
-@media (max-width: 767px) {
+@media (max-width: 319px) {
   .visible-xs {
     display: block !important;
   }
@@ -768,26 +768,26 @@
     display: table-cell !important;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 319px) {
   .visible-xs-block {
     display: block !important;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 319px) {
   .visible-xs-inline {
     display: inline !important;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 319px) {
   .visible-xs-inline-block {
     display: inline-block !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 320px) and (max-width: 749px) {
   .visible-sm {
     display: block !important;
   }
-/*  table.visible-sm {
+  table.visible-sm {
     display: table !important;
   }
   tr.visible-sm {
@@ -796,24 +796,24 @@
   th.visible-sm,
   td.visible-sm {
     display: table-cell !important;
-  }*/
+  }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 320px) and (max-width: 749px) {
   .visible-sm-block {
     display: block !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 320px) and (max-width: 749px) {
   .visible-sm-inline {
     display: inline !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 320px) and (max-width: 749px) {
   .visible-sm-inline-block {
     display: inline-block !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 750px) and (max-width: 1199px) {
   .visible-md {
     display: block !important;
   }
@@ -828,17 +828,17 @@
     display: table-cell !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 750px) and (max-width: 1199px) {
   .visible-md-block {
     display: block !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 750px) and (max-width: 1199px) {
   .visible-md-inline {
     display: inline !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 750px) and (max-width: 1199px) {
   .visible-md-inline-block {
     display: inline-block !important;
   }
@@ -873,17 +873,17 @@
     display: inline-block !important;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 319px) {
   .hidden-xs {
     display: none !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 320px) and (max-width: 749px) {
   .hidden-sm {
     display: none !important;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 750px) and (max-width: 1199px) {
   .hidden-md {
     display: none !important;
   }
