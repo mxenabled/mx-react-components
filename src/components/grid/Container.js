@@ -13,7 +13,7 @@ const Container = React.createClass({
 
   render () {
     return (
-      <div className={'container' + (this.props.fluid ? '-fluid' : '')}>
+      <div className={'container' + (this.props.fluid ? '-fluid' : '')} style={{ boxSizing: 'border-box' }}>
         {this.props.children}
       </div>
     );
