@@ -34,18 +34,14 @@ const Column = React.createClass({
 
     if (medium === 0) {
       colWidths.push('hidden-md');
-    } else {
-      if (medium !== small) {
-        colWidths.push('col-md-' + medium);
-      }
+    } else if (medium !== small) {
+      colWidths.push('col-md-' + medium);
     }
 
     if (large === 0) {
       colWidths.push('hidden-lg');
-    } else {
-      if (large !== medium) {
-        colWidths.push('col-lg-' + large);
-      }
+    } else if (large !== medium) {
+      colWidths.push('col-lg-' + large);
     }
 
     return colWidths;
