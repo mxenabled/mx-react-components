@@ -1,8 +1,6 @@
 const React = require('react');
 
-const StyleConstants = require('../../constants/Style');
-const defaultSpan = { large: 12, medium: 12, small: 12 };
-const defaultOffset = { large: 0, medium: 0, small: 0 };
+const defaultSpanOffset = { large: 0, medium: 0, small: 0 };
 
 const defaultShape = {
   large: React.PropTypes.number,
@@ -12,61 +10,65 @@ const defaultShape = {
 
 const Column = React.createClass({
   propTypes: {
-    breakpoints: React.PropTypes.shape(defaultShape),
-    columnCount: React.PropTypes.number,
     offset: React.PropTypes.shape(defaultShape),
-    order: React.PropTypes.shape(defaultShape),
-    span: React.PropTypes.shape(defaultShape),
-    style: React.PropTypes.object,
-    windowWidth: React.PropTypes.number
+    span: React.PropTypes.shape(defaultShape)
   },
 
   getDefaultProps () {
     return {
-      columnCount: 12,
-      order: {}
+      offset: defaultSpanOffset,
+      span: defaultSpanOffset
     };
   },
 
-  getInitialState () {
-    return {
-      windowSize: StyleConstants.getWindowSize(this.props.windowWidth)
-    };
+  getColumnWidths () {
+    const colWidths = [];
+
+    // Column widths
+    if (this.props.span.small !== 0) {
+      colWidths.push('col-sm-' + this.props.span.small);
+    }
+    if (this.props.span.medium !== 0 && this.props.span.medium !== this.props.span.small) {
+      colWidths.push('col-md-' + this.props.span.medium);
+    }
+    if (this.props.span.large !== 0 && this.props.span.large !== this.props.span.medium) {
+      colWidths.push('col-lg-' + this.props.span.large);
+    }
+
+    return colWidths;
   },
 
-  componentWillReceiveProps (newProps) {
-    this.setState({
-      windowSize: StyleConstants.getWindowSize(newProps.windowWidth)
-    });
+  getColumnOffsets () {
+    const offsets = [];
+
+    // Column offsets
+    if (this.props.offset.small !== 0) {
+      offsets.push('col-sm-offset-' + this.props.offset.small);
+    }
+    if (this.props.offset.medium !== 0 && this.props.offset.medium !== this.props.offset.small) {
+      offsets.push('col-md-offset-' + this.props.offset.medium);
+    }
+    if (this.props.offset.large !== 0 && this.props.offset.large !== this.props.offset.medium) {
+      offsets.push('col-lg-offset-' + this.props.offset.large);
+    }
+
+    return offsets;
   },
 
   render () {
-    const styles = this.styles();
-    const span = Object.assign(defaultSpan, this.props.span);
+    let className = [];
 
-    return span[this.state.windowSize] ? (
-      <div style={styles.component}>
+    // Column widths
+    className = className.concat(this.getColumnWidths());
+
+    // Column offsets
+    className = className.concat(this.getColumnOffsets());
+
+    return (
+      <div className={className.join(' ')}>
         {this.props.children}
       </div>
-      ) : null;
-  },
-
-  styles () {
-    const span = Object.assign({}, defaultSpan, this.props.span);
-    const offset = Object.assign({}, defaultOffset, this.props.offset);
-
-    return {
-      component: Object.assign({}, {
-        boxSizing: 'border-box',
-        flexBasis: (span[this.state.windowSize] / this.props.columnCount * 100) + '%',
-        flexGrow: 0,
-        flexShrink: 0,
-        marginLeft: (offset[this.state.windowSize] / this.props.columnCount * 100) + '%',
-        order: this.props.order[this.state.windowSize],
-        paddingLeft: 10,
-        paddingRight: 10
-      }, this.props.style)
-    };
+    );
   }
 });
 
