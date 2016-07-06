@@ -463,24 +463,24 @@ const Demo = React.createClass({
               <Column
                 span={{ large: 4 }}
               >
-                <div style={styles.responsiveDiv}>5</div>
+                <div style={styles.responsiveDiv}>4</div>
               </Column>
               <Column
                 order={{ medium: -1 }}
                 span={{ large: 3, medium: 6, small: 9 }}
               >
-                <div style={styles.responsiveDiv}>6</div>
+                <div style={styles.responsiveDiv}>5</div>
               </Column>
               <Column
                 order={{ medium: -2 }}
                 span={{ large: 3, medium: 6, small: 9 }}
               >
-                <div style={styles.responsiveDiv}>7</div>
+                <div style={styles.responsiveDiv}>6</div>
               </Column>
               <Column
                 span={{ large: 6 }}
               >
-                <div style={styles.responsiveDiv}>8</div>
+                <div style={styles.responsiveDiv}>7</div>
               </Column>
               <Column
                 span={{ large: 6, medium: 9 }}
@@ -489,12 +489,12 @@ const Demo = React.createClass({
                   <Column
                     span={{ large: 6, medium: 6, small: 6 }}
                   >
-                    <div style={styles.responsiveDiv}>9</div>
+                    <div style={styles.responsiveDiv}>8</div>
                   </Column>
                   <Column
                     span={{ large: 6, medium: 6, small: 6 }}
                   >
-                    <div style={styles.responsiveDiv}>10</div>
+                    <div style={styles.responsiveDiv}>9</div>
                   </Column>
                 </Row>
               </Column>
