@@ -1,9 +1,5 @@
 const React = require('react');
 
-const { BreakPoints } = require('../../constants/Style');
-const defaultSpan = { large: 12, medium: 12, small: 12 };
-const defaultOffset = { large: 0, medium: 0, small: 0 };
-
 const defaultShape = {
   large: React.PropTypes.number,
   medium: React.PropTypes.number,
@@ -12,82 +8,81 @@ const defaultShape = {
 
 const Column = React.createClass({
   propTypes: {
-    breakpoints: React.PropTypes.shape(defaultShape),
-    columnCount: React.PropTypes.number,
     offset: React.PropTypes.shape(defaultShape),
-    order: React.PropTypes.shape(defaultShape),
-    span: React.PropTypes.shape(defaultShape),
-    style: React.PropTypes.object
+    span: React.PropTypes.shape(defaultShape)
   },
 
   getDefaultProps () {
     return {
-      columnCount: 12,
-      order: {}
+      offset: { large: 0, medium: 0, small: 0 },
+      span: { large: 12, medium: 12, small: 12 }
     };
   },
 
-  getInitialState () {
-    return {
-      windowSize: this._getWindowSize()
-    };
-  },
+  getColumnWidths () {
+    const colWidths = [];
+    const small = this.props.span.small || 0;
+    const medium = this.props.span.medium || 0;
+    const large = this.props.span.large || 0;
 
-  componentDidMount () {
-    window.addEventListener('resize', this._handleWindowResize);
-  },
-
-  componentWillUnmount () {
-    window.removeEventListener('resize', this._handleWindowResize);
-  },
-
-  _getWindowSize () {
-    const breakpoints = Object.assign({}, BreakPoints, this.props.breakpoints);
-    const width = window.innerWidth;
-    let windowSize = 'small';
-
-    if (width >= breakpoints.large) {
-      windowSize = 'large';
-    } else if (width >= breakpoints.medium) {
-      windowSize = 'medium';
+    // Column widths
+    if (small === 0) {
+      colWidths.push('hidden-sm');
+    } else {
+      colWidths.push('col-sm-' + small);
     }
 
-    return windowSize;
+    if (medium === 0) {
+      colWidths.push('hidden-md');
+    } else if (medium !== small) {
+      colWidths.push('col-md-' + medium);
+    }
+
+    if (large === 0) {
+      colWidths.push('hidden-lg');
+    } else if (large !== medium) {
+      colWidths.push('col-lg-' + large);
+    }
+
+    return colWidths;
   },
 
-  _handleWindowResize () {
-    this.setState({
-      windowSize: this._getWindowSize()
-    });
+  getColumnOffsets () {
+    const offsets = [];
+    const small = this.props.offset.small || 0;
+    const medium = this.props.offset.medium || 0;
+    const large = this.props.offset.large || 0;
+
+    // Column offsets
+    if (small !== 0) {
+      offsets.push('col-sm-offset-' + small);
+    }
+
+    if (medium !== 0 && medium !== small) {
+      offsets.push('col-md-offset-' + medium);
+    }
+
+    if (large !== 0 && large !== medium) {
+      offsets.push('col-lg-offset-' + large);
+    }
+
+    return offsets;
   },
 
   render () {
-    const styles = this.styles();
-    const span = Object.assign(defaultSpan, this.props.span);
+    let className = [];
 
-    return span[this.state.windowSize] ? (
-      <div style={styles.component}>
+    // Column widths
+    className = className.concat(this.getColumnWidths());
+
+    // Column offsets
+    className = className.concat(this.getColumnOffsets());
+
+    return (
+      <div className={className.join(' ')} style={{ boxSizing: 'border-box' }}>
         {this.props.children}
       </div>
-      ) : null;
-  },
-
-  styles () {
-    const span = Object.assign({}, defaultSpan, this.props.span);
-    const offset = Object.assign({}, defaultOffset, this.props.offset);
-
-    return {
-      component: Object.assign({}, {
-        boxSizing: 'border-box',
-        flexBasis: (span[this.state.windowSize] / this.props.columnCount * 100) + '%',
-        flexGrow: 0,
-        flexShrink: 0,
-        marginLeft: (offset[this.state.windowSize] / this.props.columnCount * 100) + '%',
-        order: this.props.order[this.state.windowSize],
-        paddingLeft: 10,
-        paddingRight: 10
-      }, this.props.style)
-    };
+    );
   }
 });
 
