@@ -131,8 +131,9 @@ module.exports = {
     return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity + ')';
   },
 
-  getWindowSize (width) {
+  getWindowSize () {
     const breakPoints = this.BreakPoints;
+    const width = window.innerWidth;
     let windowSize = 'small';
 
     if (width >= breakPoints.large) {
