@@ -74,8 +74,8 @@ const Gauge = React.createClass({
     const dataSets = props.data.map(item => {
       return item.value;
     });
-    const startAngle = (-135 * (Math.PI /180));
-    const endAngle = (135 * (Math.PI /180));
+    const startAngle = (-135 * (Math.PI / 180));
+    const endAngle = (135 * (Math.PI / 180));
     const pie = d3.layout.pie().sort(null).padAngle(props.padAngle).endAngle(endAngle);
     const values = pie(dataSets);
     const radius = Math.min(props.width, props.height) / 2;

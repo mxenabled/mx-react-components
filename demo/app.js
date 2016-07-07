@@ -726,15 +726,15 @@ const Demo = React.createClass({
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
-              <Gauge
-                activeOffset={5}
-                arcWidth={30}
-                data={[]}
-                height={200}
-                id='gauge-2'
-                showDataLabel={false}
-                width={200}
-              />
+            <Gauge
+              activeOffset={5}
+              arcWidth={30}
+              data={[]}
+              height={200}
+              id='gauge-2'
+              showDataLabel={false}
+              width={200}
+            />
           </div>
         </div>
         <br /><br />
