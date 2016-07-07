@@ -231,6 +231,7 @@ const DatePicker = React.createClass({
           </Column>
         </Row>
       </Container>
+
     );
   },
 
