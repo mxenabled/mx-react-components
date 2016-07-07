@@ -4,6 +4,10 @@ const moment = require('moment');
 
 const Icon = require('./Icon');
 
+const Column = require('../components/grid/Column');
+const Container = require('../components/grid/Container');
+const Row = require('../components/grid/Row');
+
 const StyleConstants = require('../constants/Style');
 
 const DateRangePicker = React.createClass({
@@ -81,6 +85,16 @@ const DateRangePicker = React.createClass({
         currentDate: newProps.selectedStartDate
       });
     }
+  },
+
+  _getDateFormat () {
+    return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
+  },
+
+  _isLargeOrMediumWindowSize () {
+    const windowSize = StyleConstants.getWindowSize();
+
+    return windowSize === 'large' || windowSize === 'medium';
   },
 
   _endDateIsBeforeStartDate (startDate, endDate) {
@@ -267,6 +281,7 @@ const DateRangePicker = React.createClass({
 
   render () {
     const styles = this.styles();
+    const spans = this.spans();
 
     return (
       <div style={styles.component}>
@@ -279,9 +294,9 @@ const DateRangePicker = React.createClass({
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
-                <span>{moment.unix(this.props.selectedStartDate).format(this.props.format)}</span>
+                <span>{moment.unix(this.props.selectedStartDate).format(this._getDateFormat())}</span>
                 <span> - </span>
-                <span>{moment.unix(this.props.selectedEndDate).format(this.props.format)}</span>
+                <span>{moment.unix(this.props.selectedEndDate).format(this._getDateFormat())}</span>
               </div>
             ) : this.props.placeholderText}
           </div>
@@ -291,40 +306,55 @@ const DateRangePicker = React.createClass({
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         </div>
-        <div style={styles.optionsWrapper}>
-          {this.props.showDefaultRanges && this._renderDefaultRanges()}
-          <div style={styles.calendarWrapper}>
-            <div style={styles.calendarHeader}>
-              <Icon
-                onClick={this._handlePreviousClick}
-                size={20}
-                style={styles.calendayHeaderNav}
-                type='caret-left'
-              />
-              <div>
-                {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
-              </div>
-              <Icon
-                onClick={this._handleNextClick}
-                size={20}
-                style={styles.calendayHeaderNav}
-                type='caret-right'
-              />
-            </div>
-            <div style={styles.calendarWeek}>
-              {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
-                return (
-                  <div key={day + i} style={styles.calendarWeekDay}>
-                    {day}
+        <Container>
+          <Row>
+            <div style={styles.optionsWrapper}>
+              {this._isLargeOrMediumWindowSize() && (
+                <Column span={spans.defaultRanges}>
+                  {this.props.showDefaultRanges && this._renderDefaultRanges()}
+                </Column>
+              )}
+              <Column span={spans.calendar}>
+                <div style={styles.calendarWrapper}>
+                  <div style={styles.calendarHeader}>
+                    <Icon
+                      onClick={this._handlePreviousClick}
+                      size={20}
+                      style={styles.calendayHeaderNav}
+                      type='caret-left'
+                    />
+                    <div>
+                      {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
+                    </div>
+                    <Icon
+                      onClick={this._handleNextClick}
+                      size={20}
+                      style={styles.calendayHeaderNav}
+                      type='caret-right'
+                    />
                   </div>
-                );
-              })}
+                  <div style={styles.calendarWeek}>
+                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+                      return (
+                        <div key={day + i} style={styles.calendarWeekDay}>
+                          {day}
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div style={styles.calendarTable}>
+                    {this._renderMonthTable()}
+                  </div>
+                </div>
+              </Column>
+              {!this._isLargeOrMediumWindowSize() && (
+                <Column span={spans.defaultRanges}>
+                  {this.props.showDefaultRanges && this._renderDefaultRanges()}
+                </Column>
+              )}
             </div>
-            <div style={styles.calendarTable}>
-              {this._renderMonthTable()}
-            </div>
-          </div>
-        </div>
+          </Row>
+        </Container>
         {(this.state.showCalendar) ? (
           <div onClick={this._handleScrimClick} style={styles.scrim} />
         ) : null }
@@ -332,7 +362,24 @@ const DateRangePicker = React.createClass({
     );
   },
 
+  spans () {
+    return {
+      calendar: {
+        large: 8,
+        medium: 8,
+        small: 12
+      },
+      defaultRanges: {
+        large: 4,
+        medium: 4,
+        small: 12
+      }
+    };
+  },
+
   styles () {
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
@@ -373,21 +420,22 @@ const DateRangePicker = React.createClass({
       //Calendar Styles
       optionsWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         display: this.state.showCalendar ? 'flex' : 'none',
+        flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
-        marginTop: 10,
-        position: 'absolute',
+        marginTop: isLargeOrMediumWindowSize ? 10 : 0,
+        position: isLargeOrMediumWindowSize ? 'absolute' : 'relative',
         right: 0,
         zIndex: 10
       },
       calendarWrapper: {
         boxSizing: 'border-box',
-        padding: 20,
-        width: 285
+        padding: isLargeOrMediumWindowSize ? 20 : 10,
+        width: isLargeOrMediumWindowSize ? 285 : '100%'
       },
 
       //Calendar Header
@@ -431,7 +479,6 @@ const DateRangePicker = React.createClass({
       },
       calendarDay: {
         alignItems: 'center',
-        borderRadius: 3,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.FOG,
         cursor: 'pointer',
@@ -463,22 +510,29 @@ const DateRangePicker = React.createClass({
 
       //Default Ranges
       defaultRangesTitle: {
+        display: isLargeOrMediumWindowSize ? 'inline-block' : 'none',
         fontSize: StyleConstants.FontSizes.LARGE,
         marginTop: 10,
         marginBottom: 20
       },
       rangeOptions: {
-        borderRight: '1px solid ' + StyleConstants.Colors.FOG,
+        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
         color: StyleConstants.Colors.CHARCOAL,
+        display: isLargeOrMediumWindowSize ? 'inline-block' : 'flex',
+        flexDirection: isLargeOrMediumWindowSize ? 'column' : 'row',
+        flexWrap: isLargeOrMediumWindowSize ? 'nowrap' : 'wrap',
         fontSize: StyleConstants.FontSizes.MEDIUM,
-        padding: 20,
-        width: 115
+        padding: isLargeOrMediumWindowSize ? 20 : 0,
+        width: isLargeOrMediumWindowSize ? 115 : '100%'
       },
       rangeOption: {
         alignItems: 'center',
         cursor: 'pointer',
         display: 'flex',
-        marginBottom: 20,
+        marginBottom: isLargeOrMediumWindowSize ? 20 : 10,
+        padding: isLargeOrMediumWindowSize ? 0 : 10,
+        width: isLargeOrMediumWindowSize ? '100%' : '35%',
 
         ':hover': {
           color: this.props.primaryColor
@@ -490,12 +544,6 @@ const DateRangePicker = React.createClass({
         backgroundColor: this.props.primaryColor,
         color: StyleConstants.Colors.WHITE
       },
-      selectedStart: {
-        borderRadius: '3px 0 0 3px'
-      },
-      selectedEnd: {
-        borderRadius: '0 3px 3px 0'
-      },
       betweenDay: {
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.5),
         borderRadius: 0,
@@ -503,12 +551,6 @@ const DateRangePicker = React.createClass({
         ':hover': {
           border: '1px solid' + this.props.primaryColor
         }
-      },
-      betweenDayStart: {
-        borderRadius: '3px 0 0 3px'
-      },
-      betweenDayEnd: {
-        borderRadius: '0 3px 3px 0'
       },
 
       //Scrim
