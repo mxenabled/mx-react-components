@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.5</h3>
+        <ul>
+          <li>Fix issue with offset in Column component (<a href='https://github.com/mxenabled/mx-react-components/pull/369'>#369</a>)</li>
+        </ul>
+
         <h3>4.2.4</h3>
         <ul>
           <li>DateRangePicker - Repsonsive update using new grid system (<a href='https://github.com/mxenabled/mx-react-components/pull/368'>#368</a>)</li>
