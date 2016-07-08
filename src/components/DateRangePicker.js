@@ -420,22 +420,24 @@ const DateRangePicker = React.createClass({
       //Calendar Styles
       optionsWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         display: this.state.showCalendar ? 'flex' : 'none',
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
-        marginTop: isLargeOrMediumWindowSize ? 10 : 0,
-        position: isLargeOrMediumWindowSize ? 'absolute' : 'relative',
-        right: 0,
+        marginTop: isLargeOrMediumWindowSize ? 10 : 5,
+        position: 'absolute',
+        left: 'auto',
+        right: isLargeOrMediumWindowSize ? 0 : 'auto',
         zIndex: 10
       },
       calendarWrapper: {
         boxSizing: 'border-box',
         padding: isLargeOrMediumWindowSize ? 20 : 10,
-        width: isLargeOrMediumWindowSize ? 285 : '100%'
+        margin: 'auto',
+        width: isLargeOrMediumWindowSize ? 250 : '100%'
       },
 
       //Calendar Header
@@ -486,7 +488,7 @@ const DateRangePicker = React.createClass({
         height: 30,
         justifyContent: 'center',
         marginBottom: 2,
-        width: 35,
+        width: 30,
 
         ':hover': {
           border: '1px solid' + this.props.primaryColor
@@ -518,21 +520,24 @@ const DateRangePicker = React.createClass({
       rangeOptions: {
         borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
         borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
+        boxSizing: 'border-box',
         color: StyleConstants.Colors.CHARCOAL,
         display: isLargeOrMediumWindowSize ? 'inline-block' : 'flex',
         flexDirection: isLargeOrMediumWindowSize ? 'column' : 'row',
         flexWrap: isLargeOrMediumWindowSize ? 'nowrap' : 'wrap',
         fontSize: StyleConstants.FontSizes.MEDIUM,
-        padding: isLargeOrMediumWindowSize ? 20 : 0,
-        width: isLargeOrMediumWindowSize ? 115 : '100%'
+        paddingLeft: isLargeOrMediumWindowSize ? 10 : 0,
+        paddingTop: 10,
+        width: isLargeOrMediumWindowSize ? 150 : '100%'
       },
       rangeOption: {
         alignItems: 'center',
+        boxSizing: 'border-box',
         cursor: 'pointer',
         display: 'flex',
         marginBottom: isLargeOrMediumWindowSize ? 20 : 10,
         padding: isLargeOrMediumWindowSize ? 0 : 10,
-        width: isLargeOrMediumWindowSize ? '100%' : '35%',
+        width: isLargeOrMediumWindowSize ? '100%' : '50%',
 
         ':hover': {
           color: this.props.primaryColor
