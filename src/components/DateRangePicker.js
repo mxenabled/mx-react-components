@@ -365,14 +365,14 @@ const DateRangePicker = React.createClass({
   spans () {
     return {
       calendar: {
-        large: 8,
-        medium: 8,
+        large: this.props.showDefaultRanges ? 8 : 12,
+        medium: this.props.showDefaultRanges ? 8 : 12,
         small: 12
       },
       defaultRanges: {
-        large: 4,
-        medium: 4,
-        small: 12
+        large: this.props.showDefaultRanges ? 4 : 0,
+        medium: this.props.showDefaultRanges ? 4 : 0,
+        small: this.props.showDefaultRanges ? 12 : 0
       }
     };
   },
