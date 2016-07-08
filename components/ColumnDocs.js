@@ -28,8 +28,7 @@ const ColumnDocs = React.createClass({
         </div>
 
         <h3>Usage</h3>
-        <h5>style <label>Object or Array</label></h5>
-        <p>A style object used to style the div that wraps the uploader&#39;s content</p>
+        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap css file linked in your application.</h5>
 
         <h5>children <label>Node</label></h5>
         <p>This should be one or more {`
