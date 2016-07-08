@@ -722,6 +722,7 @@ const Demo = React.createClass({
               ]}
               defaultLabelText='Total Users'
               defaultLabelValue='300'
+              numberOfSegments={50}
               id='gauge-1'
             />
           </div>
@@ -731,6 +732,7 @@ const Demo = React.createClass({
               arcWidth={30}
               data={[]}
               height={200}
+              numberOfSegments={10}
               id='gauge-2'
               showDataLabel={false}
               width={200}
