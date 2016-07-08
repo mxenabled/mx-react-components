@@ -14,7 +14,7 @@ const Column = React.createClass({
 
   getDefaultProps () {
     return {
-      offset: { large: 0, medium: 0, small: 0 },
+      offset: {},
       span: { large: 12, medium: 12, small: 12 }
     };
   },
@@ -49,20 +49,20 @@ const Column = React.createClass({
 
   getColumnOffsets () {
     const offsets = [];
-    const small = this.props.offset.small || 0;
-    const medium = this.props.offset.medium || 0;
-    const large = this.props.offset.large || 0;
+    const small = this.props.offset.small;
+    const medium = this.props.offset.medium;
+    const large = this.props.offset.large;
 
     // Column offsets
-    if (small !== 0) {
+    if (small >= 0) {
       offsets.push('col-sm-offset-' + small);
     }
 
-    if (medium !== 0 && medium !== small) {
+    if (medium >= 0 && medium !== small) {
       offsets.push('col-md-offset-' + medium);
     }
 
-    if (large !== 0 && large !== medium) {
+    if (large >= 0 && large !== medium) {
       offsets.push('col-lg-offset-' + large);
     }
 
