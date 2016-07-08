@@ -6,6 +6,22 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.4</h3>
+        <ul>
+          <li>DateRangePicker - Repsonsive update using new grid system (<a href='https://github.com/mxenabled/mx-react-components/pull/368'>#368</a>)</li>
+        </ul>
+
+        <h3>4.2.3</h3>
+        <ul>
+          <li>Add icon prop to SimpleInput (<a href='https://github.com/mxenabled/mx-react-components/pull/362'>#362</a>)</li>
+        </ul>
+
+        <h3>4.2.0</h3>
+        <ul>
+          <li>Add Container component and switch Row and Column to use Bootstrap grid system (<a href='https://github.com/mxenabled/mx-react-components/pull/365'>#365</a>)</li>
+          <li>DonuChart default label color now set to ASH (<a href='https://github.com/mxenabled/mx-react-components/pull/360'>#360</a>)</li>
+        </ul>
+
         <h3>4.1.10</h3>
         <ul>
           <li>Add BreakPoint resolutions to Style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/358'>#358</a>)</li>
