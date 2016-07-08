@@ -153,7 +153,7 @@ const DatePicker = React.createClass({
     return (
       <Container fluid={true}>
         <Row>
-          <Column span={spans.dateColumn}>
+          <Column span={spans.date}>
             <div
               onBlur={this._handleDateBlur}
               onClick={this._handleDateClick}
@@ -187,13 +187,13 @@ const DatePicker = React.createClass({
             </div>
           </Column>
           {this.props.children ? (
-            <Column span={spans.childrenColumn}>
+            <Column span={spans.children}>
               <div style={styles.children}>
                 {this.props.children}
               </div>
             </Column>
           ) : null}
-          <Column span={spans.timeColumn}>
+          <Column span={spans.time}>
             <div
               onBlur={this._handleTimeBlur}
               onFocus={this._handleTimeFocus}
@@ -235,25 +235,25 @@ const DatePicker = React.createClass({
   },
 
   spans () {
-    return Object.assign({}, {
-      dateColumn: {
+    return {
+      date: {
         large: this.props.children ? 5 : 6,
         medium: this.props.children ? 5 : 6,
         small: 12
       },
 
-      childrenColumn: {
+      children: {
         large: 1,
         medium: 1,
         small: 12
       },
 
-      timeColumn: {
+      time: {
         large: 6,
         medium: 6,
         small: 12
       }
-    });
+    };
   },
 
   styles () {
