@@ -164,7 +164,7 @@ const RowDocs = React.createClass({
         backgroundColor: Styles.Colors.PORCELAIN,
         border: '1px solid' + Styles.Colors.FOG,
         borderRadius: 3,
-        marginBottom: 10
+        marginBottom: 10,
         padding: 10,
         width: '100%'
       },
