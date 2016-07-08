@@ -22,6 +22,7 @@ const Gauge = React.createClass({
     formatter: React.PropTypes.func,
     height: React.PropTypes.number,
     id: React.PropTypes.string,
+    numberOfSegments: React.PropTypes.number,
     opacity: React.PropTypes.number,
     padAngle: React.PropTypes.number,
     showBaseArc: React.PropTypes.bool,
@@ -44,6 +45,7 @@ const Gauge = React.createClass({
       },
       height: 150,
       id: 'gauge',
+      numberOfSegments: 6,
       opacity: 1,
       padAngle: 0.02,
       showBaseArc: true,
@@ -58,6 +60,7 @@ const Gauge = React.createClass({
 
   componentWillMount () {
     this._setupD3Functions(this.props);
+    this._buildSegments(this.props);
   },
 
   componentWillReceiveProps (newProps) {
@@ -94,27 +97,28 @@ const Gauge = React.createClass({
     });
   },
 
-  _renderArcs () {
-    const firstSegment = -135 * (Math.PI / 180);
-    const endOfFirstSegment = -90 * (Math.PI / 180);
-    const secondSegment = -90 * (Math.PI / 180);
-    const endOfSecondSegment = -45 * (Math.PI / 180);
-    const thirdSegment = -45 * (Math.PI / 180);
-    const endOfThirdSegment = 0;
-    const fourthSegment = 0;
-    const endOfFourthSegment = 45 * (Math.PI / 180);
-    const fifthSegment = 45 * (Math.PI / 180);
-    const endOfFifthSegment = 90 * (Math.PI / 180);
-    const sixthSegment = 90 * (Math.PI / 180);
-    const endOfSixthSegment = 135 * (Math.PI / 180);
+  _buildSegments (props) {
+    const numberOfSegments = props.numberOfSegments;
+    const segmentSize = 270 / (numberOfSegments);
+    const convertToPie = (Math.PI / 180);
+    const segments = [];
+    let startAngle = -135;
 
-    const segments = [
-      { startAngle: firstSegment, endAngle: endOfFirstSegment, padAngle: 0.02 },
-      { startAngle: secondSegment, endAngle: endOfSecondSegment, padAngle: 0.02 },
-      { startAngle: thirdSegment, endAngle: endOfThirdSegment, padAngle: 0.02 },
-      { startAngle: fourthSegment, endAngle: endOfFourthSegment, padAngle: 0.02 },
-      { startAngle: fifthSegment, endAngle: endOfFifthSegment, padAngle: 0.02 },
-      { startAngle: sixthSegment, endAngle: endOfSixthSegment, padAngle: 0.02 }];
+    for (let i = 0; i < numberOfSegments; i++) {
+      endAngle = startAngle + segmentSize;
+      segments[i] = {
+        id: 'segment' + i,
+        startAngle: (startAngle * convertToPie),
+        endAngle: (endAngle * convertToPie),
+        padAngle: 0.02
+      };
+      startAngle = endAngle;
+    }
+    return segments;
+  },
+
+  _renderArcs () {
+    const segments = this.buildSegments();
 
     return segments.map((point, i) => {
       return (
