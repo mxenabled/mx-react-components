@@ -60,7 +60,6 @@ const Gauge = React.createClass({
 
   componentWillMount () {
     this._setupD3Functions(this.props);
-    this._buildSegments(this.props);
   },
 
   componentWillReceiveProps (newProps) {
@@ -103,27 +102,29 @@ const Gauge = React.createClass({
     const convertToPie = (Math.PI / 180);
     const segments = [];
     let startAngle = -135;
+    let endAngle = startAngle + segmentSize;
 
-    for (let i = 0; i < numberOfSegments; i++) {
-      endAngle = startAngle + segmentSize;
+    for (let i = 1; i <= numberOfSegments; i++) {
       segments[i] = {
         id: 'segment' + i,
         startAngle: (startAngle * convertToPie),
         endAngle: (endAngle * convertToPie),
         padAngle: 0.02
       };
+
       startAngle = endAngle;
+      endAngle = (startAngle + segmentSize);
     }
     return segments;
   },
 
   _renderArcs () {
-    const segments = this.buildSegments();
+    const segments = this._buildSegments(this.props);
 
     return segments.map((point, i) => {
       return (
         <g
-          key={i}
+          key={point.id}
         >
           <path
             className={'arc-' + this.props.id}
