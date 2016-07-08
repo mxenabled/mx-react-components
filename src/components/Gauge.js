@@ -177,8 +177,7 @@ const Gauge = React.createClass({
   _renderDataLabel () {
     const styles = this.styles();
 
-    if (this.props.showDataLabel) {
-      if (this.props.children) {
+    if (this.props.showDataLabel) && (this.props.children) {
         return (
           <div
             className='mx-gauge-data'
