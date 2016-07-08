@@ -7,7 +7,7 @@ const Container = React.createClass({
 
   getDefaultProps () {
     return {
-      fluid: false
+      fluid: true
     };
   },
 
