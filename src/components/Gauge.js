@@ -1,6 +1,5 @@
 const _isEqual = require('lodash/isEqual');
 const React = require('react');
-const Radium = require('radium');
 const d3 = require('d3');
 
 const StyleConstants = require('../constants/Style');
@@ -55,7 +54,9 @@ const Gauge = React.createClass({
   },
 
   getInitialState () {
-    return {};
+    return {
+      radiansMultiplier: (Math.PI / 180)
+    };
   },
 
   componentWillMount () {
@@ -76,9 +77,9 @@ const Gauge = React.createClass({
     const dataSets = props.data.map(item => {
       return item.value;
     });
-    const startAngle = (-135 * (Math.PI / 180));
-    const endAngle = (135 * (Math.PI / 180));
-    const pie = d3.layout.pie().sort(null).padAngle(props.padAngle).endAngle(endAngle);
+    const startAngle = (-135 * this.state.radiansMultiplier);
+    const endAngle = (135 * this.state.radiansMultiplier);
+    const pie = d3.layout.pie().padAngle(props.padAngle).endAngle(endAngle);
     const values = pie(dataSets);
     const radius = Math.min(props.width, props.height) / 2;
     const standardArc = d3.svg.arc().outerRadius(radius - props.activeOffset).innerRadius(radius - props.arcWidth);
@@ -99,7 +100,7 @@ const Gauge = React.createClass({
   _buildSegments (props) {
     const numberOfSegments = props.numberOfSegments;
     const segmentSize = 270 / (numberOfSegments);
-    const convertToPie = (Math.PI / 180);
+    const convertToPie = this.state.radiansMultiplier;
     const segments = [];
     let startAngle = -135;
     let endAngle = startAngle + segmentSize;
@@ -158,8 +159,8 @@ const Gauge = React.createClass({
       const dataPointArc = d3.svg.arc()
         .outerRadius(this.state.radius - this.props.activeOffset)
         .innerRadius(this.state.radius - this.props.arcWidth)
-        .startAngle(endAngle * (Math.PI / 180))
-        .endAngle(endAngle * (Math.PI / 180));
+        .startAngle(endAngle * this.state.radiansMultiplier)
+        .endAngle(endAngle * this.state.radiansMultiplier);
 
       return (
         <circle
@@ -177,38 +178,35 @@ const Gauge = React.createClass({
   _renderDataLabel () {
     const styles = this.styles();
 
-    if (this.props.showDataLabel) && (this.props.children) {
-        return (
-          <div
-            className='mx-gauge-data'
-            onClick={this._handleClick}
-            style={styles.center}
-          >
-            {this.props.children}
-          </div>
-        );
-      } else {
-        const color = this.props.colors[0];
-        const text = this.props.defaultLabelText;
-        const value = this.props.formatter(this.props.defaultLabelValue);
-
-        return (
-          <div
-            className='mx-gauge-data'
-            onClick={this._handleClick}
-            style={styles.center}
-          >
-            <div className='mx-gauge-data-value' style={[styles.value, { color }]}>
-              {value}
-            </div>
-            <div className='mx-gauge-data-label' style={styles.label}>
-              {text}
-            </div>
-          </div>
-        );
-      }
+    if (this.props.showDataLabel && this.props.children) {
+      return (
+        <div
+          className='mx-gauge-data'
+          onClick={this._handleClick}
+          style={styles.center}
+        >
+          {this.props.children}
+        </div>
+      );
     } else {
-      return null;
+      const color = this.props.colors[0];
+      const text = this.props.defaultLabelText;
+      const value = this.props.formatter(this.props.defaultLabelValue);
+
+      return (
+        <div
+          className='mx-gauge-data'
+          onClick={this._handleClick}
+          style={styles.center}
+        >
+          <div className='mx-gauge-data-value' style={Object.assign({}, styles.value, { color })}>
+            {value}
+          </div>
+          <div className='mx-gauge-data-label' style={styles.label}>
+            {text}
+          </div>
+        </div>
+      );
     }
   },
 
@@ -220,7 +218,7 @@ const Gauge = React.createClass({
     return (
       <div
         className='mx-gauge'
-        style={[styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width }]}
+        style={Object.assign({}, styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width })}
       >
         {this._renderDataLabel()}
         <svg
@@ -254,7 +252,7 @@ const Gauge = React.createClass({
       },
       label: {
         color: StyleConstants.Colors.ASH,
-        fontSize: '0.4em',
+        fontSize: StyleConstants.FontSizes.LARGE,
         marginTop: 5
       },
       value: {
@@ -264,4 +262,4 @@ const Gauge = React.createClass({
   }
 });
 
-module.exports = Radium(Gauge);
+module.exports = Gauge;
