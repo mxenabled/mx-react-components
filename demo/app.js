@@ -209,7 +209,6 @@ const Demo = React.createClass({
           selected: false
         }
       ],
-      gaugeData: [],
       icon: {
         value: 'accounts',
         displayValue: 'Accounts'
@@ -248,8 +247,7 @@ const Demo = React.createClass({
             name: 'Data Point 3',
             value: 200
           }
-        ],
-        gaugeData: []
+        ]
       });
     }, 3000);
   },
@@ -722,8 +720,8 @@ const Demo = React.createClass({
               ]}
               defaultLabelText='Total Users'
               defaultLabelValue='300'
-              numberOfSegments={50}
               id='gauge-1'
+              numberOfSegments={50}
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
@@ -732,8 +730,8 @@ const Demo = React.createClass({
               arcWidth={30}
               data={[]}
               height={200}
-              numberOfSegments={10}
               id='gauge-2'
+              numberOfSegments={10}
               showDataLabel={false}
               width={200}
             />
