@@ -34,6 +34,8 @@ const ModalDocs = React.createClass({
   },
 
   render () {
+    const imageStyle = Object.assign({}, { maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 });
+
     return (
       <div>
         <h1>
@@ -78,7 +80,7 @@ const ModalDocs = React.createClass({
           >
             <div style={{ padding: 20, textAlign: 'center' }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-              <img src='https://unsplash.it/1000/600?random' style={[{ maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 }]} />
+              <img src='https://unsplash.it/1000/600?random' style={imageStyle} />
             </div>
           </Modal>
         ) : null}
@@ -96,7 +98,8 @@ const ModalDocs = React.createClass({
       icon: '',
       label: 'Click Me',
       onClick: function () { //do something },
-      style: { marginTop: 10 }, //a style object or Radium array
+      primaryColor: Styles.Colors.BANANA,
+      style: { marginTop: 10 }, //a style object
       type: 'primary' //either 'primary' or 'secondary'
     }]
   `}
@@ -137,6 +140,9 @@ const ModalDocs = React.createClass({
         <p>Default: 'false'</p>
         <p>Determines if the title bar section, which contains the title, is displayed.</p>
 
+        <h5>style <label>Object</label></h5>
+        <p>Additional styles that can be set on the component.</p>
+
         <h5>title <label>String</label></h5>
         <p>The text to be displayed in the title bar at the top of the modal.</p>
 
@@ -152,39 +158,40 @@ const ModalDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
-    let isOpen = true;
-
-    _handleModalClose () {
-      isOpen = false;
-    }
-
-    <Modal
-      buttons={[
-        {
-          label: 'Secondary',
-          onClick: this._handleModalSecondaryClick,
-          type: 'secondary'
-        },
-        {
-          label: 'Primary',
-          onClick: this._handleModalPrimaryClick,
-          type: 'primary'
-        }
-      ]}
-      footerContent={(
-        <div>
-          Footer content
-        </div>
-      )}
-      isOpen={this.state.showModal}
-      onRequestClose={_handleModalClose}
-      showFooter={true}
-      showTitleBar={true}
-      tooltipLabel='This is the footer text.'
-      title='This is the header text'
-      tooltip='This is my tooltip content'
-      tooltipTitle='This is my tooltip title'
-    >
+          <Modal
+            buttons={[
+              {
+                icon: 'close',
+                label: 'Secondary',
+                onClick: this._handleModalClose,
+                type: 'secondary'
+              },
+              {
+                icon: 'rocket',
+                label: 'Primary',
+                onClick: this._handleModalClose,
+                type: 'primary'
+              }
+            ]}
+            footerContent={(
+              <div style={{ color: '#ACB0B3', fontSize: '12px', padding: '2px 0' }}>
+                Footer Content
+              </div>
+            )}
+            footerStyle={{ padding: '40px 20px' }}
+            onRequestClose={this._handleModalClose}
+            showFooter={true}
+            showTitleBar={true}
+            title='This is the header text'
+            tooltip='This is my tooltip content'
+            tooltipLabel='This is the footer text.'
+            tooltipTitle='This is my tooltip title'
+          >
+            <div style={{ padding: 20, textAlign: 'center' }}>
+              <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
+              <img src='https://unsplash.it/1000/600?random' style={imageStyle} />
+            </div>
+          </Modal>
   `}
         </Markdown>
       </div>
