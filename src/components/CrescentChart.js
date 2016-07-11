@@ -4,7 +4,7 @@ const d3 = require('d3');
 
 const StyleConstants = require('../constants/Style');
 
-const CresentChart = React.createClass({
+const CrescentChart = React.createClass({
   propTypes: {
     activeOffset: React.PropTypes.number,
     arcWidth: React.PropTypes.number,
@@ -43,7 +43,7 @@ const CresentChart = React.createClass({
         return value;
       },
       height: 150,
-      id: 'cresentChart',
+      id: 'crescentChart',
       numberOfSegments: 6,
       opacity: 1,
       padAngle: 0.02,
@@ -181,7 +181,7 @@ const CresentChart = React.createClass({
     if (this.props.showDataLabel && this.props.children) {
       return (
         <div
-          className='mx-cresentChart-data'
+          className='mx-crescentChart-data'
           onClick={this._handleClick}
           style={styles.center}
         >
@@ -195,14 +195,14 @@ const CresentChart = React.createClass({
 
       return (
         <div
-          className='mx-cresentChart-data'
+          className='mx-crescentChart-data'
           onClick={this._handleClick}
           style={styles.center}
         >
-          <div className='mx-cresentChart-data-value' style={Object.assign({}, styles.value, { color })}>
+          <div className='mx-crescentChart-data-value' style={Object.assign({}, styles.value, { color })}>
             {value}
           </div>
-          <div className='mx-cresentChart-data-label' style={styles.label}>
+          <div className='mx-crescentChart-data-label' style={styles.label}>
             {text}
           </div>
         </div>
@@ -217,17 +217,17 @@ const CresentChart = React.createClass({
 
     return (
       <div
-        className='mx-cresentChart'
+        className='mx-crescentChart'
         style={Object.assign({}, styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width })}
       >
         {this._renderDataLabel()}
         <svg
-          className='mx-cresentChart-svg'
+          className='mx-crescentChart-svg'
           height={this.props.height}
           ref={this.props.id}
           width={this.props.width}
         >
-          <g className='mx-cresentChart-g' transform={position}>
+          <g className='mx-crescentChart-g' transform={position}>
             {this._renderBaseArc()}
             {this._renderArcs()}
             {this._renderDataPoints()}
@@ -262,4 +262,4 @@ const CresentChart = React.createClass({
   }
 });
 
-module.exports = CresentChart;
+module.exports = CrescentChart;

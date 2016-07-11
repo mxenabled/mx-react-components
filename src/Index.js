@@ -12,7 +12,7 @@ module.exports = {
   DonutChart: require('./components/DonutChart'),
   Drawer: require('./components/Drawer'),
   FileUpload: require('./components/FileUpload'),
-  CresentChart: require('./components/CresentChart'),
+  CrescentChart: require('./components/CrescentChart'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),
