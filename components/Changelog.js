@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.6</h3>
+        <ul>
+          <li>Drawer - Position changed from absolute to fixed (<a href='https://github.com/mxenabled/mx-react-components/pull/370'>#370</a>)</li>
+          <li>DateTimePicker - Repsonsive update using new grid system (<a href='https://github.com/mxenabled/mx-react-components/pull/367'>#367</a>)</li>
+        </ul>
+
         <h3>4.2.5</h3>
         <ul>
           <li>Fix issue with offset in Column component (<a href='https://github.com/mxenabled/mx-react-components/pull/369'>#369</a>)</li>
