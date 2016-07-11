@@ -4,7 +4,7 @@ const d3 = require('d3');
 
 const StyleConstants = require('../constants/Style');
 
-const Gauge = React.createClass({
+const CresentChart = React.createClass({
   propTypes: {
     activeOffset: React.PropTypes.number,
     arcWidth: React.PropTypes.number,
@@ -43,7 +43,7 @@ const Gauge = React.createClass({
         return value;
       },
       height: 150,
-      id: 'gauge',
+      id: 'cresentChart',
       numberOfSegments: 6,
       opacity: 1,
       padAngle: 0.02,
@@ -181,7 +181,7 @@ const Gauge = React.createClass({
     if (this.props.showDataLabel && this.props.children) {
       return (
         <div
-          className='mx-gauge-data'
+          className='mx-cresentChart-data'
           onClick={this._handleClick}
           style={styles.center}
         >
@@ -195,14 +195,14 @@ const Gauge = React.createClass({
 
       return (
         <div
-          className='mx-gauge-data'
+          className='mx-cresentChart-data'
           onClick={this._handleClick}
           style={styles.center}
         >
-          <div className='mx-gauge-data-value' style={Object.assign({}, styles.value, { color })}>
+          <div className='mx-cresentChart-data-value' style={Object.assign({}, styles.value, { color })}>
             {value}
           </div>
-          <div className='mx-gauge-data-label' style={styles.label}>
+          <div className='mx-cresentChart-data-label' style={styles.label}>
             {text}
           </div>
         </div>
@@ -217,17 +217,17 @@ const Gauge = React.createClass({
 
     return (
       <div
-        className='mx-gauge'
+        className='mx-cresentChart'
         style={Object.assign({}, styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width })}
       >
         {this._renderDataLabel()}
         <svg
-          className='mx-gauge-svg'
+          className='mx-cresentChart-svg'
           height={this.props.height}
           ref={this.props.id}
           width={this.props.width}
         >
-          <g className='mx-gauge-g' transform={position}>
+          <g className='mx-cresentChart-g' transform={position}>
             {this._renderBaseArc()}
             {this._renderArcs()}
             {this._renderDataPoints()}
@@ -262,4 +262,4 @@ const Gauge = React.createClass({
   }
 });
 
-module.exports = Gauge;
+module.exports = CresentChart;
