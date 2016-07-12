@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+
+        <h3>4.2.7</h3>
+        <ul>
+          <li>Gauge - Add new gauge component (<a href='https://github.com/mxenabled/mx-react-components/pull/366'>#366</a>)</li>
+        </ul>
+
         <h3>4.2.6</h3>
         <ul>
           <li>Drawer - Position changed from absolute to fixed (<a href='https://github.com/mxenabled/mx-react-components/pull/370'>#370</a>)</li>
