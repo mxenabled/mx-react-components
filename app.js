@@ -13,6 +13,7 @@ const DateTimePicker = require('components/DateTimePickerDocs');
 const DisplayInput = require('components/DisplayInputDocs');
 const DonutChart = require('components/DonutChartDocs');
 const FileUpload = require('components/FileUploadDocs');
+const Gauge = require('components/GaugeDocs'); 
 const Header = require('components/Header');
 const Home = require('components/Home');
 const Icon = require('components/IconDocs');
