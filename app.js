@@ -13,7 +13,7 @@ const DateTimePicker = require('components/DateTimePickerDocs');
 const DisplayInput = require('components/DisplayInputDocs');
 const DonutChart = require('components/DonutChartDocs');
 const FileUpload = require('components/FileUploadDocs');
-const Gauge = require('components/GaugeDocs'); 
+const Gauge = require('components/GaugeDocs');
 const Header = require('components/Header');
 const Home = require('components/Home');
 const Icon = require('components/IconDocs');
@@ -68,6 +68,7 @@ ReactDOM.render((
         <Route component={DisplayInput} path='display-input' />
         <Route component={DonutChart} path='donut' />
         <Route component={FileUpload} path='file-upload' />
+        <Route component={Gauge} path='gauge' />
         <Route component={Icon} path='icon' />
         <Route component={Loader} path='loader' />
         <Route component={Modal} path='modal' />
