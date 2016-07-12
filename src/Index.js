@@ -13,6 +13,7 @@ module.exports = {
   DonutChart: require('./components/DonutChart'),
   Drawer: require('./components/Drawer'),
   FileUpload: require('./components/FileUpload'),
+  Gauge: require('./components/Gauge'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   Modal: require('./components/Modal'),

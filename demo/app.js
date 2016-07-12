@@ -19,6 +19,7 @@ const {
   DonutChart,
   Drawer,
   FileUpload,
+  Gauge,
   Icon,
   Loader,
   Modal,
@@ -700,6 +701,44 @@ const Demo = React.createClass({
             <div style={{ marginTop: 10 }}>
               <Button onClick={this._handleAddDataToChart}>Add Data to Chart</Button>
             </div>
+          </div>
+        </div>
+
+        <br /><br />
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', padding: 20 }}>
+            <Gauge
+              activeOffset={5}
+              animateOnHover={true}
+              animationDuration={750}
+              animationTypeOnLoad='roll'
+              arcWidth={15}
+              chartTotal={300}
+              data={[]}
+              dataPointColors={['#FFA510']}
+              dataPoints={[
+                {
+                  name: 'Data Dot 1',
+                  value: 150
+                }
+              ]}
+              defaultLabelText='Total Users'
+              defaultLabelValue='300'
+              id='gauge-1'
+              numberOfSegments={50}
+            />
+          </div>
+          <div style={{ display: 'inline-block', padding: 20 }}>
+            <Gauge
+              activeOffset={5}
+              arcWidth={30}
+              data={[]}
+              height={200}
+              id='gauge-2'
+              numberOfSegments={10}
+              showDataLabel={false}
+              width={200}
+            />
           </div>
         </div>
         <br /><br />
