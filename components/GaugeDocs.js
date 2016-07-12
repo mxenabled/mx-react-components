@@ -9,12 +9,12 @@ const GaugeDocs = React.createClass({
     return (
       <div>
         <h1>
-          GaugeDocs
+          Gauge
           <label>A D3 gauge that supports a multiple multiple, and reference dots.</label>
         </h1>
 
         <h3>Demo</h3>
-        <GaugeDemo
+        <Gauge
           activeOffset={5}
           arcWidth={15}
           chartTotal={300}
@@ -126,7 +126,7 @@ const GaugeDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
-    <GaugeDemo
+    <Gauge
       activeOffset={5}
       arcWidth={15}
       chartTotal={300}
