@@ -18,7 +18,7 @@ const {
   DonutChart,
   Drawer,
   FileUpload,
-  CrescentChart,
+  Gauge,
   Icon,
   Loader,
   Modal,
@@ -704,7 +704,7 @@ const Demo = React.createClass({
         <br /><br />
         <div style={{ textAlign: 'center' }}>
           <div style={{ display: 'inline-block', padding: 20 }}>
-            <CrescentChart
+            <Gauge
               activeOffset={5}
               animateOnHover={true}
               animationDuration={750}
@@ -712,6 +712,7 @@ const Demo = React.createClass({
               arcWidth={15}
               chartTotal={300}
               data={[]}
+              dataPointColors={['#FFA510']}
               dataPoints={[
                 {
                   name: 'Data Dot 1',
@@ -720,17 +721,17 @@ const Demo = React.createClass({
               ]}
               defaultLabelText='Total Users'
               defaultLabelValue='300'
-              id='crescentChart-1'
+              id='gauge-1'
               numberOfSegments={50}
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
-            <CrescentChart
+            <Gauge
               activeOffset={5}
               arcWidth={30}
               data={[]}
               height={200}
-              id='crescentChart-2'
+              id='gauge-2'
               numberOfSegments={10}
               showDataLabel={false}
               width={200}
