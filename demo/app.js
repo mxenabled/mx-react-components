@@ -452,19 +452,23 @@ const Demo = React.createClass({
               >
                 <div style={styles.responsiveDiv}>1</div>
               </Column>
+            </Row>
+            <Row>
               <Column span={{ large: 4, medium: 3, small: 10 }} >
                 <div style={styles.responsiveDiv}>2</div>
               </Column>
               <Column
-                span={{ large: 4, medium: 9 }}
+                span={{ large: 4, medium: 6, small: 0 }}
               >
                 <div style={styles.responsiveDiv}>3</div>
               </Column>
               <Column
-                span={{ large: 4 }}
+                span={{ large: 4, medium: 9, small: 2 }}
               >
                 <div style={styles.responsiveDiv}>4</div>
               </Column>
+            </Row>
+            <Row>
               <Column
                 order={{ medium: -1 }}
                 span={{ large: 3, medium: 6, small: 9 }}
@@ -473,10 +477,12 @@ const Demo = React.createClass({
               </Column>
               <Column
                 order={{ medium: -2 }}
-                span={{ large: 3, medium: 6, small: 9 }}
+                span={{ large: 9, medium: 6, small: 3 }}
               >
                 <div style={styles.responsiveDiv}>6</div>
               </Column>
+            </Row>
+            <Row>
               <Column
                 span={{ large: 6 }}
               >
@@ -485,18 +491,20 @@ const Demo = React.createClass({
               <Column
                 span={{ large: 6, medium: 9 }}
               >
-                <Row>
-                  <Column
-                    span={{ large: 6, medium: 6, small: 6 }}
-                  >
-                    <div style={styles.responsiveDiv}>8</div>
-                  </Column>
-                  <Column
-                    span={{ large: 6, medium: 6, small: 6 }}
-                  >
-                    <div style={styles.responsiveDiv}>9</div>
-                  </Column>
-                </Row>
+                <Container>
+                  <Row>
+                    <Column
+                      span={{ large: 6, medium: 6, small: 6 }}
+                    >
+                      <div style={styles.responsiveDiv}>nested-8</div>
+                    </Column>
+                    <Column
+                      span={{ large: 6, medium: 6, small: 6 }}
+                    >
+                      <div style={styles.responsiveDiv}>nested-9</div>
+                    </Column>
+                  </Row>
+                </Container>
               </Column>
             </Row>
           </Container>
