@@ -17,6 +17,7 @@ const Gauge = React.createClass({
     dataPointRadius: React.PropTypes.number,
     dataPoints: React.PropTypes.array,
     defaultLabelText: React.PropTypes.string,
+    defaultLabelValueColor: React.PropTypes.string,
     defaultLabelValue: React.PropTypes.string,
     formatter: React.PropTypes.func,
     height: React.PropTypes.number,
@@ -42,6 +43,7 @@ const Gauge = React.createClass({
       formatter (value) {
         return value;
       },
+      defaultLabelValueColor: StyleConstants.Colors.PRIMARY,
       height: 150,
       id: 'gauge',
       numberOfSegments: 6,
@@ -189,7 +191,7 @@ const Gauge = React.createClass({
         </div>
       );
     } else {
-      const color = this.props.colors[0];
+      const color = this.props.defaultLabelValueColor;
       const text = this.props.defaultLabelText;
       const value = this.props.formatter(this.props.defaultLabelValue);
 
