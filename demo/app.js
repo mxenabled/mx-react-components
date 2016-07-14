@@ -723,6 +723,7 @@ const Demo = React.createClass({
                 }
               ]}
               defaultLabelText='Total Users'
+              defaultLabelValueColor={'#FF69B4'}
               defaultLabelValue='300'
               id='gauge-1'
               numberOfSegments={50}
