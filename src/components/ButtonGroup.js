@@ -35,7 +35,7 @@ const ButtonGroup = React.createClass({
     const styles = this.styles();
 
     return (
-      <div {...this.props}>
+      <div>
         {this.props.buttons.map((button, i) => {
           const isFirstChild = i === 0;
           const isLastChild = i === this.props.buttons.length - 1;

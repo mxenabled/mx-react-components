@@ -1330,7 +1330,6 @@ const Icon = React.createClass({
       <svg
         {...this.props}
         className='mx-icon'
-        fit={true}
         preserveAspectRatio='xMidYMid meet'
         style={styles.component}
         viewBox='0 0 512 512'
