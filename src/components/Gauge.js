@@ -193,10 +193,10 @@ const Gauge = React.createClass({
         </div>
       );
     } else {
-      const numberColor = this.props.numberLabelColor;
-      const textColor = this.props.textLabelColor;
-      const text = this.props.textLabel;
       const number = this.props.formatter(this.props.numberLabel);
+      const numberColor = this.props.numberLabelColor;
+      const text = this.props.textLabel;
+      const textColor = this.props.textLabelColor;
 
       return (
         <div
@@ -204,7 +204,7 @@ const Gauge = React.createClass({
           onClick={this._handleClick}
           style={styles.center}
         >
-          <div className='mx-gauge-data-value' style={Object.assign({}, styles.value, { numberColor })}>
+          <div className='mx-gauge-data-number' style={Object.assign({}, styles.number, { numberColor })}>
             {number}
           </div>
           <div className='mx-gauge-data-label' style={Object.assign({}, styles.label, { textColor })}>
@@ -259,7 +259,7 @@ const Gauge = React.createClass({
         fontSize: StyleConstants.FontSizes.LARGE,
         marginTop: 5
       },
-      value: {
+      number: {
         fontWeight: 300
       }
     };

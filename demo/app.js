@@ -724,9 +724,11 @@ const Demo = React.createClass({
               ]}
               defaultLabelText='Total Users'
               id='gauge-1'
-              numberLabel='300'
+              numberLabel='100'
               numberLabelColor={'#FF69B4'}
               numberOfSegments={10}
+              textLabel={'number of users'}
+              textLabelColor={'#00000F'}
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
