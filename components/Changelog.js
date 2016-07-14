@@ -6,11 +6,21 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.9</h3>
+        <ul>
+          <li>Gauge - Fix segment colors (<a href='https://github.com/mxenabled/mx-react-components/pull/375'>#375</a>)</li>
+        </ul>
+
+        <h3>4.2.8</h3>
+        <ul>
+          <li>Gauge - Fix segment colors (<a href='https://github.com/mxenabled/mx-react-components/pull/374'>#374</a>)</li>
+        </ul>
 
         <h3>4.2.7</h3>
         <ul>
           <li>Gauge - Add new gauge component (<a href='https://github.com/mxenabled/mx-react-components/pull/366'>#366</a>)</li>
         </ul>
+        <p>New Contributors: <a href='https://github.com/vintagepenguin'>vintagepenguin</a></p>
 
         <h3>4.2.6</h3>
         <ul>
