@@ -728,7 +728,7 @@ const Demo = React.createClass({
               numberLabelColor={'#FF69B4'}
               numberOfSegments={10}
               textLabel={'number of users'}
-              textLabelColor={'#00000F'}
+              textLabelColor={'#FF69B4'}
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>

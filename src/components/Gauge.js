@@ -204,10 +204,10 @@ const Gauge = React.createClass({
           onClick={this._handleClick}
           style={styles.center}
         >
-          <div className='mx-gauge-data-number' style={Object.assign({}, styles.number, { numberColor })}>
+          <div className='mx-gauge-data-value' style={Object.assign({}, styles.number, { color: numberColor })}>
             {number}
           </div>
-          <div className='mx-gauge-data-label' style={Object.assign({}, styles.label, { textColor })}>
+          <div className='mx-gauge-data-label' style={Object.assign({}, styles.label, { color: textColor })}>
             {text}
           </div>
         </div>
