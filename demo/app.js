@@ -719,13 +719,16 @@ const Demo = React.createClass({
               dataPoints={[
                 {
                   name: 'Data Dot 1',
-                  value: 150
+                  value: 10
                 }
               ]}
               defaultLabelText='Total Users'
-              defaultLabelValue='300'
               id='gauge-1'
-              numberOfSegments={50}
+              numberLabel='100'
+              numberLabelColor={'#FF69B4'}
+              numberOfSegments={10}
+              textLabel={'number of users'}
+              textLabelColor={'#FF69B4'}
             />
           </div>
           <div style={{ display: 'inline-block', padding: 20 }}>
