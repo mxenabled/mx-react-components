@@ -16,17 +16,18 @@ const Gauge = React.createClass({
     dataPointColors: React.PropTypes.array,
     dataPointRadius: React.PropTypes.number,
     dataPoints: React.PropTypes.array,
-    defaultLabelText: React.PropTypes.string,
-    defaultLabelValue: React.PropTypes.string,
-    defaultValueColor: React.PropTypes.string,
     formatter: React.PropTypes.func,
     height: React.PropTypes.number,
     id: React.PropTypes.string,
+    numberLabel: React.PropTypes.string,
+    numberLabelColor: React.PropTypes.string,
     numberOfSegments: React.PropTypes.number,
     opacity: React.PropTypes.number,
     padAngle: React.PropTypes.number,
     showBaseArc: React.PropTypes.bool,
     showDataLabel: React.PropTypes.bool,
+    textLabel: React.PropTypes.string,
+    textLabelColor: React.PropTypes.string,
     width: React.PropTypes.number
   },
 
@@ -43,7 +44,7 @@ const Gauge = React.createClass({
       formatter (value) {
         return value;
       },
-      defaultLabelValueColor: StyleConstants.Colors.PRIMARY,
+      numberLabelColor: StyleConstants.Colors.PRIMARY,
       height: 150,
       id: 'gauge',
       numberOfSegments: 6,
@@ -51,6 +52,7 @@ const Gauge = React.createClass({
       padAngle: 0.02,
       showBaseArc: true,
       showDataLabel: true,
+      textLabelColor: StyleConstants.Colors.ASH,
       width: 150
     };
   },
@@ -191,9 +193,10 @@ const Gauge = React.createClass({
         </div>
       );
     } else {
-      const color = this.props.defaultLabelValueColor;
-      const text = this.props.defaultLabelText;
-      const value = this.props.formatter(this.props.defaultLabelValue);
+      const numberColor = this.props.numberLabelColor;
+      const textColor = this.props.textLabelColor;
+      const text = this.props.textLabel;
+      const number = this.props.formatter(this.props.numberLabel);
 
       return (
         <div
@@ -201,10 +204,10 @@ const Gauge = React.createClass({
           onClick={this._handleClick}
           style={styles.center}
         >
-          <div className='mx-gauge-data-value' style={Object.assign({}, styles.value, { color })}>
-            {value}
+          <div className='mx-gauge-data-value' style={Object.assign({}, styles.value, { numberColor })}>
+            {number}
           </div>
-          <div className='mx-gauge-data-label' style={styles.label}>
+          <div className='mx-gauge-data-label' style={Object.assign({}, styles.label, { textColor })}>
             {text}
           </div>
         </div>
@@ -253,7 +256,6 @@ const Gauge = React.createClass({
         transform: 'translate(-50%, -50%)'
       },
       label: {
-        color: StyleConstants.Colors.ASH,
         fontSize: StyleConstants.FontSizes.LARGE,
         marginTop: 5
       },
