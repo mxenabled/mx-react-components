@@ -8,7 +8,7 @@ const Changelog = React.createClass({
 
         <h3>4.2.9</h3>
         <ul>
-          <li>Gauge - Fix segment colors (<a href='https://github.com/mxenabled/mx-react-components/pull/375'>#375</a>)</li>
+          <li>Fix React errors for unrecognized attributes (<a href='https://github.com/mxenabled/mx-react-components/pull/375'>#375</a>)</li>
         </ul>
 
         <h3>4.2.8</h3>
