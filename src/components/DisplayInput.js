@@ -211,7 +211,7 @@ const DisplayInput = React.createClass({
       },
 
       hintText: {
-        bottom: isLargeOrMediumWindowSize ? 14 : 40,
+        bottom: isLargeOrMediumWindowSize ? 14 : 0,
         position: 'absolute',
         right: 5
       },
