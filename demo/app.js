@@ -945,8 +945,11 @@ const Demo = React.createClass({
           placeholder='Type something'
           valid={true}
         />
+
         <br /><br />
         <SearchInput />
+
+        <br /><br />
         <DisplayInput
           hint='Click to Edit'
           label='Display Input'
