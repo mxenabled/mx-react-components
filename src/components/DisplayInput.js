@@ -3,6 +3,10 @@ const Radium = require('radium');
 
 const StyleConstants = require('../constants/Style');
 
+const Column = require('../components/grid/Column');
+const Container = require('../components/grid/Container');
+const Row = require('../components/grid/Row');
+
 const DisplayInput = React.createClass({
   propTypes: {
     hint: React.PropTypes.string,
@@ -25,31 +29,46 @@ const DisplayInput = React.createClass({
     };
   },
 
+  _isLargeOrMediumWindowSize () {
+    const windowSize = StyleConstants.getWindowSize();
+
+    return windowSize === 'large' || windowSize === 'medium';
+  },
+
   render () {
     const styles = this.styles();
 
     return (
-      <div style={styles.wrapper}>
-        {this.props.label ? (
-          <div key='label' style={styles.label}>
-            <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-              {this.props.label}
-            </div>
-          </div>) : null}
-        <input
-          {...this.props}
-          key='input'
-          label={this.props.label}
-          style={styles.input}
-          type='text'
-        />
-        <div style={styles.hint}>
-          <div style={styles.hintText}>
-            {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
-            {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
-          </div>
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Column>
+            { this._isLargeOrMediumWindowSize() && (
+              <div style={styles.wrapper}>
+                {this.props.label ? (
+                  <div key='label' style={styles.label}>
+                    <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                      {this.props.label}
+                    </div>
+                  </div>) : null}
+                <input
+                  {...this.props}
+                  key='input'
+                  label={this.props.label}
+                  style={styles.input}
+                  type='text'
+                />
+                <div style={styles.hint}>
+                  <div style={styles.hintText}>
+                    {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
+                    {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
+                  </div>
+                </div>
+              </div>
+            )}
+
+          </Column>
+        </Row>
+      </Container>
     );
   },
 
