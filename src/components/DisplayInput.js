@@ -42,54 +42,27 @@ const DisplayInput = React.createClass({
       <Container>
         <Row>
           <Column>
-            { this._isLargeOrMediumWindowSize() && (
-              <div style={styles.wrapper}>
-                {this.props.label ? (
-                  <div key='label' style={styles.label}>
-                    <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-                      {this.props.label}
-                    </div>
-                  </div>) : null}
-                <input
-                  {...this.props}
-                  key='input'
-                  label={this.props.label}
-                  style={styles.input}
-                  type='text'
-                />
-                <div style={styles.hint}>
-                  <div style={styles.hintText}>
-                    {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
-                    {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
+            <div style={this._isLargeOrMediumWindowSize() ? styles.wrapper : styles.wrapperSmall}>
+              {this.props.label ? (
+                <div key='label' style={this._isLargeOrMediumWindowSize() ? styles.label : styles.labelSmall}>
+                  <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                    {this.props.label}
                   </div>
+                </div>) : null}
+              <input
+                {...this.props}
+                key='input'
+                label={this.props.label}
+                style={this._isLargeOrMediumWindowSize() ? styles.input : styles.inputSmall}
+                type='text'
+              />
+              <div style={styles.hint}>
+                <div style={styles.hintText}>
+                  {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
+                  {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
                 </div>
               </div>
-            )}
-
-            { !this._isLargeOrMediumWindowSize() && (
-              <div style={styles.wrapperSmall}>
-                {this.props.label ? (
-                  <div key='label' style={styles.labelSmall}>
-                    <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-                      {this.props.label}
-                    </div>
-                  </div>) : null}
-                <input
-                  {...this.props}
-                  key='input'
-                  label={this.props.label}
-                  style={styles.inputSmall}
-                  type='text'
-                />
-                <div style={styles.hint}>
-                  <div style={styles.hintText}>
-                    {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
-                    {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
-                  </div>
-                </div>
-              </div>
-            )}
-
+            </div>
           </Column>
         </Row>
       </Container>
