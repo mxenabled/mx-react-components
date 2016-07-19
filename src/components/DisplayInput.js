@@ -73,6 +73,8 @@ const DisplayInput = React.createClass({
   },
 
   styles () {
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+
     return {
       wrapper: Object.assign({
         borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
@@ -122,6 +124,56 @@ const DisplayInput = React.createClass({
       },
 
       labelText: {
+
+      wrapperSmall: Object.assign({
+        display: 'flex',
+        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        flexWrap: 'wrap',
+        height: 80,
+        paddingRight: this.props.hint || this.props.status ? 100 : 0,
+        transition: 'all .2s ease-in',
+        WebkitAppearance: 'none',
+        whiteSpace: 'nowrap',
+
+        ':focus': {
+          borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      }, this.props.style),
+
+      inputSmall: {
+        backgroundColor: 'transparent',
+        border: '1px solid transparent',
+        flex: '1 0 100%',
+        float: 'left',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: '70%',
+        padding: 10,
+        WebkitAppearance: 'none',
+        width: '70%',
+
+        ':focus': {
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+
+      labelSmall: {
+        flex: '1 0 100%',
+        height: '30%',
+        position: 'relative',
+        width: 130,
+
+        ':focus': {
+          color: this.props.primaryColor
+        }
+      },
+
+      labelTextSmall: {
+        color: StyleConstants.Colors.BLACK,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
         bottom: 14,
         left: 5,
         position: 'absolute'
@@ -140,7 +192,7 @@ const DisplayInput = React.createClass({
       },
 
       hintText: {
-        bottom: 14,
+        bottom: isLargeOrMediumWindowSize ? 14 : 40,
         position: 'absolute',
         right: 5
       },
