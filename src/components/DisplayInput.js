@@ -70,7 +70,7 @@ const DisplayInput = React.createClass({
               <div style={styles.wrapperSmall}>
                 {this.props.label ? (
                   <div key='label' style={styles.labelSmall}>
-                    <div style={Object.assign({}, styles.labelTextSmall, this.props.labelStyle)}>
+                    <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
                       {this.props.label}
                     </div>
                   </div>) : null}
@@ -132,11 +132,7 @@ const DisplayInput = React.createClass({
       },
 
       label: {
-        color: StyleConstants.Colors.ASH,
-        display: 'inline-block',
         float: 'left',
-        fontSize: StyleConstants.FontSizes.SMALL,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
         height: '100%',
         marginLeft: -130,
         position: 'relative',
@@ -148,6 +144,14 @@ const DisplayInput = React.createClass({
       },
 
       labelText: {
+        color: StyleConstants.Colors.BLACK,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        bottom: 14,
+        left: 5,
+        position: 'absolute'
+
+      },
 
       wrapperSmall: Object.assign({
         display: 'flex',
@@ -192,15 +196,6 @@ const DisplayInput = React.createClass({
         ':focus': {
           color: this.props.primaryColor
         }
-      },
-
-      labelTextSmall: {
-        color: StyleConstants.Colors.BLACK,
-        fontSize: StyleConstants.FontSizes.SMALL,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        bottom: 14,
-        left: 5,
-        position: 'absolute'
       },
 
       hint: {
