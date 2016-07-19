@@ -66,6 +66,30 @@ const DisplayInput = React.createClass({
               </div>
             )}
 
+            { !this._isLargeOrMediumWindowSize() && (
+              <div style={styles.wrapperSmall}>
+                {this.props.label ? (
+                  <div key='label' style={styles.labelSmall}>
+                    <div style={Object.assign({}, styles.labelTextSmall, this.props.labelStyle)}>
+                      {this.props.label}
+                    </div>
+                  </div>) : null}
+                <input
+                  {...this.props}
+                  key='input'
+                  label={this.props.label}
+                  style={styles.inputSmall}
+                  type='text'
+                />
+                <div style={styles.hint}>
+                  <div style={styles.hintText}>
+                    {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
+                    {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
+                  </div>
+                </div>
+              </div>
+            )}
+
           </Column>
         </Row>
       </Container>
