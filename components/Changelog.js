@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.11</h3>
+        <ul>
+          <li>Limit width to 100% on ProgressBar (<a href='https://github.com/mxenabled/mx-react-components/pull/377'>#377</a>)</li>
+        </ul>
+
         <h3>4.2.9</h3>
         <ul>
           <li>Fix React errors for unrecognized attributes (<a href='https://github.com/mxenabled/mx-react-components/pull/375'>#375</a>)</li>
