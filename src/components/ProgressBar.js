@@ -41,7 +41,7 @@ const ProgressBar = React.createClass({
         backgroundColor: this.props.progressColor,
         borderRadius: this.props.height / 4,
         height: this.props.height,
-        width: this.props.percentage + '%'
+        width: this.props.percentage > 100 ? '100%' : this.props.percentage + '%'
       }
     }, this.props.styles);
   }
