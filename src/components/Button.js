@@ -10,6 +10,7 @@ const Icon = require('../components/Icon');
 const Button = React.createClass({
   propTypes: {
     actionText: React.PropTypes.string,
+    disableHover: React.PropTypes.bool,
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     onClick: React.PropTypes.func,
@@ -84,7 +85,7 @@ const Button = React.createClass({
         fill: StyleConstants.Colors.WHITE,
         transition: 'all .2s ease-in',
 
-        ':hover': {
+        ':hover': this.props.disableHover ? null : {
           backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -15),
           borderColor: StyleConstants.adjustColor(this.props.primaryColor, -15),
           transition: 'all .2s ease-in'
@@ -102,7 +103,7 @@ const Button = React.createClass({
         fill: this.props.primaryColor,
         transition: 'all .2s ease-in',
 
-        ':hover': {
+        ':hover': this.props.disableHover ? null : {
           backgroundColor: this.props.primaryColor,
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
@@ -122,8 +123,7 @@ const Button = React.createClass({
         color: StyleConstants.Colors.ASH,
         fill: StyleConstants.Colors.ASH,
         transition: 'all .2s ease-in',
-
-        ':hover': {
+        ':hover': this.props.disableHover ? null : {
           backgroundColor: StyleConstants.Colors.ASH,
           borderColor: StyleConstants.Colors.ASH,
           color: StyleConstants.Colors.WHITE,
@@ -146,7 +146,7 @@ const Button = React.createClass({
         borderColor: 'transparent',
         borderRadius: 2,
         borderWidth: 1,
-        ':hover': {
+        ':hover': this.props.disableHover ? null : {
           color: StyleConstants.adjustColor(this.props.primaryColor, -8),
           fill: StyleConstants.adjustColor(this.props.primaryColor, -8),
           transition: 'all .2s ease-in',
@@ -166,7 +166,7 @@ const Button = React.createClass({
         borderWidth: 1,
         color: this.props.primaryColor,
         fill: this.props.primaryColor,
-        ':hover': {
+        ':hover': this.props.disableHover ? null : {
           backgroundColor: StyleConstants.Colors.PORCELAIN
         },
         ':active': {
