@@ -404,8 +404,7 @@ const Demo = React.createClass({
 
   _handleInputFocus () {
     this.setState({
-      statusMessage: null,
-      showHint: false
+      showHint: true,
     });
   },
 
