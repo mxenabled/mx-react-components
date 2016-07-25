@@ -36,32 +36,58 @@ const DisplayInput = React.createClass({
   },
 
   render () {
+    // Methods
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
+
+    // Column Sizes
+    const twoWidthColumn = { large: 2, medium: 2, small: 0 };
+    const inputColumn = showHint ? { large: 8, medium: 8, small: 12 } : { large: 10, medium: 10, small: 12 };
+    const labelColumn = { large: 2, medium: 2, small: 12 };
+    const statusColumn = { large: 10, medium: 10, small: 12 };
+
+    // Styles
     const styles = this.styles();
 
     return (
       <Container>
-        <Row>
-          <Column>
-            <div style={this._isLargeOrMediumWindowSize() ? styles.wrapper : styles.wrapperSmall}>
-              {this.props.label ? (
-                <div key='label' style={this._isLargeOrMediumWindowSize() ? styles.label : styles.labelSmall}>
+        <div style={styles.wrapper}>
+          <Row>
+            {this.props.label ? (
+              <Column span={labelColumn} style={styles.label}>
+                <div key='label' style={styles.label}>
                   <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
                     {this.props.label}
                   </div>
-                </div>) : null}
+                </div>
+              </Column>
+            ) : null }
+
+            <Column span={inputColumn}>
               <input
                 {...this.props}
                 key='input'
                 label={this.props.label}
-                style={this._isLargeOrMediumWindowSize() ? styles.input : styles.inputSmall}
+                style={styles.input}
                 type='text'
               />
-              <div style={styles.hint}>
-                <div style={styles.hintText}>
+            </Column>
+
+            {showHint ? (
+              <Column span={twoWidthColumn}>
+                <div style={styles.hint}>
                   {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
-                  {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
                 </div>
-              </div>
+              </Column>
+            ) : null }
+          </Row>
+        </div>
+
+        <Row>
+          <Column span={twoWidthColumn} />
+          <Column span={statusColumn} >
+            <div style={styles.status}>
+              {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
             </div>
           </Column>
         </Row>
