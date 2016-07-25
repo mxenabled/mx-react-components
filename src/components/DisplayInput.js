@@ -97,31 +97,29 @@ const DisplayInput = React.createClass({
 
   styles () {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const textIndent = isLargeOrMediumWindowSize ? 20 : 10;
 
     return {
-      wrapper: Object.assign({
-        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-        height: 43,
-        paddingLeft: this.props.label ? 130 : 0,
-        paddingRight: this.props.hint || this.props.status ? 100 : 0,
-        transition: 'all .2s ease-in',
-        WebkitAppearance: 'none',
-        whiteSpace: 'nowrap',
+      error: {
+        color: StyleConstants.Colors.STRAWBERRY
+      },
 
-        ':focus': {
-          borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-          boxShadow: 'none',
-          outline: 'none'
-        }
-      }, this.props.style),
+      hint: {
+        color: this.props.primaryColor,
+        height: 20,
+        paddingTop: 15,
+        textAlign: 'right'
+      },
 
       input: {
         backgroundColor: 'transparent',
         border: '1px solid transparent',
-        float: 'left',
         fontSize: StyleConstants.FontSizes.LARGE,
-        padding: 10,
-        WebkitAppearance: 'none',
+        height: isLargeOrMediumWindowSize ? '100%' : '75%',
+        paddingBottom: isLargeOrMediumWindowSize ? 10 : 0,
+        paddingTop: 0,
+        paddingLeft: textIndent,
+        textAlign: 'left',
         width: '100%',
 
         ':focus': {
@@ -131,12 +129,6 @@ const DisplayInput = React.createClass({
       },
 
       label: {
-        float: 'left',
-        height: '100%',
-        marginLeft: -130,
-        position: 'relative',
-        width: 130,
-
         ':focus': {
           color: this.props.primaryColor
         }
@@ -144,20 +136,29 @@ const DisplayInput = React.createClass({
 
       labelText: {
         color: StyleConstants.Colors.BLACK,
+        height: isLargeOrMediumWindowSize ? '100%' : '25%',
         fontSize: StyleConstants.FontSizes.SMALL,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        bottom: 14,
-        left: 5,
-        position: 'absolute'
-
+        padding: isLargeOrMediumWindowSize ? 15 : 0,
+        paddingLeft: textIndent,
+        textAlign: 'left',
+        width: '100%'
       },
 
-      wrapperSmall: Object.assign({
-        display: 'flex',
+      status: {
+        height: 10,
+        paddingLeft: textIndent,
+        paddingTop: 10,
+        width: '50%'
+      },
+
+      success: {
+        color: this.props.primaryColor
+      },
+
+      wrapper: Object.assign({
         borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-        flexWrap: 'wrap',
-        height: 80,
-        paddingRight: this.props.hint || this.props.status ? 100 : 0,
+        height: isLargeOrMediumWindowSize ? 43 : 70,
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
@@ -167,61 +168,7 @@ const DisplayInput = React.createClass({
           boxShadow: 'none',
           outline: 'none'
         }
-      }, this.props.style),
-
-      inputSmall: {
-        backgroundColor: 'transparent',
-        border: '1px solid transparent',
-        flex: '1 0 100%',
-        float: 'left',
-        fontSize: StyleConstants.FontSizes.LARGE,
-        height: '70%',
-        padding: 10,
-        WebkitAppearance: 'none',
-        width: '70%',
-
-        ':focus': {
-          boxShadow: 'none',
-          outline: 'none'
-        }
-      },
-
-      labelSmall: {
-        flex: '1 0 100%',
-        height: '30%',
-        position: 'relative',
-        width: 130,
-
-        ':focus': {
-          color: this.props.primaryColor
-        }
-      },
-
-      hint: {
-        color: this.props.primaryColor,
-        display: 'inline-block',
-        float: 'right',
-        height: '100%',
-        marginRight: -100,
-        position: 'relative',
-        textAlign: 'right',
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-
-      hintText: {
-        bottom: isLargeOrMediumWindowSize ? 14 : 0,
-        position: 'absolute',
-        right: 5
-      },
-
-      error: {
-        color: StyleConstants.Colors.STRAWBERRY
-      },
-
-      success: {
-        color: this.props.primaryColor
-      }
+      }, this.props.style)
     };
   }
 });
