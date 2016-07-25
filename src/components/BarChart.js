@@ -59,10 +59,8 @@ const Rect = React.createClass({
 
   _handleMouseOver (label, value, x, y) {
     const animateDuration = 500;
-    const labelMargin = 200;
-    const yPos = value < 0 ? labelMargin : y;
 
-    this.props.onHover(label, value, x, yPos);
+    this.props.onHover(label, value, x, y);
 
     this.setState({
       hovering: true,
@@ -150,7 +148,7 @@ const BarChart = React.createClass({
   },
 
   _renderBar (yScale, xScale, value, index) {
-    const height = Math.abs(yScale(value) - yScale(0));
+    const height = value < 0 ? Math.abs(yScale(value) - yScale(0)) : yScale(value);
     const x = xScale(index);
     const barWidth = xScale.rangeBand();
     const y = value > 0 ? this.props.height - height : 0;
@@ -179,9 +177,12 @@ const BarChart = React.createClass({
     const data = this.props.data.map(d => {
       return d.value;
     });
+    let negativeBarsDrawn = false;
+    let positiveBarsDrawn = false;
+    const y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
 
     const yScale = d3.scale.linear()
-      .domain([d3.min(data), d3.max(data)])
+      .domain([-y0, y0])
       .range([0, height]);
 
     const xScale = d3.scale.ordinal()
@@ -191,6 +192,8 @@ const BarChart = React.createClass({
 
     const positiveBars = data.map((value, index) => {
       if (value > 0) {
+        positiveBarsDrawn = true;
+
         return this._renderBar(yScale, xScale, value, index);
       } else {
         return null;
@@ -199,6 +202,8 @@ const BarChart = React.createClass({
 
     const negativeBars = data.map((value, index) => {
       if (value < 0) {
+        negativeBarsDrawn = true;
+
         return this._renderBar(yScale, xScale, value, index);
       } else {
         return null;
@@ -207,11 +212,11 @@ const BarChart = React.createClass({
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
-        <svg height={height} width={width}>
+        <svg height={positiveBarsDrawn ? height : 0} width={width}>
           <g>{positiveBars}</g>
         </svg>
         <div>{this._renderLabels(barWidth)}</div>
-        <svg height={height} width={width}>
+        <svg height={negativeBarsDrawn ? height : 0} width={width}>
           <g>{negativeBars}</g>
         </svg>
       </div>
