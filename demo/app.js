@@ -1002,22 +1002,22 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Jan',
-                value: 125.25
+                value: -125.25
               },
               {
                 color: '#E3E6E7',
                 label: 'Feb',
-                value: 545.25
+                value: -545.25
               },
               {
                 color: '#E3E6E7',
                 label: 'Mar',
-                value: 789.25
+                value: -279.25
               },
               {
                 color: '#359BCF',
                 label: 'Apr',
-                value: 254.25
+                value: 625.25
               },
               {
                 color: '#E3E6E7',
@@ -1027,7 +1027,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Jun',
-                value: 1200.75
+                value: 265
               },
               {
                 color: '#E3E6E7',
@@ -1037,7 +1037,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Aug',
-                value: 965.25
+                value: -665.25
               },
               {
                 color: '#E3E6E7',
@@ -1047,7 +1047,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Oct',
-                value: 987.25
+                value: -987.25
               },
               {
                 color: '#E3E6E7',

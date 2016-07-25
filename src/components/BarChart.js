@@ -59,8 +59,10 @@ const Rect = React.createClass({
 
   _handleMouseOver (label, value, x, y) {
     const animateDuration = 500;
+    const labelMargin = 200;
+    const yPos = value < 0 ? labelMargin : y;
 
-    this.props.onHover(label, value, x, y);
+    this.props.onHover(label, value, x, yPos);
 
     this.setState({
       hovering: true,
@@ -105,6 +107,7 @@ const BarChart = React.createClass({
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
     hoverColor: React.PropTypes.string,
+    labelStyle: React.PropTypes.object,
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
     width: React.PropTypes.number
@@ -138,7 +141,7 @@ const BarChart = React.createClass({
       return (
         <span
           key={index}
-          style={Object.assign({}, styles.label, { width: totalWidth / this.props.data.length })}
+          style={Object.assign({}, styles.label, { width: totalWidth / this.props.data.length }, this.props.labelStyle)}
         >
           {label}
         </span>
@@ -146,55 +149,71 @@ const BarChart = React.createClass({
     });
   },
 
+  _renderBar (yScale, xScale, value, index) {
+    const height = Math.abs(yScale(value) - yScale(0));
+    const x = xScale(index);
+    const barWidth = xScale.rangeBand();
+    const y = value > 0 ? this.props.height - height : 0;
+
+    return (
+      <Rect
+        animateOnHover={this.props.animateOnHover}
+        color={this.props.data[index].color}
+        height={height}
+        hoverColor={this.props.hoverColor}
+        key={index * value}
+        label={this.props.data[index].label}
+        onClick={this.props.onClick}
+        onHover={this.props.onHover}
+        value={value}
+        width={barWidth}
+        x={x}
+        y={y}
+      />
+    );
+  },
+
   render () {
     const styles = this.styles();
+    const { height, width } = this.props;
     const data = this.props.data.map(d => {
       return d.value;
     });
 
     const yScale = d3.scale.linear()
-      .domain([0, d3.max(data)])
-      .range([0, this.props.height]);
+      .domain([d3.min(data), d3.max(data)])
+      .range([0, height]);
 
     const xScale = d3.scale.ordinal()
       .domain(d3.range(this.props.data.length))
-      .rangeRoundBands([0, this.props.width], 0.03);
+      .rangeRoundBands([0, width], 0.03);
+    const barWidth = xScale.rangeBand();
 
-    let barWidth;
-    const bars = data.map((point, index) => {
-      const height = yScale(point);
-      const y = this.props.height - height;
-      const x = xScale(index);
+    const positiveBars = data.map((value, index) => {
+      if (value > 0) {
+        return this._renderBar(yScale, xScale, value, index);
+      } else {
+        return null;
+      }
+    });
 
-      barWidth = xScale.rangeBand();
-
-      return (
-        <Rect
-          animateOnHover={this.props.animateOnHover}
-          color={this.props.data[index].color}
-          height={height}
-          hoverColor={this.props.hoverColor}
-          key={index * point}
-          label={this.props.data[index].label}
-          onClick={this.props.onClick}
-          onHover={this.props.onHover}
-          value={point}
-          width={barWidth}
-          x={x}
-          y={y}
-        />
-      );
+    const negativeBars = data.map((value, index) => {
+      if (value < 0) {
+        return this._renderBar(yScale, xScale, value, index);
+      } else {
+        return null;
+      }
     });
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
-        <svg
-          height={this.props.height}
-          width={this.props.width}
-        >
-          <g>{bars}</g>
+        <svg height={height} width={width}>
+          <g>{positiveBars}</g>
         </svg>
         <div>{this._renderLabels(barWidth)}</div>
+        <svg height={height} width={width}>
+          <g>{negativeBars}</g>
+        </svg>
       </div>
     );
   },
