@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.13</h3>
+        <ul>
+          <li>Column span prop behaves more like Bootstrap (<a href='https://github.com/mxenabled/mx-react-components/pull/372'>#376</a>)</li>
+        </ul>
+
         <h3>4.2.12</h3>
         <ul>
           <li>Make DisplayInput responsive (<a href='https://github.com/mxenabled/mx-react-components/pull/376'>#376</a>)</li>
