@@ -15,32 +15,30 @@ const Column = React.createClass({
   getDefaultProps () {
     return {
       offset: {},
-      span: { large: 12, medium: 12, small: 12 }
+      span: { large: 12 }
     };
   },
 
   getColumnWidths () {
     const colWidths = [];
-    const small = this.props.span.small || 0;
-    const medium = this.props.span.medium || 0;
-    const large = this.props.span.large || 0;
+    const { large, medium, small } = this.props.span;
 
     // Column widths
     if (small === 0) {
       colWidths.push('hidden-sm');
-    } else {
+    } else if (small) {
       colWidths.push('col-sm-' + small);
     }
 
     if (medium === 0) {
       colWidths.push('hidden-md');
-    } else if (medium !== small) {
+    } else if (medium && medium !== small) {
       colWidths.push('col-md-' + medium);
     }
 
     if (large === 0) {
       colWidths.push('hidden-lg');
-    } else if (large !== medium) {
+    } else if (large && large !== medium) {
       colWidths.push('col-lg-' + large);
     }
 
