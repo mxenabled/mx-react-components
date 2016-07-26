@@ -229,6 +229,8 @@ const BarChart = React.createClass({
   },
 
   styles () {
+    const labelMargin = 0.01;
+
     return {
       component: {
         display: 'block'
@@ -238,7 +240,7 @@ const BarChart = React.createClass({
         textAlign: 'center'
       },
       labelWrapper: {
-        margin: this.props.width * 0.014
+        margin: this.props.width * labelMargin
       }
     };
   }
