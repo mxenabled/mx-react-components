@@ -91,12 +91,12 @@ const Rect = React.createClass({
         onClick={this.props.onClick.bind(null, this.props.value, this.props.label)}
         onMouseOut={this._handleMouseOut}
         onMouseOver={this._handleMouseOver.bind(null, this.props.label, this.props.value, this.props.x, y)}
+        rx={3}
+        ry={3}
         style={style}
         width={this.props.width}
         x={this.props.x}
         y={y}
-        rx={3}
-        ry={3}
       />
     );
   }
@@ -238,7 +238,7 @@ const BarChart = React.createClass({
         textAlign: 'center'
       },
       labelWrapper: {
-        margin: this.props.width * 0.01
+        margin: this.props.width * 0.014
       }
     };
   }

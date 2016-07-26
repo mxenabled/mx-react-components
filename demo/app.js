@@ -992,7 +992,7 @@ const Demo = React.createClass({
         <br /><br />
         <div style={{ position: 'relative' }}>
           {this.state.barchartHoverValue ? (
-            <span style={{ position: 'absolute', top: this.state.barchartY - 20, left: this.state.barchartX + 10 }}>
+            <span style={{ position: 'absolute', top: this.state.barchartY - 20, left: this.state.barchartX }}>
               {this.state.barchartHoverValue}
             </span>
           ) : null}
