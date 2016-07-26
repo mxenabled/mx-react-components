@@ -3,6 +3,10 @@ const Radium = require('radium');
 
 const StyleConstants = require('../constants/Style');
 
+const Column = require('../components/grid/Column');
+const Container = require('../components/grid/Container');
+const Row = require('../components/grid/Row');
+
 const DisplayInput = React.createClass({
   propTypes: {
     hint: React.PropTypes.string,
@@ -25,59 +29,97 @@ const DisplayInput = React.createClass({
     };
   },
 
+  _isLargeOrMediumWindowSize () {
+    const windowSize = StyleConstants.getWindowSize();
+
+    return windowSize === 'large' || windowSize === 'medium';
+  },
+
   render () {
+    // Methods
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
+
+    // Column Sizes
+    const twoWidthColumn = { large: 2, medium: 2, small: 0 };
+    const inputColumn = showHint ? { large: 8, medium: 8, small: 12 } : { large: 10, medium: 10, small: 12 };
+    const labelColumn = { large: 2, medium: 2, small: 12 };
+    const statusColumn = { large: 10, medium: 10, small: 12 };
+
+    // Styles
     const styles = this.styles();
 
     return (
-      <div style={styles.wrapper}>
-        {this.props.label ? (
-          <div key='label' style={styles.label}>
-            <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-              {this.props.label}
-            </div>
-          </div>) : null}
-        <input
-          {...this.props}
-          key='input'
-          label={this.props.label}
-          style={styles.input}
-          type='text'
-        />
-        <div style={styles.hint}>
-          <div style={styles.hintText}>
-            {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
-            {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
-          </div>
+      <Container>
+        <div style={styles.wrapper}>
+          <Row>
+            {this.props.label ? (
+              <Column span={labelColumn} style={styles.label}>
+                <div key='label' style={styles.label}>
+                  <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                    {this.props.label}
+                  </div>
+                </div>
+              </Column>
+            ) : null }
+
+            <Column span={inputColumn}>
+              <input
+                {...this.props}
+                key='input'
+                label={this.props.label}
+                style={styles.input}
+                type='text'
+              />
+            </Column>
+
+            {showHint ? (
+              <Column span={twoWidthColumn}>
+                <div style={styles.hint}>
+                  {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
+                </div>
+              </Column>
+            ) : null }
+          </Row>
         </div>
-      </div>
+
+        <Row>
+          <Column span={twoWidthColumn} />
+          <Column span={statusColumn} >
+            <div style={styles.status}>
+              {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
+            </div>
+          </Column>
+        </Row>
+      </Container>
     );
   },
 
   styles () {
-    return {
-      wrapper: Object.assign({
-        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-        height: 43,
-        paddingLeft: this.props.label ? 130 : 0,
-        paddingRight: this.props.hint || this.props.status ? 100 : 0,
-        transition: 'all .2s ease-in',
-        WebkitAppearance: 'none',
-        whiteSpace: 'nowrap',
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const textIndent = isLargeOrMediumWindowSize ? 20 : 10;
 
-        ':focus': {
-          borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-          boxShadow: 'none',
-          outline: 'none'
-        }
-      }, this.props.style),
+    return {
+      error: {
+        color: StyleConstants.Colors.STRAWBERRY
+      },
+
+      hint: {
+        color: this.props.primaryColor,
+        height: 20,
+        paddingTop: 15,
+        textAlign: 'right'
+      },
 
       input: {
         backgroundColor: 'transparent',
         border: '1px solid transparent',
-        float: 'left',
         fontSize: StyleConstants.FontSizes.LARGE,
-        padding: 10,
-        WebkitAppearance: 'none',
+        height: isLargeOrMediumWindowSize ? '100%' : '75%',
+        paddingBottom: isLargeOrMediumWindowSize ? 10 : 0,
+        paddingTop: 0,
+        paddingLeft: textIndent,
+        textAlign: 'left',
         width: '100%',
 
         ':focus': {
@@ -87,52 +129,46 @@ const DisplayInput = React.createClass({
       },
 
       label: {
-        color: StyleConstants.Colors.ASH,
-        display: 'inline-block',
-        float: 'left',
-        fontSize: StyleConstants.FontSizes.SMALL,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        height: '100%',
-        marginLeft: -130,
-        position: 'relative',
-        width: 130,
-
         ':focus': {
           color: this.props.primaryColor
         }
       },
 
       labelText: {
-        bottom: 14,
-        left: 5,
-        position: 'absolute'
+        color: StyleConstants.Colors.BLACK,
+        height: isLargeOrMediumWindowSize ? '100%' : '25%',
+        fontSize: StyleConstants.FontSizes.SMALL,
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        padding: isLargeOrMediumWindowSize ? 15 : 0,
+        paddingLeft: textIndent,
+        textAlign: 'left',
+        width: '100%'
       },
 
-      hint: {
-        color: this.props.primaryColor,
-        display: 'inline-block',
-        float: 'right',
-        height: '100%',
-        marginRight: -100,
-        position: 'relative',
-        textAlign: 'right',
-        top: '50%',
-        transform: 'translateY(-50%)'
-      },
-
-      hintText: {
-        bottom: 14,
-        position: 'absolute',
-        right: 5
-      },
-
-      error: {
-        color: StyleConstants.Colors.STRAWBERRY
+      status: {
+        height: 10,
+        paddingLeft: textIndent,
+        paddingTop: 10,
+        width: '50%'
       },
 
       success: {
         color: this.props.primaryColor
-      }
+      },
+
+      wrapper: Object.assign({
+        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        height: isLargeOrMediumWindowSize ? 43 : 70,
+        transition: 'all .2s ease-in',
+        WebkitAppearance: 'none',
+        whiteSpace: 'nowrap',
+
+        ':focus': {
+          borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      }, this.props.style)
     };
   }
 });
