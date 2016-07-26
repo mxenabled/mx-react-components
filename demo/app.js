@@ -1002,7 +1002,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Jan',
-                value: -125.25
+                value: -325.25
               },
               {
                 color: '#E3E6E7',

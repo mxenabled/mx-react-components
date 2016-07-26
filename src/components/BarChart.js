@@ -78,9 +78,11 @@ const Rect = React.createClass({
     const animateHeight = d3.ease('back-out', 0.5);
     const height = this.props.height * animateHeight(Math.min(1, this.state.milliseconds / 1000));
     const y = this.props.height - height + this.props.y;
+    const shift = this.props.value > 0 ? '3px' : '-3px';
     const style = {
       fill: this.state.hovering && this.props.hoverColor ? this.props.hoverColor : this.props.color,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      transform: 'translateY(' + shift + ')'
     };
 
     return (
@@ -93,6 +95,8 @@ const Rect = React.createClass({
         width={this.props.width}
         x={this.props.x}
         y={y}
+        rx={3}
+        ry={3}
       />
     );
   }
@@ -126,12 +130,11 @@ const BarChart = React.createClass({
     return !_isEqual(nextProps, this.props);
   },
 
-  _renderLabels (barWidth) {
+  _renderLabels (barWidth, gap) {
     const styles = this.styles();
     const labels = this.props.data.map(d => {
       return d.label;
     });
-    const gap = 0.03;
     const spaceBetweenBars = this.props.width * gap;
     const totalWidth = barWidth * this.props.data.length + spaceBetweenBars;
 
@@ -147,10 +150,9 @@ const BarChart = React.createClass({
     });
   },
 
-  _renderBar (yScale, xScale, value, index) {
+  _renderBar (yScale, xScale, barWidth, value, index) {
     const height = value < 0 ? Math.abs(yScale(value) - yScale(0)) : yScale(value);
     const x = xScale(index);
-    const barWidth = xScale.rangeBand();
     const y = value > 0 ? this.props.height - height : 0;
 
     return (
@@ -177,8 +179,7 @@ const BarChart = React.createClass({
     const data = this.props.data.map(d => {
       return d.value;
     });
-    let negativeBarsDrawn = false;
-    let positiveBarsDrawn = false;
+    const gap = 0.3;
     const y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
 
     const yScale = d3.scale.linear()
@@ -187,14 +188,12 @@ const BarChart = React.createClass({
 
     const xScale = d3.scale.ordinal()
       .domain(d3.range(this.props.data.length))
-      .rangeRoundBands([0, width], 0.03);
+      .rangeRoundBands([0, width], gap);
     const barWidth = xScale.rangeBand();
 
     const positiveBars = data.map((value, index) => {
       if (value > 0) {
-        positiveBarsDrawn = true;
-
-        return this._renderBar(yScale, xScale, value, index);
+        return this._renderBar(yScale, xScale, barWidth, value, index);
       } else {
         return null;
       }
@@ -202,23 +201,29 @@ const BarChart = React.createClass({
 
     const negativeBars = data.map((value, index) => {
       if (value < 0) {
-        negativeBarsDrawn = true;
-
-        return this._renderBar(yScale, xScale, value, index);
+        return this._renderBar(yScale, xScale, barWidth, value, index);
       } else {
         return null;
       }
     });
 
+    const pHeight = d3.max(data) > 0 ? yScale(d3.max(data)) : 0;
+    const nHeight = d3.min(data) < 0 ? yScale(Math.abs(d3.min(data))) - yScale(0) : 0;
+
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
-        <svg height={positiveBarsDrawn ? height : 0} width={width}>
-          <g>{positiveBars}</g>
-        </svg>
-        <div>{this._renderLabels(barWidth)}</div>
-        <svg height={negativeBarsDrawn ? height : 0} width={width}>
-          <g>{negativeBars}</g>
-        </svg>
+        <div>
+          <svg height={pHeight} width={width}>
+            <g>{positiveBars}</g>
+          </svg>
+        </div>
+        <div>
+          <svg height={nHeight} width={width}>
+            <g>{negativeBars}</g>
+          </svg>
+        </div>
+        <div style={styles.labelWrapper}>{this._renderLabels(barWidth, gap)}</div>
+
       </div>
     );
   },
@@ -231,6 +236,9 @@ const BarChart = React.createClass({
       label: {
         display: 'inline-block',
         textAlign: 'center'
+      },
+      labelWrapper: {
+        margin: this.props.width * 0.01
       }
     };
   }
