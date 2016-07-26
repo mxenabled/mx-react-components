@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.12</h3>
+        <ul>
+          <li>Make DisplayInput responsive (<a href='https://github.com/mxenabled/mx-react-components/pull/376'>#376</a>)</li>
+        </ul>
+
         <h3>4.2.11</h3>
         <ul>
           <li>Limit width to 100% on ProgressBar (<a href='https://github.com/mxenabled/mx-react-components/pull/377'>#377</a>)</li>
