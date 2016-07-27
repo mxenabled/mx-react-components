@@ -1015,7 +1015,7 @@ const Demo = React.createClass({
                 value: -279.25
               },
               {
-                color: '#359BCF',
+                color: '#E3E6E7',
                 label: 'Apr',
                 value: 625.25
               },
@@ -1062,8 +1062,10 @@ const Demo = React.createClass({
             ]}
             height={200}
             onHover={this._handleBarChartHover}
+            primaryColor='#DA670B'
             width={700}
           />
+          <br /><br /><br />
         </div>
       </div>
     );

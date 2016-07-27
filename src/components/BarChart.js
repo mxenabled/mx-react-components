@@ -20,10 +20,10 @@ const Rect = React.createClass({
     animateOnHover: React.PropTypes.bool,
     color: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
-    hoverColor: React.PropTypes.string,
     label: React.PropTypes.string,
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
+    primaryColor: React.PropTypes.string,
     value: React.PropTypes.number.isRequired,
     width: React.PropTypes.number,
     x: React.PropTypes.number.isRequired,
@@ -80,7 +80,7 @@ const Rect = React.createClass({
     const y = this.props.height - height + this.props.y;
     const shift = this.props.value > 0 ? '3px' : '-3px';
     const style = {
-      fill: this.state.hovering && this.props.hoverColor ? this.props.hoverColor : this.props.color,
+      fill: this.state.hovering && this.props.primaryColor ? this.props.primaryColor : this.props.color,
       cursor: 'pointer',
       transform: 'translateY(' + shift + ')'
     };
@@ -108,7 +108,6 @@ const BarChart = React.createClass({
     animateOnHover: React.PropTypes.bool,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
-    hoverColor: React.PropTypes.string,
     labelStyle: React.PropTypes.object,
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
@@ -120,7 +119,6 @@ const BarChart = React.createClass({
     return {
       animateOnHover: false,
       height: 300,
-      hoverColor: StyleConstants.Colors.PRIMARY,
       onClick: () => {},
       onHover: () => {},
       primaryColor: StyleConstants.Colors.PRIMARY,
@@ -164,11 +162,11 @@ const BarChart = React.createClass({
         animateOnHover={this.props.animateOnHover}
         color={this.props.data[index].color}
         height={height}
-        hoverColor={this.props.hoverColor}
         key={index * value}
         label={this.props.data[index].label}
         onClick={this.props.onClick}
         onHover={this.props.onHover}
+        primaryColor={this.props.primaryColor}
         value={value}
         width={barWidth}
         x={x}
