@@ -112,6 +112,7 @@ const BarChart = React.createClass({
     labelStyle: React.PropTypes.object,
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
+    primaryColor: React.PropTypes.string,
     width: React.PropTypes.number
   },
 
@@ -122,6 +123,7 @@ const BarChart = React.createClass({
       hoverColor: StyleConstants.Colors.PRIMARY,
       onClick: () => {},
       onHover: () => {},
+      primaryColor: StyleConstants.Colors.PRIMARY,
       width: 500
     };
   },
@@ -130,21 +132,23 @@ const BarChart = React.createClass({
     return !_isEqual(nextProps, this.props);
   },
 
-  _renderLabels (barWidth, gap) {
+  _renderLabels (barWidth, xScale) {
     const styles = this.styles();
-    const labels = this.props.data.map(d => {
-      return d.label;
-    });
-    const spaceBetweenBars = this.props.width * gap;
-    const totalWidth = barWidth * this.props.data.length + spaceBetweenBars;
 
-    return labels.map((label, index) => {
+    return this.props.data.map((item, index) => {
+      const xPos = xScale(index);
+      const labelPos = {
+        position: 'absolute',
+        left: xPos,
+        width: barWidth
+      };
+
       return (
         <span
           key={index}
-          style={Object.assign({}, styles.label, { width: totalWidth / this.props.data.length }, this.props.labelStyle)}
+          style={Object.assign({}, styles.label, labelPos, this.props.labelStyle)}
         >
-          {label}
+          {item.label}
         </span>
       );
     });
@@ -212,35 +216,30 @@ const BarChart = React.createClass({
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
+        <svg height={pHeight} width={width}>
+          <g>{positiveBars}</g>
+        </svg>
+        <svg height={nHeight} width={width}>
+          <g>{negativeBars}</g>
+        </svg>
         <div>
-          <svg height={pHeight} width={width}>
-            <g>{positiveBars}</g>
-          </svg>
+          {this._renderLabels(barWidth, xScale)}
         </div>
-        <div>
-          <svg height={nHeight} width={width}>
-            <g>{negativeBars}</g>
-          </svg>
-        </div>
-        <div style={styles.labelWrapper}>{this._renderLabels(barWidth, gap)}</div>
-
       </div>
     );
   },
 
   styles () {
-    const labelMargin = 0.01;
-
     return {
       component: {
-        display: 'block'
+        display: 'block',
+        position: 'relative'
       },
       label: {
+        color: StyleConstants.Colors.ASH,
         display: 'inline-block',
+        fontSize: StyleConstants.FontSizes.SMALL,
         textAlign: 'center'
-      },
-      labelWrapper: {
-        margin: this.props.width * labelMargin
       }
     };
   }
