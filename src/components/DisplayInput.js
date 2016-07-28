@@ -54,7 +54,7 @@ const DisplayInput = React.createClass({
         <div style={styles.wrapper}>
           <Row>
             {this.props.label ? (
-              <Column span={labelColumn} style={styles.label}>
+              <Column span={labelColumn}>
                 <div key='label' style={styles.label}>
                   <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
                     {this.props.label}
@@ -188,8 +188,10 @@ const DisplayInput = React.createClass({
       wrapper: Object.assign({
         borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
         height: isLargeOrMediumWindowSize ? 43 : 70,
+        paddingBottom: StyleConstants.Spacing.XSMALL,
         paddingLeft: -10,
         paddingRight: -10,
+        paddingTop: StyleConstants.Spacing.XSMALL,
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
