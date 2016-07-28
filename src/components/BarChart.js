@@ -23,6 +23,7 @@ const Rect = React.createClass({
     label: React.PropTypes.string,
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
+    onHoverOut: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
     value: React.PropTypes.number.isRequired,
     width: React.PropTypes.number,
@@ -72,6 +73,7 @@ const Rect = React.createClass({
     this.setState({
       hovering: false
     });
+    this.props.onHoverOut();
   },
 
   render () {
@@ -126,8 +128,29 @@ const BarChart = React.createClass({
     };
   },
 
-  shouldComponentUpdate (nextProps) {
-    return !_isEqual(nextProps, this.props);
+  getInitialState () {
+    return {
+      hovering: false
+    };
+  },
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
+  },
+
+  _handleHover (label, value, x, y) {
+    this.setState({
+      hovering: true,
+      value,
+      x,
+      y
+    });
+  },
+
+  _handleHoverOut () {
+    this.setState({
+      hovering: false
+    });
   },
 
   _renderLabels (barWidth, xScale) {
@@ -165,7 +188,8 @@ const BarChart = React.createClass({
         key={index * value}
         label={this.props.data[index].label}
         onClick={this.props.onClick}
-        onHover={this.props.onHover}
+        onHover={this._handleHover}
+        onHoverOut={this._handleHoverOut}
         primaryColor={this.props.primaryColor}
         value={value}
         width={barWidth}
@@ -214,15 +238,20 @@ const BarChart = React.createClass({
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
+
         <svg height={pHeight} width={width}>
-          <g>{positiveBars}</g>
+          {positiveBars}
         </svg>
-        <svg height={nHeight} width={width}>
+        <svg height={nHeight + 20} width={width}>
           <g>{negativeBars}</g>
         </svg>
         <div>
           {this._renderLabels(barWidth, xScale)}
         </div>
+        {this.state.hovering ? (
+          <span style={{ position: 'absolute', width: barWidth, textAlign: 'center', top: this.state.value > 0 ? this.state.y - 20 : height - 20, left: this.state.x }}>
+            {this.state.value}
+          </span>) : null}
       </div>
     );
   },
