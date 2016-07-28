@@ -1,4 +1,5 @@
 const React = require('react');
+const numeral = require('numeral');
 const _isEqual = require('lodash/isEqual');
 
 const StyleConstants = require('../constants/Style');
@@ -22,8 +23,8 @@ const Rect = React.createClass({
     height: React.PropTypes.number.isRequired,
     label: React.PropTypes.string,
     onClick: React.PropTypes.func,
-    onHover: React.PropTypes.func,
-    onHoverOut: React.PropTypes.func,
+    onMouseOut: React.PropTypes.func,
+    onMouseOver: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
     value: React.PropTypes.number.isRequired,
     width: React.PropTypes.number,
@@ -61,19 +62,20 @@ const Rect = React.createClass({
   _handleMouseOver (label, value, x, y) {
     const animateDuration = 500;
 
-    this.props.onHover(label, value, x, y);
-
     this.setState({
       hovering: true,
       milliseconds: this.props.animateOnHover ? animateDuration : this.state.milliseconds
     });
+
+    this.props.onMouseOver(label, value, x, y);
   },
 
   _handleMouseOut () {
     this.setState({
       hovering: false
     });
-    this.props.onHoverOut();
+
+    this.props.onMouseOut();
   },
 
   render () {
@@ -114,6 +116,8 @@ const BarChart = React.createClass({
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
+    tooltipFormat: React.PropTypes.string,
+    tooltipStyle: React.PropTypes.object,
     width: React.PropTypes.number
   },
 
@@ -124,6 +128,7 @@ const BarChart = React.createClass({
       onClick: () => {},
       onHover: () => {},
       primaryColor: StyleConstants.Colors.PRIMARY,
+      tooltipFormat: '$0,0.00',
       width: 500
     };
   },
@@ -138,7 +143,7 @@ const BarChart = React.createClass({
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
   },
 
-  _handleHover (label, value, x, y) {
+  _handleMouseOver (label, value, x, y) {
     this.setState({
       hovering: true,
       value,
@@ -147,7 +152,7 @@ const BarChart = React.createClass({
     });
   },
 
-  _handleHoverOut () {
+  _handleMouseOut () {
     this.setState({
       hovering: false
     });
@@ -188,8 +193,8 @@ const BarChart = React.createClass({
         key={index * value}
         label={this.props.data[index].label}
         onClick={this.props.onClick}
-        onHover={this._handleHover}
-        onHoverOut={this._handleHoverOut}
+        onMouseOut={this._handleMouseOut}
+        onMouseOver={this._handleMouseOver}
         primaryColor={this.props.primaryColor}
         value={value}
         width={barWidth}
@@ -215,42 +220,42 @@ const BarChart = React.createClass({
     const xScale = d3.scale.ordinal()
       .domain(d3.range(this.props.data.length))
       .rangeRoundBands([0, width], gap);
+
     const barWidth = xScale.rangeBand();
 
     const positiveBars = data.map((value, index) => {
-      if (value > 0) {
-        return this._renderBar(yScale, xScale, barWidth, value, index);
-      } else {
-        return null;
-      }
+      return value > 0 ? this._renderBar(yScale, xScale, barWidth, value, index) : null;
     });
 
     const negativeBars = data.map((value, index) => {
-      if (value < 0) {
-        return this._renderBar(yScale, xScale, barWidth, value, index);
-      } else {
-        return null;
-      }
+      return value < 0 ? this._renderBar(yScale, xScale, barWidth, value, index) : null;
     });
 
-    const pHeight = d3.max(data) > 0 ? yScale(d3.max(data)) : 0;
-    const nHeight = d3.min(data) < 0 ? yScale(Math.abs(d3.min(data))) - yScale(0) : 0;
+    const maxHeightForPositiveBars = d3.max(data) > 0 ? yScale(d3.max(data)) : 0;
+    const maxHeightForNegativeBars = d3.min(data) < 0 ? yScale(Math.abs(d3.min(data))) - yScale(0) : 0;
+    const tooltipMargin = 20;
+    const tooltipWidth = barWidth * 1.5;
+    const tooltipXPos = (tooltipWidth - barWidth) / 2;
+    const tooltipStyle = {
+      left: this.state.x - tooltipXPos,
+      top: this.state.value > 0 ? this.state.y - tooltipMargin : height - tooltipMargin,
+      width: tooltipWidth
+    };
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
-
-        <svg height={pHeight} width={width}>
+        <svg height={maxHeightForPositiveBars} width={width}>
           {positiveBars}
         </svg>
-        <svg height={nHeight + 20} width={width}>
+        <svg height={maxHeightForNegativeBars} width={width}>
           <g>{negativeBars}</g>
         </svg>
         <div>
           {this._renderLabels(barWidth, xScale)}
         </div>
         {this.state.hovering ? (
-          <span style={{ position: 'absolute', width: barWidth, textAlign: 'center', top: this.state.value > 0 ? this.state.y - 20 : height - 20, left: this.state.x }}>
-            {this.state.value}
+          <span style={Object.assign({}, styles.tooltip, tooltipStyle, this.props.tooltipStyle)}>
+            {this.props.tooltipFormat ? numeral(this.state.value).format(this.props.tooltipFormat) : this.state.value}
           </span>) : null}
       </div>
     );
@@ -267,6 +272,14 @@ const BarChart = React.createClass({
         display: 'inline-block',
         fontSize: StyleConstants.FontSizes.SMALL,
         textAlign: 'center'
+      },
+      tooltip: {
+        color: this.props.primaryColor,
+        fontSize: StyleConstants.FontSizes.LARGE,
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        position: 'absolute',
+        textAlign: 'center',
+        whiteSpace: 'nowrap'
       }
     };
   }
