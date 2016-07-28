@@ -20,9 +20,6 @@ module.exports = {
     LIME: '#2EBE51',
     STRAWBERRY: '#E22727',
 
-    // BLACK
-    BLACK: '#000000',
-
     // CHART COLORS
     BASE_ARC: '#F5F5F5',
     YELLOW: '#f6a01e',
