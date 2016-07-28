@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.15</h3>
+        <ul>
+          <li>BarChart accepts negative numbers (<a href='https://github.com/mxenabled/mx-react-components/pull/379'>#379</a>)</li>
+        </ul>
+
         <h3>4.2.13</h3>
         <ul>
           <li>Column span prop behaves more like Bootstrap (<a href='https://github.com/mxenabled/mx-react-components/pull/372'>#376</a>)</li>
