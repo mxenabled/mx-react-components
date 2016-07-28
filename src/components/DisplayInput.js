@@ -55,7 +55,7 @@ const DisplayInput = React.createClass({
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
-                <div key='label' style={styles.label}>
+                <div>
                   <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
                     {this.props.label}
                   </div>
@@ -153,12 +153,6 @@ const DisplayInput = React.createClass({
         width: '100%'
       },
 
-      label: {
-        ':focus': {
-          color: this.props.primaryColor
-        }
-      },
-
       labelText: {
         aligntItems: 'center',
         color: StyleConstants.Colors.CHARCOAL,
@@ -166,8 +160,10 @@ const DisplayInput = React.createClass({
         height: isLargeOrMediumWindowSize ? '100%' : '25%',
         fontSize: StyleConstants.FontSizes.SMALL,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        padding: isLargeOrMediumWindowSize ? 15 : 0,
-        paddingLeft: textIndent,
+        paddingBottom: StyleConstants.Spacing.MEDIUM,
+        paddingLeft: StyleConstants.Spacing.SMALL,
+        paddingRight: StyleConstants.Spacing.SMALL,
+        paddingTop: StyleConstants.Spacing.MEDIUM,
         textAlign: 'left',
         width: '100%'
       },
