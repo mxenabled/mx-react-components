@@ -63,14 +63,22 @@ const DisplayInput = React.createClass({
               </Column>
             ) : null }
 
-            <Column span={inputColumn}>
-              <input
-                {...this.props}
-                key='input'
-                label={this.props.label}
-                style={styles.input}
-                type='text'
-              />
+            <Column relative={!!this.props.children} span={inputColumn}>
+              {this.props.children ? (
+                <div style={styles.children}>
+                  {this.props.children}
+                </div>
+              ) : (
+                <div style={styles.inputWrapper}>
+                  <input
+                    {...this.props}
+                    key='input'
+                    label={this.props.label}
+                    style={styles.input}
+                    type='text'
+                  />
+                </div>
+              )}
             </Column>
 
             {showHint ? (
@@ -83,14 +91,16 @@ const DisplayInput = React.createClass({
           </Row>
         </div>
 
-        <Row>
-          <Column span={twoWidthColumn} />
-          <Column span={statusColumn} >
-            <div style={styles.status}>
-              {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
-            </div>
-          </Column>
-        </Row>
+        {this.props.status ? (
+          <Row>
+            <Column span={twoWidthColumn} />
+            <Column span={statusColumn} >
+              <div style={styles.status}>
+                <div style={styles[this.props.status.type]}>{this.props.status.message}</div>
+              </div>
+            </Column>
+          </Row>
+        ) : null}
       </Container>
     );
   },
@@ -128,6 +138,22 @@ const DisplayInput = React.createClass({
         }
       },
 
+      inputWrapper: {
+        alignItems: 'center',
+        display: 'flex',
+        height: isLargeOrMediumWindowSize ? 43 : 70
+      },
+
+      children: {
+        alignItems: 'center',
+        display: 'flex',
+        height: isLargeOrMediumWindowSize ? 43 : 70,
+        paddingBottom: isLargeOrMediumWindowSize ? 10 : 0,
+        paddingTop: 0,
+        paddingLeft: textIndent,
+        width: '100%'
+      },
+
       label: {
         ':focus': {
           color: this.props.primaryColor
@@ -135,7 +161,9 @@ const DisplayInput = React.createClass({
       },
 
       labelText: {
-        color: StyleConstants.Colors.BLACK,
+        aligntItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
+        display: 'flex',
         height: isLargeOrMediumWindowSize ? '100%' : '25%',
         fontSize: StyleConstants.FontSizes.SMALL,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
@@ -148,7 +176,9 @@ const DisplayInput = React.createClass({
       status: {
         height: 10,
         paddingLeft: textIndent,
-        paddingTop: 10,
+        paddingRight: StyleConstants.Spacing.SMALL,
+        paddingBottom: StyleConstants.Spacing.XSMALL,
+        paddingTop: StyleConstants.Spacing.XSMALL,
         width: '50%'
       },
 
@@ -159,6 +189,8 @@ const DisplayInput = React.createClass({
       wrapper: Object.assign({
         borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
         height: isLargeOrMediumWindowSize ? 43 : 70,
+        paddingLeft: -10,
+        paddingRight: -10,
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
