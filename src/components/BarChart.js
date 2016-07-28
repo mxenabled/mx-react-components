@@ -236,9 +236,10 @@ const BarChart = React.createClass({
     const tooltipMargin = 20;
     const tooltipWidth = barWidth * 1.5;
     const tooltipXPos = (tooltipWidth - barWidth) / 2;
+    const tooltipYPos = maxHeightForPositiveBars > 0 ? maxHeightForPositiveBars - tooltipMargin : -1 * tooltipMargin;
     const tooltipStyle = {
       left: this.state.x - tooltipXPos,
-      top: this.state.value > 0 ? this.state.y - tooltipMargin : maxHeightForNegativeBars,
+      top: this.state.value > 0 ? this.state.y - tooltipMargin : tooltipYPos,
       width: tooltipWidth
     };
 
