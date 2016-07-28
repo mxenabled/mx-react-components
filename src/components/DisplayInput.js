@@ -93,8 +93,7 @@ const DisplayInput = React.createClass({
 
         {this.props.status ? (
           <Row>
-            <Column span={twoWidthColumn} />
-            <Column span={statusColumn} >
+            <Column offset={twoWidthColumn} span={statusColumn} >
               <div style={styles.status}>
                 <div style={styles[this.props.status.type]}>{this.props.status.message}</div>
               </div>
