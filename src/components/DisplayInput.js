@@ -125,9 +125,7 @@ const DisplayInput = React.createClass({
         border: '1px solid transparent',
         fontSize: StyleConstants.FontSizes.LARGE,
         height: isLargeOrMediumWindowSize ? '100%' : '75%',
-        paddingBottom: isLargeOrMediumWindowSize ? 10 : 0,
-        paddingTop: 0,
-        paddingLeft: textIndent,
+        paddingBottom: isLargeOrMediumWindowSize ? 20 : 0,
         textAlign: 'left',
         width: '100%',
 
@@ -140,16 +138,19 @@ const DisplayInput = React.createClass({
       inputWrapper: {
         alignItems: 'center',
         display: 'flex',
-        height: isLargeOrMediumWindowSize ? 43 : 70
+        paddingBottom: StyleConstants.Spacing.SMALL,
+        paddingLeft: StyleConstants.Spacing.SMALL,
+        paddingRight: StyleConstants.Spacing.SMALL,
+        paddingTop: StyleConstants.Spacing.SMALL
       },
 
       children: {
         alignItems: 'center',
         display: 'flex',
-        height: isLargeOrMediumWindowSize ? 43 : 70,
-        paddingBottom: isLargeOrMediumWindowSize ? 10 : 0,
-        paddingTop: 0,
-        paddingLeft: textIndent,
+        paddingBottom: StyleConstants.Spacing.SMALL,
+        paddingLeft: StyleConstants.Spacing.SMALL,
+        paddingRight: StyleConstants.Spacing.SMALL,
+        paddingTop: StyleConstants.Spacing.SMALL,
         width: '100%'
       },
 
