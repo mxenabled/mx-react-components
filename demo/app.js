@@ -1002,7 +1002,7 @@ const Demo = React.createClass({
         <br /><br />
         <div style={{ position: 'relative' }}>
           {this.state.barchartHoverValue ? (
-            <span style={{ position: 'absolute', top: this.state.barchartY - 20, left: this.state.barchartX + 10 }}>
+            <span style={{ position: 'absolute', top: this.state.barchartY - 20, left: this.state.barchartX }}>
               {this.state.barchartHoverValue}
             </span>
           ) : null}
@@ -1012,22 +1012,22 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Jan',
-                value: 125.25
+                value: -325.25
               },
               {
                 color: '#E3E6E7',
                 label: 'Feb',
-                value: 545.25
+                value: -545.25
               },
               {
                 color: '#E3E6E7',
                 label: 'Mar',
-                value: 789.25
+                value: -279.25
               },
               {
-                color: '#359BCF',
+                color: '#E3E6E7',
                 label: 'Apr',
-                value: 254.25
+                value: 625.25
               },
               {
                 color: '#E3E6E7',
@@ -1037,7 +1037,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Jun',
-                value: 1200.75
+                value: 265
               },
               {
                 color: '#E3E6E7',
@@ -1047,7 +1047,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Aug',
-                value: 965.25
+                value: -665.25
               },
               {
                 color: '#E3E6E7',
@@ -1057,7 +1057,7 @@ const Demo = React.createClass({
               {
                 color: '#E3E6E7',
                 label: 'Oct',
-                value: 987.25
+                value: -987.25
               },
               {
                 color: '#E3E6E7',
@@ -1072,8 +1072,10 @@ const Demo = React.createClass({
             ]}
             height={200}
             onHover={this._handleBarChartHover}
+            primaryColor='#DA670B'
             width={700}
           />
+          <br /><br /><br />
         </div>
       </div>
     );
