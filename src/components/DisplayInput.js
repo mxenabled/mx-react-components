@@ -37,6 +37,7 @@ const DisplayInput = React.createClass({
 
   render () {
     // Methods
+    const hasChildren = !!this.props.children;
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
     const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
 
@@ -63,7 +64,7 @@ const DisplayInput = React.createClass({
               </Column>
             ) : null }
 
-            <Column relative={!!this.props.children} span={inputColumn}>
+            <Column relative={!hasChildren} span={inputColumn}>
               {this.props.children ? (
                 <div style={styles.children}>
                   {this.props.children}
