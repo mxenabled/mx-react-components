@@ -166,7 +166,7 @@ const DisplayInput = React.createClass({
 
       status: {
         paddingBottom: StyleConstants.Spacing.XSMALL,
-        paddingLeft: StyleConstants.Spacing.SMALL,
+        paddingLeft: isLargeOrMediumWindowSize ? StyleConstants.Spacing.SMALL : StyleConstants.Spacing.XSMALL,
         paddingRight: StyleConstants.Spacing.SMALL,
         paddingTop: StyleConstants.Spacing.XSMALL
       },
