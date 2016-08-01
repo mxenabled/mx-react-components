@@ -35,6 +35,10 @@ const ColumnDocs = React.createClass({
             <Column />
         `} nodes to be displayed.</p>
 
+        <h5>relative <label>Boolean</label></h5>
+        <p>Default: true</p>
+        <p>Determines if the column is positioned relative or not.</p>
+
         <h3>Example</h3>
         <Markdown>
           {`

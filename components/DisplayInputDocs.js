@@ -66,6 +66,9 @@ const DisplayInputDocs = React.createClass({
         />
 
         <h3>Usage</h3>
+        <h5>children <label>Node</label></h5>
+        <p>JSX node to be rendered in place of the standard input</p>
+
         <h5>hint <label>String</label></h5>
         <p>Hint text to display to user on input hover</p>
 
