@@ -37,6 +37,7 @@ const DisplayInput = React.createClass({
 
   render () {
     // Methods
+    const hasChildren = !!this.props.children;
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
     const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
 
@@ -54,8 +55,8 @@ const DisplayInput = React.createClass({
         <div style={styles.wrapper}>
           <Row>
             {this.props.label ? (
-              <Column span={labelColumn} style={styles.label}>
-                <div key='label' style={styles.label}>
+              <Column span={labelColumn}>
+                <div>
                   <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
                     {this.props.label}
                   </div>
@@ -63,14 +64,22 @@ const DisplayInput = React.createClass({
               </Column>
             ) : null }
 
-            <Column span={inputColumn}>
-              <input
-                {...this.props}
-                key='input'
-                label={this.props.label}
-                style={styles.input}
-                type='text'
-              />
+            <Column relative={!hasChildren} span={inputColumn}>
+              {hasChildren ? (
+                <div style={styles.children}>
+                  {this.props.children}
+                </div>
+              ) : (
+                <div style={styles.inputWrapper}>
+                  <input
+                    {...this.props}
+                    key='input'
+                    label={this.props.label}
+                    style={styles.input}
+                    type='text'
+                  />
+                </div>
+              )}
             </Column>
 
             {showHint ? (
@@ -84,12 +93,13 @@ const DisplayInput = React.createClass({
         </div>
 
         <Row>
-          <Column span={twoWidthColumn} />
-          <Column span={statusColumn} >
-            <div style={styles.status}>
-              {this.props.status ? (<div style={styles[this.props.status.type]}>{this.props.status.message}</div>) : null}
-            </div>
-          </Column>
+          {this.props.status ? (
+            <Column offset={twoWidthColumn} span={statusColumn} >
+              <div style={styles.status}>
+                <div style={styles[this.props.status.type]}>{this.props.status.message}</div>
+              </div>
+            </Column>
+          ) : null}
         </Row>
       </Container>
     );
@@ -97,7 +107,6 @@ const DisplayInput = React.createClass({
 
   styles () {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
-    const textIndent = isLargeOrMediumWindowSize ? 20 : 10;
 
     return {
       error: {
@@ -115,10 +124,6 @@ const DisplayInput = React.createClass({
         backgroundColor: 'transparent',
         border: '1px solid transparent',
         fontSize: StyleConstants.FontSizes.LARGE,
-        height: isLargeOrMediumWindowSize ? '100%' : '75%',
-        paddingBottom: isLargeOrMediumWindowSize ? 10 : 0,
-        paddingTop: 0,
-        paddingLeft: textIndent,
         textAlign: 'left',
         width: '100%',
 
@@ -128,28 +133,36 @@ const DisplayInput = React.createClass({
         }
       },
 
-      label: {
-        ':focus': {
-          color: this.props.primaryColor
-        }
+      inputWrapper: {
+        alignItems: 'center',
+        display: 'flex',
+        padding: StyleConstants.Spacing.SMALL
+      },
+
+      children: {
+        alignItems: 'center',
+        display: 'flex',
+        padding: StyleConstants.Spacing.SMALL
       },
 
       labelText: {
-        color: StyleConstants.Colors.BLACK,
-        height: isLargeOrMediumWindowSize ? '100%' : '25%',
+        aligntItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
+        display: 'flex',
         fontSize: StyleConstants.FontSizes.SMALL,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        padding: isLargeOrMediumWindowSize ? 15 : 0,
-        paddingLeft: textIndent,
-        textAlign: 'left',
-        width: '100%'
+        paddingBottom: isLargeOrMediumWindowSize ? StyleConstants.Spacing.MEDIUM : StyleConstants.Spacing.XSMALL,
+        paddingLeft: StyleConstants.Spacing.SMALL,
+        paddingRight: StyleConstants.Spacing.SMALL,
+        paddingTop: isLargeOrMediumWindowSize ? StyleConstants.Spacing.MEDIUM : StyleConstants.Spacing.XSMALL,
+        textAlign: 'left'
       },
 
       status: {
-        height: 10,
-        paddingLeft: textIndent,
-        paddingTop: 10,
-        width: '50%'
+        paddingBottom: StyleConstants.Spacing.XSMALL,
+        paddingLeft: isLargeOrMediumWindowSize ? StyleConstants.Spacing.SMALL : StyleConstants.Spacing.XSMALL,
+        paddingRight: StyleConstants.Spacing.SMALL,
+        paddingTop: StyleConstants.Spacing.XSMALL
       },
 
       success: {
@@ -158,7 +171,11 @@ const DisplayInput = React.createClass({
 
       wrapper: Object.assign({
         borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-        height: isLargeOrMediumWindowSize ? 43 : 70,
+        boxSizing: 'border-box',
+        paddingBottom: StyleConstants.Spacing.XSMALL,
+        marginLeft: isLargeOrMediumWindowSize ? 0 : -10,
+        marginRight: isLargeOrMediumWindowSize ? 0 : -10,
+        paddingTop: StyleConstants.Spacing.XSMALL,
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',

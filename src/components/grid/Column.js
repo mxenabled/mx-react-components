@@ -9,12 +9,14 @@ const defaultShape = {
 const Column = React.createClass({
   propTypes: {
     offset: React.PropTypes.shape(defaultShape),
+    relative: React.PropTypes.bool,
     span: React.PropTypes.shape(defaultShape)
   },
 
   getDefaultProps () {
     return {
       offset: {},
+      relative: true,
       span: { large: 12 }
     };
   },
@@ -77,7 +79,7 @@ const Column = React.createClass({
     className = className.concat(this.getColumnOffsets());
 
     return (
-      <div className={className.join(' ')} style={{ boxSizing: 'border-box' }}>
+      <div className={className.join(' ')} style={{ boxSizing: 'border-box', position: this.props.relative ? 'relative' : 'static' }}>
         {this.props.children}
       </div>
     );
