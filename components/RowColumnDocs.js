@@ -110,6 +110,10 @@ const RowDocs = React.createClass({
         `}</p>
         <p>A number representing the columns span at which to display the enclosed content, based on the columnCount. If set to 0, the column will be hidden.</p>
 
+        <h5>relative <label>Boolean</label></h5>
+        <p>Default: true</p>
+        <p>Determines if the column is positioned relative or not.</p>
+
         <h5>children <label>Node</label></h5>
         <p>The content to be displayed in the column</p>
 
