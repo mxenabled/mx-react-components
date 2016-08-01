@@ -65,7 +65,7 @@ const DisplayInput = React.createClass({
             ) : null }
 
             <Column relative={!hasChildren} span={inputColumn}>
-              {this.props.children ? (
+              {hasChildren ? (
                 <div style={styles.children}>
                   {this.props.children}
                 </div>
@@ -136,19 +136,13 @@ const DisplayInput = React.createClass({
       inputWrapper: {
         alignItems: 'center',
         display: 'flex',
-        paddingBottom: StyleConstants.Spacing.SMALL,
-        paddingLeft: StyleConstants.Spacing.SMALL,
-        paddingRight: StyleConstants.Spacing.SMALL,
-        paddingTop: StyleConstants.Spacing.SMALL
+        padding: StyleConstants.Spacing.SMALL
       },
 
       children: {
         alignItems: 'center',
         display: 'flex',
-        paddingBottom: StyleConstants.Spacing.SMALL,
-        paddingLeft: StyleConstants.Spacing.SMALL,
-        paddingRight: StyleConstants.Spacing.SMALL,
-        paddingTop: StyleConstants.Spacing.SMALL
+        padding: StyleConstants.Spacing.SMALL
       },
 
       labelText: {
