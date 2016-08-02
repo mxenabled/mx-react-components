@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.17</h3>
+        <ul>
+          <li>New Icon - Flag (<a href='https://github.com/mxenabled/mx-react-components/pull/381'>#381</a>)</li>
+          <li>New Icon - Split (<a href='https://github.com/mxenabled/mx-react-components/pull/383'>#383</a>)</li>
+          <li>SimpleSelect typo fixes for styles (<a href='https://github.com/mxenabled/mx-react-components/pull/382'>#382</a>)</li>
+        </ul>
+
         <h3>4.2.16</h3>
         <ul>
           <li>DisplayInput and Column component fixes/tweaks (<a href='https://github.com/mxenabled/mx-react-components/pull/380'>#380</a>)</li>
