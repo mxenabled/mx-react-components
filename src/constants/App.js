@@ -393,6 +393,10 @@ module.exports = {
       displayValue: 'Spinner'
     },
     {
+      value: 'split',
+      displayValue: 'Split'
+    },
+    {
       value: 'sports',
       displayValue: 'Sports'
     },
