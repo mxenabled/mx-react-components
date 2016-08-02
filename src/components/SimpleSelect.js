@@ -63,7 +63,7 @@ const SimpleSelect = React.createClass({
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.BLACK,
-        display: 'felx',
+        display: 'flex',
         flexDirection: 'column',
         fill: StyleConstants.Colors.BLACK,
         fontFamily: StyleConstants.FontFamily,
