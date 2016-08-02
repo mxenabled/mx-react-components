@@ -205,6 +205,10 @@ module.exports = {
       displayValue: 'Filter'
     },
     {
+      value: 'flag',
+      displayValue: 'Flag'
+    },
+    {
       value: 'folder',
       displayValue: 'Folder'
     },
