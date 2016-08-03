@@ -80,22 +80,22 @@ const DonutChart = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
-    if (!_isEqual(this.props.data, newProps.data)) {
-      this._setupD3Functions(newProps);
-      this._animateChart();
-    }
+    this._setupD3Functions(newProps);
 
     if (newProps.activeIndex !== this.props.activeIndex) {
       this.setState({
         activeIndex: newProps.activeIndex
       });
-
-      this._animateActiveArc(this.props.activeIndex, newProps.activeIndex);
     }
   },
 
   shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(this.props, nextProps) || !_isEqual(this.state, nextState);
+  },
+
+  componentDidUpdate (prevProps) {
+    this._animateChart();
+    this._animateActiveArc(prevProps.activeIndex, this.props.activeIndex);
   },
 
   _setupD3Functions (props) {
