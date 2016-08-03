@@ -34,6 +34,7 @@ const {
   SimpleInput,
   SimpleSelect,
   Styles,
+  Tabs,
   TimeBasedLineChart,
   ToggleSwitch,
   Tooltip,
@@ -219,6 +220,7 @@ const Demo = React.createClass({
       radioChecked: false,
       selectedCalendarDate: null,
       selectedDatePickerDate: null,
+      selectedTab: 1,
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
@@ -429,6 +431,12 @@ const Demo = React.createClass({
   _handleRadioButtonClick () {
     this.setState({
       radioChecked: !this.state.radioChecked
+    });
+  },
+
+  _handleTabSelect (selectedTab) {
+    this.setState({
+      selectedTab
     });
   },
 
@@ -745,13 +753,36 @@ const Demo = React.createClass({
               data={[]}
               height={200}
               id='gauge-2'
-              numberOfSegments={10}
+              numberOfSegments={70}
               showDataLabel={false}
               width={200}
             />
           </div>
         </div>
         <br /><br />
+
+        <div style={{ textAlign: 'center' }}>
+          <Tabs
+            brandColor={'#FF69B4'}
+            onTabSelect={this._handleTabSelect}
+            selectedTab={this.state.selectedTab}
+            showBottomBorder={false}
+            tabs={['pizza', 'ice cream', 'bacon', 'chicken']}
+          />
+        </div>
+        <br /><br />
+
+        <div style={{ textAlign: 'center' }}>
+          <Tabs
+            onTabSelect={this._handleTabSelect}
+            selectedBottomBorderPadding={25}
+            selectedTab={this.state.selectedTab}
+            showBottomBorder={false}
+            tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
+          />
+        </div>
+        <br /><br />
+
         <div style={{ textAlign: 'center' }}>
           <TimeBasedLineChart
             breakPointDate={moment().startOf('day').unix()}
