@@ -97,7 +97,10 @@ const DonutChart = React.createClass({
     if (!_isEqual(prevProps.data, this.props.data)) {
       this._animateChart();
     }
-    this._animateActiveArc(prevProps.activeIndex, this.props.activeIndex);
+
+    if (!_isEqual(prevProps.activeIndex, this.props.activeIndex)) {
+      this._animateActiveArc(prevProps.activeIndex, this.props.activeIndex);
+    }
   },
 
   _setupD3Functions (props) {
