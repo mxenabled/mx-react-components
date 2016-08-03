@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.19</h3>
+        <ul>
+          <li>Donut Chart - Preventing too many opening and selection animations from occurring (<a href='https://github.com/mxenabled/mx-react-components/pull/390'>#390</a>)</li>
+          <li>Donut Chart - Ensuring opening animation occurs for all present arcs on chart (<a href='https://github.com/mxenabled/mx-react-components/pull/386'>#386</a>)</li>
+          <li>Documents - opening browser automatically during npm run dev command</li>
+        </ul>
+
         <h3>4.2.17</h3>
         <ul>
           <li>New Icon - Flag (<a href='https://github.com/mxenabled/mx-react-components/pull/381'>#381</a>)</li>
