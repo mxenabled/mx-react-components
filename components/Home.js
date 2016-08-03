@@ -16,7 +16,7 @@ const Home = React.createClass({
             <h1>Features</h1>
             <div className='flex'>
               <div className='feature'>
-                <img src='/mx-react-components/images/react-logo.png' />
+                <img src='images/react-logo.png' />
                 <h2>ReactJS</h2>
                 <p>
                   We are huge advocates of ReactJS at MX. Our ui kit is built using React and is intended to be used in React based web projects.
@@ -37,7 +37,7 @@ const Home = React.createClass({
                 </p>
               </div>
               <div className='feature'>
-                <img src='/mx-react-components/images/radium-logo.png' />
+                <img src='images/radium-logo.png' />
                 <h2>Radium</h2>
                 <p>
                   We use Radium for inline css styles that are scoped to each component and prevent conflicts with other component or global styles.
