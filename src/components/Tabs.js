@@ -1,7 +1,7 @@
 const React = require('react');
 const Radium = require('radium');
 
-const Button  = require('./Button');
+const Icon = require('./Icon');
 const SimpleSelect = require('./SimpleSelect');
 const StyleConstants = require('../constants/Style');
 
@@ -25,8 +25,8 @@ const Tabs = React.createClass({
 
   getInitialState () {
     return {
-      selectedTab: this.props.selectedTab || 1,
-      showMenu: true
+      selectedTab: this.props.selectedTab || 0,
+      showMenu: false
     };
   },
 
@@ -38,17 +38,18 @@ const Tabs = React.createClass({
     }
   },
 
-  _handleTabClick (selectedTab) {
-    this.props.onTabSelect(selectedTab);
-
+  _handleMenuClick () {
     this.setState({
-      selectedTab
+      showMenu: !this.state.showMenu
     });
   },
 
-  _handleMobileButtonClick () {
+  _handleTabClick (selectedTab) {
+    this.props.onTabSelect(selectedTab);
+    this._handleMenuClick();
+
     this.setState({
-      showMenu: !this.state.showMenu
+      selectedTab
     });
   },
 
@@ -66,7 +67,7 @@ const Tabs = React.createClass({
     const styles = this.styles();
 
     return this.props.tabs.map((tab, index) => {
-      const _index = index + 1;
+      const _index = index;
 
       return (
         <span
@@ -80,6 +81,46 @@ const Tabs = React.createClass({
     });
   },
 
+  _renderTabMenu () {
+    const selectedTab = this.props.tabs[this.state.selectedTab];
+    const styles = this.styles();
+    const tabItems = this._tabItems();
+
+    return (
+      <div onClick={this._handleMenuClick} style={styles.menuWrapper} >
+        {selectedTab}
+        <Icon
+          size={20}
+          style={{ color: this.state.brandColor }}
+          type={!this.state.showMenu ? 'caret-down' : 'caret-up' }
+        />
+        {this.state.showMenu ? (
+          <SimpleSelect
+            items={tabItems}
+            menuStyles={styles.menu}
+            onScrimClick={this._handleMenuClick}
+            showItems={this.state.showMenu}
+          />
+        ) : null}
+      </div>
+    );
+  },
+
+  _tabItems () {
+    const tabItems = [];
+
+    this.props.tabs.map((tab, index) => {
+      tabItems.push({
+        onClick: () => {
+          this._handleTabClick(index);
+        },
+        text: tab
+      });
+    });
+
+    return tabItems;
+  },
+
   render () {
     const styles = this.styles();
 
@@ -91,7 +132,7 @@ const Tabs = React.createClass({
           </div>
         ) : (
           <div>
-            {this._renderTabList()}
+            {this._renderTabMenu()}
           </div>
         )}
       </div>
@@ -118,6 +159,30 @@ const Tabs = React.createClass({
         marginRight: 30,
         marginTop: 30,
         padding: 5,
+        textTransform: 'uppercase',
+
+        ':hover': {
+          color: StyleConstants.Colors.ASH
+        }
+      },
+      menuWrapper: {
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        color: this.props.brandColor,
+        lineHeight: '20px',
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontStyle: StyleConstants.Fonts.SEMIBOLD,
+        letterSpacing: '.75',
+        textTransform: 'uppercase'
+      },
+      menu: {
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.CHARCOAL,
+        cursor: 'pointer',
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontStyle: StyleConstants.Fonts.SEMIBOLD,
+        letterSpacing: '.75',
+        position: 'absolute',
         textTransform: 'uppercase',
 
         ':hover': {
