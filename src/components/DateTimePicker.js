@@ -114,8 +114,8 @@ const DatePicker = React.createClass({
     const value = e.target.value.toLowerCase().replace('.', '');
 
     const time = value.split(':');
-    const am = value.includes('am');
-    const pm = value.includes('pm');
+    const am = value.indexOf('am') >= 0;
+    const pm = value.indexOf('pm') >= 0;
     const minute = Number(time[1].substring(0, 2));
     let hour = Number(time[0]);
 
@@ -177,13 +177,13 @@ const DatePicker = React.createClass({
                 style={styles.selectedDateCaret}
                 type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
               />
-            {this.state.showCalendar ? (
-              <Calendar
-                {...this.props}
-                onDateSelect={this._handleDateSelect}
-                style={styles.calendar}
-              />
-            ) : null}
+              <div style={styles.calendarWrapper}>
+                <Calendar
+                  {...this.props}
+                  onDateSelect={this._handleDateSelect}
+                  style={styles.calendar}
+                />
+              </div>
             </div>
           </Column>
           {this.props.children ? (
@@ -317,6 +317,9 @@ const DatePicker = React.createClass({
       },
 
       //Calendar Styles
+      calendarWrapper: {
+        display: this.state.showCalendar ? 'block' : 'none'
+      },
       calendar: Object.assign({}, {
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
