@@ -6,6 +6,12 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.2.</h3>
+        <ul>
+          <li>Tabs Component - add it and make it work for mobile (<a href='https://github.com/mxenabled/mx-react-components/pull/395'>#395</a>)</li>
+        </ul>
+
+
         <h3>4.2.19</h3>
         <ul>
           <li>Donut Chart - Preventing too many opening and selection animations from occurring (<a href='https://github.com/mxenabled/mx-react-components/pull/390'>#390</a>)</li>
