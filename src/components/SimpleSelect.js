@@ -12,6 +12,7 @@ const SimpleSelect = React.createClass({
     items: React.PropTypes.array.isRequired,
     itemStyles: React.PropTypes.object,
     menuStyles: React.PropTypes.object,
+    onItemClick: React.PropTypes.func,
     onScrimClick: React.PropTypes.func,
     style: React.PropTypes.object
   },
@@ -33,7 +34,7 @@ const SimpleSelect = React.createClass({
               return (
                 <div
                   key={i}
-                  onClick={item.onClick}
+                  onClick={this.props.onItemClick.bind(null, item)}
                   style={Object.assign({}, styles.item, this.props.itemStyles)}
                 >
                   {item.icon ? (
