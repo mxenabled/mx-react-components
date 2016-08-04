@@ -114,13 +114,13 @@ const DatePicker = React.createClass({
     const value = e.target.value.toLowerCase().replace('.', '');
 
     const time = value.split(':');
-    const am = value.indexOf('am');
-    const pm = value.indexOf('pm');
+    const am = value.indexOf('am') >= 0;
+    const pm = value.indexOf('pm') >= 0;
     const minute = Number(time[1].substring(0, 2));
     let hour = Number(time[0]);
 
-    hour = am >= 0 && hour === 12 ? 0 : hour;
-    hour = pm >= 0 && hour !== 12 ? hour + 12 : hour;
+    hour = am && hour === 12 ? 0 : hour;
+    hour = pm && hour !== 12 ? hour + 12 : hour;
 
     if (hour > MAX_HOUR || minute > MAX_MINUTE) {
       e.value.target = '';
