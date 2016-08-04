@@ -146,7 +146,7 @@ const DisplayInput = React.createClass({
       },
 
       labelText: {
-        aligntItems: 'center',
+        alignItems: 'center',
         color: StyleConstants.Colors.CHARCOAL,
         display: 'flex',
         fontSize: StyleConstants.FontSizes.SMALL,
