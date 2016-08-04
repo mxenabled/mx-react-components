@@ -214,6 +214,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
+      menuStyle: { color: Styles.COLOR.YELLOW },
       lineChartData: [],
       pageIndicatorIndex: 0,
       radioChecked: false,
@@ -418,6 +419,25 @@ const Demo = React.createClass({
     });
   },
 
+  _handleItemClick (item) {
+    if (item.text === 'Red') {
+      this.setState({
+        menuStyle: { color: Styles.COLOR.RED },
+        showMenu: !this.state.showMenu
+      });
+    } else if (item.text === 'Blue') {
+      this.setState({
+         menuStyle: { color: Styles.COLOR.YELLOW },
+         showMenu: !this.state.showMenu
+       });
+    } else {
+      this.setState({
+         menuStyle: { color: Styles.COLOR.GREEN },
+         showMenu: !this.state.showMenu
+       });
+    }
+  },
+
   _handleBarChartHover (barchartHoverLabel, barchartHoverValue, barchartX, barchartY) {
     this.setState({
       barchartHoverValue,
@@ -612,11 +632,13 @@ const Demo = React.createClass({
             </Button>
             {this.state.showMenu ? (
               <SimpleSelect
+                menuStyles={this.state.menuStyle}
                 items={[
-                  { text: 'Menu Item 1' },
-                  { text: 'Menu Item 2' },
-                  { text: 'Menu Item 3' }
+                  { text: 'Red' },
+                  { text: 'Blue' },
+                  { text: 'Green' }
                 ]}
+                onItemClick={this._handleItemClick}
                 onScrimClick={this._handleSimpleSelectClick}
               />
             ) : null}
