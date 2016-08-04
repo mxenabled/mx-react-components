@@ -214,7 +214,7 @@ const Demo = React.createClass({
         value: 'accounts',
         displayValue: 'Accounts'
       },
-      menuStyle: { color: Styles.COLOR.YELLOW },
+      menuStyle: { color: Styles.Colors.YELLOW },
       lineChartData: [],
       pageIndicatorIndex: 0,
       radioChecked: false,
@@ -422,19 +422,19 @@ const Demo = React.createClass({
   _handleItemClick (item) {
     if (item.text === 'Red') {
       this.setState({
-        menuStyle: { color: Styles.COLOR.RED },
+        menuStyle: { color: Styles.Colors.RED },
         showMenu: !this.state.showMenu
       });
     } else if (item.text === 'Blue') {
       this.setState({
-         menuStyle: { color: Styles.COLOR.YELLOW },
-         showMenu: !this.state.showMenu
-       });
+        menuStyle: { color: Styles.Colors.BLUE },
+        showMenu: !this.state.showMenu
+      });
     } else {
       this.setState({
-         menuStyle: { color: Styles.COLOR.GREEN },
-         showMenu: !this.state.showMenu
-       });
+        menuStyle: { color: Styles.Colors.GREEN },
+        showMenu: !this.state.showMenu
+      });
     }
   },
 
