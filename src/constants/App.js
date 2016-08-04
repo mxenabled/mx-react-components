@@ -205,6 +205,10 @@ module.exports = {
       displayValue: 'Filter'
     },
     {
+      value: 'flag',
+      displayValue: 'Flag'
+    },
+    {
       value: 'folder',
       displayValue: 'Folder'
     },
@@ -391,6 +395,10 @@ module.exports = {
     {
       value: 'spinner',
       displayValue: 'Spinner'
+    },
+    {
+      value: 'split',
+      displayValue: 'Split'
     },
     {
       value: 'sports',

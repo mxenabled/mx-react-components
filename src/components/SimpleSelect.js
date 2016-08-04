@@ -37,7 +37,7 @@ const SimpleSelect = React.createClass({
                   style={Object.assign({}, styles.item, this.props.itemStyles)}
                 >
                   {item.icon ? (
-                    <Icon size={this.props.iconSize || 20} styles={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
+                    <Icon size={this.props.iconSize || 20} style={Object.assign({}, styles.icon, this.props.iconStyles)} type={item.icon} />
                   ) : null}
                   {item.text}
                 </div>
@@ -63,7 +63,7 @@ const SimpleSelect = React.createClass({
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.BLACK,
-        display: 'felx',
+        display: 'flex',
         flexDirection: 'column',
         fill: StyleConstants.Colors.BLACK,
         fontFamily: StyleConstants.FontFamily,
@@ -72,7 +72,9 @@ const SimpleSelect = React.createClass({
         position: 'absolute',
         zIndex: 10
       },
-
+      icon: {
+        paddingRight: StyleConstants.Spacing.SMALL
+      },
       item: {
         boxSizing: 'border-box',
         height: 40,
