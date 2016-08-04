@@ -220,7 +220,7 @@ const Demo = React.createClass({
       radioChecked: false,
       selectedCalendarDate: null,
       selectedDatePickerDate: null,
-      selectedTab: 1,
+      selectedTab: 0,
       showDrawer: false,
       showDrawerButtonType: 'primary',
       showModal: false,
@@ -761,18 +761,7 @@ const Demo = React.createClass({
         </div>
         <br /><br />
 
-        <div style={{ textAlign: 'center' }}>
-          <Tabs
-            brandColor={'#FF69B4'}
-            onTabSelect={this._handleTabSelect}
-            selectedTab={this.state.selectedTab}
-            showBottomBorder={false}
-            tabs={['pizza', 'ice cream', 'bacon', 'chicken']}
-          />
-        </div>
-        <br /><br />
-
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ marginLeft: '30%', width: '100%' }}>
           <Tabs
             onTabSelect={this._handleTabSelect}
             selectedBottomBorderPadding={25}
