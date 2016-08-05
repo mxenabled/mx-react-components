@@ -82,7 +82,7 @@ const Tabs = React.createClass({
   _renderTabMenu () {
     const selectedTab = this.props.tabs[this.state.selectedTab];
     const styles = this.styles();
-    const tabItems = this._tabItems();
+    const tabItems = this._buildTabItems();
 
     return (
       <div onClick={this._toggleMenu} style={styles.menuWrapper} >
@@ -104,7 +104,7 @@ const Tabs = React.createClass({
     );
   },
 
-  _tabItems () {
+  _buildTabItems () {
     const tabItems = [];
 
     this.props.tabs.map((tab, index) => {
