@@ -7,9 +7,9 @@ const StyleConstants = require('../constants/Style');
 
 const Tabs = React.createClass({
   propTypes: {
+    activeTabStyles: React.PropTypes.object,
     brandColor: React.PropTypes.string,
     onTabSelect: React.PropTypes.func.isRequired,
-    selectedBottomBorderPadding: React.PropTypes.number,
     selectedTab: React.PropTypes.number,
     showBottomBorder: React.PropTypes.bool,
     tabs: React.PropTypes.array.isRequired
@@ -60,11 +60,8 @@ const Tabs = React.createClass({
   },
 
   _renderTabs () {
-    const selectedTabStyle = {
-      borderBottom: '2px solid ' + this.props.brandColor,
-      paddingBottom: this.props.selectedBottomBorderPadding
-    };
     const styles = this.styles();
+    const activeTabStyle = Object.assign({}, styles.activeTab, this.props.activeTabStyles);
 
     return this.props.tabs.map((tab, index) => {
       const _index = index;
@@ -73,7 +70,7 @@ const Tabs = React.createClass({
         <span
           key={_index}
           onClick={this._handleTabClick.bind(null, _index)}
-          style={[styles.tab, this.state.selectedTab === _index && selectedTabStyle]}
+          style={[styles.tab, this.state.selectedTab === _index && activeTabStyle]}
         >
           {tab}
         </span>
@@ -188,6 +185,9 @@ const Tabs = React.createClass({
         ':hover': {
           color: StyleConstants.Colors.ASH
         }
+      },
+      activeTab: {
+        borderBottom: '2px solid ' + this.props.brandColor
       },
       tabsContainer: {
         borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
