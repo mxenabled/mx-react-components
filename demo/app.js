@@ -763,8 +763,8 @@ const Demo = React.createClass({
 
         <div style={{ marginLeft: '30%', width: '100%' }}>
           <Tabs
+            activeTabStyle={{ paddingBottom: 25 }}
             onTabSelect={this._handleTabSelect}
-            selectedBottomBorderPadding={25}
             selectedTab={this.state.selectedTab}
             showBottomBorder={false}
             tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
