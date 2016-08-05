@@ -12,14 +12,15 @@ const Tabs = React.createClass({
     onTabSelect: React.PropTypes.func.isRequired,
     selectedTab: React.PropTypes.number,
     showBottomBorder: React.PropTypes.bool,
-    tabs: React.PropTypes.array.isRequired
+    tabs: React.PropTypes.array.isRequired,
+    useTabsInMobile: React.PropTypes.bool
   },
 
   getDefaultProps () {
     return {
       brandColor: StyleConstants.Colors.PRIMARY,
       showBottomBorder: true,
-      selectedBottomBorderPadding: 5
+      useTabsInMobile: false
     };
   },
 
@@ -61,7 +62,7 @@ const Tabs = React.createClass({
 
   _renderTabs () {
     const styles = this.styles();
-    const activeTabStyle = Object.assign({}, styles.activeTab, this.props.activeTabStyles);
+    const selectedTabStyle = Object.assign({}, styles.activeTab, this.props.activeTabStyles);
 
     return this.props.tabs.map((tab, index) => {
       const _index = index;
@@ -70,7 +71,7 @@ const Tabs = React.createClass({
         <span
           key={_index}
           onClick={this._handleTabClick.bind(null, _index)}
-          style={[styles.tab, this.state.selectedTab === _index && activeTabStyle]}
+          style={[styles.tab, this.state.selectedTab === _index && selectedTabStyle]}
         >
           {tab}
         </span>
@@ -123,7 +124,7 @@ const Tabs = React.createClass({
 
     return (
       <div style={[styles.component, this.props.style]}>
-        {this._isLargeOrMediumWindowSize() ? (
+        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile ? (
           <div style={styles.tabsContainer}>
             {this._renderTabs()}
           </div>
