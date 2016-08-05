@@ -767,7 +767,8 @@ const Demo = React.createClass({
             onTabSelect={this._handleTabSelect}
             selectedTab={this.state.selectedTab}
             showBottomBorder={false}
-            tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
+            tabs={['donuts', 'ice cream']}
+            useTabsInMobile={false}
           />
         </div>
         <br /><br />
