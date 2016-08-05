@@ -20,6 +20,7 @@ const TabsDocs = React.createClass({
           selectedTab={this.state.selectedTab}
           showBottomBorder={false}
           tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
+          useTabsInMobile={false}
         />
 
         <h3>Usage</h3>
@@ -53,6 +54,10 @@ const TabsDocs = React.createClass({
         <p>Default: Roll over item for details</p>
         <p>The text to display in the data label when not hovering over a slice.</p>
 
+        <h5>useTabsInMobile <label>Boolean</label></h5>
+        <p>Default: false</p>
+        <p>When true, this will override the default and show tabs in mobile instead of a menu screen.</p>
+
         <h3>Example</h3>
         <Markdown>
 {`
@@ -69,6 +74,7 @@ const TabsDocs = React.createClass({
     selectedTab={this.state.selectedTab}
     showBottomBorder={false}
     tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
+    useTabsInMobile={false}
   />
   `}
         </Markdown>
