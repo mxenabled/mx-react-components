@@ -15,14 +15,17 @@ const TabsDocs = React.createClass({
 
         <h3>Demo</h3>
         <Tabs
+          activeTabStyle={{ paddingBottom: 25 }}
           onTabSelect={this._handleTabSelect}
-          selectedBottomBorderPadding={25}
           selectedTab={this.state.selectedTab}
           showBottomBorder={false}
           tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
         />
 
         <h3>Usage</h3>
+        <h5>activeTabStyle<label>Object</label></h5>
+        <p>Styles for the active tab.</p>
+
         <h5>brandColor<label>String</label></h5>
         <p>Default: PRIMARY COLOR</p>
         <p>Hex value or style constant for that brand.</p>
@@ -60,6 +63,7 @@ const TabsDocs = React.createClass({
    },
 
   <Tabs
+    activeTabStyle={{ paddingBottom: 25 }}
     onTabSelect={this._handleTabSelect}
     selectedBottomBorderPadding={25}
     selectedTab={this.state.selectedTab}
