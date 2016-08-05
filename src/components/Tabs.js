@@ -39,7 +39,7 @@ const Tabs = React.createClass({
     }
   },
 
-  _handleMenuClick () {
+  _toggleMenu () {
     this.setState({
       showMenu: !this.state.showMenu
     });
@@ -47,7 +47,7 @@ const Tabs = React.createClass({
 
   _handleTabClick (selectedTab) {
     this.props.onTabSelect(selectedTab);
-    this._handleMenuClick();
+    this._toggleMenu();
 
     this.setState({
       selectedTab
@@ -85,7 +85,7 @@ const Tabs = React.createClass({
     const tabItems = this._tabItems();
 
     return (
-      <div onClick={this._handleMenuClick} style={styles.menuWrapper} >
+      <div onClick={this._toggleMenu} style={styles.menuWrapper} >
         {selectedTab}
         <Icon
           size={20}
@@ -96,7 +96,7 @@ const Tabs = React.createClass({
           <SimpleSelect
             items={tabItems}
             menuStyles={styles.menu}
-            onScrimClick={this._handleMenuClick}
+            onScrimClick={this._toggleMenu}
             showItems={this.state.showMenu}
           />
         ) : null}
