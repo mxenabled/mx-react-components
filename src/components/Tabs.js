@@ -80,13 +80,13 @@ const Tabs = React.createClass({
   },
 
   _renderTabMenu () {
-    const selectedTab = this.props.tabs[this.state.selectedTab];
+    const selectedTabName = this.props.tabs[this.state.selectedTab];
     const styles = this.styles();
     const tabItems = this._buildTabItems();
 
     return (
       <div onClick={this._toggleMenu} style={styles.menuWrapper} >
-        {selectedTab}
+        {selectedTabName}
         <Icon
           size={20}
           style={{ color: this.state.brandColor }}
