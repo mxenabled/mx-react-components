@@ -12,6 +12,7 @@ const StyleConstants = require('../constants/Style');
 
 const DateRangePicker = React.createClass({
   propTypes: {
+    closeCalendarOnRangeSelect: React.PropTypes.bool,
     defaultRanges: React.PropTypes.arrayOf(React.PropTypes.shape({
       displayValue: React.PropTypes.string,
       endDate: React.PropTypes.number,
@@ -31,6 +32,7 @@ const DateRangePicker = React.createClass({
 
   getDefaultProps () {
     return {
+      closeCalendarOnRangeSelect: false,
       defaultRanges: [
         {
           displayValue: 'Today',
@@ -122,10 +124,18 @@ const DateRangePicker = React.createClass({
     } else {
       this.props.onDateSelect(startDate, endDate);
     }
+
+    if (startDate && endDate && this.props.closeCalendarOnRangeSelect) {
+      this._handleScrimClick();
+    }
   },
 
   _handleDefaultRangeSelection (range) {
     this.props.onDateSelect(range.startDate, range.endDate);
+
+    if (this.props.closeCalendarOnRangeSelect) {
+      this._handleScrimClick();
+    }
   },
 
   _handleDateHover (activeSelectDate) {
