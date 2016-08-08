@@ -763,7 +763,7 @@ const Demo = React.createClass({
 
         <div style={{ marginLeft: '30%', width: '100%' }}>
           <Tabs
-            activeTabStyle={{ paddingBottom: 25 }}
+            activeTabStyles={{ paddingBottom: 25 }}
             onTabSelect={this._handleTabSelect}
             selectedTab={this.state.selectedTab}
             showBottomBorder={false}
