@@ -8,7 +8,7 @@ const Changelog = React.createClass({
 
         <h3>4.2.21</h3>
         <ul>
-          <li>Tabs Component - add it and make it work for mobile (<a href='https://github.com/mxenabled/mx-react-components/pull/395'>#395</a>)</li>
+          <li>Tabs Component - Adds new Tabs component. See docs for details. (<a href='https://github.com/mxenabled/mx-react-components/pull/395'>#395</a>)</li>
         </ul>
 
 
