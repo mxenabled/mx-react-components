@@ -29,6 +29,7 @@ module.exports = {
   SimpleInput: require('./components/SimpleInput'),
   SimpleSelect: require('./components/SimpleSelect'),
   Spin: require('./components/Spin'),
+  Tabs: require('./components/Tabs'),
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
   Tooltip: require('./components/Tooltip'),
