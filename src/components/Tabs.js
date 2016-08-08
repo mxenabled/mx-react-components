@@ -160,7 +160,7 @@ const Tabs = React.createClass({
         textTransform: 'uppercase',
 
         ':hover': {
-          color: StyleConstants.Colors.ASH
+          color: this._isLargeOrMediumWindowSize() ? StyleConstants.Colors.ASH : StyleConstants.Colors.CHARCOAL
         }
       },
       menuWrapper: {
