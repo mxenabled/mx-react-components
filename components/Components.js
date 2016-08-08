@@ -117,6 +117,10 @@ const Components = React.createClass({
                   displayValue: 'Time Based Line Chart'
                 },
                 {
+                  value: 'tabs',
+                  displayValue: 'Tabs'
+                },
+                {
                   value: 'toggle-switch',
                   displayValue: 'Toggle Switch'
                 },
@@ -156,6 +160,7 @@ const Components = React.createClass({
             <Link to='/components/select-full-screen'>Select Full Screen</Link>
             <Link to='/components/simple-input'>Simple Input</Link>
             <Link to='/components/simple-select'>Simple Select</Link>
+            <Link to='/components/tabs'>Tabs</Link>
             <Link to='/components/toggle-switch'>Toggle Switch</Link>
             <Link to='/components/type-ahead'>Type Ahead</Link>
 
