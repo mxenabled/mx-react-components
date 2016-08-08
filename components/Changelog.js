@@ -6,8 +6,6 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
-
-
         <h3>4.2.23</h3>
         <ul>
           <li>Tabs Component - Fixes error with hoover in mobile. (<a href='https://github.com/mxenabled/mx-react-components/pull/398'>#398</a>)</li>
