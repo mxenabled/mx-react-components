@@ -181,11 +181,7 @@ const Tabs = React.createClass({
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
         letterSpacing: '.75',
         position: 'absolute',
-        textTransform: 'uppercase',
-
-        ':hover': {
-          color: StyleConstants.Colors.ASH
-        }
+        textTransform: 'uppercase'
       },
       activeTab: {
         borderBottom: '2px solid ' + this.props.brandColor
