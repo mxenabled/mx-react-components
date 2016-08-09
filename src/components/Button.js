@@ -10,7 +10,6 @@ const Icon = require('../components/Icon');
 const Button = React.createClass({
   propTypes: {
     actionText: React.PropTypes.string,
-    disableHover: React.PropTypes.bool,
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     onClick: React.PropTypes.func,
