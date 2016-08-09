@@ -36,6 +36,10 @@ const DateRangePickerDocs = React.createClass({
         />
 
         <h3>Usage</h3>
+        <h5>closeCalendarOnRangeSelect <label>boolean</label></h5>
+        <p>Default: false</p>
+        <p>Determines if the calendar is closed after successful range selection.</p>
+
         <h5>defaultRanges <label>Array of range option objects</label></h5>
         <p>Default: <a href='https://github.com/mxenabled/mx-react-components/blob/master/src/components/DateRangePicker.js#L30'>See Code for default array of ranges</a></p>
         <p>Array of default range objects used when showDefaultRanges prop is set to true.  If not supplied, the default above is used.</p>
