@@ -11,6 +11,10 @@ const Changelog = React.createClass({
           <li>Tabs Component - Fixes error with hoover in mobile. (<a href='https://github.com/mxenabled/mx-react-components/pull/398'>#398</a>)</li>
         </ul>
 
+        <h3>4.2.22</h3>
+        <ul>
+          <li>DateRangePicker - Adds new prop to close calendar on succesful range selection if set to true. (<a href='https://github.com/mxenabled/mx-react-components/pull/397'>#397</a>)</li>
+        </ul>
 
         <h3>4.2.21</h3>
         <ul>
