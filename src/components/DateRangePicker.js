@@ -402,6 +402,7 @@ const DateRangePicker = React.createClass({
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
+        padding: '10px 15px',
         position: 'relative',
         width: '100%'
       }, this.props.style),
@@ -412,7 +413,6 @@ const DateRangePicker = React.createClass({
         cursor: 'pointer',
         display: 'flex',
         justifyContent: 'space-between',
-        padding: '10px 15px',
         position: 'relative'
       },
       selectedDateIcon: {
