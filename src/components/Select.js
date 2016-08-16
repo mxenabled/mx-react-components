@@ -7,8 +7,6 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent);
-
 const Select = React.createClass({
   propTypes: {
     color: React.PropTypes.string,
@@ -17,6 +15,7 @@ const Select = React.createClass({
     options: React.PropTypes.array,
     optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
+    optionTextStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     placeholderText: React.PropTypes.string,
     scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     selected: React.PropTypes.object,
@@ -64,11 +63,9 @@ const Select = React.createClass({
   },
 
   _handleClick () {
-    if (!isMobile) {
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    }
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   },
 
   _handleOptionClick (option) {
@@ -245,20 +242,6 @@ const Select = React.createClass({
           </div>
           {this.props.options.length || this.props.children ? this._renderOptions() : null}
         </div>
-
-        {isMobile ? (
-          <select
-            className='mx-select-default'
-            onChange={this._handleSelectChange}
-            ref='defaultSelect'
-            style={styles.select}
-            value={selected.value}
-          >
-            {this.props.options.map(option => {
-              return (<option key={option.displayValue + option.value} value={option.value}>{option.displayValue}</option>);
-            })}
-          </select>
-        ) : null }
       </div>
     );
   },
@@ -330,9 +313,10 @@ const Select = React.createClass({
       optionIcon: {
         marginRight: 5
       },
-      optionText: {
-        flex: '1 0 0%'
-      },
+      optionText: Object.assign({},
+        {
+          flex: '1 0 0%'
+        }, this.props.optionTextStyle),
       scrim: {
         position: 'fixed',
         zIndex: 9,
