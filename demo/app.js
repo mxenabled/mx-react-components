@@ -356,6 +356,18 @@ const Demo = React.createClass({
     });
   },
 
+  _handleShowSmallDrawer () {
+    this.setState({
+      showSmallDrawer: true
+    });
+  },
+
+  _handleHideSmallDrawer () {
+    this.setState({
+      showSmallDrawer: false
+    });
+  },
+
   _handleSpinnerIconOnlyClick () {
     this.setState({
       spinnerIconOnlyIsActive: !this.state.spinnerIconOnlyIsActive
@@ -535,6 +547,18 @@ const Demo = React.createClass({
               title='This is the drawer component'
             >
               <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
+              <Button onClick={this._handleShowSmallDrawer}>
+                Toggle Small Drawer
+              </Button>
+              {this.state.showSmallDrawer ? (
+                <Drawer
+                  breakPoints={{ large: 750, medium: 500, small: 320 }}
+                  maxWidth={480}
+                  onClose={this._handleHideSmallDrawer}
+                  showScrim={false}
+                  title='Small Drawer'
+                />
+              ) : null}
             </Drawer>
           </div>
         ) : null}
