@@ -50,15 +50,13 @@ const Drawer = React.createClass({
       return this.props.animateLeftDistance + '%';
     }
 
-    const greaterThan1200ComponentWidth = 960;
-    const maxResolutionBreakPoint = 1200;
-    const minResoultionBreakPoint = 750;
+    const maxDrawerWidth = 960;
     const windowWidth = window.innerWidth;
 
-    if (windowWidth >= maxResolutionBreakPoint) {
+    if (windowWidth >= StyleConstants.BreakPoints.large) {
       //Resolution - 960 from the left
-      return windowWidth - greaterThan1200ComponentWidth;
-    } else if (windowWidth <= minResoultionBreakPoint) {
+      return windowWidth - maxDrawerWidth;
+    } else if (windowWidth <= StyleConstants.BreakPoints.medium) {
       //All the way over to the left
       return 0;
     } else {
