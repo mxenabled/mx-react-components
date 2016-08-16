@@ -67,7 +67,12 @@ const Drawer = React.createClass({
     }
   },
 
-  _handleCloseClick () {
+  /**
+   * Animate the Drawer closed and then call the onClose callback.
+   *
+   * @returns {Promise} that is resolved when the animation finishes
+   */
+  close () {
     this._animateComponent({ left: '100%' })
     .then(() => {
       this.props.onClose();
@@ -113,13 +118,13 @@ const Drawer = React.createClass({
 
     return (
       <div style={styles.componentWrapper}>
-        <div onClick={this._handleCloseClick} style={styles.scrim} />
+        <div onClick={this.close} style={styles.scrim} />
         <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
           <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
             <span style={styles.backArrow}>
               <Button
                 icon='arrow-left'
-                onClick={this._handleCloseClick}
+                onClick={this.close}
                 primaryColor={this.props.buttonPrimaryColor}
                 type={'base'}
               />
