@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.4.2</h3>
+        <ul>
+          <li>Drawer.close needs to return a Promise (<a href='https://github.com/mxenabled/mx-react-components/pull/412'>#412</a>)</li>
+        </ul>
+
         <h3>4.4.0</h3>
         <ul>
           <li>Allow for different Drawer sizes (<a href='https://github.com/mxenabled/mx-react-components/pull/409'>#409</a>)</li>
