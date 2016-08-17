@@ -2,6 +2,7 @@ const _isNumber = require('lodash/isNumber');
 const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
+const _throttle = require('lodash/throttle');
 
 const Button = require('../components/Button');
 
@@ -49,8 +50,17 @@ const Drawer = React.createClass({
     };
   },
 
+  componentWillMount () {
+    this._resizeThrottled = _throttle(this._resize, 100);
+  },
+
   componentDidMount () {
     this._animateComponent({ left: this._getAnimationDistance() });
+    window.addEventListener('resize', this._resizeThrottled);
+  },
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this._resizeThrottled);
   },
 
   _getAnimationDistance () {
@@ -81,14 +91,18 @@ const Drawer = React.createClass({
     });
   },
 
-  _animateComponent (transition) {
+  _animateComponent (transition, extraOptions) {
     const el = this._component;
-    const options = {
+    const options = Object.assign({
       duration: this.props.duration,
       easing: this.props.easing
-    };
+    }, extraOptions);
 
     return Velocity(el, transition, options);
+  },
+
+  _resize () {
+    this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
   },
 
   _renderNav () {
