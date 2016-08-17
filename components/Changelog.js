@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.4.0</h3>
+        <ul>
+          <li>Allow for different Drawer sizes (<a href='https://github.com/mxenabled/mx-react-components/pull/409'>#409</a>)</li>
+          <li>Reposition the Drawer when the window is resized (<a href='https://github.com/mxenabled/mx-react-components/pull/408'>#408</a>)</li>
+          <li>Make the close fn public for closing the Drawer externally (<a href='https://github.com/mxenabled/mx-react-components/pull/405'>#405</a>)</li>
+        </ul>
+
         <h3>4.3.0</h3>
         <ul>
           <li>Moves padding to parent so it can be overwritten in date range picker. (<a href='https://github.com/mxenabled/mx-react-components/pull/402'>#402</a>)</li>
