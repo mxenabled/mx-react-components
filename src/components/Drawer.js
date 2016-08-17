@@ -90,10 +90,10 @@ const Drawer = React.createClass({
    * @returns {Promise} that is resolved when the animation finishes
    */
   close () {
-    this._animateComponent({ left: '100%' })
-    .then(() => {
-      this.props.onClose();
-    });
+    return this._animateComponent({ left: '100%' })
+      .then(() => {
+        this.props.onClose();
+      });
   },
 
   _animateComponent (transition, extraOptions) {
