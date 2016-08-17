@@ -349,6 +349,10 @@ const Demo = React.createClass({
     });
   },
 
+  _handleCloseDrawerClick () {
+    this.refs.drawer.close();
+  },
+
   _onHideDrawer () {
     this.setState({
       showDrawer: false,
@@ -544,21 +548,33 @@ const Demo = React.createClass({
               headerStyle={{ backgroundColor: '#fff' }}
               navConfig={navConfig}
               onClose={this._onHideDrawer}
+              ref='drawer'
               title='This is the drawer component'
             >
-              <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>Insert Custom Content Here</div>
-              <Button onClick={this._handleShowSmallDrawer}>
-                Toggle Small Drawer
-              </Button>
-              {this.state.showSmallDrawer ? (
-                <Drawer
-                  breakPoints={{ large: 750, medium: 500, small: 320 }}
-                  maxWidth={480}
-                  onClose={this._handleHideSmallDrawer}
-                  showScrim={false}
-                  title='Small Drawer'
-                />
-              ) : null}
+              <p style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                Insert Custom Content Here
+              </p>
+
+              <p style={{ padding: 10 }}>
+                <Button onClick={this._handleCloseDrawerClick}>
+                  Close Drawer
+                </Button>
+              </p>
+
+              <p style={{ padding: 10 }}>
+                <Button onClick={this._handleShowSmallDrawer}>
+                  Toggle Small Drawer
+                </Button>
+                {this.state.showSmallDrawer ? (
+                  <Drawer
+                    breakPoints={{ large: 750, medium: 500, small: 320 }}
+                    maxWidth={480}
+                    onClose={this._handleHideSmallDrawer}
+                    showScrim={false}
+                    title='Small Drawer'
+                  />
+                ) : null}
+              </p>
             </Drawer>
           </div>
         ) : null}
