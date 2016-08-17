@@ -130,6 +130,14 @@ const StylesDocs = React.createClass({
           `}
         </Markdown>
 
+        <h5>BreakPoints</h5>
+        <Markdown lang='js'>
+          {`
+            Styles.BreakPoints.large: 1200,
+            Styles.BreakPoints.medium: 750,
+            Styles.BreakPoints.small: 320
+          `}
+        </Markdown>
 
         <h5>Adjust Color</h5>
         <p>Takes a HEX color and adjust amount and returns a HEX value of the new color. Negative numbers darken whereas positive numbers lighten the color.</p>
@@ -146,6 +154,14 @@ const StylesDocs = React.createClass({
         <Markdown lang='js'>
           {`
             color: Styles.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)
+          `}
+        </Markdown>
+
+        <h5>Get Window Size</h5>
+        <p>Returns the <code style={{ display: 'inline', padding: 3 }}>Styles.BreakPoints</code> key for the current window width.</p>
+        <Markdown lang='js'>
+          {`
+            Styles.getWindowSize() // e.g. returns 'large'
           `}
         </Markdown>
 
