@@ -2,6 +2,7 @@ const _isNumber = require('lodash/isNumber');
 const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
+const _throttle = require('lodash/throttle');
 
 const Button = require('../components/Button');
 
@@ -10,6 +11,11 @@ const StyleConstants = require('../constants/Style');
 const Drawer = React.createClass({
   propTypes: {
     animateLeftDistance: React.PropTypes.number,
+    breakPoints: React.PropTypes.shape({
+      large: React.PropTypes.number,
+      medium: React.PropTypes.number,
+      small: React.PropTypes.number
+    }),
     buttonPrimaryColor: React.PropTypes.string,
     contentStyle: React.PropTypes.oneOfType([
       React.PropTypes.array,
@@ -21,6 +27,7 @@ const Drawer = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
+    maxWidth: React.PropTypes.number,
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
       onNextClick: React.PropTypes.func.isRequired,
@@ -34,15 +41,26 @@ const Drawer = React.createClass({
   getDefaultProps () {
     return {
       buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
+      breakPoints: StyleConstants.BreakPoints,
       duration: 500,
       easing: [0.28, 0.14, 0.34, 1.04],
+      maxWidth: 960,
       showScrim: true,
       title: ''
     };
   },
 
+  componentWillMount () {
+    this._resizeThrottled = _throttle(this._resize, 100);
+  },
+
   componentDidMount () {
     this._animateComponent({ left: this._getAnimationDistance() });
+    window.addEventListener('resize', this._resizeThrottled);
+  },
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this._resizeThrottled);
   },
 
   _getAnimationDistance () {
@@ -50,20 +68,19 @@ const Drawer = React.createClass({
       return this.props.animateLeftDistance + '%';
     }
 
-    const greaterThan1200ComponentWidth = 960;
-    const maxResolutionBreakPoint = 1200;
-    const minResoultionBreakPoint = 750;
     const windowWidth = window.innerWidth;
 
-    if (windowWidth >= maxResolutionBreakPoint) {
-      //Resolution - 960 from the left
-      return windowWidth - greaterThan1200ComponentWidth;
-    } else if (windowWidth <= minResoultionBreakPoint) {
+    if (windowWidth >= this.props.breakPoints.large) {
+      //Resolution - maxWidth
+      return windowWidth - this.props.maxWidth;
+    } else if (windowWidth <= this.props.breakPoints.medium) {
       //All the way over to the left
       return 0;
     } else {
       //20% from the left
-      return '20%';
+      const newLeft = windowWidth * 0.2;
+
+      return Math.max(newLeft, windowWidth - this.props.maxWidth);
     }
   },
 
@@ -79,14 +96,18 @@ const Drawer = React.createClass({
     });
   },
 
-  _animateComponent (transition) {
+  _animateComponent (transition, extraOptions) {
     const el = this._component;
-    const options = {
+    const options = Object.assign({
       duration: this.props.duration,
       easing: this.props.easing
-    };
+    }, extraOptions);
 
     return Velocity(el, transition, options);
+  },
+
+  _resize () {
+    this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
   },
 
   _renderNav () {
@@ -157,11 +178,11 @@ const Drawer = React.createClass({
         backgroundColor: StyleConstants.Colors.PORCELAIN,
         boxShadow: StyleConstants.ShadowHigh,
 
-        '@media (max-width: 750px)': {
+        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
           width: '100%'
         },
-        '@media (min-width: 1200px)': {
-          width: 960
+        [`@media (min-width: ${this.props.breakPoints.large}px)`]: {
+          width: this.props.maxWidth
         }
       },
       componentWrapper: {
@@ -194,7 +215,7 @@ const Drawer = React.createClass({
         textAlign: 'left',
         width: '25%',
 
-        '@media (max-width: 750px)': {
+        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
           paddingLeft: 10
         }
       },
