@@ -393,6 +393,10 @@ module.exports = {
       displayValue: 'Segments'
     },
     {
+      value: 'spending',
+      displayValue: 'Spending'
+    },
+    {
       value: 'spinner',
       displayValue: 'Spinner'
     },
