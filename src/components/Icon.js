@@ -524,7 +524,7 @@ const Icon = React.createClass({
             l196.1,151.7c2.6,2,5.7,3,8.8,3c3.2,0,6.5-1.1,9.1-3.3L457,147.3V376C457,380.2,453.5,383.8,449.4,383.8z' />
         );
       case 'export':
-        console.warn('WARNING: The 'export' icon has been moved to 'import' and will be removed in a future release.');
+        console.warn('WARNING: The "export" icon has been moved to "import" and will be removed in a future release.');
         return (
           <g>
             <path d='M149.6,223.3H242v92.5c0,7.7,6.2,14,14,14s14-6.2,14-14v-92.5h92.5c7.7,0,14-6.2,14-14s-6.2-14-14-14H270
