@@ -159,6 +159,7 @@ const StylesDocs = React.createClass({
 
         <h5>Get Window Size</h5>
         <p>Returns the <code style={{ display: 'inline', padding: 3 }}>Styles.BreakPoints</code> key for the current window width.</p>
+        <p>Potential window sizes: large, medium, small, and xsmall (less than 320) </p>
         <Markdown lang='js'>
           {`
             Styles.getWindowSize() // e.g. returns 'large'
