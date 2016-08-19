@@ -5,6 +5,10 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>4.4.3</h3>
+        <ul>
+          <li>Added isRelative prop to DateRangePicker to allow for alterantive positioning in mobile. (<a href='https://github.com/mxenabled/mx-react-components/pull/406'>#406</a>)</li>
+        </ul>
 
         <h3>4.4.2</h3>
         <ul>
