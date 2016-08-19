@@ -19,6 +19,7 @@ const DateRangePicker = React.createClass({
       startDate: React.PropTypes.number
     })),
     format: React.PropTypes.string,
+    isRelative: React.PropTypes.bool,
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
     onDateSelect: React.PropTypes.func,
@@ -66,6 +67,7 @@ const DateRangePicker = React.createClass({
         }
       ],
       format: 'MMM D, YYYY',
+      isRelative: true,
       locale: 'en',
       onDateSelect () {},
       placeholderText: 'Select A Date Range',
@@ -403,7 +405,7 @@ const DateRangePicker = React.createClass({
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         padding: '10px 15px',
-        position: 'relative',
+        position: this.props.isRelative ? 'relative' : 'static',
         width: '100%'
       }, this.props.style),
 
@@ -413,7 +415,7 @@ const DateRangePicker = React.createClass({
         cursor: 'pointer',
         display: 'flex',
         justifyContent: 'space-between',
-        position: 'relative'
+        position: this.props.isRelative ? 'relative' : 'static'
       },
       selectedDateIcon: {
         fill: this.props.primaryColor,
@@ -439,7 +441,7 @@ const DateRangePicker = React.createClass({
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
         position: 'absolute',
-        left: 'auto',
+        left: this.props.isRelative ? 0 : 'auto',
         right: isLargeOrMediumWindowSize ? 0 : 'auto',
         zIndex: 10
       },
