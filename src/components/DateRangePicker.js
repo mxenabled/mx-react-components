@@ -441,7 +441,7 @@ const DateRangePicker = React.createClass({
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
         position: 'absolute',
-        left: this.props.isRelative ? 0 : 'auto',
+        left: this.props.isRelative ? 'auto' : 0,
         right: isLargeOrMediumWindowSize ? 0 : 'auto',
         zIndex: 10
       },
