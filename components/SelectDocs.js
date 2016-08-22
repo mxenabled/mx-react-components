@@ -80,8 +80,8 @@ const SelectDocs = React.createClass({
         <h5>optionsStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the options wrapper element.</p>
 
-        <h5>optionStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the css styles of each option element.</p>
+        <h5>optionTextStyle <label>Object</label></h5>
+        <p>A style object that modifies the css style of the selected option.</p>
 
         <h5>placeholderText <label>String</label></h5>
         <p>A text to be displayed when there is no value selected.</p>
