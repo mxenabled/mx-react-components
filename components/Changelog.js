@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.4.35</h3>
+        <ul>
+          <li>Added spending to the Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/414'>#414</a>)</li>
+        </ul>
+
         <h3>4.4.34</h3>
         <ul>
           <li>Allow DisplayInput to be "focused" programmatically (<a href='https://github.com/mxenabled/mx-react-components/pull/417'>#417</a>)</li>
