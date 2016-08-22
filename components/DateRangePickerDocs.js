@@ -61,6 +61,10 @@ const DateRangePickerDocs = React.createClass({
         <p>Default: 'en'</p>
         <p>This is used to format the dates, day names, month names, etc based on the locale.</p>
 
+        <h5>isRelative <label>boolean</label></h5>
+        <p>Default: true</p>
+        <p>Determines if the selected date and options are positioned relative or static.</p>
+
         <h5>minimumDate <label>Number (unix timestamp)</label></h5>
         <p>If set, the user will not be able to select a date prior to this date.</p>
 
