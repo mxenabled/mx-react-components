@@ -6,6 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.4.34</h3>
+        <ul>
+          <li>Allow DisplayInput to be "focused" programmatically (<a href='https://github.com/mxenabled/mx-react-components/pull/417'>#417</a>)</li>
+        </ul>
+
         <h3>4.4.33</h3>
         <ul>
           <li>Updates to React 15.3.1 - <a href='https://github.com/facebook/react/releases/tag/v15.3.1'>React 15.3.1 details</a> (<a href='https://github.com/mxenabled/mx-react-components/pull/418'>#418</a>)</li>
