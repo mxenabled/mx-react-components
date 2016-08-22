@@ -8,7 +8,7 @@ const Changelog = React.createClass({
 
         <h3>4.4.33</h3>
         <ul>
-          <li>Updates to React 15.3.1 - https://github.com/facebook/react/releases/tag/v15.3.1 (<a href='https://github.com/mxenabled/mx-react-components/pull/418'>#418</a>)</li>
+          <li>Updates to React 15.3.1 - <a href='https://github.com/facebook/react/releases/tag/v15.3.1'>React 15.3.1 details</a> (<a href='https://github.com/mxenabled/mx-react-components/pull/418'>#418</a>)</li>
         </ul>
 
         <h3>4.4.31</h3>
