@@ -10,6 +10,7 @@ const Row = require('../components/grid/Row');
 const DisplayInput = React.createClass({
   propTypes: {
     hint: React.PropTypes.string,
+    isFocused: React.PropTypes.bool,
     label: React.PropTypes.string,
     labelStyle: React.PropTypes.object,
     placeholder: React.PropTypes.string,
@@ -24,6 +25,7 @@ const DisplayInput = React.createClass({
 
   getDefaultProps () {
     return {
+      isFocused: false,
       primaryColor: StyleConstants.Colors.PRIMARY,
       valid: true
     };
@@ -52,7 +54,7 @@ const DisplayInput = React.createClass({
 
     return (
       <Container>
-        <div style={styles.wrapper}>
+        <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
@@ -107,6 +109,11 @@ const DisplayInput = React.createClass({
 
   styles () {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const wrapperFocus = {
+      borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+      boxShadow: 'none',
+      outline: 'none'
+    };
 
     return {
       error: {
@@ -180,12 +187,10 @@ const DisplayInput = React.createClass({
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
 
-        ':focus': {
-          borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
-          boxShadow: 'none',
-          outline: 'none'
-        }
-      }, this.props.style)
+        ':focus': wrapperFocus
+      }, this.props.style),
+
+      wrapperFocus
     };
   }
 });
