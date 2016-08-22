@@ -6,9 +6,29 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>4.4.33</h3>
+        <ul>
+          <li>Updates to React 15.3.1 - <a href='https://github.com/facebook/react/releases/tag/v15.3.1'>React 15.3.1 details</a> (<a href='https://github.com/mxenabled/mx-react-components/pull/418'>#418</a>)</li>
+        </ul>
+
+        <h3>4.4.31</h3>
+        <ul>
+          <li>DateRangePicker - Fixes isRelative prop usage (<a href='https://github.com/mxenabled/mx-react-components/pull/416'>#416</a>)</li>
+        </ul>
+
+        <h3>4.4.3</h3>
+        <ul>
+          <li>DateRangePicker - adds new prop isRelative (<a href='https://github.com/mxenabled/mx-react-components/pull/406'>#406</a>)</li>
+        </ul>
+
         <h3>4.4.2</h3>
         <ul>
           <li>Drawer.close needs to return a Promise (<a href='https://github.com/mxenabled/mx-react-components/pull/412'>#412</a>)</li>
+        </ul>
+
+        <h3>4.4.1</h3>
+        <ul>
+          <li>Select Component - Strips out Native select element and adds new optionTextStyle prop (<a href='https://github.com/mxenabled/mx-react-components/pull/407'>#407</a>)</li>
         </ul>
 
         <h3>4.4.0</h3>
