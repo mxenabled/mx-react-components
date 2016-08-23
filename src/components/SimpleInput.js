@@ -7,6 +7,7 @@ const StyleConstants = require('../constants/Style');
 const Input = React.createClass({
   propTypes: {
     baseColor: React.PropTypes.string,
+    focusOnLoad: React.PropTypes.bool,
     icon: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     style: React.PropTypes.oneOfType([
@@ -21,6 +22,7 @@ const Input = React.createClass({
   getDefaultProps () {
     return {
       baseColor: StyleConstants.Colors.PRIMARY,
+      focusOnLoad: false,
       type: 'text',
       valid: true
     };
@@ -35,6 +37,10 @@ const Input = React.createClass({
   componentDidMount () {
     if (this.props.style) {
       console.warn('The style prop is deprecated and will be removed in a future release. Please used styles.');
+    }
+
+    if (this.props.focusOnLoad) {
+      this.refs.input.focus();
     }
   },
 
