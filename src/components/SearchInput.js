@@ -5,6 +5,7 @@ const Input = require('./SimpleInput');
 const SearchInput = React.createClass({
   propTypes: {
     baseColor: React.PropTypes.string,
+    focusOnLoad: React.PropTypes.bool,
     onBlur: React.PropTypes.func,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
@@ -27,6 +28,7 @@ const SearchInput = React.createClass({
       <div style={Object.assign({}, styles.component, this.props.style)}>
         <Input
           baseColor={this.props.baseColor}
+          focusOnLoad={this.props.focusOnLoad}
           icon='search'
           onBlur={this.props.onBlur}
           onChange={this.props.onChange}

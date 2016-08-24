@@ -1015,7 +1015,7 @@ const Demo = React.createClass({
         />
 
         <br /><br />
-        <SearchInput />
+        <SearchInput focusOnLoad={true} />
 
         <br /><br />
         <DisplayInput
