@@ -5,7 +5,7 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
-        <h3><4.4.37<h3>
+        <h3>4.4.37<h3>
         <ul>
           <li>
             Added a prop that allows users to focus their cursor in the text field on load in the SimpleInput and SearchInput components (<a href='https://github.com/mxenabled/mx-react-components/pull/422'>#422</a>)
