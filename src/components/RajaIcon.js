@@ -3,12 +3,14 @@ const Radium = require('radium');
 
 const RajaIcon = React.createClass({
   propTypes: {
+    elementProps: React.PropTypes.object,
     size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     type: React.PropTypes.string
   },
 
   getDefaultProps () {
     return {
+      elementProps: {},
       size: 24,
       type: 'b'
     };
@@ -646,6 +648,7 @@ const RajaIcon = React.createClass({
   },
 
   render () {
+    const { elementProps } = this.props;
     const styles = {
       fill: this.props.style.color,
       width: this.props.size,
@@ -656,7 +659,7 @@ const RajaIcon = React.createClass({
 
     return (
       <svg
-        {...this.props}
+        {...elementProps}
         fit={true}
         preserveAspectRatio='xMidYMid meet'
         style={[styles, this.props.style]}
