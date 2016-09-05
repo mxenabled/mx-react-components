@@ -2,6 +2,7 @@ const React = require('react');
 
 const Icon = React.createClass({
   propTypes: {
+    elementProps: React.PropTypes.object,
     size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     style: React.PropTypes.object,
     type: React.PropTypes.string
@@ -9,6 +10,7 @@ const Icon = React.createClass({
 
   getDefaultProps () {
     return {
+      elementProps: {},
       size: 24,
       type: 'accounts'
     };
@@ -1360,11 +1362,12 @@ const Icon = React.createClass({
   },
 
   render () {
+    const { elementProps } = this.props;
     const styles = this.styles();
 
     return (
       <svg
-        {...this.props}
+        {...elementProps}
         className='mx-icon'
         preserveAspectRatio='xMidYMid meet'
         style={styles.component}
