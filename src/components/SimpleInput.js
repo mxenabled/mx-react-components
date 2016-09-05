@@ -7,6 +7,7 @@ const StyleConstants = require('../constants/Style');
 const Input = React.createClass({
   propTypes: {
     baseColor: React.PropTypes.string,
+    elementProps: React.PropTypes.object,
     focusOnLoad: React.PropTypes.bool,
     icon: React.PropTypes.string,
     placeholder: React.PropTypes.string,
@@ -22,6 +23,7 @@ const Input = React.createClass({
   getDefaultProps () {
     return {
       baseColor: StyleConstants.Colors.PRIMARY,
+      elementProps: {},
       focusOnLoad: false,
       type: 'text',
       valid: true
@@ -61,6 +63,7 @@ const Input = React.createClass({
   },
 
   render () {
+    const { elementProps } = this.props;
     const styles = this.styles();
 
     return (
@@ -74,7 +77,7 @@ const Input = React.createClass({
           <Icon size={20} style={styles.icon} type={this.props.icon} />
         ) : null}
         <input
-          {...this.props}
+          {...elementProps}
           ref='input'
           style={styles.input}
           type={this.props.type}
