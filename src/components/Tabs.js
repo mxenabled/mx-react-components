@@ -89,7 +89,7 @@ const Tabs = React.createClass({
         {selectedTabName}
         <Icon
           size={20}
-          style={{ color: this.state.brandColor }}
+          style={{ color: this.props.brandColor }}
           type={!this.state.showMenu ? 'caret-down' : 'caret-up' }
         />
         {this.state.showMenu ? (
@@ -153,7 +153,7 @@ const Tabs = React.createClass({
         cursor: 'pointer',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        letterSpacing: '.75',
+        letterSpacing: 0.75,
         marginRight: 30,
         marginTop: 30,
         padding: 5,
@@ -170,7 +170,7 @@ const Tabs = React.createClass({
         lineHeight: '20px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        letterSpacing: '.75',
+        letterSpacing: 0.75,
         textTransform: 'uppercase'
       },
       menu: {
@@ -179,7 +179,7 @@ const Tabs = React.createClass({
         cursor: 'pointer',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        letterSpacing: '.75',
+        letterSpacing: 0.75,
         position: 'absolute',
         textTransform: 'uppercase'
       },

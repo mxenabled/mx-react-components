@@ -41,13 +41,15 @@ const Input = React.createClass({
       console.warn('The style prop is deprecated and will be removed in a future release. Please used styles.');
     }
 
-    if (this.props.focusOnLoad) {
-      this.refs.input.focus();
+    if (this.props.focusOnLoad && this.input) {
+      this.input.focus();
     }
   },
 
   _onFocus () {
-    this.refs.input.focus();
+    if (this.input) {
+      this.input.focus();
+    }
 
     this.setState({
       focus: true
@@ -55,7 +57,9 @@ const Input = React.createClass({
   },
 
   _onBlur () {
-    this.refs.input.blur();
+    if (this.input) {
+      this.input.blur();
+    }
 
     this.setState({
       focus: false
@@ -78,7 +82,9 @@ const Input = React.createClass({
         ) : null}
         <input
           {...elementProps}
-          ref='input'
+          ref={(ref) => {
+            this.input = ref;
+          }}
           style={styles.input}
           type={this.props.type}
         />
