@@ -9,6 +9,7 @@ const Row = require('../components/grid/Row');
 
 const DisplayInput = React.createClass({
   propTypes: {
+    elementProps: React.PropTypes.object,
     hint: React.PropTypes.string,
     isFocused: React.PropTypes.bool,
     label: React.PropTypes.string,
@@ -25,6 +26,7 @@ const DisplayInput = React.createClass({
 
   getDefaultProps () {
     return {
+      elementProps: {},
       isFocused: false,
       primaryColor: StyleConstants.Colors.PRIMARY,
       valid: true
@@ -38,6 +40,9 @@ const DisplayInput = React.createClass({
   },
 
   render () {
+    // Input properties
+    const { elementProps } = this.props;
+
     // Methods
     const hasChildren = !!this.props.children;
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
@@ -74,7 +79,7 @@ const DisplayInput = React.createClass({
               ) : (
                 <div style={styles.inputWrapper}>
                   <input
-                    {...this.props}
+                    {...elementProps}
                     key='input'
                     label={this.props.label}
                     style={styles.input}

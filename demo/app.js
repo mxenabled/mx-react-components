@@ -1019,12 +1019,14 @@ const Demo = React.createClass({
 
         <br /><br />
         <DisplayInput
+          elementProps={{
+            onBlur: this._handleInputStatusMessage,
+            onFocus: this._handleInputFocus,
+            onMouseOut: this._handleInputHideHint,
+            onMouseOver: this._handleInputShowHint
+          }}
           hint='Click to Edit'
           label='Display Input'
-          onBlur={this._handleInputStatusMessage}
-          onFocus={this._handleInputFocus}
-          onMouseOut={this._handleInputHideHint}
-          onMouseOver={this._handleInputShowHint}
           placeholder='Type something'
           showHint={this.state.showHint}
           status={this.state.statusMessage}
