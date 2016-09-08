@@ -551,17 +551,17 @@ const Demo = React.createClass({
               ref='drawer'
               title='This is the drawer component'
             >
-              <p style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>
+              <div style={{ padding: 20, fontFamily: 'Helvetica, Arial, sans-serif' }}>
                 Insert Custom Content Here
-              </p>
+              </div>
 
-              <p style={{ padding: 10 }}>
+              <div style={{ padding: 10 }}>
                 <Button onClick={this._handleCloseDrawerClick}>
                   Close Drawer
                 </Button>
-              </p>
+              </div>
 
-              <p style={{ padding: 10 }}>
+              <div style={{ padding: 10 }}>
                 <Button onClick={this._handleShowSmallDrawer}>
                   Toggle Small Drawer
                 </Button>
@@ -574,7 +574,7 @@ const Demo = React.createClass({
                     title='Small Drawer'
                   />
                 ) : null}
-              </p>
+              </div>
             </Drawer>
           </div>
         ) : null}
