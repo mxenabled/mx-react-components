@@ -49,7 +49,13 @@ const Drawer = React.createClass({
   },
 
   componentDidMount () {
-    this._animateComponent({ left: this._getAnimationDistance() });
+    // Aphrodite Buffers injecting styles so on componentDidMount
+    // styles may not be ready.  setTimeout is their suggested
+    // solution. https://github.com/Khan/aphrodite#style-injection-and-buffering
+    setTimeout(() => {
+      this._animateComponent({ left: this._getAnimationDistance() });
+    }, 0);
+
     window.addEventListener('resize', this._resizeThrottled);
   },
 
@@ -93,7 +99,6 @@ const Drawer = React.createClass({
   _animateComponent (transition, extraOptions) {
     const el = this._component;
     const options = Object.assign({
-      delay: 50,
       duration: this.props.duration,
       easing: this.props.easing
     }, extraOptions);
