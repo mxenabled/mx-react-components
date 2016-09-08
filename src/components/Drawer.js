@@ -1,5 +1,5 @@
 const _isNumber = require('lodash/isNumber');
-const Radium = require('radium');
+const { StyleSheet, css } = require('aphrodite/no-important');
 const React = require('react');
 const Velocity = require('velocity-animate');
 const _throttle = require('lodash/throttle');
@@ -17,16 +17,10 @@ const Drawer = React.createClass({
       small: React.PropTypes.number
     }),
     buttonPrimaryColor: React.PropTypes.string,
-    contentStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
+    contentStyle: React.PropTypes.object,
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
-    headerStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
+    headerStyle: React.PropTypes.object,
     maxWidth: React.PropTypes.number,
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
@@ -42,8 +36,10 @@ const Drawer = React.createClass({
     return {
       buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       breakPoints: StyleConstants.BreakPoints,
+      contentStyle: {},
       duration: 500,
       easing: [0.28, 0.14, 0.34, 1.04],
+      headerStyle: {},
       maxWidth: 960,
       showScrim: true,
       title: ''
@@ -99,6 +95,7 @@ const Drawer = React.createClass({
   _animateComponent (transition, extraOptions) {
     const el = this._component;
     const options = Object.assign({
+      delay: 50,
       duration: this.props.duration,
       easing: this.props.easing
     }, extraOptions);
@@ -111,17 +108,15 @@ const Drawer = React.createClass({
   },
 
   _renderNav () {
-    const styles = this.styles();
-
     return this.props.navConfig ? (
-      <nav style={styles.nav}>
+      <nav className={css(styles.nav)}>
         <Button
           icon='caret-left'
           onClick={this.props.navConfig.onPreviousClick}
           primaryColor={this.props.buttonPrimaryColor}
           type='base'
         />
-        <span style={styles.navLabel}>
+        <span className={css(styles.navLabel)}>
           {this.props.navConfig.label}
         </span>
         <Button
@@ -131,18 +126,37 @@ const Drawer = React.createClass({
           type='base'
         />
       </nav>
-    ) : <div style={styles.nav} />;
+    ) : <div className={css(styles.nav)} />;
   },
 
   render () {
-    const styles = this.styles();
+    const dynamicStyles = StyleSheet.create({
+      backArrow: {
+        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
+          paddingLeft: 10
+        }
+      },
+      component: Object.assign({}, {
+        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
+          width: '100%'
+        },
+        [`@media (min-width: ${this.props.breakPoints.large}px)`]: {
+          width: this.props.maxWidth
+        }
+      }, this.props.style),
+      content: this.props.contentStyle,
+      header: this.props.headerStyle,
+      scrim: {
+        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
+      }
+    });
 
     return (
-      <div style={styles.componentWrapper}>
-        <div onClick={this.close} style={styles.scrim} />
-        <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
-          <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
-            <span style={styles.backArrow}>
+      <div className={css(styles.componentWrapper)}>
+        <div className={css(styles.scrim, dynamicStyles.scrim)} onClick={this.close} />
+        <div className={css(styles.component, dynamicStyles.component)} ref={(ref) => (this._component = ref)}>
+          <header className={css(styles.header, dynamicStyles.header)}>
+            <span className={css(styles.backArrow, dynamicStyles.backArrow)}>
               <Button
                 icon='arrow-left'
                 onClick={this.close}
@@ -150,116 +164,103 @@ const Drawer = React.createClass({
                 type={'base'}
               />
             </span>
-            <span style={styles.title}>
+            <span className={css(styles.title)}>
               {this.props.title}
             </span>
             {this._renderNav()}
           </header>
-          <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+          <div className={css(styles.content, dynamicStyles.content)}>
             {this.props.children}
           </div>
         </div>
       </div>
     );
-  },
-
-  styles () {
-    return {
-      component: {
-        border: '1px solid ' + StyleConstants.Colors.FOG,
-        boxSizing: 'border-box',
-        zIndex: 1001,
-        top: 0,
-        bottom: 0,
-        left: '100%',
-        position: 'absolute',
-        width: '80%',
-        overflow: 'hidden',
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
-        boxShadow: StyleConstants.ShadowHigh,
-
-        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
-          width: '100%'
-        },
-        [`@media (min-width: ${this.props.breakPoints.large}px)`]: {
-          width: this.props.maxWidth
-        }
-      },
-      componentWrapper: {
-        bottom: 0,
-        left: 0,
-        position: 'fixed',
-        right: 0,
-        top: 0,
-        zIndex: 999
-      },
-      content: {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        height: '100%'
-      },
-      scrim: {
-        zIndex: 1000,
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        textAlign: 'center',
-        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
-      },
-      icons: {
-        color: StyleConstants.Colors.ASH
-      },
-      backArrow: {
-        paddingLeft: 20,
-        textAlign: 'left',
-        width: '25%',
-
-        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
-          paddingLeft: 10
-        }
-      },
-      header: {
-        alignItems: 'center',
-        backgroundColor: StyleConstants.Colors.WHITE,
-        borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.ASH,
-        display: 'flex',
-        fontFamily: StyleConstants.Fonts.REGULAR,
-        fontSize: StyleConstants.FontSizes.LARGE,
-        justifyContent: 'center',
-        padding: '7px 7px',
-        position: 'relative'
-      },
-      title: {
-        overflow: 'hidden',
-        textAlign: 'center',
-        textOverflow: 'ellipsis',
-        width: '50%',
-        whiteSpace: 'nowrap'
-      },
-      nav: {
-        paddingRight: 20,
-        textAlign: 'right',
-        width: '25%',
-        whiteSpace: 'nowrap',
-
-        '@media (max-width: 750px)': {
-          paddingRight: 10
-        }
-      },
-      navLabel: {
-        padding: '7px 14px',
-        position: 'relative',
-        bottom: 5,
-
-        '@media (max-width: 750px)': {
-          display: 'none',
-          padding: 0
-        }
-      }
-    };
   }
 });
 
-module.exports = Radium(Drawer);
+const styles = StyleSheet.create({
+  component: {
+    border: '1px solid ' + StyleConstants.Colors.FOG,
+    boxSizing: 'border-box',
+    zIndex: 1001,
+    top: 0,
+    bottom: 0,
+    left: '100%',
+    position: 'absolute',
+    width: '80%',
+    overflow: 'hidden',
+    backgroundColor: StyleConstants.Colors.PORCELAIN,
+    boxShadow: StyleConstants.ShadowHigh
+  },
+  componentWrapper: {
+    bottom: 0,
+    left: 0,
+    position: 'fixed',
+    right: 0,
+    top: 0,
+    zIndex: 999
+  },
+  content: {
+    backgroundColor: StyleConstants.Colors.WHITE,
+    height: '100%'
+  },
+  scrim: {
+    zIndex: 1000,
+    position: 'fixed',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    textAlign: 'center',
+    backgroundColor: StyleConstants.Colors.SCRIM
+  },
+  icons: {
+    color: StyleConstants.Colors.ASH
+  },
+  backArrow: {
+    paddingLeft: 20,
+    textAlign: 'left',
+    width: '25%'
+  },
+  header: {
+    alignItems: 'center',
+    backgroundColor: StyleConstants.Colors.WHITE,
+    borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
+    color: StyleConstants.Colors.ASH,
+    display: 'flex',
+    fontFamily: StyleConstants.Fonts.REGULAR,
+    fontSize: StyleConstants.FontSizes.LARGE,
+    justifyContent: 'center',
+    padding: '7px 7px',
+    position: 'relative'
+  },
+  title: {
+    overflow: 'hidden',
+    textAlign: 'center',
+    textOverflow: 'ellipsis',
+    width: '50%',
+    whiteSpace: 'nowrap'
+  },
+  nav: {
+    paddingRight: 20,
+    textAlign: 'right',
+    width: '25%',
+    whiteSpace: 'nowrap',
+
+    '@media (max-width: 750px)': {
+      paddingRight: 10
+    }
+  },
+  navLabel: {
+    padding: '7px 14px',
+    position: 'relative',
+    bottom: 5,
+
+    '@media (max-width: 750px)': {
+      display: 'none',
+      padding: 0
+    }
+  }
+});
+
+module.exports = Drawer;
