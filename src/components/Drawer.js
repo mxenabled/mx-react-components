@@ -36,10 +36,8 @@ const Drawer = React.createClass({
     return {
       buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       breakPoints: StyleConstants.BreakPoints,
-      contentStyle: {},
       duration: 500,
       easing: [0.28, 0.14, 0.34, 1.04],
-      headerStyle: {},
       maxWidth: 960,
       showScrim: true,
       title: ''
