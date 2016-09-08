@@ -108,6 +108,8 @@ const Drawer = React.createClass({
   },
 
   _renderNav () {
+    const styles = this.styles();
+
     return this.props.navConfig ? (
       <nav className={css(styles.nav)}>
         <Button
@@ -130,33 +132,14 @@ const Drawer = React.createClass({
   },
 
   render () {
-    const dynamicStyles = StyleSheet.create({
-      backArrow: {
-        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
-          paddingLeft: 10
-        }
-      },
-      component: Object.assign({}, {
-        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
-          width: '100%'
-        },
-        [`@media (min-width: ${this.props.breakPoints.large}px)`]: {
-          width: this.props.maxWidth
-        }
-      }, this.props.style),
-      content: this.props.contentStyle,
-      header: this.props.headerStyle,
-      scrim: {
-        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
-      }
-    });
+    const styles = this.styles();
 
     return (
       <div className={css(styles.componentWrapper)}>
-        <div className={css(styles.scrim, dynamicStyles.scrim)} onClick={this.close} />
-        <div className={css(styles.component, dynamicStyles.component)} ref={(ref) => (this._component = ref)}>
-          <header className={css(styles.header, dynamicStyles.header)}>
-            <span className={css(styles.backArrow, dynamicStyles.backArrow)}>
+        <div className={css(styles.scrim)} onClick={this.close} />
+        <div className={css(styles.component)} ref={(ref) => (this._component = ref)}>
+          <header className={css(styles.header)}>
+            <span className={css(styles.backArrow)}>
               <Button
                 icon='arrow-left'
                 onClick={this.close}
@@ -169,97 +152,110 @@ const Drawer = React.createClass({
             </span>
             {this._renderNav()}
           </header>
-          <div className={css(styles.content, dynamicStyles.content)}>
+          <div className={css(styles.content)}>
             {this.props.children}
           </div>
         </div>
       </div>
     );
-  }
-});
+  },
 
-const styles = StyleSheet.create({
-  component: {
-    border: '1px solid ' + StyleConstants.Colors.FOG,
-    boxSizing: 'border-box',
-    zIndex: 1001,
-    top: 0,
-    bottom: 0,
-    left: '100%',
-    position: 'absolute',
-    width: '80%',
-    overflow: 'hidden',
-    backgroundColor: StyleConstants.Colors.PORCELAIN,
-    boxShadow: StyleConstants.ShadowHigh
-  },
-  componentWrapper: {
-    bottom: 0,
-    left: 0,
-    position: 'fixed',
-    right: 0,
-    top: 0,
-    zIndex: 999
-  },
-  content: {
-    backgroundColor: StyleConstants.Colors.WHITE,
-    height: '100%'
-  },
-  scrim: {
-    zIndex: 1000,
-    position: 'fixed',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    textAlign: 'center',
-    backgroundColor: StyleConstants.Colors.SCRIM
-  },
-  icons: {
-    color: StyleConstants.Colors.ASH
-  },
-  backArrow: {
-    paddingLeft: 20,
-    textAlign: 'left',
-    width: '25%'
-  },
-  header: {
-    alignItems: 'center',
-    backgroundColor: StyleConstants.Colors.WHITE,
-    borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
-    color: StyleConstants.Colors.ASH,
-    display: 'flex',
-    fontFamily: StyleConstants.Fonts.REGULAR,
-    fontSize: StyleConstants.FontSizes.LARGE,
-    justifyContent: 'center',
-    padding: '7px 7px',
-    position: 'relative'
-  },
-  title: {
-    overflow: 'hidden',
-    textAlign: 'center',
-    textOverflow: 'ellipsis',
-    width: '50%',
-    whiteSpace: 'nowrap'
-  },
-  nav: {
-    paddingRight: 20,
-    textAlign: 'right',
-    width: '25%',
-    whiteSpace: 'nowrap',
+  styles () {
+    return StyleSheet.create({
+      component: Object.assign({}, {
+        border: '1px solid ' + StyleConstants.Colors.FOG,
+        boxSizing: 'border-box',
+        zIndex: 1001,
+        top: 0,
+        bottom: 0,
+        left: '100%',
+        position: 'absolute',
+        width: '80%',
+        overflow: 'hidden',
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        boxShadow: StyleConstants.ShadowHigh,
 
-    '@media (max-width: 750px)': {
-      paddingRight: 10
-    }
-  },
-  navLabel: {
-    padding: '7px 14px',
-    position: 'relative',
-    bottom: 5,
+        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
+          width: '100%'
+        },
+        [`@media (min-width: ${this.props.breakPoints.large}px)`]: {
+          width: this.props.maxWidth
+        }
+      }, this.props.style),
+      componentWrapper: {
+        bottom: 0,
+        left: 0,
+        position: 'fixed',
+        right: 0,
+        top: 0,
+        zIndex: 999
+      },
+      content: Object.assign({}, {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        height: '100%'
+      }, this.props.contentStyle),
+      scrim: {
+        zIndex: 1000,
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        textAlign: 'center',
+        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
+      },
+      icons: {
+        color: StyleConstants.Colors.ASH
+      },
+      backArrow: {
+        paddingLeft: 20,
+        textAlign: 'left',
+        width: '25%',
 
-    '@media (max-width: 750px)': {
-      display: 'none',
-      padding: 0
-    }
+        [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
+          paddingLeft: 10
+        }
+      },
+      header: Object.assign({}, {
+        alignItems: 'center',
+        backgroundColor: StyleConstants.Colors.WHITE,
+        borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.ASH,
+        display: 'flex',
+        fontFamily: StyleConstants.Fonts.REGULAR,
+        fontSize: StyleConstants.FontSizes.LARGE,
+        justifyContent: 'center',
+        padding: '7px 7px',
+        position: 'relative'
+      }, this.props.headerStyle),
+      title: {
+        overflow: 'hidden',
+        textAlign: 'center',
+        textOverflow: 'ellipsis',
+        width: '50%',
+        whiteSpace: 'nowrap'
+      },
+      nav: {
+        paddingRight: 20,
+        textAlign: 'right',
+        width: '25%',
+        whiteSpace: 'nowrap',
+
+        '@media (max-width: 750px)': {
+          paddingRight: 10
+        }
+      },
+      navLabel: {
+        padding: '7px 14px',
+        position: 'relative',
+        bottom: 5,
+
+        '@media (max-width: 750px)': {
+          display: 'none',
+          padding: 0
+        }
+      }
+    });
   }
 });
 
