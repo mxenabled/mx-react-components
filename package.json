@@ -5,7 +5,10 @@
   "main": "dist/Index.js",
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
-    "demo": "webpack demo/app.js demo/bundle.js --config demo/webpack.config.js -w & node demo/server.js",
+    "compiledocs": "cd docs rm -rf node_modules && npm install && NODE_ENV=production webpack --progress && git add -A && git commit -m 'docs webpack bundle $npm_package_version'",
+    "dev": "concurrently --kill-others 'npm run startdocs' 'npm run startwebpack'",
+    "startdocs": "npm install && open 'http://localhost:8080' && webpack-dev-server --content-base docs/",
+    "startwebpack": "cd docs && NODE_ENV=development webpack --watch",
     "test": "eslint src"
   },
   "repository": {
@@ -44,6 +47,7 @@
     "babel-plugin-transform-object-assign": "^6.5.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-react": "^6.0.0",
+    "concurrently": "^2.2.0",
     "eslint": "^2.10.0",
     "eslint-config-mx": "^1.2.7",
     "eslint-loader": "^1.0.0",

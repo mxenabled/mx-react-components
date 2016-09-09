@@ -1,0 +1,247 @@
+/* Eric Meyers Reset CSS v2.0 - http://cssreset.com */
+html;body;div;span;applet;object;iframe;h1;h2;h3;h4;h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+body, html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;;
+  font-size: 13px;
+  color: #2E323F;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #359BCF;
+}
+
+p {
+  line-height: 1.5em;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 0 10px;
+}
+
+ul, ol {
+  margin: 20px 0 20px 30px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5em;
+}
+ul li {
+  list-style-type: disc;
+  margin-bottom: 10px;
+}
+
+code {
+  background-color: #f5f5f5;
+  font-family: monospace;
+  padding: 15px;
+  display: block;
+  font-size: 12px;
+  line-height: 1.5em;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 0 0 15px;
+  line-height: 1.2em;
+}
+  h1 label {
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.3em;
+  }
+
+h2 {
+  font-size: 24px;
+  margin: 0 0 20px;
+  font-weight: 300;
+}
+
+h3 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 60px 0 20px 0;
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+  h5 label {
+    font-style: italic;
+    color: #999;
+    margin-left: 5px;
+    font-weight: 300;
+  }
+
+.button {
+  border-radius: 3px;
+  background: #359BCF;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .button {
+    width: auto;
+  }
+}
+
+
+.flex {
+  display: flex;
+}
+
+.container {
+  width: 86%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 0 160px;
+  width: 80%;
+  margin: 0 auto
+}
+
+@media screen and (min-width: 769px) {
+  .hero {
+    padding: 200px 0 260px;
+    width: 60%;
+  }
+}
+  .hero p {
+    font-size: 16px;
+    font-weight: 200;
+    margin-bottom: 40px;
+  }
+  .hero code {
+    display: inline-block;
+  }
+
+.features {
+  padding: 100px 0;
+  background-color: #359BCF;
+  color: #FFFFFF;
+  text-align: center;
+}
+  .features h1 {
+    margin-bottom: 50px;
+  }
+  .feature {
+    padding: 0 50px 50px;
+  }
+  @media screen and (min-width: 769px) {
+    .feature {
+      width: 25%;
+      padding: 0 50px;
+    }
+  }
+    .feature img {
+      max-width: 100%;
+      height: 60px;
+      width: auto;
+      margin-bottom: 30px;
+      opacity: 0.3;
+    }
+    .feature svg {
+      fill: #fff;
+      opacity: 0.3;
+      margin-bottom: 30px;
+    }
+
+.contribute {
+  text-align: center;
+  padding: 100px 0;
+}
+@media screen and (min-width: 769px) {
+  .contribute {
+    text-align: left;
+  }
+}
+  .contribute h1 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+.sideNav {
+  padding-bottom: 60px;
+}
+  .sideNav .defaultSelect {
+    display: block;
+  }
+  .sideNav .links {
+    display: none;
+  }
+  .sideNav h3 {
+    padding-right: 40px;
+    font-size: 14px;
+  }
+  .sideNav a {
+    display: block;
+    margin-bottom: 10px;
+    padding-right: 40px;
+    color: #999;
+  }
+    .sideNav a:hover {
+      color: #359BCF;
+    }
+    .sideNav a.active {
+      font-weight: 600;
+      color: #359BCF;
+      border-right: 2px solid #359BCF;
+    }
+
+@media screen and (min-width: 769px) {
+  .components {
+    display: flex;
+  }
+  .sideNav {
+    margin-right: 60px;
+    width: 20%;
+    border-right: 1px solid #e5e5e5;
+    text-align: right;
+    padding-bottom: 60px;
+  }
+    .sideNav .defaultSelect {
+      display: none;
+    }
+    .sideNav .links {
+      display: block;
+    }
+  .content {
+    width: 80%;
+    padding: 50px 0;
+  }
+}
+
+footer {
+  padding: 40px 0;
+  background-color: #333;
+  text-align: center;
+  color: rgba(255,255,255,0.2);
+}
