@@ -9,7 +9,7 @@
     "dev": "concurrently --kill-others 'npm run docs:server' 'npm run docs:webpack'",
     "docs:server": "npm install && open 'http://localhost:8080' && webpack-dev-server --content-base docs/",
     "docs:webpack": "cd docs && NODE_ENV=development webpack --watch",
-    "test": "eslint src",
+    "test": "eslint src"
   },
   "repository": {
     "type": "git",

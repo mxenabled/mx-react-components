@@ -57,12 +57,15 @@ const Home = React.createClass({
             <p>You may need to install some modules like babel and esw globally so you have access to their cli&#39;s.</p>
             <p><code>npm install</code></p>
 
-            <h3>Run the demo</h3>
-            <p>We've set up a demo page with all of the components to help test your changes. We've even included live reload to make your life a little easier.</p>
-            <p><code>npm run demo</code></p>
+            <h3>Run the dev server</h3>
+            <p>Running the development server allows you to test your changes in the docs. This includes changes to the docs themselves.</p>
+            <p><code>npm run dev</code></p>
 
             <h3>Make changes</h3>
             <p>You should only need to edit the files in the "src" directory.</p>
+
+            <h3>Update Documentation</h3>
+            <p>Update thes docs folder with any relevant changes included in your PR.</p>
 
             <h3>Run ESLint</h3>
             <p>Before you push up your code to a PR, make sure it passes our ESLint tests.</p>
