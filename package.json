@@ -5,8 +5,8 @@
   "main": "dist/Index.js",
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
-    "compile:docs": "cd docs rm -rf node_modules && npm install && NODE_ENV=production webpack --progress && git add -A && git commit -m $(node -p \"'Docs Version: ' + require('./package.json').version\")",
     "dev": "concurrently --kill-others 'npm run docs:server' 'npm run docs:webpack'",
+    "docs:release": "cd docs && rm -rf node_modules && npm install && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
     "docs:server": "npm install && open 'http://localhost:8080' && webpack-dev-server --content-base docs/",
     "docs:webpack": "cd docs && NODE_ENV=development webpack --watch",
     "test": "eslint src"
