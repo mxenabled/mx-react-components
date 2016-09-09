@@ -1,8 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var isProd = (process.env.NODE_ENV === 'production');
-
 module.exports = {
   entry: {
     app: './app.js'
@@ -40,7 +38,7 @@ module.exports = {
   resolve: {
     alias: {
       components: path.join(__dirname, 'components'),
-      'mx-react-components': isProd ? path.join(__dirname, '../dist') : path.join(__dirname, '../src')
+      'mx-react-components': path.join(__dirname, '../src')
     }
   }
 };
