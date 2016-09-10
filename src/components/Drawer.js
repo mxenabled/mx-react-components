@@ -1,5 +1,5 @@
 const _isNumber = require('lodash/isNumber');
-const Radium = require('radium');
+const { StyleSheet, css } = require('aphrodite/no-important');
 const React = require('react');
 const Velocity = require('velocity-animate');
 const _throttle = require('lodash/throttle');
@@ -17,16 +17,10 @@ const Drawer = React.createClass({
       small: React.PropTypes.number
     }),
     buttonPrimaryColor: React.PropTypes.string,
-    contentStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
+    contentStyle: React.PropTypes.object,
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
-    headerStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
+    headerStyle: React.PropTypes.object,
     maxWidth: React.PropTypes.number,
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
@@ -55,7 +49,13 @@ const Drawer = React.createClass({
   },
 
   componentDidMount () {
-    this._animateComponent({ left: this._getAnimationDistance() });
+    // Aphrodite Buffers injecting styles so on componentDidMount
+    // styles may not be ready.  setTimeout is their suggested
+    // solution. https://github.com/Khan/aphrodite#style-injection-and-buffering
+    setTimeout(() => {
+      this._animateComponent({ left: this._getAnimationDistance() });
+    }, 0);
+
     window.addEventListener('resize', this._resizeThrottled);
   },
 
@@ -114,14 +114,14 @@ const Drawer = React.createClass({
     const styles = this.styles();
 
     return this.props.navConfig ? (
-      <nav style={styles.nav}>
+      <nav className={css(styles.nav)}>
         <Button
           icon='caret-left'
           onClick={this.props.navConfig.onPreviousClick}
           primaryColor={this.props.buttonPrimaryColor}
           type='base'
         />
-        <span style={styles.navLabel}>
+        <span className={css(styles.navLabel)}>
           {this.props.navConfig.label}
         </span>
         <Button
@@ -131,18 +131,18 @@ const Drawer = React.createClass({
           type='base'
         />
       </nav>
-    ) : <div style={styles.nav} />;
+    ) : <div className={css(styles.nav)} />;
   },
 
   render () {
     const styles = this.styles();
 
     return (
-      <div style={styles.componentWrapper}>
-        <div onClick={this.close} style={styles.scrim} />
-        <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
-          <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
-            <span style={styles.backArrow}>
+      <div className={css(styles.componentWrapper)}>
+        <div className={css(styles.scrim)} onClick={this.close} />
+        <div className={css(styles.component)} ref={(ref) => (this._component = ref)}>
+          <header className={css(styles.header)}>
+            <span className={css(styles.backArrow)}>
               <Button
                 icon='arrow-left'
                 onClick={this.close}
@@ -150,12 +150,12 @@ const Drawer = React.createClass({
                 type={'base'}
               />
             </span>
-            <span style={styles.title}>
+            <span className={css(styles.title)}>
               {this.props.title}
             </span>
             {this._renderNav()}
           </header>
-          <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+          <div className={css(styles.content)}>
             {this.props.children}
           </div>
         </div>
@@ -164,8 +164,8 @@ const Drawer = React.createClass({
   },
 
   styles () {
-    return {
-      component: {
+    return StyleSheet.create({
+      component: Object.assign({}, {
         border: '1px solid ' + StyleConstants.Colors.FOG,
         boxSizing: 'border-box',
         zIndex: 1001,
@@ -184,7 +184,7 @@ const Drawer = React.createClass({
         [`@media (min-width: ${this.props.breakPoints.large}px)`]: {
           width: this.props.maxWidth
         }
-      },
+      }, this.props.style),
       componentWrapper: {
         bottom: 0,
         left: 0,
@@ -193,10 +193,10 @@ const Drawer = React.createClass({
         top: 0,
         zIndex: 999
       },
-      content: {
+      content: Object.assign({}, {
         backgroundColor: StyleConstants.Colors.WHITE,
         height: '100%'
-      },
+      }, this.props.contentStyle),
       scrim: {
         zIndex: 1000,
         position: 'fixed',
@@ -219,7 +219,7 @@ const Drawer = React.createClass({
           paddingLeft: 10
         }
       },
-      header: {
+      header: Object.assign({}, {
         alignItems: 'center',
         backgroundColor: StyleConstants.Colors.WHITE,
         borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
@@ -230,7 +230,7 @@ const Drawer = React.createClass({
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative'
-      },
+      }, this.props.headerStyle),
       title: {
         overflow: 'hidden',
         textAlign: 'center',
@@ -258,8 +258,8 @@ const Drawer = React.createClass({
           padding: 0
         }
       }
-    };
+    });
   }
 });
 
-module.exports = Radium(Drawer);
+module.exports = Drawer;
