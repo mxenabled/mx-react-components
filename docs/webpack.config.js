@@ -53,7 +53,7 @@ module.exports = {
     }
 
     return plugins;
-  },
+  }(),
   resolve: {
     alias: {
       components: path.join(__dirname, 'components'),
