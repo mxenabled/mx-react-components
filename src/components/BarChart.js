@@ -211,11 +211,26 @@ const BarChart = React.createClass({
       return d.value;
     });
     const gap = 0.3;
-    const y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
+    const hasNegative = !!data.filter(value => value < 0).length;
+    const hasPositive = !!data.filter(value => value > 0).length;
+    let domain;
+    let range;
 
+    if (hasNegative && !hasPositive) {
+      domain = [d3.min(data), 0];
+      range = [-height, 0];
+    } else if (!hasNegative && hasPositive) {
+      domain = [0, d3.max(data)];
+      range = [0, height];
+    } else if (hasNegative && hasPositive) {
+      const y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
+
+      domain = [-y0, y0];
+      range = [-height, height];
+    }
     const yScale = d3.scale.linear()
-      .domain([-y0, y0])
-      .range([0, height]);
+      .domain(domain)
+      .range(range);
 
     const xScale = d3.scale.ordinal()
       .domain(d3.range(this.props.data.length))
