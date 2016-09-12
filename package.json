@@ -51,7 +51,6 @@
     "eslint-plugin-react": "^5.0.0",
     "live-server": "^0.8.1",
     "node-libs-browser": "^0.5.2",
-    "webpack": "^1.0.0",
-    "webpack-dev-server": "^1.15.1"
+    "webpack": "^1.0.0"
   }
 }
