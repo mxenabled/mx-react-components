@@ -180,10 +180,10 @@ const BarChart = React.createClass({
     });
   },
 
-  _renderBar (yScale, xScale, barWidth, value, index) {
-    const height = value < 0 ? Math.abs(yScale(value) - yScale(0)) : yScale(value);
+  _renderBar (yScale, xScale, barWidth, value, index, maxHeight) {
+    const height = Math.abs(yScale(value));
     const x = xScale(index);
-    const y = value > 0 ? this.props.height - height : 0;
+    const y = value > 0 ? maxHeight - height : 0;
 
     return (
       <Rect
@@ -226,7 +226,7 @@ const BarChart = React.createClass({
       const y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
 
       domain = [-y0, y0];
-      range = [-height, height];
+      range = [-height / 2, height / 2];
     }
     const yScale = d3.scale.linear()
       .domain(domain)
@@ -237,17 +237,17 @@ const BarChart = React.createClass({
       .rangeRoundBands([0, width], gap);
 
     const barWidth = xScale.rangeBand();
-
+    const maxHeight = Math.max.apply(null, range.map(Math.abs));
     const positiveBars = data.map((value, index) => {
-      return value > 0 ? this._renderBar(yScale, xScale, barWidth, value, index) : null;
+      return value > 0 ? this._renderBar(yScale, xScale, barWidth, value, index, maxHeight) : null;
     });
 
     const negativeBars = data.map((value, index) => {
-      return value < 0 ? this._renderBar(yScale, xScale, barWidth, value, index) : null;
+      return value < 0 ? this._renderBar(yScale, xScale, barWidth, value, index, maxHeight) : null;
     });
 
-    const maxHeightForPositiveBars = d3.max(data) > 0 ? yScale(d3.max(data)) : 0;
-    const maxHeightForNegativeBars = d3.min(data) < 0 ? yScale(Math.abs(d3.min(data))) - yScale(0) : 0;
+    const maxHeightForPositiveBars = hasPositive ? yScale(d3.max(data)) : 0;
+    const maxHeightForNegativeBars = hasNegative ? yScale(Math.abs(d3.min(data))) : 0;
     const tooltipMargin = 20;
     const tooltipWidth = barWidth * 1.5;
     const tooltipXPos = (tooltipWidth - barWidth) / 2;
