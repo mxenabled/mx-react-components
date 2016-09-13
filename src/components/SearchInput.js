@@ -32,11 +32,11 @@ const SearchInput = React.createClass({
             onBlur: this.props.onBlur,
             onChange: this.props.onChange,
             placeholder: this.props.placeholder,
+            type: 'text',
             value: this.props.searchKeyword
           }}
           focusOnLoad={this.props.focusOnLoad}
           icon='search'
-          type='text'
         />
       </div>
     );
