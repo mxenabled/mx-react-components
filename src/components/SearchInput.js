@@ -28,13 +28,15 @@ const SearchInput = React.createClass({
       <div style={Object.assign({}, styles.component, this.props.style)}>
         <Input
           baseColor={this.props.baseColor}
+          elementProps={{
+            onBlur: this.props.onBlur,
+            onChange: this.props.onChange,
+            placeholder: this.props.placeholder,
+            value: this.props.searchKeyword
+          }}
           focusOnLoad={this.props.focusOnLoad}
           icon='search'
-          onBlur={this.props.onBlur}
-          onChange={this.props.onChange}
-          placeholder={this.props.placeholder}
           type='text'
-          value={this.props.searchKeyword}
         />
       </div>
     );
