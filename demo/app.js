@@ -22,6 +22,7 @@ const {
   Gauge,
   Icon,
   Loader,
+  Menu,
   Modal,
   PageIndicator,
   ProgressBar,
@@ -225,6 +226,7 @@ const Demo = React.createClass({
       showDrawerButtonType: 'primary',
       showModal: false,
       showMenu: false,
+      showMenuItems: false,
       showSmallModal: false,
       uploadedFile: null,
       windowWidth: document.documentElement.clientWidth || document.body.clientWidth
@@ -1018,6 +1020,35 @@ const Demo = React.createClass({
         <SearchInput focusOnLoad={true} />
 
         <br /><br />
+        <Menu
+          alignItems='left'
+          isOpen={this.state.showMenuItems}
+          items={[
+            {
+              icon: 'duplicate',
+              label: 'Item 1',
+              onClick: () => {}
+            },
+            {
+              icon: 'no',
+              label: 'Item 2',
+              onClick: () => {}
+            },
+            {
+              icon: 'subtract',
+              label: 'Item 3',
+              onClick: () => {}
+            }
+          ]}
+          onClick={() => {
+            this.setState({
+              showMenuItems: !this.state.showMenuItems
+            });
+          }}
+          style={{ marginLeft: '50%' }}
+        />
+
+        <br /><br />
         <DisplayInput
           elementProps={{
             onBlur: this._handleInputStatusMessage,
@@ -1138,6 +1169,7 @@ const Demo = React.createClass({
             primaryColor='#DA670B'
             width={700}
           />
+
           <br /><br /><br />
         </div>
       </div>
