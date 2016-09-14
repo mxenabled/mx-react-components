@@ -35,6 +35,7 @@ const {
   SimpleSelect,
   Styles,
   Tabs,
+  TextArea,
   TimeBasedLineChart,
   ToggleSwitch,
   Tooltip,
@@ -1138,6 +1139,8 @@ const Demo = React.createClass({
             primaryColor='#DA670B'
             width={700}
           />
+          <br /><br />
+          <TextArea rows={3} />
           <br /><br /><br />
         </div>
       </div>
