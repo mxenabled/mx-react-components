@@ -1169,7 +1169,6 @@ const Demo = React.createClass({
             primaryColor='#DA670B'
             width={700}
           />
-
           <br /><br /><br />
         </div>
       </div>
