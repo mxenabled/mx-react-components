@@ -15,7 +15,9 @@ const SimpleInputDocs = React.createClass({
 
         <h3>Demo</h3>
         <SimpleInput
-          placeholder='Type something'
+          elementProps={{
+            placeholder: 'Type something'
+          }}
         />
 
         <h3>Usage</h3>
