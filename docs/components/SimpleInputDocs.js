@@ -15,7 +15,9 @@ const SimpleInputDocs = React.createClass({
 
         <h3>Demo</h3>
         <SimpleInput
-          placeholder='Type something'
+          elementProps={{
+            placeholder: 'Type something'
+          }}
         />
 
         <h3>Usage</h3>
@@ -34,6 +36,22 @@ const SimpleInputDocs = React.createClass({
               valid={false}
             />
           `}
+        </Markdown>
+
+        <h5>Release Canidate 5.0.0</h5>
+        <p>Properties to be passed to the input element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
+
+        <Markdown>
+        {`
+          <SimpleInput
+            elementProps={{
+              onChange: myOnChangeCallbackFunction
+              placeholder: 'Type something'
+            }}
+            label='Type something'
+            valid={true}
+          />
+        `}
         </Markdown>
       </div>
     );
