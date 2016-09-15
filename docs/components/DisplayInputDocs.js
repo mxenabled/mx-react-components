@@ -53,19 +53,22 @@ const DisplayInputDocs = React.createClass({
 
         <h3>Demo</h3>
         <DisplayInput
+          elementProps={{
+            onBlur: this._handleInputStatusMessage,
+            onFocus: this._handleInputFocus,
+            onMouseOut: this._handleInputHideHint,
+            onMouseOver: this._handleInputShowHint,
+            placeholder: 'Type something'
+          }}
           hint='Click to Edit'
           label='Display Input'
-          onBlur={this._handleInputStatusMessage}
-          onFocus={this._handleInputFocus}
-          onMouseOut={this._handleInputHideHint}
-          onMouseOver={this._handleInputShowHint}
-          placeholder='Type something'
           showHint={this.state.showHint}
           status={this.state.statusMessage}
           valid={true}
         />
 
         <h3>Usage</h3>
+
         <h5>children <label>Node</label></h5>
         <p>JSX node to be rendered in place of the standard input.</p>
 
@@ -102,6 +105,22 @@ const DisplayInputDocs = React.createClass({
           <DisplayInput
             label='Display Input'
             placeholder='Type something'
+            valid={true}
+          />
+        `}
+        </Markdown>
+
+        <h5>Release Canidate 5.0.0</h5>
+        <p>Properties to be passed to the input element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
+
+        <Markdown>
+        {`
+          <DisplayInput
+            elementProps={{
+              onChange: myOnChangeCallbackFunction
+              placeholder: 'Type something'
+            }}
+            label='Display Input'
             valid={true}
           />
         `}

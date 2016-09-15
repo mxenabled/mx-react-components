@@ -5,12 +5,61 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+
+        <h3>Release Canidate 5.0.0-rc.5</h3>
+        <ul>
+          <li>
+            Moves docs from gh-pages branch to /docs folder in master branch(<a href='https://github.com/mxenabled/mx-react-components/pull/432'>#432</a>)
+          </li>
+        </ul>
+
+        <h3>Release Canidate 5.0.0-rc.4</h3>
+        <ul>
+          <li>
+            SearchInput: Fixes React unknown prop warning(<a href='https://github.com/mxenabled/mx-react-components/pull/434'>#434</a>)
+          </li>
+        </ul>
+
+        <h3>Release Canidate 5.0.0-rc.3</h3>
+        <ul>
+          <li>
+            BarChart: Fixes scaling issue(<a href='https://github.com/mxenabled/mx-react-components/pull/433'>#433</a>)
+          </li>
+        </ul>
+
+        <h3>Release Canidate 5.0.0-rc.2</h3>
+        <ul>
+          <li>
+            Reverts Radium back to 0.14.0(<a href='https://github.com/mxenabled/mx-react-components/pull/431'>#431</a>)
+          </li>
+        </ul>
+
+        <h3>Release Canidate 5.0.0-rc.1</h3>
+        <ul>
+          <li>
+            Tabs: Fixes brand color for caret icon(<a href='https://github.com/mxenabled/mx-react-components/pull/425'>#425</a>)
+          </li>
+          <li>
+            BREAKING CHANGE: Fixes React unknown prop warnings on various components(<a href='https://github.com/mxenabled/mx-react-components/pull/426'>#426</a>)
+          </li>
+          <li>
+            Demo App - Fix radium style error on Tabs(<a href='https://github.com/mxenabled/mx-react-components/pull/427'>#427</a>)
+          </li>
+          <li>
+            Update to Radium 0.18.1(<a href='https://github.com/mxenabled/mx-react-components/pull/428'>#428</a>)
+          </li>
+          <li>
+            SimpleInput: Use callback for reference to Input(<a href='https://github.com/mxenabled/mx-react-components/pull/429'>#429</a>)
+          </li>
+        </ul>
+
         <h3>4.4.37</h3>
         <ul>
           <li>
             Added a prop that allows users to focus their cursor in the text field on load in the SimpleInput and SearchInput components (<a href='https://github.com/mxenabled/mx-react-components/pull/422'>#422</a>)
           </li>
         </ul>
+
         <h3>4.4.35</h3>
         <ul>
           <li>Added spending to the Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/414'>#414</a>)</li>

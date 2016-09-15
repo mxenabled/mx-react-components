@@ -41,6 +41,21 @@ const IconDocs = React.createClass({
             />
           `}
         </Markdown>
+
+        <h5>Release Canidate 5.0.0</h5>
+        <p>Properties to be passed to the svg element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
+
+        <Markdown>
+        {`
+            <Icon
+              elementProps={{
+                onClick: myOnClickCallbackFunction
+              }}
+              size={50}
+              type='accounts'
+            />
+        `}
+        </Markdown>
       </div>
     );
   }
