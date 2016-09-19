@@ -287,14 +287,18 @@ const DatePickerFullScreen = React.createClass({
             {this._renderTitle(styles)}
             <div className='mx-date-picker-full-screen-calendar-header' key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
               <Icon
-                onClick={this._handlePreviousClick}
+                elementProps={{
+                  onClick: this._handlePreviousClick
+                }}
                 size={32}
                 style={leftNavIconStyle}
                 type='caret-left'
               />
               {currentDate.format('MMMM YYYY')}
               <Icon
-                onClick={this._handleNextClick}
+                elementProps={{
+                  onClick: this._handleNextClick
+                }}
                 size={32}
                 style={rightNavIconStyle}
                 type='caret-right'

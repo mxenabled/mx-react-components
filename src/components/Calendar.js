@@ -100,7 +100,9 @@ const Calendar = React.createClass({
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <Icon
-            onClick={this._handlePreviousClick}
+            elementProps={{
+              onClick: this._handlePreviousClick
+            }}
             size={20}
             style={styles.calendayHeaderNav}
             type='caret-left'
@@ -109,7 +111,9 @@ const Calendar = React.createClass({
             {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
           </div>
           <Icon
-            onClick={this._handleNextClick}
+            elementProps={{
+              onClick: this._handleNextClick
+            }}
             size={20}
             style={styles.calendayHeaderNav}
             type='caret-right'
@@ -156,7 +160,8 @@ const Calendar = React.createClass({
         textAlign: 'center'
       },
       calendayHeaderNav: {
-        width: 35
+        width: 35,
+        cursor: 'pointer'
       },
 
       //Calendar week
