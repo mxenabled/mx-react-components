@@ -227,7 +227,9 @@ const TypeAhead = React.createClass({
         <div className='mx-typeahead-selected' key={index} style={styles.itemTag}>
           {item}
           <Icon
-            onClick={this._handleItemRemove.bind(null, item)}
+            elementProps={{
+              onClick: this._handleItemRemove.bind(null, item)
+            }}
             size={15}
             style={styles.removeIcon}
             type='close'
