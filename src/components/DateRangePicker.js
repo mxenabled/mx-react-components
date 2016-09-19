@@ -330,18 +330,22 @@ const DateRangePicker = React.createClass({
                 <div style={styles.calendarWrapper}>
                   <div style={styles.calendarHeader}>
                     <Icon
-                      onClick={this._handlePreviousClick}
+                      elementProps={{
+                        onClick: this._handlePreviousClick
+                      }}
                       size={20}
-                      style={styles.calendayHeaderNav}
+                      style={styles.calendarHeaderNav}
                       type='caret-left'
                     />
                     <div>
                       {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
                     </div>
                     <Icon
-                      onClick={this._handleNextClick}
+                      elementProps={{
+                        onClick: this._handlePreviousClick
+                      }}
                       size={20}
-                      style={styles.calendayHeaderNav}
+                      style={styles.calendarHeaderNav}
                       type='caret-right'
                     />
                   </div>
@@ -464,8 +468,9 @@ const DateRangePicker = React.createClass({
         position: 'relative',
         textAlign: 'center'
       },
-      calendayHeaderNav: {
-        width: 35
+      calendarHeaderNav: {
+        width: 35,
+        cursor: 'pointer'
       },
 
       //Calendar week
@@ -484,7 +489,7 @@ const DateRangePicker = React.createClass({
         width: 30
       },
 
-      //Calenday table
+      //Calendar table
       calendarTable: {
         alignItems: 'center',
         display: 'flex',
