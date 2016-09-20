@@ -29,9 +29,20 @@ const FileUploadDocs = React.createClass({
         <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
+            imageValidation={{
+              exactHeight: 200,
+              exactWidth: 400,
+              maxHeight: 400,
+              maxWidth: 800,
+              minHeight: 100,
+              minWidth: 200,
+              ratioHeight: 1,
+              ratioWidth: 2
+            }}
             maxFileSize={3000}
             onFileAdd={this._handleFileChange}
             onFileRemove={this._handleFileChange}
+            onFileValidation={this._handleFileValidation}
             uploadedFile={this.state.uploadedFile}
           />
         </div>
@@ -40,8 +51,23 @@ const FileUploadDocs = React.createClass({
         <h5>allowedFileTypes <label>Array</label></h5>
         <p>An array of file types and extensions allowed for upload.</p>
 
+        <h5>imageValidation <label>Object</label></h5>
+        <p>An object used for image dimension validation.</p>
+        <p>Options are:</p>
+        <ul>
+          <li><h5>exactHeight<label>exact height in pixels</label></h5></li>
+          <li><h5>exactWidth<label>exact width in pixels</label></h5></li>
+          <li><h5>maxHeight<label>maximum height in pixels</label></h5></li>
+          <li><h5>maxWidth<label>maximum width in pixels</label></h5></li>
+          <li><h5>minHeight<label>minimum height in pixels</label></h5></li>
+          <li><h5>minWidth<label>minimum width in pixels</label></h5></li>
+          <li><h5>ratioHeight<label>ratio of height compared to width</label></h5></li>
+          <li><h5>ratioWidth<label>ratio of width compared to height</label></h5></li>
+        </ul>
+        <p>NOTE: ratio requires both values. All others can be used alone or with others.</p>
+
         <h5>maxFileSize <label>Number</label></h5>
-        <p>Sets the maximum file size allowed. Measured in byes.</p>
+        <p>Sets the maximum file size allowed. Measured in bytes.</p>
 
         <h5>OnFileAdd <label>function</label></h5>
         <p>Event handler for when a file is added.</p>
@@ -52,7 +78,7 @@ const FileUploadDocs = React.createClass({
         <h5>OnFileValidation <label>function</label></h5>
         <p>Event handler for when a file is invalid (too large or wrong file type).</p>
 
-        <h5>style <label>Object or Array</label></h5>
+        <h5>style <label>Object</label></h5>
         <p>A style object used to style the div that wraps the uploader&#39;s content</p>
 
         <h5>uploadedFile <label>Any</label></h5>
@@ -75,9 +101,20 @@ const FileUploadDocs = React.createClass({
 
     <FileUpload
       allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
+      imageValidation={{
+        exactHeight: 200,
+        exactWidth: 400,
+        maxHeight: 400,
+        maxWidth: 800,
+        minHeight: 100,
+        minWidth: 200,
+        ratioHeight: 1,
+        ratioWidth: 2
+      }}
       maxFileSize={3000}
       onFileAdd={this._handleFileChange}
       onFileRemove={this._handleFileChange}
+      onFileValidation={this._handleFileValidation}
       uploadedFile={this.state.uploadedFile}
     />
   `}
