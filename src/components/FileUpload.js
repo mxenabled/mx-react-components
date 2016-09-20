@@ -36,12 +36,16 @@ const FileUpload = React.createClass({
   },
 
   componentDidMount () {
-    this._readFile(this.props.uploadedFile);
+    this._readFile(this.props.uploadedFile, result => {
+      this._validateFile(result.file, result.width, result.height);
+    });
   },
 
   componentWillReceiveProps (newProps) {
     if (newProps.uploadedFile !== this.props.uploadedFile) {
-      this._readFile(newProps.uploadedFile);
+      this._readFile(newProps.uploadedFile, result => {
+        this._validateFile(result.file, result.width, result.height);
+      });
     }
   },
 
