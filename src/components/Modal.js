@@ -156,8 +156,10 @@ const Modal = React.createClass({
         <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
           <Icon
             className='mx-modal-tooltip-label-icon'
-            onMouseOut={this._handleTooltipToggle.bind(null, false)}
-            onMouseOver={this._handleTooltipToggle.bind(null, true)}
+            elementProps={{
+              onMouseOut: this._handleTooltipToggle.bind(null, false),
+              onMouseOver: this._handleTooltipToggle.bind(null, true)
+            }}
             size={18}
             style={{ color: this.props.color }}
             type='info'

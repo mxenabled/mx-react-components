@@ -87,8 +87,10 @@ const Tooltip = React.createClass({
           </div>
         ) : null}
         <Icon
-          onMouseEnter={this._handleInfoMouseEnter}
-          onMouseLeave={this._handleInfoMouseLeave}
+          elementProps={{
+            onMouseEnter: this._handleInfoMouseEnter,
+            onMouseLeave: this._handleInfoMouseLeave
+          }}
           size={this.props.iconSize}
           type={this.props.icon}
         />
