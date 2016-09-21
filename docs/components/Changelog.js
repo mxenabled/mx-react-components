@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Canidate 5.0.0-rc.8</h3>
+        <ul>
+          <li>
+            Add reset for input on FileUpload on new props.(<a href='https://github.com/mxenabled/mx-react-components/pull/447'>#447</a>)
+          </li>
+        </ul>
+
         <h3>Release Canidate 5.0.0-rc.7</h3>
         <ul>
           <li>
