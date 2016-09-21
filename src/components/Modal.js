@@ -190,7 +190,9 @@ const Modal = React.createClass({
           {this.props.showCloseIcon ? (
             <Icon
               className='mx-modal-close'
-              onClick={this.props.onRequestClose}
+              elementProps={{
+                onClick: this.props.onRequestClose
+              }}
               size={24}
               style={styles.close}
               type='close-solid'
