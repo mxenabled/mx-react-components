@@ -9,8 +9,10 @@ const Input = React.createClass({
     baseColor: React.PropTypes.string,
     elementProps: React.PropTypes.object,
     focusOnLoad: React.PropTypes.bool,
+    handleResetClick: React.PropTypes.func,
     icon: React.PropTypes.string,
     placeholder: React.PropTypes.string,
+    rightIcon: React.PropTypes.string,
     style: React.PropTypes.oneOfType([
       React.PropTypes.array,
       React.PropTypes.object
@@ -88,6 +90,16 @@ const Input = React.createClass({
           style={styles.input}
           type={this.props.type}
         />
+        {this.props.rightIcon ? (
+          <Icon
+            elementProps={{
+              onClick: this.props.handleResetClick
+            }}
+            size={20}
+            style={styles.rightIcon}
+            type={this.props.rightIcon}
+          />
+        ) : null}
       </div>
     );
   },
@@ -110,11 +122,18 @@ const Input = React.createClass({
         border: '1px solid ' + this.props.baseColor
       },
       icon: {
-        paddingRight: StyleConstants.Spacing.XSMALL,
+        paddingRight: 7,
         fill: this.props.baseColor
+      },
+      rightIcon: {
+        paddingLeft: StyleConstants.Spacing.XSMALL,
+        fill: StyleConstants.Colors.FOG,
+        cursor: 'pointer'
       },
       input: {
         flex: '1 0 0%',
+        color: StyleConstants.Colors.CHARCOAL,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
         backgroundColor: StyleConstants.Colors.WHITE,
         border: 'none',
         outline: 'none',

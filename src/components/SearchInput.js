@@ -6,6 +6,7 @@ const SearchInput = React.createClass({
   propTypes: {
     baseColor: React.PropTypes.string,
     focusOnLoad: React.PropTypes.bool,
+    handleResetClick: React.PropTypes.func,
     onBlur: React.PropTypes.func,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
@@ -36,7 +37,10 @@ const SearchInput = React.createClass({
             value: this.props.searchKeyword
           }}
           focusOnLoad={this.props.focusOnLoad}
+          handleResetClick={this.props.handleResetClick}
           icon='search'
+          resetClick={this.props.handleResetClick}
+          rightIcon='close-solid'
         />
       </div>
     );
