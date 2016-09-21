@@ -42,6 +42,8 @@ const FileUpload = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
+    this._input.value = null;
+
     if (newProps.uploadedFile !== this.props.uploadedFile) {
       this._readFile(newProps.uploadedFile, result => {
         this._validateFile(result.file, result.width, result.height);
