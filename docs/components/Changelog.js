@@ -6,6 +6,26 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Canidate 5.0.0-rc.7</h3>
+        <ul>
+          <li>
+            Add validation for image dimensions in FileUploader.(<a href='https://github.com/mxenabled/mx-react-components/pull/444'>#444</a>)
+          </li>
+          <li>
+            Restyle search input and add reset icon.(<a href='https://github.com/mxenabled/mx-react-components/pull/443'>#443</a>)
+          </li>
+          <li>
+            Fix close icon on Modals.(<a href='https://github.com/mxenabled/mx-react-components/pull/437'>#437</a>)
+          </li>
+        </ul>
+
+        <h3>Release Canidate 5.0.0-rc.6</h3>
+        <ul>
+          <li>
+            Update Icons with new elememtns prop.(<a href='https://github.com/mxenabled/mx-react-components/pull/440'>#440</a>)
+          </li>
+        </ul>
+
         <h3>Release Canidate 5.0.0-rc.5</h3>
         <ul>
           <li>
