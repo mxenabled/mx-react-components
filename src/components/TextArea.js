@@ -26,7 +26,7 @@ const TextArea = React.createClass({
   },
 
   _onFocus () {
-    this.refs.textarea.focus();
+    this.textarea.focus();
 
     this.setState({
       focus: true
@@ -34,7 +34,7 @@ const TextArea = React.createClass({
   },
 
   _onBlur () {
-    this.refs.textarea.blur();
+    this.textarea.blur();
 
     this.setState({
       focus: false
@@ -54,7 +54,9 @@ const TextArea = React.createClass({
       >
         <textarea
           {...elementProps}
-          ref='textarea'
+          ref={ref => {
+            this.textarea = ref;
+          }}
           rows={rows}
           style={styles.textarea}
         />
