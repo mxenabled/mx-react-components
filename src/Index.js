@@ -30,6 +30,7 @@ module.exports = {
   SimpleSelect: require('./components/SimpleSelect'),
   Spin: require('./components/Spin'),
   Tabs: require('./components/Tabs'),
+  TextArea: require('./components/TextArea'),
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
   Tooltip: require('./components/Tooltip'),
