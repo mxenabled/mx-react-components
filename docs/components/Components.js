@@ -165,6 +165,7 @@ const Components = React.createClass({
             <Link to='/components/type-ahead'>Type Ahead</Link>
 
             <h3>Charts (D3)</h3>
+            <Link to='/components/bar'>Bar</Link>
             <Link to='/components/donut'>Donut</Link>
             <Link to='/components/gauge'>Gauge</Link>
             <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>

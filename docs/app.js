@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const { hashHistory, Route, IndexRoute, Router } = require('react-router');
 
+const BarChart = require('components/BarChartDocs');
 const Button = require('components/ButtonDocs');
 const ButtonGroup = require('components/ButtonGroupDocs');
 const Changelog = require('components/Changelog');
@@ -60,6 +61,7 @@ ReactDOM.render((
     <Route component={App} path='/'>
       <Route component={Components} path='components'>
         <IndexRoute component={Changelog} />
+        <Route component={BarChart} path='bar' />
         <Route component={Button} path='button' />
         <Route component={ButtonGroup} path='button-group' />
         <Route component={DatePicker} path='date-picker' />
