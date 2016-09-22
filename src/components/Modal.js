@@ -256,7 +256,8 @@ const Modal = React.createClass({
         padding: '15px 20px',
         color: StyleConstants.Colors.ASH,
         fontSize: StyleConstants.FontSizes.SMALL,
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        letterSpacing: 1
       },
       content: {
         position: 'relative',
