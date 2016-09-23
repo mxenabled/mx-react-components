@@ -31,12 +31,17 @@ const MenuDocs = React.createClass({
           items={[
             {
               icon: 'duplicate',
-              label: 'Mark as Duplicate',
+              label: 'Item1',
               onClick: () => {}
             },
             {
               icon: 'no',
-              label: 'Mark as Closed',
+              label: 'Item2',
+              onClick: () => {}
+            },
+            {
+              icon: 'accounts',
+              label: 'Item3',
               onClick: () => {}
             }
           ]}
