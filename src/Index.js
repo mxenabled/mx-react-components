@@ -16,6 +16,7 @@ module.exports = {
   Gauge: require('./components/Gauge'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
+  Menu: require('./components/Menu'),
   Modal: require('./components/Modal'),
   PageIndicator: require('./components/PageIndicator'),
   ProgressBar: require('./components/ProgressBar'),
