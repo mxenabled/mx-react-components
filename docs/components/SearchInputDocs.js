@@ -5,6 +5,24 @@ const { SearchInput } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const SearchInputDocs = React.createClass({
+  getInitialState () {
+    return {
+      searchKeyword: ''
+    };
+  },
+
+  _handleInputChange (e) {
+    this.setState({
+      searchKeyword: e.target.value
+    });
+  },
+
+  _handleResetClick () {
+    this.setState({
+      searchKeyword: ''
+    });
+  },
+
   render () {
     return (
       <div>
@@ -15,7 +33,10 @@ const SearchInputDocs = React.createClass({
 
         <h3>Demo</h3>
         <SearchInput
+          handleResetClick={this._handleResetClick}
+          onChange={this._handleInputChange}
           placeholder='Type to search'
+          searchKeyword={this.state.searchKeyword}
         />
 
         <h3>Usage</h3>
