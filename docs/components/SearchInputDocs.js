@@ -47,7 +47,7 @@ const SearchInputDocs = React.createClass({
         <p>A method to be called as the user types in the search input field.</p>
 
         <h5>handleResetClick <label>Function</label></h5>
-        <p>A method to be called when reset icon is clicked.</p>
+        <p>A method to be called when reset icon is clicked, in the demo above it is used to clear the input value.</p>
 
         <h5>placeholder <label>String</label></h5>
         <p>The text to show before the user starts typing or when the search input field is empty.</p>
