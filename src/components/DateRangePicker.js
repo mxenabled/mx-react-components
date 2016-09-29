@@ -342,7 +342,7 @@ const DateRangePicker = React.createClass({
                     </div>
                     <Icon
                       elementProps={{
-                        onClick: this._handlePreviousClick
+                        onClick: this._handleNextClick
                       }}
                       size={20}
                       style={styles.calendarHeaderNav}
