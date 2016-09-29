@@ -60,6 +60,7 @@ const Rect = React.createClass({
   },
 
   _handleMouseOver (label, value, x, y) {
+    // console.log("this is x", x, "this is y", y)
     const animateDuration = 500;
 
     this.setState({
