@@ -226,7 +226,6 @@ const RangeSelector = React.createClass({
   },
 
   render () {
-    console.log("render")
     const styles = this.styles();
 
     return (
@@ -255,7 +254,9 @@ const RangeSelector = React.createClass({
           onMouseUp={this._handleDragEnd}
           onTouchEnd={this._handleDragEnd}
           onTouchMove={this._handleDragging}
-          ref={(ref) => this.rangeSelectorRef = ref}
+          ref={(ref) => {
+            this.rangeSelectorRef = ref;
+          }}
           style={styles.range}
         >
           {this.props.presets.length ? (
