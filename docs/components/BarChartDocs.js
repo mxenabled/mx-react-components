@@ -125,7 +125,6 @@ const BarChartDocs = React.createClass({
 
         <h5>height <label>Number</label></h5>
         <p>Height in pixels of the SVG that renders the bars.</p>
-        <p>The tallest bar in the chart will have this height.</p>
         <p>Default: 300</p>
 
         <h5>labelStyle<label>Object</label></h5>
@@ -137,33 +136,97 @@ const BarChartDocs = React.createClass({
         <h5>onHover<label>Function</label></h5>
         <p>Callback function that will run when a bar is hovered over.</p>
 
-        <h5>onHover<label>Function</label></h5>
-        <p>Callback function that will run when a bar is hovered over.</p>
-
         <h5>primaryColor<label>String</label></h5>
         <p>Primary Color used in the chart.</p>
         <p>Default: '#359BCF'</p>
 
         <h5>tooltipFormat<label>String</label></h5>
         <p>A string that can be passed to change the display format of the tooltip text.</p>
-        <p>Default: '#$0,0.00'</p>
+        <p>Default: '$0,0.00'</p>
 
         <h5>tooltipStyle<label>Object</label></h5>
         <p>A style object that can be passed to style the tooltip.</p>
 
         <h5>width<label>Number</label></h5>
-        <p>Width of the SVG; bars will determine width accordingly.</p>
+        <p>Width of the SVG; bars will determine their individual width accordingly.</p>
         <p>Default: 500</p>
 
+        <h3>Example</h3>
+        <Markdown>
+  {`
+    <BarChart
+      data={[
+        {
+          color: '#E3E6E7',
+          label: 'Jan',
+          value: 595.45
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Feb',
+          value: 690.65
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Mar',
+          value: 897.40
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Apr',
+          value: 1209.95
+        },
+        {
+          color: '#E3E6E7',
+          label: 'May',
+          value: 1191.00
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Jun',
+          value: 1391.27
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Jul',
+          value: 991.23
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Aug',
+          value: 1101.45
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Sep',
+          value: 1301.45
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Oct',
+          value: 1405.45
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Nov',
+          value: 1600.45
+        },
+        {
+          color: '#E3E6E7',
+          label: 'Dec',
+          value: 2100.45
+        }
+      ]}
+    />
+  `}
+        </Markdown>
       </div>
+
     );
   },
 
   styles () {
     return {
-      chart: {
-
-      },
       demoHeader: {
         marginBottom: 20
       }
