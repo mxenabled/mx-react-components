@@ -17,6 +17,7 @@ const Drawer = React.createClass({
       small: React.PropTypes.number
     }),
     buttonPrimaryColor: React.PropTypes.string,
+    closeOnScrimClick: React.PropTypes.bool,
     contentStyle: React.PropTypes.oneOfType([
       React.PropTypes.array,
       React.PropTypes.object
@@ -34,6 +35,7 @@ const Drawer = React.createClass({
       onPreviousClick: React.PropTypes.func.isRequired
     }),
     onClose: React.PropTypes.func.isRequired,
+    showCloseButton: React.PropTypes.bool,
     showScrim: React.PropTypes.bool,
     title: React.PropTypes.string
   },
@@ -42,9 +44,11 @@ const Drawer = React.createClass({
     return {
       buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
       breakPoints: StyleConstants.BreakPoints,
+      closeOnScrimClick: true,
       duration: 500,
       easing: [0.28, 0.14, 0.34, 1.04],
       maxWidth: 960,
+      showCloseButton: true,
       showScrim: true,
       title: ''
     };
@@ -139,16 +143,18 @@ const Drawer = React.createClass({
 
     return (
       <div style={styles.componentWrapper}>
-        <div onClick={this.close} style={styles.scrim} />
+        <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
         <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
           <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
             <span style={styles.backArrow}>
-              <Button
-                icon='arrow-left'
-                onClick={this.close}
-                primaryColor={this.props.buttonPrimaryColor}
-                type={'base'}
-              />
+              {this.props.showCloseButton &&
+                <Button
+                  icon='arrow-left'
+                  onClick={this.close}
+                  primaryColor={this.props.buttonPrimaryColor}
+                  type={'base'}
+                />
+              }
             </span>
             <span style={styles.title}>
               {this.props.title}
@@ -229,7 +235,8 @@ const Drawer = React.createClass({
         fontSize: StyleConstants.FontSizes.LARGE,
         justifyContent: 'center',
         padding: '7px 7px',
-        position: 'relative'
+        position: 'relative',
+        minHeight: StyleConstants.Spacing.XLARGE
       },
       title: {
         overflow: 'hidden',
