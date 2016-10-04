@@ -8,7 +8,9 @@ const DrawerDocs = React.createClass({
 
   getInitialState () {
     return {
-      demoDrawerOpen: false
+      demoDrawerOpen: false,
+      currentPage: 3,
+      totalPages: 8
     };
   },
 
@@ -24,12 +26,30 @@ const DrawerDocs = React.createClass({
     });
   },
 
+  _handlePreviousClick () {
+    if (this.state.currentPage > 1) {
+      this.setState({
+        currentPage: this.state.currentPage - 1
+      });
+    }
+  },
+
+  _handleNextClick () {
+    if (this.state.currentPage < this.state.totalPages) {
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      });
+    }
+  },
+
   _renderDrawer () {
     const styles = this.styles();
 
     return (
       <Drawer
+        breakPoints={{ large: 1200, medium: 1100, small: 1320 }}
         contentStyle={styles.content}
+        navConfig={{ label: this.state.currentPage + ' of ' + this.state.totalPages, onNextClick: this._handleNextClick, onPreviousClick: this._handlePreviousClick }}
         onClose={this._handleDrawerClose}
         title='Demo Drawer'
       >
@@ -57,7 +77,7 @@ const DrawerDocs = React.createClass({
         <h5>animateLeftDistance<label>Number</label></h5>
         <p>This number represents the percent of the screen visible between the left edge of the screen and the left edge of the drawer.</p>
 
-        <h5>breakPoints<label></label></h5>
+        <h5>breakPoints<label>Object</label></h5>
         <p></p>
 
         <h5>buttonPrimaryColor<label>String</label></h5>
@@ -73,24 +93,29 @@ const DrawerDocs = React.createClass({
 
         <h5>duration<label>Number</label></h5>
         <p>Default: 500</p>
-        <p></p>
+        <p>This number sets the duration of the drawer animation.</p>
 
         <h5>easing<label>Array</label></h5>
-        <p>Easing: [0.28, 0.14, 0.34, 1.04]</p>
-        <p></p>
+        <p>Default: [0.28, 0.14, 0.34, 1.04]</p>
+        <p>Easing takes an array for how to step through the drawer animation.</p>
 
         <h5>headerStyle<label>Object or Array</label></h5>
         <p>Styles for the header part of the drawer.</p>
 
         <h5>maxWidth<label></label></h5>
         <p>Default: 960</p>
-        <p></p>
+        <p>This is the maximum width of the drawer component.</p>
 
-        <h5>navConfig<label></label></h5>
-        <p></p>
+        <h5>navConfig<label>Object</label></h5>
+        <p>This object requires 3 properties:</p>
+        <ul>
+          <li><h5>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
+          <li><h5>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
+          <li><h5>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
+        </ul>
 
         <h5>onClose<label>Function</label> Required</h5>
-        <p></p>
+        <p>This function will be called when a user clicks the close drawer button.</p>
 
         <h5>showCloseButton<label>Boolean</label></h5>
         <p>Default: true</p>
@@ -104,18 +129,13 @@ const DrawerDocs = React.createClass({
         <p>Default: ''</p>
         <p>This will be displayed in the header of the drawer component.</p>
 
-        <h5><label></label></h5>
-        <p></p>
-
-        <h5><label></label></h5>
-        <p></p>
-
         <h3>Example</h3>
         <Markdown>
   {`
     <Drawer
-      onClose={ () => {}}
       buttonPrimaryColor='#333333'
+      onClose={this._handleCloseDrawerClick}
+      showScrim={false}
       title='Demo Drawer'
     />
   `}
@@ -127,7 +147,8 @@ const DrawerDocs = React.createClass({
   styles () {
     return {
       content: {
-        padding: 20
+        padding: 60,
+        fontFamily: 'ProximaNovaRegular, Helvetica, Arial, sans-serif'
       }
     };
   }
