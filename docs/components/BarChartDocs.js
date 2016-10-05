@@ -96,7 +96,7 @@ const BarChartDocs = React.createClass({
       <div>
         <h1>
           BarChart
-          <label>CHANGE THIS A D3 donut chart that supports a center label, multiple slices, and reference dots.</label>
+          <label>CHANGE THIS A D3 bar chart that supports labels for the bars and tooltips.</label>
         </h1>
 
         <h3 style={styles.demoHeader}>Demo</h3>
