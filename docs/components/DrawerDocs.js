@@ -137,7 +137,9 @@ const DrawerDocs = React.createClass({
       onClose={this._handleCloseDrawerClick}
       showScrim={false}
       title='Demo Drawer'
-    />
+    >
+      //Content here
+    </Drawer>
   `}
         </Markdown>
       </div>
@@ -148,7 +150,8 @@ const DrawerDocs = React.createClass({
     return {
       content: {
         padding: 60,
-        fontFamily: 'ProximaNovaRegular, Helvetica, Arial, sans-serif'
+        fontFamily: 'ProximaNovaRegular, Helvetica, Arial, sans-serif',
+        color: '#2E323F'
       }
     };
   }
