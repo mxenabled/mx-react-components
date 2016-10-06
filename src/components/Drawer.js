@@ -13,8 +13,7 @@ const Drawer = React.createClass({
     animateLeftDistance: React.PropTypes.number,
     breakPoints: React.PropTypes.shape({
       large: React.PropTypes.number,
-      medium: React.PropTypes.number,
-      small: React.PropTypes.number
+      medium: React.PropTypes.number
     }),
     buttonPrimaryColor: React.PropTypes.string,
     closeOnScrimClick: React.PropTypes.bool,

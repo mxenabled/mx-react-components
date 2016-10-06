@@ -47,7 +47,7 @@ const DrawerDocs = React.createClass({
 
     return (
       <Drawer
-        breakPoints={{ large: 1200, medium: 1100, small: 1320 }}
+        breakPoints={{ large: 1200, medium: 1100 }}
         contentStyle={styles.content}
         navConfig={{ label: this.state.currentPage + ' of ' + this.state.totalPages, onNextClick: this._handleNextClick, onPreviousClick: this._handlePreviousClick }}
         onClose={this._handleDrawerClose}
@@ -60,6 +60,8 @@ const DrawerDocs = React.createClass({
   },
 
   render () {
+    const styles = this.styles();
+
     return (
       <div>
         <h1>
@@ -78,7 +80,16 @@ const DrawerDocs = React.createClass({
         <p>This number represents the percent of the screen visible between the left edge of the screen and the left edge of the drawer.</p>
 
         <h5>breakPoints<label>Object</label></h5>
-        <p></p>
+        <p>This object takes 2 properties:</p>
+        <ul style={styles.unorderdLists}>
+          <li style={styles.listItem}><h5 style={styles.listItem}>large <label>Number</label></h5></li>
+          <li style={styles.listItem}><h5 style={styles.listItem}>medium <label>Number</label></h5></li>
+        </ul>
+        <p>When the screen size is: <br />
+          &#62;&#61; large: drawer width is maxWidth <br />
+          &#60;	large and > medium: drawer width is 20% from left side <br />
+          &#60;&#61; medium: drawer width is 100%
+        </p>
 
         <h5>buttonPrimaryColor<label>String</label></h5>
         <p>Default: '#359BCF'</p>
@@ -108,10 +119,10 @@ const DrawerDocs = React.createClass({
 
         <h5>navConfig<label>Object</label></h5>
         <p>This object requires 3 properties:</p>
-        <ul>
-          <li><h5>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
-          <li><h5>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
-          <li><h5>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
+        <ul style={styles.unorderdLists}>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
         </ul>
 
         <h5>onClose<label>Function</label> Required</h5>
@@ -152,6 +163,18 @@ const DrawerDocs = React.createClass({
         padding: 60,
         fontFamily: 'ProximaNovaRegular, Helvetica, Arial, sans-serif',
         color: '#2E323F'
+      },
+      unorderdLists: {
+        marginTop: 0,
+        marginBottom: 8
+      },
+      listItem: {
+        marginTop: 0,
+        marginBottom: 0
+      },
+      h5ListItem: {
+        marginTop: 0,
+        marginBottom: 0
       }
     };
   }
