@@ -99,7 +99,7 @@ const DrawerDocs = React.createClass({
         <p>Default: true</p>
         <p>To prevent the drawer from closing if a user clicks on the screen outside of the drawer, set this to <em>false</em>.</p>
 
-        <h5>contentStyle<label></label></h5>
+        <h5>contentStyle<label>Object or Array</label></h5>
         <p>Styles for the content inside the drawer.</p>
 
         <h5>duration<label>Number</label></h5>
@@ -113,7 +113,7 @@ const DrawerDocs = React.createClass({
         <h5>headerStyle<label>Object or Array</label></h5>
         <p>Styles for the header part of the drawer.</p>
 
-        <h5>maxWidth<label></label></h5>
+        <h5>maxWidth<label>Number</label></h5>
         <p>Default: 960</p>
         <p>This is the maximum width of the drawer component.</p>
 
