@@ -87,7 +87,7 @@ const DrawerDocs = React.createClass({
         </ul>
         <p>When the screen size is: <br />
           &#62;&#61; large: drawer width is maxWidth <br />
-          &#60;	large and > medium: drawer width is 20% from left side <br />
+          &#60;	large and &#62; medium: drawer width is 20% from left side <br />
           &#60;&#61; medium: drawer width is 100%
         </p>
 
