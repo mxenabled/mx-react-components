@@ -49,6 +49,10 @@ const Components = React.createClass({
                   displayValue: 'Display Input'
                 },
                 {
+                  value: 'drawer',
+                  displayValue: 'Drawer'
+                },
+                {
                   value: 'donut',
                   displayValue: 'Donut'
                 },
@@ -161,6 +165,7 @@ const Components = React.createClass({
             <Link to='/components/date-range-picker'>Date Range Picker</Link>
             <Link to='/components/date-time-picker'>Date Time Picker</Link>
             <Link to='/components/display-input'>Display Input</Link>
+            <Link to='/components/drawer'>Drawer</Link>
             <Link to='/components/file-upload'>File Upload</Link>
             <Link to='/components/radio-button'>Radio Button</Link>
             <Link to='/components/range-selector'>Range Selector</Link>

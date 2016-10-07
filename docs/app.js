@@ -11,6 +11,7 @@ const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
 const DateRangePicker = require('components/DateRangePickerDocs');
 const DateTimePicker = require('components/DateTimePickerDocs');
 const DisplayInput = require('components/DisplayInputDocs');
+const Drawer = require('components/DrawerDocs');
 const DonutChart = require('components/DonutChartDocs');
 const FileUpload = require('components/FileUploadDocs');
 const Gauge = require('components/GaugeDocs');
@@ -69,6 +70,7 @@ ReactDOM.render((
         <Route component={DateRangePicker} path='date-range-picker' />
         <Route component={DateTimePicker} path='date-time-picker' />
         <Route component={DisplayInput} path='display-input' />
+        <Route component={Drawer} path='drawer' />
         <Route component={DonutChart} path='donut' />
         <Route component={FileUpload} path='file-upload' />
         <Route component={Gauge} path='gauge' />
