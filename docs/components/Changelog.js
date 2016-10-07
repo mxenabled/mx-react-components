@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Canidate 5.0.0-rc.14</h3>
+        <ul>
+          <li>
+           Adds two props to the drawer component and adds the Drawer to the docs.(<a href='https://github.com/mxenabled/mx-react-components/pull/457'>#457</a>)
+          </li>
+        </ul>
+
         <h3>Release Canidate 5.0.0-rc.9</h3>
         <ul>
           <li>
