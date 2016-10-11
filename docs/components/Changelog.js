@@ -5,6 +5,18 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Canidate 5.0.0-rc.15</h3>
+        <ul>
+          <li>
+            Adds a check to see if the handleResetClick prop is passed down, if not, hide the x icon.(<a href='https://github.com/mxenabled/mx-react-components/pull/451'>#451</a>)
+          </li>
+          <li>
+            Switches refs in RangeSelector to the accepted pattern.(<a href='https://github.com/mxenabled/mx-react-components/pull/454'>#454</a>)
+          </li>
+          <li>
+            Adds docs for BarChart component.(<a href='https://github.com/mxenabled/mx-react-components/pull/456'>#456</a>)
+          </li>
+        </ul>
 
         <h3>Release Canidate 5.0.0-rc.14</h3>
         <ul>
