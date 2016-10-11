@@ -90,7 +90,7 @@ const Input = React.createClass({
           style={styles.input}
           type={this.props.type}
         />
-        {this.props.rightIcon ? (
+        {this.props.rightIcon && this.props.handleResetClick ? (
           <Icon
             elementProps={{
               onClick: this.props.handleResetClick
