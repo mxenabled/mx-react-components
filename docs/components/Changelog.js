@@ -5,7 +5,7 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
-        <h3>Release Canidate 5.0.0-rc.15</h3>
+        <h3>Release Candidate 5.0.0-rc.15</h3>
         <ul>
           <li>
             Adds a check to see if the handleResetClick prop is passed down, if not, hide the x icon.(<a href='https://github.com/mxenabled/mx-react-components/pull/451'>#451</a>)
@@ -18,28 +18,28 @@ const Changelog = React.createClass({
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.14</h3>
+        <h3>Release Candidate 5.0.0-rc.14</h3>
         <ul>
           <li>
             Adds two props to the drawer component and adds the Drawer to the docs.(<a href='https://github.com/mxenabled/mx-react-components/pull/457'>#457</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.9</h3>
+        <h3>Release Candidate 5.0.0-rc.9</h3>
         <ul>
           <li>
             Fix hover on Tooltip and on the footer tooltip in Modal.(<a href='https://github.com/mxenabled/mx-react-components/pull/449'>#449</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.8</h3>
+        <h3>Release Candidate 5.0.0-rc.8</h3>
         <ul>
           <li>
             Add reset for input on FileUpload on new props.(<a href='https://github.com/mxenabled/mx-react-components/pull/447'>#447</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.7</h3>
+        <h3>Release Candidate 5.0.0-rc.7</h3>
         <ul>
           <li>
             Add validation for image dimensions in FileUploader.(<a href='https://github.com/mxenabled/mx-react-components/pull/444'>#444</a>)
@@ -52,42 +52,42 @@ const Changelog = React.createClass({
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.6</h3>
+        <h3>Release Candidate 5.0.0-rc.6</h3>
         <ul>
           <li>
             Update Icons with new elememtns prop.(<a href='https://github.com/mxenabled/mx-react-components/pull/440'>#440</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.5</h3>
+        <h3>Release Candidate 5.0.0-rc.5</h3>
         <ul>
           <li>
             Moves docs from gh-pages branch to /docs folder in master branch(<a href='https://github.com/mxenabled/mx-react-components/pull/432'>#432</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.4</h3>
+        <h3>Release Candidate 5.0.0-rc.4</h3>
         <ul>
           <li>
             SearchInput: Fixes React unknown prop warning(<a href='https://github.com/mxenabled/mx-react-components/pull/434'>#434</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.3</h3>
+        <h3>Release Candidate 5.0.0-rc.3</h3>
         <ul>
           <li>
             BarChart: Fixes scaling issue(<a href='https://github.com/mxenabled/mx-react-components/pull/433'>#433</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.2</h3>
+        <h3>Release Candidate 5.0.0-rc.2</h3>
         <ul>
           <li>
             Reverts Radium back to 0.14.0(<a href='https://github.com/mxenabled/mx-react-components/pull/431'>#431</a>)
           </li>
         </ul>
 
-        <h3>Release Canidate 5.0.0-rc.1</h3>
+        <h3>Release Candidate 5.0.0-rc.1</h3>
         <ul>
           <li>
             Tabs: Fixes brand color for caret icon(<a href='https://github.com/mxenabled/mx-react-components/pull/425'>#425</a>)
