@@ -78,7 +78,7 @@ const RangeSelector = React.createClass({
   },
 
   _setDefaultRangeValues () {
-    const component = ReactDOM.findDOMNode(this.refs.rangeSelector);
+    const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const componentStyles = window.getComputedStyle(component);
     const width = parseInt(componentStyles.width, 0);
 
@@ -127,7 +127,7 @@ const RangeSelector = React.createClass({
 
   _handleTrackMouseDown (e) {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+    const newPixels = clientX - ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
     const updatedState = {
       trackClicked: true
     };
@@ -156,7 +156,7 @@ const RangeSelector = React.createClass({
         selectedLabel: null
       };
 
-      let newPixels = clientX - ReactDOM.findDOMNode(this.refs.rangeSelector).getBoundingClientRect().left;
+      let newPixels = clientX - ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
 
       //make sure we don't go past the end of the track
       newPixels = Math.min(newPixels, this.state.width);
@@ -254,7 +254,9 @@ const RangeSelector = React.createClass({
           onMouseUp={this._handleDragEnd}
           onTouchEnd={this._handleDragEnd}
           onTouchMove={this._handleDragging}
-          ref='rangeSelector'
+          ref={(ref) => {
+            this.rangeSelectorRef = ref;
+          }}
           style={styles.range}
         >
           {this.props.presets.length ? (

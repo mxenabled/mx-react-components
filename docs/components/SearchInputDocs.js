@@ -5,6 +5,24 @@ const { SearchInput } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const SearchInputDocs = React.createClass({
+  getInitialState () {
+    return {
+      searchKeyword: ''
+    };
+  },
+
+  _handleInputChange (e) {
+    this.setState({
+      searchKeyword: e.target.value
+    });
+  },
+
+  _handleResetClick () {
+    this.setState({
+      searchKeyword: ''
+    });
+  },
+
   render () {
     return (
       <div>
@@ -15,7 +33,10 @@ const SearchInputDocs = React.createClass({
 
         <h3>Demo</h3>
         <SearchInput
+          handleResetClick={this._handleResetClick}
+          onChange={this._handleInputChange}
           placeholder='Type to search'
+          searchKeyword={this.state.searchKeyword}
         />
 
         <h3>Usage</h3>
@@ -26,7 +47,7 @@ const SearchInputDocs = React.createClass({
         <p>A method to be called as the user types in the search input field.</p>
 
         <h5>handleResetClick <label>Function</label></h5>
-        <p>A method to be called when reset icon is clicked.</p>
+        <p>A method to be called when reset icon is clicked, in the demo above it is used to clear the input value.</p>
 
         <h5>placeholder <label>String</label></h5>
         <p>The text to show before the user starts typing or when the search input field is empty.</p>
