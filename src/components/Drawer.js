@@ -3,6 +3,7 @@ const Radium = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
 const _throttle = require('lodash/throttle');
+const _merge = require('lodash/merge');
 
 const Button = require('../components/Button');
 
@@ -36,6 +37,7 @@ const Drawer = React.createClass({
     onClose: React.PropTypes.func.isRequired,
     showCloseButton: React.PropTypes.bool,
     showScrim: React.PropTypes.bool,
+    styles: React.PropTypes.object,
     title: React.PropTypes.string
   },
 
@@ -169,7 +171,7 @@ const Drawer = React.createClass({
   },
 
   styles () {
-    return {
+    return _merge({}, {
       component: {
         border: '1px solid ' + StyleConstants.Colors.FOG,
         boxSizing: 'border-box',
@@ -264,7 +266,7 @@ const Drawer = React.createClass({
           padding: 0
         }
       }
-    };
+    }, this.props.styles);
   }
 });
 

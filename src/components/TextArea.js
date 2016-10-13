@@ -1,5 +1,7 @@
 const React = require('react');
 
+const _merge = require('lodash/merge');
+
 const StyleConstants = require('../constants/Style');
 
 const TextArea = React.createClass({
@@ -7,6 +9,7 @@ const TextArea = React.createClass({
     elementProps: React.PropTypes.object,
     primaryColor: React.PropTypes.string,
     rows: React.PropTypes.number,
+    styles: React.PropTypes.object,
     valid: React.PropTypes.bool
   },
 
@@ -65,7 +68,7 @@ const TextArea = React.createClass({
   },
 
   styles () {
-    return {
+    return _merge({}, {
       component: {
         display: 'block'
       },
@@ -91,7 +94,7 @@ const TextArea = React.createClass({
         outline: 'none',
         boxShadow: 'none'
       }
-    };
+    }, this.props.styles);
   }
 });
 

@@ -5,6 +5,14 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+
+        <h3>Release Candidate 5.0.0-rc.16</h3>
+        <ul>
+          <li>
+            Adds styles prop to the Drawer and TextArea components to enable greater CSS control.(<a href='https://github.com/mxenabled/mx-react-components/pull/459'>#459</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.15</h3>
         <ul>
           <li>
