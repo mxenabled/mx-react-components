@@ -134,7 +134,7 @@ const StylesDocs = React.createClass({
         <Markdown lang='js'>
           {`
             Styles.BreakPoints.large: 1200,
-            Styles.BreakPoints.medium: 750,
+            Styles.BreakPoints.medium: 768,
             Styles.BreakPoints.small: 320
           `}
         </Markdown>

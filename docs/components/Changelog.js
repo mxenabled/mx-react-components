@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.17</h3>
+	<ul>
+	  <li>
+	    Updates the medium breakpoint to 768px to align better with the ipad and other tablets.
+	  </li>
+	</ul>
+
         <h3>Release Candidate 5.0.0-rc.16</h3>
         <ul>
           <li>
