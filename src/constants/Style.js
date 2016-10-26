@@ -1,7 +1,7 @@
 module.exports = {
   BreakPoints: {
     large: 1200,
-    medium: 750,
+    medium: 768,
     small: 320
   },
 
