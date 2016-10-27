@@ -33,6 +33,7 @@ const Select = require('components/SelectDocs');
 const SelectFullScreen = require('components/SelectFullScreenDocs');
 const SimpleInput = require('components/SimpleInputDocs');
 const SimpleSelect = require('components/SimpleSelectDocs');
+const SimpleSlider = require('components/SimpleSliderDocs');
 const Spin = require('components/SpinDocs');
 const Styles = require('components/StylesDocs');
 const Tabs = require('components/TabsDocs');
@@ -91,6 +92,7 @@ ReactDOM.render((
         <Route component={SelectFullScreen} path='select-full-screen' />
         <Route component={SimpleInput} path='simple-input' />
         <Route component={SimpleSelect} path='simple-select' />
+        <Route component={SimpleSlider} path='simple-slider' />
         <Route component={Spin} path='spin' />
         <Route component={Styles} path='styles' />
         <Route component={Tabs} path='tabs' />
