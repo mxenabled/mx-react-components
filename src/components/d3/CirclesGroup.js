@@ -5,6 +5,7 @@ const StyleConstants = require('../../constants/Style');
 const CirclesGroup = React.createClass({
   propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
+    circleColor: React.PropTypes.string,
     circleRadius: React.PropTypes.number,
     data: React.PropTypes.array.isRequired,
     shouldAnimate: React.PropTypes.bool,
@@ -15,6 +16,7 @@ const CirclesGroup = React.createClass({
 
   getDefaultProps () {
     return {
+      circleColor: StyleConstants.Colors.CHARCOAL,
       circleRadius: 3,
       shouldAnimate: true,
       translation: 'translate(0,0)'
@@ -56,7 +58,7 @@ const CirclesGroup = React.createClass({
                 fill={StyleConstants.Colors.WHITE}
                 key={index}
                 r={circleRadius}
-                stroke={StyleConstants.Colors.CHARCOAL}
+                stroke={this.props.circleColor}
               />
             );
           })
