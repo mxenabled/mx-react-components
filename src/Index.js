@@ -48,6 +48,7 @@ module.exports = {
   SlicesGroup: require('./components/d3/SlicesGroup'),
   TimeXAxisGroup: require('./components/d3/TimeXAxisGroup'),
 
+  // App constants
   AppConstants: require('./constants/App'),
   Styles: require('./constants/Style')
 };
