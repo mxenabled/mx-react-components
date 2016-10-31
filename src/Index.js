@@ -37,6 +37,18 @@ module.exports = {
   Tooltip: require('./components/Tooltip'),
   TypeAhead: require('./components/TypeAhead'),
 
+  // D3 components
+  AxisGroup: require('./components/d3/AxisGroup'),
+  BreakPointGroup: require('./components/d3/BreakPointGroup'),
+  CirclesGroup: require('./components/d3/CirclesGroup'),
+  GridLinesGroup: require('./components/d3/GridLinesGroup'),
+  LineGroup: require('./components/d3/LineGroup'),
+  ShadedAreaRectangleGroup: require('./components/d3/ShadedAreaRectangleGroup'),
+  ShadedHatchPatternRectangleGroup: require('./components/d3/ShadedHatchPatternRectangleGroup'),
+  SlicesGroup: require('./components/d3/SlicesGroup'),
+  TimeXAxisGroup: require('./components/d3/TimeXAxisGroup'),
+
+  // App constants
   AppConstants: require('./constants/App'),
   Styles: require('./constants/Style')
 };
