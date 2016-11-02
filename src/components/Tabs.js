@@ -89,7 +89,7 @@ const Tabs = React.createClass({
         {selectedTabName}
         <Icon
           size={20}
-          style={{ color: this.props.brandColor }}
+          style={{ fill: this.props.brandColor }}
           type={!this.state.showMenu ? 'caret-down' : 'caret-up' }
         />
         {this.state.showMenu ? (
