@@ -9,21 +9,22 @@ const SimpleSlider = React.createClass({
   propTypes: {
     defaultValue: React.PropTypes.number,
     disabled: React.PropTypes.bool,
-    onPercentChange: React.PropTypes.func,
+    onPercentChange: React.PropTypes.func.isRequired,
     selectedColor: React.PropTypes.string,
-    styles: React.PropTypes.object,
-    updateOnDrag: React.PropTypes.bool
+    styles: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
-      defaultValue: 0,
+      //defaultValue: 0,
+      //
       selectedColor: '#359BCF'
     };
   },
 
   getInitialState () {
     const disabled = this.props.disabled || false;
+
     return {
       dragging: false,
       disabled
@@ -35,9 +36,11 @@ const SimpleSlider = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
+    console.log('newProps', newProps);
     const disabled = newProps.disabled || false;
-    const leftPixels = (newProps.defaultValue * this.state.width) || 0;
+    const leftPixels = (newProps.defaultValue * this.state.width) || this.state.currentPercent;
     const currentPercent = newProps.defaultValue;
+
     this.setState({ leftPixels, currentPercent, disabled });
   },
 
@@ -46,11 +49,9 @@ const SimpleSlider = React.createClass({
     const componentStyles = window.getComputedStyle(component);
     const width = parseInt(componentStyles.width, 0);
     let leftPixels = 0;
-    let currentPercent = 0;
 
     if (this.props.defaultValue) {
       leftPixels = (this.props.defaultValue * this.state.width);
-      currentPercent = this.props.defaultValue;
     }
 
     this.setState({ width, leftPixels });
@@ -64,11 +65,11 @@ const SimpleSlider = React.createClass({
 
     if (currentPercent < 0) {
       currentPercent = 0;
-    } else if ( currentPercent > 1) {
+    } else if (currentPercent > 1) {
       currentPercent = 1;
     }
 
-    if (leftPixels >= 0 && leftPixels <= this.state.width) {
+    if (leftPixels >= 10 && leftPixels <= this.state.width + 10) {
       this.setState({ leftPixels, currentPercent });
     }
     this.props.onPercentChange((currentPercent).toFixed(2));
@@ -86,9 +87,10 @@ const SimpleSlider = React.createClass({
       const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
       const leftPixels = (clientX - leftSpace);
       let currentPercent = ((clientX - leftSpace) / this.state.width);
+
       if (currentPercent < 0) {
         currentPercent = 0;
-      } else if ( currentPercent > 1) {
+      } else if (currentPercent > 1) {
         currentPercent = 1;
       }
 
@@ -107,7 +109,7 @@ const SimpleSlider = React.createClass({
 
   render () {
     const styles = this.styles();
-    console.log('disabled? ', this.state.disabled);
+    console.log(this.state.leftPixels);
 
     return (
       <div style={styles.component}>
@@ -157,7 +159,7 @@ const SimpleSlider = React.createClass({
       },
       trackHolder: {
         padding: '15px 0',
-        cursor: this.state.disabled ? 'default' : 'pointer',
+        cursor: this.state.disabled ? 'default' : 'pointer'
       },
       toggle: {
         width: '20px',
