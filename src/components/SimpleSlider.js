@@ -7,17 +7,15 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSlider = React.createClass({
   propTypes: {
-    defaultValue: React.PropTypes.number,
     disabled: React.PropTypes.bool,
     onPercentChange: React.PropTypes.func.isRequired,
+    percent: React.PropTypes.number.isRequired,
     selectedColor: React.PropTypes.string,
     styles: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
-      //defaultValue: 0,
-      //
       selectedColor: '#359BCF'
     };
   },
@@ -36,31 +34,24 @@ const SimpleSlider = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
-    console.log('newProps', newProps);
     const disabled = newProps.disabled || false;
-    const leftPixels = (newProps.defaultValue * this.state.width) || this.state.currentPercent;
-    const currentPercent = newProps.defaultValue;
+    const leftPixels = (newProps.percent * this.state.width);
 
-    this.setState({ leftPixels, currentPercent, disabled });
+    this.setState({ leftPixels, disabled });
   },
 
   _setDefaults () {
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const componentStyles = window.getComputedStyle(component);
     const width = parseInt(componentStyles.width, 0);
-    let leftPixels = 0;
-
-    if (this.props.defaultValue) {
-      leftPixels = (this.props.defaultValue * this.state.width);
-    }
+    const leftPixels = this.props.percent * width;
 
     this.setState({ width, leftPixels });
   },
 
-  _handleTrackMouseDown (e) {
+  _handleMouseEvents (e) {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
-    const leftPixels = (clientX - leftSpace);
     let currentPercent = ((clientX - leftSpace) / this.state.width);
 
     if (currentPercent < 0) {
@@ -69,10 +60,11 @@ const SimpleSlider = React.createClass({
       currentPercent = 1;
     }
 
-    if (leftPixels >= 10 && leftPixels <= this.state.width + 10) {
-      this.setState({ leftPixels, currentPercent });
-    }
-    this.props.onPercentChange((currentPercent).toFixed(2));
+    this.props.onPercentChange(currentPercent);
+  },
+
+  _handleTrackMouseDown (e) {
+    this._handleMouseEvents(e);
   },
 
   _handleDragStart () {
@@ -83,21 +75,7 @@ const SimpleSlider = React.createClass({
 
   _handleDragging (e) {
     if (this.state.dragging) {
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
-      const leftPixels = (clientX - leftSpace);
-      let currentPercent = ((clientX - leftSpace) / this.state.width);
-
-      if (currentPercent < 0) {
-        currentPercent = 0;
-      } else if (currentPercent > 1) {
-        currentPercent = 1;
-      }
-
-      if (leftPixels >= 10 && leftPixels <= this.state.width + 10) {
-        this.setState({ leftPixels, currentPercent });
-      }
-      this.props.onPercentChange((currentPercent).toFixed(2));
+      this._handleMouseEvents(e);
     }
   },
 
@@ -109,7 +87,6 @@ const SimpleSlider = React.createClass({
 
   render () {
     const styles = this.styles();
-    console.log(this.state.leftPixels);
 
     return (
       <div style={styles.component}>
@@ -146,7 +123,6 @@ const SimpleSlider = React.createClass({
     return _merge({}, {
       component: {
         position: 'relative',
-        fontSize: '11px',
         fontFamily: StyleConstants.FontFamily
       },
       range: {
@@ -170,9 +146,9 @@ const SimpleSlider = React.createClass({
         position: 'absolute',
         top: '50%',
         left: this.state.leftPixels,
-        marginLeft: '15px',
-        transform: 'translate(-50%, -50%)',
-        WebkitTransform: 'translate(-50%, -50%)',
+        marginLeft: '0px',
+        transform: 'translate(20%, -50%)',
+        WebkitTransform: 'translate(20%, -50%)',
         cursor: this.state.disabled ? 'default' : 'pointer',
         zIndex: 2
       },
