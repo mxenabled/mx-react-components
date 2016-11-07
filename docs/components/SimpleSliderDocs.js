@@ -11,9 +11,7 @@ const SimpleSliderDocs = React.createClass({
     };
   },
 
-  _handleSliderChange (newPercent) {
-    const percent = newPercent;
-
+  _handleSliderChange (percent) {
     this.setState({ percent });
   },
 

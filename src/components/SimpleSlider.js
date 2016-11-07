@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const _noop = require('lodash/noop');
 const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
@@ -16,16 +15,14 @@ const SimpleSlider = React.createClass({
 
   getDefaultProps () {
     return {
-      selectedColor: '#359BCF'
+      selectedColor: StyleConstants.Colors.PRIMARY
     };
   },
 
   getInitialState () {
-    const disabled = this.props.disabled || false;
 
     return {
-      dragging: false,
-      disabled
+      dragging: false
     };
   },
 
@@ -34,10 +31,9 @@ const SimpleSlider = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
-    const disabled = newProps.disabled || false;
     const leftPixels = (newProps.percent * this.state.width);
 
-    this.setState({ leftPixels, disabled });
+    this.setState({ leftPixels });
   },
 
   _setDefaults () {
@@ -91,26 +87,26 @@ const SimpleSlider = React.createClass({
     return (
       <div style={styles.component}>
         <div
-          onMouseLeave={this.state.disabled ? _noop() : this._handleDragEnd}
-          onMouseMove={this.state.disabled ? _noop() : this._handleDragging}
-          onMouseUp={this.state.disabled ? _noop() : this._handleDragEnd}
-          onTouchEnd={this.state.disabled ? _noop() : this._handleDragEnd}
-          onTouchMove={this.state.disabled ? _noop() : this._handleDragging}
+          onMouseLeave={this.props.disabled ? null : this._handleDragEnd}
+          onMouseMove={this.props.disabled ? null : this._handleDragging}
+          onMouseUp={this.props.disabled ? null : this._handleDragEnd}
+          onTouchEnd={this.props.disabled ? null : this._handleDragEnd}
+          onTouchMove={this.props.disabled ? null : this._handleDragging}
           ref={(ref) => {
             this.rangeSelectorRef = ref;
           }}
           style={styles.range}
         >
           <div
-            onMouseDown={this.state.disabled ? _noop() : this._handleTrackMouseDown}
+            onMouseDown={this.props.disabled ? null : this._handleTrackMouseDown}
             style={styles.trackHolder}
           >
             <div style={styles.track}></div>
             <div style={styles.selected}></div>
           </div>
           <div
-            onMouseDown={this.state.disabled ? _noop() : this._handleDragStart}
-            onTouchStart={this.state.disabled ? _noop() : this._handleDragStart}
+            onMouseDown={this.props.disabled ? null : this._handleDragStart}
+            onTouchStart={this.props.disabled ? null : this._handleDragStart}
             style={styles.toggle}
           >
           </div>
@@ -127,37 +123,40 @@ const SimpleSlider = React.createClass({
       },
       range: {
         padding: '25px 0',
-        margin: '0 15px'
+        margin: `0 ${StyleConstants.Spacing.MEDIUM}px`
       },
       track: {
-        height: '1px',
+        height: '1',
         background: '#ccc'
       },
       trackHolder: {
-        padding: '15px 0',
-        cursor: this.state.disabled ? 'default' : 'pointer'
+        padding: `${StyleConstants.Spacing.MEDIUM}px 0`,
+        cursor: this.props.disabled ? 'default' : 'pointer'
       },
       toggle: {
-        width: '20px',
-        height: '20px',
+        width: StyleConstants.Spacing.LARGE,
+        height: StyleConstants.Spacing.LARGE,
         borderRadius: '100%',
         background: '#fff',
         boxShadow: StyleConstants.ShadowLow,
         position: 'absolute',
         top: '50%',
         left: this.state.leftPixels,
-        marginLeft: '0px',
         transform: 'translate(20%, -50%)',
         WebkitTransform: 'translate(20%, -50%)',
-        cursor: this.state.disabled ? 'default' : 'pointer',
+        //cursor: this.props.disabled ? 'not-allowed' : '-webkit-grab',
+        //
+        cursor: 'grab',
+        cursor: '-webkit-grab',
+        cursor: '-moz-grab',
         zIndex: 2
       },
       selected: {
         position: 'absolute',
-        left: 10,
+        left: StyleConstants.Spacing.SMALL,
         width: this.state.leftPixels,
         background: this.props.selectedColor,
-        height: '3px',
+        height: '3',
         top: '50%',
         transform: 'translateY(-50%)',
         WebkitTransform: 'translateY(-50%)',
