@@ -337,6 +337,10 @@ module.exports = {
       displayValue: 'NO'
     },
     {
+      value: 'pause',
+      displayValue: 'Pause'
+    },
+    {
       value: 'personal-care',
       displayValue: 'Personal Care'
     },
