@@ -152,11 +152,11 @@ const DonutChart = React.createClass({
     const nextArcData = this.state.values[nextActiveIndex];
 
     if (currentArcData) {
-      d3.select(this.refs['arc-' + this.props.id + currentActiveIndex]).transition('currentArc').duration(200).attr('d', this.state.standardArc(currentArcData));
+      d3.select(this['arc-' + this.props.id + currentActiveIndex]).transition('currentArc').duration(200).attr('d', this.state.standardArc(currentArcData));
     }
 
     if (nextArcData) {
-      d3.select(this.refs['arc-' + this.props.id + nextActiveIndex]).transition('nextArc').duration(200).attr('d', this.state.hoveredArc(nextArcData));
+      d3.select(this['arc-' + this.props.id + nextActiveIndex]).transition('nextArc').duration(200).attr('d', this.state.hoveredArc(nextArcData));
     }
   },
 
@@ -227,7 +227,7 @@ const DonutChart = React.createClass({
 
   _handleMouseEnter (point) {
     if (this.props.animateOnHover && this.state.activeIndex !== point.index) {
-      d3.select(this.refs[point.ref]).transition('mouseEnter').duration(200).attr('d', this.state.hoveredArc(point.arc));
+      d3.select(this[point.ref]).transition('mouseEnter').duration(200).attr('d', this.state.hoveredArc(point.arc));
     }
 
     this.props.onMouseEnter(this.props.data[point.index], point.index);
@@ -239,7 +239,7 @@ const DonutChart = React.createClass({
 
   _handleMouseLeave (point) {
     if (this.props.animateOnHover) {
-      d3.select(this.refs[point.ref]).transition('mouseLeave').duration(200).attr('d', this.state.standardArc(point.arc));
+      d3.select(this[point.ref]).transition('mouseLeave').duration(200).attr('d', this.state.standardArc(point.arc));
     }
 
     this.props.onMouseLeave();
@@ -263,7 +263,9 @@ const DonutChart = React.createClass({
             d={this.state.standardArc(point)}
             fill={this.props.colors[i]}
             opacity={this.props.opacity}
-            ref={'arc-' + this.props.id + i}
+            ref={(ref) => {
+              this['arc-' + this.props.id + i] = ref;
+            }}
           />
         </g>
       );
@@ -363,7 +365,6 @@ const DonutChart = React.createClass({
         <svg
           className='mx-donutchart-svg'
           height={this.props.height}
-          ref={this.props.id}
           width={this.props.width}
         >
           <g className='mx-donutchart-g' transform={position}>
