@@ -53,8 +53,6 @@ const SimpleSliderDocs = React.createClass({
             />
           `}
         </Markdown>
-
-
       </div>
     );
   }
