@@ -36,7 +36,7 @@ const SimpleSliderDocs = React.createClass({
         <h5>disabled <label>bool</label></h5>
         <p>When true, the slider is disabled. This defaults to false.</p>
 
-        <h5>onPercentChange <label>func</label></h5>
+        <h5>onPercentChange <label>func</label> <em>Required</em></h5>
         <p>When the slider is moved, your callback function is called and the current percent is passed as a param. The current percent is a number between 0 and 1.</p>
 
         <h5>selectedColor <label>string</label></h5>
