@@ -33,7 +33,7 @@ const CirclesGroup = React.createClass({
 
   _animateCircles () {
     if (this.props.shouldAnimate) {
-      d3.select(this.refs.circleGroup).selectAll('.circle').data(this.props.data).transition().attr('cy', d => {
+      d3.select(this.circleGroup).selectAll('.circle').data(this.props.data).transition().attr('cy', d => {
         return this.props.yScaleValueFunction(d.y);
       });
     }
@@ -44,7 +44,11 @@ const CirclesGroup = React.createClass({
     const preventCircleOverlapCutOff = 45;
 
     return (
-      <g className='circle-group' ref='circleGroup' transform={translation}>
+      <g
+        className='circle-group'
+        ref={(ref) => this.circleGroup = ref}
+        transform={translation}
+      >
         {data.length <= preventCircleOverlapCutOff ? (
           data.map((item, index) => {
             const cx = xScaleValueFunction(item.x);

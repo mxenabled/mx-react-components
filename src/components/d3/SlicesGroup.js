@@ -12,7 +12,7 @@ const SlicesGroup = React.createClass({
 
   render () {
     return (
-      <g className='slices' ref='slices'>
+      <g className='slices'>
         {this.props.data.map((dataPoint, index) => {
           return (
             <rect

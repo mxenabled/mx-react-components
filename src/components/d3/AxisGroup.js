@@ -36,14 +36,14 @@ const AxisGroup = React.createClass({
       .ticks(tickValues.length)
       .tickValues(tickValues);
 
-    d3.select(this.refs[this.props.axis + 'Axis']).call(axisFunction);
+    d3.select(this.axisGroup).call(axisFunction);
   },
 
   render () {
     return (
       <g
         className={this.props.axis + '-axis'}
-        ref={this.props.axis + 'Axis'}
+        ref={(ref) => this.axisGroup = ref}
         transform={this.props.translation}
       />
     );
