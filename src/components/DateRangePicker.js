@@ -298,11 +298,12 @@ const DateRangePicker = React.createClass({
     return (
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
-          <Icon
-            size={20}
-            style={styles.selectedDateIcon}
-            type='calendar'
-          />
+          {StyleConstants.getWindowSize() !== 'xsmall' &&
+            <Icon
+              size={20}
+              style={styles.selectedDateIcon}
+              type='calendar'
+            />}
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
@@ -312,11 +313,12 @@ const DateRangePicker = React.createClass({
               </div>
             ) : this.props.placeholderText}
           </div>
-          <Icon
-            size={20}
-            style={styles.selectedDateCaret}
-            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-          />
+          {StyleConstants.getWindowSize() !== 'xsmall' &&
+            <Icon
+              size={20}
+              style={styles.selectedDateCaret}
+              type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+            />}
         </div>
         <Container>
           <Row>
@@ -405,6 +407,7 @@ const DateRangePicker = React.createClass({
         borderWidth: 1,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.BLACK,
+        cursor: 'pointer',
         display: 'inline-block',
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -416,18 +419,16 @@ const DateRangePicker = React.createClass({
       // Selected Date styles
       selectedDateWrapper: {
         alignItems: 'center',
-        cursor: 'pointer',
         display: 'flex',
-        justifyContent: 'space-between',
-        position: this.props.isRelative ? 'relative' : 'static'
+        height: 20,
+        justifyContent: 'space-between'
       },
       selectedDateIcon: {
         fill: this.props.primaryColor,
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
-        flex: 1
+        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
       },
       selectedDateCaret: {
         fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
