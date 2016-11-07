@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const Radium = require('radium');
 const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
@@ -20,7 +21,6 @@ const SimpleSlider = React.createClass({
   },
 
   getInitialState () {
-
     return {
       dragging: false
     };
@@ -116,6 +116,15 @@ const SimpleSlider = React.createClass({
   },
 
   styles () {
+    let cursorStyle = 'grab';
+
+    if (this.props.disabled) {
+      cursorStyle = 'not-allowed';
+    }
+    if (this.state.dragging) {
+      cursorStyle = 'grabbing';
+    }
+
     return _merge({}, {
       component: {
         position: 'relative',
@@ -131,7 +140,7 @@ const SimpleSlider = React.createClass({
       },
       trackHolder: {
         padding: `${StyleConstants.Spacing.MEDIUM}px 0`,
-        cursor: this.props.disabled ? 'default' : 'pointer'
+        cursor: cursorStyle
       },
       toggle: {
         width: StyleConstants.Spacing.LARGE,
@@ -144,11 +153,7 @@ const SimpleSlider = React.createClass({
         left: this.state.leftPixels,
         transform: 'translate(20%, -50%)',
         WebkitTransform: 'translate(20%, -50%)',
-        //cursor: this.props.disabled ? 'not-allowed' : '-webkit-grab',
-        //
-        cursor: 'grab',
-        cursor: '-webkit-grab',
-        cursor: '-moz-grab',
+        cursor: cursorStyle,
         zIndex: 2
       },
       selected: {
@@ -166,4 +171,4 @@ const SimpleSlider = React.createClass({
   }
 });
 
-module.exports = SimpleSlider;
+module.exports = Radium(SimpleSlider);
