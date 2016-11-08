@@ -16,6 +16,7 @@ const SimpleSlider = React.createClass({
 
   getDefaultProps () {
     return {
+      disabled: false,
       selectedColor: StyleConstants.Colors.PRIMARY
     };
   },
@@ -33,15 +34,16 @@ const SimpleSlider = React.createClass({
   },
 
   componentWillReceiveProps (newProps) {
-    const leftPixels = (newProps.percent * this.state.width);
+    if (this.props.percent !== newProps.percent) {
+      const leftPixels = (newProps.percent * this.state.width);
 
-    this.setState({ leftPixels });
+      this.setState({ leftPixels });
+    }
   },
 
   _setDefaults () {
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
-    const componentStyles = window.getComputedStyle(component);
-    const width = parseInt(componentStyles.width, 0);
+    const width = component.clientWidth;
     const leftPixels = this.props.percent * width;
 
     this.setState({ width, leftPixels });
@@ -59,10 +61,6 @@ const SimpleSlider = React.createClass({
     }
 
     this.props.onPercentChange(currentPercent);
-  },
-
-  _handleTrackMouseDown (e) {
-    this._handleMouseEvents(e);
   },
 
   _handleDragStart () {
@@ -85,33 +83,33 @@ const SimpleSlider = React.createClass({
 
   render () {
     const styles = this.styles();
+    const { disabled } = this.props;
 
     return (
       <div style={styles.component}>
         <div
-          onMouseLeave={this.props.disabled ? null : this._handleDragEnd}
-          onMouseMove={this.props.disabled ? null : this._handleDragging}
-          onMouseUp={this.props.disabled ? null : this._handleDragEnd}
-          onTouchEnd={this.props.disabled ? null : this._handleDragEnd}
-          onTouchMove={this.props.disabled ? null : this._handleDragging}
+          onMouseLeave={disabled ? null : this._handleDragEnd}
+          onMouseMove={disabled ? null : this._handleDragging}
+          onMouseUp={disabled ? null : this._handleDragEnd}
+          onTouchEnd={disabled ? null : this._handleDragEnd}
+          onTouchMove={disabled ? null : this._handleDragging}
           ref={(ref) => {
             this.rangeSelectorRef = ref;
           }}
           style={styles.range}
         >
           <div
-            onMouseDown={this.props.disabled ? null : this._handleTrackMouseDown}
+            onMouseDown={disabled ? null : this._handleMouseEvents}
             style={styles.trackHolder}
           >
-            <div style={styles.track}></div>
-            <div style={styles.selected}></div>
+            <div style={styles.track} />
+            <div style={styles.selected} />
           </div>
           <div
-            onMouseDown={this.props.disabled ? null : this._handleDragStart}
-            onTouchStart={this.props.disabled ? null : this._handleDragStart}
+            onMouseDown={disabled ? null : this._handleDragStart}
+            onTouchStart={disabled ? null : this._handleDragStart}
             style={styles.toggle}
-          >
-          </div>
+          />
         </div>
       </div>
     );
@@ -148,7 +146,7 @@ const SimpleSlider = React.createClass({
         width: StyleConstants.Spacing.LARGE,
         height: StyleConstants.Spacing.LARGE,
         borderRadius: '100%',
-        background: '#fff',
+        background: StyleConstants.Colors.WHITE,
         boxShadow: StyleConstants.ShadowLow,
         position: 'absolute',
         top: '50%',
