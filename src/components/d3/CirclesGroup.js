@@ -8,6 +8,7 @@ const CirclesGroup = React.createClass({
     circleColor: React.PropTypes.string,
     circleRadius: React.PropTypes.number,
     data: React.PropTypes.array.isRequired,
+    onCircleClick: React.PropTypes.func,
     shouldAnimate: React.PropTypes.bool,
     translation: React.PropTypes.string,
     xScaleValueFunction: React.PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ const CirclesGroup = React.createClass({
     return {
       circleColor: StyleConstants.Colors.CHARCOAL,
       circleRadius: 3,
+      onCircleClick: () => {},
       shouldAnimate: true,
       translation: 'translate(0,0)'
     };
@@ -61,6 +63,9 @@ const CirclesGroup = React.createClass({
                 cy={cy}
                 fill={StyleConstants.Colors.WHITE}
                 key={index}
+                onClick={() => {
+                  this.props.onCircleClick(item);
+                }}
                 r={circleRadius}
                 stroke={this.props.circleColor}
               />
