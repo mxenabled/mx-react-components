@@ -35,7 +35,7 @@ const SimpleSlider = React.createClass({
 
   componentWillReceiveProps (newProps) {
     if (this.props.percent !== newProps.percent) {
-      const leftPixels = (newProps.percent * this.state.width);
+      const leftPixels = newProps.percent * this.state.width;
 
       this.setState({ leftPixels });
     }
