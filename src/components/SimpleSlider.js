@@ -52,7 +52,7 @@ const SimpleSlider = React.createClass({
   _handleMouseEvents (e) {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
-    let currentPercent = ((clientX - leftSpace) / this.state.width);
+    let currentPercent = (clientX - leftSpace) / this.state.width;
 
     if (currentPercent < 0) {
       currentPercent = 0;
