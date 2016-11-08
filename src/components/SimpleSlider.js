@@ -23,7 +23,8 @@ const SimpleSlider = React.createClass({
   getInitialState () {
     return {
       dragging: false,
-      leftPixels: 0
+      leftPixels: 0,
+      width: 0
     };
   },
 
