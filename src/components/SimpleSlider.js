@@ -30,7 +30,11 @@ const SimpleSlider = React.createClass({
   },
 
   componentDidMount () {
-    this._setDefaults();
+    const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
+    const width = component.clientWidth;
+    const leftPixels = this.props.percent * width;
+
+    this.setState({ width, leftPixels });
   },
 
   componentWillReceiveProps (newProps) {
@@ -39,14 +43,6 @@ const SimpleSlider = React.createClass({
 
       this.setState({ leftPixels });
     }
-  },
-
-  _setDefaults () {
-    const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
-    const width = component.clientWidth;
-    const leftPixels = this.props.percent * width;
-
-    this.setState({ width, leftPixels });
   },
 
   _handleMouseEvents (e) {
