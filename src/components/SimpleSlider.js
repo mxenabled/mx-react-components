@@ -127,8 +127,7 @@ const SimpleSlider = React.createClass({
 
     return _merge({}, {
       component: {
-        position: 'relative',
-        fontFamily: StyleConstants.FontFamily
+        position: 'relative'
       },
       range: {
         padding: '25px 0',
