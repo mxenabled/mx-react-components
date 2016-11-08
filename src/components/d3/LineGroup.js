@@ -60,7 +60,7 @@ const LineGroup = React.createClass({
 
   _animateLine () {
     if (this.props.shouldAnimate) {
-      d3.select(this.refs.chartLine).transition().attr('d', this.state.line(this.props.data));
+      d3.select(this.chartLine).transition().attr('d', this.state.line(this.props.data));
     }
   },
 
@@ -68,11 +68,11 @@ const LineGroup = React.createClass({
     const { data, dashLine, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
 
     return (
-      <g className='chart-line-group' ref='chartLineGroup' transform={translation}>
+      <g className='chart-line-group' transform={translation}>
         <path
           d={shouldAnimate ? this.state.flatLine(data) : this.state.line(data) }
           fill='none'
-          ref='chartLine'
+          ref={(ref) => this.chartLine = ref}
           stroke={lineColor}
           strokeDasharray={dashLine ? '4,4' : 'none'}
           strokeWidth={strokeWidth}

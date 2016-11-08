@@ -23,7 +23,7 @@ const ShadedAreaRectangleGroup = React.createClass({
 
   render () {
     return (
-      <g className='shaded-area' ref='ShadedArea'>
+      <g className='shaded-area'>
         <rect
           fill={this.props.fillColor}
           fillOpacity={this.props.fillOpacity}

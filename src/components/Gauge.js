@@ -136,7 +136,6 @@ const Gauge = React.createClass({
             d={this.state.standardArc(point)}
             fill={this.props.colors[i]}
             opacity={this.props.opacity}
-            ref={'arc-' + this.props.id + i}
           />
         </g>
       );
@@ -229,7 +228,6 @@ const Gauge = React.createClass({
         <svg
           className='mx-gauge-svg'
           height={this.props.height}
-          ref={this.props.id}
           width={this.props.width}
         >
           <g className='mx-gauge-g' transform={position}>

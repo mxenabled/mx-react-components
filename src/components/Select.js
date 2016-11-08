@@ -130,7 +130,7 @@ const Select = React.createClass({
   },
 
   _scrollListDown (nextIndex) {
-    const ul = ReactDOM.findDOMNode(this.refs.optionList);
+    const ul = ReactDOM.findDOMNode(this.optionList);
     const activeLi = ul.children[nextIndex];
     const heightFromTop = nextIndex * activeLi.clientHeight;
 
@@ -140,7 +140,7 @@ const Select = React.createClass({
   },
 
   _scrollListUp (prevIndex) {
-    const ul = ReactDOM.findDOMNode(this.refs.optionList);
+    const ul = ReactDOM.findDOMNode(this.optionList);
     const activeLi = ul.children[prevIndex];
     const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
 
@@ -177,7 +177,7 @@ const Select = React.createClass({
         );
       } else {
         return (
-          <ul className='mx-select-options' ref='optionList' style={styles.options}>
+          <ul className='mx-select-options' ref={(ref) => this.optionList = ref} style={styles.options}>
             {this.props.options.map(option => {
               return (
                 <li
@@ -185,7 +185,6 @@ const Select = React.createClass({
                   key={option.displayValue + option.value}
                   onClick={this._handleOptionClick.bind(null, option)}
                   onMouseOver={this._handleOptionMouseOver.bind(null, option)}
-                  ref={option.displayValue + option.value}
                   style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,

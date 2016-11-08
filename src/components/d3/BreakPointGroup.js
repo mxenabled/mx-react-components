@@ -24,7 +24,7 @@ const BreakPointGroup = React.createClass({
     const breakPointLabelYPosition = 40;
 
     return (
-      <g className='break-point-items' ref='breakPointItems' transform={translation}>
+      <g className='break-point-items' transform={translation}>
         <line
           className='break-point-line'
           x1={breakPointXValue}

@@ -84,7 +84,7 @@ const DatePicker = React.createClass({
     e.stopPropagation();
 
     if (this.props.closeOnDateSelect) {
-      this.refs.dateSelect.blur();
+      this.dateSelect.blur();
 
       this.setState({
         showCalendar: false
@@ -158,7 +158,7 @@ const DatePicker = React.createClass({
               onBlur={this._handleDateBlur}
               onClick={this._handleDateClick}
               onFocus={this._handleDateFocus}
-              ref='dateSelect'
+              ref={(ref) => this.dateSelect = ref}
               style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
               tabIndex={0}
             >
@@ -213,7 +213,6 @@ const DatePicker = React.createClass({
                   defaultValue={this.state.editTime ? moment.unix(this.props.selectedDate).format('HH:mm') : null}
                   name='time'
                   onBlur={this._handleTimeSelect}
-                  ref='timeInput'
                   style={styles.timeInput}
                   type='time'
                 />

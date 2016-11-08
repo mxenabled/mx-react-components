@@ -21,7 +21,7 @@ const ShadedHatchPatternRectangleGroup = React.createClass({
 
   render () {
     return (
-      <g className='shaded-hatch-pattern' ref='ShadeHatchPattern'>
+      <g className='shaded-hatch-pattern'>
         <pattern
           height={4}
           id='diagonalHatch'

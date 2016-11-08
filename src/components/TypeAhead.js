@@ -54,7 +54,7 @@ const TypeAhead = React.createClass({
       isOpen: true
     });
 
-    ReactDOM.findDOMNode(this.refs.input).focus();
+    ReactDOM.findDOMNode(this.input).focus();
   },
 
   _handleItemMouseOver () {
@@ -97,7 +97,7 @@ const TypeAhead = React.createClass({
       selectedItems
     });
 
-    ReactDOM.findDOMNode(this.refs.input).focus();
+    ReactDOM.findDOMNode(this.input).focus();
   },
 
   _handleItemRemove (item) {
@@ -111,7 +111,7 @@ const TypeAhead = React.createClass({
       selectedItems
     });
 
-    ReactDOM.findDOMNode(this.refs.input).focus();
+    ReactDOM.findDOMNode(this.input).focus();
   },
 
   _handleInputKeyDown (e) {
@@ -186,13 +186,13 @@ const TypeAhead = React.createClass({
         highlightedValue: null
       });
 
-      ReactDOM.findDOMNode(this.refs.input).blur();
+      ReactDOM.findDOMNode(this.input).blur();
     }
   },
 
   _scrollList (nextIndex, scrollDirection) {
     const filteredItems = this._getFilteredItems();
-    const ul = ReactDOM.findDOMNode(this.refs.optionList);
+    const ul = ReactDOM.findDOMNode(this.optionList);
     const skipClearSelectAll = 2;
     const activeLi = ul.children[nextIndex + skipClearSelectAll];
 
@@ -240,7 +240,11 @@ const TypeAhead = React.createClass({
 
   _renderItemList () {
     return (
-      <div className='mx-typeahead-option-list' ref='optionList' style={styles.itemList}>
+      <div
+        className='mx-typeahead-option-list'
+        ref={(ref) => this.optionList = ref}
+        style={styles.itemList}
+      >
         {this.state.selectedItems.length !== this.props.items.length ? (
           <div
             className='mx-typeahead-select-all'
@@ -276,7 +280,6 @@ const TypeAhead = React.createClass({
               key={index}
               onMouseDown={this._handleItemSelect.bind(null, item)}
               onMouseOver={this._handleItemMouseOver}
-              ref={index}
               style={[styles.item, (item === this.state.highlightedValue) && styles.activeItem]}
             >
               {item}
@@ -304,7 +307,7 @@ const TypeAhead = React.createClass({
           onChange={this._handleInputChange}
           onKeyDown={this._handleInputKeyDown}
           placeholder={!this.state.selectedItems.length ? this.props.placeholderText : null}
-          ref='input'
+          ref={(ref) => this.input = ref}
           style={styles.input}
           type='text'
           value={this.state.searchString}

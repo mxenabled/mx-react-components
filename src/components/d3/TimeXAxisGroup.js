@@ -37,14 +37,14 @@ const TimeXAxisGroup = React.createClass({
     .tickSize(this.props.tickSize, this.props.tickSize)
     .ticks(this.props.numberOfTicks);
 
-    d3.select(this.refs.timeAxis).call(timeAxisFunction);
+    d3.select(this.timeAxis).call(timeAxisFunction);
   },
 
   render () {
     return (
       <g
         className='time-axis'
-        ref='timeAxis'
+        ref={(ref) => this.timeAxis = ref}
         transform={this.props.translation}
       />
     );

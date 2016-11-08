@@ -106,7 +106,6 @@ const SelectFullScreen = React.createClass({
                     className='mx-select-full-screen-option'
                     key={option.displayValue + option.value}
                     onClick={this._handleOptionClick.bind(null, option)}
-                    ref={option.displayValue + option.value}
                   >
                     {this.props.optionFormatter(option)}
                   </div>

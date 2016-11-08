@@ -154,8 +154,8 @@ const HoveredDataPointGroup = React.createClass({
     const dateTextOffset = 20;
 
     return (
-      <g className='hover-state' ref='hoverState'>
-        <g className='hover-state-line' ref='hoverStateLine' transform={translation}>
+      <g className='hover-state'>
+        <g className='hover-state-line' transform={translation}>
           <line
             className='hovered-data-point-line'
             x1={hoveredDataPointXScaleValue}
@@ -164,7 +164,7 @@ const HoveredDataPointGroup = React.createClass({
             y2={hoveredDataPointYScaleValue}
           />
         </g>
-        <g className='hover-state-date-rect' ref='hoverStateDateRect' transform={translation}>
+        <g className='hover-state-date-rect' transform={translation}>
           <rect
             className='hovered-data-point-date'
             height={dateRectangleHeight}
@@ -173,7 +173,7 @@ const HoveredDataPointGroup = React.createClass({
             y={adjustedHeight}
           />
         </g>
-        <g className='hover-state-circle' ref='hoverStateCircle' transform={translation}>
+        <g className='hover-state-circle' transform={translation}>
           <circle
             className='circle'
             cx={xScaleValueFunction(hoveredDataPoint.x)}
@@ -181,7 +181,7 @@ const HoveredDataPointGroup = React.createClass({
             r={5}
           />
         </g>
-        <g className='hover-state-date-text' ref='hoverStateDateText' transform={translation}>
+        <g className='hover-state-date-text' transform={translation}>
           <text
             className='hovered-data-point-date-text'
             x={hoveredDataPointXScaleValue - dateTextOffset}
@@ -423,7 +423,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _styleChart () {
-    const chart = d3.select(this.refs.chart);
+    const chart = d3.select(this.chart);
 
     // Style x axis labels
     chart.select('g.time-axis').selectAll('text')
@@ -516,7 +516,7 @@ const TimeBasedLineChart = React.createClass({
             <svg
               height={height}
               onMouseLeave={this._handleChartMouseLeave}
-              ref='chart'
+              ref={(ref) => this.chart = ref}
               width={width}
             >
               {shadeFutureOnGraph ? (

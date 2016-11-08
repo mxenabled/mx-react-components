@@ -40,14 +40,14 @@ const GridLinesGroup = React.createClass({
       .ticks(tickValues.length)
       .tickValues(tickValues);
 
-    d3.select(this.refs[this.props.axis + 'GridLines']).call(gridLinesFunction);
+    d3.select(this.gridLines).call(gridLinesFunction);
   },
 
   render () {
     return (
       <g
         className={this.props.axis + '-grid-line'}
-        ref={this.props.axis + 'GridLines'}
+        ref={(ref) => this.gridLines = ref}
         transform={this.props.translation}
       />
     );
