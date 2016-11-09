@@ -96,7 +96,7 @@ const SimpleSelect = React.createClass({
         alignItems: 'center',
         boxSizing: 'border-box',
         height: 40,
-        padding: '14px 20px',
+        padding: StyleConstants.Spacing.MEDIUM,
 
         ':hover': {
           backgroundColor: this.props.hoverColor,
