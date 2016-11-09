@@ -6,10 +6,70 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.25</h3>
+        <ul>
+          <li>
+            Update SimpleSelect to use stlyes object.(<a href='https://github.com/mxenabled/mx-react-components/pull/471'>#471</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.24</h3>
+        <ul>
+          <li>
+            More changes to CirlceGroup.(<a href='https://github.com/mxenabled/mx-react-components/pull/470'>#470</a>)
+          </li>
+        </ul>
+
+
+        <h3>Release Candidate 5.0.0-rc.23</h3>
+        <ul>
+          <li>
+            Minor fixes to CirlceGroup.(<a href='https://github.com/mxenabled/mx-react-components/pull/469'>#469</a>)
+          </li>
+        </ul>
+
+
+        <h3>Release Candidate 5.0.0-rc.22</h3>
+        <ul>
+          <li>
+            Convert refs from strings to callbacks.(<a href='https://github.com/mxenabled/mx-react-components/pull/468'>#468</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.21</h3>
+        <ul>
+          <li>
+            Fixes layout of DatePicker on small screens.(<a href='https://github.com/mxenabled/mx-react-components/pull/467'>#467</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.20</h3>
+        <ul>
+          <li>
+            Add Pause icon.(<a href='https://github.com/mxenabled/mx-react-components/pull/465'>#465</a>)
+          </li>
+        </ul>
+
+
+        <h3>Release Candidate 5.0.0-rc.19</h3>
+        <ul>
+          <li>
+            Add brand color to icon in Tabs.(<a href='https://github.com/mxenabled/mx-react-components/pull/463'>#463</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.18</h3>
+        <ul>
+          <li>
+            Expose D3 elements.(<a href='https://github.com/mxenabled/mx-react-components/pull/462'>#462</a>)
+          </li>
+        </ul>
+
+
         <h3>Release Candidate 5.0.0-rc.17</h3>
         <ul>
           <li>
-            Updates the medium breakpoint to 768px to align better with the ipad and other tablets.
+            Updates the medium breakpoint to 768px to align better with the ipad and other tablets.(<a href='https://github.com/mxenabled/mx-react-components/pull/461'>#461</a>)
           </li>
         </ul>
 
