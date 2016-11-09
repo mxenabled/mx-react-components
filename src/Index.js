@@ -29,6 +29,7 @@ module.exports = {
   SelectFullScreen: require('./components/SelectFullScreen'),
   SimpleInput: require('./components/SimpleInput'),
   SimpleSelect: require('./components/SimpleSelect'),
+  SimpleSlider: require('./components/SimpleSlider'),
   Spin: require('./components/Spin'),
   Tabs: require('./components/Tabs'),
   TextArea: require('./components/TextArea'),

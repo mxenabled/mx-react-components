@@ -109,6 +109,10 @@ const Components = React.createClass({
                   displayValue: 'Select'
                 },
                 {
+                  value: 'simple-slider',
+                  displayValue: 'Simple Slider'
+                },
+                {
                   value: 'select-full-screen',
                   displayValue: 'Select Full Screen'
                 },
@@ -174,6 +178,7 @@ const Components = React.createClass({
             <Link to='/components/select-full-screen'>Select Full Screen</Link>
             <Link to='/components/simple-input'>Simple Input</Link>
             <Link to='/components/simple-select'>Simple Select</Link>
+            <Link to='/components/simple-slider'>Simple Slider</Link>
             <Link to='/components/textarea'>TextArea</Link>
             <Link to='/components/tabs'>Tabs</Link>
             <Link to='/components/toggle-switch'>Toggle Switch</Link>
