@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.26</h3>
+        <ul>
+          <li>
+            Added `bell`, `net-worth2`, and `pointer` icons.
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.25</h3>
         <ul>
           <li>
