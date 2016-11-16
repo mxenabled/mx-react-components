@@ -65,6 +65,10 @@ module.exports = {
       displayValue: 'Backspace'
     },
     {
+      value: 'bell',
+      displayValue: 'bell'
+    },
+    {
       value: 'bike',
       displayValue: 'Bike'
     },
@@ -333,6 +337,10 @@ module.exports = {
       displayValue: 'Net Worth'
     },
     {
+      value: 'net-worth2',
+      displayValue: 'Net Worth 2'
+    },
+    {
       value: 'no',
       displayValue: 'NO'
     },
@@ -363,6 +371,10 @@ module.exports = {
     {
       value: 'plus',
       displayValue: 'Plus'
+    },
+    {
+      value: 'pointer',
+      displayValue: 'pointer'
     },
     {
       value: 'property',
@@ -468,7 +480,7 @@ module.exports = {
 
   RajaIcons: [
     {
-      displayVvalue: 'about',
+      displayValue: 'about',
       value: 'about'
     },
     {
