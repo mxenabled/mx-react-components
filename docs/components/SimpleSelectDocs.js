@@ -17,6 +17,9 @@ const SimpleSelectDocs = React.createClass({
     });
   },
 
+  _handleItemClick () {
+  },
+
   render () {
     return (
       <div>
@@ -37,9 +40,9 @@ const SimpleSelectDocs = React.createClass({
           {this.state.showMenu ? (
             <SimpleSelect
               items={[
-                { icon: 'auto', text: 'Auto' },
-                { icon: 'kids', text: 'Kids' },
-                { icon: 'pets', text: 'Pets' }
+                { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
+                { icon: 'kids', text: 'Kids', onClick: this._handleItemClick },
+                { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
               ]}
               onScrimClick={this._handleClick}
             />
@@ -56,6 +59,9 @@ const SimpleSelectDocs = React.createClass({
 
         <h5>onScrimClick <label>function</label></h5>
         <p><em>onClick</em> handler for the menu scrim.</p>
+
+        <h5>scrimClickOnSelect <label>boolean</label></h5>
+        <p>Boolean that triggers a scrim click on select. Can be used to auto-close.</p>
 
         <h5>styles <label>Object</label></h5>
         <p>A nested styles object to override/append any of the styled elements.</p>

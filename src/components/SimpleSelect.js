@@ -15,12 +15,14 @@ const SimpleSelect = React.createClass({
     itemStyles: React.PropTypes.object,
     menuStyles: React.PropTypes.object,
     onScrimClick: React.PropTypes.func,
+    scrimClickOnSelect: React.PropTypes.bool,
     style: React.PropTypes.object,
     styles: React.PropTypes.object
   },
 
   getDefaultProps () {
     return {
+      scrimClickOnSelect: false,
       hoverColor: StyleConstants.Colors.PRIMARY,
       items: [],
       onScrimClick () {}
@@ -41,6 +43,14 @@ const SimpleSelect = React.createClass({
     }
   },
 
+  _handleItemClick (item, e) {
+    if (this.props.scrimClickOnSelect) {
+      this.props.onScrimClick(e);
+    }
+
+    item.onClick(e);
+  },
+
   render () {
     const styles = this.styles();
 
@@ -51,7 +61,7 @@ const SimpleSelect = React.createClass({
               return (
                 <div
                   key={i}
-                  onClick={item.onClick}
+                  onClick={this._handleItemClick.bind(null, item)}
                   style={styles.item}
                 >
                   {item.icon ? (
