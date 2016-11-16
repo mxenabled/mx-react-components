@@ -17,9 +17,6 @@ const SimpleSelectDocs = React.createClass({
     });
   },
 
-  _handleItemClick () {
-  },
-
   render () {
     return (
       <div>
