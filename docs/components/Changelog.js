@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.29</h3>
+        <ul>
+          <li>
+            Make Button more accessible.(<a href='https://github.com/mxenabled/mx-react-components/pull/475'>#475</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.28</h3>
         <ul>
           <li>
