@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _merge = require('lodash/merge');
+const browser = require('bowser');
 
 const StyleConstants = require('../constants/Style');
 
@@ -114,11 +115,18 @@ const SimpleSlider = React.createClass({
   styles () {
     let cursorStyle = 'grab';
 
+    if (browser.msie) {
+      cursorStyle = 'pointer';
+    }
+
     if (this.props.disabled) {
       cursorStyle = 'not-allowed';
     }
     if (this.state.dragging) {
       cursorStyle = 'grabbing';
+      if (browser.msie) {
+        cursorStyle = 'pointer';
+      }
     }
 
     return _merge({}, {
@@ -135,7 +143,7 @@ const SimpleSlider = React.createClass({
       },
       trackHolder: {
         padding: `${StyleConstants.Spacing.MEDIUM}px 0`,
-        cursor: cursorStyle
+        cursor: this.props.disabled ? 'not-allowed' : 'pointer'
       },
       toggle: {
         width: StyleConstants.Spacing.LARGE,
