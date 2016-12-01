@@ -6,12 +6,14 @@ const CirclesGroup = React.createClass({
   propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     circleColor: React.PropTypes.string,
+    circleOverlayRadius: React.PropTypes.number,
     circleRadius: React.PropTypes.number,
     data: React.PropTypes.array.isRequired,
     onCircleClick: React.PropTypes.func,
     shouldAnimate: React.PropTypes.bool,
     strokeWidth: React.PropTypes.number,
     translation: React.PropTypes.string,
+    useCircleOverlay: React.PropTypes.bool,
     xScaleValueFunction: React.PropTypes.func.isRequired,
     yScaleValueFunction: React.PropTypes.func.isRequired
   },
@@ -19,11 +21,13 @@ const CirclesGroup = React.createClass({
   getDefaultProps () {
     return {
       circleColor: StyleConstants.Colors.CHARCOAL,
+      circleOverlayRadius: 6,
       circleRadius: 3,
       onCircleClick: () => {},
       shouldAnimate: true,
       strokeWidth: 2,
-      translation: 'translate(0,0)'
+      translation: 'translate(0,0)',
+      useCircleOverlay: false
     };
   },
 
@@ -44,7 +48,7 @@ const CirclesGroup = React.createClass({
   },
 
   render () {
-    const { adjustedHeight, circleRadius, data, shouldAnimate, translation, xScaleValueFunction, yScaleValueFunction } = this.props;
+    const { adjustedHeight, circleOverlayRadius, circleRadius, data, shouldAnimate, translation, useCircleOverlay, xScaleValueFunction, yScaleValueFunction } = this.props;
     const preventCircleOverlapCutOff = 45;
 
     return (
@@ -59,19 +63,35 @@ const CirclesGroup = React.createClass({
             const cy = shouldAnimate ? adjustedHeight : yScaleValueFunction(item.y);
 
             return (
-              <circle
-                className='circle'
-                cx={cx}
-                cy={cy}
-                fill={StyleConstants.Colors.WHITE}
-                key={index}
-                onClick={() => {
-                  this.props.onCircleClick(item);
-                }}
-                r={circleRadius}
-                stroke={this.props.circleColor}
-                style={{ 'stroke-width': this.props.strokeWidth }}
-              />
+              <g key={index}>
+                <circle
+                  className='circle'
+                  cx={cx}
+                  cy={cy}
+                  fill={StyleConstants.Colors.WHITE}
+                  onClick={() => {
+                    if (!useCircleOverlay) {
+                      this.props.onCircleClick(item);
+                    }
+                  }}
+                  r={circleRadius}
+                  stroke={this.props.circleColor}
+                  style={{ 'strokeWidth': this.props.strokeWidth }}
+                />
+                {useCircleOverlay && (
+                  <circle
+                    className='circle-overlay'
+                    cx={cx}
+                    cy={yScaleValueFunction(item.y)}
+                    fill={StyleConstants.Colors.WHITE}
+                    onClick={() => {
+                      this.props.onCircleClick(item);
+                    }}
+                    r={circleOverlayRadius}
+                    style={{ 'fillOpacity': 0 }}
+                  />
+                )}
+              </g>
             );
           })
         ) : null}
