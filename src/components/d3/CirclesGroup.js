@@ -48,7 +48,7 @@ const CirclesGroup = React.createClass({
   },
 
   render () {
-    const { adjustedHeight, circleRadius, data, shouldAnimate, translation, xScaleValueFunction, yScaleValueFunction } = this.props;
+    const { adjustedHeight, circleOverlayRadius, circleRadius, data, shouldAnimate, translation, useCircleOverlay, xScaleValueFunction, yScaleValueFunction } = this.props;
     const preventCircleOverlapCutOff = 45;
 
     return (
@@ -63,19 +63,35 @@ const CirclesGroup = React.createClass({
             const cy = shouldAnimate ? adjustedHeight : yScaleValueFunction(item.y);
 
             return (
-              <circle
-                className='circle'
-                cx={cx}
-                cy={cy}
-                fill={StyleConstants.Colors.WHITE}
-                key={index}
-                onClick={() => {
-                  this.props.onCircleClick(item);
-                }}
-                r={circleRadius}
-                stroke={this.props.circleColor}
-                style={{ 'stroke-width': this.props.strokeWidth }}
-              />
+              <g key={index}>
+                <circle
+                  className='circle'
+                  cx={cx}
+                  cy={cy}
+                  fill={StyleConstants.Colors.WHITE}
+                  onClick={() => {
+                    if (!useCircleOverlay) {
+                      this.props.onCircleClick(item);
+                    }
+                  }}
+                  r={circleRadius}
+                  stroke={this.props.circleColor}
+                  style={{ 'strokeWidth': this.props.strokeWidth }}
+                />
+                {useCircleOverlay && (
+                  <circle
+                    className='circle-overlay'
+                    cx={cx}
+                    cy={yScaleValueFunction(item.y)}
+                    fill={StyleConstants.Colors.WHITE}
+                    onClick={() => {
+                      this.props.onCircleClick(item);
+                    }}
+                    r={circleOverlayRadius}
+                    style={{ 'fillOpacity': 0 }}
+                  />
+                )}
+              </g>
             );
           })
         ) : null}
