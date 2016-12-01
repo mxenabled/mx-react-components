@@ -6,6 +6,7 @@ const CirclesGroup = React.createClass({
   propTypes: {
     adjustedHeight: React.PropTypes.number.isRequired,
     circleColor: React.PropTypes.string,
+    circleOverlayRadius: React.PropTypes.number,
     circleRadius: React.PropTypes.number,
     data: React.PropTypes.array.isRequired,
     onCircleClick: React.PropTypes.func,
@@ -19,6 +20,7 @@ const CirclesGroup = React.createClass({
   getDefaultProps () {
     return {
       circleColor: StyleConstants.Colors.CHARCOAL,
+      circleOverlayRadius: 6,
       circleRadius: 3,
       onCircleClick: () => {},
       shouldAnimate: true,
