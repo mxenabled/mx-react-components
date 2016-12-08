@@ -10,15 +10,8 @@ const Chart = {
       return d[axis];
     });
 
-    //remove negative character if it exists
-    let maxString = Math.ceil(max).toString();
-    let minString = Math.floor(min).toString();
-
-    maxString = maxString.replace('-', '');
-    minString = minString.replace('-', '');
-
-    const maxDigits = maxString.length - 1;
-    const minDigits = minString.length - 1;
+    const maxDigits = Math.ceil(Math.abs(max)).toString().length - 1;
+    const minDigits = Math.floor(Math.abs(min)).toString().length - 1;
 
     const maxMultiplier = Math.pow(10, maxDigits) < 100 ? 100 : Math.pow(10, maxDigits);
     const minMultiplier = Math.pow(10, minDigits) < 100 ? 100 : Math.pow(10, maxDigits);
