@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.30</h3>
+        <ul>
+          <li>
+            Update SimpleSlider Component.(<a href='https://github.com/mxenabled/mx-react-components/pull/476'>#475</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.29</h3>
         <ul>
           <li>
