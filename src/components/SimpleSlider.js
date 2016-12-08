@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Radium = require('radium');
 const _merge = require('lodash/merge');
+const browser = require('bowser');
 
 const StyleConstants = require('../constants/Style');
 
@@ -42,6 +43,16 @@ const SimpleSlider = React.createClass({
       const leftPixels = newProps.percent * this.state.width;
 
       this.setState({ leftPixels });
+    }
+  },
+
+  _getCursorStyle () {
+    if (this.props.disabled) {
+      return 'not-allowed';
+    } else if (browser.msie) {
+      return 'pointer';
+    } else {
+      return this.state.dragging ? 'grabbing' : 'grab';
     }
   },
 
@@ -112,14 +123,7 @@ const SimpleSlider = React.createClass({
   },
 
   styles () {
-    let cursorStyle = 'grab';
-
-    if (this.props.disabled) {
-      cursorStyle = 'not-allowed';
-    }
-    if (this.state.dragging) {
-      cursorStyle = 'grabbing';
-    }
+    const cursorStyle = this._getCursorStyle();
 
     return _merge({}, {
       component: {
@@ -135,7 +139,7 @@ const SimpleSlider = React.createClass({
       },
       trackHolder: {
         padding: `${StyleConstants.Spacing.MEDIUM}px 0`,
-        cursor: cursorStyle
+        cursor: this.props.disabled ? 'not-allowed' : 'pointer'
       },
       toggle: {
         width: StyleConstants.Spacing.LARGE,
