@@ -9,7 +9,7 @@ const Changelog = React.createClass({
         <h3>Release Candidate 5.0.0-rc.30</h3>
         <ul>
           <li>
-            Update SimpleSlider Component.(<a href='https://github.com/mxenabled/mx-react-components/pull/476'>#475</a>)
+            Update SimpleSlider Component.(<a href='https://github.com/mxenabled/mx-react-components/pull/476'>#476</a>)
           </li>
         </ul>
 
