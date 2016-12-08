@@ -10,8 +10,9 @@ const Chart = {
       return d[axis];
     });
 
-    const maxDigits = Math.ceil(max).toString().length - 1;
-    const minDigits = Math.floor(min).toString().length - 1;
+    const maxDigits = Math.ceil(Math.abs(max)).toString().length - 1;
+    const minDigits = Math.floor(Math.abs(min)).toString().length - 1;
+
     const maxMultiplier = Math.pow(10, maxDigits) < 100 ? 100 : Math.pow(10, maxDigits);
     const minMultiplier = Math.pow(10, minDigits) < 100 ? 100 : Math.pow(10, maxDigits);
 
