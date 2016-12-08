@@ -51,5 +51,8 @@ module.exports = {
 
   // App constants
   AppConstants: require('./constants/App'),
-  Styles: require('./constants/Style')
+  Styles: require('./constants/Style'),
+
+  // App Utils
+  ChartUtils: require('./utils/Chart')
 };
