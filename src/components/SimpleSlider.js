@@ -46,6 +46,16 @@ const SimpleSlider = React.createClass({
     }
   },
 
+  _getCursorStyle () {
+    if (this.props.disabled) {
+      return 'not-allowed';
+    } else if (browser.msie) {
+      return 'pointer';
+    } else {
+      return this.state.dragging ? 'grabbing' : 'grab';
+    }
+  },
+
   _handleMouseEvents (e) {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
@@ -113,21 +123,7 @@ const SimpleSlider = React.createClass({
   },
 
   styles () {
-    let cursorStyle = 'grab';
-
-    if (browser.msie) {
-      cursorStyle = 'pointer';
-    }
-
-    if (this.props.disabled) {
-      cursorStyle = 'not-allowed';
-    }
-    if (this.state.dragging) {
-      cursorStyle = 'grabbing';
-      if (browser.msie) {
-        cursorStyle = 'pointer';
-      }
-    }
+    const cursorStyle = this._getCursorStyle();
 
     return _merge({}, {
       component: {
