@@ -272,9 +272,17 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _yRangeContainsZero () {
-    const minMaxValues = ChartUtils.getDataMinMaxValues(this.props.data, 'y');
+    const max = d3.max(this.props.data, d => {
+      return d.y;
+    });
 
-    return minMaxValues.min <= 0 && minMaxValues.max >= 0;
+    const min = d3.min(this.props.data, d => {
+      return d.y;
+    });
+
+    const tickSpec = ChartUtils.getAxisTickSpecification(min, max);
+
+    return tickSpec.min <= 0 && tickSpec.max >= 0;
   },
 
   // Handle functions
@@ -365,11 +373,19 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getYScaleFunction () {
-    const minMaxValues = ChartUtils.getDataMinMaxValues(this.props.data, 'y');
+    const max = d3.max(this.props.data, d => {
+      return d.y;
+    });
+
+    const min = d3.min(this.props.data, d => {
+      return d.y;
+    });
+
+    const tickSpec = ChartUtils.getAxisTickSpecification(min, max);
 
     return d3.scale.linear()
       .range([this.state.adjustedHeight, 0])
-      .domain([minMaxValues.min, minMaxValues.max]);
+      .domain([tickSpec.min, tickSpec.max]);
   },
 
   _getYScaleValue (value) {
