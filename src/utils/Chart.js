@@ -1,44 +1,54 @@
-const d3 = require('d3');
-
 const Chart = {
-  getDataMinMaxValues (data, axis) {
-    let max = d3.max(data, d => {
-      return d[axis];
-    });
+  getAxisTickSpecification (min, max) {
+    // Needs to maintain parity with mobile app.
+    // https://git.moneydesktop.com/dev/moneymobilex/blob/master/Classes/utils/maths.cpp
+    // generate_tick_specification method
 
-    let min = d3.min(data, d => {
-      return d[axis];
-    });
+    let step = 0;
+    let numberOfTicks = 0;
+    let start = 0;
+    let end = 0;
 
-    const maxDigits = Math.ceil(Math.abs(max)).toString().length - 1;
-    const minDigits = Math.floor(Math.abs(min)).toString().length - 1;
+    if (min < max) {
+      // Math.Log10 not supported in IE 10/11 so we have to use Math.log / Math.LN10
+      step = Math.pow(10, Math.floor(Math.log(max - min) / Math.LN10));
 
-    const maxMultiplier = Math.pow(10, maxDigits) < 100 ? 100 : Math.pow(10, maxDigits);
-    const minMultiplier = Math.pow(10, minDigits) < 100 ? 100 : Math.pow(10, maxDigits);
+      if (step >= 100) {
+        const range = Math.ceil(max / step) * step - Math.floor(min / step) * step;
 
-    max = Math.ceil(max / maxMultiplier) * maxMultiplier;
-    min = Math.floor(min / minMultiplier) * minMultiplier;
+        numberOfTicks = range / step;
 
-    return { min, max };
-  },
+        if (numberOfTicks <= 3) {
+          step /= 2;
+        } else if (numberOfTicks >= 7) {
+          step *= 2;
+        }
+      } else {
+        step = 100;
+      }
 
-  getAxisTickValues (data, axis) {
-    const estimatedNumberOfTicks = 6;
-    const minMaxValues = this.getDataMinMaxValues(data, axis);
-    const range = minMaxValues.max - minMaxValues.min;
-    const tempStep = range / estimatedNumberOfTicks;
-    const magnitude = Math.floor(Math.log(tempStep) / Math.LN10);
-    const magnitudePower = Math.pow(10, magnitude);
-    const magnitudeMultiplier = parseInt(tempStep / magnitudePower + 0.5, 10);
-    const stepSize = magnitudeMultiplier * magnitudePower;
+      start = Math.floor(min / step) * step;
+      end = Math.ceil(max / step) * step;
+      numberOfTicks = Math.max((end - start) / step, 2);
+    } else {
+      if (min === max) {
+        start = Math.floor(min / 100) * 100;
+      } else {
+        start = 0;
+      }
+
+      step = 50;
+      numberOfTicks = 2;
+      end = start + 100;
+    }
 
     const values = [];
 
-    for (let min = minMaxValues.min; min <= minMaxValues.max; min += stepSize) {
-      values.push(min);
+    for (let value = start; value <= end; value += step) {
+      values.push(value);
     }
 
-    return values;
+    return { min: start, max: end, tickValues: values };
   }
 };
 
