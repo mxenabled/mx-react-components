@@ -30,7 +30,9 @@ const GridLinesGroup = React.createClass({
   },
 
   _renderGridLines () {
-    const tickValues = ChartUtils.getAxisTickValues(this.props.data, this.props.axis);
+    const max = d3.max(this.props.data, d => d[this.props.axis]);
+    const min = d3.min(this.props.data, d => d[this.props.axis]);
+    const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
 
     const gridLinesFunction = d3.svg.axis()
       .scale(this.props.scaleFunction())
