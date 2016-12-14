@@ -28,14 +28,8 @@ const AxisGroup = React.createClass({
   },
 
   _renderAxis () {
-    const max = d3.max(this.props.data, d => {
-      return d[this.props.axis];
-    });
-
-    const min = d3.min(this.props.data, d => {
-      return d[this.props.axis];
-    });
-
+    const max = d3.max(this.props.data, d => d[this.props.axis]);
+    const min = d3.min(this.props.data, d => d[this.props.axis]);
     const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
 
     const axisFunction = d3.svg.axis()
