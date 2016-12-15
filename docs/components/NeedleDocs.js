@@ -42,7 +42,7 @@ const NeedleDocs = React.createClass({
 
         <h3>Example</h3>
         <Markdown>
-        { `
+          { `
         <Needle direction="up" />
 
         <Needle direction="down" />
