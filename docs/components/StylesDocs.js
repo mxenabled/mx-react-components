@@ -17,26 +17,39 @@ const StylesDocs = React.createClass({
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
           {Object.keys(Styles.Colors).map(color => {
             return (
-              <div key={color} style={{ marginBottom: 20, height: 100, width: 100, textAlign: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <div key={color} style={{ width: 60, height: 60, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
+              <div key={color} style={{ marginBottom: 20, height: 120, width: 120, textAlign: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <div key={color} style={{ width: 80, height: 80, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
                 <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, flex: '1 0 100%' }}>({color})</div>
               </div>
             );
           })}
         </div>
-        <h5>Colors</h5>
+        <h5>Neutral Colors</h5>
         <Markdown lang='js'>
           {`
-            Styles.Colors.ASH // #ACB0B3
+            Styles.Colors.SLATE // #2F363E
             Styles.Colors.CHARCOAL // #56595A
+            Styles.Colors.ASH // #ACB0B3
             Styles.Colors.FOG // #E3E6E7
             Styles.Colors.PORCELAIN // #F7F8F8
             Styles.Colors.WHITE // #FFFFFF
+          `}
+        </Markdown>
+        <h5>Accent Colors</h5>
+        <Markdown lang='js'>
+          {`
             Styles.Colors.PRIMARY // #359BCF
-            Styles.Colors.BANANA // #FBB600
+            Styles.Colors.BANANA // #FCBC19
+            Styles.Colors.EGGPLANT // #6C3F6F
+            Styles.Colors.LEMON // #EBBE54
+            Styles.Colors.LIME // #14C764
             Styles.Colors.ORANGE // #EF7625
-            Styles.Colors.LIME // #2EBE51
-            Styles.Colors.STRAWBERRY // #E22727
+            Styles.Colors.PLUM // #AE547A
+            Styles.Colors.STRAWBERRY // #EB3434
+            Styles.Colors.TOMATO // #CD5A57
+            Styles.Colors.LIGHT_LIME // #97E9BB,
+            Styles.Colors.LIGHT_BANANA // #F7DD7C,
+            Styles.Colors.LIGHT_STRAWBERRY // #FF6B61,
           `}
         </Markdown>
 
