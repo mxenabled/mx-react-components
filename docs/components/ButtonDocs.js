@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Button } = require('mx-react-components');
+const { Button, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
