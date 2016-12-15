@@ -42,6 +42,17 @@ const ButtonDocs = React.createClass({
           <Button style={style} type='neutral'>Neutral</Button>
           <Button style={style} type='disabled'>Disabled</Button>
         </div>
+        <div
+          className='flex'
+          style={{
+            backgroundColor: Styles.Colors.PRIMARY,
+            padding: Styles.Spacing.LARGE,
+            marginTop: Styles.Spacing.LARGE,
+            width: 150
+          }}
+        >
+          <Button style={style} type='primaryInverse'>Primary Inverse</Button>
+        </div>
         <br /><br />
         <div className='flex'>
           <Button icon='add'>Icon</Button>
