@@ -7,18 +7,28 @@ module.exports = {
 
   Colors: {
     // GRAYSCALE
-    ASH: '#ACB0B3',
+    SLATE: '#2F363E',
     CHARCOAL: '#56595A',
+    ASH: '#ACB0B3',
     FOG: '#E3E6E7',
     PORCELAIN: '#F7F8F8',
     WHITE: '#FFFFFF',
 
     // ACCENTS
     PRIMARY: '#359BCF',
-    BANANA: '#FBB600',
+    BANANA: '#FCBC19',
+    EGGPLANT: '#6C3F6F',
+    LEMON: '#EBBE54',
+    LIME: '#14C764',
     ORANGE: '#EF7625',
-    LIME: '#2EBE51',
-    STRAWBERRY: '#E22727',
+    PLUM: '#AE547A',
+    STRAWBERRY: '#EB3434',
+    TOMATO: '#CD5A57',
+
+    // BUDGET ARC COLORS
+    LIGHT_LIME: '#97E9BB',
+    LIGHT_BANANA: '#F7DD7C',
+    LIGHT_STRAWBERRY: '#FF6B61',
 
     // CHART COLORS
     BASE_ARC: '#F5F5F5',
