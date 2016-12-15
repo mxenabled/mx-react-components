@@ -30,7 +30,7 @@ const ButtonDocs = React.createClass({
       <div>
         <h1>
           Button
-          <label>A standard button with 6 available styles.</label>
+          <label>A standard button with 7 available styles.</label>
         </h1>
 
         <h3>Demo</h3>
