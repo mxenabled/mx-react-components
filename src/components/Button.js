@@ -127,6 +127,24 @@ const Button = React.createClass({
           transition: 'all .2s ease-in'
         }
       },
+      primaryInverse: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        borderColor: StyleConstants.Colors.WHITE,
+        color: this.props.primaryColor,
+        fill: this.props.primaryColor,
+        transition: 'all .2s ease-in',
+
+        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -15),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -15),
+          transition: 'all .2s ease-in'
+        },
+        ':active': {
+          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -30),
+          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -30),
+          transition: 'all .2s ease-in'
+        }
+      },
       secondary: {
         backgroundColor: 'transparent',
         borderColor: StyleConstants.Colors.ASH,
