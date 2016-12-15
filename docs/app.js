@@ -22,6 +22,7 @@ const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
 const Menu = require('components/MenuDocs');
 const Modal = require('components/ModalDocs');
+const Needle = require('components/NeedleDocs');
 const PageIndicator = require('components/PageIndicatorDocs');
 const ProgressBar = require('components/ProgressBarDocs');
 const RadioButton = require('components/RadioButtonDocs');
@@ -81,6 +82,7 @@ ReactDOM.render((
         <Route component={Loader} path='loader' />
         <Route component={Menu} path='menu' />
         <Route component={Modal} path='modal' />
+        <Route component={Needle} path='needle' />
         <Route component={PageIndicator} path='page-indicator' />
         <Route component={ProgressBar} path='progress-bar' />
         <Route component={RadioButton} path='radio-button' />

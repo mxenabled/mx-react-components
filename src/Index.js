@@ -18,6 +18,7 @@ module.exports = {
   Loader: require('./components/Loader'),
   Menu: require('./components/Menu'),
   Modal: require('./components/Modal'),
+  Needle: require('./components/Needle'),
   PageIndicator: require('./components/PageIndicator'),
   ProgressBar: require('./components/ProgressBar'),
   RadioButton: require('./components/RadioButton'),
