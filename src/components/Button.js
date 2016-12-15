@@ -21,6 +21,7 @@ const Button = React.createClass({
       'neutral',
       'primary',
       'primaryOutline',
+      'primaryInverse',
       'secondary'
     ])
   },
