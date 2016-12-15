@@ -87,7 +87,7 @@ const ButtonDocs = React.createClass({
 
         <h5>type <label>String</label></h5>
         <p>Default: 'primary'</p>
-        <p>This sets the button type. Available options are 'primary', 'primaryOutline', 'secondary', 'base', 'neutral', and 'disabled'. Setting the type to `disabled` also prevents onClick events from firing.</p>
+        <p>This sets the button type. Available options are 'primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base', 'neutral', and 'disabled'. Setting the type to `disabled` also prevents onClick events from firing.</p>
 
         <h3>Example</h3>
         <Markdown>
