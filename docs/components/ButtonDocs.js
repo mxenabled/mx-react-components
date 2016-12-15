@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Button } = require('mx-react-components');
+const { Button, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -30,7 +30,7 @@ const ButtonDocs = React.createClass({
       <div>
         <h1>
           Button
-          <label>A standard button with 6 available styles.</label>
+          <label>A standard button with 7 available styles.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -41,6 +41,17 @@ const ButtonDocs = React.createClass({
           <Button style={style} type='base'>Base</Button>
           <Button style={style} type='neutral'>Neutral</Button>
           <Button style={style} type='disabled'>Disabled</Button>
+        </div>
+        <div
+          className='flex'
+          style={{
+            backgroundColor: Styles.Colors.PRIMARY,
+            padding: Styles.Spacing.LARGE,
+            marginTop: Styles.Spacing.LARGE,
+            width: 150
+          }}
+        >
+          <Button style={style} type='primaryInverse'>Primary Inverse</Button>
         </div>
         <br /><br />
         <div className='flex'>
@@ -76,7 +87,7 @@ const ButtonDocs = React.createClass({
 
         <h5>type <label>String</label></h5>
         <p>Default: 'primary'</p>
-        <p>This sets the button type. Available options are 'primary', 'primaryOutline', 'secondary', 'base', 'neutral', and 'disabled'. Setting the type to `disabled` also prevents onClick events from firing.</p>
+        <p>This sets the button type. Available options are 'primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base', 'neutral', and 'disabled'. Setting the type to `disabled` also prevents onClick events from firing.</p>
 
         <h3>Example</h3>
         <Markdown>
