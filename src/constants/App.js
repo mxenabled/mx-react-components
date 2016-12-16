@@ -137,6 +137,18 @@ module.exports = {
       displayValue: 'Check Solid'
     },
     {
+      value: 'checkbox',
+      displayValue: 'Checkbox'
+    },
+    {
+      value: 'checkbox-selected',
+      displayValue: 'Checkbox Selected'
+    },
+    {
+      value: 'checkbox-solid',
+      displayValue: 'Checkbox Solid'
+    },
+    {
       value: 'checking',
       displayValue: 'Checking'
     },
@@ -155,6 +167,10 @@ module.exports = {
     {
       value: 'close-solid',
       displayValue: 'Close Solid'
+    },
+    {
+      value: 'close-box',
+      displayValue: 'Close Box'
     },
     {
       value: 'comparisons',
@@ -373,12 +389,24 @@ module.exports = {
       displayValue: 'Plus'
     },
     {
+      value: 'plus-box',
+      displayValue: 'Plus Box'
+    },
+    {
       value: 'pointer',
       displayValue: 'pointer'
     },
     {
       value: 'property',
       displayValue: 'Property'
+    },
+    {
+      value: 'radio-empty',
+      displayValue: 'Radio Empty'
+    },
+    {
+      value: 'radio-filled',
+      displayValue: 'Radio Filled'
     },
     {
       value: 'real-estate',
