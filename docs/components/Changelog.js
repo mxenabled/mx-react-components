@@ -9,7 +9,7 @@ const Changelog = React.createClass({
         <h3>Release Candidate 5.0.0-rc.39</h3>
         <ul>
           <li>
-            Added more icons. (<a href='https://github.com/mxenabled/mx-react-components/pull/488'>#488</a>)
+            Added another icon. (<a href='https://github.com/mxenabled/mx-react-components/pull/488'>#488</a>)
           </li>
         </ul>
 
