@@ -277,6 +277,10 @@ module.exports = {
       displayValue: 'Info'
     },
     {
+      value: 'info-solid',
+      displayValue: 'Info-solid'
+    },
+    {
       value: 'investment',
       displayValue: 'Investment'
     },
