@@ -21,7 +21,6 @@ const Home = require('components/Home');
 const Icon = require('components/IconDocs');
 const Loader = require('components/LoaderDocs');
 const Menu = require('components/MenuDocs');
-const MessageBoxDocs = require('components/MessageBoxDocs');
 const Modal = require('components/ModalDocs');
 const PageIndicator = require('components/PageIndicatorDocs');
 const ProgressBar = require('components/ProgressBarDocs');
@@ -81,7 +80,6 @@ ReactDOM.render((
         <Route component={Icon} path='icon' />
         <Route component={Loader} path='loader' />
         <Route component={Menu} path='menu' />
-        <Route component={MessageBoxDocs} path='message-box' />
         <Route component={Modal} path='modal' />
         <Route component={PageIndicator} path='page-indicator' />
         <Route component={ProgressBar} path='progress-bar' />

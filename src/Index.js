@@ -17,7 +17,6 @@ module.exports = {
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   Menu: require('./components/Menu'),
-  MessageBox: require('./components/MessageBox'),
   Modal: require('./components/Modal'),
   PageIndicator: require('./components/PageIndicator'),
   ProgressBar: require('./components/ProgressBar'),
