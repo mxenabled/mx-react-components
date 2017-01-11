@@ -37,13 +37,10 @@ const MessageBoxDocs = React.createClass({
         {
           <div>
             <h5>children<label>Node</label></h5>
-            <p>If the MessageBox is expandable, children will be the contens of the expanded box.</p>
+            <p>Passing children allow the message box to be expandable and display the children.</p>
 
             <h5>color<label>String</label></h5>
             <p>The primary color of the box.</p>
-
-            <h5>expandable<label>Boolean</label></h5>
-            <p>Whether the message box should expand onClick to display more info. `true` will also display the caret icon</p>
 
             <h5>icon<label>String</label></h5>
             <p>The type of icon to display in the upper left of the MessageBox header.</p>
