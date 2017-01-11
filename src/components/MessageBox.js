@@ -1,4 +1,5 @@
 const React = require('react');
+const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
 const Icon = require('../components/Icon');
@@ -7,8 +8,8 @@ const MessageBox = React.createClass({
   propTypes: {
     children: React.PropTypes.node,
     color: React.PropTypes.string,
-    expandable: React.PropTypes.bool,
     icon: React.PropTypes.string,
+    styles: React.PropTypes.object,
     title: React.PropTypes.string
   },
 
@@ -29,12 +30,9 @@ const MessageBox = React.createClass({
 
     return (
       <div className='mx-message-box' style={styles.component}>
-        <div onClick={this._toggleMessageBox} style={styles.header}>
+        <div onClick={this.props.children ? this._toggleMessageBox : () => {}} style={styles.header}>
           <div style={styles.leftHeader}>
             <Icon
-              elementProps={{
-                onClick: this._toggleMessageBox
-              }}
               size={20}
               style={Object.assign({}, styles.icon, { marginRight: StyleConstants.Spacing.SMALL })}
               type={this.props.icon}
@@ -43,11 +41,8 @@ const MessageBox = React.createClass({
             {this.props.title}
           </div>
 
-          {this.props.expandable &&
+          {this.props.children &&
             <Icon
-              elementProps={{
-                onClick: this._toggleMessageBox
-              }}
               size={19}
               style={styles.icon}
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
@@ -66,7 +61,7 @@ const MessageBox = React.createClass({
   },
 
   styles () {
-    return {
+    return _merge({}, {
       component: {
         color: StyleConstants.Colors.WHITE,
         boxSizing: 'border-box'
@@ -89,7 +84,7 @@ const MessageBox = React.createClass({
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.color, 0.1),
         padding: StyleConstants.Spacing.SMALL
       }
-    };
+    }, this.props.styles);
   }
 });
 

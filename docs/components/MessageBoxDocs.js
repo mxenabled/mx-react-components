@@ -17,10 +17,16 @@ const MessageBoxDocs = React.createClass({
 
         <h3>Demo</h3>
         <MessageBox
-          color={Styles.Colors.PRIMARY}
-          expandable={true}
+          color={Styles.Colors.STRAWBERRY}
           icon='attention-solid'
-          title='This is a Message'
+          styles={styles.messageBoxNoChildren}
+          title='This is a MessageBox with no children.'
+        />
+
+        <MessageBox
+          color={Styles.Colors.PRIMARY}
+          icon='attention-solid'
+          title='This is a MessageBox with children.'
         >
           <div style={styles.messageBoxContents}>
             <div style={styles.messageBoxText}>This is some message box text.</div>
@@ -50,9 +56,16 @@ const MessageBoxDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
           {`
+            //Without Children
+            <MessageBox
+              color={Styles.Colors.STRAWBERRY}
+              icon='attention-solid'
+              title='This is a Message'
+            />
+
+            //With Children
             <MessageBox
               color={Styles.Colors.PRIMARY}
-              expandable={true}
               icon='attention-solid'
               title='This is a Message'
             >
@@ -75,6 +88,11 @@ const MessageBoxDocs = React.createClass({
       },
       messageBoxText: {
         flex: 1
+      },
+      messageBoxNoChildren: {
+        component: {
+          marginBottom: Styles.Spacing.LARGE
+        }
       }
     };
   }

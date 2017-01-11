@@ -156,6 +156,7 @@ const Components = React.createClass({
             <Link to='/components/raja-icon'>Raja Icon</Link>
             <Link to='/components/loader'>Loader</Link>
             <Link to='/components/menu'>Menu</Link>
+            <Link to='/components/message-box'>MessageBox</Link>
             <Link to='/components/modal'>Modal</Link>
             <Link to='/components/page-indicator'>Page Indicator</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
