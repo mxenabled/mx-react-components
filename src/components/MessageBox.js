@@ -15,7 +15,7 @@ const MessageBox = React.createClass({
 
   getInitialState () {
     return {
-      isOpen: false
+      isOpen: true
     };
   },
 
@@ -69,7 +69,7 @@ const MessageBox = React.createClass({
       header: {
         background: this.props.color,
         display: 'flex',
-        cursor: 'pointer',
+        cursor: this.props.children ? 'pointer' : 'auto',
         padding: StyleConstants.Spacing.XSMALL,
         alignItems: 'center'
       },
@@ -77,12 +77,11 @@ const MessageBox = React.createClass({
         flex: 1
       },
       icon: {
-        fill: StyleConstants.Colors.WHITE,
-        cursor: 'pointer'
+        fill: StyleConstants.Colors.WHITE
       },
       children: {
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.color, 0.1),
-        padding: StyleConstants.Spacing.SMALL
+        padding: this.props.children ? StyleConstants.Spacing.SMALL : null
       }
     }, this.props.styles);
   }
