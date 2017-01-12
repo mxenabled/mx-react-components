@@ -660,7 +660,6 @@ const RajaIcon = React.createClass({
     return (
       <svg
         {...elementProps}
-        fit={true}
         preserveAspectRatio='xMidYMid meet'
         style={[styles, this.props.style]}
         viewBox='0 0 1024 1024'

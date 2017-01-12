@@ -27,7 +27,7 @@ const TabsDocs = React.createClass({
 
         <h3>Demo</h3>
         <Tabs
-          activeTabStyles={{ paddingBottom: 25 }}
+          activeTabStyles={{ padding: '5px 5px 25px 5px' }}
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
           showBottomBorder={false}

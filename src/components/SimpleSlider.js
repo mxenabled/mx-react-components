@@ -134,7 +134,7 @@ const SimpleSlider = React.createClass({
         margin: `0 ${StyleConstants.Spacing.MEDIUM}px`
       },
       track: {
-        height: '1',
+        height: 1,
         background: '#ccc'
       },
       trackHolder: {
@@ -160,7 +160,7 @@ const SimpleSlider = React.createClass({
         left: StyleConstants.Spacing.SMALL,
         width: this.state.leftPixels,
         background: this.props.selectedColor,
-        height: '3',
+        height: 3,
         top: '50%',
         transform: 'translateY(-50%)',
         WebkitTransform: 'translateY(-50%)',

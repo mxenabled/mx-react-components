@@ -540,8 +540,8 @@ module.exports = {
       value: 'boat'
     },
     {
-      displayValue: 'briefvalue:',
-      value: 'briefvalue:'
+      displayValue: 'briefcase',
+      value: 'briefcase'
     },
     {
       displayValue: 'bubble_budgets',
