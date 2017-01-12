@@ -7,8 +7,8 @@ const Markdown = require('components/Markdown');
 const PaginationButtonsDocs = React.createClass({
   getInitialState () {
     return {
-      currentPage: 1,
-      totalPages: 5
+      currentPage: 8,
+      totalPages: 20
     };
   },
 
@@ -21,7 +21,7 @@ const PaginationButtonsDocs = React.createClass({
       <div>
         <h1>
           Pagination Buttons
-          <label>A standard button group with 7 available styles used to navigate pagination.</label>
+          <label>A button group used to navigate pagination.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -29,12 +29,19 @@ const PaginationButtonsDocs = React.createClass({
           currentPage={this.state.currentPage}
           onClick={this._handleButtonClick}
           totalPages={this.state.totalPages}
-          type='primaryOutline'
         />
         <h3>Usage</h3>
-        <h5>currentPage <label>String</label></h5>
+        <h5>currentPage <label>Number</label></h5>
         <p>Default: 1</p>
         <p><em>(required)</em> The current page.</p>
+
+        <h5>onClick <label>Function</label></h5>
+        <p>Function used to handle button click event. Returns the number clicked.</p>
+        <p>If prev/next button is clicked, the number returned is -1/+1 the current page number.</p>
+
+        <h5>pageRange <label>Number</label></h5>
+        <p>Default: 5</p>
+        <p>The number of page buttons (not including prev/next buttons) shown in the button group.</p>
 
         <h5>primaryColor <label>String</label></h5>
         <p>Default: Styles.Colors.PRIMARY</p>
@@ -43,14 +50,14 @@ const PaginationButtonsDocs = React.createClass({
         <h5>totalPages <label>String</label></h5>
         <p><em>(required)</em> The total number of pages.</p>
 
-        <h5>type <label>String</label></h5>
-        <p>Default: 'primary'</p>
-        <p>This sets the button type. Available options are 'primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base', 'neutral', and 'disabled'. Setting the type to `disabled` also prevents onClick events from firing.</p>
-
         <h3>Example</h3>
         <Markdown>
   {`
-    <Button primaryColor='#333333' type='secondary' />
+    <PaginationButtons
+      currentPage={8}
+      onClick={this._handleButtonClick}
+      totalPages={20}
+    />
   `}
         </Markdown>
       </div>

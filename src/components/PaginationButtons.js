@@ -27,41 +27,43 @@ const PaginationButtons = React.createClass({
     };
   },
 
-  _handleButtonClick (goToPage) {
+  _handleButtonClick (buttonClicked) {
     const { currentPage, totalPages } = this.props;
+    let goToPage = buttonClicked;
 
-    if (goToPage === 'prev') {
-      const prevPage = currentPage > 1 ? currentPage - 1 : 1;
-
-      this.props.onClick(prevPage, currentPage);
-    } else if (goToPage === 'next') {
-      const nextPage = currentPage < totalPages ? currentPage + 1 : totalPages;
-
-      this.props.onClick(nextPage, currentPage);
+    if (buttonClicked === 'prev') {
+      goToPage = currentPage > 1 ? currentPage - 1 : 1;
+    } else if (buttonClicked === 'next') {
+      goToPage = currentPage < totalPages ? currentPage + 1 : totalPages;
     }
+
+    this.props.onClick(goToPage);
   },
 
   _getPageButtons () {
     const style = this.styles();
     const { currentPage, pageRange, totalPages } = this.props;
     const totalButtons = pageRange < totalPages ? pageRange : totalPages;
-    const adjuster = totalButtons % 2 === 0 ? totalButtons / 2 : (totalButtons - 1) / 2;
-    const maxPage = totalButtons > totalPages ? totalButtons : totalPages;
-    const minPage = (currentPage - adjuster > adjuster) && (currentPage + adjuster < maxPage) ? currentPage - adjuster : 1;
-    const startingPage = (currentPage + adjuster > maxPage) && (currentPage - adjuster * 2 > minPage) ? currentPage - adjuster * 2 : minPage;
-    const endingPage = (currentPage + adjuster < maxPage) && (currentPage + adjuster * 2 < maxPage) ? currentPage + adjuster : maxPage;
-    let pages = [];
+    const pages = [];
+    const maxStartingPage = totalPages - pageRange + 1;
+    let startingPage = 1;
+    let maxEndingPage = maxStartingPage + pageRange - 1;
+    let endingPage = totalButtons;
 
-    console.log('maxPage', maxPage, 'minPage', minPage, 'startingPage', startingPage, 'currentPage', currentPage);
+    if (currentPage > pageRange) {
+      startingPage = maxStartingPage >= currentPage ? currentPage : maxStartingPage;
+      maxEndingPage = startingPage + pageRange - 1;
+      endingPage = maxEndingPage <= currentPage ? currentPage : maxEndingPage;
+    }
 
-    for (let i = startingPage; i < endingPage + 1; i++) {
+    for (let i = startingPage; i <= endingPage; i++) {
       const buttonStyle = i === currentPage ? Object.assign({}, style.component, { color: 'red' }) : style.component;
 
-      pages = [...pages, {
+      pages.push({
         onClick: this._handleButtonClick.bind(null, i),
         text: i.toString(),
         style: buttonStyle
-      }];
+      });
     }
 
     return pages;

@@ -85,6 +85,10 @@ const Components = React.createClass({
                   displayValue: 'Page Indicator'
                 },
                 {
+                  value: 'pagination-buttons',
+                  displayValue: 'Pagination Buttons'
+                },
+                {
                   value: 'progress-bar',
                   displayValue: 'Progress Bar'
                 },
@@ -159,6 +163,7 @@ const Components = React.createClass({
             <Link to='/components/message-box'>MessageBox</Link>
             <Link to='/components/modal'>Modal</Link>
             <Link to='/components/page-indicator'>Page Indicator</Link>
+            <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
             <Link to='/components/spin'>Spin</Link>
 
