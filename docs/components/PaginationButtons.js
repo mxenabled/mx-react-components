@@ -47,7 +47,7 @@ const PaginationButtonsDocs = React.createClass({
         <p>Default: Styles.Colors.PRIMARY</p>
         <p>The primary color used with the button styles.</p>
 
-        <h5>totalPages <label>String</label></h5>
+        <h5>totalPages <label>Number</label></h5>
         <p><em>(required)</em> The total number of pages.</p>
 
         <h3>Example</h3>
