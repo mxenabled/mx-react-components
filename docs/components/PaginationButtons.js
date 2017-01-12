@@ -7,8 +7,8 @@ const Markdown = require('components/Markdown');
 const PaginationButtonsDocs = React.createClass({
   getInitialState () {
     return {
-      currentPage: 8,
-      totalPages: 20
+      currentPage: 4,
+      totalPages: 10
     };
   },
 

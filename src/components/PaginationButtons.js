@@ -57,7 +57,7 @@ const PaginationButtons = React.createClass({
     }
 
     for (let i = startingPage; i <= endingPage; i++) {
-      const buttonStyle = i === currentPage ? Object.assign({}, style.component, { color: 'red' }) : style.component;
+      const buttonStyle = i === currentPage ? Object.assign({}, style.component, style.active) : style.component;
 
       pages.push({
         onClick: this._handleButtonClick.bind(null, i),
@@ -70,7 +70,7 @@ const PaginationButtons = React.createClass({
   },
 
   render () {
-    const style = this.styles();
+    const style = this.styles().component;
 
     return (
       <ButtonGroup
@@ -78,13 +78,13 @@ const PaginationButtons = React.createClass({
           {
             icon: 'caret-left',
             onClick: this._handleButtonClick.bind(null, 'prev'),
-            style: Object.assign({}, style.component, style.arrows)
+            style
           },
           ...this._getPageButtons(),
           {
             icon: 'caret-right',
             onClick: this._handleButtonClick.bind(null, 'next'),
-            style: Object.assign({}, style.component, style.arrows)
+            style
           }
         ]}
         type={this.props.type}
@@ -98,8 +98,8 @@ const PaginationButtons = React.createClass({
         padding: '4px 8px',
         width: 35
       }, this.props.styles),
-      aarows: {
-        color: 'red'
+      active: {
+        backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.15)
       }
     };
   }
