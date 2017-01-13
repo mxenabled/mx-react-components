@@ -40,7 +40,7 @@ const PaginationButtonsDocs = React.createClass({
         <p>If prev/next button is clicked, the number returned is -1/+1 the current page number.</p>
 
         <h5>pageRange <label>Number</label></h5>
-        <p>Default: 7</p>
+        <p>Default: 9</p>
         <p>The number of page buttons (not including prev/next buttons) shown in the button group.</p>
 
         <h5>primaryColor <label>String</label></h5>

@@ -20,7 +20,7 @@ const PaginationButtons = React.createClass({
   getDefaultProps () {
     return {
       currentPage: 1,
-      pageRange: 7,
+      pageRange: 9,
       primaryColor: StyleConstants.Colors.PRIMARY,
       totalPages: 1,
       type: 'primaryOutline'
@@ -38,6 +38,28 @@ const PaginationButtons = React.createClass({
     }
 
     this.props.onClick(goToPage);
+  },
+
+  _getPrevButton () {
+    const disabledStyle = this.props.currentPage <= 1 && this.styles().disabled;
+    const style = Object.assign({}, this.styles().component, disabledStyle);
+
+    return {
+      icon: 'caret-left',
+      onClick: this._handleButtonClick.bind(null, 'prev'),
+      style
+    };
+  },
+
+  _getNextButton () {
+    const disabledStyle = this.props.currentPage >= this.props.totalPages && this.styles().disabled;
+    const style = Object.assign({}, this.styles().component, disabledStyle);
+
+    return {
+      icon: 'caret-right',
+      onClick: this._handleButtonClick.bind(null, 'next'),
+      style
+    };
   },
 
   _getStartingPage (currentPage, maxStartingPage, staticSet, startingSet, middleSet) {
@@ -69,27 +91,27 @@ const PaginationButtons = React.createClass({
   },
 
   _addFirstPageButtons () {
-    const style = this.styles().component;
+    const style = this.styles();
 
     return [{
       onClick: this._handleButtonClick.bind(null, 1),
-      style,
+      style: style.component,
       text: '1'
     }, {
       icon: 'kabob_horizontal',
-      style
+      style: Object.assign({}, style.component, style.disabled)
     }];
   },
 
   _addLastPageButtons (totalPages) {
-    const style = this.styles().component;
+    const style = this.styles();
 
     return [{
       icon: 'kabob_horizontal',
-      style
+      style: Object.assign({}, style.component, style.disabled)
     }, {
       onClick: this._handleButtonClick.bind(null, totalPages.toString()),
-      style,
+      style: style.component,
       text: totalPages.toString()
     }];
   },
@@ -107,7 +129,8 @@ const PaginationButtons = React.createClass({
     const endingPage = this._getEndingPage(totalPages, pageRange, startingSet, staticSet, middleSet, startingPage);
 
     for (let i = startingPage; i <= endingPage; i++) {
-      const buttonStyle = i === currentPage ? Object.assign({}, style.component, style.active) : style.component;
+      const activeStyle = i === currentPage && style.active;
+      const buttonStyle = Object.assign({}, style.component, activeStyle);
 
       pages.push({
         onClick: this._handleButtonClick.bind(null, i),
@@ -130,22 +153,12 @@ const PaginationButtons = React.createClass({
   },
 
   render () {
-    const style = this.styles().component;
-
     return (
       <ButtonGroup
         buttons={[
-          {
-            icon: 'caret-left',
-            onClick: this._handleButtonClick.bind(null, 'prev'),
-            style
-          },
+          this._getPrevButton(),
           ...this._getPageButtons(),
-          {
-            icon: 'caret-right',
-            onClick: this._handleButtonClick.bind(null, 'next'),
-            style
-          }
+          this._getNextButton()
         ]}
         type={this.props.type}
       />
@@ -160,6 +173,11 @@ const PaginationButtons = React.createClass({
       }, this.props.style),
       active: {
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.15)
+      },
+      disabled: {
+        color: StyleConstants.Colors.ASH,
+        cursor: 'default',
+        fill: StyleConstants.Colors.ASH
       }
     };
   }
