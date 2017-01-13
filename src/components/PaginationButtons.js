@@ -12,7 +12,7 @@ const PaginationButtons = React.createClass({
     onClick: React.PropTypes.func,
     pageRange: React.PropTypes.number,
     primaryColor: React.PropTypes.string,
-    styles: React.PropTypes.object,
+    style: React.PropTypes.object,
     totalPages: React.PropTypes.number.isRequired,
     type: React.PropTypes.oneOf(buttonTypes)
   },
@@ -157,7 +157,7 @@ const PaginationButtons = React.createClass({
       component: Object.assign({
         padding: '4px 8px',
         width: 35
-      }, this.props.styles),
+      }, this.props.style),
       active: {
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.15)
       }
