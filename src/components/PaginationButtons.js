@@ -20,7 +20,7 @@ const PaginationButtons = React.createClass({
   getDefaultProps () {
     return {
       currentPage: 1,
-      pageRange: 5,
+      pageRange: 7,
       primaryColor: StyleConstants.Colors.PRIMARY,
       totalPages: 1,
       type: 'primaryOutline'
@@ -40,21 +40,71 @@ const PaginationButtons = React.createClass({
     this.props.onClick(goToPage);
   },
 
+  _getStartingPage (currentPage, maxStartingPage, staticSet, startingSet, middleSet) {
+    let startingPage = 1;
+
+    if (!staticSet && !startingSet) {
+      if (middleSet) {
+        startingPage = currentPage;
+      } else {
+        startingPage = maxStartingPage;
+      }
+    }
+
+    return startingPage;
+  },
+
+  _getEndingPage (totalPages, pageRange, startingSet, staticSet, middleSet, startingPage) {
+    let endingPage = totalPages;
+
+    if (!staticSet) {
+      if (startingSet) {
+        endingPage = pageRange - 2;
+      } else if (middleSet) {
+        endingPage = startingPage + pageRange - 5;
+      }
+    }
+
+    return endingPage;
+  },
+
+  _addFirstPageButtons () {
+    const style = this.styles().component;
+
+    return [{
+      onClick: this._handleButtonClick.bind(null, 1),
+      style,
+      text: '1'
+    }, {
+      icon: 'kabob_horizontal',
+      style
+    }];
+  },
+
+  _addLastPageButtons (totalPages) {
+    const style = this.styles().component;
+
+    return [{
+      icon: 'kabob_horizontal',
+      style
+    }, {
+      onClick: this._handleButtonClick.bind(null, totalPages.toString()),
+      style,
+      text: totalPages.toString()
+    }];
+  },
+
   _getPageButtons () {
     const style = this.styles();
     const { currentPage, pageRange, totalPages } = this.props;
-    const totalButtons = pageRange < totalPages ? pageRange : totalPages;
     const pages = [];
-    const maxStartingPage = totalPages - pageRange + 1;
-    let startingPage = 1;
-    let maxEndingPage = maxStartingPage + pageRange - 1;
-    let endingPage = totalButtons;
-
-    if (currentPage > pageRange) {
-      startingPage = maxStartingPage >= currentPage ? currentPage : maxStartingPage;
-      maxEndingPage = startingPage + pageRange - 1;
-      endingPage = maxEndingPage <= currentPage ? currentPage : maxEndingPage;
-    }
+    const maxStartingPage = totalPages - pageRange + 3;
+    const staticSet = totalPages <= pageRange;
+    const startingSet = !staticSet && currentPage <= pageRange - 2;
+    const endingSet = !staticSet && !startingSet && currentPage + pageRange - 3 >= totalPages;
+    const middleSet = !staticSet && !startingSet && !endingSet;
+    const startingPage = this._getStartingPage(currentPage, maxStartingPage, staticSet, startingSet, middleSet);
+    const endingPage = this._getEndingPage(totalPages, pageRange, startingSet, staticSet, middleSet, startingPage);
 
     for (let i = startingPage; i <= endingPage; i++) {
       const buttonStyle = i === currentPage ? Object.assign({}, style.component, style.active) : style.component;
@@ -64,6 +114,16 @@ const PaginationButtons = React.createClass({
         text: i.toString(),
         style: buttonStyle
       });
+    }
+
+    if (!staticSet) {
+      if (!startingSet) {
+        pages.unshift(...this._addFirstPageButtons());
+      }
+
+      if (!endingSet) {
+        pages.push(...this._addLastPageButtons(totalPages));
+      }
     }
 
     return pages;
