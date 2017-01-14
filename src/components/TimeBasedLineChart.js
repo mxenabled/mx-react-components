@@ -517,7 +517,9 @@ const TimeBasedLineChart = React.createClass({
             <svg
               height={height}
               onMouseLeave={this._handleChartMouseLeave}
+              preserveAspectRatio='xMinYMin meet'
               ref={(ref) => this.chart = ref}
+              viewBox={`0 -10 ${(height / 2) + this.props.margin.top} ${(width / 2) + this.props.margin.right}`}
               width={width}
             >
               {shadeFutureOnGraph ? (
