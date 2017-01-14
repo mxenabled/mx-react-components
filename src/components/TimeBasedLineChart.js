@@ -328,7 +328,7 @@ const TimeBasedLineChart = React.createClass({
 
   _getTimeAxisTranslation () {
     const offSet = 10;
-    const x = this.props.margin.left - offSet;
+    const x = this.props.margin.left;
     const y = this.props.height - this.props.margin.bottom - offSet;
 
     return 'translate(' + x + ',' + y + ')';
