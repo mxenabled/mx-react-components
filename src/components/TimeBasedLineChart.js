@@ -559,7 +559,16 @@ const TimeBasedLineChart = React.createClass({
                 translation={this._getYAxisTranslation()}
               />
               <TimeXAxisGroup
-                data={data}
+                ticks={
+                  data.filter((datum, index) => {
+                    const isMonthRangeType = this.props.rangeType === 'month';
+
+                    return isMonthRangeType || index % 3 === 0;
+                  })
+                  .map(datum => {
+                    return moment.unix(datum.x).startOf(this.props.rangeType).unix();
+                  })
+                }
                 timeAxisFormat={rangeType === 'day' ? 'MMM D' : 'MMM'}
                 translation={this._getTimeAxisTranslation()}
                 xScaleFunction={this._getXScaleFunction}
