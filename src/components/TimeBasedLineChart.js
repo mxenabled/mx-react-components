@@ -432,9 +432,7 @@ const TimeBasedLineChart = React.createClass({
     chart.select('g.time-axis').selectAll('text')
       .attr('y', 12)
       .style(styles.xAxisLabel)
-      .style('text-anchor', () => {
-        return this.props.rangeType === 'day' ? 'middle' : 'start';
-      });
+      .style('text-anchor', 'middle');
 
     // Style x axis ticks
     chart.select('g.time-axis').selectAll('line')
