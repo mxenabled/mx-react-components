@@ -353,10 +353,9 @@ const TimeBasedLineChart = React.createClass({
   _getXScaleFunction () {
     const maxDate = this.props.data[this.props.data.length - 1].x;
     const minDate = this.props.data[0].x;
-    const offSet = 10;
 
     return d3.time.scale()
-      .range([0, this.state.adjustedWidth - offSet])
+      .range([0, this.state.adjustedWidth])
       .domain([minDate, maxDate]);
   },
 
