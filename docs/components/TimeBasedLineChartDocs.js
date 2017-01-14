@@ -57,13 +57,9 @@ const TimeBasedLineChartDocs = React.createClass({
           breakPointDate={moment().startOf('month').unix()}
           breakPointLabel={'This Month'}
           data={lineChartData}
-          height={400}
-          margin={{ top: 30, right: 0, bottom: 30, left: 75 }}
+          height={this.state.chartHeight}
           rangeType={'month'}
-          shadeBelowZero={true}
-          showZeroLine={true}
-          style={{ boxSizing: 'content-box' }}
-          width={700}
+          width={this.state.chartWidth}
         />
 
         <h3>Usage</h3>
