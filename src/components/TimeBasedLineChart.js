@@ -47,7 +47,7 @@ const styles = {
   },
   chartMargins: {
     top: 20,
-    right: 20,
+    right: 30,
     bottom: 20,
     left: 75
   },
@@ -517,9 +517,7 @@ const TimeBasedLineChart = React.createClass({
             <svg
               height={height}
               onMouseLeave={this._handleChartMouseLeave}
-              preserveAspectRatio='xMinYMin meet'
               ref={(ref) => this.chart = ref}
-              viewBox={`0 -10 ${(height / 2) + this.props.margin.top} ${(width / 2) + this.props.margin.right}`}
               width={width}
             >
               {shadeFutureOnGraph ? (
@@ -565,7 +563,7 @@ const TimeBasedLineChart = React.createClass({
                     return isMonthRangeType || index % 3 === 0;
                   })
                   .map(datum => {
-                    return moment.unix(datum.x).startOf(this.props.rangeType).unix();
+                    return moment.unix(datum.x).utc().unix();
                   })
                 }
                 timeAxisFormat={rangeType === 'day' ? 'MMM D' : 'MMM'}
