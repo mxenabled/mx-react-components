@@ -423,10 +423,8 @@ const TimeBasedLineChart = React.createClass({
     const data = this.props.data;
     const maxDate = data.length ? data[data.length - 1].x : 0;
     const minDate = data.length ? data[0].x : 0;
-    const secondMaxDate = data.length ? data[data.length - 2].x : 0;
-    const offSet = (maxDate - secondMaxDate) / 2;
 
-    return [{ x: minDate, y: 0 }, { x: maxDate + offSet, y: 0 }];
+    return [{ x: minDate, y: 0 }, { x: maxDate, y: 0 }];
   },
 
   _styleChart () {
