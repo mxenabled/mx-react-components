@@ -1,5 +1,5 @@
 const _isNumber = require('lodash/isNumber');
-const Radium = require('radium');
+const { StyleRoot } = require('radium');
 const React = require('react');
 const Velocity = require('velocity-animate');
 const _throttle = require('lodash/throttle');
@@ -143,30 +143,32 @@ const Drawer = React.createClass({
     const styles = this.styles();
 
     return (
-      <div style={styles.componentWrapper}>
-        <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
-        <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
-          <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
-            <span style={styles.backArrow}>
-              {this.props.showCloseButton &&
-                <Button
-                  icon='arrow-left'
-                  onClick={this.close}
-                  primaryColor={this.props.buttonPrimaryColor}
-                  type={'base'}
-                />
-              }
-            </span>
-            <span style={styles.title}>
-              {this.props.title}
-            </span>
-            {this._renderNav()}
-          </header>
-          <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
-            {this.props.children}
+      <StyleRoot>
+        <div style={styles.componentWrapper}>
+          <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
+          <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
+            <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
+              <span style={styles.backArrow}>
+                {this.props.showCloseButton &&
+                  <Button
+                    icon='arrow-left'
+                    onClick={this.close}
+                    primaryColor={this.props.buttonPrimaryColor}
+                    type={'base'}
+                  />
+                }
+              </span>
+              <span style={styles.title}>
+                {this.props.title}
+              </span>
+              {this._renderNav()}
+            </header>
+            <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+              {this.props.children}
+            </div>
           </div>
         </div>
-      </div>
+      </ StyleRoot>
     );
   },
 
@@ -270,4 +272,4 @@ const Drawer = React.createClass({
   }
 });
 
-module.exports = Radium(Drawer);
+module.exports = Drawer;
