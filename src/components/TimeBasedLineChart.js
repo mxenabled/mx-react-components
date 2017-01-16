@@ -597,7 +597,7 @@ const TimeBasedLineChart = React.createClass({
                   />
                   <text
                     className='zero-line-label'
-                    transform={this._getLineTranslation()}
+                    transform={this._getZeroLabelTranslation()}
                     x={this._getZeroLabelXValue()}
                     y={this._getZeroLabelYValue()}
                   >
