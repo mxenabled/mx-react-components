@@ -326,6 +326,10 @@ const TimeBasedLineChart = React.createClass({
     return 'translate(' + this.props.margin.left + ', 10)';
   },
 
+  _getZeroLabelTranslation () {
+    return 'translate(' + this.props.margin.left + ', 14)';
+  },
+
   _getTimeAxisTranslation () {
     const offSet = 10;
     const x = this.props.margin.left;
@@ -412,7 +416,7 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getZeroLabelYValue () {
-    return this._getYScaleValue(0 - this.props.margin.top);
+    return this._getYScaleValue(0);
   },
 
   _getZeroLineData () {
