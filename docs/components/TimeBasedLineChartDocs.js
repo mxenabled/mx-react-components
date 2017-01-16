@@ -6,6 +6,28 @@ const { TimeBasedLineChart } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 const TimeBasedLineChartDocs = React.createClass({
+  getInitialState () {
+    return {
+      chartHeight: (window.innerWidth * 0.6) / 2,
+      chartWidth: window.innerWidth * 0.6
+    };
+  },
+
+  componentDidMount () {
+    window.addEventListener('resize', this._handleWindowResize);
+  },
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this._handleWindowResize);
+  },
+
+  _handleWindowResize () {
+    this.setState({
+      chartHeight: (window.innerWidth * 0.6) / 2,
+      chartWidth: window.innerWidth * 0.6
+    });
+  },
+
   render () {
     const lineChartData = [];
 
@@ -35,13 +57,10 @@ const TimeBasedLineChartDocs = React.createClass({
           breakPointDate={moment().startOf('month').unix()}
           breakPointLabel={'This Month'}
           data={lineChartData}
-          height={400}
-          margin={{ top: 30, right: 0, bottom: 30, left: 75 }}
+          height={this.state.chartHeight}
           rangeType={'month'}
-          shadeBelowZero={true}
           showZeroLine={true}
-          style={{ boxSizing: 'content-box' }}
-          width={700}
+          width={this.state.chartWidth}
         />
 
         <h3>Usage</h3>

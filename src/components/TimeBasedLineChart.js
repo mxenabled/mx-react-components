@@ -47,7 +47,7 @@ const styles = {
   },
   chartMargins: {
     top: 20,
-    right: 20,
+    right: 30,
     bottom: 20,
     left: 75
   },
@@ -326,9 +326,13 @@ const TimeBasedLineChart = React.createClass({
     return 'translate(' + this.props.margin.left + ', 10)';
   },
 
+  _getZeroLabelTranslation () {
+    return 'translate(' + this.props.margin.left + ', 14)';
+  },
+
   _getTimeAxisTranslation () {
     const offSet = 10;
-    const x = this.props.margin.left - offSet;
+    const x = this.props.margin.left;
     const y = this.props.height - this.props.margin.bottom - offSet;
 
     return 'translate(' + x + ',' + y + ')';
@@ -353,10 +357,9 @@ const TimeBasedLineChart = React.createClass({
   _getXScaleFunction () {
     const maxDate = this.props.data[this.props.data.length - 1].x;
     const minDate = this.props.data[0].x;
-    const offSet = 10;
 
     return d3.time.scale()
-      .range([0, this.state.adjustedWidth - offSet])
+      .range([0, this.state.adjustedWidth])
       .domain([minDate, maxDate]);
   },
 
@@ -413,17 +416,15 @@ const TimeBasedLineChart = React.createClass({
   },
 
   _getZeroLabelYValue () {
-    return this._getYScaleValue(0 - this.props.margin.top);
+    return this._getYScaleValue(0);
   },
 
   _getZeroLineData () {
     const data = this.props.data;
     const maxDate = data.length ? data[data.length - 1].x : 0;
     const minDate = data.length ? data[0].x : 0;
-    const secondMaxDate = data.length ? data[data.length - 2].x : 0;
-    const offSet = (maxDate - secondMaxDate) / 2;
 
-    return [{ x: minDate, y: 0 }, { x: maxDate + offSet, y: 0 }];
+    return [{ x: minDate, y: 0 }, { x: maxDate, y: 0 }];
   },
 
   _styleChart () {
@@ -433,9 +434,7 @@ const TimeBasedLineChart = React.createClass({
     chart.select('g.time-axis').selectAll('text')
       .attr('y', 12)
       .style(styles.xAxisLabel)
-      .style('text-anchor', () => {
-        return this.props.rangeType === 'day' ? 'middle' : 'start';
-      });
+      .style('text-anchor', 'middle');
 
     // Style x axis ticks
     chart.select('g.time-axis').selectAll('line')
@@ -559,7 +558,16 @@ const TimeBasedLineChart = React.createClass({
                 translation={this._getYAxisTranslation()}
               />
               <TimeXAxisGroup
-                data={data}
+                ticks={
+                  data.filter((datum, index) => {
+                    const isMonthRangeType = this.props.rangeType === 'month';
+
+                    return isMonthRangeType || index % 3 === 0;
+                  })
+                  .map(datum => {
+                    return moment.unix(datum.x).utc().unix();
+                  })
+                }
                 timeAxisFormat={rangeType === 'day' ? 'MMM D' : 'MMM'}
                 translation={this._getTimeAxisTranslation()}
                 xScaleFunction={this._getXScaleFunction}
@@ -589,7 +597,7 @@ const TimeBasedLineChart = React.createClass({
                   />
                   <text
                     className='zero-line-label'
-                    transform={this._getLineTranslation()}
+                    transform={this._getZeroLabelTranslation()}
                     x={this._getZeroLabelXValue()}
                     y={this._getZeroLabelYValue()}
                   >
