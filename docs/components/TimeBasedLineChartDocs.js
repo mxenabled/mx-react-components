@@ -59,6 +59,7 @@ const TimeBasedLineChartDocs = React.createClass({
           data={lineChartData}
           height={this.state.chartHeight}
           rangeType={'month'}
+          showZeroLine={true}
           width={this.state.chartWidth}
         />
 
