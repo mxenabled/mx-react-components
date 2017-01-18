@@ -81,6 +81,10 @@ const Components = React.createClass({
                   displayValue: 'Modal'
                 },
                 {
+                  value: 'needle',
+                  displayValue: 'needle'
+                },
+                {
                   value: 'page-indicator',
                   displayValue: 'Page Indicator'
                 },
@@ -166,6 +170,7 @@ const Components = React.createClass({
             <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
             <Link to='/components/spin'>Spin</Link>
+            <Link to='/components/needle'>Needle</Link>
 
             <h3>Form</h3>
             <Link to='/components/button'>Button</Link>

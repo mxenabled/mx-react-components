@@ -23,6 +23,7 @@ const Loader = require('components/LoaderDocs');
 const Menu = require('components/MenuDocs');
 const MessageBox = require('components/MessageBoxDocs');
 const Modal = require('components/ModalDocs');
+const Needle = require('components/NeedleDocs');
 const PageIndicator = require('components/PageIndicatorDocs');
 const PaginationButtons = require('components/PaginationButtonsDocs');
 const ProgressBar = require('components/ProgressBarDocs');
@@ -84,6 +85,7 @@ ReactDOM.render((
         <Route component={Menu} path='menu' />
         <Route component={MessageBox} path='message-box' />
         <Route component={Modal} path='modal' />
+        <Route component={Needle} path='needle' />
         <Route component={PageIndicator} path='page-indicator' />
         <Route component={PaginationButtons} path='pagination-buttons' />
         <Route component={ProgressBar} path='progress-bar' />

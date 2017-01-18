@@ -19,6 +19,7 @@ module.exports = {
   Menu: require('./components/Menu'),
   MessageBox: require('./components/MessageBox'),
   Modal: require('./components/Modal'),
+  Needle: require('./components/Needle'),
   PageIndicator: require('./components/PageIndicator'),
   PaginationButtons: require('./components/PaginationButtons'),
   ProgressBar: require('./components/ProgressBar'),
