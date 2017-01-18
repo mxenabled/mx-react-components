@@ -41,24 +41,26 @@ const PaginationButtons = React.createClass({
   },
 
   _getPrevButton () {
-    const disabledStyle = this.props.currentPage <= 1 && this.styles().disabled;
-    const style = Object.assign({}, this.styles().component, disabledStyle);
+    const type = this.props.currentPage <= 1 && 'disabled';
+    const style = this.styles().component;
 
     return {
       icon: 'caret-left',
       onClick: this._handleButtonClick.bind(null, 'prev'),
-      style
+      style,
+      type
     };
   },
 
   _getNextButton () {
-    const disabledStyle = this.props.currentPage >= this.props.totalPages && this.styles().disabled;
-    const style = Object.assign({}, this.styles().component, disabledStyle);
+    const type = this.props.currentPage >= this.props.totalPages && 'disabled';
+    const style = this.styles().component;
 
     return {
       icon: 'caret-right',
       onClick: this._handleButtonClick.bind(null, 'next'),
-      style
+      style,
+      type
     };
   },
 
@@ -91,27 +93,29 @@ const PaginationButtons = React.createClass({
   },
 
   _addFirstPageButtons () {
-    const style = this.styles();
+    const style = this.styles().component;
 
     return [{
       onClick: this._handleButtonClick.bind(null, 1),
-      style: style.component,
+      style,
       text: '1'
     }, {
       icon: 'kabob_horizontal',
-      style: Object.assign({}, style.component, style.disabled)
+      style,
+      type: 'disabled'
     }];
   },
 
   _addLastPageButtons (totalPages) {
-    const style = this.styles();
+    const style = this.styles().component;
 
     return [{
       icon: 'kabob_horizontal',
-      style: Object.assign({}, style.component, style.disabled)
+      style,
+      type: 'disabled'
     }, {
       onClick: this._handleButtonClick.bind(null, totalPages.toString()),
-      style: style.component,
+      style,
       text: totalPages.toString()
     }];
   },
@@ -173,11 +177,6 @@ const PaginationButtons = React.createClass({
       }, this.props.style),
       active: {
         backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.15)
-      },
-      disabled: {
-        color: StyleConstants.Colors.ASH,
-        cursor: 'default',
-        fill: StyleConstants.Colors.ASH
       }
     };
   }
