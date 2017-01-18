@@ -7,6 +7,8 @@ const StyleConstants = require('../constants/Style');
 
 const Icon = require('../components/Icon');
 
+const { buttonTypes } = require('../constants/App');
+
 const Button = React.createClass({
   propTypes: {
     actionText: React.PropTypes.string,
@@ -15,15 +17,7 @@ const Button = React.createClass({
     onClick: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
     style: React.PropTypes.object,
-    type: React.PropTypes.oneOf([
-      'base',
-      'disabled',
-      'neutral',
-      'primary',
-      'primaryOutline',
-      'primaryInverse',
-      'secondary'
-    ])
+    type: React.PropTypes.oneOf(buttonTypes)
   },
 
   getDefaultProps () {

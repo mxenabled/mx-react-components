@@ -5,22 +5,19 @@ const Button = require('./Button');
 
 const StyleConstants = require('../constants/Style');
 
+const { buttonTypes } = require('../constants/App');
+
 const ButtonGroup = React.createClass({
   propTypes: {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       icon: React.PropTypes.string,
       onClick: React.PropTypes.func,
       style: React.PropTypes.object,
-      text: React.PropTypes.string
+      text: React.PropTypes.string,
+      type: React.PropTypes.oneOf(buttonTypes)
     }).isRequired),
     primaryColor: React.PropTypes.string,
-    type: React.PropTypes.oneOf([
-      'base',
-      'disabled',
-      'neutral',
-      'primary',
-      'primaryOutline'
-    ])
+    type: React.PropTypes.oneOf(buttonTypes)
   },
 
   getDefaultProps () {
@@ -40,19 +37,20 @@ const ButtonGroup = React.createClass({
           const isFirstChild = i === 0;
           const isLastChild = i === this.props.buttons.length - 1;
           const isOnlyChild = isFirstChild && isLastChild;
+          const isDisabled = button.type === 'disabled';
 
           return (
             <Button
               icon={button.icon}
               key={i}
-              onClick={button.onClick}
+              onClick={!isDisabled && button.onClick}
               primaryColor={this.props.primaryColor}
               style={Object.assign({},
                 styles.component,
-                styles[this.props.type],
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
                 isOnlyChild && styles.onlyChild,
+                isDisabled && styles.disabled,
                 button.style)}
               type={this.props.type}
             >
@@ -70,7 +68,7 @@ const ButtonGroup = React.createClass({
         boxSizing: 'border-box',
         borderRadius: 0,
         borderWidth: 1,
-        borderRightWidth: 0,
+        borderRightWidth: this.props.type === 'base' ? 1 : 0,
         verticalAlign: 'middle'
       }, this.props.style),
       firstChild: {
@@ -84,11 +82,16 @@ const ButtonGroup = React.createClass({
         borderRadius: 2,
         borderWidth: 1
       },
-      base: {
-        borderRight: '1px solid transparent',
+      disabled: {
+        backgroundColor: 'transparent',
+        color: StyleConstants.Colors.FOG,
+        cursor: 'default',
+        fill: StyleConstants.Colors.FOG,
         ':hover': {
-          borderRadius: 2,
-          borderRight: '1px solid initial'
+          backgroundColor: 'transparent'
+        },
+        ':active': {
+          backgroundColor: 'transparent'
         }
       }
     };
