@@ -43,7 +43,7 @@ const ButtonGroup = React.createClass({
             <Button
               icon={button.icon}
               key={i}
-              onClick={button.onClick}
+              onClick={!isDisabled && button.onClick}
               primaryColor={this.props.primaryColor}
               style={Object.assign({},
                 styles.component,
