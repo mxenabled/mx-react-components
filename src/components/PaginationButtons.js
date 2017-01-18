@@ -8,10 +8,7 @@ const { buttonTypes } = require('../constants/App');
 
 const PaginationButtons = React.createClass({
   propTypes: {
-    currentPage: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]).isRequired,
+    currentPage: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func,
     pageRange: React.PropTypes.number,
     primaryColor: React.PropTypes.string,
@@ -117,7 +114,7 @@ const PaginationButtons = React.createClass({
       style,
       type: 'disabled'
     }, {
-      onClick: this._handleButtonClick.bind(null, totalPages.toString()),
+      onClick: this._handleButtonClick.bind(null, totalPages),
       style,
       text: totalPages.toString()
     }];
