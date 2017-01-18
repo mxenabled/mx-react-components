@@ -1,4 +1,14 @@
 module.exports = {
+  buttonTypes: [
+    'base',
+    'disabled',
+    'neutral',
+    'primary',
+    'primaryOutline',
+    'primaryInverse',
+    'secondary'
+  ],
+
   Icons: [
     {
       value: 'accounts',

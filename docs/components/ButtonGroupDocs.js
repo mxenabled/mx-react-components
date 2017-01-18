@@ -25,6 +25,18 @@ const ButtonGroupDocs = React.createClass({
           />
         </div>
         <br /><br />
+        <div className='flex'>
+          <ButtonGroup
+            buttons={[
+              { text: 'Item 1' },
+              { text: 'Item 2, disabled', type: 'disabled' },
+              { text: 'Item 3' },
+              { text: 'Item 4' }
+            ]}
+            type='primaryOutline'
+          />
+        </div>
+        <br /><br />
         <div>
           <ButtonGroup
             buttons={[
@@ -39,7 +51,8 @@ const ButtonGroupDocs = React.createClass({
         <h3>Usage</h3>
         <h5>buttons <label>Array of Objects</label></h5>
         <p>Default: An empty array</p>
-        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>icon</label>, <label>text</label>, or both.</p>
+        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>icon</label>, <label>text</label>, and <label>style</label>.</p>
+        <p>A button can be disabled by adding <label>type = 'disabled'</label> but no other button types are supported within the button group.</p>
 
         <h5>icon <label>String</label></h5>
         <p>The name of the <a href='/components/icon'>icon</a></p>
@@ -61,7 +74,7 @@ const ButtonGroupDocs = React.createClass({
     <ButtonGroup
       buttons={[
          { icon: 'download' },
-         { icon: 'search' },
+         { icon: 'search', type: 'disabled' },
          { icon: 'add' }
       ]}
       type='base' />
