@@ -6,6 +6,20 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.45</h3>
+        <ul>
+          <li>
+            Added PaginationButtons Component. (<a href='https://github.com/mxenabled/mx-react-components/pull/491'>#491</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.44</h3>
+        <ul>
+          <li>
+            Added support for disabled buttons in ButtonGroups Component. (<a href='https://github.com/mxenabled/mx-react-components/pull/494'>#494</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.39</h3>
         <ul>
           <li>
