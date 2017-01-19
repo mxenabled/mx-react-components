@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Button, Drawer } = require('mx-react-components');
+const { Button, Drawer, SimpleSelect } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -11,6 +11,7 @@ const DrawerDocs = React.createClass({
       demoDrawerOpen: false,
       currentPage: 3,
       totalPages: 8
+      showSimpleSelectMenu: false
     };
   },
 
@@ -180,6 +181,34 @@ const DrawerDocs = React.createClass({
   }
 });
 
+function HeaderMenu ({ handleButtonClick, handleScrimClick, showSimpleSelectMenu = false }) {
+  return (
+    <div style={{ width: 150 }}>
+      <Button
+        icon='gear'
+        onClick={handleButtonClick}
+        type='neutral'
+      >
+        Settings
+      </Button>
+      {showSimpleSelectMenu ? (
+        <SimpleSelect
+          items={[
+            { icon: 'auto', text: 'Auto' },
+            { icon: 'kids', text: 'Kids' },
+            { icon: 'pets', text: 'Pets' }
+          ]}
+          menuStyles={{ left: 65 }}
+          onScrimClick={handleScrimClick}
+        />
+      ) : null}
+    </div>
+  );
+}
+HeaderMenu.propTypes = {
+  handleButtonClick: React.PropTypes.func,
+  handleScrimClick: React.PropTypes.func,
+  showSimpleSelectMenu: React.PropTypes.bool
+};
 
 module.exports = DrawerDocs;
-
