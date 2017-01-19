@@ -25,6 +25,13 @@ const NotifyOnScrollThreshold = React.createClass({
     this._handleScroll = _throttle(this._handleScroll, 200);
 
     this.container.parentElement.addEventListener('scroll', this._handleScroll);
+
+    if (this.container.parentElement.scrollHeight <= this.container.parentElement.clientHeight) {
+      this.setState({
+        scrollHeight: this.container.parentElement.scrollHeight,
+        thresholdMet: true
+      });
+    }
   },
 
   componentWillUnmount () {
