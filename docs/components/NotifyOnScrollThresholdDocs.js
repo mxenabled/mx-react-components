@@ -68,6 +68,10 @@ const NotifyOnScrollThresholdDocs = React.createClass({
         </div>
 
         <h3>Usage</h3>
+        <h5>onThresholdMet <label>Function</label></h5>
+        <p>Default: No Operation</p>
+        <p>A function called when the threshold is met.</p>
+
         <h5>threshold <label>Number</label></h5>
         <p>Default: 0.9</p>
         <p>A number between 0 and 1 that respresents a percentage between 0% and 100%</p>
@@ -87,6 +91,9 @@ const NotifyOnScrollThresholdDocs = React.createClass({
           {`
       <div style={styles.scrollContainer}>
         <NotifyOnScrollThreshold
+          onThresholdMet={() => {
+            this.setState({ thresholdMet: !this.state.thresholdMet });
+          }}
           threshold={0.8}
         >
           {(thresholdMet, scrollPosition, scrollHeight) => {
