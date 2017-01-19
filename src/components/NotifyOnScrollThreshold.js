@@ -3,8 +3,10 @@ const _throttle = require('lodash/throttle');
 
 const NotifyOnScrollThreshold = React.createClass({
   propTypes: {
-    children: React.PropTypes.func,
-    threshold: React.PropTypes.number
+    children: React.PropTypes.func.isRequired,
+    threshold: React.PropTypes.number // Number between 0 and 1 representing 0 to 100%
+  },
+
   getDefaultProps () {
     return {
       threshold: 0.9
