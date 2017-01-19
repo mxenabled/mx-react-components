@@ -251,7 +251,7 @@ const Drawer = React.createClass({
         width: '50%',
         whiteSpace: 'nowrap'
       },
-      nav: {
+      headerMenu: {
         paddingRight: 20,
         textAlign: 'right',
         width: '25%',
