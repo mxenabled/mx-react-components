@@ -43,6 +43,12 @@ const DrawerDocs = React.createClass({
     }
   },
 
+  _handleSimpleSelectClick () {
+    this.setState({
+      showMenu: !this.state.showMenu
+    });
+  },
+
   _renderDrawer () {
     const styles = this.styles();
 
@@ -50,10 +56,17 @@ const DrawerDocs = React.createClass({
       <Drawer
         breakPoints={{ large: 1200, medium: 1100 }}
         contentStyle={styles.content}
-        navConfig={{ label: this.state.currentPage + ' of ' + this.state.totalPages, onNextClick: this._handleNextClick, onPreviousClick: this._handlePreviousClick }}
+        headerMenu={(
+          <HeaderMenu
+            handleButtonClick={this._handleSimpleSelectClick}
+            handleScrimClick={this._handleSimpleSelectClick}
+            showSimpleSelectMenu={this.state.showMenu}
+          />
+        )}
         onClose={this._handleDrawerClose}
         title='Demo Drawer'
       >
+
         Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
       </Drawer>
 
