@@ -37,6 +37,11 @@ const NotifyOnScrollThreshold = React.createClass({
   },
 
   render () {
+    // TODO:
+    // 1. Position from bottom passed to children function
+    // 2. Clean up _handleScroll
+    // 3. What happens if the parent isn't scrollable due to lack of content?
+
     return (
       <div ref={(ref) => this.container = ref}>
         {this.props.children(this.state.thresholdMet)}
