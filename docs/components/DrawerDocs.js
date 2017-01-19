@@ -127,6 +127,10 @@ const DrawerDocs = React.createClass({
         <h5>headerStyle<label>Object or Array</label></h5>
         <p>Styles for the header part of the drawer.</p>
 
+        <h5>headerMenu<label>Function or Component</label></h5>
+        <p>This is a function or component that you can pass into the header for a menu or addtional nav items.</p>
+        <p>(See code in example for how to pass a component as a prop.)</p>
+
         <h5>maxWidth<label>Number</label></h5>
         <p>Default: 960</p>
         <p>This is the maximum width of the drawer component.</p>
