@@ -26,21 +26,15 @@ const NotifyOnScrollThreshold = React.createClass({
   _handleScroll (evt) {
     const element = evt.target;
     const availableHeight = element.scrollHeight - element.clientHeight;
-
     const position = element.scrollTop / availableHeight;
 
-    if (position >= this.props.threshold) {
-      this.setState({ thresholdMet: true });
-    } else if (this.state.thresholdMet && position < this.props.threshold) {
-      this.setState({ thresholdMet: false });
-    }
+    this.setState({ thresholdMet: position >= this.props.threshold });
   },
 
   render () {
     // TODO:
     // 1. Position from bottom passed to children function
-    // 2. Clean up _handleScroll
-    // 3. What happens if the parent isn't scrollable due to lack of content?
+    // 2. What happens if the parent isn't scrollable due to lack of content?
 
     return (
       <div ref={(ref) => this.container = ref}>
