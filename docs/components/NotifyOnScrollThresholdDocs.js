@@ -1,6 +1,7 @@
 const React = require('react');
 
 const { NotifyOnScrollThreshold } = require('mx-react-components');
+const Markdown = require('components/Markdown');
 
 const NotifyOnScrollThresholdDocs = React.createClass({
   getInitialState () {
@@ -12,7 +13,7 @@ const NotifyOnScrollThresholdDocs = React.createClass({
   _getMoreItems () {
     const newItems = [];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
       newItems.push(Math.floor(Math.random() * 100));
     }
 
@@ -26,6 +27,8 @@ const NotifyOnScrollThresholdDocs = React.createClass({
   },
 
   render () {
+    const styles = this.styles();
+
     return (
       <div>
         <h1>
@@ -35,19 +38,20 @@ const NotifyOnScrollThresholdDocs = React.createClass({
 
         <h3>Demo</h3>
 
-        <div style={{ border: '1px solid black', height: 200, overflow: 'scroll', padding: 10 }}>
+        <p>Scroll to the bottom of the list.</p>
+
+        <div style={styles.scrollContainer}>
           <NotifyOnScrollThreshold
             threshold={0.8}
           >
-            {(thresholdMet) => {
+            {(thresholdMet, scrollPosition, scrollHeight) => {
               return (
                 <div>
                   {thresholdMet && (
-                    <div style={{ backgroundColor: 'lightgrey', padding: 10, position: 'absolute' }}>
-                      Threshold hit! <button onClick={this._loadMoreData}>Load More Data?</button>
+                    <div style={Object.assign({}, styles.thresholdMessage, { top: scrollHeight - 75 })}>
+                      <span>Threshold hit! <button onClick={this._loadMoreData}>Load More Data</button></span>
                     </div>
                   )}
-                  Scroll to the bottom of the list.
                   <ul>
                     {this.state.listData.map((item, index) => {
                       return <li key={index}>{item}</li>;
@@ -60,10 +64,69 @@ const NotifyOnScrollThresholdDocs = React.createClass({
         </div>
 
         <h3>Usage</h3>
+        <h5>threshold <label>Number</label></h5>
+        <p>Default: 0.9</p>
+        <p>A number between 0 and 1 that respresents a percentage between 0% and 100%</p>
 
         <h3>Example</h3>
+
+        <p>
+          NotifyOnScrollThreshold is a "function as children" component.
+          As you can see from the example below.  You pass a function in the form of a child
+          component.  This function is called and passed the three arguments thresholdMet,
+          scrollPosition, and scrollHeight.  These aregument can then be used to conditionally
+          render jsx, be passed along to other component function calls, or passed down as props
+          to other child components.
+        </p>
+
+        <Markdown>
+          {`
+      <div style={styles.scrollContainer}>
+        <NotifyOnScrollThreshold
+          threshold={0.8}
+        >
+          {(thresholdMet, scrollPosition, scrollHeight) => {
+            return (
+              <div>
+                {thresholdMet && (
+                  <div style={Object.assign({}, styles.thresholdMessage, { top: scrollHeight - 75 })}>
+                    <span>Threshold hit! <button onClick={this._loadMoreData}>Load More Data</button></span>
+                  </div>
+                )}
+                <ul>
+                  {this.state.listData.map((item, index) => {
+                    return <li key={index}>{item}</li>;
+                  })}
+                </ul>
+              </div>
+            );
+          }}
+        </NotifyOnScrollThreshold>
+      </div>
+          `}
+        </Markdown>
       </div>
     );
+  },
+
+  styles () {
+    return {
+      scrollContainer: {
+        border: '1px solid black',
+        height: 200,
+        padding: 10,
+        position: 'relative',
+        overflow: 'scroll'
+      },
+      thresholdMessage: {
+        backgroundColor: 'lightgrey',
+        border: '1px solid black',
+        left: '50%',
+        padding: 10,
+        position: 'absolute',
+        transform: 'translateX(-50%)'
+      }
+    };
   }
 });
 
