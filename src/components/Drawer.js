@@ -162,7 +162,9 @@ const Drawer = React.createClass({
               <span style={styles.title}>
                 {this.props.title}
               </span>
-              {this._renderNav()}
+              <div style={styles.headerMenu}>
+                {this.props.headerMenu}
+              </div>
             </header>
             <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
               {this.props.children}
