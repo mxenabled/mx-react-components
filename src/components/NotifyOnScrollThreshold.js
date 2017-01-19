@@ -40,12 +40,18 @@ const NotifyOnScrollThreshold = React.createClass({
 
   _handleScroll (evt) {
     const element = evt.target;
-    const availableHeight = element.scrollHeight - element.clientHeight;
-    const position = element.scrollTop / availableHeight;
+    const heightDifference = element.scrollHeight - element.clientHeight;
+    const position = element.scrollTop / heightDifference;
+    const scrollHeightIsLessThanElementHeight = element.scrollHeight <= element.clientHeight;
+    const thresholdMet = position >= this.props.threshold || scrollHeightIsLessThanElementHeight;
 
-    this.setState({ thresholdMet: position >= this.props.threshold });
+    if (this.state.thresholdMet !== thresholdMet) {
+      this.setState({
         scrollHeight: element.scrollHeight,
         scrollPosition: element.scrollTop,
+        thresholdMet
+      });
+    }
   },
 
   render () {
