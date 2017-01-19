@@ -24,11 +24,11 @@ const Drawer = React.createClass({
     ]),
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
+    headerMenu: React.PropTypes.func,
     headerStyle: React.PropTypes.oneOfType([
       React.PropTypes.array,
       React.PropTypes.object
     ]),
-    headerMenu: React.PropTypes.func,
     maxWidth: React.PropTypes.number,
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
