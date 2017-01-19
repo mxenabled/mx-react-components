@@ -6,7 +6,8 @@ const Markdown = require('components/Markdown');
 const NotifyOnScrollThresholdDocs = React.createClass({
   getInitialState () {
     return {
-      listData: this._getMoreItems()
+      listData: this._getMoreItems(),
+      thresholdMet: false
     };
   },
 
@@ -38,10 +39,13 @@ const NotifyOnScrollThresholdDocs = React.createClass({
 
         <h3>Demo</h3>
 
-        <p>Scroll to the bottom of the list.</p>
+        <p>Scroll to the bottom of the list. {this.state.thresholdMet && <span style={{ color: 'red' }}>Threshold Met</span>}</p>
 
         <div style={styles.scrollContainer}>
           <NotifyOnScrollThreshold
+            onThresholdMet={() => {
+              this.setState({ thresholdMet: !this.state.thresholdMet });
+            }}
             threshold={0.8}
           >
             {(thresholdMet, scrollPosition, scrollHeight) => {
