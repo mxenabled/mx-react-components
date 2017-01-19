@@ -161,14 +161,61 @@ const DrawerDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
+
+    _handleDrawerClose () {
+      this.setState({
+        demoDrawerOpen: false
+      });
+    },
+
     <Drawer
-      buttonPrimaryColor='#333333'
-      onClose={this._handleCloseDrawerClick}
-      showScrim={false}
+      breakPoints={{ large: 1200, medium: 1100 }}
+      contentStyle={styles.content}
+      headerMenu={(
+        <HeaderMenu
+          handleButtonClick={this._handleSimpleSelectClick}
+          handleScrimClick={this._handleSimpleSelectClick}
+          showSimpleSelectMenu={this.state.showMenu}
+        />
+      )}
+      onClose={this._handleDrawerClose}
       title='Demo Drawer'
     >
-      //Content here
+      // Content Here
+
     </Drawer>
+
+    // Component To Pass As A Prop
+    function HeaderMenu ({ handleButtonClick, handleScrimClick, showSimpleSelectMenu = false }) {
+      return (
+        <div style={{ width: 150 }}>
+          <Button
+            icon='gear'
+            onClick={handleButtonClick}
+            type='neutral'
+          >
+            Settings
+          </Button>
+          {showSimpleSelectMenu ? (
+            <SimpleSelect
+              items={[
+                { icon: 'auto', text: 'Auto' },
+                { icon: 'kids', text: 'Kids' },
+                { icon: 'pets', text: 'Pets' }
+              ]}
+              menuStyles={{ left: 65 }}
+              onScrimClick={handleScrimClick}
+            />
+          ) : null}
+        </div>
+      );
+    }
+
+    HeaderMenu.propTypes = {
+      handleButtonClick: React.PropTypes.func,
+      handleScrimClick: React.PropTypes.func,
+      showSimpleSelectMenu: React.PropTypes.bool
+    };
   `}
         </Markdown>
       </div>
@@ -189,6 +236,16 @@ const DrawerDocs = React.createClass({
       listItem: {
         marginTop: 0,
         marginBottom: 0
+      },
+      navLabel: {
+        padding: '7px 14px',
+        position: 'relative',
+        bottom: 5,
+
+        '@media (max-width: 750px)': {
+          display: 'none',
+          padding: 0
+        }
       },
       h5ListItem: {
         marginTop: 0,
