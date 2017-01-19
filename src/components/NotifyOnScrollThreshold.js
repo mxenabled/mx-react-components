@@ -5,6 +5,10 @@ const NotifyOnScrollThreshold = React.createClass({
   propTypes: {
     children: React.PropTypes.func,
     threshold: React.PropTypes.number
+  getDefaultProps () {
+    return {
+      threshold: 0.9
+    };
   },
 
   getInitialState () {
