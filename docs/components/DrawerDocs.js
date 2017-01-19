@@ -135,14 +135,6 @@ const DrawerDocs = React.createClass({
         <p>Default: 960</p>
         <p>This is the maximum width of the drawer component.</p>
 
-        <h5>navConfig<label>Object</label></h5>
-        <p>This object requires 3 properties:</p>
-        <ul style={styles.unorderdLists}>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
-        </ul>
-
         <h5>onClose<label>Function</label> Required</h5>
         <p>This function will be called when a user clicks the close drawer button.</p>
 
@@ -157,6 +149,14 @@ const DrawerDocs = React.createClass({
         <h5>title<label>String</label></h5>
         <p>Default: ''</p>
         <p>This will be displayed in the header of the drawer component.</p>
+
+        <h5>DEPRECATED: navConfig <label>Object</label></h5>
+        <p>This object requires 3 properties:</p>
+        <ul style={styles.unorderdLists}>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
+        </ul>
 
         <h3>Example</h3>
         <Markdown>
