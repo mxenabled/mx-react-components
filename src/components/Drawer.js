@@ -28,6 +28,7 @@ const Drawer = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
+    headerMenu: React.PropTypes.func,
     maxWidth: React.PropTypes.number,
     navConfig: React.PropTypes.shape({
       label: React.PropTypes.string.isRequired,
