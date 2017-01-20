@@ -81,6 +81,10 @@ const Components = React.createClass({
                   displayValue: 'Modal'
                 },
                 {
+                  value: 'notify-on-scroll-threshold',
+                  displayValue: 'Notify On Scroll Threshold'
+                },
+                {
                   value: 'page-indicator',
                   displayValue: 'Page Indicator'
                 },
@@ -162,6 +166,7 @@ const Components = React.createClass({
             <Link to='/components/menu'>Menu</Link>
             <Link to='/components/message-box'>MessageBox</Link>
             <Link to='/components/modal'>Modal</Link>
+            <Link to='/components/notify-on-scroll-threshold'>Notify On Scroll Threshold</Link>
             <Link to='/components/page-indicator'>Page Indicator</Link>
             <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
