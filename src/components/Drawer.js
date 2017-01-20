@@ -24,7 +24,7 @@ const Drawer = React.createClass({
     ]),
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
-    headerMenu: React.PropTypes.func,
+    headerMenu: React.PropTypes.element,
     headerStyle: React.PropTypes.oneOfType([
       React.PropTypes.array,
       React.PropTypes.object
