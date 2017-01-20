@@ -119,7 +119,7 @@ const Drawer = React.createClass({
   _renderNav () {
     const styles = this.styles();
 
-    return this.props.navConfig ? (
+    return (
       <nav style={styles.nav}>
         <Button
           icon='caret-left'
@@ -137,7 +137,7 @@ const Drawer = React.createClass({
           type='base'
         />
       </nav>
-    ) : <div style={styles.nav} />;
+    );
   },
 
   render () {
@@ -163,7 +163,7 @@ const Drawer = React.createClass({
                 {this.props.title}
               </span>
               <div style={styles.headerMenu}>
-                {this.props.headerMenu}
+                {this.props.navConfig ? this._renderNav : this.props.headerMenu}
               </div>
             </header>
             <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
