@@ -10,7 +10,7 @@ const DrawerDocs = React.createClass({
     return {
       demoDrawerOpen: false,
       currentPage: 3,
-      totalPages: 8
+      totalPages: 8,
       showSimpleSelectMenu: false
     };
   },
@@ -272,8 +272,8 @@ function HeaderMenu ({ handleButtonClick, handleScrimClick, showSimpleSelectMenu
             { icon: 'kids', text: 'Kids' },
             { icon: 'pets', text: 'Pets' }
           ]}
-          menuStyles={{ left: 65 }}
           onScrimClick={handleScrimClick}
+          styles={{ menu: { left: 65 } }}
         />
       ) : null}
     </div>
