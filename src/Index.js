@@ -14,6 +14,7 @@ module.exports = {
   Drawer: require('./components/Drawer'),
   FileUpload: require('./components/FileUpload'),
   Gauge: require('./components/Gauge'),
+  HeaderMenu: require('./components/HeaderMenu'),
   Icon: require('./components/Icon'),
   Loader: require('./components/Loader'),
   Menu: require('./components/Menu'),
