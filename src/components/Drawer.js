@@ -24,6 +24,7 @@ const Drawer = React.createClass({
     ]),
     duration: React.PropTypes.number,
     easing: React.PropTypes.array,
+    headerMenu: React.PropTypes.element,
     headerStyle: React.PropTypes.oneOfType([
       React.PropTypes.array,
       React.PropTypes.object
@@ -118,7 +119,7 @@ const Drawer = React.createClass({
   _renderNav () {
     const styles = this.styles();
 
-    return this.props.navConfig ? (
+    return (
       <nav style={styles.nav}>
         <Button
           icon='caret-left'
@@ -136,7 +137,7 @@ const Drawer = React.createClass({
           type='base'
         />
       </nav>
-    ) : <div style={styles.nav} />;
+    );
   },
 
   render () {
@@ -161,7 +162,9 @@ const Drawer = React.createClass({
               <span style={styles.title}>
                 {this.props.title}
               </span>
-              {this._renderNav()}
+              <div style={styles.headerMenu}>
+                {this.props.headerMenu ? this.props.headerMenu : this._renderNav()}
+              </div>
             </header>
             <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
               {this.props.children}
@@ -248,7 +251,7 @@ const Drawer = React.createClass({
         width: '50%',
         whiteSpace: 'nowrap'
       },
-      nav: {
+      headerMenu: {
         paddingRight: 20,
         textAlign: 'right',
         width: '25%',

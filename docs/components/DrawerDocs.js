@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { Button, Drawer } = require('mx-react-components');
+const { Button, Drawer, HeaderMenu } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -10,7 +10,8 @@ const DrawerDocs = React.createClass({
     return {
       demoDrawerOpen: false,
       currentPage: 3,
-      totalPages: 8
+      totalPages: 8,
+      showSimpleSelectMenu: false
     };
   },
 
@@ -42,6 +43,12 @@ const DrawerDocs = React.createClass({
     }
   },
 
+  _handleSimpleSelectClick () {
+    this.setState({
+      showMenu: !this.state.showMenu
+    });
+  },
+
   _renderDrawer () {
     const styles = this.styles();
 
@@ -49,10 +56,17 @@ const DrawerDocs = React.createClass({
       <Drawer
         breakPoints={{ large: 1200, medium: 1100 }}
         contentStyle={styles.content}
-        navConfig={{ label: this.state.currentPage + ' of ' + this.state.totalPages, onNextClick: this._handleNextClick, onPreviousClick: this._handlePreviousClick }}
+        headerMenu={(
+          <HeaderMenu
+            handleButtonClick={this._handleSimpleSelectClick}
+            handleScrimClick={this._handleSimpleSelectClick}
+            showSimpleSelectMenu={this.state.showMenu}
+          />
+        )}
         onClose={this._handleDrawerClose}
         title='Demo Drawer'
       >
+
         Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
       </Drawer>
 
@@ -113,17 +127,13 @@ const DrawerDocs = React.createClass({
         <h5>headerStyle<label>Object or Array</label></h5>
         <p>Styles for the header part of the drawer.</p>
 
+        <h5>headerMenu<label>Function or Component</label></h5>
+        <p>This is a function or component that you can pass into the header for a menu or addtional nav items.</p>
+        <p>(See code in example for how to pass a component as a prop.)</p>
+
         <h5>maxWidth<label>Number</label></h5>
         <p>Default: 960</p>
         <p>This is the maximum width of the drawer component.</p>
-
-        <h5>navConfig<label>Object</label></h5>
-        <p>This object requires 3 properties:</p>
-        <ul style={styles.unorderdLists}>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
-        </ul>
 
         <h5>onClose<label>Function</label> Required</h5>
         <p>This function will be called when a user clicks the close drawer button.</p>
@@ -140,17 +150,72 @@ const DrawerDocs = React.createClass({
         <p>Default: ''</p>
         <p>This will be displayed in the header of the drawer component.</p>
 
+        <h5>DEPRECATED: navConfig <label>Object</label></h5>
+        <p>This object requires 3 properties:</p>
+        <ul style={styles.unorderdLists}>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
+          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
+        </ul>
+
         <h3>Example</h3>
         <Markdown>
   {`
+
+    _handleDrawerClose () {
+      this.setState({
+        demoDrawerOpen: false
+      });
+    },
+
     <Drawer
-      buttonPrimaryColor='#333333'
-      onClose={this._handleCloseDrawerClick}
-      showScrim={false}
+      breakPoints={{ large: 1200, medium: 1100 }}
+      contentStyle={styles.content}
+      headerMenu={(
+        <HeaderMenu
+          handleButtonClick={this._handleSimpleSelectClick}
+          handleScrimClick={this._handleSimpleSelectClick}
+          showSimpleSelectMenu={this.state.showMenu}
+        />
+      )}
+      onClose={this._handleDrawerClose}
       title='Demo Drawer'
     >
-      //Content here
+      // Content Here
+
     </Drawer>
+
+    // Component To Pass As A Prop
+    function HeaderMenu ({ handleButtonClick, handleScrimClick, showSimpleSelectMenu = false }) {
+      return (
+        <div style={{ width: 150 }}>
+          <Button
+            icon='gear'
+            onClick={handleButtonClick}
+            type='neutral'
+          >
+            Settings
+          </Button>
+          {showSimpleSelectMenu ? (
+            <SimpleSelect
+              items={[
+                { icon: 'auto', text: 'Auto' },
+                { icon: 'kids', text: 'Kids' },
+                { icon: 'pets', text: 'Pets' }
+              ]}
+              menuStyles={{ left: 65 }}
+              onScrimClick={handleScrimClick}
+            />
+          ) : null}
+        </div>
+      );
+    }
+
+    HeaderMenu.propTypes = {
+      handleButtonClick: React.PropTypes.func,
+      handleScrimClick: React.PropTypes.func,
+      showSimpleSelectMenu: React.PropTypes.bool
+    };
   `}
         </Markdown>
       </div>
@@ -172,6 +237,16 @@ const DrawerDocs = React.createClass({
         marginTop: 0,
         marginBottom: 0
       },
+      navLabel: {
+        padding: '7px 14px',
+        position: 'relative',
+        bottom: 5,
+
+        '@media (max-width: 750px)': {
+          display: 'none',
+          padding: 0
+        }
+      },
       h5ListItem: {
         marginTop: 0,
         marginBottom: 0
@@ -180,6 +255,4 @@ const DrawerDocs = React.createClass({
   }
 });
 
-
 module.exports = DrawerDocs;
-
