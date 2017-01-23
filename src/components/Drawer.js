@@ -163,7 +163,7 @@ const Drawer = React.createClass({
                 {this.props.title}
               </span>
               <div style={styles.headerMenu}>
-                {this.props.headerMenu ? this.props.headerMenu : this._renderNav()}
+                {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav()}
               </div>
             </header>
             <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
