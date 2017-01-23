@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.47</h3>
+        <ul>
+          <li>
+            Allows you to pass component to Drawer header. (<a href='https://github.com/mxenabled/mx-react-components/pull/497'>#497</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.46</h3>
         <ul>
           <li>
