@@ -170,6 +170,25 @@ const StylesDocs = React.createClass({
           `}
         </Markdown>
 
+        <h5>Linear Gradient</h5>
+        <p>Takes a HEX color and optional opacity amount and returns a linear gradient string. Opacity defaults to 0.8</p>
+        <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY), height: 100, width: '100%' }}></div>
+
+        <Markdown lang='js'>
+          {`
+            background: Styles.linearGradient(Styles.Colors.PRIMARY);
+          `}
+        </Markdown>
+
+        <div style={{ background: Styles.linearGradient(Styles.Colors.ORANGE, 0.2), height: 100, width: '100%' }}></div>
+
+        <Markdown lang='js'>
+          {`
+            background: Styles.linearGradient(Styles.Colors.ORANGE, 0.2);
+          `}
+        </Markdown>
+
+
         <h5>Get Window Size</h5>
         <p>Returns the <code style={{ display: 'inline', padding: 3 }}>Styles.BreakPoints</code> key for the current window width.</p>
         <Markdown lang='js'>

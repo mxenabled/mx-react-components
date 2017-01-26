@@ -141,6 +141,10 @@ module.exports = {
     return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity + ')';
   },
 
+  linearGradient (color, opacity = 0.8) {
+    return `linear-gradient(${this.adjustHexOpacity(color, opacity)}, ${color})`;
+  },
+
   getWindowSize () {
     const breakPoints = this.BreakPoints;
     const width = window.innerWidth;
