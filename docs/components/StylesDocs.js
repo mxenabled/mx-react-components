@@ -171,7 +171,7 @@ const StylesDocs = React.createClass({
         </Markdown>
 
         <h5>Linear Gradient</h5>
-        <p>Takes a HEX color and optional opacity amount and returns a linear gradient string. Opacity defaults to 0.8</p>
+        <p>Takes two HEX colors and optional opacity amounts and returns a linear gradient string. The first color is requried, the other color and opacities are optional. If only the first color is provided, the gradient will be a single color from 0.8 to 1.</p>
         <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
@@ -180,11 +180,11 @@ const StylesDocs = React.createClass({
           `}
         </Markdown>
 
-        <div style={{ background: Styles.linearGradient(Styles.Colors.ORANGE, 0.2), height: 100, width: '100%' }}></div>
+        <div style={{ background: Styles.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
           {`
-            background: Styles.linearGradient(Styles.Colors.ORANGE, 0.2);
+            background: Styles.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1);
           `}
         </Markdown>
 

@@ -141,8 +141,8 @@ module.exports = {
     return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity + ')';
   },
 
-  linearGradient (color, opacity = 0.8) {
-    return `linear-gradient(${this.adjustHexOpacity(color, opacity)}, ${color})`;
+  linearGradient (startColor, startOpacity = 0.8, endColor = startColor, endOpacity = 1) {
+    return `linear-gradient(${this.adjustHexOpacity(startColor, startOpacity)}, ${this.adjustHexOpacity(endColor, endOpacity)})`;
   },
 
   getWindowSize () {
