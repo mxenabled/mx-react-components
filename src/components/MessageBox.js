@@ -37,8 +37,7 @@ const MessageBox = React.createClass({
               style={Object.assign({}, styles.icon, { marginRight: StyleConstants.Spacing.SMALL })}
               type={this.props.icon}
             />
-
-            {this.props.title}
+            <div style={styles.title}>{this.props.title}</div>
           </div>
 
           {this.props.children &&
@@ -74,7 +73,12 @@ const MessageBox = React.createClass({
         alignItems: 'center'
       },
       leftHeader: {
-        flex: 1
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center'
+      },
+      title: {
+        fontFamily: StyleConstants.Fonts.SEMIBOLD
       },
       icon: {
         fill: StyleConstants.Colors.WHITE
