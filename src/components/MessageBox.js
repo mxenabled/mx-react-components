@@ -37,7 +37,6 @@ const MessageBox = React.createClass({
               style={Object.assign({}, styles.icon, { marginRight: StyleConstants.Spacing.SMALL })}
               type={this.props.icon}
             />
-
             <div style={styles.title}>{this.props.title}</div>
           </div>
 
