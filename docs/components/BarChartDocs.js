@@ -1,72 +1,31 @@
 const React = require('react');
+const d3 = require('d3');
+const moment = require('moment');
 
 const Markdown = require('components/Markdown');
 
-const { BarChart } = require('mx-react-components');
+const { BarChart, BarTimeXAxis, Styles } = require('mx-react-components');
 
-const chartData = [
-  {
-    color: '#E3E6E7',
-    label: 'Jan',
-    value: 595.45
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Feb',
-    value: 690.65
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Mar',
-    value: 897.40
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Apr',
-    value: 1209.95
-  },
-  {
-    color: '#E3E6E7',
-    label: 'May',
-    value: 1191.00
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Jun',
-    value: 1391.27
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Jul',
-    value: 991.23
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Aug',
-    value: 1101.45
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Sep',
-    value: 1301.45
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Oct',
-    value: 1405.45
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Nov',
-    value: 1600.45
-  },
-  {
-    color: '#E3E6E7',
-    label: 'Dec',
-    value: 2100.45
-  }
+const margins = {
+  top: 50,
+  right: 20,
+  bottom: 40,
+  left: 20
+};
+const width = 500 - margins.right - margins.left;
+const height = 300 - margins.top - margins.bottom;
 
-];
+const chartData = [];
+
+for (let i = 0; i < 12; i++) {
+  const date = moment().add(i, 'M');
+
+  chartData.push({
+    label: date.unix(),
+    value: Math.round(Math.random() * (10000 - -10000) + -10000)
+  });
+}
+
 
 const BarChartDocs = React.createClass({
 
@@ -89,8 +48,26 @@ const BarChartDocs = React.createClass({
     });
   },
 
+
   render () {
     const styles = this.styles();
+
+    const ticks = chartData.map(d => {
+      return d.label;
+    });
+
+    const xAxisScale = d3.scale.ordinal()
+      .domain(ticks)
+      .rangeRoundBands([0, width], 0.2);
+
+    const xAxis = (
+      <BarTimeXAxis
+        tickValues={ticks}
+        timeAxisFormat='MMM'
+        transform={`translate(${margins.left},${height + margins.top + margins.bottom / 2})`}
+        xScaleFunction={xAxisScale}
+      />
+    );
 
     return (
       <div>
@@ -102,8 +79,11 @@ const BarChartDocs = React.createClass({
         <h3 style={styles.demoHeader}>Demo</h3>
 
         <BarChart
+          animateOnHover={true}
           data={chartData}
+          margin={margins}
           style={styles.chart}
+          xAxis={xAxis}
         />
 
         <h3>Usage</h3>
@@ -111,13 +91,17 @@ const BarChartDocs = React.createClass({
         <p>If true, individual bars will animate on hover.</p>
         <p>Default: false</p>
 
+        <h5>borderRadius <label>Number</label></h5>
+        <p>Radius for the bar applied to the top for positive and bottom for negative values.</p>
+        <p>Default: 3</p>
+
         <h5>data<label>Array</label></h5>
-        <p>An array of objects that have color, label, and value properties. Each object represents a bar. Example:</p>
+        <p>An array of objects that label and value properties. Each object represents a bar. Optionally allows a color property to override the default color of the bar. Example:</p>
         <Markdown lang='js'>
   {`
     [{
-      label: 'Bar Label Name', //string - used to display the data label
-      color: '#E3E6E7', //string - color hexcode
+      label: 'label', //optional - Anything that can be parsed by d3 as an axis value.
+      color: '#E3E6E7', //string - hexcode or rgb
       value: 10 //number - required, value of bar, determines bar size
     }]
   `}
@@ -127,97 +111,93 @@ const BarChartDocs = React.createClass({
         <p>Height in pixels of the SVG that renders the bars.</p>
         <p>Default: 300</p>
 
-        <h5>labelStyle<label>Object</label></h5>
-        <p>A style object used to style the bar label.</p>
+        <h5>margin <label>Object</label></h5>
+        <p>Object containing the desired padding on the SVG to account for axis labels and tooltips.</p>
+        <p>Default:</p>
+        <Markdown lang='js'>
+  {`
+    {
+      top: 20,
+      right: 20,
+      bottom: 40,
+      left: 20
+    }
+  `}
+        </Markdown>
 
         <h5>onClick<label>Function</label></h5>
-        <p>Callback function that will run when a bar is clicked.</p>
+        <p>Callback function that will run when a bar is clicked. Provided the data values from the bar clicked.</p>
 
         <h5>onHover<label>Function</label></h5>
-        <p>Callback function that will run when a bar is hovered over.</p>
+        <p>Callback function that will run when a bar is hovered over. Provided the data values from the bar hovered over.</p>
 
-        <h5>primaryColor<label>String</label></h5>
-        <p>Primary Color used in the chart.</p>
-        <p>Default: '#359BCF'</p>
+        <h5>style<label>Object</label></h5>
+        <p>A object that allows you to override the internal styles</p>
+        <p>Available keys: </p>
+        <Markdown>
+  {`
+      bar,
+      positiveBarHover,
+      negativeBarHover,
+      positiveBarClicked,
+      negativeBarClicked,
+      tooltipContainer,
+      tooltipText
+  `}
+        </Markdown>
 
-        <h5>tooltipFormat<label>String</label></h5>
-        <p>A string that can be passed to change the display format of the tooltip text.</p>
-        <p>Default: '$0,0.00'</p>
-
-        <h5>tooltipStyle<label>Object</label></h5>
-        <p>A style object that can be passed to style the tooltip.</p>
+        <h5>tooltipFormat<label>Function</label></h5>
+        <p>A function that is called to format the value being displayed in the tooltip.</p>
 
         <h5>width<label>Number</label></h5>
         <p>Width of the SVG; bars will determine their individual width accordingly.</p>
         <p>Default: 500</p>
 
+        <h5>xAxis<label>Element</label></h5>
+        <p>A element representing the xAxis. You are incharge of transforming to the correct location.</p>
+
+        <h5>yAxis<label>Element</label></h5>
+        <p>A element representing the yAxis. You are incharge of transforming to the correct location.</p>
+
         <h3>Example</h3>
-        <Markdown>
+        <Markdown lang='js'>
   {`
-    <BarChart
-      data={[
-        {
-          color: '#E3E6E7',
-          label: 'Jan',
-          value: 595.45
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Feb',
-          value: 690.65
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Mar',
-          value: 897.40
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Apr',
-          value: 1209.95
-        },
-        {
-          color: '#E3E6E7',
-          label: 'May',
-          value: 1191.00
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Jun',
-          value: 1391.27
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Jul',
-          value: 991.23
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Aug',
-          value: 1101.45
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Sep',
-          value: 1301.45
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Oct',
-          value: 1405.45
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Nov',
-          value: 1600.45
-        },
-        {
-          color: '#E3E6E7',
-          label: 'Dec',
-          value: 2100.45
-        }
-      ]}
-    />
+    const margins = {
+      top: 50,
+      right: 20,
+      bottom: 40,
+      left: 20
+    };
+    const width = 500 - margins.right - margins.left;
+    const height = 300 - margins.top - margins.bottom;
+
+    const data = [{label: 1485470502878, value:, 1337}, {...}];
+
+    const ticks = data.map(d => {
+      return d.label;
+    });
+    const xAxisScale = d3.scale.ordinal()
+      .domain(ticks)
+      .rangeRoundBands([0, width], 0.2);
+
+    const xAxis = (
+      <BarTimeXAxis
+
+        tickValues={ticks}
+        timeAxisFormat='MMM'
+        transform={'translate(${margins.left},${height + margins.top + margins.bottom / 2})'}
+        xScaleFunction={xAxisScale}
+      />
+    );
+    const xAxis = (<BarTimeXAxis />
+
+    return (
+      <BarChart
+        data={data}
+        margin={margins}
+        xAxis={xAxis}
+      />
+    );
   `}
         </Markdown>
       </div>
@@ -229,6 +209,11 @@ const BarChartDocs = React.createClass({
     return {
       demoHeader: {
         marginBottom: 20
+      },
+      chart: {
+        positiveBarClicked: {
+          fill: Styles.Colors.LIME
+        }
       }
     };
   }
