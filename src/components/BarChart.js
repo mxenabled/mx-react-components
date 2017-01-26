@@ -1,73 +1,92 @@
 const React = require('react');
-const numeral = require('numeral');
 const _isEqual = require('lodash/isEqual');
 
 const StyleConstants = require('../constants/Style');
 
-const SetIntervalMixin = {
-  componentWillMount () {
-    this.intervals = [];
-  },
-  setInterval () {
-    this.intervals.push(setInterval.apply(null, arguments));
-  },
-  componentWillUnmount () {
-    this.intervals.map(clearInterval);
-  }
-};
-
-const Rect = React.createClass({
+const Bar = React.createClass({
   propTypes: {
     animateOnHover: React.PropTypes.bool,
-    color: React.PropTypes.string,
-    height: React.PropTypes.number.isRequired,
-    label: React.PropTypes.string,
-    onClick: React.PropTypes.func,
+    animationDuration: React.PropTypes.number,
+    height: React.PropTypes.number,
+    hovering: React.PropTypes.bool,
     onMouseOut: React.PropTypes.func,
     onMouseOver: React.PropTypes.func,
-    primaryColor: React.PropTypes.string,
-    value: React.PropTypes.number.isRequired,
+    radius: React.PropTypes.number,
+    value: React.PropTypes.number,
     width: React.PropTypes.number,
-    x: React.PropTypes.number.isRequired,
-    y: React.PropTypes.number.isRequired
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
   },
-
-  mixins: [SetIntervalMixin],
 
   getInitialState () {
     return {
-      hovering: false,
-      milliseconds: 0
+      hovering: false
     };
   },
 
   componentDidMount () {
-    this.setInterval(this.tick, 10);
-  },
+    if (this.props.animationDuration) {
+      const transform = this._getTransformWithScale(0);
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.setState({
-        milliseconds: 0
-      });
+      d3.select(this.bar)
+        .attr('transform', transform)
+      .transition()
+        .duration(this.props.animationDuration)
+        .attr('transform', 'scale(1)');
     }
   },
 
-  tick () {
-    this.setState({
-      milliseconds: this.state.milliseconds + 10
-    });
+  componentDidUpdate () {
+    if (this.state.hovering && this.props.animateOnHover) {
+      const transform = this._getTransformWithScale(0.9);
+
+      d3.select(this.bar)
+      .transition()
+        .duration(100)
+        .attr('transform', transform)
+      .transition()
+        .duration(100)
+        .attr('transform', 'scale(1)');
+    }
   },
 
-  _handleMouseOver (label, value, x, y) {
-    const animateDuration = 500;
+  _getTransformWithScale (factor) {
+    const centerX = 0;
+    const centerY = (this.props.value > 0) ? this.props.y + this.props.height : this.props.y;
+    const sx = -centerX * (factor - 1);
+    const sy = -centerY * (factor - 1);
 
+    return `translate(${sx},${sy}) scale(1, ${factor})`;
+  },
+
+  _drawPath ({ x, y, width, height, value, radius }) {
+    if (value > 0) {
+      return 'M' + x + ',' + y +
+         'h' + (width - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
+         'v' + (height - radius) +
+         'h' + (-width) +
+         'v' + (-height + radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
+         'Z';
+    } else {
+      return 'M' + x + ',' + y +
+         'h' + width +
+         'v' + (height - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius +
+         'h' + (radius * 2 - width) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
+         'v' + (radius - height) +
+         'Z';
+    }
+  },
+
+  _handleMouseOver () {
     this.setState({
-      hovering: true,
-      milliseconds: this.props.animateOnHover ? animateDuration : this.state.milliseconds
+      hovering: true
     });
 
-    this.props.onMouseOver(label, value, x, y);
+    this.props.onMouseOver();
   },
 
   _handleMouseOut () {
@@ -79,33 +98,26 @@ const Rect = React.createClass({
   },
 
   render () {
-    const animateHeight = d3.ease('back-out', 0.5);
-    const height = this.props.height * animateHeight(Math.min(1, this.state.milliseconds / 1000));
-    const y = this.props.height - height + this.props.y;
-    const shift = this.props.value > 0 ? '3px' : '-3px';
-    const style = {
-      fill: this.state.hovering && this.props.primaryColor ? this.props.primaryColor : this.props.color,
-      cursor: 'pointer',
-      transform: 'translateY(' + shift + ')'
-    };
-
     return (
-      <rect
-        height={height}
-        onClick={this.props.onClick.bind(null, this.props.value, this.props.label)}
+      <path
+        d={this._drawPath({
+          x: this.props.x,
+          y: this.props.y,
+          width: this.props.width,
+          height: this.props.height,
+          value: this.props.value,
+          radius: this.props.radius
+        })}
         onMouseOut={this._handleMouseOut}
-        onMouseOver={this._handleMouseOver.bind(null, this.props.label, this.props.value, this.props.x, y)}
-        rx={3}
-        ry={3}
-        style={style}
-        width={this.props.width}
-        x={this.props.x}
-        y={y}
+        onMouseOver={this._handleMouseOver}
+        ref={ref => {
+          this.bar = ref;
+        }}
+        style={this.props.style}
       />
     );
   }
 });
-
 
 const BarChart = React.createClass({
   propTypes: {
@@ -113,12 +125,20 @@ const BarChart = React.createClass({
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
     labelStyle: React.PropTypes.object,
+    margin: React.PropTypes.shape({
+      top: React.PropTypes.number,
+      right: React.PropTypes.number,
+      bottom: React.PropTypes.number,
+      left: React.PropTypes.number
+    }),
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
-    primaryColor: React.PropTypes.string,
-    tooltipFormat: React.PropTypes.string,
-    tooltipStyle: React.PropTypes.object,
-    width: React.PropTypes.number
+    showTooltips: React.PropTypes.bool,
+    style: React.PropTypes.object,
+    tooltipFormat: React.PropTypes.func,
+    width: React.PropTypes.number,
+    xAxis: React.PropTypes.element,
+    yAxis: React.PropTypes.element
   },
 
   getDefaultProps () {
@@ -127,15 +147,22 @@ const BarChart = React.createClass({
       height: 300,
       onClick: () => {},
       onHover: () => {},
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      tooltipFormat: '$0,0.00',
-      width: 500
+      style: {},
+      tooltipFormat: (val) => val,
+      width: 500,
+      margin: {
+        top: 20,
+        right: 20,
+        bottom: 40,
+        left: 20
+      },
+      showTooltips: true
     };
   },
 
   getInitialState () {
     return {
-      hovering: false
+      hoveringObj: {}
     };
   },
 
@@ -143,136 +170,123 @@ const BarChart = React.createClass({
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
   },
 
-  _handleMouseOver (label, value, x, y) {
+  _handleMouseOver (x, y, width, height, data) {
     this.setState({
-      hovering: true,
-      value,
-      x,
-      y
+      hoveringObj: {
+        x,
+        y,
+        width,
+        height,
+        value: data.value,
+        label: data.label
+      }
     });
   },
 
   _handleMouseOut () {
     this.setState({
-      hovering: false
+      hoveringObj: {}
     });
   },
 
-  _renderLabels (barWidth, xScale) {
-    const styles = this.styles();
+  _getTooltipX () {
+    if (Object.keys(this.state.hoveringObj).length) {
+      const margin = this.props.margin;
 
-    return this.props.data.map((item, index) => {
-      const xPos = xScale(index);
-      const labelPos = {
-        position: 'absolute',
-        left: xPos,
-        width: barWidth
-      };
-
-      return (
-        <span
-          key={index}
-          style={Object.assign({}, styles.label, labelPos, this.props.labelStyle)}
-        >
-          {item.label}
-        </span>
-      );
-    });
+      return this.state.hoveringObj.x + margin.left;
+    }
+    return -100;
   },
 
-  _renderBar (yScale, xScale, barWidth, value, index, maxHeight) {
-    const height = Math.abs(yScale(value));
-    const x = xScale(index);
-    const y = value > 0 ? maxHeight - height : 0;
+  _getTooltipY () {
+    if (Object.keys(this.state.hoveringObj).length) {
+      const margin = this.props.margin;
 
-    return (
-      <Rect
-        animateOnHover={this.props.animateOnHover}
-        color={this.props.data[index].color}
-        height={height}
-        key={index * value}
-        label={this.props.data[index].label}
-        onClick={this.props.onClick}
-        onMouseOut={this._handleMouseOut}
-        onMouseOver={this._handleMouseOver}
-        primaryColor={this.props.primaryColor}
-        value={value}
-        width={barWidth}
-        x={x}
-        y={y}
-      />
-    );
+      if (this.state.hoveringObj.value < 0) {
+        const y = this.state.hoveringObj.y + margin.top + this.state.hoveringObj.height + this.tooltip.getBBox().height;
+
+        return y;
+      }
+      return this.state.hoveringObj.y + margin.top - this.tooltip.getBBox().height / 2;
+    }
+    return -100;
   },
 
   render () {
     const styles = this.styles();
-    const { height, width } = this.props;
+    const { height, margin, width } = this.props;
+    const widthMargin = width - margin.left - margin.right;
+    const heightMargin = height - margin.top - margin.bottom;
+
     const data = this.props.data.map(d => {
       return d.value;
     });
-    const gap = 0.3;
-    const hasNegative = !!data.filter(value => value < 0).length;
-    const hasPositive = !!data.filter(value => value > 0).length;
-    let domain;
-    let range;
 
-    if (hasNegative && !hasPositive) {
-      domain = [d3.min(data), 0];
-      range = [-height, 0];
-    } else if (!hasNegative && hasPositive) {
-      domain = [0, d3.max(data)];
-      range = [0, height];
-    } else if (hasNegative && hasPositive) {
-      const y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
+    const domain = [Math.min.apply(null, data), Math.max.apply(null, data)];
+    const xDomain = this.props.data.map(d => {
+      return d.label;
+    });
 
-      domain = [-y0, y0];
-      range = [-height / 2, height / 2];
-    }
-    const yScale = d3.scale.linear()
+    const yFunc = d3.scale.linear()
       .domain(domain)
-      .range(range);
+      .range([heightMargin, 0]);
 
-    const xScale = d3.scale.ordinal()
-      .domain(d3.range(this.props.data.length))
-      .rangeRoundBands([0, width], gap);
-
-    const barWidth = xScale.rangeBand();
-    const maxHeight = Math.max.apply(null, range.map(Math.abs));
-    const positiveBars = data.map((value, index) => {
-      return value > 0 ? this._renderBar(yScale, xScale, barWidth, value, index, maxHeight) : null;
-    });
-
-    const negativeBars = data.map((value, index) => {
-      return value < 0 ? this._renderBar(yScale, xScale, barWidth, value, index, maxHeight) : null;
-    });
-
-    const maxHeightForPositiveBars = hasPositive ? yScale(d3.max(data)) : 0;
-    const maxHeightForNegativeBars = hasNegative ? yScale(Math.abs(d3.min(data))) : 0;
-    const tooltipMargin = 20;
-    const tooltipWidth = barWidth * 1.5;
-    const tooltipXPos = (tooltipWidth - barWidth) / 2;
-    const tooltipYPos = maxHeightForPositiveBars > 0 ? maxHeightForPositiveBars - tooltipMargin : -1 * tooltipMargin;
-    const tooltipStyle = {
-      left: this.state.x - tooltipXPos,
-      top: this.state.value > 0 ? this.state.y - tooltipMargin : tooltipYPos,
-      width: tooltipWidth
-    };
+    const xFunc = d3.scale.ordinal()
+      .domain(xDomain)
+      .rangeRoundBands([0, widthMargin], 0.2);
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
-        <svg height={maxHeightForPositiveBars} width={width}>
-          {positiveBars}
+        <svg
+          height={height}
+          preserveAspectRatio='xMinYMin meet'
+          width={width}
+          xmlns={'http://www.w3.org/2000/svg'}
+        >
+          <g transform={`translate(${margin.left},${margin.top})`}>
+            {this.props.data.map(d => {
+              const x = xFunc(d.label);
+              const y = (d.value > 0) ? yFunc(d.value) : yFunc(0);
+              const w = xFunc.rangeBand();
+              const h = Math.abs(yFunc(d.value) - yFunc(0));
+              const baseStyle = Object.assign({}, this.props.style.bar, { fill: d.color });
+              const style = (this.state.hoveringObj.value === d.value) ?
+                Object.assign({}, baseStyle, this.props.style.barHover) :
+                baseStyle;
+
+              return (
+                <Bar
+                  animateOnHover={this.props.animateOnHover}
+                  animationDuration={700}
+                  height={h}
+                  key={d.label + d.value}
+                  onMouseOut={this._handleMouseOut}
+                  onMouseOver={this._handleMouseOver.bind(null, x, y, w, h, d)}
+                  radius={3}
+                  style={style}
+                  value={d.value}
+                  width={w}
+                  x={x}
+                  y={y}
+                />
+              );
+            })}
+          </g>
+          {this.props.yAxis ? this.props.yAxis : null}
+          {this.props.xAxis ? this.props.xAxis : null}
+          <g
+            ref={(ref) => {
+              this.tooltip = ref;
+            }}
+            transform={`translate(${this._getTooltipX()}, ${this._getTooltipY()})`}
+          >
+            {this.props.showTooltips ? (
+              <text style={styles.tooltip}>
+                {this.state.hoveringObj.value || 'placeholder'}
+              </text>
+            ) : null}
+          </g>
         </svg>
-        <svg height={maxHeightForNegativeBars} width={width}>
-          <g>{negativeBars}</g>
-        </svg>
-        <div>
-          {this._renderLabels(barWidth, xScale)}
-        </div>
-        {this.state.hovering ? (
-          <span style={Object.assign({}, styles.tooltip, tooltipStyle, this.props.tooltipStyle)}>
-            {this.props.tooltipFormat ? numeral(this.state.value).format(this.props.tooltipFormat) : this.state.value}
-          </span>) : null}
       </div>
     );
   },
@@ -290,10 +304,9 @@ const BarChart = React.createClass({
         textAlign: 'center'
       },
       tooltip: {
-        color: this.props.primaryColor,
-        fontSize: StyleConstants.FontSizes.LARGE,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        position: 'absolute',
+        color: StyleConstants.Colors.CHARCOAL,
         textAlign: 'center',
         whiteSpace: 'nowrap'
       }
