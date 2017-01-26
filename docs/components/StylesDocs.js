@@ -180,6 +180,14 @@ const StylesDocs = React.createClass({
           `}
         </Markdown>
 
+        <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY, 0.2), height: 100, width: '100%' }}></div>
+
+        <Markdown lang='js'>
+          {`
+            background: Styles.linearGradient(Styles.Colors.PRIMARY, 0.2);
+          `}
+        </Markdown>
+
         <div style={{ background: Styles.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
