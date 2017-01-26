@@ -1,5 +1,8 @@
 const React = require('react');
 const _isEqual = require('lodash/isEqual');
+const _merge = require('lodash/merge');
+const _omit = require('lodash/omit');
+const _functions = require('lodash/functions');
 
 const StyleConstants = require('../constants/Style');
 
@@ -9,6 +12,7 @@ const Bar = React.createClass({
     animationDuration: React.PropTypes.number,
     height: React.PropTypes.number,
     hovering: React.PropTypes.bool,
+    onClick: React.PropTypes.func,
     onMouseOut: React.PropTypes.func,
     onMouseOver: React.PropTypes.func,
     radius: React.PropTypes.number,
@@ -16,12 +20,6 @@ const Bar = React.createClass({
     width: React.PropTypes.number,
     x: React.PropTypes.number,
     y: React.PropTypes.number
-  },
-
-  getInitialState () {
-    return {
-      hovering: false
-    };
   },
 
   componentDidMount () {
@@ -36,17 +34,22 @@ const Bar = React.createClass({
     }
   },
 
+  shouldComponentUpdate (nextProps) {
+    // check the props that aren't functions
+    return !_isEqual(_omit(nextProps, _functions(nextProps)), _omit(this.props, _functions(this.props)));
+  },
+
   componentDidUpdate () {
-    if (this.state.hovering && this.props.animateOnHover) {
+    if (this.props.hovering && this.props.animateOnHover) {
       const transform = this._getTransformWithScale(0.9);
 
       d3.select(this.bar)
-      .transition()
-        .duration(100)
-        .attr('transform', transform)
-      .transition()
-        .duration(100)
-        .attr('transform', 'scale(1)');
+        .transition()
+          .duration(100)
+          .attr('transform', transform)
+        .transition()
+          .duration(100)
+          .attr('transform', 'scale(1)');
     }
   },
 
@@ -81,22 +84,6 @@ const Bar = React.createClass({
     }
   },
 
-  _handleMouseOver () {
-    this.setState({
-      hovering: true
-    });
-
-    this.props.onMouseOver();
-  },
-
-  _handleMouseOut () {
-    this.setState({
-      hovering: false
-    });
-
-    this.props.onMouseOut();
-  },
-
   render () {
     return (
       <path
@@ -108,8 +95,9 @@ const Bar = React.createClass({
           value: this.props.value,
           radius: this.props.radius
         })}
-        onMouseOut={this._handleMouseOut}
-        onMouseOver={this._handleMouseOver}
+        onClick={this.props.onClick}
+        onMouseOut={this.props.onMouseOut}
+        onMouseOver={this.props.onMouseOver}
         ref={ref => {
           this.bar = ref;
         }}
@@ -122,9 +110,9 @@ const Bar = React.createClass({
 const BarChart = React.createClass({
   propTypes: {
     animateOnHover: React.PropTypes.bool,
+    barRadius: React.PropTypes.number,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
-    labelStyle: React.PropTypes.object,
     margin: React.PropTypes.shape({
       top: React.PropTypes.number,
       right: React.PropTypes.number,
@@ -144,30 +132,48 @@ const BarChart = React.createClass({
   getDefaultProps () {
     return {
       animateOnHover: false,
+      barRadius: 3,
       height: 300,
-      onClick: () => {},
-      onHover: () => {},
-      style: {},
-      tooltipFormat: (val) => val,
-      width: 500,
       margin: {
         top: 20,
         right: 20,
         bottom: 40,
         left: 20
       },
+      onClick: () => {},
+      onHover: () => {},
+      style: {},
+      tooltipFormat: (val) => val,
+      width: 500,
       showTooltips: true
     };
   },
 
   getInitialState () {
     return {
-      hoveringObj: {}
+      hoveringObj: {},
+      clickedData: {}
     };
   },
 
   shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
+  },
+
+  componentDidUpdate () {
+    let transform;
+
+    if (Object.keys(this.state.hoveringObj).length) {
+      const x = this._getTooltipX();
+      const y = this._getTooltipY();
+
+      transform = `translate(${x}, ${y})`;
+    } else {
+      transform = 'translate(-100, -100)';
+    }
+
+    d3.select(this.tooltip)
+      .attr('transform', transform);
   },
 
   _handleMouseOver (x, y, width, height, data) {
@@ -181,6 +187,8 @@ const BarChart = React.createClass({
         label: data.label
       }
     });
+
+    this.props.onHover(data);
   },
 
   _handleMouseOut () {
@@ -189,11 +197,25 @@ const BarChart = React.createClass({
     });
   },
 
+  _handleOnClick (data) {
+    this.setState({
+      clickedData: data
+    });
+
+    this.props.onClick(data);
+  },
+
   _getTooltipX () {
     if (Object.keys(this.state.hoveringObj).length) {
       const margin = this.props.margin;
+      const bb = this.tooltip.getBBox();
+      const hoveringObj = this.state.hoveringObj;
 
-      return this.state.hoveringObj.x + margin.left;
+      // Center the tooltip on the X Axis of the bar width
+      const hoverCX = hoveringObj.width / 2 + hoveringObj.x + margin.left;
+      const tooltipCX = bb.width / 2;
+
+      return hoverCX - tooltipCX;
     }
     return -100;
   },
@@ -203,9 +225,7 @@ const BarChart = React.createClass({
       const margin = this.props.margin;
 
       if (this.state.hoveringObj.value < 0) {
-        const y = this.state.hoveringObj.y + margin.top + this.state.hoveringObj.height + this.tooltip.getBBox().height;
-
-        return y;
+        return this.state.hoveringObj.y + margin.top + this.state.hoveringObj.height + this.tooltip.getBBox().height;
       }
       return this.state.hoveringObj.y + margin.top - this.tooltip.getBBox().height / 2;
     }
@@ -213,7 +233,7 @@ const BarChart = React.createClass({
   },
 
   render () {
-    const styles = this.styles();
+    const styles = _merge({}, this.styles(), this.props.style);
     const { height, margin, width } = this.props;
     const widthMargin = width - margin.left - margin.right;
     const heightMargin = height - margin.top - margin.bottom;
@@ -245,24 +265,37 @@ const BarChart = React.createClass({
         >
           <g transform={`translate(${margin.left},${margin.top})`}>
             {this.props.data.map(d => {
+              const positive = (d.value > 0);
               const x = xFunc(d.label);
-              const y = (d.value > 0) ? yFunc(d.value) : yFunc(0);
+              const y = positive ? yFunc(d.value) : yFunc(0);
               const w = xFunc.rangeBand();
               const h = Math.abs(yFunc(d.value) - yFunc(0));
-              const baseStyle = Object.assign({}, this.props.style.bar, { fill: d.color });
-              const style = (this.state.hoveringObj.value === d.value) ?
-                Object.assign({}, baseStyle, this.props.style.barHover) :
-                baseStyle;
+              const key = d.label + d.value;
+              const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
+              const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
+              const baseStyle = d.color ? Object.assign({}, styles.bar, { fill: d.color }) : styles.bar;
+              let style;
+
+              if (clicked) {
+                style = Object.assign({}, baseStyle, positive ? styles.positiveBarClicked : styles.negativeBarClicked);
+              } else if (hovering) {
+                style = Object.assign({}, baseStyle, positive ? styles.positiveBarHover : styles.negativeBarHover);
+              } else {
+                style = baseStyle;
+              }
 
               return (
                 <Bar
                   animateOnHover={this.props.animateOnHover}
                   animationDuration={700}
+                  clicked={clicked}
                   height={h}
-                  key={d.label + d.value}
+                  hovering={hovering}
+                  key={key}
+                  onClick={this._handleOnClick.bind(null, d)}
                   onMouseOut={this._handleMouseOut}
                   onMouseOver={this._handleMouseOver.bind(null, x, y, w, h, d)}
-                  radius={3}
+                  radius={this.props.barRadius}
                   style={style}
                   value={d.value}
                   width={w}
@@ -278,13 +311,11 @@ const BarChart = React.createClass({
             ref={(ref) => {
               this.tooltip = ref;
             }}
-            transform={`translate(${this._getTooltipX()}, ${this._getTooltipY()})`}
+            style={styles.tooltipContainer}
           >
-            {this.props.showTooltips ? (
-              <text style={styles.tooltip}>
-                {this.state.hoveringObj.value || 'placeholder'}
-              </text>
-            ) : null}
+            <text style={styles.tooltipText}>
+              {this.props.tooltipFormat(this.state.hoveringObj.value)}
+            </text>
           </g>
         </svg>
       </div>
@@ -293,17 +324,25 @@ const BarChart = React.createClass({
 
   styles () {
     return {
-      component: {
-        display: 'block',
-        position: 'relative'
+      bar: {
+        fill: StyleConstants.Colors.FOG
       },
-      label: {
-        color: StyleConstants.Colors.ASH,
-        display: 'inline-block',
-        fontSize: StyleConstants.FontSizes.SMALL,
-        textAlign: 'center'
+      positiveBarHover: {
+        fill: StyleConstants.Colors.PRIMARY
       },
-      tooltip: {
+      negativeBarHover: {
+        fill: StyleConstants.Colors.PRIMARY
+      },
+      positiveBarClicked: {
+        fill: StyleConstants.Colors.PRIMARY
+      },
+      negativeBarClicked: {
+        fill: StyleConstants.Colors.PRIMARY
+      },
+      tooltipContainer: {
+
+      },
+      tooltipText: {
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         color: StyleConstants.Colors.CHARCOAL,
