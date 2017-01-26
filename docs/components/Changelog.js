@@ -6,6 +6,23 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.50</h3>
+        <ul>
+          <li>
+            Add linearGradient helper to Styles (<a href='https://github.com/mxenabled/mx-react-components/pull/501'>#501</a>)
+          </li>
+          <li>
+            Change MessageBox header to semibold (<a href='https://github.com/mxenabled/mx-react-components/pull/500'>#500</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.49</h3>
+        <ul>
+          <li>
+            Add navConfig back into Drawer component to keep backward compatibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/498'>#498</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.47</h3>
         <ul>
           <li>
