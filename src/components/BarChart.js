@@ -35,7 +35,6 @@ const Bar = React.createClass({
   },
 
   shouldComponentUpdate (nextProps) {
-    // check the props that aren't functions
     return !_isEqual(_omit(nextProps, _functions(nextProps)), _omit(this.props, _functions(this.props)));
   },
 
