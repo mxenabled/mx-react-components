@@ -154,10 +154,10 @@ const BarChartDocs = React.createClass({
         <p>Default: 500</p>
 
         <h5>xAxis<label>Element</label></h5>
-        <p>A element representing the xAxis. You are incharge of transforming to the correct location.</p>
+        <p>A element representing the xAxis. You are in charge of transforming to the correct location.</p>
 
         <h5>yAxis<label>Element</label></h5>
-        <p>A element representing the yAxis. You are incharge of transforming to the correct location.</p>
+        <p>A element representing the yAxis. You are in charge of transforming to the correct location.</p>
 
         <h3>Example</h3>
         <Markdown lang='js'>
