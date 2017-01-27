@@ -454,7 +454,7 @@ const DateRangePicker = React.createClass({
         boxSizing: 'border-box',
         padding: isLargeOrMediumWindowSize ? 20 : 10,
         margin: 'auto',
-        width: isLargeOrMediumWindowSize ? 250 : '100%'
+        width: 250
       },
 
       //Calendar Header
@@ -546,7 +546,7 @@ const DateRangePicker = React.createClass({
         fontSize: StyleConstants.FontSizes.MEDIUM,
         paddingLeft: isLargeOrMediumWindowSize ? 10 : 0,
         paddingTop: 10,
-        width: isLargeOrMediumWindowSize ? 150 : '100%'
+        width: isLargeOrMediumWindowSize ? 150 : 300
       },
       rangeOption: {
         alignItems: 'center',
