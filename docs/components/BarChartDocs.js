@@ -182,14 +182,12 @@ const BarChartDocs = React.createClass({
 
     const xAxis = (
       <BarTimeXAxis
-
         tickValues={ticks}
         timeAxisFormat='MMM'
         transform={'translate(${margins.left},${height + margins.top + margins.bottom / 2})'}
         xScaleFunction={xAxisScale}
       />
     );
-    const xAxis = (<BarTimeXAxis />
 
     return (
       <BarChart
