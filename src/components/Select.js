@@ -9,6 +9,7 @@ const StyleConstants = require('../constants/Style');
 
 const Select = React.createClass({
   propTypes: {
+    brandColor: React.PropTypes.string,
     color: React.PropTypes.string,
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     onChange: React.PropTypes.func,
@@ -25,6 +26,7 @@ const Select = React.createClass({
 
   getDefaultProps () {
     return {
+      brandColor: StyleConstants.Colors.PRIMARY,
       color: StyleConstants.Colors.PRIMARY,
       onChange () {},
       options: [],
@@ -45,7 +47,7 @@ const Select = React.createClass({
   getBackgroundColor (option) {
     if (option.value === this.state.hoverItem) {
       return {
-        backgroundColor: StyleConstants.Colors.PRIMARY,
+        backgroundColor: this.props.brandColor,
         color: StyleConstants.Colors.WHITE,
         fill: StyleConstants.Colors.WHITE
       };
