@@ -1,7 +1,7 @@
 const React = require('react');
 
-const Changelog = React.createClass({
-  render () {
+class Changelog extends React.Component {
+  render() {
     return (
       <div>
         <h1>Change Log</h1>
@@ -1208,6 +1208,6 @@ const Changelog = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Changelog;

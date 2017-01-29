@@ -4,18 +4,16 @@ const { SimpleSlider } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const SimpleSliderDocs = React.createClass({
-  getInitialState () {
-    return {
-      percent: 0
-    };
-  },
+class SimpleSliderDocs extends React.Component {
+  state = {
+    percent: 0
+  };
 
-  _handleSliderChange (percent) {
+  _handleSliderChange = (percent) => {
     this.setState({ percent });
-  },
+  };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -54,7 +52,7 @@ const SimpleSliderDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SimpleSliderDocs;
 

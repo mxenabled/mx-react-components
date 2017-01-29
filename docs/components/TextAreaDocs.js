@@ -4,8 +4,8 @@ const { TextArea } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const TextAreaDocs = React.createClass({
-  render () {
+class TextAreaDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -58,6 +58,6 @@ const TextAreaDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = TextAreaDocs;

@@ -2,8 +2,8 @@ const React = require('react');
 
 const { Icon } = require('mx-react-components');
 
-const Home = React.createClass({
-  render () {
+class Home extends React.Component {
+  render() {
     return (
       <div>
         <div className='hero'>
@@ -78,6 +78,6 @@ const Home = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Home;

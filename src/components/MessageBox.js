@@ -4,28 +4,26 @@ const _merge = require('lodash/merge');
 const StyleConstants = require('../constants/Style');
 const Icon = require('../components/Icon');
 
-const MessageBox = React.createClass({
-  propTypes: {
+class MessageBox extends React.Component {
+  static propTypes = {
     children: React.PropTypes.node,
     color: React.PropTypes.string,
     icon: React.PropTypes.string,
     styles: React.PropTypes.object,
     title: React.PropTypes.string
-  },
+  };
 
-  getInitialState () {
-    return {
-      isOpen: true
-    };
-  },
+  state = {
+    isOpen: true
+  };
 
-  _toggleMessageBox () {
+  _toggleMessageBox = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -57,9 +55,9 @@ const MessageBox = React.createClass({
 
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       component: {
         color: StyleConstants.Colors.WHITE,
@@ -88,7 +86,7 @@ const MessageBox = React.createClass({
         padding: this.props.children ? StyleConstants.Spacing.SMALL : null
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = MessageBox;

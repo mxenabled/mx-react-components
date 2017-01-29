@@ -5,30 +5,28 @@ const { TimeBasedLineChart } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const TimeBasedLineChartDocs = React.createClass({
-  getInitialState () {
-    return {
-      chartHeight: (window.innerWidth * 0.6) / 2,
-      chartWidth: window.innerWidth * 0.6
-    };
-  },
+class TimeBasedLineChartDocs extends React.Component {
+  state = {
+    chartHeight: (window.innerWidth * 0.6) / 2,
+    chartWidth: window.innerWidth * 0.6
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('resize', this._handleWindowResize);
-  },
+  }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('resize', this._handleWindowResize);
-  },
+  }
 
-  _handleWindowResize () {
+  _handleWindowResize = () => {
     this.setState({
       chartHeight: (window.innerWidth * 0.6) / 2,
       chartWidth: window.innerWidth * 0.6
     });
-  },
+  };
 
-  render () {
+  render() {
     const lineChartData = [];
 
     for (let i = 6; i > 0; i--) {
@@ -177,6 +175,6 @@ const TimeBasedLineChartDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = TimeBasedLineChartDocs;

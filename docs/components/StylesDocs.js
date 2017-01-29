@@ -4,8 +4,8 @@ const { Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const StylesDocs = React.createClass({
-  render () {
+class StylesDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -218,6 +218,6 @@ const StylesDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = StylesDocs;

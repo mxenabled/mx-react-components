@@ -6,47 +6,43 @@ const browser = require('bowser');
 
 const StyleConstants = require('../constants/Style');
 
-const SimpleSlider = React.createClass({
-  propTypes: {
+class SimpleSlider extends React.Component {
+  static propTypes = {
     disabled: React.PropTypes.bool,
     onPercentChange: React.PropTypes.func.isRequired,
     percent: React.PropTypes.number.isRequired,
     selectedColor: React.PropTypes.string,
     styles: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      disabled: false,
-      selectedColor: StyleConstants.Colors.PRIMARY
-    };
-  },
+  static defaultProps = {
+    disabled: false,
+    selectedColor: StyleConstants.Colors.PRIMARY
+  };
 
-  getInitialState () {
-    return {
-      dragging: false,
-      leftPixels: 0,
-      width: 0
-    };
-  },
+  state = {
+    dragging: false,
+    leftPixels: 0,
+    width: 0
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const width = component.clientWidth;
     const leftPixels = this.props.percent * width;
 
     this.setState({ width, leftPixels });
-  },
+  }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (this.props.percent !== newProps.percent) {
       const leftPixels = newProps.percent * this.state.width;
 
       this.setState({ leftPixels });
     }
-  },
+  }
 
-  _getCursorStyle () {
+  _getCursorStyle = () => {
     if (this.props.disabled) {
       return 'not-allowed';
     } else if (browser.msie) {
@@ -54,9 +50,9 @@ const SimpleSlider = React.createClass({
     } else {
       return this.state.dragging ? 'grabbing' : 'grab';
     }
-  },
+  };
 
-  _handleMouseEvents (e) {
+  _handleMouseEvents = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
     let currentPercent = (clientX - leftSpace) / this.state.width;
@@ -68,27 +64,27 @@ const SimpleSlider = React.createClass({
     }
 
     this.props.onPercentChange(currentPercent);
-  },
+  };
 
-  _handleDragStart () {
+  _handleDragStart = () => {
     this.setState({
       dragging: true
     });
-  },
+  };
 
-  _handleDragging (e) {
+  _handleDragging = (e) => {
     if (this.state.dragging) {
       this._handleMouseEvents(e);
     }
-  },
+  };
 
-  _handleDragEnd () {
+  _handleDragEnd = () => {
     this.setState({
       dragging: false
     });
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
     const { disabled } = this.props;
 
@@ -120,9 +116,9 @@ const SimpleSlider = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     const cursorStyle = this._getCursorStyle();
 
     return _merge({}, {
@@ -167,7 +163,7 @@ const SimpleSlider = React.createClass({
         zIndex: 1
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = Radium(SimpleSlider);

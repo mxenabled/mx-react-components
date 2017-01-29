@@ -1,22 +1,20 @@
 const React = require('react');
 
-const Icon = React.createClass({
-  propTypes: {
+class Icon extends React.Component {
+  static propTypes = {
     elementProps: React.PropTypes.object,
     size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     style: React.PropTypes.object,
     type: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      elementProps: {},
-      size: 24,
-      type: 'accounts'
-    };
-  },
+  static defaultProps = {
+    elementProps: {},
+    size: 24,
+    type: 'accounts'
+  };
 
-  _renderSvg () {
+  _renderSvg = () => {
     switch (this.props.type) {
       case 'accounts':
         return (
@@ -1459,9 +1457,9 @@ const Icon = React.createClass({
       default:
         return null;
     }
-  },
+  };
 
-  render () {
+  render() {
     const { elementProps } = this.props;
     const styles = this.styles();
 
@@ -1476,9 +1474,9 @@ const Icon = React.createClass({
         {this._renderSvg()}
       </svg>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({
         width: this.props.size,
@@ -1487,7 +1485,7 @@ const Icon = React.createClass({
         verticalAlign: 'middle'
       }, this.props.style)
     };
-  }
-});
+  };
+}
 
 module.exports = Icon;

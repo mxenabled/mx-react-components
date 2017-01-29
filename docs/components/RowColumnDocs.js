@@ -4,8 +4,8 @@ const { Button, Column, Container, Row, Styles } = require('mx-react-components'
 
 const Markdown = require('components/Markdown');
 
-const RowDocs = React.createClass({
-  render () {
+class RowDocs extends React.Component {
+  render() {
     const styles = this.styles();
 
     return (
@@ -156,9 +156,9 @@ const RowDocs = React.createClass({
         </Markdown>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       container: {
         width: '100%'
@@ -176,7 +176,7 @@ const RowDocs = React.createClass({
         width: '100%'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = RowDocs;

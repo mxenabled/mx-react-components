@@ -4,8 +4,8 @@ const { SimpleInput } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const SimpleInputDocs = React.createClass({
-  render () {
+class SimpleInputDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -56,6 +56,6 @@ const SimpleInputDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SimpleInputDocs;

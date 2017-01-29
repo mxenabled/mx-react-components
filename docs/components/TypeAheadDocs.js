@@ -4,8 +4,8 @@ const { TypeAhead } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const TypeAheadDocs = React.createClass({
-  render () {
+class TypeAheadDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -118,6 +118,6 @@ const TypeAheadDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = TypeAheadDocs;

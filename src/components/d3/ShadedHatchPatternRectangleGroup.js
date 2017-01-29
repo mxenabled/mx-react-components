@@ -2,24 +2,22 @@ const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
-const ShadedHatchPatternRectangleGroup = React.createClass({
-  propTypes: {
+class ShadedHatchPatternRectangleGroup extends React.Component {
+  static propTypes = {
     fillColor: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
     translation: React.PropTypes.string,
     width: React.PropTypes.number.isRequired,
     x: React.PropTypes.number.isRequired,
     y: React.PropTypes.number.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      fillColor: StyleConstants.Colors.FOG,
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    fillColor: StyleConstants.Colors.FOG,
+    translation: 'translate(0,0)'
+  };
 
-  render () {
+  render() {
     return (
       <g className='shaded-hatch-pattern'>
         <pattern
@@ -45,6 +43,6 @@ const ShadedHatchPatternRectangleGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 module.exports = ShadedHatchPatternRectangleGroup;

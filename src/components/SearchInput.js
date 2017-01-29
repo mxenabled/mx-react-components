@@ -2,8 +2,8 @@ const React = require('react');
 
 const Input = require('./SimpleInput');
 
-const SearchInput = React.createClass({
-  propTypes: {
+class SearchInput extends React.Component {
+  static propTypes = {
     baseColor: React.PropTypes.string,
     focusOnLoad: React.PropTypes.bool,
     handleResetClick: React.PropTypes.func,
@@ -12,17 +12,15 @@ const SearchInput = React.createClass({
     placeholder: React.PropTypes.string,
     searchKeyword: React.PropTypes.string,
     style: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      onBlur: () => {},
-      onChange: () => {},
-      placeholder: 'Search'
-    };
-  },
+  static defaultProps = {
+    onBlur: () => {},
+    onChange: () => {},
+    placeholder: 'Search'
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -44,16 +42,16 @@ const SearchInput = React.createClass({
         />
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: {
         display: 'inline-block',
         width: '100%'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = SearchInput;

@@ -4,8 +4,8 @@ const { Row, Column, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ColumnDocs = React.createClass({
-  render () {
+class ColumnDocs extends React.Component {
+  render() {
     const styles = this.styles();
 
     return (
@@ -51,9 +51,9 @@ const ColumnDocs = React.createClass({
         </Markdown>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       responsiveDiv: {
         boxSizing: 'border-box',
@@ -64,7 +64,7 @@ const ColumnDocs = React.createClass({
         width: '100%'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = ColumnDocs;

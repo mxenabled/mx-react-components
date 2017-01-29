@@ -6,59 +6,55 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const Calendar = React.createClass({
-  propTypes: {
+class Calendar extends React.Component {
+  static propTypes = {
     locale: React.PropTypes.string,
     minimumDate: React.PropTypes.number,
     onDateSelect: React.PropTypes.func,
     primaryColor: React.PropTypes.string,
     selectedDate: React.PropTypes.number,
     style: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      locale: 'en',
-      onDateSelect () {},
-      primaryColor: StyleConstants.Colors.PRIMARY
-    };
-  },
+  static defaultProps = {
+    locale: 'en',
+    onDateSelect () {},
+    primaryColor: StyleConstants.Colors.PRIMARY
+  };
 
-  getInitialState () {
-    return {
-      currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
-    };
-  },
+  state = {
+    currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
+  };
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
       this.setState({
         currentDate: newProps.selectedDate
       });
     }
-  },
+  }
 
-  _handleDateSelect (date, e) {
+  _handleDateSelect = (date, e) => {
     this.props.onDateSelect(date, e);
-  },
+  };
 
-  _handlePreviousClick () {
+  _handlePreviousClick = () => {
     const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
 
     this.setState({
       currentDate
     });
-  },
+  };
 
-  _handleNextClick () {
+  _handleNextClick = () => {
     const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
 
     this.setState({
       currentDate
     });
-  },
+  };
 
-  _renderMonthTable () {
+  _renderMonthTable = () => {
     const styles = this.styles();
     const days = [];
     let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
@@ -91,9 +87,9 @@ const Calendar = React.createClass({
     }
 
     return days;
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -133,9 +129,9 @@ const Calendar = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
@@ -224,7 +220,7 @@ const Calendar = React.createClass({
         color: StyleConstants.Colors.WHITE
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(Calendar);

@@ -12,8 +12,8 @@ const StyleConstants = require('../constants/Style');
 const MAX_HOUR = 23;
 const MAX_MINUTE = 59;
 
-const DatePicker = React.createClass({
-  propTypes: {
+class DatePicker extends React.Component {
+  static propTypes = {
     calendarStyle: React.PropTypes.object,
     closeOnDateSelect: React.PropTypes.bool,
     dateFormat: React.PropTypes.string,
@@ -32,55 +32,51 @@ const DatePicker = React.createClass({
     timezone: React.PropTypes.string,
     timezoneFormat: React.PropTypes.oneOf(['abbr', 'name']),
     timezoneNames: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      closeOnDateSelect: true,
-      dateFormat: 'MMM D, YYYY',
-      dateIcon: 'calendar',
-      datePlaceholder: 'Select a Date',
-      locale: 'en',
-      onDateSelect () {},
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      showIcons: true,
-      timeFormat: 'LT',
-      timeIcon: 'clock',
-      timePlaceholder: 'Select a Time',
-      timezone: moment.tz.guess(),
-      timezoneNames: {
-        EST: 'Eastern Standard Time',
-        EDT: 'Eastern Daylight Time',
-        CST: 'Central Standard Time',
-        CDT: 'Central Daylight Time',
-        MST: 'Mountain Standard Time',
-        MDT: 'Mountain Daylight Time',
-        PST: 'Pacific Standard Time',
-        PDT: 'Pacific Daylight Time'
-      }
-    };
-  },
+  static defaultProps = {
+    closeOnDateSelect: true,
+    dateFormat: 'MMM D, YYYY',
+    dateIcon: 'calendar',
+    datePlaceholder: 'Select a Date',
+    locale: 'en',
+    onDateSelect () {},
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    showIcons: true,
+    timeFormat: 'LT',
+    timeIcon: 'clock',
+    timePlaceholder: 'Select a Time',
+    timezone: moment.tz.guess(),
+    timezoneNames: {
+      EST: 'Eastern Standard Time',
+      EDT: 'Eastern Daylight Time',
+      CST: 'Central Standard Time',
+      CDT: 'Central Daylight Time',
+      MST: 'Mountain Standard Time',
+      MDT: 'Mountain Daylight Time',
+      PST: 'Pacific Standard Time',
+      PDT: 'Pacific Daylight Time'
+    }
+  };
 
-  getInitialState () {
-    return {
-      showCalendar: false,
-      editTime: false
-    };
-  },
+  state = {
+    showCalendar: false,
+    editTime: false
+  };
 
-  _handleDateBlur () {
+  _handleDateBlur = () => {
     this.setState({
       showCalendar: false
     });
-  },
+  };
 
-  _handleDateFocus () {
+  _handleDateFocus = () => {
     this.setState({
       showCalendar: true
     });
-  },
+  };
 
-  _handleDateSelect (date, e) {
+  _handleDateSelect = (date, e) => {
     e.stopPropagation();
 
     if (this.props.closeOnDateSelect) {
@@ -95,21 +91,21 @@ const DatePicker = React.createClass({
     const minutes = this.props.selectedDate ? moment.unix(this.props.selectedDate).minute() : 0;
 
     this.props.onDateSelect(moment.unix(date).hour(hour).minute(minutes).seconds(0).unix());
-  },
+  };
 
-  _handleTimeBlur () {
+  _handleTimeBlur = () => {
     this.setState({
       editTime: false
     });
-  },
+  };
 
-  _handleTimeFocus () {
+  _handleTimeFocus = () => {
     this.setState({
       editTime: true
     });
-  },
+  };
 
-  _handleTimeSelect (e) {
+  _handleTimeSelect = (e) => {
     const selectedDate = this.props.selectedDate ? moment.unix(this.props.selectedDate) : moment();
     const value = e.target.value.toLowerCase().replace('.', '');
 
@@ -132,9 +128,9 @@ const DatePicker = React.createClass({
 
       this.props.onDateSelect(date);
     }
-  },
+  };
 
-  _getTimezone (date) {
+  _getTimezone = (date) => {
     const timezoneAbbr = date ? moment.unix(date).tz(this.props.timezone).format('z') : moment().tz(this.props.timezone).format('z');
 
     if (this.props.timezoneFormat === 'name') {
@@ -144,9 +140,9 @@ const DatePicker = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
     const spans = this.spans();
 
@@ -231,9 +227,9 @@ const DatePicker = React.createClass({
         </Row>
       </Container>
     );
-  },
+  }
 
-  spans () {
+  spans = () => {
     return {
       date: {
         large: this.props.children ? 5 : 6,
@@ -253,9 +249,9 @@ const DatePicker = React.createClass({
         small: 12
       }
     };
-  },
+  };
 
-  styles () {
+  styles = () => {
     return Object.assign({}, {
       children: {
         textAlign: 'center'
@@ -333,7 +329,7 @@ const DatePicker = React.createClass({
         zIndex: 10
       }, this.props.calendarStyle)
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = DatePicker;

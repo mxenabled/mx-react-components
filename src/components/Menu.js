@@ -4,8 +4,8 @@ const Icon = require('../components/Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const Menu = React.createClass({
-  propTypes: {
+class Menu extends React.Component {
+  static propTypes = {
     alignItems: React.PropTypes.oneOf(['left', 'right']),
     isOpen: React.PropTypes.bool,
     items: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -15,44 +15,40 @@ const Menu = React.createClass({
     })).isRequired,
     onClick: React.PropTypes.func,
     primaryColor: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      alignItems: 'left',
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      isOpen: false,
-      onClick: () => {}
-    };
-  },
+  static defaultProps = {
+    alignItems: 'left',
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    isOpen: false,
+    onClick: () => {}
+  };
 
-  getInitialState () {
-    return {
-      hoverItemIndex: null
-    };
-  },
+  state = {
+    hoverItemIndex: null
+  };
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (!nextProps.isOpen) {
       this.setState({
         hoverItemIndex: null
       });
     }
-  },
+  }
 
-  _handleMouseOver (hoverItemIndex) {
+  _handleMouseOver = (hoverItemIndex) => {
     this.setState({
       hoverItemIndex
     });
-  },
+  };
 
-  _handleMouseOut () {
+  _handleMouseOut = () => {
     this.setState({
       hoverItemIndex: null
     });
-  },
+  };
 
-  _renderItems () {
+  _renderItems = () => {
     const styles = this.styles();
 
     return this.props.items.map((item, index) => {
@@ -78,9 +74,9 @@ const Menu = React.createClass({
         </div>
       );
     });
-  },
+  };
 
-  render () {
+  render() {
     const { isOpen, alignItems } = this.props;
     const styles = this.styles();
 
@@ -103,9 +99,9 @@ const Menu = React.createClass({
         ) : null}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: {
         display: 'block',
@@ -150,7 +146,7 @@ const Menu = React.createClass({
         top: 3
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Menu;

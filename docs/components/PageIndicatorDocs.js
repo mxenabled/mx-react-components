@@ -4,20 +4,18 @@ const { PageIndicator } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const PageIndicatorDocs = React.createClass({
-  getInitialState () {
-    return {
-      pageIndicatorIndex: 0
-    };
-  },
+class PageIndicatorDocs extends React.Component {
+  state = {
+    pageIndicatorIndex: 0
+  };
 
-  _handlePageIndicatorClick (index) {
+  _handlePageIndicatorClick = (index) => {
     this.setState({
       pageIndicatorIndex: index
     });
-  },
+  };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -63,6 +61,6 @@ const PageIndicatorDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = PageIndicatorDocs;

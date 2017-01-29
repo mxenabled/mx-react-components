@@ -3,15 +3,8 @@ const React = require('react');
 const { NotifyOnScrollThreshold } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
-const NotifyOnScrollThresholdDocs = React.createClass({
-  getInitialState () {
-    return {
-      listData: this._getMoreItems(),
-      thresholdMet: false
-    };
-  },
-
-  _getMoreItems () {
+class NotifyOnScrollThresholdDocs extends React.Component {
+  _getMoreItems = () => {
     const newItems = [];
 
     for (let i = 0; i < 25; i++) {
@@ -19,15 +12,15 @@ const NotifyOnScrollThresholdDocs = React.createClass({
     }
 
     return newItems;
-  },
+  };
 
-  _loadMoreData () {
+  _loadMoreData = () => {
     this.setState({
       listData: this.state.listData.concat(this._getMoreItems())
     });
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -123,9 +116,9 @@ const NotifyOnScrollThresholdDocs = React.createClass({
         </Markdown>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       scrollContainer: {
         border: '1px solid black',
@@ -143,7 +136,12 @@ const NotifyOnScrollThresholdDocs = React.createClass({
         transform: 'translateX(-50%)'
       }
     };
-  }
-});
+  };
+
+  state = {
+    listData: this._getMoreItems(),
+    thresholdMet: false
+  };
+}
 
 module.exports = NotifyOnScrollThresholdDocs;

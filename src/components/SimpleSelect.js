@@ -6,8 +6,8 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const SimpleSelect = React.createClass({
-  propTypes: {
+class SimpleSelect extends React.Component {
+  static propTypes = {
     hoverColor: React.PropTypes.string,
     iconSize: React.PropTypes.number,
     iconStyles: React.PropTypes.object,
@@ -18,18 +18,16 @@ const SimpleSelect = React.createClass({
     scrimClickOnSelect: React.PropTypes.bool,
     style: React.PropTypes.object,
     styles: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      scrimClickOnSelect: false,
-      hoverColor: StyleConstants.Colors.PRIMARY,
-      items: [],
-      onScrimClick () {}
-    };
-  },
+  static defaultProps = {
+    scrimClickOnSelect: false,
+    hoverColor: StyleConstants.Colors.PRIMARY,
+    items: [],
+    onScrimClick () {}
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.style) {
       console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
     }
@@ -41,17 +39,17 @@ const SimpleSelect = React.createClass({
     if (this.props.menuStyles) {
       console.warn('The menuStyles prop is deprecated and will be removed in a future release. Please use styles.');
     }
-  },
+  }
 
-  _handleItemClick (item, e) {
+  _handleItemClick = (item, e) => {
     if (this.props.scrimClickOnSelect) {
       this.props.onScrimClick(e);
     }
 
     item.onClick(e);
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -75,9 +73,9 @@ const SimpleSelect = React.createClass({
         <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       component: Object.assign({
         height: 0,
@@ -130,7 +128,7 @@ const SimpleSelect = React.createClass({
         zIndex: 9
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = Radium(SimpleSelect);

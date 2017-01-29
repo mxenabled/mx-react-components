@@ -4,22 +4,20 @@ const { Button, SimpleSelect } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const SimpleSelectDocs = React.createClass({
-  getInitialState () {
-    return {
-      showMenu: false
-    };
-  },
+class SimpleSelectDocs extends React.Component {
+  state = {
+    showMenu: false
+  };
 
-  _handleClick () {
+  _handleClick = () => {
     this.setState({
       showMenu: !this.state.showMenu
     });
-  },
+  };
 
-  _handleItemClick () {},
+  _handleItemClick = () => {};
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -98,6 +96,6 @@ const SimpleSelectDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SimpleSelectDocs;

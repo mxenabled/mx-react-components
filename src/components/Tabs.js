@@ -5,8 +5,8 @@ const Icon = require('./Icon');
 const SimpleSelect = require('./SimpleSelect');
 const StyleConstants = require('../constants/Style');
 
-const Tabs = React.createClass({
-  propTypes: {
+class Tabs extends React.Component {
+  static propTypes = {
     activeTabStyles: React.PropTypes.object,
     brandColor: React.PropTypes.string,
     onTabSelect: React.PropTypes.func.isRequired,
@@ -14,53 +14,49 @@ const Tabs = React.createClass({
     showBottomBorder: React.PropTypes.bool,
     tabs: React.PropTypes.array.isRequired,
     useTabsInMobile: React.PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      brandColor: StyleConstants.Colors.PRIMARY,
-      showBottomBorder: true,
-      useTabsInMobile: false
-    };
-  },
+  static defaultProps = {
+    brandColor: StyleConstants.Colors.PRIMARY,
+    showBottomBorder: true,
+    useTabsInMobile: false
+  };
 
-  getInitialState () {
-    return {
-      selectedTab: this.props.selectedTab || 0,
-      showMenu: false
-    };
-  },
+  state = {
+    selectedTab: this.props.selectedTab || 0,
+    showMenu: false
+  };
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab !== this.state.selectedTab) {
       this.setState({
         selectedTab: nextProps.selectedTab
       });
     }
-  },
+  }
 
-  _toggleMenu () {
+  _toggleMenu = () => {
     this.setState({
       showMenu: !this.state.showMenu
     });
-  },
+  };
 
-  _handleTabClick (selectedTab) {
+  _handleTabClick = (selectedTab) => {
     this.props.onTabSelect(selectedTab);
     this._toggleMenu();
 
     this.setState({
       selectedTab
     });
-  },
+  };
 
-  _isLargeOrMediumWindowSize () {
+  _isLargeOrMediumWindowSize = () => {
     const windowSize = StyleConstants.getWindowSize();
 
     return windowSize === 'medium' || windowSize === 'large';
-  },
+  };
 
-  _renderTabs () {
+  _renderTabs = () => {
     const styles = this.styles();
     const selectedTabStyle = Object.assign({}, styles.activeTab, this.props.activeTabStyles);
 
@@ -77,9 +73,9 @@ const Tabs = React.createClass({
         </span>
       );
     });
-  },
+  };
 
-  _renderTabMenu () {
+  _renderTabMenu = () => {
     const selectedTabName = this.props.tabs[this.state.selectedTab];
     const styles = this.styles();
     const tabItems = this._buildTabItems();
@@ -102,9 +98,9 @@ const Tabs = React.createClass({
         ) : null}
       </div>
     );
-  },
+  };
 
-  _buildTabItems () {
+  _buildTabItems = () => {
     const tabItems = [];
 
     this.props.tabs.map((tab, index) => {
@@ -117,9 +113,9 @@ const Tabs = React.createClass({
     });
 
     return tabItems;
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -135,9 +131,9 @@ const Tabs = React.createClass({
         )}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       // Block styles
       component: {
@@ -194,7 +190,7 @@ const Tabs = React.createClass({
         width: '100%'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(Tabs);

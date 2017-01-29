@@ -5,8 +5,8 @@ const _throttle = require('lodash/throttle');
 
 const StyleConstants = require('../constants/Style');
 
-const RangeSelector = React.createClass({
-  propTypes: {
+class RangeSelector extends React.Component {
+  static propTypes = {
     defaultLowerValue: React.PropTypes.number,
     defaultUpperValue: React.PropTypes.number,
     formatter: React.PropTypes.func,
@@ -18,54 +18,53 @@ const RangeSelector = React.createClass({
     selectedColor: React.PropTypes.string,
     updateOnDrag: React.PropTypes.bool,
     upperBound: React.PropTypes.number
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      defaultLowerValue: 0,
-      defaultUpperValue: 1,
-      interval: 1,
-      formatter (value) {
-        return value;
-      },
-      lowerBound: 0,
-      onLowerDragStop () {},
-      onUpperDragStop () {},
-      presets: [],
-      selectedColor: StyleConstants.Colors.PRIMARY,
-      updateOnDrag: false,
-      upperBound: 100
-    };
-  },
+  static defaultProps = {
+    defaultLowerValue: 0,
+    defaultUpperValue: 1,
+    interval: 1,
+    formatter (value) {
+      return value;
+    },
+    lowerBound: 0,
+    onLowerDragStop () {},
+    onUpperDragStop () {},
+    presets: [],
+    selectedColor: StyleConstants.Colors.PRIMARY,
+    updateOnDrag: false,
+    upperBound: 100
+  };
 
-  getInitialState () {
-    const lowerValue = this.props.defaultLowerValue;
-    const upperValue = this.props.defaultUpperValue;
+  constructor(props, context) {
+    super(props, context);
+    const lowerValue = props.defaultLowerValue;
+    const upperValue = props.defaultUpperValue;
 
-    return {
+    this.state = {
       dragging: null,
       lowerPixels: 0,
       lowerValue,
-      range: this.props.upperBound - this.props.lowerBound,
+      range: props.upperBound - props.lowerBound,
       selectedLabel: this._getSelectedLabel(lowerValue, upperValue),
-      showPresets: !!this.props.presets.length && !lowerValue && !upperValue,
+      showPresets: !!props.presets.length && !lowerValue && !upperValue,
       upperPixels: 1,
       upperValue,
       trackClicked: false
     };
-  },
+  }
 
-  componentDidMount () {
+  componentDidMount() {
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
-  },
+  }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
-  },
+  }
 
-  _getSelectedLabel (lowerValue, upperValue) {
+  _getSelectedLabel = (lowerValue, upperValue) => {
     if (this.props.presets) {
       const preset = this.props.presets.filter(preset => {
         return preset.lowerValue === lowerValue && preset.upperValue === upperValue;
@@ -75,9 +74,9 @@ const RangeSelector = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  _setDefaultRangeValues () {
+  _setDefaultRangeValues = () => {
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const componentStyles = window.getComputedStyle(component);
     const width = parseInt(componentStyles.width, 0);
@@ -95,9 +94,9 @@ const RangeSelector = React.createClass({
       upperPixels,
       width
     });
-  },
+  };
 
-  _handlePresetClick (preset) {
+  _handlePresetClick = (preset) => {
     //convert our values to a 0-based scale
     const lowerPosition = preset.lowerValue - (this.props.lowerBound);
     const upperPosition = preset.upperValue - (this.props.lowerBound);
@@ -117,15 +116,15 @@ const RangeSelector = React.createClass({
 
     this.props.onLowerDragStop(preset.lowerValue);
     this.props.onUpperDragStop(preset.upperValue);
-  },
+  };
 
-  _handleDragStart (type) {
+  _handleDragStart = (type) => {
     this.setState({
       dragging: type
     });
-  },
+  };
 
-  _handleTrackMouseDown (e) {
+  _handleTrackMouseDown = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const newPixels = clientX - ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
     const updatedState = {
@@ -145,10 +144,10 @@ const RangeSelector = React.createClass({
     }
 
     this.setState(updatedState, this._handleDragging(e));
-  },
+  };
 
   //this method now handles both the dragging of the toggle, and moving it when track is clicked
-  _handleDragging (e) {
+  _handleDragging = (e) => {
     if (this.state.dragging) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const pixelInterval = this.props.interval * this.state.width / this.state.range;
@@ -199,9 +198,9 @@ const RangeSelector = React.createClass({
 
       e.preventDefault();
     }
-  },
+  };
 
-  _handleDragEnd (e) {
+  _handleDragEnd = (e) => {
     if (this.state.dragging) {
       if (this.state.trackClicked) {
         this._handleDragging(e);
@@ -216,16 +215,16 @@ const RangeSelector = React.createClass({
         });
       }
     }
-  },
+  };
 
-  _handleToggleViews () {
+  _handleToggleViews = () => {
     this.setState({
       selectedLabel: null,
       showPresets: !this.state.showPresets
     });
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -303,9 +302,9 @@ const RangeSelector = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: {
         position: 'relative',
@@ -421,7 +420,7 @@ const RangeSelector = React.createClass({
         opacity: 0.5
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(RangeSelector);

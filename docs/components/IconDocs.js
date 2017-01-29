@@ -4,8 +4,8 @@ const { Icon, Styles, AppConstants } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const IconDocs = React.createClass({
-  render () {
+class IconDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -59,6 +59,6 @@ const IconDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = IconDocs;

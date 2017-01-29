@@ -4,8 +4,8 @@ const { ToggleSwitch } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ToggleSwitchDocs = React.createClass({
-  render () {
+class ToggleSwitchDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -60,6 +60,6 @@ const ToggleSwitchDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = ToggleSwitchDocs;

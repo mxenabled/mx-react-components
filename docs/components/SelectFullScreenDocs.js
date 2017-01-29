@@ -47,8 +47,8 @@ const options = [
   }
 ];
 
-const SelectFullScreenDocs = React.createClass({
-  render () {
+class SelectFullScreenDocs extends React.Component {
+  render() {
     return (
       <div>
         <h1>
@@ -164,6 +164,6 @@ const SelectFullScreenDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SelectFullScreenDocs;

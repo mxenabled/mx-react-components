@@ -4,36 +4,34 @@ const { Modal } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ModalDocs = React.createClass({
-  getInitialState () {
-    return {
-      showModal: false,
-      showSmallModal: false
-    };
-  },
+class ModalDocs extends React.Component {
+  state = {
+    showModal: false,
+    showSmallModal: false
+  };
 
-  _handleModalClick () {
+  _handleModalClick = () => {
     this.setState({
       showModal: true,
       showSmallModal: false
     });
-  },
+  };
 
-  _handleSmallModalClick () {
+  _handleSmallModalClick = () => {
     this.setState({
       showModal: true,
       showSmallModal: true
     });
-  },
+  };
 
-  _handleModalClose () {
+  _handleModalClose = () => {
     this.setState({
       showModal: false,
       showSmallModal: false
     });
-  },
+  };
 
-  render () {
+  render() {
     const imageStyle = Object.assign({}, { maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 });
 
     return (
@@ -197,6 +195,6 @@ const ModalDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = ModalDocs;
