@@ -5,7 +5,7 @@ const { TypeAhead } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class TypeAheadDocs extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <h1>

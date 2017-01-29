@@ -5,7 +5,7 @@ const { MessageBox, Button, Styles } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class MessageBoxDocs extends React.Component {
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

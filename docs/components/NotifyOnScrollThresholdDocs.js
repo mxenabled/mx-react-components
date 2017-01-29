@@ -4,6 +4,11 @@ const { NotifyOnScrollThreshold } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class NotifyOnScrollThresholdDocs extends React.Component {
+  state = {
+    listData: this._getMoreItems(),
+    thresholdMet: false
+  };
+
   _getMoreItems = () => {
     const newItems = [];
 
@@ -20,7 +25,7 @@ class NotifyOnScrollThresholdDocs extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (
@@ -136,11 +141,6 @@ class NotifyOnScrollThresholdDocs extends React.Component {
         transform: 'translateX(-50%)'
       }
     };
-  };
-
-  state = {
-    listData: this._getMoreItems(),
-    thresholdMet: false
   };
 }
 

@@ -33,13 +33,13 @@ class FileUpload extends React.Component {
     imageSource: null
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._readFile(this.props.uploadedFile, result => {
       this._validateFile(result.file, result.width, result.height);
     });
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     this._input.value = null;
 
     if (newProps.uploadedFile !== this.props.uploadedFile) {
@@ -202,7 +202,7 @@ class FileUpload extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = this.styles();
     const dropzoneLoaded = this.props.imageUrl || this.props.uploadedFile;
     const imageSource = this.state.imageSource || this.props.imageUrl;

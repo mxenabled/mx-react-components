@@ -142,7 +142,7 @@ class DatePicker extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = this.styles();
     const spans = this.spans();
 

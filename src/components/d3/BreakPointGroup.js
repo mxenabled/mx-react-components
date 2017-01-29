@@ -15,7 +15,7 @@ class BreakPointGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  render() {
+  render () {
     const { adjustedHeight, adjustedWidth, breakPointDate, breakPointLabel, margin, translation, xScaleValueFunction } = this.props;
     const breakPointXValue = xScaleValueFunction(breakPointDate);
     const breakPointLabelOffSet = 10;

@@ -5,7 +5,7 @@ const { SimpleInput } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class SimpleInputDocs extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <h1>

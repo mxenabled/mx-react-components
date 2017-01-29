@@ -17,7 +17,7 @@ class ShadedHatchPatternRectangleGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  render() {
+  render () {
     return (
       <g className='shaded-hatch-pattern'>
         <pattern

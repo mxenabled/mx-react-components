@@ -29,11 +29,11 @@ class CirclesGroup extends React.Component {
     useCircleOverlay: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._animateCircles();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._animateCircles();
   }
 
@@ -45,7 +45,7 @@ class CirclesGroup extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const { adjustedHeight, circleOverlayRadius, circleRadius, data, shouldAnimate, translation, useCircleOverlay, xScaleValueFunction, yScaleValueFunction } = this.props;
     const preventCircleOverlapCutOff = 45;
 

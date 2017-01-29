@@ -42,7 +42,7 @@ class SelectFullScreen extends React.Component {
     selected: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
         this._handleCloseClick();
@@ -116,7 +116,7 @@ class SelectFullScreen extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (

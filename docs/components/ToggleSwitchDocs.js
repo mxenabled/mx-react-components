@@ -5,7 +5,7 @@ const { ToggleSwitch } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class ToggleSwitchDocs extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <h1>

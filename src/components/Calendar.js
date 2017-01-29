@@ -26,7 +26,7 @@ class Calendar extends React.Component {
     currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
       this.setState({
         currentDate: newProps.selectedDate
@@ -89,7 +89,7 @@ class Calendar extends React.Component {
     return days;
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

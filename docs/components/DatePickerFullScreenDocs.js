@@ -6,7 +6,7 @@ const { DatePickerFullScreen } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class DatePickerFullScreenDocs extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <h1>

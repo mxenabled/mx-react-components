@@ -31,7 +31,7 @@ class ModalDocs extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const imageStyle = Object.assign({}, { maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 });
 
     return (

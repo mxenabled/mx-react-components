@@ -34,7 +34,7 @@ class Input extends React.Component {
     focus: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.style) {
       console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
     }
@@ -64,7 +64,7 @@ class Input extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const { elementProps } = this.props;
     const styles = this.styles();
 

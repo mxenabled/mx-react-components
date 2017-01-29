@@ -36,7 +36,7 @@ class RangeSelector extends React.Component {
     upperBound: 100
   };
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
     const lowerValue = props.defaultLowerValue;
     const upperValue = props.defaultUpperValue;
@@ -54,13 +54,13 @@ class RangeSelector extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
   }
 
@@ -224,7 +224,7 @@ class RangeSelector extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

@@ -20,7 +20,7 @@ class SearchInput extends React.Component {
     placeholder: 'Search'
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

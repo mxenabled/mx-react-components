@@ -23,7 +23,7 @@ class Markdown extends React.Component {
     return { __html: rawMarkup };
   };
 
-  render() {
+  render () {
     return (
       <span dangerouslySetInnerHTML={this._rawMarkup()} />
     );

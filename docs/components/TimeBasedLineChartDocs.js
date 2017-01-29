@@ -11,11 +11,11 @@ class TimeBasedLineChartDocs extends React.Component {
     chartWidth: window.innerWidth * 0.6
   };
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('resize', this._handleWindowResize);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('resize', this._handleWindowResize);
   }
 
@@ -26,7 +26,7 @@ class TimeBasedLineChartDocs extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const lineChartData = [];
 
     for (let i = 6; i > 0; i--) {

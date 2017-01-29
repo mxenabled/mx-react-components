@@ -5,7 +5,7 @@ const { Button, Column, Container, Row, Styles } = require('mx-react-components'
 const Markdown = require('components/Markdown');
 
 class RowDocs extends React.Component {
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

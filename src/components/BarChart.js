@@ -135,7 +135,7 @@ class BarChart extends React.Component {
     hovering: false
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
   }
 
@@ -200,7 +200,7 @@ class BarChart extends React.Component {
     );
   };
 
-  render() {
+  render () {
     const styles = this.styles();
     const { height, width } = this.props;
     const data = this.props.data.map(d => {

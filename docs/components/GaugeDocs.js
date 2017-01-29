@@ -5,7 +5,7 @@ const { Gauge } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class GaugeDocs extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <h1>

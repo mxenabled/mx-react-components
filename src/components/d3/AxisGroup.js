@@ -17,11 +17,11 @@ class AxisGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._renderAxis();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._renderAxis();
   }
 
@@ -40,7 +40,7 @@ class AxisGroup extends React.Component {
     d3.select(this.axisGroup).call(axisFunction);
   };
 
-  render() {
+  render () {
     return (
       <g
         className={this.props.axis + '-axis'}

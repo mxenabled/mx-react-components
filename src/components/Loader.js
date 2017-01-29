@@ -20,7 +20,7 @@ class Loader extends React.Component {
     children: 'LOADING...'
   };
 
-  render() {
+  render () {
     if (this.props.isLoading) {
       const styles = {
         component: {

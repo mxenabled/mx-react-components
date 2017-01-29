@@ -13,7 +13,7 @@ class SimpleSliderDocs extends React.Component {
     this.setState({ percent });
   };
 
-  render() {
+  render () {
     return (
       <div>
         <h1>

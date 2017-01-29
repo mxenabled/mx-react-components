@@ -37,7 +37,7 @@ class DisplayInput extends React.Component {
     return windowSize === 'large' || windowSize === 'medium';
   };
 
-  render() {
+  render () {
     // Input properties
     const { elementProps } = this.props;
 

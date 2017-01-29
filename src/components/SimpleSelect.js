@@ -27,7 +27,7 @@ class SimpleSelect extends React.Component {
     onScrimClick () {}
   };
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.style) {
       console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
     }
@@ -49,7 +49,7 @@ class SimpleSelect extends React.Component {
     item.onClick(e);
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

@@ -40,7 +40,7 @@ class TextArea extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const { elementProps, rows } = this.props;
     const styles = this.styles();
 

@@ -3,7 +3,7 @@ const React = require('react');
 const { Icon } = require('mx-react-components');
 
 class Home extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <div className='hero'>

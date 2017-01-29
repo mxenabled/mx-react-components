@@ -53,7 +53,7 @@ class Modal extends React.Component {
     showTooltip: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
   /*eslint-disable */
     if (this.props.hasOwnProperty('isOpen')) {
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
@@ -175,7 +175,7 @@ class Modal extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

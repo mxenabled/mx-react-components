@@ -67,15 +67,15 @@ class DonutChart extends React.Component {
     activeIndex: this.props.activeIndex || -1
   };
 
-  componentWillMount() {
+  componentWillMount () {
     this._setupD3Functions(this.props);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this._animateChart();
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     this._setupD3Functions(newProps);
 
     if (newProps.activeIndex !== this.props.activeIndex) {
@@ -85,11 +85,11 @@ class DonutChart extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(this.props, nextProps) || !_isEqual(this.state, nextState);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (!_isEqual(prevProps.data, this.props.data)) {
       this._animateChart();
     }
@@ -347,7 +347,7 @@ class DonutChart extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
     const styles = this.styles();

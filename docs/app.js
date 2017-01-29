@@ -46,7 +46,7 @@ const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
 
 class App extends React.Component {
-  render() {
+  render () {
     const currentYear = new Date().getFullYear();
 
     return (

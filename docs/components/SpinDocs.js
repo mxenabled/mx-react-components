@@ -5,7 +5,7 @@ const { Icon, Spin } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class SpinDocs extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <h1>

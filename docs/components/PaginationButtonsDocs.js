@@ -14,7 +14,7 @@ class PaginationButtonsDocs extends React.Component {
     this.setState({ currentPage: nextPage });
   };
 
-  render() {
+  render () {
     return (
       <div>
         <h1>

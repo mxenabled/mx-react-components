@@ -4,7 +4,7 @@ const { Link } = require('react-router');
 const { Icon } = require('mx-react-components');
 
 class Header extends React.Component {
-  render() {
+  render () {
     return (
       <div style={styles.component}>
         <Link to='/'>

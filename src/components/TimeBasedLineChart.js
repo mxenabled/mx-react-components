@@ -142,7 +142,7 @@ class HoveredDataPointGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  render() {
+  render () {
     const { adjustedHeight, hoveredDataPoint, rangeType, translation, xScaleValueFunction, yScaleValueFunction } = this.props;
     const hoveredDataPointXScaleValue = xScaleValueFunction(hoveredDataPoint.x);
     const hoveredDataPointYScaleValue = yScaleValueFunction(hoveredDataPoint.y);
@@ -233,7 +233,7 @@ class TimeBasedLineChart extends React.Component {
     zeroState: <div style={styles.zeroState}>No Data Found</div>
   };
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     const adjustedWidth = props.width - props.margin.right - props.margin.left;
     const adjustedHeight = props.height - props.margin.top - props.margin.bottom;
@@ -244,11 +244,11 @@ class TimeBasedLineChart extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this._styleChart();
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.height !== null || newProps.width !== null || newProps.margin !== null) {
       const height = newProps.height || this.props.height;
       const width = newProps.width || this.props.width;
@@ -264,7 +264,7 @@ class TimeBasedLineChart extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._styleChart();
   }
 
@@ -505,7 +505,7 @@ class TimeBasedLineChart extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
     const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 

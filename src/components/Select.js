@@ -208,7 +208,7 @@ class Select extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = this.styles();
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 

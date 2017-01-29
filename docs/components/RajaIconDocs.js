@@ -18,7 +18,7 @@ class RajaIconDocs extends React.Component {
     });
   };
 
-  render() {
+  render () {
     return (
       <div>
         <h1>

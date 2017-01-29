@@ -33,7 +33,7 @@ class Button extends React.Component {
     return windowSize === 'medium' || windowSize === 'large';
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

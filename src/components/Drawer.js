@@ -54,16 +54,16 @@ class Drawer extends React.Component {
     title: ''
   };
 
-  componentWillMount() {
+  componentWillMount () {
     this._resizeThrottled = _throttle(this._resize, 100);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this._animateComponent({ left: this._getAnimationDistance() });
     window.addEventListener('resize', this._resizeThrottled);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('resize', this._resizeThrottled);
   }
 
@@ -138,7 +138,7 @@ class Drawer extends React.Component {
     );
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

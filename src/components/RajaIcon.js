@@ -645,7 +645,7 @@ class RajaIcon extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const { elementProps } = this.props;
     const styles = {
       fill: this.props.style.color,

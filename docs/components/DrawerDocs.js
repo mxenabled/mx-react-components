@@ -70,7 +70,7 @@ class DrawerDocs extends React.Component {
     );
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

@@ -10,7 +10,7 @@ class SlicesGroup extends React.Component {
     xScaleValueFunction: React.PropTypes.func.isRequired
   };
 
-  render() {
+  render () {
     return (
       <g className='slices'>
         {this.props.data.map((dataPoint, index) => {

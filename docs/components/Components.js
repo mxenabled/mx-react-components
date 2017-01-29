@@ -12,7 +12,7 @@ class Components extends React.Component {
     this.context.router.push('/components/' + selected.value);
   };
 
-  render() {
+  render () {
     return (
       <div className='container components'>
         <div className='sideNav'>

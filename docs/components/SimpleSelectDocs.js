@@ -17,7 +17,7 @@ class SimpleSelectDocs extends React.Component {
 
   _handleItemClick = () => {};
 
-  render() {
+  render () {
     return (
       <div>
         <h1>
