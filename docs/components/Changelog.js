@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.51</h3>
+        <ul>
+          <li>
+            Adds a backgroundColor prop to the select component (<a href='https://github.com/mxenabled/mx-react-components/pull/503'>#503</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.50</h3>
         <ul>
           <li>
