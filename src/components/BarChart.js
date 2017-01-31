@@ -112,6 +112,7 @@ const BarChart = React.createClass({
     barRadius: React.PropTypes.number,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
+    initialSelectedData: React.PropTypes.object,
     margin: React.PropTypes.shape({
       top: React.PropTypes.number,
       right: React.PropTypes.number,
@@ -151,7 +152,7 @@ const BarChart = React.createClass({
   getInitialState () {
     return {
       hoveringObj: {},
-      clickedData: {}
+      clickedData: this.props.initialSelectedData || {}
     };
   },
 
@@ -168,7 +169,7 @@ const BarChart = React.createClass({
 
       transform = `translate(${x}, ${y})`;
     } else {
-      transform = 'translate(-100, -100)';
+      transform = 'translate(-1000, -1000)';
     }
 
     d3.select(this.tooltip)
@@ -216,7 +217,7 @@ const BarChart = React.createClass({
 
       return hoverCX - tooltipCX;
     }
-    return -100;
+    return -1000;
   },
 
   _getTooltipY () {
@@ -228,7 +229,7 @@ const BarChart = React.createClass({
       }
       return this.state.hoveringObj.y + margin.top - this.tooltip.getBBox().height / 2;
     }
-    return -100;
+    return -1000;
   },
 
   render () {
@@ -237,17 +238,28 @@ const BarChart = React.createClass({
     const widthMargin = width - margin.left - margin.right;
     const heightMargin = height - margin.top - margin.bottom;
 
+    let hasNegative = false;
+
     const data = this.props.data.map(d => {
+      if (!hasNegative && d.value < 0) {
+        hasNegative = true;
+      }
       return d.value;
     });
+    let yDomain;
 
-    const domain = [Math.min.apply(null, data), Math.max.apply(null, data)];
+    if (hasNegative) {
+      yDomain = [Math.min.apply(null, data), Math.max.apply(null, data)];
+    } else {
+      yDomain = [0, Math.max.apply(null, data)];
+    }
+
     const xDomain = this.props.data.map(d => {
       return d.label;
     });
 
     const yFunc = d3.scale.linear()
-      .domain(domain)
+      .domain(yDomain)
       .range([heightMargin, 0]);
 
     const xFunc = d3.scale.ordinal()
@@ -257,18 +269,22 @@ const BarChart = React.createClass({
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
         <svg
-          height={height}
+          height={height + margin.top + margin.bottom}
           preserveAspectRatio='xMinYMin meet'
-          width={width}
+          width={width + margin.left + margin.right}
           xmlns={'http://www.w3.org/2000/svg'}
         >
           <g transform={`translate(${margin.left},${margin.top})`}>
             {this.props.data.map(d => {
+              if (d.value === 0) {
+                return null;
+              }
+
               const positive = (d.value > 0);
               const x = xFunc(d.label);
               const y = positive ? yFunc(d.value) : yFunc(0);
               const w = xFunc.rangeBand();
-              const h = Math.abs(yFunc(d.value) - yFunc(0));
+              const h = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
               const key = d.label + d.value;
               const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
               const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
