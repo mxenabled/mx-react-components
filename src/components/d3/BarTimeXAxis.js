@@ -2,11 +2,13 @@ const React = require('react');
 
 const d3 = require('d3');
 const moment = require('moment');
+const _merge = require('lodash/merge');
 
 const StyleConstants = require('../../constants/Style');
 
 const BarTimeXAxis = React.createClass({
   propTypes: {
+    style: React.PropTypes.object,
     tickRange: React.PropTypes.array,
     tickSize: React.PropTypes.number,
     tickValues: React.PropTypes.array,
@@ -17,6 +19,7 @@ const BarTimeXAxis = React.createClass({
 
   getDefaultProps () {
     return {
+      style: {},
       tickSize: 6,
       tickValues: null,
       transform: 'translate(0,0)'
@@ -46,7 +49,7 @@ const BarTimeXAxis = React.createClass({
   },
 
   _styleChart () {
-    const style = this.styles();
+    const style = _merge({}, this.styles(), this.props.style);
     const axis = d3.select(this.timeAxis);
 
     // Style x axis labels
