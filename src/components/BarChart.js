@@ -239,17 +239,22 @@ const BarChart = React.createClass({
     const heightMargin = height - margin.top - margin.bottom;
 
     let hasNegative = false;
+    let hasPositive = false;
 
     const data = this.props.data.map(d => {
       if (!hasNegative && d.value < 0) {
         hasNegative = true;
+      } else if (!hasPositive && d.value > 0) {
+        hasPositive = true;
       }
       return d.value;
     });
     let yDomain;
 
-    if (hasNegative) {
+    if (hasNegative && hasPositive) {
       yDomain = [Math.min.apply(null, data), Math.max.apply(null, data)];
+    } else if (hasNegative && !hasPositive) {
+      yDomain = [Math.min.apply(null, data), 0];
     } else {
       yDomain = [0, Math.max.apply(null, data)];
     }
