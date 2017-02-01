@@ -4,18 +4,16 @@ const { FileUpload } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const FileUploadDocs = React.createClass({
-  getInitialState () {
-    return {
-      uploadedFile: null
-    };
-  },
+class FileUploadDocs extends React.Component {
+  state = {
+    uploadedFile: null
+  };
 
-  _handleFileChange (uploadedFile) {
+  _handleFileChange = (uploadedFile) => {
     this.setState({
       uploadedFile
     });
-  },
+  };
 
   render () {
     return (
@@ -122,6 +120,6 @@ const FileUploadDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = FileUploadDocs;

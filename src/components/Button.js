@@ -9,8 +9,8 @@ const Icon = require('../components/Icon');
 
 const { buttonTypes } = require('../constants/App');
 
-const Button = React.createClass({
-  propTypes: {
+class Button extends React.Component {
+  static propTypes = {
     actionText: React.PropTypes.string,
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
@@ -18,22 +18,20 @@ const Button = React.createClass({
     primaryColor: React.PropTypes.string,
     style: React.PropTypes.object,
     type: React.PropTypes.oneOf(buttonTypes)
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      onClick () {},
-      isActive: false,
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      type: 'primary'
-    };
-  },
+  static defaultProps = {
+    onClick () {},
+    isActive: false,
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    type: 'primary'
+  };
 
-  _isLargeOrMediumWindowSize () {
+  _isLargeOrMediumWindowSize = () => {
     const windowSize = StyleConstants.getWindowSize();
 
     return windowSize === 'medium' || windowSize === 'large';
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -57,9 +55,9 @@ const Button = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({
         borderRadius: 2,
@@ -209,7 +207,7 @@ const Button = React.createClass({
         marginLeft: (this.props.isActive && this.props.actionText) ? 10 : 0
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(Button);

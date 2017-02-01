@@ -3,22 +3,20 @@ const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
 
-const ProgressBar = React.createClass({
-  propTypes: {
+class ProgressBar extends React.Component {
+  static propTypes = {
     baseColor: React.PropTypes.string,
     height: React.PropTypes.number,
     percentage: React.PropTypes.number,
     progressColor: React.PropTypes.string,
     styles: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      baseColor: StyleConstants.Colors.FOG,
-      height: 10,
-      progressColor: StyleConstants.Colors.PRIMARY
-    };
-  },
+  static defaultProps = {
+    baseColor: StyleConstants.Colors.FOG,
+    height: 10,
+    progressColor: StyleConstants.Colors.PRIMARY
+  };
 
   render () {
     const styles = this.styles();
@@ -28,9 +26,9 @@ const ProgressBar = React.createClass({
         <div style={styles.progress}>{this.props.children}</div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       component: {
         backgroundColor: this.props.baseColor,
@@ -44,7 +42,7 @@ const ProgressBar = React.createClass({
         width: this.props.percentage > 100 ? '100%' : this.props.percentage + '%'
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = ProgressBar;

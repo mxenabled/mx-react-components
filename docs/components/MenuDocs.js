@@ -4,18 +4,16 @@ const { Menu } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const MenuDocs = React.createClass({
-  getInitialState () {
-    return {
-      showItems: false
-    };
-  },
+class MenuDocs extends React.Component {
+  state = {
+    showItems: false
+  };
 
-  _handleClick () {
+  _handleClick = () => {
     this.setState({
       showItems: !this.state.showItems
     });
-  },
+  };
 
   render () {
     return (
@@ -87,6 +85,6 @@ const MenuDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = MenuDocs;

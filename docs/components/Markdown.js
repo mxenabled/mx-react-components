@@ -1,19 +1,17 @@
 const React = require('react');
 const marked = require('marked');
 
-const Markdown = React.createClass({
-  propTypes: {
+class Markdown extends React.Component {
+  static propTypes = {
     children: React.PropTypes.node,
     lang: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      lang: 'html'
-    };
-  },
+  static defaultProps = {
+    lang: 'html'
+  };
 
-  _rawMarkup () {
+  _rawMarkup = () => {
     const lang = this.props.lang;
     const rawMarkup = marked(this.props.children.toString(), {
       highlight (code) {
@@ -23,13 +21,13 @@ const Markdown = React.createClass({
     });
 
     return { __html: rawMarkup };
-  },
+  };
 
   render () {
     return (
       <span dangerouslySetInnerHTML={this._rawMarkup()} />
     );
   }
-});
+}
 
 module.exports = Markdown;

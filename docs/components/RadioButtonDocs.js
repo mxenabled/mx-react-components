@@ -4,18 +4,16 @@ const { RadioButton, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const RadioButtonDocs = React.createClass({
-  getInitialState () {
-    return {
-      selected: 'default'
-    };
-  },
+class RadioButtonDocs extends React.Component {
+  state = {
+    selected: 'default'
+  };
 
-  _handleRadioClick (selected) {
+  _handleRadioClick = (selected) => {
     this.setState({
       selected
     });
-  },
+  };
 
   render () {
     return (
@@ -83,6 +81,6 @@ const RadioButtonDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = RadioButtonDocs;

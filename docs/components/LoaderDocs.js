@@ -4,7 +4,7 @@ const { Loader } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const LoaderDocs = React.createClass({
+class LoaderDocs extends React.Component {
   render () {
     return (
       <div>
@@ -61,7 +61,7 @@ const LoaderDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 const style = {
   backgroundImage: 'url("../images/sample-image.jpg")',

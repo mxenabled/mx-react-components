@@ -1,27 +1,23 @@
 const React = require('react');
 const _throttle = require('lodash/throttle');
 
-const NotifyOnScrollThreshold = React.createClass({
-  propTypes: {
+class NotifyOnScrollThreshold extends React.Component {
+  static propTypes = {
     children: React.PropTypes.func.isRequired,
     onThresholdMet: React.PropTypes.func,
     threshold: React.PropTypes.number // Number between 0 and 1 representing 0 to 100%
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      onThresholdMet: () => {},
-      threshold: 0.9
-    };
-  },
+  static defaultProps = {
+    onThresholdMet: () => {},
+    threshold: 0.9
+  };
 
-  getInitialState () {
-    return {
-      scrollHeight: 0,
-      scrollPosition: 0,
-      thresholdMet: false
-    };
-  },
+  state = {
+    scrollHeight: 0,
+    scrollPosition: 0,
+    thresholdMet: false
+  };
 
   componentDidMount () {
     this._handleScroll = _throttle(this._handleScroll, 200);
@@ -34,13 +30,13 @@ const NotifyOnScrollThreshold = React.createClass({
         thresholdMet: true
       });
     }
-  },
+  }
 
   componentWillUnmount () {
     this.container.parentElement.removeEventListener('scroll', this._handleScroll);
-  },
+  }
 
-  _handleScroll (evt) {
+  _handleScroll = (evt) => {
     const element = evt.target;
     const heightDifference = element.scrollHeight - element.clientHeight;
     const position = element.scrollTop / heightDifference;
@@ -54,7 +50,7 @@ const NotifyOnScrollThreshold = React.createClass({
         thresholdMet
       }, this.props.onThresholdMet);
     }
-  },
+  };
 
   render () {
     return (
@@ -63,6 +59,6 @@ const NotifyOnScrollThreshold = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = NotifyOnScrollThreshold;

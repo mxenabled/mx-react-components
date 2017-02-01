@@ -7,8 +7,9 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const Select = React.createClass({
-  propTypes: {
+class Select extends React.Component {
+  static propTypes = {
+    color: React.PropTypes.string,
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     hoverColor: React.PropTypes.string,
     onChange: React.PropTypes.func,
@@ -21,28 +22,24 @@ const Select = React.createClass({
     selected: React.PropTypes.object,
     selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     valid: React.PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      hoverColor: StyleConstants.Colors.PRIMARY,
-      onChange () {},
-      options: [],
-      placeholderText: 'Select One',
-      valid: true
-    };
-  },
+  static defaultProps = {
+    color: StyleConstants.Colors.PRIMARY,
+    onChange () {},
+    options: [],
+    placeholderText: 'Select One',
+    valid: true
+  };
 
-  getInitialState () {
-    return {
-      highlightedValue: null,
-      isOpen: false,
-      selected: false,
-      hoverItem: null
-    };
-  },
+  state = {
+    highlightedValue: null,
+    isOpen: false,
+    selected: false,
+    hoverItem: null
+  };
 
-  getBackgroundColor (option) {
+  getBackgroundColor = (option) => {
     if (option.value === this.state.hoverItem) {
       return {
         backgroundColor: this.props.hoverColor,
@@ -52,23 +49,23 @@ const Select = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  _handleScrimClick () {
+  _handleScrimClick = () => {
     this.setState({
       isOpen: false,
       highlightedValue: null,
       hoverItem: null
     });
-  },
+  };
 
-  _handleClick () {
+  _handleClick = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  },
+  };
 
-  _handleOptionClick (option) {
+  _handleOptionClick = (option) => {
     this.setState({
       selected: option,
       isOpen: false,
@@ -77,23 +74,23 @@ const Select = React.createClass({
     });
 
     this.props.onChange(option);
-  },
+  };
 
-  _handleOptionMouseOver (option) {
+  _handleOptionMouseOver = (option) => {
     this.setState({
       hoverItem: option.value
     });
-  },
+  };
 
-  _handleSelectChange (e) {
+  _handleSelectChange = (e) => {
     const selectedOption = this.props.options.filter(option => {
       return option.value + '' === e.target.value;
     })[0];
 
     this._handleOptionClick(selectedOption);
-  },
+  };
 
-  _handleInputKeyDown (e) {
+  _handleInputKeyDown = (e) => {
     const highlightedValue = this.state.highlightedValue;
 
     if (e.keyCode === 13 && highlightedValue) {
@@ -127,9 +124,9 @@ const Select = React.createClass({
         this._scrollListUp(previousIndex);
       }
     }
-  },
+  };
 
-  _scrollListDown (nextIndex) {
+  _scrollListDown = (nextIndex) => {
     const ul = ReactDOM.findDOMNode(this.optionList);
     const activeLi = ul.children[nextIndex];
     const heightFromTop = nextIndex * activeLi.clientHeight;
@@ -137,9 +134,9 @@ const Select = React.createClass({
     if (heightFromTop > ul.clientHeight) {
       ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
     }
-  },
+  };
 
-  _scrollListUp (prevIndex) {
+  _scrollListUp = (prevIndex) => {
     const ul = ReactDOM.findDOMNode(this.optionList);
     const activeLi = ul.children[prevIndex];
     const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
@@ -147,9 +144,9 @@ const Select = React.createClass({
     if (heightFromBottom > ul.clientHeight) {
       ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
     }
-  },
+  };
 
-  _renderScrim () {
+  _renderScrim = () => {
     if (this.state.isOpen) {
       const styles = this.styles();
 
@@ -163,9 +160,9 @@ const Select = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  _renderOptions () {
+  _renderOptions = () => {
     if (this.state.isOpen) {
       const styles = this.styles();
 
@@ -210,7 +207,7 @@ const Select = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -243,9 +240,9 @@ const Select = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({},
         {
@@ -325,8 +322,8 @@ const Select = React.createClass({
         left: 0
       }
     };
-  }
-});
+  };
+}
 
 
 module.exports = Radium(Select);

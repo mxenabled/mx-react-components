@@ -3,14 +3,14 @@ const { Link } = require('react-router');
 
 const { Select } = require('mx-react-components');
 
-const Components = React.createClass({
-  contextTypes: {
+class Components extends React.Component {
+  static contextTypes = {
     router: React.PropTypes.object.isRequired
-  },
+  };
 
-  _handleChange (selected) {
+  _handleChange = (selected) => {
     this.context.router.push('/components/' + selected.value);
-  },
+  };
 
   render () {
     return (
@@ -215,6 +215,6 @@ const Components = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Components;

@@ -4,8 +4,8 @@ const _merge = require('lodash/merge');
 const Icon = require('./Icon');
 const StyleConstants = require('../constants/Style');
 
-const Input = React.createClass({
-  propTypes: {
+class Input extends React.Component {
+  static propTypes = {
     baseColor: React.PropTypes.string,
     elementProps: React.PropTypes.object,
     focusOnLoad: React.PropTypes.bool,
@@ -20,23 +20,19 @@ const Input = React.createClass({
     styles: React.PropTypes.object,
     type: React.PropTypes.string,
     valid: React.PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      baseColor: StyleConstants.Colors.PRIMARY,
-      elementProps: {},
-      focusOnLoad: false,
-      type: 'text',
-      valid: true
-    };
-  },
+  static defaultProps = {
+    baseColor: StyleConstants.Colors.PRIMARY,
+    elementProps: {},
+    focusOnLoad: false,
+    type: 'text',
+    valid: true
+  };
 
-  getInitialState () {
-    return {
-      focus: false
-    };
-  },
+  state = {
+    focus: false
+  };
 
   componentDidMount () {
     if (this.props.style) {
@@ -46,9 +42,9 @@ const Input = React.createClass({
     if (this.props.focusOnLoad && this.input) {
       this.input.focus();
     }
-  },
+  }
 
-  _onFocus () {
+  _onFocus = () => {
     if (this.input) {
       this.input.focus();
     }
@@ -56,9 +52,9 @@ const Input = React.createClass({
     this.setState({
       focus: true
     });
-  },
+  };
 
-  _onBlur () {
+  _onBlur = () => {
     if (this.input) {
       this.input.blur();
     }
@@ -66,7 +62,7 @@ const Input = React.createClass({
     this.setState({
       focus: false
     });
-  },
+  };
 
   render () {
     const { elementProps } = this.props;
@@ -102,9 +98,9 @@ const Input = React.createClass({
         ) : null}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       wrapper: Object.assign({}, {
         padding: StyleConstants.Spacing.SMALL,
@@ -140,7 +136,7 @@ const Input = React.createClass({
         boxShadow: 'none'
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = Input;

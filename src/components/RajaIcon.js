@@ -1,22 +1,20 @@
 const React = require('react');
 const Radium = require('radium');
 
-const RajaIcon = React.createClass({
-  propTypes: {
+class RajaIcon extends React.Component {
+  static propTypes = {
     elementProps: React.PropTypes.object,
     size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     type: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      elementProps: {},
-      size: 24,
-      type: 'b'
-    };
-  },
+  static defaultProps = {
+    elementProps: {},
+    size: 24,
+    type: 'b'
+  };
 
-  _renderSvg () {
+  _renderSvg = () => {
     switch (this.props.type) {
       case 'about':
         return (
@@ -645,7 +643,7 @@ const RajaIcon = React.createClass({
       default:
         return null;
     }
-  },
+  };
 
   render () {
     const { elementProps } = this.props;
@@ -668,6 +666,6 @@ const RajaIcon = React.createClass({
       </svg>
     );
   }
-});
+}
 
 module.exports = Radium(RajaIcon);

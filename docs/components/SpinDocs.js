@@ -4,7 +4,7 @@ const { Icon, Spin } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const SpinDocs = React.createClass({
+class SpinDocs extends React.Component {
   render () {
     return (
       <div>
@@ -45,6 +45,6 @@ const SpinDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SpinDocs;

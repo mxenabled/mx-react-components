@@ -3,31 +3,29 @@ const d3 = require('d3');
 
 const ChartUtils = require('../../utils/Chart');
 
-const AxisGroup = React.createClass({
-  propTypes: {
+class AxisGroup extends React.Component {
+  static propTypes = {
     axis: React.PropTypes.string.isRequired,
     axisFormatFunction: React.PropTypes.func.isRequired,
     data: React.PropTypes.array.isRequired,
     orientation: React.PropTypes.string.isRequired,
     scaleFunction: React.PropTypes.func.isRequired,
     translation: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    translation: 'translate(0,0)'
+  };
 
   componentDidMount () {
     this._renderAxis();
-  },
+  }
 
   componentDidUpdate () {
     this._renderAxis();
-  },
+  }
 
-  _renderAxis () {
+  _renderAxis = () => {
     const max = d3.max(this.props.data, d => d[this.props.axis]);
     const min = d3.min(this.props.data, d => d[this.props.axis]);
     const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
@@ -40,7 +38,7 @@ const AxisGroup = React.createClass({
       .tickValues(tickValues);
 
     d3.select(this.axisGroup).call(axisFunction);
-  },
+  };
 
   render () {
     return (
@@ -51,6 +49,6 @@ const AxisGroup = React.createClass({
       />
     );
   }
-});
+}
 
 module.exports = AxisGroup;

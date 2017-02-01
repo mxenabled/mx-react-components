@@ -4,45 +4,41 @@ const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
 
-const TextArea = React.createClass({
-  propTypes: {
+class TextArea extends React.Component {
+  static propTypes = {
     elementProps: React.PropTypes.object,
     primaryColor: React.PropTypes.string,
     rows: React.PropTypes.number,
     styles: React.PropTypes.object,
     valid: React.PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      elementProps: {},
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      rows: 5,
-      valid: true
-    };
-  },
+  static defaultProps = {
+    elementProps: {},
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    rows: 5,
+    valid: true
+  };
 
-  getInitialState () {
-    return {
-      focus: false
-    };
-  },
+  state = {
+    focus: false
+  };
 
-  _onFocus () {
+  _onFocus = () => {
     this.textarea.focus();
 
     this.setState({
       focus: true
     });
-  },
+  };
 
-  _onBlur () {
+  _onBlur = () => {
     this.textarea.blur();
 
     this.setState({
       focus: false
     });
-  },
+  };
 
   render () {
     const { elementProps, rows } = this.props;
@@ -65,9 +61,9 @@ const TextArea = React.createClass({
         />
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       component: {
         display: 'block'
@@ -95,7 +91,7 @@ const TextArea = React.createClass({
         boxShadow: 'none'
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = TextArea;

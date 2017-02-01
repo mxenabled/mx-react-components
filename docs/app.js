@@ -45,7 +45,7 @@ const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
 
-const App = React.createClass({
+class App extends React.Component {
   render () {
     const currentYear = new Date().getFullYear();
 
@@ -61,7 +61,7 @@ const App = React.createClass({
       </div>
     );
   }
-});
+}
 
 ReactDOM.render((
   <Router history={hashHistory}>

@@ -4,32 +4,30 @@ const d3 = require('d3');
 
 const ChartUtils = require('../../utils/Chart');
 
-const GridLinesGroup = React.createClass({
-  propTypes: {
+class GridLinesGroup extends React.Component {
+  static propTypes = {
     axis: React.PropTypes.string.isRequired,
     data: React.PropTypes.array.isRequired,
     orientation: React.PropTypes.string,
     scaleFunction: React.PropTypes.func.isRequired,
     tickSize: React.PropTypes.number.isRequired,
     translation: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      orientation: 'left',
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    orientation: 'left',
+    translation: 'translate(0,0)'
+  };
 
   componentDidMount () {
     this._renderGridLines();
-  },
+  }
 
   componentDidUpdate () {
     this._renderGridLines();
-  },
+  }
 
-  _renderGridLines () {
+  _renderGridLines = () => {
     const max = d3.max(this.props.data, d => d[this.props.axis]);
     const min = d3.min(this.props.data, d => d[this.props.axis]);
     const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
@@ -43,7 +41,7 @@ const GridLinesGroup = React.createClass({
       .tickValues(tickValues);
 
     d3.select(this.gridLines).call(gridLinesFunction);
-  },
+  };
 
   render () {
     return (
@@ -54,6 +52,6 @@ const GridLinesGroup = React.createClass({
       />
     );
   }
-});
+}
 
 module.exports = GridLinesGroup;

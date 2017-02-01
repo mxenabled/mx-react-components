@@ -4,21 +4,19 @@ const { RajaIcon, Styles, AppConstants } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const RajaIconDocs = React.createClass({
-  getInitialState () {
-    return {
-      icon: {
-        value: 'accounts',
-        displayValue: 'Accounts'
-      }
-    };
-  },
+class RajaIconDocs extends React.Component {
+  state = {
+    icon: {
+      value: 'accounts',
+      displayValue: 'Accounts'
+    }
+  };
 
-  _handleSelectChange (option) {
+  _handleSelectChange = (option) => {
     this.setState({
       icon: option
     });
-  },
+  };
 
   render () {
     return (
@@ -80,6 +78,6 @@ const RajaIconDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = RajaIconDocs;

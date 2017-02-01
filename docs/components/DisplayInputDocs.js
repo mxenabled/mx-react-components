@@ -4,36 +4,33 @@ const { DisplayInput } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const DisplayInputDocs = React.createClass({
+class DisplayInputDocs extends React.Component {
+  state = {
+    showHint: false,
+    statusMessage: null,
+    valid: true
+  };
 
-  getInitialState () {
-    return {
-      showHint: false,
-      statusMessage: null,
-      valid: true
-    };
-  },
-
-  _handleInputShowHint () {
+  _handleInputShowHint = () => {
     this.setState({
       showHint: true
     });
-  },
+  };
 
-  _handleInputHideHint () {
+  _handleInputHideHint = () => {
     this.setState({
       showHint: false
     });
-  },
+  };
 
-  _handleInputFocus () {
+  _handleInputFocus = () => {
     this.setState({
       statusMessage: null,
       showHint: false
     });
-  },
+  };
 
-  _handleInputStatusMessage () {
+  _handleInputStatusMessage = () => {
     this.setState({
       statusMessage: {
         type: 'success',
@@ -41,7 +38,7 @@ const DisplayInputDocs = React.createClass({
       },
       valid: true
     });
-  },
+  };
 
   render () {
     return (
@@ -128,6 +125,6 @@ const DisplayInputDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = DisplayInputDocs;

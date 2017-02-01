@@ -1,15 +1,13 @@
 const React = require('react');
 
-const Container = React.createClass({
-  propTypes: {
+class Container extends React.Component {
+  static propTypes = {
     fluid: React.PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      fluid: true
-    };
-  },
+  static defaultProps = {
+    fluid: true
+  };
 
   render () {
     return (
@@ -18,6 +16,6 @@ const Container = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Container;

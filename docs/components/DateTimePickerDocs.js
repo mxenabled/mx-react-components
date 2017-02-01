@@ -4,18 +4,16 @@ const { DateTimePicker } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const DateTimePickerDocs = React.createClass({
-  getInitialState () {
-    return {
-      selectedDate: null
-    };
-  },
+class DateTimePickerDocs extends React.Component {
+  state = {
+    selectedDate: null
+  };
 
-  _handleDateSelect (selectedDate) {
+  _handleDateSelect = (selectedDate) => {
     this.setState({
       selectedDate
     });
-  },
+  };
 
   render () {
     return (
@@ -125,6 +123,6 @@ const DateTimePickerDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = DateTimePickerDocs;

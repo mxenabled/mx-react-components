@@ -107,8 +107,8 @@ const Rect = React.createClass({
 });
 
 
-const BarChart = React.createClass({
-  propTypes: {
+class BarChart extends React.Component {
+  static propTypes = {
     animateOnHover: React.PropTypes.bool,
     data: React.PropTypes.array.isRequired,
     height: React.PropTypes.number,
@@ -119,46 +119,42 @@ const BarChart = React.createClass({
     tooltipFormat: React.PropTypes.string,
     tooltipStyle: React.PropTypes.object,
     width: React.PropTypes.number
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      animateOnHover: false,
-      height: 300,
-      onClick: () => {},
-      onHover: () => {},
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      tooltipFormat: '$0,0.00',
-      width: 500
-    };
-  },
+  static defaultProps = {
+    animateOnHover: false,
+    height: 300,
+    onClick: () => {},
+    onHover: () => {},
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    tooltipFormat: '$0,0.00',
+    width: 500
+  };
 
-  getInitialState () {
-    return {
-      hovering: false
-    };
-  },
+  state = {
+    hovering: false
+  };
 
   shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
-  },
+  }
 
-  _handleMouseOver (label, value, x, y) {
+  _handleMouseOver = (label, value, x, y) => {
     this.setState({
       hovering: true,
       value,
       x,
       y
     });
-  },
+  };
 
-  _handleMouseOut () {
+  _handleMouseOut = () => {
     this.setState({
       hovering: false
     });
-  },
+  };
 
-  _renderLabels (barWidth, xScale) {
+  _renderLabels = (barWidth, xScale) => {
     const styles = this.styles();
 
     return this.props.data.map((item, index) => {
@@ -178,9 +174,9 @@ const BarChart = React.createClass({
         </span>
       );
     });
-  },
+  };
 
-  _renderBar (yScale, xScale, barWidth, value, index, maxHeight) {
+  _renderBar = (yScale, xScale, barWidth, value, index, maxHeight) => {
     const height = Math.abs(yScale(value));
     const x = xScale(index);
     const y = value > 0 ? maxHeight - height : 0;
@@ -202,7 +198,7 @@ const BarChart = React.createClass({
         y={y}
       />
     );
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -275,9 +271,9 @@ const BarChart = React.createClass({
           </span>) : null}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: {
         display: 'block',
@@ -298,7 +294,7 @@ const BarChart = React.createClass({
         whiteSpace: 'nowrap'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = BarChart;

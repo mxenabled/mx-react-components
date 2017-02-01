@@ -4,7 +4,7 @@ const { Gauge } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const GaugeDocs = React.createClass({
+class GaugeDocs extends React.Component {
   render () {
     return (
       <div>
@@ -148,6 +148,6 @@ const GaugeDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = GaugeDocs;

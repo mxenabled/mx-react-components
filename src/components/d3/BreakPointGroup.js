@@ -1,7 +1,7 @@
 const React = require('react');
 
-const BreakPointGroup = React.createClass({
-  propTypes: {
+class BreakPointGroup extends React.Component {
+  static propTypes = {
     adjustedHeight: React.PropTypes.number.isRequired,
     adjustedWidth: React.PropTypes.number.isRequired,
     breakPointDate: React.PropTypes.number.isRequired,
@@ -9,13 +9,11 @@ const BreakPointGroup = React.createClass({
     margin: React.PropTypes.object.isRequired,
     translation: React.PropTypes.string,
     xScaleValueFunction: React.PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    translation: 'translate(0,0)'
+  };
 
   render () {
     const { adjustedHeight, adjustedWidth, breakPointDate, breakPointLabel, margin, translation, xScaleValueFunction } = this.props;
@@ -44,6 +42,6 @@ const BreakPointGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 module.exports = BreakPointGroup;

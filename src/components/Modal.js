@@ -5,8 +5,8 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const Modal = React.createClass({
-  propTypes: {
+class Modal extends React.Component {
+  static propTypes = {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       actionText: React.PropTypes.string,
       className: React.PropTypes.string,
@@ -33,29 +33,25 @@ const Modal = React.createClass({
     tooltip: React.PropTypes.string,
     tooltipLabel: React.PropTypes.string,
     tooltipTitle: React.PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      buttons: [],
-      color: StyleConstants.Colors.PRIMARY,
-      isRelative: false,
-      showCloseIcon: true,
-      showFooter: false,
-      showScrim: true,
-      showTitleBar: false,
-      title: '',
-      tooltip: null,
-      tooltipLabel: '',
-      tooltipTitle: null
-    };
-  },
+  static defaultProps = {
+    buttons: [],
+    color: StyleConstants.Colors.PRIMARY,
+    isRelative: false,
+    showCloseIcon: true,
+    showFooter: false,
+    showScrim: true,
+    showTitleBar: false,
+    title: '',
+    tooltip: null,
+    tooltipLabel: '',
+    tooltipTitle: null
+  };
 
-  getInitialState () {
-    return {
-      showTooltip: false
-    };
-  },
+  state = {
+    showTooltip: false
+  };
 
   componentDidMount () {
   /*eslint-disable */
@@ -63,15 +59,15 @@ const Modal = React.createClass({
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
     }
   /*eslint-enable */
-  },
+  }
 
-  _handleTooltipToggle (show) {
+  _handleTooltipToggle = (show) => {
     this.setState({
       showTooltip: show
     });
-  },
+  };
 
-  _renderTitleBar () {
+  _renderTitleBar = () => {
     if (this.props.showTitleBar) {
       const styles = this.styles();
 
@@ -83,9 +79,9 @@ const Modal = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  _renderFooter () {
+  _renderFooter = () => {
     if (this.props.showFooter) {
       const styles = this.styles();
 
@@ -117,9 +113,9 @@ const Modal = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  _renderFooterContent () {
+  _renderFooterContent = () => {
     const styles = this.styles();
 
     return (
@@ -127,9 +123,9 @@ const Modal = React.createClass({
         {this.props.footerContent}
       </div>
     );
-  },
+  };
 
-  _renderTooltip () {
+  _renderTooltip = () => {
     if (this.state.showTooltip) {
       const styles = this.styles();
 
@@ -146,9 +142,9 @@ const Modal = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  _renderTooltipIconAndLabel () {
+  _renderTooltipIconAndLabel = () => {
     if (this.props.tooltip) {
       const styles = this.styles();
 
@@ -177,7 +173,7 @@ const Modal = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -209,9 +205,9 @@ const Modal = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       scrim: {
         zIndex: 1000,
@@ -316,7 +312,7 @@ const Modal = React.createClass({
         textAlign: 'center'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Modal;

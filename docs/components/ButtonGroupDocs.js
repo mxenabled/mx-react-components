@@ -4,7 +4,7 @@ const { ButtonGroup } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ButtonGroupDocs = React.createClass({
+class ButtonGroupDocs extends React.Component {
   render () {
     return (
       <div>
@@ -84,6 +84,6 @@ const ButtonGroupDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = ButtonGroupDocs;

@@ -48,7 +48,7 @@ const options = [
   }
 ];
 
-const SelectDocs = React.createClass({
+class SelectDocs extends React.Component {
   render () {
     return (
       <div>
@@ -152,6 +152,6 @@ const SelectDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SelectDocs;

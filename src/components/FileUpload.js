@@ -6,8 +6,8 @@ const StyleConstants = require('../constants/Style');
 const Button = require('./Button');
 const Icon = require('./Icon');
 
-const FileUpload = React.createClass({
-  propTypes: {
+class FileUpload extends React.Component {
+  static propTypes = {
     allowedFileTypes: React.PropTypes.array,
     imageUrl: React.PropTypes.string,
     imageValidation: React.PropTypes.shape({
@@ -26,20 +26,18 @@ const FileUpload = React.createClass({
     onFileValidation: React.PropTypes.func,
     style: React.PropTypes.object,
     uploadedFile: React.PropTypes.any
-  },
+  };
 
-  getInitialState () {
-    return {
-      dragging: false,
-      imageSource: null
-    };
-  },
+  state = {
+    dragging: false,
+    imageSource: null
+  };
 
   componentDidMount () {
     this._readFile(this.props.uploadedFile, result => {
       this._validateFile(result.file, result.width, result.height);
     });
-  },
+  }
 
   componentWillReceiveProps (newProps) {
     this._input.value = null;
@@ -49,9 +47,9 @@ const FileUpload = React.createClass({
         this._validateFile(result.file, result.width, result.height);
       });
     }
-  },
+  }
 
-  _handleFileSelect (e) {
+  _handleFileSelect = (e) => {
     const file = e.target.files[0];
 
     if (file) {
@@ -63,27 +61,27 @@ const FileUpload = React.createClass({
         this._validateFile(file);
       }
     }
-  },
+  };
 
-  _onDragOver (e) {
+  _onDragOver = (e) => {
     e.stopPropagation();
     e.preventDefault();
 
     this.setState({
       dragging: true
     });
-  },
+  };
 
-  _onDragLeave (e) {
+  _onDragLeave = (e) => {
     e.stopPropagation();
     e.preventDefault();
 
     this.setState({
       dragging: false
     });
-  },
+  };
 
-  _onDrop (e) {
+  _onDrop = (e) => {
     e.stopPropagation();
     e.preventDefault();
 
@@ -96,13 +94,13 @@ const FileUpload = React.createClass({
     } else {
       this._validateFile(file);
     }
-  },
+  };
 
-  _onDropzoneClick () {
+  _onDropzoneClick = () => {
     this._input.click();
-  },
+  };
 
-  _readFile (file, callback = () => {}) {
+  _readFile = (file, callback = () => {}) => {
     if (file) {
       const reader = new FileReader();
       const image = new Image();
@@ -126,9 +124,9 @@ const FileUpload = React.createClass({
         };
       };
     }
-  },
+  };
 
-  _removeFile (e) {
+  _removeFile = (e) => {
     e.stopPropagation();
     e.preventDefault();
 
@@ -138,9 +136,9 @@ const FileUpload = React.createClass({
       imageSource: null
     });
     this.props.onFileRemove();
-  },
+  };
 
-  _validateImageDimensions (width, height) {
+  _validateImageDimensions = (width, height) => {
     const validationMessages = [];
 
     if (this.props.onFileValidation && this.props.imageValidation) {
@@ -174,9 +172,9 @@ const FileUpload = React.createClass({
     }
 
     return validationMessages;
-  },
+  };
 
-  _validateFile (file, width = null, height = null) {
+  _validateFile = (file, width = null, height = null) => {
     const validationMessages = this._validateImageDimensions(width, height);
     const isTooBig = this.props.maxFileSize < file.size / 1000;
     const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
@@ -202,7 +200,7 @@ const FileUpload = React.createClass({
     } else {
       this.props.onFileAdd(file);
     }
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -261,9 +259,9 @@ const FileUpload = React.createClass({
         />
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       dropzone: Object.assign({}, {
         backgroundColor: this.state.dragging ? StyleConstants.Colors.WHITE : StyleConstants.Colors.PORCELAIN,
@@ -330,7 +328,7 @@ const FileUpload = React.createClass({
         color: StyleConstants.Colors.ASH
       }
     };
-  }
-});
+  };
+}
 
 module.exports = FileUpload;

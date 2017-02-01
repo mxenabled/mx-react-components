@@ -7,8 +7,8 @@ const StyleConstants = require('../constants/Style');
 
 const { buttonTypes } = require('../constants/App');
 
-const ButtonGroup = React.createClass({
-  propTypes: {
+class ButtonGroup extends React.Component {
+  static propTypes = {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       icon: React.PropTypes.string,
       onClick: React.PropTypes.func,
@@ -18,15 +18,13 @@ const ButtonGroup = React.createClass({
     }).isRequired),
     primaryColor: React.PropTypes.string,
     type: React.PropTypes.oneOf(buttonTypes)
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      buttons: [],
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      type: 'primaryOutline'
-    };
-  },
+  static defaultProps = {
+    buttons: [],
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    type: 'primaryOutline'
+  };
 
   render () {
     const styles = this.styles();
@@ -60,9 +58,9 @@ const ButtonGroup = React.createClass({
         })}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({
         boxSizing: 'border-box',
@@ -95,7 +93,7 @@ const ButtonGroup = React.createClass({
         }
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(ButtonGroup);

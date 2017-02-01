@@ -4,7 +4,7 @@ const { DonutChart } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const DonutChartDocs = React.createClass({
+class DonutChartDocs extends React.Component {
   render () {
     return (
       <div>
@@ -190,6 +190,6 @@ const DonutChartDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = DonutChartDocs;
