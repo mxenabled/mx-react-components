@@ -4,26 +4,23 @@ const { Button, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ButtonDocs = React.createClass({
+class ButtonDocs extends React.Component {
+  state = {
+    buttonIsActive: false,
+    spinnerIsActive: false
+  };
 
-  getInitialState () {
-    return {
-      buttonIsActive: false,
-      spinnerIsActive: false
-    };
-  },
-
-  _handleButtonClick () {
+  _handleButtonClick = () => {
     this.setState({
       buttonIsActive: !this.state.buttonIsActive
     });
-  },
+  };
 
-  _handleSpinnerClick () {
+  _handleSpinnerClick = () => {
     this.setState({
       spinnerIsActive: !this.state.spinnerIsActive
     });
-  },
+  };
 
   render () {
     return (
@@ -98,7 +95,7 @@ const ButtonDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 const style = {
   margin: '0 10px'
