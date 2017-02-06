@@ -43,7 +43,6 @@ const Button = React.createClass({
       <button
         aria-label={this.props.ariaLabel}
         onClick={this.props.type === 'disabled' ? null : this.props.onClick}
-        role='button'
         style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
       >
         <div style={styles.children}>
