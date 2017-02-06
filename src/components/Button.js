@@ -46,8 +46,15 @@ const Button = React.createClass({
         style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
       >
         <div style={styles.children}>
-          {(this.props.icon && !this.props.isActive) ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
-          {this.props.isActive ? (
+          {(this.props.icon && !this.props.isActive) && (
+            <Icon
+              elementProps={{ 'aria-hidden': true }}
+              size={20}
+              style={styles.icon}
+              type={this.props.icon}
+            />
+          )}
+          {this.props.isActive && (
             <Spin direction='counterclockwise'>
               <Icon elementProps={{ 'aria-hidden': true }} size={20} type='spinner' />
             </Spin>
