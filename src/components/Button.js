@@ -12,6 +12,7 @@ const { buttonTypes } = require('../constants/App');
 const Button = React.createClass({
   propTypes: {
     actionText: React.PropTypes.string,
+    ariaLabel: React.PropTypes.string,
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     onClick: React.PropTypes.func,
