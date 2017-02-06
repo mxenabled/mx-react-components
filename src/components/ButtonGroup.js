@@ -42,6 +42,7 @@ const ButtonGroup = React.createClass({
 
           return (
             <Button
+              ariaLabel={button.ariaLabel}
               icon={button.icon}
               key={i}
               onClick={isDisabled ? null : button.onClick}
