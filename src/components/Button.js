@@ -49,9 +49,9 @@ const Button = React.createClass({
           {(this.props.icon && !this.props.isActive) ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
           {this.props.isActive ? (
             <Spin direction='counterclockwise'>
-              <Icon size={20} type='spinner' />
+              <Icon elementProps={{ 'aria-hidden': true }} size={20} type='spinner' />
             </Spin>
-          ) : null }
+          )}
           <div style={styles.buttonText}>
             {this.props.isActive ? this.props.actionText : this.props.children}
           </div>
