@@ -40,7 +40,8 @@ const Button = React.createClass({
     const styles = this.styles();
 
     return (
-      <div
+      <button
+        aria-label={this.props.ariaLabel}
         onClick={this.props.type === 'disabled' ? null : this.props.onClick}
         role='button'
         style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
@@ -56,7 +57,7 @@ const Button = React.createClass({
             {this.props.isActive ? this.props.actionText : this.props.children}
           </div>
         </div>
-      </div>
+      </button>
     );
   },
 
