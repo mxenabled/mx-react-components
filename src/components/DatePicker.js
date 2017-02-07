@@ -24,7 +24,9 @@ const DatePicker = React.createClass({
   getDefaultProps () {
     return {
       closeOnDateSelect: false,
+      currentDate: null,
       format: 'MMM D, YYYY',
+      isValid: true,
       locale: 'en',
       onDateSelect () {},
       placeholderText: 'Select A Date',
