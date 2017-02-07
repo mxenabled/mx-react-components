@@ -10,6 +10,7 @@ const { buttonTypes } = require('../constants/App');
 const ButtonGroup = React.createClass({
   propTypes: {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
+      ariaLabel: React.PropTypes.string,
       icon: React.PropTypes.string,
       onClick: React.PropTypes.func,
       style: React.PropTypes.object,
@@ -41,6 +42,7 @@ const ButtonGroup = React.createClass({
 
           return (
             <Button
+              ariaLabel={button.ariaLabel}
               icon={button.icon}
               key={i}
               onClick={isDisabled ? null : button.onClick}

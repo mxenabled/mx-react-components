@@ -12,6 +12,7 @@ const { buttonTypes } = require('../constants/App');
 const Button = React.createClass({
   propTypes: {
     actionText: React.PropTypes.string,
+    ariaLabel: React.PropTypes.string,
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     onClick: React.PropTypes.func,
@@ -39,23 +40,30 @@ const Button = React.createClass({
     const styles = this.styles();
 
     return (
-      <div
+      <button
+        aria-label={this.props.ariaLabel}
         onClick={this.props.type === 'disabled' ? null : this.props.onClick}
-        role='button'
         style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
       >
         <div style={styles.children}>
-          {(this.props.icon && !this.props.isActive) ? <Icon size={20} style={styles.icon} type={this.props.icon} /> : null}
-          {this.props.isActive ? (
+          {(this.props.icon && !this.props.isActive) && (
+            <Icon
+              elementProps={{ 'aria-hidden': true }}
+              size={20}
+              style={styles.icon}
+              type={this.props.icon}
+            />
+          )}
+          {this.props.isActive && (
             <Spin direction='counterclockwise'>
-              <Icon size={20} type='spinner' />
+              <Icon elementProps={{ 'aria-hidden': true }} size={20} type='spinner' />
             </Spin>
-          ) : null }
+          )}
           <div style={styles.buttonText}>
             {this.props.isActive ? this.props.actionText : this.props.children}
           </div>
         </div>
-      </div>
+      </button>
     );
   },
 
