@@ -6,6 +6,19 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.53</h3>
+        <ul>
+          <li>
+            Large refactor of the bar chart (<a href='https://github.com/mxenabled/mx-react-components/pull/502'>#502</a>)
+          </li>
+          <li>
+            Button/ButtonGroup refactor for accessibility (aria) (<a href='https://github.com/mxenabled/mx-react-components/pull/508'>#508</a>)
+          </li>
+          <li>
+            SimpleSelect supports props.children over props.items (<a href='https://github.com/mxenabled/mx-react-components/pull/507'>#507</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.51</h3>
         <ul>
           <li>
