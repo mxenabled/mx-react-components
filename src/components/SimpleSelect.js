@@ -57,7 +57,9 @@ const SimpleSelect = React.createClass({
     return (
       <div style={styles.component}>
         <div style={styles.menu}>
-            {this.props.items.map((item, i) => {
+          {this.props.children ?
+            this.props.children :
+            (this.props.items.map((item, i) => {
               return (
                 <div
                   key={i}
@@ -70,7 +72,8 @@ const SimpleSelect = React.createClass({
                   <div style={styles.text}>{item.text}</div>
                 </div>
               );
-            })}
+            })
+          )}
         </div>
         <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
