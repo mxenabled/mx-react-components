@@ -18,7 +18,7 @@ const Select = React.createClass({
     optionTextStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     placeholderText: React.PropTypes.string,
     scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    selected: React.PropTypes.object,
+    selected: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.bool]),
     selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     valid: React.PropTypes.bool
   },
