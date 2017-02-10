@@ -27,7 +27,7 @@ class ButtonGroup extends React.Component {
     type: 'primaryOutline'
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (
