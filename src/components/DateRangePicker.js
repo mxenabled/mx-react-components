@@ -10,10 +10,43 @@ const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
-const SelectedRangeIcon = ({ fill }) => <div><Icon size={20} style={{ fill }} type='check-solid' /></div>;
+const DefaultRanges = (props) => (
+  <div style={props.styles.rangeOptions}>
+    <div style={props.styles.defaultRangesTitle}>
+      Select a Range
+    </div>
+    {props.defaultRanges.map(range => (
+      <div key={range.displayValue + range.startDate} style={props.styles.rangeOption}>
+        <div>
+          <Icon
+            size={20}
+            style={{
+              fill: range.startDate === props.selectedStartDate && range.endDate === props.selectedEndDate ?
+              props.primaryColor : 'transparent'
+            }}
+            type='check-solid'
+          />
+        </ div>
+        <div onClick={props.handleDefaultRangeSelection.bind(null, range)}>
+          {range.displayValue}
+        </div>
+      </div>
+      )
+    )}
+  </div>
+);
 
-SelectedRangeIcon.propTypes = {
-  fill: React.PropTypes.string
+DefaultRanges.propTypes = {
+  defaultRanges: React.PropTypes.array,
+  handleDefaultRangeSelection: React.PropTypes.func,
+  primaryColor: React.PropTypes.string,
+  selectedEndDate: React.PropTypes.number,
+  selectedStartDate: React.PropTypes.number,
+  styles: React.PropTypes.shape({
+    defaultRangesTitle: React.PropTypes.object,
+    rangeOption: React.PropTypes.object,
+    rangeOptions: React.PropTypes.object
+  })
 };
 
 const DateRangePicker = React.createClass({
@@ -218,32 +251,6 @@ const DateRangePicker = React.createClass({
     return where;
   },
 
-  _renderDefaultRanges () {
-    const styles = this.styles();
-
-    return (
-      <div style={styles.rangeOptions}>
-        <div style={styles.defaultRangesTitle}>
-          Select a Range
-        </div>
-        {this.props.defaultRanges.map(range => (
-          <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
-            <SelectedRangeIcon
-              fill={
-                range.startDate === this.props.selectedStartDate && range.endDate === this.props.selectedEndDate ?
-                this.props.primaryColor : 'transparent'
-              }
-            />
-            <div onClick={this._handleDefaultRangeSelection.bind(null, range)}>
-              {range.displayValue}
-            </div>
-          </div>
-          )
-        )}
-      </div>
-    );
-  },
-
   _renderMonthTable () {
     const styles = this.styles();
     const days = [];
@@ -321,7 +328,14 @@ const DateRangePicker = React.createClass({
             <div style={styles.optionsWrapper}>
               {this._isLargeOrMediumWindowSize() && (
                 <Column span={spans.defaultRanges}>
-                  {this.props.showDefaultRanges && this._renderDefaultRanges()}
+                  {this.props.showDefaultRanges &&
+                    <DefaultRanges
+                      defaultRanges={this.props.defaultRanges}
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      primaryColor={this.props.primaryColor}
+                      styles={styles}
+                    />
+                  }
                 </Column>
               )}
               <Column span={spans.calendar}>
