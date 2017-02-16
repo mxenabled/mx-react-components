@@ -10,6 +10,12 @@ const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
+const SelectedRangeIcon = ({ fill }) => <div><Icon size={20} style={{ fill }} type='check-solid' /></div>;
+
+SelectedRangeIcon.propTypes = {
+  fill: React.PropTypes.string
+};
+
 const DateRangePicker = React.createClass({
   propTypes: {
     closeCalendarOnRangeSelect: React.PropTypes.bool,
@@ -220,16 +226,20 @@ const DateRangePicker = React.createClass({
         <div style={styles.defaultRangesTitle}>
           Select a Range
         </div>
-        {this.props.defaultRanges.map(range => {
-          return (
-            <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
-              {this._renderSelectedRangeIcon(range)}
-              <div onClick={this._handleDefaultRangeSelection.bind(null, range)}>
-                {range.displayValue}
-              </div>
+        {this.props.defaultRanges.map(range => (
+          <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
+            <SelectedRangeIcon
+              fill={
+                range.startDate === this.props.selectedStartDate && range.endDate === this.props.selectedEndDate ?
+                this.props.primaryColor : 'transparent'
+              }
+            />
+            <div onClick={this._handleDefaultRangeSelection.bind(null, range)}>
+              {range.displayValue}
             </div>
-          );
-        })}
+          </div>
+          )
+        )}
       </div>
     );
   },
@@ -276,20 +286,6 @@ const DateRangePicker = React.createClass({
     return days;
   },
 
-  _renderSelectedRangeIcon (range) {
-    const isSelectedRange = range.startDate === this.props.selectedStartDate && range.endDate === this.props.selectedEndDate;
-    const iconStyle = { fill: isSelectedRange ? this.props.primaryColor : 'transparent' };
-
-    return (
-      <div>
-        <Icon
-          size={20}
-          style={iconStyle}
-          type='check-solid'
-        />
-      </div>
-    );
-  },
 
   render () {
     const styles = this.styles();
