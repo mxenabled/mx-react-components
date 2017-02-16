@@ -394,7 +394,14 @@ const DateRangePicker = React.createClass({
               </Column>
               {!this._isLargeOrMediumWindowSize() && (
                 <Column span={spans.defaultRanges}>
-                  {this.props.showDefaultRanges && this._renderDefaultRanges()}
+                  {this.props.showDefaultRanges &&
+                    <DefaultRanges
+                      defaultRanges={this.props.defaultRanges}
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      primaryColor={this.props.primaryColor}
+                      styles={styles}
+                    />
+                  }
                 </Column>
               )}
             </div>
