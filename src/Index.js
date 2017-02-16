@@ -52,6 +52,7 @@ module.exports = {
   ShadedHatchPatternRectangleGroup: require('./components/d3/ShadedHatchPatternRectangleGroup'),
   SlicesGroup: require('./components/d3/SlicesGroup'),
   TimeXAxisGroup: require('./components/d3/TimeXAxisGroup'),
+  BarTimeXAxis: require('./components/d3/BarTimeXAxis'),
 
   // App constants
   AppConstants: require('./constants/App'),

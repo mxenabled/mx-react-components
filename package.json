@@ -1,6 +1,6 @@
 {
   "name": "mx-react-components",
-  "version": "5.0.0-rc.52",
+  "version": "5.0.0-rc.54",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
@@ -43,9 +43,11 @@
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.0.0",
+    "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-plugin-transform-object-assign": "^6.5.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-react": "^6.0.0",
+    "babel-preset-stage-0": "^6.22.0",
     "eslint": "^2.10.0",
     "eslint-config-mx": "^1.2.8",
     "eslint-loader": "^1.0.0",

@@ -4,26 +4,23 @@ const { Button, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ButtonDocs = React.createClass({
+class ButtonDocs extends React.Component {
+  state = {
+    buttonIsActive: false,
+    spinnerIsActive: false
+  };
 
-  getInitialState () {
-    return {
-      buttonIsActive: false,
-      spinnerIsActive: false
-    };
-  },
-
-  _handleButtonClick () {
+  _handleButtonClick = () => {
     this.setState({
       buttonIsActive: !this.state.buttonIsActive
     });
-  },
+  };
 
-  _handleSpinnerClick () {
+  _handleSpinnerClick = () => {
     this.setState({
       spinnerIsActive: !this.state.spinnerIsActive
     });
-  },
+  };
 
   render () {
     return (
@@ -56,7 +53,7 @@ const ButtonDocs = React.createClass({
         <br /><br />
         <div className='flex'>
           <Button icon='add'>Icon</Button>
-          <Button icon='delete' style={style} />
+          <Button ariaLabel='delete' icon='delete' style={style} />
         </div>
         <br /><br />
         <div className='flex'>
@@ -65,14 +62,24 @@ const ButtonDocs = React.createClass({
             isActive={this.state.buttonIsActive}
             onClick={this._handleButtonClick}
           >
-            Loading Button
+            Loading
           </Button>
-          <Button isActive={this.state.spinnerIsActive} onClick={this._handleSpinnerClick} style={style}>Loading Button (spinner only)</Button>
+          <Button
+            isActive={this.state.spinnerIsActive}
+            onClick={this._handleSpinnerClick}
+            style={style}
+          >
+            Loading (spinner only)
+          </Button>
         </div>
 
         <h3>Usage</h3>
         <h5>actionText <label>String</label></h5>
         <p>The button text when isActive is true. If not defined, a spinner without text is shown.</p>
+
+        <h5>ariaLabel <label>String</label></h5>
+        <p>If defined, adds an aria-label attribute equal to the supplied value on the button element for accessibility.</p>
+        <p><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute'>aria-label documentation</a></p>
 
         <h5>icon <label>String</label></h5>
         <p>This can be any of the Icon component values. If defined, an icon will be shown to the left of the button content.</p>
@@ -92,13 +99,13 @@ const ButtonDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
-    <Button primaryColor='#333333' type='secondary' />
+    <Button ariaLabel='Submit Form' primaryColor='#333333' type='secondary' />
   `}
         </Markdown>
       </div>
     );
   }
-});
+}
 
 const style = {
   margin: '0 10px'

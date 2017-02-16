@@ -17,9 +17,9 @@ const ButtonGroupDocs = React.createClass({
         <div className='flex'>
           <ButtonGroup
             buttons={[
-              { icon: 'caret-left' },
-              { text: 'Mar 2015 - Feb 2016' },
-              { icon: 'caret-right' }
+              { ariaLabel: 'Back', icon: 'caret-left' },
+              { ariaLabel: 'March 2015 to February 2016', text: 'Mar 2015 - Feb 2016' },
+              { ariaLabel: 'Forward', icon: 'caret-right' }
             ]}
             type='primaryOutline'
           />
@@ -40,9 +40,9 @@ const ButtonGroupDocs = React.createClass({
         <div>
           <ButtonGroup
             buttons={[
-              { icon: 'download' },
-              { icon: 'search' },
-              { icon: 'add' }
+              { ariaLabel: 'Download', icon: 'download' },
+              { ariaLabel: 'Search', icon: 'search' },
+              { ariaLabel: 'Add', icon: 'add' }
             ]}
             type='base'
           />
@@ -51,8 +51,9 @@ const ButtonGroupDocs = React.createClass({
         <h3>Usage</h3>
         <h5>buttons <label>Array of Objects</label></h5>
         <p>Default: An empty array</p>
-        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>icon</label>, <label>text</label>, and <label>style</label>.</p>
+        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>ariaLabel</label>, <label>icon</label>, <label>text</label>, and <label>style</label>.</p>
         <p>A button can be disabled by adding <label>type = 'disabled'</label> but no other button types are supported within the button group.</p>
+        <p>The ariaLabel attribute for each button is used for accessibility purposes but is not required.  See the Button component documentation for more details.</p>
 
         <h5>icon <label>String</label></h5>
         <p>The name of the <a href='/components/icon'>icon</a></p>
@@ -73,9 +74,9 @@ const ButtonGroupDocs = React.createClass({
   {`
     <ButtonGroup
       buttons={[
-         { icon: 'download' },
-         { icon: 'search', type: 'disabled' },
-         { icon: 'add' }
+         { ariaLabel: 'Download', icon: 'download' },
+         { ariaLabel: 'Search', icon: 'search', type: 'disabled' },
+         { ariaLabel: 'Add', icon: 'add' }
       ]}
       type='base' />
     />
