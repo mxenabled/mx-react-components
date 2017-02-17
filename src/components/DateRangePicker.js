@@ -446,7 +446,7 @@ const DateRangePicker = React.createClass({
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         padding: '10px 15px',
-        position: this.props.isRelative ? 'relative' : 'static',
+        position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
       }, this.props.style),
 
@@ -482,7 +482,7 @@ const DateRangePicker = React.createClass({
         position: 'absolute',
         left: this.props.isRelative ? 'auto' : 0,
         right: 0,
-        width: window.innerWidth < 450 && '100%',
+        width: window.innerWidth < 450 && window.innerWidth,
         zIndex: 10
       },
       calendarWrapper: {
