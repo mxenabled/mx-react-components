@@ -11,21 +11,23 @@ const Row = require('../components/grid/Row');
 const StyleConstants = require('../constants/Style');
 
 const DefaultRanges = ({ defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles }) => (
+  <div style={styles.rangeOptions}>
+    <div style={styles.defaultRangesTitle}>
       Select a Range
     </div>
-    {props.defaultRanges.map(range => (
-      <div key={range.displayValue + range.startDate} style={props.styles.rangeOption}>
+    {defaultRanges.map(range => (
+      <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
         <div>
           <Icon
             size={20}
             style={{
-              fill: range.startDate === props.selectedStartDate && range.endDate === props.selectedEndDate ?
+              fill: range.startDate === selectedStartDate && range.endDate === selectedEndDate ?
               props.primaryColor : 'transparent'
             }}
             type='check-solid'
           />
         </ div>
-        <div onClick={props.handleDefaultRangeSelection.bind(null, range)}>
+        <div onClick={handleDefaultRangeSelection.bind(null, range)}>
           {range.displayValue}
         </div>
       </div>
