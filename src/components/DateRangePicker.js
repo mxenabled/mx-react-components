@@ -10,9 +10,7 @@ const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
-const DefaultRanges = (props) => (
-  <div style={props.styles.rangeOptions}>
-    <div style={props.styles.defaultRangesTitle}>
+const DefaultRanges = ({ defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles }) => (
       Select a Range
     </div>
     {props.defaultRanges.map(range => (
