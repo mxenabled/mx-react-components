@@ -518,7 +518,7 @@ const DateRangePicker = React.createClass({
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
         height: 30,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         marginBottom: 2
       },
       calendarWeekDay: {
@@ -531,7 +531,7 @@ const DateRangePicker = React.createClass({
         alignItems: 'center',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-around'
+        justifyContent: 'center'
       },
       calendarDay: {
         alignItems: 'center',
