@@ -10,6 +10,96 @@ const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
+const DefaultRanges = ({ defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles }) => (
+  <div style={styles.rangeOptions}>
+    <div style={styles.defaultRangesTitle}>
+      Select a Range
+    </div>
+    {defaultRanges.map(range => (
+      <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
+        <div>
+          <Icon
+            size={20}
+            style={{
+              fill: range.startDate === selectedStartDate && range.endDate === selectedEndDate ?
+              props.primaryColor : 'transparent'
+            }}
+            type='check-solid'
+          />
+        </ div>
+        <div onClick={handleDefaultRangeSelection.bind(null, range)}>
+          {range.displayValue}
+        </div>
+      </div>
+      )
+    )}
+  </div>
+);
+
+DefaultRanges.propTypes = {
+  defaultRanges: React.PropTypes.array,
+  handleDefaultRangeSelection: React.PropTypes.func,
+  primaryColor: React.PropTypes.string,
+  selectedEndDate: React.PropTypes.number,
+  selectedStartDate: React.PropTypes.number,
+  styles: React.PropTypes.shape({
+    defaultRangesTitle: React.PropTypes.object,
+    rangeOption: React.PropTypes.object,
+    rangeOptions: React.PropTypes.object
+  })
+};
+
+const MonthTable = ({ activeSelectDate, currentDate, getDateRangePosition, handleDateHover, handleDateSelect, isInActiveRange, minimumDate, selectedEndDate, selectedStartDate, styles }) => {
+  const days = [];
+  let startDate = moment.unix(currentDate).startOf('month').startOf('week');
+  const endDate = moment.unix(currentDate).endOf('month').endOf('week');
+
+  while (moment(startDate).isBefore(endDate)) {
+    const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
+    const isActiveRange = (selectedStartDate || selectedEndDate) ?
+      isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
+      false;
+    const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
+    const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
+
+    const day = (
+      <div
+        key={startDate}
+        onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
+        onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
+        style={Object.assign({},
+          styles.calendarDay,
+          startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
+          disabledDay && styles.calendarDayDisabled,
+          (startDate.isSame(moment(), 'day') && !isActiveRange) && styles.today,
+          isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
+          isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
+        )}
+      >
+        {startDate.date()}
+      </div>
+    );
+
+    days.push(day);
+    startDate = startDate.add(1, 'd');
+  }
+
+  return (<div style={styles.calendarTable}>{days}</div>);
+};
+
+MonthTable.propTypes = {
+  activeSelectDate: React.PropTypes.number,
+  currentDate: React.PropTypes.number,
+  getDateRangePosition: React.PropTypes.func,
+  handleDateHover: React.PropTypes.func,
+  handleDateSelect: React.PropTypes.func,
+  isInActiveRange: React.PropTypes.func,
+  minimumDate: React.PropTypes.number,
+  selectedEndDate: React.PropTypes.number,
+  selectedStartDate: React.PropTypes.number,
+  styles: React.PropTypes.object
+};
+
 const DateRangePicker = React.createClass({
   propTypes: {
     closeCalendarOnRangeSelect: React.PropTypes.bool,
@@ -174,7 +264,7 @@ const DateRangePicker = React.createClass({
     });
   },
 
-  _isActiveRange (selectedStart, selectedEnd, active, date) {
+  _isInActiveRange (selectedStart, selectedEnd, active, date) {
     const start = selectedStart || active;
     const end = selectedEnd || active;
 
@@ -189,7 +279,7 @@ const DateRangePicker = React.createClass({
     return isActive;
   },
 
-  _whereInDateRange (selectedStart, selectedEnd, active, date) {
+  _getDateRangePosition (selectedStart, selectedEnd, active, date) {
     const start = selectedStart || active;
     const end = selectedEnd || active;
 
@@ -210,85 +300,6 @@ const DateRangePicker = React.createClass({
     }
 
     return where;
-  },
-
-  _renderDefaultRanges () {
-    const styles = this.styles();
-
-    return (
-      <div style={styles.rangeOptions}>
-        <div style={styles.defaultRangesTitle}>
-          Select a Range
-        </div>
-        {this.props.defaultRanges.map(range => {
-          return (
-            <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
-              {this._renderSelectedRangeIcon(range)}
-              <div onClick={this._handleDefaultRangeSelection.bind(null, range)}>
-                {range.displayValue}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  },
-
-  _renderMonthTable () {
-    const styles = this.styles();
-    const days = [];
-    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
-
-    while (moment(startDate).isBefore(endDate)) {
-      const selectedStartDate = this.props.selectedStartDate;
-      const selectedEndDate = this.props.selectedEndDate;
-      const activeSelectDate = this.state.activeSelectDate;
-      const isToday = startDate.isSame(moment(), 'day');
-      const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
-      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate)) : null;
-      const isActiveRange = (selectedStartDate || selectedEndDate) ? this._isActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) : false;
-      const whereInRange = this._whereInDateRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
-      const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
-
-      const day = (
-        <div
-          key={startDate}
-          onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
-          onMouseEnter={disabledDay ? null : this._handleDateHover.bind(null, startDate.unix())}
-          style={Object.assign({},
-            styles.calendarDay,
-            isCurrentMonth && styles.currentMonth,
-            disabledDay && styles.calendarDayDisabled,
-            (isToday && !isActiveRange) && styles.today,
-            isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
-            isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
-          )}
-        >
-          {startDate.date()}
-        </div>
-      );
-
-      days.push(day);
-      startDate = startDate.add(1, 'd');
-    }
-
-    return days;
-  },
-
-  _renderSelectedRangeIcon (range) {
-    const isSelectedRange = range.startDate === this.props.selectedStartDate && range.endDate === this.props.selectedEndDate;
-    const iconStyle = { fill: isSelectedRange ? this.props.primaryColor : 'transparent' };
-
-    return (
-      <div>
-        <Icon
-          size={20}
-          style={iconStyle}
-          type='check-solid'
-        />
-      </div>
-    );
   },
 
   render () {
@@ -325,7 +336,14 @@ const DateRangePicker = React.createClass({
             <div style={styles.optionsWrapper}>
               {this._isLargeOrMediumWindowSize() && (
                 <Column span={spans.defaultRanges}>
-                  {this.props.showDefaultRanges && this._renderDefaultRanges()}
+                  {this.props.showDefaultRanges &&
+                    <DefaultRanges
+                      defaultRanges={this.props.defaultRanges}
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      primaryColor={this.props.primaryColor}
+                      styles={styles}
+                    />
+                  }
                 </Column>
               )}
               <Column span={spans.calendar}>
@@ -360,14 +378,30 @@ const DateRangePicker = React.createClass({
                       );
                     })}
                   </div>
-                  <div style={styles.calendarTable}>
-                    {this._renderMonthTable()}
-                  </div>
+                  <MonthTable
+                    activeSelectDate={this.state.activeSelectDate}
+                    currentDate={this.state.currentDate}
+                    getDateRangePosition={this._getDateRangePosition}
+                    handleDateHover={this._handleDateHover}
+                    handleDateSelect={this._handleDateSelect}
+                    isInActiveRange={this._isInActiveRange}
+                    minimumDate={this.props.minimumDate}
+                    selectedEndDate={this.props.selectedEndDate}
+                    selectedStartDate={this.props.selectedStartDate}
+                    styles={styles}
+                  />
                 </div>
               </Column>
               {!this._isLargeOrMediumWindowSize() && (
                 <Column span={spans.defaultRanges}>
-                  {this.props.showDefaultRanges && this._renderDefaultRanges()}
+                  {this.props.showDefaultRanges &&
+                    <DefaultRanges
+                      defaultRanges={this.props.defaultRanges}
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      primaryColor={this.props.primaryColor}
+                      styles={styles}
+                    />
+                  }
                 </Column>
               )}
             </div>
@@ -412,7 +446,7 @@ const DateRangePicker = React.createClass({
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         padding: '10px 15px',
-        position: this.props.isRelative ? 'relative' : 'static',
+        position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
       }, this.props.style),
 
@@ -446,8 +480,9 @@ const DateRangePicker = React.createClass({
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
         position: 'absolute',
-        left: this.props.isRelative ? 'auto' : 0,
+        left: this.props.isRelative && window.innerWidth > 450 ? 'auto' : 0,
         right: 0,
+        width: window.innerWidth < 450 ? window.innerWidth : 'inherit',
         zIndex: 10
       },
       calendarWrapper: {
@@ -483,7 +518,7 @@ const DateRangePicker = React.createClass({
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
         height: 30,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         marginBottom: 2
       },
       calendarWeekDay: {
@@ -496,7 +531,7 @@ const DateRangePicker = React.createClass({
         alignItems: 'center',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-around'
+        justifyContent: 'center'
       },
       calendarDay: {
         alignItems: 'center',
@@ -547,7 +582,7 @@ const DateRangePicker = React.createClass({
         fontSize: StyleConstants.FontSizes.MEDIUM,
         paddingLeft: isLargeOrMediumWindowSize ? 10 : 0,
         paddingTop: 10,
-        maxWidth: 250,
+        maxWidth: window.innerWidth > 450 ? 250 : 'inherit',
         width: isLargeOrMediumWindowSize ? 150 : '100%'
       },
       rangeOption: {

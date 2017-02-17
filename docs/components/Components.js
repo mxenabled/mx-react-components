@@ -14,7 +14,7 @@ const Components = React.createClass({
 
   render () {
     return (
-      <div className='container components'>
+      <div className='container-fluid components'>
         <div className='sideNav'>
           <div className='defaultSelect'>
             <Select
