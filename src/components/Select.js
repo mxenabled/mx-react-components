@@ -200,7 +200,7 @@ const Select = React.createClass({
                     />
                   ) : null}
                   <div style={styles.optionText}>{option.displayValue}</div>
-                  {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} style={styles.check} type='check' /> : null }
+                  {_isEqual(option, this.state.highlightedValue) ? <Icon size={15} type='check' /> : null }
                 </li>
               );
             })}
@@ -277,8 +277,8 @@ const Select = React.createClass({
           position: 'relative'
         }, this.props.selectedStyle),
       activeItem: {
-        fill: StyleConstants.Colors.PRIMARY,
-        color: StyleConstants.Colors.PRIMARY
+        fill: this.props.hoverColor,
+        color: this.props.hoverColor
       },
       invalid: {
         borderColor: StyleConstants.Colors.STRAWBERRY
