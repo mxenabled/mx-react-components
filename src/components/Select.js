@@ -10,13 +10,13 @@ const StyleConstants = require('../constants/Style');
 const Select = React.createClass({
   propTypes: {
     dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    primaryColor: React.PropTypes.string,
     onChange: React.PropTypes.func,
     options: React.PropTypes.array,
     optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     optionTextStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     placeholderText: React.PropTypes.string,
+    primaryColor: React.PropTypes.string,
     scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
     selected: React.PropTypes.object,
     selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
