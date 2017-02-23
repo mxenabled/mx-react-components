@@ -7,11 +7,11 @@ module.exports = {
 
   Colors: {
     // GRAYSCALE
-    SLATE: '#2F363E',
-    CHARCOAL: '#56595A',
-    ASH: '#ACB0B3',
-    FOG: '#E3E6E7',
-    PORCELAIN: '#F7F8F8',
+    SLATE: '#2C353F',
+    CHARCOAL: '#474F59',
+    ASH: '#959CA6',
+    FOG: '#DFE3E8',
+    PORCELAIN: '#F5F6F8',
     WHITE: '#FFFFFF',
 
     // ACCENTS
