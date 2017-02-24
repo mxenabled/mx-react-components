@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.57</h3>
+        <ul>
+          <li>
+            Makes all input text Charcoal (<a href='https://github.com/mxenabled/mx-react-components/pull/516'>#516</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.56</h3>
         <ul>
           <li>
