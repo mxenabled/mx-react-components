@@ -78,7 +78,8 @@ const MessageBox = React.createClass({
         alignItems: 'center'
       },
       title: {
-        fontFamily: StyleConstants.Fonts.SEMIBOLD
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: StyleConstants.FontSizes.MEDIUM
       },
       icon: {
         fill: StyleConstants.Colors.WHITE
