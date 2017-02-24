@@ -6,6 +6,22 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+          <h3>Release Candidate 5.0.0-rc.56</h3>
+          <ul>
+            <li>
+              CreateClass to Class Conversion - ButtonGroup (<a href='https://github.com/mxenabled/mx-react-components/pull/509'>#509</a>)
+            </li>
+            <li>
+              CreateClass to Class Conversion - Calendar (<a href='https://github.com/mxenabled/mx-react-components/pull/510'>#510</a>)
+            </li>
+            <li>
+              Added primary color prop for Select Component (<a href='https://github.com/mxenabled/mx-react-components/pull/513'>#513</a>)
+            </li>
+            <li>
+              Updated Gray Colors for Greater Accessibility and Contrast (<a href='https://github.com/mxenabled/mx-react-components/pull/515'>#515</a>)
+            </li>
+          </ul>
+
         <h3>Release Candidate 5.0.0-rc.53</h3>
         <ul>
           <li>
