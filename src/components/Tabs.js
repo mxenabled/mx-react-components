@@ -189,8 +189,7 @@ const Tabs = React.createClass({
       tabsContainer: {
         borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
         boxSizing: 'border-box',
-        paddingBottom: 20,
-        paddingLeft: 20,
+        padding: `0 0 ${StyleConstants.Spacing.LARGE}px ${StyleConstants.Spacing.LARGE}px`,
         width: '100%'
       }
     };
