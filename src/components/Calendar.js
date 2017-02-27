@@ -140,7 +140,7 @@ class Calendar extends React.Component {
         boxSizing: 'border-box',
         marginTop: 10,
         padding: 20,
-        width: 287
+        width: 250
       }, this.props.style),
 
       //Calendar Header
