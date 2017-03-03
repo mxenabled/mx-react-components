@@ -69,6 +69,7 @@ class ButtonGroup extends React.Component {
         borderRadius: 0,
         borderWidth: 1,
         borderRightWidth: this.props.type === 'base' ? 1 : 0,
+        margin: 0,
         verticalAlign: 'middle'
       }, this.props.style),
       firstChild: {
