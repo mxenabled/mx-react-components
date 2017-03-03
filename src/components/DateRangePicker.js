@@ -100,8 +100,8 @@ MonthTable.propTypes = {
   styles: React.PropTypes.object
 };
 
-const DateRangePicker = React.createClass({
-  propTypes: {
+class DateRangePicker extends React.Component {
+  static propTypes = {
     closeCalendarOnRangeSelect: React.PropTypes.bool,
     defaultRanges: React.PropTypes.arrayOf(React.PropTypes.shape({
       displayValue: React.PropTypes.string,
@@ -119,83 +119,79 @@ const DateRangePicker = React.createClass({
     selectedStartDate: React.PropTypes.number,
     showDefaultRanges: React.PropTypes.bool,
     style: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      closeCalendarOnRangeSelect: false,
-      defaultRanges: [
-        {
-          displayValue: 'Today',
-          endDate: moment().endOf('day').unix(),
-          startDate: moment().startOf('day').unix()
-        },
-        {
-          displayValue: 'This Month',
-          endDate: moment().endOf('month').unix(),
-          startDate: moment().startOf('month').unix()
-        },
-        {
-          displayValue: 'Last Month',
-          endDate: moment().subtract(1, 'months').endOf('month').unix(),
-          startDate: moment().subtract(1, 'months').startOf('month').unix()
-        },
-        {
-          displayValue: 'Last 7 Days',
-          endDate: moment().endOf('day').unix(),
-          startDate: moment().subtract(6, 'days').startOf('day').unix()
-        },
-        {
-          displayValue: 'Last 30 Days',
-          endDate: moment().endOf('day').unix(),
-          startDate: moment().subtract(29, 'days').startOf('day').unix()
-        },
-        {
-          displayValue: 'Last 90 Days',
-          endDate: moment().endOf('day').unix(),
-          startDate: moment().subtract(89, 'days').startOf('day').unix()
-        }
-      ],
-      format: 'MMM D, YYYY',
-      isRelative: true,
-      locale: 'en',
-      onDateSelect () {},
-      placeholderText: 'Select A Date Range',
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      showDefaultRanges: false
-    };
-  },
+  static defaultProps = {
+    closeCalendarOnRangeSelect: false,
+    defaultRanges: [
+      {
+        displayValue: 'Today',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().startOf('day').unix()
+      },
+      {
+        displayValue: 'This Month',
+        endDate: moment().endOf('month').unix(),
+        startDate: moment().startOf('month').unix()
+      },
+      {
+        displayValue: 'Last Month',
+        endDate: moment().subtract(1, 'months').endOf('month').unix(),
+        startDate: moment().subtract(1, 'months').startOf('month').unix()
+      },
+      {
+        displayValue: 'Last 7 Days',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().subtract(6, 'days').startOf('day').unix()
+      },
+      {
+        displayValue: 'Last 30 Days',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().subtract(29, 'days').startOf('day').unix()
+      },
+      {
+        displayValue: 'Last 90 Days',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().subtract(89, 'days').startOf('day').unix()
+      }
+    ],
+    format: 'MMM D, YYYY',
+    isRelative: true,
+    locale: 'en',
+    onDateSelect () {},
+    placeholderText: 'Select A Date Range',
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    showDefaultRanges: false
+  };
 
-  getInitialState () {
-    return {
-      currentDate: this.props.selectedStartDate || moment().unix(),
-      showCalendar: false
-    };
-  },
+  state = {
+    currentDate: this.props.selectedStartDate || moment().unix(),
+    showCalendar: false
+  };
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate) {
       this.setState({
         currentDate: newProps.selectedStartDate
       });
     }
-  },
+  }
 
-  _getDateFormat () {
+  _getDateFormat = () => {
     return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
-  },
+  };
 
-  _isLargeOrMediumWindowSize () {
+  _isLargeOrMediumWindowSize = () => {
     const windowSize = StyleConstants.getWindowSize();
 
     return windowSize === 'large' || windowSize === 'medium';
-  },
+  };
 
-  _endDateIsBeforeStartDate (startDate, endDate) {
+  _endDateIsBeforeStartDate = (startDate, endDate) => {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
-  },
+  };
 
-  _handleDateSelect (date) {
+  _handleDateSelect = (date) => {
     let endDate;
     let startDate;
     const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
@@ -220,51 +216,51 @@ const DateRangePicker = React.createClass({
     if (startDate && endDate && this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
     }
-  },
+  };
 
-  _handleDefaultRangeSelection (range) {
+  _handleDefaultRangeSelection = (range) => {
     this.props.onDateSelect(range.startDate, range.endDate);
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
     }
-  },
+  };
 
-  _handleDateHover (activeSelectDate) {
+  _handleDateHover = (activeSelectDate) => {
     this.setState({
       activeSelectDate
     });
-  },
+  };
 
-  _handlePreviousClick () {
+  _handlePreviousClick = () => {
     const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
 
     this.setState({
       currentDate
     });
-  },
+  };
 
-  _handleNextClick () {
+  _handleNextClick = () => {
     const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
 
     this.setState({
       currentDate
     });
-  },
+  };
 
-  _handleScrimClick () {
+  _handleScrimClick = () => {
     this.setState({
       showCalendar: false
     });
-  },
+  };
 
-  _toggleCalendar () {
+  _toggleCalendar = () => {
     this.setState({
       showCalendar: !this.state.showCalendar
     });
-  },
+  };
 
-  _isInActiveRange (selectedStart, selectedEnd, active, date) {
+  _isInActiveRange = (selectedStart, selectedEnd, active, date) => {
     const start = selectedStart || active;
     const end = selectedEnd || active;
 
@@ -277,9 +273,9 @@ const DateRangePicker = React.createClass({
     }
 
     return isActive;
-  },
+  };
 
-  _getDateRangePosition (selectedStart, selectedEnd, active, date) {
+  _getDateRangePosition = (selectedStart, selectedEnd, active, date) => {
     const start = selectedStart || active;
     const end = selectedEnd || active;
 
@@ -300,9 +296,9 @@ const DateRangePicker = React.createClass({
     }
 
     return where;
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
     const spans = this.spans();
 
@@ -412,9 +408,9 @@ const DateRangePicker = React.createClass({
         ) : null }
       </div>
     );
-  },
+  }
 
-  spans () {
+  spans = () => {
     return {
       calendar: {
         large: this.props.showDefaultRanges ? 8 : 12,
@@ -427,9 +423,9 @@ const DateRangePicker = React.createClass({
         small: this.props.showDefaultRanges ? 12 : 0
       }
     };
-  },
+  };
 
-  styles () {
+  styles = () => {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
 
     return {
@@ -623,7 +619,7 @@ const DateRangePicker = React.createClass({
         zIndex: 9
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(DateRangePicker);
