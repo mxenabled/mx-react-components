@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.58</h3>
+        <ul>
+          <li>
+            Fixes border bug in ButtonGroup in Safari (<a href='https://github.com/mxenabled/mx-react-components/pull/521'>#521</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.57</h3>
         <ul>
           <li>
