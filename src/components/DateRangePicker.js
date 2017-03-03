@@ -169,7 +169,7 @@ class DateRangePicker extends React.Component {
     showCalendar: false
   };
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate) {
       this.setState({
         currentDate: newProps.selectedStartDate
@@ -298,7 +298,7 @@ class DateRangePicker extends React.Component {
     return where;
   };
 
-  render() {
+  render () {
     const styles = this.styles();
     const spans = this.spans();
 

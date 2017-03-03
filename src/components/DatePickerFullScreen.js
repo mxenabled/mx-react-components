@@ -6,8 +6,8 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-class DatePickerFullScreen extends React.Component {
-  static propTypes = {
+const DatePickerFullScreen = React.createClass({
+  propTypes: {
     closeIcon: React.PropTypes.string,
     closeOnDateSelect: React.PropTypes.bool,
     defaultDate: React.PropTypes.number,
@@ -24,29 +24,41 @@ class DatePickerFullScreen extends React.Component {
     style: React.PropTypes.object,
     title: React.PropTypes.string,
     useInputForSelectedDate: React.PropTypes.bool
-  };
+  },
 
-  static defaultProps = {
-    closeIcon: 'close',
-    closeOnDateSelect: false,
-    format: 'MMM D, YYYY',
-    isFixed: false,
-    locale: 'en',
-    onDateSelect () {},
-    showDayBorders: false,
-    title: 'Select A Date',
-    useInputForSelectedDate: true
-  };
+  getDefaultProps () {
+    return {
+      closeIcon: 'close',
+      closeOnDateSelect: false,
+      format: 'MMM D, YYYY',
+      isFixed: false,
+      locale: 'en',
+      onDateSelect () {},
+      showDayBorders: false,
+      title: 'Select A Date',
+      useInputForSelectedDate: true
+    };
+  },
 
-  componentDidMount() {
+  getInitialState () {
+    return {
+      currentDate: null,
+      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      isValid: true,
+      selectedDate: this.props.defaultDate,
+      showCalendar: false
+    };
+  },
+
+  componentDidMount () {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
         this._handleCloseClick();
       }
     };
-  }
+  },
 
-  _getInputValueByDate = (date) => {
+  _getInputValueByDate (date) {
     let inputValue = null;
 
     if (date) {
@@ -60,21 +72,21 @@ class DatePickerFullScreen extends React.Component {
     }
 
     return inputValue;
-  };
+  },
 
-  _getSelectedDate = () => {
+  _getSelectedDate () {
     const selectedDate = this.state.selectedDate;
 
     return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
-  };
+  },
 
-  _handleCloseClick = () => {
+  _handleCloseClick () {
     this.setState({
       showCalendar: false
     });
-  };
+  },
 
-  _handleDateSelect = (date) => {
+  _handleDateSelect (date) {
     if (this.props.closeOnDateSelect) {
       this._handleScrimClick();
     }
@@ -86,9 +98,9 @@ class DatePickerFullScreen extends React.Component {
     });
 
     this.props.onDateSelect(date);
-  };
+  },
 
-  _handleInputBlur = (evt) => {
+  _handleInputBlur (evt) {
     if (evt.target.value.length === 0) {
       this.props.onDateSelect(null);
 
@@ -101,15 +113,15 @@ class DatePickerFullScreen extends React.Component {
         inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
       });
     }
-  };
+  },
 
-  _handleInputChange = (evt) => {
+  _handleInputChange (evt) {
     this.setState({
       inputValue: evt.target.value
     });
-  };
+  },
 
-  _handlePreviousClick = () => {
+  _handlePreviousClick () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
@@ -118,9 +130,9 @@ class DatePickerFullScreen extends React.Component {
     this.setState({
       currentDate
     });
-  };
+  },
 
-  _handleNextClick = () => {
+  _handleNextClick () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
@@ -129,21 +141,21 @@ class DatePickerFullScreen extends React.Component {
     this.setState({
       currentDate
     });
-  };
+  },
 
-  _handleScrimClick = () => {
+  _handleScrimClick () {
     this.setState({
       showCalendar: false
     });
-  };
+  },
 
-  _toggleCalendar = () => {
+  _toggleCalendar () {
     this.setState({
       showCalendar: !this.state.showCalendar
     });
-  };
+  },
 
-  _renderMonthTable = (currentDate, selectedDate) => {
+  _renderMonthTable (currentDate, selectedDate) {
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
@@ -180,9 +192,9 @@ class DatePickerFullScreen extends React.Component {
     }
 
     return days;
-  };
+  },
 
-  _renderSelectedDate = () => {
+  _renderSelectedDate () {
     if (this.props.useInputForSelectedDate) {
       const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
 
@@ -213,9 +225,9 @@ class DatePickerFullScreen extends React.Component {
         </div>
       );
     }
-  };
+  },
 
-  _renderTitle = (styles) => {
+  _renderTitle (styles) {
     if (this.props.title) {
       return (
         <div key='title' style={styles.title}>
@@ -225,17 +237,9 @@ class DatePickerFullScreen extends React.Component {
     } else {
       return null;
     }
-  };
+  },
 
-  state = {
-    currentDate: null,
-    inputValue: this._getInputValueByDate(this.props.defaultDate),
-    isValid: true,
-    selectedDate: this.props.defaultDate,
-    showCalendar: false
-  };
-
-  render() {
+  render () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
     let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
@@ -309,7 +313,7 @@ class DatePickerFullScreen extends React.Component {
       </div>
     );
   }
-}
+});
 
 const styles = {
   calendarDay: {

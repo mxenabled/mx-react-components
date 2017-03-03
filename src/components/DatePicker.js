@@ -35,13 +35,13 @@ class DatePicker extends React.Component {
     showCalendar: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.defaultDate) {
       console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
       this.setState({
         currentDate: newProps.selectedDate
@@ -76,7 +76,7 @@ class DatePicker extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (
