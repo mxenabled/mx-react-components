@@ -363,6 +363,10 @@ module.exports = {
       displayValue: 'MX'
     },
     {
+      value: 'needle',
+      displayValue: 'Needle'
+    },
+    {
       value: 'net-worth',
       displayValue: 'Net Worth'
     },
