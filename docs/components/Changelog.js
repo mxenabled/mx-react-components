@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.60</h3>
+        <ul>
+          <li>
+            Fixes overflow rule in Safari to allow the display of modals inside a Drawer (<a href='https://github.com/mxenabled/mx-react-components/pull/523'>#523</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.59</h3>
         <ul>
           <li>
