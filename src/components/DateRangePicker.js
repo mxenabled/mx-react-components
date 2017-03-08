@@ -10,31 +10,29 @@ const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
-const DefaultRanges = ({ defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles }) => (
+const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles }) => (
   <div style={styles.rangeOptions}>
-    <div style={styles.defaultRangesTitle}>
+    <div style={Object.assign({}, styles.defaultRangesTitle, { color: primaryColor })}>
       Select a Range
     </div>
     {defaultRanges.map(range => (
-      <div key={range.displayValue + range.startDate} style={styles.rangeOption}>
+      <div key={range.displayValue + range.startDate} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
         <div>
           <Icon
             size={20}
-            style={{
-              fill: range.startDate === selectedStartDate && range.endDate === selectedEndDate ?
-              props.primaryColor : 'transparent'
-            }}
+            style={Object.assign({}, styles.rangeOptionIcon, {
+              fill: range.startDate === selectedStartDate && range.endDate === selectedEndDate ? primaryColor : 'transparent'
+            })}
             type='check-solid'
           />
-        </ div>
-        <div onClick={handleDefaultRangeSelection.bind(null, range)}>
+        </div>
+        <div>
           {range.displayValue}
         </div>
       </div>
-      )
-    )}
+    ))}
   </div>
-);
+));
 
 DefaultRanges.propTypes = {
   defaultRanges: React.PropTypes.array,
@@ -341,6 +339,8 @@ const DateRangePicker = React.createClass({
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
                       primaryColor={this.props.primaryColor}
+                      selectedEndDate={this.props.selectedEndDate}
+                      selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
                     />
                   }
@@ -566,10 +566,11 @@ const DateRangePicker = React.createClass({
 
       //Default Ranges
       defaultRangesTitle: {
+        color: StyleConstants.Colors.PRIMARY,
         display: isLargeOrMediumWindowSize ? 'inline-block' : 'none',
-        fontSize: StyleConstants.FontSizes.LARGE,
-        marginTop: 10,
-        marginBottom: 20
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
       },
       rangeOptions: {
         borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
@@ -580,8 +581,8 @@ const DateRangePicker = React.createClass({
         flexDirection: isLargeOrMediumWindowSize ? 'column' : 'row',
         flexWrap: isLargeOrMediumWindowSize ? 'nowrap' : 'wrap',
         fontSize: StyleConstants.FontSizes.MEDIUM,
-        paddingLeft: isLargeOrMediumWindowSize ? 10 : 0,
-        paddingTop: 10,
+        marginLeft: isLargeOrMediumWindowSize ? -10 : 0,
+        marginRight: isLargeOrMediumWindowSize ? -10 : 0,
         maxWidth: window.innerWidth > 450 ? 250 : 'inherit',
         width: isLargeOrMediumWindowSize ? 150 : '100%'
       },
@@ -590,13 +591,15 @@ const DateRangePicker = React.createClass({
         boxSizing: 'border-box',
         cursor: 'pointer',
         display: 'flex',
-        marginBottom: isLargeOrMediumWindowSize ? 20 : 10,
-        padding: isLargeOrMediumWindowSize ? 0 : 10,
+        padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.MEDIUM}px`,
         width: isLargeOrMediumWindowSize ? '100%' : '50%',
 
         ':hover': {
-          color: this.props.primaryColor
+          backgroundColor: StyleConstants.Colors.PORCELAIN
         }
+      },
+      rangeOptionIcon: {
+        paddingRight: StyleConstants.Spacing.SMALL
       },
 
       //Selected and Selecting Range

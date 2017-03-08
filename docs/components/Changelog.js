@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.61</h3>
+        <ul>
+          <li>
+            Style Polish and Fixes for default range options in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/526'>#526</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.60</h3>
         <ul>
           <li>
