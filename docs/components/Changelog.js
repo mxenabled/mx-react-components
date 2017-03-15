@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.62</h3>
+        <ul>
+          <li>
+            Adds a styles prop to the Container component (<a href='https://github.com/mxenabled/mx-react-components/pull/527'>#527</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.61</h3>
         <ul>
           <li>
