@@ -204,6 +204,7 @@ const Modal = React.createClass({
               elementProps={{
                 tabIndex: 0,
                 'aria-label': 'Close Modal',
+                role: 'button',
                 onClick: this.props.onRequestClose,
                 onKeyUp: (e) => e.keyCode === 13 && this.props.onRequestClose()
               }}
