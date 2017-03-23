@@ -7,8 +7,8 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const DatePicker = React.createClass({
-  propTypes: {
+class DatePicker extends React.Component {
+  static propTypes = {
     closeOnDateSelect: React.PropTypes.bool,
     defaultDate: React.PropTypes.number,
     format: React.PropTypes.string,
@@ -19,31 +19,27 @@ const DatePicker = React.createClass({
     primaryColor: React.PropTypes.string,
     selectedDate: React.PropTypes.number,
     style: React.PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      closeOnDateSelect: false,
-      format: 'MMM D, YYYY',
-      locale: 'en',
-      onDateSelect () {},
-      placeholderText: 'Select A Date',
-      primaryColor: StyleConstants.Colors.PRIMARY
-    };
-  },
+  static defaultProps = {
+    closeOnDateSelect: false,
+    format: 'MMM D, YYYY',
+    locale: 'en',
+    onDateSelect () {},
+    placeholderText: 'Select A Date',
+    primaryColor: StyleConstants.Colors.PRIMARY
+  };
 
-  getInitialState () {
-    return {
-      currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
-      showCalendar: false
-    };
-  },
+  state = {
+    currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
+    showCalendar: false
+  };
 
   componentDidMount () {
     if (this.props.defaultDate) {
       console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
     }
-  },
+  }
 
   componentWillReceiveProps (newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
@@ -58,27 +54,27 @@ const DatePicker = React.createClass({
         currentDate: newProps.defaultDate
       });
     }
-  },
+  }
 
-  _handleDateSelect (date) {
+  _handleDateSelect = (date) => {
     if (this.props.closeOnDateSelect) {
       this._handleScrimClick();
     }
 
     this.props.onDateSelect(date);
-  },
+  };
 
-  _handleScrimClick () {
+  _handleScrimClick = () => {
     this.setState({
       showCalendar: false
     });
-  },
+  };
 
-  _toggleCalendar () {
+  _toggleCalendar = () => {
     this.setState({
       showCalendar: !this.state.showCalendar
     });
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -112,9 +108,9 @@ const DatePicker = React.createClass({
         ) : null }
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
@@ -171,7 +167,7 @@ const DatePicker = React.createClass({
         zIndex: 9
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(DatePicker);

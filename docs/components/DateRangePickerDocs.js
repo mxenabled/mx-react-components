@@ -4,20 +4,18 @@ const { DateRangePicker } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const DateRangePickerDocs = React.createClass({
-  getInitialState () {
-    return {
-      selectedEndDate: null,
-      selectedStartDate: null
-    };
-  },
+class DateRangePickerDocs extends React.Component {
+  state = {
+    selectedEndDate: null,
+    selectedStartDate: null
+  };
 
-  _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
+  _handleDateRangeSelect = (selectedStartDate, selectedEndDate) => {
     this.setState({
       selectedStartDate,
       selectedEndDate
     });
-  },
+  };
 
   render () {
     return (
@@ -113,6 +111,6 @@ const DateRangePickerDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = DateRangePickerDocs;
