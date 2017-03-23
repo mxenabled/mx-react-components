@@ -5,18 +5,18 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
-          <h3>Release Candidate 5.0.0-rc.63</h3>
-          <ul>
-            <li>
-              Makes Modal More accessible (<a href='https://github.com/mxenabled/mx-react-components/pull/528'>#528</a>)
-            </li>
-            <li>
-              Create Class conversion (<a href='https://github.com/mxenabled/mx-react-components/pull/520'>#520</a>)
-            </li>
-            <li>
-              Changed fontsize in message box component to MEDIUM (<a href='https://github.com/mxenabled/mx-react-components/pull/517'>#517</a>)
-            </li>
-          </ul>
+        <h3>Release Candidate 5.0.0-rc.63</h3>
+        <ul>
+          <li>
+            Makes Modal More accessible (<a href='https://github.com/mxenabled/mx-react-components/pull/528'>#528</a>)
+          </li>
+          <li>
+            Create Class conversion (<a href='https://github.com/mxenabled/mx-react-components/pull/520'>#520</a>)
+          </li>
+          <li>
+            Changed fontsize in message box component to MEDIUM (<a href='https://github.com/mxenabled/mx-react-components/pull/517'>#517yarn</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.62</h3>
         <ul>
