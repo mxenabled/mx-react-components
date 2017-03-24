@@ -188,6 +188,12 @@ const Modal = React.createClass({
         <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
         <div
           className='mx-modal-container'
+          onKeyUp={e => {
+            if (e.shiftKey && e.keyCode === 9 && document.activeElement.className === this._modal.className) {
+              e.preventDefault();
+              this._closeIcon.focus();
+            }
+          }}
           ref={ref => this._modal = ref}
           style={Object.assign({}, styles.container, this.props.style)}
           tabIndex={0}
@@ -206,10 +212,15 @@ const Modal = React.createClass({
                 'aria-label': 'Close Modal',
                 role: 'button',
                 onClick: this.props.onRequestClose,
-                onKeyDown: (e) => {
+                onKeyUp: (e) => {
                   if (e.keyCode === 13) this.props.onRequestClose();
                   if (e.keyCode === 9) this._modal.focus();
-                }
+                  if (e.shiftKey && e.keyCode === 9) {
+                    this._modal.focus();
+                    e.stopPropagation();
+                  }
+                },
+                ref: ref => this._closeIcon = ref
               }}
               size={24}
               style={styles.close}
