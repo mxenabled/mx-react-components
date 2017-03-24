@@ -206,7 +206,10 @@ const Modal = React.createClass({
                 'aria-label': 'Close Modal',
                 role: 'button',
                 onClick: this.props.onRequestClose,
-                onKeyUp: (e) => e.keyCode === 13 && this.props.onRequestClose()
+                onKeyDown: (e) => {
+                  if (e.keyCode === 13) this.props.onRequestClose();
+                  if (e.keyCode === 9) this._modal.focus();
+                }
               }}
               size={24}
               style={styles.close}
