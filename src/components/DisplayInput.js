@@ -137,6 +137,7 @@ const DisplayInput = React.createClass({
         border: '1px solid transparent',
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.LARGE,
+        lineHeight: 1,
         textAlign: 'left',
         width: '100%',
 
