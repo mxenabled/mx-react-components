@@ -478,7 +478,8 @@ class DateRangePicker extends React.Component {
         position: 'absolute',
         left: this.props.isRelative && window.innerWidth > 450 ? 'auto' : 0,
         right: 0,
-        width: window.innerWidth < 450 ? window.innerWidth : 'inherit',
+        maxWidth: 450,
+        width: window.innerWidth,
         zIndex: 10
       },
       calendarWrapper: {
