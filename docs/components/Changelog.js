@@ -8,7 +8,7 @@ const Changelog = React.createClass({
         <h3>Release Candidate 5.0.0-rc.64</h3>
         <ul>
           <li>
-            Fixes DateRangePicker options wrapper width (<a href='https://github.com/mxenabled/mx-react-components/pull/529'>#529</a>)
+            Fixes DateRangePicker options wrapper width (<a href='https://github.com/mxenabled/mx-react-components/pull/530'>#530</a>)
           </li>
         </ul>
 
