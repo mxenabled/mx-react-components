@@ -124,7 +124,6 @@ const BarChart = React.createClass({
     showTooltips: React.PropTypes.bool,
     style: React.PropTypes.object,
     threshold: React.PropTypes.number,
-    thresholdStyles: React.PropTypes.object,
     tooltipFormat: React.PropTypes.func,
     width: React.PropTypes.number,
     xAxis: React.PropTypes.element,
