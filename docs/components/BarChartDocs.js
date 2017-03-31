@@ -83,6 +83,7 @@ const BarChartDocs = React.createClass({
           data={chartData}
           margin={margins}
           style={styles.chart}
+          threshold={Math.round(Math.random() * 10000)}
           xAxis={xAxis}
         />
 
@@ -141,10 +142,14 @@ const BarChartDocs = React.createClass({
       negativeBarHover,
       positiveBarClicked,
       negativeBarClicked,
+      threshold,
       tooltipContainer,
       tooltipText
   `}
         </Markdown>
+
+        <h5>threshold<label>Number</label></h5>
+        <p>A value used to render an optional threshold line.</p>
 
         <h5>tooltipFormat<label>Function</label></h5>
         <p>A function that is called to format the value being displayed in the tooltip.</p>
@@ -173,6 +178,8 @@ const BarChartDocs = React.createClass({
 
     const data = [{label: 1485470502878, value:, 1337}, {...}];
 
+    const threshold = 2000;
+
     const ticks = data.map(d => {
       return d.label;
     });
@@ -193,6 +200,7 @@ const BarChartDocs = React.createClass({
       <BarChart
         data={data}
         margin={margins}
+        threshold={threshold}
         xAxis={xAxis}
       />
     );

@@ -123,6 +123,8 @@ const BarChart = React.createClass({
     onHover: React.PropTypes.func,
     showTooltips: React.PropTypes.bool,
     style: React.PropTypes.object,
+    threshold: React.PropTypes.number,
+    thresholdStyles: React.PropTypes.object,
     tooltipFormat: React.PropTypes.func,
     width: React.PropTypes.number,
     xAxis: React.PropTypes.element,
@@ -327,6 +329,17 @@ const BarChart = React.createClass({
           </g>
           {this.props.yAxis ? this.props.yAxis : null}
           {this.props.xAxis ? this.props.xAxis : null}
+          {this.props.threshold ? (
+            <g transform={`translate(${margin.left},${margin.top})`}>
+              <line
+                style={styles.threshold}
+                x1={0}
+                x2={width - margin.left - margin.right}
+                y1={yFunc(this.props.threshold)}
+                y2={yFunc(this.props.threshold)}
+              />
+            </g>
+          ) : null }
           <g
             ref={(ref) => {
               this.tooltip = ref;
@@ -368,6 +381,11 @@ const BarChart = React.createClass({
         color: StyleConstants.Colors.CHARCOAL,
         textAlign: 'center',
         whiteSpace: 'nowrap'
+      },
+      threshold: {
+        stroke: StyleConstants.Colors.ASH,
+        strokeDasharray: '4,4',
+        strokeWidth: 1
       }
     };
   }
