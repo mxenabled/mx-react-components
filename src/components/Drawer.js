@@ -63,6 +63,7 @@ const Drawer = React.createClass({
   componentDidMount () {
     this._animateComponent({ left: this._getAnimationDistance() });
     window.addEventListener('resize', this._resizeThrottled);
+    this._component.focus();
   },
 
   componentWillUnmount () {
@@ -147,7 +148,13 @@ const Drawer = React.createClass({
       <StyleRoot>
         <div style={styles.componentWrapper}>
           <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
-          <div ref={(ref) => (this._component = ref)} style={Object.assign({}, styles.component, this.props.style)}>
+          <div
+            aria-label={this.props.title}
+            ref={(ref) => (this._component = ref)}
+            role='dialog'
+            style={Object.assign({}, styles.component, this.props.style)}
+            tabIndex={0}
+          >
             <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
               <span style={styles.backArrow}>
                 {this.props.showCloseButton &&
