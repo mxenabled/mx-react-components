@@ -5,6 +5,13 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.68</h3>
+        <ul>
+          <li>
+            Add aria-label and tabIndex to the drawer for accessibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/532'>#533</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.66</h3>
         <ul>
           <li>
