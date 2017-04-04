@@ -63,7 +63,7 @@ const Drawer = React.createClass({
   componentDidMount () {
     this._animateComponent({ left: this._getAnimationDistance() });
     window.addEventListener('resize', this._resizeThrottled);
-    this._component.focus();
+    this._componentContent.focus();
   },
 
   componentWillUnmount () {
@@ -153,7 +153,6 @@ const Drawer = React.createClass({
             ref={(ref) => (this._component = ref)}
             role='dialog'
             style={Object.assign({}, styles.component, this.props.style)}
-            tabIndex={0}
           >
             <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
               <span style={styles.backArrow}>
@@ -173,7 +172,7 @@ const Drawer = React.createClass({
                 {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav()}
               </div>
             </header>
-            <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+            <div ref={(ref) => (this._componentContent = ref)} style={Object.assign({}, styles.content, this.props.contentStyle)} tabIndex={0}>
               {this.props.children}
             </div>
           </div>
