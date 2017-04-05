@@ -22,7 +22,7 @@ for (let i = 0; i < 12; i++) {
 
   chartData.push({
     label: date.unix(),
-    value: Math.round(Math.random() * (10000 - -10000) + -10000)
+    value: i - 1
   });
 }
 
@@ -82,6 +82,7 @@ const BarChartDocs = React.createClass({
           animateOnHover={true}
           data={chartData}
           margin={margins}
+          minHeight={10}
           style={styles.chart}
           threshold={Math.round(Math.random() * 10000)}
           xAxis={xAxis}
