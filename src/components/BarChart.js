@@ -311,6 +311,14 @@ const BarChart = React.createClass({
     }
   },
 
+  _getRadius (d) {
+    if (d.value === 0 && this.props.minBarHeight) {
+      return Math.min(this.props.barRadius, this.props.minBarHeight);
+    } else {
+      return this.props.barRadius;
+    }
+  },
+
   render () {
     const styles = _merge({}, this.styles(), this.props.style);
     const { height, margin, width } = this.props;
@@ -362,6 +370,7 @@ const BarChart = React.createClass({
               const w = xFunc.rangeBand();
               const baseHeight = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
               const h = this._getHeight(baseHeight);
+              const r = this._getRadius(d);
               const key = d.label + d.value;
               const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
               const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
@@ -390,7 +399,7 @@ const BarChart = React.createClass({
                   onClick={this._handleOnClick.bind(null, d)}
                   onMouseOut={this._handleMouseOut}
                   onMouseOver={this._handleMouseOver.bind(null, x, y, w, h, d)}
-                  radius={this.props.barRadius}
+                  radius={r}
                   style={style}
                   value={d.value}
                   width={w}
