@@ -49,20 +49,12 @@ const Input = React.createClass({
   },
 
   _onFocus () {
-    if (this.input) {
-      this.input.focus();
-    }
-
     this.setState({
       focus: true
     });
   },
 
   _onBlur () {
-    if (this.input) {
-      this.input.blur();
-    }
-
     this.setState({
       focus: false
     });
@@ -74,19 +66,16 @@ const Input = React.createClass({
 
     return (
       <div
-        onBlur={this._onBlur}
-        onFocus={this._onFocus}
         style={Object.assign({}, styles.wrapper, this.state.focus ? styles.activeWrapper : null)}
-        tabIndex={0}
       >
         {this.props.icon ? (
           <Icon size={20} style={styles.icon} type={this.props.icon} />
         ) : null}
         <input
           {...elementProps}
-          ref={(ref) => {
-            this.input = ref;
-          }}
+          onBlur={this._onBlur}
+          onFocus={this._onFocus}
+          ref={ref => this.input = ref}
           style={styles.input}
           type={this.props.type}
         />
