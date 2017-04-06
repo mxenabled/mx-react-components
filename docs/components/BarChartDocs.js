@@ -130,7 +130,6 @@ const BarChartDocs = React.createClass({
 
         <h5>minBarHeight<label>Number</label></h5>
         <p>The minimum height for a bar if the value of the data is 0. The minBarHeight can not be less than the radius.</p>
-        <p>Default: 3</p>
 
         <h5>onClick<label>Function</label></h5>
         <p>Callback function that will run when a bar is clicked. Provided the data values from the bar clicked.</p>
