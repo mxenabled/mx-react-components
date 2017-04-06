@@ -75,9 +75,7 @@ const Input = React.createClass({
           {...elementProps}
           onBlur={this._onBlur}
           onFocus={this._onFocus}
-          ref={(ref) => {
-            this.input = ref;
-          }}
+          ref={ref => this.input = ref}
           style={styles.input}
           type={this.props.type}
         />
