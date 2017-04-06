@@ -284,18 +284,22 @@ const BarChart = React.createClass({
       const bboxHeight = this.tooltip.getBBox().height;
       const negativeHeightAdjustment = this.state.hoveringObj.height + bboxHeight;
       const positiveHeightAdjustment = tooltipHeight - bboxHeight / 2;
+      const { hasNegative, hasPositive } = this.state;
+      const divisor = hasNegative && hasPositive ? 2 : 1;
 
       if (negativeValue) {
         return tooltipHeight + negativeHeightAdjustment;
       } else if (positiveValue) {
         return positiveHeightAdjustment;
       } else {
-        return positiveHeightAdjustment - this.props.minBarHeight;
+        if (hasNegative && !hasPositive) {
+          return negativeHeightAdjustment + this.props.minBarHeight + tooltipHeight;
+        }
+        return positiveHeightAdjustment - this.props.minBarHeight / divisor;
       }
     }
     return -1000;
   },
-
 
   render () {
     const styles = _merge({}, this.styles(), this.props.style);
