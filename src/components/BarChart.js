@@ -97,16 +97,6 @@ const Bar = React.createClass({
     }
   },
 
-  _getHeight () {
-    if (this.props.minBarHeight) {
-      const adjuster = this.props.radius > this.props.minBarHeight ? this.props.radius : this.props.minBarHeight;
-
-      return this.props.height + adjuster;
-    } else {
-      return this.props.height;
-    }
-  },
-
   render () {
     const hasMinBarHeight = this.props.height === 0 && this.props.minBarHeight;
     const divisor = this.props.hasNegative && this.props.hasPositive ? 2 : 1;
@@ -127,7 +117,7 @@ const Bar = React.createClass({
           x: this.props.x,
           y,
           width: this.props.width,
-          height: this._getHeight(),
+          height: this.props.height,
           value: this.props.value,
           radius: this.props.radius
         })}
@@ -311,6 +301,16 @@ const BarChart = React.createClass({
     return -1000;
   },
 
+  _getHeight (baseHeight) {
+    if (this.props.minBarHeight) {
+      const adjuster = this.props.barRadius > this.props.minBarHeight ? this.props.barRadius : this.props.minBarHeight;
+
+      return baseHeight + adjuster;
+    } else {
+      return baseHeight;
+    }
+  },
+
   render () {
     const styles = _merge({}, this.styles(), this.props.style);
     const { height, margin, width } = this.props;
@@ -360,7 +360,8 @@ const BarChart = React.createClass({
               const x = xFunc(d.label);
               const y = positive ? yFunc(d.value) : yFunc(0);
               const w = xFunc.rangeBand();
-              const h = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
+              const baseHeight = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
+              const h = this._getHeight(baseHeight);
               const key = d.label + d.value;
               const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
               const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
