@@ -65,7 +65,7 @@ const Bar = React.createClass({
   },
 
   _drawPath ({ x, y, width, height, value, radius }) {
-    if (value >= 0 && !this.props.hasNegative) {
+    if (value > 0 || (value === 0 && !this.props.hasNegative)) {
       return 'M' + x + ',' + y +
          'h' + (width - radius) +
          'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
@@ -74,7 +74,7 @@ const Bar = React.createClass({
          'v' + (-height + radius) +
          'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
          'Z';
-    } else if (value <= 0 && !this.props.hasPositive) {
+    } else if (value < 0 || (value === 0 && !this.props.hasPositive)) {
       return 'M' + x + ',' + y +
          'h' + width +
          'v' + (height - radius) +
