@@ -99,11 +99,9 @@ const Bar = React.createClass({
 
   _getHeight () {
     if (this.props.minBarHeight) {
-      if (this.props.radius > this.props.minBarHeight) {
-        return this.props.height + this.props.radius;
-      } else {
-        return this.props.height + this.props.minBarHeight;
-      }
+      const adjuster = this.props.radius > this.props.minBarHeight ? this.props.radius : this.props.minBarHeight;
+
+      return this.props.height + adjuster;
     } else {
       return this.props.height;
     }

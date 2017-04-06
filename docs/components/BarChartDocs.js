@@ -94,7 +94,7 @@ const BarChartDocs = React.createClass({
         <p>If true, individual bars will animate on hover.</p>
         <p>Default: false</p>
 
-        <h5>borderRadius <label>Number</label></h5>
+        <h5>barRadius <label>Number</label></h5>
         <p>Radius for the bar applied to the top for positive and bottom for negative values.</p>
         <p>Default: 3</p>
 
