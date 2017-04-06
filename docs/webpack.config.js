@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var isProd = (process.env.NODE_ENV === 'production');
 
 module.exports = {
+  devtool: !isProd && 'eval',
   entry: {
     app: './app.js'
   },
