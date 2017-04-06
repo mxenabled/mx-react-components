@@ -97,6 +97,18 @@ const Bar = React.createClass({
     }
   },
 
+  _getHeight () {
+    if (this.props.minBarHeight) {
+      if (this.props.radius > this.props.minBarHeight) {
+        return this.props.height + this.props.radius;
+      } else {
+        return this.props.height + this.props.minBarHeight;
+      }
+    } else {
+      return this.props.height;
+    }
+  },
+
   render () {
     const hasMinBarHeight = this.props.height === 0 && this.props.minBarHeight;
     const divisor = this.props.hasNegative && this.props.hasPositive ? 2 : 1;
@@ -117,7 +129,7 @@ const Bar = React.createClass({
           x: this.props.x,
           y,
           width: this.props.width,
-          height: hasMinBarHeight ? this.props.height + this.props.minBarHeight : this.props.height,
+          height: this._getHeight(),
           value: this.props.value,
           radius: this.props.radius
         })}

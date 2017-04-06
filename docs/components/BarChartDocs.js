@@ -83,7 +83,7 @@ const BarChartDocs = React.createClass({
           animateOnHover={true}
           data={chartData}
           margin={margins}
-          minBarHeight={1}
+          minBarHeight={3}
           style={styles.chart}
           threshold={Math.round(Math.random() * 10000)}
           xAxis={xAxis}
@@ -129,7 +129,8 @@ const BarChartDocs = React.createClass({
         </Markdown>
 
         <h5>minBarHeight<label>Number</label></h5>
-        <p>The minimum height for a bar if the value of the data is 0.</p>
+        <p>The minimum height for a bar if the value of the data is 0. The minBarHeight can not be less than the radius.</p>
+        <p>Default: 3</p>
 
         <h5>onClick<label>Function</label></h5>
         <p>Callback function that will run when a bar is clicked. Provided the data values from the bar clicked.</p>
@@ -205,7 +206,7 @@ const BarChartDocs = React.createClass({
       <BarChart
         data={data}
         margin={margins}
-        minBarHeight={1}
+        minBarHeight={3}
         threshold={threshold}
         xAxis={xAxis}
       />
