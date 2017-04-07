@@ -1,4 +1,5 @@
 const React = require('react');
+const FocusTrap = require('focus-trap-react');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
@@ -184,37 +185,38 @@ const Modal = React.createClass({
     const styles = this.styles();
 
     return (
-      <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
-        <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
-        <div
-          className='mx-modal-container'
-          ref={ref => this._modal = ref}
-          style={Object.assign({}, styles.container, this.props.style)}
-          tabIndex={0}
-        >
-          {this._renderTitleBar()}
-          <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
-            {this.props.children}
-            {this._renderTooltip()}
+      <FocusTrap>
+        <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
+          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
+          <div
+            className='mx-modal-container'
+            ref={ref => this._modal = ref}
+            style={Object.assign({}, styles.container, this.props.style)}
+          >
+            {this._renderTitleBar()}
+            <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
+              {this.props.children}
+              {this._renderTooltip()}
+            </div>
+            {this._renderFooter()}
+            {this.props.showCloseIcon && (
+              <Icon
+                className='mx-modal-close'
+                elementProps={{
+                  tabIndex: 0,
+                  'aria-label': 'Close Modal',
+                  role: 'button',
+                  onClick: this.props.onRequestClose,
+                  onKeyUp: (e) => e.keyCode === 13 && this.props.onRequestClose()
+                }}
+                size={24}
+                style={styles.close}
+                type='close-solid'
+              />
+            )}
           </div>
-          {this._renderFooter()}
-          {this.props.showCloseIcon && (
-            <Icon
-              className='mx-modal-close'
-              elementProps={{
-                tabIndex: 0,
-                'aria-label': 'Close Modal',
-                role: 'button',
-                onClick: this.props.onRequestClose,
-                onKeyUp: (e) => e.keyCode === 13 && this.props.onRequestClose()
-              }}
-              size={24}
-              style={styles.close}
-              type='close-solid'
-            />
-          )}
         </div>
-      </div>
+      </FocusTrap>
     );
   },
 
