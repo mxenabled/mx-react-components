@@ -35,6 +35,7 @@ class Button extends React.Component {
   };
 
   render () {
+    console.log("this is this.props.children.props.className.", this.props.children && this.props.children.props && this.props.children.props.className)
     const styles = this.styles();
 
     return (

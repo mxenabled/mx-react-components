@@ -163,7 +163,9 @@ const Drawer = React.createClass({
                     onClick={this.close}
                     primaryColor={this.props.buttonPrimaryColor}
                     type={'base'}
-                  />
+                  >
+                    <span className='visuallyHidden' style={styles.visuallyHidden}>Close Drawer</span>
+                  </Button>
                 }
               </span>
               <span style={styles.title}>
@@ -276,6 +278,17 @@ const Drawer = React.createClass({
           display: 'none',
           padding: 0
         }
+      },
+      visuallyHidden: {
+        border: 0,
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'insert(50%)',
+        height: 1,
+        margin: '-1px',
+        overflow: 'hidden',
+        padding: 0,
+        position: 'absolute',
+        width: 1
       }
     }, this.props.styles);
   }
