@@ -2,6 +2,8 @@ const React = require('react');
 
 const Input = require('./SimpleInput');
 
+const StylesUtil = require('../utils/Styles');
+
 const SearchInput = React.createClass({
   propTypes: {
     baseColor: React.PropTypes.string,
@@ -11,7 +13,8 @@ const SearchInput = React.createClass({
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     searchKeyword: React.PropTypes.string,
-    style: React.PropTypes.object
+    style: React.PropTypes.object,
+    styles: React.PropTypes.object
   },
 
   getDefaultProps () {
@@ -20,6 +23,10 @@ const SearchInput = React.createClass({
       onChange: () => {},
       placeholder: 'Search'
     };
+  },
+
+  componentWillMount () {
+    StylesUtil.checkForDeprecated(this.props);
   },
 
   render () {
@@ -47,12 +54,12 @@ const SearchInput = React.createClass({
   },
 
   styles () {
-    return {
+    return Object.assign({}, {
       component: {
         display: 'inline-block',
         width: '100%'
       }
-    };
+    }, this.props.styles);
   }
 });
 
