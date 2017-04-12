@@ -12,7 +12,6 @@ const { buttonTypes } = require('../constants/App');
 class Button extends React.Component {
   static propTypes = {
     actionText: React.PropTypes.string,
-    ariaLabel: React.PropTypes.string,
     icon: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     onClick: React.PropTypes.func,
@@ -59,7 +58,6 @@ class Button extends React.Component {
 
     return (
       <button
-        aria-label={this.props.ariaLabel}
         onClick={this.props.type === 'disabled' ? null : this.props.onClick}
         style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
       >
