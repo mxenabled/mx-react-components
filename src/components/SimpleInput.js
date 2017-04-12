@@ -2,7 +2,10 @@ const React = require('react');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
+
 const StyleConstants = require('../constants/Style');
+
+const StylesUtil = require('../utils/Styles');
 
 const Input = React.createClass({
   propTypes: {
@@ -39,9 +42,7 @@ const Input = React.createClass({
   },
 
   componentDidMount () {
-    if (this.props.style) {
-      console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
-    }
+    StylesUtil.checkForDeprecated(this.props);
 
     if (this.props.focusOnLoad && this.input) {
       this.input.focus();
