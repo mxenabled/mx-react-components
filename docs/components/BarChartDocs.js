@@ -26,6 +26,7 @@ for (let i = 0; i < 12; i++) {
   });
 }
 
+chartData[4].value = 0;
 
 const BarChartDocs = React.createClass({
 
@@ -82,6 +83,7 @@ const BarChartDocs = React.createClass({
           animateOnHover={true}
           data={chartData}
           margin={margins}
+          minBarHeight={1}
           style={styles.chart}
           threshold={Math.round(Math.random() * 10000)}
           xAxis={xAxis}
@@ -92,7 +94,7 @@ const BarChartDocs = React.createClass({
         <p>If true, individual bars will animate on hover.</p>
         <p>Default: false</p>
 
-        <h5>borderRadius <label>Number</label></h5>
+        <h5>barRadius <label>Number</label></h5>
         <p>Radius for the bar applied to the top for positive and bottom for negative values.</p>
         <p>Default: 3</p>
 
@@ -125,6 +127,10 @@ const BarChartDocs = React.createClass({
     }
   `}
         </Markdown>
+
+        <h5>minBarHeight<label>Number</label></h5>
+        <p>The minimum height for a bar if the value of the data is 0.</p>
+        <p>NOTE: If minBarHeight is less than barRadius, the radius will be changed to equal the minBarHeight for the bar.</p>
 
         <h5>onClick<label>Function</label></h5>
         <p>Callback function that will run when a bar is clicked. Provided the data values from the bar clicked.</p>
@@ -200,6 +206,7 @@ const BarChartDocs = React.createClass({
       <BarChart
         data={data}
         margin={margins}
+        minBarHeight={1}
         threshold={threshold}
         xAxis={xAxis}
       />

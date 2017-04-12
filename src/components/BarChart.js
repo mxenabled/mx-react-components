@@ -10,8 +10,11 @@ const Bar = React.createClass({
   propTypes: {
     animateOnHover: React.PropTypes.bool,
     animationDuration: React.PropTypes.number,
+    hasNegative: React.PropTypes.bool,
+    hasPositive: React.PropTypes.bool,
     height: React.PropTypes.number,
     hovering: React.PropTypes.bool,
+    minBarHeight: React.PropTypes.number,
     onClick: React.PropTypes.func,
     onMouseOut: React.PropTypes.func,
     onMouseOver: React.PropTypes.func,
@@ -62,7 +65,7 @@ const Bar = React.createClass({
   },
 
   _drawPath ({ x, y, width, height, value, radius }) {
-    if (value > 0) {
+    if (value > 0 || (value === 0 && !this.props.hasNegative)) {
       return 'M' + x + ',' + y +
          'h' + (width - radius) +
          'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
@@ -71,7 +74,7 @@ const Bar = React.createClass({
          'v' + (-height + radius) +
          'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
          'Z';
-    } else {
+    } else if (value < 0 || (value === 0 && !this.props.hasPositive)) {
       return 'M' + x + ',' + y +
          'h' + width +
          'v' + (height - radius) +
@@ -80,15 +83,39 @@ const Bar = React.createClass({
          'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
          'v' + (radius - height) +
          'Z';
+    } else {
+      return 'M' + x + ',' + y +
+         'h' + (width - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
+         'v' + (height - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius +
+         'h' + (radius * 2 - width) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
+         'v' + (radius - height) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
+         'Z';
     }
   },
 
   render () {
+    const hasMinBarHeight = this.props.height === 0 && this.props.minBarHeight;
+    const divisor = this.props.hasNegative && this.props.hasPositive ? 2 : 1;
+
+    let y = this.props.y;
+
+    if (hasMinBarHeight) {
+      if (this.props.hasNegative && !this.props.hasPositive) {
+        y = 0;
+      } else {
+        y = this.props.y - (this.props.minBarHeight / divisor);
+      }
+    }
+
     return (
       <path
         d={this._drawPath({
           x: this.props.x,
-          y: this.props.y,
+          y,
           width: this.props.width,
           height: this.props.height,
           value: this.props.value,
@@ -119,6 +146,7 @@ const BarChart = React.createClass({
       bottom: React.PropTypes.number,
       left: React.PropTypes.number
     }),
+    minBarHeight: React.PropTypes.number,
     onClick: React.PropTypes.func,
     onHover: React.PropTypes.func,
     showTooltips: React.PropTypes.bool,
@@ -141,6 +169,7 @@ const BarChart = React.createClass({
         bottom: 40,
         left: 20
       },
+      minBarHeight: 0,
       onClick: () => {},
       onHover: () => {},
       style: {},
@@ -153,8 +182,14 @@ const BarChart = React.createClass({
   getInitialState () {
     return {
       hoveringObj: {},
-      clickedData: this.props.initialSelectedData || {}
+      clickedData: this.props.initialSelectedData || {},
+      hasNegative: false,
+      hasPositive: false
     };
+  },
+
+  componentWillMount () {
+    this._hasPositiveOrNegativeValues();
   },
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -175,6 +210,25 @@ const BarChart = React.createClass({
 
     d3.select(this.tooltip)
       .attr('transform', transform);
+  },
+
+  _hasPositiveOrNegativeValues () {
+    let hasNegative = false;
+    let hasPositive = false;
+
+    this.props.data.forEach(d => {
+      if (!hasNegative && d.value < 0) {
+        hasNegative = true;
+      } else if (!hasPositive && d.value > 0) {
+        hasPositive = true;
+      }
+      return d.value;
+    });
+
+    this.setState({
+      hasNegative,
+      hasPositive
+    });
   },
 
   _handleMouseOver (x, y, width, height, data) {
@@ -224,13 +278,45 @@ const BarChart = React.createClass({
   _getTooltipY () {
     if (Object.keys(this.state.hoveringObj).length) {
       const margin = this.props.margin;
+      const negativeValue = this.state.hoveringObj.value < 0;
+      const positiveValue = this.state.hoveringObj.value > 0;
+      const tooltipHeight = this.state.hoveringObj.y + margin.top;
+      const bboxHeight = this.tooltip.getBBox().height;
+      const negativeHeightAdjustment = this.state.hoveringObj.height + bboxHeight;
+      const positiveHeightAdjustment = tooltipHeight - bboxHeight / 2;
+      const { hasNegative, hasPositive } = this.state;
+      const divisor = hasNegative && hasPositive ? 2 : 1;
 
-      if (this.state.hoveringObj.value < 0) {
-        return this.state.hoveringObj.y + margin.top + this.state.hoveringObj.height + this.tooltip.getBBox().height;
+      if (negativeValue) {
+        return tooltipHeight + negativeHeightAdjustment;
+      } else if (positiveValue) {
+        return positiveHeightAdjustment;
+      } else {
+        if (hasNegative && !hasPositive) {
+          return negativeHeightAdjustment + this.props.minBarHeight + tooltipHeight;
+        }
+        return positiveHeightAdjustment - this.props.minBarHeight / divisor;
       }
-      return this.state.hoveringObj.y + margin.top - this.tooltip.getBBox().height / 2;
     }
     return -1000;
+  },
+
+  _getHeight (baseHeight) {
+    if (this.props.minBarHeight) {
+      const adjuster = this.props.barRadius > this.props.minBarHeight ? this.props.barRadius : this.props.minBarHeight;
+
+      return baseHeight + adjuster;
+    } else {
+      return baseHeight;
+    }
+  },
+
+  _getRadius (d) {
+    if (d.value === 0 && this.props.minBarHeight) {
+      return Math.min(this.props.barRadius, this.props.minBarHeight);
+    } else {
+      return this.props.barRadius;
+    }
   },
 
   render () {
@@ -238,18 +324,10 @@ const BarChart = React.createClass({
     const { height, margin, width } = this.props;
     const widthMargin = width - margin.left - margin.right;
     const heightMargin = height - margin.top - margin.bottom;
-
-    let hasNegative = false;
-    let hasPositive = false;
-
-    const data = this.props.data.map(d => {
-      if (!hasNegative && d.value < 0) {
-        hasNegative = true;
-      } else if (!hasPositive && d.value > 0) {
-        hasPositive = true;
-      }
-      return d.value;
-    });
+    const { hasNegative, hasPositive } = this.state;
+    const data = this.props.data.reduce((acc, d) => {
+      return acc.concat(d.value);
+    }, []);
     let yDomain;
 
     if (hasNegative && hasPositive) {
@@ -282,7 +360,7 @@ const BarChart = React.createClass({
         >
           <g transform={`translate(${margin.left},${margin.top})`}>
             {this.props.data.map(d => {
-              if (d.value === 0) {
+              if (d.value === 0 && !this.props.minBarHeight) {
                 return null;
               }
 
@@ -290,7 +368,9 @@ const BarChart = React.createClass({
               const x = xFunc(d.label);
               const y = positive ? yFunc(d.value) : yFunc(0);
               const w = xFunc.rangeBand();
-              const h = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
+              const baseHeight = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
+              const h = this._getHeight(baseHeight);
+              const r = this._getRadius(d);
               const key = d.label + d.value;
               const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
               const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
@@ -310,13 +390,16 @@ const BarChart = React.createClass({
                   animateOnHover={this.props.animateOnHover}
                   animationDuration={700}
                   clicked={clicked}
+                  hasNegative={hasNegative}
+                  hasPositive={hasPositive}
                   height={h}
                   hovering={hovering}
                   key={key}
+                  minBarHeight={this.props.minBarHeight}
                   onClick={this._handleOnClick.bind(null, d)}
                   onMouseOut={this._handleMouseOut}
                   onMouseOver={this._handleMouseOver.bind(null, x, y, w, h, d)}
-                  radius={this.props.barRadius}
+                  radius={r}
                   style={style}
                   value={d.value}
                   width={w}
