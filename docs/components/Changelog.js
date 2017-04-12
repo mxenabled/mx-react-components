@@ -5,6 +5,16 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.70</h3>
+        <ul>
+          <li>
+            Adds minBarHeight prop to the BarChart component (<a href='https://github.com/mxenabled/mx-react-components/pull/535'>#535</a>)
+          </li>
+          <li>
+            Moves style deprecated warning to a util (<a href='https://github.com/mxenabled/mx-react-components/pull/540'>#540</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.68</h3>
         <ul>
           <li>
