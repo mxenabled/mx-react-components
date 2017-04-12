@@ -55,6 +55,8 @@ const SearchInputDocs = React.createClass({
         <h5>searchKeyword <label>String</label></h5>
         <p>Sets the value of the search input field.</p>
 
+        <h5>styles <label>Object</label></h5>
+        <p>Styles object used to override default styles.</p>
 
         <h3>Example</h3>
         <Markdown>
