@@ -164,7 +164,7 @@ const Drawer = React.createClass({
                     primaryColor={this.props.buttonPrimaryColor}
                     type={'base'}
                   >
-                    <span style={styles.visuallyHidden}>Close Drawer</span>
+                    <span className='visuallyHidden' style={styles.visuallyHidden}>Close Drawer</span>
                   </Button>
                 }
               </span>

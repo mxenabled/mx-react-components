@@ -34,24 +34,19 @@ class Button extends React.Component {
     return windowSize === 'medium' || windowSize === 'large';
   };
 
-  _hasVisibleChildren = () => {
-    let hasVisibleChildren = false;
+  _childIsVisible = child =>
+    !child.props || child.props.className !== 'visuallyHidden';
 
+  _hasVisibleChildren = () => {
     if (!this.props.children) {
-      return hasVisibleChildren;
+      return false;
     }
 
     if (!Array.isArray(this.props.children)) {
-      return !this.props.children.props || this.props.children.props.className !== 'visuallyHidden';
+      return this._childIsVisible(this.props.children);
     }
 
-    this.props.children.forEach((child) => {
-      if (child.props && child.props.className !== 'visuallyHidden') {
-        hasVisibleChildren = true;
-      }
-    });
-
-    return hasVisibleChildren;
+    return this.props.children.some(this._childIsVisible);
   };
 
   render () {
