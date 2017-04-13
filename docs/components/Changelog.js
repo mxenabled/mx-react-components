@@ -5,12 +5,12 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
-          <h3>Release Candidate 5.0.0-rc.71</h3>
-          <ul>
-            <li>
-              Allows button component to be passed children with "visuallyHidden" class for accessibility (<a href='https://github.com/mxenabled/mx-react-components/pull/541'>#541</a>)
-            </li>
-          </ul>
+        <h3>Release Candidate 5.0.0-rc.71</h3>
+        <ul>
+          <li>
+            Allows button component to be passed children with "visuallyHidden" class for accessibility (<a href='https://github.com/mxenabled/mx-react-components/pull/541'>#541</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.70</h3>
         <ul>
