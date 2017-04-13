@@ -34,6 +34,21 @@ class Button extends React.Component {
     return windowSize === 'medium' || windowSize === 'large';
   };
 
+  _childIsVisible = child =>
+    !child.props || child.props.className !== 'visuallyHidden';
+
+  _hasVisibleChildren = () => {
+    if (!this.props.children) {
+      return false;
+    }
+
+    if (!Array.isArray(this.props.children)) {
+      return this._childIsVisible(this.props.children);
+    }
+
+    return this.props.children.some(this._childIsVisible);
+  };
+
   render () {
     const styles = this.styles();
 
@@ -208,8 +223,8 @@ class Button extends React.Component {
         fill: StyleConstants.Colors.FOG
       },
       icon: {
-        marginLeft: this.props.children ? -4 : 0,
-        marginRight: this.props.children ? 5 : 0
+        marginLeft: this._hasVisibleChildren() ? -4 : 0,
+        marginRight: this._hasVisibleChildren() ? 5 : 0
       },
       buttonText: {
         marginLeft: (this.props.isActive && this.props.actionText) ? 10 : 0
