@@ -5,6 +5,16 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.75</h3>
+        <ul>
+          <li>
+            Traps focus in Modal, adds focus trap library (<a href='https://github.com/mxenabled/mx-react-components/pull/537'>#537</a>)
+          </li>
+          <li>
+            Traps focus in Drawer (<a href='https://github.com/mxenabled/mx-react-components/pull/543'>#543</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.73</h3>
         <ul>
           <li>
