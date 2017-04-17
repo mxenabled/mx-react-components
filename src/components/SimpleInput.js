@@ -59,6 +59,8 @@ const Input = React.createClass({
     this.setState({
       focus: false
     });
+
+    if (this.props.elementProps.onBlur) this.props.elementProps.onBlur();
   },
 
   render () {
