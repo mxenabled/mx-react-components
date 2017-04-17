@@ -194,7 +194,11 @@ const Modal = React.createClass({
             style={Object.assign({}, styles.container, this.props.style)}
           >
             {this._renderTitleBar()}
-            <div className='mx-modal-content' style={Object.assign({}, styles.content, this.props.contentStyle)}>
+            <div
+              className='mx-modal-content'
+              style={Object.assign({}, styles.content, this.props.contentStyle)}
+              tabIndex={0}
+            >
               {this.props.children}
               {this._renderTooltip()}
             </div>
