@@ -5,6 +5,13 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.76</h3>
+        <ul>
+          <li>
+            Makes Modal always have focusable content (<a href='https://github.com/mxenabled/mx-react-components/pull/547'>#547</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.75</h3>
         <ul>
           <li>
