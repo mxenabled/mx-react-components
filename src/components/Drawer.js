@@ -1,5 +1,6 @@
 const _isNumber = require('lodash/isNumber');
 const { StyleRoot } = require('radium');
+const FocusTrap = require('focus-trap-react');
 const React = require('react');
 const Velocity = require('velocity-animate');
 const _throttle = require('lodash/throttle');
@@ -146,40 +147,42 @@ const Drawer = React.createClass({
 
     return (
       <StyleRoot>
-        <div style={styles.componentWrapper}>
-          <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
-          <div
-            aria-label={this.props.title}
-            ref={(ref) => (this._component = ref)}
-            role='dialog'
-            style={Object.assign({}, styles.component, this.props.style)}
-            tabIndex={0}
-          >
-            <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
-              <span style={styles.backArrow}>
-                {this.props.showCloseButton &&
-                  <Button
-                    icon='arrow-left'
-                    onClick={this.close}
-                    primaryColor={this.props.buttonPrimaryColor}
-                    type={'base'}
-                  >
-                    <span className='visuallyHidden' style={styles.visuallyHidden}>Close Drawer</span>
-                  </Button>
-                }
-              </span>
-              <span style={styles.title}>
-                {this.props.title}
-              </span>
-              <div style={styles.headerMenu}>
-                {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav()}
+        <FocusTrap>
+          <div style={styles.componentWrapper}>
+            <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
+            <div
+              aria-label={this.props.title}
+              ref={(ref) => (this._component = ref)}
+              role='dialog'
+              style={Object.assign({}, styles.component, this.props.style)}
+              tabIndex={0}
+            >
+              <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
+                <span style={styles.backArrow}>
+                  {this.props.showCloseButton &&
+                    <Button
+                      icon='arrow-left'
+                      onClick={this.close}
+                      primaryColor={this.props.buttonPrimaryColor}
+                      type={'base'}
+                    >
+                      <span className='visuallyHidden' style={styles.visuallyHidden}>Close Drawer</span>
+                    </Button>
+                  }
+                </span>
+                <span style={styles.title}>
+                  {this.props.title}
+                </span>
+                <div style={styles.headerMenu}>
+                  {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav()}
+                </div>
+              </header>
+              <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+                {this.props.children}
               </div>
-            </header>
-            <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
-              {this.props.children}
             </div>
           </div>
-        </div>
+        </FocusTrap>
       </ StyleRoot>
     );
   },
