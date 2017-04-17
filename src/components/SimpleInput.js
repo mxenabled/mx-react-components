@@ -49,18 +49,20 @@ const Input = React.createClass({
     }
   },
 
-  _onFocus () {
+  _onFocus (e) {
     this.setState({
       focus: true
     });
+
+    if (this.props.elementProps.onFocus) this.props.elementProps.onFocus(e);
   },
 
-  _onBlur () {
+  _onBlur (e) {
     this.setState({
       focus: false
     });
 
-    if (this.props.elementProps.onBlur) this.props.elementProps.onBlur();
+    if (this.props.elementProps.onBlur) this.props.elementProps.onBlur(e);
   },
 
   render () {
