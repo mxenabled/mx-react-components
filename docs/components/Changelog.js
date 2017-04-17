@@ -5,6 +5,13 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.72</h3>
+        <ul>
+          <li>
+            Fix issue with onBlur in SimpleInput (<a href='https://github.com/mxenabled/mx-react-components/pull/544'>#544</a>)
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.71</h3>
         <ul>
           <li>
