@@ -5,6 +5,13 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.77</h3>
+        <ul>
+          <li>
+            Adds ariaLabel prop on Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/548'>#548</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.76</h3>
         <ul>
           <li>
