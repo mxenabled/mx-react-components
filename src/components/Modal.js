@@ -8,6 +8,7 @@ const StyleConstants = require('../constants/Style');
 
 const Modal = React.createClass({
   propTypes: {
+    ariaLabel: React.PropTypes.string,
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       actionText: React.PropTypes.string,
       className: React.PropTypes.string,
@@ -38,6 +39,7 @@ const Modal = React.createClass({
 
   getDefaultProps () {
     return {
+      ariaLabel: '',
       buttons: [],
       color: StyleConstants.Colors.PRIMARY,
       isRelative: false,
@@ -59,7 +61,7 @@ const Modal = React.createClass({
   },
 
   componentDidMount () {
-    this._modal.focus();
+    this._modalContent.focus();
   /*eslint-disable */
     if (this.props.hasOwnProperty('isOpen')) {
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
@@ -190,12 +192,13 @@ const Modal = React.createClass({
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
           <div
             className='mx-modal-container'
-            ref={ref => this._modal = ref}
             style={Object.assign({}, styles.container, this.props.style)}
           >
             {this._renderTitleBar()}
             <div
+              aria-label={this.props.ariaLabel}
               className='mx-modal-content'
+              ref={ref => this._modalContent = ref}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
               tabIndex={0}
             >
