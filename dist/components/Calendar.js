@@ -1,0 +1,231 @@
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var React = require('react');
+var Radium = require('radium');
+var moment = require('moment');
+
+var Icon = require('./Icon');
+
+var StyleConstants = require('../constants/Style');
+
+var Calendar = React.createClass({
+  displayName: 'Calendar',
+
+  propTypes: {
+    locale: React.PropTypes.string,
+    minimumDate: React.PropTypes.number,
+    onDateSelect: React.PropTypes.func,
+    primaryColor: React.PropTypes.string,
+    selectedDate: React.PropTypes.number,
+    style: React.PropTypes.object
+  },
+
+  getDefaultProps: function getDefaultProps() {
+    return {
+      locale: 'en',
+      onDateSelect: function onDateSelect() {},
+
+      primaryColor: StyleConstants.Colors.PRIMARY
+    };
+  },
+  getInitialState: function getInitialState() {
+    return {
+      currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
+    };
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+    if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
+      this.setState({
+        currentDate: newProps.selectedDate
+      });
+    }
+  },
+  _handleDateSelect: function _handleDateSelect(date, e) {
+    this.props.onDateSelect(date, e);
+  },
+  _handlePreviousClick: function _handlePreviousClick() {
+    var currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
+
+    this.setState({
+      currentDate: currentDate
+    });
+  },
+  _handleNextClick: function _handleNextClick() {
+    var currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
+
+    this.setState({
+      currentDate: currentDate
+    });
+  },
+  _renderMonthTable: function _renderMonthTable() {
+    var styles = this.styles();
+    var days = [];
+    var startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    var endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+
+    while (moment(startDate).isBefore(endDate)) {
+      var isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
+      var isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate), 'day');
+      var isToday = startDate.isSame(moment(), 'day');
+      var disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+
+      var day = React.createElement(
+        'div',
+        {
+          key: startDate,
+          onClick: disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix()),
+          style: _extends({}, styles.calendarDay, isCurrentMonth && styles.currentMonth, disabledDay && styles.calendarDayDisabled, isToday && styles.today, isSelectedDay && styles.selectedDay)
+        },
+        startDate.date()
+      );
+
+      days.push(day);
+      startDate = startDate.add(1, 'd');
+    }
+
+    return days;
+  },
+  render: function render() {
+    var styles = this.styles();
+
+    return React.createElement(
+      'div',
+      { style: styles.component },
+      React.createElement(
+        'div',
+        { style: styles.calendarHeader },
+        React.createElement(Icon, {
+          elementProps: {
+            onClick: this._handlePreviousClick
+          },
+          size: 20,
+          style: styles.calendayHeaderNav,
+          type: 'caret-left'
+        }),
+        React.createElement(
+          'div',
+          null,
+          moment(this.state.currentDate, 'X').format('MMMM YYYY')
+        ),
+        React.createElement(Icon, {
+          elementProps: {
+            onClick: this._handleNextClick
+          },
+          size: 20,
+          style: styles.calendayHeaderNav,
+          type: 'caret-right'
+        })
+      ),
+      React.createElement(
+        'div',
+        { style: styles.calendarWeek },
+        ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(function (day, i) {
+          return React.createElement(
+            'div',
+            { key: i, style: styles.calendarWeekDay },
+            day
+          );
+        })
+      ),
+      React.createElement(
+        'div',
+        { style: styles.calendarTable },
+        this._renderMonthTable()
+      )
+    );
+  },
+  styles: function styles() {
+    return {
+      component: _extends({
+        backgroundColor: StyleConstants.Colors.WHITE,
+        border: '1px solid ' + StyleConstants.Colors.FOG,
+        borderRadius: 3,
+        boxSizing: 'border-box',
+        marginTop: 10,
+        padding: 20,
+        width: 287
+      }, this.props.style),
+
+      //Calendar Header
+      calendarHeader: {
+        alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
+        display: 'flex',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: 30,
+        justifyContent: 'space-between',
+        marginBottom: 15,
+        position: 'relative',
+        textAlign: 'center'
+      },
+      calendayHeaderNav: {
+        width: 35,
+        cursor: 'pointer'
+      },
+
+      //Calendar week
+      calendarWeek: {
+        alignItems: 'center',
+        color: StyleConstants.Colors.ASH,
+        display: 'flex',
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        height: 30,
+        justifyContent: 'space-around',
+        marginBottom: 2
+      },
+      calendarWeekDay: {
+        textAlign: 'center',
+        width: 35
+      },
+
+      //Calenday table
+      calendarTable: {
+        alignItems: 'center',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around'
+      },
+      calendarDay: {
+        alignItems: 'center',
+        borderRadius: 3,
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.FOG,
+        cursor: 'pointer',
+        display: 'flex',
+        height: 30,
+        justifyContent: 'center',
+        marginBottom: 2,
+        width: 35,
+
+        ':hover': {
+          border: '1px solid ' + this.props.primaryColor
+        }
+      },
+      calendarDayDisabled: {
+        color: StyleConstants.Colors.FOG,
+
+        ':hover': {
+          cursor: 'default',
+          border: 'none'
+        }
+      },
+
+      today: {
+        backgroundColor: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.WHITE
+      },
+      currentMonth: {
+        color: StyleConstants.Colors.CHARCOAL
+      },
+      selectedDay: {
+        backgroundColor: this.props.primaryColor,
+        color: StyleConstants.Colors.WHITE
+      }
+    };
+  }
+});
+
+module.exports = Radium(Calendar);
