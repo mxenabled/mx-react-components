@@ -10,7 +10,7 @@ class GaugeDocs extends React.Component {
       <div>
         <h1>
           Gauge
-          <label>A D3 gauge that supports a multiple multiple, and reference dots.</label>
+          <label>A D3 gauge that supports multiple colors for each tranche of the gauge, and reference dots.</label>
         </h1>
 
         <h3>Demo</h3>
