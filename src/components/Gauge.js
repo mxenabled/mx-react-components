@@ -4,8 +4,8 @@ const d3 = require('d3');
 
 const StyleConstants = require('../constants/Style');
 
-const Gauge = React.createClass({
-  propTypes: {
+class Gauge extends React.Component {
+  static propTypes = {
     activeOffset: React.PropTypes.number,
     arcWidth: React.PropTypes.number,
     baseArcColor: React.PropTypes.string,
@@ -29,55 +29,51 @@ const Gauge = React.createClass({
     textLabel: React.PropTypes.string,
     textLabelColor: React.PropTypes.string,
     width: React.PropTypes.number
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      activeOffset: 0,
-      arcWidth: 10,
-      baseArcColor: StyleConstants.Colors.BASE_ARC,
-      colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
-      data: [],
-      dataPointColors: [StyleConstants.Colors.CHARCOAL].concat(d3.scale.category20b().range()),
-      dataPointRadius: 5,
-      dataPoints: [],
-      formatter (value) {
-        return value;
-      },
-      numberLabelColor: StyleConstants.Colors.PRIMARY,
-      height: 150,
-      id: 'gauge',
-      numberOfSegments: 6,
-      opacity: 1,
-      padAngle: 0.02,
-      showBaseArc: true,
-      showDataLabel: true,
-      textLabelColor: StyleConstants.Colors.ASH,
-      width: 150
-    };
-  },
+  static defaultProps = {
+    activeOffset: 0,
+    arcWidth: 10,
+    baseArcColor: StyleConstants.Colors.BASE_ARC,
+    colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
+    data: [],
+    dataPointColors: [StyleConstants.Colors.CHARCOAL].concat(d3.scale.category20b().range()),
+    dataPointRadius: 5,
+    dataPoints: [],
+    formatter (value) {
+      return value;
+    },
+    numberLabelColor: StyleConstants.Colors.PRIMARY,
+    height: 150,
+    id: 'gauge',
+    numberOfSegments: 6,
+    opacity: 1,
+    padAngle: 0.02,
+    showBaseArc: true,
+    showDataLabel: true,
+    textLabelColor: StyleConstants.Colors.ASH,
+    width: 150
+  };
 
-  getInitialState () {
-    return {
-      radiansMultiplier: (Math.PI / 180)
-    };
-  },
+  state = {
+    radiansMultiplier: (Math.PI / 180)
+  };
 
-  componentWillMount () {
+  componentWillMount() {
     this._setupD3Functions(this.props);
-  },
+  }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (!_isEqual(this.props.data, newProps.data)) {
       this._setupD3Functions(newProps);
     }
-  },
+  }
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return !_isEqual(this.props, nextProps) || !_isEqual(this.state, nextState);
-  },
+  }
 
-  _setupD3Functions (props) {
+  _setupD3Functions = (props) => {
     const dataSets = props.data.map(item => {
       return item.value;
     });
@@ -99,9 +95,9 @@ const Gauge = React.createClass({
       standardArc,
       values
     });
-  },
+  };
 
-  _buildSegments (props) {
+  _buildSegments = (props) => {
     const numberOfSegments = props.numberOfSegments;
     const segmentSize = 270 / (numberOfSegments);
     const convertToPie = this.state.radiansMultiplier;
@@ -121,9 +117,9 @@ const Gauge = React.createClass({
       endAngle = (startAngle + segmentSize);
     }
     return segments;
-  },
+  };
 
-  _renderArcs () {
+  _renderArcs = () => {
     const segments = this._buildSegments(this.props);
 
     return segments.map((point, i) => {
@@ -140,17 +136,17 @@ const Gauge = React.createClass({
         </g>
       );
     });
-  },
+  };
 
-  _renderBaseArc () {
+  _renderBaseArc = () => {
     return (
       <g>
         <path d={this.state.baseArc()} fill={this.props.baseArcColor}></path>
       </g>
     );
-  },
+  };
 
-  _renderDataPoints () {
+  _renderDataPoints = () => {
     const dataPoints = this.props.dataPoints.map(dataPoint => {
       return dataPoint.value;
     });
@@ -176,9 +172,9 @@ const Gauge = React.createClass({
         />
       );
     });
-  },
+  };
 
-  _renderDataLabel () {
+  _renderDataLabel = () => {
     const styles = this.styles();
 
     if (this.props.showDataLabel && this.props.children) {
@@ -212,9 +208,9 @@ const Gauge = React.createClass({
         </div>
       );
     }
-  },
+  };
 
-  render () {
+  render() {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
     const styles = this.styles();
@@ -238,9 +234,9 @@ const Gauge = React.createClass({
         </svg>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: {
         position: 'relative',
@@ -261,7 +257,7 @@ const Gauge = React.createClass({
         fontWeight: 300
       }
     };
-  }
-});
+  };
+}
 
 module.exports = Gauge;
