@@ -15,7 +15,7 @@ class FileUploadDocs extends React.Component {
     });
   };
 
-  render() {
+  render () {
     return (
       <div>
         <h1>
@@ -24,7 +24,7 @@ class FileUploadDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
-        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+        <div style={{ cursor: 'pointer', textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
             imageValidation={{
@@ -42,7 +42,9 @@ class FileUploadDocs extends React.Component {
             onFileRemove={this._handleFileChange}
             onFileValidation={this._handleFileValidation}
             uploadedFile={this.state.uploadedFile}
-          />
+          >
+            Click Here to Upload File (demo).
+          </FileUpload>
         </div>
 
         <h3>Usage</h3>

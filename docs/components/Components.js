@@ -171,6 +171,7 @@ const Components = React.createClass({
             <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
             <Link to='/components/spin'>Spin</Link>
+            <Link to='/components/file-upload'>File Upload</Link>
 
             <h3>Form</h3>
             <Link to='/components/button'>Button</Link>
