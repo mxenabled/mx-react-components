@@ -59,17 +59,17 @@ class Gauge extends React.Component {
     radiansMultiplier: (Math.PI / 180)
   };
 
-  componentWillMount() {
+  componentWillMount () {
     this._setupD3Functions(this.props);
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (!_isEqual(this.props.data, newProps.data)) {
       this._setupD3Functions(newProps);
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(this.props, nextProps) || !_isEqual(this.state, nextState);
   }
 
@@ -210,7 +210,7 @@ class Gauge extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
     const styles = this.styles();
