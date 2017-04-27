@@ -217,7 +217,7 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDefaultRangeSelection = (range) => {
-    this.props.onDateSelect(range.startDate, range.endDate);
+    this.props.onDateSelect(range.startDate, range.endDate, range.displayValue);
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
