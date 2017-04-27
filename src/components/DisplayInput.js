@@ -135,7 +135,7 @@ const DisplayInput = React.createClass({
 
       input: {
         backgroundColor: 'transparent',
-        border: '1px solid transparent',
+        border: 0,
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.LARGE,
         lineHeight: 1,
@@ -156,7 +156,10 @@ const DisplayInput = React.createClass({
 
       children: {
         alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
         display: 'flex',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: StyleConstants.Spacing.LARGE,
         padding: StyleConstants.Spacing.SMALL
       },
 
