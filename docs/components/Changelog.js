@@ -5,6 +5,14 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+
+        <h3>Release Candidate 5.0.0-rc.79</h3>
+        <ul>
+          <li>
+            DisplayInput children styles (<a href='https://github.com/mxenabled/mx-react-components/pull/555'>#555</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.77</h3>
         <ul>
           <li>
