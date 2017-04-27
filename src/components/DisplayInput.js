@@ -9,6 +9,7 @@ const Row = require('../components/grid/Row');
 
 const DisplayInput = React.createClass({
   propTypes: {
+    childrenStyle: React.PropTypes.object,
     elementProps: React.PropTypes.object,
     hint: React.PropTypes.string,
     isFocused: React.PropTypes.bool,
@@ -73,7 +74,7 @@ const DisplayInput = React.createClass({
 
             <Column relative={!hasChildren} span={inputColumn}>
               {hasChildren ? (
-                <div style={styles.children}>
+                <div style={Object.assign({}, styles.children, this.props.childrenStyle)}>
                   {this.props.children}
                 </div>
               ) : (
@@ -134,7 +135,7 @@ const DisplayInput = React.createClass({
 
       input: {
         backgroundColor: 'transparent',
-        border: '1px solid transparent',
+        border: 0,
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.LARGE,
         lineHeight: 1,
@@ -155,7 +156,10 @@ const DisplayInput = React.createClass({
 
       children: {
         alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
         display: 'flex',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: StyleConstants.Spacing.LARGE,
         padding: StyleConstants.Spacing.SMALL
       },
 
