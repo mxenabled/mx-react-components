@@ -139,6 +139,4 @@ Option.propTypes = {
   label: React.PropTypes.string.isRequired
 };
 
-Listbox.Option = Radium(Option);
-
-module.exports = Listbox;
+module.exports = { Listbox, Option: Radium(Option) };
