@@ -11,13 +11,16 @@ const SimpleSelectDocs = React.createClass({
     };
   },
 
-  _handleClick () {
+  _handleItemClick (e, item) {
+    this._toggleMenu();
+    alert(`You clicked ${item.text}`); // eslint-disable-line no-alert
+  },
+
+  _toggleMenu () {
     this.setState({
       showMenu: !this.state.showMenu
     });
   },
-
-  _handleItemClick () {},
 
   render () {
     return (
@@ -31,19 +34,20 @@ const SimpleSelectDocs = React.createClass({
         <div style={{ width: 177 }}>
           <Button
             icon='gear'
-            onClick={this._handleClick}
+            onClick={this._toggleMenu}
             type='neutral'
           >
             Settings
           </Button>
           {this.state.showMenu ? (
             <SimpleSelect
+              aria-label='Select a category'
               items={[
                 { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
                 { icon: 'kids', text: 'Kids', onClick: this._handleItemClick },
                 { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
               ]}
-              onScrimClick={this._handleClick}
+              onScrimClick={this._toggleMenu}
             />
           ) : null}
         </div>
@@ -68,7 +72,12 @@ const SimpleSelectDocs = React.createClass({
         <h3>Example</h3>
         <Markdown>
   {`
-    _handleClick () {
+    _handleItemClick (e, item) {
+      this._toggleMenu();
+      alert(\`You clicked $\{item.text\}\`);
+    },
+
+    _toggleMenu () {
       this.setState({
         showMenu: !this.state.showMenu
       });
@@ -77,19 +86,20 @@ const SimpleSelectDocs = React.createClass({
     <div>
       <Button
         icon='gear'
-        onClick={this._handleClick}
+        onClick={this._toggleMenu}
         type='neutral'
       >
         Settings
       </Button>
       {this.state.showMenu ? (
         <SimpleSelect
+          aria-label='Select a category'
           items={[
-            { icon: 'auto', text: 'Auto' },
-            { icon: 'kids', text: 'Kids' },
-            { icon: 'pets', text: 'Pets' }
+            { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
+            { icon: 'kids', text: 'Kids', onClick: this._handleItemClick },
+            { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
           ]}
-          onScrimClick={this._handleClick}
+          onScrimClick={this._toggleMenu}
         />
       ) : null}
     </div>
