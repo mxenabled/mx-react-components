@@ -3,11 +3,13 @@ const Radium = require('radium');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
+const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
+    'aria-label': React.PropTypes.string,
     hoverColor: React.PropTypes.string,
     iconSize: React.PropTypes.number,
     iconStyles: React.PropTypes.object,
@@ -48,7 +50,7 @@ const SimpleSelect = React.createClass({
       this.props.onScrimClick(e);
     }
 
-    item.onClick(e);
+    item.onClick(e, item);
   },
 
   render () {
@@ -56,13 +58,18 @@ const SimpleSelect = React.createClass({
 
     return (
       <div style={styles.component}>
-        <div style={styles.menu}>
+        <Listbox
+          aria-label={this.props['aria-label']}
+          style={styles.menu}
+          useGlobalKeyHandler={true}
+        >
           {this.props.children ?
             this.props.children :
             (this.props.items.map((item, i) => {
               return (
-                <div
+                <Option
                   key={i}
+                  label={item.text}
                   onClick={this._handleItemClick.bind(null, item)}
                   style={styles.item}
                 >
@@ -70,11 +77,11 @@ const SimpleSelect = React.createClass({
                     <Icon size={this.props.iconSize || 20} style={styles.icon} type={item.icon} />
                   ) : null}
                   <div style={styles.text}>{item.text}</div>
-                </div>
+                </Option>
               );
             })
           )}
-        </div>
+        </Listbox>
         <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
     );
