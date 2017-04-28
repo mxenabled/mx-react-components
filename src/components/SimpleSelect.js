@@ -3,7 +3,7 @@ const Radium = require('radium');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
-const { Listbox, Option } = require('./accessibility/Listbox');
+const Listbox = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
@@ -67,7 +67,7 @@ const SimpleSelect = React.createClass({
             this.props.children :
             (this.props.items.map((item, i) => {
               return (
-                <Option
+                <Listbox.Option
                   key={i}
                   label={item.text}
                   onClick={this._handleItemClick.bind(null, item)}
@@ -77,7 +77,7 @@ const SimpleSelect = React.createClass({
                     <Icon size={this.props.iconSize || 20} style={styles.icon} type={item.icon} />
                   ) : null}
                   <div style={styles.text}>{item.text}</div>
-                </Option>
+                </Listbox.Option>
               );
             })
           )}
