@@ -6,10 +6,11 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
-        <h3>Release Candidate 5.0.0-rc.80</h3>
+        <h3>Release Candidate 5.0.0-rc.81</h3>
         <ul>
           <li>
-            SimpleSelect accessibility using Listbox/Option (<a href='https://github.com/mxenabled/mx-react-components/pull/556'>#556</a>).
+            SimpleSelect accessibility using Listbox/Option (<a href='https://github.com/mxenabled/mx-react-components/pull/556'>#556</a>)
+            (<a href='https://github.com/mxenabled/mx-react-components/pull/557'>#557</a>).
           </li>
         </ul>
 
