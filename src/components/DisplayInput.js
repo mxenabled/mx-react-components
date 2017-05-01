@@ -1,5 +1,6 @@
 const React = require('react');
 const Radium = require('radium');
+const _uniqueId = require('lodash/uniqueId');
 
 const StyleConstants = require('../constants/Style');
 
@@ -34,6 +35,11 @@ const DisplayInput = React.createClass({
     };
   },
 
+  componentWillMount () {
+    this._labelId = _uniqueId('DI');
+    this._inputId = _uniqueId('DI');
+  },
+
   _isLargeOrMediumWindowSize () {
     const windowSize = StyleConstants.getWindowSize();
 
@@ -64,11 +70,9 @@ const DisplayInput = React.createClass({
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
-                <div>
-                  <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-                    {this.props.label}
-                  </div>
-                </div>
+                <label htmlFor={this._inputId} id={this._labelId} style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                  {this.props.label}
+                </label>
               </Column>
             ) : null }
 
@@ -81,8 +85,9 @@ const DisplayInput = React.createClass({
                 <div style={styles.inputWrapper}>
                   <input
                     {...elementProps}
+                    aria-labelledby={this.props.label ? this._labelId : null}
+                    id={this._inputId}
                     key='input'
-                    label={this.props.label}
                     style={styles.input}
                     type='text'
                   />
