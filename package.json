@@ -38,7 +38,7 @@
     "prop-types": "^15.5.8",
     "radium": "^0.18.1",
     "react": "^15.5.4",
-    "react-dom": "^15.3.1",
+    "react-dom": "^15.5.4",
     "velocity-animate": "^1.2.3"
   },
   "devDependencies": {
