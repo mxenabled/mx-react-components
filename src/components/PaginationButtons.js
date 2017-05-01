@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const ButtonGroup = require('./ButtonGroup');
@@ -8,13 +9,13 @@ const { buttonTypes } = require('../constants/App');
 
 const PaginationButtons = React.createClass({
   propTypes: {
-    currentPage: React.PropTypes.number.isRequired,
-    onClick: React.PropTypes.func,
-    pageRange: React.PropTypes.number,
-    primaryColor: React.PropTypes.string,
-    style: React.PropTypes.object,
-    totalPages: React.PropTypes.number.isRequired,
-    type: React.PropTypes.oneOf(buttonTypes)
+    currentPage: PropTypes.number.isRequired,
+    onClick: PropTypes.func,
+    pageRange: PropTypes.number,
+    primaryColor: PropTypes.string,
+    style: PropTypes.object,
+    totalPages: PropTypes.number.isRequired,
+    type: PropTypes.oneOf(buttonTypes)
   },
 
   getDefaultProps () {

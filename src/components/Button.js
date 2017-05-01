@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const Spin = require('./Spin');
@@ -11,14 +12,14 @@ const { buttonTypes } = require('../constants/App');
 
 class Button extends React.Component {
   static propTypes = {
-    actionText: React.PropTypes.string,
-    ariaLabel: React.PropTypes.string,
-    icon: React.PropTypes.string,
-    isActive: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    primaryColor: React.PropTypes.string,
-    style: React.PropTypes.object,
-    type: React.PropTypes.oneOf(buttonTypes)
+    actionText: PropTypes.string,
+    ariaLabel: PropTypes.string,
+    icon: PropTypes.string,
+    isActive: PropTypes.bool,
+    onClick: PropTypes.func,
+    primaryColor: PropTypes.string,
+    style: PropTypes.object,
+    type: PropTypes.oneOf(buttonTypes)
   };
 
   static defaultProps = {

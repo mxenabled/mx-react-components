@@ -1,21 +1,22 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
 const CirclesGroup = React.createClass({
   propTypes: {
-    adjustedHeight: React.PropTypes.number.isRequired,
-    circleColor: React.PropTypes.string,
-    circleOverlayRadius: React.PropTypes.number,
-    circleRadius: React.PropTypes.number,
-    data: React.PropTypes.array.isRequired,
-    onCircleClick: React.PropTypes.func,
-    shouldAnimate: React.PropTypes.bool,
-    strokeWidth: React.PropTypes.number,
-    translation: React.PropTypes.string,
-    useCircleOverlay: React.PropTypes.bool,
-    xScaleValueFunction: React.PropTypes.func.isRequired,
-    yScaleValueFunction: React.PropTypes.func.isRequired
+    adjustedHeight: PropTypes.number.isRequired,
+    circleColor: PropTypes.string,
+    circleOverlayRadius: PropTypes.number,
+    circleRadius: PropTypes.number,
+    data: PropTypes.array.isRequired,
+    onCircleClick: PropTypes.func,
+    shouldAnimate: PropTypes.bool,
+    strokeWidth: PropTypes.number,
+    translation: PropTypes.string,
+    useCircleOverlay: PropTypes.bool,
+    xScaleValueFunction: PropTypes.func.isRequired,
+    yScaleValueFunction: PropTypes.func.isRequired
   },
 
   getDefaultProps () {

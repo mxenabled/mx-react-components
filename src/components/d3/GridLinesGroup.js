@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const d3 = require('d3');
@@ -6,12 +7,12 @@ const ChartUtils = require('../../utils/Chart');
 
 const GridLinesGroup = React.createClass({
   propTypes: {
-    axis: React.PropTypes.string.isRequired,
-    data: React.PropTypes.array.isRequired,
-    orientation: React.PropTypes.string,
-    scaleFunction: React.PropTypes.func.isRequired,
-    tickSize: React.PropTypes.number.isRequired,
-    translation: React.PropTypes.string
+    axis: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    orientation: PropTypes.string,
+    scaleFunction: PropTypes.func.isRequired,
+    tickSize: PropTypes.number.isRequired,
+    translation: PropTypes.string
   },
 
   getDefaultProps () {

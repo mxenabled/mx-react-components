@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
@@ -6,11 +7,11 @@ const Icon = require('../components/Icon');
 
 const MessageBox = React.createClass({
   propTypes: {
-    children: React.PropTypes.node,
-    color: React.PropTypes.string,
-    icon: React.PropTypes.string,
-    styles: React.PropTypes.object,
-    title: React.PropTypes.string
+    children: PropTypes.node,
+    color: PropTypes.string,
+    icon: PropTypes.string,
+    styles: PropTypes.object,
+    title: PropTypes.string
   },
 
   getInitialState () {

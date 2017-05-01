@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
 
@@ -35,15 +36,15 @@ const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, prim
 ));
 
 DefaultRanges.propTypes = {
-  defaultRanges: React.PropTypes.array,
-  handleDefaultRangeSelection: React.PropTypes.func,
-  primaryColor: React.PropTypes.string,
-  selectedEndDate: React.PropTypes.number,
-  selectedStartDate: React.PropTypes.number,
-  styles: React.PropTypes.shape({
-    defaultRangesTitle: React.PropTypes.object,
-    rangeOption: React.PropTypes.object,
-    rangeOptions: React.PropTypes.object
+  defaultRanges: PropTypes.array,
+  handleDefaultRangeSelection: PropTypes.func,
+  primaryColor: PropTypes.string,
+  selectedEndDate: PropTypes.number,
+  selectedStartDate: PropTypes.number,
+  styles: PropTypes.shape({
+    defaultRangesTitle: PropTypes.object,
+    rangeOption: PropTypes.object,
+    rangeOptions: PropTypes.object
   })
 };
 
@@ -86,37 +87,37 @@ const MonthTable = ({ activeSelectDate, currentDate, getDateRangePosition, handl
 };
 
 MonthTable.propTypes = {
-  activeSelectDate: React.PropTypes.number,
-  currentDate: React.PropTypes.number,
-  getDateRangePosition: React.PropTypes.func,
-  handleDateHover: React.PropTypes.func,
-  handleDateSelect: React.PropTypes.func,
-  isInActiveRange: React.PropTypes.func,
-  minimumDate: React.PropTypes.number,
-  selectedEndDate: React.PropTypes.number,
-  selectedStartDate: React.PropTypes.number,
-  styles: React.PropTypes.object
+  activeSelectDate: PropTypes.number,
+  currentDate: PropTypes.number,
+  getDateRangePosition: PropTypes.func,
+  handleDateHover: PropTypes.func,
+  handleDateSelect: PropTypes.func,
+  isInActiveRange: PropTypes.func,
+  minimumDate: PropTypes.number,
+  selectedEndDate: PropTypes.number,
+  selectedStartDate: PropTypes.number,
+  styles: PropTypes.object
 };
 
 class DateRangePicker extends React.Component {
   static propTypes = {
-    closeCalendarOnRangeSelect: React.PropTypes.bool,
-    defaultRanges: React.PropTypes.arrayOf(React.PropTypes.shape({
-      displayValue: React.PropTypes.string,
-      endDate: React.PropTypes.number,
-      startDate: React.PropTypes.number
+    closeCalendarOnRangeSelect: PropTypes.bool,
+    defaultRanges: PropTypes.arrayOf(PropTypes.shape({
+      displayValue: PropTypes.string,
+      endDate: PropTypes.number,
+      startDate: PropTypes.number
     })),
-    format: React.PropTypes.string,
-    isRelative: React.PropTypes.bool,
-    locale: React.PropTypes.string,
-    minimumDate: React.PropTypes.number,
-    onDateSelect: React.PropTypes.func,
-    placeholderText: React.PropTypes.string,
-    primaryColor: React.PropTypes.string,
-    selectedEndDate: React.PropTypes.number,
-    selectedStartDate: React.PropTypes.number,
-    showDefaultRanges: React.PropTypes.bool,
-    style: React.PropTypes.object
+    format: PropTypes.string,
+    isRelative: PropTypes.bool,
+    locale: PropTypes.string,
+    minimumDate: PropTypes.number,
+    onDateSelect: PropTypes.func,
+    placeholderText: PropTypes.string,
+    primaryColor: PropTypes.string,
+    selectedEndDate: PropTypes.number,
+    selectedStartDate: PropTypes.number,
+    showDefaultRanges: PropTypes.bool,
+    style: PropTypes.object
   };
 
   static defaultProps = {
