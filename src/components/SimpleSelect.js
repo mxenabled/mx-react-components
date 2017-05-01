@@ -1,5 +1,6 @@
 const React = require('react');
 const Radium = require('radium');
+const keycode = require('keycode');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
@@ -32,6 +33,8 @@ const SimpleSelect = React.createClass({
   },
 
   componentDidMount () {
+    window.addEventListener('keydown', this._handleKeyDown);
+
     if (this.props.style) {
       console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
     }
@@ -45,12 +48,23 @@ const SimpleSelect = React.createClass({
     }
   },
 
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this._handleKeyDown);
+  },
+
   _handleItemClick (item, e) {
     if (this.props.scrimClickOnSelect) {
       this.props.onScrimClick(e);
     }
 
     item.onClick(e, item);
+  },
+
+  _handleKeyDown (e) {
+    if (keycode(e) === 'esc') {
+      e.preventDefault();
+      this.props.onScrimClick();
+    }
   },
 
   render () {
