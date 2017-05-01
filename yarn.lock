@@ -1632,9 +1632,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-mx@^1.2.8:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/eslint-config-mx/-/eslint-config-mx-1.2.9.tgz#bf64cf263a33043da21ec716bee3b67169e167b0"
+eslint-config-mx@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-mx/-/eslint-config-mx-1.3.1.tgz#df0bc8209b1757a102f4d525248c15b2176359ce"
 
 eslint-loader@^1.0.0:
   version "1.6.1"
