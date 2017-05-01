@@ -6,6 +6,14 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.82</h3>
+        <ul>
+          <li>
+            Add esc key handling to SimpleSelect (<a href='https://github.com/mxenabled/mx-react-components/pull/558'>#558</a>).
+            Use a label tag for the DisplayInput label (<a href='https://github.com/mxenabled/mx-react-components/pull/559'>#559</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.81</h3>
         <ul>
           <li>
