@@ -8,7 +8,7 @@ const StyleConstants = require('../constants/Style');
 
 const Modal = React.createClass({
   propTypes: {
-    ariaLabel: React.PropTypes.string,
+    'aria-label': React.PropTypes.string,
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
       actionText: React.PropTypes.string,
       className: React.PropTypes.string,
@@ -39,7 +39,7 @@ const Modal = React.createClass({
 
   getDefaultProps () {
     return {
-      ariaLabel: '',
+      'aria-label': '',
       buttons: [],
       color: StyleConstants.Colors.PRIMARY,
       isRelative: false,
@@ -196,7 +196,7 @@ const Modal = React.createClass({
           >
             {this._renderTitleBar()}
             <div
-              aria-label={this.props.ariaLabel}
+              aria-label={this.props['aria-label']}
               className='mx-modal-content'
               ref={ref => this._modalContent = ref}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
