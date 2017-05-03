@@ -39,6 +39,18 @@ class DatePickerFullScreen extends React.Component {
     useInputForSelectedDate: true
   };
 
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      currentDate: null,
+      inputValue: this._getInputValueByDate(props.defaultDate),
+      isValid: true,
+      selectedDate: props.defaultDate,
+      showCalendar: false
+    };
+  }
+
   componentDidMount () {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
@@ -226,14 +238,6 @@ class DatePickerFullScreen extends React.Component {
     } else {
       return null;
     }
-  };
-
-  state = {
-    currentDate: null,
-    inputValue: this._getInputValueByDate(this.props.defaultDate),
-    isValid: true,
-    selectedDate: this.props.defaultDate,
-    showCalendar: false
   };
 
   render () {

@@ -30,6 +30,14 @@ class Listbox extends React.Component {
     useGlobalKeyHandler: false
   };
 
+  constructor () {
+    super();
+
+    this.state = {
+      focusedIndex: this._getSelectedOptionIndex()
+    };
+  }
+
   componentDidMount () {
     this._eventTarget = this.props.useGlobalKeyHandler ? window : this.component;
     this._eventTarget.addEventListener('keydown', this._handleKeyDown);
@@ -89,10 +97,6 @@ class Listbox extends React.Component {
 
     // focus next
     this.setState({ focusedIndex: focusedIndex + 1 }, this._focusOption);
-  };
-
-  state = {
-    focusedIndex: this._getSelectedOptionIndex()
   };
 
   render () {
