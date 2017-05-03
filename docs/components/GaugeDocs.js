@@ -4,13 +4,13 @@ const { Gauge } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const GaugeDocs = React.createClass({
+class GaugeDocs extends React.Component {
   render () {
     return (
       <div>
         <h1>
           Gauge
-          <label>A D3 gauge that supports a multiple multiple, and reference dots.</label>
+          <label>A D3 gauge that supports multiple colors for each tranche of the gauge, and reference dots.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -148,6 +148,6 @@ const GaugeDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = GaugeDocs;
