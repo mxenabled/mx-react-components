@@ -4,18 +4,16 @@ const { FileUpload } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const FileUploadDocs = React.createClass({
-  getInitialState () {
-    return {
-      uploadedFile: null
-    };
-  },
+class FileUploadDocs extends React.Component {
+  state = {
+    uploadedFile: null
+  };
 
-  _handleFileChange (uploadedFile) {
+  _handleFileChange = (uploadedFile) => {
     this.setState({
       uploadedFile
     });
-  },
+  };
 
   render () {
     return (
@@ -26,7 +24,7 @@ const FileUploadDocs = React.createClass({
         </h1>
 
         <h3>Demo</h3>
-        <div style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+        <div style={{ cursor: 'pointer', textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
             imageValidation={{
@@ -44,7 +42,9 @@ const FileUploadDocs = React.createClass({
             onFileRemove={this._handleFileChange}
             onFileValidation={this._handleFileValidation}
             uploadedFile={this.state.uploadedFile}
-          />
+          >
+            Click Here to Upload File (demo).
+          </FileUpload>
         </div>
 
         <h3>Usage</h3>
@@ -122,6 +122,6 @@ const FileUploadDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = FileUploadDocs;
