@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const keycode = require('keycode');
 const _merge = require('lodash/merge');
@@ -10,17 +11,17 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
-    'aria-label': React.PropTypes.string,
-    hoverColor: React.PropTypes.string,
-    iconSize: React.PropTypes.number,
-    iconStyles: React.PropTypes.object,
-    items: React.PropTypes.array.isRequired,
-    itemStyles: React.PropTypes.object,
-    menuStyles: React.PropTypes.object,
-    onScrimClick: React.PropTypes.func,
-    scrimClickOnSelect: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    styles: React.PropTypes.object
+    'aria-label': PropTypes.string,
+    hoverColor: PropTypes.string,
+    iconSize: PropTypes.number,
+    iconStyles: PropTypes.object,
+    items: PropTypes.array.isRequired,
+    itemStyles: PropTypes.object,
+    menuStyles: PropTypes.object,
+    onScrimClick: PropTypes.func,
+    scrimClickOnSelect: PropTypes.bool,
+    style: PropTypes.object,
+    styles: PropTypes.object
   },
 
   getDefaultProps () {

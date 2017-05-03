@@ -1,11 +1,12 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
 const Spin = React.createClass({
   propTypes: {
-    children: React.PropTypes.node,
-    direction: React.PropTypes.oneOf(['counterclockwise', 'clockwise']),
-    speed: React.PropTypes.number //milliseconds, time it takes to make 1 full rotation
+    children: PropTypes.node,
+    direction: PropTypes.oneOf(['counterclockwise', 'clockwise']),
+    speed: PropTypes.number //milliseconds, time it takes to make 1 full rotation
   },
 
   getDefaultProps () {

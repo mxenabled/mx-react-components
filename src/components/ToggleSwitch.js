@@ -1,19 +1,20 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const StyleConstants = require('../constants/Style');
 const Icon = require('./Icon');
 
 const ToggleSwitch = React.createClass({
   propTypes: {
-    checked: React.PropTypes.bool,
-    falseIcon: React.PropTypes.string,
-    leftLabel: React.PropTypes.string,
-    onToggle: React.PropTypes.func,
-    rightLabel: React.PropTypes.string,
-    showIcons: React.PropTypes.bool,
-    showLabels: React.PropTypes.bool,
-    styles: React.PropTypes.object,
-    trueIcon: React.PropTypes.string
+    checked: PropTypes.bool,
+    falseIcon: PropTypes.string,
+    leftLabel: PropTypes.string,
+    onToggle: PropTypes.func,
+    rightLabel: PropTypes.string,
+    showIcons: PropTypes.bool,
+    showLabels: PropTypes.bool,
+    styles: PropTypes.object,
+    trueIcon: PropTypes.string
   },
 
   getDefaultProps () {

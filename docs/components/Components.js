@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const { Link } = require('react-router');
 
@@ -5,7 +6,7 @@ const { Select } = require('mx-react-components');
 
 const Components = React.createClass({
   contextTypes: {
-    router: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
   },
 
   _handleChange (selected) {

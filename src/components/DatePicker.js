@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
 
@@ -9,16 +10,16 @@ const StyleConstants = require('../constants/Style');
 
 class DatePicker extends React.Component {
   static propTypes = {
-    closeOnDateSelect: React.PropTypes.bool,
-    defaultDate: React.PropTypes.number,
-    format: React.PropTypes.string,
-    locale: React.PropTypes.string,
-    minimumDate: React.PropTypes.number,
-    onDateSelect: React.PropTypes.func,
-    placeholderText: React.PropTypes.string,
-    primaryColor: React.PropTypes.string,
-    selectedDate: React.PropTypes.number,
-    style: React.PropTypes.object
+    closeOnDateSelect: PropTypes.bool,
+    defaultDate: PropTypes.number,
+    format: PropTypes.string,
+    locale: PropTypes.string,
+    minimumDate: PropTypes.number,
+    onDateSelect: PropTypes.func,
+    placeholderText: PropTypes.string,
+    primaryColor: PropTypes.string,
+    selectedDate: PropTypes.number,
+    style: PropTypes.object
   };
 
   static defaultProps = {

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const d3 = require('d3');
@@ -8,13 +9,13 @@ const StyleConstants = require('../../constants/Style');
 
 const BarTimeXAxis = React.createClass({
   propTypes: {
-    style: React.PropTypes.object,
-    tickRange: React.PropTypes.array,
-    tickSize: React.PropTypes.number,
-    tickValues: React.PropTypes.array,
-    timeAxisFormat: React.PropTypes.string.isRequired,
-    transform: React.PropTypes.string,
-    xScaleFunction: React.PropTypes.func.isRequired
+    style: PropTypes.object,
+    tickRange: PropTypes.array,
+    tickSize: PropTypes.number,
+    tickValues: PropTypes.array,
+    timeAxisFormat: PropTypes.string.isRequired,
+    transform: PropTypes.string,
+    xScaleFunction: PropTypes.func.isRequired
   },
 
   getDefaultProps () {

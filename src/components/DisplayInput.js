@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
 
@@ -10,20 +11,20 @@ const Row = require('../components/grid/Row');
 
 const DisplayInput = React.createClass({
   propTypes: {
-    childrenStyle: React.PropTypes.object,
-    elementProps: React.PropTypes.object,
-    hint: React.PropTypes.string,
-    isFocused: React.PropTypes.bool,
-    label: React.PropTypes.string,
-    labelStyle: React.PropTypes.object,
-    placeholder: React.PropTypes.string,
-    primaryColor: React.PropTypes.string,
-    showHint: React.PropTypes.bool,
-    status: React.PropTypes.shape({
-      type: React.PropTypes.string,
-      message: React.PropTypes.string
+    childrenStyle: PropTypes.object,
+    elementProps: PropTypes.object,
+    hint: PropTypes.string,
+    isFocused: PropTypes.bool,
+    label: PropTypes.string,
+    labelStyle: PropTypes.object,
+    placeholder: PropTypes.string,
+    primaryColor: PropTypes.string,
+    showHint: PropTypes.bool,
+    status: PropTypes.shape({
+      type: PropTypes.string,
+      message: PropTypes.string
     }),
-    valid: React.PropTypes.bool
+    valid: PropTypes.bool
   },
 
   getDefaultProps () {

@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const Icon = require('./Icon');
@@ -7,17 +8,17 @@ const StyleConstants = require('../constants/Style');
 
 const SelectFullScreen = React.createClass({
   propTypes: {
-    closeIcon: React.PropTypes.string,
-    isFixed: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    optionFormatter: React.PropTypes.func,
-    options: React.PropTypes.array,
-    optionsHeaderText: React.PropTypes.string,
-    optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    placeholderText: React.PropTypes.string,
-    selected: React.PropTypes.object,
-    selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array])
+    closeIcon: PropTypes.string,
+    isFixed: PropTypes.bool,
+    onChange: PropTypes.func,
+    optionFormatter: PropTypes.func,
+    options: PropTypes.array,
+    optionsHeaderText: PropTypes.string,
+    optionsStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    optionStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    placeholderText: PropTypes.string,
+    selected: PropTypes.object,
+    selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   },
 
   getDefaultProps () {

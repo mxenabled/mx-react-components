@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const FocusTrap = require('focus-trap-react');
 
@@ -8,33 +9,33 @@ const StyleConstants = require('../constants/Style');
 
 const Modal = React.createClass({
   propTypes: {
-    'aria-label': React.PropTypes.string,
-    buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
-      actionText: React.PropTypes.string,
-      className: React.PropTypes.string,
-      isActive: React.PropTypes.bool,
-      icon: React.PropTypes.string,
-      label: React.PropTypes.string,
-      onClick: React.PropTypes.func,
-      primaryColor: React.PropTypes.string,
-      style: React.PropTypes.object,
-      type: React.PropTypes.oneOf(['primary', 'secondary'])
+    'aria-label': PropTypes.string,
+    buttons: PropTypes.arrayOf(PropTypes.shape({
+      actionText: PropTypes.string,
+      className: PropTypes.string,
+      isActive: PropTypes.bool,
+      icon: PropTypes.string,
+      label: PropTypes.string,
+      onClick: PropTypes.func,
+      primaryColor: PropTypes.string,
+      style: PropTypes.object,
+      type: PropTypes.oneOf(['primary', 'secondary'])
     })),
-    color: React.PropTypes.string,
-    contentStyle: React.PropTypes.object,
-    footerContent: React.PropTypes.node,
-    footerStyle: React.PropTypes.object,
-    isRelative: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func,
-    showCloseIcon: React.PropTypes.bool,
-    showFooter: React.PropTypes.bool,
-    showScrim: React.PropTypes.bool,
-    showTitleBar: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    title: React.PropTypes.string,
-    tooltip: React.PropTypes.string,
-    tooltipLabel: React.PropTypes.string,
-    tooltipTitle: React.PropTypes.string
+    color: PropTypes.string,
+    contentStyle: PropTypes.object,
+    footerContent: PropTypes.node,
+    footerStyle: PropTypes.object,
+    isRelative: PropTypes.bool,
+    onRequestClose: PropTypes.func,
+    showCloseIcon: PropTypes.bool,
+    showFooter: PropTypes.bool,
+    showScrim: PropTypes.bool,
+    showTitleBar: PropTypes.bool,
+    style: PropTypes.object,
+    title: PropTypes.string,
+    tooltip: PropTypes.string,
+    tooltipLabel: PropTypes.string,
+    tooltipTitle: PropTypes.string
   },
 
   getDefaultProps () {

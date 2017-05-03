@@ -1,16 +1,17 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const defaultShape = {
-  large: React.PropTypes.number,
-  medium: React.PropTypes.number,
-  small: React.PropTypes.number
+  large: PropTypes.number,
+  medium: PropTypes.number,
+  small: PropTypes.number
 };
 
 const Column = React.createClass({
   propTypes: {
-    offset: React.PropTypes.shape(defaultShape),
-    relative: React.PropTypes.bool,
-    span: React.PropTypes.shape(defaultShape)
+    offset: PropTypes.shape(defaultShape),
+    relative: PropTypes.bool,
+    span: PropTypes.shape(defaultShape)
   },
 
   getDefaultProps () {

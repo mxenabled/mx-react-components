@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const keycode = require('keycode');
 const _findIndex = require('lodash/findIndex');
@@ -21,8 +22,8 @@ const _findIndex = require('lodash/findIndex');
  */
 const Listbox = React.createClass({
   propTypes: {
-    'aria-label': React.PropTypes.string.isRequired,
-    useGlobalKeyHandler: React.PropTypes.bool
+    'aria-label': PropTypes.string.isRequired,
+    useGlobalKeyHandler: PropTypes.bool
   },
 
   getDefaultProps () {
@@ -135,8 +136,8 @@ const Option = ({ children, isSelected, label, ...props }) => (
 );
 
 Option.propTypes = {
-  isSelected: React.PropTypes.bool,
-  label: React.PropTypes.string.isRequired
+  isSelected: PropTypes.bool,
+  label: PropTypes.string.isRequired
 };
 
 module.exports = { Listbox, Option: Radium(Option) };

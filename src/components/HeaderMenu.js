@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const Button = require('./Button');
 const SimpleSelect = require('./SimpleSelect');
@@ -28,9 +29,9 @@ function HeaderMenu ({ handleButtonClick, handleScrimClick, showSimpleSelectMenu
 }
 
 HeaderMenu.propTypes = {
-  handleButtonClick: React.PropTypes.func,
-  handleScrimClick: React.PropTypes.func,
-  showSimpleSelectMenu: React.PropTypes.bool
+  handleButtonClick: PropTypes.func,
+  handleScrimClick: PropTypes.func,
+  showSimpleSelectMenu: PropTypes.bool
 };
 
 module.exports = HeaderMenu;
