@@ -30,8 +30,8 @@ class Listbox extends React.Component {
     useGlobalKeyHandler: false
   };
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
 
     this.state = {
       focusedIndex: this._getSelectedOptionIndex()
