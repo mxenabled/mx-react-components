@@ -5,8 +5,8 @@ const d3 = require('d3');
 
 const StyleConstants = require('../../constants/Style');
 
-const LineGroup = React.createClass({
-  propTypes: {
+class LineGroup extends React.Component {
+  static propTypes = {
     adjustedHeight: PropTypes.number.isRequired,
     dashLine: PropTypes.bool,
     data: PropTypes.array.isRequired,
@@ -16,19 +16,17 @@ const LineGroup = React.createClass({
     translation: PropTypes.string,
     xScaleValueFunction: PropTypes.func.isRequired,
     yScaleValueFunction: PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      dashLine: false,
-      lineColor: StyleConstants.Colors.CHARCOAL,
-      shouldAnimate: true,
-      strokeWidth: 2,
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    dashLine: false,
+    lineColor: StyleConstants.Colors.CHARCOAL,
+    shouldAnimate: true,
+    strokeWidth: 2,
+    translation: 'translate(0,0)'
+  };
 
-  componentWillMount () {
+  componentWillMount() {
     const flatLine = d3.svg.line()
       .x(d => {
         return this.props.xScaleValueFunction(d.x);
@@ -49,23 +47,23 @@ const LineGroup = React.createClass({
       flatLine,
       line
     });
-  },
+  }
 
-  componentDidMount () {
+  componentDidMount() {
     this._animateLine();
-  },
+  }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._animateLine();
-  },
+  }
 
-  _animateLine () {
+  _animateLine = () => {
     if (this.props.shouldAnimate) {
       d3.select(this.chartLine).transition().attr('d', this.state.line(this.props.data));
     }
-  },
+  };
 
-  render () {
+  render() {
     const { data, dashLine, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
 
     return (
@@ -81,6 +79,6 @@ const LineGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 module.exports = LineGroup;

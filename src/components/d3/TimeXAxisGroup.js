@@ -4,31 +4,29 @@ const React = require('react');
 const d3 = require('d3');
 const moment = require('moment');
 
-const TimeXAxisGroup = React.createClass({
-  propTypes: {
+class TimeXAxisGroup extends React.Component {
+  static propTypes = {
     ticks: PropTypes.array.isRequired,
     tickSize: PropTypes.number,
     timeAxisFormat: PropTypes.string.isRequired,
     translation: PropTypes.string,
     xScaleFunction: PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      tickSize: 6,
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    tickSize: 6,
+    translation: 'translate(0,0)'
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     this._renderAxis();
-  },
+  }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._renderAxis();
-  },
+  }
 
-  _renderAxis () {
+  _renderAxis = () => {
     const timeAxisFunction = d3.svg.axis()
     .scale(this.props.xScaleFunction())
     .tickSize(this.props.tickSize, this.props.tickSize)
@@ -38,9 +36,9 @@ const TimeXAxisGroup = React.createClass({
     });
 
     d3.select(this.timeAxis).call(timeAxisFunction);
-  },
+  };
 
-  render () {
+  render() {
     return (
       <g
         className='time-axis'
@@ -49,6 +47,6 @@ const TimeXAxisGroup = React.createClass({
       />
     );
   }
-});
+}
 
 module.exports = TimeXAxisGroup;

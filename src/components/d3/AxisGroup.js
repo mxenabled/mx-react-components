@@ -4,31 +4,29 @@ const d3 = require('d3');
 
 const ChartUtils = require('../../utils/Chart');
 
-const AxisGroup = React.createClass({
-  propTypes: {
+class AxisGroup extends React.Component {
+  static propTypes = {
     axis: PropTypes.string.isRequired,
     axisFormatFunction: PropTypes.func.isRequired,
     data: PropTypes.array.isRequired,
     orientation: PropTypes.string.isRequired,
     scaleFunction: PropTypes.func.isRequired,
     translation: PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    translation: 'translate(0,0)'
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     this._renderAxis();
-  },
+  }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._renderAxis();
-  },
+  }
 
-  _renderAxis () {
+  _renderAxis = () => {
     const max = d3.max(this.props.data, d => d[this.props.axis]);
     const min = d3.min(this.props.data, d => d[this.props.axis]);
     const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
@@ -41,9 +39,9 @@ const AxisGroup = React.createClass({
       .tickValues(tickValues);
 
     d3.select(this.axisGroup).call(axisFunction);
-  },
+  };
 
-  render () {
+  render() {
     return (
       <g
         className={this.props.axis + '-axis'}
@@ -52,6 +50,6 @@ const AxisGroup = React.createClass({
       />
     );
   }
-});
+}
 
 module.exports = AxisGroup;

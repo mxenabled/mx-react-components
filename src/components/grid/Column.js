@@ -7,22 +7,20 @@ const defaultShape = {
   small: PropTypes.number
 };
 
-const Column = React.createClass({
-  propTypes: {
+class Column extends React.Component {
+  static propTypes = {
     offset: PropTypes.shape(defaultShape),
     relative: PropTypes.bool,
     span: PropTypes.shape(defaultShape)
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      offset: {},
-      relative: true,
-      span: { large: 12 }
-    };
-  },
+  static defaultProps = {
+    offset: {},
+    relative: true,
+    span: { large: 12 }
+  };
 
-  getColumnWidths () {
+  getColumnWidths = () => {
     const colWidths = [];
     const { large, medium, small } = this.props.span;
 
@@ -46,9 +44,9 @@ const Column = React.createClass({
     }
 
     return colWidths;
-  },
+  };
 
-  getColumnOffsets () {
+  getColumnOffsets = () => {
     const offsets = [];
     const small = this.props.offset.small;
     const medium = this.props.offset.medium;
@@ -68,9 +66,9 @@ const Column = React.createClass({
     }
 
     return offsets;
-  },
+  };
 
-  render () {
+  render() {
     let className = [];
 
     // Column widths
@@ -85,6 +83,6 @@ const Column = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Column;

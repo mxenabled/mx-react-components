@@ -3,8 +3,8 @@ const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
-const ShadedAreaRectangleGroup = React.createClass({
-  propTypes: {
+class ShadedAreaRectangleGroup extends React.Component {
+  static propTypes = {
     fillColor: PropTypes.string,
     fillOpacity: PropTypes.number,
     height: PropTypes.number.isRequired,
@@ -12,17 +12,15 @@ const ShadedAreaRectangleGroup = React.createClass({
     width: PropTypes.number.isRequired,
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      fillColor: StyleConstants.Colors.FOG,
-      fillOpacity: 0.1,
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    fillColor: StyleConstants.Colors.FOG,
+    fillOpacity: 0.1,
+    translation: 'translate(0,0)'
+  };
 
-  render () {
+  render() {
     return (
       <g className='shaded-area'>
         <rect
@@ -37,6 +35,6 @@ const ShadedAreaRectangleGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 module.exports = ShadedAreaRectangleGroup;

@@ -3,8 +3,8 @@ const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
-const CirclesGroup = React.createClass({
-  propTypes: {
+class CirclesGroup extends React.Component {
+  static propTypes = {
     adjustedHeight: PropTypes.number.isRequired,
     circleColor: PropTypes.string,
     circleOverlayRadius: PropTypes.number,
@@ -17,38 +17,36 @@ const CirclesGroup = React.createClass({
     useCircleOverlay: PropTypes.bool,
     xScaleValueFunction: PropTypes.func.isRequired,
     yScaleValueFunction: PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      circleColor: StyleConstants.Colors.CHARCOAL,
-      circleOverlayRadius: 6,
-      circleRadius: 3,
-      onCircleClick: () => {},
-      shouldAnimate: true,
-      strokeWidth: 2,
-      translation: 'translate(0,0)',
-      useCircleOverlay: false
-    };
-  },
+  static defaultProps = {
+    circleColor: StyleConstants.Colors.CHARCOAL,
+    circleOverlayRadius: 6,
+    circleRadius: 3,
+    onCircleClick: () => {},
+    shouldAnimate: true,
+    strokeWidth: 2,
+    translation: 'translate(0,0)',
+    useCircleOverlay: false
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     this._animateCircles();
-  },
+  }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._animateCircles();
-  },
+  }
 
-  _animateCircles () {
+  _animateCircles = () => {
     if (this.props.shouldAnimate) {
       d3.select(this.circleGroup).selectAll('.circle').data(this.props.data).transition().attr('cy', d => {
         return this.props.yScaleValueFunction(d.y);
       });
     }
-  },
+  };
 
-  render () {
+  render() {
     const { adjustedHeight, circleOverlayRadius, circleRadius, data, shouldAnimate, translation, useCircleOverlay, xScaleValueFunction, yScaleValueFunction } = this.props;
     const preventCircleOverlapCutOff = 45;
 
@@ -99,6 +97,6 @@ const CirclesGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 module.exports = CirclesGroup;

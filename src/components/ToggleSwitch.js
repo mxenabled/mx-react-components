@@ -4,8 +4,8 @@ const Radium = require('radium');
 const StyleConstants = require('../constants/Style');
 const Icon = require('./Icon');
 
-const ToggleSwitch = React.createClass({
-  propTypes: {
+class ToggleSwitch extends React.Component {
+  static propTypes = {
     checked: PropTypes.bool,
     falseIcon: PropTypes.string,
     leftLabel: PropTypes.string,
@@ -15,26 +15,24 @@ const ToggleSwitch = React.createClass({
     showLabels: PropTypes.bool,
     styles: PropTypes.object,
     trueIcon: PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      checked: false,
-      falseIcon: 'close-skinny',
-      leftLabel: 'Off',
-      onToggle () {},
-      rightLabel: 'On',
-      showLabels: false,
-      showIcons: true,
-      trueIcon: 'check-skinny'
-    };
-  },
+  static defaultProps = {
+    checked: false,
+    falseIcon: 'close-skinny',
+    leftLabel: 'Off',
+    onToggle () {},
+    rightLabel: 'On',
+    showLabels: false,
+    showIcons: true,
+    trueIcon: 'check-skinny'
+  };
 
-  _handleToggle (event) {
+  _handleToggle = (event) => {
     this.props.onToggle(event);
-  },
+  };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -60,9 +58,9 @@ const ToggleSwitch = React.createClass({
         ) : null}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return Object.assign({}, {
       component: {
         alignItems: 'center',
@@ -123,8 +121,7 @@ const ToggleSwitch = React.createClass({
         backgroundColor: StyleConstants.Colors.ASH
       }
     }, this.props.styles);
-  }
-
-});
+  };
+}
 
 module.exports = Radium(ToggleSwitch);

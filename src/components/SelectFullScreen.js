@@ -6,8 +6,8 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const SelectFullScreen = React.createClass({
-  propTypes: {
+class SelectFullScreen extends React.Component {
+  static propTypes = {
     closeIcon: PropTypes.string,
     isFixed: PropTypes.bool,
     onChange: PropTypes.func,
@@ -19,72 +19,68 @@ const SelectFullScreen = React.createClass({
     placeholderText: PropTypes.string,
     selected: PropTypes.object,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      closeIcon: 'close',
-      isFixed: false,
-      onChange () {},
-      optionFormatter (option) {
-        return (
-          <div key={option.displayValue + option.value + '_value'} style={styles.option}>
-            {option.displayValue}
-          </div>
-        );
-      },
-      options: [],
-      optionsHeaderText: 'Select An Option',
-      placeholderText: 'Select One',
-      selected: false
-    };
-  },
+  static defaultProps = {
+    closeIcon: 'close',
+    isFixed: false,
+    onChange () {},
+    optionFormatter (option) {
+      return (
+        <div key={option.displayValue + option.value + '_value'} style={styles.option}>
+          {option.displayValue}
+        </div>
+      );
+    },
+    options: [],
+    optionsHeaderText: 'Select An Option',
+    placeholderText: 'Select One',
+    selected: false
+  };
 
-  getInitialState () {
-    return {
-      isOpen: false,
-      selected: false
-    };
-  },
+  state = {
+    isOpen: false,
+    selected: false
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
         this._handleCloseClick();
       }
     };
-  },
+  }
 
-  _handleClick () {
+  _handleClick = () => {
     this.setState({
       isOpen: true
     });
-  },
+  };
 
-  _handleCloseClick () {
+  _handleCloseClick = () => {
     this.setState({
       isOpen: false
     });
-  },
+  };
 
-  _handleOptionClick (option) {
+  _handleOptionClick = (option) => {
     this.setState({
       selected: option,
       isOpen: false
     });
 
     this.props.onChange(option);
-  },
+  };
 
-  _handleSelectChange (e) {
+  _handleSelectChange = (e) => {
     const selectedOption = this.props.options.filter(option => {
       return option.value + '' === e.target.value;
     })[0];
 
     this._handleOptionClick(selectedOption);
-  },
+  };
 
-  _renderOptions () {
+  _renderOptions = () => {
     if (this.state.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
@@ -119,9 +115,9 @@ const SelectFullScreen = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
-  render () {
+  render() {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
@@ -138,7 +134,7 @@ const SelectFullScreen = React.createClass({
       </div>
     );
   }
-});
+}
 
 const styles = {
   close: {
