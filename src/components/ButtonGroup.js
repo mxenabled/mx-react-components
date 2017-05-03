@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const Button = require('./Button');
@@ -9,16 +10,16 @@ const { buttonTypes } = require('../constants/App');
 
 class ButtonGroup extends React.Component {
   static propTypes = {
-    buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
-      ariaLabel: React.PropTypes.string,
-      icon: React.PropTypes.string,
-      onClick: React.PropTypes.func,
-      style: React.PropTypes.object,
-      text: React.PropTypes.string,
-      type: React.PropTypes.oneOf(buttonTypes)
+    buttons: PropTypes.arrayOf(PropTypes.shape({
+      'aria-label': PropTypes.string,
+      icon: PropTypes.string,
+      onClick: PropTypes.func,
+      style: PropTypes.object,
+      text: PropTypes.string,
+      type: PropTypes.oneOf(buttonTypes)
     }).isRequired),
-    primaryColor: React.PropTypes.string,
-    type: React.PropTypes.oneOf(buttonTypes)
+    primaryColor: PropTypes.string,
+    type: PropTypes.oneOf(buttonTypes)
   };
 
   static defaultProps = {
@@ -40,7 +41,7 @@ class ButtonGroup extends React.Component {
 
           return (
             <Button
-              ariaLabel={button.ariaLabel}
+              aria-label={button['aria-label']}
               icon={button.icon}
               key={i}
               onClick={isDisabled ? null : button.onClick}

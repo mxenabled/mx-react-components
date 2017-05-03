@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _merge = require('lodash/merge');
 const browser = require('bowser');
@@ -8,11 +9,11 @@ const StyleConstants = require('../constants/Style');
 
 const SimpleSlider = React.createClass({
   propTypes: {
-    disabled: React.PropTypes.bool,
-    onPercentChange: React.PropTypes.func.isRequired,
-    percent: React.PropTypes.number.isRequired,
-    selectedColor: React.PropTypes.string,
-    styles: React.PropTypes.object
+    disabled: PropTypes.bool,
+    onPercentChange: PropTypes.func.isRequired,
+    percent: PropTypes.number.isRequired,
+    selectedColor: PropTypes.string,
+    styles: PropTypes.object
   },
 
   getDefaultProps () {

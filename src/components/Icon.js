@@ -1,11 +1,12 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Icon = React.createClass({
   propTypes: {
-    elementProps: React.PropTypes.object,
-    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    style: React.PropTypes.object,
-    type: React.PropTypes.string
+    elementProps: PropTypes.object,
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    style: PropTypes.object,
+    type: PropTypes.string
   },
 
   getDefaultProps () {

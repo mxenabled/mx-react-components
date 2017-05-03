@@ -1,27 +1,32 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
+const keycode = require('keycode');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
+const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
 const SimpleSelect = React.createClass({
   propTypes: {
-    hoverColor: React.PropTypes.string,
-    iconSize: React.PropTypes.number,
-    iconStyles: React.PropTypes.object,
-    items: React.PropTypes.array.isRequired,
-    itemStyles: React.PropTypes.object,
-    menuStyles: React.PropTypes.object,
-    onScrimClick: React.PropTypes.func,
-    scrimClickOnSelect: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    styles: React.PropTypes.object
+    'aria-label': PropTypes.string,
+    hoverColor: PropTypes.string,
+    iconSize: PropTypes.number,
+    iconStyles: PropTypes.object,
+    items: PropTypes.array.isRequired,
+    itemStyles: PropTypes.object,
+    menuStyles: PropTypes.object,
+    onScrimClick: PropTypes.func,
+    scrimClickOnSelect: PropTypes.bool,
+    style: PropTypes.object,
+    styles: PropTypes.object
   },
 
   getDefaultProps () {
     return {
+      'aria-label': '',
       scrimClickOnSelect: false,
       hoverColor: StyleConstants.Colors.PRIMARY,
       items: [],
@@ -30,6 +35,8 @@ const SimpleSelect = React.createClass({
   },
 
   componentDidMount () {
+    window.addEventListener('keydown', this._handleKeyDown);
+
     if (this.props.style) {
       console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
     }
@@ -43,12 +50,23 @@ const SimpleSelect = React.createClass({
     }
   },
 
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this._handleKeyDown);
+  },
+
   _handleItemClick (item, e) {
     if (this.props.scrimClickOnSelect) {
       this.props.onScrimClick(e);
     }
 
-    item.onClick(e);
+    item.onClick(e, item);
+  },
+
+  _handleKeyDown (e) {
+    if (keycode(e) === 'esc') {
+      e.preventDefault();
+      this.props.onScrimClick();
+    }
   },
 
   render () {
@@ -56,13 +74,18 @@ const SimpleSelect = React.createClass({
 
     return (
       <div style={styles.component}>
-        <div style={styles.menu}>
+        <Listbox
+          aria-label={this.props['aria-label']}
+          style={styles.menu}
+          useGlobalKeyHandler={true}
+        >
           {this.props.children ?
             this.props.children :
             (this.props.items.map((item, i) => {
               return (
-                <div
+                <Option
                   key={i}
+                  label={item.text}
                   onClick={this._handleItemClick.bind(null, item)}
                   style={styles.item}
                 >
@@ -70,11 +93,11 @@ const SimpleSelect = React.createClass({
                     <Icon size={this.props.iconSize || 20} style={styles.icon} type={item.icon} />
                   ) : null}
                   <div style={styles.text}>{item.text}</div>
-                </div>
+                </Option>
               );
             })
           )}
-        </div>
+        </Listbox>
         <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
     );

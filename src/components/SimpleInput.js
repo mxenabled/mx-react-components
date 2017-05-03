@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
@@ -9,20 +10,20 @@ const StylesUtil = require('../utils/Styles');
 
 const Input = React.createClass({
   propTypes: {
-    baseColor: React.PropTypes.string,
-    elementProps: React.PropTypes.object,
-    focusOnLoad: React.PropTypes.bool,
-    handleResetClick: React.PropTypes.func,
-    icon: React.PropTypes.string,
-    placeholder: React.PropTypes.string,
-    rightIcon: React.PropTypes.string,
-    style: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
+    baseColor: PropTypes.string,
+    elementProps: PropTypes.object,
+    focusOnLoad: PropTypes.bool,
+    handleResetClick: PropTypes.func,
+    icon: PropTypes.string,
+    placeholder: PropTypes.string,
+    rightIcon: PropTypes.string,
+    style: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object
     ]),
-    styles: React.PropTypes.object,
-    type: React.PropTypes.string,
-    valid: React.PropTypes.bool
+    styles: PropTypes.object,
+    type: PropTypes.string,
+    valid: PropTypes.bool
   },
 
   getDefaultProps () {

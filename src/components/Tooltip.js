@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Icon = require('./Icon');
@@ -6,11 +7,11 @@ const StyleConstants = require('../constants/Style');
 
 const Tooltip = React.createClass({
   propTypes: {
-    icon: React.PropTypes.string,
-    iconSize: React.PropTypes.number,
-    placement: React.PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
-    style: React.PropTypes.object,
-    tooltipStyle: React.PropTypes.object
+    icon: PropTypes.string,
+    iconSize: PropTypes.number,
+    placement: PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
+    style: PropTypes.object,
+    tooltipStyle: PropTypes.object
   },
 
   getDefaultProps () {

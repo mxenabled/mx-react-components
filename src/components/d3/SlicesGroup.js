@@ -1,13 +1,14 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const SlicesGroup = React.createClass({
   propTypes: {
-    adjustedHeight: React.PropTypes.number.isRequired,
-    data: React.PropTypes.array.isRequired,
-    handleChartMouseOver: React.PropTypes.func.isRequired,
-    sliceWidth: React.PropTypes.number.isRequired,
-    translation: React.PropTypes.string.isRequired,
-    xScaleValueFunction: React.PropTypes.func.isRequired
+    adjustedHeight: PropTypes.number.isRequired,
+    data: PropTypes.array.isRequired,
+    handleChartMouseOver: PropTypes.func.isRequired,
+    sliceWidth: PropTypes.number.isRequired,
+    translation: PropTypes.string.isRequired,
+    xScaleValueFunction: PropTypes.func.isRequired
   },
 
   render () {

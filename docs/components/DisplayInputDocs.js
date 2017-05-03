@@ -1,6 +1,6 @@
 const React = require('react');
 
-const { DisplayInput } = require('mx-react-components');
+const { DisplayInput, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -63,11 +63,20 @@ class DisplayInputDocs extends React.Component {
           status={this.state.statusMessage}
           valid={true}
         />
+        <DisplayInput
+          childrenStyle={{ backgroundColor: Styles.Colors.PORCELAIN }}
+          label='Display Children'
+        >
+          Custom &nbsp;<span style={{ fontFamily: 'monospace' }}>children</span>
+        </DisplayInput>
 
         <h3>Usage</h3>
 
         <h5>children <label>Node</label></h5>
         <p>JSX node to be rendered in place of the standard input.</p>
+
+        <h5>childrenStyle <label>Object</label></h5>
+        <p>When providing custom children use this to to style the wrapping div.</p>
 
         <h5>hint <label>String</label></h5>
         <p>Hint text to display to user on input hover.</p>

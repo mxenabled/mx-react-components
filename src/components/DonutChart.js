@@ -1,5 +1,6 @@
 const _isEqual = require('lodash/isEqual');
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const d3 = require('d3');
 
@@ -7,33 +8,33 @@ const StyleConstants = require('../constants/Style');
 
 const DonutChart = React.createClass({
   propTypes: {
-    activeIndex: React.PropTypes.number,
-    activeOffset: React.PropTypes.number,
-    animateOnHover: React.PropTypes.bool,
-    animationDuration: React.PropTypes.number,
-    animationTypeOnLoad: React.PropTypes.oneOf(['roll', 'pop']),
-    arcWidth: React.PropTypes.number,
-    baseArcColor: React.PropTypes.string,
-    chartTotal: React.PropTypes.number,
-    children: React.PropTypes.node,
-    colors: React.PropTypes.array,
-    data: React.PropTypes.array.isRequired,
-    dataPointColors: React.PropTypes.array,
-    dataPointRadius: React.PropTypes.number,
-    dataPoints: React.PropTypes.array,
-    defaultLabelText: React.PropTypes.string,
-    defaultLabelValue: React.PropTypes.string,
-    formatter: React.PropTypes.func,
-    height: React.PropTypes.number,
-    id: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    opacity: React.PropTypes.number,
-    padAngle: React.PropTypes.number,
-    showBaseArc: React.PropTypes.bool,
-    showDataLabel: React.PropTypes.bool,
-    width: React.PropTypes.number
+    activeIndex: PropTypes.number,
+    activeOffset: PropTypes.number,
+    animateOnHover: PropTypes.bool,
+    animationDuration: PropTypes.number,
+    animationTypeOnLoad: PropTypes.oneOf(['roll', 'pop']),
+    arcWidth: PropTypes.number,
+    baseArcColor: PropTypes.string,
+    chartTotal: PropTypes.number,
+    children: PropTypes.node,
+    colors: PropTypes.array,
+    data: PropTypes.array.isRequired,
+    dataPointColors: PropTypes.array,
+    dataPointRadius: PropTypes.number,
+    dataPoints: PropTypes.array,
+    defaultLabelText: PropTypes.string,
+    defaultLabelValue: PropTypes.string,
+    formatter: PropTypes.func,
+    height: PropTypes.number,
+    id: PropTypes.string,
+    onClick: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    opacity: PropTypes.number,
+    padAngle: PropTypes.number,
+    showBaseArc: PropTypes.bool,
+    showDataLabel: PropTypes.bool,
+    width: PropTypes.number
   },
 
   getDefaultProps () {

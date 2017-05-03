@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const d3 = require('d3');
@@ -5,11 +6,11 @@ const moment = require('moment');
 
 const TimeXAxisGroup = React.createClass({
   propTypes: {
-    ticks: React.PropTypes.array.isRequired,
-    tickSize: React.PropTypes.number,
-    timeAxisFormat: React.PropTypes.string.isRequired,
-    translation: React.PropTypes.string,
-    xScaleFunction: React.PropTypes.func.isRequired
+    ticks: PropTypes.array.isRequired,
+    tickSize: PropTypes.number,
+    timeAxisFormat: PropTypes.string.isRequired,
+    translation: PropTypes.string,
+    xScaleFunction: PropTypes.func.isRequired
   },
 
   getDefaultProps () {

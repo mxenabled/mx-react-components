@@ -1,5 +1,7 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
+const _uniqueId = require('lodash/uniqueId');
 
 const StyleConstants = require('../constants/Style');
 
@@ -7,21 +9,23 @@ const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
 const Row = require('../components/grid/Row');
 
+
 class DisplayInput extends React.Component {
   static propTypes = {
-    elementProps: React.PropTypes.object,
-    hint: React.PropTypes.string,
-    isFocused: React.PropTypes.bool,
-    label: React.PropTypes.string,
-    labelStyle: React.PropTypes.object,
-    placeholder: React.PropTypes.string,
-    primaryColor: React.PropTypes.string,
-    showHint: React.PropTypes.bool,
-    status: React.PropTypes.shape({
-      type: React.PropTypes.string,
-      message: React.PropTypes.string
+    childrenStyle: PropTypes.object,
+    elementProps: PropTypes.object,
+    hint: PropTypes.string,
+    isFocused: PropTypes.bool,
+    label: PropTypes.string,
+    labelStyle: PropTypes.object,
+    placeholder: PropTypes.string,
+    primaryColor: PropTypes.string,
+    showHint: PropTypes.bool,
+    status: PropTypes.shape({
+      type: PropTypes.string,
+      message: PropTypes.string
     }),
-    valid: React.PropTypes.bool
+    valid: PropTypes.bool
   };
 
   static defaultProps = {
@@ -31,11 +35,16 @@ class DisplayInput extends React.Component {
     valid: true
   };
 
-  _isLargeOrMediumWindowSize = () => {
+  componentWillMount () {
+    this._labelId = _uniqueId('DI');
+    this._inputId = _uniqueId('DI');
+  }
+
+  _isLargeOrMediumWindowSize () {
     const windowSize = StyleConstants.getWindowSize();
 
     return windowSize === 'large' || windowSize === 'medium';
-  };
+  }
 
   render () {
     // Input properties
@@ -61,25 +70,24 @@ class DisplayInput extends React.Component {
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
-                <div>
-                  <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-                    {this.props.label}
-                  </div>
-                </div>
+                <label htmlFor={this._inputId} id={this._labelId} style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                  {this.props.label}
+                </label>
               </Column>
             ) : null }
 
             <Column relative={!hasChildren} span={inputColumn}>
               {hasChildren ? (
-                <div style={styles.children}>
+                <div style={Object.assign({}, styles.children, this.props.childrenStyle)}>
                   {this.props.children}
                 </div>
               ) : (
                 <div style={styles.inputWrapper}>
                   <input
                     {...elementProps}
+                    aria-labelledby={this.props.label ? this._labelId : null}
+                    id={this._inputId}
                     key='input'
-                    label={this.props.label}
                     style={styles.input}
                     type='text'
                   />
@@ -132,7 +140,7 @@ class DisplayInput extends React.Component {
 
       input: {
         backgroundColor: 'transparent',
-        border: '1px solid transparent',
+        border: 0,
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.LARGE,
         lineHeight: 1,
@@ -153,7 +161,10 @@ class DisplayInput extends React.Component {
 
       children: {
         alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
         display: 'flex',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: StyleConstants.Spacing.LARGE,
         padding: StyleConstants.Spacing.SMALL
       },
 

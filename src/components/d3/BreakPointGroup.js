@@ -1,14 +1,15 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const BreakPointGroup = React.createClass({
   propTypes: {
-    adjustedHeight: React.PropTypes.number.isRequired,
-    adjustedWidth: React.PropTypes.number.isRequired,
-    breakPointDate: React.PropTypes.number.isRequired,
-    breakPointLabel: React.PropTypes.string.isRequired,
-    margin: React.PropTypes.object.isRequired,
-    translation: React.PropTypes.string,
-    xScaleValueFunction: React.PropTypes.func.isRequired
+    adjustedHeight: PropTypes.number.isRequired,
+    adjustedWidth: PropTypes.number.isRequired,
+    breakPointDate: PropTypes.number.isRequired,
+    breakPointLabel: PropTypes.string.isRequired,
+    margin: PropTypes.object.isRequired,
+    translation: PropTypes.string,
+    xScaleValueFunction: PropTypes.func.isRequired
   },
 
   getDefaultProps () {
