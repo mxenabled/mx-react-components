@@ -3,7 +3,7 @@ const { Link } = require('react-router');
 
 const { Icon } = require('mx-react-components');
 
-const Header = React.createClass({
+class Header extends React.Component {
   render () {
     return (
       <div style={styles.component}>
@@ -19,7 +19,7 @@ const Header = React.createClass({
       </div>
     );
   }
-});
+}
 
 const styles = {
   component: {
