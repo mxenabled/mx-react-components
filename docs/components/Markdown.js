@@ -1,10 +1,11 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const marked = require('marked');
 
 const Markdown = React.createClass({
   propTypes: {
-    children: React.PropTypes.node,
-    lang: React.PropTypes.string
+    children: PropTypes.node,
+    lang: PropTypes.string
   },
 
   getDefaultProps () {

@@ -1,4 +1,5 @@
 const _isEqual = require('lodash/isEqual');
+const PropTypes = require('prop-types');
 const React = require('react');
 const d3 = require('d3');
 
@@ -6,29 +7,29 @@ const StyleConstants = require('../constants/Style');
 
 class Gauge extends React.Component {
   static propTypes = {
-    activeOffset: React.PropTypes.number,
-    arcWidth: React.PropTypes.number,
-    baseArcColor: React.PropTypes.string,
-    chartTotal: React.PropTypes.number,
-    children: React.PropTypes.node,
-    colors: React.PropTypes.array,
-    data: React.PropTypes.array.isRequired,
-    dataPointColors: React.PropTypes.array,
-    dataPointRadius: React.PropTypes.number,
-    dataPoints: React.PropTypes.array,
-    formatter: React.PropTypes.func,
-    height: React.PropTypes.number,
-    id: React.PropTypes.string,
-    numberLabel: React.PropTypes.string,
-    numberLabelColor: React.PropTypes.string,
-    numberOfSegments: React.PropTypes.number,
-    opacity: React.PropTypes.number,
-    padAngle: React.PropTypes.number,
-    showBaseArc: React.PropTypes.bool,
-    showDataLabel: React.PropTypes.bool,
-    textLabel: React.PropTypes.string,
-    textLabelColor: React.PropTypes.string,
-    width: React.PropTypes.number
+    activeOffset: PropTypes.number,
+    arcWidth: PropTypes.number,
+    baseArcColor: PropTypes.string,
+    chartTotal: PropTypes.number,
+    children: PropTypes.node,
+    colors: PropTypes.array,
+    data: PropTypes.array.isRequired,
+    dataPointColors: PropTypes.array,
+    dataPointRadius: PropTypes.number,
+    dataPoints: PropTypes.array,
+    formatter: PropTypes.func,
+    height: PropTypes.number,
+    id: PropTypes.string,
+    numberLabel: PropTypes.string,
+    numberLabelColor: PropTypes.string,
+    numberOfSegments: PropTypes.number,
+    opacity: PropTypes.number,
+    padAngle: PropTypes.number,
+    showBaseArc: PropTypes.bool,
+    showDataLabel: PropTypes.bool,
+    textLabel: PropTypes.string,
+    textLabelColor: PropTypes.string,
+    width: PropTypes.number
   };
 
   static defaultProps = {

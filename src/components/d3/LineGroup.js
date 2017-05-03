@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const d3 = require('d3');
@@ -6,15 +7,15 @@ const StyleConstants = require('../../constants/Style');
 
 const LineGroup = React.createClass({
   propTypes: {
-    adjustedHeight: React.PropTypes.number.isRequired,
-    dashLine: React.PropTypes.bool,
-    data: React.PropTypes.array.isRequired,
-    lineColor: React.PropTypes.string,
-    shouldAnimate: React.PropTypes.bool,
-    strokeWidth: React.PropTypes.number,
-    translation: React.PropTypes.string,
-    xScaleValueFunction: React.PropTypes.func.isRequired,
-    yScaleValueFunction: React.PropTypes.func.isRequired
+    adjustedHeight: PropTypes.number.isRequired,
+    dashLine: PropTypes.bool,
+    data: PropTypes.array.isRequired,
+    lineColor: PropTypes.string,
+    shouldAnimate: PropTypes.bool,
+    strokeWidth: PropTypes.number,
+    translation: PropTypes.string,
+    xScaleValueFunction: PropTypes.func.isRequired,
+    yScaleValueFunction: PropTypes.func.isRequired
   },
 
   getDefaultProps () {

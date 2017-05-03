@@ -1,5 +1,7 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
+const _uniqueId = require('lodash/uniqueId');
 
 const StyleConstants = require('../constants/Style');
 
@@ -9,19 +11,20 @@ const Row = require('../components/grid/Row');
 
 const DisplayInput = React.createClass({
   propTypes: {
-    elementProps: React.PropTypes.object,
-    hint: React.PropTypes.string,
-    isFocused: React.PropTypes.bool,
-    label: React.PropTypes.string,
-    labelStyle: React.PropTypes.object,
-    placeholder: React.PropTypes.string,
-    primaryColor: React.PropTypes.string,
-    showHint: React.PropTypes.bool,
-    status: React.PropTypes.shape({
-      type: React.PropTypes.string,
-      message: React.PropTypes.string
+    childrenStyle: PropTypes.object,
+    elementProps: PropTypes.object,
+    hint: PropTypes.string,
+    isFocused: PropTypes.bool,
+    label: PropTypes.string,
+    labelStyle: PropTypes.object,
+    placeholder: PropTypes.string,
+    primaryColor: PropTypes.string,
+    showHint: PropTypes.bool,
+    status: PropTypes.shape({
+      type: PropTypes.string,
+      message: PropTypes.string
     }),
-    valid: React.PropTypes.bool
+    valid: PropTypes.bool
   },
 
   getDefaultProps () {
@@ -31,6 +34,11 @@ const DisplayInput = React.createClass({
       primaryColor: StyleConstants.Colors.PRIMARY,
       valid: true
     };
+  },
+
+  componentWillMount () {
+    this._labelId = _uniqueId('DI');
+    this._inputId = _uniqueId('DI');
   },
 
   _isLargeOrMediumWindowSize () {
@@ -63,25 +71,24 @@ const DisplayInput = React.createClass({
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
-                <div>
-                  <div style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
-                    {this.props.label}
-                  </div>
-                </div>
+                <label htmlFor={this._inputId} id={this._labelId} style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                  {this.props.label}
+                </label>
               </Column>
             ) : null }
 
             <Column relative={!hasChildren} span={inputColumn}>
               {hasChildren ? (
-                <div style={styles.children}>
+                <div style={Object.assign({}, styles.children, this.props.childrenStyle)}>
                   {this.props.children}
                 </div>
               ) : (
                 <div style={styles.inputWrapper}>
                   <input
                     {...elementProps}
+                    aria-labelledby={this.props.label ? this._labelId : null}
+                    id={this._inputId}
                     key='input'
-                    label={this.props.label}
                     style={styles.input}
                     type='text'
                   />
@@ -134,7 +141,7 @@ const DisplayInput = React.createClass({
 
       input: {
         backgroundColor: 'transparent',
-        border: '1px solid transparent',
+        border: 0,
         color: StyleConstants.Colors.CHARCOAL,
         fontSize: StyleConstants.FontSizes.LARGE,
         lineHeight: 1,
@@ -155,7 +162,10 @@ const DisplayInput = React.createClass({
 
       children: {
         alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
         display: 'flex',
+        fontSize: StyleConstants.FontSizes.LARGE,
+        height: StyleConstants.Spacing.LARGE,
         padding: StyleConstants.Spacing.SMALL
       },
 

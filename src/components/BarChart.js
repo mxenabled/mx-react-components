@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const _isEqual = require('lodash/isEqual');
 const _merge = require('lodash/merge');
@@ -8,21 +9,21 @@ const StyleConstants = require('../constants/Style');
 
 const Bar = React.createClass({
   propTypes: {
-    animateOnHover: React.PropTypes.bool,
-    animationDuration: React.PropTypes.number,
-    hasNegative: React.PropTypes.bool,
-    hasPositive: React.PropTypes.bool,
-    height: React.PropTypes.number,
-    hovering: React.PropTypes.bool,
-    minBarHeight: React.PropTypes.number,
-    onClick: React.PropTypes.func,
-    onMouseOut: React.PropTypes.func,
-    onMouseOver: React.PropTypes.func,
-    radius: React.PropTypes.number,
-    value: React.PropTypes.number,
-    width: React.PropTypes.number,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+    animateOnHover: PropTypes.bool,
+    animationDuration: PropTypes.number,
+    hasNegative: PropTypes.bool,
+    hasPositive: PropTypes.bool,
+    height: PropTypes.number,
+    hovering: PropTypes.bool,
+    minBarHeight: PropTypes.number,
+    onClick: PropTypes.func,
+    onMouseOut: PropTypes.func,
+    onMouseOver: PropTypes.func,
+    radius: PropTypes.number,
+    value: PropTypes.number,
+    width: PropTypes.number,
+    x: PropTypes.number,
+    y: PropTypes.number
   },
 
   componentDidMount () {
@@ -135,27 +136,27 @@ const Bar = React.createClass({
 
 const BarChart = React.createClass({
   propTypes: {
-    animateOnHover: React.PropTypes.bool,
-    barRadius: React.PropTypes.number,
-    data: React.PropTypes.array.isRequired,
-    height: React.PropTypes.number,
-    initialSelectedData: React.PropTypes.object,
-    margin: React.PropTypes.shape({
-      top: React.PropTypes.number,
-      right: React.PropTypes.number,
-      bottom: React.PropTypes.number,
-      left: React.PropTypes.number
+    animateOnHover: PropTypes.bool,
+    barRadius: PropTypes.number,
+    data: PropTypes.array.isRequired,
+    height: PropTypes.number,
+    initialSelectedData: PropTypes.object,
+    margin: PropTypes.shape({
+      top: PropTypes.number,
+      right: PropTypes.number,
+      bottom: PropTypes.number,
+      left: PropTypes.number
     }),
-    minBarHeight: React.PropTypes.number,
-    onClick: React.PropTypes.func,
-    onHover: React.PropTypes.func,
-    showTooltips: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    threshold: React.PropTypes.number,
-    tooltipFormat: React.PropTypes.func,
-    width: React.PropTypes.number,
-    xAxis: React.PropTypes.element,
-    yAxis: React.PropTypes.element
+    minBarHeight: PropTypes.number,
+    onClick: PropTypes.func,
+    onHover: PropTypes.func,
+    showTooltips: PropTypes.bool,
+    style: PropTypes.object,
+    threshold: PropTypes.number,
+    tooltipFormat: PropTypes.func,
+    width: PropTypes.number,
+    xAxis: PropTypes.element,
+    yAxis: PropTypes.element
   },
 
   getDefaultProps () {

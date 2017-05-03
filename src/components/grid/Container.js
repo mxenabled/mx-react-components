@@ -1,9 +1,10 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Container = React.createClass({
   propTypes: {
-    fluid: React.PropTypes.bool,
-    styles: React.PropTypes.object
+    fluid: PropTypes.bool,
+    styles: PropTypes.object
   },
 
   getDefaultProps () {
