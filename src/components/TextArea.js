@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const _merge = require('lodash/merge');
@@ -6,11 +7,11 @@ const StyleConstants = require('../constants/Style');
 
 const TextArea = React.createClass({
   propTypes: {
-    elementProps: React.PropTypes.object,
-    primaryColor: React.PropTypes.string,
-    rows: React.PropTypes.number,
-    styles: React.PropTypes.object,
-    valid: React.PropTypes.bool
+    elementProps: PropTypes.object,
+    primaryColor: PropTypes.string,
+    rows: PropTypes.number,
+    styles: PropTypes.object,
+    valid: PropTypes.bool
   },
 
   getDefaultProps () {

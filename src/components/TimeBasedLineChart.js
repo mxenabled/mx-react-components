@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const d3 = require('d3');
@@ -130,12 +131,12 @@ const styles = {
 
 const HoveredDataPointGroup = React.createClass({
   propTypes: {
-    adjustedHeight: React.PropTypes.number.isRequired,
-    hoveredDataPoint: React.PropTypes.object.isRequired,
-    rangeType: React.PropTypes.string.isRequired,
-    translation: React.PropTypes.string,
-    xScaleValueFunction: React.PropTypes.func.isRequired,
-    yScaleValueFunction: React.PropTypes.func.isRequired
+    adjustedHeight: PropTypes.number.isRequired,
+    hoveredDataPoint: PropTypes.object.isRequired,
+    rangeType: PropTypes.string.isRequired,
+    translation: PropTypes.string,
+    xScaleValueFunction: PropTypes.func.isRequired,
+    yScaleValueFunction: PropTypes.func.isRequired
   },
 
   getDefaultProps () {
@@ -198,22 +199,22 @@ const HoveredDataPointGroup = React.createClass({
 // Main Component
 const TimeBasedLineChart = React.createClass({
   propTypes: {
-    breakPointDate: React.PropTypes.number,
-    breakPointLabel: React.PropTypes.string,
-    data: React.PropTypes.array.isRequired,
-    height: React.PropTypes.number,
-    hoveredDataPointDetails: React.PropTypes.array,
-    limitLineCircles: React.PropTypes.bool,
-    lineColor: React.PropTypes.string,
-    margin: React.PropTypes.object,
-    rangeType: React.PropTypes.oneOf(['day', 'month']),
-    shadeBelowZero: React.PropTypes.bool,
-    shadeFutureOnGraph: React.PropTypes.bool,
-    showBreakPoint: React.PropTypes.bool,
-    showZeroLine: React.PropTypes.bool,
-    width: React.PropTypes.number,
-    yAxisFormatter: React.PropTypes.func,
-    zeroState: React.PropTypes.node
+    breakPointDate: PropTypes.number,
+    breakPointLabel: PropTypes.string,
+    data: PropTypes.array.isRequired,
+    height: PropTypes.number,
+    hoveredDataPointDetails: PropTypes.array,
+    limitLineCircles: PropTypes.bool,
+    lineColor: PropTypes.string,
+    margin: PropTypes.object,
+    rangeType: PropTypes.oneOf(['day', 'month']),
+    shadeBelowZero: PropTypes.bool,
+    shadeFutureOnGraph: PropTypes.bool,
+    showBreakPoint: PropTypes.bool,
+    showZeroLine: PropTypes.bool,
+    width: PropTypes.number,
+    yAxisFormatter: PropTypes.func,
+    zeroState: PropTypes.node
   },
 
   getDefaultProps () {

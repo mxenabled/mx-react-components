@@ -1,4 +1,5 @@
 const _isNumber = require('lodash/isNumber');
+const PropTypes = require('prop-types');
 const { StyleRoot } = require('radium');
 const FocusTrap = require('focus-trap-react');
 const React = require('react');
@@ -12,35 +13,35 @@ const StyleConstants = require('../constants/Style');
 
 const Drawer = React.createClass({
   propTypes: {
-    animateLeftDistance: React.PropTypes.number,
-    breakPoints: React.PropTypes.shape({
-      large: React.PropTypes.number,
-      medium: React.PropTypes.number
+    animateLeftDistance: PropTypes.number,
+    breakPoints: PropTypes.shape({
+      large: PropTypes.number,
+      medium: PropTypes.number
     }),
-    buttonPrimaryColor: React.PropTypes.string,
-    closeOnScrimClick: React.PropTypes.bool,
-    contentStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
+    buttonPrimaryColor: PropTypes.string,
+    closeOnScrimClick: PropTypes.bool,
+    contentStyle: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object
     ]),
-    duration: React.PropTypes.number,
-    easing: React.PropTypes.array,
-    headerMenu: React.PropTypes.element,
-    headerStyle: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
+    duration: PropTypes.number,
+    easing: PropTypes.array,
+    headerMenu: PropTypes.element,
+    headerStyle: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.object
     ]),
-    maxWidth: React.PropTypes.number,
-    navConfig: React.PropTypes.shape({
-      label: React.PropTypes.string.isRequired,
-      onNextClick: React.PropTypes.func.isRequired,
-      onPreviousClick: React.PropTypes.func.isRequired
+    maxWidth: PropTypes.number,
+    navConfig: PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      onNextClick: PropTypes.func.isRequired,
+      onPreviousClick: PropTypes.func.isRequired
     }),
-    onClose: React.PropTypes.func.isRequired,
-    showCloseButton: React.PropTypes.bool,
-    showScrim: React.PropTypes.bool,
-    styles: React.PropTypes.object,
-    title: React.PropTypes.string
+    onClose: PropTypes.func.isRequired,
+    showCloseButton: PropTypes.bool,
+    showScrim: PropTypes.bool,
+    styles: PropTypes.object,
+    title: PropTypes.string
   },
 
   getDefaultProps () {

@@ -1,16 +1,17 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const StyleConstants = require('../../constants/Style');
 
 const ShadedAreaRectangleGroup = React.createClass({
   propTypes: {
-    fillColor: React.PropTypes.string,
-    fillOpacity: React.PropTypes.number,
-    height: React.PropTypes.number.isRequired,
-    translation: React.PropTypes.string,
-    width: React.PropTypes.number.isRequired,
-    x: React.PropTypes.number.isRequired,
-    y: React.PropTypes.number.isRequired
+    fillColor: PropTypes.string,
+    fillOpacity: PropTypes.number,
+    height: PropTypes.number.isRequired,
+    translation: PropTypes.string,
+    width: PropTypes.number.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
   },
 
   getDefaultProps () {

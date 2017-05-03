@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Icon = require('../components/Icon');
@@ -6,15 +7,15 @@ const StyleConstants = require('../constants/Style');
 
 const Menu = React.createClass({
   propTypes: {
-    alignItems: React.PropTypes.oneOf(['left', 'right']),
-    isOpen: React.PropTypes.bool,
-    items: React.PropTypes.arrayOf(React.PropTypes.shape({
-      icon: React.PropTypes.string,
-      label: React.PropTypes.string,
-      onClick: React.PropTypes.func
+    alignItems: PropTypes.oneOf(['left', 'right']),
+    isOpen: PropTypes.bool,
+    items: PropTypes.arrayOf(PropTypes.shape({
+      icon: PropTypes.string,
+      label: PropTypes.string,
+      onClick: PropTypes.func
     })).isRequired,
-    onClick: React.PropTypes.func,
-    primaryColor: React.PropTypes.string
+    onClick: PropTypes.func,
+    primaryColor: PropTypes.string
   },
 
   getDefaultProps () {

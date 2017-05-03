@@ -1,12 +1,13 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const StyleConstants = require('../constants/Style');
 
 const PageIndicator = React.createClass({
   propTypes: {
-    activeIndex: React.PropTypes.number,
-    count: React.PropTypes.number.isRequired,
-    onClick: React.PropTypes.func
+    activeIndex: PropTypes.number,
+    count: PropTypes.number.isRequired,
+    onClick: PropTypes.func
   },
 
   _handleDotClick (index = 0) {

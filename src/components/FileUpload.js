@@ -1,4 +1,5 @@
 const numeral = require('numeral');
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const StyleConstants = require('../constants/Style');
@@ -8,24 +9,24 @@ const Icon = require('./Icon');
 
 class FileUpload extends React.Component {
   static propTypes = {
-    allowedFileTypes: React.PropTypes.array,
-    imageUrl: React.PropTypes.string,
-    imageValidation: React.PropTypes.shape({
-      exactHeight: React.PropTypes.number,
-      exactWidth: React.PropTypes.number,
-      maxHeight: React.PropTypes.number,
-      maxWidth: React.PropTypes.number,
-      minHeight: React.PropTypes.number,
-      minWidth: React.PropTypes.number,
-      ratioHeight: React.PropTypes.number,
-      ratioWidth: React.PropTypes.number
+    allowedFileTypes: PropTypes.array,
+    imageUrl: PropTypes.string,
+    imageValidation: PropTypes.shape({
+      exactHeight: PropTypes.number,
+      exactWidth: PropTypes.number,
+      maxHeight: PropTypes.number,
+      maxWidth: PropTypes.number,
+      minHeight: PropTypes.number,
+      minWidth: PropTypes.number,
+      ratioHeight: PropTypes.number,
+      ratioWidth: PropTypes.number
     }),
-    maxFileSize: React.PropTypes.number,
-    onFileAdd: React.PropTypes.func.isRequired,
-    onFileRemove: React.PropTypes.func.isRequired,
-    onFileValidation: React.PropTypes.func,
-    style: React.PropTypes.object,
-    uploadedFile: React.PropTypes.any
+    maxFileSize: PropTypes.number,
+    onFileAdd: PropTypes.func.isRequired,
+    onFileRemove: PropTypes.func.isRequired,
+    onFileValidation: PropTypes.func,
+    style: PropTypes.object,
+    uploadedFile: PropTypes.any
   };
 
   state = {

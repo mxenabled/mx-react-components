@@ -1,6 +1,7 @@
 const _isEqual = require('lodash/isEqual');
 const React = require('react');
 const ReactDOM = require('react-dom');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const Icon = require('./Icon');
@@ -9,18 +10,18 @@ const StyleConstants = require('../constants/Style');
 
 const Select = React.createClass({
   propTypes: {
-    dropdownStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    onChange: React.PropTypes.func,
-    options: React.PropTypes.array,
-    optionsStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    optionStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    optionTextStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    placeholderText: React.PropTypes.string,
-    primaryColor: React.PropTypes.string,
-    scrimStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    selected: React.PropTypes.object,
-    selectedStyle: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.array]),
-    valid: React.PropTypes.bool
+    dropdownStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    onChange: PropTypes.func,
+    options: PropTypes.array,
+    optionsStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    optionStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    optionTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    placeholderText: PropTypes.string,
+    primaryColor: PropTypes.string,
+    scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    selected: PropTypes.object,
+    selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    valid: PropTypes.bool
   },
 
   getDefaultProps () {
