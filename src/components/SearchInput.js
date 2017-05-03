@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Input = require('./SimpleInput');
@@ -6,15 +7,15 @@ const StylesUtil = require('../utils/Styles');
 
 const SearchInput = React.createClass({
   propTypes: {
-    baseColor: React.PropTypes.string,
-    focusOnLoad: React.PropTypes.bool,
-    handleResetClick: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    onChange: React.PropTypes.func,
-    placeholder: React.PropTypes.string,
-    searchKeyword: React.PropTypes.string,
-    style: React.PropTypes.object,
-    styles: React.PropTypes.object
+    baseColor: PropTypes.string,
+    focusOnLoad: PropTypes.bool,
+    handleResetClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    searchKeyword: PropTypes.string,
+    style: PropTypes.object,
+    styles: PropTypes.object
   },
 
   getDefaultProps () {

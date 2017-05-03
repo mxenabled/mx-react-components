@@ -1,11 +1,12 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const RajaIcon = React.createClass({
   propTypes: {
-    elementProps: React.PropTypes.object,
-    size: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    type: React.PropTypes.string
+    elementProps: PropTypes.object,
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    type: PropTypes.string
   },
 
   getDefaultProps () {

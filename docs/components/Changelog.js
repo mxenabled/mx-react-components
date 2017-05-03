@@ -5,6 +5,37 @@ const Changelog = React.createClass({
     return (
       <div>
         <h1>Change Log</h1>
+
+        <h3>Release Candidate 5.0.0-rc.83</h3>
+        <ul>
+          <li>
+            Rename ariaLabel to aria-label to match React's naming conventions (<a href='https://github.com/mxenabled/mx-react-components/pull/561'>#561</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.82</h3>
+        <ul>
+          <li>
+            Add esc key handling to SimpleSelect (<a href='https://github.com/mxenabled/mx-react-components/pull/558'>#558</a>).
+            Use a label tag for the DisplayInput label (<a href='https://github.com/mxenabled/mx-react-components/pull/559'>#559</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.81</h3>
+        <ul>
+          <li>
+            SimpleSelect accessibility using Listbox/Option (<a href='https://github.com/mxenabled/mx-react-components/pull/556'>#556</a>)
+            (<a href='https://github.com/mxenabled/mx-react-components/pull/557'>#557</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.79</h3>
+        <ul>
+          <li>
+            DisplayInput children styles (<a href='https://github.com/mxenabled/mx-react-components/pull/555'>#555</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.77</h3>
         <ul>
           <li>

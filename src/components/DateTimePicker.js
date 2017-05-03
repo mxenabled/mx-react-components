@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const moment = require('moment-timezone/builds/moment-timezone-with-data.min');
 
@@ -14,24 +15,24 @@ const MAX_MINUTE = 59;
 
 class DatePicker extends React.Component {
   static propTypes = {
-    calendarStyle: React.PropTypes.object,
-    closeOnDateSelect: React.PropTypes.bool,
-    dateFormat: React.PropTypes.string,
-    dateIcon: React.PropTypes.string,
-    datePlaceholder: React.PropTypes.string,
-    locale: React.PropTypes.string,
-    minimumDate: React.PropTypes.number,
-    onDateSelect: React.PropTypes.func,
-    primaryColor: React.PropTypes.string,
-    selectedDate: React.PropTypes.number,
-    showIcons: React.PropTypes.bool,
-    styles: React.PropTypes.object,
-    timeFormat: React.PropTypes.string,
-    timeIcon: React.PropTypes.string,
-    timePlaceholder: React.PropTypes.string,
-    timezone: React.PropTypes.string,
-    timezoneFormat: React.PropTypes.oneOf(['abbr', 'name']),
-    timezoneNames: React.PropTypes.object
+    calendarStyle: PropTypes.object,
+    closeOnDateSelect: PropTypes.bool,
+    dateFormat: PropTypes.string,
+    dateIcon: PropTypes.string,
+    datePlaceholder: PropTypes.string,
+    locale: PropTypes.string,
+    minimumDate: PropTypes.number,
+    onDateSelect: PropTypes.func,
+    primaryColor: PropTypes.string,
+    selectedDate: PropTypes.number,
+    showIcons: PropTypes.bool,
+    styles: PropTypes.object,
+    timeFormat: PropTypes.string,
+    timeIcon: PropTypes.string,
+    timePlaceholder: PropTypes.string,
+    timezone: PropTypes.string,
+    timezoneFormat: PropTypes.oneOf(['abbr', 'name']),
+    timezoneNames: PropTypes.object
   };
 
   static defaultProps = {

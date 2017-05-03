@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _throttle = require('lodash/throttle');
 
@@ -7,17 +8,17 @@ const StyleConstants = require('../constants/Style');
 
 const RangeSelector = React.createClass({
   propTypes: {
-    defaultLowerValue: React.PropTypes.number,
-    defaultUpperValue: React.PropTypes.number,
-    formatter: React.PropTypes.func,
-    interval: React.PropTypes.number,
-    lowerBound: React.PropTypes.number,
-    onLowerDragStop: React.PropTypes.func,
-    onUpperDragStop: React.PropTypes.func,
-    presets: React.PropTypes.array,
-    selectedColor: React.PropTypes.string,
-    updateOnDrag: React.PropTypes.bool,
-    upperBound: React.PropTypes.number
+    defaultLowerValue: PropTypes.number,
+    defaultUpperValue: PropTypes.number,
+    formatter: PropTypes.func,
+    interval: PropTypes.number,
+    lowerBound: PropTypes.number,
+    onLowerDragStop: PropTypes.func,
+    onUpperDragStop: PropTypes.func,
+    presets: PropTypes.array,
+    selectedColor: PropTypes.string,
+    updateOnDrag: PropTypes.bool,
+    upperBound: PropTypes.number
   },
 
   getDefaultProps () {

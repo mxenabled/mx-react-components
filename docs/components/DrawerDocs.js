@@ -209,9 +209,9 @@ class DrawerDocs extends React.Component {
     }
 
     HeaderMenu.propTypes = {
-      handleButtonClick: React.PropTypes.func,
-      handleScrimClick: React.PropTypes.func,
-      showSimpleSelectMenu: React.PropTypes.bool
+      handleButtonClick: PropTypes.func,
+      handleScrimClick: PropTypes.func,
+      showSimpleSelectMenu: PropTypes.bool
     };
   `}
         </Markdown>
