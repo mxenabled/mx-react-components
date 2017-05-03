@@ -17,9 +17,9 @@ class ButtonGroupDocs extends React.Component {
         <div className='flex'>
           <ButtonGroup
             buttons={[
-              { ariaLabel: 'Back', icon: 'caret-left' },
-              { ariaLabel: 'March 2015 to February 2016', text: 'Mar 2015 - Feb 2016' },
-              { ariaLabel: 'Forward', icon: 'caret-right' }
+              { 'aria-label': 'Back', icon: 'caret-left' },
+              { 'aria-label': 'March 2015 to February 2016', text: 'Mar 2015 - Feb 2016' },
+              { 'aria-label': 'Forward', icon: 'caret-right' }
             ]}
             type='primaryOutline'
           />
@@ -40,9 +40,9 @@ class ButtonGroupDocs extends React.Component {
         <div>
           <ButtonGroup
             buttons={[
-              { ariaLabel: 'Download', icon: 'download' },
-              { ariaLabel: 'Search', icon: 'search' },
-              { ariaLabel: 'Add', icon: 'add' }
+              { 'aria-label': 'Download', icon: 'download' },
+              { 'aria-label': 'Search', icon: 'search' },
+              { 'aria-label': 'Add', icon: 'add' }
             ]}
             type='base'
           />
@@ -51,9 +51,9 @@ class ButtonGroupDocs extends React.Component {
         <h3>Usage</h3>
         <h5>buttons <label>Array of Objects</label></h5>
         <p>Default: An empty array</p>
-        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>ariaLabel</label>, <label>icon</label>, <label>text</label>, and <label>style</label>.</p>
+        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <label>aria-label</label>, <label>icon</label>, <label>text</label>, and <label>style</label>.</p>
         <p>A button can be disabled by adding <label>type = 'disabled'</label> but no other button types are supported within the button group.</p>
-        <p>The ariaLabel attribute for each button is used for accessibility purposes but is not required.  See the Button component documentation for more details.</p>
+        <p>The aria-label attribute for each button is used for accessibility purposes but is not required.  See the Button component documentation for more details.</p>
 
         <h5>icon <label>String</label></h5>
         <p>The name of the <a href='/components/icon'>icon</a></p>
@@ -74,9 +74,9 @@ class ButtonGroupDocs extends React.Component {
   {`
     <ButtonGroup
       buttons={[
-         { ariaLabel: 'Download', icon: 'download' },
-         { ariaLabel: 'Search', icon: 'search', type: 'disabled' },
-         { ariaLabel: 'Add', icon: 'add' }
+         { 'aria-label': 'Download', icon: 'download' },
+         { 'aria-label': 'Search', icon: 'search', type: 'disabled' },
+         { 'aria-label': 'Add', icon: 'add' }
       ]}
       type='base' />
     />

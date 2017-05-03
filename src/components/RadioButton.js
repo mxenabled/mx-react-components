@@ -1,15 +1,16 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const StyleConstants = require('../constants/Style');
 
 const RadioButton = React.createClass({
   propTypes: {
-    activeButtonStyle: React.PropTypes.object,
-    buttonStyle: React.PropTypes.object,
-    checked: React.PropTypes.bool,
-    color: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    style: React.PropTypes.object
+    activeButtonStyle: PropTypes.object,
+    buttonStyle: PropTypes.object,
+    checked: PropTypes.bool,
+    color: PropTypes.string,
+    onClick: PropTypes.func,
+    style: PropTypes.object
   },
 
   getDefaultProps () {

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
@@ -5,11 +6,11 @@ const StyleConstants = require('../constants/Style');
 
 const ProgressBar = React.createClass({
   propTypes: {
-    baseColor: React.PropTypes.string,
-    height: React.PropTypes.number,
-    percentage: React.PropTypes.number,
-    progressColor: React.PropTypes.string,
-    styles: React.PropTypes.object
+    baseColor: PropTypes.string,
+    height: PropTypes.number,
+    percentage: PropTypes.number,
+    progressColor: PropTypes.string,
+    styles: PropTypes.object
   },
 
   getDefaultProps () {

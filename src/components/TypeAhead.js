@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const Icon = require('./Icon');
@@ -8,11 +9,11 @@ const StyleConstants = require('../constants/Style');
 
 const TypeAhead = React.createClass({
   propTypes: {
-    items: React.PropTypes.array,
-    onItemRemove: React.PropTypes.func,
-    onItemSelect: React.PropTypes.func,
-    placeholderText: React.PropTypes.string,
-    preSelectedItems: React.PropTypes.array
+    items: PropTypes.array,
+    onItemRemove: PropTypes.func,
+    onItemSelect: PropTypes.func,
+    placeholderText: PropTypes.string,
+    preSelectedItems: PropTypes.array
   },
 
   getDefaultProps () {

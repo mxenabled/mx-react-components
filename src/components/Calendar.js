@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
 
@@ -8,12 +9,12 @@ const StyleConstants = require('../constants/Style');
 
 class Calendar extends React.Component {
   static propTypes = {
-    locale: React.PropTypes.string,
-    minimumDate: React.PropTypes.number,
-    onDateSelect: React.PropTypes.func,
-    primaryColor: React.PropTypes.string,
-    selectedDate: React.PropTypes.number,
-    style: React.PropTypes.object
+    locale: PropTypes.string,
+    minimumDate: PropTypes.number,
+    onDateSelect: PropTypes.func,
+    primaryColor: PropTypes.string,
+    selectedDate: PropTypes.number,
+    style: PropTypes.object
   };
 
   static defaultProps = {

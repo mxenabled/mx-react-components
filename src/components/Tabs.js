@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Radium = require('radium');
 
 const Icon = require('./Icon');
@@ -7,13 +8,13 @@ const StyleConstants = require('../constants/Style');
 
 const Tabs = React.createClass({
   propTypes: {
-    activeTabStyles: React.PropTypes.object,
-    brandColor: React.PropTypes.string,
-    onTabSelect: React.PropTypes.func.isRequired,
-    selectedTab: React.PropTypes.number,
-    showBottomBorder: React.PropTypes.bool,
-    tabs: React.PropTypes.array.isRequired,
-    useTabsInMobile: React.PropTypes.bool
+    activeTabStyles: PropTypes.object,
+    brandColor: PropTypes.string,
+    onTabSelect: PropTypes.func.isRequired,
+    selectedTab: PropTypes.number,
+    showBottomBorder: PropTypes.bool,
+    tabs: PropTypes.array.isRequired,
+    useTabsInMobile: PropTypes.bool
   },
 
   getDefaultProps () {

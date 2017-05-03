@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 
 const Spin = require('./Spin');
@@ -6,10 +7,10 @@ const StyleConstants = require('../constants/Style');
 
 const Loader = React.createClass({
   propTypes: {
-    color: React.PropTypes.string,
-    isLoading: React.PropTypes.bool,
-    isRelative: React.PropTypes.bool,
-    isSmall: React.PropTypes.bool
+    color: PropTypes.string,
+    isLoading: PropTypes.bool,
+    isRelative: PropTypes.bool,
+    isSmall: PropTypes.bool
   },
 
   getDefaultProps () {

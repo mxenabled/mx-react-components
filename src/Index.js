@@ -42,6 +42,10 @@ module.exports = {
   Tooltip: require('./components/Tooltip'),
   TypeAhead: require('./components/TypeAhead'),
 
+  // Accessibility
+  Listbox: require('./components/accessibility/Listbox').Listbox,
+  Option: require('./components/accessibility/Listbox').Option,
+
   // D3 components
   AxisGroup: require('./components/d3/AxisGroup'),
   BreakPointGroup: require('./components/d3/BreakPointGroup'),
