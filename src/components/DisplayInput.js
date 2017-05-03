@@ -9,8 +9,9 @@ const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
 const Row = require('../components/grid/Row');
 
-const DisplayInput = React.createClass({
-  propTypes: {
+
+class DisplayInput extends React.Component {
+  static propTypes = {
     childrenStyle: PropTypes.object,
     elementProps: PropTypes.object,
     hint: PropTypes.string,
@@ -25,27 +26,25 @@ const DisplayInput = React.createClass({
       message: PropTypes.string
     }),
     valid: PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      elementProps: {},
-      isFocused: false,
-      primaryColor: StyleConstants.Colors.PRIMARY,
-      valid: true
-    };
-  },
+  static defaultProps = {
+    elementProps: {},
+    isFocused: false,
+    primaryColor: StyleConstants.Colors.PRIMARY,
+    valid: true
+  };
 
   componentWillMount () {
     this._labelId = _uniqueId('DI');
     this._inputId = _uniqueId('DI');
-  },
+  }
 
   _isLargeOrMediumWindowSize () {
     const windowSize = StyleConstants.getWindowSize();
 
     return windowSize === 'large' || windowSize === 'medium';
-  },
+  }
 
   render () {
     // Input properties
@@ -117,9 +116,9 @@ const DisplayInput = React.createClass({
         </Row>
       </Container>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
     const wrapperFocus = {
       borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
@@ -209,7 +208,7 @@ const DisplayInput = React.createClass({
 
       wrapperFocus
     };
-  }
-});
+  };
+}
 
 module.exports = Radium(DisplayInput);
