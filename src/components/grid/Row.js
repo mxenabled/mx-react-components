@@ -1,7 +1,7 @@
 const React = require('react');
 
 class Row extends React.Component {
-  render() {
+  render () {
     return (
       <div className={'row'} style={{ boxSizing: 'border-box' }}>
         {this.props.children}

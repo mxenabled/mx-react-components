@@ -34,7 +34,7 @@ class DisplayInput extends React.Component {
     valid: true
   };
 
-  componentWillMount() {
+  componentWillMount () {
     this._labelId = _uniqueId('DI');
     this._inputId = _uniqueId('DI');
   }
@@ -45,7 +45,7 @@ class DisplayInput extends React.Component {
     return windowSize === 'large' || windowSize === 'medium';
   };
 
-  render() {
+  render () {
     // Input properties
     const { elementProps } = this.props;
 

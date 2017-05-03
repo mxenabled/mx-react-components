@@ -25,11 +25,11 @@ class BarTimeXAxis extends React.Component {
     transform: 'translate(0,0)'
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._renderAxis();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._renderAxis();
   }
 
@@ -60,7 +60,7 @@ class BarTimeXAxis extends React.Component {
       .style(style.path);
   };
 
-  render() {
+  render () {
     return (
       <g
         className='x-bar-time-axis'

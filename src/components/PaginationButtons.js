@@ -155,7 +155,7 @@ class PaginationButtons extends React.Component {
     return pages;
   };
 
-  render() {
+  render () {
     return (
       <ButtonGroup
         buttons={[

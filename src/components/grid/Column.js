@@ -68,7 +68,7 @@ class Column extends React.Component {
     return offsets;
   };
 
-  render() {
+  render () {
     let className = [];
 
     // Column widths

@@ -28,7 +28,7 @@ class Tabs extends React.Component {
     showMenu: false
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.selectedTab !== this.state.selectedTab) {
       this.setState({
         selectedTab: nextProps.selectedTab
@@ -116,7 +116,7 @@ class Tabs extends React.Component {
     return tabItems;
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

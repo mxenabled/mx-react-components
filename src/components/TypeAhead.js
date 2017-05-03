@@ -287,7 +287,7 @@ class TypeAhead extends React.Component {
     );
   };
 
-  render() {
+  render () {
     return (
       <div
         className='mx-typeahead'

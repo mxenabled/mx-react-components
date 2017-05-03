@@ -20,11 +20,11 @@ class GridLinesGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._renderGridLines();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._renderGridLines();
   }
 
@@ -44,7 +44,7 @@ class GridLinesGroup extends React.Component {
     d3.select(this.gridLines).call(gridLinesFunction);
   };
 
-  render() {
+  render () {
     return (
       <g
         className={this.props.axis + '-grid-line'}

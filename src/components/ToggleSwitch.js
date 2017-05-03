@@ -32,7 +32,7 @@ class ToggleSwitch extends React.Component {
     this.props.onToggle(event);
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

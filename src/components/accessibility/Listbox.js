@@ -30,13 +30,13 @@ class Listbox extends React.Component {
     useGlobalKeyHandler: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._eventTarget = this.props.useGlobalKeyHandler ? window : this.component;
     this._eventTarget.addEventListener('keydown', this._handleKeyDown);
     this._focusOption();
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this._eventTarget.removeEventListener('keydown', this._handleKeyDown);
   }
 
@@ -95,7 +95,7 @@ class Listbox extends React.Component {
     focusedIndex: this._getSelectedOptionIndex()
   };
 
-  render() {
+  render () {
     return (
       <div
         aria-label={this.props['aria-label']}

@@ -20,7 +20,7 @@ class NotifyOnScrollThreshold extends React.Component {
     thresholdMet: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._handleScroll = _throttle(this._handleScroll, 200);
 
     this.container.parentElement.addEventListener('scroll', this._handleScroll);
@@ -33,7 +33,7 @@ class NotifyOnScrollThreshold extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.container.parentElement.removeEventListener('scroll', this._handleScroll);
   }
 
@@ -53,7 +53,7 @@ class NotifyOnScrollThreshold extends React.Component {
     }
   };
 
-  render() {
+  render () {
     return (
       <div ref={(ref) => this.container = ref}>
         {this.props.children(this.state.thresholdMet, this.state.scrollPosition, this.state.scrollHeight)}

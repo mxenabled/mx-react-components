@@ -18,11 +18,11 @@ class TimeXAxisGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._renderAxis();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._renderAxis();
   }
 
@@ -38,7 +38,7 @@ class TimeXAxisGroup extends React.Component {
     d3.select(this.timeAxis).call(timeAxisFunction);
   };
 
-  render() {
+  render () {
     return (
       <g
         className='time-axis'

@@ -57,7 +57,7 @@ class Modal extends React.Component {
     showTooltip: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this._modalContent.focus();
   /*eslint-disable */
     if (this.props.hasOwnProperty('isOpen')) {
@@ -180,7 +180,7 @@ class Modal extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

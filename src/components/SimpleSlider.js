@@ -27,7 +27,7 @@ class SimpleSlider extends React.Component {
     width: 0
   };
 
-  componentDidMount() {
+  componentDidMount () {
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const width = component.clientWidth;
     const leftPixels = this.props.percent * width;
@@ -35,7 +35,7 @@ class SimpleSlider extends React.Component {
     this.setState({ width, leftPixels });
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (this.props.percent !== newProps.percent) {
       const leftPixels = newProps.percent * this.state.width;
 
@@ -85,7 +85,7 @@ class SimpleSlider extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const styles = this.styles();
     const { disabled } = this.props;
 

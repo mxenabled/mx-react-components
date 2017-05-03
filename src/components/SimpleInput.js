@@ -38,7 +38,7 @@ class Input extends React.Component {
     focus: false
   };
 
-  componentDidMount() {
+  componentDidMount () {
     StylesUtil.checkForDeprecated(this.props);
 
     if (this.props.focusOnLoad && this.input) {
@@ -62,7 +62,7 @@ class Input extends React.Component {
     if (this.props.elementProps.onBlur) this.props.elementProps.onBlur(e);
   };
 
-  render() {
+  render () {
     const { elementProps } = this.props;
     const styles = this.styles();
 

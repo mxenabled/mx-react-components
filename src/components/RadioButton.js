@@ -18,7 +18,7 @@ class RadioButton extends React.Component {
     onClick: () => {}
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

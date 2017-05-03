@@ -31,7 +31,7 @@ class PageIndicator extends React.Component {
     return dots;
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

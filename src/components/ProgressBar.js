@@ -19,7 +19,7 @@ class ProgressBar extends React.Component {
     progressColor: StyleConstants.Colors.PRIMARY
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

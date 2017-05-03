@@ -20,7 +20,7 @@ class ShadedAreaRectangleGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  render() {
+  render () {
     return (
       <g className='shaded-area'>
         <rect

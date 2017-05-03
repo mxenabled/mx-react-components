@@ -1467,7 +1467,7 @@ class Icon extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const { elementProps } = this.props;
     const styles = this.styles();
 

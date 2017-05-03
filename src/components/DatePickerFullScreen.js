@@ -39,7 +39,7 @@ class DatePickerFullScreen extends React.Component {
     useInputForSelectedDate: true
   };
 
-  componentDidMount() {
+  componentDidMount () {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
         this._handleCloseClick();
@@ -236,7 +236,7 @@ class DatePickerFullScreen extends React.Component {
     showCalendar: false
   };
 
-  render() {
+  render () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
     let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);

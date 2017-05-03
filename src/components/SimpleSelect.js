@@ -32,7 +32,7 @@ class SimpleSelect extends React.Component {
     onScrimClick () {}
   };
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('keydown', this._handleKeyDown);
 
     if (this.props.style) {
@@ -48,7 +48,7 @@ class SimpleSelect extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('keydown', this._handleKeyDown);
   }
 
@@ -67,7 +67,7 @@ class SimpleSelect extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

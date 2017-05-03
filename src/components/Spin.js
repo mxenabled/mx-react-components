@@ -14,7 +14,7 @@ class Spin extends React.Component {
     speed: 1000
   };
 
-  componentDidMount() {
+  componentDidMount () {
     const el = ReactDOM.findDOMNode(this);
     const speed = this.props.speed;
     const spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
@@ -31,7 +31,7 @@ class Spin extends React.Component {
     }, speed / 360);
   }
 
-  render() {
+  render () {
     return (
       <div className='mx-spin' style={{ display: 'inline-block' }}>
         {this.props.children}

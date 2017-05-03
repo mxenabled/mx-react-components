@@ -26,7 +26,7 @@ class LineGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  componentWillMount() {
+  componentWillMount () {
     const flatLine = d3.svg.line()
       .x(d => {
         return this.props.xScaleValueFunction(d.x);
@@ -49,11 +49,11 @@ class LineGroup extends React.Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this._animateLine();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this._animateLine();
   }
 
@@ -63,7 +63,7 @@ class LineGroup extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const { data, dashLine, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
 
     return (

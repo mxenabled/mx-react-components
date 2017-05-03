@@ -24,11 +24,11 @@ class SearchInput extends React.Component {
     placeholder: 'Search'
   };
 
-  componentWillMount() {
+  componentWillMount () {
     StylesUtil.checkForDeprecated(this.props);
   }
 
-  render() {
+  render () {
     const styles = this.styles();
 
     return (

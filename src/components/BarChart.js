@@ -26,7 +26,7 @@ class Bar extends React.Component {
     y: PropTypes.number
   };
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.animationDuration) {
       const transform = this._getTransformWithScale(0);
 
@@ -38,11 +38,11 @@ class Bar extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate (nextProps) {
     return !_isEqual(_omit(nextProps, _functions(nextProps)), _omit(this.props, _functions(this.props)));
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     if (this.props.hovering && this.props.animateOnHover) {
       const transform = this._getTransformWithScale(0.9);
 
@@ -98,7 +98,7 @@ class Bar extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const hasMinBarHeight = this.props.height === 0 && this.props.minBarHeight;
     const divisor = this.props.hasNegative && this.props.hasPositive ? 2 : 1;
 
@@ -185,15 +185,15 @@ class BarChart extends React.Component {
     hasPositive: false
   };
 
-  componentWillMount() {
+  componentWillMount () {
     this._hasPositiveOrNegativeValues();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     let transform;
 
     if (Object.keys(this.state.hoveringObj).length) {
@@ -316,7 +316,7 @@ class BarChart extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const styles = _merge({}, this.styles(), this.props.style);
     const { height, margin, width } = this.props;
     const widthMargin = width - margin.left - margin.right;

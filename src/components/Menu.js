@@ -29,7 +29,7 @@ class Menu extends React.Component {
     hoverItemIndex: null
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (!nextProps.isOpen) {
       this.setState({
         hoverItemIndex: null
@@ -77,7 +77,7 @@ class Menu extends React.Component {
     });
   };
 
-  render() {
+  render () {
     const { isOpen, alignItems } = this.props;
     const styles = this.styles();
 
