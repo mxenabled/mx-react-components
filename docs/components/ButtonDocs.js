@@ -53,7 +53,7 @@ class ButtonDocs extends React.Component {
         <br /><br />
         <div className='flex'>
           <Button icon='add'>Icon</Button>
-          <Button ariaLabel='delete' icon='delete' style={style} />
+          <Button aria-label='delete' icon='delete' style={style} />
         </div>
         <br /><br />
         <div className='flex'>
@@ -77,7 +77,7 @@ class ButtonDocs extends React.Component {
         <h5>actionText <label>String</label></h5>
         <p>The button text when isActive is true. If not defined, a spinner without text is shown.</p>
 
-        <h5>ariaLabel <label>String</label></h5>
+        <h5>aria-label <label>String</label></h5>
         <p>If defined, adds an aria-label attribute equal to the supplied value on the button element for accessibility.</p>
         <p><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute'>aria-label documentation</a></p>
 
@@ -99,7 +99,7 @@ class ButtonDocs extends React.Component {
         <h3>Example</h3>
         <Markdown>
   {`
-    <Button ariaLabel='Submit Form' primaryColor='#333333' type='secondary' />
+    <Button aria-label='Submit Form' primaryColor='#333333' type='secondary' />
   `}
         </Markdown>
       </div>

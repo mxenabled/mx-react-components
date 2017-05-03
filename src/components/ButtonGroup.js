@@ -11,7 +11,7 @@ const { buttonTypes } = require('../constants/App');
 class ButtonGroup extends React.Component {
   static propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
-      ariaLabel: PropTypes.string,
+      'aria-label': PropTypes.string,
       icon: PropTypes.string,
       onClick: PropTypes.func,
       style: PropTypes.object,
@@ -41,7 +41,7 @@ class ButtonGroup extends React.Component {
 
           return (
             <Button
-              ariaLabel={button.ariaLabel}
+              aria-label={button['aria-label']}
               icon={button.icon}
               key={i}
               onClick={isDisabled ? null : button.onClick}

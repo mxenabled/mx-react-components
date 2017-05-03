@@ -26,6 +26,7 @@ const SimpleSelect = React.createClass({
 
   getDefaultProps () {
     return {
+      'aria-label': '',
       scrimClickOnSelect: false,
       hoverColor: StyleConstants.Colors.PRIMARY,
       items: [],

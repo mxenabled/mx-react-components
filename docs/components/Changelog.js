@@ -6,6 +6,13 @@ const Changelog = React.createClass({
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.83</h3>
+        <ul>
+          <li>
+            Rename ariaLabel to aria-label to match React's naming conventions (<a href='https://github.com/mxenabled/mx-react-components/pull/561'>#561</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.82</h3>
         <ul>
           <li>
