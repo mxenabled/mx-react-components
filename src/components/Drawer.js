@@ -11,8 +11,8 @@ const Button = require('../components/Button');
 
 const StyleConstants = require('../constants/Style');
 
-const Drawer = React.createClass({
-  propTypes: {
+class Drawer extends React.Component {
+  static propTypes = {
     animateLeftDistance: PropTypes.number,
     breakPoints: PropTypes.shape({
       large: PropTypes.number,
@@ -42,37 +42,35 @@ const Drawer = React.createClass({
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
     title: PropTypes.string
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
-      breakPoints: StyleConstants.BreakPoints,
-      closeOnScrimClick: true,
-      duration: 500,
-      easing: [0.28, 0.14, 0.34, 1.04],
-      maxWidth: 960,
-      showCloseButton: true,
-      showScrim: true,
-      title: ''
-    };
-  },
+  static defaultProps = {
+    buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
+    breakPoints: StyleConstants.BreakPoints,
+    closeOnScrimClick: true,
+    duration: 500,
+    easing: [0.28, 0.14, 0.34, 1.04],
+    maxWidth: 960,
+    showCloseButton: true,
+    showScrim: true,
+    title: ''
+  };
 
   componentWillMount () {
     this._resizeThrottled = _throttle(this._resize, 100);
-  },
+  }
 
   componentDidMount () {
     this._animateComponent({ left: this._getAnimationDistance() });
     window.addEventListener('resize', this._resizeThrottled);
     this._component.focus();
-  },
+  }
 
   componentWillUnmount () {
     window.removeEventListener('resize', this._resizeThrottled);
-  },
+  }
 
-  _getAnimationDistance () {
+  _getAnimationDistance = () => {
     if (_isNumber(this.props.animateLeftDistance)) {
       return this.props.animateLeftDistance + '%';
     }
@@ -91,21 +89,21 @@ const Drawer = React.createClass({
 
       return Math.max(newLeft, windowWidth - this.props.maxWidth);
     }
-  },
+  };
 
   /**
    * Animate the Drawer closed and then call the onClose callback.
    *
    * @returns {Promise} that is resolved when the animation finishes
    */
-  close () {
+  close = () => {
     return this._animateComponent({ left: '100%' })
       .then(() => {
         this.props.onClose();
       });
-  },
+  };
 
-  _animateComponent (transition, extraOptions) {
+  _animateComponent = (transition, extraOptions) => {
     const el = this._component;
     const options = Object.assign({
       duration: this.props.duration,
@@ -113,13 +111,13 @@ const Drawer = React.createClass({
     }, extraOptions);
 
     return Velocity(el, transition, options);
-  },
+  };
 
-  _resize () {
+  _resize = () => {
     this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
-  },
+  };
 
-  _renderNav () {
+  _renderNav = () => {
     const styles = this.styles();
 
     return (
@@ -141,7 +139,7 @@ const Drawer = React.createClass({
         />
       </nav>
     );
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -186,9 +184,9 @@ const Drawer = React.createClass({
         </FocusTrap>
       </ StyleRoot>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       component: {
         border: '1px solid ' + StyleConstants.Colors.FOG,
@@ -295,7 +293,7 @@ const Drawer = React.createClass({
         width: 1
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = Drawer;

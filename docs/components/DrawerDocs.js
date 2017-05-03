@@ -4,52 +4,49 @@ const { Button, Drawer, HeaderMenu } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const DrawerDocs = React.createClass({
+class DrawerDocs extends React.Component {
+  state = {
+    demoDrawerOpen: false,
+    currentPage: 3,
+    totalPages: 8,
+    showSimpleSelectMenu: false
+  };
 
-  getInitialState () {
-    return {
-      demoDrawerOpen: false,
-      currentPage: 3,
-      totalPages: 8,
-      showSimpleSelectMenu: false
-    };
-  },
-
-  _handleDemoButtonClick () {
+  _handleDemoButtonClick = () => {
     this.setState({
       demoDrawerOpen: true
     });
-  },
+  };
 
-  _handleDrawerClose () {
+  _handleDrawerClose = () => {
     this.setState({
       demoDrawerOpen: false
     });
-  },
+  };
 
-  _handlePreviousClick () {
+  _handlePreviousClick = () => {
     if (this.state.currentPage > 1) {
       this.setState({
         currentPage: this.state.currentPage - 1
       });
     }
-  },
+  };
 
-  _handleNextClick () {
+  _handleNextClick = () => {
     if (this.state.currentPage < this.state.totalPages) {
       this.setState({
         currentPage: this.state.currentPage + 1
       });
     }
-  },
+  };
 
-  _handleSimpleSelectClick () {
+  _handleSimpleSelectClick = () => {
     this.setState({
       showMenu: !this.state.showMenu
     });
-  },
+  };
 
-  _renderDrawer () {
+  _renderDrawer = () => {
     const styles = this.styles();
 
     return (
@@ -71,7 +68,7 @@ const DrawerDocs = React.createClass({
       </Drawer>
 
     );
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -220,9 +217,9 @@ const DrawerDocs = React.createClass({
         </Markdown>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       content: {
         padding: 60,
@@ -252,7 +249,7 @@ const DrawerDocs = React.createClass({
         marginBottom: 0
       }
     };
-  }
-});
+  };
+}
 
 module.exports = DrawerDocs;
