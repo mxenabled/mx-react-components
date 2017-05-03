@@ -5,24 +5,21 @@ const Spin = require('./Spin');
 
 const StyleConstants = require('../constants/Style');
 
-const Loader = React.createClass({
-  propTypes: {
+class Loader extends React.Component {
+  static propTypes = {
     color: PropTypes.string,
     isLoading: PropTypes.bool,
     isRelative: PropTypes.bool,
     isSmall: PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      color: StyleConstants.Colors.PRIMARY,
-      isLoading: false,
-      isRelative: false,
-      isSmall: false,
-      children: 'LOADING...'
-    };
-  },
-
+  static defaultProps = {
+    color: StyleConstants.Colors.PRIMARY,
+    isLoading: false,
+    isRelative: false,
+    isSmall: false,
+    children: 'LOADING...'
+  };
 
   render () {
     if (this.props.isLoading) {
@@ -88,7 +85,7 @@ const Loader = React.createClass({
       );
     }
   }
-});
+}
 
 
 module.exports = Loader;
