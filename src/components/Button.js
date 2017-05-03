@@ -12,8 +12,8 @@ const { buttonTypes } = require('../constants/App');
 
 class Button extends React.Component {
   static propTypes = {
-    actionText: PropTypes.string,
     'aria-label': PropTypes.string,
+    actionText: PropTypes.string,
     icon: PropTypes.string,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
