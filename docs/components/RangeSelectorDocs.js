@@ -4,7 +4,7 @@ const { RangeSelector } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const RangeSelectorDocs = React.createClass({
+class RangeSelectorDocs extends React.Component {
   render () {
     return (
       <div>
@@ -134,6 +134,6 @@ const RangeSelectorDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = RangeSelectorDocs;

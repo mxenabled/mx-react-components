@@ -4,7 +4,7 @@ const { MessageBox, Button, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const MessageBoxDocs = React.createClass({
+class MessageBoxDocs extends React.Component {
   render () {
     const styles = this.styles();
 
@@ -75,9 +75,9 @@ const MessageBoxDocs = React.createClass({
         </Markdown>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       messageBoxContents: {
         color: Styles.Colors.CHARCOAL,
@@ -92,7 +92,7 @@ const MessageBoxDocs = React.createClass({
         }
       }
     };
-  }
-});
+  };
+}
 
 module.exports = MessageBoxDocs;

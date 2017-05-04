@@ -4,17 +4,15 @@ const { PaginationButtons } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const PaginationButtonsDocs = React.createClass({
-  getInitialState () {
-    return {
-      currentPage: 4,
-      totalPages: 20
-    };
-  },
+class PaginationButtonsDocs extends React.Component {
+  state = {
+    currentPage: 4,
+    totalPages: 20
+  };
 
-  _handleButtonClick (nextPage) {
+  _handleButtonClick = (nextPage) => {
     this.setState({ currentPage: nextPage });
-  },
+  };
 
   render () {
     return (
@@ -63,6 +61,6 @@ const PaginationButtonsDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = PaginationButtonsDocs;

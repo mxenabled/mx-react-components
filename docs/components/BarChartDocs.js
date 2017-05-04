@@ -28,27 +28,23 @@ for (let i = 0; i < 12; i++) {
 
 chartData[4].value = 0;
 
-const BarChartDocs = React.createClass({
+class BarChartDocs extends React.Component {
+  state = {
+    buttonIsActive: false,
+    spinnerIsActive: false
+  };
 
-  getInitialState () {
-    return {
-      buttonIsActive: false,
-      spinnerIsActive: false
-    };
-  },
-
-  _handleButtonClick () {
+  _handleButtonClick = () => {
     this.setState({
       buttonIsActive: !this.state.buttonIsActive
     });
-  },
+  };
 
-  _handleSpinnerClick () {
+  _handleSpinnerClick = () => {
     this.setState({
       spinnerIsActive: !this.state.spinnerIsActive
     });
-  },
-
+  };
 
   render () {
     const styles = this.styles();
@@ -216,9 +212,9 @@ const BarChartDocs = React.createClass({
       </div>
 
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       demoHeader: {
         marginBottom: 20
@@ -229,7 +225,7 @@ const BarChartDocs = React.createClass({
         }
       }
     };
-  }
-});
+  };
+}
 
 module.exports = BarChartDocs;
