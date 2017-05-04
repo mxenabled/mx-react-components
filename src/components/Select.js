@@ -293,6 +293,7 @@ class Select extends React.Component {
       option: {
         display: 'flex',
         alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
         cursor: 'pointer',
         backgroundColor: StyleConstants.Colors.WHITE,
         padding: 10,
