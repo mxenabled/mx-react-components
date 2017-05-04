@@ -247,8 +247,7 @@ class Select extends React.Component {
           fontSize: StyleConstants.FontSizes.MEDIUM,
           padding: '8px 10px',
           position: 'relative',
-          boxSizing: 'border-box',
-          outline: 'none'
+          boxSizing: 'border-box'
         }, this.props.dropdownStyle),
       select: {
         position: 'absolute',
