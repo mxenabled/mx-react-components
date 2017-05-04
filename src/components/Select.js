@@ -6,6 +6,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 const Icon = require('./Icon');
+const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
@@ -52,28 +53,40 @@ class Select extends React.Component {
     }
   };
 
+  _handleKeyDown = (e) => {
+    switch (keycode(e)) {
+      case 'esc':
+        e.preventDefault();
+        e.stopPropagation();
+        this._handleScrimClick();
+        this.component.focus();
+        break;
+      case 'enter':
+      case 'space':
+        if (e.target === this.component) {
+          e.preventDefault();
+          e.stopPropagation();
+          this._toggle();
+        }
+        break;
+    }
+  };
+
   _handleScrimClick = () => {
     this.setState({
       isOpen: false,
-      highlightedValue: null,
       hoverItem: null
     });
-  };
-
-  _handleClick = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+    this.component.focus();
   };
 
   _handleOptionClick = (option) => {
     this.setState({
       selected: option,
       isOpen: false,
-      highlightedValue: option,
       hoverItem: null
     });
-
+    this.component.focus();
     this.props.onChange(option);
   };
 
@@ -89,42 +102,6 @@ class Select extends React.Component {
     })[0];
 
     this._handleOptionClick(selectedOption);
-  };
-
-  _handleInputKeyDown = (e) => {
-    const highlightedValue = this.state.highlightedValue;
-
-    if (keycode(e) === 'enter' && highlightedValue) {
-      this._handleOptionClick(highlightedValue);
-    }
-
-    if (keycode(e) === 'down') {
-      e.preventDefault();
-
-      const nextIndex = this.props.options.indexOf(highlightedValue) + 1;
-
-      if (nextIndex < this.props.options.length) {
-        this.setState({
-          highlightedValue: this.props.options[nextIndex]
-        });
-
-        this._scrollListDown(nextIndex);
-      }
-    }
-
-    if (keycode(e) === 'up') {
-      e.preventDefault();
-
-      const previousIndex = this.props.options.indexOf(highlightedValue) - 1;
-
-      if (previousIndex > -1) {
-        this.setState({
-          highlightedValue: this.props.options[previousIndex]
-        });
-
-        this._scrollListUp(previousIndex);
-      }
-    }
   };
 
   _scrollListDown = (nextIndex) => {
@@ -145,6 +122,12 @@ class Select extends React.Component {
     if (heightFromBottom > ul.clientHeight) {
       ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
     }
+  };
+
+  _toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   };
 
   _renderScrim = () => {
@@ -175,18 +158,26 @@ class Select extends React.Component {
         );
       } else {
         return (
-          <ul className='mx-select-options' ref={(ref) => this.optionList = ref} style={styles.options}>
+          <Listbox
+            aria-label={this.props.placeholderText}
+            className='mx-select-options'
+            ref={(ref) => this.optionList = ref}
+            style={styles.options}
+            useGlobalKeyHandler={true}
+          >
             {this.props.options.map(option => {
               return (
-                <li
+                <Option
                   className='mx-select-option'
+                  isSelected={option === this.state.selected}
                   key={option.displayValue + option.value}
+                  label={option.displayValue}
                   onClick={this._handleOptionClick.bind(null, option)}
                   onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,
-                    _isEqual(option, this.state.highlightedValue) ? styles.activeItem : null,
+                    _isEqual(option, this.state.selected) ? styles.activeItem : null,
                     this.getBackgroundColor(option)
                   )}
                 >
@@ -198,11 +189,11 @@ class Select extends React.Component {
                     />
                   ) : null}
                   <div style={styles.optionText}>{option.displayValue}</div>
-                  {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} type='check' /> : null }
-                </li>
+                  {_isEqual(option, this.state.selected) ? <Icon size={20} type='check' /> : null }
+                </Option>
               );
             })}
-          </ul>
+          </Listbox>
         );
       }
     } else {
@@ -217,8 +208,9 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
-          onClick={this._handleClick}
-          onKeyDown={this._handleInputKeyDown}
+          onClick={this._toggle}
+          onKeyDown={this._handleKeyDown}
+          ref={ref => this.component = ref}
           style={styles.component}
           tabIndex='0'
         >
