@@ -51,6 +51,7 @@ class DisplayInputDocs extends React.Component {
         <h3>Demo</h3>
         <DisplayInput
           elementProps={{
+            id: 'input-id',
             onBlur: this._handleInputStatusMessage,
             onFocus: this._handleInputFocus,
             onMouseOut: this._handleInputHideHint,
