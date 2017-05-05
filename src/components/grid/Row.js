@@ -1,6 +1,6 @@
 const React = require('react');
 
-const Row = React.createClass({
+class Row extends React.Component {
   render () {
     return (
       <div className={'row'} style={{ boxSizing: 'border-box' }}>
@@ -8,6 +8,6 @@ const Row = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Row;

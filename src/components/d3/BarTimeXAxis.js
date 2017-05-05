@@ -7,8 +7,8 @@ const _merge = require('lodash/merge');
 
 const StyleConstants = require('../../constants/Style');
 
-const BarTimeXAxis = React.createClass({
-  propTypes: {
+class BarTimeXAxis extends React.Component {
+  static propTypes = {
     style: PropTypes.object,
     tickRange: PropTypes.array,
     tickSize: PropTypes.number,
@@ -16,26 +16,24 @@ const BarTimeXAxis = React.createClass({
     timeAxisFormat: PropTypes.string.isRequired,
     transform: PropTypes.string,
     xScaleFunction: PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      style: {},
-      tickSize: 6,
-      tickValues: null,
-      transform: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    style: {},
+    tickSize: 6,
+    tickValues: null,
+    transform: 'translate(0,0)'
+  };
 
   componentDidMount () {
     this._renderAxis();
-  },
+  }
 
   componentDidUpdate () {
     this._renderAxis();
-  },
+  }
 
-  _renderAxis () {
+  _renderAxis = () => {
     const timeAxisFunction = d3.svg.axis()
       .scale(this.props.xScaleFunction)
       .tickValues(this.props.tickValues)
@@ -47,9 +45,9 @@ const BarTimeXAxis = React.createClass({
     d3.select(this.timeAxis).call(timeAxisFunction);
 
     this._styleChart();
-  },
+  };
 
-  _styleChart () {
+  _styleChart = () => {
     const style = _merge({}, this.styles(), this.props.style);
     const axis = d3.select(this.timeAxis);
 
@@ -60,7 +58,7 @@ const BarTimeXAxis = React.createClass({
     // Style x axis path
     axis.selectAll('path')
       .style(style.path);
-  },
+  };
 
   render () {
     return (
@@ -70,9 +68,9 @@ const BarTimeXAxis = React.createClass({
         transform={this.props.transform}
       />
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       text: {
         fill: StyleConstants.Colors.ASH,
@@ -86,7 +84,7 @@ const BarTimeXAxis = React.createClass({
         fill: 'none'
       }
     };
-  }
-});
+  };
+}
 
 module.exports = BarTimeXAxis;

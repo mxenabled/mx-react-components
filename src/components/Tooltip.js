@@ -5,43 +5,39 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const Tooltip = React.createClass({
-  propTypes: {
+class Tooltip extends React.Component {
+  static propTypes = {
     icon: PropTypes.string,
     iconSize: PropTypes.number,
     placement: PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
     style: PropTypes.object,
     tooltipStyle: PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      icon: 'info',
-      iconSize: 20,
-      placement: 'top',
-      tooltipStyle: {}
-    };
-  },
+  static defaultProps = {
+    icon: 'info',
+    iconSize: 20,
+    placement: 'top',
+    tooltipStyle: {}
+  };
 
-  getInitialState () {
-    return {
-      showTooltip: false
-    };
-  },
+  state = {
+    showTooltip: false
+  };
 
-  _handleInfoMouseEnter () {
+  _handleInfoMouseEnter = () => {
     this.setState({
       showTooltip: true
     });
-  },
+  };
 
-  _handleInfoMouseLeave () {
+  _handleInfoMouseLeave = () => {
     this.setState({
       showTooltip: false
     });
-  },
+  };
 
-  _getPosition () {
+  _getPosition = () => {
     const offSet = this.props.iconSize + 5;
     const width = this.props.tooltipStyle.width || 200;
 
@@ -75,7 +71,7 @@ const Tooltip = React.createClass({
       default:
         return null;
     }
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -97,9 +93,9 @@ const Tooltip = React.createClass({
         />
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({}, {
         display: 'inline-block',
@@ -127,7 +123,7 @@ const Tooltip = React.createClass({
         this._getPosition(),
         this.props.tooltipStyle)
     };
-  }
-});
+  };
+}
 
 module.exports = Tooltip;

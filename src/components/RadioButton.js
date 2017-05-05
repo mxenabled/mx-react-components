@@ -3,22 +3,20 @@ const React = require('react');
 
 const StyleConstants = require('../constants/Style');
 
-const RadioButton = React.createClass({
-  propTypes: {
+class RadioButton extends React.Component {
+  static propTypes = {
     activeButtonStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
     checked: PropTypes.bool,
     color: PropTypes.string,
     onClick: PropTypes.func,
     style: PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      color: StyleConstants.Colors.PRIMARY,
-      onClick: () => {}
-    };
-  },
+  static defaultProps = {
+    color: StyleConstants.Colors.PRIMARY,
+    onClick: () => {}
+  };
 
   render () {
     const styles = this.styles();
@@ -31,9 +29,9 @@ const RadioButton = React.createClass({
         <div style={styles.children}>{this.props.children}</div>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: Object.assign({}, {
         cursor: 'pointer',
@@ -58,7 +56,7 @@ const RadioButton = React.createClass({
         backgroundColor: this.props.color
       }, this.props.activeButtonStyle)
     };
-  }
-});
+  };
+}
 
 module.exports = RadioButton;

@@ -3,20 +3,20 @@ const React = require('react');
 
 const StyleConstants = require('../constants/Style');
 
-const PageIndicator = React.createClass({
-  propTypes: {
+class PageIndicator extends React.Component {
+  static propTypes = {
     activeIndex: PropTypes.number,
     count: PropTypes.number.isRequired,
     onClick: PropTypes.func
-  },
+  };
 
-  _handleDotClick (index = 0) {
+  _handleDotClick = (index = 0) => {
     if (this.props.onClick) {
       this.props.onClick(index);
     }
-  },
+  };
 
-  _renderDots () {
+  _renderDots = () => {
     const styles = this.styles();
     const dots = [];
 
@@ -29,7 +29,7 @@ const PageIndicator = React.createClass({
     }
 
     return dots;
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -39,9 +39,9 @@ const PageIndicator = React.createClass({
         {this._renderDots()}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       component: {
         textAlign: 'center',
@@ -61,7 +61,7 @@ const PageIndicator = React.createClass({
         backgroundColor: StyleConstants.Colors.CHARCOAL
       }
     };
-  }
-});
+  };
+}
 
 module.exports = PageIndicator;

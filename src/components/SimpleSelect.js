@@ -9,8 +9,8 @@ const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
-const SimpleSelect = React.createClass({
-  propTypes: {
+class SimpleSelect extends React.Component {
+  static propTypes = {
     'aria-label': PropTypes.string,
     hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
@@ -22,17 +22,15 @@ const SimpleSelect = React.createClass({
     scrimClickOnSelect: PropTypes.bool,
     style: PropTypes.object,
     styles: PropTypes.object
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      'aria-label': '',
-      scrimClickOnSelect: false,
-      hoverColor: StyleConstants.Colors.PRIMARY,
-      items: [],
-      onScrimClick () {}
-    };
-  },
+  static defaultProps = {
+    'aria-label': '',
+    scrimClickOnSelect: false,
+    hoverColor: StyleConstants.Colors.PRIMARY,
+    items: [],
+    onScrimClick () {}
+  };
 
   componentDidMount () {
     window.addEventListener('keydown', this._handleKeyDown);
@@ -48,26 +46,26 @@ const SimpleSelect = React.createClass({
     if (this.props.menuStyles) {
       console.warn('The menuStyles prop is deprecated and will be removed in a future release. Please use styles.');
     }
-  },
+  }
 
   componentWillUnmount () {
     window.removeEventListener('keydown', this._handleKeyDown);
-  },
+  }
 
-  _handleItemClick (item, e) {
+  _handleItemClick = (item, e) => {
     if (this.props.scrimClickOnSelect) {
       this.props.onScrimClick(e);
     }
 
     item.onClick(e, item);
-  },
+  };
 
-  _handleKeyDown (e) {
+  _handleKeyDown = (e) => {
     if (keycode(e) === 'esc') {
       e.preventDefault();
       this.props.onScrimClick();
     }
-  },
+  };
 
   render () {
     const styles = this.styles();
@@ -101,9 +99,9 @@ const SimpleSelect = React.createClass({
         <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       component: Object.assign({
         height: 0,
@@ -156,7 +154,7 @@ const SimpleSelect = React.createClass({
         zIndex: 9
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = Radium(SimpleSelect);

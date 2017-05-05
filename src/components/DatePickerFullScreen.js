@@ -7,8 +7,8 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const DatePickerFullScreen = React.createClass({
-  propTypes: {
+class DatePickerFullScreen extends React.Component {
+  static propTypes = {
     closeIcon: PropTypes.string,
     closeOnDateSelect: PropTypes.bool,
     defaultDate: PropTypes.number,
@@ -25,31 +25,31 @@ const DatePickerFullScreen = React.createClass({
     style: PropTypes.object,
     title: PropTypes.string,
     useInputForSelectedDate: PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      closeIcon: 'close',
-      closeOnDateSelect: false,
-      format: 'MMM D, YYYY',
-      isFixed: false,
-      locale: 'en',
-      onDateSelect () {},
-      showDayBorders: false,
-      title: 'Select A Date',
-      useInputForSelectedDate: true
-    };
-  },
+  static defaultProps = {
+    closeIcon: 'close',
+    closeOnDateSelect: false,
+    format: 'MMM D, YYYY',
+    isFixed: false,
+    locale: 'en',
+    onDateSelect () {},
+    showDayBorders: false,
+    title: 'Select A Date',
+    useInputForSelectedDate: true
+  };
 
-  getInitialState () {
-    return {
+  constructor (props) {
+    super(props);
+
+    this.state = {
       currentDate: null,
-      inputValue: this._getInputValueByDate(this.props.defaultDate),
+      inputValue: this._getInputValueByDate(props.defaultDate),
       isValid: true,
-      selectedDate: this.props.defaultDate,
+      selectedDate: props.defaultDate,
       showCalendar: false
     };
-  },
+  }
 
   componentDidMount () {
     window.onkeyup = e => {
@@ -57,9 +57,9 @@ const DatePickerFullScreen = React.createClass({
         this._handleCloseClick();
       }
     };
-  },
+  }
 
-  _getInputValueByDate (date) {
+  _getInputValueByDate = (date) => {
     let inputValue = null;
 
     if (date) {
@@ -73,21 +73,21 @@ const DatePickerFullScreen = React.createClass({
     }
 
     return inputValue;
-  },
+  };
 
-  _getSelectedDate () {
+  _getSelectedDate = () => {
     const selectedDate = this.state.selectedDate;
 
     return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
-  },
+  };
 
-  _handleCloseClick () {
+  _handleCloseClick = () => {
     this.setState({
       showCalendar: false
     });
-  },
+  };
 
-  _handleDateSelect (date) {
+  _handleDateSelect = (date) => {
     if (this.props.closeOnDateSelect) {
       this._handleScrimClick();
     }
@@ -99,9 +99,9 @@ const DatePickerFullScreen = React.createClass({
     });
 
     this.props.onDateSelect(date);
-  },
+  };
 
-  _handleInputBlur (evt) {
+  _handleInputBlur = (evt) => {
     if (evt.target.value.length === 0) {
       this.props.onDateSelect(null);
 
@@ -114,15 +114,15 @@ const DatePickerFullScreen = React.createClass({
         inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
       });
     }
-  },
+  };
 
-  _handleInputChange (evt) {
+  _handleInputChange = (evt) => {
     this.setState({
       inputValue: evt.target.value
     });
-  },
+  };
 
-  _handlePreviousClick () {
+  _handlePreviousClick = () => {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
@@ -131,9 +131,9 @@ const DatePickerFullScreen = React.createClass({
     this.setState({
       currentDate
     });
-  },
+  };
 
-  _handleNextClick () {
+  _handleNextClick = () => {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
 
@@ -142,21 +142,21 @@ const DatePickerFullScreen = React.createClass({
     this.setState({
       currentDate
     });
-  },
+  };
 
-  _handleScrimClick () {
+  _handleScrimClick = () => {
     this.setState({
       showCalendar: false
     });
-  },
+  };
 
-  _toggleCalendar () {
+  _toggleCalendar = () => {
     this.setState({
       showCalendar: !this.state.showCalendar
     });
-  },
+  };
 
-  _renderMonthTable (currentDate, selectedDate) {
+  _renderMonthTable = (currentDate, selectedDate) => {
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
@@ -193,9 +193,9 @@ const DatePickerFullScreen = React.createClass({
     }
 
     return days;
-  },
+  };
 
-  _renderSelectedDate () {
+  _renderSelectedDate = () => {
     if (this.props.useInputForSelectedDate) {
       const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
 
@@ -226,9 +226,9 @@ const DatePickerFullScreen = React.createClass({
         </div>
       );
     }
-  },
+  };
 
-  _renderTitle (styles) {
+  _renderTitle = (styles) => {
     if (this.props.title) {
       return (
         <div key='title' style={styles.title}>
@@ -238,7 +238,7 @@ const DatePickerFullScreen = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
   render () {
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
@@ -314,7 +314,7 @@ const DatePickerFullScreen = React.createClass({
       </div>
     );
   }
-});
+}
 
 const styles = {
   calendarDay: {

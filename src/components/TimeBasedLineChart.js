@@ -129,21 +129,19 @@ const styles = {
   }
 };
 
-const HoveredDataPointGroup = React.createClass({
-  propTypes: {
+class HoveredDataPointGroup extends React.Component {
+  static propTypes = {
     adjustedHeight: PropTypes.number.isRequired,
     hoveredDataPoint: PropTypes.object.isRequired,
     rangeType: PropTypes.string.isRequired,
     translation: PropTypes.string,
     xScaleValueFunction: PropTypes.func.isRequired,
     yScaleValueFunction: PropTypes.func.isRequired
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      translation: 'translate(0,0)'
-    };
-  },
+  static defaultProps = {
+    translation: 'translate(0,0)'
+  };
 
   render () {
     const { adjustedHeight, hoveredDataPoint, rangeType, translation, xScaleValueFunction, yScaleValueFunction } = this.props;
@@ -194,11 +192,11 @@ const HoveredDataPointGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 // Main Component
-const TimeBasedLineChart = React.createClass({
-  propTypes: {
+class TimeBasedLineChart extends React.Component {
+  static propTypes = {
     breakPointDate: PropTypes.number,
     breakPointLabel: PropTypes.string,
     data: PropTypes.array.isRequired,
@@ -215,42 +213,41 @@ const TimeBasedLineChart = React.createClass({
     width: PropTypes.number,
     yAxisFormatter: PropTypes.func,
     zeroState: PropTypes.node
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      breakPointDate: moment().startOf('day').unix(),
-      breakPointLabel: 'Today',
-      height: 400,
-      limitLineCircles: false,
-      lineColor: StyleConstants.Colors.PRIMARY,
-      margin: styles.chartMargins,
-      rangeType: 'day',
-      shadeBelowZero: false,
-      shadeFutureOnGraph: true,
-      showBreakPoint: true,
-      showZeroLine: false,
-      width: 550,
-      yAxisFormatter (d) {
-        return numeral(d).format('0.0a');
-      },
-      zeroState: <div style={styles.zeroState}>No Data Found</div>
-    };
-  },
+  static defaultProps = {
+    breakPointDate: moment().startOf('day').unix(),
+    breakPointLabel: 'Today',
+    height: 400,
+    limitLineCircles: false,
+    lineColor: StyleConstants.Colors.PRIMARY,
+    margin: styles.chartMargins,
+    rangeType: 'day',
+    shadeBelowZero: false,
+    shadeFutureOnGraph: true,
+    showBreakPoint: true,
+    showZeroLine: false,
+    width: 550,
+    yAxisFormatter (d) {
+      return numeral(d).format('0.0a');
+    },
+    zeroState: <div style={styles.zeroState}>No Data Found</div>
+  };
 
-  getInitialState () {
-    const adjustedWidth = this.props.width - this.props.margin.right - this.props.margin.left;
-    const adjustedHeight = this.props.height - this.props.margin.top - this.props.margin.bottom;
+  constructor (props) {
+    super(props);
+    const adjustedWidth = props.width - props.margin.right - props.margin.left;
+    const adjustedHeight = props.height - props.margin.top - props.margin.bottom;
 
-    return {
+    this.state = {
       adjustedHeight,
       adjustedWidth
     };
-  },
+  }
 
   componentDidMount () {
     this._styleChart();
-  },
+  }
 
   componentWillReceiveProps (newProps) {
     if (newProps.height !== null || newProps.width !== null || newProps.margin !== null) {
@@ -266,35 +263,35 @@ const TimeBasedLineChart = React.createClass({
         adjustedWidth
       });
     }
-  },
+  }
 
   componentDidUpdate () {
     this._styleChart();
-  },
+  }
 
-  _yRangeContainsZero () {
+  _yRangeContainsZero = () => {
     const max = d3.max(this.props.data, d => d.y);
     const min = d3.min(this.props.data, d => d.y);
     const tickSpec = ChartUtils.getAxisTickSpecification(min, max);
 
     return tickSpec.min <= 0 && tickSpec.max >= 0;
-  },
+  };
 
   // Handle functions
-  _handleChartMouseLeave () {
+  _handleChartMouseLeave = () => {
     this.setState({
       hoveredDataPoint: null
     });
-  },
+  };
 
-  _handleChartMouseOver (hoveredDataPoint) {
+  _handleChartMouseOver = (hoveredDataPoint) => {
     this.setState({
       hoveredDataPoint
     });
-  },
+  };
 
   // Helper Functions
-  _getDataForLineCircles () {
+  _getDataForLineCircles = () => {
     if (this.props.limitLineCircles) {
       return this.props.data.filter((dataPoint, index) => {
         return index === 0 || index === this.props.data.length - 1 || dataPoint.x === this.props.breakPointDate;
@@ -302,9 +299,9 @@ const TimeBasedLineChart = React.createClass({
     }
 
     return this.props.data;
-  },
+  };
 
-  _getFormattedValue (value, type, format) {
+  _getFormattedValue = (value, type, format) => {
     let formattedValue = '';
 
     switch (type) {
@@ -320,57 +317,57 @@ const TimeBasedLineChart = React.createClass({
     }
 
     return formattedValue;
-  },
+  };
 
   // Translation Helpers
-  _getLineTranslation () {
+  _getLineTranslation = () => {
     return 'translate(' + this.props.margin.left + ', 10)';
-  },
+  };
 
-  _getZeroLabelTranslation () {
+  _getZeroLabelTranslation = () => {
     return 'translate(' + this.props.margin.left + ', 14)';
-  },
+  };
 
-  _getTimeAxisTranslation () {
+  _getTimeAxisTranslation = () => {
     const offSet = 10;
     const x = this.props.margin.left;
     const y = this.props.height - this.props.margin.bottom - offSet;
 
     return 'translate(' + x + ',' + y + ')';
-  },
+  };
 
-  _getVerticalLineTranslation () {
+  _getVerticalLineTranslation = () => {
     return 'translate(' + this.props.margin.left + ', -10)';
-  },
+  };
 
-  _getYAxisTranslation () {
+  _getYAxisTranslation = () => {
     const offSet = 10;
     const y = this.props.margin.top - offSet;
 
     return 'translate(' + this.props.margin.left + ',' + y + ')';
-  },
+  };
 
   // Position Helpers
-  _getSliceWidth () {
+  _getSliceWidth = () => {
     return Math.floor(this.state.adjustedWidth / this.props.data.length);
-  },
+  };
 
-  _getXScaleFunction () {
+  _getXScaleFunction = () => {
     const maxDate = this.props.data[this.props.data.length - 1].x;
     const minDate = this.props.data[0].x;
 
     return d3.time.scale()
       .range([0, this.state.adjustedWidth])
       .domain([minDate, maxDate]);
-  },
+  };
 
-  _getXScaleValue (value) {
+  _getXScaleValue = (value) => {
     const xScale = this._getXScaleFunction();
 
     return xScale(value);
-  },
+  };
 
-  _getYScaleFunction () {
+  _getYScaleFunction = () => {
     const max = d3.max(this.props.data, d => d.y);
     const min = d3.min(this.props.data, d => d.y);
     const tickSpec = ChartUtils.getAxisTickSpecification(min, max);
@@ -378,57 +375,57 @@ const TimeBasedLineChart = React.createClass({
     return d3.scale.linear()
       .range([this.state.adjustedHeight, 0])
       .domain([tickSpec.min, tickSpec.max]);
-  },
+  };
 
-  _getYScaleValue (value) {
+  _getYScaleValue = (value) => {
     const yScale = this._getYScaleFunction();
 
     return yScale(value);
-  },
+  };
 
-  _getShadedRectangleHeight () {
+  _getShadedRectangleHeight = () => {
     const calculatedHeight = this.state.adjustedHeight - this._getShadedRectangleYValue();
 
     return calculatedHeight < 0 ? 0 : calculatedHeight;
-  },
+  };
 
-  _getShadedRectangleWidth () {
+  _getShadedRectangleWidth = () => {
     const calculatedWidth = this.state.adjustedWidth - this._getShadedRectangleXValue();
 
     return calculatedWidth < 0 ? 0 : calculatedWidth;
-  },
+  };
 
-  _getShadedRectangleXValue () {
+  _getShadedRectangleXValue = () => {
     const breakPointXValue = this._getXScaleValue(this.props.breakPointDate);
 
     return breakPointXValue < 0 ? 0 : breakPointXValue;
-  },
+  };
 
-  _getShadedRectangleYValue () {
+  _getShadedRectangleYValue = () => {
     return this._getYScaleValue(0);
-  },
+  };
 
-  _getZeroLabelXValue () {
+  _getZeroLabelXValue = () => {
     const data = this.props.data;
     const maxDate = data.length ? data[data.length - 1].x : 0;
     const offSet = 15;
 
     return this._getXScaleValue(maxDate + this.props.margin.right) + offSet;
-  },
+  };
 
-  _getZeroLabelYValue () {
+  _getZeroLabelYValue = () => {
     return this._getYScaleValue(0);
-  },
+  };
 
-  _getZeroLineData () {
+  _getZeroLineData = () => {
     const data = this.props.data;
     const maxDate = data.length ? data[data.length - 1].x : 0;
     const minDate = data.length ? data[0].x : 0;
 
     return [{ x: minDate, y: 0 }, { x: maxDate, y: 0 }];
-  },
+  };
 
-  _styleChart () {
+  _styleChart = () => {
     const chart = d3.select(this.chart);
 
     // Style x axis labels
@@ -485,10 +482,10 @@ const TimeBasedLineChart = React.createClass({
 
     chart.select('text.zero-line-label')
       .style(styles.zeroLineLabel);
-  },
+  };
 
   // Render functions
-  _renderHoveredDataPointDetails () {
+  _renderHoveredDataPointDetails = () => {
     if (this.props.hoveredDataPointDetails && this.state.hoveredDataPoint) {
       return this.props.hoveredDataPointDetails.map((item, index) => {
         const value = this.state.hoveredDataPoint[item.key];
@@ -507,7 +504,7 @@ const TimeBasedLineChart = React.createClass({
     } else {
       return null;
     }
-  },
+  };
 
   render () {
     const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
@@ -648,6 +645,6 @@ const TimeBasedLineChart = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Radium(TimeBasedLineChart);

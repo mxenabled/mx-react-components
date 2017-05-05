@@ -1,15 +1,15 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const SlicesGroup = React.createClass({
-  propTypes: {
+class SlicesGroup extends React.Component {
+  static propTypes = {
     adjustedHeight: PropTypes.number.isRequired,
     data: PropTypes.array.isRequired,
     handleChartMouseOver: PropTypes.func.isRequired,
     sliceWidth: PropTypes.number.isRequired,
     translation: PropTypes.string.isRequired,
     xScaleValueFunction: PropTypes.func.isRequired
-  },
+  };
 
   render () {
     return (
@@ -31,6 +31,6 @@ const SlicesGroup = React.createClass({
       </g>
     );
   }
-});
+}
 
 module.exports = SlicesGroup;

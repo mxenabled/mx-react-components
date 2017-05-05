@@ -8,8 +8,8 @@ const StyleConstants = require('../constants/Style');
 
 const StylesUtil = require('../utils/Styles');
 
-const Input = React.createClass({
-  propTypes: {
+class Input extends React.Component {
+  static propTypes = {
     baseColor: PropTypes.string,
     elementProps: PropTypes.object,
     focusOnLoad: PropTypes.bool,
@@ -24,23 +24,19 @@ const Input = React.createClass({
     styles: PropTypes.object,
     type: PropTypes.string,
     valid: PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      baseColor: StyleConstants.Colors.PRIMARY,
-      elementProps: {},
-      focusOnLoad: false,
-      type: 'text',
-      valid: true
-    };
-  },
+  static defaultProps = {
+    baseColor: StyleConstants.Colors.PRIMARY,
+    elementProps: {},
+    focusOnLoad: false,
+    type: 'text',
+    valid: true
+  };
 
-  getInitialState () {
-    return {
-      focus: false
-    };
-  },
+  state = {
+    focus: false
+  };
 
   componentDidMount () {
     StylesUtil.checkForDeprecated(this.props);
@@ -48,23 +44,23 @@ const Input = React.createClass({
     if (this.props.focusOnLoad && this.input) {
       this.input.focus();
     }
-  },
+  }
 
-  _onFocus (e) {
+  _onFocus = (e) => {
     this.setState({
       focus: true
     });
 
     if (this.props.elementProps.onFocus) this.props.elementProps.onFocus(e);
-  },
+  };
 
-  _onBlur (e) {
+  _onBlur = (e) => {
     this.setState({
       focus: false
     });
 
     if (this.props.elementProps.onBlur) this.props.elementProps.onBlur(e);
-  },
+  };
 
   render () {
     const { elementProps } = this.props;
@@ -97,9 +93,9 @@ const Input = React.createClass({
         ) : null}
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return _merge({}, {
       wrapper: Object.assign({}, {
         padding: StyleConstants.Spacing.SMALL,
@@ -135,7 +131,7 @@ const Input = React.createClass({
         boxShadow: 'none'
       }
     }, this.props.styles);
-  }
-});
+  };
+}
 
 module.exports = Input;

@@ -7,8 +7,8 @@ const _functions = require('lodash/functions');
 
 const StyleConstants = require('../constants/Style');
 
-const Bar = React.createClass({
-  propTypes: {
+class Bar extends React.Component {
+  static propTypes = {
     animateOnHover: PropTypes.bool,
     animationDuration: PropTypes.number,
     hasNegative: PropTypes.bool,
@@ -24,7 +24,7 @@ const Bar = React.createClass({
     width: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number
-  },
+  };
 
   componentDidMount () {
     if (this.props.animationDuration) {
@@ -36,11 +36,11 @@ const Bar = React.createClass({
         .duration(this.props.animationDuration)
         .attr('transform', 'scale(1)');
     }
-  },
+  }
 
   shouldComponentUpdate (nextProps) {
     return !_isEqual(_omit(nextProps, _functions(nextProps)), _omit(this.props, _functions(this.props)));
-  },
+  }
 
   componentDidUpdate () {
     if (this.props.hovering && this.props.animateOnHover) {
@@ -54,18 +54,18 @@ const Bar = React.createClass({
           .duration(100)
           .attr('transform', 'scale(1)');
     }
-  },
+  }
 
-  _getTransformWithScale (factor) {
+  _getTransformWithScale = (factor) => {
     const centerX = 0;
     const centerY = (this.props.value > 0) ? this.props.y + this.props.height : this.props.y;
     const sx = -centerX * (factor - 1);
     const sy = -centerY * (factor - 1);
 
     return `translate(${sx},${sy}) scale(1, ${factor})`;
-  },
+  };
 
-  _drawPath ({ x, y, width, height, value, radius }) {
+  _drawPath = ({ x, y, width, height, value, radius }) => {
     if (value > 0 || (value === 0 && !this.props.hasNegative)) {
       return 'M' + x + ',' + y +
          'h' + (width - radius) +
@@ -96,7 +96,7 @@ const Bar = React.createClass({
          'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
          'Z';
     }
-  },
+  };
 
   render () {
     const hasMinBarHeight = this.props.height === 0 && this.props.minBarHeight;
@@ -132,10 +132,10 @@ const Bar = React.createClass({
       />
     );
   }
-});
+}
 
-const BarChart = React.createClass({
-  propTypes: {
+class BarChart extends React.Component {
+  static propTypes = {
     animateOnHover: PropTypes.bool,
     barRadius: PropTypes.number,
     data: PropTypes.array.isRequired,
@@ -157,45 +157,41 @@ const BarChart = React.createClass({
     width: PropTypes.number,
     xAxis: PropTypes.element,
     yAxis: PropTypes.element
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      animateOnHover: false,
-      barRadius: 3,
-      height: 300,
-      margin: {
-        top: 20,
-        right: 20,
-        bottom: 40,
-        left: 20
-      },
-      minBarHeight: 0,
-      onClick: () => {},
-      onHover: () => {},
-      style: {},
-      tooltipFormat: (val) => val,
-      width: 500,
-      showTooltips: true
-    };
-  },
+  static defaultProps = {
+    animateOnHover: false,
+    barRadius: 3,
+    height: 300,
+    margin: {
+      top: 20,
+      right: 20,
+      bottom: 40,
+      left: 20
+    },
+    minBarHeight: 0,
+    onClick: () => {},
+    onHover: () => {},
+    style: {},
+    tooltipFormat: (val) => val,
+    width: 500,
+    showTooltips: true
+  };
 
-  getInitialState () {
-    return {
-      hoveringObj: {},
-      clickedData: this.props.initialSelectedData || {},
-      hasNegative: false,
-      hasPositive: false
-    };
-  },
+  state = {
+    hoveringObj: {},
+    clickedData: this.props.initialSelectedData || {},
+    hasNegative: false,
+    hasPositive: false
+  };
 
   componentWillMount () {
     this._hasPositiveOrNegativeValues();
-  },
+  }
 
   shouldComponentUpdate (nextProps, nextState) {
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
-  },
+  }
 
   componentDidUpdate () {
     let transform;
@@ -211,9 +207,9 @@ const BarChart = React.createClass({
 
     d3.select(this.tooltip)
       .attr('transform', transform);
-  },
+  }
 
-  _hasPositiveOrNegativeValues () {
+  _hasPositiveOrNegativeValues = () => {
     let hasNegative = false;
     let hasPositive = false;
 
@@ -230,9 +226,9 @@ const BarChart = React.createClass({
       hasNegative,
       hasPositive
     });
-  },
+  };
 
-  _handleMouseOver (x, y, width, height, data) {
+  _handleMouseOver = (x, y, width, height, data) => {
     this.setState({
       hoveringObj: {
         x,
@@ -245,23 +241,23 @@ const BarChart = React.createClass({
     });
 
     this.props.onHover(data);
-  },
+  };
 
-  _handleMouseOut () {
+  _handleMouseOut = () => {
     this.setState({
       hoveringObj: {}
     });
-  },
+  };
 
-  _handleOnClick (data) {
+  _handleOnClick = (data) => {
     this.setState({
       clickedData: data
     });
 
     this.props.onClick(data);
-  },
+  };
 
-  _getTooltipX () {
+  _getTooltipX = () => {
     if (Object.keys(this.state.hoveringObj).length) {
       const margin = this.props.margin;
       const bb = this.tooltip.getBBox();
@@ -274,9 +270,9 @@ const BarChart = React.createClass({
       return hoverCX - tooltipCX;
     }
     return -1000;
-  },
+  };
 
-  _getTooltipY () {
+  _getTooltipY = () => {
     if (Object.keys(this.state.hoveringObj).length) {
       const margin = this.props.margin;
       const negativeValue = this.state.hoveringObj.value < 0;
@@ -300,9 +296,9 @@ const BarChart = React.createClass({
       }
     }
     return -1000;
-  },
+  };
 
-  _getHeight (baseHeight) {
+  _getHeight = (baseHeight) => {
     if (this.props.minBarHeight) {
       const adjuster = this.props.barRadius > this.props.minBarHeight ? this.props.barRadius : this.props.minBarHeight;
 
@@ -310,15 +306,15 @@ const BarChart = React.createClass({
     } else {
       return baseHeight;
     }
-  },
+  };
 
-  _getRadius (d) {
+  _getRadius = (d) => {
     if (d.value === 0 && this.props.minBarHeight) {
       return Math.min(this.props.barRadius, this.props.minBarHeight);
     } else {
       return this.props.barRadius;
     }
-  },
+  };
 
   render () {
     const styles = _merge({}, this.styles(), this.props.style);
@@ -436,9 +432,9 @@ const BarChart = React.createClass({
         </svg>
       </div>
     );
-  },
+  }
 
-  styles () {
+  styles = () => {
     return {
       bar: {
         fill: StyleConstants.Colors.FOG
@@ -471,7 +467,7 @@ const BarChart = React.createClass({
         strokeWidth: 1
       }
     };
-  }
-});
+  };
+}
 
 module.exports = BarChart;

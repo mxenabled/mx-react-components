@@ -20,47 +20,47 @@ const _findIndex = require('lodash/findIndex');
  *     <Option ...>Bar</Option>
  *   </Listbox>
  */
-const Listbox = React.createClass({
-  propTypes: {
+class Listbox extends React.Component {
+  static propTypes = {
     'aria-label': PropTypes.string.isRequired,
     useGlobalKeyHandler: PropTypes.bool
-  },
+  };
 
-  getDefaultProps () {
-    return {
-      useGlobalKeyHandler: false
-    };
-  },
+  static defaultProps = {
+    useGlobalKeyHandler: false
+  };
 
-  getInitialState () {
-    return {
+  constructor (props) {
+    super(props);
+
+    this.state = {
       focusedIndex: this._getSelectedOptionIndex()
     };
-  },
+  }
 
   componentDidMount () {
     this._eventTarget = this.props.useGlobalKeyHandler ? window : this.component;
     this._eventTarget.addEventListener('keydown', this._handleKeyDown);
     this._focusOption();
-  },
+  }
 
   componentWillUnmount () {
     this._eventTarget.removeEventListener('keydown', this._handleKeyDown);
-  },
+  }
 
-  _getChildren () {
+  _getChildren = () => {
     return React.Children.toArray(this.props.children);
-  },
+  };
 
-  _getSelectedOptionIndex () {
+  _getSelectedOptionIndex = () => {
     const children = this._getChildren();
     const focusedIndex = _findIndex(children, child => child.props.isSelected);
 
     // default to first
     return focusedIndex === -1 ? 0 : focusedIndex;
-  },
+  };
 
-  _handleKeyDown (e) {
+  _handleKeyDown = (e) => {
     switch (keycode(e)) {
       case 'up':
         e.preventDefault();
@@ -76,28 +76,28 @@ const Listbox = React.createClass({
         e.target.click();
         break;
     }
-  },
+  };
 
-  _focusOption () {
+  _focusOption = () => {
     const option = this.component.children[this.state.focusedIndex];
 
     if (option) setTimeout(() => option.focus());
-  },
+  };
 
-  _focusPrevious () {
+  _focusPrevious = () => {
     // go to the end if at the beginning
     const focusedIndex = this.state.focusedIndex === 0 ? this._getChildren().length : this.state.focusedIndex;
 
     this.setState({ focusedIndex: focusedIndex - 1 }, this._focusOption);
-  },
+  };
 
-  _focusNext () {
+  _focusNext = () => {
     // go to the beginning if at the end
     const focusedIndex = this.state.focusedIndex === this._getChildren().length - 1 ? -1 : this.state.focusedIndex;
 
     // focus next
     this.setState({ focusedIndex: focusedIndex + 1 }, this._focusOption);
-  },
+  };
 
   render () {
     return (
@@ -116,7 +116,7 @@ const Listbox = React.createClass({
       </div>
     );
   }
-});
+}
 
 /**
  * Option
