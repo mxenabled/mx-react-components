@@ -51,11 +51,10 @@ class Select extends React.Component {
         break;
       case 'enter':
       case 'space':
-        if (e.target === this.component) {
-          e.preventDefault();
-          e.stopPropagation();
-          this._toggle();
-        }
+        if (this.state.isOpen) return;
+        e.preventDefault();
+        e.stopPropagation();
+        this._toggle();
         break;
     }
   };
