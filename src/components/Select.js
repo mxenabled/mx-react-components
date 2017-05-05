@@ -1,8 +1,9 @@
 const _isEqual = require('lodash/isEqual');
-const React = require('react');
-const ReactDOM = require('react-dom');
+const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 const Icon = require('./Icon');
 
@@ -93,11 +94,11 @@ class Select extends React.Component {
   _handleInputKeyDown = (e) => {
     const highlightedValue = this.state.highlightedValue;
 
-    if (e.keyCode === 13 && highlightedValue) {
+    if (keycode(e) === 'enter' && highlightedValue) {
       this._handleOptionClick(highlightedValue);
     }
 
-    if (e.keyCode === 40) {
+    if (keycode(e) === 'down') {
       e.preventDefault();
 
       const nextIndex = this.props.options.indexOf(highlightedValue) + 1;
@@ -111,7 +112,7 @@ class Select extends React.Component {
       }
     }
 
-    if (e.keyCode === 38) {
+    if (keycode(e) === 'up') {
       e.preventDefault();
 
       const previousIndex = this.props.options.indexOf(highlightedValue) - 1;
