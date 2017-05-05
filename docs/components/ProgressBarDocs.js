@@ -4,7 +4,7 @@ const { ProgressBar } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const ProgressBarDocs = React.createClass({
+class ProgressBarDocs extends React.Component {
   render () {
     return (
       <div>
@@ -60,6 +60,6 @@ const ProgressBarDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = ProgressBarDocs;

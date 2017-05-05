@@ -1,6 +1,6 @@
 const React = require('react');
 
-const Changelog = React.createClass({
+class Changelog extends React.Component {
   render () {
     return (
       <div>
@@ -1405,6 +1405,6 @@ const Changelog = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Changelog;

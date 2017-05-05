@@ -4,18 +4,16 @@ const { Tabs } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const TabsDocs = React.createClass({
-  getInitialState () {
-    return {
-      selectedTab: 0
-    };
-  },
+class TabsDocs extends React.Component {
+  state = {
+    selectedTab: 0
+  };
 
-  _handleTabSelect (selectedTab) {
+  _handleTabSelect = (selectedTab) => {
     this.setState({
       selectedTab
     });
-  },
+  };
 
   render () {
     return (
@@ -84,6 +82,6 @@ const TabsDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = TabsDocs;

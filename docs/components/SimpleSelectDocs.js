@@ -4,23 +4,21 @@ const { Button, SimpleSelect } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const SimpleSelectDocs = React.createClass({
-  getInitialState () {
-    return {
-      showMenu: false
-    };
-  },
+class SimpleSelectDocs extends React.Component {
+  state = {
+    showMenu: false
+  };
 
-  _handleItemClick (e, item) {
+  _handleItemClick = (e, item) => {
     this._toggleMenu();
     alert(`You clicked ${item.text}`); // eslint-disable-line no-alert
-  },
+  };
 
-  _toggleMenu () {
+  _toggleMenu = () => {
     this.setState({
       showMenu: !this.state.showMenu
     });
-  },
+  };
 
   render () {
     return (
@@ -108,6 +106,6 @@ const SimpleSelectDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SimpleSelectDocs;

@@ -4,24 +4,22 @@ const { SearchInput } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
-const SearchInputDocs = React.createClass({
-  getInitialState () {
-    return {
-      searchKeyword: ''
-    };
-  },
+class SearchInputDocs extends React.Component {
+  state = {
+    searchKeyword: ''
+  };
 
-  _handleInputChange (e) {
+  _handleInputChange = (e) => {
     this.setState({
       searchKeyword: e.target.value
     });
-  },
+  };
 
-  _handleResetClick () {
+  _handleResetClick = () => {
     this.setState({
       searchKeyword: ''
     });
-  },
+  };
 
   render () {
     return (
@@ -69,6 +67,6 @@ const SearchInputDocs = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = SearchInputDocs;
