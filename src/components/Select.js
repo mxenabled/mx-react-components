@@ -288,7 +288,7 @@ class Select extends React.Component {
           borderRadius: '0 0 3px 3px',
           left: -1,
           right: -1,
-          marginTop: 10,
+          margin: '8px 0 0 0',
           padding: 0,
           minWidth: '100%',
           position: 'absolute',
