@@ -41,18 +41,6 @@ class Select extends React.Component {
     hoverItem: null
   };
 
-  getBackgroundColor = (option) => {
-    if (option.value === this.state.hoverItem) {
-      return {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE,
-        fill: StyleConstants.Colors.WHITE
-      };
-    } else {
-      return null;
-    }
-  };
-
   _handleKeyDown = (e) => {
     switch (keycode(e)) {
       case 'esc':
@@ -177,8 +165,7 @@ class Select extends React.Component {
                   style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,
-                    _isEqual(option, this.state.selected) ? styles.activeItem : null,
-                    this.getBackgroundColor(option)
+                    _isEqual(option, this.state.selected) ? styles.activeOption : null
                   )}
                 >
                   {option.icon ? (
@@ -236,6 +223,12 @@ class Select extends React.Component {
   }
 
   styles = () => {
+    const focusedOption = {
+      backgroundColor: this.props.primaryColor,
+      color: StyleConstants.Colors.WHITE,
+      fill: StyleConstants.Colors.WHITE
+    };
+
     return {
       component: Object.assign({},
         {
@@ -265,10 +258,6 @@ class Select extends React.Component {
           justifyContent: 'space-between',
           position: 'relative'
         }, this.props.selectedStyle),
-      activeItem: {
-        fill: this.props.primaryColor,
-        color: this.props.primaryColor
-      },
       invalid: {
         borderColor: StyleConstants.Colors.STRAWBERRY
       },
@@ -290,14 +279,22 @@ class Select extends React.Component {
           maxHeight: 260,
           overflow: 'auto'
         }, this.props.optionsStyle),
+      activeOption: {
+        fill: this.props.primaryColor,
+        color: this.props.primaryColor
+      },
       option: {
         display: 'flex',
         alignItems: 'center',
         color: StyleConstants.Colors.CHARCOAL,
         cursor: 'pointer',
         backgroundColor: StyleConstants.Colors.WHITE,
+        outline: 'none',
         padding: 10,
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+
+        ':focus': focusedOption,
+        ':hover': focusedOption
       },
       optionIcon: {
         marginRight: 5
