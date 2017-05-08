@@ -48,7 +48,18 @@ DefaultRanges.propTypes = {
   })
 };
 
-const MonthTable = ({ activeSelectDate, currentDate, getDateRangePosition, handleDateHover, handleDateSelect, isInActiveRange, minimumDate, selectedEndDate, selectedStartDate, styles }) => {
+const MonthTable = ({
+  activeSelectDate,
+  currentDate,
+  getDateRangePosition,
+  handleDateHover,
+  handleDateSelect,
+  isInActiveRange,
+  minimumDate,
+  selectedEndDate,
+  selectedStartDate,
+  styles
+}) => {
   const days = [];
   let startDate = moment.unix(currentDate).startOf('month').startOf('week');
   const endDate = moment.unix(currentDate).endOf('month').endOf('week');
@@ -367,7 +378,7 @@ class DateRangePicker extends React.Component {
                     />
                   </div>
                   <div style={styles.calendarWeek}>
-                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => {
                       return (
                         <div key={day} style={styles.calendarWeekDay}>
                           {day}
