@@ -31,6 +31,10 @@ module.exports = {
       displayValue: 'Apple'
     },
     {
+      value: 'appliances',
+      displayValue: 'Appliances'
+    },
+    {
       value: 'arrow-down',
       displayValue: 'Arrow Down'
     },
