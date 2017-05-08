@@ -37,8 +37,7 @@ class Select extends React.Component {
   state = {
     highlightedValue: null,
     isOpen: false,
-    selected: false,
-    hoverItem: null
+    selected: false
   };
 
   _handleKeyDown = (e) => {
@@ -46,7 +45,7 @@ class Select extends React.Component {
       case 'esc':
         e.preventDefault();
         e.stopPropagation();
-        this._handleScrimClick();
+        this._close();
         this.component.focus();
         break;
       case 'enter':
@@ -54,41 +53,27 @@ class Select extends React.Component {
         if (this.state.isOpen) return;
         e.preventDefault();
         e.stopPropagation();
-        this._toggle();
+        this._open();
         break;
     }
   };
 
-  _handleScrimClick = () => {
-    this.setState({
-      isOpen: false,
-      hoverItem: null
-    });
+  _close = () => {
+    this.setState({ isOpen: false });
     this.component.focus();
   };
 
-  _handleOptionClick = (option) => {
-    this.setState({
-      selected: option,
-      isOpen: false,
-      hoverItem: null
-    });
-    this.component.focus();
-    this.props.onChange(option);
+  _open = () => {
+    this.setState({ isOpen: true });
   };
 
-  _handleOptionMouseOver = (option) => {
-    this.setState({
-      hoverItem: option.value
+  _handleOptionClick = (option, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({ selected: option }, () => {
+      this._close();
+      this.props.onChange(option);
     });
-  };
-
-  _handleSelectChange = (e) => {
-    const selectedOption = this.props.options.filter(option => {
-      return option.value + '' === e.target.value;
-    })[0];
-
-    this._handleOptionClick(selectedOption);
   };
 
   _scrollListDown = (nextIndex) => {
@@ -111,12 +96,6 @@ class Select extends React.Component {
     }
   };
 
-  _toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
-
   _renderScrim = () => {
     if (this.state.isOpen) {
       const styles = this.styles();
@@ -124,7 +103,7 @@ class Select extends React.Component {
       return (
         <div
           className='mx-select-scrim'
-          onClick={this._handleScrimClick}
+          onClick={this._close}
           style={[styles.scrim, this.props.scrimStyle]}
         />
       );
@@ -160,7 +139,6 @@ class Select extends React.Component {
                   key={option.displayValue + option.value}
                   label={option.displayValue}
                   onClick={this._handleOptionClick.bind(null, option)}
-                  onMouseOver={this._handleOptionMouseOver.bind(null, option)}
                   style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,
@@ -194,7 +172,7 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
-          onClick={this._toggle}
+          onClick={this._open}
           onKeyDown={this._handleKeyDown}
           ref={ref => this.component = ref}
           style={styles.component}
