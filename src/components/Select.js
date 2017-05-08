@@ -46,7 +46,6 @@ class Select extends React.Component {
         e.preventDefault();
         e.stopPropagation();
         this._close();
-        this.component.focus();
         break;
       case 'enter':
       case 'space':
