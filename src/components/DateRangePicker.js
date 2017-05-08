@@ -175,14 +175,17 @@ class DateRangePicker extends React.Component {
   };
 
   state = {
-    currentDate: this.props.selectedStartDate || moment().unix(),
+    currentDate: this.props.selectedEndDate || moment().unix(),
     showCalendar: false
   };
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate) {
+    const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
+    const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
+
+    if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
       this.setState({
-        currentDate: newProps.selectedStartDate
+        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
       });
     }
   }
@@ -378,13 +381,19 @@ class DateRangePicker extends React.Component {
                     />
                   </div>
                   <div style={styles.calendarWeek}>
-                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => {
-                      return (
-                        <div key={day} style={styles.calendarWeekDay}>
-                          {day}
-                        </div>
-                      );
-                    })}
+                    {[{ label: 'S', value: 'Sunday' },
+                      { label: 'M', value: 'Monday' },
+                      { label: 'T', value: 'Tuesday' },
+                      { label: 'W', value: 'Wednesday' },
+                      { label: 'T', value: 'Thursday' },
+                      { label: 'F', value: 'Friday' },
+                      { label: 'S', value: 'Saturday' }].map((day) => {
+                        return (
+                          <div key={day.value} style={styles.calendarWeekDay}>
+                            {day.label}
+                          </div>
+                        );
+                      })}
                   </div>
                   <MonthTable
                     activeSelectDate={this.state.activeSelectDate}
