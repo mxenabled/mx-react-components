@@ -160,7 +160,7 @@ class Tabs extends React.Component {
         }
       },
       activeTab: {
-        cursor: 'pointer',
+        cursor: 'default',
         color: this.props.brandColor,
         borderBottom: '2px solid ' + this.props.brandColor,
 
