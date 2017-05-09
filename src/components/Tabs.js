@@ -93,6 +93,7 @@ class Tabs extends React.Component {
         />
         {this.state.showMenu ? (
           <SimpleSelect
+            hoverColor={this.props.brandColor}
             items={tabItems}
             menuStyles={styles.menu}
             onScrimClick={this._toggleMenu}
