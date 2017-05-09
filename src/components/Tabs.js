@@ -95,7 +95,6 @@ class Tabs extends React.Component {
           <SimpleSelect
             hoverColor={this.props.brandColor}
             items={tabItems}
-            menuStyles={styles.menu}
             onScrimClick={this._toggleMenu}
             showItems={this.state.showMenu}
           />
@@ -176,14 +175,6 @@ class Tabs extends React.Component {
         lineHeight: '20px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD
-      },
-      menu: {
-        boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
-        cursor: 'pointer',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        position: 'absolute'
       },
       tabsContainer: {
         display: 'flex',
