@@ -25,7 +25,6 @@ class TabsDocs extends React.Component {
 
         <h3>Demo</h3>
         <Tabs
-          activeTabStyles={{ padding: '5px 5px 25px 5px' }}
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
           showBottomBorder={false}
@@ -70,7 +69,6 @@ class TabsDocs extends React.Component {
              },
 
             <Tabs
-              activeTabStyles={{ paddingBottom: 25 }}
               onTabSelect={this._handleTabSelect}
               selectedTab={this.state.selectedTab}
               showBottomBorder={false}
