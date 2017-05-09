@@ -1,6 +1,6 @@
 {
   "name": "mx-react-components",
-  "version": "5.0.0-rc.87",
+  "version": "5.0.0-rc.88",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
