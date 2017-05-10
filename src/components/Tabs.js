@@ -120,18 +120,12 @@ class Tabs extends React.Component {
 
   render () {
     const styles = this.styles();
+    const useTabs = this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile;
+    const tabsStyles = Object.assign({}, styles.component, (useTabs && styles.tabsContainer), this.props.style);
 
     return (
-      <div style={Object.assign({}, styles.component, this.props.style)}>
-        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile ? (
-          <div style={styles.tabsContainer}>
-            {this._renderTabs()}
-          </div>
-        ) : (
-          <div>
-            {this._renderTabMenu()}
-          </div>
-        )}
+      <div style={tabsStyles}>
+        {useTabs ? this._renderTabs() : this._renderTabMenu()}
       </div>
     );
   }
