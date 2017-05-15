@@ -52,6 +52,7 @@ module.exports = {
     INCOME: '#133F49',
     INVESTMENTS: '#FF7070',
     KIDS: '#82D196',
+    OTHER: '#959CA6',
     PETS: '#85507B',
     PERSONAL_CARE: '#338B7A',
     SHOPPING: '#CF5F84',
