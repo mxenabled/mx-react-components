@@ -3,11 +3,15 @@
   "version": "5.0.0-rc.91",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
+  "watch": {
+    "release": "src/**/*.js"
+  },
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
     "dev": "yarn && yarn upgrade && cd docs && yarn && yarn upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
     "docs:release": "yarn && cd docs && yarn && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
-    "test": "eslint src"
+    "test": "eslint src",
+    "watch": "npm-watch"
   },
   "repository": {
     "type": "git",
@@ -57,6 +61,7 @@
     "eslint-plugin-react": "^5.0.0",
     "live-server": "^0.8.1",
     "node-libs-browser": "^0.5.2",
+    "npm-watch": "^0.1.9",
     "webpack": "^1.0.0",
     "webpack-dev-server": "^1.16.2"
   }
