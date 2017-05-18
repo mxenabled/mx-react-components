@@ -10,18 +10,24 @@ const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
+const optionShape = PropTypes.shape({
+  displayValue: PropTypes.any.isRequired,
+  icon: PropTypes.any,
+  value: PropTypes.any.isRequired
+});
+
 class Select extends React.Component {
   static propTypes = {
     dropdownStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     onChange: PropTypes.func,
-    options: PropTypes.array,
+    options: PropTypes.arrayOf(optionShape),
     optionsStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     optionStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     optionTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
     scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    selected: PropTypes.object,
+    selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     valid: PropTypes.bool
   };
