@@ -50,7 +50,7 @@ class Select extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (!_isEqual(nextProps.selected, this.props.selected)) {
+    if (!_isEqual(newProps.selected, this.props.selected)) {
       this.setState({ selected: newProps.selected });
     }
   }
