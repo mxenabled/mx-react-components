@@ -43,6 +43,12 @@ class Select extends React.Component {
     };
   }
 
+  componentWillReceiveProps (newProps) {
+    if (!_isEqual(nextProps.selected, this.props.selected)) {
+      this.setState({ selected: newProps.selected });
+    }
+  }
+
   _handleKeyDown = (e) => {
     switch (keycode(e)) {
       case 'esc':
