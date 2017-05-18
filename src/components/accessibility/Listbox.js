@@ -64,15 +64,18 @@ class Listbox extends React.Component {
     switch (keycode(e)) {
       case 'up':
         e.preventDefault();
+        e.stopPropagation();
         this._focusPrevious();
         break;
       case 'down':
         e.preventDefault();
+        e.stopPropagation();
         this._focusNext();
         break;
       case 'enter':
       case 'space':
         e.preventDefault();
+        e.stopPropagation();
         e.target.click();
         break;
     }
