@@ -34,11 +34,14 @@ class Select extends React.Component {
     valid: true
   };
 
-  state = {
-    highlightedValue: null,
-    isOpen: false,
-    selected: false
-  };
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      isOpen: false,
+      selected: props.selected
+    };
+  }
 
   _handleKeyDown = (e) => {
     switch (keycode(e)) {
