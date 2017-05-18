@@ -10,6 +10,13 @@ const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
 
+// returns a function that takes a click event, stops it, then calls the callback
+const haltEvent = callback => e => {
+  e.preventDefault();
+  e.stopPropagation();
+  callback();
+};
+
 const optionShape = PropTypes.shape({
   displayValue: PropTypes.any.isRequired,
   icon: PropTypes.any,
@@ -81,9 +88,7 @@ class Select extends React.Component {
     this.setState({ isOpen: true });
   };
 
-  _handleOptionClick = (option, e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  _handleOptionClick = (option) => {
     this.setState({ selected: option }, () => {
       this._close();
       this.props.onChange(option);
@@ -117,7 +122,7 @@ class Select extends React.Component {
       return (
         <div
           className='mx-select-scrim'
-          onClick={this._close}
+          onClick={haltEvent(this._close)}
           style={[styles.scrim, this.props.scrimStyle]}
         />
       );
@@ -152,7 +157,7 @@ class Select extends React.Component {
                   isSelected={option === this.state.selected}
                   key={option.displayValue + option.value}
                   label={option.displayValue}
-                  onClick={this._handleOptionClick.bind(null, option)}
+                  onClick={haltEvent(this._handleOptionClick.bind(null, option))}
                   style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,
@@ -186,7 +191,7 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
-          onClick={this._open}
+          onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
           ref={ref => this.component = ref}
           style={styles.component}
