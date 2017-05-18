@@ -149,7 +149,7 @@ class Select extends React.Component {
               return (
                 <Option
                   className='mx-select-option'
-                  isSelected={option === this.state.selected}
+                  isSelected={_isEqual(option, this.state.selected)}
                   key={option.displayValue + option.value}
                   label={option.displayValue}
                   onClick={this._handleOptionClick.bind(null, option)}
