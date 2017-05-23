@@ -1,25 +1,40 @@
 const _isEqual = require('lodash/isEqual');
-const React = require('react');
-const ReactDOM = require('react-dom');
+const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 const Icon = require('./Icon');
+const { Listbox, Option } = require('./accessibility/Listbox');
 
 const StyleConstants = require('../constants/Style');
+
+// returns a function that takes a click event, stops it, then calls the callback
+const haltEvent = callback => e => {
+  e.preventDefault();
+  e.stopPropagation();
+  callback();
+};
+
+const optionShape = PropTypes.shape({
+  displayValue: PropTypes.any.isRequired,
+  icon: PropTypes.any,
+  value: PropTypes.any.isRequired
+});
 
 class Select extends React.Component {
   static propTypes = {
     dropdownStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     onChange: PropTypes.func,
-    options: PropTypes.array,
+    options: PropTypes.arrayOf(optionShape),
     optionsStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     optionStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     optionTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
     scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    selected: PropTypes.object,
+    selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     valid: PropTypes.bool
   };
@@ -32,98 +47,52 @@ class Select extends React.Component {
     valid: true
   };
 
-  state = {
-    highlightedValue: null,
-    isOpen: false,
-    selected: false,
-    hoverItem: null
-  };
+  constructor (props) {
+    super(props);
 
-  getBackgroundColor = (option) => {
-    if (option.value === this.state.hoverItem) {
-      return {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE,
-        fill: StyleConstants.Colors.WHITE
-      };
-    } else {
-      return null;
+    this.state = {
+      isOpen: false,
+      selected: props.selected
+    };
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (!_isEqual(newProps.selected, this.props.selected)) {
+      this.setState({ selected: newProps.selected });
+    }
+  }
+
+  _handleKeyDown = (e) => {
+    switch (keycode(e)) {
+      case 'esc':
+        e.preventDefault();
+        e.stopPropagation();
+        this._close();
+        break;
+      case 'enter':
+      case 'space':
+        if (this.state.isOpen) return;
+        e.preventDefault();
+        e.stopPropagation();
+        this._open();
+        break;
     }
   };
 
-  _handleScrimClick = () => {
-    this.setState({
-      isOpen: false,
-      highlightedValue: null,
-      hoverItem: null
-    });
+  _close = () => {
+    this.setState({ isOpen: false });
+    this.component.focus();
   };
 
-  _handleClick = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  _open = () => {
+    this.setState({ isOpen: true });
   };
 
   _handleOptionClick = (option) => {
-    this.setState({
-      selected: option,
-      isOpen: false,
-      highlightedValue: option,
-      hoverItem: null
+    this.setState({ selected: option }, () => {
+      this._close();
+      this.props.onChange(option);
     });
-
-    this.props.onChange(option);
-  };
-
-  _handleOptionMouseOver = (option) => {
-    this.setState({
-      hoverItem: option.value
-    });
-  };
-
-  _handleSelectChange = (e) => {
-    const selectedOption = this.props.options.filter(option => {
-      return option.value + '' === e.target.value;
-    })[0];
-
-    this._handleOptionClick(selectedOption);
-  };
-
-  _handleInputKeyDown = (e) => {
-    const highlightedValue = this.state.highlightedValue;
-
-    if (e.keyCode === 13 && highlightedValue) {
-      this._handleOptionClick(highlightedValue);
-    }
-
-    if (e.keyCode === 40) {
-      e.preventDefault();
-
-      const nextIndex = this.props.options.indexOf(highlightedValue) + 1;
-
-      if (nextIndex < this.props.options.length) {
-        this.setState({
-          highlightedValue: this.props.options[nextIndex]
-        });
-
-        this._scrollListDown(nextIndex);
-      }
-    }
-
-    if (e.keyCode === 38) {
-      e.preventDefault();
-
-      const previousIndex = this.props.options.indexOf(highlightedValue) - 1;
-
-      if (previousIndex > -1) {
-        this.setState({
-          highlightedValue: this.props.options[previousIndex]
-        });
-
-        this._scrollListUp(previousIndex);
-      }
-    }
   };
 
   _scrollListDown = (nextIndex) => {
@@ -153,7 +122,7 @@ class Select extends React.Component {
       return (
         <div
           className='mx-select-scrim'
-          onClick={this._handleScrimClick}
+          onClick={haltEvent(this._close)}
           style={[styles.scrim, this.props.scrimStyle]}
         />
       );
@@ -174,19 +143,25 @@ class Select extends React.Component {
         );
       } else {
         return (
-          <ul className='mx-select-options' ref={(ref) => this.optionList = ref} style={styles.options}>
+          <Listbox
+            aria-label={this.props.placeholderText}
+            className='mx-select-options'
+            ref={(ref) => this.optionList = ref}
+            style={styles.options}
+            useGlobalKeyHandler={true}
+          >
             {this.props.options.map(option => {
               return (
-                <li
+                <Option
                   className='mx-select-option'
+                  isSelected={_isEqual(option, this.state.selected)}
                   key={option.displayValue + option.value}
-                  onClick={this._handleOptionClick.bind(null, option)}
-                  onMouseOver={this._handleOptionMouseOver.bind(null, option)}
+                  label={option.displayValue}
+                  onClick={haltEvent(this._handleOptionClick.bind(null, option))}
                   style={Object.assign({},
                     styles.option,
                     this.props.optionStyle,
-                    _isEqual(option, this.state.highlightedValue) ? styles.activeItem : null,
-                    this.getBackgroundColor(option)
+                    _isEqual(option, this.state.selected) ? styles.activeOption : null
                   )}
                 >
                   {option.icon ? (
@@ -197,11 +172,11 @@ class Select extends React.Component {
                     />
                   ) : null}
                   <div style={styles.optionText}>{option.displayValue}</div>
-                  {_isEqual(option, this.state.highlightedValue) ? <Icon size={20} type='check' /> : null }
-                </li>
+                  {_isEqual(option, this.state.selected) ? <Icon size={20} type='check' /> : null }
+                </Option>
               );
             })}
-          </ul>
+          </Listbox>
         );
       }
     } else {
@@ -216,8 +191,9 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
-          onClick={this._handleClick}
-          onKeyDown={this._handleInputKeyDown}
+          onClick={haltEvent(this._open)}
+          onKeyDown={this._handleKeyDown}
+          ref={ref => this.component = ref}
           style={styles.component}
           tabIndex='0'
         >
@@ -243,6 +219,12 @@ class Select extends React.Component {
   }
 
   styles = () => {
+    const focusedOption = {
+      backgroundColor: this.props.primaryColor,
+      color: StyleConstants.Colors.WHITE,
+      fill: StyleConstants.Colors.WHITE
+    };
+
     return {
       component: Object.assign({},
         {
@@ -254,8 +236,7 @@ class Select extends React.Component {
           fontSize: StyleConstants.FontSizes.MEDIUM,
           padding: '8px 10px',
           position: 'relative',
-          boxSizing: 'border-box',
-          outline: 'none'
+          boxSizing: 'border-box'
         }, this.props.dropdownStyle),
       select: {
         position: 'absolute',
@@ -273,10 +254,6 @@ class Select extends React.Component {
           justifyContent: 'space-between',
           position: 'relative'
         }, this.props.selectedStyle),
-      activeItem: {
-        fill: this.props.primaryColor,
-        color: this.props.primaryColor
-      },
       invalid: {
         borderColor: StyleConstants.Colors.STRAWBERRY
       },
@@ -287,7 +264,7 @@ class Select extends React.Component {
           borderRadius: '0 0 3px 3px',
           left: -1,
           right: -1,
-          marginTop: 10,
+          margin: '8px 0 0 0',
           padding: 0,
           minWidth: '100%',
           position: 'absolute',
@@ -298,13 +275,22 @@ class Select extends React.Component {
           maxHeight: 260,
           overflow: 'auto'
         }, this.props.optionsStyle),
+      activeOption: {
+        fill: this.props.primaryColor,
+        color: this.props.primaryColor
+      },
       option: {
         display: 'flex',
         alignItems: 'center',
+        color: StyleConstants.Colors.CHARCOAL,
         cursor: 'pointer',
         backgroundColor: StyleConstants.Colors.WHITE,
+        outline: 'none',
         padding: 10,
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+
+        ':focus': focusedOption,
+        ':hover': focusedOption
       },
       optionIcon: {
         marginRight: 5
