@@ -56,7 +56,7 @@ class StandardTabs extends React.Component {
           <Tab
             isActive={this.state.selectedTab === index}
             key={tab}
-            onClick={this.handleTabSelect.bind(null, index)}
+            onClick={this.handleTabSelect.bind(this, index)}
             styles={{ activeTab: this.props.activeTabStyles }}
           >
             {tab}
@@ -168,8 +168,8 @@ class MenuTabs extends StandardTabs {
 
     return (
       <Button
+        buttonRef={ref => this.component = ref}
         onClick={this._toggleMenu}
-        ref={ref => this.component = ref}
         role='button'
         style={styles.menuWrapper}
         tabIndex={0}
@@ -201,7 +201,7 @@ class MenuTabs extends StandardTabs {
 
         ':hover': {
           backgroundColor: 'transparent'
-        },
+        }
       }
     };
   };
