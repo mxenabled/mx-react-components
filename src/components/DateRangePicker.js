@@ -369,7 +369,7 @@ class DateRangePicker extends React.Component {
                       type='caret-left'
                     />
                     <div>
-                      {moment(this.props.selectedEndDate ? this.props.selectedEndDate : this.state.currentDate, 'X').format('MMMM YYYY')}
+                      {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
                     </div>
                     <Icon
                       elementProps={{
