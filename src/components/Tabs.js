@@ -9,6 +9,7 @@ const StyleConstants = require('../constants/Style');
 class Tabs extends React.Component {
   static propTypes = {
     activeTabStyles: PropTypes.object,
+    alignment: PropTypes.oneOf(['left', 'center']),
     brandColor: PropTypes.string,
     onTabSelect: PropTypes.func.isRequired,
     selectedTab: PropTypes.number,
@@ -18,6 +19,7 @@ class Tabs extends React.Component {
   };
 
   static defaultProps = {
+    alignment: 'left',
     brandColor: StyleConstants.Colors.PRIMARY,
     showBottomBorder: true,
     useTabsInMobile: false
@@ -91,8 +93,8 @@ class Tabs extends React.Component {
         />
         {this.state.showMenu ? (
           <SimpleSelect
+            hoverColor={this.props.brandColor}
             items={tabItems}
-            menuStyles={styles.menu}
             onScrimClick={this._toggleMenu}
             showItems={this.state.showMenu}
           />
@@ -120,7 +122,7 @@ class Tabs extends React.Component {
     const styles = this.styles();
 
     return (
-      <div style={[styles.component, this.props.style]}>
+      <div style={Object.assign({}, styles.component, this.props.style)}>
         {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile ? (
           <div style={styles.tabsContainer}>
             {this._renderTabs()}
@@ -146,18 +148,24 @@ class Tabs extends React.Component {
       },
       tab: {
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.ASH,
         cursor: 'pointer',
+        display: 'inline-block',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        letterSpacing: 0.75,
-        marginRight: 30,
-        marginTop: 30,
-        padding: 5,
-        textTransform: 'uppercase',
+        padding: StyleConstants.Spacing.MEDIUM,
 
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          color: StyleConstants.Colors.ASH
+        ':hover': {
+          color: StyleConstants.Colors.CHARCOAL
+        }
+      },
+      activeTab: {
+        cursor: 'default',
+        color: this.props.brandColor,
+        borderBottom: '2px solid ' + this.props.brandColor,
+
+        ':hover': {
+          color: this.props.brandColor
         }
       },
       menuWrapper: {
@@ -166,27 +174,12 @@ class Tabs extends React.Component {
         color: this.props.brandColor,
         lineHeight: '20px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        letterSpacing: 0.75,
-        textTransform: 'uppercase'
-      },
-      menu: {
-        boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
-        cursor: 'pointer',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        letterSpacing: 0.75,
-        position: 'absolute',
-        textTransform: 'uppercase'
-      },
-      activeTab: {
-        borderBottom: '2px solid ' + this.props.brandColor
+        fontStyle: StyleConstants.Fonts.SEMIBOLD
       },
       tabsContainer: {
+        display: 'flex',
+        justifyContent: this.props.alignment === 'left' ? 'flex-start' : 'center',
         borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        boxSizing: 'border-box',
-        padding: `0 0 ${StyleConstants.Spacing.LARGE}px ${StyleConstants.Spacing.LARGE}px`,
         width: '100%'
       }
     };

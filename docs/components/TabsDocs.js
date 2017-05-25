@@ -25,17 +25,25 @@ class TabsDocs extends React.Component {
 
         <h3>Demo</h3>
         <Tabs
-          activeTabStyles={{ padding: '5px 5px 25px 5px' }}
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
-          showBottomBorder={false}
-          tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
-          useTabsInMobile={false}
+          tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+        />
+        <Tabs
+          alignment='center'
+          onTabSelect={this._handleTabSelect}
+          selectedTab={this.state.selectedTab}
+          tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+          useTabsInMobile={true}
         />
 
         <h3>Usage</h3>
         <h5>activeTabStyles<label>Object</label></h5>
         <p>Styles for the active tab.</p>
+
+        <h5>alignment<label>'left' or 'center'</label></h5>
+        <p>Default: 'left'</p>
+        <p>Tab alignment.</p>
 
         <h5>brandColor<label>String</label></h5>
         <p>Default: PRIMARY COLOR</p>
@@ -70,12 +78,9 @@ class TabsDocs extends React.Component {
              },
 
             <Tabs
-              activeTabStyles={{ paddingBottom: 25 }}
               onTabSelect={this._handleTabSelect}
               selectedTab={this.state.selectedTab}
-              showBottomBorder={false}
-              tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
-              useTabsInMobile={false}
+              tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
             />
           `}
         </Markdown>
