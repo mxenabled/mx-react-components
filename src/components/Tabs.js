@@ -59,25 +59,6 @@ class Tabs extends React.Component {
     return windowSize === 'medium' || windowSize === 'large';
   };
 
-  _renderTabs = () => {
-    const styles = this.styles();
-    const selectedTabStyle = Object.assign({}, styles.activeTab, this.props.activeTabStyles);
-
-    return this.props.tabs.map((tab, index) => {
-      const _index = index;
-
-      return (
-        <span
-          key={_index}
-          onClick={this._handleTabClick.bind(null, _index)}
-          style={[styles.tab, this.state.selectedTab === _index && selectedTabStyle]}
-        >
-          {tab}
-        </span>
-      );
-    });
-  };
-
   _renderTabMenu = () => {
     const selectedTabName = this.props.tabs[this.state.selectedTab];
     const styles = this.styles();
@@ -120,18 +101,21 @@ class Tabs extends React.Component {
 
   render () {
     const styles = this.styles();
+    const useTabs = this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile;
+    const componentStyles = Object.assign({}, styles.component, (useTabs && styles.tabsContainer), this.props.style);
 
     return (
-      <div style={Object.assign({}, styles.component, this.props.style)}>
-        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile ? (
-          <div style={styles.tabsContainer}>
-            {this._renderTabs()}
-          </div>
-        ) : (
-          <div>
-            {this._renderTabMenu()}
-          </div>
-        )}
+      <div style={componentStyles}>
+        {useTabs ? this.props.tabs.map((tab, index) =>
+          <Tab
+            isActive={this.state.selectedTab === index}
+            key={tab}
+            onClick={this._handleTabClick.bind(null, index)}
+            styles={{ activeTab: this.props.activeTabStyles }}
+          >
+            {tab}
+          </Tab>
+        ) : this._renderTabMenu()}
       </div>
     );
   }
@@ -142,31 +126,6 @@ class Tabs extends React.Component {
       component: {
         display: 'block',
         width: '100%'
-      },
-      buttonStyles: {
-        backgroundColor: 'transparent'
-      },
-      tab: {
-        boxSizing: 'border-box',
-        color: StyleConstants.Colors.ASH,
-        cursor: 'pointer',
-        display: 'inline-block',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        padding: StyleConstants.Spacing.MEDIUM,
-
-        ':hover': {
-          color: StyleConstants.Colors.CHARCOAL
-        }
-      },
-      activeTab: {
-        cursor: 'default',
-        color: this.props.brandColor,
-        borderBottom: '2px solid ' + this.props.brandColor,
-
-        ':hover': {
-          color: this.props.brandColor
-        }
       },
       menuWrapper: {
         alignItems: 'center',
@@ -186,4 +145,64 @@ class Tabs extends React.Component {
   };
 }
 
-module.exports = Radium(Tabs);
+class TabWithoutRadium extends React.Component {
+  static propTypes = {
+    activeTabStyles: PropTypes.object,
+    brandColor: PropTypes.string,
+    isActive: PropTypes.bool,
+    onClick: PropTypes.func,
+    styles: PropTypes.object
+  }
+
+  static defaultProps = {
+    brandColor: StyleConstants.Colors.PRIMARY,
+    isActive: false,
+    onClick: () => {},
+    styles: {}
+  }
+
+  render () {
+    const styles = this.styles();
+    let style = Object.assign({}, styles.tab, this.props.styles.tab);
+
+    if (this.props.isActive)
+      style = Object.assign({}, style, styles.activeTab, this.props.styles.activeTab);
+
+    return (
+      <span onClick={this.props.onClick} style={style}>
+        {this.props.children}
+      </span>
+    );
+  }
+
+  styles = () => {
+    return {
+      tab: {
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.ASH,
+        cursor: 'pointer',
+        display: 'inline-block',
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontStyle: StyleConstants.Fonts.SEMIBOLD,
+        padding: StyleConstants.Spacing.MEDIUM,
+
+        ':hover': {
+          color: StyleConstants.Colors.CHARCOAL
+        }
+      },
+      activeTab: Object.assign({
+        cursor: 'default',
+        color: this.props.brandColor,
+        borderBottom: '2px solid ' + this.props.brandColor,
+
+        ':hover': {
+          color: this.props.brandColor
+        }
+      }, this.props.activeTabStyles)
+    };
+  }
+}
+
+const Tab = Radium(TabWithoutRadium);
+
+module.exports = Tabs;
