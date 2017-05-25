@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+const ButtonGroup = require('./ButtonGroup');
 const StyleConstants = require('../constants/Style');
 
 class StandardTabs extends React.Component {
@@ -126,8 +127,73 @@ class TabWithoutRadium extends React.Component {
 
 const Tab = Radium(TabWithoutRadium);
 
+class PillTabs extends StandardTabs {
+  render () {
+    const styles = this.styles();
+
+    return (
+      <div style={styles.component}>
+        <ButtonGroup
+          buttons={this.props.tabs.map((tab, index) => ({
+            'aria-label': tab,
+            onClick: (this.state.selectedTab === index ? null : this.handleTabSelect.bind(this, index)),
+            style: Object.assign({}, styles.tab, this.state.selectedTab === index && styles.selected),
+            text: tab
+          }))}
+          style={styles.buttonGroup}
+          type='neutral'
+        />
+      </div>
+    );
+  }
+
+  styles = () => {
+    return {
+      component: {
+        margin: StyleConstants.Spacing.SMALL
+      },
+      tab: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderColor: StyleConstants.Colors.FOG,
+        outline: 'none',
+
+        ':hover': {
+          backgroundColor: this.props.brandColor,
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE
+        },
+        ':focus': {
+          backgroundColor: this.props.brandColor,
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE
+        },
+        ':active': {
+          backgroundColor: StyleConstants.adjustColor(this.props.brandColor, -15)
+        }
+      },
+      selected: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        color: this.props.brandColor,
+        cursor: 'default',
+
+        ':hover': {
+          backgroundColor: 'transparent'
+        },
+        ':focus': {
+          backgroundColor: StyleConstants.Colors.WHITE,
+          color: this.props.brandColor
+        },
+        ':active': {
+          backgroundColor: 'transparent'
+        }
+      }
+    };
+  }
+}
+
 const TabsTypes = {
-  standard: StandardTabs
+  standard: StandardTabs,
+  pill: PillTabs
 };
 
 const Tabs = ({
@@ -139,7 +205,7 @@ const Tabs = ({
   ...props
 }) => {
   if (typeof useTabsInMobile !== 'undefined') {
-    console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release. Please use `type=\'menu\'`.');
+    console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release.');
   }
 
   const componentStyle = Object.assign({
