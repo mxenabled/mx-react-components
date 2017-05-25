@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+const ButtonGroup = require('./ButtonGroup');
 const Button = require('./Button');
 const Icon = require('./Icon');
 const SimpleSelect = require('./SimpleSelect');
@@ -207,8 +208,73 @@ class MenuTabs extends StandardTabs {
   };
 }
 
+class PillTabs extends StandardTabs {
+  render () {
+    const styles = this.styles();
+
+    return (
+      <div style={styles.component}>
+        <ButtonGroup
+          buttons={this.props.tabs.map((tab, index) => ({
+            'aria-label': tab,
+            onClick: (this.state.selectedTab === index ? null : this.handleTabSelect.bind(this, index)),
+            style: Object.assign({}, styles.tab, this.state.selectedTab === index && styles.selected),
+            text: tab
+          }))}
+          style={styles.buttonGroup}
+          type='neutral'
+        />
+      </div>
+    );
+  }
+
+  styles = () => {
+    return {
+      component: {
+        margin: StyleConstants.Spacing.SMALL
+      },
+      tab: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderColor: StyleConstants.Colors.FOG,
+        outline: 'none',
+
+        ':hover': {
+          backgroundColor: this.props.brandColor,
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE
+        },
+        ':focus': {
+          backgroundColor: this.props.brandColor,
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE
+        },
+        ':active': {
+          backgroundColor: StyleConstants.adjustColor(this.props.brandColor, -15)
+        }
+      },
+      selected: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        color: this.props.brandColor,
+        cursor: 'default',
+
+        ':hover': {
+          backgroundColor: 'transparent'
+        },
+        ':focus': {
+          backgroundColor: StyleConstants.Colors.WHITE,
+          color: this.props.brandColor
+        },
+        ':active': {
+          backgroundColor: 'transparent'
+        }
+      }
+    };
+  }
+}
+
 const TabsTypes = {
   standard: StandardTabs,
+  pill: PillTabs,
   menu: Radium(MenuTabs)
 };
 
