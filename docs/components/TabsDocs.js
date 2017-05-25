@@ -17,6 +17,8 @@ class TabsDocs extends React.Component {
   };
 
   render () {
+    const tabs = ['Donuts', 'Ice Cream', 'Bacon', 'Chicken'];
+
     return (
       <div>
         <h1>
@@ -25,19 +27,29 @@ class TabsDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+
         <Tabs
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
-          tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+          tabs={tabs}
         />
+
         <Tabs
           alignment='center'
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
-          tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+          tabs={tabs}
+        />
+
+        <Tabs
+          onTabSelect={this._handleTabSelect}
+          selectedTab={this.state.selectedTab}
+          tabs={tabs}
+          type='pill'
         />
 
         <h3>Usage</h3>
+
         <h5>activeTabStyles<label>Object</label></h5>
         <p>Styles for the active tab.</p>
 
@@ -64,22 +76,43 @@ class TabsDocs extends React.Component {
         <p>Default: PRIMARY</p>
         <p><em>(required)</em> Array of values that you want respresented as tabs. Each item in the array should be a string. The "onTabClick" function will be called when you click on each one.</p>
 
+        <h5>type <label>One of: ['standard', 'pill']</label></h5>
+        <p>Default: standard</p>
+        <p></p>
+
         <h5>DEPRECATED: useTabsInMobile <label>Boolean</label></h5>
         <p>Deprecated. For dropdown style tabs please use <Link to='/components/select'>Select</Link> instead.</p>
 
         <h3>Example</h3>
         <Markdown>
           {`
-            _handleTabSelect (selectedTab) {
-                 this.setState({
-                   selectedTab
-                 });
-             },
+            const tabs = ['Donuts', 'Ice Cream', 'Bacon', 'Chicken'];
+            const _handleTabSelect = (selectedTab) => {
+              this.setState({
+                selectedTab
+              });
+             };
+
+            ...
 
             <Tabs
               onTabSelect={this._handleTabSelect}
               selectedTab={this.state.selectedTab}
-              tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+              tabs={tabs}
+            />
+
+            <Tabs
+              alignment='center'
+              onTabSelect={this._handleTabSelect}
+              selectedTab={this.state.selectedTab}
+              tabs={tabs}
+            />
+
+            <Tabs
+              onTabSelect={this._handleTabSelect}
+              selectedTab={this.state.selectedTab}
+              tabs={tabs}
+              type='pill'
             />
           `}
         </Markdown>
