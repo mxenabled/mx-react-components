@@ -14,6 +14,7 @@ class Button extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     actionText: PropTypes.string,
+    buttonRef: PropTypes.func,
     icon: PropTypes.string,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
@@ -57,6 +58,7 @@ class Button extends React.Component {
       <button
         aria-label={this.props['aria-label']}
         onClick={this.props.type === 'disabled' ? null : this.props.onClick}
+        ref={this.props.buttonRef}
         style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
       >
         <div style={styles.children}>

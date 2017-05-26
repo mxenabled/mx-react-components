@@ -16,6 +16,8 @@ class TabsDocs extends React.Component {
   };
 
   render () {
+    const tabs = ['Donuts', 'Ice Cream', 'Bacon', 'Chicken'];
+
     return (
       <div>
         <h1>
@@ -24,20 +26,41 @@ class TabsDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+
+        <h5>type <label>&apos;standard&apos;</label></h5>
         <Tabs
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
-          tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+          tabs={tabs}
         />
+
+        <h5>type <label>&apos;standard&apos;</label> <br /> alignment <label>&apos;center&apos;</label></h5>
         <Tabs
           alignment='center'
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
-          tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
+          tabs={tabs}
           useTabsInMobile={true}
         />
 
+        <h5>type <label>&apos;menu&apos;</label></h5>
+        <Tabs
+          onTabSelect={this._handleTabSelect}
+          selectedTab={this.state.selectedTab}
+          tabs={tabs}
+          type='menu'
+        />
+
+        <h5>type <label>&apos;pill&apos;</label></h5>
+        <Tabs
+          onTabSelect={this._handleTabSelect}
+          selectedTab={this.state.selectedTab}
+          tabs={tabs}
+          type='pill'
+        />
+
         <h3>Usage</h3>
+
         <h5>activeTabStyles<label>Object</label></h5>
         <p>Styles for the active tab.</p>
 
@@ -64,9 +87,12 @@ class TabsDocs extends React.Component {
         <p>Default: PRIMARY</p>
         <p><em>(required)</em> Array of values that you want respresented as tabs. Each item in the array should be a string. The "onTabClick" function will be called when you click on each one.</p>
 
-        <h5>useTabsInMobile <label>Boolean</label></h5>
-        <p>Default: false</p>
-        <p>When true, this will override the default and show tabs in mobile instead of a menu screen.</p>
+        <h5>type <label>One of: ['standard', 'pill', 'menu']</label></h5>
+        <p>Default: standard</p>
+        <p></p>
+
+        <h5>DEPRECATED: useTabsInMobile <label>Boolean</label></h5>
+        <p>Deprecated, use the `type` prop instead.</p>
 
         <h3>Example</h3>
         <Markdown>
