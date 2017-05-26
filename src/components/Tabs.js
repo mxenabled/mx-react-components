@@ -26,12 +26,6 @@ class StandardTabs extends React.Component {
     };
   }
 
-  componentWillMount () {
-    if (this.props.hasOwnProperty('useTabsInMobile')) {
-      console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release.');
-    }
-  }
-
   componentWillReceiveProps (nextProps) {
     if (nextProps.selectedTab !== this.state.selectedTab) {
       this.setState({
