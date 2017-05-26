@@ -14,8 +14,7 @@ class StandardTabs extends React.Component {
     brandColor: PropTypes.string,
     onTabSelect: PropTypes.func.isRequired,
     selectedTab: PropTypes.number,
-    tabs: PropTypes.array.isRequired,
-    useTabsInMobile: PropTypes.bool
+    tabs: PropTypes.array.isRequired
   };
 
   static defaultProps = {
@@ -28,10 +27,6 @@ class StandardTabs extends React.Component {
     this.state = {
       selectedTab: this.props.selectedTab || 0
     };
-
-    if (props.hasOwnProperty('useTabsInMobile')) {
-      console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release. Please use `type=\'menu\'`.');
-    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -283,8 +278,13 @@ const Tabs = ({
   showBottomBorder = true,
   style,
   type = 'standard',
+  useTabsInMobile,
   ...props
 }) => {
+  if (typeof useTabsInMobile !== 'undefined') {
+    console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release. Please use `type=\'menu\'`.');
+  }
+
   const componentStyle = Object.assign({
     display: 'flex',
     justifyContent: alignment === 'left' ? 'flex-start' : 'center',
@@ -305,7 +305,8 @@ const Tabs = ({
 Tabs.propTypes = {
   alignment: PropTypes.oneOf(['left', 'center']),
   showBottomBorder: PropTypes.bool,
-  type: PropTypes.oneOf(Object.keys(TabsTypes))
+  type: PropTypes.oneOf(Object.keys(TabsTypes)),
+  useTabsInMobile: PropTypes.bool
 };
 
 module.exports = Tabs;
