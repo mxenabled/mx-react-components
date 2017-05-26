@@ -2,8 +2,6 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
-const Icon = require('./Icon');
-const SimpleSelect = require('./SimpleSelect');
 const StyleConstants = require('../constants/Style');
 
 class Tabs extends React.Component {
@@ -21,14 +19,19 @@ class Tabs extends React.Component {
   static defaultProps = {
     alignment: 'left',
     brandColor: StyleConstants.Colors.PRIMARY,
-    showBottomBorder: true,
-    useTabsInMobile: false
+    showBottomBorder: true
   };
 
   state = {
     selectedTab: this.props.selectedTab || 0,
     showMenu: false
   };
+
+  componentWillMount () {
+    if (this.props.hasOwnProperty('useTabsInMobile')) {
+      console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release.');
+    }
+  }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.selectedTab !== this.state.selectedTab) {
@@ -38,75 +41,21 @@ class Tabs extends React.Component {
     }
   }
 
-  _toggleMenu = () => {
-    this.setState({
-      showMenu: !this.state.showMenu
-    });
-  };
-
   _handleTabClick = (selectedTab) => {
     this.props.onTabSelect(selectedTab);
-    this._toggleMenu();
 
     this.setState({
       selectedTab
     });
   };
 
-  _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
-
-    return windowSize === 'medium' || windowSize === 'large';
-  };
-
-  _renderTabMenu = () => {
-    const selectedTabName = this.props.tabs[this.state.selectedTab];
-    const styles = this.styles();
-    const tabItems = this._buildTabItems();
-
-    return (
-      <div onClick={this._toggleMenu} style={styles.menuWrapper} >
-        {selectedTabName}
-        <Icon
-          size={20}
-          style={{ fill: this.props.brandColor }}
-          type={!this.state.showMenu ? 'caret-down' : 'caret-up' }
-        />
-        {this.state.showMenu ? (
-          <SimpleSelect
-            hoverColor={this.props.brandColor}
-            items={tabItems}
-            onScrimClick={this._toggleMenu}
-            showItems={this.state.showMenu}
-          />
-        ) : null}
-      </div>
-    );
-  };
-
-  _buildTabItems = () => {
-    const tabItems = [];
-
-    this.props.tabs.map((tab, index) => {
-      tabItems.push({
-        onClick: () => {
-          this._handleTabClick(index);
-        },
-        text: tab
-      });
-    });
-
-    return tabItems;
-  };
-
   render () {
     const styles = this.styles();
-    const useTabs = this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile;
-    const componentStyles = Object.assign({}, styles.component, (useTabs && styles.tabsContainer), this.props.style);
+    const componentStyles = Object.assign({}, styles.component, styles.tabsContainer, this.props.style);
 
     return (
       <div style={componentStyles}>
-        {useTabs ? this.props.tabs.map((tab, index) =>
+        {this.props.tabs.map((tab, index) =>
           <Tab
             isActive={this.state.selectedTab === index}
             key={tab}
@@ -115,7 +64,7 @@ class Tabs extends React.Component {
           >
             {tab}
           </Tab>
-        ) : this._renderTabMenu()}
+        )}
       </div>
     );
   }
@@ -126,14 +75,6 @@ class Tabs extends React.Component {
       component: {
         display: 'block',
         width: '100%'
-      },
-      menuWrapper: {
-        alignItems: 'center',
-        boxSizing: 'border-box',
-        color: this.props.brandColor,
-        lineHeight: '20px',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontStyle: StyleConstants.Fonts.SEMIBOLD
       },
       tabsContainer: {
         display: 'flex',
