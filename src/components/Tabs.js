@@ -84,64 +84,77 @@ class TabWithoutRadium extends React.Component {
 
 const Tab = Radium(TabWithoutRadium);
 
-class Tabs extends React.Component {
-  static propTypes = {
-    activeTabStyles: PropTypes.object,
-    brandColor: PropTypes.string,
-    onTabSelect: PropTypes.func.isRequired,
-    selectedTab: PropTypes.number,
-    tabs: PropTypes.array.isRequired
-  };
-
-  static defaultProps = {
-    brandColor: StyleConstants.Colors.PRIMARY,
-    selectedTab: 0
-  };
-
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      selectedTab: this.props.selectedTab
+/**
+ * Common state management and definition of props for Tabs components.
+ */
+const Tabbable = (TabsComponent) => {
+  return class extends React.Component { // eslint-disable-line react/display-name
+    static propTypes = {
+      activeTabStyles: PropTypes.object,
+      brandColor: PropTypes.string,
+      onTabSelect: PropTypes.func.isRequired,
+      selectedTab: PropTypes.number,
+      tabs: PropTypes.array.isRequired
     };
-  }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.selectedTab !== this.state.selectedTab) {
+    static defaultProps = {
+      selectedTab: 0
+    };
+
+    constructor (props) {
+      super(props);
+
+      this.state = {
+        selectedTab: this.props.selectedTab
+      };
+    }
+
+    componentWillReceiveProps (nextProps) {
+      if (nextProps.selectedTab !== this.state.selectedTab) {
+        this.setState({
+          selectedTab: nextProps.selectedTab
+        });
+      }
+    }
+
+    handleTabSelect (selectedTab) {
+      this.props.onTabSelect(selectedTab);
+
       this.setState({
-        selectedTab: nextProps.selectedTab
+        selectedTab
       });
     }
-  }
 
-  handleTabSelect (selectedTab) {
-    this.props.onTabSelect(selectedTab);
+    render () {
+      return <TabsComponent {...this.props} />;
+    }
+  };
+};
 
-    this.setState({
-      selectedTab
-    });
-  }
+const StandardTabs = Tabbable(({
+  activeTabStyles,
+  brandColor = StyleConstants.Colors.PRIMARY,
+  onTabSelect,
+  selectedTab,
+  tabs
+}) => (
+  <div>
+    {tabs.map((tab, index) =>
+      <Tab
+        brandColor={brandColor}
+        isActive={selectedTab === index}
+        key={tab}
+        onClick={onTabSelect.bind(null, index)}
+        styles={{ activeTab: activeTabStyles }}
+      >
+        {tab}
+      </Tab>
+      )}
+  </div>
+));
 
-  render () {
-    return (
-      <div>
-        {this.props.tabs.map((tab, index) =>
-          <Tab
-            brandColor={this.props.brandColor}
-            isActive={this.props.selectedTab === index}
-            key={tab}
-            onClick={this.handleTabSelect.bind(this, index)}
-            styles={{ activeTab: this.props.activeTabStyles }}
-          >
-            {tab}
-          </Tab>
-          )}
-      </div>
-    );
-  }
-}
-
-const PillTabs = ({
+const PillTabs = Tabbable(({
+  activeTabStyles,
   brandColor = StyleConstants.Colors.PRIMARY,
   onTabSelect,
   selectedTab,
@@ -170,7 +183,7 @@ const PillTabs = ({
         backgroundColor: StyleConstants.adjustColor(brandColor, -15)
       }
     },
-    selected: {
+    selected: Object.assign({
       backgroundColor: StyleConstants.Colors.WHITE,
       color: brandColor,
       cursor: 'default',
@@ -185,7 +198,7 @@ const PillTabs = ({
       ':active': {
         backgroundColor: 'transparent'
       }
-    }
+    }, activeTabStyles)
   };
 
   return (
@@ -202,12 +215,10 @@ const PillTabs = ({
       />
     </div>
   );
-};
-
-PillTabs.propTypes = Tabs.propTypes;
+});
 
 const TabsTypes = {
-  standard: Tabs,
+  standard: StandardTabs,
   pill: PillTabs
 };
 
@@ -217,7 +228,7 @@ const TabsFactory = ({ type = 'standard', useTabsInMobile, ...props }) => {
   }
 
   const wrapperProps = _pick(props, Object.keys(TabsWrapper.propTypes));
-  const tabsProps = _pick(props, Object.keys(Tabs.propTypes));
+  const tabsProps = _pick(props, Object.keys(StandardTabs.propTypes));
   const TabsComponent = TabsTypes[type];
 
   if (!TabsComponent) throw new Error(`Unknown Tabs type: ${type}`);
