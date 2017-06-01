@@ -164,8 +164,7 @@ class Calendar extends React.Component {
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
-        padding: 20,
-        width: 600
+        padding: 20
       }, this.props.style),
 
       //Calendar Header
@@ -209,10 +208,10 @@ class Calendar extends React.Component {
 
       //Calenday table
       calendarTable: {
-        alignItems: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around'
+        // alignItems: 'center',
+        // display: 'flex',
+        // flexWrap: 'wrap',
+        // justifyContent: 'space-around'
       },
       calendarDay: {
         alignItems: 'center',
