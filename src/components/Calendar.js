@@ -55,39 +55,62 @@ class Calendar extends React.Component {
     });
   };
 
-  _renderMonthTable = () => {
-    const styles = this.styles();
-    const days = [];
-    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+  _getWeeks = () => {
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    const weeks = [];
+    let days = [];
 
     while (moment(startDate).isBefore(endDate)) {
-      const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
-      const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate), 'day');
-      const isToday = startDate.isSame(moment(), 'day');
-      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+      const day = startDate.clone();
 
-      const day = (
-        <div
-          key={startDate}
-          onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
-          style={Object.assign({},
-            styles.calendarDay,
-            isCurrentMonth && styles.currentMonth,
-            disabledDay && styles.calendarDayDisabled,
-            isToday && styles.today,
-            isSelectedDay && styles.selectedDay
-          )}
-        >
-          {startDate.date()}
-        </div>
-      );
+      if (days.length < 7) {
+        days.push(day);
+      } else {
+        weeks.push(days);
+        days = [];
+      }
 
-      days.push(day);
-      startDate = startDate.add(1, 'd');
+      startDate.add(1, 'd');
     }
 
-    return days;
+    console.log(weeks)
+
+    return weeks;
+  };
+
+  _renderMonthTable = () => {
+    const styles = this.styles();
+    const weeks = this._getWeeks();
+
+    return weeks.map(week => {
+      return (
+        <div>
+          {week.map(day => {
+            const isCurrentMonth = day.isSame(moment.unix(this.state.currentDate), 'month');
+            const isSelectedDay = day.isSame(moment.unix(this.props.selectedDate), 'day');
+            const isToday = day.isSame(moment(), 'day');
+            const disabledDay = this.props.minimumDate ? day.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+
+            return (
+              <div
+                key={day}
+                onClick={disabledDay ? null : this._handleDateSelect.bind(null, day.unix())}
+                style={Object.assign({},
+                  styles.calendarDay,
+                  isCurrentMonth && styles.currentMonth,
+                  disabledDay && styles.calendarDayDisabled,
+                  isToday && styles.today,
+                  isSelectedDay && styles.selectedDay
+                )}
+              >
+                {day.date()}
+              </div>
+            );
+          })}
+        </div>
+      );
+    });
   };
 
   render () {
@@ -140,8 +163,8 @@ class Calendar extends React.Component {
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
-        padding: 20,
-        width: 250
+        padding: 20
+        //width: 250
       }, this.props.style),
 
       //Calendar Header
