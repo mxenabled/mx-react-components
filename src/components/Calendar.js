@@ -149,9 +149,7 @@ class Calendar extends React.Component {
             );
           })}
         </div>
-        <div style={styles.calendarTable}>
-          {this._renderMonthTable()}
-        </div>
+        {this._renderMonthTable()}
       </div>
     );
   }
@@ -207,12 +205,6 @@ class Calendar extends React.Component {
       },
 
       //Calenday table
-      calendarTable: {
-        // alignItems: 'center',
-        // display: 'flex',
-        // flexWrap: 'wrap',
-        // justifyContent: 'space-around'
-      },
       calendarDay: {
         alignItems: 'center',
         borderRadius: 3,
