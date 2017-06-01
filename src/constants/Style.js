@@ -95,10 +95,6 @@ module.exports = {
     XSMALL: 5
   },
 
-  linearGradient (startColor, startOpacity = 0.8, endColor = startColor, endOpacity = 1) {
-    return `linear-gradient(${this.adjustHexOpacity(startColor, startOpacity)}, ${this.adjustHexOpacity(endColor, endOpacity)})`;
-  },
-
   getWindowSize () {
     const breakPoints = this.BreakPoints;
     const width = window.innerWidth;
