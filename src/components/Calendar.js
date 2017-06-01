@@ -86,7 +86,7 @@ class Calendar extends React.Component {
 
     return weeks.map(week => {
       return (
-        <div>
+        <div style={{ display: 'flex' }}>
           {week.map(day => {
             const isCurrentMonth = day.isSame(moment.unix(this.state.currentDate), 'month');
             const isSelectedDay = day.isSame(moment.unix(this.props.selectedDate), 'day');
@@ -165,7 +165,6 @@ class Calendar extends React.Component {
         boxSizing: 'border-box',
         marginTop: 10,
         padding: 20
-        //width: 250
       }, this.props.style),
 
       //Calendar Header
