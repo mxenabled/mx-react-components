@@ -63,5 +63,6 @@ module.exports = {
   Styles: require('./constants/Style'),
 
   // App Utils
-  ChartUtils: require('./utils/Chart')
+  ChartUtils: require('./utils/Chart'),
+  StyleUtils: require('./utils/Style')
 };
