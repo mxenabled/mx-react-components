@@ -86,7 +86,7 @@ class Calendar extends React.Component {
 
     return weeks.map(week => {
       return (
-        <div style={{ display: 'flex' }}>
+        <div style={styles.calendarWeek}>
           {week.map(day => {
             const isCurrentMonth = day.isSame(moment.unix(this.state.currentDate), 'month');
             const isSelectedDay = day.isSame(moment.unix(this.props.selectedDate), 'day');
@@ -140,7 +140,7 @@ class Calendar extends React.Component {
             type='caret-right'
           />
         </div>
-        <div style={styles.calendarWeek}>
+        <div style={styles.calendarWeekHeader}>
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
             return (
               <div key={i} style={styles.calendarWeekDay}>
@@ -164,7 +164,8 @@ class Calendar extends React.Component {
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
-        padding: 20
+        padding: 20,
+        width: 600
       }, this.props.style),
 
       //Calendar Header
@@ -185,19 +186,25 @@ class Calendar extends React.Component {
       },
 
       //Calendar week
-      calendarWeek: {
+      calendarWeekHeader: {
         alignItems: 'center',
         color: StyleConstants.Colors.ASH,
         display: 'flex',
+        flex: '1 1 100%',
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
         height: 30,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         marginBottom: 2
       },
       calendarWeekDay: {
         textAlign: 'center',
         width: 35
+      },
+      calendarWeek: {
+        display: 'flex',
+        flex: '1 1 100%',
+        justifyContent: 'center'
       },
 
       //Calenday table
