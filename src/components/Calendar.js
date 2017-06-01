@@ -58,23 +58,24 @@ class Calendar extends React.Component {
   _getWeeks = () => {
     const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    const weekLength = 7;
     const weeks = [];
     let days = [];
 
     while (moment(startDate).isBefore(endDate)) {
       const day = startDate.clone();
 
-      if (days.length < 7) {
+      if (days.length < weekLength) {
         days.push(day);
+        startDate.add(1, 'd');
       } else {
-        weeks.push(days);
         days = [];
       }
 
-      startDate.add(1, 'd');
+      if (days.length === weekLength) {
+        weeks.push(days);
+      }
     }
-
-    console.log(weeks)
 
     return weeks;
   };
