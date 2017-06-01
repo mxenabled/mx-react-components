@@ -157,7 +157,7 @@ class StylesDocs extends React.Component {
 
         <Markdown lang='js'>
           {`
-            color: Styles.adjustColor(Styles.Colors.PRIMARY, -15); //#359BCF is adjusted and returned as #268CC0
+            color: StyleUtils.adjustColor(Styles.Colors.PRIMARY, -15); //#359BCF is adjusted and returned as #268CC0
           `}
         </Markdown>
 

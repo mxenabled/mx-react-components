@@ -5,6 +5,7 @@ const Radium = require('radium');
 const Spin = require('./Spin');
 
 const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 const Icon = require('../components/Icon');
 
@@ -114,13 +115,13 @@ class Button extends React.Component {
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -15),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -15),
+          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -15),
+          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
           transition: 'all .2s ease-in'
         }
       },
@@ -138,8 +139,8 @@ class Button extends React.Component {
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleConstants.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
+          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -153,13 +154,13 @@ class Button extends React.Component {
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -15),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -15),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -15),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -30),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.WHITE, -30),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -30),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -30),
           transition: 'all .2s ease-in'
         }
       },
@@ -177,8 +178,8 @@ class Button extends React.Component {
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
-          borderColor: StyleConstants.adjustColor(StyleConstants.Colors.ASH, -30),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -30),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -193,14 +194,14 @@ class Button extends React.Component {
         borderRadius: 2,
         borderWidth: 1,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          color: StyleConstants.adjustColor(this.props.primaryColor, -8),
-          fill: StyleConstants.adjustColor(this.props.primaryColor, -8),
+          color: StyleUtils.adjustColor(this.props.primaryColor, -8),
+          fill: StyleUtils.adjustColor(this.props.primaryColor, -8),
           transition: 'all .2s ease-in',
           borderColor: StyleConstants.Colors.FOG
         },
         ':active': {
-          color: StyleConstants.adjustColor(this.props.primaryColor, -16),
-          fill: StyleConstants.adjustColor(this.props.primaryColor, -16),
+          color: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          fill: StyleUtils.adjustColor(this.props.primaryColor, -16),
           transition: 'all .2s ease-in',
           backgroundColor: StyleConstants.Colors.PORCELAIN
         }
@@ -216,7 +217,7 @@ class Button extends React.Component {
           backgroundColor: StyleConstants.Colors.PORCELAIN
         },
         ':active': {
-          backgroundColor: StyleConstants.adjustColor(StyleConstants.Colors.PORCELAIN, -15)
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PORCELAIN, -15)
         }
       },
       disabled: {
