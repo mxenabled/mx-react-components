@@ -3,8 +3,6 @@ const React = require('react');
 
 const Input = require('./SimpleInput');
 
-const StylesUtil = require('../utils/Styles');
-
 class SearchInput extends React.Component {
   static propTypes = {
     baseColor: PropTypes.string,
@@ -23,10 +21,6 @@ class SearchInput extends React.Component {
     onChange: () => {},
     placeholder: 'Search'
   };
-
-  componentWillMount () {
-    StylesUtil.checkForDeprecated(this.props);
-  }
 
   render () {
     const styles = this.styles();

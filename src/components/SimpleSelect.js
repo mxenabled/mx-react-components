@@ -35,10 +35,6 @@ class SimpleSelect extends React.Component {
   componentDidMount () {
     window.addEventListener('keydown', this._handleKeyDown);
 
-    if (this.props.style) {
-      console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
-    }
-
     if (this.props.iconStyles) {
       console.warn('The iconStyles prop is deprecated and will be removed in a future release. Please use styles.');
     }
