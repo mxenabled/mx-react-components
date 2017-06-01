@@ -201,7 +201,7 @@ class StylesDocs extends React.Component {
         <p>Returns the <code style={{ display: 'inline', padding: 3 }}>Styles.BreakPoints</code> key for the current window width.</p>
         <Markdown lang='js'>
           {`
-            Styles.getWindowSize() // e.g. returns 'large'
+            StyleUtils.getWindowSize(Styles.BreakPoints) // e.g. returns 'large'
           `}
         </Markdown>
 

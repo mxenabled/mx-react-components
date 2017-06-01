@@ -196,7 +196,7 @@ class DateRangePicker extends React.Component {
   };
 
   _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+    const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
 
     return windowSize === 'large' || windowSize === 'medium';
   };
@@ -319,7 +319,7 @@ class DateRangePicker extends React.Component {
     return (
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
-          {StyleConstants.getWindowSize() !== 'xsmall' &&
+          {StyleUtils.getWindowSize(StyleConstants.BreakPoints) !== 'xsmall' &&
             <Icon
               size={20}
               style={styles.selectedDateIcon}
@@ -334,7 +334,7 @@ class DateRangePicker extends React.Component {
               </div>
             ) : this.props.placeholderText}
           </div>
-          {StyleConstants.getWindowSize() !== 'xsmall' &&
+          {StyleUtils.getWindowSize(StyleConstants.BreakPoints) !== 'xsmall' &&
             <Icon
               size={20}
               style={styles.selectedDateCaret}

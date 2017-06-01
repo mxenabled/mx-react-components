@@ -32,7 +32,7 @@ class Button extends React.Component {
   };
 
   _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+    const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
 
     return windowSize === 'medium' || windowSize === 'large';
   };
