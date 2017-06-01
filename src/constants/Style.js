@@ -93,21 +93,5 @@ module.exports = {
     MEDIUM: 15,
     SMALL: 10,
     XSMALL: 5
-  },
-
-  getWindowSize () {
-    const breakPoints = this.BreakPoints;
-    const width = window.innerWidth;
-    let windowSize = 'small';
-
-    if (width >= breakPoints.large) {
-      windowSize = 'large';
-    } else if (width >= breakPoints.medium) {
-      windowSize = 'medium';
-    } else if (width <= breakPoints.small) {
-      windowSize = 'xsmall';
-    }
-
-    return windowSize;
   }
 };
