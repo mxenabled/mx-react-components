@@ -166,7 +166,7 @@ class StylesDocs extends React.Component {
 
         <Markdown lang='js'>
           {`
-            color: Styles.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)
+            color: StyleUtils.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)
           `}
         </Markdown>
 

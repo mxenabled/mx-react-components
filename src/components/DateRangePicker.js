@@ -10,6 +10,7 @@ const Container = require('../components/grid/Container');
 const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles }) => (
   <div style={styles.rangeOptions}>
@@ -626,7 +627,7 @@ class DateRangePicker extends React.Component {
         color: StyleConstants.Colors.WHITE
       },
       betweenDay: {
-        backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.5),
+        backgroundColor: StyleUtils.adjustHexOpacity(this.props.primaryColor, 0.5),
         borderRadius: 0,
 
         ':hover': {

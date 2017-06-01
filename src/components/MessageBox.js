@@ -2,8 +2,9 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
-const StyleConstants = require('../constants/Style');
 const Icon = require('../components/Icon');
+const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 class MessageBox extends React.Component {
   static propTypes = {
@@ -84,7 +85,7 @@ class MessageBox extends React.Component {
         fill: StyleConstants.Colors.WHITE
       },
       children: {
-        backgroundColor: StyleConstants.adjustHexOpacity(this.props.color, 0.1),
+        backgroundColor: StyleUtils.adjustHexOpacity(this.props.color, 0.1),
         padding: this.props.children ? StyleConstants.Spacing.SMALL : null
       }
     }, this.props.styles);
