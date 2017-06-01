@@ -5,6 +5,7 @@ const Radium = require('radium');
 const Icon = require('./Icon');
 const SimpleSelect = require('./SimpleSelect');
 const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 class Tabs extends React.Component {
   static propTypes = {
@@ -52,7 +53,7 @@ class Tabs extends React.Component {
   };
 
   _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+    const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
 
     return windowSize === 'medium' || windowSize === 'large';
   };

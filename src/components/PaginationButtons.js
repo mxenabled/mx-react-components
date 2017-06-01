@@ -4,6 +4,7 @@ const React = require('react');
 const ButtonGroup = require('./ButtonGroup');
 
 const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 const { buttonTypes } = require('../constants/App');
 
@@ -175,7 +176,7 @@ class PaginationButtons extends React.Component {
         width: 35
       }, this.props.style),
       active: {
-        backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.15)
+        backgroundColor: StyleUtils.adjustHexOpacity(this.props.primaryColor, 0.15)
       }
     };
   };

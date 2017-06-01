@@ -4,6 +4,7 @@ const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
 
 const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
@@ -40,7 +41,7 @@ class DisplayInput extends React.Component {
   }
 
   _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+    const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
 
     return windowSize === 'large' || windowSize === 'medium';
   };

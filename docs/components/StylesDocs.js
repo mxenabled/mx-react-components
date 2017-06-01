@@ -157,7 +157,7 @@ class StylesDocs extends React.Component {
 
         <Markdown lang='js'>
           {`
-            color: Styles.adjustColor(Styles.Colors.PRIMARY, -15); //#359BCF is adjusted and returned as #268CC0
+            color: StyleUtils.adjustColor(Styles.Colors.PRIMARY, -15); //#359BCF is adjusted and returned as #268CC0
           `}
         </Markdown>
 
@@ -166,33 +166,33 @@ class StylesDocs extends React.Component {
 
         <Markdown lang='js'>
           {`
-            color: Styles.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)
+            color: StyleUtils.adjustHexOpacity(Styles.Colors.PRIMARY, 0.5); //#359BCF, 0.5 is returned as rgba(53, 155, 207, 0.5)
           `}
         </Markdown>
 
         <h5>Linear Gradient</h5>
         <p>Takes two HEX colors and optional opacity amounts and returns a linear gradient string. The first color is requried, the other color and opacities are optional. If only the first color is provided, the gradient will be a single color from 0.8 to 1.</p>
-        <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY), height: 100, width: '100%' }}></div>
+        <div style={{ background: StyleUtils.linearGradient(Styles.Colors.PRIMARY), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
           {`
-            background: Styles.linearGradient(Styles.Colors.PRIMARY);
+            background: StyleUtils.linearGradient(Styles.Colors.PRIMARY);
           `}
         </Markdown>
 
-        <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY, 0.2), height: 100, width: '100%' }}></div>
+        <div style={{ background: StyleUtils.linearGradient(Styles.Colors.PRIMARY, 0.2), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
           {`
-            background: Styles.linearGradient(Styles.Colors.PRIMARY, 0.2);
+            background: StyleUtils.linearGradient(Styles.Colors.PRIMARY, 0.2);
           `}
         </Markdown>
 
-        <div style={{ background: Styles.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1), height: 100, width: '100%' }}></div>
+        <div style={{ background: StyleUtils.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
           {`
-            background: Styles.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1);
+            background: StyleUtils.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1);
           `}
         </Markdown>
 
@@ -201,7 +201,7 @@ class StylesDocs extends React.Component {
         <p>Returns the <code style={{ display: 'inline', padding: 3 }}>Styles.BreakPoints</code> key for the current window width.</p>
         <Markdown lang='js'>
           {`
-            Styles.getWindowSize() // e.g. returns 'large'
+            StyleUtils.getWindowSize(Styles.BreakPoints) // e.g. returns 'large'
           `}
         </Markdown>
 

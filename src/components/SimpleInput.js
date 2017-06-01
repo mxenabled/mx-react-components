@@ -6,8 +6,6 @@ const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
 
-const StylesUtil = require('../utils/Styles');
-
 class Input extends React.Component {
   static propTypes = {
     baseColor: PropTypes.string,
@@ -39,8 +37,6 @@ class Input extends React.Component {
   };
 
   componentDidMount () {
-    StylesUtil.checkForDeprecated(this.props);
-
     if (this.props.focusOnLoad && this.input) {
       this.input.focus();
     }
