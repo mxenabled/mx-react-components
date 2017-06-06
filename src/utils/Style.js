@@ -1,3 +1,5 @@
+const StyleConstants = require('../constants/Style');
+
 const StyleUtils = {
   adjustColor (col, amt) {
     let color = col;
@@ -62,6 +64,17 @@ const StyleUtils = {
     }
 
     return windowSize;
+  },
+
+  /**
+   * Abstraction to simplify merging theme colors.
+   *
+   * @param {Object} theme - Override keys in StyleConstants.Colors
+   * @param {String} primaryColor - Will be deprecated in a future release once it has been replaced by `theme` in each component
+   * @returns {Object}
+   */
+  mergeTheme (theme, primaryColor) {
+    return Object.assign({}, StyleConstants.Colors, theme, primaryColor && { PRIMARY: primaryColor });
   }
 };
 
