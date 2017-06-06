@@ -230,7 +230,7 @@ class Select extends React.Component {
         {
           backgroundColor: StyleConstants.Colors.WHITE,
           borderRadius: 3,
-          border: '1px solid ' + StyleConstants.Colors.FOG,
+          border: '1px solid ' + StyleConstants.Colors.GRAY_300,
           cursor: 'pointer',
           fontFamily: StyleConstants.FontFamily,
           fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -255,12 +255,12 @@ class Select extends React.Component {
           position: 'relative'
         }, this.props.selectedStyle),
       invalid: {
-        borderColor: StyleConstants.Colors.STRAWBERRY
+        borderColor: StyleConstants.Colors.DANGER
       },
       options: Object.assign({},
         {
           backgroundColor: StyleConstants.Colors.WHITE,
-          border: '1px solid ' + StyleConstants.Colors.FOG,
+          border: '1px solid ' + StyleConstants.Colors.GRAY_300,
           borderRadius: '0 0 3px 3px',
           left: -1,
           right: -1,
@@ -282,7 +282,7 @@ class Select extends React.Component {
       option: {
         display: 'flex',
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         cursor: 'pointer',
         backgroundColor: StyleConstants.Colors.WHITE,
         outline: 'none',

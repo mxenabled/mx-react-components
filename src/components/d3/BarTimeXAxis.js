@@ -73,13 +73,13 @@ class BarTimeXAxis extends React.Component {
   styles = () => {
     return {
       text: {
-        fill: StyleConstants.Colors.ASH,
+        fill: StyleConstants.Colors.GRAY_500,
         stroke: 'none',
         'font-size': StyleConstants.FontSizes.MEDIUM,
         'text-anchor': 'middle'
       },
       path: {
-        stroke: StyleConstants.Colors.FOG,
+        stroke: StyleConstants.Colors.GRAY_300,
         'stroke-width': 1,
         fill: 'none'
       }

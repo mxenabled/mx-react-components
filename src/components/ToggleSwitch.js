@@ -86,7 +86,7 @@ class ToggleSwitch extends React.Component {
         fontWeight: 'bold'
       },
       inactiveLabel: {
-        color: StyleConstants.Colors.FOG
+        color: StyleConstants.Colors.GRAY_300
       },
       activeLabel: {
         color: StyleConstants.Colors.PRIMARY
@@ -115,10 +115,10 @@ class ToggleSwitch extends React.Component {
         zIndex: 1
       },
       trueTrack: {
-        backgroundColor: StyleConstants.Colors.CHARCOAL
+        backgroundColor: StyleConstants.Colors.GRAY_700
       },
       falseTrack: {
-        backgroundColor: StyleConstants.Colors.ASH
+        backgroundColor: StyleConstants.Colors.GRAY_500
       }
     }, this.props.styles);
   };

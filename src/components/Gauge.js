@@ -38,7 +38,7 @@ class Gauge extends React.Component {
     baseArcColor: StyleConstants.Colors.BASE_ARC,
     colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
     data: [],
-    dataPointColors: [StyleConstants.Colors.CHARCOAL].concat(d3.scale.category20b().range()),
+    dataPointColors: [StyleConstants.Colors.GRAY_700].concat(d3.scale.category20b().range()),
     dataPointRadius: 5,
     dataPoints: [],
     formatter (value) {
@@ -52,7 +52,7 @@ class Gauge extends React.Component {
     padAngle: 0.02,
     showBaseArc: true,
     showDataLabel: true,
-    textLabelColor: StyleConstants.Colors.ASH,
+    textLabelColor: StyleConstants.Colors.GRAY_500,
     width: 150
   };
 

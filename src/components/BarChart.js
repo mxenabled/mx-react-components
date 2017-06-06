@@ -437,7 +437,7 @@ class BarChart extends React.Component {
   styles = () => {
     return {
       bar: {
-        fill: StyleConstants.Colors.FOG
+        fill: StyleConstants.Colors.GRAY_300
       },
       positiveBarHover: {
         fill: StyleConstants.Colors.PRIMARY
@@ -457,12 +457,12 @@ class BarChart extends React.Component {
       tooltipText: {
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         textAlign: 'center',
         whiteSpace: 'nowrap'
       },
       threshold: {
-        stroke: StyleConstants.Colors.ASH,
+        stroke: StyleConstants.Colors.GRAY_500,
         strokeDasharray: '4,4',
         strokeWidth: 1
       }

@@ -15,7 +15,7 @@ class ShadedAreaRectangleGroup extends React.Component {
   };
 
   static defaultProps = {
-    fillColor: StyleConstants.Colors.FOG,
+    fillColor: StyleConstants.Colors.GRAY_300,
     fillOpacity: 0.1,
     translation: 'translate(0,0)'
   };

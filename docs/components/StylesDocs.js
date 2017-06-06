@@ -19,7 +19,7 @@ class StylesDocs extends React.Component {
             return (
               <div key={color} style={{ marginBottom: 20, height: 120, width: 120, textAlign: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <div key={color} style={{ width: 80, height: 80, borderRadius: '100%', backgroundColor: Styles.Colors[color] }} />
-                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, flex: '1 0 100%' }}>({color})</div>
+                <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, flex: '1 0 100%' }}>({color})</div>
               </div>
             );
           })}
@@ -188,11 +188,11 @@ class StylesDocs extends React.Component {
           `}
         </Markdown>
 
-        <div style={{ background: StyleUtils.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1), height: 100, width: '100%' }}></div>
+        <div style={{ background: StyleUtils.linearGradient(Styles.Colors.DANGER, 1, Styles.Colors.SUCCESS, 1), height: 100, width: '100%' }}></div>
 
         <Markdown lang='js'>
           {`
-            background: StyleUtils.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1);
+            background: StyleUtils.linearGradient(Styles.Colors.DANGER, 1, Styles.Colors.SUCCESS, 1);
           `}
         </Markdown>
 
@@ -211,7 +211,7 @@ class StylesDocs extends React.Component {
             const { Styles } = require('mx-react-components');
 
             const styles = {
-              color: Styles.Colors.STRAWBERRY
+              color: Styles.Colors.DANGER
             };
           `}
         </Markdown>

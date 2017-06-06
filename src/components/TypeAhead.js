@@ -340,7 +340,7 @@ const styles = {
     ':focus': {
       backgroundColor: '#FFFFFF',
       boxShadow: 'none',
-      color: StyleConstants.Colors.CHARCOAL,
+      color: StyleConstants.Colors.GRAY_700,
       outline: 'none'
     }
   },
@@ -354,7 +354,7 @@ const styles = {
   input: {
     backgroundColor: '#FFFFFF',
     borderWidth: 0,
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     fontSize: '13px',
     minWidth: '33%',
     outline: 'none',
@@ -399,7 +399,7 @@ const styles = {
     position: 'relative'
   },
   item: {
-    color: StyleConstants.Colors.ASH,
+    color: StyleConstants.Colors.GRAY_500,
     cursor: 'pointer',
     paddingTop: '10px',
     paddingRight: '10px',
@@ -418,7 +418,7 @@ const styles = {
     }
   },
   removeIcon: {
-    color: StyleConstants.Colors.ASH,
+    color: StyleConstants.Colors.GRAY_500,
     marginLeft: '5px',
     cursor: 'pointer'
   }

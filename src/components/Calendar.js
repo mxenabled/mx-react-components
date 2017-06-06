@@ -136,7 +136,7 @@ class Calendar extends React.Component {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
@@ -147,7 +147,7 @@ class Calendar extends React.Component {
       //Calendar Header
       calendarHeader: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         display: 'flex',
         fontSize: StyleConstants.FontSizes.LARGE,
         height: 30,
@@ -164,7 +164,7 @@ class Calendar extends React.Component {
       //Calendar week
       calendarWeek: {
         alignItems: 'center',
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         display: 'flex',
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
@@ -188,7 +188,7 @@ class Calendar extends React.Component {
         alignItems: 'center',
         borderRadius: 3,
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.GRAY_300,
         cursor: 'pointer',
         display: 'flex',
         height: 30,
@@ -201,7 +201,7 @@ class Calendar extends React.Component {
         }
       },
       calendarDayDisabled: {
-        color: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.GRAY_300,
 
         ':hover': {
           cursor: 'default',
@@ -210,11 +210,11 @@ class Calendar extends React.Component {
       },
 
       today: {
-        backgroundColor: StyleConstants.Colors.FOG,
+        backgroundColor: StyleConstants.Colors.GRAY_300,
         color: StyleConstants.Colors.WHITE
       },
       currentMonth: {
-        color: StyleConstants.Colors.CHARCOAL
+        color: StyleConstants.Colors.GRAY_700
       },
       selectedDay: {
         backgroundColor: this.props.primaryColor,

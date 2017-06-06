@@ -54,11 +54,11 @@ class PageIndicator extends React.Component {
         borderRadius: '100%',
         display: 'inline-block',
         verticalAlign: 'middle',
-        backgroundColor: StyleConstants.Colors.FOG,
+        backgroundColor: StyleConstants.Colors.GRAY_300,
         cursor: 'pointer'
       },
       dotActive: {
-        backgroundColor: StyleConstants.Colors.CHARCOAL
+        backgroundColor: StyleConstants.Colors.GRAY_700
       }
     };
   };

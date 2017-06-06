@@ -247,7 +247,7 @@ class Modal extends React.Component {
         right: 0,
         margin: '-12px -12px 0 0',
         cursor: 'pointer',
-        color: StyleConstants.Colors.CHARCOAL
+        color: StyleConstants.Colors.GRAY_700
       },
       container: {
         fontFamily: StyleConstants.FontFamily,
@@ -263,11 +263,11 @@ class Modal extends React.Component {
         textAlign: 'left'
       },
       titleBar: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        backgroundColor: StyleConstants.Colors.GRAY_100,
         borderTopLeftRadius: 2,
         borderTopRightRadius: 2,
         padding: '15px 20px',
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         fontSize: StyleConstants.FontSizes.SMALL,
         textTransform: 'uppercase',
         letterSpacing: 1
@@ -278,7 +278,7 @@ class Modal extends React.Component {
         overflow: 'auto'
       },
       footer: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        backgroundColor: StyleConstants.Colors.GRAY_100,
         borderBottomLeftRadius: 2,
         borderBottomRightRadius: 2,
         padding: '10px 20px',
@@ -296,8 +296,8 @@ class Modal extends React.Component {
         fontSize: StyleConstants.FontSizes.SMALL
       },
       tooltip: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
-        borderColor: StyleConstants.Colors.FOG,
+        backgroundColor: StyleConstants.Colors.GRAY_100,
+        borderColor: StyleConstants.Colors.GRAY_300,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
@@ -313,7 +313,7 @@ class Modal extends React.Component {
         marginBottom: 5
       },
       tooltipContent: {
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         fontSize: StyleConstants.FontSizes.SMALL,
         lineHeight: '1.5em',
         textAlign: 'left'

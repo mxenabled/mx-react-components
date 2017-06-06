@@ -38,7 +38,7 @@ class RajaIconDocs extends React.Component {
                   style={{ color: '#000' }}
                   type={icon.value}
                 />
-                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
+                <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
               </div>
             );
           })}

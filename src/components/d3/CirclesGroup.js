@@ -20,7 +20,7 @@ class CirclesGroup extends React.Component {
   };
 
   static defaultProps = {
-    circleColor: StyleConstants.Colors.CHARCOAL,
+    circleColor: StyleConstants.Colors.GRAY_700,
     circleOverlayRadius: 6,
     circleRadius: 3,
     onCircleClick: () => {},

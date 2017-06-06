@@ -65,7 +65,7 @@ class DisplayInputDocs extends React.Component {
           valid={true}
         />
         <DisplayInput
-          childrenStyle={{ backgroundColor: Styles.Colors.PORCELAIN }}
+          childrenStyle={{ backgroundColor: Styles.Colors.GRAY_100 }}
           label='Display Children'
         >
           Custom &nbsp;<span style={{ fontFamily: 'monospace' }}>children</span>

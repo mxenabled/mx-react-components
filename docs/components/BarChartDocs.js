@@ -221,7 +221,7 @@ class BarChartDocs extends React.Component {
       },
       chart: {
         positiveBarClicked: {
-          fill: Styles.Colors.LIME
+          fill: Styles.Colors.SUCCESS
         }
       }
     };

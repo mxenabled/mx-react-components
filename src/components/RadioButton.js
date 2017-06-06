@@ -45,7 +45,7 @@ class RadioButton extends React.Component {
         width: 15,
         height: 15,
         marginRight: 5,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: '100%',
         backgroundColor: StyleConstants.Colors.WHITE
       }, this.props.buttonStyle),

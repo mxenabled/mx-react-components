@@ -99,7 +99,7 @@ class Tooltip extends React.Component {
     return {
       component: Object.assign({}, {
         display: 'inline-block',
-        fill: StyleConstants.Colors.ASH,
+        fill: StyleConstants.Colors.GRAY_500,
         position: 'relative'
       }, this.props.style),
       tooltip: Object.assign({},

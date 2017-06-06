@@ -36,14 +36,14 @@ const styles = {
 
   // Chart
   breakPointLabel: {
-    fill: StyleConstants.Colors.ASH,
+    fill: StyleConstants.Colors.GRAY_500,
     'font-family': StyleConstants.Fonts.REGULAR,
     'font-size': StyleConstants.FontSizes.SMALL,
     stroke: 'none'
   },
   breakPointLine: {
     fill: 'none',
-    stroke: StyleConstants.Colors.FOG,
+    stroke: StyleConstants.Colors.GRAY_300,
     'stroke-width': 1
   },
   chartMargins: {
@@ -57,11 +57,11 @@ const styles = {
     'stroke-width': 2
   },
   dateTooltip: {
-    fill: StyleConstants.Colors.CHARCOAL,
+    fill: StyleConstants.Colors.GRAY_700,
     stroke: 'none'
   },
   dateTooltipText: {
-    fill: StyleConstants.Colors.FOG,
+    fill: StyleConstants.Colors.GRAY_300,
     stroke: 'none',
     'font-family': StyleConstants.Fonts.REGULAR,
     'font-size': StyleConstants.FontSizes.MEDIUM
@@ -76,11 +76,11 @@ const styles = {
   },
   verticalLine: {
     fill: 'none',
-    stroke: StyleConstants.Colors.ASH,
+    stroke: StyleConstants.Colors.GRAY_500,
     'stroke-width': 1
   },
   xAxisLabel: {
-    fill: StyleConstants.Colors.ASH,
+    fill: StyleConstants.Colors.GRAY_500,
     stroke: 'none'
   },
   yAxisLabel: {
@@ -88,7 +88,7 @@ const styles = {
     'text-anchor': 'end'
   },
   zeroLineLabel: {
-    stroke: StyleConstants.Colors.STRAWBERRY
+    stroke: StyleConstants.Colors.DANGER
   },
 
   // Hovered Data Point
@@ -103,7 +103,7 @@ const styles = {
   },
   hoveredDataPointLabel: {
     boxSizing: 'border-box',
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     display: 'inline-block',
     fontFamily: StyleConstants.Fonts.REGULAR,
     fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -112,7 +112,7 @@ const styles = {
   },
   hoveredDataPointValue: {
     boxSizing: 'border-box',
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     display: 'inline-block',
     fontFamily: StyleConstants.Fonts.SEMIBOLD,
     fontSize: StyleConstants.FontSizes.MEDIUM,
@@ -436,17 +436,17 @@ class TimeBasedLineChart extends React.Component {
 
     // Style x axis ticks
     chart.select('g.time-axis').selectAll('line')
-      .style({ stroke: StyleConstants.Colors.FOG });
+      .style({ stroke: StyleConstants.Colors.GRAY_300 });
 
     // Style y axis labels
     chart.select('g.y-axis').selectAll('text')
       .style(styles.yAxisLabel)
-      .style('fill', StyleConstants.Colors.ASH)
+      .style('fill', StyleConstants.Colors.GRAY_500)
       .attr('transform', 'translate(-10,0)');
 
     // Style y axis ticks
     chart.select('g.y-axis').selectAll('line')
-      .style('stroke', StyleConstants.Colors.FOG);
+      .style('stroke', StyleConstants.Colors.GRAY_300);
 
     // Style Circles
     chart.selectAll('.circle')
@@ -478,7 +478,7 @@ class TimeBasedLineChart extends React.Component {
       .style(styles.domain);
 
     chart.selectAll('.y-grid-line .tick')
-      .style('stroke', StyleConstants.Colors.FOG);
+      .style('stroke', StyleConstants.Colors.GRAY_300);
 
     chart.select('text.zero-line-label')
       .style(styles.zeroLineLabel);
@@ -531,7 +531,7 @@ class TimeBasedLineChart extends React.Component {
               ) : null}
               {shadeBelowZero ? (
                 <ShadedAreaRectangleGroup
-                  fillColor={StyleConstants.Colors.STRAWBERRY}
+                  fillColor={StyleConstants.Colors.DANGER}
                   height={this._getShadedRectangleHeight()}
                   translation={this._getLineTranslation()}
                   width={adjustedWidth}
@@ -587,7 +587,7 @@ class TimeBasedLineChart extends React.Component {
                     adjustedHeight={adjustedHeight}
                     dashLine={true}
                     data={this._getZeroLineData()}
-                    lineColor={StyleConstants.Colors.STRAWBERRY}
+                    lineColor={StyleConstants.Colors.DANGER}
                     shouldAnimate={false}
                     translation={this._getLineTranslation()}
                     xScaleValueFunction={this._getXScaleValue}

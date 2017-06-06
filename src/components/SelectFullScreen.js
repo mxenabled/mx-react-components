@@ -143,10 +143,10 @@ const styles = {
     top: 15,
     textAlign: 'center',
     cursor: 'pointer',
-    color: StyleConstants.Colors.ASH
+    color: StyleConstants.Colors.GRAY_500
   },
   closeIcon: {
-    color: StyleConstants.Colors.ASH
+    color: StyleConstants.Colors.GRAY_500
   },
   closeText: {
     fontSize: StyleConstants.FontSizes.TINY
@@ -155,7 +155,7 @@ const styles = {
     cursor: 'pointer',
     fontFamily: StyleConstants.FontFamily,
     fontSize: StyleConstants.FontSizes.LARGE,
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     boxSizing: 'border-box',
     outline: 'none'
   },
@@ -177,7 +177,7 @@ const styles = {
     zIndex: 999
   },
   optionsWrapper: {
-    border: '1px solid ' + StyleConstants.Colors.FOG,
+    border: '1px solid ' + StyleConstants.Colors.GRAY_300,
     height: 250,
     overflow: 'auto',
     width: 300
@@ -196,7 +196,7 @@ const styles = {
     }
   },
   optionsHeader: {
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     fontSize: StyleConstants.FontSizes.XXLARGE,
     fontWeight: 'bold',
     paddingBottom: 10

@@ -318,24 +318,24 @@ class DatePickerFullScreen extends React.Component {
 
 const styles = {
   calendarDay: {
-    color: StyleConstants.Colors.ASH,
+    color: StyleConstants.Colors.GRAY_500,
     float: 'left',
     paddingBottom: '11%',
     position: 'relative',
     width: '13.5%'
   },
   borderBottom: {
-    borderBottom: StyleConstants.Colors.FOG,
+    borderBottom: StyleConstants.Colors.GRAY_300,
     borderBottomStyle: 'solid',
     borderBottomWidth: 1
   },
   borderRight: {
-    borderRight: StyleConstants.Colors.FOG,
+    borderRight: StyleConstants.Colors.GRAY_300,
     borderRightStyle: 'solid',
     borderRightWidth: 1
   },
   borderLeft: {
-    borderLeft: StyleConstants.Colors.FOG,
+    borderLeft: StyleConstants.Colors.GRAY_300,
     borderLeftStyle: 'solid',
     borderLeftWidth: 1
   },
@@ -370,12 +370,12 @@ const styles = {
   calendarDayDisabled: {
     ':hover': {
       background: 'none',
-      color: StyleConstants.Colors.PORCELAIN
+      color: StyleConstants.Colors.GRAY_100
     }
   },
   calendarHeader: {
-    color: StyleConstants.Colors.CHARCOAL,
-    borderBottom: StyleConstants.Colors.FOG,
+    color: StyleConstants.Colors.GRAY_700,
+    borderBottom: StyleConstants.Colors.GRAY_300,
     borderBottomWidth: 1,
     fontSize: StyleConstants.FontSizes.XLARGE,
     fontWeight: 'normal',
@@ -385,7 +385,7 @@ const styles = {
     textTransform: 'none'
   },
   calendarIcon: {
-    color: StyleConstants.Colors.PORCELAIN,
+    color: StyleConstants.Colors.GRAY_100,
     position: 'absolute',
     right: 12.8,
     top: '50%',
@@ -400,10 +400,10 @@ const styles = {
     top: 15,
     textAlign: 'center',
     cursor: 'pointer',
-    color: StyleConstants.Colors.ASH
+    color: StyleConstants.Colors.GRAY_500
   },
   closeIcon: {
-    color: StyleConstants.Colors.ASH
+    color: StyleConstants.Colors.GRAY_500
   },
   closeText: {
     fontSize: StyleConstants.FontSizes.TINY
@@ -452,7 +452,7 @@ const styles = {
     color: StyleConstants.Colors.WHITE
   },
   currentMonth: {
-    color: StyleConstants.Colors.CHARCOAL
+    color: StyleConstants.Colors.GRAY_700
   },
   input: {
     backgroundColor: 'transparent',
@@ -489,14 +489,14 @@ const styles = {
     transform: 'translateY(-50%)'
   },
   placeholderText: {
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     fontSize: StyleConstants.FontSizes.MEDIUM,
     paddingLeft: 5,
     position: 'absolute',
     top: 10
   },
   selectedDate: {
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     cursor: 'pointer',
     fontSize: StyleConstants.FontSizes.MEDIUM,
     padding: '5px 0 5px 5px',
@@ -504,12 +504,12 @@ const styles = {
     width: '100%',
 
     ':hover': {
-      color: StyleConstants.Colors.BLUE
+      color: StyleConstants.Colors.PRIMARY
     }
   },
   title: {
     boxSizing: 'border-box',
-    color: StyleConstants.Colors.CHARCOAL,
+    color: StyleConstants.Colors.GRAY_700,
     fontSize: StyleConstants.FontSizes.XXLARGE,
     fontWeight: 'bold',
     padding: '0px 0px 20px 10px'
