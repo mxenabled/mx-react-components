@@ -46,7 +46,7 @@ class DonutChart extends React.Component {
     baseArcColor: StyleConstants.Colors.BASE_ARC,
     colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
     data: [],
-    dataPointColors: [StyleConstants.Colors.LIME].concat(d3.scale.category20b().range()),
+    dataPointColors: [StyleConstants.Colors.SUCCESS].concat(d3.scale.category20b().range()),
     dataPointRadius: 5,
     dataPoints: [],
     formatter (value) {
@@ -388,7 +388,7 @@ class DonutChart extends React.Component {
         transform: 'translate(-50%, -50%)'
       },
       label: {
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         fontSize: '0.4em',
         marginTop: 5
       },

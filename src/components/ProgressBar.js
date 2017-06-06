@@ -14,7 +14,7 @@ class ProgressBar extends React.Component {
   };
 
   static defaultProps = {
-    baseColor: StyleConstants.Colors.FOG,
+    baseColor: StyleConstants.Colors.GRAY_300,
     height: 10,
     progressColor: StyleConstants.Colors.PRIMARY
   };

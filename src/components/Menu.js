@@ -61,12 +61,12 @@ class Menu extends React.Component {
           onMouseOver={this._handleMouseOver.bind(null, index)}
           style={Object.assign({}, styles.menuItem, {
             backgroundColor: index === this.state.hoverItemIndex ? this.props.primaryColor : 'transparent',
-            color: index === this.state.hoverItemIndex ? StyleConstants.Colors.WHITE : StyleConstants.Colors.ASH
+            color: index === this.state.hoverItemIndex ? StyleConstants.Colors.WHITE : StyleConstants.Colors.GRAY_500
           })}
         >
           <Icon
             size={20}
-            style={Object.assign({}, styles.itemIcon, { fill: index === this.state.hoverItemIndex ? StyleConstants.Colors.WHITE : StyleConstants.Colors.CHARCOAL })}
+            style={Object.assign({}, styles.itemIcon, { fill: index === this.state.hoverItemIndex ? StyleConstants.Colors.WHITE : StyleConstants.Colors.GRAY_700 })}
             type={item.icon}
           />
           <span style={styles.itemLabel}>
@@ -110,8 +110,8 @@ class Menu extends React.Component {
         width: 40
       },
       dotsWrapper: {
-        backgroundColor: this.props.isOpen ? StyleConstants.Colors.PORCELAIN : 'transparent',
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        backgroundColor: this.props.isOpen ? StyleConstants.Colors.GRAY_100 : 'transparent',
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         cursor: 'pointer',
         margin: 3,
@@ -119,7 +119,7 @@ class Menu extends React.Component {
       },
       menu: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         position: 'absolute',
@@ -132,7 +132,7 @@ class Menu extends React.Component {
         fill: this.props.primaryColor
       },
       menuItem: {
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         cursor: 'pointer',
         marginRight: 5,
         whiteSpace: 'nowrap'

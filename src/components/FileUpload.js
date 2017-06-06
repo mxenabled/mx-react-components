@@ -265,10 +265,10 @@ class FileUpload extends React.Component {
   styles = () => {
     return {
       dropzone: Object.assign({}, {
-        backgroundColor: this.state.dragging ? StyleConstants.Colors.WHITE : StyleConstants.Colors.PORCELAIN,
-        border: this.state.dragging ? '1px dashed ' + StyleConstants.Colors.PRIMARY : '1px solid ' + StyleConstants.Colors.FOG,
+        backgroundColor: this.state.dragging ? StyleConstants.Colors.WHITE : StyleConstants.Colors.GRAY_100,
+        border: this.state.dragging ? '1px dashed ' + StyleConstants.Colors.PRIMARY : '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         fontFamily: StyleConstants.Fonts.REGULAR,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         height: this.state.dragging ? 150 : 100,
@@ -304,7 +304,7 @@ class FileUpload extends React.Component {
         opacity: this.state.dragging ? 0.5 : 1
       },
       documentIcon: {
-        fill: StyleConstants.Colors.ASH
+        fill: StyleConstants.Colors.GRAY_500
       },
       button: {
         marginTop: 10
@@ -326,7 +326,7 @@ class FileUpload extends React.Component {
         marginBottom: 10
       },
       invalidIcon: {
-        color: StyleConstants.Colors.ASH
+        color: StyleConstants.Colors.GRAY_500
       }
     };
   };

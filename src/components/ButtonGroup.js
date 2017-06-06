@@ -86,9 +86,9 @@ class ButtonGroup extends React.Component {
       },
       disabled: {
         backgroundColor: 'transparent',
-        color: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.GRAY_300,
         cursor: 'default',
-        fill: StyleConstants.Colors.FOG,
+        fill: StyleConstants.Colors.GRAY_300,
         ':hover': {
           backgroundColor: 'transparent'
         },

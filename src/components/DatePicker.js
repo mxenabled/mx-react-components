@@ -115,7 +115,7 @@ class DatePicker extends React.Component {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -153,11 +153,11 @@ class DatePicker extends React.Component {
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500,
         flex: 1
       },
       selectedDateCaret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_500
       },
       scrim: {
         bottom: 0,

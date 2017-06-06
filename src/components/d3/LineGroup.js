@@ -20,7 +20,7 @@ class LineGroup extends React.Component {
 
   static defaultProps = {
     dashLine: false,
-    lineColor: StyleConstants.Colors.CHARCOAL,
+    lineColor: StyleConstants.Colors.GRAY_700,
     shouldAnimate: true,
     strokeWidth: 2,
     translation: 'translate(0,0)'

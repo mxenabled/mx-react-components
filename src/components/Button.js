@@ -108,39 +108,39 @@ class Button extends React.Component {
         lineHeight: '20px'
       },
       primary: {
-        backgroundColor: this.props.primaryColor,
-        borderColor: this.props.primaryColor,
+        backgroundColor: StyleConstants.Colors.PRIMARY,
+        borderColor: StyleConstants.Colors.PRIMARY,
         color: StyleConstants.Colors.WHITE,
         fill: StyleConstants.Colors.WHITE,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -15),
-          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -15),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -15),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
           transition: 'all .2s ease-in'
         }
       },
       primaryOutline: {
         backgroundColor: 'transparent',
-        borderColor: this.props.primaryColor,
-        color: this.props.primaryColor,
-        fill: this.props.primaryColor,
+        borderColor: StyleConstants.Colors.PRIMARY,
+        color: StyleConstants.Colors.PRIMARY,
+        fill: StyleConstants.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: this.props.primaryColor,
+          backgroundColor: StyleConstants.Colors.PRIMARY,
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
-          borderColor: StyleUtils.adjustColor(this.props.primaryColor, -30),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -149,8 +149,8 @@ class Button extends React.Component {
       primaryInverse: {
         backgroundColor: StyleConstants.Colors.WHITE,
         borderColor: StyleConstants.Colors.WHITE,
-        color: this.props.primaryColor,
-        fill: this.props.primaryColor,
+        color: StyleConstants.Colors.PRIMARY,
+        fill: StyleConstants.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
@@ -166,20 +166,20 @@ class Button extends React.Component {
       },
       secondary: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.ASH,
-        color: StyleConstants.Colors.ASH,
-        fill: StyleConstants.Colors.ASH,
+        borderColor: StyleConstants.Colors.GRAY_500,
+        color: StyleConstants.Colors.GRAY_500,
+        fill: StyleConstants.Colors.GRAY_500,
         transition: 'all .2s ease-in',
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.Colors.ASH,
-          borderColor: StyleConstants.Colors.ASH,
+          backgroundColor: StyleConstants.Colors.GRAY_500,
+          borderColor: StyleConstants.Colors.GRAY_500,
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -30),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.ASH, -30),
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.GRAY_500, -30),
+          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.GRAY_500, -30),
           color: StyleConstants.Colors.WHITE,
           fill: StyleConstants.Colors.WHITE,
           transition: 'all .2s ease-in'
@@ -187,44 +187,44 @@ class Button extends React.Component {
       },
       base: {
         backgroundColor: 'transparent',
-        color: this.props.primaryColor,
-        fill: this.props.primaryColor,
+        color: StyleConstants.Colors.PRIMARY,
+        fill: StyleConstants.Colors.PRIMARY,
         transition: 'all .2s ease-in',
         borderColor: 'transparent',
         borderRadius: 2,
         borderWidth: 1,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          color: StyleUtils.adjustColor(this.props.primaryColor, -8),
-          fill: StyleUtils.adjustColor(this.props.primaryColor, -8),
+          color: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -8),
+          fill: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -8),
           transition: 'all .2s ease-in',
-          borderColor: StyleConstants.Colors.FOG
+          borderColor: StyleConstants.Colors.GRAY_300
         },
         ':active': {
-          color: StyleUtils.adjustColor(this.props.primaryColor, -16),
-          fill: StyleUtils.adjustColor(this.props.primaryColor, -16),
+          color: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -16),
+          fill: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -16),
           transition: 'all .2s ease-in',
-          backgroundColor: StyleConstants.Colors.PORCELAIN
+          backgroundColor: StyleConstants.Colors.GRAY_100
         }
       },
       neutral: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.FOG,
+        borderColor: StyleConstants.Colors.GRAY_300,
         borderRadius: 2,
         borderWidth: 1,
-        color: this.props.primaryColor,
-        fill: this.props.primaryColor,
+        color: StyleConstants.Colors.PRIMARY,
+        fill: StyleConstants.Colors.PRIMARY,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.Colors.PORCELAIN
+          backgroundColor: StyleConstants.Colors.GRAY_100
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PORCELAIN, -15)
+          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.GRAY_100, -15)
         }
       },
       disabled: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.FOG,
-        fill: StyleConstants.Colors.FOG
+        borderColor: StyleConstants.Colors.GRAY_300,
+        color: StyleConstants.Colors.GRAY_300,
+        fill: StyleConstants.Colors.GRAY_300
       },
       icon: {
         marginLeft: this._hasVisibleChildren() ? -4 : 0,

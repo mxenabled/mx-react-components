@@ -68,7 +68,7 @@ class GaugeDocs extends React.Component {
         </Markdown>
 
         <h5>dataPointColors <label>Array</label></h5>
-        <p>Default: CHARCOAL </p>
+        <p>Default: GRAY_700 </p>
         <p>Array of css color values whose indexes correspond with the data array. For example, the first color value in dataPointColors will determine the dot color for the first item in dataPoints.</p>
 
         <h5>dataPointRadius <label>Number</label></h5>

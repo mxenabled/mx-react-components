@@ -262,13 +262,13 @@ class DatePicker extends React.Component {
       selectWrapper: {
         alignItems: 'center',
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: StyleConstants.Colors.FOG,
+        borderColor: StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
         boxShadow: 'none',
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         cursor: 'pointer',
         display: 'flex',
         flex: '1 0 0%',
@@ -285,11 +285,11 @@ class DatePicker extends React.Component {
         marginRight: 5
       },
       selectedText: {
-        color: this.props.selectedDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        color: this.props.selectedDate ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500,
         flex: 1
       },
       selectedDateCaret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_500
       },
 
       // Time Styles
@@ -302,12 +302,12 @@ class DatePicker extends React.Component {
         outline: 'none'
       },
       timeDisplay: {
-        color: this.props.selectedDate ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH,
+        color: this.props.selectedDate ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500,
         flex: 1,
         lineHeight: '1.55em'
       },
       timezone: {
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         paddingLeft: 10,
         textAlign: 'right'
       },
@@ -318,7 +318,7 @@ class DatePicker extends React.Component {
       },
       calendar: Object.assign({}, {
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',

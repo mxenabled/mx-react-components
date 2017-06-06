@@ -14,7 +14,7 @@ class ShadedHatchPatternRectangleGroup extends React.Component {
   };
 
   static defaultProps = {
-    fillColor: StyleConstants.Colors.FOG,
+    fillColor: StyleConstants.Colors.GRAY_300,
     translation: 'translate(0,0)'
   };
 

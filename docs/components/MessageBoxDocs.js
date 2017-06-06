@@ -17,7 +17,7 @@ class MessageBoxDocs extends React.Component {
 
         <h3>Demo</h3>
         <MessageBox
-          color={Styles.Colors.STRAWBERRY}
+          color={Styles.Colors.DANGER}
           icon='attention-solid'
           styles={styles.messageBoxNoChildren}
           title='This is a MessageBox with no children.'
@@ -55,7 +55,7 @@ class MessageBoxDocs extends React.Component {
           {`
             //Without Children
             <MessageBox
-              color={Styles.Colors.STRAWBERRY}
+              color={Styles.Colors.DANGER}
               icon='attention-solid'
               title='This is a Message'
             />
@@ -80,7 +80,7 @@ class MessageBoxDocs extends React.Component {
   styles = () => {
     return {
       messageBoxContents: {
-        color: Styles.Colors.CHARCOAL,
+        color: Styles.Colors.GRAY_700,
         display: 'flex'
       },
       messageBoxText: {

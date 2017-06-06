@@ -97,7 +97,7 @@ class Input extends React.Component {
         padding: StyleConstants.Spacing.SMALL,
         boxSizing: 'border-box',
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.GRAY_300 : '1px solid ' + StyleConstants.Colors.DANGER,
         borderRadius: 3,
         display: 'flex',
         alignItems: 'center',
@@ -114,12 +114,12 @@ class Input extends React.Component {
       },
       rightIcon: {
         paddingLeft: StyleConstants.Spacing.XSMALL,
-        fill: StyleConstants.Colors.FOG,
+        fill: StyleConstants.Colors.GRAY_300,
         cursor: 'pointer'
       },
       input: {
         flex: '1 0 0%',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         backgroundColor: StyleConstants.Colors.WHITE,
         border: 'none',

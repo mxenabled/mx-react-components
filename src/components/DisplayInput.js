@@ -121,14 +121,14 @@ class DisplayInput extends React.Component {
   styles = () => {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
     const wrapperFocus = {
-      borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+      borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.DANGER,
       boxShadow: 'none',
       outline: 'none'
     };
 
     return {
       error: {
-        color: StyleConstants.Colors.STRAWBERRY
+        color: StyleConstants.Colors.DANGER
       },
 
       hint: {
@@ -141,7 +141,7 @@ class DisplayInput extends React.Component {
       input: {
         backgroundColor: 'transparent',
         border: 0,
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         fontSize: StyleConstants.FontSizes.LARGE,
         lineHeight: 1,
         textAlign: 'left',
@@ -161,7 +161,7 @@ class DisplayInput extends React.Component {
 
       children: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         display: 'flex',
         fontSize: StyleConstants.FontSizes.LARGE,
         height: StyleConstants.Spacing.LARGE,
@@ -170,7 +170,7 @@ class DisplayInput extends React.Component {
 
       labelText: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         display: 'flex',
         fontSize: StyleConstants.FontSizes.SMALL,
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
@@ -193,7 +193,7 @@ class DisplayInput extends React.Component {
       },
 
       wrapper: Object.assign({
-        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.GRAY_300 : '1px solid ' + StyleConstants.Colors.DANGER,
         boxSizing: 'border-box',
         paddingBottom: StyleConstants.Spacing.XSMALL,
         marginLeft: isLargeOrMediumWindowSize ? 0 : -10,

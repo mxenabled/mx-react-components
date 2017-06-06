@@ -189,7 +189,7 @@ class Drawer extends React.Component {
   styles = () => {
     return _merge({}, {
       component: {
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         boxSizing: 'border-box',
         zIndex: 1001,
         top: 0,
@@ -197,7 +197,7 @@ class Drawer extends React.Component {
         left: '100%',
         position: 'absolute',
         width: '80%',
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        backgroundColor: StyleConstants.Colors.GRAY_100,
         boxShadow: StyleConstants.ShadowHigh,
 
         [`@media (max-width: ${this.props.breakPoints.medium}px)`]: {
@@ -230,7 +230,7 @@ class Drawer extends React.Component {
         backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
       },
       icons: {
-        color: StyleConstants.Colors.ASH
+        color: StyleConstants.Colors.GRAY_500
       },
       backArrow: {
         paddingLeft: 20,
@@ -244,8 +244,8 @@ class Drawer extends React.Component {
       header: {
         alignItems: 'center',
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderBottom: 'solid 1px ' + StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.ASH,
+        borderBottom: 'solid 1px ' + StyleConstants.Colors.GRAY_300,
+        color: StyleConstants.Colors.GRAY_500,
         display: 'flex',
         fontFamily: StyleConstants.Fonts.REGULAR,
         fontSize: StyleConstants.FontSizes.LARGE,

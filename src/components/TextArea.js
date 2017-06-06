@@ -73,7 +73,7 @@ class TextArea extends React.Component {
         padding: StyleConstants.Spacing.SMALL,
         boxSizing: 'border-box',
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.GRAY_300 : '1px solid ' + StyleConstants.Colors.DANGER,
         borderRadius: 3,
         display: 'flex',
         alignItems: 'center',

@@ -453,7 +453,7 @@ class DateRangePicker extends React.Component {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -480,16 +480,16 @@ class DateRangePicker extends React.Component {
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
+        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500
       },
       selectedDateCaret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_500
       },
 
       //Calendar Styles
       optionsWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
@@ -515,7 +515,7 @@ class DateRangePicker extends React.Component {
       //Calendar Header
       calendarHeader: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         display: 'flex',
         fontSize: StyleConstants.FontSizes.LARGE,
         height: 30,
@@ -532,7 +532,7 @@ class DateRangePicker extends React.Component {
       //Calendar week
       calendarWeek: {
         alignItems: 'center',
-        color: StyleConstants.Colors.ASH,
+        color: StyleConstants.Colors.GRAY_500,
         display: 'flex',
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
@@ -555,7 +555,7 @@ class DateRangePicker extends React.Component {
       calendarDay: {
         alignItems: 'center',
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.GRAY_300,
         cursor: 'pointer',
         display: 'flex',
         height: 30,
@@ -568,7 +568,7 @@ class DateRangePicker extends React.Component {
         }
       },
       calendarDayDisabled: {
-        color: StyleConstants.Colors.FOG,
+        color: StyleConstants.Colors.GRAY_300,
 
         ':hover': {
           cursor: 'default',
@@ -576,11 +576,11 @@ class DateRangePicker extends React.Component {
         }
       },
       today: {
-        backgroundColor: StyleConstants.Colors.FOG,
+        backgroundColor: StyleConstants.Colors.GRAY_300,
         color: StyleConstants.Colors.WHITE
       },
       currentMonth: {
-        color: StyleConstants.Colors.CHARCOAL
+        color: StyleConstants.Colors.GRAY_700
       },
 
       //Default Ranges
@@ -592,10 +592,10 @@ class DateRangePicker extends React.Component {
         padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
       },
       rangeOptions: {
-        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
+        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.GRAY_300 : 'none',
+        borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.GRAY_300,
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         display: isLargeOrMediumWindowSize ? 'inline-block' : 'flex',
         flexDirection: isLargeOrMediumWindowSize ? 'column' : 'row',
         flexWrap: isLargeOrMediumWindowSize ? 'nowrap' : 'wrap',
@@ -614,7 +614,7 @@ class DateRangePicker extends React.Component {
         width: isLargeOrMediumWindowSize ? '100%' : '50%',
 
         ':hover': {
-          backgroundColor: StyleConstants.Colors.PORCELAIN
+          backgroundColor: StyleConstants.Colors.GRAY_100
         }
       },
       rangeOptionIcon: {
