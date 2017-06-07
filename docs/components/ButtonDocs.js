@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Button, Styles } = require('mx-react-components');
 
@@ -23,6 +24,11 @@ class ButtonDocs extends React.Component {
   };
 
   render () {
+    const customTheme = {
+      GRAY_300: '#ffc0bc',
+      PRIMARY: '#6C3F6F'
+    };
+
     return (
       <div>
         <h1>
@@ -72,6 +78,11 @@ class ButtonDocs extends React.Component {
             Loading (spinner only)
           </Button>
         </div>
+        <h4>Custom Theme</h4>
+        <div className='flex'>
+          <Button theme={customTheme}>Primary</Button>
+          <Button style={style} theme={customTheme} type='disabled'>Disabled</Button>
+        </div>
 
         <h3>Usage</h3>
         <h5>actionText <label>String</label></h5>
@@ -88,9 +99,9 @@ class ButtonDocs extends React.Component {
         <p>Default: false</p>
         <p>A boolean that is toggled when the button is clicked and when the item is finished loading..</p>
 
-        <h5>primaryColor <label>String</label></h5>
-        <p>Default: Styles.Colors.PRIMARY</p>
-        <p>The primary color used with the button styles.</p>
+        <h5>theme <label>Object</label></h5>
+        <p>Default: See Colors in <Link to='/components/styles'>Styles</Link></p>
+        <p>Customize any of the colors used in Button.</p>
 
         <h5>type <label>String</label></h5>
         <p>Default: 'primary'</p>
@@ -99,7 +110,7 @@ class ButtonDocs extends React.Component {
         <h3>Example</h3>
         <Markdown>
   {`
-    <Button aria-label='Submit Form' primaryColor='#333333' type='secondary' />
+    <Button aria-label='Submit Form' theme={{ PRIMARY: '#333333' }} type='secondary' />
   `}
         </Markdown>
       </div>

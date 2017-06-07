@@ -21,13 +21,14 @@ class Button extends React.Component {
     onClick: PropTypes.func,
     primaryColor: PropTypes.string,
     style: PropTypes.object,
+    theme: PropTypes.object,
     type: PropTypes.oneOf(buttonTypes)
   };
 
   static defaultProps = {
     onClick () {},
     isActive: false,
-    primaryColor: StyleConstants.Colors.PRIMARY,
+    theme: StyleConstants,
     type: 'primary'
   };
 
@@ -85,6 +86,8 @@ class Button extends React.Component {
   }
 
   styles = () => {
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+
     return {
       component: Object.assign({
         borderRadius: 2,
@@ -108,123 +111,123 @@ class Button extends React.Component {
         lineHeight: '20px'
       },
       primary: {
-        backgroundColor: StyleConstants.Colors.PRIMARY,
-        borderColor: StyleConstants.Colors.PRIMARY,
-        color: StyleConstants.Colors.WHITE,
-        fill: StyleConstants.Colors.WHITE,
+        backgroundColor: theme.PRIMARY,
+        borderColor: theme.PRIMARY,
+        color: theme.WHITE,
+        fill: theme.WHITE,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -15),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -15),
+          backgroundColor: StyleUtils.adjustColor(theme.PRIMARY, -15),
+          borderColor: StyleUtils.adjustColor(theme.PRIMARY, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
+          backgroundColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
+          borderColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
           transition: 'all .2s ease-in'
         }
       },
       primaryOutline: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.PRIMARY,
-        color: StyleConstants.Colors.PRIMARY,
-        fill: StyleConstants.Colors.PRIMARY,
+        borderColor: theme.PRIMARY,
+        color: theme.PRIMARY,
+        fill: theme.PRIMARY,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.Colors.PRIMARY,
-          color: StyleConstants.Colors.WHITE,
-          fill: StyleConstants.Colors.WHITE,
+          backgroundColor: theme.PRIMARY,
+          color: theme.WHITE,
+          fill: theme.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -30),
-          color: StyleConstants.Colors.WHITE,
-          fill: StyleConstants.Colors.WHITE,
+          backgroundColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
+          borderColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
+          color: theme.WHITE,
+          fill: theme.WHITE,
           transition: 'all .2s ease-in'
         }
       },
       primaryInverse: {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: StyleConstants.Colors.WHITE,
-        color: StyleConstants.Colors.PRIMARY,
-        fill: StyleConstants.Colors.PRIMARY,
+        backgroundColor: theme.WHITE,
+        borderColor: theme.WHITE,
+        color: theme.PRIMARY,
+        fill: theme.PRIMARY,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -15),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -15),
+          backgroundColor: StyleUtils.adjustColor(theme.WHITE, -15),
+          borderColor: StyleUtils.adjustColor(theme.WHITE, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -30),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.WHITE, -30),
+          backgroundColor: StyleUtils.adjustColor(theme.WHITE, -30),
+          borderColor: StyleUtils.adjustColor(theme.WHITE, -30),
           transition: 'all .2s ease-in'
         }
       },
       secondary: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.GRAY_500,
-        color: StyleConstants.Colors.GRAY_500,
-        fill: StyleConstants.Colors.GRAY_500,
+        borderColor: theme.GRAY_500,
+        color: theme.GRAY_500,
+        fill: theme.GRAY_500,
         transition: 'all .2s ease-in',
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.Colors.GRAY_500,
-          borderColor: StyleConstants.Colors.GRAY_500,
-          color: StyleConstants.Colors.WHITE,
-          fill: StyleConstants.Colors.WHITE,
+          backgroundColor: theme.GRAY_500,
+          borderColor: theme.GRAY_500,
+          color: theme.WHITE,
+          fill: theme.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.GRAY_500, -30),
-          borderColor: StyleUtils.adjustColor(StyleConstants.Colors.GRAY_500, -30),
-          color: StyleConstants.Colors.WHITE,
-          fill: StyleConstants.Colors.WHITE,
+          backgroundColor: StyleUtils.adjustColor(theme.GRAY_500, -30),
+          borderColor: StyleUtils.adjustColor(theme.GRAY_500, -30),
+          color: theme.WHITE,
+          fill: theme.WHITE,
           transition: 'all .2s ease-in'
         }
       },
       base: {
         backgroundColor: 'transparent',
-        color: StyleConstants.Colors.PRIMARY,
-        fill: StyleConstants.Colors.PRIMARY,
+        color: theme.PRIMARY,
+        fill: theme.PRIMARY,
         transition: 'all .2s ease-in',
         borderColor: 'transparent',
         borderRadius: 2,
         borderWidth: 1,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          color: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -8),
-          fill: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -8),
+          color: StyleUtils.adjustColor(theme.PRIMARY, -8),
+          fill: StyleUtils.adjustColor(theme.PRIMARY, -8),
           transition: 'all .2s ease-in',
-          borderColor: StyleConstants.Colors.GRAY_300
+          borderColor: theme.GRAY_300
         },
         ':active': {
-          color: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -16),
-          fill: StyleUtils.adjustColor(StyleConstants.Colors.PRIMARY, -16),
+          color: StyleUtils.adjustColor(theme.PRIMARY, -16),
+          fill: StyleUtils.adjustColor(theme.PRIMARY, -16),
           transition: 'all .2s ease-in',
-          backgroundColor: StyleConstants.Colors.GRAY_100
+          backgroundColor: theme.GRAY_100
         }
       },
       neutral: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.GRAY_300,
+        borderColor: theme.GRAY_300,
         borderRadius: 2,
         borderWidth: 1,
-        color: StyleConstants.Colors.PRIMARY,
-        fill: StyleConstants.Colors.PRIMARY,
+        color: theme.PRIMARY,
+        fill: theme.PRIMARY,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleConstants.Colors.GRAY_100
+          backgroundColor: theme.GRAY_100
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(StyleConstants.Colors.GRAY_100, -15)
+          backgroundColor: StyleUtils.adjustColor(theme.GRAY_100, -15)
         }
       },
       disabled: {
         backgroundColor: 'transparent',
-        borderColor: StyleConstants.Colors.GRAY_300,
-        color: StyleConstants.Colors.GRAY_300,
-        fill: StyleConstants.Colors.GRAY_300
+        borderColor: theme.GRAY_300,
+        color: theme.GRAY_300,
+        fill: theme.GRAY_300
       },
       icon: {
         marginLeft: this._hasVisibleChildren() ? -4 : 0,
