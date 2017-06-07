@@ -74,7 +74,7 @@ const StyleUtils = {
    * @returns {Object}
    */
   mergeTheme (theme, primaryColor) {
-    return Object.assign({}, StyleConstants.Colors, theme, primaryColor && { PRIMARY: primaryColor });
+    return Object.assign({}, StyleConstants.Colors, primaryColor && { PRIMARY: primaryColor }, theme);
   }
 };
 
