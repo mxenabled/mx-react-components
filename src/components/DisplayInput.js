@@ -90,7 +90,6 @@ class DisplayInput extends React.Component {
                     id={this._inputId}
                     key='input'
                     style={styles.input}
-                    type='text'
                   />
                 </div>
               )}
