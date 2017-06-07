@@ -14,7 +14,6 @@ class DisplayInput extends React.Component {
     childrenStyle: PropTypes.object,
     elementProps: PropTypes.object,
     hint: PropTypes.string,
-    inputType: PropTypes.string,
     isFocused: PropTypes.bool,
     label: PropTypes.string,
     labelStyle: PropTypes.object,

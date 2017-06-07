@@ -82,10 +82,6 @@ class DisplayInputDocs extends React.Component {
         <h5>hint <label>String</label></h5>
         <p>Hint text to display to user on input hover.</p>
 
-        <h5>inputType <label>String</label></h5>
-        <p>Default: 'text'</p>
-        <p>Used to customize the HTML input type.</p>
-
         <h5>isFocused <label>Boolean</label></h5>
         <p>When providing custom children use this to indicate that the component has focus.</p>
 
