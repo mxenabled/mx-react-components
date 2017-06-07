@@ -6,7 +6,7 @@ const Icon = require('./Icon');
 const Spin = require('./Spin');
 
 const StyleConstants = require('../constants/Style');
-const { buttonTypes } = require('../constants/App');
+const { buttonTypes, themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
@@ -21,7 +21,7 @@ class Button extends React.Component {
     onClick: PropTypes.func,
     primaryColor: PropTypes.string,
     style: PropTypes.object,
-    theme: PropTypes.object,
+    theme: themeShape,
     type: PropTypes.oneOf(buttonTypes)
   };
 

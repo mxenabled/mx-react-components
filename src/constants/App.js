@@ -1,3 +1,15 @@
+const PropTypes = require('prop-types');
+
+const StyleConstants = require('./Style');
+
+const shapeForObject = (obj, propType) =>
+  PropTypes.shape(
+    Object.keys(obj).reduce((shape, key) => {
+      shape[key] = propType;
+      return shape;
+    }, {})
+  );
+
 module.exports = {
   buttonTypes: [
     'base',
@@ -945,5 +957,9 @@ module.exports = {
       displayValue: 'wedding',
       value: 'wedding'
     }
-  ]
+  ],
+
+  themeShape: PropTypes.shape({
+    Colors: shapeForObject(StyleConstants.Colors, PropTypes.string)
+  })
 };
