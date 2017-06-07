@@ -30,7 +30,6 @@ class DisplayInput extends React.Component {
 
   static defaultProps = {
     elementProps: {},
-    inputType: 'text',
     isFocused: false,
     primaryColor: StyleConstants.Colors.PRIMARY,
     valid: true
@@ -90,7 +89,6 @@ class DisplayInput extends React.Component {
                     id={this._inputId}
                     key='input'
                     style={styles.input}
-                    type={this.props.inputType}
                   />
                 </div>
               )}
