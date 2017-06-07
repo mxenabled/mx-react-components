@@ -5,6 +5,17 @@ const { Button, Styles } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
+const buttonStyle = {
+  margin: '0 10px'
+};
+
+const customTheme = {
+  Colors: {
+    GRAY_300: '#ffc0bc',
+    PRIMARY: '#6C3F6F'
+  }
+};
+
 class ButtonDocs extends React.Component {
   state = {
     buttonIsActive: false,
@@ -24,11 +35,6 @@ class ButtonDocs extends React.Component {
   };
 
   render () {
-    const customTheme = {
-      GRAY_300: '#ffc0bc',
-      PRIMARY: '#6C3F6F'
-    };
-
     return (
       <div>
         <h1>
@@ -39,11 +45,11 @@ class ButtonDocs extends React.Component {
         <h3>Demo</h3>
         <div className='flex'>
           <Button>Primary</Button>
-          <Button style={style} type='primaryOutline'>Primary Outline</Button>
-          <Button style={style} type='secondary'>Secondary</Button>
-          <Button style={style} type='base'>Base</Button>
-          <Button style={style} type='neutral'>Neutral</Button>
-          <Button style={style} type='disabled'>Disabled</Button>
+          <Button style={buttonStyle} type='primaryOutline'>Primary Outline</Button>
+          <Button style={buttonStyle} type='secondary'>Secondary</Button>
+          <Button style={buttonStyle} type='base'>Base</Button>
+          <Button style={buttonStyle} type='neutral'>Neutral</Button>
+          <Button style={buttonStyle} type='disabled'>Disabled</Button>
         </div>
         <div
           className='flex'
@@ -54,12 +60,12 @@ class ButtonDocs extends React.Component {
             width: 150
           }}
         >
-          <Button style={style} type='primaryInverse'>Primary Inverse</Button>
+          <Button style={buttonStyle} type='primaryInverse'>Primary Inverse</Button>
         </div>
         <br /><br />
         <div className='flex'>
           <Button icon='add'>Icon</Button>
-          <Button aria-label='delete' icon='delete' style={style} />
+          <Button aria-label='delete' icon='delete' style={buttonStyle} />
         </div>
         <br /><br />
         <div className='flex'>
@@ -73,7 +79,7 @@ class ButtonDocs extends React.Component {
           <Button
             isActive={this.state.spinnerIsActive}
             onClick={this._handleSpinnerClick}
-            style={style}
+            style={buttonStyle}
           >
             Loading (spinner only)
           </Button>
@@ -81,7 +87,7 @@ class ButtonDocs extends React.Component {
         <h4>Custom Theme</h4>
         <div className='flex'>
           <Button theme={customTheme}>Primary</Button>
-          <Button style={style} theme={customTheme} type='disabled'>Disabled</Button>
+          <Button style={buttonStyle} theme={customTheme} type='disabled'>Disabled</Button>
         </div>
 
         <h3>Usage</h3>
@@ -117,9 +123,5 @@ class ButtonDocs extends React.Component {
     );
   }
 }
-
-const style = {
-  margin: '0 10px'
-};
 
 module.exports = ButtonDocs;
