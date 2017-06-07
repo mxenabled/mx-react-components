@@ -115,123 +115,123 @@ class Button extends React.Component {
         lineHeight: '20px'
       },
       primary: {
-        backgroundColor: theme.PRIMARY,
-        borderColor: theme.PRIMARY,
-        color: theme.WHITE,
-        fill: theme.WHITE,
+        backgroundColor: theme.Colors.PRIMARY,
+        borderColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE,
+        fill: theme.Colors.WHITE,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleUtils.adjustColor(theme.PRIMARY, -15),
-          borderColor: StyleUtils.adjustColor(theme.PRIMARY, -15),
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
+          borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
-          borderColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
+          borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
           transition: 'all .2s ease-in'
         }
       },
       primaryOutline: {
         backgroundColor: 'transparent',
-        borderColor: theme.PRIMARY,
-        color: theme.PRIMARY,
-        fill: theme.PRIMARY,
+        borderColor: theme.Colors.PRIMARY,
+        color: theme.Colors.PRIMARY,
+        fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: theme.PRIMARY,
-          color: theme.WHITE,
-          fill: theme.WHITE,
+          backgroundColor: theme.Colors.PRIMARY,
+          color: theme.Colors.WHITE,
+          fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
-          borderColor: StyleUtils.adjustColor(theme.PRIMARY, -30),
-          color: theme.WHITE,
-          fill: theme.WHITE,
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
+          borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
+          color: theme.Colors.WHITE,
+          fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         }
       },
       primaryInverse: {
-        backgroundColor: theme.WHITE,
-        borderColor: theme.WHITE,
-        color: theme.PRIMARY,
-        fill: theme.PRIMARY,
+        backgroundColor: theme.Colors.WHITE,
+        borderColor: theme.Colors.WHITE,
+        color: theme.Colors.PRIMARY,
+        fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: StyleUtils.adjustColor(theme.WHITE, -15),
-          borderColor: StyleUtils.adjustColor(theme.WHITE, -15),
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.WHITE, -15),
+          borderColor: StyleUtils.adjustColor(theme.Colors.WHITE, -15),
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(theme.WHITE, -30),
-          borderColor: StyleUtils.adjustColor(theme.WHITE, -30),
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.WHITE, -30),
+          borderColor: StyleUtils.adjustColor(theme.Colors.WHITE, -30),
           transition: 'all .2s ease-in'
         }
       },
       secondary: {
         backgroundColor: 'transparent',
-        borderColor: theme.GRAY_500,
-        color: theme.GRAY_500,
-        fill: theme.GRAY_500,
+        borderColor: theme.Colors.GRAY_500,
+        color: theme.Colors.GRAY_500,
+        fill: theme.Colors.GRAY_500,
         transition: 'all .2s ease-in',
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: theme.GRAY_500,
-          borderColor: theme.GRAY_500,
-          color: theme.WHITE,
-          fill: theme.WHITE,
+          backgroundColor: theme.Colors.GRAY_500,
+          borderColor: theme.Colors.GRAY_500,
+          color: theme.Colors.WHITE,
+          fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(theme.GRAY_500, -30),
-          borderColor: StyleUtils.adjustColor(theme.GRAY_500, -30),
-          color: theme.WHITE,
-          fill: theme.WHITE,
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_500, -30),
+          borderColor: StyleUtils.adjustColor(theme.Colors.GRAY_500, -30),
+          color: theme.Colors.WHITE,
+          fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         }
       },
       base: {
         backgroundColor: 'transparent',
-        color: theme.PRIMARY,
-        fill: theme.PRIMARY,
+        color: theme.Colors.PRIMARY,
+        fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
         borderColor: 'transparent',
         borderRadius: 2,
         borderWidth: 1,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          color: StyleUtils.adjustColor(theme.PRIMARY, -8),
-          fill: StyleUtils.adjustColor(theme.PRIMARY, -8),
+          color: StyleUtils.adjustColor(theme.Colors.PRIMARY, -8),
+          fill: StyleUtils.adjustColor(theme.Colors.PRIMARY, -8),
           transition: 'all .2s ease-in',
-          borderColor: theme.GRAY_300
+          borderColor: theme.Colors.GRAY_300
         },
         ':active': {
-          color: StyleUtils.adjustColor(theme.PRIMARY, -16),
-          fill: StyleUtils.adjustColor(theme.PRIMARY, -16),
+          color: StyleUtils.adjustColor(theme.Colors.PRIMARY, -16),
+          fill: StyleUtils.adjustColor(theme.Colors.PRIMARY, -16),
           transition: 'all .2s ease-in',
-          backgroundColor: theme.GRAY_100
+          backgroundColor: theme.Colors.GRAY_100
         }
       },
       neutral: {
         backgroundColor: 'transparent',
-        borderColor: theme.GRAY_300,
+        borderColor: theme.Colors.GRAY_300,
         borderRadius: 2,
         borderWidth: 1,
-        color: theme.PRIMARY,
-        fill: theme.PRIMARY,
+        color: theme.Colors.PRIMARY,
+        fill: theme.Colors.PRIMARY,
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          backgroundColor: theme.GRAY_100
+          backgroundColor: theme.Colors.GRAY_100
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(theme.GRAY_100, -15)
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_100, -15)
         }
       },
       disabled: {
         backgroundColor: 'transparent',
-        borderColor: theme.GRAY_300,
-        color: theme.GRAY_300,
-        fill: theme.GRAY_300
+        borderColor: theme.Colors.GRAY_300,
+        color: theme.Colors.GRAY_300,
+        fill: theme.Colors.GRAY_300
       },
       icon: {
         marginLeft: this._hasVisibleChildren() ? -4 : 0,
