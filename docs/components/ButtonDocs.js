@@ -101,7 +101,7 @@ class ButtonDocs extends React.Component {
 
         <h5>theme <label>Object</label></h5>
         <p>Default: See Colors in <Link to='/components/styles'>Styles</Link></p>
-        <p>Customize any of the colors used in Button.</p>
+        <p>Customize the component&apos;s colors.</p>
 
         <h5>type <label>String</label></h5>
         <p>Default: 'primary'</p>
