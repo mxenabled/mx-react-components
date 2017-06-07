@@ -2,14 +2,14 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+const Icon = require('./Icon');
 const Spin = require('./Spin');
 
 const StyleConstants = require('../constants/Style');
-const StyleUtils = require('../utils/Style');
-
-const Icon = require('../components/Icon');
-
 const { buttonTypes } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Button extends React.Component {
   static propTypes = {
@@ -31,6 +31,10 @@ class Button extends React.Component {
     theme: StyleConstants,
     type: 'primary'
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   _isLargeOrMediumWindowSize = () => {
     const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
