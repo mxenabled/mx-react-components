@@ -41,6 +41,7 @@ const Spin = require('components/SpinDocs');
 const Styles = require('components/StylesDocs');
 const Tabs = require('components/TabsDocs');
 const TextArea = require('components/TextAreaDocs');
+const Theme = require('components/ThemeDocs');
 const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
@@ -103,6 +104,7 @@ ReactDOM.render((
         <Route component={Styles} path='styles' />
         <Route component={Tabs} path='tabs' />
         <Route component={TextArea} path='textarea' />
+        <Route component={Theme} path='theme' />
         <Route component={TimeBasedLineChart} path='time-based-line-chart' />
         <Route component={ToggleSwitch} path='toggle-switch' />
         <Route component={TypeAhead} path='type-ahead' />
