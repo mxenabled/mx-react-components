@@ -5,7 +5,6 @@ const Radium = require('radium');
 const Icon = require('./Icon');
 const Spin = require('./Spin');
 
-const StyleConstants = require('../constants/Style');
 const { buttonTypes, themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -28,7 +27,6 @@ class Button extends React.Component {
   static defaultProps = {
     onClick () {},
     isActive: false,
-    theme: StyleConstants,
     type: 'primary'
   };
 
@@ -58,7 +56,8 @@ class Button extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
 
     return (
       <button
@@ -89,8 +88,7 @@ class Button extends React.Component {
     );
   }
 
-  styles = () => {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+  styles = (theme) => {
     const windowSizeIsSmall = this._windowSizeIsSmall(theme);
 
     return {
