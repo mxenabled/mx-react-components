@@ -36,8 +36,8 @@ class Button extends React.Component {
     deprecatePrimaryColor(this.props);
   }
 
-  _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
+  _windowSizeIsSmall = (theme) => {
+    const windowSize = StyleUtils.getWindowSize(theme.BreakPoints);
 
     return windowSize === 'medium' || windowSize === 'large';
   };
@@ -91,6 +91,7 @@ class Button extends React.Component {
 
   styles = () => {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const windowSizeIsSmall = this._windowSizeIsSmall(theme);
 
     return {
       component: Object.assign({
@@ -101,8 +102,8 @@ class Button extends React.Component {
         boxSizing: 'border-box',
         display: 'inline-block',
         padding: '4px 14px',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.MEDIUM,
+        fontFamily: theme.Fonts.SEMIBOLD,
         cursor: this.props.type === 'disabled' ? 'default' : 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
@@ -121,7 +122,7 @@ class Button extends React.Component {
         fill: theme.Colors.WHITE,
         transition: 'all .2s ease-in',
 
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+        ':hover': windowSizeIsSmall ? null : {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
           borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
           transition: 'all .2s ease-in'
@@ -139,7 +140,7 @@ class Button extends React.Component {
         fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+        ':hover': windowSizeIsSmall ? null : {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE,
           fill: theme.Colors.WHITE,
@@ -160,7 +161,7 @@ class Button extends React.Component {
         fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+        ':hover': windowSizeIsSmall ? null : {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.WHITE, -15),
           borderColor: StyleUtils.adjustColor(theme.Colors.WHITE, -15),
           transition: 'all .2s ease-in'
@@ -177,7 +178,7 @@ class Button extends React.Component {
         color: theme.Colors.GRAY_500,
         fill: theme.Colors.GRAY_500,
         transition: 'all .2s ease-in',
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+        ':hover': windowSizeIsSmall ? null : {
           backgroundColor: theme.Colors.GRAY_500,
           borderColor: theme.Colors.GRAY_500,
           color: theme.Colors.WHITE,
@@ -200,7 +201,7 @@ class Button extends React.Component {
         borderColor: 'transparent',
         borderRadius: 2,
         borderWidth: 1,
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+        ':hover': windowSizeIsSmall ? null : {
           color: StyleUtils.adjustColor(theme.Colors.PRIMARY, -8),
           fill: StyleUtils.adjustColor(theme.Colors.PRIMARY, -8),
           transition: 'all .2s ease-in',
@@ -220,7 +221,7 @@ class Button extends React.Component {
         borderWidth: 1,
         color: theme.Colors.PRIMARY,
         fill: theme.Colors.PRIMARY,
-        ':hover': !this._isLargeOrMediumWindowSize() ? null : {
+        ':hover': windowSizeIsSmall ? null : {
           backgroundColor: theme.Colors.GRAY_100
         },
         ':active': {
