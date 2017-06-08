@@ -44,7 +44,7 @@ class StylesDocs extends React.Component {
           <label>Contains values that are used throughout mx-react-components. Exposing it makes it easy to use the same colors, font sizes, fonts, etc throughout any application.</label>
         </h1>
 
-        <h3>Usage</h3>
+        <h3>Constants</h3>
 
         <h5>Neutral Colors</h5>
         <ColorsList colors={[
@@ -131,6 +131,8 @@ class StylesDocs extends React.Component {
             Styles.BreakPoints.small: 320
           `}
         </Markdown>
+
+        <h3>Utilities</h3>
 
         <h5>Adjust Color</h5>
         <p>Takes a HEX color and adjust amount and returns a HEX value of the new color. Negative numbers darken whereas positive numbers lighten the color.</p>
