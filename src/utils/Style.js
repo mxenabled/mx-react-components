@@ -2,6 +2,9 @@ const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
 
+const doubleHexCode = color =>
+  color.split('').map(char => char + char).join('');
+
 const StyleUtils = {
   adjustColor (col, amt) {
     let color = col;
@@ -9,6 +12,7 @@ const StyleUtils = {
 
     if (color[0] === '#') {
       color = color.slice(1);
+      if (color.length === 3) color = doubleHexCode(color);
       usePound = true;
     }
 
