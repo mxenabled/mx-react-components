@@ -106,8 +106,7 @@ class ButtonDocs extends React.Component {
         <p>A boolean that is toggled when the button is clicked and when the item is finished loading..</p>
 
         <h5>theme <label>Object</label></h5>
-        <p>Default: See Colors in <Link to='/components/styles'>Styles</Link></p>
-        <p>Customize the component&apos;s colors.</p>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>type <label>String</label></h5>
         <p>Default: 'primary'</p>
