@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Button, Drawer, HeaderMenu } = require('mx-react-components');
 
@@ -6,10 +7,7 @@ const Markdown = require('components/Markdown');
 
 class DrawerDocs extends React.Component {
   state = {
-    demoDrawerOpen: false,
-    currentPage: 3,
-    totalPages: 8,
-    showSimpleSelectMenu: false
+    demoDrawerOpen: false
   };
 
   _handleDemoButtonClick = () => {
@@ -24,25 +22,9 @@ class DrawerDocs extends React.Component {
     });
   };
 
-  _handlePreviousClick = () => {
-    if (this.state.currentPage > 1) {
-      this.setState({
-        currentPage: this.state.currentPage - 1
-      });
-    }
-  };
-
-  _handleNextClick = () => {
-    if (this.state.currentPage < this.state.totalPages) {
-      this.setState({
-        currentPage: this.state.currentPage + 1
-      });
-    }
-  };
-
-  _handleSimpleSelectClick = () => {
+  _handleSimpleSelectClick = (event, item) => {
     this.setState({
-      showMenu: !this.state.showMenu
+      clickedMenu: item
     });
   };
 
@@ -55,18 +37,24 @@ class DrawerDocs extends React.Component {
         contentStyle={styles.content}
         headerMenu={(
           <HeaderMenu
-            handleButtonClick={this._handleSimpleSelectClick}
-            handleScrimClick={this._handleSimpleSelectClick}
-            showSimpleSelectMenu={this.state.showMenu}
+            buttonIcon='gear'
+            buttonText='Settings'
+            items={[
+              { icon: 'auto', onClick: this._handleSimpleSelectClick, text: 'Auto' },
+              { icon: 'kids', onClick: this._handleSimpleSelectClick, text: 'Kids' },
+              { icon: 'pets', onClick: this._handleSimpleSelectClick, text: 'Pets' }
+            ]}
           />
         )}
         onClose={this._handleDrawerClose}
         title='Demo Drawer'
       >
 
+        {this.state.clickedMenu && <code>You clicked: {this.state.clickedMenu.text}</code>}
+        <p>
         Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
+        </p>
       </Drawer>
-
     );
   };
 
@@ -101,10 +89,6 @@ class DrawerDocs extends React.Component {
           &#60;	large and &#62; medium: drawer width is 20% from left side <br />
           &#60;&#61; medium: drawer width is 100%
         </p>
-
-        <h5>buttonPrimaryColor<label>String</label></h5>
-        <p>Default: '#359BCF'</p>
-        <p>This sets the color of the arrow in the close button at the top left of the drawer.</p>
 
         <h5>closeOnScrimClick<label>Boolean</label></h5>
         <p>Default: true</p>
@@ -143,6 +127,9 @@ class DrawerDocs extends React.Component {
         <p>Default: true</p>
         <p>If set to <em>true</em>, the part of the screen not covered by the drawer will be opaque. If set to <em>false</em>, the content will stay visible.</p>
 
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+
         <h5>title<label>String</label></h5>
         <p>Default: ''</p>
         <p>This will be displayed in the header of the drawer component.</p>
@@ -179,40 +166,7 @@ class DrawerDocs extends React.Component {
       title='Demo Drawer'
     >
       // Content Here
-
     </Drawer>
-
-    // Component To Pass As A Prop
-    function HeaderMenu ({ handleButtonClick, handleScrimClick, showSimpleSelectMenu = false }) {
-      return (
-        <div style={{ width: 150 }}>
-          <Button
-            icon='gear'
-            onClick={handleButtonClick}
-            type='neutral'
-          >
-            Settings
-          </Button>
-          {showSimpleSelectMenu ? (
-            <SimpleSelect
-              items={[
-                { icon: 'auto', text: 'Auto' },
-                { icon: 'kids', text: 'Kids' },
-                { icon: 'pets', text: 'Pets' }
-              ]}
-              menuStyles={{ left: 65 }}
-              onScrimClick={handleScrimClick}
-            />
-          ) : null}
-        </div>
-      );
-    }
-
-    HeaderMenu.propTypes = {
-      handleButtonClick: PropTypes.func,
-      handleScrimClick: PropTypes.func,
-      showSimpleSelectMenu: PropTypes.bool
-    };
   `}
         </Markdown>
       </div>
