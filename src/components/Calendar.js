@@ -62,38 +62,62 @@ class Calendar extends React.Component {
     });
   };
 
-  _renderMonthTable = (styles) => {
-    const days = [];
-    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+  _getWeeks = () => {
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    const weekLength = 7;
+    const weeks = [];
+    let days = [];
 
     while (moment(startDate).isBefore(endDate)) {
-      const isCurrentMonth = startDate.isSame(moment.unix(this.state.currentDate), 'month');
-      const isSelectedDay = startDate.isSame(moment.unix(this.props.selectedDate), 'day');
-      const isToday = startDate.isSame(moment(), 'day');
-      const disabledDay = this.props.minimumDate ? startDate.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+      const day = startDate.clone();
 
-      const day = (
-        <div
-          key={startDate}
-          onClick={disabledDay ? null : this._handleDateSelect.bind(null, startDate.unix())}
-          style={Object.assign({},
-            styles.calendarDay,
-            isCurrentMonth && styles.currentMonth,
-            disabledDay && styles.calendarDayDisabled,
-            isToday && styles.today,
-            isSelectedDay && styles.selectedDay
-          )}
-        >
-          {startDate.date()}
-        </div>
-      );
+      if (days.length < weekLength) {
+        days.push(day);
+        startDate.add(1, 'd');
+      } else {
+        days = [];
+      }
 
-      days.push(day);
-      startDate = startDate.add(1, 'd');
+      if (days.length === weekLength) {
+        weeks.push(days);
+      }
     }
 
-    return days;
+    return weeks;
+  };
+
+  _renderMonthTable = (styles) => {
+    const weeks = this._getWeeks();
+
+    return weeks.map(week => {
+      return (
+        <div style={styles.calendarWeek}>
+          {week.map(day => {
+            const isCurrentMonth = day.isSame(moment.unix(this.state.currentDate), 'month');
+            const isSelectedDay = day.isSame(moment.unix(this.props.selectedDate), 'day');
+            const isToday = day.isSame(moment(), 'day');
+            const disabledDay = this.props.minimumDate ? day.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+
+            return (
+              <div
+                key={day}
+                onClick={disabledDay ? null : this._handleDateSelect.bind(null, day.unix())}
+                style={Object.assign({},
+                  styles.calendarDay,
+                  isCurrentMonth && styles.currentMonth,
+                  disabledDay && styles.calendarDayDisabled,
+                  isToday && styles.today,
+                  isSelectedDay && styles.selectedDay
+                )}
+              >
+                {day.date()}
+              </div>
+            );
+          })}
+        </div>
+      );
+    });
   };
 
   render () {
@@ -123,7 +147,7 @@ class Calendar extends React.Component {
             type='caret-right'
           />
         </div>
-        <div style={styles.calendarWeek}>
+        <div style={styles.calendarWeekHeader}>
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
             return (
               <div key={i} style={styles.calendarWeekDay}>
@@ -132,9 +156,7 @@ class Calendar extends React.Component {
             );
           })}
         </div>
-        <div style={styles.calendarTable}>
-          {this._renderMonthTable(styles)}
-        </div>
+        {this._renderMonthTable(styles)}
       </div>
     );
   }
@@ -147,8 +169,7 @@ class Calendar extends React.Component {
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
-        padding: 20,
-        width: 250
+        padding: 20
       }, this.props.style),
 
       //Calendar Header
@@ -169,28 +190,28 @@ class Calendar extends React.Component {
       },
 
       //Calendar week
-      calendarWeek: {
+      calendarWeekHeader: {
         alignItems: 'center',
         color: theme.Colors.GRAY_500,
         display: 'flex',
+        flex: '1 1 100%',
         fontFamily: theme.Fonts.SEMIBOLD,
         fontSize: theme.FontSizes.SMALL,
         height: 30,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         marginBottom: 2
       },
       calendarWeekDay: {
         textAlign: 'center',
         width: 35
       },
+      calendarWeek: {
+        display: 'flex',
+        flex: '1 1 100%',
+        justifyContent: 'center'
+      },
 
       //Calenday table
-      calendarTable: {
-        alignItems: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around'
-      },
       calendarDay: {
         alignItems: 'center',
         borderRadius: 3,

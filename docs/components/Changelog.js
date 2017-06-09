@@ -6,6 +6,20 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.96</h3>
+        <ul>
+          <li>
+            Allows for customizing the input type of DisplayInput (<a href='https://github.com/mxenabled/mx-react-components/pull/593'>#593</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.95</h3>
+        <ul>
+          <li>
+            Fixes display issues with the Calendar component (<a href='https://github.com/mxenabled/mx-react-components/pull/590'>#590</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.90</h3>
         <ul>
           <li>
