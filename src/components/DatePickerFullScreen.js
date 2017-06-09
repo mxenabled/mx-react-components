@@ -5,7 +5,9 @@ const moment = require('moment');
 
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class DatePickerFullScreen extends React.Component {
   static propTypes = {
@@ -23,6 +25,7 @@ class DatePickerFullScreen extends React.Component {
     selectedDateWrapperStyle: PropTypes.object,
     showDayBorders: PropTypes.bool,
     style: PropTypes.object,
+    theme: themeShape,
     title: PropTypes.string,
     useInputForSelectedDate: PropTypes.bool
   };
@@ -156,7 +159,7 @@ class DatePickerFullScreen extends React.Component {
     });
   };
 
-  _renderMonthTable = (currentDate, selectedDate) => {
+  _renderMonthTable = (styles, currentDate, selectedDate) => {
     const days = [];
     const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
     const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
@@ -195,7 +198,7 @@ class DatePickerFullScreen extends React.Component {
     return days;
   };
 
-  _renderSelectedDate = () => {
+  _renderSelectedDate = (styles, theme) => {
     if (this.props.useInputForSelectedDate) {
       const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
 
@@ -206,7 +209,7 @@ class DatePickerFullScreen extends React.Component {
             onBlur={this._handleInputBlur}
             onChange={this._handleInputChange}
             onClick={this._toggleCalendar}
-            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: StyleConstants.Colors.WHITE }]}
+            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: theme.Colors.WHITE }]}
             type='text'
             value={this.state.inputValue}
           />
@@ -241,6 +244,8 @@ class DatePickerFullScreen extends React.Component {
   };
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
     const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
     const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
     let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
@@ -265,7 +270,7 @@ class DatePickerFullScreen extends React.Component {
             this.props.selectedDateWrapperStyle
           ]}
         >
-          {this._renderSelectedDate()}
+          {this._renderSelectedDate(styles, theme)}
         </div>
         <div
           className='mx-date-picker-full-screen-calendar-scrim'
@@ -306,7 +311,7 @@ class DatePickerFullScreen extends React.Component {
               />
             </div>
             <div style={styles.calendarContainer}>
-              {this._renderMonthTable(currentDate, selectedDate)}
+              {this._renderMonthTable(styles, currentDate, selectedDate)}
             </div>
             <div style={styles.clearFix}></div>
           </div>
@@ -314,206 +319,208 @@ class DatePickerFullScreen extends React.Component {
       </div>
     );
   }
-}
 
-const styles = {
-  calendarDay: {
-    color: StyleConstants.Colors.GRAY_500,
-    float: 'left',
-    paddingBottom: '11%',
-    position: 'relative',
-    width: '13.5%'
-  },
-  borderBottom: {
-    borderBottom: StyleConstants.Colors.GRAY_300,
-    borderBottomStyle: 'solid',
-    borderBottomWidth: 1
-  },
-  borderRight: {
-    borderRight: StyleConstants.Colors.GRAY_300,
-    borderRightStyle: 'solid',
-    borderRightWidth: 1
-  },
-  borderLeft: {
-    borderLeft: StyleConstants.Colors.GRAY_300,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 1
-  },
-  calendarContainer: {
-    width: '100%',
-    padding: '0px 2px 10px 6px'
-  },
-  calendarDayContent: {
-    borderRadius: '50%',
-    height: 32,
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%) translateX(-50%)',
-    width: 32,
+  styles = (theme) => {
+    return {
+      calendarDay: {
+        color: theme.Colors.GRAY_500,
+        float: 'left',
+        paddingBottom: '11%',
+        position: 'relative',
+        width: '13.5%'
+      },
+      borderBottom: {
+        borderBottom: theme.Colors.GRAY_300,
+        borderBottomStyle: 'solid',
+        borderBottomWidth: 1
+      },
+      borderRight: {
+        borderRight: theme.Colors.GRAY_300,
+        borderRightStyle: 'solid',
+        borderRightWidth: 1
+      },
+      borderLeft: {
+        borderLeft: theme.Colors.GRAY_300,
+        borderLeftStyle: 'solid',
+        borderLeftWidth: 1
+      },
+      calendarContainer: {
+        width: '100%',
+        padding: '0px 2px 10px 6px'
+      },
+      calendarDayContent: {
+        borderRadius: '50%',
+        height: 32,
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)',
+        width: 32,
 
-    ':hover': {
-      backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.WHITE,
-      cursor: 'pointer'
-    }
-  },
-  calendarDayText: {
-    borderRadius: '100%',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    fontWeight: 'normal',
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%) translateX(-50%)'
-  },
-  calendarDayDisabled: {
-    ':hover': {
-      background: 'none',
-      color: StyleConstants.Colors.GRAY_100
-    }
-  },
-  calendarHeader: {
-    color: StyleConstants.Colors.GRAY_700,
-    borderBottom: StyleConstants.Colors.GRAY_300,
-    borderBottomWidth: 1,
-    fontSize: StyleConstants.FontSizes.XLARGE,
-    fontWeight: 'normal',
-    padding: '5px 0px 7px 0px',
-    position: 'relative',
-    textAlign: 'center',
-    textTransform: 'none'
-  },
-  calendarIcon: {
-    color: StyleConstants.Colors.GRAY_100,
-    position: 'absolute',
-    right: 12.8,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  calendarShow: {
-    display: 'block'
-  },
-  close: {
-    position: 'absolute',
-    right: 20,
-    top: 15,
-    textAlign: 'center',
-    cursor: 'pointer',
-    color: StyleConstants.Colors.GRAY_500
-  },
-  closeIcon: {
-    color: StyleConstants.Colors.GRAY_500
-  },
-  closeText: {
-    fontSize: StyleConstants.FontSizes.TINY
-  },
-  clearFix: {
-    clear: 'both',
-    marginBottom: 15
-  },
-  component: {
-    backgroundColor: '#fff',
-    fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.LARGE,
-    width: '100%',
+        ':hover': {
+          backgroundColor: theme.Colors.PRIMARY,
+          color: theme.Colors.WHITE,
+          cursor: 'pointer'
+        }
+      },
+      calendarDayText: {
+        borderRadius: '100%',
+        fontSize: theme.FontSizes.MEDIUM,
+        fontWeight: 'normal',
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%) translateX(-50%)'
+      },
+      calendarDayDisabled: {
+        ':hover': {
+          background: 'none',
+          color: theme.Colors.GRAY_100
+        }
+      },
+      calendarHeader: {
+        color: theme.Colors.GRAY_700,
+        borderBottom: theme.Colors.GRAY_300,
+        borderBottomWidth: 1,
+        fontSize: theme.FontSizes.XLARGE,
+        fontWeight: 'normal',
+        padding: '5px 0px 7px 0px',
+        position: 'relative',
+        textAlign: 'center',
+        textTransform: 'none'
+      },
+      calendarIcon: {
+        color: theme.Colors.GRAY_100,
+        position: 'absolute',
+        right: 12.8,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      calendarShow: {
+        display: 'block'
+      },
+      close: {
+        position: 'absolute',
+        right: 20,
+        top: 15,
+        textAlign: 'center',
+        cursor: 'pointer',
+        color: theme.Colors.GRAY_500
+      },
+      closeIcon: {
+        color: theme.Colors.GRAY_500
+      },
+      closeText: {
+        fontSize: theme.FontSizes.TINY
+      },
+      clearFix: {
+        clear: 'both',
+        marginBottom: 15
+      },
+      component: {
+        backgroundColor: '#fff',
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.LARGE,
+        width: '100%',
 
-    ':focus': {
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  calendarModal: {
-    backgroundColor: '#fff',
-    bottom: 0,
-    display: 'none',
-    left: 0,
-    margin: 0,
-    padding: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    zIndex: 999
-  },
-  calendarWrapper: {
-    height: 300,
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300
-  },
-  selectedDateWrapper: {
-    position: 'relative',
-    cursor: 'pointer'
-  },
-  currentDay: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.WHITE
-  },
-  currentMonth: {
-    color: StyleConstants.Colors.GRAY_700
-  },
-  input: {
-    backgroundColor: 'transparent',
-    border: 'none',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    outline: 'none',
-    paddingBottom: 10,
-    paddingLeft: 5,
-    position: 'relative',
-    top: 5,
-    WebkitAppearance: 'none',
-    width: '80%',
-    zIndex: 2,
+        ':focus': {
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+      calendarModal: {
+        backgroundColor: '#fff',
+        bottom: 0,
+        display: 'none',
+        left: 0,
+        margin: 0,
+        padding: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 999
+      },
+      calendarWrapper: {
+        height: 300,
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 300
+      },
+      selectedDateWrapper: {
+        position: 'relative',
+        cursor: 'pointer'
+      },
+      currentDay: {
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE
+      },
+      currentMonth: {
+        color: theme.Colors.GRAY_700
+      },
+      input: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        fontSize: theme.FontSizes.MEDIUM,
+        outline: 'none',
+        paddingBottom: 10,
+        paddingLeft: 5,
+        position: 'relative',
+        top: 5,
+        WebkitAppearance: 'none',
+        width: '80%',
+        zIndex: 2,
 
-    ':focus': {
-      border: 'none',
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  navIcon: {
-    cursor: 'pointer'
-  },
-  navLeft: {
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  navRight: {
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    transform: 'translateY(-50%)'
-  },
-  placeholderText: {
-    color: StyleConstants.Colors.GRAY_700,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    paddingLeft: 5,
-    position: 'absolute',
-    top: 10
-  },
-  selectedDate: {
-    color: StyleConstants.Colors.GRAY_700,
-    cursor: 'pointer',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    padding: '5px 0 5px 5px',
-    verticalAlign: 'middle',
-    width: '100%',
+        ':focus': {
+          border: 'none',
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+      navIcon: {
+        cursor: 'pointer'
+      },
+      navLeft: {
+        position: 'absolute',
+        left: 0,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      navRight: {
+        position: 'absolute',
+        right: 0,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      },
+      placeholderText: {
+        color: theme.Colors.GRAY_700,
+        fontSize: theme.FontSizes.MEDIUM,
+        paddingLeft: 5,
+        position: 'absolute',
+        top: 10
+      },
+      selectedDate: {
+        color: theme.Colors.GRAY_700,
+        cursor: 'pointer',
+        fontSize: theme.FontSizes.MEDIUM,
+        padding: '5px 0 5px 5px',
+        verticalAlign: 'middle',
+        width: '100%',
 
-    ':hover': {
-      color: StyleConstants.Colors.PRIMARY
-    }
-  },
-  title: {
-    boxSizing: 'border-box',
-    color: StyleConstants.Colors.GRAY_700,
-    fontSize: StyleConstants.FontSizes.XXLARGE,
-    fontWeight: 'bold',
-    padding: '0px 0px 20px 10px'
+        ':hover': {
+          color: theme.Colors.PRIMARY
+        }
+      },
+      title: {
+        boxSizing: 'border-box',
+        color: theme.Colors.GRAY_700,
+        fontSize: theme.FontSizes.XXLARGE,
+        fontWeight: 'bold',
+        padding: '0px 0px 20px 10px'
+      }
+    };
   }
-};
+}
 
 module.exports = Radium(DatePickerFullScreen);
