@@ -5,7 +5,10 @@ const moment = require('moment');
 
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Calendar extends React.Component {
   static propTypes = {
@@ -14,18 +17,22 @@ class Calendar extends React.Component {
     onDateSelect: PropTypes.func,
     primaryColor: PropTypes.string,
     selectedDate: PropTypes.number,
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
     locale: 'en',
-    onDateSelect () {},
-    primaryColor: StyleConstants.Colors.PRIMARY
+    onDateSelect () {}
   };
 
   state = {
     currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   componentWillReceiveProps (newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
@@ -55,8 +62,7 @@ class Calendar extends React.Component {
     });
   };
 
-  _renderMonthTable = () => {
-    const styles = this.styles();
+  _renderMonthTable = (styles) => {
     const days = [];
     let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
@@ -91,7 +97,8 @@ class Calendar extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
 
     return (
       <div style={styles.component}>
@@ -126,17 +133,17 @@ class Calendar extends React.Component {
           })}
         </div>
         <div style={styles.calendarTable}>
-          {this._renderMonthTable()}
+          {this._renderMonthTable(styles)}
         </div>
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: Object.assign({
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
+        backgroundColor: theme.Colors.WHITE,
+        border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
@@ -147,9 +154,9 @@ class Calendar extends React.Component {
       //Calendar Header
       calendarHeader: {
         alignItems: 'center',
-        color: StyleConstants.Colors.GRAY_700,
+        color: theme.Colors.GRAY_700,
         display: 'flex',
-        fontSize: StyleConstants.FontSizes.LARGE,
+        fontSize: theme.FontSizes.LARGE,
         height: 30,
         justifyContent: 'space-between',
         marginBottom: 15,
@@ -164,10 +171,10 @@ class Calendar extends React.Component {
       //Calendar week
       calendarWeek: {
         alignItems: 'center',
-        color: StyleConstants.Colors.GRAY_500,
+        color: theme.Colors.GRAY_500,
         display: 'flex',
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.SMALL,
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.SMALL,
         height: 30,
         justifyContent: 'space-around',
         marginBottom: 2
@@ -188,7 +195,7 @@ class Calendar extends React.Component {
         alignItems: 'center',
         borderRadius: 3,
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.GRAY_300,
+        color: theme.Colors.GRAY_300,
         cursor: 'pointer',
         display: 'flex',
         height: 30,
@@ -197,11 +204,11 @@ class Calendar extends React.Component {
         width: 35,
 
         ':hover': {
-          border: '1px solid ' + this.props.primaryColor
+          border: '1px solid ' + theme.Colors.PRIMARY
         }
       },
       calendarDayDisabled: {
-        color: StyleConstants.Colors.GRAY_300,
+        color: theme.Colors.GRAY_300,
 
         ':hover': {
           cursor: 'default',
@@ -210,15 +217,15 @@ class Calendar extends React.Component {
       },
 
       today: {
-        backgroundColor: StyleConstants.Colors.GRAY_300,
-        color: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.GRAY_300,
+        color: theme.Colors.WHITE
       },
       currentMonth: {
-        color: StyleConstants.Colors.GRAY_700
+        color: theme.Colors.GRAY_700
       },
       selectedDay: {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE
       }
     };
   };
