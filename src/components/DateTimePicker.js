@@ -187,6 +187,7 @@ class DatePicker extends React.Component {
                   {...this.props}
                   onDateSelect={this._handleDateSelect}
                   style={styles.calendar}
+                  theme={theme}
                 />
               </div>
             </div>
