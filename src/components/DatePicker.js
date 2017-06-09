@@ -6,7 +6,10 @@ const moment = require('moment');
 const Calendar = require('./Calendar');
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class DatePicker extends React.Component {
   static propTypes = {
@@ -19,7 +22,8 @@ class DatePicker extends React.Component {
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
     selectedDate: PropTypes.number,
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
@@ -27,8 +31,7 @@ class DatePicker extends React.Component {
     format: 'MMM D, YYYY',
     locale: 'en',
     onDateSelect () {},
-    placeholderText: 'Select A Date',
-    primaryColor: StyleConstants.Colors.PRIMARY
+    placeholderText: 'Select A Date'
   };
 
   state = {
@@ -37,6 +40,7 @@ class DatePicker extends React.Component {
   };
 
   componentDidMount () {
+    deprecatePrimaryColor(this.props);
     if (this.props.defaultDate) {
       console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
     }
@@ -78,7 +82,8 @@ class DatePicker extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
 
     return (
       <div style={styles.component}>
@@ -102,6 +107,7 @@ class DatePicker extends React.Component {
             onDateSelect={this._handleDateSelect}
             selectedDate={this.state.currentDate}
             style={styles.calendar}
+            theme={theme}
           />
         </div>
         {(this.state.showCalendar) ? (
@@ -111,24 +117,24 @@ class DatePicker extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: Object.assign({
-        backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_300,
+        backgroundColor: theme.Colors.WHITE,
+        borderColor: this.state.showCalendar ? theme.Colors.PRIMARY : theme.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.BLACK,
+        color: theme.Colors.BLACK,
         display: 'inline-block',
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.MEDIUM,
         position: 'relative',
         width: '100%'
       }, this.props.style),
       calendar: {
-        boxShadow: StyleConstants.ShadowHigh
+        boxShadow: theme.ShadowHigh
       },
       calendarWrapper: {
         boxSizing: 'border-box',
@@ -149,15 +155,15 @@ class DatePicker extends React.Component {
         position: 'relative'
       },
       selectedDateIcon: {
-        fill: this.props.primaryColor,
+        fill: theme.Colors.PRIMARY,
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedDate || this.props.defaultDate) ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500,
+        color: (this.props.selectedDate || this.props.defaultDate) ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500,
         flex: 1
       },
       selectedDateCaret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_500
+        fill: this.state.showCalendar ? theme.Colors.PRIMARY : theme.Colors.GRAY_500
       },
       scrim: {
         bottom: 0,
