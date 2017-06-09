@@ -3,6 +3,7 @@ const React = require('react');
 
 const { Styles } = require('mx-react-components');
 
+const Code = require('components/Code');
 const Markdown = require('components/Markdown');
 const StyleUtils = require('utils/Style');
 
@@ -44,7 +45,7 @@ class StylesDocs extends React.Component {
           <label>Contains values that are used throughout mx-react-components. Exposing it makes it easy to use the same colors, font sizes, fonts, etc throughout any application.</label>
         </h1>
 
-        <h3>Usage</h3>
+        <h3>Constants</h3>
 
         <h5>Neutral Colors</h5>
         <ColorsList colors={[
@@ -91,7 +92,7 @@ class StylesDocs extends React.Component {
         </Markdown>
 
         <h5>Fonts</h5>
-        <p>In order to leverage the ProximaNova fonts, you will need to include those fonts in your application using @font_face and make sure the names match.</p>
+        <p>In order to leverage the ProximaNova fonts, you will need to include those fonts in your application using <Code>@font_face</Code> and make sure the names match.</p>
 
         <Markdown lang='js'>
           {`
@@ -131,6 +132,8 @@ class StylesDocs extends React.Component {
             Styles.BreakPoints.small: 320
           `}
         </Markdown>
+
+        <h3>Utilities</h3>
 
         <h5>Adjust Color</h5>
         <p>Takes a HEX color and adjust amount and returns a HEX value of the new color. Negative numbers darken whereas positive numbers lighten the color.</p>
@@ -178,7 +181,7 @@ class StylesDocs extends React.Component {
 
 
         <h5>Get Window Size</h5>
-        <p>Returns the <code style={{ display: 'inline', padding: 3 }}>Styles.BreakPoints</code> key for the current window width.</p>
+        <p>Returns the <Code>Styles.BreakPoints</Code> key for the current window width.</p>
         <Markdown lang='js'>
           {`
             StyleUtils.getWindowSize(Styles.BreakPoints) // e.g. returns 'large'
