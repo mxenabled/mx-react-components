@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Gauge } = require('mx-react-components');
 
@@ -118,6 +119,9 @@ class GaugeDocs extends React.Component {
         <h5>showDataLabel <label>Boolean</label></h5>
         <p>Default: true</p>
         <p>If set to true, the defaultLabelText will be displayed in the center of the chart. On slice hover, the defaultLabelText with change to display the data corresponding with the slice.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>width <label>Number</label></h5>
         <p>Default: 150</p>
