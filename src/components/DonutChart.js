@@ -351,9 +351,9 @@ class DonutChart extends React.Component {
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    const colors = [theme.Colors.PRIMARY].concat(d3.scale.category20().range());
-    const baseArcColor = theme.Colors.BASE_ARC;
-    const dataPointColors = [theme.Colors.SUCCESS].concat(d3.scale.category20b().range());
+    const colors = this.props.colors || [theme.Colors.PRIMARY].concat(d3.scale.category20().range());
+    const baseArcColor = this.props.baseArcColor || theme.Colors.BASE_ARC;
+    const dataPointColors = this.props.dataPointColors || [theme.Colors.SUCCESS].concat(d3.scale.category20b().range());
 
     return (
       <div
