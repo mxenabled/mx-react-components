@@ -76,9 +76,11 @@ class Tabs extends React.Component {
         width: '100%'
       },
       tabsContainer: {
+        borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        boxSizing: 'border-box',
         display: 'flex',
         justifyContent: this.props.alignment === 'left' ? 'flex-start' : 'center',
-        borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        overflowX: 'scroll',
         width: '100%'
       }
     };
@@ -125,6 +127,7 @@ class TabWithoutRadium extends React.Component {
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
         padding: StyleConstants.Spacing.MEDIUM,
+        whiteSpace: 'nowrap',
 
         ':hover': {
           color: StyleConstants.Colors.CHARCOAL
