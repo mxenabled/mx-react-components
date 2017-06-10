@@ -23,8 +23,7 @@ class Tabs extends React.Component {
   };
 
   state = {
-    selectedTab: this.props.selectedTab || 0,
-    showMenu: false
+    selectedTab: this.props.selectedTab || 0
   };
 
   componentWillMount () {
