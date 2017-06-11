@@ -11,9 +11,10 @@ const StandardTabs = Tabbable(({
   brandColor = StyleConstants.Colors.PRIMARY,
   onTabSelect,
   selectedTab,
+  style,
   tabs
 }) => (
-  <div>
+  <div style={style}>
     {tabs.map((tab, index) =>
       <Tab
         brandColor={brandColor}
@@ -67,6 +68,7 @@ class TabWithoutRadium extends React.Component {
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
         padding: StyleConstants.Spacing.MEDIUM,
+        whiteSpace: 'nowrap',
 
         ':hover': {
           color: StyleConstants.Colors.CHARCOAL

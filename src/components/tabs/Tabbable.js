@@ -1,21 +1,28 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+const StyleConstants = require('../../constants/Style');
+
 /**
- * Common state management and definition of props for Tabs components.
+ * Common state and prop management and outer styling for Tabs components.
  */
 const Tabbable = (TabsComponent) => {
   return class extends React.Component { // eslint-disable-line react/display-name
     static propTypes = {
       activeTabStyles: PropTypes.object,
+      alignment: PropTypes.oneOf(['left', 'center']),
       brandColor: PropTypes.string,
       onTabSelect: PropTypes.func.isRequired,
       selectedTab: PropTypes.number,
+      showBottomBorder: PropTypes.bool,
+      style: PropTypes.object,
       tabs: PropTypes.array.isRequired
     };
 
     static defaultProps = {
-      selectedTab: 0
+      alignment: 'left',
+      selectedTab: 0,
+      showBottomBorder: true
     };
 
     constructor (props) {
@@ -43,7 +50,18 @@ const Tabbable = (TabsComponent) => {
     }
 
     render () {
-      return <TabsComponent {...this.props} />;
+      return <TabsComponent {...this.props} style={this.styles()} />;
+    }
+
+    styles () {
+      return Object.assign({
+        borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        boxSizing: 'border-box',
+        display: 'flex',
+        justifyContent: this.props.alignment === 'left' ? 'flex-start' : 'center',
+        overflowX: 'scroll',
+        width: '100%'
+      }, this.props.style);
     }
   };
 };

@@ -10,11 +10,12 @@ const PillTabs = Tabbable(({
   brandColor = StyleConstants.Colors.PRIMARY,
   onTabSelect,
   selectedTab,
+  style,
   tabs
 }) => {
   const styles = {
     component: {
-      margin: StyleConstants.Spacing.SMALL
+      padding: StyleConstants.Spacing.SMALL
     },
     tab: {
       backgroundColor: StyleConstants.Colors.PORCELAIN,
@@ -54,7 +55,7 @@ const PillTabs = Tabbable(({
   };
 
   return (
-    <div style={styles.component}>
+    <div style={Object.assign({}, styles.component, style)}>
       <ButtonGroup
         buttons={tabs.map((tab, index) => ({
           'aria-label': tab,
