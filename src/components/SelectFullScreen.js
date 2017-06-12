@@ -4,7 +4,9 @@ const Radium = require('radium');
 
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class SelectFullScreen extends React.Component {
   static propTypes = {
@@ -18,20 +20,14 @@ class SelectFullScreen extends React.Component {
     optionStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     placeholderText: PropTypes.string,
     selected: PropTypes.object,
-    selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+    selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    theme: themeShape
   };
 
   static defaultProps = {
     closeIcon: 'close',
     isFixed: false,
     onChange () {},
-    optionFormatter (option) {
-      return (
-        <div key={option.displayValue + option.value + '_value'} style={styles.option}>
-          {option.displayValue}
-        </div>
-      );
-    },
     options: [],
     optionsHeaderText: 'Select An Option',
     placeholderText: 'Select One',
@@ -80,7 +76,15 @@ class SelectFullScreen extends React.Component {
     this._handleOptionClick(selectedOption);
   };
 
-  _renderOptions = () => {
+  _optionFormatter = (option, styles) => {
+    return (
+      <div key={option.displayValue + option.value + '_value'} style={styles.option}>
+        {option.displayValue}
+      </div>
+    );
+  };
+
+  _renderOptions = (styles) => {
     if (this.state.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
@@ -104,7 +108,7 @@ class SelectFullScreen extends React.Component {
                     key={option.displayValue + option.value}
                     onClick={this._handleOptionClick.bind(null, option)}
                   >
-                    {this.props.optionFormatter(option)}
+                    {this.props.optionFormatter ? this.props.optionFormatter(option) : this._optionFormatter(option, styles)}
                   </div>
                 );
               })}
@@ -118,6 +122,8 @@ class SelectFullScreen extends React.Component {
   };
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
@@ -130,77 +136,79 @@ class SelectFullScreen extends React.Component {
         >
           {selected.displayValue}
         </div>
-        {this._renderOptions()}
+        {this._renderOptions(styles)}
       </div>
     );
   }
-}
 
-const styles = {
-  close: {
-    position: 'absolute',
-    right: 20,
-    top: 15,
-    textAlign: 'center',
-    cursor: 'pointer',
-    color: StyleConstants.Colors.GRAY_500
-  },
-  closeIcon: {
-    color: StyleConstants.Colors.GRAY_500
-  },
-  closeText: {
-    fontSize: StyleConstants.FontSizes.TINY
-  },
-  component: {
-    cursor: 'pointer',
-    fontFamily: StyleConstants.FontFamily,
-    fontSize: StyleConstants.FontSizes.LARGE,
-    color: StyleConstants.Colors.GRAY_700,
-    boxSizing: 'border-box',
-    outline: 'none'
-  },
-  content: {
-    left: '50%',
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 300
-  },
-  optionsScrim: {
-    backgroundColor: '#fff',
-    bottom: 0,
-    height: '100%',
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    zIndex: 999
-  },
-  optionsWrapper: {
-    border: '1px solid ' + StyleConstants.Colors.GRAY_300,
-    height: 250,
-    overflow: 'auto',
-    width: 300
-  },
-  option: {
-    cursor: 'pointer',
-    backgroundColor: '#fff',
-    padding: 10,
-    whiteSpace: 'nowrap',
-    fontSize: StyleConstants.FontSizes.MEDIUM,
+  styles = (theme) => {
+    return {
+      close: {
+        position: 'absolute',
+        right: 20,
+        top: 15,
+        textAlign: 'center',
+        cursor: 'pointer',
+        color: theme.Colors.GRAY_500
+      },
+      closeIcon: {
+        color: theme.Colors.GRAY_500
+      },
+      closeText: {
+        fontSize: theme.FontSizes.TINY
+      },
+      component: {
+        cursor: 'pointer',
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.LARGE,
+        color: theme.Colors.GRAY_700,
+        boxSizing: 'border-box',
+        outline: 'none'
+      },
+      content: {
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 300
+      },
+      optionsScrim: {
+        backgroundColor: '#fff',
+        bottom: 0,
+        height: '100%',
+        left: 0,
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        zIndex: 999
+      },
+      optionsWrapper: {
+        border: '1px solid ' + theme.Colors.GRAY_300,
+        height: 250,
+        overflow: 'auto',
+        width: 300
+      },
+      option: {
+        cursor: 'pointer',
+        backgroundColor: '#fff',
+        padding: 10,
+        whiteSpace: 'nowrap',
+        fontSize: theme.FontSizes.MEDIUM,
 
-    ':hover': {
-      backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.WHITE,
-      opacity: 1
-    }
-  },
-  optionsHeader: {
-    color: StyleConstants.Colors.GRAY_700,
-    fontSize: StyleConstants.FontSizes.XXLARGE,
-    fontWeight: 'bold',
-    paddingBottom: 10
+        ':hover': {
+          backgroundColor: theme.Colors.PRIMARY,
+          color: theme.Colors.WHITE,
+          opacity: 1
+        }
+      },
+      optionsHeader: {
+        color: theme.Colors.GRAY_700,
+        fontSize: theme.FontSizes.XXLARGE,
+        fontWeight: 'bold',
+        paddingBottom: 10
+      }
+    };
   }
-};
+}
 
 module.exports = Radium(SelectFullScreen);

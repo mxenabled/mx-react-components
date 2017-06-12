@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { SelectFullScreen } = require('mx-react-components');
 
@@ -110,6 +111,8 @@ class SelectFullScreenDocs extends React.Component {
         <h5>selectedStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the selected valued.</p>
 
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
