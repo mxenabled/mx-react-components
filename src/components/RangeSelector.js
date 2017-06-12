@@ -4,7 +4,10 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _throttle = require('lodash/throttle');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class RangeSelector extends React.Component {
   static propTypes = {
@@ -17,6 +20,7 @@ class RangeSelector extends React.Component {
     onUpperDragStop: PropTypes.func,
     presets: PropTypes.array,
     selectedColor: PropTypes.string,
+    theme: themeShape,
     updateOnDrag: PropTypes.bool,
     upperBound: PropTypes.number
   };
@@ -32,7 +36,6 @@ class RangeSelector extends React.Component {
     onLowerDragStop () {},
     onUpperDragStop () {},
     presets: [],
-    selectedColor: StyleConstants.Colors.PRIMARY,
     updateOnDrag: false,
     upperBound: 100
   };
@@ -56,6 +59,7 @@ class RangeSelector extends React.Component {
   }
 
   componentDidMount () {
+    deprecatePrimaryColor(this.props);
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
@@ -226,7 +230,8 @@ class RangeSelector extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.selectedColor);
+    const styles = this.styles(theme);
 
     return (
       <div className='mx-rangeselector' style={[styles.component, this.props.style]}>
@@ -305,12 +310,12 @@ class RangeSelector extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: {
         position: 'relative',
         fontSize: '11px',
-        fontFamily: StyleConstants.FontFamily
+        fontFamily: theme.FontFamily
       },
       presets: {
         position: 'absolute',
@@ -340,7 +345,7 @@ class RangeSelector extends React.Component {
         height: '20px',
         borderRadius: '100%',
         background: '#fff',
-        boxShadow: StyleConstants.ShadowLow,
+        boxShadow: theme.ShadowLow,
         position: 'absolute',
         top: '50%',
         left: this.state.lowerPixels,
@@ -354,7 +359,7 @@ class RangeSelector extends React.Component {
         height: '20px',
         borderRadius: '100%',
         background: '#fff',
-        boxShadow: StyleConstants.ShadowLow,
+        boxShadow: theme.ShadowLow,
         position: 'absolute',
         top: '50%',
         left: this.state.upperPixels,
@@ -368,7 +373,7 @@ class RangeSelector extends React.Component {
         position: 'absolute',
         left: this.state.lowerPixels + 10,
         width: this.state.upperPixels - this.state.lowerPixels,
-        background: this.props.selectedColor,
+        background: theme.Colors.PRIMARY,
         height: '3px',
         top: '50%',
         transform: 'translateY(-50%)',
@@ -412,7 +417,7 @@ class RangeSelector extends React.Component {
         top: 0,
         right: 0,
         cursor: 'pointer',
-        color: this.props.selectedColor
+        color: theme.Colors.PRIMARY
       },
       selectedLabel: {
         textAlign: 'center',
