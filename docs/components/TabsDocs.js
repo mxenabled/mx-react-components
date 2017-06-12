@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Tabs } = require('mx-react-components');
 
@@ -34,7 +35,6 @@ class TabsDocs extends React.Component {
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
           tabs={['Donuts', 'Ice Cream', 'Bacon', 'Chicken']}
-          useTabsInMobile={true}
         />
 
         <h3>Usage</h3>
@@ -64,9 +64,8 @@ class TabsDocs extends React.Component {
         <p>Default: PRIMARY</p>
         <p><em>(required)</em> Array of values that you want respresented as tabs. Each item in the array should be a string. The "onTabClick" function will be called when you click on each one.</p>
 
-        <h5>useTabsInMobile <label>Boolean</label></h5>
-        <p>Default: false</p>
-        <p>When true, this will override the default and show tabs in mobile instead of a menu screen.</p>
+        <h5>DEPRECATED: useTabsInMobile <label>Boolean</label></h5>
+        <p>Deprecated. For dropdown style tabs please use <Link to='/components/select'>Select</Link> instead.</p>
 
         <h3>Example</h3>
         <Markdown>
