@@ -6,6 +6,10 @@ const Button = require('./Button');
 const Icon = require('./Icon');
 
 const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Modal extends React.Component {
   static propTypes = {
@@ -32,6 +36,7 @@ class Modal extends React.Component {
     showScrim: PropTypes.bool,
     showTitleBar: PropTypes.bool,
     style: PropTypes.object,
+    theme: themeShape,
     title: PropTypes.string,
     tooltip: PropTypes.string,
     tooltipLabel: PropTypes.string,
@@ -41,7 +46,6 @@ class Modal extends React.Component {
   static defaultProps = {
     'aria-label': '',
     buttons: [],
-    color: StyleConstants.Colors.PRIMARY,
     isRelative: false,
     showCloseIcon: true,
     showFooter: false,
@@ -58,12 +62,14 @@ class Modal extends React.Component {
   };
 
   componentDidMount () {
+    deprecatePrimaryColor(this.props, 'color');
+
     this._modalContent.focus();
-  /*eslint-disable */
+    /*eslint-disable */
     if (this.props.hasOwnProperty('isOpen')) {
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
     }
-  /*eslint-enable */
+    /*eslint-enable */
   }
 
   _handleTooltipToggle = (show) => {
@@ -72,10 +78,8 @@ class Modal extends React.Component {
     });
   };
 
-  _renderTitleBar = () => {
+  _renderTitleBar = (styles) => {
     if (this.props.showTitleBar) {
-      const styles = this.styles();
-
       return (
         <div className='mx-modal-title-bar' style={styles.titleBar}>
           {this.props.title}
@@ -86,14 +90,12 @@ class Modal extends React.Component {
     }
   };
 
-  _renderFooter = () => {
+  _renderFooter = (styles, theme) => {
     if (this.props.showFooter) {
-      const styles = this.styles();
-
       return (
         <div className='mx-modal-footer' style={Object.assign({}, styles.footer, this.props.footerStyle)}>
-          {this._renderTooltipIconAndLabel()}
-          {this._renderFooterContent()}
+          {this._renderTooltipIconAndLabel(styles, theme)}
+          {this._renderFooterContent(styles)}
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
               return (
@@ -120,9 +122,7 @@ class Modal extends React.Component {
     }
   };
 
-  _renderFooterContent = () => {
-    const styles = this.styles();
-
+  _renderFooterContent = (styles) => {
     return (
       <div className='mx-modal-footer-content' style={styles.footerContent}>
         {this.props.footerContent}
@@ -130,13 +130,11 @@ class Modal extends React.Component {
     );
   };
 
-  _renderTooltip = () => {
+  _renderTooltip = (styles, theme) => {
     if (this.state.showTooltip) {
-      const styles = this.styles();
-
       return (
         <div style={styles.tooltip}>
-          <div className='mx-modal-tooltip-title' style={Object.assign({}, styles.tooltipTitle, { color: this.props.color })}>
+          <div className='mx-modal-tooltip-title' style={Object.assign({}, styles.tooltipTitle, { color: theme.Colors.PRIMARY })}>
             {this.props.tooltipTitle}
           </div>
           <div className='mx-modal-tooltip-content' style={styles.tooltipContent}>
@@ -149,10 +147,8 @@ class Modal extends React.Component {
     }
   };
 
-  _renderTooltipIconAndLabel = () => {
+  _renderTooltipIconAndLabel = (styles, theme) => {
     if (this.props.tooltip) {
-      const styles = this.styles();
-
       return (
         <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
           <Icon
@@ -162,14 +158,14 @@ class Modal extends React.Component {
               onMouseOver: this._handleTooltipToggle.bind(null, true)
             }}
             size={18}
-            style={{ color: this.props.color }}
+            style={{ color: theme.Colors.PRIMARY }}
             type='info'
           />
           <span
             className='mx-modal-tooltip-label-text'
             onMouseOut={this._handleTooltipToggle.bind(null, false)}
             onMouseOver={this._handleTooltipToggle.bind(null, true)}
-            style={Object.assign({}, styles.tooltipLabelText, { color: this.props.color })}
+            style={Object.assign({}, styles.tooltipLabelText, { color: theme.Colors.PRIMARY })}
           >
             {this.props.tooltipLabel}
           </span>
@@ -181,7 +177,8 @@ class Modal extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
+    const styles = this.styles(theme);
 
     return (
       <FocusTrap>
@@ -191,7 +188,7 @@ class Modal extends React.Component {
             className='mx-modal-container'
             style={Object.assign({}, styles.container, this.props.style)}
           >
-            {this._renderTitleBar()}
+            {this._renderTitleBar(styles)}
             <div
               aria-label={this.props['aria-label']}
               className='mx-modal-content'
@@ -200,9 +197,9 @@ class Modal extends React.Component {
               tabIndex={0}
             >
               {this.props.children}
-              {this._renderTooltip()}
+              {this._renderTooltip(styles, theme)}
             </div>
-            {this._renderFooter()}
+            {this._renderFooter(styles, theme)}
             {this.props.showCloseIcon && (
               <Icon
                 className='mx-modal-close'
