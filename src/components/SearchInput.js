@@ -3,6 +3,10 @@ const React = require('react');
 
 const Input = require('./SimpleInput');
 
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+
 class SearchInput extends React.Component {
   static propTypes = {
     baseColor: PropTypes.string,
@@ -13,7 +17,8 @@ class SearchInput extends React.Component {
     placeholder: PropTypes.string,
     searchKeyword: PropTypes.string,
     style: PropTypes.object,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
@@ -23,12 +28,12 @@ class SearchInput extends React.Component {
   };
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles();
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
         <Input
-          baseColor={this.props.baseColor}
           elementProps={{
             onBlur: this.props.onBlur,
             onChange: this.props.onChange,
@@ -41,6 +46,7 @@ class SearchInput extends React.Component {
           icon='search'
           resetClick={this.props.handleResetClick}
           rightIcon='close-solid'
+          theme={theme}
         />
       </div>
     );
