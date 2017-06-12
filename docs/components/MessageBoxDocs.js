@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { MessageBox, Button, Styles } = require('mx-react-components');
 
@@ -24,7 +25,6 @@ class MessageBoxDocs extends React.Component {
         />
 
         <MessageBox
-          color={Styles.Colors.PRIMARY}
           icon='attention-solid'
           title='This is a MessageBox with children.'
         >
@@ -44,6 +44,9 @@ class MessageBoxDocs extends React.Component {
 
             <h5>icon<label>String</label></h5>
             <p>The type of icon to display in the upper left of the MessageBox header.</p>
+
+            <h5>theme <label>Object</label></h5>
+            <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
             <h5>title<label>String</label></h5>
             <p>The text to display in the MessageBox header.</p>
