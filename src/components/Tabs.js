@@ -2,34 +2,28 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+const ButtonGroup = require('./ButtonGroup');
 const StyleConstants = require('../constants/Style');
 
-class Tabs extends React.Component {
+class StandardTabs extends React.Component {
   static propTypes = {
     activeTabStyles: PropTypes.object,
-    alignment: PropTypes.oneOf(['left', 'center']),
     brandColor: PropTypes.string,
     onTabSelect: PropTypes.func.isRequired,
     selectedTab: PropTypes.number,
-    showBottomBorder: PropTypes.bool,
-    tabs: PropTypes.array.isRequired,
-    useTabsInMobile: PropTypes.bool
+    tabs: PropTypes.array.isRequired
   };
 
   static defaultProps = {
-    alignment: 'left',
-    brandColor: StyleConstants.Colors.PRIMARY,
-    showBottomBorder: true
+    brandColor: StyleConstants.Colors.PRIMARY
   };
 
-  state = {
-    selectedTab: this.props.selectedTab || 0
-  };
+  constructor (props) {
+    super(props);
 
-  componentWillMount () {
-    if (this.props.hasOwnProperty('useTabsInMobile')) {
-      console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release.');
-    }
+    this.state = {
+      selectedTab: this.props.selectedTab || 0
+    };
   }
 
   componentWillReceiveProps (nextProps) {
@@ -40,25 +34,22 @@ class Tabs extends React.Component {
     }
   }
 
-  _handleTabClick = (selectedTab) => {
+  handleTabSelect (selectedTab) {
     this.props.onTabSelect(selectedTab);
 
     this.setState({
       selectedTab
     });
-  };
+  }
 
   render () {
-    const styles = this.styles();
-    const componentStyles = Object.assign({}, styles.component, styles.tabsContainer, this.props.style);
-
     return (
-      <div style={componentStyles}>
+      <div>
         {this.props.tabs.map((tab, index) =>
           <Tab
             isActive={this.state.selectedTab === index}
             key={tab}
-            onClick={this._handleTabClick.bind(null, index)}
+            onClick={this.handleTabSelect.bind(this, index)}
             styles={{ activeTab: this.props.activeTabStyles }}
           >
             {tab}
@@ -67,24 +58,6 @@ class Tabs extends React.Component {
       </div>
     );
   }
-
-  styles = () => {
-    return {
-      // Block styles
-      component: {
-        display: 'block',
-        width: '100%'
-      },
-      tabsContainer: {
-        borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        boxSizing: 'border-box',
-        display: 'flex',
-        justifyContent: this.props.alignment === 'left' ? 'flex-start' : 'center',
-        overflowX: 'scroll',
-        width: '100%'
-      }
-    };
-  };
 }
 
 class TabWithoutRadium extends React.Component {
@@ -147,5 +120,112 @@ class TabWithoutRadium extends React.Component {
 }
 
 const Tab = Radium(TabWithoutRadium);
+
+class PillTabs extends StandardTabs {
+  render () {
+    const styles = this.styles();
+
+    return (
+      <div style={styles.component}>
+        <ButtonGroup
+          buttons={this.props.tabs.map((tab, index) => ({
+            'aria-label': tab,
+            onClick: (this.state.selectedTab === index ? null : this.handleTabSelect.bind(this, index)),
+            style: Object.assign({}, styles.tab, this.state.selectedTab === index && styles.selected),
+            text: tab
+          }))}
+          style={styles.buttonGroup}
+          type='neutral'
+        />
+      </div>
+    );
+  }
+
+  styles = () => {
+    return {
+      component: {
+        margin: StyleConstants.Spacing.SMALL
+      },
+      tab: {
+        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        borderColor: StyleConstants.Colors.FOG,
+        outline: 'none',
+
+        ':hover': {
+          backgroundColor: this.props.brandColor,
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE
+        },
+        ':focus': {
+          backgroundColor: this.props.brandColor,
+          color: StyleConstants.Colors.WHITE,
+          fill: StyleConstants.Colors.WHITE
+        },
+        ':active': {
+          backgroundColor: StyleConstants.adjustColor(this.props.brandColor, -15)
+        }
+      },
+      selected: {
+        backgroundColor: StyleConstants.Colors.WHITE,
+        color: this.props.brandColor,
+        cursor: 'default',
+
+        ':hover': {
+          backgroundColor: 'transparent'
+        },
+        ':focus': {
+          backgroundColor: StyleConstants.Colors.WHITE,
+          color: this.props.brandColor
+        },
+        ':active': {
+          backgroundColor: 'transparent'
+        }
+      }
+    };
+  }
+}
+
+const TabsTypes = {
+  standard: StandardTabs,
+  pill: PillTabs
+};
+
+const Tabs = ({
+  alignment = 'left',
+  showBottomBorder = true,
+  style,
+  type = 'standard',
+  useTabsInMobile,
+  ...props
+}) => {
+  if (typeof useTabsInMobile !== 'undefined') {
+    console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release.');
+  }
+
+  const componentStyle = Object.assign({
+    borderBottom: showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+    boxSizing: 'border-box',
+    display: 'flex',
+    justifyContent: alignment === 'left' ? 'flex-start' : 'center',
+    overflowX: 'scroll',
+    width: '100%'
+  }, style);
+  const TabsComponent = TabsTypes[type];
+
+  if (!TabsComponent) throw new Error(`Unknown Tabs type: ${type}`);
+
+  return (
+    <div style={componentStyle}>
+      <TabsComponent {...props} />
+    </div>
+  );
+};
+
+Tabs.propTypes = {
+  alignment: PropTypes.oneOf(['left', 'center']),
+  showBottomBorder: PropTypes.bool,
+  type: PropTypes.oneOf(Object.keys(TabsTypes)),
+  useTabsInMobile: PropTypes.bool
+};
 
 module.exports = Tabs;
