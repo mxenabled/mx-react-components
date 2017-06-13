@@ -1,8 +1,12 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
-const StyleConstants = require('../constants/Style');
+
 const Icon = require('./Icon');
+
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class ToggleSwitch extends React.Component {
   static propTypes = {
@@ -14,6 +18,7 @@ class ToggleSwitch extends React.Component {
     showIcons: PropTypes.bool,
     showLabels: PropTypes.bool,
     styles: PropTypes.object,
+    theme: themeShape,
     trueIcon: PropTypes.string
   };
 
@@ -33,7 +38,8 @@ class ToggleSwitch extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
 
     return (
       <div className='toggle-switch-component' style={styles.component}>
@@ -60,17 +66,17 @@ class ToggleSwitch extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return Object.assign({}, {
       component: {
         alignItems: 'center',
         display: 'flex',
-        fontFamily: StyleConstants.Fonts.REGULAR,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontFamily: theme.Fonts.REGULAR,
+        fontSize: theme.FontSizes.MEDIUM,
         position: 'relative'
       },
       icon: {
-        fill: StyleConstants.Colors.WHITE,
+        fill: theme.Colors.WHITE,
         position: 'absolute',
         top: 0,
         zIndex: 2
@@ -86,13 +92,13 @@ class ToggleSwitch extends React.Component {
         fontWeight: 'bold'
       },
       inactiveLabel: {
-        color: StyleConstants.Colors.GRAY_300
+        color: theme.Colors.GRAY_300
       },
       activeLabel: {
-        color: StyleConstants.Colors.PRIMARY
+        color: theme.Colors.PRIMARY
       },
       toggle: {
-        backgroundColor: StyleConstants.Colors.WHITE,
+        backgroundColor: theme.Colors.WHITE,
         borderRadius: '100%',
         height: 20,
         left: this.props.checked ? 20 : 2,
@@ -115,10 +121,10 @@ class ToggleSwitch extends React.Component {
         zIndex: 1
       },
       trueTrack: {
-        backgroundColor: StyleConstants.Colors.GRAY_700
+        backgroundColor: theme.Colors.GRAY_700
       },
       falseTrack: {
-        backgroundColor: StyleConstants.Colors.GRAY_500
+        backgroundColor: theme.Colors.GRAY_500
       }
     }, this.props.styles);
   };
