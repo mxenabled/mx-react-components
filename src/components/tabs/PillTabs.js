@@ -5,7 +5,7 @@ const Tabbable = require('./Tabbable');
 
 const StyleConstants = require('../../constants/Style');
 
-const PillTabs = Tabbable(({
+const PillTabs = ({
   activeTabStyles,
   brandColor = StyleConstants.Colors.PRIMARY,
   onTabSelect,
@@ -68,6 +68,8 @@ const PillTabs = Tabbable(({
       />
     </div>
   );
-});
+};
 
-module.exports = PillTabs;
+PillTabs.propTypes = Tabbable.propTypes;
+
+module.exports = Tabbable(PillTabs);

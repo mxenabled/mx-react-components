@@ -5,7 +5,7 @@ const Tabbable = require('./Tabbable');
 
 const StyleConstants = require('../../constants/Style');
 
-const StandardTabs = Tabbable(({
+const StandardTabs = ({
   activeTabStyles,
   brandColor = StyleConstants.Colors.PRIMARY,
   onTabSelect,
@@ -26,6 +26,8 @@ const StandardTabs = Tabbable(({
       </Tab>
       )}
   </div>
-));
+);
 
-module.exports = StandardTabs;
+StandardTabs.propTypes = Tabbable.propTypes;
+
+module.exports = Tabbable(StandardTabs);

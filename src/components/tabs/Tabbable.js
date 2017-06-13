@@ -8,16 +8,7 @@ const StyleConstants = require('../../constants/Style');
  */
 const Tabbable = (TabsComponent) => {
   return class extends React.Component { // eslint-disable-line react/display-name
-    static propTypes = {
-      activeTabStyles: PropTypes.object,
-      alignment: PropTypes.oneOf(['left', 'center']),
-      brandColor: PropTypes.string,
-      onTabSelect: PropTypes.func.isRequired,
-      selectedTab: PropTypes.number,
-      showBottomBorder: PropTypes.bool,
-      style: PropTypes.object,
-      tabs: PropTypes.array.isRequired
-    };
+    static propTypes = Tabbable.propTypes;
 
     static defaultProps = {
       alignment: 'left',
@@ -64,6 +55,17 @@ const Tabbable = (TabsComponent) => {
       }, this.props.style);
     }
   };
+};
+
+Tabbable.propTypes = {
+  activeTabStyles: PropTypes.object,
+  alignment: PropTypes.oneOf(['left', 'center']),
+  brandColor: PropTypes.string,
+  onTabSelect: PropTypes.func.isRequired,
+  selectedTab: PropTypes.number,
+  showBottomBorder: PropTypes.bool,
+  style: PropTypes.object,
+  tabs: PropTypes.array.isRequired
 };
 
 module.exports = Tabbable;
