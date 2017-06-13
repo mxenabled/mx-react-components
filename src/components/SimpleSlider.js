@@ -5,7 +5,10 @@ const Radium = require('radium');
 const _merge = require('lodash/merge');
 const browser = require('bowser');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class SimpleSlider extends React.Component {
   static propTypes = {
@@ -13,12 +16,12 @@ class SimpleSlider extends React.Component {
     onPercentChange: PropTypes.func.isRequired,
     percent: PropTypes.number.isRequired,
     selectedColor: PropTypes.string,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
-    disabled: false,
-    selectedColor: StyleConstants.Colors.PRIMARY
+    disabled: false
   };
 
   state = {
@@ -28,6 +31,8 @@ class SimpleSlider extends React.Component {
   };
 
   componentDidMount () {
+    deprecatePrimaryColor(this.props, 'selectedColor');
+
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const width = component.clientWidth;
     const leftPixels = this.props.percent * width;
@@ -86,7 +91,8 @@ class SimpleSlider extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.selectedColor);
+    const styles = this.styles(theme);
     const { disabled } = this.props;
 
     return (
@@ -119,7 +125,7 @@ class SimpleSlider extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     const cursorStyle = this._getCursorStyle();
 
     return _merge({}, {
@@ -128,22 +134,22 @@ class SimpleSlider extends React.Component {
       },
       range: {
         padding: '25px 0',
-        margin: `0 ${StyleConstants.Spacing.MEDIUM}px`
+        margin: `0 ${theme.Spacing.MEDIUM}px`
       },
       track: {
         height: 1,
         background: '#ccc'
       },
       trackHolder: {
-        padding: `${StyleConstants.Spacing.MEDIUM}px 0`,
+        padding: `${theme.Spacing.MEDIUM}px 0`,
         cursor: this.props.disabled ? 'not-allowed' : 'pointer'
       },
       toggle: {
-        width: StyleConstants.Spacing.LARGE,
-        height: StyleConstants.Spacing.LARGE,
+        width: theme.Spacing.LARGE,
+        height: theme.Spacing.LARGE,
         borderRadius: '100%',
-        background: StyleConstants.Colors.WHITE,
-        boxShadow: StyleConstants.ShadowLow,
+        background: theme.Colors.WHITE,
+        boxShadow: theme.ShadowLow,
         position: 'absolute',
         top: '50%',
         left: this.state.leftPixels,
@@ -154,9 +160,9 @@ class SimpleSlider extends React.Component {
       },
       selected: {
         position: 'absolute',
-        left: StyleConstants.Spacing.SMALL,
+        left: theme.Spacing.SMALL,
         width: this.state.leftPixels,
-        background: this.props.selectedColor,
+        background: theme.Colors.PRIMARY,
         height: 3,
         top: '50%',
         transform: 'translateY(-50%)',
