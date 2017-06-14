@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { TypeAhead } = require('mx-react-components');
 
@@ -90,6 +91,9 @@ class TypeAheadDocs extends React.Component {
 
         <h5>preSelectedItems <label>Array</label></h5>
         <p>An array of Strings to be displayed as selected options by default. These values should be contained in the items Array. These values will be the starting point of the TypeAhead's selected values state. Once the user begins interacting with the TypeAhead, they will be ignored.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
