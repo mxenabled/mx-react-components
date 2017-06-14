@@ -5,7 +5,9 @@ const _merge = require('lodash/merge');
 const _omit = require('lodash/omit');
 const _functions = require('lodash/functions');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class Bar extends React.Component {
   static propTypes = {
@@ -152,6 +154,7 @@ class BarChart extends React.Component {
     onHover: PropTypes.func,
     showTooltips: PropTypes.bool,
     style: PropTypes.object,
+    theme: themeShape,
     threshold: PropTypes.number,
     tooltipFormat: PropTypes.func,
     width: PropTypes.number,
@@ -317,7 +320,8 @@ class BarChart extends React.Component {
   };
 
   render () {
-    const styles = _merge({}, this.styles(), this.props.style);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = _merge({}, this.styles(theme), this.props.style);
     const { height, margin, width } = this.props;
     const widthMargin = width - margin.left - margin.right;
     const heightMargin = height - margin.top - margin.bottom;
@@ -434,35 +438,35 @@ class BarChart extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       bar: {
-        fill: StyleConstants.Colors.GRAY_300
+        fill: theme.Colors.GRAY_300
       },
       positiveBarHover: {
-        fill: StyleConstants.Colors.PRIMARY
+        fill: theme.Colors.PRIMARY
       },
       negativeBarHover: {
-        fill: StyleConstants.Colors.PRIMARY
+        fill: theme.Colors.PRIMARY
       },
       positiveBarClicked: {
-        fill: StyleConstants.Colors.PRIMARY
+        fill: theme.Colors.PRIMARY
       },
       negativeBarClicked: {
-        fill: StyleConstants.Colors.PRIMARY
+        fill: theme.Colors.PRIMARY
       },
       tooltipContainer: {
 
       },
       tooltipText: {
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        color: StyleConstants.Colors.GRAY_700,
+        fontSize: theme.FontSizes.MEDIUM,
+        fontFamily: theme.Fonts.SEMIBOLD,
+        color: theme.Colors.GRAY_700,
         textAlign: 'center',
         whiteSpace: 'nowrap'
       },
       threshold: {
-        stroke: StyleConstants.Colors.GRAY_500,
+        stroke: theme.Colors.GRAY_500,
         strokeDasharray: '4,4',
         strokeWidth: 1
       }
