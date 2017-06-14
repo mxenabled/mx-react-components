@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { SimpleSlider } = require('mx-react-components');
 
@@ -35,16 +36,14 @@ class SimpleSliderDocs extends React.Component {
         <h5>onPercentChange <label>func</label> <em>Required</em></h5>
         <p>When the slider is moved, your callback function is called and the current percent is passed as a param. The current percent is a number between 0 and 1.</p>
 
-        <h5>selectedColor <label>string</label></h5>
-        <p>This sets the slider bar color.</p>
-
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
           {`
             <SimpleSlider
               percent={this.state.percent}
-              selectedColor='#359BCF'
               onPercentChange={this._myCallbackFunction}
             />
           `}
