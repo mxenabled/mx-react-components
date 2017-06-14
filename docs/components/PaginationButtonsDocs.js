@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { PaginationButtons } = require('mx-react-components');
 
@@ -41,9 +42,8 @@ class PaginationButtonsDocs extends React.Component {
         <p>Default: 9</p>
         <p>The number of page buttons (not including prev/next buttons) shown in the button group.</p>
 
-        <h5>primaryColor <label>String</label></h5>
-        <p>Default: Styles.Colors.PRIMARY</p>
-        <p>The primary color used with the button styles.</p>
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>totalPages <label>Number</label></h5>
         <p><em>(required)</em> The total number of pages.</p>
