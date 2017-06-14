@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { ProgressBar } = require('mx-react-components');
 
@@ -44,6 +45,9 @@ class ProgressBarDocs extends React.Component {
 
         <h5>styles <label>Objext</label></h5>
         <p>A nested styles object used to override the `component` and/or `progress` divs in the component. This can also be used in place of the height and bar colors.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
