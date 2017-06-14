@@ -8,7 +8,10 @@ const Container = require('./grid/Container');
 const Icon = require('./Icon');
 const Row = require('./grid/Row');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 const MAX_HOUR = 23;
 const MAX_MINUTE = 59;
@@ -27,6 +30,7 @@ class DatePicker extends React.Component {
     selectedDate: PropTypes.number,
     showIcons: PropTypes.bool,
     styles: PropTypes.object,
+    theme: themeShape,
     timeFormat: PropTypes.string,
     timeIcon: PropTypes.string,
     timePlaceholder: PropTypes.string,
@@ -42,7 +46,6 @@ class DatePicker extends React.Component {
     datePlaceholder: 'Select a Date',
     locale: 'en',
     onDateSelect () {},
-    primaryColor: StyleConstants.Colors.PRIMARY,
     showIcons: true,
     timeFormat: 'LT',
     timeIcon: 'clock',
@@ -64,6 +67,10 @@ class DatePicker extends React.Component {
     showCalendar: false,
     editTime: false
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   _handleDateBlur = () => {
     this.setState({
@@ -144,7 +151,8 @@ class DatePicker extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
     const spans = this.spans();
 
     return (
@@ -179,6 +187,7 @@ class DatePicker extends React.Component {
                   {...this.props}
                   onDateSelect={this._handleDateSelect}
                   style={styles.calendar}
+                  theme={theme}
                 />
               </div>
             </div>
@@ -252,7 +261,7 @@ class DatePicker extends React.Component {
     };
   };
 
-  styles = () => {
+  styles = (theme) => {
     return Object.assign({}, {
       children: {
         textAlign: 'center'
@@ -261,35 +270,35 @@ class DatePicker extends React.Component {
       // Select styles
       selectWrapper: {
         alignItems: 'center',
-        backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: StyleConstants.Colors.GRAY_300,
+        backgroundColor: theme.Colors.WHITE,
+        borderColor: theme.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
         boxShadow: 'none',
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.GRAY_700,
+        color: theme.Colors.GRAY_700,
         cursor: 'pointer',
         display: 'flex',
         flex: '1 0 0%',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontSize: theme.FontSizes.MEDIUM,
         outline: 'none',
         padding: '10px 15px',
         position: 'relative'
       },
       activeSelectWrapper: {
-        borderColor: this.props.primaryColor
+        borderColor: theme.Colors.PRIMARY
       },
       selectedIcon: {
-        fill: this.props.primaryColor,
+        fill: theme.Colors.PRIMARY,
         marginRight: 5
       },
       selectedText: {
-        color: this.props.selectedDate ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500,
+        color: this.props.selectedDate ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500,
         flex: 1
       },
       selectedDateCaret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.GRAY_500
+        fill: this.state.showCalendar ? theme.Colors.PRIMARY : theme.Colors.GRAY_500
       },
 
       // Time Styles
@@ -297,17 +306,17 @@ class DatePicker extends React.Component {
         border: 'none',
         boxShadow: 'none',
         flex: 1,
-        fontFamily: StyleConstants.Fonts.REGULAR,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontFamily: theme.Fonts.REGULAR,
+        fontSize: theme.FontSizes.MEDIUM,
         outline: 'none'
       },
       timeDisplay: {
-        color: this.props.selectedDate ? StyleConstants.Colors.GRAY_700 : StyleConstants.Colors.GRAY_500,
+        color: this.props.selectedDate ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500,
         flex: 1,
         lineHeight: '1.55em'
       },
       timezone: {
-        color: StyleConstants.Colors.GRAY_500,
+        color: theme.Colors.GRAY_500,
         paddingLeft: 10,
         textAlign: 'right'
       },
@@ -317,10 +326,10 @@ class DatePicker extends React.Component {
         display: this.state.showCalendar ? 'block' : 'none'
       },
       calendar: Object.assign({}, {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.GRAY_300,
+        backgroundColor: theme.Colors.WHITE,
+        border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
-        boxShadow: StyleConstants.ShadowHigh,
+        boxShadow: theme.ShadowHigh,
         boxSizing: 'border-box',
         padding: 20,
         position: 'absolute',

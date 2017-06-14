@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { DatePicker } = require('mx-react-components');
 
@@ -53,12 +54,11 @@ class DatePickerDocs extends React.Component {
         <p>Default: Select A Date</p>
         <p>A string used as placeholder text for the selected date input when it is empty.</p>
 
-        <h5>primaryColor <label>String</label></h5>
-        <p>Default: PRIMARY</p>
-        <p>The color used for input focus, selected date highlight, and hover border.</p>
-
         <h5>selectedDate <label>Number (unix timestamp)</label></h5>
         <p>This sets the selected date on the component. Can be used to set a default date.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
