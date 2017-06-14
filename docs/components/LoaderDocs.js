@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Loader } = require('mx-react-components');
 
@@ -24,7 +25,7 @@ class LoaderDocs extends React.Component {
           <div style={style}>
             <Loader color='red' isLoading={true} isRelative={true} />
           </div>
-          <div style={style}>
+          <div style={Object.assign({}, style, { backgroundImage: 'url("../images/sample-image.jpg")' })}>
             <Loader isLoading={true} isRelative={true}>Custom Loading Message</Loader>
           </div>
         </div>
@@ -46,6 +47,9 @@ class LoaderDocs extends React.Component {
         <p>Default: 'LOADING...'</p>
         <p>If set, this value will be displayed below the loading circle.</p>
 
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+
         <h3>Example</h3>
         <Markdown>
   {`
@@ -64,7 +68,6 @@ class LoaderDocs extends React.Component {
 }
 
 const style = {
-  backgroundImage: 'url("../images/sample-image.jpg")',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
