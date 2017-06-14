@@ -5,7 +5,9 @@ const Radium = require('radium');
 
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class TypeAhead extends React.Component {
   static propTypes = {
@@ -13,7 +15,8 @@ class TypeAhead extends React.Component {
     onItemRemove: PropTypes.func,
     onItemSelect: PropTypes.func,
     placeholderText: PropTypes.string,
-    preSelectedItems: PropTypes.array
+    preSelectedItems: PropTypes.array,
+    theme: themeShape
   };
 
   static defaultProps = {
@@ -218,7 +221,7 @@ class TypeAhead extends React.Component {
     });
   };
 
-  _renderSelectedItems = () => {
+  _renderSelectedItems = (styles) => {
     return this.state.selectedItems.map((item, index) => {
       return (
         <div className='mx-typeahead-selected' key={index} style={styles.itemTag}>
@@ -235,7 +238,7 @@ class TypeAhead extends React.Component {
     });
   };
 
-  _renderItemList = () => {
+  _renderItemList = (styles) => {
     return (
       <div
         className='mx-typeahead-option-list'
@@ -277,7 +280,7 @@ class TypeAhead extends React.Component {
               key={index}
               onMouseDown={this._handleItemSelect.bind(null, item)}
               onMouseOver={this._handleItemMouseOver}
-              style={[styles.item, (item === this.state.highlightedValue) && styles.activeItem]}
+              style={Object.assign({}, styles.item, (item === this.state.highlightedValue) && styles.activeItem)}
             >
               {item}
             </div>
@@ -288,15 +291,18 @@ class TypeAhead extends React.Component {
   };
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
+
     return (
       <div
         className='mx-typeahead'
         onBlur={this._handleBlur}
         onFocus={this._handleFocus}
-        style={[styles.component, this.props.style]}
+        style={Object.assign({}, styles.component, this.props.style)}
         tabIndex='0'
       >
-        {this._renderSelectedItems()}
+        {this._renderSelectedItems(styles)}
 
         <input
           className='mx-typeahead-input'
@@ -310,118 +316,120 @@ class TypeAhead extends React.Component {
           value={this.state.searchString}
         />
 
-        <div className='mx-typeahead-option-list-container' style={[styles.itemListContainer, !this.state.isOpen && { display: 'none' }]}>
-          {this._renderItemList()}
+        <div className='mx-typeahead-option-list-container' style={Object.assign({}, styles.itemListContainer, !this.state.isOpen && { display: 'none' })}>
+          {this._renderItemList(styles)}
         </div>
       </div>
     );
   }
+
+  styles = (theme) => {
+    return {
+      component: {
+        backgroundColor: '#FFFFFF',
+        borderColor: '#e5e5e5',
+        borderRadius: '3px',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        boxSizing: 'border-box',
+        fontFamily: theme.FontFamily,
+        fontSize: '12px',
+        paddingTop: '10px',
+        paddingRight: '10px',
+        paddingBottom: '10px',
+        paddingLeft: '10px',
+        position: 'relative',
+        WebkitAppearance: 'none',
+        width: '100%',
+        minHeight: '35px',
+
+        ':focus': {
+          backgroundColor: '#FFFFFF',
+          boxShadow: 'none',
+          color: theme.Colors.GRAY_700,
+          outline: 'none'
+        }
+      },
+      activeItem: {
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE
+      },
+      clearFix: {
+        clear: 'both'
+      },
+      input: {
+        backgroundColor: '#FFFFFF',
+        borderWidth: 0,
+        color: theme.Colors.GRAY_700,
+        fontSize: '13px',
+        minWidth: '33%',
+        outline: 'none',
+        WebkitAppearance: 'none',
+
+        ':focus': {
+          borderWidth: 0,
+          boxShadow: 'none',
+          outline: 'none'
+        }
+      },
+      itemList: {
+        minHeight: '20px',
+        maxHeight: '200px',
+        overflow: 'auto'
+      },
+      itemListContainer: {
+        clear: 'both',
+        backgroundColor: '#fff',
+        position: 'absolute',
+        left: -1,
+        right: -1,
+        marginTop: '7px',
+        marginBottom: '20px',
+        border: '1px solid #E5E5E5',
+        borderRadius: '0 0 3px 3px',
+        boxShadow: theme.ShadowHigh,
+        zIndex: 10
+      },
+      itemTag: {
+        backgroundColor: '#eee',
+        borderColor: '#e5e5e5',
+        borderRadius: '3px',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        display: 'inline-block',
+        lineHeight: '0.8em',
+        marginTop: '1px',
+        marginRight: '2px',
+        marginBottom: '1px',
+        paddingLeft: '3px',
+        position: 'relative'
+      },
+      item: {
+        color: theme.Colors.GRAY_500,
+        cursor: 'pointer',
+        paddingTop: '10px',
+        paddingRight: '10px',
+        paddingBottom: '10px',
+        paddingLeft: '10px',
+        lineHeight: '1em',
+
+        ':focus': {
+          border: 'none',
+          boxShadow: 'none',
+          outline: 'none'
+        },
+        ':hover': {
+          backgroundColor: theme.Colors.PRIMARY,
+          color: theme.Colors.WHITE
+        }
+      },
+      removeIcon: {
+        color: theme.Colors.GRAY_500,
+        marginLeft: '5px',
+        cursor: 'pointer'
+      }
+    };
+  };
 }
-
-const styles = {
-  component: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#e5e5e5',
-    borderRadius: '3px',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    boxSizing: 'border-box',
-    fontFamily: StyleConstants.FontFamily,
-    fontSize: '12px',
-    paddingTop: '10px',
-    paddingRight: '10px',
-    paddingBottom: '10px',
-    paddingLeft: '10px',
-    position: 'relative',
-    WebkitAppearance: 'none',
-    width: '100%',
-    minHeight: '35px',
-
-    ':focus': {
-      backgroundColor: '#FFFFFF',
-      boxShadow: 'none',
-      color: StyleConstants.Colors.GRAY_700,
-      outline: 'none'
-    }
-  },
-  activeItem: {
-    backgroundColor: StyleConstants.Colors.PRIMARY,
-    color: StyleConstants.Colors.WHITE
-  },
-  clearFix: {
-    clear: 'both'
-  },
-  input: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 0,
-    color: StyleConstants.Colors.GRAY_700,
-    fontSize: '13px',
-    minWidth: '33%',
-    outline: 'none',
-    WebkitAppearance: 'none',
-
-    ':focus': {
-      borderWidth: 0,
-      boxShadow: 'none',
-      outline: 'none'
-    }
-  },
-  itemList: {
-    minHeight: '20px',
-    maxHeight: '200px',
-    overflow: 'auto'
-  },
-  itemListContainer: {
-    clear: 'both',
-    backgroundColor: '#fff',
-    position: 'absolute',
-    left: -1,
-    right: -1,
-    marginTop: '7px',
-    marginBottom: '20px',
-    border: '1px solid #E5E5E5',
-    borderRadius: '0 0 3px 3px',
-    boxShadow: StyleConstants.ShadowHigh,
-    zIndex: 10
-  },
-  itemTag: {
-    backgroundColor: '#eee',
-    borderColor: '#e5e5e5',
-    borderRadius: '3px',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    display: 'inline-block',
-    lineHeight: '0.8em',
-    marginTop: '1px',
-    marginRight: '2px',
-    marginBottom: '1px',
-    paddingLeft: '3px',
-    position: 'relative'
-  },
-  item: {
-    color: StyleConstants.Colors.GRAY_500,
-    cursor: 'pointer',
-    paddingTop: '10px',
-    paddingRight: '10px',
-    paddingBottom: '10px',
-    paddingLeft: '10px',
-    lineHeight: '1em',
-
-    ':focus': {
-      border: 'none',
-      boxShadow: 'none',
-      outline: 'none'
-    },
-    ':hover': {
-      backgroundColor: StyleConstants.Colors.PRIMARY,
-      color: StyleConstants.Colors.WHITE
-    }
-  },
-  removeIcon: {
-    color: StyleConstants.Colors.GRAY_500,
-    marginLeft: '5px',
-    cursor: 'pointer'
-  }
-};
 
 module.exports = Radium(TypeAhead);
