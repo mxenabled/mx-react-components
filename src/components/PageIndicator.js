@@ -1,13 +1,16 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class PageIndicator extends React.Component {
   static propTypes = {
     activeIndex: PropTypes.number,
     count: PropTypes.number.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    theme: themeShape
   };
 
   _handleDotClick = (index = 0) => {
@@ -16,8 +19,7 @@ class PageIndicator extends React.Component {
     }
   };
 
-  _renderDots = () => {
-    const styles = this.styles();
+  _renderDots = (styles) => {
     const dots = [];
 
     for (let i = 0; i < this.props.count; i++) {
@@ -32,16 +34,17 @@ class PageIndicator extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
 
     return (
       <div style={styles.component}>
-        {this._renderDots()}
+        {this._renderDots(styles)}
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: {
         textAlign: 'center',
@@ -54,11 +57,11 @@ class PageIndicator extends React.Component {
         borderRadius: '100%',
         display: 'inline-block',
         verticalAlign: 'middle',
-        backgroundColor: StyleConstants.Colors.GRAY_300,
+        backgroundColor: theme.Colors.GRAY_300,
         cursor: 'pointer'
       },
       dotActive: {
-        backgroundColor: StyleConstants.Colors.GRAY_700
+        backgroundColor: theme.Colors.GRAY_700
       }
     };
   };
