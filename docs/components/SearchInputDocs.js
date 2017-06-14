@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { SearchInput } = require('mx-react-components');
 
@@ -55,6 +56,9 @@ class SearchInputDocs extends React.Component {
 
         <h5>styles <label>Object</label></h5>
         <p>Styles object used to override default styles.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>

@@ -4,7 +4,10 @@ const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Input extends React.Component {
   static propTypes = {
@@ -20,12 +23,12 @@ class Input extends React.Component {
       PropTypes.object
     ]),
     styles: PropTypes.object,
+    theme: themeShape,
     type: PropTypes.string,
     valid: PropTypes.bool
   };
 
   static defaultProps = {
-    baseColor: StyleConstants.Colors.PRIMARY,
     elementProps: {},
     focusOnLoad: false,
     type: 'text',
@@ -37,6 +40,8 @@ class Input extends React.Component {
   };
 
   componentDidMount () {
+    deprecatePrimaryColor(this.props, 'baseColor');
+
     if (this.props.focusOnLoad && this.input) {
       this.input.focus();
     }
@@ -60,7 +65,8 @@ class Input extends React.Component {
 
   render () {
     const { elementProps } = this.props;
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.baseColor);
+    const styles = this.styles(theme);
 
     return (
       <div
@@ -91,13 +97,13 @@ class Input extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return _merge({}, {
       wrapper: Object.assign({}, {
-        padding: StyleConstants.Spacing.SMALL,
+        padding: theme.Spacing.SMALL,
         boxSizing: 'border-box',
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.GRAY_300 : '1px solid ' + StyleConstants.Colors.DANGER,
+        backgroundColor: theme.Colors.WHITE,
+        border: this.props.valid ? '1px solid ' + theme.Colors.GRAY_300 : '1px solid ' + theme.Colors.DANGER,
         borderRadius: 3,
         display: 'flex',
         alignItems: 'center',
@@ -106,22 +112,22 @@ class Input extends React.Component {
         boxShadow: 'none'
       }, this.props.style),
       activeWrapper: {
-        border: '1px solid ' + this.props.baseColor
+        border: '1px solid ' + theme.Colors.PRIMARY
       },
       icon: {
         paddingRight: 7,
-        fill: this.props.baseColor
+        fill: theme.Colors.PRIMARY
       },
       rightIcon: {
-        paddingLeft: StyleConstants.Spacing.XSMALL,
-        fill: StyleConstants.Colors.GRAY_300,
+        paddingLeft: theme.Spacing.XSMALL,
+        fill: theme.Colors.GRAY_300,
         cursor: 'pointer'
       },
       input: {
         flex: '1 0 0%',
-        color: StyleConstants.Colors.GRAY_700,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        backgroundColor: StyleConstants.Colors.WHITE,
+        color: theme.Colors.GRAY_700,
+        fontSize: theme.FontSizes.MEDIUM,
+        backgroundColor: theme.Colors.WHITE,
         border: 'none',
         outline: 'none',
         boxShadow: 'none'
