@@ -41,7 +41,12 @@ const Tabbable = (TabsComponent) => {
     }
 
     render () {
-      return <TabsComponent {...this.props} style={this.styles()} />;
+      const tabsProps = Object.assign({}, this.props, {
+        onTabSelect: this.handleTabSelect.bind(this), // delegate for keeping state
+        selectedTab: this.props.selectedTab
+      });
+
+      return <TabsComponent {...tabsProps} style={this.styles()} />;
     }
 
     styles () {
