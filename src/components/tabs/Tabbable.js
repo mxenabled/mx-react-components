@@ -7,7 +7,7 @@ const StyleConstants = require('../../constants/Style');
  * Common state and prop management and outer styling for Tabs components.
  */
 const Tabbable = (TabsComponent) => {
-  return class extends React.Component { // eslint-disable-line react/display-name
+  const TabbableComponent = class extends React.Component {
     static propTypes = Tabbable.propTypes;
 
     static defaultProps = {
@@ -55,6 +55,8 @@ const Tabbable = (TabsComponent) => {
       }, this.props.style);
     }
   };
+
+  return TabbableComponent;
 };
 
 Tabbable.propTypes = {
