@@ -1,12 +1,15 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const StyleConstants = require('../../constants/Style');
+const { themeShape } = require('../../constants/App');
+
+const StyleUtils = require('../../utils/Style');
 
 class ShadedHatchPatternRectangleGroup extends React.Component {
   static propTypes = {
     fillColor: PropTypes.string,
     height: PropTypes.number.isRequired,
+    theme: themeShape,
     translation: PropTypes.string,
     width: PropTypes.number.isRequired,
     x: PropTypes.number.isRequired,
@@ -14,11 +17,13 @@ class ShadedHatchPatternRectangleGroup extends React.Component {
   };
 
   static defaultProps = {
-    fillColor: StyleConstants.Colors.GRAY_300,
     translation: 'translate(0,0)'
   };
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const fillColor = this.props.fillColor || theme.Colors.GRAY_300;
+
     return (
       <g className='shaded-hatch-pattern'>
         <pattern
@@ -29,7 +34,7 @@ class ShadedHatchPatternRectangleGroup extends React.Component {
         >
           <path
             d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'
-            stroke={this.props.fillColor}
+            stroke={fillColor}
             strokeWidth={1}
           />
         </pattern>
