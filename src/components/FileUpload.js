@@ -224,7 +224,7 @@ class FileUpload extends React.Component {
       failedValidationTypes.push('file_size');
     }
 
-    if (isInvalidFileType && isInvalidFileExtension) {
+    if (isInvalidFileType || isInvalidFileExtension) {
       failedValidationTypes.push('file_type');
     }
 
@@ -242,9 +242,9 @@ class FileUpload extends React.Component {
         failedValidationTypes
       });
 
-      return this.props.onFileRemove(this.props.uploadedFile);
+      this.props.onFileRemove(this.props.uploadedFile);
     } else {
-      return this.props.onFileAdd(file);
+      this.props.onFileAdd(file);
     }
   };
 
@@ -280,7 +280,7 @@ class FileUpload extends React.Component {
                   type='secondary'
                 />
               </div>
-            ) : null }
+            ) : null}
           </div>
         ) : (
           <div style={styles.dropzoneChild}>
@@ -295,7 +295,7 @@ class FileUpload extends React.Component {
                   this.state.failedValidationTypes.map(validationType => {
                     return (<div style={styles.invalidMessage}>{this._getDefaultValidationMessage(validationType)}</div>);
                   })
-              ) : null }
+              ) : null}
                 {this.props.children}
               </div>
             )}
