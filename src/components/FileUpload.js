@@ -233,10 +233,8 @@ class FileUpload extends React.Component {
     }
 
     if (this.props.onFileValidation) {
-      return this.props.onFileValidation(failedValidationTypes);
-    }
-
-    if (failedValidationTypes.length) {
+      this.props.onFileValidation(failedValidationTypes);
+    } else if (failedValidationTypes.length) {
       this.setState({
         dragging: false,
         failedValidationTypes
