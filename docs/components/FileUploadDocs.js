@@ -27,7 +27,16 @@ class FileUploadDocs extends React.Component {
         <div style={{ cursor: 'pointer', textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
             allowedFileTypes={['image/jpeg', 'text/csv', 'image/png', 'gif']}
-
+            imageValidation={{
+              exactHeight: 200,
+              exactWidth: 400,
+              maxHeight: 400,
+              maxWidth: 800,
+              minHeight: 100,
+              minWidth: 200,
+              ratioHeight: 1,
+              ratioWidth: 2
+            }}
             maxFileSize={3000}
             onFileAdd={this._handleFileChange}
             onFileRemove={this._handleFileChange}
