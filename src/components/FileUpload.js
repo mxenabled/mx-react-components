@@ -224,7 +224,7 @@ class FileUpload extends React.Component {
       failedValidationTypes.push('file_size');
     }
 
-    if (isInvalidFileType || isInvalidFileExtension) {
+    if (isInvalidFileType && isInvalidFileExtension) {
       failedValidationTypes.push('file_type');
     }
 
