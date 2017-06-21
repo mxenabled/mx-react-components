@@ -31,7 +31,8 @@ class FileUpload extends React.Component {
 
   state = {
     dragging: false,
-    imageSource: null
+    imageSource: null,
+    failedValidationTypes: []
   };
 
   componentDidMount () {
@@ -48,6 +49,43 @@ class FileUpload extends React.Component {
         this._validateFile(result.file, result.width, result.height);
       });
     }
+  }
+
+  _getDefaultValidationMessage (validationType) {
+    let validationMessage = 'Selected file did not meet requirements';
+
+    switch (validationType) {
+      case 'exact_height':
+        validationMessage = 'Image requires an exact height of ' + this.props.imageValidation.exactHeight + ' pixels';
+        break;
+      case 'exact_width':
+        validationMessage = 'Image requires an exact width of ' + this.props.imageValidation.exactWidth + ' pixels';
+        break;
+      case 'file_size':
+        validationMessage = 'File size is too large. Must be ' + this.props.maxFileSize + 'k or less.';
+        break;
+      case 'file_type':
+        validationMessage = 'Unpermitted File Type. Must be one of: ' + this.props.allowedFileTypes.join(', ');
+        break;
+      case 'image_ratio':
+        validationMessage = 'Image ratio must be ' + this.props.imageValidation.ratioHeight + 'px/' + this.props.imageValidation.ratioWidth + 'px';
+        break;
+      case 'max_height':
+        validationMessage = 'Maximum Image height of ' + this.props.imageValidation.maxHeight + ' exceeded';
+        break;
+      case 'max_width':
+        validationMessage = 'Maximum Image width of ' + this.props.imageValidation.maxWidth + ' exceeded';
+        break;
+      case 'min_height':
+        validationMessage = 'Image must have minimum heigh of ' + this.props.imageValidation.minHeight + ' pixels';
+        break;
+      case 'min_width':
+        validationMessage = 'Image must have minimum width of ' + this.props.imageValidation.minWidth + ' pixels';
+        break;
+      default:
+        break;
+    }
+    return validationMessage;
   }
 
   _handleFileSelect = (e) => {
@@ -140,61 +178,66 @@ class FileUpload extends React.Component {
   };
 
   _validateImageDimensions = (width, height) => {
-    const validationMessages = [];
+    const failedImageValidationTypes = [];
 
-    if (this.props.onFileValidation && this.props.imageValidation) {
+    if (this.props.imageValidation) {
       if (this.props.imageValidation.exactHeight && this.props.imageValidation.exactHeight !== height) {
-        validationMessages.push('exact_height');
+        failedImageValidationTypes.push('exact_height');
       }
 
       if (this.props.imageValidation.exactWidth && this.props.imageValidation.exactWidth !== width) {
-        validationMessages.push('exact_width');
+        failedImageValidationTypes.push('exact_width');
       }
 
       if (this.props.imageValidation.maxHeight && this.props.imageValidation.maxHeight < height) {
-        validationMessages.push('max_height');
+        failedImageValidationTypes.push('max_height');
       }
 
       if (this.props.imageValidation.maxWidth && this.props.imageValidation.maxWidth < width) {
-        validationMessages.push('max_width');
+        failedImageValidationTypes.push('max_width');
       }
 
       if (this.props.imageValidation.minHeight && this.props.imageValidation.minHeight > height) {
-        validationMessages.push('min_height');
+        failedImageValidationTypes.push('min_height');
       }
 
       if (this.props.imageValidation.minWidth && this.props.imageValidation.minWidth > width) {
-        validationMessages.push('min_width');
+        failedImageValidationTypes.push('min_width');
       }
 
       if (this.props.imageValidation.ratioHeight && this.props.imageValidation.ratioWidth && (this.props.imageValidation.ratioHeight / this.props.imageValidation.ratioWidth !== height / width)) {
-        validationMessages.push('image_ratio');
+        failedImageValidationTypes.push('image_ratio');
       }
     }
 
-    return validationMessages;
+    return failedImageValidationTypes;
   };
 
   _validateFile = (file, width = null, height = null) => {
-    const validationMessages = this._validateImageDimensions(width, height);
+    let failedValidationTypes = [];
+    const fileExt = file.name.split('.').pop();
     const isTooBig = this.props.maxFileSize < file.size / 1000;
-    const isInvalidType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
+    const isInvalidFileType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
+    const isInvalidFileExtension = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(fileExt) < 0;
 
-    if (this.props.onFileValidation) {
-      if (isTooBig) {
-        validationMessages.push('file_size');
-      }
-
-      if (isInvalidType) {
-        validationMessages.push('file_type');
-      }
-
-      this.props.onFileValidation(validationMessages);
+    if (isTooBig) {
+      failedValidationTypes.push('file_size');
     }
 
-    if (validationMessages.length) {
+    if (isInvalidFileType || isInvalidFileExtension) {
+      failedValidationTypes.push('file_type');
+    }
+
+    if (failedValidationTypes.indexOf('file_type') < 0 && failedValidationTypes.indexOf('file_size') < 0) {
+      failedValidationTypes = failedValidationTypes.concat(this._validateImageDimensions(width, height));
+    }
+
+    if (this.props.onFileValidation) {
+      this.props.onFileValidation(failedValidationTypes);
+    } else if (failedValidationTypes.length) {
       this.setState({
-        dragging: false
+        dragging: false,
+        failedValidationTypes
       });
 
       this.props.onFileRemove(this.props.uploadedFile);
@@ -246,6 +289,11 @@ class FileUpload extends React.Component {
               </div>
             ) : (
               <div style={styles.centered}>
+              {this.state.failedValidationTypes.length > 0 ? (
+                  this.state.failedValidationTypes.map(validationType => {
+                    return (<div style={styles.invalidMessage}>{this._getDefaultValidationMessage(validationType)}</div>);
+                  })
+              ) : null}
                 {this.props.children}
               </div>
             )}
@@ -323,7 +371,8 @@ class FileUpload extends React.Component {
       },
       invalidMessage: {
         fontSize: StyleConstants.FontSizes.LARGE,
-        marginBottom: 10
+        marginBottom: 10,
+        color: StyleConstants.Colors.STRAWBERRY
       },
       invalidIcon: {
         color: StyleConstants.Colors.ASH
