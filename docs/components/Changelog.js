@@ -9,6 +9,13 @@ class Changelog extends React.Component {
         <h3>Release Candidate 5.0.0-rc.97</h3>
         <ul>
           <li>
+            Fixes bug with the file type and extension validation in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/630'>#630</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.97</h3>
+        <ul>
+          <li>
             Allows extensions to be used in `allowedFileTypes` of FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/629'>#629</a>).
           </li>
           <li>
