@@ -26,21 +26,11 @@ class FileUploadDocs extends React.Component {
         <h3>Demo</h3>
         <div style={{ cursor: 'pointer', textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
-            allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
-            imageValidation={{
-              exactHeight: 200,
-              exactWidth: 400,
-              maxHeight: 400,
-              maxWidth: 800,
-              minHeight: 100,
-              minWidth: 200,
-              ratioHeight: 1,
-              ratioWidth: 2
-            }}
+            allowedFileTypes={['image/jpeg', 'text/csv', 'image/png', 'gif']}
+
             maxFileSize={3000}
             onFileAdd={this._handleFileChange}
             onFileRemove={this._handleFileChange}
-            onFileValidation={this._handleFileValidation}
             uploadedFile={this.state.uploadedFile}
           >
             Click Here to Upload File (demo).
@@ -100,7 +90,7 @@ class FileUploadDocs extends React.Component {
     }
 
     <FileUpload
-      allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
+      allowedFileTypes={['image/jpeg', 'text/csv', 'image/png', 'gif']}
       imageValidation={{
         exactHeight: 200,
         exactWidth: 400,
@@ -114,7 +104,6 @@ class FileUploadDocs extends React.Component {
       maxFileSize={3000}
       onFileAdd={this._handleFileChange}
       onFileRemove={this._handleFileChange}
-      onFileValidation={this._handleFileValidation}
       uploadedFile={this.state.uploadedFile}
     />
   `}
