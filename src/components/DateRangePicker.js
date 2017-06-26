@@ -318,12 +318,11 @@ class DateRangePicker extends React.Component {
     return (
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
-          {StyleConstants.getWindowSize() !== 'xsmall' &&
-            <Icon
-              size={20}
-              style={styles.selectedDateIcon}
-              type='calendar'
-            />}
+          <Icon
+            size={20}
+            style={styles.selectedDateIcon}
+            type='calendar'
+          />
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
@@ -333,12 +332,11 @@ class DateRangePicker extends React.Component {
               </div>
             ) : this.props.placeholderText}
           </div>
-          {StyleConstants.getWindowSize() !== 'xsmall' &&
-            <Icon
-              size={20}
-              style={styles.selectedDateCaret}
-              type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-            />}
+          <Icon
+            size={20}
+            style={styles.selectedDateCaret}
+            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+          />
         </div>
         <Container>
           <Row>
