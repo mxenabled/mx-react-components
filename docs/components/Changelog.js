@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.99</h3>
+        <ul>
+          <li>
+            Removes xsmall breakpoint in style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/597'>#597</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.97</h3>
         <ul>
           <li>
