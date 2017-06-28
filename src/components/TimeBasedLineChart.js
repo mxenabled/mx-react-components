@@ -558,9 +558,7 @@ class TimeBasedLineChart extends React.Component {
               <TimeXAxisGroup
                 ticks={
                   data.filter((datum, index) => {
-                    const isMonthRangeType = this.props.rangeType === 'month';
-
-                    return isMonthRangeType || index % 3 === 0;
+                    return index % Math.ceil(data.length / 10) === 0;
                   })
                   .map(datum => {
                     return moment.unix(datum.x).utc().unix();
