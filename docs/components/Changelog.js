@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.100</h3>
+        <ul>
+          <li>
+            Fixes overlaping x axis labels in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/631'>#631</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.99</h3>
         <ul>
           <li>
