@@ -108,7 +108,7 @@ class DisplayInputDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-        {`
+          {`
           <DisplayInput
             label='Display Input'
             placeholder='Type something'
@@ -121,7 +121,7 @@ class DisplayInputDocs extends React.Component {
         <p>Properties to be passed to the input element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
 
         <Markdown>
-        {`
+          {`
           <DisplayInput
             elementProps={{
               onChange: myOnChangeCallbackFunction

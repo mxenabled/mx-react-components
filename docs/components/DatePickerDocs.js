@@ -62,7 +62,7 @@ class DatePickerDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     _handleDateSelect (selectedDate) {
       this.setState({
         selectedDatePickerDate

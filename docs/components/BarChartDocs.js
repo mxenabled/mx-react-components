@@ -97,13 +97,13 @@ class BarChartDocs extends React.Component {
         <h5>data<label>Array</label></h5>
         <p>An array of objects that label and value properties. Each object represents a bar. Optionally allows a color property to override the default color of the bar. Example:</p>
         <Markdown lang='js'>
-  {`
-    [{
-      label: 'label', //optional - Anything that can be parsed by d3 as an axis value.
-      color: '#E3E6E7', //string - hexcode or rgb
-      value: 10 //number - required, value of bar, determines bar size
-    }]
-  `}
+          {`
+            [{
+              label: 'label', //optional - Anything that can be parsed by d3 as an axis value.
+              color: '#E3E6E7', //string - hexcode or rgb
+              value: 10 //number - required, value of bar, determines bar size
+            }]
+          `}
         </Markdown>
 
         <h5>height <label>Number</label></h5>
@@ -114,7 +114,7 @@ class BarChartDocs extends React.Component {
         <p>Object containing the desired padding on the SVG to account for axis labels and tooltips.</p>
         <p>Default:</p>
         <Markdown lang='js'>
-  {`
+          {`
     {
       top: 20,
       right: 20,
@@ -138,7 +138,7 @@ class BarChartDocs extends React.Component {
         <p>A object that allows you to override the internal styles</p>
         <p>Available keys: </p>
         <Markdown>
-  {`
+          {`
       bar,
       positiveBarHover,
       negativeBarHover,
@@ -168,7 +168,7 @@ class BarChartDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown lang='js'>
-  {`
+          {`
     const margins = {
       top: 50,
       right: 20,

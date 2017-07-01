@@ -68,7 +68,7 @@ class DatePickerFullScreenDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <DatePickerFullScreen
       closeOnDateSelect={true}
       showDayBorders={false}

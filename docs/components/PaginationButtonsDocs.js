@@ -50,7 +50,7 @@ class PaginationButtonsDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <PaginationButtons
       currentPage={4}
       onClick={this._handleButtonClick}

@@ -89,7 +89,7 @@ class RangeSelectorDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <RangeSelector
       defaultLowerValue={18}
       defaultUpperValue={30}

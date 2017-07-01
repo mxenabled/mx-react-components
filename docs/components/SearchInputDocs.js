@@ -58,7 +58,7 @@ class SearchInputDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-        {`
+          {`
           <SearchInput
             placeholder='Type to search'
           />

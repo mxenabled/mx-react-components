@@ -48,7 +48,7 @@ class LoaderDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <Loader
       isLoading={true}
       isRelative={true}

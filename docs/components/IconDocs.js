@@ -46,7 +46,7 @@ class IconDocs extends React.Component {
         <p>Properties to be passed to the svg element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
 
         <Markdown>
-        {`
+          {`
             <Icon
               elementProps={{
                 onClick: myOnClickCallbackFunction

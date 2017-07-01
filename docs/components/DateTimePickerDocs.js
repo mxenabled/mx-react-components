@@ -109,7 +109,7 @@ class DateTimePickerDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-        {`
+          {`
           <DateTimePicker
             closeOnDateSelect={true}
             onDateSelect={this._handleDateSelect}

@@ -113,7 +113,7 @@ class SelectFullScreenDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <Select
       isFixed={true}
       options={[
