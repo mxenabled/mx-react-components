@@ -308,7 +308,7 @@ class DatePickerFullScreen extends React.Component {
             <div style={styles.calendarContainer}>
               {this._renderMonthTable(currentDate, selectedDate)}
             </div>
-            <div style={styles.clearFix}></div>
+            <div style={styles.clearFix} />
           </div>
         </div>
       </div>
