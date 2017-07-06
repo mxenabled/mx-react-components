@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 
 const { DonutChart } = require('mx-react-components');

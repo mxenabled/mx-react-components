@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 
 const { DateRangePicker } = require('mx-react-components');

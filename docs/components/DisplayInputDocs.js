@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 
 const { DisplayInput, Styles } = require('mx-react-components');
