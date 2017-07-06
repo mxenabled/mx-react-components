@@ -42,7 +42,7 @@ class SimpleInputDocs extends React.Component {
         <p>Properties to be passed to the input element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
 
         <Markdown>
-          {`
+        {`
           <SimpleInput
             elementProps={{
               onChange: myOnChangeCallbackFunction

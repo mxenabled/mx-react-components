@@ -69,7 +69,7 @@ class SimpleSelectDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
     _handleItemClick (e, item) {
       this._toggleMenu();
       alert(\`You clicked $\{item.text\}\`);

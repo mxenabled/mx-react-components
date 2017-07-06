@@ -71,7 +71,7 @@ class ButtonGroupDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
     <ButtonGroup
       buttons={[
          { 'aria-label': 'Download', icon: 'download' },

@@ -42,7 +42,7 @@ class PageIndicatorDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
     getInitialState () {
       return {
         pageIndicatorIndex: 0

@@ -42,7 +42,7 @@ class DateRangePickerDocs extends React.Component {
         <p>Default: <a href='https://github.com/mxenabled/mx-react-components/blob/master/src/components/DateRangePicker.js#L30'>See Code for default array of ranges</a></p>
         <p>Array of default range objects used when showDefaultRanges prop is set to true.  If not supplied, the default above is used.</p>
         <Markdown lang='js'>
-          {`
+        {`
           [{
             displayValue: 'Today',
             endDate: 1446063248, // Unix timestamp
@@ -92,7 +92,7 @@ class DateRangePickerDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+        {`
           _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
             this.setState({
               selectedStartDate,

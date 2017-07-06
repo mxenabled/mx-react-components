@@ -98,7 +98,7 @@ class ButtonDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
     <Button aria-label='Submit Form' primaryColor='#333333' type='secondary' />
   `}
         </Markdown>

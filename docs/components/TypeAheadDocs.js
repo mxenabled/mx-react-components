@@ -38,7 +38,7 @@ class TypeAheadDocs extends React.Component {
         <h5>items <label>Array</label></h5>
         <p>An array of Strings used for the options list. Example:</p>
         <Markdown lang='js'>
-          {`
+  {`
     [
       'JPMorgan Chase',
       'Bank of America',
@@ -57,7 +57,7 @@ class TypeAheadDocs extends React.Component {
         <h5>onItemRemove <label>Function</label></h5>
         <p>A method to be called whenever an item is removed by the user. It will be passed 2 parameters: the item removed, an updated array of selected items. Example:</p>
         <Markdown lang='js'>
-          {`
+  {`
     _handleItemRemoved (item, selectedItems) {
       console.log(item + ' was removed from the list');
     }
@@ -72,7 +72,7 @@ class TypeAheadDocs extends React.Component {
         <h5>onItemSelect <label>Function</label></h5>
         <p>A method to be called whenever an item is selected by the user. It will be passed 2 parameters: the item selected, an updated array of selected items. Example:</p>
         <Markdown lang='js'>
-          {`
+  {`
     _handleItemSelected (item, selectedItems) {
       console.log(item + ' was selected from the list');
     }
@@ -93,7 +93,7 @@ class TypeAheadDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
     <TypeAhead
       items={[
         'JPMorgan Chase',

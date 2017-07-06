@@ -84,7 +84,7 @@ class DonutChartDocs extends React.Component {
         <h5>data <label>Array</label></h5>
         <p><em>(required)</em> An array of data objects. Example:</p>
         <Markdown lang='js'>
-          {`
+  {`
     [{
       name: 'Data Label Name', //string - optional, used to display the data label
       value: 10 //number - required, used to determine the slice size
@@ -103,7 +103,7 @@ class DonutChartDocs extends React.Component {
         <h5>dataPoints <label>Array</label></h5>
         <p>Array of name/value pairs for data points. These will be displayed as dots along the arc. Example:</p>
         <Markdown lang='js'>
-          {`
+  {`
     [{
       name: 'Data Label Name', //string - optional, not currently being used
       value: 10 //number - required, used to determine the dot location along the arc
@@ -157,7 +157,7 @@ class DonutChartDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
     <DonutChart
       activeOffset={5}
       animateOnHover={true}

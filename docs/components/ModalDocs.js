@@ -88,7 +88,7 @@ class ModalDocs extends React.Component {
         <h5>buttons <label>Array</label></h5>
         <p>An array of objects with the properties: actionText, className, isActive, icon, label, onClick, style, and type. Used to display button in the footer of the modal. Example:</p>
         <Markdown>
-          {`
+  {`
     [{
       actionText: '',
       className: 'my-button-class',
@@ -155,7 +155,7 @@ class ModalDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+  {`
           <Modal
             buttons={[
               {

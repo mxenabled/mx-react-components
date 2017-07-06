@@ -51,7 +51,7 @@ class ToggleSwitchDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown>
-          {`
+        {`
           <ToggleSwitch
             checked={true}
           />

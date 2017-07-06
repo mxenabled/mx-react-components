@@ -76,7 +76,7 @@ class TimeBasedLineChartDocs extends React.Component {
         <h5>data <label>Arrray</label></h5>
         <p>An array of data objects that are used to set the x axis, y axis, and line values. Example:</p>
         <Markdown lang='js'>
-          {`
+        {`
           [{
             x: 1446063248, //unix timestamp, required
             y: 10 //number or string
@@ -99,7 +99,7 @@ class TimeBasedLineChartDocs extends React.Component {
         <h5>margin <label>Object</label></h5>
         <p>A object that contains top, right, bottom, and left margin values. These can be used to adjust the spacing around the chart. Default:</p>
         <Markdown lang='js'>
-          {`
+        {`
           {
             top: 20,
             right: 50,
@@ -141,7 +141,7 @@ class TimeBasedLineChartDocs extends React.Component {
 
         <h3>Example</h3>
         <Markdown lang='js'>
-          {`
+  {`
     const lineChartData = [];
 
     for (let i = 6; i > 0; i--) {
