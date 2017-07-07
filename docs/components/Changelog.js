@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.102</h3>
+        <ul>
+          <li>
+            Adds default focusable=false and aria-hidden=true to svg in Icon (<a href='https://github.com/mxenabled/mx-react-components/pull/634'>#634</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.101</h3>
         <ul>
           <li>
