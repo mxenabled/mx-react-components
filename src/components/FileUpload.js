@@ -289,7 +289,7 @@ class FileUpload extends React.Component {
               </div>
             ) : (
               <div style={styles.centered}>
-              {this.state.failedValidationTypes.length > 0 ? (
+                {this.state.failedValidationTypes.length > 0 ? (
                   this.state.failedValidationTypes.map(validationType => {
                     return (<div style={styles.invalidMessage}>{this._getDefaultValidationMessage(validationType)}</div>);
                   })

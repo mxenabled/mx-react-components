@@ -1,3 +1,5 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 
 const { Gauge } = require('mx-react-components');

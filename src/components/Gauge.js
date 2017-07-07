@@ -142,7 +142,7 @@ class Gauge extends React.Component {
   _renderBaseArc = () => {
     return (
       <g>
-        <path d={this.state.baseArc()} fill={this.props.baseArcColor}></path>
+        <path d={this.state.baseArc()} fill={this.props.baseArcColor} />
       </g>
     );
   };
