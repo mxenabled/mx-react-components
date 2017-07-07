@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.101</h3>
+        <ul>
+          <li>
+            Adds focusable=false attribute to SVGs in buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/633'>#633</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.100</h3>
         <ul>
           <li>
