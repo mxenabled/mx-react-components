@@ -11,6 +11,8 @@ class SelectionPane extends React.Component {
   static propTypes = {
     currentDate: PropTypes.string,
     defaultRanges: PropTypes.array,
+    handleFromClick: PropTypes.func,
+    handleToClick: PropTypes.func,
     isLargeOrMediumWindowSize: PropTypes.string,
     primaryColor: PropTypes.string,
     selectedEndDate: PropTypes.number,
@@ -26,16 +28,16 @@ class SelectionPane extends React.Component {
       <div style={styles.container}>
         <div>
           <label style={styles.boxLabel}>From</label>
-          <div style={styles.dateSelectBox}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
+          <div onClick={this.props.handleFromClick.bind(null, selectedStartDate)} style={styles.dateSelectBox}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
 
           <label style={styles.boxLabel}>To</label>
-          <div style={styles.dateSelectBox}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
+          <div onClick={this.props.handleToClick.bind(null, selectedEndDate)} style={styles.dateSelectBox}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
         </div>
         <div>
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: this.props.primaryColor })}>
             Select a Range
           </div>
-          <DefaultRanges {...this.props} defaultRanges={this.props.defaultRanges} styles={styles} />
+          <DefaultRanges {...this.props} styles={styles} />
         </div>
       </div>
     );

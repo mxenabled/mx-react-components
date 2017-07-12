@@ -113,6 +113,7 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
+    // debugger;
     let endDate;
     let startDate;
     const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
@@ -255,6 +256,12 @@ class DateRangePicker extends React.Component {
                     <SelectionPane
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      handleFromClick={(selectedStartDate) => {
+                        this.setState({ currentDate: selectedStartDate || moment().unix() });
+                      }}
+                      handleToClick={(selectedEndDate) => {
+                        this.setState({ currentDate: selectedEndDate || moment().unix() });
+                      }}
                       isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
                       primaryColor={this.props.primaryColor}
                       selectedEndDate={this.props.selectedEndDate}
