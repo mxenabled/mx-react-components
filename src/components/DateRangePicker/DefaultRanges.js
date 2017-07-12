@@ -5,9 +5,7 @@ const Icon = require('../Icon');
 
 const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles }) => (
   <div style={styles.rangeOptions}>
-    <div style={Object.assign({}, styles.defaultRangesTitle, { color: primaryColor })}>
-      Select a Range
-    </div>
+
     {defaultRanges.map(range => (
       <div key={range.displayValue + range.startDate} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
         <div>

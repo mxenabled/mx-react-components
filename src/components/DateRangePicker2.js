@@ -15,6 +15,7 @@ const DefaultRanges = require('./DateRangePicker/DefaultRanges');
 const MonthTable = require('./DateRangePicker/MonthTable');
 const MonthSelector = require('./DateRangePicker/MonthSelector');
 const YearSelector = require('./DateRangePicker/YearSelector');
+const SelectionPane = require('./DateRangePicker/SelectionPane');
 
 
 class DateRangePicker extends React.Component {
@@ -251,9 +252,10 @@ class DateRangePicker extends React.Component {
               {this._isLargeOrMediumWindowSize() && (
                 <Column span={spans.defaultRanges}>
                   {this.props.showDefaultRanges &&
-                    <DefaultRanges
+                    <SelectionPane
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
                       primaryColor={this.props.primaryColor}
                       selectedEndDate={this.props.selectedEndDate}
                       selectedStartDate={this.props.selectedStartDate}
@@ -322,13 +324,13 @@ class DateRangePicker extends React.Component {
   spans = () => {
     return {
       calendar: {
-        large: this.props.showDefaultRanges ? 8 : 12,
-        medium: this.props.showDefaultRanges ? 8 : 12,
+        large: this.props.showDefaultRanges ? 6 : 12,
+        medium: this.props.showDefaultRanges ? 6 : 12,
         small: 12
       },
       defaultRanges: {
-        large: this.props.showDefaultRanges ? 4 : 0,
-        medium: this.props.showDefaultRanges ? 4 : 0,
+        large: this.props.showDefaultRanges ? 6 : 0,
+        medium: this.props.showDefaultRanges ? 6 : 0,
         small: this.props.showDefaultRanges ? 12 : 0
       }
     };
@@ -384,10 +386,11 @@ class DateRangePicker extends React.Component {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
+        padding: StyleConstants.Spacing.SMALL,
         position: 'absolute',
         left: this.props.isRelative && window.innerWidth > 450 ? 'auto' : 0,
         right: 0,
-        maxWidth: 450,
+        maxWidth: 650,
         width: window.innerWidth,
         zIndex: 10
       },
@@ -464,44 +467,6 @@ class DateRangePicker extends React.Component {
       },
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
-      },
-
-      //Default Ranges
-      defaultRangesTitle: {
-        color: StyleConstants.Colors.PRIMARY,
-        display: isLargeOrMediumWindowSize ? 'inline-block' : 'none',
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.SMALL,
-        padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
-      },
-      rangeOptions: {
-        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
-        boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
-        display: isLargeOrMediumWindowSize ? 'inline-block' : 'flex',
-        flexDirection: isLargeOrMediumWindowSize ? 'column' : 'row',
-        flexWrap: isLargeOrMediumWindowSize ? 'nowrap' : 'wrap',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        marginLeft: isLargeOrMediumWindowSize ? -10 : 0,
-        marginRight: isLargeOrMediumWindowSize ? -10 : 0,
-        maxWidth: window.innerWidth > 450 ? 250 : 'inherit',
-        width: isLargeOrMediumWindowSize ? 150 : '100%'
-      },
-      rangeOption: {
-        alignItems: 'center',
-        boxSizing: 'border-box',
-        cursor: 'pointer',
-        display: 'flex',
-        padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.MEDIUM}px`,
-        width: isLargeOrMediumWindowSize ? '100%' : '50%',
-
-        ':hover': {
-          backgroundColor: StyleConstants.Colors.PORCELAIN
-        }
-      },
-      rangeOptionIcon: {
-        paddingRight: StyleConstants.Spacing.SMALL
       },
 
       //Selected and Selecting Range
