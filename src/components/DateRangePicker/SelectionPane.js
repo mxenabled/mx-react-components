@@ -20,6 +20,19 @@ class SelectionPane extends React.Component {
     setCurrentDate: PropTypes.func
   };
 
+  state = {
+    selectedBox: 'from'
+  }
+
+  _handleDateBoxClick = (date, selectedBox) => {
+    // console.log("XXX date", date)
+    // this.setState({
+    //   selectedBox
+    // });
+
+    this.props.handleFromClick(date, selectedBox);
+  }
+
   render () {
     const styles = this.styles();
     const { selectedStartDate, selectedEndDate } = this.props;
@@ -28,10 +41,10 @@ class SelectionPane extends React.Component {
       <div style={styles.container}>
         <div>
           <label style={styles.boxLabel}>From</label>
-          <div onClick={this.props.handleFromClick.bind(null, selectedStartDate)} style={styles.dateSelectBox}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
+          <div onClick={() => this._handleDateBoxClick(selectedStartDate, 'from')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'from' ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
 
           <label style={styles.boxLabel}>To</label>
-          <div onClick={this.props.handleToClick.bind(null, selectedEndDate)} style={styles.dateSelectBox}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
+          <div onClick={() => this._handleDateBoxClick(selectedEndDate, 'to')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'to' ? styles.selectedDateSelectBox : null)}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
         </div>
         <div>
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: this.props.primaryColor })}>
@@ -71,6 +84,11 @@ class SelectionPane extends React.Component {
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
         padding: '10px 15px'
+      },
+      selectedDateSelectBox: {
+        borderColor: this.props.primaryColor,
+        cursor: 'pointer',
+        color: this.props.primaryColor
       },
 
       //Default Ranges

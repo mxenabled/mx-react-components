@@ -84,6 +84,7 @@ class DateRangePicker extends React.Component {
 
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
+    selectedBox: 'from',
     showCalendar: false
   };
 
@@ -113,17 +114,25 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
-    // debugger;
-    let endDate;
-    let startDate;
-    const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
-    const existingRangeEmpty = !this.props.selectedStartDate && !this.props.selectedEndDate;
+    console.log('this is this.state', this.state)
+    let endDate = this.props.selectedEndDate;
+    let startDate = this.props.selectedStartDate;
+    // const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
+    // const existingRangeEmpty = !this.props.selectedStartDate && !this.props.selectedEndDate;
+    //
+    // if (existingRangeComplete || existingRangeEmpty) {
+    //   startDate = date;
+    //   endDate = null;
+    // } else {
+    //   startDate = this.props.selectedStartDate;
+    //   endDate = date;
+    // }
 
-    if (existingRangeComplete || existingRangeEmpty) {
+    if (this.state.selectedBox === 'from') {
       startDate = date;
-      endDate = null;
-    } else {
-      startDate = this.props.selectedStartDate;
+    }
+
+    if (this.state.selectedBox === 'to') {
       endDate = date;
     }
 
@@ -256,14 +265,12 @@ class DateRangePicker extends React.Component {
                     <SelectionPane
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
-                      handleFromClick={(selectedStartDate) => {
-                        this.setState({ currentDate: selectedStartDate || moment().unix() });
-                      }}
-                      handleToClick={(selectedEndDate) => {
-                        this.setState({ currentDate: selectedEndDate || moment().unix() });
+                      handleFromClick={(selectedStartDate, selectedBox) => {
+                        this.setState({ currentDate: selectedStartDate || moment().unix(), selectedBox });
                       }}
                       isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
                       primaryColor={this.props.primaryColor}
+                      selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
                       selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
@@ -464,7 +471,7 @@ class DateRangePicker extends React.Component {
         color: StyleConstants.Colors.FOG,
 
         ':hover': {
-          cursor: 'default',
+          // cursor: 'default', why is this here?
           border: 'none'
         }
       },

@@ -6,7 +6,7 @@ const Icon = require('../Icon');
 
 class YearSelector extends React.Component {
   static propTypes = {
-    currentDate: PropTypes.string,
+    currentDate: PropTypes.number,
     setCurrentDate: PropTypes.func
   };
 
