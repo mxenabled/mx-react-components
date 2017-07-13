@@ -265,7 +265,7 @@ class DateRangePicker extends React.Component {
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
                       handleFromClick={(date, selectedBox) => {
-                        this.setState({ currentDate: date || moment().unix(), selectedBox, showCalendar: true });
+                        this.setState({ currentDate: date || moment().unix(), selectedBox, showCalendar: !this._isLargeOrMediumWindowSize() && true });
                       }}
                       isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
                       primaryColor={this.props.primaryColor}

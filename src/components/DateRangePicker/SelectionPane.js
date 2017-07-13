@@ -36,11 +36,11 @@ class SelectionPane extends React.Component {
 
   render () {
     const styles = this.styles();
-    const { selectedStartDate, selectedEndDate } = this.props;
+    const { selectedStartDate, selectedEndDate, isLargeOrMediumWindowSize } = this.props;
 
     return (
       <div style={styles.container}>
-        <div>
+        <div style={{borderBottom: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,}}>
           <label style={styles.boxLabel}>From</label>
           <div onClick={() => this._handleDateBoxClick(selectedStartDate, 'from')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'from' ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
 
@@ -66,14 +66,18 @@ class SelectionPane extends React.Component {
         flexDirection: 'column',
         height: '100%',
         borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
-        width: 300
+        padding: StyleConstants.Spacing.MEDIUM
       },
       calendarHeaderNav: {
         width: 35,
         cursor: 'pointer'
       },
 
+      boxLabel: {
+        fontFamily: StyleConstants.FontFamily,
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        color: StyleConstants.Colors.CHARCOAL
+      },
       dateSelectBox: {
         // borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
         borderColor: StyleConstants.Colors.FOG,
@@ -84,6 +88,8 @@ class SelectionPane extends React.Component {
         cursor: 'pointer',
         fontFamily: StyleConstants.FontFamily,
         fontSize: StyleConstants.FontSizes.MEDIUM,
+        marginBottom: StyleConstants.Spacing.SMALL,
+        marginTop: StyleConstants.Spacing.XSMALL,
         padding: '10px 15px'
       },
       selectedDateSelectBox: {
@@ -95,7 +101,6 @@ class SelectionPane extends React.Component {
       //Default Ranges
       defaultRangesTitle: {
         color: StyleConstants.Colors.PRIMARY,
-        display: isLargeOrMediumWindowSize ? 'inline-block' : 'none',
         fontFamily: StyleConstants.Fonts.SEMIBOLD,
         fontSize: StyleConstants.FontSizes.SMALL,
         padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
