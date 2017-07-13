@@ -15,6 +15,7 @@ class SelectionPane extends React.Component {
     handleToClick: PropTypes.func,
     isLargeOrMediumWindowSize: PropTypes.string,
     primaryColor: PropTypes.string,
+    selectedBox: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
     setCurrentDate: PropTypes.func

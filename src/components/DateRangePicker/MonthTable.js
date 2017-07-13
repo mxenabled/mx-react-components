@@ -17,11 +17,9 @@ const MonthTable = ({
   const days = [];
   let startDate = moment.unix(currentDate).startOf('month').startOf('week');
   const endDate = moment.unix(currentDate).endOf('month').endOf('week');
-  console.log("MONTH TABLE CURRENT DATE", moment.unix(currentDate).format('MMM D, YYYY'))
 
   while (moment(startDate).isBefore(endDate)) {
     const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
-    console.log("this is disabledDay", disabledDay)
     const isActiveRange = (selectedStartDate || selectedEndDate) ?
       isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
       false;

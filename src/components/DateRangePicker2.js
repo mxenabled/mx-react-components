@@ -4,14 +4,10 @@ const Radium = require('radium');
 const moment = require('moment');
 
 const Icon = require('./Icon');
-
-const Column = require('../components/grid/Column');
-const Container = require('../components/grid/Container');
-const Row = require('../components/grid/Row');
+const Button = require('./Button');
 
 const StyleConstants = require('../constants/Style');
 
-const DefaultRanges = require('./DateRangePicker/DefaultRanges');
 const MonthTable = require('./DateRangePicker/MonthTable');
 const MonthSelector = require('./DateRangePicker/MonthSelector');
 const YearSelector = require('./DateRangePicker/YearSelector');
@@ -85,7 +81,7 @@ class DateRangePicker extends React.Component {
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
     selectedBox: 'from',
-    showCalendar: false
+    showSelectionPane: false
   };
 
   // componentWillReceiveProps (newProps) {
@@ -114,10 +110,10 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
-    console.log('_hds date', moment.unix(date).format('MMM D, YYYY'))
     this.setState({
       currentDate: date
-    })
+    });
+
     let endDate = this.props.selectedEndDate;
     let startDate = this.props.selectedStartDate;
     // const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
@@ -184,13 +180,13 @@ class DateRangePicker extends React.Component {
 
   _handleScrimClick = () => {
     this.setState({
-      showCalendar: false
+      showSelectionPane: false
     });
   };
 
   _toggleCalendar = () => {
     this.setState({
-      showCalendar: !this.state.showCalendar
+      showSelectionPane: !this.state.showSelectionPane
     });
   };
 
@@ -256,21 +252,20 @@ class DateRangePicker extends React.Component {
           <Icon
             size={20}
             style={styles.selectedDateCaret}
-            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+            type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
           />
         </div>
-        <Container>
-          <Row>
+        <div style={styles.container}>
+          <div>
             <div style={styles.optionsWrapper}>
-              {this._isLargeOrMediumWindowSize() && (
-                <Column span={spans.defaultRanges}>
+              {!this.state.showCalendar && (
+                <div span={spans.defaultRanges}>
                   {this.props.showDefaultRanges &&
                     <SelectionPane
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
                       handleFromClick={(date, selectedBox) => {
-                        debugger;
-                        this.setState({ currentDate: date || moment().unix(), selectedBox });
+                        this.setState({ currentDate: date || moment().unix(), selectedBox, showCalendar: true });
                       }}
                       isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
                       primaryColor={this.props.primaryColor}
@@ -280,59 +275,56 @@ class DateRangePicker extends React.Component {
                       styles={styles}
                     />
                   }
-                </Column>
-              )}
-              <Column span={spans.calendar}>
-                <div style={styles.calendarWrapper}>
-                  <div style={styles.calendarHeader}>
-                    <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
-                    <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
-                  </div>
-                  <div style={styles.calendarWeek}>
-                    {[{ label: 'S', value: 'Sunday' },
-                      { label: 'M', value: 'Monday' },
-                      { label: 'T', value: 'Tuesday' },
-                      { label: 'W', value: 'Wednesday' },
-                      { label: 'T', value: 'Thursday' },
-                      { label: 'F', value: 'Friday' },
-                      { label: 'S', value: 'Saturday' }].map((day) => {
-                        return (
-                          <div key={day.value} style={styles.calendarWeekDay}>
-                            {day.label}
-                          </div>
-                        );
-                      })}
-                  </div>
-                  <MonthTable
-                    activeSelectDate={this.state.activeSelectDate}
-                    currentDate={this.state.currentDate}
-                    getDateRangePosition={this._getDateRangePosition}
-                    handleDateHover={this._handleDateHover}
-                    handleDateSelect={this._handleDateSelect}
-                    isInActiveRange={this._isInActiveRange}
-                    minimumDate={this.props.minimumDate}
-                    selectedEndDate={this.props.selectedEndDate}
-                    selectedStartDate={this.props.selectedStartDate}
-                    styles={styles}
-                  />
                 </div>
-              </Column>
-              {!this._isLargeOrMediumWindowSize() && (
-                <Column span={spans.defaultRanges}>
-                  {this.props.showDefaultRanges &&
-                    <DefaultRanges
-                      defaultRanges={this.props.defaultRanges}
-                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
-                      primaryColor={this.props.primaryColor}
+              )}
+
+              {(this.state.showCalendar || this._isLargeOrMediumWindowSize()) && (
+                <div span={spans.calendar}>
+                  <div style={styles.calendarWrapper}>
+                    <div style={styles.calendarHeader}>
+                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+                    </div>
+                    <div style={styles.calendarWeek}>
+                      {[{ label: 'S', value: 'Sunday' },
+                        { label: 'M', value: 'Monday' },
+                        { label: 'T', value: 'Tuesday' },
+                        { label: 'W', value: 'Wednesday' },
+                        { label: 'T', value: 'Thursday' },
+                        { label: 'F', value: 'Friday' },
+                        { label: 'S', value: 'Saturday' }].map((day) => {
+                          return (
+                            <div key={day.value} style={styles.calendarWeekDay}>
+                              {day.label}
+                            </div>
+                          );
+                        })}
+                    </div>
+                    <MonthTable
+                      activeSelectDate={this.state.activeSelectDate}
+                      currentDate={this.state.currentDate}
+                      getDateRangePosition={this._getDateRangePosition}
+                      handleDateHover={this._handleDateHover}
+                      handleDateSelect={this._handleDateSelect}
+                      isInActiveRange={this._isInActiveRange}
+                      minimumDate={this.props.minimumDate}
+                      selectedEndDate={this.props.selectedEndDate}
+                      selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
                     />
-                  }
-                </Column>
+                  </div>
+                  {!this._isLargeOrMediumWindowSize() && (
+                    <div>
+                      <Button onClick={() => this.setState({ showCalendar: false })} type='Secondary'>Cancel</Button>
+                      <Button onClick={() => this.setState({ showCalendar: false })} type='Primary'>Save</Button>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
-          </Row>
-        </Container>
-        {(this.state.showCalendar) ? (
+          </div>
+        </div>
+        {(this.state.showSelectionPane) ? (
           <div onClick={this._handleScrimClick} style={styles.scrim} />
         ) : null }
       </div>
@@ -360,7 +352,7 @@ class DateRangePicker extends React.Component {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderColor: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.FOG,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -374,6 +366,11 @@ class DateRangePicker extends React.Component {
         position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
       }, this.props.style),
+      container: {
+        display: 'flex',
+        //do we need that column-reverse
+        flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
+      },
 
       // Selected Date styles
       selectedDateWrapper: {
@@ -390,7 +387,7 @@ class DateRangePicker extends React.Component {
         color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
       },
       selectedDateCaret: {
-        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
+        fill: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.ASH
       },
 
       //Calendar Styles
@@ -400,7 +397,7 @@ class DateRangePicker extends React.Component {
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
-        display: this.state.showCalendar ? 'flex' : 'none',
+        display: this.state.showSelectionPane ? 'flex' : 'none',
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
