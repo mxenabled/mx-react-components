@@ -88,16 +88,16 @@ class DateRangePicker extends React.Component {
     showCalendar: false
   };
 
-  componentWillReceiveProps (newProps) {
-    const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
-    const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
-
-    if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
-      this.setState({
-        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
-      });
-    }
-  }
+  // componentWillReceiveProps (newProps) {
+  //   const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
+  //   const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
+  //
+  //   if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
+  //     this.setState({
+  //       currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
+  //     });
+  //   }
+  // }
 
   _getDateFormat = () => {
     return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
@@ -114,7 +114,10 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
-    console.log('this is this.state', this.state)
+    console.log('_hds date', moment.unix(date).format('MMM D, YYYY'))
+    this.setState({
+      currentDate: date
+    })
     let endDate = this.props.selectedEndDate;
     let startDate = this.props.selectedStartDate;
     // const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
@@ -265,8 +268,9 @@ class DateRangePicker extends React.Component {
                     <SelectionPane
                       defaultRanges={this.props.defaultRanges}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
-                      handleFromClick={(selectedStartDate, selectedBox) => {
-                        this.setState({ currentDate: selectedStartDate || moment().unix(), selectedBox });
+                      handleFromClick={(date, selectedBox) => {
+                        debugger;
+                        this.setState({ currentDate: date || moment().unix(), selectedBox });
                       }}
                       isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
                       primaryColor={this.props.primaryColor}
