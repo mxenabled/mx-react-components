@@ -129,10 +129,12 @@ class DateRangePicker extends React.Component {
 
     if (this.state.selectedBox === 'from') {
       startDate = date;
+      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: 'to' });
     }
 
     if (this.state.selectedBox === 'to') {
       endDate = date;
+      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: 'from' });
     }
 
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
@@ -229,6 +231,7 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
+    console.log('this is the one')
     const styles = this.styles();
     const spans = this.spans();
 
@@ -312,13 +315,12 @@ class DateRangePicker extends React.Component {
                       selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
                     />
+                    {!this._isLargeOrMediumWindowSize() && (
+                      <div style={styles.applyButton}>
+                        <Button onClick={() => this.setState({ showCalendar: false })} type='primary'>Apply</Button>
+                      </div>
+                    )}
                   </div>
-                  {!this._isLargeOrMediumWindowSize() && (
-                    <div>
-                      <Button onClick={() => this.setState({ showCalendar: false })} type='Secondary'>Cancel</Button>
-                      <Button onClick={() => this.setState({ showCalendar: false })} type='Primary'>Save</Button>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -482,6 +484,10 @@ class DateRangePicker extends React.Component {
       },
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
+      },
+      applyButton: {
+        display: 'flex',
+        justifyContent: 'flex-end'
       },
 
       //Selected and Selecting Range
