@@ -119,7 +119,7 @@ class SelectionPane extends React.Component {
         cursor: 'pointer',
         display: 'flex',
         padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.MEDIUM}px`,
-        width: '45%',
+        width: '50%',
 
         ':hover': {
           backgroundColor: StyleConstants.Colors.PORCELAIN
