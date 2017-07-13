@@ -40,7 +40,7 @@ class SelectionPane extends React.Component {
 
     return (
       <div style={styles.container}>
-        <div style={{borderBottom: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,}}>
+        <div style={{ borderBottom: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG }}>
           <label style={styles.boxLabel}>From</label>
           <div onClick={() => this._handleDateBoxClick(selectedStartDate, 'from')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'from' ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
 
