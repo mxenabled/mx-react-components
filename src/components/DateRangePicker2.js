@@ -26,6 +26,7 @@ class DateRangePicker extends React.Component {
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
+    onClose: PropTypes.func,
     onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
@@ -72,6 +73,7 @@ class DateRangePicker extends React.Component {
     format: 'MMM D, YYYY',
     isRelative: true,
     locale: 'en',
+    onClose () {},
     onDateSelect () {},
     placeholderText: 'Select A Date Range',
     primaryColor: StyleConstants.Colors.PRIMARY,
@@ -181,6 +183,8 @@ class DateRangePicker extends React.Component {
   };
 
   _handleScrimClick = () => {
+    this.props.onClose();
+
     this.setState({
       showSelectionPane: false
     });
@@ -231,7 +235,6 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    console.log('this is the one')
     const styles = this.styles();
     const spans = this.spans();
 
@@ -406,7 +409,7 @@ class DateRangePicker extends React.Component {
         padding: StyleConstants.Spacing.SMALL,
         position: 'absolute',
         left: this.props.isRelative && window.innerWidth > 450 ? 'auto' : 0,
-        right: 0,
+        // right: 0,
         maxWidth: 650,
         width: window.innerWidth,
         zIndex: 10
