@@ -320,7 +320,13 @@ class DateRangePicker extends React.Component {
                     />
                     {!this._isLargeOrMediumWindowSize() && (
                       <div style={styles.applyButton}>
-                        <Button onClick={() => this.setState({ showCalendar: false })} type='primary'>Apply</Button>
+                        <Button
+                          onClick={() => this.setState({ showCalendar: false })}
+                          primaryColor={this.props.primaryColor}
+                          type='primary'
+                        >
+                          Apply
+                        </Button>
                       </div>
                     )}
                   </div>
@@ -372,10 +378,6 @@ class DateRangePicker extends React.Component {
         width: '100%'
       }, this.props.style),
       container: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        //do we need that column-reverse
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
       },
 
@@ -408,13 +410,10 @@ class DateRangePicker extends React.Component {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
-        marginLeft: 'auto',
-        marginRight: 'auto',
         padding: StyleConstants.Spacing.SMALL,
         position: 'absolute',
-        // left: this.props.isRelative && window.innerWidth > 450 ? 'auto' : 0,
-        right: 0,
-        left: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
         maxWidth: 650,
         width: window.innerWidth,
         zIndex: 10
