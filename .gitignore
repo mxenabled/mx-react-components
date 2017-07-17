@@ -27,7 +27,7 @@ build/Release
 node_modules
 
 # NPM Release Files
-dist
+src
 
 # Webpack files
 demo/bundle.js
