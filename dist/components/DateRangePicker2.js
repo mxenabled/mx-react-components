@@ -469,7 +469,7 @@ var DateRangePicker = function (_React$Component) {
                         onClick: function onClick() {
                           return _this2.setState({ showCalendar: false });
                         },
-                        primaryColor: this.props.primaryColor,
+                        primaryColor: StyleConstants.Colors.STRAWBERRY,
                         type: 'primary'
                       },
                       'Apply'
