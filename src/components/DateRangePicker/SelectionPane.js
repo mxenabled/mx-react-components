@@ -2,17 +2,15 @@ const React = require('react');
 const moment = require('moment');
 const PropTypes = require('prop-types');
 
-// const Icon = require('../Icon');
-const StyleConstants = require('../../constants/Style');
-
 const DefaultRanges = require('../DateRangePicker/DefaultRanges');
+
+const StyleConstants = require('../../constants/Style');
 
 class SelectionPane extends React.Component {
   static propTypes = {
     currentDate: PropTypes.string,
     defaultRanges: PropTypes.array,
-    handleFromClick: PropTypes.func,
-    handleToClick: PropTypes.func,
+    handleDateBoxClick: PropTypes.func,
     isLargeOrMediumWindowSize: PropTypes.string,
     primaryColor: PropTypes.string,
     selectedBox: PropTypes.string,
@@ -26,12 +24,7 @@ class SelectionPane extends React.Component {
   }
 
   _handleDateBoxClick = (date, selectedBox) => {
-    // console.log("XXX date", date)
-    // this.setState({
-    //   selectedBox
-    // });
-
-    this.props.handleFromClick(date, selectedBox);
+    this.props.handleDateBoxClick(date, selectedBox);
   }
 
   render () {
@@ -79,7 +72,6 @@ class SelectionPane extends React.Component {
         color: StyleConstants.Colors.CHARCOAL
       },
       dateSelectBox: {
-        // borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
         borderColor: StyleConstants.Colors.FOG,
         borderRadius: 3,
         borderStyle: 'solid',
@@ -106,17 +98,11 @@ class SelectionPane extends React.Component {
         padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
       },
       rangeOptions: {
-        // borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        // borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
         boxSizing: 'border-box',
         color: StyleConstants.Colors.CHARCOAL,
         display: 'flex',
-        // flexDirection: 'row',
         flexWrap: 'wrap',
         fontSize: StyleConstants.FontSizes.MEDIUM,
-        marginLeft: isLargeOrMediumWindowSize ? -10 : 0,
-        marginRight: isLargeOrMediumWindowSize ? -10 : 0,
-        // maxWidth: window.innerWidth > 450 ? 250 : 'inherit',
         width: '100%'
       },
       rangeOption: {

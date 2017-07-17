@@ -9,8 +9,7 @@ const Button = require('./Button');
 const StyleConstants = require('../constants/Style');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
-const MonthSelector = require('./DateRangePicker/MonthSelector');
-const YearSelector = require('./DateRangePicker/YearSelector');
+const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
 const SelectionPane = require('./DateRangePicker/SelectionPane');
 
 
@@ -86,17 +85,6 @@ class DateRangePicker extends React.Component {
     showSelectionPane: false
   };
 
-  // componentWillReceiveProps (newProps) {
-  //   const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
-  //   const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
-  //
-  //   if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
-  //     this.setState({
-  //       currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
-  //     });
-  //   }
-  // }
-
   _getDateFormat = () => {
     return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
   };
@@ -118,16 +106,6 @@ class DateRangePicker extends React.Component {
 
     let endDate = this.props.selectedEndDate;
     let startDate = this.props.selectedStartDate;
-    // const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
-    // const existingRangeEmpty = !this.props.selectedStartDate && !this.props.selectedEndDate;
-    //
-    // if (existingRangeComplete || existingRangeEmpty) {
-    //   startDate = date;
-    //   endDate = null;
-    // } else {
-    //   startDate = this.props.selectedStartDate;
-    //   endDate = date;
-    // }
 
     if (this.state.selectedBox === 'from') {
       startDate = date;
@@ -166,22 +144,6 @@ class DateRangePicker extends React.Component {
     });
   };
 
-  _handlePreviousClick = () => {
-    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
-
-    this.setState({
-      currentDate
-    });
-  };
-
-  _handleNextClick = () => {
-    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
-
-    this.setState({
-      currentDate
-    });
-  };
-
   _handleScrimClick = () => {
     this.props.onClose();
 
@@ -190,7 +152,7 @@ class DateRangePicker extends React.Component {
     });
   };
 
-  _toggleCalendar = () => {
+  _toggleSelectionPane = () => {
     this.setState({
       showSelectionPane: !this.state.showSelectionPane
     });
@@ -236,11 +198,11 @@ class DateRangePicker extends React.Component {
 
   render () {
     const styles = this.styles();
-    const spans = this.spans();
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
 
     return (
       <div style={styles.component}>
-        <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
+        <div onClick={this._toggleSelectionPane} style={styles.selectedDateWrapper}>
           <Icon
             size={20}
             style={styles.selectedDateIcon}
@@ -265,15 +227,19 @@ class DateRangePicker extends React.Component {
           <div>
             <div style={styles.optionsWrapper}>
               {!this.state.showCalendar && (
-                <div span={spans.defaultRanges}>
+                <div>
                   {this.props.showDefaultRanges &&
                     <SelectionPane
                       defaultRanges={this.props.defaultRanges}
-                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
-                      handleFromClick={(date, selectedBox) => {
-                        this.setState({ currentDate: date || moment().unix(), selectedBox, showCalendar: !this._isLargeOrMediumWindowSize() && true });
+                      handleDateBoxClick={(date, selectedBox) => {
+                        this.setState({
+                          currentDate: date || moment().unix(),
+                          selectedBox,
+                          showCalendar: !isLargeOrMediumWindowSize && true
+                        });
                       }}
-                      isLargeOrMediumWindowSize={this._isLargeOrMediumWindowSize()}
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      isLargeOrMediumWindowSize={isLargeOrMediumWindowSize}
                       primaryColor={this.props.primaryColor}
                       selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
@@ -284,8 +250,8 @@ class DateRangePicker extends React.Component {
                 </div>
               )}
 
-              {(this.state.showCalendar || this._isLargeOrMediumWindowSize()) && (
-                <div span={spans.calendar}>
+              {(this.state.showCalendar || isLargeOrMediumWindowSize) && (
+                <div>
                   <div style={styles.calendarWrapper}>
                     <div style={styles.calendarHeader}>
                       <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
@@ -318,11 +284,11 @@ class DateRangePicker extends React.Component {
                       selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
                     />
-                    {!this._isLargeOrMediumWindowSize() && (
+                    {!isLargeOrMediumWindowSize && (
                       <div style={styles.applyButton}>
                         <Button
                           onClick={() => this.setState({ showCalendar: false })}
-                          primaryColor={StyleConstants.Colors.STRAWBERRY}
+                          primaryColor={this.props.primaryColor}
                           type='primary'
                         >
                           Apply
@@ -341,21 +307,6 @@ class DateRangePicker extends React.Component {
       </div>
     );
   }
-
-  spans = () => {
-    return {
-      calendar: {
-        large: this.props.showDefaultRanges ? 6 : 12,
-        medium: this.props.showDefaultRanges ? 6 : 12,
-        small: 12
-      },
-      defaultRanges: {
-        large: this.props.showDefaultRanges ? 6 : 0,
-        medium: this.props.showDefaultRanges ? 6 : 0,
-        small: this.props.showDefaultRanges ? 12 : 0
-      }
-    };
-  };
 
   styles = () => {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
@@ -412,8 +363,9 @@ class DateRangePicker extends React.Component {
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
         padding: StyleConstants.Spacing.SMALL,
         position: 'absolute',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: isLargeOrMediumWindowSize ? '50%' : 0,
+        right: isLargeOrMediumWindowSize ? 'auto' : 0,
+        transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
         maxWidth: 650,
         width: window.innerWidth,
         zIndex: 10
@@ -481,7 +433,7 @@ class DateRangePicker extends React.Component {
         color: StyleConstants.Colors.FOG,
 
         ':hover': {
-          // cursor: 'default', why is this here?
+          cursor: 'default',
           border: 'none'
         }
       },
@@ -494,7 +446,8 @@ class DateRangePicker extends React.Component {
       },
       applyButton: {
         display: 'flex',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        marginTop: StyleConstants.Spacing.XSMALL
       },
 
       //Selected and Selecting Range
