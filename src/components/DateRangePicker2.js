@@ -322,7 +322,7 @@ class DateRangePicker extends React.Component {
                       <div style={styles.applyButton}>
                         <Button
                           onClick={() => this.setState({ showCalendar: false })}
-                          primaryColor={this.props.primaryColor}
+                          primaryColor={StyleConstants.Colors.STRAWBERRY}
                           type='primary'
                         >
                           Apply
