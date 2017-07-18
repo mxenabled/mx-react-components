@@ -6,7 +6,7 @@ const Icon = require('../Icon');
 
 class Selector extends React.Component {
   static propTypes = {
-    currentDate: PropTypes.number,
+    currentDate: PropTypes.string,
     handleNextClick: PropTypes.func,
     handlePreviousClick: PropTypes.func,
     setCurrentDate: PropTypes.func
