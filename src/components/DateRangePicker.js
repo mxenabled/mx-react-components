@@ -314,15 +314,18 @@ class DateRangePicker extends React.Component {
   render () {
     const styles = this.styles();
     const spans = this.spans();
+    const shouldShowCalendarIcon = StyleConstants.getWindowSize() !== 'small';
 
     return (
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
-          <Icon
-            size={20}
-            style={styles.selectedDateIcon}
-            type='calendar'
-          />
+          {shouldShowCalendarIcon ? (
+            <Icon
+              size={20}
+              style={styles.selectedDateIcon}
+              type='calendar'
+            />
+          ) : null}
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
