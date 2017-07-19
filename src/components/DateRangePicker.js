@@ -239,7 +239,6 @@ class DateRangePicker extends React.Component {
                         });
                       }}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
-                      isLargeOrMediumWindowSize={isLargeOrMediumWindowSize}
                       primaryColor={this.props.primaryColor}
                       selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
@@ -366,8 +365,6 @@ class DateRangePicker extends React.Component {
         left: isLargeOrMediumWindowSize ? '50%' : 0,
         right: isLargeOrMediumWindowSize ? 'auto' : 0,
         transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
-        // maxWidth: 600,
-        // width: window.innerWidth,
         zIndex: 10
       },
       calendarWrapper: {

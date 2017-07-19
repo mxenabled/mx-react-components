@@ -11,7 +11,6 @@ class SelectionPane extends React.Component {
     currentDate: PropTypes.string,
     defaultRanges: PropTypes.array,
     handleDateBoxClick: PropTypes.func,
-    isLargeOrMediumWindowSize: PropTypes.bool,
     primaryColor: PropTypes.string,
     selectedBox: PropTypes.string,
     selectedEndDate: PropTypes.number,
@@ -29,11 +28,11 @@ class SelectionPane extends React.Component {
 
   render () {
     const styles = this.styles();
-    const { selectedStartDate, selectedEndDate, isLargeOrMediumWindowSize } = this.props;
+    const { selectedStartDate, selectedEndDate } = this.props;
 
     return (
       <div style={styles.container}>
-        <div style={{ borderBottom: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG }}>
+        <div>
           <label style={styles.boxLabel}>From</label>
           <div onClick={() => this._handleDateBoxClick(selectedStartDate, 'from')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'from' ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
 
@@ -51,7 +50,7 @@ class SelectionPane extends React.Component {
   }
 
   styles = () => {
-    const { isLargeOrMediumWindowSize } = this.props;
+    const isLargeOrMediumWindowSize = ['large', 'medium'].indexOf(StyleConstants.getWindowSize()) !== -1;
 
     return {
       container: {
@@ -61,7 +60,7 @@ class SelectionPane extends React.Component {
         borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
         padding: StyleConstants.Spacing.MEDIUM,
         boxSizing: 'border-box',
-        width: 275
+        width: isLargeOrMediumWindowSize ? 275 : '100%'
       },
       calendarHeaderNav: {
         width: 35,
