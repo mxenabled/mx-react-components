@@ -4,14 +4,111 @@ const Radium = require('radium');
 const moment = require('moment');
 
 const Icon = require('./Icon');
-const Button = require('./Button');
+
+const Column = require('../components/grid/Column');
+const Container = require('../components/grid/Container');
+const Row = require('../components/grid/Row');
 
 const StyleConstants = require('../constants/Style');
 
-const MonthTable = require('./DateRangePicker/MonthTable');
-const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
-const SelectionPane = require('./DateRangePicker/SelectionPane');
+const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles }) => (
+  <div style={styles.rangeOptions}>
+    <div style={Object.assign({}, styles.defaultRangesTitle, { color: primaryColor })}>
+      Select a Range
+    </div>
+    {defaultRanges.map(range => (
+      <div key={range.displayValue + range.startDate} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
+        <div>
+          <Icon
+            size={20}
+            style={Object.assign({}, styles.rangeOptionIcon, {
+              fill: range.startDate === selectedStartDate && range.endDate === selectedEndDate ? primaryColor : 'transparent'
+            })}
+            type='check-solid'
+          />
+        </div>
+        <div>
+          {range.displayValue}
+        </div>
+      </div>
+    ))}
+  </div>
+));
 
+DefaultRanges.propTypes = {
+  defaultRanges: PropTypes.array,
+  handleDefaultRangeSelection: PropTypes.func,
+  primaryColor: PropTypes.string,
+  selectedEndDate: PropTypes.number,
+  selectedStartDate: PropTypes.number,
+  styles: PropTypes.shape({
+    defaultRangesTitle: PropTypes.object,
+    rangeOption: PropTypes.object,
+    rangeOptions: PropTypes.object
+  })
+};
+
+const MonthTable = ({
+  activeSelectDate,
+  currentDate,
+  getDateRangePosition,
+  handleDateHover,
+  handleDateSelect,
+  isInActiveRange,
+  minimumDate,
+  selectedEndDate,
+  selectedStartDate,
+  styles
+}) => {
+  const days = [];
+  let startDate = moment.unix(currentDate).startOf('month').startOf('week');
+  const endDate = moment.unix(currentDate).endOf('month').endOf('week');
+
+  while (moment(startDate).isBefore(endDate)) {
+    const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
+    const isActiveRange = (selectedStartDate || selectedEndDate) ?
+      isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
+      false;
+    const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
+    const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
+
+    const day = (
+      <div
+        key={startDate}
+        onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
+        onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
+        style={Object.assign({},
+          styles.calendarDay,
+          startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
+          disabledDay && styles.calendarDayDisabled,
+          (startDate.isSame(moment(), 'day') && !isActiveRange) && styles.today,
+          isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
+          isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
+        )}
+      >
+        {startDate.date()}
+      </div>
+    );
+
+    days.push(day);
+    startDate = startDate.add(1, 'd');
+  }
+
+  return (<div style={styles.calendarTable}>{days}</div>);
+};
+
+MonthTable.propTypes = {
+  activeSelectDate: PropTypes.number,
+  currentDate: PropTypes.number,
+  getDateRangePosition: PropTypes.func,
+  handleDateHover: PropTypes.func,
+  handleDateSelect: PropTypes.func,
+  isInActiveRange: PropTypes.func,
+  minimumDate: PropTypes.number,
+  selectedEndDate: PropTypes.number,
+  selectedStartDate: PropTypes.number,
+  styles: PropTypes.object
+};
 
 class DateRangePicker extends React.Component {
   static propTypes = {
@@ -25,7 +122,6 @@ class DateRangePicker extends React.Component {
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
-    onClose: PropTypes.func,
     onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
@@ -39,14 +135,14 @@ class DateRangePicker extends React.Component {
     closeCalendarOnRangeSelect: false,
     defaultRanges: [
       {
+        displayValue: 'Today',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().startOf('day').unix()
+      },
+      {
         displayValue: 'This Month',
         endDate: moment().endOf('month').unix(),
         startDate: moment().startOf('month').unix()
-      },
-      {
-        displayValue: 'Last 30 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(29, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Last Month',
@@ -54,25 +150,24 @@ class DateRangePicker extends React.Component {
         startDate: moment().subtract(1, 'months').startOf('month').unix()
       },
       {
+        displayValue: 'Last 7 Days',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().subtract(6, 'days').startOf('day').unix()
+      },
+      {
+        displayValue: 'Last 30 Days',
+        endDate: moment().endOf('day').unix(),
+        startDate: moment().subtract(29, 'days').startOf('day').unix()
+      },
+      {
         displayValue: 'Last 90 Days',
         endDate: moment().endOf('day').unix(),
         startDate: moment().subtract(89, 'days').startOf('day').unix()
-      },
-      {
-        displayValue: 'Year To Date',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().startOf('year').unix()
-      },
-      {
-        displayValue: 'Last Year',
-        endDate: moment().startOf('day').unix(),
-        startDate: moment().startOf('day').subtract(1, 'y').unix()
       }
     ],
     format: 'MMM D, YYYY',
     isRelative: true,
     locale: 'en',
-    onClose () {},
     onDateSelect () {},
     placeholderText: 'Select A Date Range',
     primaryColor: StyleConstants.Colors.PRIMARY,
@@ -81,9 +176,19 @@ class DateRangePicker extends React.Component {
 
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
-    selectedBox: 'from',
-    showSelectionPane: false
+    showCalendar: false
   };
+
+  componentWillReceiveProps (newProps) {
+    const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
+    const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
+
+    if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
+      this.setState({
+        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
+      });
+    }
+  }
 
   _getDateFormat = () => {
     return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
@@ -100,21 +205,17 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
-    this.setState({
-      currentDate: date
-    });
+    let endDate;
+    let startDate;
+    const existingRangeComplete = this.props.selectedStartDate && this.props.selectedEndDate;
+    const existingRangeEmpty = !this.props.selectedStartDate && !this.props.selectedEndDate;
 
-    let endDate = this.props.selectedEndDate;
-    let startDate = this.props.selectedStartDate;
-
-    if (this.state.selectedBox === 'from') {
+    if (existingRangeComplete || existingRangeEmpty) {
       startDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: 'to' });
-    }
-
-    if (this.state.selectedBox === 'to') {
+      endDate = null;
+    } else {
+      startDate = this.props.selectedStartDate;
       endDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: 'from' });
     }
 
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
@@ -144,17 +245,31 @@ class DateRangePicker extends React.Component {
     });
   };
 
-  _handleScrimClick = () => {
-    this.props.onClose();
+  _handlePreviousClick = () => {
+    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
 
     this.setState({
-      showSelectionPane: false
+      currentDate
     });
   };
 
-  _toggleSelectionPane = () => {
+  _handleNextClick = () => {
+    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
+
     this.setState({
-      showSelectionPane: !this.state.showSelectionPane
+      currentDate
+    });
+  };
+
+  _handleScrimClick = () => {
+    this.setState({
+      showCalendar: false
+    });
+  };
+
+  _toggleCalendar = () => {
+    this.setState({
+      showCalendar: !this.state.showCalendar
     });
   };
 
@@ -198,12 +313,12 @@ class DateRangePicker extends React.Component {
 
   render () {
     const styles = this.styles();
-    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const spans = this.spans();
     const shouldShowCalendarIcon = StyleConstants.getWindowSize() !== 'small';
 
     return (
       <div style={styles.component}>
-        <div onClick={this._toggleSelectionPane} style={styles.selectedDateWrapper}>
+        <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           {shouldShowCalendarIcon ? (
             <Icon
               size={20}
@@ -223,92 +338,114 @@ class DateRangePicker extends React.Component {
           <Icon
             size={20}
             style={styles.selectedDateCaret}
-            type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
+            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         </div>
-        <div style={styles.container}>
-          <div>
+        <Container>
+          <Row>
             <div style={styles.optionsWrapper}>
-              {!this.state.showCalendar && (
-                <div>
+              {this._isLargeOrMediumWindowSize() && (
+                <Column span={spans.defaultRanges}>
                   {this.props.showDefaultRanges &&
-                    <SelectionPane
+                    <DefaultRanges
                       defaultRanges={this.props.defaultRanges}
-                      handleDateBoxClick={(date, selectedBox) => {
-                        this.setState({
-                          currentDate: date || moment().unix(),
-                          selectedBox,
-                          showCalendar: !isLargeOrMediumWindowSize && true
-                        });
-                      }}
                       handleDefaultRangeSelection={this._handleDefaultRangeSelection}
                       primaryColor={this.props.primaryColor}
-                      selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
                       selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
                     />
                   }
-                </div>
+                </Column>
               )}
-
-              {(this.state.showCalendar || isLargeOrMediumWindowSize) && (
-                <div>
-                  <div style={styles.calendarWrapper}>
-                    <div style={styles.calendarHeader}>
-                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
-                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+              <Column span={spans.calendar}>
+                <div style={styles.calendarWrapper}>
+                  <div style={styles.calendarHeader}>
+                    <Icon
+                      elementProps={{
+                        onClick: this._handlePreviousClick
+                      }}
+                      size={20}
+                      style={styles.calendarHeaderNav}
+                      type='caret-left'
+                    />
+                    <div>
+                      {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
                     </div>
-                    <div style={styles.calendarWeek}>
-                      {[{ label: 'S', value: 'Sunday' },
-                        { label: 'M', value: 'Monday' },
-                        { label: 'T', value: 'Tuesday' },
-                        { label: 'W', value: 'Wednesday' },
-                        { label: 'T', value: 'Thursday' },
-                        { label: 'F', value: 'Friday' },
-                        { label: 'S', value: 'Saturday' }].map((day) => {
-                          return (
-                            <div key={day.value} style={styles.calendarWeekDay}>
-                              {day.label}
-                            </div>
-                          );
-                        })}
-                    </div>
-                    <MonthTable
-                      activeSelectDate={this.state.activeSelectDate}
-                      currentDate={this.state.currentDate}
-                      getDateRangePosition={this._getDateRangePosition}
-                      handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect}
-                      isInActiveRange={this._isInActiveRange}
-                      minimumDate={this.props.minimumDate}
-                      selectedEndDate={this.props.selectedEndDate}
-                      selectedStartDate={this.props.selectedStartDate}
+                    <Icon
+                      elementProps={{
+                        onClick: this._handleNextClick
+                      }}
+                      size={20}
+                      style={styles.calendarHeaderNav}
+                      type='caret-right'
+                    />
+                  </div>
+                  <div style={styles.calendarWeek}>
+                    {[{ label: 'S', value: 'Sunday' },
+                      { label: 'M', value: 'Monday' },
+                      { label: 'T', value: 'Tuesday' },
+                      { label: 'W', value: 'Wednesday' },
+                      { label: 'T', value: 'Thursday' },
+                      { label: 'F', value: 'Friday' },
+                      { label: 'S', value: 'Saturday' }].map((day) => {
+                        return (
+                          <div key={day.value} style={styles.calendarWeekDay}>
+                            {day.label}
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <MonthTable
+                    activeSelectDate={this.state.activeSelectDate}
+                    currentDate={this.state.currentDate}
+                    getDateRangePosition={this._getDateRangePosition}
+                    handleDateHover={this._handleDateHover}
+                    handleDateSelect={this._handleDateSelect}
+                    isInActiveRange={this._isInActiveRange}
+                    minimumDate={this.props.minimumDate}
+                    selectedEndDate={this.props.selectedEndDate}
+                    selectedStartDate={this.props.selectedStartDate}
+                    styles={styles}
+                  />
+                </div>
+              </Column>
+              {!this._isLargeOrMediumWindowSize() && (
+                <Column span={spans.defaultRanges}>
+                  {this.props.showDefaultRanges &&
+                    <DefaultRanges
+                      defaultRanges={this.props.defaultRanges}
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      primaryColor={this.props.primaryColor}
                       styles={styles}
                     />
-                    {!isLargeOrMediumWindowSize && (
-                      <div style={styles.applyButton}>
-                        <Button
-                          onClick={() => this.setState({ showCalendar: false })}
-                          primaryColor={this.props.primaryColor}
-                          type='primary'
-                        >
-                          Apply
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  }
+                </Column>
               )}
             </div>
-          </div>
-        </div>
-        {(this.state.showSelectionPane) ? (
+          </Row>
+        </Container>
+        {(this.state.showCalendar) ? (
           <div onClick={this._handleScrimClick} style={styles.scrim} />
         ) : null }
       </div>
     );
   }
+
+  spans = () => {
+    return {
+      calendar: {
+        large: this.props.showDefaultRanges ? 8 : 12,
+        medium: this.props.showDefaultRanges ? 8 : 12,
+        small: 12
+      },
+      defaultRanges: {
+        large: this.props.showDefaultRanges ? 4 : 0,
+        medium: this.props.showDefaultRanges ? 4 : 0,
+        small: this.props.showDefaultRanges ? 12 : 0
+      }
+    };
+  };
 
   styles = () => {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
@@ -316,7 +453,7 @@ class DateRangePicker extends React.Component {
     return {
       component: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        borderColor: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.FOG,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -330,9 +467,6 @@ class DateRangePicker extends React.Component {
         position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
       }, this.props.style),
-      container: {
-        flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
-      },
 
       // Selected Date styles
       selectedDateWrapper: {
@@ -349,7 +483,7 @@ class DateRangePicker extends React.Component {
         color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
       },
       selectedDateCaret: {
-        fill: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.ASH
+        fill: this.state.showCalendar ? this.props.primaryColor : StyleConstants.Colors.ASH
       },
 
       //Calendar Styles
@@ -359,23 +493,23 @@ class DateRangePicker extends React.Component {
         borderRadius: 3,
         boxShadow: StyleConstants.ShadowHigh,
         boxSizing: 'border-box',
-        display: this.state.showSelectionPane ? 'flex' : 'none',
+        display: this.state.showCalendar ? 'flex' : 'none',
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
-        padding: StyleConstants.Spacing.SMALL,
         position: 'absolute',
-        left: isLargeOrMediumWindowSize ? '50%' : 0,
-        right: isLargeOrMediumWindowSize ? 'auto' : 0,
-        transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
+        left: this.props.isRelative && window.innerWidth > 450 ? 'auto' : 0,
+        right: 0,
+        maxWidth: 450,
+        width: window.innerWidth,
         zIndex: 10
       },
       calendarWrapper: {
         boxSizing: 'border-box',
         padding: isLargeOrMediumWindowSize ? 20 : 10,
         margin: 'auto',
-        maxWidth: 275,
-        width: isLargeOrMediumWindowSize ? 275 : '100%'
+        maxWidth: 250,
+        width: isLargeOrMediumWindowSize ? 250 : '100%'
       },
 
       //Calendar Header
@@ -389,6 +523,10 @@ class DateRangePicker extends React.Component {
         marginBottom: 15,
         position: 'relative',
         textAlign: 'center'
+      },
+      calendarHeaderNav: {
+        width: 35,
+        cursor: 'pointer'
       },
 
       //Calendar week
@@ -444,10 +582,43 @@ class DateRangePicker extends React.Component {
       currentMonth: {
         color: StyleConstants.Colors.CHARCOAL
       },
-      applyButton: {
+
+      //Default Ranges
+      defaultRangesTitle: {
+        color: StyleConstants.Colors.PRIMARY,
+        display: isLargeOrMediumWindowSize ? 'inline-block' : 'none',
+        fontFamily: StyleConstants.Fonts.SEMIBOLD,
+        fontSize: StyleConstants.FontSizes.SMALL,
+        padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
+      },
+      rangeOptions: {
+        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        borderTop: isLargeOrMediumWindowSize ? 'none' : '1px solid ' + StyleConstants.Colors.FOG,
+        boxSizing: 'border-box',
+        color: StyleConstants.Colors.CHARCOAL,
+        display: isLargeOrMediumWindowSize ? 'inline-block' : 'flex',
+        flexDirection: isLargeOrMediumWindowSize ? 'column' : 'row',
+        flexWrap: isLargeOrMediumWindowSize ? 'nowrap' : 'wrap',
+        fontSize: StyleConstants.FontSizes.MEDIUM,
+        marginLeft: isLargeOrMediumWindowSize ? -10 : 0,
+        marginRight: isLargeOrMediumWindowSize ? -10 : 0,
+        maxWidth: window.innerWidth > 450 ? 250 : 'inherit',
+        width: isLargeOrMediumWindowSize ? 150 : '100%'
+      },
+      rangeOption: {
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        cursor: 'pointer',
         display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: StyleConstants.Spacing.XSMALL
+        padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.MEDIUM}px`,
+        width: isLargeOrMediumWindowSize ? '100%' : '50%',
+
+        ':hover': {
+          backgroundColor: StyleConstants.Colors.PORCELAIN
+        }
+      },
+      rangeOptionIcon: {
+        paddingRight: StyleConstants.Spacing.SMALL
       },
 
       //Selected and Selecting Range
