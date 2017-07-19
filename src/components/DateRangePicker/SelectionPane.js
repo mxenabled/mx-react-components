@@ -59,7 +59,9 @@ class SelectionPane extends React.Component {
         flexDirection: 'column',
         height: '100%',
         borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        padding: StyleConstants.Spacing.MEDIUM
+        padding: StyleConstants.Spacing.MEDIUM,
+        boxSizing: 'border-box',
+        width: 275
       },
       calendarHeaderNav: {
         width: 35,
@@ -110,8 +112,9 @@ class SelectionPane extends React.Component {
         boxSizing: 'border-box',
         cursor: 'pointer',
         display: 'flex',
-        padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.MEDIUM}px`,
+        padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.SMALL}px`,
         width: '50%',
+        fontSize: StyleConstants.FontSizes.SMALL,
 
         ':hover': {
           backgroundColor: StyleConstants.Colors.PORCELAIN
