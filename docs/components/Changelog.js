@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h3>Release Candidate 5.0.0-rc.104</h3>
+        <ul>
+          <li>
+            Adds a test DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/635'>#635</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.102</h3>
         <ul>
           <li>
