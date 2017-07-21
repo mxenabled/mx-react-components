@@ -5,12 +5,13 @@ const PropTypes = require('prop-types');
 const DefaultRanges = require('../DateRangePicker/DefaultRanges');
 
 const StyleConstants = require('../../constants/Style');
+const { SelectedBox } = require('../../constants/DateRangePicker');
 
 class SelectionPane extends React.Component {
   static propTypes = {
     currentDate: PropTypes.string,
     defaultRanges: PropTypes.array,
-    handleDateBoxClick: PropTypes.func,
+    onDateBoxClick: PropTypes.func,
     primaryColor: PropTypes.string,
     selectedBox: PropTypes.string,
     selectedEndDate: PropTypes.number,
@@ -18,12 +19,8 @@ class SelectionPane extends React.Component {
     setCurrentDate: PropTypes.func
   };
 
-  state = {
-    selectedBox: 'from'
-  }
-
   _handleDateBoxClick = (date, selectedBox) => {
-    this.props.handleDateBoxClick(date, selectedBox);
+    this.props.onDateBoxClick(date, selectedBox);
   }
 
   render () {
@@ -34,10 +31,10 @@ class SelectionPane extends React.Component {
       <div style={styles.container}>
         <div>
           <label style={styles.boxLabel}>From</label>
-          <div onClick={() => this._handleDateBoxClick(selectedStartDate, 'from')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'from' ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
+          <div onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
 
           <label style={styles.boxLabel}>To</label>
-          <div onClick={() => this._handleDateBoxClick(selectedEndDate, 'to')} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === 'to' ? styles.selectedDateSelectBox : null)}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
+          <div onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
         </div>
         <div>
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: this.props.primaryColor })}>

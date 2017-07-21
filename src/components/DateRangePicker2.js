@@ -7,6 +7,7 @@ const Icon = require('./Icon');
 const Button = require('./Button');
 
 const StyleConstants = require('../constants/Style');
+const { SelectedBox } = require('../constants/DateRangePicker');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
 const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
@@ -81,7 +82,7 @@ class DateRangePicker extends React.Component {
 
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
-    selectedBox: 'from',
+    selectedBox: SelectedBox.FROM,
     showSelectionPane: false
   };
 
@@ -107,14 +108,14 @@ class DateRangePicker extends React.Component {
     let endDate = this.props.selectedEndDate;
     let startDate = this.props.selectedStartDate;
 
-    if (this.state.selectedBox === 'from') {
+    if (this.state.selectedBox === SelectedBox.FROM) {
       startDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: 'to' });
+      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: SelectedBox.TO });
     }
 
-    if (this.state.selectedBox === 'to') {
+    if (this.state.selectedBox === SelectedBox.TO) {
       endDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: 'from' });
+      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: SelectedBox.FROM });
     }
 
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
@@ -234,14 +235,14 @@ class DateRangePicker extends React.Component {
                   {this.props.showDefaultRanges &&
                     <SelectionPane
                       defaultRanges={this.props.defaultRanges}
-                      handleDateBoxClick={(date, selectedBox) => {
+                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
+                      onDateBoxClick={(date, selectedBox) => {
                         this.setState({
                           currentDate: date || moment().unix(),
                           selectedBox,
                           showCalendar: !isLargeOrMediumWindowSize && true
                         });
                       }}
-                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
                       primaryColor={this.props.primaryColor}
                       selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
