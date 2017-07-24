@@ -5,6 +5,12 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.105</h3>
+        <ul>
+          <li>
+            Updates position styling for DateRangePicker mobile bug(<a href='https://github.com/mxenabled/mx-react-components/pull/637'>#637</a>).
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.104</h3>
         <ul>
