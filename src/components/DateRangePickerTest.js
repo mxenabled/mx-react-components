@@ -370,14 +370,14 @@ class DateRangePicker extends React.Component {
         right: isLargeOrMediumWindowSize ? 'auto' : 0,
         transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
         zIndex: 10,
-        maxWidth: 540,
+        maxWidth: 575,
         width: window.innerWidth
       },
       calendarWrapper: {
         boxSizing: 'border-box',
-        padding: isLargeOrMediumWindowSize ? 20 : 10,
+        padding: 20,
         margin: 'auto',
-        maxWidth: 255,
+        maxWidth: 275,
         width: isLargeOrMediumWindowSize ? 275 : '100%'
       },
 

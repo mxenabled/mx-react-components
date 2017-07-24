@@ -57,7 +57,7 @@ class SelectionPane extends React.Component {
         borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
         padding: StyleConstants.Spacing.MEDIUM,
         boxSizing: 'border-box',
-        width: isLargeOrMediumWindowSize ? 255 : '100%'
+        width: isLargeOrMediumWindowSize ? 275 : '100%'
       },
       calendarHeaderNav: {
         width: 35,
