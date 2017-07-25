@@ -38,6 +38,7 @@ class Drawer extends React.Component {
       onPreviousClick: PropTypes.func.isRequired
     }),
     onClose: PropTypes.func.isRequired,
+    onOpen: React.PropTypes.func,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
@@ -51,6 +52,7 @@ class Drawer extends React.Component {
     duration: 500,
     easing: [0.28, 0.14, 0.34, 1.04],
     maxWidth: 960,
+    onOpen: () => {},
     showCloseButton: true,
     showScrim: true,
     title: ''
@@ -61,7 +63,7 @@ class Drawer extends React.Component {
   }
 
   componentDidMount () {
-    this._animateComponent({ left: this._getAnimationDistance() });
+    this._open();
     window.addEventListener('resize', this._resizeThrottled);
     this._component.focus();
   }
@@ -100,6 +102,13 @@ class Drawer extends React.Component {
     return this._animateComponent({ left: '100%' })
       .then(() => {
         this.props.onClose();
+      });
+  };
+
+  open = () => {
+    return this._animateComponent({ left: this._getAnimationDistance() })
+      .then(() => {
+        this.props.onOpen();
       });
   };
 
