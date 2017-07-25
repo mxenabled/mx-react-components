@@ -63,7 +63,7 @@ class Drawer extends React.Component {
   }
 
   componentDidMount () {
-    this._open();
+    this.open();
     window.addEventListener('resize', this._resizeThrottled);
     this._component.focus();
   }
