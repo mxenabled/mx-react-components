@@ -16,14 +16,14 @@ class Selector extends React.Component {
     const styles = this.styles();
 
     return (
-      <div style={styles.container}>
+      <div style={Object.assign({}, this.props.style, styles.container)}>
         <Icon
           elementProps={{ onClick: this.props.handlePreviousClick }}
           size={20}
           style={styles.calendarHeaderNav}
           type='caret-left'
         />
-        <div>
+        <div style={styles.currentDate}>
           {this.props.currentDate}
         </div>
         <Icon
@@ -39,11 +39,16 @@ class Selector extends React.Component {
   styles = () => {
     return {
       container: {
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+
       },
       calendarHeaderNav: {
-        width: 35,
         cursor: 'pointer'
+      },
+      currentDate: {
+        padding: '0px 10px'
       }
     };
   }
@@ -74,6 +79,7 @@ class MonthSelector extends React.Component {
         currentDate={moment(this.props.currentDate, 'X').format('MMMM')}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
+        style={{ width: '60%' }}
       />
     );
   }
