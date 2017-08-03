@@ -73,15 +73,25 @@ class MonthSelector extends React.Component {
   };
 
   render () {
+    const styles = this.styles();
+
     return (
       <Selector
         {...this.props}
         currentDate={moment(this.props.currentDate, 'X').format('MMMM')}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
-        style={{ width: '60%' }}
+        style={styles.monthSelector}
       />
     );
+  }
+
+  styles = () => {
+    return {
+      monthSelector: {
+        width: '60%'
+      }
+    };
   }
 }
 
