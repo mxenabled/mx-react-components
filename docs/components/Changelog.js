@@ -8,6 +8,19 @@ class Changelog extends React.Component {
         <h3>Release Candidate 5.0.0-rc.105</h3>
         <ul>
           <li>
+            Adds two callback props to Drawer, onOpen and beforeClose (<a href='https://github.com/mxenabled/mx-react-components/pull/639'>#639</a>).
+          </li>
+          <li>
+            Implements shouldComponentUpdatein Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/640'>#640</a>).
+          </li>
+          <li>
+            Polish DateRangePicker UI & styling (<a href='https://github.com/mxenabled/mx-react-components/pull/641'>#641</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.105</h3>
+        <ul>
+          <li>
             Updates position styling for DateRangePicker mobile bug(<a href='https://github.com/mxenabled/mx-react-components/pull/637'>#637</a>).
           </li>
         </ul>
