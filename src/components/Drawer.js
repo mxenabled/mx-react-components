@@ -14,6 +14,7 @@ const StyleConstants = require('../constants/Style');
 class Drawer extends React.Component {
   static propTypes = {
     animateLeftDistance: PropTypes.number,
+    beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
       large: PropTypes.number,
       medium: PropTypes.number
@@ -38,6 +39,7 @@ class Drawer extends React.Component {
       onPreviousClick: PropTypes.func.isRequired
     }),
     onClose: PropTypes.func.isRequired,
+    onOpen: React.PropTypes.func,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
@@ -45,12 +47,14 @@ class Drawer extends React.Component {
   };
 
   static defaultProps = {
+    beforeClose: () => {},
     buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
     breakPoints: StyleConstants.BreakPoints,
     closeOnScrimClick: true,
     duration: 500,
     easing: [0.28, 0.14, 0.34, 1.04],
     maxWidth: 960,
+    onOpen: () => {},
     showCloseButton: true,
     showScrim: true,
     title: ''
@@ -61,7 +65,7 @@ class Drawer extends React.Component {
   }
 
   componentDidMount () {
-    this._animateComponent({ left: this._getAnimationDistance() });
+    this.open();
     window.addEventListener('resize', this._resizeThrottled);
     this._component.focus();
   }
@@ -97,9 +101,17 @@ class Drawer extends React.Component {
    * @returns {Promise} that is resolved when the animation finishes
    */
   close = () => {
+    this.props.beforeClose();
     return this._animateComponent({ left: '100%' })
       .then(() => {
         this.props.onClose();
+      });
+  };
+
+  open = () => {
+    return this._animateComponent({ left: this._getAnimationDistance() })
+      .then(() => {
+        this.props.onOpen();
       });
   };
 
