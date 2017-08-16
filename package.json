@@ -5,6 +5,7 @@
   "main": "dist/Index.js",
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
+    "dev-release": "babel src --watch --out-dir dist",
     "dev": "yarn && yarn upgrade && cd docs && yarn && yarn upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
     "docs:release": "yarn && cd docs && yarn && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
     "test": "eslint src"
