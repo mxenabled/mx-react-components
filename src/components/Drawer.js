@@ -199,6 +199,8 @@ class Drawer extends React.Component {
   }
 
   styles = () => {
+    const HEADER_HEIGHT = '50px';
+
     return _merge({}, {
       component: {
         border: '1px solid ' + StyleConstants.Colors.FOG,
@@ -229,7 +231,8 @@ class Drawer extends React.Component {
       },
       content: {
         backgroundColor: StyleConstants.Colors.WHITE,
-        height: '100%'
+        overflow: 'auto',
+        height: `calc(100% - ${HEADER_HEIGHT})`
       },
       scrim: {
         zIndex: 1000,
@@ -264,7 +267,7 @@ class Drawer extends React.Component {
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative',
-        minHeight: StyleConstants.Spacing.XLARGE
+        height: HEADER_HEIGHT
       },
       title: {
         overflow: 'hidden',
