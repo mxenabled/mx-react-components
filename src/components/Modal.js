@@ -5,7 +5,6 @@ const FocusTrap = require('focus-trap-react');
 const Button = require('./Button');
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -221,7 +220,7 @@ class Modal extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = theme => {
     return {
       scrim: {
         zIndex: 1000,
@@ -236,7 +235,7 @@ class Modal extends React.Component {
         position: 'absolute'
       },
       overlay: {
-        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
+        backgroundColor: this.props.showScrim ? theme.Colors.SCRIM : 'transparent'
       },
       close: {
         position: 'absolute',
@@ -244,15 +243,15 @@ class Modal extends React.Component {
         right: 0,
         margin: '-12px -12px 0 0',
         cursor: 'pointer',
-        color: StyleConstants.Colors.GRAY_700
+        color: theme.Colors.GRAY_700
       },
       container: {
-        fontFamily: StyleConstants.FontFamily,
+        fontFamily: theme.FontFamily,
         boxSizing: 'border-box',
         position: 'relative',
         zIndex: 1001,
-        backgroundColor: StyleConstants.Colors.WHITE,
-        boxShadow: StyleConstants.ShadowHigh,
+        backgroundColor: theme.Colors.WHITE,
+        boxShadow: theme.ShadowHigh,
         borderRadius: 2,
         top: 20,
         maxWidth: 'calc(100% - 40px)',
@@ -260,12 +259,12 @@ class Modal extends React.Component {
         textAlign: 'left'
       },
       titleBar: {
-        backgroundColor: StyleConstants.Colors.GRAY_100,
+        backgroundColor: theme.Colors.GRAY_100,
         borderTopLeftRadius: 2,
         borderTopRightRadius: 2,
         padding: '15px 20px',
-        color: StyleConstants.Colors.GRAY_500,
-        fontSize: StyleConstants.FontSizes.SMALL,
+        color: theme.Colors.GRAY_500,
+        fontSize: theme.FontSizes.SMALL,
         textTransform: 'uppercase',
         letterSpacing: 1
       },
@@ -275,7 +274,7 @@ class Modal extends React.Component {
         overflow: 'auto'
       },
       footer: {
-        backgroundColor: StyleConstants.Colors.GRAY_100,
+        backgroundColor: theme.Colors.GRAY_100,
         borderBottomLeftRadius: 2,
         borderBottomRightRadius: 2,
         padding: '10px 20px',
@@ -290,11 +289,11 @@ class Modal extends React.Component {
         padding: '5px 0'
       },
       tooltipLabelText: {
-        fontSize: StyleConstants.FontSizes.SMALL
+        fontSize: theme.FontSizes.SMALL
       },
       tooltip: {
-        backgroundColor: StyleConstants.Colors.GRAY_100,
-        borderColor: StyleConstants.Colors.GRAY_300,
+        backgroundColor: theme.Colors.GRAY_100,
+        borderColor: theme.Colors.GRAY_300,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
@@ -306,12 +305,12 @@ class Modal extends React.Component {
         padding: 10
       },
       tooltipTitle: {
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontSize: theme.FontSizes.MEDIUM,
         marginBottom: 5
       },
       tooltipContent: {
-        color: StyleConstants.Colors.GRAY_500,
-        fontSize: StyleConstants.FontSizes.SMALL,
+        color: theme.Colors.GRAY_500,
+        fontSize: theme.FontSizes.SMALL,
         lineHeight: '1.5em',
         textAlign: 'left'
       },
