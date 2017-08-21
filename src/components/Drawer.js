@@ -1,4 +1,5 @@
 const _isNumber = require('lodash/isNumber');
+const _get = require('lodash/get');
 const PropTypes = require('prop-types');
 const { StyleRoot } = require('radium');
 const FocusTrap = require('focus-trap-react');
@@ -93,6 +94,21 @@ class Drawer extends React.Component {
 
       return Math.max(newLeft, windowWidth - this.props.maxWidth);
     }
+  };
+
+  /**
+   * Figure out the height of the header. This can come from either:
+   *
+   * this.props.headerStyle.height
+   * this.props.header.height
+   *
+   * If neither are set, default to 50px
+   */
+  _getHeaderHeight = () => {
+    return _get(this.props, ['headerStyle', 'height'],
+                _get(this.props,
+                     ['styles', 'header', 'height'],
+                     '50px'));
   };
 
   /**
@@ -199,7 +215,7 @@ class Drawer extends React.Component {
   }
 
   styles = () => {
-    const HEADER_HEIGHT = '50px';
+    const HEADER_HEIGHT = this._getHeaderHeight();
 
     return _merge({}, {
       component: {
