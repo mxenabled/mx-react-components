@@ -278,7 +278,7 @@ class RangeSelector extends React.Component {
             onMouseDown={this._handleTrackMouseDown}
             style={styles.trackHolder}
           >
-            <div className='mx-rangeselector-track' style={styles.track}></div>
+            <div className='mx-rangeselector-track' style={styles.track} />
             <div className='mx-rangeselector-selected' style={styles.selected}>
               <div className='mx-rangeselector-selected-label' style={styles.selectedLabel}>
                 {this.state.selectedLabel}

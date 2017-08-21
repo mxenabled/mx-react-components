@@ -69,7 +69,6 @@ class Button extends React.Component {
         <div style={styles.children}>
           {(this.props.icon && !this.props.isActive) && (
             <Icon
-              elementProps={{ 'aria-hidden': true }}
               size={20}
               style={styles.icon}
               type={this.props.icon}
@@ -77,7 +76,7 @@ class Button extends React.Component {
           )}
           {this.props.isActive && (
             <Spin direction='counterclockwise'>
-              <Icon elementProps={{ 'aria-hidden': true }} size={20} type='spinner' />
+              <Icon size={20} type='spinner' />
             </Spin>
           )}
           <div style={styles.buttonText}>

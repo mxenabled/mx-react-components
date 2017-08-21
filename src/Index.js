@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   BarChart: require('./components/BarChart'),
   Button: require('./components/Button'),
@@ -8,6 +10,7 @@ module.exports = {
   DatePicker: require('./components/DatePicker'),
   DatePickerFullScreen: require('./components/DatePickerFullScreen'),
   DateRangePicker: require('./components/DateRangePicker'),
+  DateRangePickerTest: require('./components/DateRangePickerTest'),
   DateTimePicker: require('./components/DateTimePicker'),
   DisplayInput: require('./components/DisplayInput'),
   DonutChart: require('./components/DonutChart'),
@@ -64,5 +67,15 @@ module.exports = {
 
   // App Utils
   ChartUtils: require('./utils/Chart'),
+<<<<<<< HEAD
   StyleUtils: require('./utils/Style')
+=======
+
+  // App configuration
+  Config: {
+    setDefaultTimeZone: (timezone) => {
+      moment.tz.setDefault(timezone);
+    }
+  }
+>>>>>>> master
 };

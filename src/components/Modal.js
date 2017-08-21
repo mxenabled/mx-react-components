@@ -183,7 +183,7 @@ class Modal extends React.Component {
     return (
       <FocusTrap>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
-          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)}></div>
+          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
             className='mx-modal-container'
             style={Object.assign({}, styles.container, this.props.style)}

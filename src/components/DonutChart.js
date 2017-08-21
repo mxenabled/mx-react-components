@@ -273,7 +273,11 @@ class DonutChart extends React.Component {
     if (this.props.showBaseArc) {
       return (
         <g>
+<<<<<<< HEAD
           <path d={this.state.baseArc()} fill={baseArcColor}></path>
+=======
+          <path d={this.state.baseArc()} fill={this.props.baseArcColor} />
+>>>>>>> master
         </g>
       );
     } else {

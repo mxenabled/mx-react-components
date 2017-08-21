@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const PropTypes = require('prop-types');
+=======
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
+>>>>>>> master
 const React = require('react');
 
 const { Styles } = require('mx-react-components');
@@ -155,7 +160,11 @@ class StylesDocs extends React.Component {
 
         <h5>Linear Gradient</h5>
         <p>Takes two HEX colors and optional opacity amounts and returns a linear gradient string. The first color is requried, the other color and opacities are optional. If only the first color is provided, the gradient will be a single color from 0.8 to 1.</p>
+<<<<<<< HEAD
         <div style={{ background: StyleUtils.linearGradient(Styles.Colors.PRIMARY), height: 100, width: '100%' }}></div>
+=======
+        <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY), height: 100, width: '100%' }} />
+>>>>>>> master
 
         <Markdown lang='js'>
           {`
@@ -163,7 +172,11 @@ class StylesDocs extends React.Component {
           `}
         </Markdown>
 
+<<<<<<< HEAD
         <div style={{ background: StyleUtils.linearGradient(Styles.Colors.PRIMARY, 0.2), height: 100, width: '100%' }}></div>
+=======
+        <div style={{ background: Styles.linearGradient(Styles.Colors.PRIMARY, 0.2), height: 100, width: '100%' }} />
+>>>>>>> master
 
         <Markdown lang='js'>
           {`
@@ -171,7 +184,11 @@ class StylesDocs extends React.Component {
           `}
         </Markdown>
 
+<<<<<<< HEAD
         <div style={{ background: StyleUtils.linearGradient(Styles.Colors.DANGER, 1, Styles.Colors.SUCCESS, 1), height: 100, width: '100%' }}></div>
+=======
+        <div style={{ background: Styles.linearGradient(Styles.Colors.ORANGE, 1, Styles.Colors.LEMON, 1), height: 100, width: '100%' }} />
+>>>>>>> master
 
         <Markdown lang='js'>
           {`

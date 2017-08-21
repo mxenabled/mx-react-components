@@ -5,6 +5,77 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.105</h3>
+        <ul>
+          <li>
+            Adds two callback props to Drawer, onOpen and beforeClose (<a href='https://github.com/mxenabled/mx-react-components/pull/639'>#639</a>).
+          </li>
+          <li>
+            Implements shouldComponentUpdatein Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/640'>#640</a>).
+          </li>
+          <li>
+            Polish DateRangePicker UI & styling (<a href='https://github.com/mxenabled/mx-react-components/pull/641'>#641</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.105</h3>
+        <ul>
+          <li>
+            Updates position styling for DateRangePicker mobile bug(<a href='https://github.com/mxenabled/mx-react-components/pull/637'>#637</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.104</h3>
+        <ul>
+          <li>
+            Adds a test DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/635'>#635</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.102</h3>
+        <ul>
+          <li>
+            Adds default focusable=false and aria-hidden=true to svg in Icon (<a href='https://github.com/mxenabled/mx-react-components/pull/634'>#634</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.101</h3>
+        <ul>
+          <li>
+            Adds focusable=false attribute to SVGs in buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/633'>#633</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.100</h3>
+        <ul>
+          <li>
+            Fixes overlaping x axis labels in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/631'>#631</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.99</h3>
+        <ul>
+          <li>
+            Removes xsmall breakpoint in style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/597'>#597</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.97</h3>
+        <ul>
+          <li>
+            Fixes bug with the file type and extension validation in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/630'>#630</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.97</h3>
+        <ul>
+          <li>
+            Allows extensions to be used in `allowedFileTypes` of FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/629'>#629</a>).
+          </li>
+          <li>
+            Adds default error messages with file and/or image validation fails on FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/629'>#629</a>).
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.96</h3>
         <ul>

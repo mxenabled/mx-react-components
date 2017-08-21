@@ -323,16 +323,22 @@ class DateRangePicker extends React.Component {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const spans = this.spans();
+    const shouldShowCalendarIcon = StyleConstants.getWindowSize() !== 'small';
 
     return (
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
+<<<<<<< HEAD
           {StyleUtils.getWindowSize(theme.BreakPoints) !== 'xsmall' &&
+=======
+          {shouldShowCalendarIcon ? (
+>>>>>>> master
             <Icon
               size={20}
               style={styles.selectedDateIcon}
               type='calendar'
-            />}
+            />
+          ) : null}
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
@@ -342,12 +348,20 @@ class DateRangePicker extends React.Component {
               </div>
             ) : this.props.placeholderText}
           </div>
+<<<<<<< HEAD
           {StyleUtils.getWindowSize(theme.BreakPoints) !== 'xsmall' &&
             <Icon
               size={20}
               style={styles.selectedDateCaret}
               type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
             />}
+=======
+          <Icon
+            size={20}
+            style={styles.selectedDateCaret}
+            type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
+          />
+>>>>>>> master
         </div>
         <Container>
           <Row>
@@ -378,7 +392,7 @@ class DateRangePicker extends React.Component {
                       type='caret-left'
                     />
                     <div>
-                      {moment(this.state.currentDate, 'X').format('MMMM YYYY')}
+                      {moment.unix(this.state.currentDate).format('MMMM YYYY')}
                     </div>
                     <Icon
                       elementProps={{
