@@ -52,12 +52,7 @@ class Drawer extends React.Component {
   };
 
   static defaultProps = {
-<<<<<<< HEAD
-=======
     beforeClose: () => {},
-    buttonPrimaryColor: StyleConstants.Colors.PRIMARY,
-    breakPoints: StyleConstants.BreakPoints,
->>>>>>> master
     closeOnScrimClick: true,
     duration: 500,
     easing: [0.28, 0.14, 0.34, 1.04],
@@ -82,12 +77,8 @@ class Drawer extends React.Component {
   }
 
   componentDidMount () {
-<<<<<<< HEAD
     deprecatePrimaryColor(this.props, 'buttonPrimaryColor');
-    this._animateComponent({ left: this._getAnimationDistance() });
-=======
     this.open();
->>>>>>> master
     window.addEventListener('resize', this._resizeThrottled);
     this._component.focus();
   }

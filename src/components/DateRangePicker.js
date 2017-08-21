@@ -323,16 +323,12 @@ class DateRangePicker extends React.Component {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const spans = this.spans();
-    const shouldShowCalendarIcon = StyleConstants.getWindowSize() !== 'small';
+    const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
 
     return (
       <div style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
-<<<<<<< HEAD
-          {StyleUtils.getWindowSize(theme.BreakPoints) !== 'xsmall' &&
-=======
           {shouldShowCalendarIcon ? (
->>>>>>> master
             <Icon
               size={20}
               style={styles.selectedDateIcon}
@@ -348,20 +344,11 @@ class DateRangePicker extends React.Component {
               </div>
             ) : this.props.placeholderText}
           </div>
-<<<<<<< HEAD
-          {StyleUtils.getWindowSize(theme.BreakPoints) !== 'xsmall' &&
-            <Icon
-              size={20}
-              style={styles.selectedDateCaret}
-              type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
-            />}
-=======
           <Icon
             size={20}
             style={styles.selectedDateCaret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
->>>>>>> master
         </div>
         <Container>
           <Row>

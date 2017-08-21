@@ -374,14 +374,9 @@ class FileUpload extends React.Component {
         transform: 'translate(-50%, -50%)'
       },
       invalidMessage: {
-<<<<<<< HEAD
         fontSize: theme.FontSizes.LARGE,
-        marginBottom: 10
-=======
-        fontSize: StyleConstants.FontSizes.LARGE,
         marginBottom: 10,
-        color: StyleConstants.Colors.STRAWBERRY
->>>>>>> master
+        color: theme.Colors.DANGER
       },
       invalidIcon: {
         color: theme.Colors.GRAY_500

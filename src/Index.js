@@ -67,9 +67,7 @@ module.exports = {
 
   // App Utils
   ChartUtils: require('./utils/Chart'),
-<<<<<<< HEAD
-  StyleUtils: require('./utils/Style')
-=======
+  StyleUtils: require('./utils/Style'),
 
   // App configuration
   Config: {
@@ -77,5 +75,4 @@ module.exports = {
       moment.tz.setDefault(timezone);
     }
   }
->>>>>>> master
 };

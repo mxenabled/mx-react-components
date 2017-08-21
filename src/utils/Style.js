@@ -65,8 +65,6 @@ const StyleUtils = {
       windowSize = 'large';
     } else if (width >= breakPoints.medium) {
       windowSize = 'medium';
-    } else if (width <= breakPoints.small) {
-      windowSize = 'xsmall';
     }
 
     return windowSize;
