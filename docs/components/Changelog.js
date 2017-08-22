@@ -6,12 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
         <h3>Release Candidate 5.0.0-rc.105</h3>
+        <h3>Release Candidate 5.0.0-rc.106</h3>
         <ul>
           <li>
             Adds two callback props to Drawer, onOpen and beforeClose (<a href='https://github.com/mxenabled/mx-react-components/pull/639'>#639</a>).
           </li>
           <li>
-            Implements shouldComponentUpdatein Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/640'>#640</a>).
+            Implements shouldComponentUpdate in Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/640'>#640</a>).
           </li>
           <li>
             Polish DateRangePicker UI & styling (<a href='https://github.com/mxenabled/mx-react-components/pull/641'>#641</a>).
