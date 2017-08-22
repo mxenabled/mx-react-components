@@ -279,6 +279,7 @@ class FileUpload extends React.Component {
                   icon='delete'
                   onClick={this._removeFile}
                   style={styles.button}
+                  theme={theme}
                   type='secondary'
                 />
               </div>

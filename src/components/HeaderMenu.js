@@ -7,7 +7,8 @@ class HeaderMenu extends React.Component {
   static propTypes = {
     buttonIcon: PropTypes.string,
     buttonText: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    theme: themeShape
   }
 
   state = {
@@ -35,6 +36,7 @@ class HeaderMenu extends React.Component {
         <Button
           icon={this.props.buttonIcon}
           onClick={this.toggle}
+          theme={theme}
           type='neutral'
         >
           {this.props.buttonText}

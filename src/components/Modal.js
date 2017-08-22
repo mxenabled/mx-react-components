@@ -105,8 +105,8 @@ class Modal extends React.Component {
                   isActive={button.isActive}
                   key={button.type + i}
                   onClick={button.onClick}
-                  primaryColor={button.primaryColor}
                   style={Object.assign({}, styles.button, button.style)}
+                  theme={theme}
                   type={button.type}
                 >
                   {button.label}
