@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
         <h3>Release Candidate 5.0.0-rc.105</h3>
+        <h3>Release Candidate 5.0.0-rc.107</h3>
+        <ul>
+          <li>
+            Adds new submit-feedback icon to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/644'>#644</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.106</h3>
         <ul>
           <li>
