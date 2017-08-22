@@ -465,7 +465,7 @@ class DateRangePicker extends React.Component {
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
-        color: theme.Colors.BLACK,
+        color: theme.Colors.GRAY_900,
         cursor: 'pointer',
         display: 'inline-block',
         fontFamily: theme.FontFamily,

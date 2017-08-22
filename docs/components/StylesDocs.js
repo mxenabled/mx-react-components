@@ -17,7 +17,8 @@ const ColorInfo = ({ colorName }) => (
     flexWrap: 'wrap',
     margin: 20,
     textAlign: 'center'
-  }}>
+  }}
+  >
     <div key={colorName} style={{ width: 80, height: 80, borderRadius: '100%', backgroundColor: Styles.Colors[colorName] }} />
     <div style={{ color: Styles.Colors.GRAY_700, marginTop: 5 }}>{colorName}</div>
     <div style={{ color: Styles.Colors.GRAY_500, marginTop: 5, fontSize: Styles.FontSizes.SMALL }}>({Styles.Colors[colorName]})</div>
@@ -57,7 +58,8 @@ class StylesDocs extends React.Component {
           'GRAY_500',
           'GRAY_700',
           'GRAY_900'
-        ]} />
+        ]}
+        />
 
         <h5>Accent Colors</h5>
         <ColorsList colors={[
@@ -66,19 +68,22 @@ class StylesDocs extends React.Component {
           'WARNING',
           'DANGER',
           'ATTENTION'
-        ]} />
+        ]}
+        />
 
         <h5>Light Accent Colors</h5>
         <ColorsList colors={[
           'LIGHT_SUCCESS',
           'LIGHT_WARNING',
           'LIGHT_DANGER'
-        ]} />
+        ]}
+        />
 
         <h5>Scrim Color</h5>
         <ColorsList colors={[
           'SCRIM'
-        ]} />
+        ]}
+        />
 
         <h5>FontSizes</h5>
         <Markdown lang='js'>
