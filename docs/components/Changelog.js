@@ -5,7 +5,13 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
-        <h3>Release Candidate 5.0.0-rc.105</h3>
+        <h3>Release Candidate 5.0.0-rc.108</h3>
+        <ul>
+          <li>
+            Adds mechanism for setting default moment time zone (<a href='https://github.com/mxenabled/mx-react-components/pull/645'>#645</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.107</h3>
         <ul>
           <li>
