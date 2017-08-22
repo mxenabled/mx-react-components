@@ -172,6 +172,7 @@ class PaginationButtons extends React.Component {
           ...this._getPageButtons(styles),
           this._getNextButton(styles)
         ]}
+        theme={theme}
         type={this.props.type}
       />
     );
