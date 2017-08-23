@@ -78,7 +78,7 @@ class MonthSelector extends React.Component {
     return (
       <Selector
         {...this.props}
-        currentDate={moment(this.props.currentDate, 'X').format('MMMM')}
+        currentDate={moment.unix(this.props.currentDate).format('MMMM')}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
         style={styles.monthSelector}
@@ -117,7 +117,7 @@ class YearSelector extends React.Component {
     return (
       <Selector
         {...this.props}
-        currentDate={moment(this.props.currentDate, 'X').format('YYYY')}
+        currentDate={moment.unix(this.props.currentDate).format('YYYY')}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
       />
