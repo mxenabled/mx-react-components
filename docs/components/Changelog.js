@@ -29,6 +29,13 @@ class Changelog extends React.Component {
 
         //==========================================
 
+        <h3>Release Candidate 5.0.0-rc.109</h3>
+        <ul>
+          <li>
+            Fix for common height issues in Drawer component. (<a href='https://github.com/mxenabled/mx-react-components/pull/646'>#646</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.108</h3>
         <ul>
           <li>
