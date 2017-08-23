@@ -172,7 +172,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 80? =================================
+        <h3>Release Candidate 5.0.0-rc.80</h3>
+        <ul>
+          <li>
+            SimpleSelect accessibility using Listbox/Option (<a href='https://github.com/mxenabled/mx-react-components/pull/556'>#556</a>).
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.79</h3>
         <ul>
@@ -181,7 +186,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 78 ? ================================
+        <h3>Release Candidate 5.0.0-rc.78</h3>
+        <ul>
+          <li>
+            Adds displayValue as argument to onDateSelect call in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/554'>#554</a>).
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.77</h3>
         <ul>
@@ -207,16 +217,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 74 ? ===================================
-
         <h3>Release Candidate 5.0.0-rc.73</h3>
         <ul>
           <li>
             Fix issue with onBlur in SimpleInput (<a href='https://github.com/mxenabled/mx-react-components/pull/545'>#545</a>)
           </li>
         </ul>
-
-        // 72 ? =======================================
 
         <h3>Release Candidate 5.0.0-rc.71</h3>
         <ul>
@@ -235,7 +241,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 69 ? =================================
+        <h3>Release Candidate 5.0.0-rc.69</h3>
+        <ul>
+          <li>
+            SimpleInput shift+tab accessibility fix (<a href='https://github.com/mxenabled/mx-react-components/pull/536'>#536</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.68</h3>
         <ul>
@@ -243,8 +254,6 @@ class Changelog extends React.Component {
             Add aria-label and tabIndex to the drawer for accessibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/532'>#533</a>)
           </li>
         </ul>
-
-        // 67 ? =============================
 
         <h3>Release Candidate 5.0.0-rc.66</h3>
         <ul>
@@ -338,7 +347,19 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 54, 55 ? =============================
+        <h3>Release Candidate 5.0.0-rc.55</h3>
+        <ul>
+          <li>
+            Style polish to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/511'>#511</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.54</h3>
+        <ul>
+          <li>
+            Converts Button component from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/506'>#506</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.53</h3>
         <ul>
@@ -353,7 +374,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 52 ? =============================
+        <h3>Release Candidate 5.0.0-rc.52</h3>
+        <ul>
+          <li>
+            Responsive Date Range Picker (<a href='https://github.com/mxenabled/mx-react-components/pull/505'>#505</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.51</h3>
         <ul>
@@ -378,8 +404,6 @@ class Changelog extends React.Component {
             Add navConfig back into Drawer component to keep backward compatibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/498'>#498</a>)
           </li>
         </ul>
-
-        // 48 ? ===============================
 
         <h3>Release Candidate 5.0.0-rc.47</h3>
         <ul>
@@ -409,7 +433,33 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 40, 41, 42, 43 ? ===========================
+        <h3>Release Candidate 5.0.0-rc.43</h3>
+        <ul>
+          <li>
+            TimeBasedLineChart bug fixes and style polish(<a href='https://github.com/mxenabled/mx-react-components/pull/493'>#493</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.42</h3>
+        <ul>
+          <li>
+            Fixes issue in Drawer component with new version of Radium(<a href='https://github.com/mxenabled/mx-react-components/pull/492'>#492</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.41</h3>
+        <ul>
+          <li>
+            Adds new component MessageBox(<a href='https://github.com/mxenabled/mx-react-components/pull/490'>#490</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.40</h3>
+        <ul>
+          <li>
+            Adds Yarn, Updates Radium, and fixes docs issues(<a href='https://github.com/mxenabled/mx-react-components/pull/489'>#489</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.39</h3>
         <ul>
@@ -425,7 +475,26 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 33 - 37 ? ===========================
+        <h3>Release Candidate 5.0.0-rc.36</h3>
+        <ul>
+          <li>
+            Update to Style Color Constants(<a href='https://github.com/mxenabled/mx-react-components/pull/484'>#484</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.34</h3>
+        <ul>
+          <li>
+            Button Component: New primaryInverse type(<a href='https://github.com/mxenabled/mx-react-components/pull/483'>#483</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.33</h3>
+        <ul>
+          <li>
+            Fix for y range and tick values in D3 chart utils(<a href='https://github.com/mxenabled/mx-react-components/pull/479'>#479</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.32</h3>
         <ul>
@@ -434,7 +503,19 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 30, 31 ? ===========================
+        <h3>Release Candidate 5.0.0-rc.31</h3>
+        <ul>
+          <li>
+            Chart utils getDataMinMaxValues function fix(<a href='https://github.com/mxenabled/mx-react-components/pull/478'>#478</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.30</h3>
+        <ul>
+          <li>
+            Adds ability to have an overlay for circles in D3 CircleGroup component(<a href='https://github.com/mxenabled/mx-react-components/pull/477'>#477</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.29</h3>
         <ul>
@@ -457,7 +538,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 26 ? ===============================
+        <h3>Release Candidate 5.0.0-rc.26</h3>
+        <ul>
+          <li>
+            Adds new SimpleSlider component(<a href='https://github.com/mxenabled/mx-react-components/pull/466'>#466</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.25</h3>
         <ul>
@@ -553,7 +639,29 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 10, 11, 12, 13 ? ==========================
+        <h3>Release Candidate 5.0.0-rc.13</h3>
+        <ul>
+          <li>
+            Fixes DateRangePicker next click function (<a href='https://github.com/mxenabled/mx-react-components/pull/453'>#453</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.11</h3>
+        <ul>
+          <li>
+            Adds new component Menu(<a href='https://github.com/mxenabled/mx-react-components/pull/436'>#436</a>)
+          </li>
+          <li>
+            Adds new component TextArea(<a href='https://github.com/mxenabled/mx-react-components/pull/435'>#435</a>)
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.10</h3>
+        <ul>
+          <li>
+            Adds letter spacing to the modal title(<a href='https://github.com/mxenabled/mx-react-components/pull/450'>#450</a>)
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.9</h3>
         <ul>
