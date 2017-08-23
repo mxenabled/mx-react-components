@@ -7,7 +7,8 @@ class HeaderMenu extends React.Component {
   static propTypes = {
     buttonIcon: PropTypes.string,
     buttonText: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    theme: themeShape
   }
 
   state = {
@@ -21,6 +22,7 @@ class HeaderMenu extends React.Component {
   }
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const items = this.props.items.map(item =>
       Object.assign({}, item, {
         onClick: (event, itemClicked) => {
@@ -35,6 +37,7 @@ class HeaderMenu extends React.Component {
         <Button
           icon={this.props.buttonIcon}
           onClick={this.toggle}
+          theme={theme}
           type='neutral'
         >
           {this.props.buttonText}
@@ -44,6 +47,7 @@ class HeaderMenu extends React.Component {
             items={items}
             onScrimClick={this.toggle}
             styles={{ menu: { left: 65 } }}
+            theme={theme}
           />
          ) : null}
       </div>

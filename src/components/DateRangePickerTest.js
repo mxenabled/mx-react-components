@@ -251,11 +251,11 @@ class DateRangePicker extends React.Component {
                           showCalendar: !isLargeOrMediumWindowSize && true
                         });
                       }}
-                      primaryColor={this.props.primaryColor}
                       selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
                       selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
+                      theme={theme}
                     />
                   }
                 </div>
@@ -299,7 +299,7 @@ class DateRangePicker extends React.Component {
                       <div style={styles.applyButton}>
                         <Button
                           onClick={() => this.setState({ showCalendar: false })}
-                          primaryColor={this.props.primaryColor}
+                          theme={theme}
                           type='primary'
                         >
                           Apply
