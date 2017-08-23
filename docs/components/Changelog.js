@@ -77,7 +77,12 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 103? ==============================
+        <h3>Release Candidate 5.0.0-rc.103</h3>
+        <ul>
+          <li>
+            DateRangePicker - Only show calendar icon at larger resolutions (<a href='https://github.com/mxenabled/mx-react-components/pull/636'>#636</a>).
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.102</h3>
         <ul>
@@ -138,7 +143,36 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 91, 92, 93, 94 ? =====================================
+        <h3>Release Candidate 5.0.0-rc.94</h3>
+        <ul>
+          <li>
+            Adds buttonRef for calling focus etc. on the Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/584'>#584</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.93</h3>
+        <ul>
+          <li>
+            Fixes DateRangePicker month title (<a href='https://github.com/mxenabled/mx-react-components/pull/580'>#580</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.92</h3>
+        <ul>
+          <li>
+            Fixes Select scrim click (<a href='https://github.com/mxenabled/mx-react-components/pull/578'>#578</a>).
+          </li>
+          <li>
+            Fixes select isSelected highlighting (<a href='https://github.com/mxenabled/mx-react-components/pull/579'>#579</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.91</h3>
+        <ul>
+          <li>
+            Fixes typo in Select component (<a href='https://github.com/mxenabled/mx-react-components/pull/577'>#577</a>).
+          </li>
+        </ul>
 
         <h3>Release Candidate 5.0.0-rc.90</h3>
         <ul>
@@ -147,7 +181,67 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        // 84 - 89 ? ====================================
+        <h3>Release Candidate 5.0.0-rc.89</h3>
+        <ul>
+          <li>
+            Adds OTHER as a category color in Style constants  (<a href='https://github.com/mxenabled/mx-react-components/pull/576'>#576</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.88</h3>
+        <ul>
+          <li>
+            Defaults DateRangePicker to last date (<a href='https://github.com/mxenabled/mx-react-components/pull/572'>#572</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.87</h3>
+        <ul>
+          <li>
+            Adds new appliances icon (<a href='https://github.com/mxenabled/mx-react-components/pull/568'>#568</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.85</h3>
+        <ul>
+          <li>
+            Updates package.json scripts using yarn (<a href='https://github.com/mxenabled/mx-react-components/pull/569'>#569</a>).
+          </li>
+          <li>
+            DisplayInput fix for custom id (<a href='https://github.com/mxenabled/mx-react-components/pull/570'>#570</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.84</h3>
+        <ul>
+          <li>
+            Upgrades to React 15.5 (<a href='https://github.com/mxenabled/mx-react-components/pull/560'>#560</a>).
+          </li>
+          <li>
+            Converts DonutChart from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/550'>#550</a>).
+          </li>
+          <li>
+            Converts Drawer from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/551'>#551</a>).
+          </li>
+          <li>
+            Converts FileUpload from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/552'>#552</a>).
+          </li>
+          <li>
+            Converts Gauge from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/553'>#553</a>).
+          </li>
+          <li>
+            Converts HeaderMenu from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/562'>#562</a>).
+          </li>
+          <li>
+            Converts Loader from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/564'>#564</a>).
+          </li>
+          <li>
+            Remaining Components converted from creatClass to ES6 classes (<a href='https://github.com/mxenabled/mx-react-components/pull/565'>#565</a>).
+          </li>
+          <li>
+            Converted docs from creatClass to ES6 classes (<a href='https://github.com/mxenabled/mx-react-components/pull/566'>#566</a>).
+          </li>
+        </ul>        
 
         <h3>Release Candidate 5.0.0-rc.83</h3>
         <ul>
