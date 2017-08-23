@@ -5,7 +5,17 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
-        <h3>Release Candidate 5.0.0-rc.105</h3>
+        <h3>Release Candidate 5.0.0-rc.110</h3>
+        <ul>
+          <li>
+            Remove old DateRangePicker code (<a href='https://github.com/mxenabled/mx-react-components/pull/643'>#643</a>).
+          </li>
+          <li>
+            Fix Moment UTC bug in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/649'>#649</a>).
+          </li>
+        </ul>
+
+        <h3>Release Candidate 5.0.0-rc.106</h3>
         <ul>
           <li>
             Adds two callback props to Drawer, onOpen and beforeClose (<a href='https://github.com/mxenabled/mx-react-components/pull/639'>#639</a>).
