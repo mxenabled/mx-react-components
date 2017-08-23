@@ -544,6 +544,7 @@ class TimeBasedLineChart extends React.Component {
               {shadeFutureOnGraph ? (
                 <ShadedHatchPatternRectangleGroup
                   height={adjustedHeight}
+                  theme={this.state.theme}
                   translation={this._getLineTranslation()}
                   width={this._getShadedRectangleWidth()}
                   x={this._getShadedRectangleXValue()}
@@ -554,6 +555,7 @@ class TimeBasedLineChart extends React.Component {
                 <ShadedAreaRectangleGroup
                   fillColor={this.state.theme.Colors.DANGER}
                   height={this._getShadedRectangleHeight()}
+                  theme={this.state.theme}
                   translation={this._getLineTranslation()}
                   width={adjustedWidth}
                   x={0}
@@ -608,6 +610,7 @@ class TimeBasedLineChart extends React.Component {
                     data={this._getZeroLineData()}
                     lineColor={this.state.theme.Colors.DANGER}
                     shouldAnimate={false}
+                    theme={this.state.theme}
                     translation={this._getLineTranslation()}
                     xScaleValueFunction={this._getXScaleValue}
                     yScaleValueFunction={this._getYScaleValue}
@@ -626,6 +629,7 @@ class TimeBasedLineChart extends React.Component {
                 adjustedHeight={adjustedHeight}
                 data={data}
                 lineColor={lineColor}
+                theme={this.state.theme}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
@@ -633,6 +637,7 @@ class TimeBasedLineChart extends React.Component {
               <CirclesGroup
                 adjustedHeight={adjustedHeight}
                 data={this._getDataForLineCircles()}
+                theme={this.state.theme}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
