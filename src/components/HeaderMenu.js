@@ -47,6 +47,7 @@ class HeaderMenu extends React.Component {
             items={items}
             onScrimClick={this.toggle}
             styles={{ menu: { left: 65 } }}
+            theme={theme}
           />
          ) : null}
       </div>
