@@ -207,6 +207,7 @@ class Components extends React.Component {
             <Link to='/components/row-column'>Row & Column</Link>
 
             <h3>Helpers</h3>
+            <Link to='/components/config'>Config</Link>
             <Link to='/components/styles'>Styles</Link>
           </div>
         </div>

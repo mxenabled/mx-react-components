@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   BarChart: require('./components/BarChart'),
   Button: require('./components/Button'),
@@ -63,5 +65,12 @@ module.exports = {
   Styles: require('./constants/Style'),
 
   // App Utils
-  ChartUtils: require('./utils/Chart')
+  ChartUtils: require('./utils/Chart'),
+
+  // App configuration
+  Config: {
+    setDefaultTimeZone: (timezone) => {
+      moment.tz.setDefault(timezone);
+    }
+  }
 };

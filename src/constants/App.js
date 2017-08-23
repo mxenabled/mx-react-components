@@ -475,6 +475,10 @@ module.exports = {
       displayValue: 'Sports'
     },
     {
+      value: 'submit-feedback',
+      displayValue: 'Submit Feedback'
+    },
+    {
       value: 'subtract',
       displayValue: 'Subtract'
     },

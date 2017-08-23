@@ -252,6 +252,7 @@ class DateRangePicker extends React.Component {
                   }
                 </div>
               )}
+<<<<<<< HEAD
 
               {(this.state.showCalendar || isLargeOrMediumWindowSize) && (
                 <div>
@@ -259,6 +260,21 @@ class DateRangePicker extends React.Component {
                     <div style={styles.calendarHeader}>
                       <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
                       <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+=======
+              <Column span={spans.calendar}>
+                <div style={styles.calendarWrapper}>
+                  <div style={styles.calendarHeader}>
+                    <Icon
+                      elementProps={{
+                        onClick: this._handlePreviousClick
+                      }}
+                      size={20}
+                      style={styles.calendarHeaderNav}
+                      type='caret-left'
+                    />
+                    <div>
+                      {moment.unix(this.state.currentDate).format('MMMM YYYY')}
+>>>>>>> master
                     </div>
                     <div style={styles.calendarWeek}>
                       {[{ label: 'S', value: 'Sunday' },
