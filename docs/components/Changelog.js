@@ -5,6 +5,30 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
+        <h2>MX React Components V 5.0</h2>
+
+        <h3>Breaking Changes</h3>
+        <ul>
+        </ul>
+
+        <h3>New Features</h3>
+        <ul>
+        </ul>
+
+        <h3>New Icons</h3>
+        <ul>
+        </ul>
+
+        <h3>Accessibility</h3>
+        <ul>
+        </ul>
+
+        <h3>Bug Fixes</h3>
+        <ul>
+        </ul>
+
+        //==========================================
+
         <h3>Release Candidate 5.0.0-rc.108</h3>
         <ul>
           <li>
@@ -46,6 +70,8 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 103? ==============================
+
         <h3>Release Candidate 5.0.0-rc.102</h3>
         <ul>
           <li>
@@ -74,7 +100,7 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
-        <h3>Release Candidate 5.0.0-rc.97</h3>
+        <h3>Release Candidate 5.0.0-rc.98</h3>
         <ul>
           <li>
             Fixes bug with the file type and extension validation in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/630'>#630</a>).
@@ -105,12 +131,16 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 91, 92, 93, 94 ? =====================================
+
         <h3>Release Candidate 5.0.0-rc.90</h3>
         <ul>
           <li>
             Select accessibility updates (<a href='https://github.com/mxenabled/mx-react-components/pull/571'>#571</a>).
           </li>
         </ul>
+
+        // 84 - 89 ? ====================================
 
         <h3>Release Candidate 5.0.0-rc.83</h3>
         <ul>
@@ -135,12 +165,16 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 80? =================================
+
         <h3>Release Candidate 5.0.0-rc.79</h3>
         <ul>
           <li>
             DisplayInput children styles (<a href='https://github.com/mxenabled/mx-react-components/pull/555'>#555</a>).
           </li>
         </ul>
+
+        // 78 ? ================================
 
         <h3>Release Candidate 5.0.0-rc.77</h3>
         <ul>
@@ -166,12 +200,16 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 74 ? ===================================
+
         <h3>Release Candidate 5.0.0-rc.73</h3>
         <ul>
           <li>
             Fix issue with onBlur in SimpleInput (<a href='https://github.com/mxenabled/mx-react-components/pull/545'>#545</a>)
           </li>
         </ul>
+
+        // 72 ? =======================================
 
         <h3>Release Candidate 5.0.0-rc.71</h3>
         <ul>
@@ -190,12 +228,16 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 69 ? =================================
+
         <h3>Release Candidate 5.0.0-rc.68</h3>
         <ul>
           <li>
             Add aria-label and tabIndex to the drawer for accessibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/532'>#533</a>)
           </li>
         </ul>
+
+        // 67 ? =============================
 
         <h3>Release Candidate 5.0.0-rc.66</h3>
         <ul>
@@ -289,6 +331,8 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 54, 55 ? =============================
+
         <h3>Release Candidate 5.0.0-rc.53</h3>
         <ul>
           <li>
@@ -301,6 +345,8 @@ class Changelog extends React.Component {
             SimpleSelect supports props.children over props.items (<a href='https://github.com/mxenabled/mx-react-components/pull/507'>#507</a>)
           </li>
         </ul>
+
+        // 52 ? =============================
 
         <h3>Release Candidate 5.0.0-rc.51</h3>
         <ul>
@@ -325,6 +371,8 @@ class Changelog extends React.Component {
             Add navConfig back into Drawer component to keep backward compatibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/498'>#498</a>)
           </li>
         </ul>
+
+        // 48 ? ===============================
 
         <h3>Release Candidate 5.0.0-rc.47</h3>
         <ul>
@@ -354,6 +402,8 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 40, 41, 42, 43 ? ===========================
+
         <h3>Release Candidate 5.0.0-rc.39</h3>
         <ul>
           <li>
@@ -368,12 +418,16 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 33 - 37 ? ===========================
+
         <h3>Release Candidate 5.0.0-rc.32</h3>
         <ul>
           <li>
             Update SimpleSlider Component.(<a href='https://github.com/mxenabled/mx-react-components/pull/476'>#476</a>)
           </li>
         </ul>
+
+        // 30, 31 ? ===========================
 
         <h3>Release Candidate 5.0.0-rc.29</h3>
         <ul>
@@ -395,6 +449,8 @@ class Changelog extends React.Component {
             Added `bell`, `net-worth2`, and `pointer` icons.(<a href='https://github.com/mxenabled/mx-react-components/pull/472'>#472</a>)
           </li>
         </ul>
+
+        // 26 ? ===============================
 
         <h3>Release Candidate 5.0.0-rc.25</h3>
         <ul>
@@ -490,6 +546,8 @@ class Changelog extends React.Component {
           </li>
         </ul>
 
+        // 10, 11, 12, 13 ? ==========================
+
         <h3>Release Candidate 5.0.0-rc.9</h3>
         <ul>
           <li>
@@ -570,6 +628,8 @@ class Changelog extends React.Component {
             SimpleInput: Use callback for reference to Input(<a href='https://github.com/mxenabled/mx-react-components/pull/429'>#429</a>)
           </li>
         </ul>
+
+// END RC 5 Releases ==================================================================
 
         <h3>4.4.37</h3>
         <ul>
