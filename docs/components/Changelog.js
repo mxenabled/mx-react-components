@@ -27,8 +27,6 @@ class Changelog extends React.Component {
         <ul>
         </ul>
 
-        //==========================================
-
         <h3>Release Candidate 5.0.0-rc.110</h3>
         <ul>
           <li>
@@ -847,8 +845,6 @@ class Changelog extends React.Component {
             SimpleInput: Use callback for reference to Input(<a href='https://github.com/mxenabled/mx-react-components/pull/429'>#429</a>)
           </li>
         </ul>
-
-// END RC 5 Releases ==================================================================
 
         <h3>4.4.37</h3>
         <ul>
