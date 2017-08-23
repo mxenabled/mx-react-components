@@ -29,6 +29,16 @@ class Changelog extends React.Component {
 
         //==========================================
 
+        <h3>Release Candidate 5.0.0-rc.110</h3>
+        <ul>
+          <li>
+            Remove old DateRangePicker code (<a href='https://github.com/mxenabled/mx-react-components/pull/643'>#643</a>).
+          </li>
+          <li>
+            Fix Moment UTC bug in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/649'>#649</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.109</h3>
         <ul>
           <li>
