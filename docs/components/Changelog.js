@@ -5,29 +5,78 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
+
         <h2>MX React Components V 5.0</h2>
 
-        <h3>Breaking Changes</h3>
+        <h3>v5 Release Notes</h3>
         <ul>
+          <li>
+            Updates to React 15.5
+          </li>
+          <li>
+            Updates to ES6 Classes
+          </li>
+          <li>
+            Adds ability to apply theme to components
+          </li>
+          <li>
+            Adds ability to set default timezone for moment within package
+          </li>
+          <li>
+            Makes several components more accessible
+          </li>
+          <li>
+            Adds many new icons to the Icon component
+          </li>
+          <li>
+            D3 Chart components revamped to work better with React and be more reusable
+          </li>
+          <li>
+            Revamps DateRangePicker component to be more responsive and user friendly
+          </li>
+          <li>
+            Adds new component Menu(<a href='https://github.com/mxenabled/mx-react-components/pull/436'>#436</a>)
+          </li>
+          <li>
+            Adds new component MessageBox(<a href='https://github.com/mxenabled/mx-react-components/pull/490'>#490</a>)
+          </li>
+          <li>
+            Adds new component NotifyOnScrollThreshold(<a href='https://github.com/mxenabled/mx-react-components/pull/496'>#496</a>)
+          </li>
+          <li>
+            Adds new component PaginationButtons(<a href='https://github.com/mxenabled/mx-react-components/pull/491'>#491</a>)
+          </li>
+          <li>
+            Adds new component SimpleSlider(<a href='https://github.com/mxenabled/mx-react-components/pull/466'>#466</a>)
+          </li>
+          <li>
+            Adds new component TextArea(<a href='https://github.com/mxenabled/mx-react-components/pull/435'>#435</a>)
+          </li>
+          <li>
+            Various bug fixes
+          </li>
+          <li>
+            Various style polishing
+          </li>
+          <li>
+            Updates and changes to Style constants(<a href='https://github.com/mxenabled/mx-react-components/blob/master/src/constants/Style.js'>Style.js</a>)
+          </li>
         </ul>
 
-        <h3>New Features</h3>
+        <h3>v5 Breaking Changes</h3>
         <ul>
+          <li>
+            Fixes React unknown prop warnings on various components(<a href='https://github.com/mxenabled/mx-react-components/pull/426'>#426</a>)
+          </li>
+          <li>
+            Removes xsmall breakpoint in style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/597'>#597</a>).
+          </li>
+          <li>
+            Updates the medium breakpoint to 768px to align better with the ipad and other tablets.(<a href='https://github.com/mxenabled/mx-react-components/pull/461'>#461</a>)
+          </li>
         </ul>
 
-        <h3>New Icons</h3>
-        <ul>
-        </ul>
-
-        <h3>Accessibility</h3>
-        <ul>
-        </ul>
-
-        <h3>Bug Fixes</h3>
-        <ul>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.110</h3>
+        <h3>v5 Complete Change log</h3>
         <ul>
           <li>
             Remove old DateRangePicker code (<a href='https://github.com/mxenabled/mx-react-components/pull/643'>#643</a>).
@@ -35,31 +84,15 @@ class Changelog extends React.Component {
           <li>
             Fix Moment UTC bug in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/649'>#649</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.109</h3>
-        <ul>
           <li>
             Fix for common height issues in Drawer component. (<a href='https://github.com/mxenabled/mx-react-components/pull/646'>#646</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.108</h3>
-        <ul>
           <li>
             Adds mechanism for setting default moment time zone (<a href='https://github.com/mxenabled/mx-react-components/pull/645'>#645</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.107</h3>
-        <ul>
           <li>
             Adds new submit-feedback icon to Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/644'>#644</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.106</h3>
-        <ul>
           <li>
             Adds two callback props to Drawer, onOpen and beforeClose (<a href='https://github.com/mxenabled/mx-react-components/pull/639'>#639</a>).
           </li>
@@ -69,159 +102,75 @@ class Changelog extends React.Component {
           <li>
             Polish DateRangePicker UI & styling (<a href='https://github.com/mxenabled/mx-react-components/pull/641'>#641</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.105</h3>
-        <ul>
           <li>
             Updates position styling for DateRangePicker mobile bug(<a href='https://github.com/mxenabled/mx-react-components/pull/637'>#637</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.104</h3>
-        <ul>
           <li>
             Adds a test DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/635'>#635</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.103</h3>
-        <ul>
           <li>
             DateRangePicker - Only show calendar icon at larger resolutions (<a href='https://github.com/mxenabled/mx-react-components/pull/636'>#636</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.102</h3>
-        <ul>
           <li>
             Adds default focusable=false and aria-hidden=true to svg in Icon (<a href='https://github.com/mxenabled/mx-react-components/pull/634'>#634</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.101</h3>
-        <ul>
           <li>
             Adds focusable=false attribute to SVGs in buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/633'>#633</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.100</h3>
-        <ul>
           <li>
             Fixes overlaping x axis labels in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/631'>#631</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.99</h3>
-        <ul>
           <li>
             Removes xsmall breakpoint in style constants (<a href='https://github.com/mxenabled/mx-react-components/pull/597'>#597</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.98</h3>
-        <ul>
           <li>
             Fixes bug with the file type and extension validation in FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/630'>#630</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.97</h3>
-        <ul>
           <li>
             Allows extensions to be used in `allowedFileTypes` of FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/629'>#629</a>).
           </li>
           <li>
             Adds default error messages with file and/or image validation fails on FileUpload (<a href='https://github.com/mxenabled/mx-react-components/pull/629'>#629</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.96</h3>
-        <ul>
           <li>
             Allows for customizing the input type of DisplayInput (<a href='https://github.com/mxenabled/mx-react-components/pull/593'>#593</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.95</h3>
-        <ul>
           <li>
             Fixes display issues with the Calendar component (<a href='https://github.com/mxenabled/mx-react-components/pull/590'>#590</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.94</h3>
-        <ul>
           <li>
             Adds buttonRef for calling focus etc. on the Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/584'>#584</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.93</h3>
-        <ul>
           <li>
             Fixes DateRangePicker month title (<a href='https://github.com/mxenabled/mx-react-components/pull/580'>#580</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.92</h3>
-        <ul>
           <li>
             Fixes Select scrim click (<a href='https://github.com/mxenabled/mx-react-components/pull/578'>#578</a>).
           </li>
           <li>
             Fixes select isSelected highlighting (<a href='https://github.com/mxenabled/mx-react-components/pull/579'>#579</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.91</h3>
-        <ul>
           <li>
             Fixes typo in Select component (<a href='https://github.com/mxenabled/mx-react-components/pull/577'>#577</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.90</h3>
-        <ul>
           <li>
             Select accessibility updates (<a href='https://github.com/mxenabled/mx-react-components/pull/571'>#571</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.89</h3>
-        <ul>
           <li>
             Adds OTHER as a category color in Style constants  (<a href='https://github.com/mxenabled/mx-react-components/pull/576'>#576</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.88</h3>
-        <ul>
           <li>
             Defaults DateRangePicker to last date (<a href='https://github.com/mxenabled/mx-react-components/pull/572'>#572</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.87</h3>
-        <ul>
           <li>
             Adds new appliances icon (<a href='https://github.com/mxenabled/mx-react-components/pull/568'>#568</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.85</h3>
-        <ul>
           <li>
             Updates package.json scripts using yarn (<a href='https://github.com/mxenabled/mx-react-components/pull/569'>#569</a>).
           </li>
           <li>
             DisplayInput fix for custom id (<a href='https://github.com/mxenabled/mx-react-components/pull/570'>#570</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.84</h3>
-        <ul>
           <li>
             Upgrades to React 15.5 (<a href='https://github.com/mxenabled/mx-react-components/pull/560'>#560</a>).
           </li>
@@ -249,137 +198,65 @@ class Changelog extends React.Component {
           <li>
             Converted docs from creatClass to ES6 classes (<a href='https://github.com/mxenabled/mx-react-components/pull/566'>#566</a>).
           </li>
-        </ul>        
-
-        <h3>Release Candidate 5.0.0-rc.83</h3>
-        <ul>
           <li>
             Rename ariaLabel to aria-label to match React's naming conventions (<a href='https://github.com/mxenabled/mx-react-components/pull/561'>#561</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.82</h3>
-        <ul>
           <li>
             Add esc key handling to SimpleSelect (<a href='https://github.com/mxenabled/mx-react-components/pull/558'>#558</a>).
             Use a label tag for the DisplayInput label (<a href='https://github.com/mxenabled/mx-react-components/pull/559'>#559</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.81</h3>
-        <ul>
           <li>
             SimpleSelect accessibility using Listbox/Option (<a href='https://github.com/mxenabled/mx-react-components/pull/556'>#556</a>)
             (<a href='https://github.com/mxenabled/mx-react-components/pull/557'>#557</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.80</h3>
-        <ul>
           <li>
             SimpleSelect accessibility using Listbox/Option (<a href='https://github.com/mxenabled/mx-react-components/pull/556'>#556</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.79</h3>
-        <ul>
           <li>
             DisplayInput children styles (<a href='https://github.com/mxenabled/mx-react-components/pull/555'>#555</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.78</h3>
-        <ul>
           <li>
             Adds displayValue as argument to onDateSelect call in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/554'>#554</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.77</h3>
-        <ul>
           <li>
             Adds ariaLabel prop on Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/548'>#548</a>).
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.76</h3>
-        <ul>
           <li>
             Makes Modal always have focusable content (<a href='https://github.com/mxenabled/mx-react-components/pull/547'>#547</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.75</h3>
-        <ul>
           <li>
             Traps focus in Modal, adds focus trap library (<a href='https://github.com/mxenabled/mx-react-components/pull/537'>#537</a>)
           </li>
           <li>
             Traps focus in Drawer (<a href='https://github.com/mxenabled/mx-react-components/pull/543'>#543</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.73</h3>
-        <ul>
           <li>
             Fix issue with onBlur in SimpleInput (<a href='https://github.com/mxenabled/mx-react-components/pull/545'>#545</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.71</h3>
-        <ul>
           <li>
             Allows button component to be passed children with "visuallyHidden" class for accessibility (<a href='https://github.com/mxenabled/mx-react-components/pull/541'>#541</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.70</h3>
-        <ul>
           <li>
             Adds minBarHeight prop to the BarChart component (<a href='https://github.com/mxenabled/mx-react-components/pull/535'>#535</a>)
           </li>
           <li>
             Moves style deprecated warning to a util (<a href='https://github.com/mxenabled/mx-react-components/pull/540'>#540</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.69</h3>
-        <ul>
           <li>
             SimpleInput shift+tab accessibility fix (<a href='https://github.com/mxenabled/mx-react-components/pull/536'>#536</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.68</h3>
-        <ul>
           <li>
             Add aria-label and tabIndex to the drawer for accessibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/532'>#533</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.66</h3>
-        <ul>
           <li>
             Add threshold to BarChart (<a href='https://github.com/mxenabled/mx-react-components/pull/533'>#533</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.65</h3>
-        <ul>
           <li>
             DisplayInput - prevent input text clipping (<a href='https://github.com/mxenabled/mx-react-components/pull/531'>#531</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.64</h3>
-        <ul>
           <li>
             Fixes DateRangePicker options wrapper width (<a href='https://github.com/mxenabled/mx-react-components/pull/530'>#530</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.63</h3>
-        <ul>
           <li>
             Makes Modal More accessible (<a href='https://github.com/mxenabled/mx-react-components/pull/528'>#528</a>)
           </li>
@@ -389,52 +266,24 @@ class Changelog extends React.Component {
           <li>
             Changed fontsize in message box component to MEDIUM (<a href='https://github.com/mxenabled/mx-react-components/pull/517'>#517yarn</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.62</h3>
-        <ul>
           <li>
             Adds a styles prop to the Container component (<a href='https://github.com/mxenabled/mx-react-components/pull/527'>#527</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.61</h3>
-        <ul>
           <li>
             Style Polish and Fixes for default range options in DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/526'>#526</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.60</h3>
-        <ul>
           <li>
             Fixes overflow rule in Safari to allow the display of modals inside a Drawer (<a href='https://github.com/mxenabled/mx-react-components/pull/523'>#523</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.59</h3>
-        <ul>
           <li>
             Adds Needle Icon Component (<a href='https://github.com/mxenabled/mx-react-components/pull/522'>#522</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.58</h3>
-        <ul>
           <li>
             Fixes border bug in ButtonGroup in Safari (<a href='https://github.com/mxenabled/mx-react-components/pull/521'>#521</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.57</h3>
-        <ul>
           <li>
             Makes all input text Charcoal (<a href='https://github.com/mxenabled/mx-react-components/pull/516'>#516</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.56</h3>
-        <ul>
           <li>
             CreateClass to Class Conversion - ButtonGroup (<a href='https://github.com/mxenabled/mx-react-components/pull/509'>#509</a>)
           </li>
@@ -447,24 +296,12 @@ class Changelog extends React.Component {
           <li>
             Updated Gray Colors for Greater Accessibility and Contrast (<a href='https://github.com/mxenabled/mx-react-components/pull/515'>#515</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.55</h3>
-        <ul>
           <li>
             Style polish to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/511'>#511</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.54</h3>
-        <ul>
           <li>
             Converts Button component from createClass to ES6 class (<a href='https://github.com/mxenabled/mx-react-components/pull/506'>#506</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.53</h3>
-        <ul>
           <li>
             Large refactor of the bar chart (<a href='https://github.com/mxenabled/mx-react-components/pull/502'>#502</a>)
           </li>
@@ -474,255 +311,113 @@ class Changelog extends React.Component {
           <li>
             SimpleSelect supports props.children over props.items (<a href='https://github.com/mxenabled/mx-react-components/pull/507'>#507</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.52</h3>
-        <ul>
           <li>
             Responsive Date Range Picker (<a href='https://github.com/mxenabled/mx-react-components/pull/505'>#505</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.51</h3>
-        <ul>
           <li>
             Adds a backgroundColor prop to the select component (<a href='https://github.com/mxenabled/mx-react-components/pull/503'>#503</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.50</h3>
-        <ul>
           <li>
             Add linearGradient helper to Styles (<a href='https://github.com/mxenabled/mx-react-components/pull/501'>#501</a>)
           </li>
           <li>
             Change MessageBox header to semibold (<a href='https://github.com/mxenabled/mx-react-components/pull/500'>#500</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.49</h3>
-        <ul>
           <li>
             Add navConfig back into Drawer component to keep backward compatibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/498'>#498</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.47</h3>
-        <ul>
           <li>
             Allows you to pass component to Drawer header. (<a href='https://github.com/mxenabled/mx-react-components/pull/497'>#497</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.46</h3>
-        <ul>
           <li>
             Added NotifyOnScrollThreshold Component. (<a href='https://github.com/mxenabled/mx-react-components/pull/496'>#496</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.45</h3>
-        <ul>
           <li>
             Added PaginationButtons Component. (<a href='https://github.com/mxenabled/mx-react-components/pull/491'>#491</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.44</h3>
-        <ul>
           <li>
             Added support for disabled buttons in ButtonGroups Component. (<a href='https://github.com/mxenabled/mx-react-components/pull/494'>#494</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.43</h3>
-        <ul>
           <li>
             TimeBasedLineChart bug fixes and style polish(<a href='https://github.com/mxenabled/mx-react-components/pull/493'>#493</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.42</h3>
-        <ul>
           <li>
             Fixes issue in Drawer component with new version of Radium(<a href='https://github.com/mxenabled/mx-react-components/pull/492'>#492</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.41</h3>
-        <ul>
           <li>
             Adds new component MessageBox(<a href='https://github.com/mxenabled/mx-react-components/pull/490'>#490</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.40</h3>
-        <ul>
           <li>
             Adds Yarn, Updates Radium, and fixes docs issues(<a href='https://github.com/mxenabled/mx-react-components/pull/489'>#489</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.39</h3>
-        <ul>
           <li>
             Added another icon. (<a href='https://github.com/mxenabled/mx-react-components/pull/488'>#488</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.38</h3>
-        <ul>
           <li>
             Added more icons. (<a href='https://github.com/mxenabled/mx-react-components/pull/486'>#486</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.36</h3>
-        <ul>
           <li>
             Update to Style Color Constants(<a href='https://github.com/mxenabled/mx-react-components/pull/484'>#484</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.34</h3>
-        <ul>
           <li>
             Button Component: New primaryInverse type(<a href='https://github.com/mxenabled/mx-react-components/pull/483'>#483</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.33</h3>
-        <ul>
           <li>
             Fix for y range and tick values in D3 chart utils(<a href='https://github.com/mxenabled/mx-react-components/pull/479'>#479</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.32</h3>
-        <ul>
           <li>
             Update SimpleSlider Component.(<a href='https://github.com/mxenabled/mx-react-components/pull/476'>#476</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.31</h3>
-        <ul>
           <li>
             Chart utils getDataMinMaxValues function fix(<a href='https://github.com/mxenabled/mx-react-components/pull/478'>#478</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.30</h3>
-        <ul>
           <li>
             Adds ability to have an overlay for circles in D3 CircleGroup component(<a href='https://github.com/mxenabled/mx-react-components/pull/477'>#477</a>)
           </li>
-        </ul>
 
-        <h3>Release Candidate 5.0.0-rc.29</h3>
-        <ul>
           <li>
             Make Button more accessible.(<a href='https://github.com/mxenabled/mx-react-components/pull/475'>#475</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.28</h3>
-        <ul>
           <li>
             Add `scrimClickOnSelect` prop to SimpleSelect.(<a href='https://github.com/mxenabled/mx-react-components/pull/473'>#473</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.27</h3>
-        <ul>
           <li>
             Added `bell`, `net-worth2`, and `pointer` icons.(<a href='https://github.com/mxenabled/mx-react-components/pull/472'>#472</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.26</h3>
-        <ul>
           <li>
             Adds new SimpleSlider component(<a href='https://github.com/mxenabled/mx-react-components/pull/466'>#466</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.25</h3>
-        <ul>
           <li>
             Update SimpleSelect to use stlyes object.(<a href='https://github.com/mxenabled/mx-react-components/pull/471'>#471</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.24</h3>
-        <ul>
           <li>
             More changes to CirlceGroup.(<a href='https://github.com/mxenabled/mx-react-components/pull/470'>#470</a>)
           </li>
-        </ul>
-
-
-        <h3>Release Candidate 5.0.0-rc.23</h3>
-        <ul>
           <li>
             Minor fixes to CirlceGroup.(<a href='https://github.com/mxenabled/mx-react-components/pull/469'>#469</a>)
           </li>
-        </ul>
-
-
-        <h3>Release Candidate 5.0.0-rc.22</h3>
-        <ul>
           <li>
             Convert refs from strings to callbacks.(<a href='https://github.com/mxenabled/mx-react-components/pull/468'>#468</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.21</h3>
-        <ul>
           <li>
             Fixes layout of DatePicker on small screens.(<a href='https://github.com/mxenabled/mx-react-components/pull/467'>#467</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.20</h3>
-        <ul>
           <li>
             Add Pause icon.(<a href='https://github.com/mxenabled/mx-react-components/pull/465'>#465</a>)
           </li>
-        </ul>
-
-
-        <h3>Release Candidate 5.0.0-rc.19</h3>
-        <ul>
           <li>
             Add brand color to icon in Tabs.(<a href='https://github.com/mxenabled/mx-react-components/pull/463'>#463</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.18</h3>
-        <ul>
           <li>
             Expose D3 elements.(<a href='https://github.com/mxenabled/mx-react-components/pull/462'>#462</a>)
           </li>
-        </ul>
-
-
-        <h3>Release Candidate 5.0.0-rc.17</h3>
-        <ul>
           <li>
             Updates the medium breakpoint to 768px to align better with the ipad and other tablets.(<a href='https://github.com/mxenabled/mx-react-components/pull/461'>#461</a>)
           </li>
-        </ul>
 
-        <h3>Release Candidate 5.0.0-rc.16</h3>
-        <ul>
           <li>
             Adds styles prop to the Drawer and TextArea components to enable greater CSS control.(<a href='https://github.com/mxenabled/mx-react-components/pull/459'>#459</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.15</h3>
-        <ul>
           <li>
             Adds a check to see if the handleResetClick prop is passed down, if not, hide the x icon.(<a href='https://github.com/mxenabled/mx-react-components/pull/451'>#451</a>)
           </li>
@@ -732,55 +427,27 @@ class Changelog extends React.Component {
           <li>
             Adds docs for BarChart component.(<a href='https://github.com/mxenabled/mx-react-components/pull/456'>#456</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.14</h3>
-        <ul>
           <li>
             Adds two props to the drawer component and adds the Drawer to the docs.(<a href='https://github.com/mxenabled/mx-react-components/pull/457'>#457</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.13</h3>
-        <ul>
           <li>
             Fixes DateRangePicker next click function (<a href='https://github.com/mxenabled/mx-react-components/pull/453'>#453</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.11</h3>
-        <ul>
           <li>
             Adds new component Menu(<a href='https://github.com/mxenabled/mx-react-components/pull/436'>#436</a>)
           </li>
           <li>
             Adds new component TextArea(<a href='https://github.com/mxenabled/mx-react-components/pull/435'>#435</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.10</h3>
-        <ul>
           <li>
             Adds letter spacing to the modal title(<a href='https://github.com/mxenabled/mx-react-components/pull/450'>#450</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.9</h3>
-        <ul>
           <li>
             Fix hover on Tooltip and on the footer tooltip in Modal.(<a href='https://github.com/mxenabled/mx-react-components/pull/449'>#449</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.8</h3>
-        <ul>
           <li>
             Add reset for input on FileUpload on new props.(<a href='https://github.com/mxenabled/mx-react-components/pull/447'>#447</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.7</h3>
-        <ul>
           <li>
             Add validation for image dimensions in FileUploader.(<a href='https://github.com/mxenabled/mx-react-components/pull/444'>#444</a>)
           </li>
@@ -790,45 +457,21 @@ class Changelog extends React.Component {
           <li>
             Fix close icon on Modals.(<a href='https://github.com/mxenabled/mx-react-components/pull/437'>#437</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.6</h3>
-        <ul>
           <li>
             Update Icons with new elememtns prop.(<a href='https://github.com/mxenabled/mx-react-components/pull/440'>#440</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.5</h3>
-        <ul>
           <li>
             Moves docs from gh-pages branch to /docs folder in master branch(<a href='https://github.com/mxenabled/mx-react-components/pull/432'>#432</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.4</h3>
-        <ul>
           <li>
             SearchInput: Fixes React unknown prop warning(<a href='https://github.com/mxenabled/mx-react-components/pull/434'>#434</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.3</h3>
-        <ul>
           <li>
             BarChart: Fixes scaling issue(<a href='https://github.com/mxenabled/mx-react-components/pull/433'>#433</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.2</h3>
-        <ul>
           <li>
             Reverts Radium back to 0.14.0(<a href='https://github.com/mxenabled/mx-react-components/pull/431'>#431</a>)
           </li>
-        </ul>
-
-        <h3>Release Candidate 5.0.0-rc.1</h3>
-        <ul>
           <li>
             Tabs: Fixes brand color for caret icon(<a href='https://github.com/mxenabled/mx-react-components/pull/425'>#425</a>)
           </li>
