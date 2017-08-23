@@ -22,6 +22,7 @@ class HeaderMenu extends React.Component {
   }
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const items = this.props.items.map(item =>
       Object.assign({}, item, {
         onClick: (event, itemClicked) => {
