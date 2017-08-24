@@ -5,6 +5,13 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.111</h3>
+        <ul>
+          <li>
+            Re adds componentWillReceiveProps to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/651'>#651</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.110</h3>
         <ul>
           <li>
