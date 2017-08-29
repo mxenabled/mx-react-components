@@ -3,50 +3,50 @@ const React = require('react');
 const ButtonGroup = require('../ButtonGroup');
 const Tabbable = require('./Tabbable');
 
-const StyleConstants = require('../../constants/Style');
+const StyleUtils = require('../../utils/Style');
 
 const PillTabs = ({
   activeTabStyles,
-  brandColor = StyleConstants.Colors.PRIMARY,
   onTabSelect,
   selectedTab,
   style,
-  tabs
+  tabs,
+  theme
 }) => {
   const styles = {
     component: {
-      padding: StyleConstants.Spacing.SMALL
+      padding: theme.Spacing.SMALL
     },
     tab: {
-      backgroundColor: StyleConstants.Colors.PORCELAIN,
-      borderColor: StyleConstants.Colors.FOG,
+      backgroundColor: theme.Colors.GRAY_100,
+      borderColor: theme.Colors.GRAY_300,
       outline: 'none',
 
       ':hover': {
-        backgroundColor: brandColor,
-        color: StyleConstants.Colors.WHITE,
-        fill: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE,
+        fill: theme.Colors.WHITE
       },
       ':focus': {
-        backgroundColor: brandColor,
-        color: StyleConstants.Colors.WHITE,
-        fill: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE,
+        fill: theme.Colors.WHITE
       },
       ':active': {
-        backgroundColor: StyleConstants.adjustColor(brandColor, -15)
+        backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15)
       }
     },
     selected: Object.assign({
-      backgroundColor: StyleConstants.Colors.WHITE,
-      color: brandColor,
+      backgroundColor: theme.Colors.WHITE,
+      color: theme.Colors.PRIMARY,
       cursor: 'default',
 
       ':hover': {
         backgroundColor: 'transparent'
       },
       ':focus': {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        color: brandColor
+        backgroundColor: theme.Colors.WHITE,
+        color: theme.Colors.PRIMARY
       },
       ':active': {
         backgroundColor: 'transparent'
@@ -72,4 +72,4 @@ const PillTabs = ({
 
 PillTabs.propTypes = Tabbable.propTypes;
 
-module.exports = Tabbable(PillTabs);
+module.exports = StyleUtils.withMergedTheme(Tabbable(PillTabs));
