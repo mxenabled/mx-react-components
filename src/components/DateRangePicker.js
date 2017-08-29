@@ -19,8 +19,8 @@ class DateRangePicker extends React.Component {
     closeCalendarOnRangeSelect: PropTypes.bool,
     defaultRanges: PropTypes.arrayOf(PropTypes.shape({
       displayValue: PropTypes.string,
-      endDate: PropTypes.number,
-      startDate: PropTypes.number
+      getEndDate: PropTypes.func,
+      getStartDate: PropTypes.func
     })),
     format: PropTypes.string,
     isRelative: PropTypes.bool,
@@ -41,33 +41,33 @@ class DateRangePicker extends React.Component {
     defaultRanges: [
       {
         displayValue: 'This Month',
-        endDate: moment().endOf('month').unix(),
-        startDate: moment().startOf('month').unix()
+        getEndDate: () => moment().endOf('month').unix(),
+        getStartDate: () => moment().startOf('month').unix()
       },
       {
         displayValue: 'Last 30 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(29, 'days').startOf('day').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(29, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Last Month',
-        endDate: moment().subtract(1, 'months').endOf('month').unix(),
-        startDate: moment().subtract(1, 'months').startOf('month').unix()
+        getEndDate: () => moment().subtract(1, 'months').endOf('month').unix(),
+        getStartDate: () => moment().subtract(1, 'months').startOf('month').unix()
       },
       {
         displayValue: 'Last 90 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(89, 'days').startOf('day').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(89, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Year To Date',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().startOf('year').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().startOf('year').unix()
       },
       {
         displayValue: 'Last Year',
-        endDate: moment().startOf('day').unix(),
-        startDate: moment().startOf('day').subtract(1, 'y').unix()
+        getEndDate: () => moment().startOf('day').unix(),
+        getStartDate: () => moment().startOf('day').subtract(1, 'y').unix()
       }
     ],
     format: 'MMM D, YYYY',
@@ -143,7 +143,7 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDefaultRangeSelection = (range) => {
-    this.props.onDateSelect(range.startDate, range.endDate, range.displayValue);
+    this.props.onDateSelect(range.getStartDate(), range.getEndDate(), range.displayValue);
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
