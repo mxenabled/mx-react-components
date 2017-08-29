@@ -1,7 +1,10 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+
 const Button = require('./Button');
 const SimpleSelect = require('./SimpleSelect');
+
+const { themeShape } = require('../constants/App');
 
 class HeaderMenu extends React.Component {
   static propTypes = {
