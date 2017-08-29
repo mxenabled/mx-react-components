@@ -1,3 +1,4 @@
+const _get = require('lodash/get');
 const _isEqual = require('lodash/isEqual');
 const _isNumber = require('lodash/isNumber');
 const _merge = require('lodash/merge');
@@ -117,6 +118,21 @@ class Drawer extends React.Component {
   };
 
   /**
+   * Figure out the height of the header. This can come from either:
+   *
+   * this.props.headerStyle.height
+   * this.props.header.height
+   *
+   * If neither are set, default to 50px
+   */
+  _getHeaderHeight = () => {
+    return _get(this.props, ['headerStyle', 'height'],
+                _get(this.props,
+                     ['styles', 'header', 'height'],
+                     '50px'));
+  };
+
+  /**
    * Animate the Drawer closed and then call the onClose callback.
    *
    * @returns {Promise} that is resolved when the animation finishes
@@ -219,6 +235,8 @@ class Drawer extends React.Component {
   }
 
   styles = (theme) => {
+    const HEADER_HEIGHT = this._getHeaderHeight();
+
     return _merge({}, {
       component: {
         border: '1px solid ' + theme.Colors.GRAY_300,
@@ -249,7 +267,8 @@ class Drawer extends React.Component {
       },
       content: {
         backgroundColor: theme.Colors.WHITE,
-        height: '100%'
+        overflow: 'auto',
+        height: `calc(100% - ${HEADER_HEIGHT})`
       },
       scrim: {
         zIndex: 1000,
@@ -284,7 +303,7 @@ class Drawer extends React.Component {
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative',
-        minHeight: theme.Spacing.XLARGE
+        height: HEADER_HEIGHT
       },
       title: {
         overflow: 'hidden',
