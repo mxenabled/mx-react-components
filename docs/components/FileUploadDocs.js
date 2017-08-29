@@ -1,4 +1,7 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { FileUpload } = require('mx-react-components');
 
@@ -26,7 +29,7 @@ class FileUploadDocs extends React.Component {
         <h3>Demo</h3>
         <div style={{ cursor: 'pointer', textAlign: 'center', width: '80%', margin: 'auto' }}>
           <FileUpload
-            allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
+            allowedFileTypes={['image/jpeg', 'text/csv', 'image/png', 'gif']}
             imageValidation={{
               exactHeight: 200,
               exactWidth: 400,
@@ -40,7 +43,6 @@ class FileUploadDocs extends React.Component {
             maxFileSize={3000}
             onFileAdd={this._handleFileChange}
             onFileRemove={this._handleFileChange}
-            onFileValidation={this._handleFileValidation}
             uploadedFile={this.state.uploadedFile}
           >
             Click Here to Upload File (demo).
@@ -81,6 +83,9 @@ class FileUploadDocs extends React.Component {
         <h5>style <label>Object</label></h5>
         <p>A style object used to style the div that wraps the uploader&#39;s content</p>
 
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+
         <h5>uploadedFile <label>Any</label></h5>
         <p>The uploaded file</p>
 
@@ -100,7 +105,7 @@ class FileUploadDocs extends React.Component {
     }
 
     <FileUpload
-      allowedFileTypes={['image/jpeg', 'text/csv', 'image/png']}
+      allowedFileTypes={['image/jpeg', 'text/csv', 'image/png', 'gif']}
       imageValidation={{
         exactHeight: 200,
         exactWidth: 400,
@@ -114,7 +119,6 @@ class FileUploadDocs extends React.Component {
       maxFileSize={3000}
       onFileAdd={this._handleFileChange}
       onFileRemove={this._handleFileChange}
-      onFileValidation={this._handleFileValidation}
       uploadedFile={this.state.uploadedFile}
     />
   `}

@@ -1,4 +1,4 @@
-module.exports = {
+const Style = {
   BreakPoints: {
     large: 1200,
     medium: 768,
@@ -6,61 +6,28 @@ module.exports = {
   },
 
   Colors: {
-    // GRAYSCALE
-    SLATE: '#2C353F',
-    CHARCOAL: '#474F59',
-    ASH: '#959CA6',
-    FOG: '#DFE3E8',
-    PORCELAIN: '#F5F6F8',
+    // Grayscale Colors
     WHITE: '#FFFFFF',
+    GRAY_100: '#F5F6F8', // PORCELAIN
+    GRAY_300: '#DFE3E8', // FOG
+    GRAY_500: '#959CA6', // ASH
+    GRAY_700: '#474F59', // CHARCOAL
+    GRAY_900: '#2C353F', // SLATE
 
-    // ACCENTS
-    PRIMARY: '#359BCF',
-    BANANA: '#FCBC19',
-    EGGPLANT: '#6C3F6F',
-    LEMON: '#EBBE54',
-    LIME: '#14C764',
-    ORANGE: '#EF7625',
-    PLUM: '#AE547A',
-    STRAWBERRY: '#EB3434',
-    TOMATO: '#CD5A57',
+    // Accent Colors
+    PRIMARY: '#359BCF', // BLUE
+    SUCCESS: '#14C764', // LIME
+    WARNING: '#FCBC19', // BANANA
+    DANGER: '#EB3434', // STRAWBERRY
+    ATTENTION: '#EF7625', // ORANGE
 
-    // BUDGET ARC COLORS
-    LIGHT_LIME: '#97E9BB',
-    LIGHT_BANANA: '#F7DD7C',
-    LIGHT_STRAWBERRY: '#FF6B61',
+    // Light Accent Colors
+    LIGHT_SUCCESS: '#97E9BB', // LIGHT_LIME
+    LIGHT_WARNING: '#F7DD7C', // LIGHT_BANANA
+    LIGHT_DANGER: '#FF6B61', // LIGHT_STRAWBERRY
 
-    // CHART COLORS
+    // Misc.
     BASE_ARC: '#F5F5F5',
-    YELLOW: '#f6a01e',
-    GREEN: '#00a89c',
-    BLUE: '#359BCF',
-    RED: '#EE4235',
-
-    // CATEGORY COLORS
-    AUTO_TRANSPORT: '#4B9DBC',
-    BILLS_UTILITIES: '#EF9B2C',
-    BUSINESS: '#B3DE8C',
-    EDUCATION: '#F8AB3A',
-    ENTERTAINMENT: '#AB5B89',
-    FEES: '#FF9696',
-    FINANCIAL: '#6BCDDB',
-    FOOD_DINING: '#58AC7B',
-    GIFTS_CHARITY: '#347AA5',
-    HEALTH_FITNESS: '#5C446E',
-    HOME: '#FFD84D',
-    INCOME: '#133F49',
-    INVESTMENTS: '#FF7070',
-    KIDS: '#82D196',
-    OTHER: '#959CA6',
-    PETS: '#85507B',
-    PERSONAL_CARE: '#338B7A',
-    SHOPPING: '#CF5F84',
-    TAXES: '#32588D',
-    TRAVEL: '#e37434',
-    UNCATEGORIZED: '#FA5555',
-
-    // SCRIM
     SCRIM: 'rgba(247,248,248,0.9)'
   },
 
@@ -93,72 +60,7 @@ module.exports = {
     MEDIUM: 15,
     SMALL: 10,
     XSMALL: 5
-  },
-
-  adjustColor (col, amt) {
-    let color = col;
-    let usePound = false;
-
-    if (color[0] === '#') {
-      color = color.slice(1);
-      usePound = true;
-    }
-
-    const num = parseInt(color, 16);
-
-    let r = (num >> 16) + amt;
-
-    if (r > 255) {
-      r = 255;
-    } else if (r < 0) {
-      r = 0;
-    }
-
-    let b = ((num >> 8) & 0x00FF) + amt;
-
-    if (b > 255) {
-      b = 255;
-    } else if (b < 0) {
-      b = 0;
-    }
-
-    let g = (num & 0x0000FF) + amt;
-
-    if (g > 255) {
-      g = 255;
-    } else if (g < 0) {
-      g = 0;
-    }
-
-    return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
-  },
-
-
-  adjustHexOpacity (color, opacity) {
-    const r = parseInt(color.slice(1, 3), 16);
-    const g = parseInt(color.slice(3, 5), 16);
-    const b = parseInt(color.slice(5, 7), 16);
-
-    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity + ')';
-  },
-
-  linearGradient (startColor, startOpacity = 0.8, endColor = startColor, endOpacity = 1) {
-    return `linear-gradient(${this.adjustHexOpacity(startColor, startOpacity)}, ${this.adjustHexOpacity(endColor, endOpacity)})`;
-  },
-
-  getWindowSize () {
-    const breakPoints = this.BreakPoints;
-    const width = window.innerWidth;
-    let windowSize = 'small';
-
-    if (width >= breakPoints.large) {
-      windowSize = 'large';
-    } else if (width >= breakPoints.medium) {
-      windowSize = 'medium';
-    } else if (width <= breakPoints.small) {
-      windowSize = 'xsmall';
-    }
-
-    return windowSize;
   }
 };
+
+module.exports = Style;

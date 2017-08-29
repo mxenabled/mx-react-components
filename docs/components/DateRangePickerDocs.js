@@ -1,4 +1,7 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { DateRangePicker } = require('mx-react-components');
 
@@ -73,10 +76,6 @@ class DateRangePickerDocs extends React.Component {
         <p>Default: Select A Date</p>
         <p>A string used as placeholder text for the selected date input when it is empty.</p>
 
-        <h5>primaryColor <label>String</label></h5>
-        <p>Default: PRIMARY</p>
-        <p>The color used for input focus, selected date highlight, and hover border.</p>
-
         <h5>selectedEndDate <label>Number (unix timestamp)</label></h5>
         <p>This sets the selected end date on the component. Can be used to set a default end date.</p>
 
@@ -89,6 +88,9 @@ class DateRangePickerDocs extends React.Component {
 
         <h5>style <label>Object</label></h5>
         <p>Additional styles that can be set on the component.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>

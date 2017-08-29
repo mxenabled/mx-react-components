@@ -1,4 +1,7 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Modal } = require('mx-react-components');
 
@@ -32,7 +35,9 @@ class ModalDocs extends React.Component {
   };
 
   render () {
-    const imageStyle = Object.assign({}, { maxWidth: '100%', height: 'auto', margin: 'auto' }, this.state.showSmallModal && { width: 400 });
+    const imageWidth = this.state.showSmallModal ? 400 : 1000;
+    const imageHeight = this.state.showSmallModal ? 240 : 600;
+    const imageStyle = { width: imageWidth, height: imageHeight, margin: 'auto' };
 
     return (
       <div>
@@ -78,7 +83,7 @@ class ModalDocs extends React.Component {
           >
             <div style={{ padding: 20, textAlign: 'center' }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-              <img src='https://unsplash.it/1000/600?random' style={imageStyle} />
+              <img src={`https://unsplash.it/${imageWidth}/${imageHeight}?random`} style={imageStyle} />
             </div>
           </Modal>
         ) : null}
@@ -96,15 +101,12 @@ class ModalDocs extends React.Component {
       icon: '',
       label: 'Click Me',
       onClick: function () { //do something },
-      primaryColor: Styles.Colors.BANANA,
+      primaryColor: Styles.Colors.WARNING,
       style: { marginTop: 10 }, //a style object
       type: 'primary' //either 'primary' or 'secondary'
     }]
   `}
         </Markdown>
-
-        <h5>color <label>String</label></h5>
-        <p>A css color string to be used as the accent color of the modal: primary button, tooltip title, etc.</p>
 
         <h5>contentStyle <label>Object</label></h5>
         <p>A style object used to style the content div that wrapps the modal&#39;s content</p>
@@ -140,6 +142,9 @@ class ModalDocs extends React.Component {
 
         <h5>style <label>Object</label></h5>
         <p>Additional styles that can be set on the component.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>title <label>String</label></h5>
         <p>The text to be displayed in the title bar at the top of the modal.</p>

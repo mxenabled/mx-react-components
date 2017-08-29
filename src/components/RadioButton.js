@@ -1,7 +1,10 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class RadioButton extends React.Component {
   static propTypes = {
@@ -10,28 +13,33 @@ class RadioButton extends React.Component {
     checked: PropTypes.bool,
     color: PropTypes.string,
     onClick: PropTypes.func,
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
-    color: StyleConstants.Colors.PRIMARY,
     onClick: () => {}
   };
 
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
+
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
+    const styles = this.styles(theme);
 
     return (
       <div onClick={this.props.onClick} style={styles.component}>
         <div style={styles.radioButton}>
-          {this.props.checked ? <div style={styles.radioButtonActive}></div> : null}
+          {this.props.checked ? <div style={styles.radioButtonActive} /> : null}
         </div>
         <div style={styles.children}>{this.props.children}</div>
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: Object.assign({}, {
         cursor: 'pointer',
@@ -45,15 +53,15 @@ class RadioButton extends React.Component {
         width: 15,
         height: 15,
         marginRight: 5,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: '100%',
-        backgroundColor: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.WHITE
       }, this.props.buttonStyle),
       radioButtonActive: Object.assign({}, {
         width: '60%',
         height: '60%',
         borderRadius: '100%',
-        backgroundColor: this.props.color
+        backgroundColor: theme.Colors.PRIMARY
       }, this.props.activeButtonStyle)
     };
   };

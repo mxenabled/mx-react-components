@@ -3,7 +3,10 @@ const React = require('react');
 
 const Icon = require('../components/Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Menu extends React.Component {
   static propTypes = {
@@ -15,12 +18,12 @@ class Menu extends React.Component {
       onClick: PropTypes.func
     })).isRequired,
     onClick: PropTypes.func,
-    primaryColor: PropTypes.string
+    primaryColor: PropTypes.string,
+    theme: themeShape
   };
 
   static defaultProps = {
     alignItems: 'left',
-    primaryColor: StyleConstants.Colors.PRIMARY,
     isOpen: false,
     onClick: () => {}
   };
@@ -28,6 +31,10 @@ class Menu extends React.Component {
   state = {
     hoverItemIndex: null
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   componentWillReceiveProps (nextProps) {
     if (!nextProps.isOpen) {
@@ -49,9 +56,7 @@ class Menu extends React.Component {
     });
   };
 
-  _renderItems = () => {
-    const styles = this.styles();
-
+  _renderItems = (styles, theme) => {
     return this.props.items.map((item, index) => {
       return (
         <div
@@ -60,13 +65,13 @@ class Menu extends React.Component {
           onMouseOut={this._handleMouseOut}
           onMouseOver={this._handleMouseOver.bind(null, index)}
           style={Object.assign({}, styles.menuItem, {
-            backgroundColor: index === this.state.hoverItemIndex ? this.props.primaryColor : 'transparent',
-            color: index === this.state.hoverItemIndex ? StyleConstants.Colors.WHITE : StyleConstants.Colors.ASH
+            backgroundColor: index === this.state.hoverItemIndex ? theme.Colors.PRIMARY : 'transparent',
+            color: index === this.state.hoverItemIndex ? theme.Colors.WHITE : theme.Colors.GRAY_500
           })}
         >
           <Icon
             size={20}
-            style={Object.assign({}, styles.itemIcon, { fill: index === this.state.hoverItemIndex ? StyleConstants.Colors.WHITE : StyleConstants.Colors.CHARCOAL })}
+            style={Object.assign({}, styles.itemIcon, { fill: index === this.state.hoverItemIndex ? theme.Colors.WHITE : theme.Colors.GRAY_700 })}
             type={item.icon}
           />
           <span style={styles.itemLabel}>
@@ -79,7 +84,8 @@ class Menu extends React.Component {
 
   render () {
     const { isOpen, alignItems } = this.props;
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
 
     return (
       <div
@@ -95,14 +101,14 @@ class Menu extends React.Component {
         </div>
         {isOpen ? (
           <div style={Object.assign({}, styles.menu, alignItems === 'right' ? { right: 3 } : { left: 3 })}>
-            {this._renderItems()}
+            {this._renderItems(styles, theme)}
           </div>
         ) : null}
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: {
         display: 'block',
@@ -110,18 +116,18 @@ class Menu extends React.Component {
         width: 40
       },
       dotsWrapper: {
-        backgroundColor: this.props.isOpen ? StyleConstants.Colors.PORCELAIN : 'transparent',
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        backgroundColor: this.props.isOpen ? theme.Colors.GRAY_100 : 'transparent',
+        border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
         cursor: 'pointer',
         margin: 3,
         padding: 6
       },
       menu: {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        backgroundColor: theme.Colors.WHITE,
+        border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
-        boxShadow: StyleConstants.ShadowHigh,
+        boxShadow: theme.ShadowHigh,
         position: 'absolute',
         top: 40,
         padding: 10,
@@ -129,10 +135,10 @@ class Menu extends React.Component {
         zIndex: 10
       },
       menuIcon: {
-        fill: this.props.primaryColor
+        fill: theme.Colors.PRIMARY
       },
       menuItem: {
-        color: StyleConstants.Colors.ASH,
+        color: theme.Colors.GRAY_500,
         cursor: 'pointer',
         marginRight: 5,
         whiteSpace: 'nowrap'

@@ -1,3 +1,5 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 
 const { ToggleSwitch } = require('mx-react-components');
@@ -5,6 +7,14 @@ const { ToggleSwitch } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class ToggleSwitchDocs extends React.Component {
+  state = {
+    checked: false
+  }
+
+  toggle = () => {
+    this.setState({ checked: !this.state.checked });
+  }
+
   render () {
     return (
       <div>
@@ -14,7 +24,7 @@ class ToggleSwitchDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
-        <ToggleSwitch />
+        <ToggleSwitch checked={this.state.checked} onToggle={this.toggle} />
 
         <h3>Usage</h3>
         <h5>checked <label>Boolean</label></h5>

@@ -3,7 +3,9 @@ const React = require('react');
 
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class Tooltip extends React.Component {
   static propTypes = {
@@ -11,6 +13,7 @@ class Tooltip extends React.Component {
     iconSize: PropTypes.number,
     placement: PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
     style: PropTypes.object,
+    theme: themeShape,
     tooltipStyle: PropTypes.object
   };
 
@@ -74,7 +77,8 @@ class Tooltip extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
 
     return (
       <div style={styles.component}>
@@ -95,21 +99,21 @@ class Tooltip extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: Object.assign({}, {
         display: 'inline-block',
-        fill: StyleConstants.Colors.ASH,
+        fill: theme.Colors.GRAY_500,
         position: 'relative'
       }, this.props.style),
       tooltip: Object.assign({},
         {
           alignItems: 'center',
-          backgroundColor: StyleConstants.Colors.WHITE,
+          backgroundColor: theme.Colors.WHITE,
           borderRadius: 3,
-          boxShadow: StyleConstants.ShadowHigh,
+          boxShadow: theme.ShadowHigh,
           display: 'flex',
-          fontSize: StyleConstants.FontSizes.MEDIUM,
+          fontSize: theme.FontSizes.MEDIUM,
           justifyContent: 'center',
           lineHeight: '1.3em',
           minHeight: '100%',

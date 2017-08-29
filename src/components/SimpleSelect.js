@@ -7,7 +7,10 @@ const _merge = require('lodash/merge');
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class SimpleSelect extends React.Component {
   static propTypes = {
@@ -21,23 +24,21 @@ class SimpleSelect extends React.Component {
     onScrimClick: PropTypes.func,
     scrimClickOnSelect: PropTypes.bool,
     style: PropTypes.object,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
     'aria-label': '',
     scrimClickOnSelect: false,
-    hoverColor: StyleConstants.Colors.PRIMARY,
     items: [],
     onScrimClick () {}
   };
 
   componentDidMount () {
-    window.addEventListener('keydown', this._handleKeyDown);
+    deprecatePrimaryColor(this.props, 'hoverColor');
 
-    if (this.props.style) {
-      console.warn('The style prop is deprecated and will be removed in a future release. Please use styles.');
-    }
+    window.addEventListener('keydown', this._handleKeyDown);
 
     if (this.props.iconStyles) {
       console.warn('The iconStyles prop is deprecated and will be removed in a future release. Please use styles.');
@@ -68,7 +69,8 @@ class SimpleSelect extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor);
+    const styles = this.styles(theme);
 
     return (
       <div style={styles.component}>
@@ -101,7 +103,7 @@ class SimpleSelect extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return _merge({}, {
       component: Object.assign({
         height: 0,
@@ -110,16 +112,16 @@ class SimpleSelect extends React.Component {
 
       menu: Object.assign({}, {
         alignSelf: 'stretch',
-        backgroundColor: StyleConstants.Colors.WHITE,
+        backgroundColor: theme.Colors.WHITE,
         borderRadius: 3,
-        boxShadow: StyleConstants.ShadowHigh,
+        boxShadow: theme.ShadowHigh,
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: theme.Colors.GRAY_700,
         display: 'flex',
         flexDirection: 'column',
-        fill: StyleConstants.Colors.CHARCOAL,
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fill: theme.Colors.GRAY_700,
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.MEDIUM,
         top: 10,
         position: 'absolute',
         zIndex: 10
@@ -130,17 +132,17 @@ class SimpleSelect extends React.Component {
         alignItems: 'center',
         boxSizing: 'border-box',
         height: 40,
-        padding: StyleConstants.Spacing.MEDIUM,
+        padding: theme.Spacing.MEDIUM,
 
         ':hover': {
-          backgroundColor: this.props.hoverColor,
-          color: StyleConstants.Colors.WHITE,
+          backgroundColor: theme.Colors.PRIMARY,
+          color: theme.Colors.WHITE,
           cursor: 'pointer',
-          fill: StyleConstants.Colors.WHITE
+          fill: theme.Colors.WHITE
         }
       }, this.props.itemStyles),
       icon: Object.assign({}, {
-        marginRight: StyleConstants.Spacing.SMALL
+        marginRight: theme.Spacing.SMALL
       }, this.props.iconStyles),
       text: {
         whiteSpace: 'nowrap'

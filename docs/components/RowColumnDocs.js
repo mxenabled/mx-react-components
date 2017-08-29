@@ -165,8 +165,8 @@ class RowDocs extends React.Component {
       },
       responsiveDiv: {
         boxSizing: 'border-box',
-        backgroundColor: Styles.Colors.PORCELAIN,
-        border: '1px solid' + Styles.Colors.FOG,
+        backgroundColor: Styles.Colors.GRAY_100,
+        border: '1px solid' + Styles.Colors.GRAY_300,
         borderRadius: 3,
         marginBottom: 10,
         padding: 10,

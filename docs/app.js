@@ -7,6 +7,7 @@ const Button = require('components/ButtonDocs');
 const ButtonGroup = require('components/ButtonGroupDocs');
 const Changelog = require('components/Changelog');
 const Components = require('components/Components');
+const { ConfigDocs } = require('components/ConfigDocs');
 const DatePicker = require('components/DatePickerDocs');
 const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
 const DateRangePicker = require('components/DateRangePickerDocs');
@@ -41,6 +42,7 @@ const Spin = require('components/SpinDocs');
 const Styles = require('components/StylesDocs');
 const Tabs = require('components/TabsDocs');
 const TextArea = require('components/TextAreaDocs');
+const Theme = require('components/ThemeDocs');
 const TimeBasedLineChart = require('components/TimeBasedLineChartDocs');
 const ToggleSwitch = require('components/ToggleSwitchDocs');
 const TypeAhead = require('components/TypeAheadDocs');
@@ -71,6 +73,7 @@ ReactDOM.render((
         <Route component={BarChart} path='bar' />
         <Route component={Button} path='button' />
         <Route component={ButtonGroup} path='button-group' />
+        <Route component={ConfigDocs} path='config' />
         <Route component={DatePicker} path='date-picker' />
         <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DateRangePicker} path='date-range-picker' />
@@ -103,6 +106,7 @@ ReactDOM.render((
         <Route component={Styles} path='styles' />
         <Route component={Tabs} path='tabs' />
         <Route component={TextArea} path='textarea' />
+        <Route component={Theme} path='theme' />
         <Route component={TimeBasedLineChart} path='time-based-line-chart' />
         <Route component={ToggleSwitch} path='toggle-switch' />
         <Route component={TypeAhead} path='type-ahead' />

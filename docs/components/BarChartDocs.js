@@ -1,3 +1,5 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 const d3 = require('d3');
 const moment = require('moment');
@@ -221,7 +223,7 @@ class BarChartDocs extends React.Component {
       },
       chart: {
         positiveBarClicked: {
-          fill: Styles.Colors.LIME
+          fill: Styles.Colors.SUCCESS
         }
       }
     };

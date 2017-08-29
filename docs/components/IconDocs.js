@@ -1,3 +1,5 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
 
 const { Icon, Styles, AppConstants } = require('mx-react-components');
@@ -19,7 +21,7 @@ class IconDocs extends React.Component {
             return (
               <div key={icon.value} style={{ width: 100, height: 100, textAlign: 'center' }}>
                 <Icon key={icon.value} size={40} type={icon.value} />
-                <div style={{ color: Styles.Colors.ASH, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
+                <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
               </div>
             );
           })}

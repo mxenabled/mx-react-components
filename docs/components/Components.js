@@ -206,8 +206,10 @@ class Components extends React.Component {
             <h3>Responsive Grid</h3>
             <Link to='/components/row-column'>Row & Column</Link>
 
-            <h3>Helpers</h3>
+            <h3>Customization</h3>
+            <Link to='/components/config'>Config</Link>
             <Link to='/components/styles'>Styles</Link>
+            <Link to='/components/theme'>Theme</Link>
           </div>
         </div>
 

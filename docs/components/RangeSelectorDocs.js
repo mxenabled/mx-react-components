@@ -1,4 +1,7 @@
+// eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
+/* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { RangeSelector } = require('mx-react-components');
 
@@ -51,7 +54,6 @@ class RangeSelectorDocs extends React.Component {
               label: 'Silent'
             }
           ]}
-          selectedColor='#359BCF'
           upperBound={100}
         />
 
@@ -84,8 +86,8 @@ class RangeSelectorDocs extends React.Component {
         <h5>upperBound <label>Number</label></h5>
         <p>A number that sets the upper bound of the RangeSelector and is used to calculate the relative position of the toggles.</p>
 
-        <h5>selectedColor <label>String</label></h5>
-        <p>The color of the element that spans between the two toggles and represents the selected values.</p>
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
@@ -127,7 +129,6 @@ class RangeSelectorDocs extends React.Component {
         }
       ]}
       range={100}
-      selectedColor='#359BCF'
     />
   `}
         </Markdown>

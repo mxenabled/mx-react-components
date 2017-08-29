@@ -5,6 +5,7 @@ const Radium = require('radium');
 const d3 = require('d3');
 const moment = require('moment');
 const numeral = require('numeral');
+const _isEqual = require('lodash/isEqual');
 
 const BreakPointGroup = require('./d3/BreakPointGroup');
 const GridLinesGroup = require('./d3/GridLinesGroup');
@@ -16,117 +17,120 @@ const SlicesGroup = require('./d3/SlicesGroup');
 const TimeXAxisGroup = require('./d3/TimeXAxisGroup');
 const AxisGroup = require('./d3/AxisGroup');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
 
 const ChartUtils = require('../utils/Chart');
+const StyleUtils = require('../utils/Style');
 
-const styles = {
-  // NOTE: D3 doesn't like camel cased key names for
-  // styles.  Because of this styles in this file may
-  // resemble the following.  'font-size'  DO NOT
-  // change or chart styles will break.
+const getStyles = (theme) => {
+  return {
+    // NOTE: D3 doesn't like camel cased key names for
+    // styles.  Because of this styles in this file may
+    // resemble the following.  'font-size'  DO NOT
+    // change or chart styles will break.
 
-  // Component
-  component: {
-    fontFamily: StyleConstants.FontFamily,
-    position: 'relative',
-    boxSizing: 'content-box',
-    display: 'inline-block'
-  },
+    // Component
+    component: {
+      fontFamily: theme.FontFamily,
+      position: 'relative',
+      boxSizing: 'content-box',
+      display: 'inline-block'
+    },
 
-  // Chart
-  breakPointLabel: {
-    fill: StyleConstants.Colors.ASH,
-    'font-family': StyleConstants.Fonts.REGULAR,
-    'font-size': StyleConstants.FontSizes.SMALL,
-    stroke: 'none'
-  },
-  breakPointLine: {
-    fill: 'none',
-    stroke: StyleConstants.Colors.FOG,
-    'stroke-width': 1
-  },
-  chartMargins: {
-    top: 20,
-    right: 30,
-    bottom: 20,
-    left: 75
-  },
-  circle: {
-    fill: StyleConstants.Colors.WHITE,
-    'stroke-width': 2
-  },
-  dateTooltip: {
-    fill: StyleConstants.Colors.CHARCOAL,
-    stroke: 'none'
-  },
-  dateTooltipText: {
-    fill: StyleConstants.Colors.FOG,
-    stroke: 'none',
-    'font-family': StyleConstants.Fonts.REGULAR,
-    'font-size': StyleConstants.FontSizes.MEDIUM
-  },
-  domain: {
-    opacity: 0
-  },
-  text: {
-    'font-family': StyleConstants.Fonts.REGULAR,
-    'font-size': StyleConstants.FontSizes.MEDIUM,
-    stroke: 'none'
-  },
-  verticalLine: {
-    fill: 'none',
-    stroke: StyleConstants.Colors.ASH,
-    'stroke-width': 1
-  },
-  xAxisLabel: {
-    fill: StyleConstants.Colors.ASH,
-    stroke: 'none'
-  },
-  yAxisLabel: {
-    stroke: 'none',
-    'text-anchor': 'end'
-  },
-  zeroLineLabel: {
-    stroke: StyleConstants.Colors.STRAWBERRY
-  },
+    // Chart
+    breakPointLabel: {
+      fill: theme.Colors.GRAY_500,
+      'font-family': theme.Fonts.REGULAR,
+      'font-size': theme.FontSizes.SMALL,
+      stroke: 'none'
+    },
+    breakPointLine: {
+      fill: 'none',
+      stroke: theme.Colors.GRAY_300,
+      'stroke-width': 1
+    },
+    chartMargins: {
+      top: 20,
+      right: 30,
+      bottom: 20,
+      left: 75
+    },
+    circle: {
+      fill: theme.Colors.WHITE,
+      'stroke-width': 2
+    },
+    dateTooltip: {
+      fill: theme.Colors.GRAY_700,
+      stroke: 'none'
+    },
+    dateTooltipText: {
+      fill: theme.Colors.GRAY_300,
+      stroke: 'none',
+      'font-family': theme.Fonts.REGULAR,
+      'font-size': theme.FontSizes.MEDIUM
+    },
+    domain: {
+      opacity: 0
+    },
+    text: {
+      'font-family': theme.Fonts.REGULAR,
+      'font-size': theme.FontSizes.MEDIUM,
+      stroke: 'none'
+    },
+    verticalLine: {
+      fill: 'none',
+      stroke: theme.Colors.GRAY_500,
+      'stroke-width': 1
+    },
+    xAxisLabel: {
+      fill: theme.Colors.GRAY_500,
+      stroke: 'none'
+    },
+    yAxisLabel: {
+      stroke: 'none',
+      'text-anchor': 'end'
+    },
+    zeroLineLabel: {
+      stroke: theme.Colors.DANGER
+    },
 
-  // Hovered Data Point
-  hoveredDataPointDetail: {
-    boxSizing: 'border-box',
-    display: 'inline-block',
-    float: 'left'
-  },
-  hoveredDataPointDetails: {
-    padding: 20,
-    width: '100%'
-  },
-  hoveredDataPointLabel: {
-    boxSizing: 'border-box',
-    color: StyleConstants.Colors.CHARCOAL,
-    display: 'inline-block',
-    fontFamily: StyleConstants.Fonts.REGULAR,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    paddingRight: 5,
-    textAlign: 'right'
-  },
-  hoveredDataPointValue: {
-    boxSizing: 'border-box',
-    color: StyleConstants.Colors.CHARCOAL,
-    display: 'inline-block',
-    fontFamily: StyleConstants.Fonts.SEMIBOLD,
-    fontSize: StyleConstants.FontSizes.MEDIUM,
-    textAlign: 'left',
-    width: 90
-  },
+    // Hovered Data Point
+    hoveredDataPointDetail: {
+      boxSizing: 'border-box',
+      display: 'inline-block',
+      float: 'left'
+    },
+    hoveredDataPointDetails: {
+      padding: 20,
+      width: '100%'
+    },
+    hoveredDataPointLabel: {
+      boxSizing: 'border-box',
+      color: theme.Colors.GRAY_700,
+      display: 'inline-block',
+      fontFamily: theme.Fonts.REGULAR,
+      fontSize: theme.FontSizes.MEDIUM,
+      paddingRight: 5,
+      textAlign: 'right'
+    },
+    hoveredDataPointValue: {
+      boxSizing: 'border-box',
+      color: theme.Colors.GRAY_700,
+      display: 'inline-block',
+      fontFamily: theme.Fonts.SEMIBOLD,
+      fontSize: theme.FontSizes.MEDIUM,
+      textAlign: 'left',
+      width: 90
+    },
 
-  // Zero State
-  zeroState: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
+    // Zero State
+    zeroState: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  };
 };
 
 class HoveredDataPointGroup extends React.Component {
@@ -204,12 +208,18 @@ class TimeBasedLineChart extends React.Component {
     hoveredDataPointDetails: PropTypes.array,
     limitLineCircles: PropTypes.bool,
     lineColor: PropTypes.string,
-    margin: PropTypes.object,
+    margin: PropTypes.shape({
+      top: PropTypes.number,
+      right: PropTypes.number,
+      bottom: PropTypes.number,
+      left: 75
+    }),
     rangeType: PropTypes.oneOf(['day', 'month']),
     shadeBelowZero: PropTypes.bool,
     shadeFutureOnGraph: PropTypes.bool,
     showBreakPoint: PropTypes.bool,
     showZeroLine: PropTypes.bool,
+    theme: themeShape,
     width: PropTypes.number,
     yAxisFormatter: PropTypes.func,
     zeroState: PropTypes.node
@@ -220,8 +230,6 @@ class TimeBasedLineChart extends React.Component {
     breakPointLabel: 'Today',
     height: 400,
     limitLineCircles: false,
-    lineColor: StyleConstants.Colors.PRIMARY,
-    margin: styles.chartMargins,
     rangeType: 'day',
     shadeBelowZero: false,
     shadeFutureOnGraph: true,
@@ -230,18 +238,27 @@ class TimeBasedLineChart extends React.Component {
     width: 550,
     yAxisFormatter (d) {
       return numeral(d).format('0.0a');
-    },
-    zeroState: <div style={styles.zeroState}>No Data Found</div>
+    }
   };
 
   constructor (props) {
     super(props);
-    const adjustedWidth = props.width - props.margin.right - props.margin.left;
-    const adjustedHeight = props.height - props.margin.top - props.margin.bottom;
+
+    const theme = StyleUtils.mergeTheme(props.theme);
+    const styles = getStyles(theme);
+    const margin = styles.chartMargins;
+    const lineColor = theme.Colors.PRIMARY;
+    const { height, width } = this.props;
+    const adjustedWidth = width - margin.right - margin.left;
+    const adjustedHeight = height - margin.top - margin.bottom;
 
     this.state = {
       adjustedHeight,
-      adjustedWidth
+      adjustedWidth,
+      lineColor,
+      margin,
+      styles,
+      theme
     };
   }
 
@@ -253,15 +270,19 @@ class TimeBasedLineChart extends React.Component {
     if (newProps.height !== null || newProps.width !== null || newProps.margin !== null) {
       const height = newProps.height || this.props.height;
       const width = newProps.width || this.props.width;
-      const margin = newProps.margin || this.props.margin;
+      const margin = newProps.margin || this.state.margin;
 
       const adjustedWidth = width - margin.right - margin.left;
       const adjustedHeight = height - margin.top - margin.bottom;
 
-      this.setState({
-        adjustedHeight,
-        adjustedWidth
-      });
+      this.setState({ adjustedHeight, adjustedWidth });
+    }
+
+    if (!_isEqual(newProps.theme, this.props.theme)) {
+      const theme = StyleUtils.mergeTheme(props.theme);
+      const styles = styles(theme);
+
+      this.setState({ styles, theme });
     }
   }
 
@@ -321,30 +342,30 @@ class TimeBasedLineChart extends React.Component {
 
   // Translation Helpers
   _getLineTranslation = () => {
-    return 'translate(' + this.props.margin.left + ', 10)';
+    return 'translate(' + this.state.margin.left + ', 10)';
   };
 
   _getZeroLabelTranslation = () => {
-    return 'translate(' + this.props.margin.left + ', 14)';
+    return 'translate(' + this.state.margin.left + ', 14)';
   };
 
   _getTimeAxisTranslation = () => {
     const offSet = 10;
-    const x = this.props.margin.left;
-    const y = this.props.height - this.props.margin.bottom - offSet;
+    const x = this.state.margin.left;
+    const y = this.props.height - this.state.margin.bottom - offSet;
 
     return 'translate(' + x + ',' + y + ')';
   };
 
   _getVerticalLineTranslation = () => {
-    return 'translate(' + this.props.margin.left + ', -10)';
+    return 'translate(' + this.state.margin.left + ', -10)';
   };
 
   _getYAxisTranslation = () => {
     const offSet = 10;
-    const y = this.props.margin.top - offSet;
+    const y = this.state.margin.top - offSet;
 
-    return 'translate(' + this.props.margin.left + ',' + y + ')';
+    return 'translate(' + this.state.margin.left + ',' + y + ')';
   };
 
   // Position Helpers
@@ -410,7 +431,7 @@ class TimeBasedLineChart extends React.Component {
     const maxDate = data.length ? data[data.length - 1].x : 0;
     const offSet = 15;
 
-    return this._getXScaleValue(maxDate + this.props.margin.right) + offSet;
+    return this._getXScaleValue(maxDate + this.state.margin.right) + offSet;
   };
 
   _getZeroLabelYValue = () => {
@@ -431,57 +452,57 @@ class TimeBasedLineChart extends React.Component {
     // Style x axis labels
     chart.select('g.time-axis').selectAll('text')
       .attr('y', 12)
-      .style(styles.xAxisLabel)
+      .style(this.state.styles.xAxisLabel)
       .style('text-anchor', 'middle');
 
     // Style x axis ticks
     chart.select('g.time-axis').selectAll('line')
-      .style({ stroke: StyleConstants.Colors.FOG });
+      .style({ stroke: this.state.theme.Colors.GRAY_300 });
 
     // Style y axis labels
     chart.select('g.y-axis').selectAll('text')
-      .style(styles.yAxisLabel)
-      .style('fill', StyleConstants.Colors.ASH)
+      .style(this.state.styles.yAxisLabel)
+      .style('fill', this.state.theme.Colors.GRAY_500)
       .attr('transform', 'translate(-10,0)');
 
     // Style y axis ticks
     chart.select('g.y-axis').selectAll('line')
-      .style('stroke', StyleConstants.Colors.FOG);
+      .style('stroke', this.state.theme.Colors.GRAY_300);
 
     // Style Circles
     chart.selectAll('.circle')
-      .style(styles.circle)
-      .style('stroke', this.props.lineColor);
+      .style(this.state.styles.circle)
+      .style('stroke', this.state.lineColor);
 
     // Style Break Point Items
     chart.selectAll('.break-point-label')
-      .style(styles.breakPointLabel);
+      .style(this.state.styles.breakPointLabel);
 
     chart.selectAll('.break-point-line')
-      .style(styles.breakPointLine);
+      .style(this.state.styles.breakPointLine);
 
     // Style Hovered Data Point Items
     chart.selectAll('.hovered-data-point-line')
-      .style(styles.verticalLine);
+      .style(this.state.styles.verticalLine);
 
     chart.selectAll('.hovered-data-point-date')
-      .style(styles.dateTooltip);
+      .style(this.state.styles.dateTooltip);
 
     chart.selectAll('.hovered-data-point-date-text')
-      .style(styles.dateTooltipText);
+      .style(this.state.styles.dateTooltipText);
 
     // Style rest of chart elements
     chart.selectAll('text')
-      .style(styles.text);
+      .style(this.state.styles.text);
 
     chart.selectAll('.domain')
-      .style(styles.domain);
+      .style(this.state.styles.domain);
 
     chart.selectAll('.y-grid-line .tick')
-      .style('stroke', StyleConstants.Colors.FOG);
+      .style('stroke', this.state.theme.Colors.GRAY_300);
 
     chart.select('text.zero-line-label')
-      .style(styles.zeroLineLabel);
+      .style(this.state.styles.zeroLineLabel);
   };
 
   // Render functions
@@ -491,11 +512,11 @@ class TimeBasedLineChart extends React.Component {
         const value = this.state.hoveredDataPoint[item.key];
 
         return (
-          <div key={'details-' + index} style={styles.hoveredDataPointDetail}>
-            <div style={styles.hoveredDataPointLabel}>
+          <div key={'details-' + index} style={this.state.styles.hoveredDataPointDetail}>
+            <div style={this.state.styles.hoveredDataPointLabel}>
               {item.label}
             </div>
-            <div style={styles.hoveredDataPointValue}>
+            <div style={this.state.styles.hoveredDataPointValue}>
               {value || value === 0 ? this._getFormattedValue(value, item.type, item.format) : 'N/A'}
             </div>
           </div>
@@ -507,11 +528,11 @@ class TimeBasedLineChart extends React.Component {
   };
 
   render () {
-    const { breakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
-    const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
+    const { breakPointDate, breakPointLabel, data, height, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
+    const { adjustedHeight, adjustedWidth, hoveredDataPoint, lineColor, margin } = this.state;
 
     return (
-      <div className='mx-time-based-line-chart' style={[styles.component, { height, width }]}>
+      <div className='mx-time-based-line-chart' style={Object.assign({}, this.state.styles.component, { height, width })}>
         {data.length ? (
           <div>
             <svg
@@ -523,6 +544,7 @@ class TimeBasedLineChart extends React.Component {
               {shadeFutureOnGraph ? (
                 <ShadedHatchPatternRectangleGroup
                   height={adjustedHeight}
+                  theme={this.state.theme}
                   translation={this._getLineTranslation()}
                   width={this._getShadedRectangleWidth()}
                   x={this._getShadedRectangleXValue()}
@@ -531,8 +553,9 @@ class TimeBasedLineChart extends React.Component {
               ) : null}
               {shadeBelowZero ? (
                 <ShadedAreaRectangleGroup
-                  fillColor={StyleConstants.Colors.STRAWBERRY}
+                  fillColor={this.state.theme.Colors.DANGER}
                   height={this._getShadedRectangleHeight()}
+                  theme={this.state.theme}
                   translation={this._getLineTranslation()}
                   width={adjustedWidth}
                   x={0}
@@ -558,9 +581,7 @@ class TimeBasedLineChart extends React.Component {
               <TimeXAxisGroup
                 ticks={
                   data.filter((datum, index) => {
-                    const isMonthRangeType = this.props.rangeType === 'month';
-
-                    return isMonthRangeType || index % 3 === 0;
+                    return index % Math.ceil(data.length / 10) === 0;
                   })
                   .map(datum => {
                     return moment.unix(datum.x).utc().unix();
@@ -587,8 +608,9 @@ class TimeBasedLineChart extends React.Component {
                     adjustedHeight={adjustedHeight}
                     dashLine={true}
                     data={this._getZeroLineData()}
-                    lineColor={StyleConstants.Colors.STRAWBERRY}
+                    lineColor={this.state.theme.Colors.DANGER}
                     shouldAnimate={false}
+                    theme={this.state.theme}
                     translation={this._getLineTranslation()}
                     xScaleValueFunction={this._getXScaleValue}
                     yScaleValueFunction={this._getYScaleValue}
@@ -607,6 +629,7 @@ class TimeBasedLineChart extends React.Component {
                 adjustedHeight={adjustedHeight}
                 data={data}
                 lineColor={lineColor}
+                theme={this.state.theme}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
@@ -614,6 +637,7 @@ class TimeBasedLineChart extends React.Component {
               <CirclesGroup
                 adjustedHeight={adjustedHeight}
                 data={this._getDataForLineCircles()}
+                theme={this.state.theme}
                 translation={this._getLineTranslation()}
                 xScaleValueFunction={this._getXScaleValue}
                 yScaleValueFunction={this._getYScaleValue}
@@ -637,11 +661,14 @@ class TimeBasedLineChart extends React.Component {
                 xScaleValueFunction={this._getXScaleValue}
               />
             </svg>
-            <div style={styles.hoveredDataPointDetails}>
+            <div style={this.state.styles.hoveredDataPointDetails}>
               {this._renderHoveredDataPointDetails()}
             </div>
           </div>
-        ) : zeroState }
+         ) : (
+           zeroState && zeroState ||
+             <div style={this.state.styles.zeroState}>No Data Found</div>
+         )}
       </div>
     );
   }

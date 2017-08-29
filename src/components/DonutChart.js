@@ -4,7 +4,9 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const d3 = require('d3');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class DonutChart extends React.Component {
   static propTypes = {
@@ -34,6 +36,7 @@ class DonutChart extends React.Component {
     padAngle: PropTypes.number,
     showBaseArc: PropTypes.bool,
     showDataLabel: PropTypes.bool,
+    theme: themeShape,
     width: PropTypes.number
   };
 
@@ -43,10 +46,7 @@ class DonutChart extends React.Component {
     animateOnHover: false,
     animationDuration: 500,
     arcWidth: 10,
-    baseArcColor: StyleConstants.Colors.BASE_ARC,
-    colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
     data: [],
-    dataPointColors: [StyleConstants.Colors.LIME].concat(d3.scale.category20b().range()),
     dataPointRadius: 5,
     dataPoints: [],
     formatter (value) {
@@ -246,7 +246,7 @@ class DonutChart extends React.Component {
     });
   };
 
-  _renderArcs = () => {
+  _renderArcs = (colors) => {
     return this.state.values.map((point, i) => {
       return (
         <g
@@ -258,7 +258,7 @@ class DonutChart extends React.Component {
           <path
             className={'arc-' + this.props.id}
             d={this.state.standardArc(point)}
-            fill={this.props.colors[i]}
+            fill={colors[i]}
             opacity={this.props.opacity}
             ref={(ref) => {
               this['arc-' + this.props.id + i] = ref;
@@ -269,11 +269,11 @@ class DonutChart extends React.Component {
     });
   };
 
-  _renderBaseArc = () => {
+  _renderBaseArc = (baseArcColor) => {
     if (this.props.showBaseArc) {
       return (
         <g>
-          <path d={this.state.baseArc()} fill={this.props.baseArcColor}></path>
+          <path d={this.state.baseArc()} fill={baseArcColor} />
         </g>
       );
     } else {
@@ -281,7 +281,7 @@ class DonutChart extends React.Component {
     }
   };
 
-  _renderDataPoints = () => {
+  _renderDataPoints = (dataPointColors) => {
     const dataPoints = this.props.dataPoints.map(dataPoint => {
       return dataPoint.value;
     });
@@ -299,7 +299,7 @@ class DonutChart extends React.Component {
         <circle
           cx='0'
           cy='0'
-          fill={this.props.dataPointColors[index]}
+          fill={dataPointColors[index]}
           key={index}
           r={this.props.dataPointRadius}
           transform={'translate(' + dataPointArc.centroid() + ')'}
@@ -308,9 +308,7 @@ class DonutChart extends React.Component {
     });
   };
 
-  _renderDataLabel = () => {
-    const styles = this.styles();
-
+  _renderDataLabel = (styles, colors) => {
     if (this.props.showDataLabel) {
       if (this.props.children) {
         return (
@@ -324,7 +322,7 @@ class DonutChart extends React.Component {
         );
       } else {
         const activeDataSet = this.props.data[this.state.activeIndex] || {};
-        const color = this.state.activeIndex === -1 ? this.props.colors[0] : this.props.colors[this.state.activeIndex];
+        const color = this.state.activeIndex === -1 ? colors[0] : colors[this.state.activeIndex];
         const text = this.state.activeIndex === -1 ? this.props.defaultLabelText : activeDataSet.name;
         const value = this.state.activeIndex === -1 ? this.props.formatter(this.props.defaultLabelValue) : this.props.formatter(activeDataSet.value);
 
@@ -351,34 +349,38 @@ class DonutChart extends React.Component {
   render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
+    const colors = this.props.colors || [theme.Colors.PRIMARY].concat(d3.scale.category20().range());
+    const baseArcColor = this.props.baseArcColor || theme.Colors.BASE_ARC;
+    const dataPointColors = this.props.dataPointColors || [theme.Colors.SUCCESS].concat(d3.scale.category20b().range());
 
     return (
       <div
         className='mx-donutchart'
         style={[styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width }]}
       >
-        {this._renderDataLabel()}
+        {this._renderDataLabel(styles, colors)}
         <svg
           className='mx-donutchart-svg'
           height={this.props.height}
           width={this.props.width}
         >
           <g className='mx-donutchart-g' transform={position}>
-            {this._renderBaseArc()}
-            {this._renderArcs()}
-            {this._renderDataPoints()}
+            {this._renderBaseArc(baseArcColor)}
+            {this._renderArcs(colors)}
+            {this._renderDataPoints(dataPointColors)}
           </g>
         </svg>
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: {
         position: 'relative',
-        fontFamily: StyleConstants.FontFamily
+        fontFamily: theme.FontFamily
       },
       center: {
         position: 'absolute',
@@ -388,7 +390,7 @@ class DonutChart extends React.Component {
         transform: 'translate(-50%, -50%)'
       },
       label: {
-        color: StyleConstants.Colors.ASH,
+        color: theme.Colors.GRAY_500,
         fontSize: '0.4em',
         marginTop: 5
       },

@@ -78,7 +78,6 @@ class TabsDocs extends React.Component {
 
         <h5>type <label>One of: ['standard', 'pill']</label></h5>
         <p>Default: standard</p>
-        <p></p>
 
         <h5>DEPRECATED: useTabsInMobile <label>Boolean</label></h5>
         <p>Deprecated. For dropdown style tabs please use <Link to='/components/select'>Select</Link> instead.</p>

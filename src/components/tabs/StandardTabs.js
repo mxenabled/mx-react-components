@@ -14,7 +14,7 @@ const StandardTabs = ({
   tabs
 }) => (
   <div style={style}>
-    {tabs.map((tab, index) =>
+    {tabs.map((tab, index) => (
       <Tab
         brandColor={brandColor}
         isActive={selectedTab === index}
@@ -24,7 +24,7 @@ const StandardTabs = ({
       >
         {tab}
       </Tab>
-      )}
+    ))}
   </div>
 );
 
