@@ -2,15 +2,17 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
 
-const StyleConstants = require('../../constants/Style');
+const { themeShape } = require('../../constants/App');
+
+const StyleUtils = require('../../utils/Style');
 
 class Tab extends React.Component {
   static propTypes = {
     activeTabStyles: PropTypes.object,
-    brandColor: PropTypes.string,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    theme: themeShape
   }
 
   static defaultProps = {
@@ -20,7 +22,8 @@ class Tab extends React.Component {
   }
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
     let style = Object.assign({}, styles.tab, this.props.styles.tab);
 
     if (this.props.isActive)
@@ -33,29 +36,29 @@ class Tab extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       tab: {
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.ASH,
+        color: theme.Colors.GRAY_500,
         cursor: 'pointer',
         display: 'inline-block',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        fontStyle: StyleConstants.Fonts.SEMIBOLD,
-        padding: StyleConstants.Spacing.MEDIUM,
+        fontSize: theme.FontSizes.MEDIUM,
+        fontStyle: theme.Fonts.SEMIBOLD,
+        padding: theme.Spacing.MEDIUM,
         whiteSpace: 'nowrap',
 
         ':hover': {
-          color: StyleConstants.Colors.CHARCOAL
+          color: theme.Colors.GRAY_700
         }
       },
       activeTab: Object.assign({
         cursor: 'default',
-        color: this.props.brandColor,
-        borderBottom: '2px solid ' + this.props.brandColor,
+        color: theme.Colors.PRIMARY,
+        borderBottom: '2px solid ' + theme.Colors.PRIMARY,
 
         ':hover': {
-          color: this.props.brandColor
+          color: theme.Colors.PRIMARY
         }
       }, this.props.activeTabStyles)
     };
