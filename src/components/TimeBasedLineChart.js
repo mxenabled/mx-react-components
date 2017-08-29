@@ -201,9 +201,9 @@ class HoveredDataPointGroup extends React.Component {
 // Main Component
 class TimeBasedLineChart extends React.Component {
   static propTypes = {
-    breakPointDate: PropTypes.number,
     breakPointLabel: PropTypes.string,
     data: PropTypes.array.isRequired,
+    getBreakPointDate: PropTypes.func,
     height: PropTypes.number,
     hoveredDataPointDetails: PropTypes.array,
     limitLineCircles: PropTypes.bool,
@@ -226,7 +226,7 @@ class TimeBasedLineChart extends React.Component {
   };
 
   static defaultProps = {
-    breakPointDate: moment().startOf('day').unix(),
+    getBreakPointDate: () => moment().startOf('day').unix(),
     breakPointLabel: 'Today',
     height: 400,
     limitLineCircles: false,
@@ -315,7 +315,7 @@ class TimeBasedLineChart extends React.Component {
   _getDataForLineCircles = () => {
     if (this.props.limitLineCircles) {
       return this.props.data.filter((dataPoint, index) => {
-        return index === 0 || index === this.props.data.length - 1 || dataPoint.x === this.props.breakPointDate;
+        return index === 0 || index === this.props.data.length - 1 || dataPoint.x === this.props.getBreakPointDate();
       });
     }
 
@@ -417,7 +417,7 @@ class TimeBasedLineChart extends React.Component {
   };
 
   _getShadedRectangleXValue = () => {
-    const breakPointXValue = this._getXScaleValue(this.props.breakPointDate);
+    const breakPointXValue = this._getXScaleValue(this.props.getBreakPointDate());
 
     return breakPointXValue < 0 ? 0 : breakPointXValue;
   };
@@ -528,8 +528,8 @@ class TimeBasedLineChart extends React.Component {
   };
 
   render () {
-    const { breakPointDate, breakPointLabel, data, height, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
-    const { adjustedHeight, adjustedWidth, hoveredDataPoint, lineColor, margin } = this.state;
+    const { getBreakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
+    const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
 
     return (
       <div className='mx-time-based-line-chart' style={Object.assign({}, this.state.styles.component, { height, width })}>
@@ -595,7 +595,7 @@ class TimeBasedLineChart extends React.Component {
                 <BreakPointGroup
                   adjustedHeight={adjustedHeight}
                   adjustedWidth={adjustedWidth}
-                  breakPointDate={breakPointDate}
+                  breakPointDate={getBreakPointDate()}
                   breakPointLabel={breakPointLabel}
                   margin={margin}
                   translation={this._getVerticalLineTranslation()}

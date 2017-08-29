@@ -66,6 +66,9 @@ class Changelog extends React.Component {
         <h3>v5 Breaking Changes</h3>
         <ul>
           <li>
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now functions instead of values (<a href='https://github.com/mxenabled/mx-react-components/pull/652'>#652</a>).
+          </li>
+          <li>
             Fixes React unknown prop warnings on various components(<a href='https://github.com/mxenabled/mx-react-components/pull/426'>#426</a>)
           </li>
           <li>
@@ -78,6 +81,12 @@ class Changelog extends React.Component {
 
         <h3>v5 Complete Change log</h3>
         <ul>
+          <li>
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now functions instead of values (<a href='https://github.com/mxenabled/mx-react-components/pull/652'>#652</a>).
+          </li>
+          <li>
+            Re adds componentWillReceiveProps to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/651'>#651</a>).
+          </li>
           <li>
             Remove old DateRangePicker code (<a href='https://github.com/mxenabled/mx-react-components/pull/643'>#643</a>).
           </li>
