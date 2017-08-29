@@ -5,6 +5,7 @@ const Radium = require('radium');
 const Icon = require('./Icon');
 const SimpleSelect = require('./SimpleSelect');
 const StyleConstants = require('../constants/Style');
+const StyleUtils = require('../utils/Style');
 
 class Tabs extends React.Component {
   static propTypes = {
@@ -52,7 +53,7 @@ class Tabs extends React.Component {
   };
 
   _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+    const windowSize = StyleUtils.getWindowSize(StyleConstants.BreakPoints);
 
     return windowSize === 'medium' || windowSize === 'large';
   };
@@ -146,7 +147,7 @@ class Tabs extends React.Component {
       },
       tab: {
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         cursor: 'pointer',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
@@ -157,7 +158,7 @@ class Tabs extends React.Component {
         textTransform: 'uppercase',
 
         ':hover': !this._isLargeOrMediumWindowSize() ? null : {
-          color: StyleConstants.Colors.ASH
+          color: StyleConstants.Colors.GRAY_500
         }
       },
       menuWrapper: {
@@ -172,7 +173,7 @@ class Tabs extends React.Component {
       },
       menu: {
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: StyleConstants.Colors.GRAY_700,
         cursor: 'pointer',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
@@ -184,7 +185,7 @@ class Tabs extends React.Component {
         borderBottom: '2px solid ' + this.props.brandColor
       },
       tabsContainer: {
-        borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
+        borderBottom: this.props.showBottomBorder ? '1px solid ' + StyleConstants.Colors.GRAY_300 : 'none',
         boxSizing: 'border-box',
         padding: `0 0 ${StyleConstants.Spacing.LARGE}px ${StyleConstants.Spacing.LARGE}px`,
         width: '100%'

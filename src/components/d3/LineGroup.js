@@ -3,7 +3,9 @@ const React = require('react');
 
 const d3 = require('d3');
 
-const StyleConstants = require('../../constants/Style');
+const { themeShape } = require('../../constants/App');
+
+const StyleUtils = require('../../utils/Style');
 
 class LineGroup extends React.Component {
   static propTypes = {
@@ -13,6 +15,7 @@ class LineGroup extends React.Component {
     lineColor: PropTypes.string,
     shouldAnimate: PropTypes.bool,
     strokeWidth: PropTypes.number,
+    theme: themeShape,
     translation: PropTypes.string,
     xScaleValueFunction: PropTypes.func.isRequired,
     yScaleValueFunction: PropTypes.func.isRequired
@@ -20,7 +23,6 @@ class LineGroup extends React.Component {
 
   static defaultProps = {
     dashLine: false,
-    lineColor: StyleConstants.Colors.CHARCOAL,
     shouldAnimate: true,
     strokeWidth: 2,
     translation: 'translate(0,0)'
@@ -64,7 +66,9 @@ class LineGroup extends React.Component {
   };
 
   render () {
-    const { data, dashLine, lineColor, shouldAnimate, strokeWidth, translation } = this.props;
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const lineColor = this.props.lineColor || theme.Colors.GRAY_700;
+    const { data, dashLine, shouldAnimate, strokeWidth, translation } = this.props;
 
     return (
       <g className='chart-line-group' transform={translation}>

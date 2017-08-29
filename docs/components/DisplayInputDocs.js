@@ -1,6 +1,7 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { DisplayInput, Styles } = require('mx-react-components');
 
@@ -67,7 +68,7 @@ class DisplayInputDocs extends React.Component {
           valid={true}
         />
         <DisplayInput
-          childrenStyle={{ backgroundColor: Styles.Colors.PORCELAIN }}
+          childrenStyle={{ backgroundColor: Styles.Colors.GRAY_100 }}
           label='Display Children'
         >
           Custom &nbsp;<span style={{ fontFamily: 'monospace' }}>children</span>
@@ -96,14 +97,14 @@ class DisplayInputDocs extends React.Component {
         <h5>placeholder <label>String</label></h5>
         <p>The text to show before the user starts typing or when the input field is empty.</p>
 
-        <h5>primaryColor <label>String</label></h5>
-        <p>A string that changes the brand color if there is one. Used on input focus and for the hint color.</p>
-
         <h5>showHint <label>Boolean</label></h5>
         <p>A boolean that controls when the hint text is displayed.</p>
 
         <h5>status <label>Object</label></h5>
         <p>An Object that contains a status type ('error' or 'success') and a status message that is displayed to the right of the input field.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>valid <label>Boolean</label></h5>
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.</p>

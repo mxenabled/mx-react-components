@@ -1,6 +1,7 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { TextArea } = require('mx-react-components');
 
@@ -29,6 +30,9 @@ class TextAreaDocs extends React.Component {
 
         <h5>rows <label>Integer</label></h5>
         <p>Specifies the number of rows to show.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>valid <label>Boolean</label></h5>
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red border.</p>

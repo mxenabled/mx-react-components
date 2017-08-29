@@ -3,11 +3,14 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
 
-const StyleConstants = require('../constants/Style');
-
 const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
 const Row = require('../components/grid/Row');
+
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class DisplayInput extends React.Component {
   static propTypes = {
@@ -24,6 +27,7 @@ class DisplayInput extends React.Component {
       type: PropTypes.string,
       message: PropTypes.string
     }),
+    theme: themeShape,
     valid: PropTypes.bool
   };
 
@@ -32,7 +36,6 @@ class DisplayInput extends React.Component {
       type: 'text'
     },
     isFocused: false,
-    primaryColor: StyleConstants.Colors.PRIMARY,
     valid: true
   };
 
@@ -41,8 +44,12 @@ class DisplayInput extends React.Component {
     this._inputId = this.props.elementProps.id || _uniqueId('DI');
   }
 
-  _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
+
+  _isLargeOrMediumWindowSize = (theme) => {
+    const windowSize = StyleUtils.getWindowSize(theme.BreakPoints);
 
     return windowSize === 'large' || windowSize === 'medium';
   };
@@ -52,8 +59,9 @@ class DisplayInput extends React.Component {
     const { elementProps } = this.props;
 
     // Methods
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const hasChildren = !!this.props.children;
-    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
 
     // Column Sizes
@@ -63,7 +71,7 @@ class DisplayInput extends React.Component {
     const statusColumn = { large: 10, medium: 10, small: 12 };
 
     // Styles
-    const styles = this.styles();
+    const styles = this.styles(theme, isLargeOrMediumWindowSize);
 
     return (
       <Container>
@@ -118,21 +126,20 @@ class DisplayInput extends React.Component {
     );
   }
 
-  styles = () => {
-    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
+  styles = (theme, isLargeOrMediumWindowSize) => {
     const wrapperFocus = {
-      borderBottom: this.props.valid ? '1px solid ' + this.props.primaryColor : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+      borderBottom: this.props.valid ? '1px solid ' + theme.Colors.PRIMARY : '1px solid ' + theme.Colors.DANGER,
       boxShadow: 'none',
       outline: 'none'
     };
 
     return {
       error: {
-        color: StyleConstants.Colors.STRAWBERRY
+        color: theme.Colors.DANGER
       },
 
       hint: {
-        color: this.props.primaryColor,
+        color: theme.Colors.PRIMARY,
         height: 20,
         paddingTop: 15,
         textAlign: 'right'
@@ -141,8 +148,8 @@ class DisplayInput extends React.Component {
       input: {
         backgroundColor: 'transparent',
         border: 0,
-        color: StyleConstants.Colors.CHARCOAL,
-        fontSize: StyleConstants.FontSizes.LARGE,
+        color: theme.Colors.GRAY_700,
+        fontSize: theme.FontSizes.LARGE,
         lineHeight: 1,
         textAlign: 'left',
         width: '100%',
@@ -156,49 +163,49 @@ class DisplayInput extends React.Component {
       inputWrapper: {
         alignItems: 'center',
         display: 'flex',
-        padding: StyleConstants.Spacing.SMALL
+        padding: theme.Spacing.SMALL
       },
 
       children: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: theme.Colors.GRAY_700,
         display: 'flex',
-        fontSize: StyleConstants.FontSizes.LARGE,
-        height: StyleConstants.Spacing.LARGE,
-        padding: StyleConstants.Spacing.SMALL
+        fontSize: theme.FontSizes.LARGE,
+        height: theme.Spacing.LARGE,
+        padding: theme.Spacing.SMALL
       },
 
       labelText: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: theme.Colors.GRAY_700,
         display: 'flex',
-        fontSize: StyleConstants.FontSizes.SMALL,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        paddingBottom: isLargeOrMediumWindowSize ? StyleConstants.Spacing.MEDIUM : StyleConstants.Spacing.XSMALL,
-        paddingLeft: StyleConstants.Spacing.SMALL,
-        paddingRight: StyleConstants.Spacing.SMALL,
-        paddingTop: isLargeOrMediumWindowSize ? StyleConstants.Spacing.MEDIUM : StyleConstants.Spacing.XSMALL,
+        fontSize: theme.FontSizes.SMALL,
+        fontFamily: theme.Fonts.SEMIBOLD,
+        paddingBottom: isLargeOrMediumWindowSize ? theme.Spacing.MEDIUM : theme.Spacing.XSMALL,
+        paddingLeft: theme.Spacing.SMALL,
+        paddingRight: theme.Spacing.SMALL,
+        paddingTop: isLargeOrMediumWindowSize ? theme.Spacing.MEDIUM : theme.Spacing.XSMALL,
         textAlign: 'left'
       },
 
       status: {
-        paddingBottom: StyleConstants.Spacing.XSMALL,
-        paddingLeft: isLargeOrMediumWindowSize ? StyleConstants.Spacing.SMALL : StyleConstants.Spacing.XSMALL,
-        paddingRight: StyleConstants.Spacing.SMALL,
-        paddingTop: StyleConstants.Spacing.XSMALL
+        paddingBottom: theme.Spacing.XSMALL,
+        paddingLeft: isLargeOrMediumWindowSize ? theme.Spacing.SMALL : theme.Spacing.XSMALL,
+        paddingRight: theme.Spacing.SMALL,
+        paddingTop: theme.Spacing.XSMALL
       },
 
       success: {
-        color: this.props.primaryColor
+        color: theme.Colors.PRIMARY
       },
 
       wrapper: Object.assign({
-        borderBottom: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        borderBottom: this.props.valid ? '1px solid ' + theme.Colors.GRAY_300 : '1px solid ' + theme.Colors.DANGER,
         boxSizing: 'border-box',
-        paddingBottom: StyleConstants.Spacing.XSMALL,
+        paddingBottom: theme.Spacing.XSMALL,
         marginLeft: isLargeOrMediumWindowSize ? 0 : -10,
         marginRight: isLargeOrMediumWindowSize ? 0 : -10,
-        paddingTop: StyleConstants.Spacing.XSMALL,
+        paddingTop: theme.Spacing.XSMALL,
         transition: 'all .2s ease-in',
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',

@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-indent */
 const React = require('react');
 const moment = require('moment');
+const { Link } = require('react-router');
 
 const { DatePickerFullScreen } = require('mx-react-components');
 
@@ -60,6 +61,9 @@ class DatePickerFullScreenDocs extends React.Component {
         <h5>showDayBorders <label>Boolean</label></h5>
         <p>Default: false</p>
         <p>If set to 'true', then borders will be shown around each date in the calendar.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>title <label>String</label></h5>
         <p>If a value is provided, it will be displayed above the calendar.</p>

@@ -1,6 +1,7 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { PageIndicator } = require('mx-react-components');
 
@@ -41,6 +42,9 @@ class PageIndicatorDocs extends React.Component {
 
         <h5>OnClick <label>function</label></h5>
         <p>A function to be called when a dot is clicked. The function will be passed the index of the clicked dot.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>

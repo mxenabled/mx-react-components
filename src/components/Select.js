@@ -8,7 +8,10 @@ const ReactDOM = require('react-dom');
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 // returns a function that takes a click event, stops it, then calls the callback
 const haltEvent = callback => e => {
@@ -36,11 +39,11 @@ class Select extends React.Component {
     scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    theme: themeShape,
     valid: PropTypes.bool
   };
 
   static defaultProps = {
-    primaryColor: StyleConstants.Colors.PRIMARY,
     onChange () {},
     options: [],
     placeholderText: 'Select One',
@@ -54,6 +57,10 @@ class Select extends React.Component {
       isOpen: false,
       selected: props.selected
     };
+  }
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
   }
 
   componentWillReceiveProps (newProps) {
@@ -115,10 +122,8 @@ class Select extends React.Component {
     }
   };
 
-  _renderScrim = () => {
+  _renderScrim = (styles) => {
     if (this.state.isOpen) {
-      const styles = this.styles();
-
       return (
         <div
           className='mx-select-scrim'
@@ -131,10 +136,8 @@ class Select extends React.Component {
     }
   };
 
-  _renderOptions = () => {
+  _renderOptions = (styles) => {
     if (this.state.isOpen) {
-      const styles = this.styles();
-
       if (this.props.children) {
         return (
           <div className='mx-select-options' style={styles.options}>
@@ -185,7 +188,8 @@ class Select extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
@@ -197,7 +201,7 @@ class Select extends React.Component {
           style={styles.component}
           tabIndex='0'
         >
-          {this._renderScrim()}
+          {this._renderScrim(styles)}
           <div className='mx-select-selected' key='selected' style={styles.selected}>
             {selected.icon ? (
               <Icon
@@ -212,28 +216,28 @@ class Select extends React.Component {
               type={this.state.isOpen ? 'caret-up' : 'caret-down'}
             />
           </div>
-          {this.props.options.length || this.props.children ? this._renderOptions() : null}
+          {this.props.options.length || this.props.children ? this._renderOptions(styles) : null}
         </div>
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     const focusedOption = {
-      backgroundColor: this.props.primaryColor,
-      color: StyleConstants.Colors.WHITE,
-      fill: StyleConstants.Colors.WHITE
+      backgroundColor: theme.Colors.PRIMARY,
+      color: theme.Colors.WHITE,
+      fill: theme.Colors.WHITE
     };
 
     return {
       component: Object.assign({},
         {
-          backgroundColor: StyleConstants.Colors.WHITE,
+          backgroundColor: theme.Colors.WHITE,
           borderRadius: 3,
-          border: '1px solid ' + StyleConstants.Colors.FOG,
+          border: '1px solid ' + theme.Colors.GRAY_300,
           cursor: 'pointer',
-          fontFamily: StyleConstants.FontFamily,
-          fontSize: StyleConstants.FontSizes.MEDIUM,
+          fontFamily: theme.FontFamily,
+          fontSize: theme.FontSizes.MEDIUM,
           padding: '8px 10px',
           position: 'relative',
           boxSizing: 'border-box'
@@ -255,12 +259,12 @@ class Select extends React.Component {
           position: 'relative'
         }, this.props.selectedStyle),
       invalid: {
-        borderColor: StyleConstants.Colors.STRAWBERRY
+        borderColor: theme.Colors.DANGER
       },
       options: Object.assign({},
         {
-          backgroundColor: StyleConstants.Colors.WHITE,
-          border: '1px solid ' + StyleConstants.Colors.FOG,
+          backgroundColor: theme.Colors.WHITE,
+          border: '1px solid ' + theme.Colors.GRAY_300,
           borderRadius: '0 0 3px 3px',
           left: -1,
           right: -1,
@@ -270,21 +274,21 @@ class Select extends React.Component {
           position: 'absolute',
           zIndex: 10,
           fontSize: 12,
-          boxShadow: StyleConstants.ShadowHigh,
+          boxShadow: theme.ShadowHigh,
           boxSizing: 'border-box',
           maxHeight: 260,
           overflow: 'auto'
         }, this.props.optionsStyle),
       activeOption: {
-        fill: this.props.primaryColor,
-        color: this.props.primaryColor
+        fill: theme.Colors.PRIMARY,
+        color: theme.Colors.PRIMARY
       },
       option: {
         display: 'flex',
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: theme.Colors.GRAY_700,
         cursor: 'pointer',
-        backgroundColor: StyleConstants.Colors.WHITE,
+        backgroundColor: theme.Colors.WHITE,
         outline: 'none',
         padding: 10,
         whiteSpace: 'nowrap',
