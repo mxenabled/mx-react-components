@@ -46,10 +46,10 @@ class SelectionPane extends React.Component {
           <div onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
         </div>
         <div>
-          <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.primaryColor })}>
+          <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
             Select a Range
           </div>
-          <DefaultRanges {...this.props} styles={styles} />
+          <DefaultRanges {...this.props} primaryColor={theme.Colors.PRIMARY} styles={styles} />
         </div>
       </div>
     );
@@ -92,9 +92,9 @@ class SelectionPane extends React.Component {
         padding: '10px 15px'
       },
       selectedDateSelectBox: {
-        borderColor: theme.Colors.primaryColor,
+        borderColor: theme.Colors.PRIMARY,
         cursor: 'pointer',
-        color: theme.Colors.primaryColor
+        color: theme.Colors.PRIMARY
       },
 
       //Default Ranges
