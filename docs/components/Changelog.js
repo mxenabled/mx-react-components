@@ -5,6 +5,13 @@ class Changelog extends React.Component {
     return (
       <div>
         <h1>Change Log</h1>
+        <h3>Release Candidate 5.0.0-rc.112</h3>
+        <ul>
+          <li>
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now functions instead of values (<a href='https://github.com/mxenabled/mx-react-components/pull/652'>#652</a>).
+          </li>
+        </ul>
+
         <h3>Release Candidate 5.0.0-rc.111</h3>
         <ul>
           <li>
