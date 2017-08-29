@@ -54,9 +54,9 @@ class TimeBasedLineChartDocs extends React.Component {
 
         <h3>Demo</h3>
         <TimeBasedLineChart
-          breakPointDate={moment().startOf('month').unix()}
           breakPointLabel={'This Month'}
           data={lineChartData}
+          getBreakPointDate={() => moment().startOf('month').unix()}
           height={this.state.chartHeight}
           rangeType={'month'}
           showZeroLine={true}
@@ -64,9 +64,9 @@ class TimeBasedLineChartDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>breakPointDate <label>Number</label></h5>
+        <h5>getBreakPointDate <label>Function</label></h5>
         <p>Default: today (as a Unix timestamp)</p>
-        <p>A Unix timestamp that sets the breakpoint for the chart. The breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to 'true', then the line after the breakpoint will be dashed instead of solid.</p>
+        <p>A function that returns a unix timestamp that sets the breakpoint for the chart. The breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to 'true', then the line after the breakpoint will be dashed instead of solid.</p>
 
         <h5>breakPointLabel <label>String</label></h5>
         <p>Default: 'Today'</p>
