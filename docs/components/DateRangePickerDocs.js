@@ -71,6 +71,9 @@ class DateRangePickerDocs extends React.Component {
         <h5>onDateSelect <label>Function</label></h5>
         <p>A function to be called when the user has selected a date. The selected date timestamp(s) will be passed to this function.</p>
 
+        <h5>optionsWrapperStyle <label>Object</label></h5>
+        <p>Additional styles that can be set on the options wrapper.</p>
+
         <h5>placeholderText <label>String</label></h5>
         <p>Default: Select A Date</p>
         <p>A string used as placeholder text for the selected date input when it is empty.</p>

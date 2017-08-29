@@ -28,6 +28,7 @@ class DateRangePicker extends React.Component {
     minimumDate: PropTypes.number,
     onClose: PropTypes.func,
     onDateSelect: PropTypes.func,
+    optionsWrapperStyle: PropTypes.object,
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
     selectedEndDate: PropTypes.number,
@@ -366,7 +367,7 @@ class DateRangePicker extends React.Component {
       },
 
       //Calendar Styles
-      optionsWrapper: {
+      optionsWrapper: Object.assign({
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: 3,
@@ -380,11 +381,11 @@ class DateRangePicker extends React.Component {
         position: 'absolute',
         left: isLargeOrMediumWindowSize ? '50%' : 0,
         right: isLargeOrMediumWindowSize ? 'auto' : 0,
-        transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
+        transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : 'none',
         zIndex: 10,
         maxWidth: 575,
         width: window.innerWidth
-      },
+      }, this.props.optionsWrapperStyle),
       calendarWrapper: {
         boxSizing: 'border-box',
         padding: 20,
