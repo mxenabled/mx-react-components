@@ -6,6 +6,8 @@ const SimpleSelect = require('./SimpleSelect');
 
 const { themeShape } = require('../constants/App');
 
+const StyleUtils = require('../utils/Style');
+
 class HeaderMenu extends React.Component {
   static propTypes = {
     buttonIcon: PropTypes.string,
