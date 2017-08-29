@@ -1,6 +1,8 @@
+const React = require('react');
 const _merge = require('lodash/merge');
 
 const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
 
 const doubleHexCode = color =>
   color.split('').map(char => char + char).join('');
@@ -81,6 +83,24 @@ const StyleUtils = {
     const primaryColorTheme = primaryColor && { Colors: { PRIMARY: primaryColor } };
 
     return _merge({}, StyleConstants, primaryColorTheme, theme);
+  },
+
+  /**
+   * Inject a theme object that has already merged StyleConstants
+   * @param {*} Component - a React component
+   */
+  withMergedTheme (Component) {
+    const WrappedComponent = (props) => {
+      const theme = StyleUtils.mergeTheme(props.theme);
+
+      return <Component {...props} theme={theme} />;
+    };
+
+    WrappedComponent.propTypes = {
+      theme: themeShape
+    };
+
+    return WrappedComponent;
   }
 };
 
