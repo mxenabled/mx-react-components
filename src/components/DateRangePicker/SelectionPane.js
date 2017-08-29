@@ -33,7 +33,7 @@ class SelectionPane extends React.Component {
 
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
-    const styles = this.styles(theme, isLargeOrMediumWindowSize);
+    const styles = this.styles(theme);
     const { selectedStartDate, selectedEndDate } = this.props;
 
     return (

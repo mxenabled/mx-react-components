@@ -106,7 +106,7 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
-  _handleDateSelect = (date) => {
+  _handleDateSelect = (isLargeOrMediumWindowSize, date) => {
     this.setState({
       currentDate: date
     });
@@ -116,12 +116,12 @@ class DateRangePicker extends React.Component {
 
     if (this.state.selectedBox === SelectedBox.FROM) {
       startDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: SelectedBox.TO });
+      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.TO });
     }
 
     if (this.state.selectedBox === SelectedBox.TO) {
       endDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: SelectedBox.FROM });
+      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.FROM });
     }
 
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
@@ -288,7 +288,7 @@ class DateRangePicker extends React.Component {
                       currentDate={this.state.currentDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect}
+                      handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
                       isInActiveRange={this._isInActiveRange}
                       minimumDate={this.props.minimumDate}
                       selectedEndDate={this.props.selectedEndDate}
