@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
+const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
 const Button = require('./Button');
@@ -28,13 +29,12 @@ class DateRangePicker extends React.Component {
     minimumDate: PropTypes.number,
     onClose: PropTypes.func,
     onDateSelect: PropTypes.func,
-    optionsWrapperStyle: PropTypes.object,
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
     showDefaultRanges: PropTypes.bool,
-    style: PropTypes.object
+    styles: PropTypes.object
   };
 
   static defaultProps = {
@@ -327,8 +327,8 @@ class DateRangePicker extends React.Component {
   styles = () => {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
 
-    return {
-      component: Object.assign({
+    return _merge({
+      component: {
         backgroundColor: StyleConstants.Colors.WHITE,
         borderColor: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.FOG,
         borderRadius: 3,
@@ -343,7 +343,7 @@ class DateRangePicker extends React.Component {
         padding: '10px 15px',
         position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
-      }, this.props.style),
+      },
       container: {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
       },
@@ -367,7 +367,7 @@ class DateRangePicker extends React.Component {
       },
 
       //Calendar Styles
-      optionsWrapper: Object.assign({
+      optionsWrapper: {
         backgroundColor: StyleConstants.Colors.WHITE,
         border: '1px solid ' + StyleConstants.Colors.FOG,
         borderRadius: 3,
@@ -385,7 +385,7 @@ class DateRangePicker extends React.Component {
         zIndex: 10,
         maxWidth: 575,
         width: window.innerWidth
-      }, this.props.optionsWrapperStyle),
+      },
       calendarWrapper: {
         boxSizing: 'border-box',
         padding: 20,
@@ -489,7 +489,7 @@ class DateRangePicker extends React.Component {
         top: 0,
         zIndex: 9
       }
-    };
+    }, this.props.styles);
   };
 }
 
