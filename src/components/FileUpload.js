@@ -2,7 +2,9 @@ const numeral = require('numeral');
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
@@ -26,6 +28,7 @@ class FileUpload extends React.Component {
     onFileRemove: PropTypes.func.isRequired,
     onFileValidation: PropTypes.func,
     style: PropTypes.object,
+    theme: themeShape,
     uploadedFile: PropTypes.any
   };
 
@@ -247,7 +250,8 @@ class FileUpload extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
     const dropzoneLoaded = this.props.imageUrl || this.props.uploadedFile;
     const imageSource = this.state.imageSource || this.props.imageUrl;
 
@@ -275,6 +279,7 @@ class FileUpload extends React.Component {
                   icon='delete'
                   onClick={this._removeFile}
                   style={styles.button}
+                  theme={theme}
                   type='secondary'
                 />
               </div>
@@ -310,15 +315,15 @@ class FileUpload extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       dropzone: Object.assign({}, {
-        backgroundColor: this.state.dragging ? StyleConstants.Colors.WHITE : StyleConstants.Colors.PORCELAIN,
-        border: this.state.dragging ? '1px dashed ' + StyleConstants.Colors.PRIMARY : '1px solid ' + StyleConstants.Colors.FOG,
+        backgroundColor: this.state.dragging ? theme.Colors.WHITE : theme.Colors.GRAY_100,
+        border: this.state.dragging ? '1px dashed ' + theme.Colors.PRIMARY : '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
-        color: StyleConstants.Colors.ASH,
-        fontFamily: StyleConstants.Fonts.REGULAR,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        color: theme.Colors.GRAY_500,
+        fontFamily: theme.Fonts.REGULAR,
+        fontSize: theme.FontSizes.MEDIUM,
         height: this.state.dragging ? 150 : 100,
         position: 'relative',
         textAlign: 'center'
@@ -329,12 +334,12 @@ class FileUpload extends React.Component {
 
       // Dragging Styles
       importIcon: {
-        fill: StyleConstants.Colors.PRIMARY
+        fill: theme.Colors.PRIMARY
       },
       draggingText: {
-        color: StyleConstants.Colors.PRIMARY,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.LARGE
+        color: theme.Colors.PRIMARY,
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.LARGE
       },
       faded: {
         opacity: 0.5
@@ -352,7 +357,7 @@ class FileUpload extends React.Component {
         opacity: this.state.dragging ? 0.5 : 1
       },
       documentIcon: {
-        fill: StyleConstants.Colors.ASH
+        fill: theme.Colors.GRAY_500
       },
       button: {
         marginTop: 10
@@ -370,12 +375,12 @@ class FileUpload extends React.Component {
         transform: 'translate(-50%, -50%)'
       },
       invalidMessage: {
-        fontSize: StyleConstants.FontSizes.LARGE,
+        fontSize: theme.FontSizes.LARGE,
         marginBottom: 10,
-        color: StyleConstants.Colors.STRAWBERRY
+        color: theme.Colors.DANGER
       },
       invalidIcon: {
-        color: StyleConstants.Colors.ASH
+        color: theme.Colors.GRAY_500
       }
     };
   };

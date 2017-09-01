@@ -57,8 +57,8 @@ class ColumnDocs extends React.Component {
     return {
       responsiveDiv: {
         boxSizing: 'border-box',
-        backgroundColor: Styles.Colors.PORCELAIN,
-        border: '1px solid' + Styles.Colors.FOG,
+        backgroundColor: Styles.Colors.GRAY_100,
+        border: '1px solid' + Styles.Colors.GRAY_300,
         borderRadius: 3,
         padding: 10,
         width: '100%'

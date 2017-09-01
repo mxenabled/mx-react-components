@@ -13,6 +13,7 @@ class Header extends React.Component {
 
         <nav style={styles.nav}>
           <Link style={styles.navLink} to='/'>Home</Link>
+          <Link style={styles.navLink} to='/components/'>Change Log</Link>
           <Link style={styles.navLink} to='/components'>Components</Link>
           <a href='http://github.com/mxenabled/mx-react-components' style={styles.navLink}>Github</a>
         </nav>

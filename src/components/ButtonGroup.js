@@ -4,9 +4,10 @@ const Radium = require('radium');
 
 const Button = require('./Button');
 
-const StyleConstants = require('../constants/Style');
+const { buttonTypes, themeShape } = require('../constants/App');
 
-const { buttonTypes } = require('../constants/App');
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class ButtonGroup extends React.Component {
   static propTypes = {
@@ -19,17 +20,22 @@ class ButtonGroup extends React.Component {
       type: PropTypes.oneOf(buttonTypes)
     }).isRequired),
     primaryColor: PropTypes.string,
+    theme: themeShape,
     type: PropTypes.oneOf(buttonTypes)
   };
 
   static defaultProps = {
     buttons: [],
-    primaryColor: StyleConstants.Colors.PRIMARY,
     type: 'primaryOutline'
   };
 
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
+
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
 
     return (
       <div>
@@ -45,7 +51,6 @@ class ButtonGroup extends React.Component {
               icon={button.icon}
               key={i}
               onClick={isDisabled ? null : button.onClick}
-              primaryColor={this.props.primaryColor}
               style={Object.assign({},
                 styles.component,
                 isFirstChild && styles.firstChild,
@@ -53,6 +58,7 @@ class ButtonGroup extends React.Component {
                 isOnlyChild && styles.onlyChild,
                 isDisabled && styles.disabled,
                 button.style)}
+              theme={theme}
               type={this.props.type}
             >
               {button.text}
@@ -63,7 +69,7 @@ class ButtonGroup extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: Object.assign({
         boxSizing: 'border-box',
@@ -86,9 +92,9 @@ class ButtonGroup extends React.Component {
       },
       disabled: {
         backgroundColor: 'transparent',
-        color: StyleConstants.Colors.FOG,
+        color: theme.Colors.GRAY_300,
         cursor: 'default',
-        fill: StyleConstants.Colors.FOG,
+        fill: theme.Colors.GRAY_300,
         ':hover': {
           backgroundColor: 'transparent'
         },

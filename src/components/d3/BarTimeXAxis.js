@@ -5,11 +5,14 @@ const d3 = require('d3');
 const moment = require('moment');
 const _merge = require('lodash/merge');
 
-const StyleConstants = require('../../constants/Style');
+const { themeShape } = require('../../constants/App');
+
+const StyleUtils = require('../../utils/Style');
 
 class BarTimeXAxis extends React.Component {
   static propTypes = {
     style: PropTypes.object,
+    theme: themeShape,
     tickRange: PropTypes.array,
     tickSize: PropTypes.number,
     tickValues: PropTypes.array,
@@ -48,7 +51,8 @@ class BarTimeXAxis extends React.Component {
   };
 
   _styleChart = () => {
-    const style = _merge({}, this.styles(), this.props.style);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const style = _merge({}, this.styles(theme), this.props.style);
     const axis = d3.select(this.timeAxis);
 
     // Style x axis labels
@@ -70,16 +74,16 @@ class BarTimeXAxis extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       text: {
-        fill: StyleConstants.Colors.ASH,
+        fill: theme.Colors.GRAY_500,
         stroke: 'none',
-        'font-size': StyleConstants.FontSizes.MEDIUM,
+        'font-size': theme.FontSizes.MEDIUM,
         'text-anchor': 'middle'
       },
       path: {
-        stroke: StyleConstants.Colors.FOG,
+        stroke: theme.Colors.GRAY_300,
         'stroke-width': 1,
         fill: 'none'
       }

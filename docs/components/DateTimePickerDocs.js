@@ -1,6 +1,7 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { DateTimePicker } = require('mx-react-components');
 
@@ -69,12 +70,11 @@ class DateTimePickerDocs extends React.Component {
         <h5>onDateSelect <label>Function</label></h5>
         <p>A function to be called when the user has selected a date. The selected date timestamp will be passed to this function.</p>
 
-        <h5>primaryColor <label>string</label></h5>
-        <p>Default: PRIMARY (#359BCF)</p>
-        <p>The color used for input focus, selected date highlight, and hover border</p>
-
         <h5>selectedDate <label>Number (unix timestamp)</label></h5>
         <p>This sets the selected date on the component. Can be used to set a default date.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>timeFormat <label>String</label></h5>
         <p>Default: 'LT'</p>

@@ -3,7 +3,10 @@ const React = require('react');
 
 const _merge = require('lodash/merge');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class TextArea extends React.Component {
   static propTypes = {
@@ -11,12 +14,12 @@ class TextArea extends React.Component {
     primaryColor: PropTypes.string,
     rows: PropTypes.number,
     styles: PropTypes.object,
+    theme: themeShape,
     valid: PropTypes.bool
   };
 
   static defaultProps = {
     elementProps: {},
-    primaryColor: StyleConstants.Colors.PRIMARY,
     rows: 5,
     valid: true
   };
@@ -24,6 +27,10 @@ class TextArea extends React.Component {
   state = {
     focus: false
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   _onFocus = () => {
     this.textarea.focus();
@@ -43,7 +50,8 @@ class TextArea extends React.Component {
 
   render () {
     const { elementProps, rows } = this.props;
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
 
     return (
       <div
@@ -64,16 +72,16 @@ class TextArea extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return _merge({}, {
       component: {
         display: 'block'
       },
       wrapper: {
-        padding: StyleConstants.Spacing.SMALL,
+        padding: theme.Spacing.SMALL,
         boxSizing: 'border-box',
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: this.props.valid ? '1px solid ' + StyleConstants.Colors.FOG : '1px solid ' + StyleConstants.Colors.STRAWBERRY,
+        backgroundColor: theme.Colors.WHITE,
+        border: this.props.valid ? '1px solid ' + theme.Colors.GRAY_300 : '1px solid ' + theme.Colors.DANGER,
         borderRadius: 3,
         display: 'flex',
         alignItems: 'center',
@@ -82,11 +90,11 @@ class TextArea extends React.Component {
         boxShadow: 'none'
       },
       active: {
-        border: '1px solid ' + this.props.primaryColor
+        border: '1px solid ' + theme.Colors.PRIMARY
       },
       textarea: {
         flex: '1 0 0%',
-        backgroundColor: StyleConstants.Colors.WHITE,
+        backgroundColor: theme.Colors.WHITE,
         border: 'none',
         outline: 'none',
         boxShadow: 'none'

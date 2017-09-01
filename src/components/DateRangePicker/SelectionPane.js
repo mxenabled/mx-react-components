@@ -4,8 +4,11 @@ const PropTypes = require('prop-types');
 
 const DefaultRanges = require('../DateRangePicker/DefaultRanges');
 
-const StyleConstants = require('../../constants/Style');
 const { SelectedBox } = require('../../constants/DateRangePicker');
+const { themeShape } = require('../../constants/App');
+
+const StyleUtils = require('../../utils/Style');
+const { deprecatePrimaryColor } = require('../../utils/Deprecation');
 
 class SelectionPane extends React.Component {
   static propTypes = {
@@ -16,15 +19,21 @@ class SelectionPane extends React.Component {
     selectedBox: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
-    setCurrentDate: PropTypes.func
+    setCurrentDate: PropTypes.func,
+    theme: themeShape
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   _handleDateBoxClick = (date, selectedBox) => {
     this.props.onDateBoxClick(date, selectedBox);
   }
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
     const { selectedStartDate, selectedEndDate } = this.props;
 
     return (
@@ -37,25 +46,25 @@ class SelectionPane extends React.Component {
           <div onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
         </div>
         <div>
-          <div style={Object.assign({}, styles.defaultRangesTitle, { color: this.props.primaryColor })}>
+          <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
             Select a Range
           </div>
-          <DefaultRanges {...this.props} styles={styles} />
+          <DefaultRanges {...this.props} primaryColor={theme.Colors.PRIMARY} styles={styles} />
         </div>
       </div>
     );
   }
 
-  styles = () => {
-    const isLargeOrMediumWindowSize = ['large', 'medium'].indexOf(StyleConstants.getWindowSize()) !== -1;
+  styles = theme => {
+    const isLargeOrMediumWindowSize = ['large', 'medium'].indexOf(StyleUtils.getWindowSize(theme.BreakPoints)) !== -1;
 
     return {
       container: {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + StyleConstants.Colors.FOG : 'none',
-        padding: StyleConstants.Spacing.MEDIUM,
+        borderRight: isLargeOrMediumWindowSize ? '1px solid ' + theme.Colors.GRAY_300 : 'none',
+        padding: theme.Spacing.MEDIUM,
         boxSizing: 'border-box',
         width: isLargeOrMediumWindowSize ? 275 : '100%'
       },
@@ -65,42 +74,42 @@ class SelectionPane extends React.Component {
       },
 
       boxLabel: {
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        color: StyleConstants.Colors.CHARCOAL
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.MEDIUM,
+        color: theme.Colors.GRAY_700
       },
       dateSelectBox: {
-        borderColor: StyleConstants.Colors.FOG,
+        borderColor: theme.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
         cursor: 'pointer',
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
-        marginBottom: StyleConstants.Spacing.SMALL,
-        marginTop: StyleConstants.Spacing.XSMALL,
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.MEDIUM,
+        marginBottom: theme.Spacing.SMALL,
+        marginTop: theme.Spacing.XSMALL,
         padding: '10px 15px'
       },
       selectedDateSelectBox: {
-        borderColor: this.props.primaryColor,
+        borderColor: theme.Colors.PRIMARY,
         cursor: 'pointer',
-        color: this.props.primaryColor
+        color: theme.Colors.PRIMARY
       },
 
       //Default Ranges
       defaultRangesTitle: {
-        color: StyleConstants.Colors.PRIMARY,
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.SMALL,
-        padding: `${StyleConstants.Spacing.LARGE}px 0px ${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.LARGE}px`
+        color: theme.Colors.PRIMARY,
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.SMALL,
+        padding: `${theme.Spacing.LARGE}px 0px ${theme.Spacing.SMALL}px ${theme.Spacing.LARGE}px`
       },
       rangeOptions: {
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: theme.Colors.GRAY_700,
         display: 'flex',
         flexWrap: 'wrap',
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontSize: theme.FontSizes.MEDIUM,
         width: '100%'
       },
       rangeOption: {
@@ -108,16 +117,16 @@ class SelectionPane extends React.Component {
         boxSizing: 'border-box',
         cursor: 'pointer',
         display: 'flex',
-        padding: `${StyleConstants.Spacing.SMALL}px ${StyleConstants.Spacing.SMALL}px`,
+        padding: `${theme.Spacing.SMALL}px ${theme.Spacing.SMALL}px`,
         width: '50%',
-        fontSize: StyleConstants.FontSizes.SMALL,
+        fontSize: theme.FontSizes.SMALL,
 
         ':hover': {
-          backgroundColor: StyleConstants.Colors.PORCELAIN
+          backgroundColor: theme.Colors.GRAY_100
         }
       },
       rangeOptionIcon: {
-        paddingRight: StyleConstants.Spacing.SMALL
+        paddingRight: theme.Spacing.SMALL
       }
 
     };

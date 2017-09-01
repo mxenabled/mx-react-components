@@ -5,7 +5,10 @@ const FocusTrap = require('focus-trap-react');
 const Button = require('./Button');
 const Icon = require('./Icon');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Modal extends React.Component {
   static propTypes = {
@@ -32,6 +35,7 @@ class Modal extends React.Component {
     showScrim: PropTypes.bool,
     showTitleBar: PropTypes.bool,
     style: PropTypes.object,
+    theme: themeShape,
     title: PropTypes.string,
     tooltip: PropTypes.string,
     tooltipLabel: PropTypes.string,
@@ -41,7 +45,6 @@ class Modal extends React.Component {
   static defaultProps = {
     'aria-label': '',
     buttons: [],
-    color: StyleConstants.Colors.PRIMARY,
     isRelative: false,
     showCloseIcon: true,
     showFooter: false,
@@ -58,12 +61,14 @@ class Modal extends React.Component {
   };
 
   componentDidMount () {
+    deprecatePrimaryColor(this.props, 'color');
+
     this._modalContent.focus();
-  /*eslint-disable */
+    /*eslint-disable */
     if (this.props.hasOwnProperty('isOpen')) {
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
     }
-  /*eslint-enable */
+    /*eslint-enable */
   }
 
   _handleTooltipToggle = (show) => {
@@ -72,10 +77,8 @@ class Modal extends React.Component {
     });
   };
 
-  _renderTitleBar = () => {
+  _renderTitleBar = (styles) => {
     if (this.props.showTitleBar) {
-      const styles = this.styles();
-
       return (
         <div className='mx-modal-title-bar' style={styles.titleBar}>
           {this.props.title}
@@ -86,14 +89,12 @@ class Modal extends React.Component {
     }
   };
 
-  _renderFooter = () => {
+  _renderFooter = (styles, theme) => {
     if (this.props.showFooter) {
-      const styles = this.styles();
-
       return (
         <div className='mx-modal-footer' style={Object.assign({}, styles.footer, this.props.footerStyle)}>
-          {this._renderTooltipIconAndLabel()}
-          {this._renderFooterContent()}
+          {this._renderTooltipIconAndLabel(styles, theme)}
+          {this._renderFooterContent(styles)}
           <div className='mx-modal-buttons'>
             {this.props.buttons.map((button, i) => {
               return (
@@ -104,8 +105,8 @@ class Modal extends React.Component {
                   isActive={button.isActive}
                   key={button.type + i}
                   onClick={button.onClick}
-                  primaryColor={button.primaryColor}
                   style={Object.assign({}, styles.button, button.style)}
+                  theme={theme}
                   type={button.type}
                 >
                   {button.label}
@@ -120,9 +121,7 @@ class Modal extends React.Component {
     }
   };
 
-  _renderFooterContent = () => {
-    const styles = this.styles();
-
+  _renderFooterContent = (styles) => {
     return (
       <div className='mx-modal-footer-content' style={styles.footerContent}>
         {this.props.footerContent}
@@ -130,13 +129,11 @@ class Modal extends React.Component {
     );
   };
 
-  _renderTooltip = () => {
+  _renderTooltip = (styles, theme) => {
     if (this.state.showTooltip) {
-      const styles = this.styles();
-
       return (
         <div style={styles.tooltip}>
-          <div className='mx-modal-tooltip-title' style={Object.assign({}, styles.tooltipTitle, { color: this.props.color })}>
+          <div className='mx-modal-tooltip-title' style={Object.assign({}, styles.tooltipTitle, { color: theme.Colors.PRIMARY })}>
             {this.props.tooltipTitle}
           </div>
           <div className='mx-modal-tooltip-content' style={styles.tooltipContent}>
@@ -149,10 +146,8 @@ class Modal extends React.Component {
     }
   };
 
-  _renderTooltipIconAndLabel = () => {
+  _renderTooltipIconAndLabel = (styles, theme) => {
     if (this.props.tooltip) {
-      const styles = this.styles();
-
       return (
         <div className='mx-modal-tooltip-label' style={styles.tooltipLabel}>
           <Icon
@@ -162,14 +157,14 @@ class Modal extends React.Component {
               onMouseOver: this._handleTooltipToggle.bind(null, true)
             }}
             size={18}
-            style={{ color: this.props.color }}
+            style={{ color: theme.Colors.PRIMARY }}
             type='info'
           />
           <span
             className='mx-modal-tooltip-label-text'
             onMouseOut={this._handleTooltipToggle.bind(null, false)}
             onMouseOver={this._handleTooltipToggle.bind(null, true)}
-            style={Object.assign({}, styles.tooltipLabelText, { color: this.props.color })}
+            style={Object.assign({}, styles.tooltipLabelText, { color: theme.Colors.PRIMARY })}
           >
             {this.props.tooltipLabel}
           </span>
@@ -181,7 +176,8 @@ class Modal extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
+    const styles = this.styles(theme);
 
     return (
       <FocusTrap>
@@ -191,7 +187,7 @@ class Modal extends React.Component {
             className='mx-modal-container'
             style={Object.assign({}, styles.container, this.props.style)}
           >
-            {this._renderTitleBar()}
+            {this._renderTitleBar(styles)}
             <div
               aria-label={this.props['aria-label']}
               className='mx-modal-content'
@@ -200,9 +196,9 @@ class Modal extends React.Component {
               tabIndex={0}
             >
               {this.props.children}
-              {this._renderTooltip()}
+              {this._renderTooltip(styles, theme)}
             </div>
-            {this._renderFooter()}
+            {this._renderFooter(styles, theme)}
             {this.props.showCloseIcon && (
               <Icon
                 className='mx-modal-close'
@@ -224,7 +220,7 @@ class Modal extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = theme => {
     return {
       scrim: {
         zIndex: 1000,
@@ -239,7 +235,7 @@ class Modal extends React.Component {
         position: 'absolute'
       },
       overlay: {
-        backgroundColor: this.props.showScrim ? StyleConstants.Colors.SCRIM : 'transparent'
+        backgroundColor: this.props.showScrim ? theme.Colors.SCRIM : 'transparent'
       },
       close: {
         position: 'absolute',
@@ -247,15 +243,15 @@ class Modal extends React.Component {
         right: 0,
         margin: '-12px -12px 0 0',
         cursor: 'pointer',
-        color: StyleConstants.Colors.CHARCOAL
+        color: theme.Colors.GRAY_700
       },
       container: {
-        fontFamily: StyleConstants.FontFamily,
+        fontFamily: theme.FontFamily,
         boxSizing: 'border-box',
         position: 'relative',
         zIndex: 1001,
-        backgroundColor: StyleConstants.Colors.WHITE,
-        boxShadow: StyleConstants.ShadowHigh,
+        backgroundColor: theme.Colors.WHITE,
+        boxShadow: theme.ShadowHigh,
         borderRadius: 2,
         top: 20,
         maxWidth: 'calc(100% - 40px)',
@@ -263,12 +259,12 @@ class Modal extends React.Component {
         textAlign: 'left'
       },
       titleBar: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        backgroundColor: theme.Colors.GRAY_100,
         borderTopLeftRadius: 2,
         borderTopRightRadius: 2,
         padding: '15px 20px',
-        color: StyleConstants.Colors.ASH,
-        fontSize: StyleConstants.FontSizes.SMALL,
+        color: theme.Colors.GRAY_500,
+        fontSize: theme.FontSizes.SMALL,
         textTransform: 'uppercase',
         letterSpacing: 1
       },
@@ -278,7 +274,7 @@ class Modal extends React.Component {
         overflow: 'auto'
       },
       footer: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
+        backgroundColor: theme.Colors.GRAY_100,
         borderBottomLeftRadius: 2,
         borderBottomRightRadius: 2,
         padding: '10px 20px',
@@ -293,11 +289,11 @@ class Modal extends React.Component {
         padding: '5px 0'
       },
       tooltipLabelText: {
-        fontSize: StyleConstants.FontSizes.SMALL
+        fontSize: theme.FontSizes.SMALL
       },
       tooltip: {
-        backgroundColor: StyleConstants.Colors.PORCELAIN,
-        borderColor: StyleConstants.Colors.FOG,
+        backgroundColor: theme.Colors.GRAY_100,
+        borderColor: theme.Colors.GRAY_300,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
@@ -309,12 +305,12 @@ class Modal extends React.Component {
         padding: 10
       },
       tooltipTitle: {
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontSize: theme.FontSizes.MEDIUM,
         marginBottom: 5
       },
       tooltipContent: {
-        color: StyleConstants.Colors.ASH,
-        fontSize: StyleConstants.FontSizes.SMALL,
+        color: theme.Colors.GRAY_500,
+        fontSize: theme.FontSizes.SMALL,
         lineHeight: '1.5em',
         textAlign: 'left'
       },
