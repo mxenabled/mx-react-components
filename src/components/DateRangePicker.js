@@ -9,6 +9,7 @@ const Button = require('./Button');
 
 const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
+const defaultTheme = require('../constants/Style');
 
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
@@ -81,7 +82,8 @@ class DateRangePicker extends React.Component {
     onClose () {},
     onDateSelect () {},
     placeholderText: 'Select A Date Range',
-    showDefaultRanges: false
+    showDefaultRanges: false,
+    theme: defaultTheme
   };
 
   state = {
@@ -105,8 +107,8 @@ class DateRangePicker extends React.Component {
     }
   }
 
-  _getDateFormat = () => {
-    return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
+  _getDateFormat = (isLargeOrMediumWindowSize) => {
+    return isLargeOrMediumWindowSize ? this.props.format : 'MMM D';
   };
 
   _isLargeOrMediumWindowSize = (theme) => {
