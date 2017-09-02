@@ -66,6 +66,7 @@ module.exports = {
 
   // App Utils
   ChartUtils: require('./utils/Chart'),
+  StyleUtils: require('./utils/Style'),
 
   // App configuration
   Config: {

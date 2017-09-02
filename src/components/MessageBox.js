@@ -2,8 +2,11 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
-const StyleConstants = require('../constants/Style');
 const Icon = require('../components/Icon');
+
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class MessageBox extends React.Component {
   static propTypes = {
@@ -11,6 +14,7 @@ class MessageBox extends React.Component {
     color: PropTypes.string,
     icon: PropTypes.string,
     styles: PropTypes.object,
+    theme: themeShape,
     title: PropTypes.string
   };
 
@@ -25,7 +29,8 @@ class MessageBox extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
 
     return (
       <div className='mx-message-box' style={styles.component}>
@@ -33,7 +38,7 @@ class MessageBox extends React.Component {
           <div style={styles.leftHeader}>
             <Icon
               size={20}
-              style={Object.assign({}, styles.icon, { marginRight: StyleConstants.Spacing.SMALL })}
+              style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
               type={this.props.icon}
             />
             <div style={styles.title}>{this.props.title}</div>
@@ -58,17 +63,19 @@ class MessageBox extends React.Component {
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
+    const color = this.props.color || theme.Colors.PRIMARY;
+
     return _merge({}, {
       component: {
-        color: StyleConstants.Colors.WHITE,
+        color: theme.Colors.WHITE,
         boxSizing: 'border-box'
       },
       header: {
-        background: this.props.color,
+        background: color,
         display: 'flex',
         cursor: this.props.children ? 'pointer' : 'auto',
-        padding: StyleConstants.Spacing.XSMALL,
+        padding: theme.Spacing.XSMALL,
         alignItems: 'center'
       },
       leftHeader: {
@@ -77,15 +84,15 @@ class MessageBox extends React.Component {
         alignItems: 'center'
       },
       title: {
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.MEDIUM
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.MEDIUM
       },
       icon: {
-        fill: StyleConstants.Colors.WHITE
+        fill: theme.Colors.WHITE
       },
       children: {
-        backgroundColor: StyleConstants.adjustHexOpacity(this.props.color, 0.1),
-        padding: this.props.children ? StyleConstants.Spacing.SMALL : null
+        backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
+        padding: this.props.children ? theme.Spacing.SMALL : null
       }
     }, this.props.styles);
   };

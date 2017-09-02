@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-indent */
 const React = require('react');
 const moment = require('moment');
+const { Link } = require('react-router');
 
 const { TimeBasedLineChart } = require('mx-react-components');
 
@@ -54,9 +55,9 @@ class TimeBasedLineChartDocs extends React.Component {
 
         <h3>Demo</h3>
         <TimeBasedLineChart
-          breakPointDate={moment().startOf('month').unix()}
           breakPointLabel={'This Month'}
           data={lineChartData}
+          getBreakPointDate={() => moment().startOf('month').unix()}
           height={this.state.chartHeight}
           rangeType={'month'}
           showZeroLine={true}
@@ -64,9 +65,9 @@ class TimeBasedLineChartDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>breakPointDate <label>Number</label></h5>
+        <h5>getBreakPointDate <label>Function</label></h5>
         <p>Default: today (as a Unix timestamp)</p>
-        <p>A Unix timestamp that sets the breakpoint for the chart. The breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to 'true', then the line after the breakpoint will be dashed instead of solid.</p>
+        <p>A function that returns a unix timestamp that sets the breakpoint for the chart. The breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to 'true', then the line after the breakpoint will be dashed instead of solid.</p>
 
         <h5>breakPointLabel <label>String</label></h5>
         <p>Default: 'Today'</p>
@@ -130,6 +131,9 @@ class TimeBasedLineChartDocs extends React.Component {
         <h5>showZeroLine <label>Boolean</label></h5>
         <p>Default: false</p>
         <p>If set to 'true', then a tick, label, and line will be displayed for the '0' yAxis value.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>width <label>Number</label></h5>
         <p>Default: 550</p>

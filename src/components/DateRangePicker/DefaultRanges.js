@@ -7,12 +7,12 @@ const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, prim
   <div style={styles.rangeOptions}>
 
     {defaultRanges.map(range => (
-      <div key={range.displayValue + range.startDate} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
+      <div key={range.displayValue + range.getStartDate()} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
         <div>
           <Icon
             size={20}
             style={Object.assign({}, styles.rangeOptionIcon, {
-              fill: range.startDate === selectedStartDate && range.endDate === selectedEndDate ? primaryColor : 'transparent'
+              fill: range.getStartDate() === selectedStartDate && range.getEndDate() === selectedEndDate ? primaryColor : 'transparent'
             })}
             type='check-solid'
           />

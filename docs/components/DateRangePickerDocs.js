@@ -1,6 +1,7 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
 const React = require('react');
+const { Link } = require('react-router');
 
 const { DateRangePicker } = require('mx-react-components');
 
@@ -41,14 +42,15 @@ class DateRangePickerDocs extends React.Component {
         <p>Determines if the calendar is closed after successful range selection.</p>
 
         <h5>defaultRanges <label>Array of range option objects</label></h5>
-        <p>Default: <a href='https://github.com/mxenabled/mx-react-components/blob/master/src/components/DateRangePicker.js#L30'>See Code for default array of ranges</a></p>
+        <p>Default: <a href='https://github.com/mxenabled/mx-react-components/blob/master/src/components/DateRangePicker.js#L41'>See Code for default array of ranges</a></p>
         <p>Array of default range objects used when showDefaultRanges prop is set to true.  If not supplied, the default above is used.</p>
+        <p>Range objects consists of a `displayValue` and two functions that get the start and end date. These functions much return unix timestamps</p>
         <Markdown lang='js'>
         {`
           [{
             displayValue: 'Today',
-            endDate: 1446063248, // Unix timestamp
-            startDate: 1446063248 // Unix timestamp
+            getEndDate: () => moment.endOf('day').unix(), // These must be a unix timestamp
+            getStartDate: () => moment.startOf('day').unix()
           }]
         `}
         </Markdown>
@@ -75,10 +77,6 @@ class DateRangePickerDocs extends React.Component {
         <p>Default: Select A Date</p>
         <p>A string used as placeholder text for the selected date input when it is empty.</p>
 
-        <h5>primaryColor <label>String</label></h5>
-        <p>Default: PRIMARY</p>
-        <p>The color used for input focus, selected date highlight, and hover border.</p>
-
         <h5>selectedEndDate <label>Number (unix timestamp)</label></h5>
         <p>This sets the selected end date on the component. Can be used to set a default end date.</p>
 
@@ -94,6 +92,9 @@ class DateRangePickerDocs extends React.Component {
 
         <h5>styles <label>Object</label></h5>
         <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>

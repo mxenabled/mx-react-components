@@ -7,21 +7,23 @@ const _merge = require('lodash/merge');
 const Icon = require('./Icon');
 const Button = require('./Button');
 
-const StyleConstants = require('../constants/Style');
 const { SelectedBox } = require('../constants/DateRangePicker');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
 const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
 const SelectionPane = require('./DateRangePicker/SelectionPane');
-
 
 class DateRangePicker extends React.Component {
   static propTypes = {
     closeCalendarOnRangeSelect: PropTypes.bool,
     defaultRanges: PropTypes.arrayOf(PropTypes.shape({
       displayValue: PropTypes.string,
-      endDate: PropTypes.number,
-      startDate: PropTypes.number
+      getEndDate: PropTypes.func,
+      getStartDate: PropTypes.func
     })),
     format: PropTypes.string,
     isRelative: PropTypes.bool,
@@ -35,7 +37,8 @@ class DateRangePicker extends React.Component {
     selectedStartDate: PropTypes.number,
     showDefaultRanges: PropTypes.bool,
     style: PropTypes.object,
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    theme: themeShape
   };
 
   static defaultProps = {
@@ -43,33 +46,33 @@ class DateRangePicker extends React.Component {
     defaultRanges: [
       {
         displayValue: 'This Month',
-        endDate: moment().endOf('month').unix(),
-        startDate: moment().startOf('month').unix()
+        getEndDate: () => moment().endOf('month').unix(),
+        getStartDate: () => moment().startOf('month').unix()
       },
       {
         displayValue: 'Last 30 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(29, 'days').startOf('day').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(29, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Last Month',
-        endDate: moment().subtract(1, 'months').endOf('month').unix(),
-        startDate: moment().subtract(1, 'months').startOf('month').unix()
+        getEndDate: () => moment().subtract(1, 'months').endOf('month').unix(),
+        getStartDate: () => moment().subtract(1, 'months').startOf('month').unix()
       },
       {
         displayValue: 'Last 90 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(89, 'days').startOf('day').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(89, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Year To Date',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().startOf('year').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().startOf('year').unix()
       },
       {
         displayValue: 'Last Year',
-        endDate: moment().startOf('day').unix(),
-        startDate: moment().startOf('day').subtract(1, 'y').unix()
+        getEndDate: () => moment().startOf('day').unix(),
+        getStartDate: () => moment().startOf('day').subtract(1, 'y').unix()
       }
     ],
     format: 'MMM D, YYYY',
@@ -78,7 +81,6 @@ class DateRangePicker extends React.Component {
     onClose () {},
     onDateSelect () {},
     placeholderText: 'Select A Date Range',
-    primaryColor: StyleConstants.Colors.PRIMARY,
     showDefaultRanges: false
   };
 
@@ -87,6 +89,10 @@ class DateRangePicker extends React.Component {
     selectedBox: SelectedBox.FROM,
     showSelectionPane: false
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   componentWillReceiveProps (newProps) {
     const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
@@ -103,8 +109,8 @@ class DateRangePicker extends React.Component {
     return this._isLargeOrMediumWindowSize() ? this.props.format : 'MMM D';
   };
 
-  _isLargeOrMediumWindowSize = () => {
-    const windowSize = StyleConstants.getWindowSize();
+  _isLargeOrMediumWindowSize = (theme) => {
+    const windowSize = StyleUtils.getWindowSize(theme.BreakPoints);
 
     return windowSize === 'large' || windowSize === 'medium';
   };
@@ -113,7 +119,7 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
-  _handleDateSelect = (date) => {
+  _handleDateSelect = (isLargeOrMediumWindowSize, date) => {
     this.setState({
       currentDate: date
     });
@@ -123,12 +129,12 @@ class DateRangePicker extends React.Component {
 
     if (this.state.selectedBox === SelectedBox.FROM) {
       startDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: SelectedBox.TO });
+      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.TO });
     }
 
     if (this.state.selectedBox === SelectedBox.TO) {
       endDate = date;
-      if (this._isLargeOrMediumWindowSize()) this.setState({ selectedBox: SelectedBox.FROM });
+      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.FROM });
     }
 
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
@@ -145,7 +151,7 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDefaultRangeSelection = (range) => {
-    this.props.onDateSelect(range.startDate, range.endDate, range.displayValue);
+    this.props.onDateSelect(range.getStartDate(), range.getEndDate(), range.displayValue);
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
@@ -211,9 +217,10 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const styles = this.styles();
-    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
-    const shouldShowCalendarIcon = StyleConstants.getWindowSize() !== 'small';
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
+    const styles = this.styles(theme, isLargeOrMediumWindowSize);
+    const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
 
     return (
       <div style={styles.component}>
@@ -228,9 +235,9 @@ class DateRangePicker extends React.Component {
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
-                <span>{moment.unix(this.props.selectedStartDate).format(this._getDateFormat())}</span>
+                <span>{moment.unix(this.props.selectedStartDate).format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
                 <span> - </span>
-                <span>{moment.unix(this.props.selectedEndDate).format(this._getDateFormat())}</span>
+                <span>{moment.unix(this.props.selectedEndDate).format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
               </div>
             ) : this.props.placeholderText}
           </div>
@@ -256,11 +263,11 @@ class DateRangePicker extends React.Component {
                           showCalendar: !isLargeOrMediumWindowSize && true
                         });
                       }}
-                      primaryColor={this.props.primaryColor}
                       selectedBox={this.state.selectedBox}
                       selectedEndDate={this.props.selectedEndDate}
                       selectedStartDate={this.props.selectedStartDate}
                       styles={styles}
+                      theme={theme}
                     />
                   }
                 </div>
@@ -294,7 +301,7 @@ class DateRangePicker extends React.Component {
                       currentDate={this.state.currentDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect}
+                      handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
                       isInActiveRange={this._isInActiveRange}
                       minimumDate={this.props.minimumDate}
                       selectedEndDate={this.props.selectedEndDate}
@@ -305,7 +312,7 @@ class DateRangePicker extends React.Component {
                       <div style={styles.applyButton}>
                         <Button
                           onClick={() => this.setState({ showCalendar: false })}
-                          primaryColor={this.props.primaryColor}
+                          theme={theme}
                           type='primary'
                         >
                           Apply
@@ -325,22 +332,20 @@ class DateRangePicker extends React.Component {
     );
   }
 
-  styles = () => {
-    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize();
-
+  styles = (theme, isLargeOrMediumWindowSize) => {
     return _merge({}, {
       component: Object.assign({
-        backgroundColor: StyleConstants.Colors.WHITE,
-        borderColor: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.FOG,
+        backgroundColor: theme.Colors.WHITE,
+        borderColor: this.state.showSelectionPane ? theme.Colors.PRIMARY : theme.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.BLACK,
+        color: theme.Colors.GRAY_900,
         cursor: 'pointer',
         display: 'inline-block',
-        fontFamily: StyleConstants.FontFamily,
-        fontSize: StyleConstants.FontSizes.MEDIUM,
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.MEDIUM,
         padding: '10px 15px',
         position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
@@ -358,28 +363,28 @@ class DateRangePicker extends React.Component {
         justifyContent: 'space-between'
       },
       selectedDateIcon: {
-        fill: this.props.primaryColor,
+        fill: theme.Colors.PRIMARY,
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? StyleConstants.Colors.CHARCOAL : StyleConstants.Colors.ASH
+        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500
       },
       selectedDateCaret: {
-        fill: this.state.showSelectionPane ? this.props.primaryColor : StyleConstants.Colors.ASH
+        fill: this.state.showSelectionPane ? theme.Colors.PRIMARY : theme.Colors.GRAY_500
       },
 
       //Calendar Styles
       optionsWrapper: {
-        backgroundColor: StyleConstants.Colors.WHITE,
-        border: '1px solid ' + StyleConstants.Colors.FOG,
+        backgroundColor: theme.Colors.WHITE,
+        border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
-        boxShadow: StyleConstants.ShadowHigh,
+        boxShadow: theme.ShadowHigh,
         boxSizing: 'border-box',
         display: this.state.showSelectionPane ? 'flex' : 'none',
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
-        padding: StyleConstants.Spacing.SMALL,
+        padding: theme.Spacing.SMALL,
         position: 'absolute',
         left: isLargeOrMediumWindowSize ? '50%' : 0,
         right: isLargeOrMediumWindowSize ? 'auto' : 0,
@@ -399,9 +404,9 @@ class DateRangePicker extends React.Component {
       //Calendar Header
       calendarHeader: {
         alignItems: 'center',
-        color: StyleConstants.Colors.CHARCOAL,
+        color: theme.Colors.GRAY_700,
         display: 'flex',
-        fontSize: StyleConstants.FontSizes.LARGE,
+        fontSize: theme.FontSizes.LARGE,
         height: 30,
         justifyContent: 'space-between',
         marginBottom: 15,
@@ -412,10 +417,10 @@ class DateRangePicker extends React.Component {
       //Calendar week
       calendarWeek: {
         alignItems: 'center',
-        color: StyleConstants.Colors.ASH,
+        color: theme.Colors.GRAY_500,
         display: 'flex',
-        fontFamily: StyleConstants.Fonts.SEMIBOLD,
-        fontSize: StyleConstants.FontSizes.SMALL,
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.SMALL,
         height: 30,
         justifyContent: 'center',
         marginBottom: 2
@@ -435,7 +440,7 @@ class DateRangePicker extends React.Component {
       calendarDay: {
         alignItems: 'center',
         boxSizing: 'border-box',
-        color: StyleConstants.Colors.FOG,
+        color: theme.Colors.GRAY_300,
         cursor: 'pointer',
         display: 'flex',
         height: 30,
@@ -444,11 +449,11 @@ class DateRangePicker extends React.Component {
         width: 30,
 
         ':hover': {
-          border: '1px solid' + this.props.primaryColor
+          border: '1px solid' + theme.Colors.PRIMARY
         }
       },
       calendarDayDisabled: {
-        color: StyleConstants.Colors.FOG,
+        color: theme.Colors.GRAY_300,
 
         ':hover': {
           cursor: 'default',
@@ -456,29 +461,29 @@ class DateRangePicker extends React.Component {
         }
       },
       today: {
-        backgroundColor: StyleConstants.Colors.FOG,
-        color: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.GRAY_300,
+        color: theme.Colors.WHITE
       },
       currentMonth: {
-        color: StyleConstants.Colors.CHARCOAL
+        color: theme.Colors.GRAY_700
       },
       applyButton: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginTop: StyleConstants.Spacing.XSMALL
+        marginTop: theme.Spacing.XSMALL
       },
 
       //Selected and Selecting Range
       selectedDay: {
-        backgroundColor: this.props.primaryColor,
-        color: StyleConstants.Colors.WHITE
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE
       },
       betweenDay: {
-        backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.5),
+        backgroundColor: StyleUtils.adjustHexOpacity(theme.Colors.PRIMARY, 0.5),
         borderRadius: 0,
 
         ':hover': {
-          border: '1px solid' + this.props.primaryColor
+          border: '1px solid' + theme.Colors.PRIMARY
         }
       },
 

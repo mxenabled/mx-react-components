@@ -1,7 +1,9 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
-const StyleConstants = require('../../constants/Style');
+const { themeShape } = require('../../constants/App');
+
+const StyleUtils = require('../../utils/Style');
 
 class CirclesGroup extends React.Component {
   static propTypes = {
@@ -13,6 +15,7 @@ class CirclesGroup extends React.Component {
     onCircleClick: PropTypes.func,
     shouldAnimate: PropTypes.bool,
     strokeWidth: PropTypes.number,
+    theme: themeShape,
     translation: PropTypes.string,
     useCircleOverlay: PropTypes.bool,
     xScaleValueFunction: PropTypes.func.isRequired,
@@ -20,7 +23,6 @@ class CirclesGroup extends React.Component {
   };
 
   static defaultProps = {
-    circleColor: StyleConstants.Colors.CHARCOAL,
     circleOverlayRadius: 6,
     circleRadius: 3,
     onCircleClick: () => {},
@@ -49,6 +51,8 @@ class CirclesGroup extends React.Component {
   render () {
     const { adjustedHeight, circleOverlayRadius, circleRadius, data, shouldAnimate, translation, useCircleOverlay, xScaleValueFunction, yScaleValueFunction } = this.props;
     const preventCircleOverlapCutOff = 45;
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const circleColor = this.props.circleColor || theme.Colors.GRAY_700;
 
     return (
       <g
@@ -67,14 +71,14 @@ class CirclesGroup extends React.Component {
                   className='circle'
                   cx={cx}
                   cy={cy}
-                  fill={StyleConstants.Colors.WHITE}
+                  fill={theme.Colors.WHITE}
                   onClick={() => {
                     if (!useCircleOverlay) {
                       this.props.onCircleClick(item);
                     }
                   }}
                   r={circleRadius}
-                  stroke={this.props.circleColor}
+                  stroke={circleColor}
                   style={{ 'strokeWidth': this.props.strokeWidth }}
                 />
                 {useCircleOverlay && (
@@ -82,7 +86,7 @@ class CirclesGroup extends React.Component {
                     className='circle-overlay'
                     cx={cx}
                     cy={yScaleValueFunction(item.y)}
-                    fill={StyleConstants.Colors.WHITE}
+                    fill={theme.Colors.WHITE}
                     onClick={() => {
                       this.props.onCircleClick(item);
                     }}

@@ -3,7 +3,9 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const d3 = require('d3');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
 
 class Gauge extends React.Component {
   static propTypes = {
@@ -29,22 +31,19 @@ class Gauge extends React.Component {
     showDataLabel: PropTypes.bool,
     textLabel: PropTypes.string,
     textLabelColor: PropTypes.string,
+    theme: themeShape,
     width: PropTypes.number
   };
 
   static defaultProps = {
     activeOffset: 0,
     arcWidth: 10,
-    baseArcColor: StyleConstants.Colors.BASE_ARC,
-    colors: [StyleConstants.Colors.PRIMARY].concat(d3.scale.category20().range()),
     data: [],
-    dataPointColors: [StyleConstants.Colors.CHARCOAL].concat(d3.scale.category20b().range()),
     dataPointRadius: 5,
     dataPoints: [],
     formatter (value) {
       return value;
     },
-    numberLabelColor: StyleConstants.Colors.PRIMARY,
     height: 150,
     id: 'gauge',
     numberOfSegments: 6,
@@ -52,7 +51,6 @@ class Gauge extends React.Component {
     padAngle: 0.02,
     showBaseArc: true,
     showDataLabel: true,
-    textLabelColor: StyleConstants.Colors.ASH,
     width: 150
   };
 
@@ -120,7 +118,7 @@ class Gauge extends React.Component {
     return segments;
   };
 
-  _renderArcs = () => {
+  _renderArcs = (colors) => {
     const segments = this._buildSegments(this.props);
 
     return segments.map((point, i) => {
@@ -131,7 +129,7 @@ class Gauge extends React.Component {
           <path
             className={'arc-' + this.props.id}
             d={this.state.standardArc(point)}
-            fill={this.props.colors[i]}
+            fill={colors[i]}
             opacity={this.props.opacity}
           />
         </g>
@@ -139,15 +137,15 @@ class Gauge extends React.Component {
     });
   };
 
-  _renderBaseArc = () => {
+  _renderBaseArc = (baseArcColor) => {
     return (
       <g>
-        <path d={this.state.baseArc()} fill={this.props.baseArcColor} />
+        <path d={this.state.baseArc()} fill={baseArcColor} />
       </g>
     );
   };
 
-  _renderDataPoints = () => {
+  _renderDataPoints = (dataPointColors) => {
     const dataPoints = this.props.dataPoints.map(dataPoint => {
       return dataPoint.value;
     });
@@ -166,7 +164,7 @@ class Gauge extends React.Component {
         <circle
           cx='0'
           cy='0'
-          fill={this.props.dataPointColors[index]}
+          fill={dataPointColors[index]}
           key={index}
           r={this.props.dataPointRadius}
           transform={'translate(' + dataPointArc.centroid() + ')'}
@@ -175,9 +173,7 @@ class Gauge extends React.Component {
     });
   };
 
-  _renderDataLabel = () => {
-    const styles = this.styles();
-
+  _renderDataLabel = (styles, numberLabelColor, textLabelColor) => {
     if (this.props.showDataLabel && this.props.children) {
       return (
         <div
@@ -190,9 +186,9 @@ class Gauge extends React.Component {
       );
     } else {
       const number = this.props.formatter(this.props.numberLabel);
-      const numberColor = this.props.numberLabelColor;
+      const numberColor = numberLabelColor;
       const text = this.props.textLabel;
-      const textColor = this.props.textLabelColor;
+      const textColor = textLabelColor;
 
       return (
         <div
@@ -214,34 +210,40 @@ class Gauge extends React.Component {
   render () {
     const position = 'translate(' + this.props.width / 2 + ',' + this.props.height / 2 + ')';
     const fontSize = Math.min(this.props.width, this.props.height) * 0.2;
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const styles = this.styles(theme);
+    const baseArcColor = this.props.baseArcColor || theme.Colors.BASE_ARC;
+    const colors = this.props.baseArcColor || [theme.Colors.PRIMARY].concat(d3.scale.category20().range());
+    const dataPointColors = this.props.dataPointColors || [theme.Colors.GRAY_700].concat(d3.scale.category20b().range());
+    const numberLabelColor = this.props.numberLabelColor || theme.Colors.PRIMARY;
+    const textLabelColor = this.props.textLabelColor || theme.Colors.GRAY_500;
 
     return (
       <div
         className='mx-gauge'
         style={Object.assign({}, styles.component, this.props.style, { fontSize, height: this.props.height, width: this.props.width })}
       >
-        {this._renderDataLabel()}
+        {this._renderDataLabel(styles, numberLabelColor, textLabelColor)}
         <svg
           className='mx-gauge-svg'
           height={this.props.height}
           width={this.props.width}
         >
           <g className='mx-gauge-g' transform={position}>
-            {this._renderBaseArc()}
-            {this._renderArcs()}
-            {this._renderDataPoints()}
+            {this._renderBaseArc(baseArcColor)}
+            {this._renderArcs(colors)}
+            {this._renderDataPoints(dataPointColors)}
           </g>
         </svg>
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: {
         position: 'relative',
-        fontFamily: StyleConstants.FontFamily
+        fontFamily: theme.FontFamily
       },
       center: {
         position: 'absolute',
@@ -251,7 +253,7 @@ class Gauge extends React.Component {
         transform: 'translate(-50%, -50%)'
       },
       label: {
-        fontSize: StyleConstants.FontSizes.LARGE,
+        fontSize: theme.FontSizes.LARGE,
         marginTop: 5
       },
       number: {

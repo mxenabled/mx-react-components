@@ -3,7 +3,10 @@ const React = require('react');
 
 const ButtonGroup = require('./ButtonGroup');
 
-const StyleConstants = require('../constants/Style');
+const { themeShape } = require('../constants/App');
+
+const StyleUtils = require('../utils/Style');
+const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 const { buttonTypes } = require('../constants/App');
 
@@ -14,6 +17,7 @@ class PaginationButtons extends React.Component {
     pageRange: PropTypes.number,
     primaryColor: PropTypes.string,
     style: PropTypes.object,
+    theme: themeShape,
     totalPages: PropTypes.number.isRequired,
     type: PropTypes.oneOf(buttonTypes)
   };
@@ -21,10 +25,13 @@ class PaginationButtons extends React.Component {
   static defaultProps = {
     currentPage: 1,
     pageRange: 9,
-    primaryColor: StyleConstants.Colors.PRIMARY,
     totalPages: 1,
     type: 'primaryOutline'
   };
+
+  componentDidMount () {
+    deprecatePrimaryColor(this.props);
+  }
 
   _handleButtonClick = (buttonClicked) => {
     const { currentPage, totalPages } = this.props;
@@ -39,9 +46,9 @@ class PaginationButtons extends React.Component {
     this.props.onClick(goToPage);
   };
 
-  _getPrevButton = () => {
+  _getPrevButton = (styles) => {
     const type = this.props.currentPage <= 1 ? 'disabled' : null;
-    const style = this.styles().component;
+    const style = styles.component;
 
     return {
       icon: 'caret-left',
@@ -51,9 +58,9 @@ class PaginationButtons extends React.Component {
     };
   };
 
-  _getNextButton = () => {
+  _getNextButton = (styles) => {
     const type = this.props.currentPage >= this.props.totalPages ? 'disabled' : null;
-    const style = this.styles().component;
+    const style = styles.component;
 
     return {
       icon: 'caret-right',
@@ -91,8 +98,8 @@ class PaginationButtons extends React.Component {
     return endingPage;
   };
 
-  _addFirstPageButtons = () => {
-    const style = this.styles().component;
+  _addFirstPageButtons = (styles) => {
+    const style = styles.component;
 
     return [{
       onClick: this._handleButtonClick.bind(null, 1),
@@ -105,8 +112,8 @@ class PaginationButtons extends React.Component {
     }];
   };
 
-  _addLastPageButtons = (totalPages) => {
-    const style = this.styles().component;
+  _addLastPageButtons = (styles, totalPages) => {
+    const style = styles.component;
 
     return [{
       icon: 'kabob_horizontal',
@@ -119,8 +126,7 @@ class PaginationButtons extends React.Component {
     }];
   };
 
-  _getPageButtons = () => {
-    const style = this.styles();
+  _getPageButtons = (styles) => {
     const { currentPage, pageRange, totalPages } = this.props;
     const pages = [];
     const maxStartingPage = totalPages - pageRange + 3;
@@ -132,8 +138,8 @@ class PaginationButtons extends React.Component {
     const endingPage = this._getEndingPage(totalPages, pageRange, startingSet, staticSet, middleSet, startingPage);
 
     for (let i = startingPage; i <= endingPage; i++) {
-      const activeStyle = i === currentPage && style.active;
-      const buttonStyle = Object.assign({}, style.component, activeStyle);
+      const activeStyle = i === currentPage && styles.active;
+      const buttonStyle = Object.assign({}, styles.component, activeStyle);
 
       pages.push({
         onClick: this._handleButtonClick.bind(null, i),
@@ -144,11 +150,11 @@ class PaginationButtons extends React.Component {
 
     if (!staticSet) {
       if (!startingSet) {
-        pages.unshift(...this._addFirstPageButtons());
+        pages.unshift(...this._addFirstPageButtons(styles));
       }
 
       if (!endingSet) {
-        pages.push(...this._addLastPageButtons(totalPages));
+        pages.push(...this._addLastPageButtons(styles, totalPages));
       }
     }
 
@@ -156,26 +162,30 @@ class PaginationButtons extends React.Component {
   };
 
   render () {
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const styles = this.styles(theme);
+
     return (
       <ButtonGroup
         buttons={[
-          this._getPrevButton(),
-          ...this._getPageButtons(),
-          this._getNextButton()
+          this._getPrevButton(styles),
+          ...this._getPageButtons(styles),
+          this._getNextButton(styles)
         ]}
+        theme={theme}
         type={this.props.type}
       />
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return {
       component: Object.assign({
         padding: '4px 8px',
         width: 35
       }, this.props.style),
       active: {
-        backgroundColor: StyleConstants.adjustHexOpacity(this.props.primaryColor, 0.15)
+        backgroundColor: StyleUtils.adjustHexOpacity(theme.Colors.PRIMARY, 0.15)
       }
     };
   };
