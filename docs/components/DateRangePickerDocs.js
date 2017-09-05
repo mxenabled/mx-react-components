@@ -88,7 +88,10 @@ class DateRangePickerDocs extends React.Component {
         <p>When set to true, shows the default range options.</p>
 
         <h5>style <label>Object</label></h5>
-        <p>Additional styles that can be set on the component.</p>
+        <p>Additional styles that can be set on the main wrapping component.</p>
+
+        <h5>styles <label>Object</label></h5>
+        <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
