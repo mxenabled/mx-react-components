@@ -106,6 +106,9 @@ class DisplayInputDocs extends React.Component {
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
+        <h5>styles <label>Object</label></h5>
+        <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
+
         <h5>valid <label>Boolean</label></h5>
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.</p>
 
