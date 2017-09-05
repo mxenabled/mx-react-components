@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
+const _merge = require('lodash/merge');
 
 const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
@@ -27,6 +28,7 @@ class DisplayInput extends React.Component {
       type: PropTypes.string,
       message: PropTypes.string
     }),
+    styles: PropTypes.object,
     theme: themeShape,
     valid: PropTypes.bool
   };
@@ -133,7 +135,7 @@ class DisplayInput extends React.Component {
       outline: 'none'
     };
 
-    return {
+    return _merge({}, {
       error: {
         color: theme.Colors.DANGER
       },
@@ -214,7 +216,7 @@ class DisplayInput extends React.Component {
       }, this.props.style),
 
       wrapperFocus
-    };
+    }, this.props.styles);
   };
 }
 
