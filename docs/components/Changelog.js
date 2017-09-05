@@ -8,6 +8,12 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.1</h3>
+        <ul>
+          <li>DateRangePicker - Updating to use _merge and a nested object for styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/653'>#653</a>)</li>
+          <li>DisplayInput - Updating to use _merge and a nested object for styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/656'>#656</a>)</li>
+        </ul>
+
         <h3>v5 Release Notes</h3>
         <ul>
           <li>
