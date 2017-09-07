@@ -275,7 +275,7 @@ class TimeBasedLineChart extends React.Component {
       const adjustedWidth = width - margin.right - margin.left;
       const adjustedHeight = height - margin.top - margin.bottom;
 
-      this.setState({ adjustedHeight, adjustedWidth });
+      this.setState({ adjustedHeight, adjustedWidth, margin });
     }
 
     if (!_isEqual(newProps.theme, this.props.theme)) {
@@ -528,8 +528,8 @@ class TimeBasedLineChart extends React.Component {
   };
 
   render () {
-    const { getBreakPointDate, breakPointLabel, data, height, lineColor, margin, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
-    const { adjustedHeight, adjustedWidth, hoveredDataPoint } = this.state;
+    const { getBreakPointDate, breakPointLabel, data, height, rangeType, shadeBelowZero, shadeFutureOnGraph, showBreakPoint, showZeroLine, width, zeroState, yAxisFormatter } = this.props;
+    const { adjustedHeight, adjustedWidth, hoveredDataPoint, lineColor, margin } = this.state;
 
     return (
       <div className='mx-time-based-line-chart' style={Object.assign({}, this.state.styles.component, { height, width })}>
