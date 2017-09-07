@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.2</h3>
+        <ul>
+          <li>Bug fix in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/658'>#658</a>)</li>
+        </ul>
+
         <h3>5.0.1</h3>
         <ul>
           <li>DateRangePicker - Updating to use _merge and a nested object for styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/653'>#653</a>)</li>
