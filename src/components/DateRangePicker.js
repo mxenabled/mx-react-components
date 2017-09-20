@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const keycode = require('keycode');
 
 const moment = require('moment');
 const _merge = require('lodash/merge');
@@ -87,6 +88,7 @@ class DateRangePicker extends React.Component {
 
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
+    focusedDay: this.props.selectedEndDate || moment().unix(),
     selectedBox: SelectedBox.FROM,
     showSelectionPane: false
   };
@@ -159,11 +161,21 @@ class DateRangePicker extends React.Component {
     }
   };
 
+  _handleDayKeyDown = (e) => {
+    if (keycode(e) === 'right') {
+      this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
+    } else if (keycode(e) === 'left') {
+      this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
+    }
+  };
+
   _handleDateHover = (activeSelectDate) => {
     this.setState({
       activeSelectDate
     });
   };
+
+  _handleKeyDown
 
   _handleScrimClick = () => {
     this.props.onClose();
@@ -218,6 +230,7 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
+    // console.log('this is this.state.focusedDay', this.state.focusedDay)
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
@@ -300,9 +313,11 @@ class DateRangePicker extends React.Component {
                     <MonthTable
                       activeSelectDate={this.state.activeSelectDate}
                       currentDate={this.state.currentDate}
+                      focusedDay={this.state.focusedDay || this.state.currentDate || this.props.selectedEndDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
                       handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
+                      handleKeyDown={this._handleDayKeyDown}
                       isInActiveRange={this._isInActiveRange}
                       minimumDate={this.props.minimumDate}
                       selectedEndDate={this.props.selectedEndDate}

@@ -5,9 +5,11 @@ const moment = require('moment');
 const MonthTable = ({
   activeSelectDate,
   currentDate,
+  focusedDay,
   getDateRangePosition,
   handleDateHover,
   handleDateSelect,
+  handleKeyDown,
   isInActiveRange,
   minimumDate,
   selectedEndDate,
@@ -30,7 +32,11 @@ const MonthTable = ({
       <div
         key={startDate}
         onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
+        onKeyUp={(e) => {
+          handleKeyDown(e);
+        }}
         onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
+
         style={Object.assign({},
           styles.calendarDay,
           startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
@@ -39,7 +45,7 @@ const MonthTable = ({
           isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
           isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
         )}
-        tabIndex={isSelectedDay || (startDate.isSame(moment(), 'day') && !isActiveRange) ? 0 : null}
+        tabIndex={startDate.isSame(moment.unix(focusedDay), 'day') ? 0 : null}
       >
         {startDate.date()}
       </div>
@@ -55,9 +61,11 @@ const MonthTable = ({
 MonthTable.propTypes = {
   activeSelectDate: PropTypes.number,
   currentDate: PropTypes.number,
+  focusedDay: PropTypes.number,
   getDateRangePosition: PropTypes.func,
   handleDateHover: PropTypes.func,
   handleDateSelect: PropTypes.func,
+  handleKeyDown: PropTypes.func,
   isInActiveRange: PropTypes.func,
   minimumDate: PropTypes.number,
   selectedEndDate: PropTypes.number,
@@ -66,3 +74,6 @@ MonthTable.propTypes = {
 };
 
 module.exports = MonthTable;
+
+
+// tabIndex={isSelectedDay || (startDate.isSame(moment(), 'day') && !isActiveRange) ? 0 : null}
