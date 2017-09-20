@@ -39,6 +39,7 @@ const MonthTable = ({
           isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
           isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
         )}
+        tabIndex={isSelectedDay || (startDate.isSame(moment(), 'day') && !isActiveRange) ? 0 : null}
       >
         {startDate.date()}
       </div>
