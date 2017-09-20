@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const keycode = require('keycode');
 const React = require('react');
 const Icon = require('../Icon');
 
@@ -7,7 +8,13 @@ const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, prim
   <div style={styles.rangeOptions}>
 
     {defaultRanges.map(range => (
-      <div key={range.displayValue + range.getStartDate()} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
+      <div
+        key={range.displayValue + range.getStartDate()}
+        onClick={handleDefaultRangeSelection.bind(null, range)}
+        onKeyUp={(e) => keycode(e) === 'enter' && handleDefaultRangeSelection(range)}
+        style={styles.rangeOption}
+        tabIndex={0}
+      >
         <div>
           <Icon
             size={20}

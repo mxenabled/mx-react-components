@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+
 const moment = require('moment');
 const _merge = require('lodash/merge');
 
