@@ -27,16 +27,23 @@ const MonthTable = ({
       false;
     const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
     const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
-
+    console.log('startDate.date', startDate.date())
+    console.log('focusedDay', moment.unix(focusedDay).date())
     const day = (
       <div
         key={startDate}
         onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
         onKeyUp={(e) => {
-          handleKeyDown(e);
+          console.log('handleKeyDownReturnValue', handleKeyDown(e))
+            handleKeyDown(e).then(() => {
+              if (moment.unix(focusedDay).date() === startDate.date()) {
+                console.log('we in here')
+                this[startDate.date()].focus()
+              }
+          });
         }}
         onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
-
+        ref={ref => this[startDate.date()] = ref}
         style={Object.assign({},
           styles.calendarDay,
           startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,

@@ -162,11 +162,13 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDayKeyDown = (e) => {
-    if (keycode(e) === 'right') {
-      this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
-    } else if (keycode(e) === 'left') {
-      this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
-    }
+    return new Promise((resolve, reject) => {
+      if (keycode(e) === 'right') {
+        resolve(this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() }));
+      } else if (keycode(e) === 'left') {
+        resolve(this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() }));
+      }
+    })
   };
 
   _handleDateHover = (activeSelectDate) => {
@@ -174,8 +176,6 @@ class DateRangePicker extends React.Component {
       activeSelectDate
     });
   };
-
-  _handleKeyDown
 
   _handleScrimClick = () => {
     this.props.onClose();
