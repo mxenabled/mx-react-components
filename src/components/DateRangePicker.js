@@ -164,6 +164,14 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDayKeyDown = (e) => {
+    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+
+    if (moment(this.state.focusedDay).isSameOrAfter(endDate)) {
+      console.log('in the if')
+      this.setState({ currentDate: this.state.focusedDay })
+    }
+
     // const { theme } = this.props;
 
     if (keycode(e) === 'right') {
