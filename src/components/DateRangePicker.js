@@ -124,7 +124,8 @@ class DateRangePicker extends React.Component {
 
   _handleDateSelect = (isLargeOrMediumWindowSize, date) => {
     this.setState({
-      currentDate: date
+      currentDate: date,
+      focusedDay: date
     });
 
     let endDate = this.props.selectedEndDate;
@@ -162,13 +163,16 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDayKeyDown = (e) => {
-    return new Promise((resolve, reject) => {
-      if (keycode(e) === 'right') {
-        resolve(this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() }));
-      } else if (keycode(e) === 'left') {
-        resolve(this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() }));
-      }
-    })
+    // const { theme } = this.props;
+
+    if (keycode(e) === 'right') {
+      this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
+    } else if (keycode(e) === 'left') {
+      this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
+    } else if (keycode(e) === 'enter') {
+      // this._handleDateSelect(this._isLargeOrMediumWindowSize(this.props.theme), this.state.focusedDay)
+      this._handleDateSelect(true, this.state.focusedDay);
+    }
   };
 
   _handleDateHover = (activeSelectDate) => {

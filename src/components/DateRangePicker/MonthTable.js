@@ -2,68 +2,77 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const moment = require('moment');
 
-const MonthTable = ({
-  activeSelectDate,
-  currentDate,
-  focusedDay,
-  getDateRangePosition,
-  handleDateHover,
-  handleDateSelect,
-  handleKeyDown,
-  isInActiveRange,
-  minimumDate,
-  selectedEndDate,
-  selectedStartDate,
-  styles
-}) => {
-  const days = [];
-  let startDate = moment.unix(currentDate).startOf('month').startOf('week');
-  const endDate = moment.unix(currentDate).endOf('month').endOf('week');
+class MonthTable extends React.Component {
+  render () {
+    const { activeSelectDate,
+      currentDate,
+      focusedDay,
+      getDateRangePosition,
+      handleDateHover,
+      handleDateSelect,
+      handleKeyDown,
+      isInActiveRange,
+      minimumDate,
+      selectedEndDate,
+      selectedStartDate,
+      styles
+    } = this.props;
 
-  while (moment(startDate).isBefore(endDate)) {
-    const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
-    const isActiveRange = (selectedStartDate || selectedEndDate) ?
-      isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
-      false;
-    const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
-    const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
-    console.log('startDate.date', startDate.date())
-    console.log('focusedDay', moment.unix(focusedDay).date())
-    const day = (
-      <div
-        key={startDate}
-        onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
-        onKeyUp={(e) => {
-          console.log('handleKeyDownReturnValue', handleKeyDown(e))
-            handleKeyDown(e).then(() => {
-              if (moment.unix(focusedDay).date() === startDate.date()) {
-                console.log('we in here')
-                this[startDate.date()].focus()
-              }
-          });
-        }}
-        onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
-        ref={ref => this[startDate.date()] = ref}
-        style={Object.assign({},
-          styles.calendarDay,
-          startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
-          disabledDay && styles.calendarDayDisabled,
-          (startDate.isSame(moment(), 'day') && !isActiveRange) && styles.today,
-          isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
-          isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
-        )}
-        tabIndex={startDate.isSame(moment.unix(focusedDay), 'day') ? 0 : null}
-      >
-        {startDate.date()}
-      </div>
-    );
+    const days = [];
+    let startDate = moment.unix(currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(currentDate).endOf('month').endOf('week');
 
-    days.push(day);
-    startDate = startDate.add(1, 'd');
+    while (moment(startDate).isBefore(endDate)) {
+      const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
+      const isActiveRange = (selectedStartDate || selectedEndDate) ?
+        isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
+        false;
+      const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
+      const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
+      const savedStartDate = startDate.date();
+      const day = (
+        <div
+          key={startDate}
+          onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
+          onKeyDown={(e) => {
+            handleKeyDown(e);
+            // .then(() => {
+              // console.log('in .then')
+              // debugger;
+
+              //why do i have no refs?
+              // this[moment.unix(focusedDay).date() - 1].focus()
+
+          // });
+          }}
+          onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
+          ref={ref => {
+            if (moment.unix(focusedDay).date() === savedStartDate) {
+              if (ref) ref.focus();
+            }
+          }}
+          style={Object.assign({},
+            styles.calendarDay,
+            startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
+            disabledDay && styles.calendarDayDisabled,
+            (startDate.isSame(moment(), 'day') && !isActiveRange) && styles.today,
+            isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
+            isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
+          )}
+          tabIndex={startDate.isSame(moment.unix(focusedDay), 'day') ? 0 : null}
+        >
+          {startDate.date()}
+        </div>
+      );
+
+      days.push(day);
+      startDate = startDate.add(1, 'd');
+    }
+
+    return (<div style={styles.calendarTable}>{days}</div>);
   }
+}
 
-  return (<div style={styles.calendarTable}>{days}</div>);
-};
 
 MonthTable.propTypes = {
   activeSelectDate: PropTypes.number,
