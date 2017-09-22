@@ -217,7 +217,6 @@ class FileUpload extends React.Component {
   };
 
   _validateFile = (file, width = null, height = null) => {
-    console.log('validate', file);
     let failedValidationTypes = [];
     const fileExt = file.name.split('.').pop();
     const isTooBig = this.props.maxFileSize < file.size / 1000;
@@ -255,8 +254,6 @@ class FileUpload extends React.Component {
     const styles = this.styles(theme);
     const dropzoneLoaded = this.props.imageUrl || this.props.uploadedFile;
     const imageSource = this.state.imageSource || this.props.imageUrl;
-
-    console.log('render 4');
 
     return (
       <div
