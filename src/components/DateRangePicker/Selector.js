@@ -21,7 +21,7 @@ class Selector extends React.Component {
         <Icon
           elementProps={{
             onClick: this.props.handlePreviousClick,
-            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handlePreviousClick(),
+            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handlePreviousClick(e),
             tabIndex: 0
           }}
           size={20}
@@ -33,8 +33,8 @@ class Selector extends React.Component {
         </div>
         <Icon
           elementProps={{
-            onClick: this.props.handlePreviousClick,
-            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handleNextClick(),
+            onClick: this.props.handleNextClick,
+            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handleNextClick(e),
             tabIndex: 0
           }}
           size={20}

@@ -156,6 +156,7 @@ class DateRangePicker extends React.Component {
 
   _handleDefaultRangeSelection = (range) => {
     this.props.onDateSelect(range.getStartDate(), range.getEndDate(), range.displayValue);
+    this.setState({ focusedDay: range.getEndDate() });
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
@@ -248,7 +249,12 @@ class DateRangePicker extends React.Component {
 
     return (
       <div style={styles.component}>
-        <div onClick={this._toggleSelectionPane} style={styles.selectedDateWrapper}>
+        <div
+          onClick={this._toggleSelectionPane}
+          onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
+          style={styles.selectedDateWrapper}
+          tabIndex={0}
+        >
           {shouldShowCalendarIcon ? (
             <Icon
               size={20}
@@ -323,7 +329,7 @@ class DateRangePicker extends React.Component {
                     <MonthTable
                       activeSelectDate={this.state.activeSelectDate}
                       currentDate={this.state.currentDate}
-                      focusedDay={this.state.focusedDay || this.state.currentDate || this.props.selectedEndDate}
+                      focusedDay={this.state.focusedDay || this.state.currentDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
                       handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
