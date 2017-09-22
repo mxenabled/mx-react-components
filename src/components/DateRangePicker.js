@@ -172,6 +172,12 @@ class DateRangePicker extends React.Component {
     } else if (keycode(e) === 'enter') {
       // this._handleDateSelect(this._isLargeOrMediumWindowSize(this.props.theme), this.state.focusedDay)
       this._handleDateSelect(true, this.state.focusedDay);
+    } else if (keycode(e) === 'up') {
+      e.preventDefault(); //stop browserscrolling
+      this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').unix() });
+    } else if (keycode(e) === 'down') {
+      e.preventDefault(); //stop browserscrolling
+      this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').unix() });
     }
   };
 
@@ -295,8 +301,8 @@ class DateRangePicker extends React.Component {
                 <div>
                   <div style={styles.calendarWrapper}>
                     <div style={styles.calendarHeader}>
-                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
-                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
+                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
 
                     </div>
                     <div style={styles.calendarWeek}>

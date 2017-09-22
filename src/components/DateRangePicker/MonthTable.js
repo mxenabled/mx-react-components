@@ -23,6 +23,7 @@ class MonthTable extends React.Component {
     const endDate = moment.unix(currentDate).endOf('month').endOf('week');
 
     while (moment(startDate).isBefore(endDate)) {
+      // console.log('this is focusedDay', moment.unix(focusedDay).date())
       const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
       const isActiveRange = (selectedStartDate || selectedEndDate) ?
         isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
