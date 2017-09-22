@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.3</h3>
+        <ul>
+          <li>Fix file upload validation (<a href='https://github.com/mxenabled/mx-react-components/pull/660'>#660</a>)</li>
+        </ul>
+
         <h3>5.0.2</h3>
         <ul>
           <li>Bug fix in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/658'>#658</a>)</li>
