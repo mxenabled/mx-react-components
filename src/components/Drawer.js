@@ -303,7 +303,8 @@ class Drawer extends React.Component {
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative',
-        height: HEADER_HEIGHT
+        height: HEADER_HEIGHT,
+        boxSizing: 'border-box'
       },
       title: {
         overflow: 'hidden',
