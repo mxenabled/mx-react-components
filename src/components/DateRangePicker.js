@@ -164,28 +164,37 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDayKeyDown = (e) => {
-    let startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
-    if (moment(this.state.focusedDay).isSameOrAfter(endDate)) {
-      console.log('in the if')
-      this.setState({ currentDate: this.state.focusedDay })
-    }
-
-    // const { theme } = this.props;
-
     if (keycode(e) === 'right') {
+      if (moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').isSameOrAfter(endDate)) {
+        this.setState({ currentDate: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
+      }
+
       this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
     } else if (keycode(e) === 'left') {
+      if (moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').isBefore(startDate)) {
+        this.setState({ currentDate: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
+      }
+
       this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
     } else if (keycode(e) === 'enter') {
-      // this._handleDateSelect(this._isLargeOrMediumWindowSize(this.props.theme), this.state.focusedDay)
       this._handleDateSelect(true, this.state.focusedDay);
     } else if (keycode(e) === 'up') {
       e.preventDefault(); //stop browserscrolling
+      if (moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').isBefore(startDate)) {
+        this.setState({ currentDate: moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').unix() });
+      }
+
       this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').unix() });
     } else if (keycode(e) === 'down') {
       e.preventDefault(); //stop browserscrolling
+
+      if (moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').isSameOrAfter(endDate)) {
+        this.setState({ currentDate: moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').unix() });
+      }
+
       this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').unix() });
     }
   };
