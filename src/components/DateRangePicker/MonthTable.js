@@ -80,6 +80,3 @@ MonthTable.propTypes = {
 };
 
 module.exports = MonthTable;
-
-
-// tabIndex={isSelectedDay || (startDate.isSame(moment(), 'day') && !isActiveRange) ? 0 : null}
