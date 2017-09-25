@@ -258,7 +258,6 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    // console.log('this is this.state.focusedDay', this.state.focusedDay)
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);

@@ -23,7 +23,6 @@ class MonthTable extends React.Component {
     const endDate = moment.unix(currentDate).endOf('month').endOf('week');
 
     while (moment(startDate).isBefore(endDate)) {
-      // console.log('this is focusedDay', moment.unix(focusedDay).date())
       const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
       const isActiveRange = (selectedStartDate || selectedEndDate) ?
         isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
@@ -35,17 +34,7 @@ class MonthTable extends React.Component {
         <div
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
-          onKeyDown={(e) => {
-            handleKeyDown(e);
-            // .then(() => {
-              // console.log('in .then')
-              // debugger;
-
-              //why do i have no refs?
-              // this[moment.unix(focusedDay).date() - 1].focus()
-
-          // });
-          }}
+          onKeyDown={handleKeyDown}
           onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
           ref={ref => {
             if (moment.unix(focusedDay).date() === savedStartDate) {
