@@ -3,27 +3,45 @@ const Radium = require('radium');
 const React = require('react');
 const Icon = require('../Icon');
 
-const DefaultRanges = Radium(({ defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles }) => (
-  <div style={styles.rangeOptions}>
+class DefaultRanges extends React.Component {
+  state = {
+    selectedOption: null
+  };
 
-    {defaultRanges.map(range => (
-      <div key={range.displayValue + range.getStartDate()} onClick={handleDefaultRangeSelection.bind(null, range)} style={styles.rangeOption}>
-        <div>
-          <Icon
-            size={20}
-            style={Object.assign({}, styles.rangeOptionIcon, {
-              fill: range.getStartDate() === selectedStartDate && range.getEndDate() === selectedEndDate ? primaryColor : 'transparent'
-            })}
-            type='check-solid'
-          />
-        </div>
-        <div>
-          {range.displayValue}
-        </div>
+  render () {
+    const { defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles } = this.props;
+
+    return (
+      <div style={styles.rangeOptions}>
+
+        {defaultRanges.map((range, index) => (
+          <div
+            key={range.displayValue + range.getStartDate()}
+            onClick={() => {
+              handleDefaultRangeSelection(range);
+              this.setState({ selectedOption: index });
+            }}
+            style={styles.rangeOption}
+          >
+            <div>
+              <Icon
+                size={20}
+                style={Object.assign({}, styles.rangeOptionIcon, {
+                  fill:
+                    this.state.selectedOption === index && range.getStartDate() === selectedStartDate && range.getEndDate() === selectedEndDate ? primaryColor : 'transparent'
+                })}
+                type='check-solid'
+              />
+            </div>
+            <div>
+              {range.displayValue}
+            </div>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-));
+    );
+  }
+}
 
 DefaultRanges.propTypes = {
   defaultRanges: PropTypes.array,
@@ -38,4 +56,4 @@ DefaultRanges.propTypes = {
   })
 };
 
-module.exports = DefaultRanges;
+module.exports = Radium(DefaultRanges);
