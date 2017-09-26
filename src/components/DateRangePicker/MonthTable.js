@@ -37,8 +37,8 @@ class MonthTable extends React.Component {
           onKeyDown={handleKeyDown}
           onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
           ref={ref => {
-            if (moment.unix(focusedDay).date() === savedStartDate) {
-              if (ref) ref.focus();
+            if (ref && moment.unix(focusedDay).date() === savedStartDate) {
+              ref.focus();
             }
           }}
           style={Object.assign({},

@@ -122,7 +122,10 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
-  _handleDateSelect = (isLargeOrMediumWindowSize, date) => {
+  _handleDateSelect = (date) => {
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
+
     this.setState({
       currentDate: date,
       focusedDay: date
@@ -168,34 +171,41 @@ class DateRangePicker extends React.Component {
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
     if (keycode(e) === 'right') {
-      if (moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').isSameOrAfter(endDate)) {
-        this.setState({ currentDate: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
+      const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
       }
 
-      this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(1, 'days').startOf('day').unix() });
+      this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'left') {
-      if (moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').isBefore(startDate)) {
-        this.setState({ currentDate: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
+      const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
       }
 
-      this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day').unix() });
+      this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'enter') {
-      this._handleDateSelect(true, this.state.focusedDay);
+      this._handleDateSelect(this.state.focusedDay);
     } else if (keycode(e) === 'up') {
-      e.preventDefault(); //stop browserscrolling
-      if (moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').isBefore(startDate)) {
-        this.setState({ currentDate: moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').unix() });
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
       }
 
-      this.setState({ focusedDay: moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day').unix() });
+      this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'down') {
-      e.preventDefault(); //stop browserscrolling
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
 
-      if (moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').isSameOrAfter(endDate)) {
-        this.setState({ currentDate: moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').unix() });
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
       }
 
-      this.setState({ focusedDay: moment.unix(this.state.focusedDay).add(7, 'days').startOf('day').unix() });
+      this.setState({ focusedDay: day.unix() });
     }
   };
 
@@ -348,7 +358,7 @@ class DateRangePicker extends React.Component {
                       focusedDay={this.state.focusedDay || this.state.currentDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
+                      handleDateSelect={this._handleDateSelect}
                       handleKeyDown={this._handleDayKeyDown}
                       isInActiveRange={this._isInActiveRange}
                       minimumDate={this.props.minimumDate}
