@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.5</h3>
+        <ul>
+          <li>DisplayInput can now pass a type to the HTML input tag (<a href='https://github.com/mxenabled/mx-react-components/pull/663'>#663</a>)</li>
+        </ul>
+
         <h3>5.0.4</h3>
         <ul>
           <li>State to manage which default range the user clicked on (<a href='https://github.com/mxenabled/mx-react-components/pull/659'>#659</a>)</li>
