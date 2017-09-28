@@ -30,6 +30,7 @@ class DisplayInput extends React.Component {
     }),
     styles: PropTypes.object,
     theme: themeShape,
+    type: PropTypes.string,
     valid: PropTypes.bool
   };
 
@@ -100,6 +101,7 @@ class DisplayInput extends React.Component {
                     id={this._inputId}
                     key='input'
                     style={styles.input}
+                    type={this.props.type}
                   />
                 </div>
               )}
