@@ -1,5 +1,6 @@
 const React = require('react');
 const moment = require('moment');
+const keycode = require('keycode');
 const PropTypes = require('prop-types');
 
 const DefaultRanges = require('../DateRangePicker/DefaultRanges');
@@ -40,10 +41,24 @@ class SelectionPane extends React.Component {
       <div style={styles.container}>
         <div>
           <label style={styles.boxLabel}>From</label>
-          <div onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}>{selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}</div>
+          <div
+            onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
+            onKeyUp={(e) => keycode(e) === 'enter' && this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
+            style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}
+            tabIndex={0}
+          >
+            {selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}
+          </div>
 
           <label style={styles.boxLabel}>To</label>
-          <div onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)} style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}>{selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}</div>
+          <div
+            onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
+            onKeyUp={(e) => keycode(e) === 'enter' && this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
+            style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}
+            tabIndex={0}
+          >
+            {selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}
+          </div>
         </div>
         <div>
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
@@ -123,6 +138,11 @@ class SelectionPane extends React.Component {
 
         ':hover': {
           backgroundColor: theme.Colors.GRAY_100
+        },
+
+        ':focus': {
+          backgroundColor: theme.Colors.GRAY_100,
+          outline: 'none'
         }
       },
       rangeOptionIcon: {

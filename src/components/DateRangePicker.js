@@ -1,6 +1,8 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const keycode = require('keycode');
+
 const moment = require('moment');
 const _merge = require('lodash/merge');
 
@@ -86,6 +88,7 @@ class DateRangePicker extends React.Component {
 
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
+    focusedDay: this.props.selectedEndDate || moment().unix(),
     selectedBox: SelectedBox.FROM,
     showSelectionPane: false
   };
@@ -119,9 +122,13 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
-  _handleDateSelect = (isLargeOrMediumWindowSize, date) => {
+  _handleDateSelect = (date) => {
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
+
     this.setState({
-      currentDate: date
+      currentDate: date,
+      focusedDay: date
     });
 
     let endDate = this.props.selectedEndDate;
@@ -152,9 +159,53 @@ class DateRangePicker extends React.Component {
 
   _handleDefaultRangeSelection = (range) => {
     this.props.onDateSelect(range.getStartDate(), range.getEndDate(), range.displayValue);
+    this.setState({ focusedDay: range.getEndDate() });
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
+    }
+  };
+
+  _handleDayKeyDown = (e) => {
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+
+    if (keycode(e) === 'right') {
+      const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'left') {
+      const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'enter') {
+      this._handleDateSelect(this.state.focusedDay);
+    } else if (keycode(e) === 'up') {
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'down') {
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
     }
   };
 
@@ -224,7 +275,12 @@ class DateRangePicker extends React.Component {
 
     return (
       <div style={styles.component}>
-        <div onClick={this._toggleSelectionPane} style={styles.selectedDateWrapper}>
+        <div
+          onClick={this._toggleSelectionPane}
+          onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
+          style={styles.selectedDateWrapper}
+          tabIndex={0}
+        >
           {shouldShowCalendarIcon ? (
             <Icon
               size={20}
@@ -277,8 +333,8 @@ class DateRangePicker extends React.Component {
                 <div>
                   <div style={styles.calendarWrapper}>
                     <div style={styles.calendarHeader}>
-                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
-                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
+                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
 
                     </div>
                     <div style={styles.calendarWeek}>
@@ -299,9 +355,11 @@ class DateRangePicker extends React.Component {
                     <MonthTable
                       activeSelectDate={this.state.activeSelectDate}
                       currentDate={this.state.currentDate}
+                      focusedDay={this.state.focusedDay || this.state.currentDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
+                      handleDateSelect={this._handleDateSelect}
+                      handleKeyDown={this._handleDayKeyDown}
                       isInActiveRange={this._isInActiveRange}
                       minimumDate={this.props.minimumDate}
                       selectedEndDate={this.props.selectedEndDate}

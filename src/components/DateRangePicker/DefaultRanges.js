@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const keycode = require('keycode');
 const React = require('react');
 const Icon = require('../Icon');
 
@@ -21,7 +22,14 @@ class DefaultRanges extends React.Component {
               handleDefaultRangeSelection(range);
               this.setState({ selectedOption: index });
             }}
+            onKeyUp={(e) => {
+              if (keycode(e) === 'enter') {
+                handleDefaultRangeSelection(range);
+                this.setState({ selectedOption: index });
+              }
+            }}
             style={styles.rangeOption}
+            tabIndex={0}
           >
             <div>
               <Icon
