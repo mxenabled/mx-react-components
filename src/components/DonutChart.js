@@ -314,7 +314,6 @@ class DonutChart extends React.Component {
         return (
           <div
             className='mx-donutchart-data'
-            onClick={this._handleClick}
             style={styles.center}
           >
             {this.props.children}
@@ -329,7 +328,6 @@ class DonutChart extends React.Component {
         return (
           <div
             className='mx-donutchart-data'
-            onClick={this._handleClick}
             style={styles.center}
           >
             <div className='mx-donutchart-data-value' style={[styles.value, { color }]}>
