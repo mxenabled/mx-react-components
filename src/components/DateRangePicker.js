@@ -275,7 +275,7 @@ class DateRangePicker extends React.Component {
 
     return (
       <div style={styles.component}>
-        <div
+        <a
           onClick={this._toggleSelectionPane}
           onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           style={styles.selectedDateWrapper}
@@ -302,7 +302,7 @@ class DateRangePicker extends React.Component {
             style={styles.selectedDateCaret}
             type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
           />
-        </div>
+        </a>
         <div style={styles.container}>
           <div>
             <div style={styles.optionsWrapper}>
