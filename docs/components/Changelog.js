@@ -8,6 +8,13 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.6</h3>
+        <ul>
+          <li>Remove DonutChart label click handler (<a href='https://github.com/mxenabled/mx-react-components/pull/666'>#666</a>)</li>
+          <li>Use a tags in certain instances in DateRangePicker for accessibility (<a href='https://github.com/mxenabled/mx-react-components/pull/665'>#665</a>)</li>
+          <li>Change column widths for DisplayInput (<a href='https://github.com/mxenabled/mx-react-components/pull/664'>#664</a>)</li>
+        </ul>
+
         <h3>5.0.5</h3>
         <ul>
           <li>Made DateRangePicker more accessible by adding keyboard navigation support (<a href='https://github.com/mxenabled/mx-react-components/pull/662'>#662</a>)</li>
