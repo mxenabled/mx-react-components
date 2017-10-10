@@ -31,7 +31,7 @@ class MonthTable extends React.Component {
       const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
       const savedStartDate = startDate.date();
       const day = (
-        <div
+        <a
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown}
@@ -52,7 +52,7 @@ class MonthTable extends React.Component {
           tabIndex={startDate.isSame(moment.unix(focusedDay), 'day') ? 0 : null}
         >
           {startDate.date()}
-        </div>
+        </a>
       );
 
       days.push(day);

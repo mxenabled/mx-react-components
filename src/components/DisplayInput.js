@@ -68,9 +68,9 @@ class DisplayInput extends React.Component {
 
     // Column Sizes
     const twoWidthColumn = { large: 2, medium: 2, small: 0 };
-    const inputColumn = showHint ? { large: 8, medium: 8, small: 12 } : { large: 10, medium: 10, small: 12 };
-    const labelColumn = { large: 2, medium: 2, small: 12 };
-    const statusColumn = { large: 10, medium: 10, small: 12 };
+    const inputColumn = showHint ? { large: 8, medium: 7, small: 12 } : { large: 10, medium: 9, small: 12 };
+    const labelColumn = { large: 2, medium: 3, small: 12 };
+    const statusColumn = { large: 10, medium: 9, small: 12 };
 
     // Styles
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
