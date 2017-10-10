@@ -130,7 +130,7 @@ class DonutChartDocs extends React.Component {
         <p>An id used to give the chart unique classNames/references so that multiple charts on a page don't attempt to animate each other.</p>
 
         <h5>onClick <label>Function</label></h5>
-        <p>A method to be called when a pie slice is clicked. It will be passed the index of the clicke data point.</p>
+        <p>A method to be called when a pie slice is clicked. It will be passed the <code>data</code> at the clicked index.</p>
 
         <h5>onMouseEnter <label>Function</label></h5>
         <p>A method to be called when the mouse hovers over a slice. It will be passed the index of the hovered data point.</p>
