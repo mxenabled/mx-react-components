@@ -8,6 +8,10 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.7</h3>
+        <ul>
+          <li>Locks down Moment.js to version 2.18.1 due to this issue <a href='https://github.com/moment/moment/issues/4216'>https://github.com/moment/moment/issues/4216</a></li>
+        </ul>
         <h3>5.0.6</h3>
         <ul>
           <li>Remove DonutChart label click handler (<a href='https://github.com/mxenabled/mx-react-components/pull/666'>#666</a>)</li>
