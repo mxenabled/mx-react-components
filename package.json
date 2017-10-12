@@ -33,7 +33,7 @@
     "focus-trap-react": "^3.0.2",
     "keycode": "^2.1.8",
     "lodash": "^4.6.1",
-    "moment": "^2.10.3",
+    "moment": "2.18.1",
     "moment-timezone": "^0.5.4",
     "numeral": "^1.5.3",
     "prop-types": "^15.5.8",
