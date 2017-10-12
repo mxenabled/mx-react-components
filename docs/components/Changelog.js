@@ -8,7 +8,7 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
-        <h3>5.0.7</h3>
+        <h3>5.0.8</h3>
         <ul>
           <li>React 16 Upgrade (<a href='https://github.com/mxenabled/mx-react-components/pull/666'>#668</a>)</li>
         </ul>
