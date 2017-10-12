@@ -1,22 +1,26 @@
 {
   "name": "mx-react-components",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
     "release": "eslint src && babel src --out-dir dist",
     "dev-release": "babel src --watch --out-dir dist",
-    "dev":
-      "yarn && yarn upgrade && cd docs && yarn && yarn upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
-    "docs:release":
-      "yarn && cd docs && yarn && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
+    "dev": "yarn && yarn upgrade && cd docs && yarn && yarn upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
+    "docs:release": "yarn && cd docs && yarn && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
     "test": "eslint src"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/moneydesktop/mx-react-components"
   },
-  "keywords": ["react", "components", "mx", "UI", "library"],
+  "keywords": [
+    "react",
+    "components",
+    "mx",
+    "UI",
+    "library"
+  ],
   "author": "MX",
   "license": "MIT",
   "bugs": {
@@ -33,9 +37,9 @@
     "moment-timezone": "^0.5.4",
     "numeral": "^1.5.3",
     "prop-types": "^15.5.8",
-    "radium": "^0.18.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "radium": "^0.19.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "velocity-animate": "^1.2.3"
   },
   "devDependencies": {

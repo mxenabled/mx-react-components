@@ -44,7 +44,7 @@ class Drawer extends React.Component {
       onPreviousClick: PropTypes.func.isRequired
     }),
     onClose: PropTypes.func.isRequired,
-    onOpen: React.PropTypes.func,
+    onOpen: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
