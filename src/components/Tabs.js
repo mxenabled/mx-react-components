@@ -174,6 +174,7 @@ class Tabs extends React.Component {
         alignItems: 'center',
         boxSizing: 'border-box',
         color: this.props.brandColor,
+        cursor: 'pointer',
         lineHeight: '20px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,
