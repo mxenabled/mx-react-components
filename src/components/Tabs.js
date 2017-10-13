@@ -15,6 +15,7 @@ class Tabs extends React.Component {
     selectedTab: PropTypes.number,
     showBottomBorder: PropTypes.bool,
     tabs: PropTypes.array.isRequired,
+    theme: PropTypes.object,
     useTabsInMobile: PropTypes.bool
   };
 
@@ -96,6 +97,7 @@ class Tabs extends React.Component {
             menuStyles={styles.menu}
             onScrimClick={this._toggleMenu}
             showItems={this.state.showMenu}
+            theme={this.props.theme}
           />
         ) : null}
       </div>
