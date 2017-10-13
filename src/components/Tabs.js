@@ -15,6 +15,7 @@ class Tabs extends React.Component {
     selectedTab: PropTypes.number,
     showBottomBorder: PropTypes.bool,
     tabs: PropTypes.array.isRequired,
+    theme: PropTypes.object,
     useTabsInMobile: PropTypes.bool
   };
 
@@ -96,6 +97,7 @@ class Tabs extends React.Component {
             menuStyles={styles.menu}
             onScrimClick={this._toggleMenu}
             showItems={this.state.showMenu}
+            theme={this.props.theme}
           />
         ) : null}
       </div>
@@ -122,7 +124,7 @@ class Tabs extends React.Component {
 
     return (
       <div style={[styles.component, this.props.style]}>
-        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile ? (
+        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile || this.props.tabs.length === 1 ? (
           <div style={styles.tabsContainer}>
             {this._renderTabs()}
           </div>
@@ -165,6 +167,7 @@ class Tabs extends React.Component {
         alignItems: 'center',
         boxSizing: 'border-box',
         color: this.props.brandColor,
+        cursor: 'pointer',
         lineHeight: '20px',
         fontSize: StyleConstants.FontSizes.MEDIUM,
         fontStyle: StyleConstants.Fonts.SEMIBOLD,

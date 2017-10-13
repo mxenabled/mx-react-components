@@ -8,9 +8,14 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.9</h3>
+        <ul>
+          <li>Gracefully handle 1 tab being passed into the Tabs component (<a href='https://github.com/mxenabled/mx-react-components/pull/669'>#669</a>)</li>
+        </ul>
+
         <h3>5.0.8</h3>
         <ul>
-          <li>React 16 Upgrade (<a href='https://github.com/mxenabled/mx-react-components/pull/666'>#668</a>)</li>
+          <li>React 16 Upgrade (<a href='https://github.com/mxenabled/mx-react-components/pull/668'>#668</a>)</li>
         </ul>
 
         <h3>5.0.7</h3>
