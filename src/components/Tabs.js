@@ -26,17 +26,8 @@ class Tabs extends React.Component {
 
   state = {
     selectedTab: this.props.selectedTab || 0,
-    showMenu: false,
-    singleTab: false
+    showMenu: false
   };
-
-  componentDidMount () {
-    if (this.props.tabs.length === 1) {
-      this.setState({
-        singleTab: true
-      });
-    }
-  }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.selectedTab !== this.state.selectedTab) {
@@ -131,7 +122,7 @@ class Tabs extends React.Component {
 
     return (
       <div style={[styles.component, this.props.style]}>
-        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile || this.state.singleTab ? (
+        {this._isLargeOrMediumWindowSize() || this.props.useTabsInMobile || this.props.tabs.length === 1 ? (
           <div style={styles.tabsContainer}>
             {this._renderTabs()}
           </div>
