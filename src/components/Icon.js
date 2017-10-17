@@ -11,10 +11,7 @@ class Icon extends React.Component {
   };
 
   static defaultProps = {
-    elementProps: {
-      'aria-hidden': true,
-      focusable: false
-    },
+    elementProps: {},
     size: 24,
     type: 'accounts'
   };
@@ -1689,7 +1686,11 @@ class Icon extends React.Component {
   };
 
   render () {
-    const { elementProps } = this.props;
+    const elementProps = {
+      'aria-hidden': true,
+      focusable: 'false',
+      ...this.props.elementProps
+    };
     const styles = this.styles();
 
     return (

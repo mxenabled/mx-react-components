@@ -1,7 +1,10 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
+const keycode = require('keycode');
+
 const moment = require('moment');
+const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
 const Button = require('./Button');
@@ -21,8 +24,8 @@ class DateRangePicker extends React.Component {
     closeCalendarOnRangeSelect: PropTypes.bool,
     defaultRanges: PropTypes.arrayOf(PropTypes.shape({
       displayValue: PropTypes.string,
-      endDate: PropTypes.number,
-      startDate: PropTypes.number
+      getEndDate: PropTypes.func,
+      getStartDate: PropTypes.func
     })),
     format: PropTypes.string,
     isRelative: PropTypes.bool,
@@ -36,6 +39,7 @@ class DateRangePicker extends React.Component {
     selectedStartDate: PropTypes.number,
     showDefaultRanges: PropTypes.bool,
     style: PropTypes.object,
+    styles: PropTypes.object,
     theme: themeShape
   };
 
@@ -44,33 +48,33 @@ class DateRangePicker extends React.Component {
     defaultRanges: [
       {
         displayValue: 'This Month',
-        endDate: moment().endOf('month').unix(),
-        startDate: moment().startOf('month').unix()
+        getEndDate: () => moment().endOf('month').unix(),
+        getStartDate: () => moment().startOf('month').unix()
       },
       {
         displayValue: 'Last 30 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(29, 'days').startOf('day').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(29, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Last Month',
-        endDate: moment().subtract(1, 'months').endOf('month').unix(),
-        startDate: moment().subtract(1, 'months').startOf('month').unix()
+        getEndDate: () => moment().subtract(1, 'months').endOf('month').unix(),
+        getStartDate: () => moment().subtract(1, 'months').startOf('month').unix()
       },
       {
         displayValue: 'Last 90 Days',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().subtract(89, 'days').startOf('day').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(89, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Year To Date',
-        endDate: moment().endOf('day').unix(),
-        startDate: moment().startOf('year').unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().startOf('year').unix()
       },
       {
         displayValue: 'Last Year',
-        endDate: moment().startOf('day').unix(),
-        startDate: moment().startOf('day').subtract(1, 'y').unix()
+        getEndDate: () => moment().startOf('day').unix(),
+        getStartDate: () => moment().startOf('day').subtract(1, 'y').unix()
       }
     ],
     format: 'MMM D, YYYY',
@@ -84,12 +88,24 @@ class DateRangePicker extends React.Component {
 
   state = {
     currentDate: this.props.selectedEndDate || moment().unix(),
+    focusedDay: this.props.selectedEndDate || moment().unix(),
     selectedBox: SelectedBox.FROM,
     showSelectionPane: false
   };
 
   componentDidMount () {
     deprecatePrimaryColor(this.props);
+  }
+
+  componentWillReceiveProps (newProps) {
+    const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
+    const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
+
+    if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
+      this.setState({
+        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
+      });
+    }
   }
 
   _getDateFormat = (isLargeOrMediumWindowSize) => {
@@ -106,9 +122,13 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
-  _handleDateSelect = (isLargeOrMediumWindowSize, date) => {
+  _handleDateSelect = (date) => {
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
+
     this.setState({
-      currentDate: date
+      currentDate: date,
+      focusedDay: date
     });
 
     let endDate = this.props.selectedEndDate;
@@ -138,10 +158,54 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDefaultRangeSelection = (range) => {
-    this.props.onDateSelect(range.startDate, range.endDate, range.displayValue);
+    this.props.onDateSelect(range.getStartDate(), range.getEndDate(), range.displayValue);
+    this.setState({ focusedDay: range.getEndDate() });
 
     if (this.props.closeCalendarOnRangeSelect) {
       this._handleScrimClick();
+    }
+  };
+
+  _handleDayKeyDown = (e) => {
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+
+    if (keycode(e) === 'right') {
+      const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'left') {
+      const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'enter') {
+      this._handleDateSelect(this.state.focusedDay);
+    } else if (keycode(e) === 'up') {
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'down') {
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
     }
   };
 
@@ -211,7 +275,12 @@ class DateRangePicker extends React.Component {
 
     return (
       <div style={styles.component}>
-        <div onClick={this._toggleSelectionPane} style={styles.selectedDateWrapper}>
+        <a
+          onClick={this._toggleSelectionPane}
+          onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
+          style={styles.selectedDateWrapper}
+          tabIndex={0}
+        >
           {shouldShowCalendarIcon ? (
             <Icon
               size={20}
@@ -233,7 +302,7 @@ class DateRangePicker extends React.Component {
             style={styles.selectedDateCaret}
             type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
           />
-        </div>
+        </a>
         <div style={styles.container}>
           <div>
             <div style={styles.optionsWrapper}>
@@ -264,8 +333,8 @@ class DateRangePicker extends React.Component {
                 <div>
                   <div style={styles.calendarWrapper}>
                     <div style={styles.calendarHeader}>
-                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
-                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate })} />
+                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
+                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
 
                     </div>
                     <div style={styles.calendarWeek}>
@@ -286,9 +355,11 @@ class DateRangePicker extends React.Component {
                     <MonthTable
                       activeSelectDate={this.state.activeSelectDate}
                       currentDate={this.state.currentDate}
+                      focusedDay={this.state.focusedDay || this.state.currentDate}
                       getDateRangePosition={this._getDateRangePosition}
                       handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect.bind(null, isLargeOrMediumWindowSize)}
+                      handleDateSelect={this._handleDateSelect}
+                      handleKeyDown={this._handleDayKeyDown}
                       isInActiveRange={this._isInActiveRange}
                       minimumDate={this.props.minimumDate}
                       selectedEndDate={this.props.selectedEndDate}
@@ -320,7 +391,7 @@ class DateRangePicker extends React.Component {
   }
 
   styles = (theme, isLargeOrMediumWindowSize) => {
-    return {
+    return _merge({}, {
       component: Object.assign({
         backgroundColor: theme.Colors.WHITE,
         borderColor: this.state.showSelectionPane ? theme.Colors.PRIMARY : theme.Colors.GRAY_300,
@@ -337,6 +408,7 @@ class DateRangePicker extends React.Component {
         position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
       }, this.props.style),
+
       container: {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
       },
@@ -482,7 +554,7 @@ class DateRangePicker extends React.Component {
         top: 0,
         zIndex: 9
       }
-    };
+    }, this.props.styles);
   };
 }
 

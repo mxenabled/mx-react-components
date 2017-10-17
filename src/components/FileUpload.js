@@ -235,7 +235,7 @@ class FileUpload extends React.Component {
       failedValidationTypes = failedValidationTypes.concat(this._validateImageDimensions(width, height));
     }
 
-    if (this.props.onFileValidation) {
+    if (this.props.onFileValidation && failedValidationTypes.length) {
       this.props.onFileValidation(failedValidationTypes);
     } else if (failedValidationTypes.length) {
       this.setState({

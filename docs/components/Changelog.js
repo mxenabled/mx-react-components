@@ -8,6 +8,55 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.9</h3>
+        <ul>
+          <li>Properly set Icon default props (<a href='https://github.com/mxenabled/mx-react-components/pull/670'>#668</a>)</li>
+        </ul>
+
+        <h3>5.0.8</h3>
+        <ul>
+          <li>React 16 Upgrade (<a href='https://github.com/mxenabled/mx-react-components/pull/666'>#668</a>)</li>
+        </ul>
+
+        <h3>5.0.7</h3>
+        <ul>
+          <li>Locks down Moment.js to version 2.18.1 due to this issue <a href='https://github.com/moment/moment/issues/4216'>https://github.com/moment/moment/issues/4216</a></li>
+        </ul>
+
+        <h3>5.0.6</h3>
+        <ul>
+          <li>Remove DonutChart label click handler (<a href='https://github.com/mxenabled/mx-react-components/pull/666'>#666</a>)</li>
+          <li>Use a tags in certain instances in DateRangePicker for accessibility (<a href='https://github.com/mxenabled/mx-react-components/pull/665'>#665</a>)</li>
+          <li>Change column widths for DisplayInput (<a href='https://github.com/mxenabled/mx-react-components/pull/664'>#664</a>)</li>
+        </ul>
+
+        <h3>5.0.5</h3>
+        <ul>
+          <li>Made DateRangePicker more accessible by adding keyboard navigation support (<a href='https://github.com/mxenabled/mx-react-components/pull/662'>#662</a>)</li>
+        </ul>
+
+        <h3>5.0.4</h3>
+        <ul>
+          <li>State to manage which default range the user clicked on (<a href='https://github.com/mxenabled/mx-react-components/pull/659'>#659</a>)</li>
+          <li>Fix Drawer header size (<a href='https://github.com/mxenabled/mx-react-components/pull/661'>#661</a>)</li>
+        </ul>
+
+        <h3>5.0.3</h3>
+        <ul>
+          <li>Fix file upload validation (<a href='https://github.com/mxenabled/mx-react-components/pull/660'>#660</a>)</li>
+        </ul>
+
+        <h3>5.0.2</h3>
+        <ul>
+          <li>Bug fix in TimeBasedLineChart (<a href='https://github.com/mxenabled/mx-react-components/pull/658'>#658</a>)</li>
+        </ul>
+
+        <h3>5.0.1</h3>
+        <ul>
+          <li>DateRangePicker - Updating to use _merge and a nested object for styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/653'>#653</a>)</li>
+          <li>DisplayInput - Updating to use _merge and a nested object for styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/656'>#656</a>)</li>
+        </ul>
+
         <h3>v5 Release Notes</h3>
         <ul>
           <li>
@@ -66,6 +115,9 @@ class Changelog extends React.Component {
         <h3>v5 Breaking Changes</h3>
         <ul>
           <li>
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now functions instead of values (<a href='https://github.com/mxenabled/mx-react-components/pull/652'>#652</a>).
+          </li>
+          <li>
             Fixes React unknown prop warnings on various components(<a href='https://github.com/mxenabled/mx-react-components/pull/426'>#426</a>)
           </li>
           <li>
@@ -78,6 +130,12 @@ class Changelog extends React.Component {
 
         <h3>v5 Complete Change log</h3>
         <ul>
+          <li>
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now functions instead of values (<a href='https://github.com/mxenabled/mx-react-components/pull/652'>#652</a>).
+          </li>
+          <li>
+            Re adds componentWillReceiveProps to DateRangePicker (<a href='https://github.com/mxenabled/mx-react-components/pull/651'>#651</a>).
+          </li>
           <li>
             Remove old DateRangePicker code (<a href='https://github.com/mxenabled/mx-react-components/pull/643'>#643</a>).
           </li>

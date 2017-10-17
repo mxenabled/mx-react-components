@@ -1,6 +1,6 @@
 {
   "name": "mx-react-components",
-  "version": "5.0.0-rc.110",
+  "version": "5.0.9",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
@@ -33,13 +33,13 @@
     "focus-trap-react": "^3.0.2",
     "keycode": "^2.1.8",
     "lodash": "^4.6.1",
-    "moment": "^2.10.3",
+    "moment": "2.18.1",
     "moment-timezone": "^0.5.4",
     "numeral": "^1.5.3",
     "prop-types": "^15.5.8",
-    "radium": "^0.18.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "radium": "^0.19.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "velocity-animate": "^1.2.3"
   },
   "devDependencies": {

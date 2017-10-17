@@ -44,7 +44,7 @@ class Drawer extends React.Component {
       onPreviousClick: PropTypes.func.isRequired
     }),
     onClose: PropTypes.func.isRequired,
-    onOpen: React.PropTypes.func,
+    onOpen: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
@@ -303,7 +303,8 @@ class Drawer extends React.Component {
         justifyContent: 'center',
         padding: '7px 7px',
         position: 'relative',
-        height: HEADER_HEIGHT
+        height: HEADER_HEIGHT,
+        boxSizing: 'border-box'
       },
       title: {
         overflow: 'hidden',

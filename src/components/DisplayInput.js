@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
+const _merge = require('lodash/merge');
 
 const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
@@ -27,6 +28,7 @@ class DisplayInput extends React.Component {
       type: PropTypes.string,
       message: PropTypes.string
     }),
+    styles: PropTypes.object,
     theme: themeShape,
     valid: PropTypes.bool
   };
@@ -66,9 +68,9 @@ class DisplayInput extends React.Component {
 
     // Column Sizes
     const twoWidthColumn = { large: 2, medium: 2, small: 0 };
-    const inputColumn = showHint ? { large: 8, medium: 8, small: 12 } : { large: 10, medium: 10, small: 12 };
-    const labelColumn = { large: 2, medium: 2, small: 12 };
-    const statusColumn = { large: 10, medium: 10, small: 12 };
+    const inputColumn = showHint ? { large: 8, medium: 7, small: 12 } : { large: 10, medium: 9, small: 12 };
+    const labelColumn = { large: 2, medium: 3, small: 12 };
+    const statusColumn = { large: 10, medium: 9, small: 12 };
 
     // Styles
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
@@ -133,7 +135,7 @@ class DisplayInput extends React.Component {
       outline: 'none'
     };
 
-    return {
+    return _merge({}, {
       error: {
         color: theme.Colors.DANGER
       },
@@ -214,7 +216,7 @@ class DisplayInput extends React.Component {
       }, this.props.style),
 
       wrapperFocus
-    };
+    }, this.props.styles);
   };
 }
 
