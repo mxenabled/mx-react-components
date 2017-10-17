@@ -112,12 +112,14 @@ class ToggleSwitch extends React.Component {
         boxSizing: 'border-box',
         cursor: 'pointer',
         height: 24,
+        minHeight: 24,
         margin: '0 10px',
         padding: 2,
         position: 'relative',
         transition: 'all 0.5s ease',
         verticalAlign: 'middle',
         width: 42,
+        minWidth: 42,
         zIndex: 1
       },
       trueTrack: {
