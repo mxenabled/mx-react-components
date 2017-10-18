@@ -56,6 +56,18 @@ class DisplayInput extends React.Component {
     return windowSize === 'large' || windowSize === 'medium';
   };
 
+  _getInputColumns = (hasLabel, showHint) => {
+    if (showHint && hasLabel) {
+      return { large: 8, medium: 7, small: 12 };
+    }
+
+    if (showHint || hasLabel) {
+      return { large: 10, medium: 9, small: 12 };
+    }
+
+    return { large: 12, medium: 12, small: 12 };
+  }
+
   render () {
     // Input properties
     const { elementProps } = this.props;
@@ -65,10 +77,11 @@ class DisplayInput extends React.Component {
     const hasChildren = !!this.props.children;
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
+    const hasLabel = !!this.props.label;
 
     // Column Sizes
     const twoWidthColumn = { large: 2, medium: 2, small: 0 };
-    const inputColumn = showHint ? { large: 8, medium: 7, small: 12 } : { large: 10, medium: 9, small: 12 };
+    const inputColumn = this._getInputColumns(hasLabel, showHint);
     const labelColumn = { large: 2, medium: 3, small: 12 };
     const statusColumn = { large: 10, medium: 9, small: 12 };
 
