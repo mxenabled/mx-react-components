@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.0.11</h3>
+        <ul>
+          <li>DisplayInput column uses full row if there's no label or hint(<a href='https://github.com/mxenabled/mx-react-components/pull/674'>#674</a>)</li>
+        </ul>
+
         <h3>5.0.10</h3>
         <ul>
           <li>Fixes ToggleSwitch in ie11(<a href='https://github.com/mxenabled/mx-react-components/pull/673'>#673</a>)</li>
