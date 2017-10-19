@@ -134,7 +134,7 @@ class NotifyOnScrollThresholdDocs extends React.Component {
         height: 200,
         padding: 10,
         position: 'relative',
-        overflow: 'scroll'
+        overflow: 'auto'
       },
       thresholdMessage: {
         backgroundColor: 'lightgrey',

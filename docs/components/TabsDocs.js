@@ -1,4 +1,5 @@
 const React = require('react');
+const { Link } = require('react-router');
 
 const { Tabs } = require('mx-react-components');
 
@@ -16,6 +17,8 @@ class TabsDocs extends React.Component {
   };
 
   render () {
+    const tabs = ['Donuts', 'Ice Cream', 'Bacon', 'Chicken'];
+
     return (
       <div>
         <h1>
@@ -24,22 +27,35 @@ class TabsDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+
         <Tabs
-          activeTabStyles={{ padding: '5px 5px 25px 5px' }}
           onTabSelect={this._handleTabSelect}
           selectedTab={this.state.selectedTab}
-          showBottomBorder={false}
-          tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
-          useTabsInMobile={false}
+          tabs={tabs}
+        />
+
+        <Tabs
+          alignment='center'
+          onTabSelect={this._handleTabSelect}
+          selectedTab={this.state.selectedTab}
+          tabs={tabs}
+        />
+
+        <Tabs
+          onTabSelect={this._handleTabSelect}
+          selectedTab={this.state.selectedTab}
+          tabs={tabs}
+          type='pill'
         />
 
         <h3>Usage</h3>
+
         <h5>activeTabStyles<label>Object</label></h5>
         <p>Styles for the active tab.</p>
 
-        <h5>brandColor<label>String</label></h5>
-        <p>Default: PRIMARY COLOR</p>
-        <p>Hex value or style constant for that brand.</p>
+        <h5>alignment<label>'left' or 'center'</label></h5>
+        <p>Default: 'left'</p>
+        <p>Tab alignment.</p>
 
         <h5>onTabSelect <label>Function</label></h5>
         <p><em>(required)</em> A function called when you click on a tab</p>
@@ -56,26 +72,45 @@ class TabsDocs extends React.Component {
         <p>Default: PRIMARY</p>
         <p><em>(required)</em> Array of values that you want respresented as tabs. Each item in the array should be a string. The "onTabClick" function will be called when you click on each one.</p>
 
-        <h5>useTabsInMobile <label>Boolean</label></h5>
-        <p>Default: false</p>
-        <p>When true, this will override the default and show tabs in mobile instead of a menu screen.</p>
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+
+        <h5>type <label>One of: ['standard', 'pill']</label></h5>
+        <p>Default: standard</p>
+
+        <h5>DEPRECATED: useTabsInMobile <label>Boolean</label></h5>
+        <p>Deprecated. For dropdown style tabs please use <Link to='/components/select'>Select</Link> instead.</p>
 
         <h3>Example</h3>
         <Markdown>
           {`
-            _handleTabSelect (selectedTab) {
-                 this.setState({
-                   selectedTab
-                 });
-             },
+            const tabs = ['Donuts', 'Ice Cream', 'Bacon', 'Chicken'];
+            const _handleTabSelect = (selectedTab) => {
+              this.setState({
+                selectedTab
+              });
+             };
+
+            ...
 
             <Tabs
-              activeTabStyles={{ paddingBottom: 25 }}
               onTabSelect={this._handleTabSelect}
               selectedTab={this.state.selectedTab}
-              showBottomBorder={false}
-              tabs={['donuts', 'ice cream', 'bacon', 'chicken']}
-              useTabsInMobile={false}
+              tabs={tabs}
+            />
+
+            <Tabs
+              alignment='center'
+              onTabSelect={this._handleTabSelect}
+              selectedTab={this.state.selectedTab}
+              tabs={tabs}
+            />
+
+            <Tabs
+              onTabSelect={this._handleTabSelect}
+              selectedTab={this.state.selectedTab}
+              tabs={tabs}
+              type='pill'
             />
           `}
         </Markdown>
