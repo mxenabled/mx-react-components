@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.0</h3>
+        <ul>
+          <li>New 'pill' style added to the Tabs component (<a href='https://github.com/mxenabled/mx-react-components/pull/672'>#672</a>)</li>
+        </ul>
+
         <h3>5.0.11</h3>
         <ul>
           <li>DisplayInput column uses full row if there's no label or hint(<a href='https://github.com/mxenabled/mx-react-components/pull/674'>#674</a>)</li>
