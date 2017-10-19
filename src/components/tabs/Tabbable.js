@@ -59,7 +59,7 @@ const Tabbable = (TabsComponent) => {
         boxSizing: 'border-box',
         display: 'flex',
         justifyContent: this.props.alignment === 'left' ? 'flex-start' : 'center',
-        overflowX: 'scroll',
+        overflowX: 'auto',
         width: '100%'
       }, this.props.style);
     }
