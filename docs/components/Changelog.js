@@ -10,7 +10,7 @@ class Changelog extends React.Component {
 
         <h3>5.1.1</h3>
         <ul>
-          <li>Updates focus-trap-react library to fix IE 11 error with Modal and returning focus (<a href='https://github.com/mxenabled/mx-react-components/pull/673'>#672</a>)</li>
+          <li>Updates focus-trap-react library to fix IE 11 error with Modal and returning focus (<a href='https://github.com/mxenabled/mx-react-components/pull/675'>#675</a>)</li>
         </ul>
 
         <h3>5.1.0</h3>
