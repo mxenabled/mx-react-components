@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.1</h3>
+        <ul>
+          <li>Updates focus-trap-react library to fix IE 11 error with Modal and returning focus (<a href='https://github.com/mxenabled/mx-react-components/pull/675'>#675</a>)</li>
+        </ul>
+
         <h3>5.1.0</h3>
         <ul>
           <li>New 'pill' style added to the Tabs component (<a href='https://github.com/mxenabled/mx-react-components/pull/672'>#672</a>)</li>

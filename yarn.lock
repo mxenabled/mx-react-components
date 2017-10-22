@@ -1918,8 +1918,8 @@ flat-cache@^1.2.1:
     write "^0.2.1"
 
 focus-trap-react@^3.0.2:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-3.0.4.tgz#5f98145ebb95b503c6996610aed61ae610304524"
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-3.0.5.tgz#8fb381b92eafe075c2406297d1da618650d37143"
   dependencies:
     focus-trap "^2.0.1"
 
