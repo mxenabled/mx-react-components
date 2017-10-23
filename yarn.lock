@@ -1917,7 +1917,7 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-focus-trap-react@^3.0.2:
+focus-trap-react@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-3.0.5.tgz#8fb381b92eafe075c2406297d1da618650d37143"
   dependencies:
