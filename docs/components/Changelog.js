@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.2</h3>
+        <ul>
+          <li>Previous attempt to update focus-trap-react didn't work.  This should resolve the issue.  (<a href='https://github.com/mxenabled/mx-react-components/pull/676'>#676</a>)</li>
+        </ul>
+
         <h3>5.1.1</h3>
         <ul>
           <li>Updates focus-trap-react library to fix IE 11 error with Modal and returning focus (<a href='https://github.com/mxenabled/mx-react-components/pull/675'>#675</a>)</li>
