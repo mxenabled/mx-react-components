@@ -343,6 +343,10 @@ module.exports = {
       displayValue: 'Loans'
     },
     {
+      value: 'lock',
+      displayValue: 'Lock'
+    },
+    {
       value: 'map',
       displayValue: 'Map'
     },
