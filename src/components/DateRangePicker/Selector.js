@@ -18,29 +18,22 @@ class Selector extends React.Component {
 
     return (
       <div style={Object.assign({}, this.props.style, styles.container)}>
-        <Icon
-          elementProps={{
-            onClick: this.props.handlePreviousClick,
-            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handlePreviousClick(e),
-            tabIndex: 0
-          }}
-          size={20}
-          style={styles.calendarHeaderNav}
-          type='caret-left'
-        />
-        <div style={styles.currentDate}>
-          {this.props.currentDate}
-        </div>
-        <Icon
-          elementProps={{
-            onClick: this.props.handleNextClick,
-            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handleNextClick(e),
-            tabIndex: 0
-          }}
-          size={20}
-          style={styles.calendarHeaderNav}
-          type='caret-right'
-        />
+        <a
+          onClick={this.props.handlePreviousClick}
+          onKeyUp={e =>
+            keycode(e) === 'enter' && this.props.handlePreviousClick(e)}
+          tabIndex={0}
+        >
+          <Icon size={20} style={styles.calendarHeaderNav} type='caret-left' />
+        </a>
+        <div style={styles.currentDate}>{this.props.currentDate}</div>
+        <a
+          onClick={this.props.handleNextClick}
+          onKeyUp={e => keycode(e) === 'enter' && this.props.handleNextClick(e)}
+          tabIndex={0}
+        >
+          <Icon size={20} style={styles.calendarHeaderNav} type='caret-right' />
+        </a>
       </div>
     );
   }
