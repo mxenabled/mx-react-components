@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.4</h3>
+        <ul>
+          <li>Setup Jest for testing.  (<a href='https://github.com/mxenabled/mx-react-components/pull/678'>#678</a>)</li>
+        </ul>
+
         <h3>5.1.3</h3>
         <ul>
           <li>Added new lock icon.  (<a href='https://github.com/mxenabled/mx-react-components/pull/679'>#679</a>)</li>
