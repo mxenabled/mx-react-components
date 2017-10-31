@@ -32,6 +32,7 @@ class MonthTable extends React.Component {
       const savedStartDate = startDate.date();
       const day = (
         <a
+          aria-label={moment(startDate).format("MMM D, YYYY")}
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown}
@@ -41,6 +42,7 @@ class MonthTable extends React.Component {
               ref.focus();
             }
           }}
+          role='button'
           style={Object.assign({},
             styles.calendarDay,
             startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,

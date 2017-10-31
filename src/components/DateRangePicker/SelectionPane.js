@@ -42,8 +42,10 @@ class SelectionPane extends React.Component {
         <div>
           <label style={styles.boxLabel}>From</label>
           <a
+            aria-label={`Select Start Date, ${selectedStartDate ? 'Current start date is ' + moment.unix(selectedStartDate).format('MMM D, YYYY') : ''}`}
             onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
             onKeyUp={(e) => keycode(e) === 'enter' && this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
+            role='button'
             style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}
             tabIndex={0}
           >
@@ -52,8 +54,10 @@ class SelectionPane extends React.Component {
 
           <label style={styles.boxLabel}>To</label>
           <a
+            aria-label={`Select End Date, ${selectedEndDate ? 'Current end date is ' + moment.unix(selectedEndDate).format('MMM D, YYYY') : ''}`}
             onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
             onKeyUp={(e) => keycode(e) === 'enter' && this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
+            role='button'
             style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}
             tabIndex={0}
           >
