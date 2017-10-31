@@ -32,7 +32,7 @@ class MonthTable extends React.Component {
       const savedStartDate = startDate.date();
       const day = (
         <a
-          aria-label={moment(startDate).format("MMM D, YYYY")}
+          aria-label={moment(startDate).format('MMM D, YYYY')}
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown}
