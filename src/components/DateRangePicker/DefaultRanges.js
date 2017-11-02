@@ -28,6 +28,7 @@ class DefaultRanges extends React.Component {
                 this.setState({ selectedOption: index });
               }
             }}
+            role='button'
             style={styles.rangeOption}
             tabIndex={0}
           >

@@ -10,7 +10,8 @@ class Selector extends React.Component {
     currentDate: PropTypes.string,
     handleNextClick: PropTypes.func,
     handlePreviousClick: PropTypes.func,
-    setCurrentDate: PropTypes.func
+    setCurrentDate: PropTypes.func,
+    type: PropTypes.string
   };
 
   render () {
@@ -18,29 +19,26 @@ class Selector extends React.Component {
 
     return (
       <div style={Object.assign({}, this.props.style, styles.container)}>
-        <Icon
-          elementProps={{
-            onClick: this.props.handlePreviousClick,
-            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handlePreviousClick(e),
-            tabIndex: 0
-          }}
-          size={20}
-          style={styles.calendarHeaderNav}
-          type='caret-left'
-        />
-        <div style={styles.currentDate}>
-          {this.props.currentDate}
-        </div>
-        <Icon
-          elementProps={{
-            onClick: this.props.handleNextClick,
-            onKeyUp: (e) => keycode(e) === 'enter' && this.props.handleNextClick(e),
-            tabIndex: 0
-          }}
-          size={20}
-          style={styles.calendarHeaderNav}
-          type='caret-right'
-        />
+        <a
+          aria-label={`Previous ${this.props.type}`}
+          onClick={this.props.handlePreviousClick}
+          onKeyUp={e =>
+            keycode(e) === 'enter' && this.props.handlePreviousClick(e)}
+          role='button'
+          tabIndex={0}
+        >
+          <Icon size={20} style={styles.calendarHeaderNav} type='caret-left' />
+        </a>
+        <div style={styles.currentDate}>{this.props.currentDate}</div>
+        <a
+          aria-label={`Next ${this.props.type}`}
+          onClick={this.props.handleNextClick}
+          onKeyUp={e => keycode(e) === 'enter' && this.props.handleNextClick(e)}
+          role='button'
+          tabIndex={0}
+        >
+          <Icon size={20} style={styles.calendarHeaderNav} type='caret-right' />
+        </a>
       </div>
     );
   }
@@ -91,6 +89,7 @@ class MonthSelector extends React.Component {
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
         style={styles.monthSelector}
+        type='Month'
       />
     );
   }
@@ -129,6 +128,7 @@ class YearSelector extends React.Component {
         currentDate={moment.unix(this.props.currentDate).format('YYYY')}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
+        type='Year'
       />
     );
   }
