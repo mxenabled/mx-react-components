@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.5</h3>
+        <ul>
+          <li>DateRangePicker Accessibility updates (<a href='https://github.com/mxenabled/mx-react-components/pull/680'>#680</a>)</li>
+        </ul>
+
         <h3>5.1.4</h3>
         <ul>
           <li>Setup Jest for testing.  (<a href='https://github.com/mxenabled/mx-react-components/pull/678'>#678</a>)</li>
