@@ -10,7 +10,7 @@ class Changelog extends React.Component {
 
         <h3>5.1.6</h3>
         <ul>
-          <li>Adds elementProps prop to Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/680'>#680</a>)</li>
+          <li>Adds elementProps prop to Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/681'>#681</a>)</li>
         </ul>
 
         <h3>5.1.5</h3>
