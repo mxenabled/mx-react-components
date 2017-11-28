@@ -13,6 +13,7 @@ class ButtonGroup extends React.Component {
   static propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
       'aria-label': PropTypes.string,
+      elementProps: PropTypes.object,
       icon: PropTypes.string,
       onClick: PropTypes.func,
       style: PropTypes.object,
@@ -48,6 +49,7 @@ class ButtonGroup extends React.Component {
           return (
             <Button
               aria-label={button['aria-label']}
+              elementProps={button.elementProps}
               icon={button.icon}
               key={i}
               onClick={isDisabled ? null : button.onClick}
