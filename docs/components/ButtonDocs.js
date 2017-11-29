@@ -97,13 +97,6 @@ class ButtonDocs extends React.Component {
         <h5>actionText <label>String</label></h5>
         <p>The button text when <Code>isActive</Code> is <Code>true</Code>. If not defined, a spinner without text is shown.</p>
 
-        <h5>aria-label <label>String</label></h5>
-        <p>If defined, adds an <Code>aria-label</Code> attribute equal to the supplied value on the button element for accessibility.</p>
-        <p><a href='https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute'>aria-label documentation</a></p>
-
-        <h5>elementProps <label>Object</label></h5>
-        <p>Object of native html attributes that you wish to have spread across the html button element of the component.  Usefull for adding things such as aria and data-dash attributes.</p>
-
         <h5>icon <label>String</label></h5>
         <p>This can be any of the <Code>Icon</Code> component values. If defined, an icon will be shown to the left of the button content.</p>
 

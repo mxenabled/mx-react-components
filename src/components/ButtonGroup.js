@@ -45,21 +45,21 @@ class ButtonGroup extends React.Component {
           const isOnlyChild = isFirstChild && isLastChild;
           const isDisabled = button.type === 'disabled';
 
+          const { style, ...rest } = button;
+
           return (
             <Button
-              aria-label={button['aria-label']}
-              icon={button.icon}
               key={i}
-              onClick={isDisabled ? null : button.onClick}
               style={Object.assign({},
                 styles.component,
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
                 isOnlyChild && styles.onlyChild,
                 isDisabled && styles.disabled,
-                button.style)}
+                style)}
               theme={theme}
               type={this.props.type}
+              {...rest}
             >
               {button.text}
             </Button>
