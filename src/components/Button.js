@@ -60,7 +60,7 @@ class Button extends React.Component {
   render () {
     // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
     // Keep elementProps for backwards compatibility.
-    const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props
+    const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
     const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
     const styles = this.styles(mergedTheme);
 
