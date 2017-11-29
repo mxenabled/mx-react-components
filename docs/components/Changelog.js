@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.7</h3>
+        <ul>
+          <li>Removes the need to use elementProps on the Button and ButtonGroup components. Still supports elementProps for backwards compatibility. (<a href='https://github.com/mxenabled/mx-react-components/pull/683'>#683</a>)</li>
+        </ul>
+
         <h3>5.1.6</h3>
         <ul>
           <li>Adds elementProps prop to Button component (<a href='https://github.com/mxenabled/mx-react-components/pull/681'>#681</a>)</li>
