@@ -59,7 +59,6 @@ class ButtonGroup extends React.Component {
                 style)}
               theme={theme}
               type={this.props.type}
-              disabled={isDisabled}
               {...rest}
             >
               {button.text}
