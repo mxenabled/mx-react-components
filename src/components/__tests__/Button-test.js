@@ -20,4 +20,24 @@ describe('Button', () => {
     expect(withIcon.find(Icon)).toBePresent();
     expect(withoutIcon.find(Icon)).toBeEmpty();
   });
+
+  it('can support real button attributes', () => {
+    const button = shallow(<Button aria-pressed="false" />)
+
+    expect(button.html()).toContain('aria-pressed')
+  })
+
+  describe("non element props", () => {
+    it('should not pass down non element props being used elsewhere', () => {
+      const button = shallow(<Button icon='foo' />)
+
+      expect(button.html()).not.toContain('foo')
+    })
+
+    it('should not pass down non element props being used elsewhere', () => {
+      const button = shallow(<Button isActive='foo' />)
+
+      expect(button.html()).not.toContain('foo')
+    })
+  })
 });

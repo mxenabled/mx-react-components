@@ -58,32 +58,34 @@ class Button extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
-    const styles = this.styles(theme);
+    // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
+    // Keep elementProps for backwards compatibility.
+    const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props
+    const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
+    const styles = this.styles(mergedTheme);
 
     return (
       <button
-        aria-label={this.props['aria-label']}
-        onClick={this.props.type === 'disabled' ? null : this.props.onClick}
-        ref={this.props.buttonRef}
-        style={Object.assign({}, styles.component, styles[this.props.type], this.props.style)}
-        {...this.props.elementProps}
+        ref={buttonRef}
+        style={Object.assign({}, styles.component, styles[this.props.type], style)}
+        {...rest}
+        {...elementProps}
       >
         <div style={styles.children}>
-          {(this.props.icon && !this.props.isActive) && (
+          {(icon && !isActive) && (
             <Icon
               size={20}
               style={styles.icon}
-              type={this.props.icon}
+              type={icon}
             />
           )}
-          {this.props.isActive && (
+          {isActive && (
             <Spin direction='counterclockwise'>
               <Icon size={20} type='spinner' />
             </Spin>
           )}
           <div style={styles.buttonText}>
-            {this.props.isActive ? this.props.actionText : this.props.children}
+            {isActive ? actionText : children}
           </div>
         </div>
       </button>
