@@ -32,6 +32,7 @@ class Drawer extends React.Component {
     ]),
     duration: PropTypes.number,
     easing: PropTypes.array,
+    focusOnLoad: PropTypes.bool,
     headerMenu: PropTypes.element,
     headerStyle: PropTypes.oneOfType([
       PropTypes.array,
@@ -57,6 +58,7 @@ class Drawer extends React.Component {
     closeOnScrimClick: true,
     duration: 500,
     easing: [0.28, 0.14, 0.34, 1.04],
+    focusOnLoad: true,
     maxWidth: 960,
     onOpen: () => {},
     showCloseButton: true,
@@ -81,7 +83,10 @@ class Drawer extends React.Component {
     deprecatePrimaryColor(this.props, 'buttonPrimaryColor');
     this.open();
     window.addEventListener('resize', this._resizeThrottled);
-    this._component.focus();
+
+    if (this.props.focusOnLoad) {
+      this._component.focus();
+    }
   }
 
   componentWillReceiveProps (newProps) {

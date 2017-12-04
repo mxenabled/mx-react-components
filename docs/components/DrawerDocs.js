@@ -107,6 +107,10 @@ class DrawerDocs extends React.Component {
         <p>Default: [0.28, 0.14, 0.34, 1.04]</p>
         <p>Easing takes an array for how to step through the drawer animation.</p>
 
+        <h5>focusOnLoad<label>Boolean</label></h5>
+        <p>Default: true</p>
+        <p>Determines if the Drawer component is focused on component mount</p>
+
         <h5>headerStyle<label>Object or Array</label></h5>
         <p>Styles for the header part of the drawer.</p>
 
