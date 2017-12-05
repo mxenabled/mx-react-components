@@ -1,13 +1,13 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const _isEqual = require('lodash/isEqual');
-const _merge = require('lodash/merge');
-const _omit = require('lodash/omit');
-const _functions = require('lodash/functions');
+const PropTypes = require("prop-types");
+const React = require("react");
+const _isEqual = require("lodash/isEqual");
+const _merge = require("lodash/merge");
+const _omit = require("lodash/omit");
+const _functions = require("lodash/functions");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require("../utils/Style");
 
 class Bar extends React.Component {
   static propTypes = {
@@ -28,39 +28,45 @@ class Bar extends React.Component {
     y: PropTypes.number
   };
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.animationDuration) {
       const transform = this._getTransformWithScale(0);
 
-      d3.select(this.bar)
-        .attr('transform', transform)
-      .transition()
+      d3
+        .select(this.bar)
+        .attr("transform", transform)
+        .transition()
         .duration(this.props.animationDuration)
-        .attr('transform', 'scale(1)');
+        .attr("transform", "scale(1)");
     }
   }
 
-  shouldComponentUpdate (nextProps) {
-    return !_isEqual(_omit(nextProps, _functions(nextProps)), _omit(this.props, _functions(this.props)));
+  shouldComponentUpdate(nextProps) {
+    return !_isEqual(
+      _omit(nextProps, _functions(nextProps)),
+      _omit(this.props, _functions(this.props))
+    );
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.props.hovering && this.props.animateOnHover) {
       const transform = this._getTransformWithScale(0.9);
 
-      d3.select(this.bar)
+      d3
+        .select(this.bar)
         .transition()
-          .duration(100)
-          .attr('transform', transform)
+        .duration(100)
+        .attr("transform", transform)
         .transition()
-          .duration(100)
-          .attr('transform', 'scale(1)');
+        .duration(100)
+        .attr("transform", "scale(1)");
     }
   }
 
-  _getTransformWithScale = (factor) => {
+  _getTransformWithScale = factor => {
     const centerX = 0;
-    const centerY = (this.props.value > 0) ? this.props.y + this.props.height : this.props.y;
+    const centerY =
+      this.props.value > 0 ? this.props.y + this.props.height : this.props.y;
     const sx = -centerX * (factor - 1);
     const sy = -centerY * (factor - 1);
 
@@ -69,38 +75,121 @@ class Bar extends React.Component {
 
   _drawPath = ({ x, y, width, height, value, radius }) => {
     if (value > 0 || (value === 0 && !this.props.hasNegative)) {
-      return 'M' + x + ',' + y +
-         'h' + (width - radius) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
-         'v' + (height - radius) +
-         'h' + (-width) +
-         'v' + (-height + radius) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
-         'Z';
+      return (
+        "M" +
+        x +
+        "," +
+        y +
+        "h" +
+        (width - radius) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        radius +
+        "," +
+        radius +
+        "v" +
+        (height - radius) +
+        "h" +
+        -width +
+        "v" +
+        (-height + radius) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        radius +
+        "," +
+        -radius +
+        "Z"
+      );
     } else if (value < 0 || (value === 0 && !this.props.hasPositive)) {
-      return 'M' + x + ',' + y +
-         'h' + width +
-         'v' + (height - radius) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius +
-         'h' + (radius * 2 - width) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
-         'v' + (radius - height) +
-         'Z';
+      return (
+        "M" +
+        x +
+        "," +
+        y +
+        "h" +
+        width +
+        "v" +
+        (height - radius) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        -radius +
+        "," +
+        radius +
+        "h" +
+        (radius * 2 - width) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        -radius +
+        "," +
+        -radius +
+        "v" +
+        (radius - height) +
+        "Z"
+      );
     } else {
-      return 'M' + x + ',' + y +
-         'h' + (width - radius) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
-         'v' + (height - radius) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius +
-         'h' + (radius * 2 - width) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
-         'v' + (radius - height) +
-         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
-         'Z';
+      return (
+        "M" +
+        x +
+        "," +
+        y +
+        "h" +
+        (width - radius) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        radius +
+        "," +
+        radius +
+        "v" +
+        (height - radius) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        -radius +
+        "," +
+        radius +
+        "h" +
+        (radius * 2 - width) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        -radius +
+        "," +
+        -radius +
+        "v" +
+        (radius - height) +
+        "a" +
+        radius +
+        "," +
+        radius +
+        " 0 0 1 " +
+        radius +
+        "," +
+        -radius +
+        "Z"
+      );
     }
   };
 
-  render () {
+  render() {
     const hasMinBarHeight = this.props.height === 0 && this.props.minBarHeight;
     const divisor = this.props.hasNegative && this.props.hasPositive ? 2 : 1;
 
@@ -110,7 +199,7 @@ class Bar extends React.Component {
       if (this.props.hasNegative && !this.props.hasPositive) {
         y = 0;
       } else {
-        y = this.props.y - (this.props.minBarHeight / divisor);
+        y = this.props.y - this.props.minBarHeight / divisor;
       }
     }
 
@@ -176,7 +265,7 @@ class BarChart extends React.Component {
     onClick: () => {},
     onHover: () => {},
     style: {},
-    tooltipFormat: (val) => val,
+    tooltipFormat: val => val,
     width: 500,
     showTooltips: true
   };
@@ -188,15 +277,15 @@ class BarChart extends React.Component {
     hasPositive: false
   };
 
-  componentWillMount () {
+  componentWillMount() {
     this._hasPositiveOrNegativeValues();
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     return !_isEqual(nextProps, this.props) || !_isEqual(nextState, this.state);
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     let transform;
 
     if (Object.keys(this.state.hoveringObj).length) {
@@ -205,11 +294,10 @@ class BarChart extends React.Component {
 
       transform = `translate(${x}, ${y})`;
     } else {
-      transform = 'translate(-1000, -1000)';
+      transform = "translate(-1000, -1000)";
     }
 
-    d3.select(this.tooltip)
-      .attr('transform', transform);
+    d3.select(this.tooltip).attr("transform", transform);
   }
 
   _hasPositiveOrNegativeValues = () => {
@@ -252,7 +340,7 @@ class BarChart extends React.Component {
     });
   };
 
-  _handleOnClick = (data) => {
+  _handleOnClick = data => {
     this.setState({
       clickedData: data
     });
@@ -282,7 +370,8 @@ class BarChart extends React.Component {
       const positiveValue = this.state.hoveringObj.value > 0;
       const tooltipHeight = this.state.hoveringObj.y + margin.top;
       const bboxHeight = this.tooltip.getBBox().height;
-      const negativeHeightAdjustment = this.state.hoveringObj.height + bboxHeight;
+      const negativeHeightAdjustment =
+        this.state.hoveringObj.height + bboxHeight;
       const positiveHeightAdjustment = tooltipHeight - bboxHeight / 2;
       const { hasNegative, hasPositive } = this.state;
       const divisor = hasNegative && hasPositive ? 2 : 1;
@@ -293,7 +382,9 @@ class BarChart extends React.Component {
         return positiveHeightAdjustment;
       } else {
         if (hasNegative && !hasPositive) {
-          return negativeHeightAdjustment + this.props.minBarHeight + tooltipHeight;
+          return (
+            negativeHeightAdjustment + this.props.minBarHeight + tooltipHeight
+          );
         }
         return positiveHeightAdjustment - this.props.minBarHeight / divisor;
       }
@@ -301,9 +392,12 @@ class BarChart extends React.Component {
     return -1000;
   };
 
-  _getHeight = (baseHeight) => {
+  _getHeight = baseHeight => {
     if (this.props.minBarHeight) {
-      const adjuster = this.props.barRadius > this.props.minBarHeight ? this.props.barRadius : this.props.minBarHeight;
+      const adjuster =
+        this.props.barRadius > this.props.minBarHeight
+          ? this.props.barRadius
+          : this.props.minBarHeight;
 
       return baseHeight + adjuster;
     } else {
@@ -311,7 +405,7 @@ class BarChart extends React.Component {
     }
   };
 
-  _getRadius = (d) => {
+  _getRadius = d => {
     if (d.value === 0 && this.props.minBarHeight) {
       return Math.min(this.props.barRadius, this.props.minBarHeight);
     } else {
@@ -319,7 +413,7 @@ class BarChart extends React.Component {
     }
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = _merge({}, this.styles(theme), this.props.style);
     const { height, margin, width } = this.props;
@@ -343,11 +437,13 @@ class BarChart extends React.Component {
       return d.label;
     });
 
-    const yFunc = d3.scale.linear()
+    const yFunc = d3.scale
+      .linear()
       .domain(yDomain)
       .range([heightMargin, 0]);
 
-    const xFunc = d3.scale.ordinal()
+    const xFunc = d3.scale
+      .ordinal()
       .domain(xDomain)
       .rangeRoundBands([0, widthMargin], 0.2);
 
@@ -355,9 +451,9 @@ class BarChart extends React.Component {
       <div style={Object.assign({}, styles.component, this.props.style)}>
         <svg
           height={height + margin.top + margin.bottom}
-          preserveAspectRatio='xMinYMin meet'
+          preserveAspectRatio="xMinYMin meet"
           width={width + margin.left + margin.right}
-          xmlns={'http://www.w3.org/2000/svg'}
+          xmlns={"http://www.w3.org/2000/svg"}
         >
           <g transform={`translate(${margin.left},${margin.top})`}>
             {this.props.data.map(d => {
@@ -365,23 +461,41 @@ class BarChart extends React.Component {
                 return null;
               }
 
-              const positive = (d.value > 0);
+              const positive = d.value > 0;
               const x = xFunc(d.label);
               const y = positive ? yFunc(d.value) : yFunc(0);
               const w = xFunc.rangeBand();
-              const baseHeight = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
+              const baseHeight = hasNegative
+                ? Math.abs(yFunc(d.value) - yFunc(0))
+                : heightMargin - yFunc(d.value);
               const h = this._getHeight(baseHeight);
               const r = this._getRadius(d);
               const key = d.label + d.value;
-              const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
-              const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
-              const baseStyle = d.color ? Object.assign({}, styles.bar, { fill: d.color }) : styles.bar;
+              const clicked =
+                this.state.clickedData.value === d.value &&
+                this.state.clickedData.label === d.label;
+              const hovering =
+                this.state.hoveringObj.value === d.value &&
+                this.state.hoveringObj.label === d.label;
+              const baseStyle = d.color
+                ? Object.assign({}, styles.bar, { fill: d.color })
+                : styles.bar;
               let style;
 
               if (clicked) {
-                style = Object.assign({}, baseStyle, positive ? styles.positiveBarClicked : styles.negativeBarClicked);
+                style = Object.assign(
+                  {},
+                  baseStyle,
+                  positive
+                    ? styles.positiveBarClicked
+                    : styles.negativeBarClicked
+                );
               } else if (hovering) {
-                style = Object.assign({}, baseStyle, positive ? styles.positiveBarHover : styles.negativeBarHover);
+                style = Object.assign(
+                  {},
+                  baseStyle,
+                  positive ? styles.positiveBarHover : styles.negativeBarHover
+                );
               } else {
                 style = baseStyle;
               }
@@ -422,9 +536,9 @@ class BarChart extends React.Component {
                 y2={yFunc(this.props.threshold)}
               />
             </g>
-          ) : null }
+          ) : null}
           <g
-            ref={(ref) => {
+            ref={ref => {
               this.tooltip = ref;
             }}
             style={styles.tooltipContainer}
@@ -438,7 +552,7 @@ class BarChart extends React.Component {
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
       bar: {
         fill: theme.Colors.GRAY_300
@@ -455,19 +569,17 @@ class BarChart extends React.Component {
       negativeBarClicked: {
         fill: theme.Colors.PRIMARY
       },
-      tooltipContainer: {
-
-      },
+      tooltipContainer: {},
       tooltipText: {
         fontSize: theme.FontSizes.MEDIUM,
         fontFamily: theme.Fonts.SEMIBOLD,
         color: theme.Colors.GRAY_700,
-        textAlign: 'center',
-        whiteSpace: 'nowrap'
+        textAlign: "center",
+        whiteSpace: "nowrap"
       },
       threshold: {
         stroke: theme.Colors.GRAY_500,
-        strokeDasharray: '4,4',
+        strokeDasharray: "4,4",
         strokeWidth: 1
       }
     };
