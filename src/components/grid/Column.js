@@ -1,5 +1,5 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require("prop-types");
+const React = require("react");
 
 const defaultShape = {
   large: PropTypes.number,
@@ -26,21 +26,21 @@ class Column extends React.Component {
 
     // Column widths
     if (small === 0) {
-      colWidths.push('hidden-sm');
+      colWidths.push("hidden-sm");
     } else if (small) {
-      colWidths.push('col-sm-' + small);
+      colWidths.push("col-sm-" + small);
     }
 
     if (medium === 0) {
-      colWidths.push('hidden-md');
+      colWidths.push("hidden-md");
     } else if (medium && medium !== small) {
-      colWidths.push('col-md-' + medium);
+      colWidths.push("col-md-" + medium);
     }
 
     if (large === 0) {
-      colWidths.push('hidden-lg');
+      colWidths.push("hidden-lg");
     } else if (large && large !== medium) {
-      colWidths.push('col-lg-' + large);
+      colWidths.push("col-lg-" + large);
     }
 
     return colWidths;
@@ -54,21 +54,21 @@ class Column extends React.Component {
 
     // Column offsets
     if (small >= 0) {
-      offsets.push('col-sm-offset-' + small);
+      offsets.push("col-sm-offset-" + small);
     }
 
     if (medium >= 0 && medium !== small) {
-      offsets.push('col-md-offset-' + medium);
+      offsets.push("col-md-offset-" + medium);
     }
 
     if (large >= 0 && large !== medium) {
-      offsets.push('col-lg-offset-' + large);
+      offsets.push("col-lg-offset-" + large);
     }
 
     return offsets;
   };
 
-  render () {
+  render() {
     let className = [];
 
     // Column widths
@@ -78,7 +78,13 @@ class Column extends React.Component {
     className = className.concat(this.getColumnOffsets());
 
     return (
-      <div className={className.join(' ')} style={{ boxSizing: 'border-box', position: this.props.relative ? 'relative' : 'static' }}>
+      <div
+        className={className.join(" ")}
+        style={{
+          boxSizing: "border-box",
+          position: this.props.relative ? "relative" : "static"
+        }}
+      >
         {this.props.children}
       </div>
     );

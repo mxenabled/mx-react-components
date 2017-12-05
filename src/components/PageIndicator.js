@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require("prop-types");
+const React = require("react");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require("../utils/Style");
 
 class PageIndicator extends React.Component {
   static propTypes = {
@@ -19,46 +19,49 @@ class PageIndicator extends React.Component {
     }
   };
 
-  _renderDots = (styles) => {
+  _renderDots = styles => {
     const dots = [];
 
     for (let i = 0; i < this.props.count; i++) {
-      const dotStyles = this.props.activeIndex === i ? Object.assign({}, styles.dot, styles.dotActive) : styles.dot;
+      const dotStyles =
+        this.props.activeIndex === i
+          ? Object.assign({}, styles.dot, styles.dotActive)
+          : styles.dot;
 
       dots.push(
-        <span key={'dot' + i} onClick={this._handleDotClick.bind(null, i)} style={dotStyles} />
+        <span
+          key={"dot" + i}
+          onClick={this._handleDotClick.bind(null, i)}
+          style={dotStyles}
+        />
       );
     }
 
     return dots;
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
-    return (
-      <div style={styles.component}>
-        {this._renderDots(styles)}
-      </div>
-    );
+    return <div style={styles.component}>{this._renderDots(styles)}</div>;
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
       component: {
-        textAlign: 'center',
-        padding: '15px 0'
+        textAlign: "center",
+        padding: "15px 0"
       },
       dot: {
         width: 6,
         height: 6,
         margin: 10,
-        borderRadius: '100%',
-        display: 'inline-block',
-        verticalAlign: 'middle',
+        borderRadius: "100%",
+        display: "inline-block",
+        verticalAlign: "middle",
         backgroundColor: theme.Colors.GRAY_300,
-        cursor: 'pointer'
+        cursor: "pointer"
       },
       dotActive: {
         backgroundColor: theme.Colors.GRAY_700

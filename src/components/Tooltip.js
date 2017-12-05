@@ -1,26 +1,26 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require("prop-types");
+const React = require("react");
 
-const Icon = require('./Icon');
+const Icon = require("./Icon");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require("../utils/Style");
 
 class Tooltip extends React.Component {
   static propTypes = {
     icon: PropTypes.string,
     iconSize: PropTypes.number,
-    placement: PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
+    placement: PropTypes.oneOf(["left", "top", "right", "bottom"]),
     style: PropTypes.object,
     theme: themeShape,
     tooltipStyle: PropTypes.object
   };
 
   static defaultProps = {
-    icon: 'info',
+    icon: "info",
     iconSize: 20,
-    placement: 'top',
+    placement: "top",
     tooltipStyle: {}
   };
 
@@ -45,30 +45,30 @@ class Tooltip extends React.Component {
     const width = this.props.tooltipStyle.width || 200;
 
     switch (this.props.placement) {
-      case 'left':
+      case "left":
         return {
           bottom: 0,
-          margin: 'auto',
+          margin: "auto",
           right: offSet,
           top: 0
         };
-      case 'right':
+      case "right":
         return {
           bottom: 0,
           left: offSet,
-          margin: 'auto',
+          margin: "auto",
           top: 0
         };
-      case 'top':
+      case "top":
         return {
           bottom: offSet,
-          left: '50%',
+          left: "50%",
           marginLeft: -(this.props.iconSize / 2 + width / 2)
         };
-      case 'bottom':
+      case "bottom":
         return {
           top: offSet,
-          left: '50%',
+          left: "50%",
           marginLeft: -(this.props.iconSize / 2 + width / 2)
         };
       default:
@@ -76,16 +76,14 @@ class Tooltip extends React.Component {
     }
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
       <div style={styles.component}>
         {this.state.showTooltip ? (
-          <div style={styles.tooltip}>
-            {this.props.children}
-          </div>
+          <div style={styles.tooltip}>{this.props.children}</div>
         ) : null}
         <Icon
           elementProps={{
@@ -99,33 +97,39 @@ class Tooltip extends React.Component {
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
-      component: Object.assign({}, {
-        display: 'inline-block',
-        fill: theme.Colors.GRAY_500,
-        position: 'relative'
-      }, this.props.style),
-      tooltip: Object.assign({},
+      component: Object.assign(
+        {},
         {
-          alignItems: 'center',
+          display: "inline-block",
+          fill: theme.Colors.GRAY_500,
+          position: "relative"
+        },
+        this.props.style
+      ),
+      tooltip: Object.assign(
+        {},
+        {
+          alignItems: "center",
           backgroundColor: theme.Colors.WHITE,
           borderRadius: 3,
           boxShadow: theme.ShadowHigh,
-          display: 'flex',
+          display: "flex",
           fontSize: theme.FontSizes.MEDIUM,
-          justifyContent: 'center',
-          lineHeight: '1.3em',
-          minHeight: '100%',
+          justifyContent: "center",
+          lineHeight: "1.3em",
+          minHeight: "100%",
           padding: 10,
-          position: 'absolute',
-          textAlign: 'center',
-          whiteSpace: 'normal',
+          position: "absolute",
+          textAlign: "center",
+          whiteSpace: "normal",
           width: this.props.tooltipStyle.width || 200,
-          zIndex: '10'
+          zIndex: "10"
         },
         this._getPosition(),
-        this.props.tooltipStyle)
+        this.props.tooltipStyle
+      )
     };
   };
 }

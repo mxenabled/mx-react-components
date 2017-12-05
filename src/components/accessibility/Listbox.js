@@ -1,8 +1,8 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const Radium = require('radium');
-const keycode = require('keycode');
-const _findIndex = require('lodash/findIndex');
+const React = require("react");
+const PropTypes = require("prop-types");
+const Radium = require("radium");
+const keycode = require("keycode");
+const _findIndex = require("lodash/findIndex");
 
 /**
  * Listbox
@@ -22,7 +22,7 @@ const _findIndex = require('lodash/findIndex');
  */
 class Listbox extends React.Component {
   static propTypes = {
-    'aria-label': PropTypes.string.isRequired,
+    "aria-label": PropTypes.string.isRequired,
     useGlobalKeyHandler: PropTypes.bool
   };
 
@@ -30,7 +30,7 @@ class Listbox extends React.Component {
     useGlobalKeyHandler: false
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -38,14 +38,16 @@ class Listbox extends React.Component {
     };
   }
 
-  componentDidMount () {
-    this._eventTarget = this.props.useGlobalKeyHandler ? window : this.component;
-    this._eventTarget.addEventListener('keydown', this._handleKeyDown);
+  componentDidMount() {
+    this._eventTarget = this.props.useGlobalKeyHandler
+      ? window
+      : this.component;
+    this._eventTarget.addEventListener("keydown", this._handleKeyDown);
     this._focusOption();
   }
 
-  componentWillUnmount () {
-    this._eventTarget.removeEventListener('keydown', this._handleKeyDown);
+  componentWillUnmount() {
+    this._eventTarget.removeEventListener("keydown", this._handleKeyDown);
   }
 
   _getChildren = () => {
@@ -60,20 +62,20 @@ class Listbox extends React.Component {
     return focusedIndex === -1 ? 0 : focusedIndex;
   };
 
-  _handleKeyDown = (e) => {
+  _handleKeyDown = e => {
     switch (keycode(e)) {
-      case 'up':
+      case "up":
         e.preventDefault();
         e.stopPropagation();
         this._focusPrevious();
         break;
-      case 'down':
+      case "down":
         e.preventDefault();
         e.stopPropagation();
         this._focusNext();
         break;
-      case 'enter':
-      case 'space':
+      case "enter":
+      case "space":
         e.preventDefault();
         e.stopPropagation();
         e.target.click();
@@ -89,25 +91,31 @@ class Listbox extends React.Component {
 
   _focusPrevious = () => {
     // go to the end if at the beginning
-    const focusedIndex = this.state.focusedIndex === 0 ? this._getChildren().length : this.state.focusedIndex;
+    const focusedIndex =
+      this.state.focusedIndex === 0
+        ? this._getChildren().length
+        : this.state.focusedIndex;
 
     this.setState({ focusedIndex: focusedIndex - 1 }, this._focusOption);
   };
 
   _focusNext = () => {
     // go to the beginning if at the end
-    const focusedIndex = this.state.focusedIndex === this._getChildren().length - 1 ? -1 : this.state.focusedIndex;
+    const focusedIndex =
+      this.state.focusedIndex === this._getChildren().length - 1
+        ? -1
+        : this.state.focusedIndex;
 
     // focus next
     this.setState({ focusedIndex: focusedIndex + 1 }, this._focusOption);
   };
 
-  render () {
+  render() {
     return (
       <div
-        aria-label={this.props['aria-label']}
-        ref={ref => this.component = ref}
-        role='listbox'
+        aria-label={this.props["aria-label"]}
+        ref={ref => (this.component = ref)}
+        role="listbox"
         style={this.props.style}
       >
         {React.Children.map(this.props.children, (child, index) =>
@@ -131,7 +139,7 @@ const Option = ({ children, isSelected, label, ...props }) => (
     {...props}
     aria-label={isSelected && label ? `${label}, Current selection` : label}
     aria-selected={isSelected}
-    role='option'
+    role="option"
     tabIndex={0}
   >
     {children}

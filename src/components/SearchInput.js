@@ -1,11 +1,11 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require("prop-types");
+const React = require("react");
 
-const Input = require('./SimpleInput');
+const Input = require("./SimpleInput");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require("../utils/Style");
 
 class SearchInput extends React.Component {
   static propTypes = {
@@ -24,10 +24,10 @@ class SearchInput extends React.Component {
   static defaultProps = {
     onBlur: () => {},
     onChange: () => {},
-    placeholder: 'Search'
+    placeholder: "Search"
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles();
 
@@ -38,14 +38,14 @@ class SearchInput extends React.Component {
             onBlur: this.props.onBlur,
             onChange: this.props.onChange,
             placeholder: this.props.placeholder,
-            type: 'text',
+            type: "text",
             value: this.props.searchKeyword
           }}
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
-          icon='search'
+          icon="search"
           resetClick={this.props.handleResetClick}
-          rightIcon='close-solid'
+          rightIcon="close-solid"
           theme={theme}
         />
       </div>
@@ -53,12 +53,16 @@ class SearchInput extends React.Component {
   }
 
   styles = () => {
-    return Object.assign({}, {
-      component: {
-        display: 'inline-block',
-        width: '100%'
-      }
-    }, this.props.styles);
+    return Object.assign(
+      {},
+      {
+        component: {
+          display: "inline-block",
+          width: "100%"
+        }
+      },
+      this.props.styles
+    );
   };
 }
 

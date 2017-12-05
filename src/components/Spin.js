@@ -1,27 +1,27 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const ReactDOM = require('react-dom');
+const PropTypes = require("prop-types");
+const React = require("react");
+const ReactDOM = require("react-dom");
 
 class Spin extends React.Component {
   static propTypes = {
     children: PropTypes.node,
-    direction: PropTypes.oneOf(['counterclockwise', 'clockwise']),
+    direction: PropTypes.oneOf(["counterclockwise", "clockwise"]),
     speed: PropTypes.number //milliseconds, time it takes to make 1 full rotation
   };
 
   static defaultProps = {
-    direction: 'clockwise',
+    direction: "clockwise",
     speed: 1000
   };
 
-  componentDidMount () {
+  componentDidMount() {
     const el = ReactDOM.findDOMNode(this);
     const speed = this.props.speed;
-    const spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
+    const spinDirection = this.props.direction === "clockwise" ? -1 : 1;
     let rotation = 0;
 
     setInterval(() => {
-      el.style.transform = 'rotate(' + rotation * spinDirection + 'deg)';
+      el.style.transform = "rotate(" + rotation * spinDirection + "deg)";
 
       if (rotation < 360) {
         rotation += 1;
@@ -31,9 +31,9 @@ class Spin extends React.Component {
     }, speed / 360);
   }
 
-  render () {
+  render() {
     return (
-      <div className='mx-spin' style={{ display: 'inline-block' }}>
+      <div className="mx-spin" style={{ display: "inline-block" }}>
         {this.props.children}
       </div>
     );

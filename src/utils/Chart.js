@@ -1,5 +1,5 @@
 const Chart = {
-  getAxisTickSpecification (min, max) {
+  getAxisTickSpecification(min, max) {
     // Needs to maintain parity with mobile app.
     // https://git.moneydesktop.com/dev/moneymobilex/blob/master/Classes/utils/maths.cpp
     // generate_tick_specification method
@@ -14,7 +14,8 @@ const Chart = {
       step = Math.pow(10, Math.floor(Math.log(max - min) / Math.LN10));
 
       if (step >= 100) {
-        const range = Math.ceil(max / step) * step - Math.floor(min / step) * step;
+        const range =
+          Math.ceil(max / step) * step - Math.floor(min / step) * step;
 
         numberOfTicks = range / step;
 

@@ -1,9 +1,9 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require("prop-types");
+const React = require("react");
 
-const d3 = require('d3');
+const d3 = require("d3");
 
-const ChartUtils = require('../../utils/Chart');
+const ChartUtils = require("../../utils/Chart");
 
 class GridLinesGroup extends React.Component {
   static propTypes = {
@@ -16,15 +16,15 @@ class GridLinesGroup extends React.Component {
   };
 
   static defaultProps = {
-    orientation: 'left',
-    translation: 'translate(0,0)'
+    orientation: "left",
+    translation: "translate(0,0)"
   };
 
-  componentDidMount () {
+  componentDidMount() {
     this._renderGridLines();
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._renderGridLines();
   }
 
@@ -33,22 +33,23 @@ class GridLinesGroup extends React.Component {
     const min = d3.min(this.props.data, d => d[this.props.axis]);
     const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
 
-    const gridLinesFunction = d3.svg.axis()
+    const gridLinesFunction = d3.svg
+      .axis()
       .scale(this.props.scaleFunction())
       .orient(this.props.orientation)
       .tickSize(this.props.tickSize, 0, 0)
-      .tickFormat('')
+      .tickFormat("")
       .ticks(tickValues.length)
       .tickValues(tickValues);
 
     d3.select(this.gridLines).call(gridLinesFunction);
   };
 
-  render () {
+  render() {
     return (
       <g
-        className={this.props.axis + '-grid-line'}
-        ref={(ref) => this.gridLines = ref}
+        className={this.props.axis + "-grid-line"}
+        ref={ref => (this.gridLines = ref)}
         transform={this.props.translation}
       />
     );

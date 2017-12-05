@@ -1,10 +1,10 @@
-const React = require('react');
+const React = require("react");
 
-const { NotifyOnScrollThreshold } = require('mx-react-components');
-const Markdown = require('components/Markdown');
+const { NotifyOnScrollThreshold } = require("mx-react-components");
+const Markdown = require("components/Markdown");
 
 class NotifyOnScrollThresholdDocs extends React.Component {
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
@@ -29,7 +29,7 @@ class NotifyOnScrollThresholdDocs extends React.Component {
     });
   };
 
-  render () {
+  render() {
     const styles = this.styles();
 
     return (
@@ -37,15 +37,21 @@ class NotifyOnScrollThresholdDocs extends React.Component {
         <h1>
           Notify On Scroll Threshold
           <label>
-            A component that wraps scroll content and will notify its children and/or parent when a user
-            has scrolled past the threshold provided.  It also exposes the scroll position
-            and scroll height values to the children.
+            A component that wraps scroll content and will notify its children
+            and/or parent when a user has scrolled past the threshold provided.
+            It also exposes the scroll position and scroll height values to the
+            children.
           </label>
         </h1>
 
         <h3>Demo</h3>
 
-        <p>Scroll to the bottom of the list. {this.state.thresholdMet && <span style={{ color: 'red' }}>Threshold Met</span>}</p>
+        <p>
+          Scroll to the bottom of the list.{" "}
+          {this.state.thresholdMet && (
+            <span style={{ color: "red" }}>Threshold Met</span>
+          )}
+        </p>
 
         <div style={styles.scrollContainer}>
           <NotifyOnScrollThreshold
@@ -58,8 +64,17 @@ class NotifyOnScrollThresholdDocs extends React.Component {
               return (
                 <div>
                   {thresholdMet && (
-                    <div style={Object.assign({}, styles.thresholdMessage, { top: scrollHeight - 75 })}>
-                      <span>Threshold Met! <button onClick={this._loadMoreData}>Load More Data</button></span>
+                    <div
+                      style={Object.assign({}, styles.thresholdMessage, {
+                        top: scrollHeight - 75
+                      })}
+                    >
+                      <span>
+                        Threshold Met!{" "}
+                        <button onClick={this._loadMoreData}>
+                          Load More Data
+                        </button>
+                      </span>
                     </div>
                   )}
                   <ul>
@@ -74,24 +89,39 @@ class NotifyOnScrollThresholdDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
-        <h5>onThresholdMet <label>Function</label></h5>
+        <h5>
+          onThresholdMet <label>Function</label>
+        </h5>
         <p>Default: No Operation</p>
         <p>A function called when the threshold is met.</p>
 
-        <h5>threshold <label>Number</label></h5>
+        <h5>
+          threshold <label>Number</label>
+        </h5>
         <p>Default: 0.9</p>
-        <p>A number between 0 and 1 that respresents a percentage between 0% and 100%</p>
+        <p>
+          A number between 0 and 1 that respresents a percentage between 0% and
+          100%
+        </p>
 
         <h3>Example</h3>
 
-        <p>
-          Things to Note.
-        </p>
+        <p>Things to Note.</p>
 
         <ul>
-          <li>The children of the component must be a function that returns jsx in the form of your choosing.</li>
-          <li>The children function recieves as arguments, thresholdMet, scrollPosition, and scrollHeight.</li>
-          <li>The component takes an optional onThresholdMet callback prop that can also be used if the thresholdMet argument in the children function isn't adaquite for your needs.</li>
+          <li>
+            The children of the component must be a function that returns jsx in
+            the form of your choosing.
+          </li>
+          <li>
+            The children function recieves as arguments, thresholdMet,
+            scrollPosition, and scrollHeight.
+          </li>
+          <li>
+            The component takes an optional onThresholdMet callback prop that
+            can also be used if the thresholdMet argument in the children
+            function isn't adaquite for your needs.
+          </li>
         </ul>
 
         <Markdown>
@@ -130,23 +160,22 @@ class NotifyOnScrollThresholdDocs extends React.Component {
   styles = () => {
     return {
       scrollContainer: {
-        border: '1px solid black',
+        border: "1px solid black",
         height: 200,
         padding: 10,
-        position: 'relative',
-        overflow: 'auto'
+        position: "relative",
+        overflow: "auto"
       },
       thresholdMessage: {
-        backgroundColor: 'lightgrey',
-        border: '1px solid black',
-        left: '50%',
+        backgroundColor: "lightgrey",
+        border: "1px solid black",
+        left: "50%",
         padding: 10,
-        position: 'absolute',
-        transform: 'translateX(-50%)'
+        position: "absolute",
+        transform: "translateX(-50%)"
       }
     };
   };
-
 }
 
 module.exports = NotifyOnScrollThresholdDocs;

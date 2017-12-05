@@ -1,13 +1,13 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require("prop-types");
+const React = require("react");
 
-const d3 = require('d3');
-const moment = require('moment');
-const _merge = require('lodash/merge');
+const d3 = require("d3");
+const moment = require("moment");
+const _merge = require("lodash/merge");
 
-const { themeShape } = require('../../constants/App');
+const { themeShape } = require("../../constants/App");
 
-const StyleUtils = require('../../utils/Style');
+const StyleUtils = require("../../utils/Style");
 
 class BarTimeXAxis extends React.Component {
   static propTypes = {
@@ -25,19 +25,20 @@ class BarTimeXAxis extends React.Component {
     style: {},
     tickSize: 6,
     tickValues: null,
-    transform: 'translate(0,0)'
+    transform: "translate(0,0)"
   };
 
-  componentDidMount () {
+  componentDidMount() {
     this._renderAxis();
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._renderAxis();
   }
 
   _renderAxis = () => {
-    const timeAxisFunction = d3.svg.axis()
+    const timeAxisFunction = d3.svg
+      .axis()
       .scale(this.props.xScaleFunction)
       .tickValues(this.props.tickValues)
       .tickFormat(d => {
@@ -56,36 +57,34 @@ class BarTimeXAxis extends React.Component {
     const axis = d3.select(this.timeAxis);
 
     // Style x axis labels
-    axis.selectAll('text')
-      .style(style.text);
+    axis.selectAll("text").style(style.text);
 
     // Style x axis path
-    axis.selectAll('path')
-      .style(style.path);
+    axis.selectAll("path").style(style.path);
   };
 
-  render () {
+  render() {
     return (
       <g
-        className='x-bar-time-axis'
-        ref={(ref) => this.timeAxis = ref}
+        className="x-bar-time-axis"
+        ref={ref => (this.timeAxis = ref)}
         transform={this.props.transform}
       />
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
       text: {
         fill: theme.Colors.GRAY_500,
-        stroke: 'none',
-        'font-size': theme.FontSizes.MEDIUM,
-        'text-anchor': 'middle'
+        stroke: "none",
+        "font-size": theme.FontSizes.MEDIUM,
+        "text-anchor": "middle"
       },
       path: {
         stroke: theme.Colors.GRAY_300,
-        'stroke-width': 1,
-        fill: 'none'
+        "stroke-width": 1,
+        fill: "none"
       }
     };
   };

@@ -1,18 +1,18 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require('react');
-const { Link } = require('react-router');
+const React = require("react");
+const { Link } = require("react-router");
 
-const { SearchInput } = require('mx-react-components');
+const { SearchInput } = require("mx-react-components");
 
-const Markdown = require('components/Markdown');
+const Markdown = require("components/Markdown");
 
 class SearchInputDocs extends React.Component {
   state = {
-    searchKeyword: ''
+    searchKeyword: ""
   };
 
-  _handleInputChange = (e) => {
+  _handleInputChange = e => {
     this.setState({
       searchKeyword: e.target.value
     });
@@ -20,11 +20,11 @@ class SearchInputDocs extends React.Component {
 
   _handleResetClick = () => {
     this.setState({
-      searchKeyword: ''
+      searchKeyword: ""
     });
   };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -36,35 +36,63 @@ class SearchInputDocs extends React.Component {
         <SearchInput
           handleResetClick={this._handleResetClick}
           onChange={this._handleInputChange}
-          placeholder='Type to search'
+          placeholder="Type to search"
           searchKeyword={this.state.searchKeyword}
         />
 
         <h3>Usage</h3>
-        <h5>onBlur <label>Function</label></h5>
-        <p>A method to be called when the user clicks the mouse outside the component.</p>
+        <h5>
+          onBlur <label>Function</label>
+        </h5>
+        <p>
+          A method to be called when the user clicks the mouse outside the
+          component.
+        </p>
 
-        <h5>onChange <label>Function</label></h5>
-        <p>A method to be called as the user types in the search input field.</p>
+        <h5>
+          onChange <label>Function</label>
+        </h5>
+        <p>
+          A method to be called as the user types in the search input field.
+        </p>
 
-        <h5>handleResetClick <label>Function</label></h5>
-        <p>A method to be called when reset icon is clicked, in the demo above it is used to clear the input value.</p>
+        <h5>
+          handleResetClick <label>Function</label>
+        </h5>
+        <p>
+          A method to be called when reset icon is clicked, in the demo above it
+          is used to clear the input value.
+        </p>
 
-        <h5>placeholder <label>String</label></h5>
-        <p>The text to show before the user starts typing or when the search input field is empty.</p>
+        <h5>
+          placeholder <label>String</label>
+        </h5>
+        <p>
+          The text to show before the user starts typing or when the search
+          input field is empty.
+        </p>
 
-        <h5>searchKeyword <label>String</label></h5>
+        <h5>
+          searchKeyword <label>String</label>
+        </h5>
         <p>Sets the value of the search input field.</p>
 
-        <h5>styles <label>Object</label></h5>
+        <h5>
+          styles <label>Object</label>
+        </h5>
         <p>Styles object used to override default styles.</p>
 
-        <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+        <h5>
+          theme <label>Object</label>
+        </h5>
+        <p>
+          Customize the component&apos;s look. See{" "}
+          <Link to="/components/theme">Theme</Link> for more information.
+        </p>
 
         <h3>Example</h3>
         <Markdown>
-        {`
+          {`
           <SearchInput
             placeholder='Type to search'
           />

@@ -1,13 +1,13 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const Radium = require('radium');
-const moment = require('moment');
+const React = require("react");
+const PropTypes = require("prop-types");
+const Radium = require("radium");
+const moment = require("moment");
 
-const Icon = require('./Icon');
+const Icon = require("./Icon");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require("../utils/Style");
 
 class DatePickerFullScreen extends React.Component {
   static propTypes = {
@@ -31,18 +31,18 @@ class DatePickerFullScreen extends React.Component {
   };
 
   static defaultProps = {
-    closeIcon: 'close',
+    closeIcon: "close",
     closeOnDateSelect: false,
-    format: 'MMM D, YYYY',
+    format: "MMM D, YYYY",
     isFixed: false,
-    locale: 'en',
-    onDateSelect () {},
+    locale: "en",
+    onDateSelect() {},
     showDayBorders: false,
-    title: 'Select A Date',
+    title: "Select A Date",
     useInputForSelectedDate: true
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -54,7 +54,7 @@ class DatePickerFullScreen extends React.Component {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
         this._handleCloseClick();
@@ -62,7 +62,7 @@ class DatePickerFullScreen extends React.Component {
     };
   }
 
-  _getInputValueByDate = (date) => {
+  _getInputValueByDate = date => {
     let inputValue = null;
 
     if (date) {
@@ -81,7 +81,9 @@ class DatePickerFullScreen extends React.Component {
   _getSelectedDate = () => {
     const selectedDate = this.state.selectedDate;
 
-    return selectedDate && moment.unix(selectedDate).isValid() ? this.state.selectedDate : moment().unix();
+    return selectedDate && moment.unix(selectedDate).isValid()
+      ? this.state.selectedDate
+      : moment().unix();
   };
 
   _handleCloseClick = () => {
@@ -90,7 +92,7 @@ class DatePickerFullScreen extends React.Component {
     });
   };
 
-  _handleDateSelect = (date) => {
+  _handleDateSelect = date => {
     if (this.props.closeOnDateSelect) {
       this._handleScrimClick();
     }
@@ -104,7 +106,7 @@ class DatePickerFullScreen extends React.Component {
     this.props.onDateSelect(date);
   };
 
-  _handleInputBlur = (evt) => {
+  _handleInputBlur = evt => {
     if (evt.target.value.length === 0) {
       this.props.onDateSelect(null);
 
@@ -114,22 +116,31 @@ class DatePickerFullScreen extends React.Component {
       });
     } else {
       this.setState({
-        inputValue: moment.unix(this.state.selectedDate).format(this.props.format)
+        inputValue: moment
+          .unix(this.state.selectedDate)
+          .format(this.props.format)
       });
     }
   };
 
-  _handleInputChange = (evt) => {
+  _handleInputChange = evt => {
     this.setState({
       inputValue: evt.target.value
     });
   };
 
   _handlePreviousClick = () => {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
+    const selectedDate = moment
+      .unix(this._getSelectedDate())
+      .locale(this.props.locale);
+    let currentDate = this.state.currentDate
+      ? this.state.currentDate.locale(this.props.locale)
+      : selectedDate;
 
-    currentDate = moment(currentDate.startOf('month').subtract(1, 'm'), this.props.format);
+    currentDate = moment(
+      currentDate.startOf("month").subtract(1, "m"),
+      this.props.format
+    );
 
     this.setState({
       currentDate
@@ -137,10 +148,17 @@ class DatePickerFullScreen extends React.Component {
   };
 
   _handleNextClick = () => {
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    let currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
+    const selectedDate = moment
+      .unix(this._getSelectedDate())
+      .locale(this.props.locale);
+    let currentDate = this.state.currentDate
+      ? this.state.currentDate.locale(this.props.locale)
+      : selectedDate;
 
-    currentDate = moment(currentDate.endOf('month').add(1, 'd'), this.props.format);
+    currentDate = moment(
+      currentDate.endOf("month").add(1, "d"),
+      this.props.format
+    );
 
     this.setState({
       currentDate
@@ -161,26 +179,43 @@ class DatePickerFullScreen extends React.Component {
 
   _renderMonthTable = (styles, currentDate, selectedDate) => {
     const days = [];
-    const startDate = moment(currentDate, this.props.format).startOf('month').startOf('week');
-    const endDate = moment(currentDate, this.props.format).endOf('month').endOf('week');
-    const minimumDate = this.props.minimumDate ? moment.unix(this.props.minimumDate) : null;
+    const startDate = moment(currentDate, this.props.format)
+      .startOf("month")
+      .startOf("week");
+    const endDate = moment(currentDate, this.props.format)
+      .endOf("month")
+      .endOf("week");
+    const minimumDate = this.props.minimumDate
+      ? moment.unix(this.props.minimumDate)
+      : null;
 
     while (startDate.isBefore(endDate)) {
       const isCurrentMonth = startDate.month() === currentDate.month();
-      const isCurrentDay = startDate.format(this.props.format) === selectedDate.format(this.props.format);
+      const isCurrentDay =
+        startDate.format(this.props.format) ===
+        selectedDate.format(this.props.format);
       const noSelectDay = startDate.isBefore(minimumDate);
       const day = (
         <div
-          key={startDate.month() + '-' + startDate.date()}
-          onClick={!noSelectDay ? this._handleDateSelect.bind(null, startDate.unix()) : null}
+          key={startDate.month() + "-" + startDate.date()}
+          onClick={
+            !noSelectDay
+              ? this._handleDateSelect.bind(null, startDate.unix())
+              : null
+          }
           style={[
             styles.calendarDay,
-            (!noSelectDay && isCurrentMonth) && styles.currentMonth
+            !noSelectDay && isCurrentMonth && styles.currentMonth
           ]}
         >
           <div
-            key={startDate.format('DDDD')}
-            style={[styles.calendarDayContent, noSelectDay ? styles.calendarDayDisabled : isCurrentDay && styles.currentDay]}
+            key={startDate.format("DDDD")}
+            style={[
+              styles.calendarDayContent,
+              noSelectDay
+                ? styles.calendarDayDisabled
+                : isCurrentDay && styles.currentDay
+            ]}
           >
             <div style={styles.calendarDayText}>{startDate.date()}</div>
           </div>
@@ -192,7 +227,7 @@ class DatePickerFullScreen extends React.Component {
       }
 
       days.push(day);
-      startDate.add(1, 'd');
+      startDate.add(1, "d");
     }
 
     return days;
@@ -200,28 +235,35 @@ class DatePickerFullScreen extends React.Component {
 
   _renderSelectedDate = (styles, theme) => {
     if (this.props.useInputForSelectedDate) {
-      const hidePlaceholder = this.state.inputValue && this.state.inputValue.length;
+      const hidePlaceholder =
+        this.state.inputValue && this.state.inputValue.length;
 
       return (
         <div>
           <input
-            key='input'
+            key="input"
             onBlur={this._handleInputBlur}
             onChange={this._handleInputChange}
             onClick={this._toggleCalendar}
-            style={[styles.input, this.props.inputStyle, hidePlaceholder && { backgroundColor: theme.Colors.WHITE }]}
-            type='text'
+            style={[
+              styles.input,
+              this.props.inputStyle,
+              hidePlaceholder && { backgroundColor: theme.Colors.WHITE }
+            ]}
+            type="text"
             value={this.state.inputValue}
           />
-          <div style={[styles.placeholderText, this.props.placeholderTextStyle]}>
-            {this.props.placeholderText || 'Select A Date'}
+          <div
+            style={[styles.placeholderText, this.props.placeholderTextStyle]}
+          >
+            {this.props.placeholderText || "Select A Date"}
           </div>
         </div>
       );
     } else {
       return (
         <div
-          key='selectedDate'
+          key="selectedDate"
           onClick={this._toggleCalendar}
           style={styles.selectedDate}
         >
@@ -231,10 +273,10 @@ class DatePickerFullScreen extends React.Component {
     }
   };
 
-  _renderTitle = (styles) => {
+  _renderTitle = styles => {
     if (this.props.title) {
       return (
-        <div key='title' style={styles.title}>
+        <div key="title" style={styles.title}>
           {this.props.title}
         </div>
       );
@@ -243,11 +285,15 @@ class DatePickerFullScreen extends React.Component {
     }
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    const selectedDate = moment.unix(this._getSelectedDate()).locale(this.props.locale);
-    const currentDate = this.state.currentDate ? this.state.currentDate.locale(this.props.locale) : selectedDate;
+    const selectedDate = moment
+      .unix(this._getSelectedDate())
+      .locale(this.props.locale);
+    const currentDate = this.state.currentDate
+      ? this.state.currentDate.locale(this.props.locale)
+      : selectedDate;
     let leftNavIconStyle = Object.assign({}, styles.navIcon, styles.navLeft);
     let rightNavIconStyle = Object.assign({}, styles.navIcon, styles.navRight);
 
@@ -258,13 +304,13 @@ class DatePickerFullScreen extends React.Component {
 
     return (
       <div
-        className='mx-date-picker-full-screen'
+        className="mx-date-picker-full-screen"
         style={[styles.component, styles.clearFix, this.props.style]}
-        tabIndex='0'
+        tabIndex="0"
       >
         <div
-          className='mx-date-picker-full-screen-selected-date'
-          key='selectedDateWrapper'
+          className="mx-date-picker-full-screen-selected-date"
+          key="selectedDateWrapper"
           style={[
             styles.selectedDateWrapper,
             this.props.selectedDateWrapperStyle
@@ -273,12 +319,12 @@ class DatePickerFullScreen extends React.Component {
           {this._renderSelectedDate(styles, theme)}
         </div>
         <div
-          className='mx-date-picker-full-screen-calendar-scrim'
-          key='calendarModal'
+          className="mx-date-picker-full-screen-calendar-scrim"
+          key="calendarModal"
           style={[
             styles.calendarModal,
             this.state.showCalendar && styles.calendarShow,
-            this.props.isFixed && { position: 'fixed' }
+            this.props.isFixed && { position: "fixed" }
           ]}
         >
           <div onClick={this._handleCloseClick} style={styles.close}>
@@ -289,25 +335,40 @@ class DatePickerFullScreen extends React.Component {
             />
             <div style={styles.closeText}>ESC</div>
           </div>
-          <div className='mx-date-picker-full-screen-calendar-wrapper' style={styles.calendarWrapper}>
+          <div
+            className="mx-date-picker-full-screen-calendar-wrapper"
+            style={styles.calendarWrapper}
+          >
             {this._renderTitle(styles)}
-            <div className='mx-date-picker-full-screen-calendar-header' key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
+            <div
+              className="mx-date-picker-full-screen-calendar-header"
+              key="calendarHeader"
+              style={[
+                styles.calendarHeader,
+                {
+                  borderBottomStyle: this.props.showDayBorders
+                    ? "solid"
+                    : "none"
+                },
+                styles.clearFix
+              ]}
+            >
               <Icon
                 elementProps={{
                   onClick: this._handlePreviousClick
                 }}
                 size={32}
                 style={leftNavIconStyle}
-                type='caret-left'
+                type="caret-left"
               />
-              {currentDate.format('MMMM YYYY')}
+              {currentDate.format("MMMM YYYY")}
               <Icon
                 elementProps={{
                   onClick: this._handleNextClick
                 }}
                 size={32}
                 style={rightNavIconStyle}
-                type='caret-right'
+                type="caret-right"
               />
             </div>
             <div style={styles.calendarContainer}>
@@ -320,61 +381,61 @@ class DatePickerFullScreen extends React.Component {
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
       calendarDay: {
         color: theme.Colors.GRAY_500,
-        float: 'left',
-        paddingBottom: '11%',
-        position: 'relative',
-        width: '13.5%'
+        float: "left",
+        paddingBottom: "11%",
+        position: "relative",
+        width: "13.5%"
       },
       borderBottom: {
         borderBottom: theme.Colors.GRAY_300,
-        borderBottomStyle: 'solid',
+        borderBottomStyle: "solid",
         borderBottomWidth: 1
       },
       borderRight: {
         borderRight: theme.Colors.GRAY_300,
-        borderRightStyle: 'solid',
+        borderRightStyle: "solid",
         borderRightWidth: 1
       },
       borderLeft: {
         borderLeft: theme.Colors.GRAY_300,
-        borderLeftStyle: 'solid',
+        borderLeftStyle: "solid",
         borderLeftWidth: 1
       },
       calendarContainer: {
-        width: '100%',
-        padding: '0px 2px 10px 6px'
+        width: "100%",
+        padding: "0px 2px 10px 6px"
       },
       calendarDayContent: {
-        borderRadius: '50%',
+        borderRadius: "50%",
         height: 32,
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)',
+        left: "50%",
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%) translateX(-50%)",
         width: 32,
 
-        ':hover': {
+        ":hover": {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE,
-          cursor: 'pointer'
+          cursor: "pointer"
         }
       },
       calendarDayText: {
-        borderRadius: '100%',
+        borderRadius: "100%",
         fontSize: theme.FontSizes.MEDIUM,
-        fontWeight: 'normal',
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%) translateX(-50%)'
+        fontWeight: "normal",
+        left: "50%",
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%) translateX(-50%)"
       },
       calendarDayDisabled: {
-        ':hover': {
-          background: 'none',
+        ":hover": {
+          background: "none",
           color: theme.Colors.GRAY_100
         }
       },
@@ -383,28 +444,28 @@ class DatePickerFullScreen extends React.Component {
         borderBottom: theme.Colors.GRAY_300,
         borderBottomWidth: 1,
         fontSize: theme.FontSizes.XLARGE,
-        fontWeight: 'normal',
-        padding: '5px 0px 7px 0px',
-        position: 'relative',
-        textAlign: 'center',
-        textTransform: 'none'
+        fontWeight: "normal",
+        padding: "5px 0px 7px 0px",
+        position: "relative",
+        textAlign: "center",
+        textTransform: "none"
       },
       calendarIcon: {
         color: theme.Colors.GRAY_100,
-        position: 'absolute',
+        position: "absolute",
         right: 12.8,
-        top: '50%',
-        transform: 'translateY(-50%)'
+        top: "50%",
+        transform: "translateY(-50%)"
       },
       calendarShow: {
-        display: 'block'
+        display: "block"
       },
       close: {
-        position: 'absolute',
+        position: "absolute",
         right: 20,
         top: 15,
-        textAlign: 'center',
-        cursor: 'pointer',
+        textAlign: "center",
+        cursor: "pointer",
         color: theme.Colors.GRAY_500
       },
       closeIcon: {
@@ -414,43 +475,43 @@ class DatePickerFullScreen extends React.Component {
         fontSize: theme.FontSizes.TINY
       },
       clearFix: {
-        clear: 'both',
+        clear: "both",
         marginBottom: 15
       },
       component: {
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
         fontFamily: theme.FontFamily,
         fontSize: theme.FontSizes.LARGE,
-        width: '100%',
+        width: "100%",
 
-        ':focus': {
-          boxShadow: 'none',
-          outline: 'none'
+        ":focus": {
+          boxShadow: "none",
+          outline: "none"
         }
       },
       calendarModal: {
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
         bottom: 0,
-        display: 'none',
+        display: "none",
         left: 0,
         margin: 0,
         padding: 0,
-        position: 'absolute',
+        position: "absolute",
         right: 0,
         top: 0,
         zIndex: 999
       },
       calendarWrapper: {
         height: 300,
-        left: '50%',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
+        left: "50%",
+        position: "absolute",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
         width: 300
       },
       selectedDateWrapper: {
-        position: 'relative',
-        cursor: 'pointer'
+        position: "relative",
+        cursor: "pointer"
       },
       currentDay: {
         backgroundColor: theme.Colors.PRIMARY,
@@ -460,67 +521,67 @@ class DatePickerFullScreen extends React.Component {
         color: theme.Colors.GRAY_700
       },
       input: {
-        backgroundColor: 'transparent',
-        border: 'none',
+        backgroundColor: "transparent",
+        border: "none",
         fontSize: theme.FontSizes.MEDIUM,
-        outline: 'none',
+        outline: "none",
         paddingBottom: 10,
         paddingLeft: 5,
-        position: 'relative',
+        position: "relative",
         top: 5,
-        WebkitAppearance: 'none',
-        width: '80%',
+        WebkitAppearance: "none",
+        width: "80%",
         zIndex: 2,
 
-        ':focus': {
-          border: 'none',
-          boxShadow: 'none',
-          outline: 'none'
+        ":focus": {
+          border: "none",
+          boxShadow: "none",
+          outline: "none"
         }
       },
       navIcon: {
-        cursor: 'pointer'
+        cursor: "pointer"
       },
       navLeft: {
-        position: 'absolute',
+        position: "absolute",
         left: 0,
-        top: '50%',
-        transform: 'translateY(-50%)'
+        top: "50%",
+        transform: "translateY(-50%)"
       },
       navRight: {
-        position: 'absolute',
+        position: "absolute",
         right: 0,
-        top: '50%',
-        transform: 'translateY(-50%)'
+        top: "50%",
+        transform: "translateY(-50%)"
       },
       placeholderText: {
         color: theme.Colors.GRAY_700,
         fontSize: theme.FontSizes.MEDIUM,
         paddingLeft: 5,
-        position: 'absolute',
+        position: "absolute",
         top: 10
       },
       selectedDate: {
         color: theme.Colors.GRAY_700,
-        cursor: 'pointer',
+        cursor: "pointer",
         fontSize: theme.FontSizes.MEDIUM,
-        padding: '5px 0 5px 5px',
-        verticalAlign: 'middle',
-        width: '100%',
+        padding: "5px 0 5px 5px",
+        verticalAlign: "middle",
+        width: "100%",
 
-        ':hover': {
+        ":hover": {
           color: theme.Colors.PRIMARY
         }
       },
       title: {
-        boxSizing: 'border-box',
+        boxSizing: "border-box",
         color: theme.Colors.GRAY_700,
         fontSize: theme.FontSizes.XXLARGE,
-        fontWeight: 'bold',
-        padding: '0px 0px 20px 10px'
+        fontWeight: "bold",
+        padding: "0px 0px 20px 10px"
       }
     };
-  }
+  };
 }
 
 module.exports = Radium(DatePickerFullScreen);

@@ -1,14 +1,14 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const PropTypes = require('prop-types');
-const Radium = require('radium');
-const _merge = require('lodash/merge');
-const browser = require('bowser');
+const React = require("react");
+const ReactDOM = require("react-dom");
+const PropTypes = require("prop-types");
+const Radium = require("radium");
+const _merge = require("lodash/merge");
+const browser = require("bowser");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const StyleUtils = require("../utils/Style");
+const { deprecatePrimaryColor } = require("../utils/Deprecation");
 
 class SimpleSlider extends React.Component {
   static propTypes = {
@@ -30,8 +30,8 @@ class SimpleSlider extends React.Component {
     width: 0
   };
 
-  componentDidMount () {
-    deprecatePrimaryColor(this.props, 'selectedColor');
+  componentDidMount() {
+    deprecatePrimaryColor(this.props, "selectedColor");
 
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const width = component.clientWidth;
@@ -40,7 +40,7 @@ class SimpleSlider extends React.Component {
     this.setState({ width, leftPixels });
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (this.props.percent !== newProps.percent) {
       const leftPixels = newProps.percent * this.state.width;
 
@@ -50,17 +50,19 @@ class SimpleSlider extends React.Component {
 
   _getCursorStyle = () => {
     if (this.props.disabled) {
-      return 'not-allowed';
+      return "not-allowed";
     } else if (browser.msie) {
-      return 'pointer';
+      return "pointer";
     } else {
-      return this.state.dragging ? 'grabbing' : 'grab';
+      return this.state.dragging ? "grabbing" : "grab";
     }
   };
 
-  _handleMouseEvents = (e) => {
+  _handleMouseEvents = e => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
+    const leftSpace = ReactDOM.findDOMNode(
+      this.rangeSelectorRef
+    ).getBoundingClientRect().left;
     let currentPercent = (clientX - leftSpace) / this.state.width;
 
     if (currentPercent < 0) {
@@ -78,7 +80,7 @@ class SimpleSlider extends React.Component {
     });
   };
 
-  _handleDragging = (e) => {
+  _handleDragging = e => {
     if (this.state.dragging) {
       this._handleMouseEvents(e);
     }
@@ -90,8 +92,11 @@ class SimpleSlider extends React.Component {
     });
   };
 
-  render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.selectedColor);
+  render() {
+    const theme = StyleUtils.mergeTheme(
+      this.props.theme,
+      this.props.selectedColor
+    );
     const styles = this.styles(theme);
     const { disabled } = this.props;
 
@@ -103,7 +108,7 @@ class SimpleSlider extends React.Component {
           onMouseUp={disabled ? null : this._handleDragEnd}
           onTouchEnd={disabled ? null : this._handleDragEnd}
           onTouchMove={disabled ? null : this._handleDragging}
-          ref={(ref) => {
+          ref={ref => {
             this.rangeSelectorRef = ref;
           }}
           style={styles.range}
@@ -125,51 +130,55 @@ class SimpleSlider extends React.Component {
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     const cursorStyle = this._getCursorStyle();
 
-    return _merge({}, {
-      component: {
-        position: 'relative'
+    return _merge(
+      {},
+      {
+        component: {
+          position: "relative"
+        },
+        range: {
+          padding: "25px 0",
+          margin: `0 ${theme.Spacing.MEDIUM}px`
+        },
+        track: {
+          height: 1,
+          background: "#ccc"
+        },
+        trackHolder: {
+          padding: `${theme.Spacing.MEDIUM}px 0`,
+          cursor: this.props.disabled ? "not-allowed" : "pointer"
+        },
+        toggle: {
+          width: theme.Spacing.LARGE,
+          height: theme.Spacing.LARGE,
+          borderRadius: "100%",
+          background: theme.Colors.WHITE,
+          boxShadow: theme.ShadowLow,
+          position: "absolute",
+          top: "50%",
+          left: this.state.leftPixels,
+          transform: "translate(20%, -50%)",
+          WebkitTransform: "translate(20%, -50%)",
+          cursor: cursorStyle,
+          zIndex: 2
+        },
+        selected: {
+          position: "absolute",
+          left: theme.Spacing.SMALL,
+          width: this.state.leftPixels,
+          background: theme.Colors.PRIMARY,
+          height: 3,
+          top: "50%",
+          transform: "translateY(-50%)",
+          WebkitTransform: "translateY(-50%)",
+          zIndex: 1
+        }
       },
-      range: {
-        padding: '25px 0',
-        margin: `0 ${theme.Spacing.MEDIUM}px`
-      },
-      track: {
-        height: 1,
-        background: '#ccc'
-      },
-      trackHolder: {
-        padding: `${theme.Spacing.MEDIUM}px 0`,
-        cursor: this.props.disabled ? 'not-allowed' : 'pointer'
-      },
-      toggle: {
-        width: theme.Spacing.LARGE,
-        height: theme.Spacing.LARGE,
-        borderRadius: '100%',
-        background: theme.Colors.WHITE,
-        boxShadow: theme.ShadowLow,
-        position: 'absolute',
-        top: '50%',
-        left: this.state.leftPixels,
-        transform: 'translate(20%, -50%)',
-        WebkitTransform: 'translate(20%, -50%)',
-        cursor: cursorStyle,
-        zIndex: 2
-      },
-      selected: {
-        position: 'absolute',
-        left: theme.Spacing.SMALL,
-        width: this.state.leftPixels,
-        background: theme.Colors.PRIMARY,
-        height: 3,
-        top: '50%',
-        transform: 'translateY(-50%)',
-        WebkitTransform: 'translateY(-50%)',
-        zIndex: 1
-      }
-    }, this.props.styles);
+      this.props.styles
+    );
   };
 }
 

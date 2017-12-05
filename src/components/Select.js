@@ -1,17 +1,17 @@
-const _isEqual = require('lodash/isEqual');
-const keycode = require('keycode');
-const PropTypes = require('prop-types');
-const Radium = require('radium');
-const React = require('react');
-const ReactDOM = require('react-dom');
+const _isEqual = require("lodash/isEqual");
+const keycode = require("keycode");
+const PropTypes = require("prop-types");
+const Radium = require("radium");
+const React = require("react");
+const ReactDOM = require("react-dom");
 
-const Icon = require('./Icon');
-const { Listbox, Option } = require('./accessibility/Listbox');
+const Icon = require("./Icon");
+const { Listbox, Option } = require("./accessibility/Listbox");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const StyleUtils = require("../utils/Style");
+const { deprecatePrimaryColor } = require("../utils/Deprecation");
 
 // returns a function that takes a click event, stops it, then calls the callback
 const haltEvent = callback => e => {
@@ -44,13 +44,13 @@ class Select extends React.Component {
   };
 
   static defaultProps = {
-    onChange () {},
+    onChange() {},
     options: [],
-    placeholderText: 'Select One',
+    placeholderText: "Select One",
     valid: true
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -59,25 +59,25 @@ class Select extends React.Component {
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     deprecatePrimaryColor(this.props);
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (!_isEqual(newProps.selected, this.props.selected)) {
       this.setState({ selected: newProps.selected });
     }
   }
 
-  _handleKeyDown = (e) => {
+  _handleKeyDown = e => {
     switch (keycode(e)) {
-      case 'esc':
+      case "esc":
         e.preventDefault();
         e.stopPropagation();
         this._close();
         break;
-      case 'enter':
-      case 'space':
+      case "enter":
+      case "space":
         if (this.state.isOpen) return;
         e.preventDefault();
         e.stopPropagation();
@@ -95,14 +95,14 @@ class Select extends React.Component {
     this.setState({ isOpen: true });
   };
 
-  _handleOptionClick = (option) => {
+  _handleOptionClick = option => {
     this.setState({ selected: option }, () => {
       this._close();
       this.props.onChange(option);
     });
   };
 
-  _scrollListDown = (nextIndex) => {
+  _scrollListDown = nextIndex => {
     const ul = ReactDOM.findDOMNode(this.optionList);
     const activeLi = ul.children[nextIndex];
     const heightFromTop = nextIndex * activeLi.clientHeight;
@@ -112,21 +112,22 @@ class Select extends React.Component {
     }
   };
 
-  _scrollListUp = (prevIndex) => {
+  _scrollListUp = prevIndex => {
     const ul = ReactDOM.findDOMNode(this.optionList);
     const activeLi = ul.children[prevIndex];
-    const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
+    const heightFromBottom =
+      (this.props.options.length - prevIndex) * activeLi.clientHeight;
 
     if (heightFromBottom > ul.clientHeight) {
       ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight;
     }
   };
 
-  _renderScrim = (styles) => {
+  _renderScrim = styles => {
     if (this.state.isOpen) {
       return (
         <div
-          className='mx-select-scrim'
+          className="mx-select-scrim"
           onClick={haltEvent(this._close)}
           style={[styles.scrim, this.props.scrimStyle]}
         />
@@ -136,11 +137,11 @@ class Select extends React.Component {
     }
   };
 
-  _renderOptions = (styles) => {
+  _renderOptions = styles => {
     if (this.state.isOpen) {
       if (this.props.children) {
         return (
-          <div className='mx-select-options' style={styles.options}>
+          <div className="mx-select-options" style={styles.options}>
             {this.props.children}
           </div>
         );
@@ -148,23 +149,28 @@ class Select extends React.Component {
         return (
           <Listbox
             aria-label={this.props.placeholderText}
-            className='mx-select-options'
-            ref={(ref) => this.optionList = ref}
+            className="mx-select-options"
+            ref={ref => (this.optionList = ref)}
             style={styles.options}
             useGlobalKeyHandler={true}
           >
             {this.props.options.map(option => {
               return (
                 <Option
-                  className='mx-select-option'
+                  className="mx-select-option"
                   isSelected={_isEqual(option, this.state.selected)}
                   key={option.displayValue + option.value}
                   label={option.displayValue}
-                  onClick={haltEvent(this._handleOptionClick.bind(null, option))}
-                  style={Object.assign({},
+                  onClick={haltEvent(
+                    this._handleOptionClick.bind(null, option)
+                  )}
+                  style={Object.assign(
+                    {},
                     styles.option,
                     this.props.optionStyle,
-                    _isEqual(option, this.state.selected) ? styles.activeOption : null
+                    _isEqual(option, this.state.selected)
+                      ? styles.activeOption
+                      : null
                   )}
                 >
                   {option.icon ? (
@@ -175,7 +181,9 @@ class Select extends React.Component {
                     />
                   ) : null}
                   <div style={styles.optionText}>{option.displayValue}</div>
-                  {_isEqual(option, this.state.selected) ? <Icon size={20} type='check' /> : null }
+                  {_isEqual(option, this.state.selected) ? (
+                    <Icon size={20} type="check" />
+                  ) : null}
                 </Option>
               );
             })}
@@ -187,42 +195,55 @@ class Select extends React.Component {
     }
   };
 
-  render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+  render() {
+    const theme = StyleUtils.mergeTheme(
+      this.props.theme,
+      this.props.primaryColor
+    );
     const styles = this.styles(theme);
-    const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
+    const selected = this.state.selected ||
+      this.props.selected || {
+        displayValue: this.props.placeholderText,
+        value: ""
+      };
 
     return (
-      <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
-        <div className='mx-select-custom'
+      <div
+        className="mx-select"
+        style={Object.assign({}, this.props.style, { position: "relative" })}
+      >
+        <div
+          className="mx-select-custom"
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
-          ref={ref => this.component = ref}
+          ref={ref => (this.component = ref)}
           style={styles.component}
-          tabIndex='0'
+          tabIndex="0"
         >
           {this._renderScrim(styles)}
-          <div className='mx-select-selected' key='selected' style={styles.selected}>
+          <div
+            className="mx-select-selected"
+            key="selected"
+            style={styles.selected}
+          >
             {selected.icon ? (
-              <Icon
-                size={20}
-                style={styles.optionIcon}
-                type={selected.icon}
-              />
+              <Icon size={20} style={styles.optionIcon} type={selected.icon} />
             ) : null}
             <div style={styles.optionText}>{selected.displayValue}</div>
             <Icon
               size={20}
-              type={this.state.isOpen ? 'caret-up' : 'caret-down'}
+              type={this.state.isOpen ? "caret-up" : "caret-down"}
             />
           </div>
-          {this.props.options.length || this.props.children ? this._renderOptions(styles) : null}
+          {this.props.options.length || this.props.children
+            ? this._renderOptions(styles)
+            : null}
         </div>
       </div>
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     const focusedOption = {
       backgroundColor: theme.Colors.PRIMARY,
       color: theme.Colors.WHITE,
@@ -230,81 +251,93 @@ class Select extends React.Component {
     };
 
     return {
-      component: Object.assign({},
+      component: Object.assign(
+        {},
         {
           backgroundColor: theme.Colors.WHITE,
           borderRadius: 3,
-          border: '1px solid ' + theme.Colors.GRAY_300,
-          cursor: 'pointer',
+          border: "1px solid " + theme.Colors.GRAY_300,
+          cursor: "pointer",
           fontFamily: theme.FontFamily,
           fontSize: theme.FontSizes.MEDIUM,
-          padding: '8px 10px',
-          position: 'relative',
-          boxSizing: 'border-box'
-        }, this.props.dropdownStyle),
+          padding: "8px 10px",
+          position: "relative",
+          boxSizing: "border-box"
+        },
+        this.props.dropdownStyle
+      ),
       select: {
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         right: 0,
         bottom: 0,
         left: 0,
-        width: '100%',
+        width: "100%",
         opacity: 0
       },
-      selected: Object.assign({},
+      selected: Object.assign(
+        {},
         {
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'relative'
-        }, this.props.selectedStyle),
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative"
+        },
+        this.props.selectedStyle
+      ),
       invalid: {
         borderColor: theme.Colors.DANGER
       },
-      options: Object.assign({},
+      options: Object.assign(
+        {},
         {
           backgroundColor: theme.Colors.WHITE,
-          border: '1px solid ' + theme.Colors.GRAY_300,
-          borderRadius: '0 0 3px 3px',
+          border: "1px solid " + theme.Colors.GRAY_300,
+          borderRadius: "0 0 3px 3px",
           left: -1,
           right: -1,
-          margin: '8px 0 0 0',
+          margin: "8px 0 0 0",
           padding: 0,
-          minWidth: '100%',
-          position: 'absolute',
+          minWidth: "100%",
+          position: "absolute",
           zIndex: 10,
           fontSize: 12,
           boxShadow: theme.ShadowHigh,
-          boxSizing: 'border-box',
+          boxSizing: "border-box",
           maxHeight: 260,
-          overflow: 'auto'
-        }, this.props.optionsStyle),
+          overflow: "auto"
+        },
+        this.props.optionsStyle
+      ),
       activeOption: {
         fill: theme.Colors.PRIMARY,
         color: theme.Colors.PRIMARY
       },
       option: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         color: theme.Colors.GRAY_700,
-        cursor: 'pointer',
+        cursor: "pointer",
         backgroundColor: theme.Colors.WHITE,
-        outline: 'none',
+        outline: "none",
         padding: 10,
-        whiteSpace: 'nowrap',
+        whiteSpace: "nowrap",
 
-        ':focus': focusedOption,
-        ':hover': focusedOption
+        ":focus": focusedOption,
+        ":hover": focusedOption
       },
       optionIcon: {
         marginRight: 5
       },
-      optionText: Object.assign({},
+      optionText: Object.assign(
+        {},
         {
-          flex: '1 0 0%'
-        }, this.props.optionTextStyle),
+          flex: "1 0 0%"
+        },
+        this.props.optionTextStyle
+      ),
       scrim: {
-        position: 'fixed',
+        position: "fixed",
         zIndex: 9,
         top: 0,
         right: 0,
@@ -314,6 +347,5 @@ class Select extends React.Component {
     };
   };
 }
-
 
 module.exports = Radium(Select);

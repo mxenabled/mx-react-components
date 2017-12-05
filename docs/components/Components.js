@@ -1,157 +1,157 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const { Link } = require('react-router');
+const PropTypes = require("prop-types");
+const React = require("react");
+const { Link } = require("react-router");
 
-const { Select } = require('mx-react-components');
+const { Select } = require("mx-react-components");
 
 class Components extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
 
-  _handleChange = (selected) => {
-    this.context.router.push('/components/' + selected.value);
+  _handleChange = selected => {
+    this.context.router.push("/components/" + selected.value);
   };
 
-  render () {
+  render() {
     return (
-      <div className='container-fluid components'>
-        <div className='sideNav'>
-          <div className='defaultSelect'>
+      <div className="container-fluid components">
+        <div className="sideNav">
+          <div className="defaultSelect">
             <Select
               onChange={this._handleChange}
               options={[
                 {
-                  value: 'button',
-                  displayValue: 'Button'
+                  value: "button",
+                  displayValue: "Button"
                 },
                 {
-                  value: 'button-group',
-                  displayValue: 'Button Group'
+                  value: "button-group",
+                  displayValue: "Button Group"
                 },
                 {
-                  value: 'date-picker',
-                  displayValue: 'Date Picker'
+                  value: "date-picker",
+                  displayValue: "Date Picker"
                 },
                 {
-                  value: 'date-picker-full-screen',
-                  displayValue: 'Date Picker Full Screen'
+                  value: "date-picker-full-screen",
+                  displayValue: "Date Picker Full Screen"
                 },
                 {
-                  value: 'date-range-picker',
-                  displayValue: 'Date Range Picker'
+                  value: "date-range-picker",
+                  displayValue: "Date Range Picker"
                 },
                 {
-                  value: 'date-time-picker',
-                  displayValue: 'Date Time Picker'
+                  value: "date-time-picker",
+                  displayValue: "Date Time Picker"
                 },
                 {
-                  value: 'display-input',
-                  displayValue: 'Display Input'
+                  value: "display-input",
+                  displayValue: "Display Input"
                 },
                 {
-                  value: 'drawer',
-                  displayValue: 'Drawer'
+                  value: "drawer",
+                  displayValue: "Drawer"
                 },
                 {
-                  value: 'donut',
-                  displayValue: 'Donut'
+                  value: "donut",
+                  displayValue: "Donut"
                 },
                 {
-                  value: 'file-upload',
-                  displayValue: 'File Upload'
+                  value: "file-upload",
+                  displayValue: "File Upload"
                 },
                 {
-                  value: 'gauge',
-                  displayValue: 'Gauge'
+                  value: "gauge",
+                  displayValue: "Gauge"
                 },
                 {
-                  value: 'icon',
-                  displayValue: 'Icon'
+                  value: "icon",
+                  displayValue: "Icon"
                 },
                 {
-                  value: 'loader',
-                  displayValue: 'Loader'
+                  value: "loader",
+                  displayValue: "Loader"
                 },
                 {
-                  value: 'menu',
-                  displayValue: 'Menu'
+                  value: "menu",
+                  displayValue: "Menu"
                 },
                 {
-                  value: 'modal',
-                  displayValue: 'Modal'
+                  value: "modal",
+                  displayValue: "Modal"
                 },
                 {
-                  value: 'notify-on-scroll-threshold',
-                  displayValue: 'Notify On Scroll Threshold'
+                  value: "notify-on-scroll-threshold",
+                  displayValue: "Notify On Scroll Threshold"
                 },
                 {
-                  value: 'page-indicator',
-                  displayValue: 'Page Indicator'
+                  value: "page-indicator",
+                  displayValue: "Page Indicator"
                 },
                 {
-                  value: 'pagination-buttons',
-                  displayValue: 'Pagination Buttons'
+                  value: "pagination-buttons",
+                  displayValue: "Pagination Buttons"
                 },
                 {
-                  value: 'progress-bar',
-                  displayValue: 'Progress Bar'
+                  value: "progress-bar",
+                  displayValue: "Progress Bar"
                 },
                 {
-                  value: 'radio-button',
-                  displayValue: 'Radio Button'
+                  value: "radio-button",
+                  displayValue: "Radio Button"
                 },
                 {
-                  value: 'raja-icon',
-                  displayValue: 'Raja Icon'
+                  value: "raja-icon",
+                  displayValue: "Raja Icon"
                 },
                 {
-                  value: 'range-selector',
-                  displayValue: 'Range Selector'
+                  value: "range-selector",
+                  displayValue: "Range Selector"
                 },
                 {
-                  value: 'row-column',
-                  displayValue: 'Grid Row & Column'
+                  value: "row-column",
+                  displayValue: "Grid Row & Column"
                 },
                 {
-                  value: 'select',
-                  displayValue: 'Select'
+                  value: "select",
+                  displayValue: "Select"
                 },
                 {
-                  value: 'simple-slider',
-                  displayValue: 'Simple Slider'
+                  value: "simple-slider",
+                  displayValue: "Simple Slider"
                 },
                 {
-                  value: 'select-full-screen',
-                  displayValue: 'Select Full Screen'
+                  value: "select-full-screen",
+                  displayValue: "Select Full Screen"
                 },
                 {
-                  value: 'spin',
-                  displayValue: 'Spin'
+                  value: "spin",
+                  displayValue: "Spin"
                 },
                 {
-                  value: 'styles',
-                  displayValue: 'Styles'
+                  value: "styles",
+                  displayValue: "Styles"
                 },
                 {
-                  value: 'time-based-line-chart',
-                  displayValue: 'Time Based Line Chart'
+                  value: "time-based-line-chart",
+                  displayValue: "Time Based Line Chart"
                 },
                 {
-                  value: 'textarea',
-                  displayValue: 'TextArea'
+                  value: "textarea",
+                  displayValue: "TextArea"
                 },
                 {
-                  value: 'tabs',
-                  displayValue: 'Tabs'
+                  value: "tabs",
+                  displayValue: "Tabs"
                 },
                 {
-                  value: 'toggle-switch',
-                  displayValue: 'Toggle Switch'
+                  value: "toggle-switch",
+                  displayValue: "Toggle Switch"
                 },
                 {
-                  value: 'type-ahead',
-                  displayValue: 'Type Ahead'
+                  value: "type-ahead",
+                  displayValue: "Type Ahead"
                 }
               ]}
               selected={null}
@@ -159,63 +159,67 @@ class Components extends React.Component {
             />
           </div>
 
-          <div className='links'>
+          <div className="links">
             <h3>General</h3>
-            <Link to='/components/icon'>Icon</Link>
-            <Link to='/components/raja-icon'>Raja Icon</Link>
-            <Link to='/components/loader'>Loader</Link>
-            <Link to='/components/menu'>Menu</Link>
-            <Link to='/components/message-box'>MessageBox</Link>
-            <Link to='/components/modal'>Modal</Link>
-            <Link to='/components/notify-on-scroll-threshold'>Notify On Scroll Threshold</Link>
-            <Link to='/components/page-indicator'>Page Indicator</Link>
-            <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
-            <Link to='/components/progress-bar'>Progress Bar</Link>
-            <Link to='/components/spin'>Spin</Link>
-            <Link to='/components/file-upload'>File Upload</Link>
+            <Link to="/components/icon">Icon</Link>
+            <Link to="/components/raja-icon">Raja Icon</Link>
+            <Link to="/components/loader">Loader</Link>
+            <Link to="/components/menu">Menu</Link>
+            <Link to="/components/message-box">MessageBox</Link>
+            <Link to="/components/modal">Modal</Link>
+            <Link to="/components/notify-on-scroll-threshold">
+              Notify On Scroll Threshold
+            </Link>
+            <Link to="/components/page-indicator">Page Indicator</Link>
+            <Link to="/components/pagination-buttons">Pagination Buttons</Link>
+            <Link to="/components/progress-bar">Progress Bar</Link>
+            <Link to="/components/spin">Spin</Link>
+            <Link to="/components/file-upload">File Upload</Link>
 
             <h3>Form</h3>
-            <Link to='/components/button'>Button</Link>
-            <Link to='/components/button-group'>Button Group</Link>
-            <Link to='/components/date-picker'>Date Picker</Link>
-            <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
-            <Link to='/components/date-range-picker'>Date Range Picker</Link>
-            <Link to='/components/date-time-picker'>Date Time Picker</Link>
-            <Link to='/components/display-input'>Display Input</Link>
-            <Link to='/components/drawer'>Drawer</Link>
-            <Link to='/components/file-upload'>File Upload</Link>
-            <Link to='/components/radio-button'>Radio Button</Link>
-            <Link to='/components/range-selector'>Range Selector</Link>
-            <Link to='/components/search-input'>Search Input</Link>
-            <Link to='/components/select'>Select</Link>
-            <Link to='/components/select-full-screen'>Select Full Screen</Link>
-            <Link to='/components/simple-input'>Simple Input</Link>
-            <Link to='/components/simple-select'>Simple Select</Link>
-            <Link to='/components/simple-slider'>Simple Slider</Link>
-            <Link to='/components/textarea'>TextArea</Link>
-            <Link to='/components/tabs'>Tabs</Link>
-            <Link to='/components/toggle-switch'>Toggle Switch</Link>
-            <Link to='/components/type-ahead'>Type Ahead</Link>
+            <Link to="/components/button">Button</Link>
+            <Link to="/components/button-group">Button Group</Link>
+            <Link to="/components/date-picker">Date Picker</Link>
+            <Link to="/components/date-picker-full-screen">
+              Date Picker Full Screen
+            </Link>
+            <Link to="/components/date-range-picker">Date Range Picker</Link>
+            <Link to="/components/date-time-picker">Date Time Picker</Link>
+            <Link to="/components/display-input">Display Input</Link>
+            <Link to="/components/drawer">Drawer</Link>
+            <Link to="/components/file-upload">File Upload</Link>
+            <Link to="/components/radio-button">Radio Button</Link>
+            <Link to="/components/range-selector">Range Selector</Link>
+            <Link to="/components/search-input">Search Input</Link>
+            <Link to="/components/select">Select</Link>
+            <Link to="/components/select-full-screen">Select Full Screen</Link>
+            <Link to="/components/simple-input">Simple Input</Link>
+            <Link to="/components/simple-select">Simple Select</Link>
+            <Link to="/components/simple-slider">Simple Slider</Link>
+            <Link to="/components/textarea">TextArea</Link>
+            <Link to="/components/tabs">Tabs</Link>
+            <Link to="/components/toggle-switch">Toggle Switch</Link>
+            <Link to="/components/type-ahead">Type Ahead</Link>
 
             <h3>Charts (D3)</h3>
-            <Link to='/components/bar'>Bar</Link>
-            <Link to='/components/donut'>Donut</Link>
-            <Link to='/components/gauge'>Gauge</Link>
-            <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>
+            <Link to="/components/bar">Bar</Link>
+            <Link to="/components/donut">Donut</Link>
+            <Link to="/components/gauge">Gauge</Link>
+            <Link to="/components/time-based-line-chart">
+              Time Based Line Chart
+            </Link>
 
             <h3>Responsive Grid</h3>
-            <Link to='/components/row-column'>Row & Column</Link>
+            <Link to="/components/row-column">Row & Column</Link>
 
             <h3>Customization</h3>
-            <Link to='/components/config'>Config</Link>
-            <Link to='/components/styles'>Styles</Link>
-            <Link to='/components/theme'>Theme</Link>
+            <Link to="/components/config">Config</Link>
+            <Link to="/components/styles">Styles</Link>
+            <Link to="/components/theme">Theme</Link>
           </div>
         </div>
 
-        <div className='content'>
-          {this.props.children}
-        </div>
+        <div className="content">{this.props.children}</div>
       </div>
     );
   }

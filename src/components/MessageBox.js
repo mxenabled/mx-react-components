@@ -1,12 +1,12 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const _merge = require('lodash/merge');
+const PropTypes = require("prop-types");
+const React = require("react");
+const _merge = require("lodash/merge");
 
-const Icon = require('../components/Icon');
+const Icon = require("../components/Icon");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require("../utils/Style");
 
 class MessageBox extends React.Component {
   static propTypes = {
@@ -28,73 +28,79 @@ class MessageBox extends React.Component {
     });
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
-      <div className='mx-message-box' style={styles.component}>
-        <div onClick={this.props.children ? this._toggleMessageBox : () => {}} style={styles.header}>
+      <div className="mx-message-box" style={styles.component}>
+        <div
+          onClick={this.props.children ? this._toggleMessageBox : () => {}}
+          style={styles.header}
+        >
           <div style={styles.leftHeader}>
             <Icon
               size={20}
-              style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
+              style={Object.assign({}, styles.icon, {
+                marginRight: theme.Spacing.SMALL
+              })}
               type={this.props.icon}
             />
             <div style={styles.title}>{this.props.title}</div>
           </div>
 
-          {this.props.children &&
+          {this.props.children && (
             <Icon
               size={19}
               style={styles.icon}
-              type={this.state.isOpen ? 'caret-up' : 'caret-down'}
+              type={this.state.isOpen ? "caret-up" : "caret-down"}
             />
-          }
+          )}
         </div>
 
-        {this.state.isOpen &&
-          <div style={styles.children}>
-            {this.props.children}
-          </div>
-        }
-
+        {this.state.isOpen && (
+          <div style={styles.children}>{this.props.children}</div>
+        )}
       </div>
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     const color = this.props.color || theme.Colors.PRIMARY;
 
-    return _merge({}, {
-      component: {
-        color: theme.Colors.WHITE,
-        boxSizing: 'border-box'
+    return _merge(
+      {},
+      {
+        component: {
+          color: theme.Colors.WHITE,
+          boxSizing: "border-box"
+        },
+        header: {
+          background: color,
+          display: "flex",
+          cursor: this.props.children ? "pointer" : "auto",
+          padding: theme.Spacing.XSMALL,
+          alignItems: "center"
+        },
+        leftHeader: {
+          flex: 1,
+          display: "flex",
+          alignItems: "center"
+        },
+        title: {
+          fontFamily: theme.Fonts.SEMIBOLD,
+          fontSize: theme.FontSizes.MEDIUM
+        },
+        icon: {
+          fill: theme.Colors.WHITE
+        },
+        children: {
+          backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
+          padding: this.props.children ? theme.Spacing.SMALL : null
+        }
       },
-      header: {
-        background: color,
-        display: 'flex',
-        cursor: this.props.children ? 'pointer' : 'auto',
-        padding: theme.Spacing.XSMALL,
-        alignItems: 'center'
-      },
-      leftHeader: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center'
-      },
-      title: {
-        fontFamily: theme.Fonts.SEMIBOLD,
-        fontSize: theme.FontSizes.MEDIUM
-      },
-      icon: {
-        fill: theme.Colors.WHITE
-      },
-      children: {
-        backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
-        padding: this.props.children ? theme.Spacing.SMALL : null
-      }
-    }, this.props.styles);
+      this.props.styles
+    );
   };
 }
 

@@ -1,8 +1,8 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const d3 = require('d3');
+const PropTypes = require("prop-types");
+const React = require("react");
+const d3 = require("d3");
 
-const ChartUtils = require('../../utils/Chart');
+const ChartUtils = require("../../utils/Chart");
 
 class AxisGroup extends React.Component {
   static propTypes = {
@@ -15,14 +15,14 @@ class AxisGroup extends React.Component {
   };
 
   static defaultProps = {
-    translation: 'translate(0,0)'
+    translation: "translate(0,0)"
   };
 
-  componentDidMount () {
+  componentDidMount() {
     this._renderAxis();
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._renderAxis();
   }
 
@@ -31,7 +31,8 @@ class AxisGroup extends React.Component {
     const min = d3.min(this.props.data, d => d[this.props.axis]);
     const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
 
-    const axisFunction = d3.svg.axis()
+    const axisFunction = d3.svg
+      .axis()
       .scale(this.props.scaleFunction())
       .orient(this.props.orientation)
       .tickFormat(this.props.axisFormatFunction)
@@ -41,11 +42,11 @@ class AxisGroup extends React.Component {
     d3.select(this.axisGroup).call(axisFunction);
   };
 
-  render () {
+  render() {
     return (
       <g
-        className={this.props.axis + '-axis'}
-        ref={(ref) => this.axisGroup = ref}
+        className={this.props.axis + "-axis"}
+        ref={ref => (this.axisGroup = ref)}
         transform={this.props.translation}
       />
     );

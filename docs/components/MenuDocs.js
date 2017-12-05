@@ -1,9 +1,9 @@
-const React = require('react');
-const { Link } = require('react-router');
+const React = require("react");
+const { Link } = require("react-router");
 
-const { Menu } = require('mx-react-components');
+const { Menu } = require("mx-react-components");
 
-const Markdown = require('components/Markdown');
+const Markdown = require("components/Markdown");
 
 class MenuDocs extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class MenuDocs extends React.Component {
     });
   };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -29,18 +29,18 @@ class MenuDocs extends React.Component {
           isOpen={this.state.showItems}
           items={[
             {
-              icon: 'duplicate',
-              label: 'Item1',
+              icon: "duplicate",
+              label: "Item1",
               onClick: () => {}
             },
             {
-              icon: 'no',
-              label: 'Item2',
+              icon: "no",
+              label: "Item2",
               onClick: () => {}
             },
             {
-              icon: 'accounts',
-              label: 'Item3',
+              icon: "accounts",
+              label: "Item3",
               onClick: () => {}
             }
           ]}
@@ -48,23 +48,40 @@ class MenuDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>alignItems<label>String</label></h5>
+        <h5>
+          alignItems<label>String</label>
+        </h5>
         <p>Aligns the items either to the right or left.</p>
 
-        <h5>isOpen<label>Boolean</label></h5>
+        <h5>
+          isOpen<label>Boolean</label>
+        </h5>
         <p>Indicates whether the menu items are visible.</p>
 
-        <h5>items<label>Array</label></h5>
-        <p>An array of objects that specify icon, label and onClick of the item.</p>
+        <h5>
+          items<label>Array</label>
+        </h5>
+        <p>
+          An array of objects that specify icon, label and onClick of the item.
+        </p>
 
-        <h5>onClick<label>Function</label></h5>
+        <h5>
+          onClick<label>Function</label>
+        </h5>
         <p>Callback function for the menu click</p>
 
-        <h5>style<label>Object</label></h5>
+        <h5>
+          style<label>Object</label>
+        </h5>
         <p>Styles for the container around the component.</p>
 
-        <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+        <h5>
+          theme <label>Object</label>
+        </h5>
+        <p>
+          Customize the component&apos;s look. See{" "}
+          <Link to="/components/theme">Theme</Link> for more information.
+        </p>
 
         <h3>Example</h3>
         <Markdown>

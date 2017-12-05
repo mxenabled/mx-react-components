@@ -1,11 +1,11 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require('react');
-const { Link } = require('react-router');
+const React = require("react");
+const { Link } = require("react-router");
 
-const { PaginationButtons } = require('mx-react-components');
+const { PaginationButtons } = require("mx-react-components");
 
-const Markdown = require('components/Markdown');
+const Markdown = require("components/Markdown");
 
 class PaginationButtonsDocs extends React.Component {
   state = {
@@ -13,11 +13,11 @@ class PaginationButtonsDocs extends React.Component {
     totalPages: 20
   };
 
-  _handleButtonClick = (nextPage) => {
+  _handleButtonClick = nextPage => {
     this.setState({ currentPage: nextPage });
   };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -32,27 +32,53 @@ class PaginationButtonsDocs extends React.Component {
           totalPages={this.state.totalPages}
         />
         <h3>Usage</h3>
-        <h5>currentPage <label>Number</label></h5>
+        <h5>
+          currentPage <label>Number</label>
+        </h5>
         <p>Default: 1</p>
-        <p><em>(required)</em> The current page.</p>
+        <p>
+          <em>(required)</em> The current page.
+        </p>
 
-        <h5>onClick <label>Function</label></h5>
-        <p>Function used to handle button click event. Returns the number clicked.</p>
-        <p>If prev/next button is clicked, the number returned is -1/+1 the current page number.</p>
+        <h5>
+          onClick <label>Function</label>
+        </h5>
+        <p>
+          Function used to handle button click event. Returns the number
+          clicked.
+        </p>
+        <p>
+          If prev/next button is clicked, the number returned is -1/+1 the
+          current page number.
+        </p>
 
-        <h5>pageRange <label>Number</label></h5>
+        <h5>
+          pageRange <label>Number</label>
+        </h5>
         <p>Default: 9</p>
-        <p>The number of page buttons (not including prev/next buttons) shown in the button group.</p>
+        <p>
+          The number of page buttons (not including prev/next buttons) shown in
+          the button group.
+        </p>
 
-        <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+        <h5>
+          theme <label>Object</label>
+        </h5>
+        <p>
+          Customize the component&apos;s look. See{" "}
+          <Link to="/components/theme">Theme</Link> for more information.
+        </p>
 
-        <h5>totalPages <label>Number</label></h5>
-        <p><em>(required)</em> The total number of pages.</p>
+        <h5>
+          totalPages <label>Number</label>
+        </h5>
+        <p>
+          <em>(required)</em> The total number of pages.
+        </p>
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <PaginationButtons
       currentPage={4}
       onClick={this._handleButtonClick}

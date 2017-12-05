@@ -1,20 +1,20 @@
-const _get = require('lodash/get');
-const _isEqual = require('lodash/isEqual');
-const _isNumber = require('lodash/isNumber');
-const _merge = require('lodash/merge');
-const _throttle = require('lodash/throttle');
-const FocusTrap = require('focus-trap-react');
-const PropTypes = require('prop-types');
-const React = require('react');
-const Velocity = require('velocity-animate');
-const { StyleRoot } = require('radium');
+const _get = require("lodash/get");
+const _isEqual = require("lodash/isEqual");
+const _isNumber = require("lodash/isNumber");
+const _merge = require("lodash/merge");
+const _throttle = require("lodash/throttle");
+const FocusTrap = require("focus-trap-react");
+const PropTypes = require("prop-types");
+const React = require("react");
+const Velocity = require("velocity-animate");
+const { StyleRoot } = require("radium");
 
-const Button = require('../components/Button');
+const Button = require("../components/Button");
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require("../constants/App");
 
-const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const StyleUtils = require("../utils/Style");
+const { deprecatePrimaryColor } = require("../utils/Deprecation");
 
 class Drawer extends React.Component {
   static propTypes = {
@@ -26,18 +26,12 @@ class Drawer extends React.Component {
     }),
     buttonPrimaryColor: PropTypes.string,
     closeOnScrimClick: PropTypes.bool,
-    contentStyle: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.object
-    ]),
+    contentStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     duration: PropTypes.number,
     easing: PropTypes.array,
     focusOnLoad: PropTypes.bool,
     headerMenu: PropTypes.element,
-    headerStyle: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.object
-    ]),
+    headerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     maxWidth: PropTypes.number,
     navConfig: PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -63,10 +57,10 @@ class Drawer extends React.Component {
     onOpen: () => {},
     showCloseButton: true,
     showScrim: true,
-    title: ''
+    title: ""
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     const theme = StyleUtils.mergeTheme(props.theme, props.buttonPrimaryColor);
@@ -75,21 +69,21 @@ class Drawer extends React.Component {
     this.state = { breakPoints, theme };
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this._resizeThrottled = _throttle(this._resize, 100);
   }
 
-  componentDidMount () {
-    deprecatePrimaryColor(this.props, 'buttonPrimaryColor');
+  componentDidMount() {
+    deprecatePrimaryColor(this.props, "buttonPrimaryColor");
     this.open();
-    window.addEventListener('resize', this._resizeThrottled);
+    window.addEventListener("resize", this._resizeThrottled);
 
     if (this.props.focusOnLoad) {
       this._component.focus();
     }
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     if (!_isEqual(newProps.breakPoints, this.props.breakPoints)) {
       this.setState({
         breakPoints: this.props.breakPoints
@@ -97,13 +91,13 @@ class Drawer extends React.Component {
     }
   }
 
-  componentWillUnmount () {
-    window.removeEventListener('resize', this._resizeThrottled);
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._resizeThrottled);
   }
 
   _getAnimationDistance = () => {
     if (_isNumber(this.props.animateLeftDistance)) {
-      return this.props.animateLeftDistance + '%';
+      return this.props.animateLeftDistance + "%";
     }
 
     const windowWidth = window.innerWidth;
@@ -131,10 +125,11 @@ class Drawer extends React.Component {
    * If neither are set, default to 50px
    */
   _getHeaderHeight = () => {
-    return _get(this.props, ['headerStyle', 'height'],
-                _get(this.props,
-                     ['styles', 'header', 'height'],
-                     '50px'));
+    return _get(
+      this.props,
+      ["headerStyle", "height"],
+      _get(this.props, ["styles", "header", "height"], "50px")
+    );
   };
 
   /**
@@ -144,56 +139,60 @@ class Drawer extends React.Component {
    */
   close = () => {
     this.props.beforeClose();
-    return this._animateComponent({ left: '100%' })
-      .then(() => {
-        this.props.onClose();
-      });
+    return this._animateComponent({ left: "100%" }).then(() => {
+      this.props.onClose();
+    });
   };
 
   open = () => {
-    return this._animateComponent({ left: this._getAnimationDistance() })
-      .then(() => {
+    return this._animateComponent({ left: this._getAnimationDistance() }).then(
+      () => {
         this.props.onOpen();
-      });
+      }
+    );
   };
 
   _animateComponent = (transition, extraOptions) => {
     const el = this._component;
-    const options = Object.assign({
-      duration: this.props.duration,
-      easing: this.props.easing
-    }, extraOptions);
+    const options = Object.assign(
+      {
+        duration: this.props.duration,
+        easing: this.props.easing
+      },
+      extraOptions
+    );
 
     return Velocity(el, transition, options);
   };
 
   _resize = () => {
-    this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
+    this._animateComponent(
+      { left: this._getAnimationDistance() },
+      { duration: 0 }
+    );
   };
 
   _renderNav = (styles, theme) => {
     return (
       <nav style={styles.nav}>
         <Button
-          icon='caret-left'
+          icon="caret-left"
           onClick={this.props.navConfig.onPreviousClick}
           theme={theme}
-          type='base'
+          type="base"
         />
-        <span style={styles.navLabel}>
-          {this.props.navConfig.label}
-        </span>
+        <span style={styles.navLabel}>{this.props.navConfig.label}</span>
         <Button
-          icon='caret-right'
+          icon="caret-right"
           onClick={this.props.navConfig.onNextClick}
           theme={theme}
-          type='base'
+          type="base"
         />
       </nav>
     );
   };
 
-  render () {
+  render() {
     const { theme } = this.state;
     const styles = this.styles(theme);
 
@@ -201,155 +200,177 @@ class Drawer extends React.Component {
       <StyleRoot>
         <FocusTrap>
           <div style={styles.componentWrapper}>
-            <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
+            <div
+              onClick={this.props.closeOnScrimClick && this.close}
+              style={styles.scrim}
+            />
             <div
               aria-label={this.props.title}
-              ref={(ref) => (this._component = ref)}
-              role='dialog'
+              ref={ref => (this._component = ref)}
+              role="dialog"
               style={Object.assign({}, styles.component, this.props.style)}
               tabIndex={0}
             >
-              <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
+              <header
+                style={Object.assign({}, styles.header, this.props.headerStyle)}
+              >
                 <span style={styles.backArrow}>
-                  {this.props.showCloseButton &&
+                  {this.props.showCloseButton && (
                     <Button
-                      icon='arrow-left'
+                      icon="arrow-left"
                       onClick={this.close}
                       theme={theme}
-                      type={'base'}
+                      type={"base"}
                     >
-                      <span className='visuallyHidden' style={styles.visuallyHidden}>Close Drawer</span>
+                      <span
+                        className="visuallyHidden"
+                        style={styles.visuallyHidden}
+                      >
+                        Close Drawer
+                      </span>
                     </Button>
-                  }
+                  )}
                 </span>
-                <span style={styles.title}>
-                  {this.props.title}
-                </span>
+                <span style={styles.title}>{this.props.title}</span>
                 <div style={styles.headerMenu}>
-                  {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav(styles, theme)}
+                  {this.props.headerMenu
+                    ? this.props.headerMenu
+                    : this.props.navConfig && this._renderNav(styles, theme)}
                 </div>
               </header>
-              <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+              <div
+                style={Object.assign(
+                  {},
+                  styles.content,
+                  this.props.contentStyle
+                )}
+              >
                 {this.props.children}
               </div>
             </div>
           </div>
         </FocusTrap>
-      </ StyleRoot>
+      </StyleRoot>
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     const HEADER_HEIGHT = this._getHeaderHeight();
 
-    return _merge({}, {
-      component: {
-        border: '1px solid ' + theme.Colors.GRAY_300,
-        boxSizing: 'border-box',
-        zIndex: 1001,
-        top: 0,
-        bottom: 0,
-        left: '100%',
-        position: 'absolute',
-        width: '80%',
-        backgroundColor: theme.Colors.GRAY_100,
-        boxShadow: theme.ShadowHigh,
+    return _merge(
+      {},
+      {
+        component: {
+          border: "1px solid " + theme.Colors.GRAY_300,
+          boxSizing: "border-box",
+          zIndex: 1001,
+          top: 0,
+          bottom: 0,
+          left: "100%",
+          position: "absolute",
+          width: "80%",
+          backgroundColor: theme.Colors.GRAY_100,
+          boxShadow: theme.ShadowHigh,
 
-        [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
-          width: '100%'
+          [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
+            width: "100%"
+          },
+          [`@media (min-width: ${this.state.breakPoints.large}px)`]: {
+            width: this.props.maxWidth
+          }
         },
-        [`@media (min-width: ${this.state.breakPoints.large}px)`]: {
-          width: this.props.maxWidth
-        }
-      },
-      componentWrapper: {
-        bottom: 0,
-        left: 0,
-        position: 'fixed',
-        right: 0,
-        top: 0,
-        zIndex: 999
-      },
-      content: {
-        backgroundColor: theme.Colors.WHITE,
-        overflow: 'auto',
-        height: `calc(100% - ${HEADER_HEIGHT})`
-      },
-      scrim: {
-        zIndex: 1000,
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        textAlign: 'center',
-        backgroundColor: this.props.showScrim ? theme.Colors.SCRIM : 'transparent'
-      },
-      icons: {
-        color: theme.Colors.GRAY_500
-      },
-      backArrow: {
-        paddingLeft: 20,
-        textAlign: 'left',
-        width: '25%',
+        componentWrapper: {
+          bottom: 0,
+          left: 0,
+          position: "fixed",
+          right: 0,
+          top: 0,
+          zIndex: 999
+        },
+        content: {
+          backgroundColor: theme.Colors.WHITE,
+          overflow: "auto",
+          height: `calc(100% - ${HEADER_HEIGHT})`
+        },
+        scrim: {
+          zIndex: 1000,
+          position: "fixed",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          textAlign: "center",
+          backgroundColor: this.props.showScrim
+            ? theme.Colors.SCRIM
+            : "transparent"
+        },
+        icons: {
+          color: theme.Colors.GRAY_500
+        },
+        backArrow: {
+          paddingLeft: 20,
+          textAlign: "left",
+          width: "25%",
 
-        [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
-          paddingLeft: 10
-        }
-      },
-      header: {
-        alignItems: 'center',
-        backgroundColor: theme.Colors.WHITE,
-        borderBottom: 'solid 1px ' + theme.Colors.GRAY_300,
-        color: theme.Colors.GRAY_500,
-        display: 'flex',
-        fontFamily: theme.Fonts.REGULAR,
-        fontSize: theme.FontSizes.LARGE,
-        justifyContent: 'center',
-        padding: '7px 7px',
-        position: 'relative',
-        height: HEADER_HEIGHT,
-        boxSizing: 'border-box'
-      },
-      title: {
-        overflow: 'hidden',
-        textAlign: 'center',
-        textOverflow: 'ellipsis',
-        width: '50%',
-        whiteSpace: 'nowrap'
-      },
-      headerMenu: {
-        paddingRight: 20,
-        textAlign: 'right',
-        width: '25%',
-        whiteSpace: 'nowrap',
+          [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
+            paddingLeft: 10
+          }
+        },
+        header: {
+          alignItems: "center",
+          backgroundColor: theme.Colors.WHITE,
+          borderBottom: "solid 1px " + theme.Colors.GRAY_300,
+          color: theme.Colors.GRAY_500,
+          display: "flex",
+          fontFamily: theme.Fonts.REGULAR,
+          fontSize: theme.FontSizes.LARGE,
+          justifyContent: "center",
+          padding: "7px 7px",
+          position: "relative",
+          height: HEADER_HEIGHT,
+          boxSizing: "border-box"
+        },
+        title: {
+          overflow: "hidden",
+          textAlign: "center",
+          textOverflow: "ellipsis",
+          width: "50%",
+          whiteSpace: "nowrap"
+        },
+        headerMenu: {
+          paddingRight: 20,
+          textAlign: "right",
+          width: "25%",
+          whiteSpace: "nowrap",
 
-        '@media (max-width: 750px)': {
-          paddingRight: 10
-        }
-      },
-      navLabel: {
-        padding: '7px 14px',
-        position: 'relative',
-        bottom: 5,
+          "@media (max-width: 750px)": {
+            paddingRight: 10
+          }
+        },
+        navLabel: {
+          padding: "7px 14px",
+          position: "relative",
+          bottom: 5,
 
-        '@media (max-width: 750px)': {
-          display: 'none',
-          padding: 0
+          "@media (max-width: 750px)": {
+            display: "none",
+            padding: 0
+          }
+        },
+        visuallyHidden: {
+          border: 0,
+          clip: "rect(0 0 0 0)",
+          clipPath: "insert(50%)",
+          height: 1,
+          margin: "-1px",
+          overflow: "hidden",
+          padding: 0,
+          position: "absolute",
+          width: 1
         }
       },
-      visuallyHidden: {
-        border: 0,
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'insert(50%)',
-        height: 1,
-        margin: '-1px',
-        overflow: 'hidden',
-        padding: 0,
-        position: 'absolute',
-        width: 1
-      }
-    }, this.props.styles);
+      this.props.styles
+    );
   };
 }
 
