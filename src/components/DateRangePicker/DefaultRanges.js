@@ -1,13 +1,13 @@
-const PropTypes = require("prop-types");
-const Radium = require("radium");
-const keycode = require("keycode");
-const React = require("react");
-const Icon = require("../Icon");
+const PropTypes = require('prop-types')
+const Radium = require('radium')
+const keycode = require('keycode')
+const React = require('react')
+const Icon = require('../Icon')
 
 class DefaultRanges extends React.Component {
   state = {
-    selectedOption: null
-  };
+    selectedOption: null,
+  }
 
   render() {
     const {
@@ -16,8 +16,8 @@ class DefaultRanges extends React.Component {
       primaryColor,
       selectedStartDate,
       selectedEndDate,
-      styles
-    } = this.props;
+      styles,
+    } = this.props
 
     return (
       <div style={styles.rangeOptions}>
@@ -25,13 +25,13 @@ class DefaultRanges extends React.Component {
           <div
             key={range.displayValue + range.getStartDate()}
             onClick={() => {
-              handleDefaultRangeSelection(range);
-              this.setState({ selectedOption: index });
+              handleDefaultRangeSelection(range)
+              this.setState({ selectedOption: index })
             }}
             onKeyUp={e => {
-              if (keycode(e) === "enter") {
-                handleDefaultRangeSelection(range);
-                this.setState({ selectedOption: index });
+              if (keycode(e) === 'enter') {
+                handleDefaultRangeSelection(range)
+                this.setState({ selectedOption: index })
               }
             }}
             role="button"
@@ -47,7 +47,7 @@ class DefaultRanges extends React.Component {
                     range.getStartDate() === selectedStartDate &&
                     range.getEndDate() === selectedEndDate
                       ? primaryColor
-                      : "transparent"
+                      : 'transparent',
                 })}
                 type="check-solid"
               />
@@ -56,7 +56,7 @@ class DefaultRanges extends React.Component {
           </div>
         ))}
       </div>
-    );
+    )
   }
 }
 
@@ -69,8 +69,8 @@ DefaultRanges.propTypes = {
   styles: PropTypes.shape({
     defaultRangesTitle: PropTypes.object,
     rangeOption: PropTypes.object,
-    rangeOptions: PropTypes.object
-  })
-};
+    rangeOptions: PropTypes.object,
+  }),
+}
 
-module.exports = Radium(DefaultRanges);
+module.exports = Radium(DefaultRanges)

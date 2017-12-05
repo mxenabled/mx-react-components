@@ -1,20 +1,20 @@
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { RadioButton } = require("mx-react-components");
+const { RadioButton } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class RadioButtonDocs extends React.Component {
   state = {
-    selected: "default"
-  };
+    selected: 'default',
+  }
 
   _handleRadioClick = selected => {
     this.setState({
-      selected
-    });
-  };
+      selected,
+    })
+  }
 
   render() {
     return (
@@ -26,17 +26,17 @@ class RadioButtonDocs extends React.Component {
 
         <h3>Demo</h3>
         <RadioButton
-          checked={this.state.selected === "default"}
-          onClick={this._handleRadioClick.bind(null, "default")}
+          checked={this.state.selected === 'default'}
+          onClick={this._handleRadioClick.bind(null, 'default')}
         >
           Default Style
         </RadioButton>
         <RadioButton
-          activeButtonStyle={{ backgroundColor: "#FBB600" }}
+          activeButtonStyle={{ backgroundColor: '#FBB600' }}
           buttonStyle={{ height: 30, width: 30 }}
-          checked={this.state.selected === "custom"}
+          checked={this.state.selected === 'custom'}
           color="#FBB600"
-          onClick={this._handleRadioClick.bind(null, "custom")}
+          onClick={this._handleRadioClick.bind(null, 'custom')}
           style={{ marginTop: 20 }}
         >
           Custom Style
@@ -47,16 +47,16 @@ class RadioButtonDocs extends React.Component {
           activeButtonStyle <label>Object</label>
         </h5>
         <p>
-          A style object that modifies the css styles of the inner 'div' element
-          that creates the checked indicator for the radio button.
+          A style object that modifies the css styles of the inner 'div' element that creates the
+          checked indicator for the radio button.
         </p>
 
         <h5>
           buttonStyle <label>Object</label>
         </h5>
         <p>
-          A style object that modifies the css styles of the 'div' element that
-          creates the radio button.
+          A style object that modifies the css styles of the 'div' element that creates the radio
+          button.
         </p>
 
         <h5>
@@ -67,10 +67,7 @@ class RadioButtonDocs extends React.Component {
         <h5>
           children <label>Boolean</label>
         </h5>
-        <p>
-          Optional content included between opening and closing tags such as a
-          label.
-        </p>
+        <p>Optional content included between opening and closing tags such as a label.</p>
 
         <h5>
           onClick <label>Function</label>
@@ -81,16 +78,15 @@ class RadioButtonDocs extends React.Component {
           style <label>Object</label>
         </h5>
         <p>
-          A style object that modifies the css styles of the 'div' element that
-          wraps the component.
+          A style object that modifies the css styles of the 'div' element that wraps the component.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h3>Example</h3>
@@ -109,8 +105,8 @@ class RadioButtonDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = RadioButtonDocs;
+module.exports = RadioButtonDocs

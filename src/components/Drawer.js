@@ -1,20 +1,20 @@
-const _get = require("lodash/get");
-const _isEqual = require("lodash/isEqual");
-const _isNumber = require("lodash/isNumber");
-const _merge = require("lodash/merge");
-const _throttle = require("lodash/throttle");
-const FocusTrap = require("focus-trap-react");
-const PropTypes = require("prop-types");
-const React = require("react");
-const Velocity = require("velocity-animate");
-const { StyleRoot } = require("radium");
+const _get = require('lodash/get')
+const _isEqual = require('lodash/isEqual')
+const _isNumber = require('lodash/isNumber')
+const _merge = require('lodash/merge')
+const _throttle = require('lodash/throttle')
+const FocusTrap = require('focus-trap-react')
+const PropTypes = require('prop-types')
+const React = require('react')
+const Velocity = require('velocity-animate')
+const { StyleRoot } = require('radium')
 
-const Button = require("../components/Button");
+const Button = require('../components/Button')
 
-const { themeShape } = require("../constants/App");
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require("../utils/Style");
-const { deprecatePrimaryColor } = require("../utils/Deprecation");
+const StyleUtils = require('../utils/Style')
+const { deprecatePrimaryColor } = require('../utils/Deprecation')
 
 class Drawer extends React.Component {
   static propTypes = {
@@ -22,7 +22,7 @@ class Drawer extends React.Component {
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
       large: PropTypes.number,
-      medium: PropTypes.number
+      medium: PropTypes.number,
     }),
     buttonPrimaryColor: PropTypes.string,
     closeOnScrimClick: PropTypes.bool,
@@ -36,7 +36,7 @@ class Drawer extends React.Component {
     navConfig: PropTypes.shape({
       label: PropTypes.string.isRequired,
       onNextClick: PropTypes.func.isRequired,
-      onPreviousClick: PropTypes.func.isRequired
+      onPreviousClick: PropTypes.func.isRequired,
     }),
     onClose: PropTypes.func.isRequired,
     onOpen: PropTypes.func,
@@ -44,8 +44,8 @@ class Drawer extends React.Component {
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
     theme: themeShape,
-    title: PropTypes.string
-  };
+    title: PropTypes.string,
+  }
 
   static defaultProps = {
     beforeClose: () => {},
@@ -57,64 +57,64 @@ class Drawer extends React.Component {
     onOpen: () => {},
     showCloseButton: true,
     showScrim: true,
-    title: ""
-  };
+    title: '',
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    const theme = StyleUtils.mergeTheme(props.theme, props.buttonPrimaryColor);
-    const breakPoints = props.breakPoints || theme.BreakPoints;
+    const theme = StyleUtils.mergeTheme(props.theme, props.buttonPrimaryColor)
+    const breakPoints = props.breakPoints || theme.BreakPoints
 
-    this.state = { breakPoints, theme };
+    this.state = { breakPoints, theme }
   }
 
   componentWillMount() {
-    this._resizeThrottled = _throttle(this._resize, 100);
+    this._resizeThrottled = _throttle(this._resize, 100)
   }
 
   componentDidMount() {
-    deprecatePrimaryColor(this.props, "buttonPrimaryColor");
-    this.open();
-    window.addEventListener("resize", this._resizeThrottled);
+    deprecatePrimaryColor(this.props, 'buttonPrimaryColor')
+    this.open()
+    window.addEventListener('resize', this._resizeThrottled)
 
     if (this.props.focusOnLoad) {
-      this._component.focus();
+      this._component.focus()
     }
   }
 
   componentWillReceiveProps(newProps) {
     if (!_isEqual(newProps.breakPoints, this.props.breakPoints)) {
       this.setState({
-        breakPoints: this.props.breakPoints
-      });
+        breakPoints: this.props.breakPoints,
+      })
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this._resizeThrottled);
+    window.removeEventListener('resize', this._resizeThrottled)
   }
 
   _getAnimationDistance = () => {
     if (_isNumber(this.props.animateLeftDistance)) {
-      return this.props.animateLeftDistance + "%";
+      return this.props.animateLeftDistance + '%'
     }
 
-    const windowWidth = window.innerWidth;
+    const windowWidth = window.innerWidth
 
     if (windowWidth >= this.state.breakPoints.large) {
       //Resolution - maxWidth
-      return windowWidth - this.props.maxWidth;
+      return windowWidth - this.props.maxWidth
     } else if (windowWidth <= this.state.breakPoints.medium) {
       //All the way over to the left
-      return 0;
+      return 0
     } else {
       //20% from the left
-      const newLeft = windowWidth * 0.2;
+      const newLeft = windowWidth * 0.2
 
-      return Math.max(newLeft, windowWidth - this.props.maxWidth);
+      return Math.max(newLeft, windowWidth - this.props.maxWidth)
     }
-  };
+  }
 
   /**
    * Figure out the height of the header. This can come from either:
@@ -127,10 +127,10 @@ class Drawer extends React.Component {
   _getHeaderHeight = () => {
     return _get(
       this.props,
-      ["headerStyle", "height"],
-      _get(this.props, ["styles", "header", "height"], "50px")
-    );
-  };
+      ['headerStyle', 'height'],
+      _get(this.props, ['styles', 'header', 'height'], '50px'),
+    )
+  }
 
   /**
    * Animate the Drawer closed and then call the onClose callback.
@@ -138,39 +138,34 @@ class Drawer extends React.Component {
    * @returns {Promise} that is resolved when the animation finishes
    */
   close = () => {
-    this.props.beforeClose();
-    return this._animateComponent({ left: "100%" }).then(() => {
-      this.props.onClose();
-    });
-  };
+    this.props.beforeClose()
+    return this._animateComponent({ left: '100%' }).then(() => {
+      this.props.onClose()
+    })
+  }
 
   open = () => {
-    return this._animateComponent({ left: this._getAnimationDistance() }).then(
-      () => {
-        this.props.onOpen();
-      }
-    );
-  };
+    return this._animateComponent({ left: this._getAnimationDistance() }).then(() => {
+      this.props.onOpen()
+    })
+  }
 
   _animateComponent = (transition, extraOptions) => {
-    const el = this._component;
+    const el = this._component
     const options = Object.assign(
       {
         duration: this.props.duration,
-        easing: this.props.easing
+        easing: this.props.easing,
       },
-      extraOptions
-    );
+      extraOptions,
+    )
 
-    return Velocity(el, transition, options);
-  };
+    return Velocity(el, transition, options)
+  }
 
   _resize = () => {
-    this._animateComponent(
-      { left: this._getAnimationDistance() },
-      { duration: 0 }
-    );
-  };
+    this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 })
+  }
 
   _renderNav = (styles, theme) => {
     return (
@@ -189,21 +184,18 @@ class Drawer extends React.Component {
           type="base"
         />
       </nav>
-    );
-  };
+    )
+  }
 
   render() {
-    const { theme } = this.state;
-    const styles = this.styles(theme);
+    const { theme } = this.state
+    const styles = this.styles(theme)
 
     return (
       <StyleRoot>
         <FocusTrap>
           <div style={styles.componentWrapper}>
-            <div
-              onClick={this.props.closeOnScrimClick && this.close}
-              style={styles.scrim}
-            />
+            <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
             <div
               aria-label={this.props.title}
               ref={ref => (this._component = ref)}
@@ -211,21 +203,11 @@ class Drawer extends React.Component {
               style={Object.assign({}, styles.component, this.props.style)}
               tabIndex={0}
             >
-              <header
-                style={Object.assign({}, styles.header, this.props.headerStyle)}
-              >
+              <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton && (
-                    <Button
-                      icon="arrow-left"
-                      onClick={this.close}
-                      theme={theme}
-                      type={"base"}
-                    >
-                      <span
-                        className="visuallyHidden"
-                        style={styles.visuallyHidden}
-                      >
+                    <Button icon="arrow-left" onClick={this.close} theme={theme} type={'base'}>
+                      <span className="visuallyHidden" style={styles.visuallyHidden}>
                         Close Drawer
                       </span>
                     </Button>
@@ -238,140 +220,132 @@ class Drawer extends React.Component {
                     : this.props.navConfig && this._renderNav(styles, theme)}
                 </div>
               </header>
-              <div
-                style={Object.assign(
-                  {},
-                  styles.content,
-                  this.props.contentStyle
-                )}
-              >
+              <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
                 {this.props.children}
               </div>
             </div>
           </div>
         </FocusTrap>
       </StyleRoot>
-    );
+    )
   }
 
   styles = theme => {
-    const HEADER_HEIGHT = this._getHeaderHeight();
+    const HEADER_HEIGHT = this._getHeaderHeight()
 
     return _merge(
       {},
       {
         component: {
-          border: "1px solid " + theme.Colors.GRAY_300,
-          boxSizing: "border-box",
+          border: '1px solid ' + theme.Colors.GRAY_300,
+          boxSizing: 'border-box',
           zIndex: 1001,
           top: 0,
           bottom: 0,
-          left: "100%",
-          position: "absolute",
-          width: "80%",
+          left: '100%',
+          position: 'absolute',
+          width: '80%',
           backgroundColor: theme.Colors.GRAY_100,
           boxShadow: theme.ShadowHigh,
 
           [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
-            width: "100%"
+            width: '100%',
           },
           [`@media (min-width: ${this.state.breakPoints.large}px)`]: {
-            width: this.props.maxWidth
-          }
+            width: this.props.maxWidth,
+          },
         },
         componentWrapper: {
           bottom: 0,
           left: 0,
-          position: "fixed",
+          position: 'fixed',
           right: 0,
           top: 0,
-          zIndex: 999
+          zIndex: 999,
         },
         content: {
           backgroundColor: theme.Colors.WHITE,
-          overflow: "auto",
-          height: `calc(100% - ${HEADER_HEIGHT})`
+          overflow: 'auto',
+          height: `calc(100% - ${HEADER_HEIGHT})`,
         },
         scrim: {
           zIndex: 1000,
-          position: "fixed",
+          position: 'fixed',
           top: 0,
           right: 0,
           bottom: 0,
           left: 0,
-          textAlign: "center",
-          backgroundColor: this.props.showScrim
-            ? theme.Colors.SCRIM
-            : "transparent"
+          textAlign: 'center',
+          backgroundColor: this.props.showScrim ? theme.Colors.SCRIM : 'transparent',
         },
         icons: {
-          color: theme.Colors.GRAY_500
+          color: theme.Colors.GRAY_500,
         },
         backArrow: {
           paddingLeft: 20,
-          textAlign: "left",
-          width: "25%",
+          textAlign: 'left',
+          width: '25%',
 
           [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
-            paddingLeft: 10
-          }
+            paddingLeft: 10,
+          },
         },
         header: {
-          alignItems: "center",
+          alignItems: 'center',
           backgroundColor: theme.Colors.WHITE,
-          borderBottom: "solid 1px " + theme.Colors.GRAY_300,
+          borderBottom: 'solid 1px ' + theme.Colors.GRAY_300,
           color: theme.Colors.GRAY_500,
-          display: "flex",
+          display: 'flex',
           fontFamily: theme.Fonts.REGULAR,
           fontSize: theme.FontSizes.LARGE,
-          justifyContent: "center",
-          padding: "7px 7px",
-          position: "relative",
+          justifyContent: 'center',
+          padding: '7px 7px',
+          position: 'relative',
           height: HEADER_HEIGHT,
-          boxSizing: "border-box"
+          boxSizing: 'border-box',
         },
         title: {
-          overflow: "hidden",
-          textAlign: "center",
-          textOverflow: "ellipsis",
-          width: "50%",
-          whiteSpace: "nowrap"
+          overflow: 'hidden',
+          textAlign: 'center',
+          textOverflow: 'ellipsis',
+          width: '50%',
+          whiteSpace: 'nowrap',
         },
         headerMenu: {
           paddingRight: 20,
-          textAlign: "right",
-          width: "25%",
-          whiteSpace: "nowrap",
+          textAlign: 'right',
+          width: '25%',
+          whiteSpace: 'nowrap',
 
-          "@media (max-width: 750px)": {
-            paddingRight: 10
-          }
+          '@media (max-width: 750px)': {
+            paddingRight: 10,
+          },
         },
         navLabel: {
-          padding: "7px 14px",
-          position: "relative",
+          padding: '7px 14px',
+          position: 'relative',
           bottom: 5,
 
-          "@media (max-width: 750px)": {
-            display: "none",
-            padding: 0
-          }
+          '@media (max-width: 750px)': {
+            display: 'none',
+            padding: 0,
+          },
         },
         visuallyHidden: {
           border: 0,
-          clip: "rect(0 0 0 0)",
-          clipPath: "insert(50%)",
+          clip: 'rect(0 0 0 0)',
+          clipPath: 'insert(50%)',
           height: 1,
-          margin: "-1px",
-          overflow: "hidden",
+          margin: '-1px',
+          overflow: 'hidden',
           padding: 0,
-          position: "absolute",
-          width: 1
-        }
+          position: 'absolute',
+          width: 1,
+        },
       },
-      this.props.styles
-    );
-  };
+      this.props.styles,
+    )
+  }
 }
 
-module.exports = Drawer;
+module.exports = Drawer

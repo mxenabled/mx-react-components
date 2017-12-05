@@ -1,28 +1,28 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { SearchInput } = require("mx-react-components");
+const { SearchInput } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class SearchInputDocs extends React.Component {
   state = {
-    searchKeyword: ""
-  };
+    searchKeyword: '',
+  }
 
   _handleInputChange = e => {
     this.setState({
-      searchKeyword: e.target.value
-    });
-  };
+      searchKeyword: e.target.value,
+    })
+  }
 
   _handleResetClick = () => {
     this.setState({
-      searchKeyword: ""
-    });
-  };
+      searchKeyword: '',
+    })
+  }
 
   render() {
     return (
@@ -44,32 +44,26 @@ class SearchInputDocs extends React.Component {
         <h5>
           onBlur <label>Function</label>
         </h5>
-        <p>
-          A method to be called when the user clicks the mouse outside the
-          component.
-        </p>
+        <p>A method to be called when the user clicks the mouse outside the component.</p>
 
         <h5>
           onChange <label>Function</label>
         </h5>
-        <p>
-          A method to be called as the user types in the search input field.
-        </p>
+        <p>A method to be called as the user types in the search input field.</p>
 
         <h5>
           handleResetClick <label>Function</label>
         </h5>
         <p>
-          A method to be called when reset icon is clicked, in the demo above it
-          is used to clear the input value.
+          A method to be called when reset icon is clicked, in the demo above it is used to clear
+          the input value.
         </p>
 
         <h5>
           placeholder <label>String</label>
         </h5>
         <p>
-          The text to show before the user starts typing or when the search
-          input field is empty.
+          The text to show before the user starts typing or when the search input field is empty.
         </p>
 
         <h5>
@@ -86,8 +80,8 @@ class SearchInputDocs extends React.Component {
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h3>Example</h3>
@@ -99,8 +93,8 @@ class SearchInputDocs extends React.Component {
         `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = SearchInputDocs;
+module.exports = SearchInputDocs

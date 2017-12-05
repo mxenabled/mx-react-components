@@ -1,50 +1,45 @@
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const Button = require("./Button");
-const SimpleSelect = require("./SimpleSelect");
+const Button = require('./Button')
+const SimpleSelect = require('./SimpleSelect')
 
-const { themeShape } = require("../constants/App");
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require("../utils/Style");
+const StyleUtils = require('../utils/Style')
 
 class HeaderMenu extends React.Component {
   static propTypes = {
     buttonIcon: PropTypes.string,
     buttonText: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired,
-    theme: themeShape
-  };
+    theme: themeShape,
+  }
 
   state = {
-    showSimpleSelectMenu: false
-  };
+    showSimpleSelectMenu: false,
+  }
 
   toggle = () => {
     this.setState({
-      showSimpleSelectMenu: !this.state.showSimpleSelectMenu
-    });
-  };
+      showSimpleSelectMenu: !this.state.showSimpleSelectMenu,
+    })
+  }
 
   render() {
-    const theme = StyleUtils.mergeTheme(this.props.theme);
+    const theme = StyleUtils.mergeTheme(this.props.theme)
     const items = this.props.items.map(item =>
       Object.assign({}, item, {
         onClick: (event, itemClicked) => {
-          this.toggle();
-          item.onClick(event, itemClicked);
-        }
-      })
-    );
+          this.toggle()
+          item.onClick(event, itemClicked)
+        },
+      }),
+    )
 
     return (
       <div style={{ width: 150 }}>
-        <Button
-          icon={this.props.buttonIcon}
-          onClick={this.toggle}
-          theme={theme}
-          type="neutral"
-        >
+        <Button icon={this.props.buttonIcon} onClick={this.toggle} theme={theme} type="neutral">
           {this.props.buttonText}
         </Button>
         {this.state.showSimpleSelectMenu ? (
@@ -56,8 +51,8 @@ class HeaderMenu extends React.Component {
           />
         ) : null}
       </div>
-    );
+    )
   }
 }
 
-module.exports = HeaderMenu;
+module.exports = HeaderMenu

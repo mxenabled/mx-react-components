@@ -1,5 +1,5 @@
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
 class BreakPointGroup extends React.Component {
   static propTypes = {
@@ -9,12 +9,12 @@ class BreakPointGroup extends React.Component {
     breakPointLabel: PropTypes.string.isRequired,
     margin: PropTypes.object.isRequired,
     translation: PropTypes.string,
-    xScaleValueFunction: PropTypes.func.isRequired
-  };
+    xScaleValueFunction: PropTypes.func.isRequired,
+  }
 
   static defaultProps = {
-    translation: "translate(0,0)"
-  };
+    translation: 'translate(0,0)',
+  }
 
   render() {
     const {
@@ -24,11 +24,11 @@ class BreakPointGroup extends React.Component {
       breakPointLabel,
       margin,
       translation,
-      xScaleValueFunction
-    } = this.props;
-    const breakPointXValue = xScaleValueFunction(breakPointDate);
-    const breakPointLabelOffSet = 10;
-    const breakPointLabelYPosition = 40;
+      xScaleValueFunction,
+    } = this.props
+    const breakPointXValue = xScaleValueFunction(breakPointDate)
+    const breakPointLabelOffSet = 10
+    const breakPointLabelYPosition = 40
 
     return (
       <g className="break-point-items" transform={translation}>
@@ -49,8 +49,8 @@ class BreakPointGroup extends React.Component {
           </text>
         ) : null}
       </g>
-    );
+    )
   }
 }
 
-module.exports = BreakPointGroup;
+module.exports = BreakPointGroup

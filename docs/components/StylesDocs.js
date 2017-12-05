@@ -1,24 +1,24 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const { Styles } = require("mx-react-components");
+const { Styles } = require('mx-react-components')
 
-const Code = require("components/Code");
-const Markdown = require("components/Markdown");
-const StyleUtils = require("utils/Style");
+const Code = require('components/Code')
+const Markdown = require('components/Markdown')
+const StyleUtils = require('utils/Style')
 
 const ColorInfo = ({ colorName }) => (
   <div
     key={Styles.Colors[colorName]}
     style={{
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "column",
-      flexWrap: "wrap",
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'wrap',
       margin: 20,
-      textAlign: "center"
+      textAlign: 'center',
     }}
   >
     <div
@@ -26,40 +26,36 @@ const ColorInfo = ({ colorName }) => (
       style={{
         width: 80,
         height: 80,
-        borderRadius: "100%",
-        backgroundColor: Styles.Colors[colorName]
+        borderRadius: '100%',
+        backgroundColor: Styles.Colors[colorName],
       }}
     />
-    <div style={{ color: Styles.Colors.GRAY_700, marginTop: 5 }}>
-      {colorName}
-    </div>
+    <div style={{ color: Styles.Colors.GRAY_700, marginTop: 5 }}>{colorName}</div>
     <div
       style={{
         color: Styles.Colors.GRAY_500,
         marginTop: 5,
-        fontSize: Styles.FontSizes.SMALL
+        fontSize: Styles.FontSizes.SMALL,
       }}
     >
       ({Styles.Colors[colorName]})
     </div>
   </div>
-);
+)
 
 ColorInfo.propTypes = {
-  colorName: PropTypes.string
-};
+  colorName: PropTypes.string,
+}
 
 const ColorsList = ({ colors }) => (
-  <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
-    {colors.map(colorName => (
-      <ColorInfo colorName={colorName} key={colorName} />
-    ))}
+  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+    {colors.map(colorName => <ColorInfo colorName={colorName} key={colorName} />)}
   </div>
-);
+)
 
 ColorsList.propTypes = {
-  colors: PropTypes.array
-};
+  colors: PropTypes.array,
+}
 
 class StylesDocs extends React.Component {
   render() {
@@ -68,9 +64,8 @@ class StylesDocs extends React.Component {
         <h1>
           Styles
           <label>
-            Contains values that are used throughout mx-react-components.
-            Exposing it makes it easy to use the same colors, font sizes, fonts,
-            etc throughout any application.
+            Contains values that are used throughout mx-react-components. Exposing it makes it easy
+            to use the same colors, font sizes, fonts, etc throughout any application.
           </label>
         </h1>
 
@@ -78,28 +73,17 @@ class StylesDocs extends React.Component {
 
         <h5>Neutral Colors</h5>
         <ColorsList
-          colors={[
-            "WHITE",
-            "GRAY_100",
-            "GRAY_300",
-            "GRAY_500",
-            "GRAY_700",
-            "GRAY_900"
-          ]}
+          colors={['WHITE', 'GRAY_100', 'GRAY_300', 'GRAY_500', 'GRAY_700', 'GRAY_900']}
         />
 
         <h5>Accent Colors</h5>
-        <ColorsList
-          colors={["PRIMARY", "SUCCESS", "WARNING", "DANGER", "ATTENTION"]}
-        />
+        <ColorsList colors={['PRIMARY', 'SUCCESS', 'WARNING', 'DANGER', 'ATTENTION']} />
 
         <h5>Light Accent Colors</h5>
-        <ColorsList
-          colors={["LIGHT_SUCCESS", "LIGHT_WARNING", "LIGHT_DANGER"]}
-        />
+        <ColorsList colors={['LIGHT_SUCCESS', 'LIGHT_WARNING', 'LIGHT_DANGER']} />
 
         <h5>Scrim Color</h5>
-        <ColorsList colors={["SCRIM"]} />
+        <ColorsList colors={['SCRIM']} />
 
         <h5>FontSizes</h5>
         <Markdown lang="js">
@@ -116,9 +100,8 @@ class StylesDocs extends React.Component {
 
         <h5>Fonts</h5>
         <p>
-          In order to leverage the ProximaNova fonts, you will need to include
-          those fonts in your application using <Code>@font_face</Code> and make
-          sure the names match.
+          In order to leverage the ProximaNova fonts, you will need to include those fonts in your
+          application using <Code>@font_face</Code> and make sure the names match.
         </p>
 
         <Markdown lang="js">
@@ -164,9 +147,8 @@ class StylesDocs extends React.Component {
 
         <h5>Adjust Color</h5>
         <p>
-          Takes a HEX color and adjust amount and returns a HEX value of the new
-          color. Negative numbers darken whereas positive numbers lighten the
-          color.
+          Takes a HEX color and adjust amount and returns a HEX value of the new color. Negative
+          numbers darken whereas positive numbers lighten the color.
         </p>
 
         <Markdown lang="js">
@@ -176,10 +158,7 @@ class StylesDocs extends React.Component {
         </Markdown>
 
         <h5>Adjust HEX Opacity</h5>
-        <p>
-          Takes a HEX color and opacity amount and returns a rgba value of the
-          new color.
-        </p>
+        <p>Takes a HEX color and opacity amount and returns a rgba value of the new color.</p>
 
         <Markdown lang="js">
           {`
@@ -189,16 +168,15 @@ class StylesDocs extends React.Component {
 
         <h5>Linear Gradient</h5>
         <p>
-          Takes two HEX colors and optional opacity amounts and returns a linear
-          gradient string. The first color is requried, the other color and
-          opacities are optional. If only the first color is provided, the
-          gradient will be a single color from 0.8 to 1.
+          Takes two HEX colors and optional opacity amounts and returns a linear gradient string.
+          The first color is requried, the other color and opacities are optional. If only the first
+          color is provided, the gradient will be a single color from 0.8 to 1.
         </p>
         <div
           style={{
             background: StyleUtils.linearGradient(Styles.Colors.PRIMARY),
             height: 100,
-            width: "100%"
+            width: '100%',
           }}
         />
 
@@ -212,7 +190,7 @@ class StylesDocs extends React.Component {
           style={{
             background: StyleUtils.linearGradient(Styles.Colors.PRIMARY, 0.2),
             height: 100,
-            width: "100%"
+            width: '100%',
           }}
         />
 
@@ -228,10 +206,10 @@ class StylesDocs extends React.Component {
               Styles.Colors.DANGER,
               1,
               Styles.Colors.SUCCESS,
-              1
+              1,
             ),
             height: 100,
-            width: "100%"
+            width: '100%',
           }}
         />
 
@@ -243,8 +221,7 @@ class StylesDocs extends React.Component {
 
         <h5>Get Window Size</h5>
         <p>
-          Returns the <Code>Styles.BreakPoints</Code> key for the current window
-          width.
+          Returns the <Code>Styles.BreakPoints</Code> key for the current window width.
         </p>
         <Markdown lang="js">
           {`
@@ -263,8 +240,8 @@ class StylesDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = StylesDocs;
+module.exports = StylesDocs

@@ -1,18 +1,18 @@
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { SimpleSlider } = require("mx-react-components");
+const { SimpleSlider } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class SimpleSliderDocs extends React.Component {
   state = {
-    percent: 0
-  };
+    percent: 0,
+  }
 
   _handleSliderChange = percent => {
-    this.setState({ percent });
-  };
+    this.setState({ percent })
+  }
 
   render() {
     return (
@@ -24,19 +24,15 @@ class SimpleSliderDocs extends React.Component {
 
         <h3>Demo</h3>
         <div>{this.state.percent}</div>
-        <SimpleSlider
-          onPercentChange={this._handleSliderChange}
-          percent={this.state.percent}
-        />
+        <SimpleSlider onPercentChange={this._handleSliderChange} percent={this.state.percent} />
 
         <h3>Usage</h3>
         <h5>
           percent <label>Number</label> <em>Required</em>
         </h5>
         <p>
-          This prop moves the slider to the assigned postion. It is passed in as
-          a number between 0 and 1. So 0.75 would put the slider at 75% of the
-          total distance.
+          This prop moves the slider to the assigned postion. It is passed in as a number between 0
+          and 1. So 0.75 would put the slider at 75% of the total distance.
         </p>
 
         <h5>
@@ -48,17 +44,16 @@ class SimpleSliderDocs extends React.Component {
           onPercentChange <label>func</label> <em>Required</em>
         </h5>
         <p>
-          When the slider is moved, your callback function is called and the
-          current percent is passed as a param. The current percent is a number
-          between 0 and 1.
+          When the slider is moved, your callback function is called and the current percent is
+          passed as a param. The current percent is a number between 0 and 1.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h3>Example</h3>
@@ -71,8 +66,8 @@ class SimpleSliderDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = SimpleSliderDocs;
+module.exports = SimpleSliderDocs

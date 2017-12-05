@@ -1,56 +1,53 @@
-const React = require("react");
-const PropTypes = require("prop-types");
-const Radium = require("radium");
+const React = require('react')
+const PropTypes = require('prop-types')
+const Radium = require('radium')
 
-const Button = require("./Button");
+const Button = require('./Button')
 
-const { buttonTypes, themeShape } = require("../constants/App");
+const { buttonTypes, themeShape } = require('../constants/App')
 
-const StyleUtils = require("../utils/Style");
-const { deprecatePrimaryColor } = require("../utils/Deprecation");
+const StyleUtils = require('../utils/Style')
+const { deprecatePrimaryColor } = require('../utils/Deprecation')
 
 class ButtonGroup extends React.Component {
   static propTypes = {
     buttons: PropTypes.arrayOf(
       PropTypes.shape({
-        "aria-label": PropTypes.string,
+        'aria-label': PropTypes.string,
         icon: PropTypes.string,
         onClick: PropTypes.func,
         style: PropTypes.object,
         text: PropTypes.string,
-        type: PropTypes.oneOf(buttonTypes)
-      }).isRequired
+        type: PropTypes.oneOf(buttonTypes),
+      }).isRequired,
     ),
     primaryColor: PropTypes.string,
     theme: themeShape,
-    type: PropTypes.oneOf(buttonTypes)
-  };
+    type: PropTypes.oneOf(buttonTypes),
+  }
 
   static defaultProps = {
     buttons: [],
-    type: "primaryOutline"
-  };
+    type: 'primaryOutline',
+  }
 
   componentDidMount() {
-    deprecatePrimaryColor(this.props);
+    deprecatePrimaryColor(this.props)
   }
 
   render() {
-    const theme = StyleUtils.mergeTheme(
-      this.props.theme,
-      this.props.primaryColor
-    );
-    const styles = this.styles(theme);
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor)
+    const styles = this.styles(theme)
 
     return (
       <div>
         {this.props.buttons.map((button, i) => {
-          const isFirstChild = i === 0;
-          const isLastChild = i === this.props.buttons.length - 1;
-          const isOnlyChild = isFirstChild && isLastChild;
-          const isDisabled = button.type === "disabled";
+          const isFirstChild = i === 0
+          const isLastChild = i === this.props.buttons.length - 1
+          const isOnlyChild = isFirstChild && isLastChild
+          const isDisabled = button.type === 'disabled'
 
-          const { style, ...rest } = button;
+          const { style, ...rest } = button
 
           return (
             <Button
@@ -62,7 +59,7 @@ class ButtonGroup extends React.Component {
                 isLastChild && styles.lastChild,
                 isOnlyChild && styles.onlyChild,
                 isDisabled && styles.disabled,
-                style
+                style,
               )}
               theme={theme}
               type={this.props.type}
@@ -70,50 +67,50 @@ class ButtonGroup extends React.Component {
             >
               {button.text}
             </Button>
-          );
+          )
         })}
       </div>
-    );
+    )
   }
 
   styles = theme => {
     return {
       component: Object.assign(
         {
-          boxSizing: "border-box",
+          boxSizing: 'border-box',
           borderRadius: 0,
           borderWidth: 1,
-          borderRightWidth: this.props.type === "base" ? 1 : 0,
+          borderRightWidth: this.props.type === 'base' ? 1 : 0,
           margin: 0,
-          verticalAlign: "middle"
+          verticalAlign: 'middle',
         },
-        this.props.style
+        this.props.style,
       ),
       firstChild: {
-        borderRadius: "2px 0 0 2px"
+        borderRadius: '2px 0 0 2px',
       },
       lastChild: {
-        borderRadius: "0 2px 2px 0",
-        borderRightWidth: 1
+        borderRadius: '0 2px 2px 0',
+        borderRightWidth: 1,
       },
       onlyChild: {
         borderRadius: 2,
-        borderWidth: 1
+        borderWidth: 1,
       },
       disabled: {
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         color: theme.Colors.GRAY_300,
-        cursor: "default",
+        cursor: 'default',
         fill: theme.Colors.GRAY_300,
-        ":hover": {
-          backgroundColor: "transparent"
+        ':hover': {
+          backgroundColor: 'transparent',
         },
-        ":active": {
-          backgroundColor: "transparent"
-        }
-      }
-    };
-  };
+        ':active': {
+          backgroundColor: 'transparent',
+        },
+      },
+    }
+  }
 }
 
-module.exports = Radium(ButtonGroup);
+module.exports = Radium(ButtonGroup)

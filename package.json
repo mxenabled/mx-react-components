@@ -16,10 +16,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "{.babelrc,.eslintrc,.prettierrc,*.json}": [
-      "prettier --write --parser json",
-      "git add"
-    ],
+    "{.babelrc,.eslintrc,.prettierrc,*.json}": ["prettier --write --parser json", "git add"],
     "*.js": ["lint --fix", "prettier --write", "git add"]
   },
   "repository": {
@@ -77,7 +74,6 @@
   },
   "jest": {
     "setupFiles": ["<rootDir>/jest-setup.js"],
-    "setupTestFrameworkScriptFile":
-      "<rootDir>/node_modules/jest-enzyme/lib/index.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-enzyme/lib/index.js"
   }
 }

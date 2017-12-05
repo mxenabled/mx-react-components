@@ -1,86 +1,81 @@
-const React = require("react");
-const _merge = require("lodash/merge");
+const React = require('react')
+const _merge = require('lodash/merge')
 
-const StyleConstants = require("../constants/Style");
-const { themeShape } = require("../constants/App");
+const StyleConstants = require('../constants/Style')
+const { themeShape } = require('../constants/App')
 
 const doubleHexCode = color =>
   color
-    .split("")
+    .split('')
     .map(char => char + char)
-    .join("");
+    .join('')
 
 const StyleUtils = {
   adjustColor(col, amt) {
-    let color = col;
-    let usePound = false;
+    let color = col
+    let usePound = false
 
-    if (color[0] === "#") {
-      color = color.slice(1);
-      if (color.length === 3) color = doubleHexCode(color);
-      usePound = true;
+    if (color[0] === '#') {
+      color = color.slice(1)
+      if (color.length === 3) color = doubleHexCode(color)
+      usePound = true
     }
 
-    const num = parseInt(color, 16);
+    const num = parseInt(color, 16)
 
-    let r = (num >> 16) + amt;
+    let r = (num >> 16) + amt
 
     if (r > 255) {
-      r = 255;
+      r = 255
     } else if (r < 0) {
-      r = 0;
+      r = 0
     }
 
-    let b = ((num >> 8) & 0x00ff) + amt;
+    let b = ((num >> 8) & 0x00ff) + amt
 
     if (b > 255) {
-      b = 255;
+      b = 255
     } else if (b < 0) {
-      b = 0;
+      b = 0
     }
 
-    let g = (num & 0x0000ff) + amt;
+    let g = (num & 0x0000ff) + amt
 
     if (g > 255) {
-      g = 255;
+      g = 255
     } else if (g < 0) {
-      g = 0;
+      g = 0
     }
 
-    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+    return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16)
   },
 
   adjustHexOpacity(color, opacity) {
-    const r = parseInt(color.slice(1, 3), 16);
-    const g = parseInt(color.slice(3, 5), 16);
-    const b = parseInt(color.slice(5, 7), 16);
+    const r = parseInt(color.slice(1, 3), 16)
+    const g = parseInt(color.slice(3, 5), 16)
+    const b = parseInt(color.slice(5, 7), 16)
 
-    return "rgba(" + r + ", " + g + ", " + b + ", " + opacity + ")";
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity + ')'
   },
 
-  linearGradient(
-    startColor,
-    startOpacity = 0.8,
-    endColor = startColor,
-    endOpacity = 1
-  ) {
+  linearGradient(startColor, startOpacity = 0.8, endColor = startColor, endOpacity = 1) {
     return `linear-gradient(${StyleUtils.adjustHexOpacity(
       startColor,
-      startOpacity
-    )}, ${StyleUtils.adjustHexOpacity(endColor, endOpacity)})`;
+      startOpacity,
+    )}, ${StyleUtils.adjustHexOpacity(endColor, endOpacity)})`
   },
 
   getWindowSize(breakPoints) {
-    const width = window.innerWidth;
-    let windowSize = "small";
+    const width = window.innerWidth
+    let windowSize = 'small'
 
     if (width >= breakPoints.large) {
-      windowSize = "large";
+      windowSize = 'large'
     } else if (width >= breakPoints.medium) {
-      windowSize = "medium";
+      windowSize = 'medium'
     }
 
-    return windowSize;
+    return windowSize
   },
 
   /**
@@ -92,10 +87,10 @@ const StyleUtils = {
    */
   mergeTheme(theme, primaryColor) {
     const primaryColorTheme = primaryColor && {
-      Colors: { PRIMARY: primaryColor }
-    };
+      Colors: { PRIMARY: primaryColor },
+    }
 
-    return _merge({}, StyleConstants, primaryColorTheme, theme);
+    return _merge({}, StyleConstants, primaryColorTheme, theme)
   },
 
   /**
@@ -104,17 +99,17 @@ const StyleUtils = {
    */
   withMergedTheme(Component) {
     const WrappedComponent = props => {
-      const theme = StyleUtils.mergeTheme(props.theme);
+      const theme = StyleUtils.mergeTheme(props.theme)
 
-      return <Component {...props} theme={theme} />;
-    };
+      return <Component {...props} theme={theme} />
+    }
 
     WrappedComponent.propTypes = {
-      theme: themeShape
-    };
+      theme: themeShape,
+    }
 
-    return WrappedComponent;
-  }
-};
+    return WrappedComponent
+  },
+}
 
-module.exports = StyleUtils;
+module.exports = StyleUtils

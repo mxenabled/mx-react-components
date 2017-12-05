@@ -1,4 +1,4 @@
-const React = require("react");
+const React = require('react')
 
 class Changelog extends React.Component {
   render() {
@@ -20,9 +20,8 @@ class Changelog extends React.Component {
         <h3>5.1.7</h3>
         <ul>
           <li>
-            Removes the need to use elementProps on the Button and ButtonGroup
-            components. Still supports elementProps for backwards compatibility.
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/683">
+            Removes the need to use elementProps on the Button and ButtonGroup components. Still
+            supports elementProps for backwards compatibility. (<a href="https://github.com/mxenabled/mx-react-components/pull/683">
               #683
             </a>)
           </li>
@@ -67,18 +66,15 @@ class Changelog extends React.Component {
         <h3>5.1.2</h3>
         <ul>
           <li>
-            Previous attempt to update focus-trap-react didn't work. This should
-            resolve the issue. (<a href="https://github.com/mxenabled/mx-react-components/pull/676">
-              #676
-            </a>)
+            Previous attempt to update focus-trap-react didn't work. This should resolve the issue.
+            (<a href="https://github.com/mxenabled/mx-react-components/pull/676">#676</a>)
           </li>
         </ul>
 
         <h3>5.1.1</h3>
         <ul>
           <li>
-            Updates focus-trap-react library to fix IE 11 error with Modal and
-            returning focus (<a href="https://github.com/mxenabled/mx-react-components/pull/675">
+            Updates focus-trap-react library to fix IE 11 error with Modal and returning focus (<a href="https://github.com/mxenabled/mx-react-components/pull/675">
               #675
             </a>)
           </li>
@@ -132,7 +128,7 @@ class Changelog extends React.Component {
         <h3>5.0.7</h3>
         <ul>
           <li>
-            Locks down Moment.js to version 2.18.1 due to this issue{" "}
+            Locks down Moment.js to version 2.18.1 due to this issue{' '}
             <a href="https://github.com/moment/moment/issues/4216">
               https://github.com/moment/moment/issues/4216
             </a>
@@ -147,8 +143,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Use a tags in certain instances in DateRangePicker for accessibility
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/665">
+            Use a tags in certain instances in DateRangePicker for accessibility (<a href="https://github.com/mxenabled/mx-react-components/pull/665">
               #665
             </a>)
           </li>
@@ -162,8 +157,7 @@ class Changelog extends React.Component {
         <h3>5.0.5</h3>
         <ul>
           <li>
-            Made DateRangePicker more accessible by adding keyboard navigation
-            support (<a href="https://github.com/mxenabled/mx-react-components/pull/662">
+            Made DateRangePicker more accessible by adding keyboard navigation support (<a href="https://github.com/mxenabled/mx-react-components/pull/662">
               #662
             </a>)
           </li>
@@ -204,14 +198,12 @@ class Changelog extends React.Component {
         <h3>5.0.1</h3>
         <ul>
           <li>
-            DateRangePicker - Updating to use _merge and a nested object for
-            styles prop (<a href="https://github.com/mxenabled/mx-react-components/pull/653">
+            DateRangePicker - Updating to use _merge and a nested object for styles prop (<a href="https://github.com/mxenabled/mx-react-components/pull/653">
               #653
             </a>)
           </li>
           <li>
-            DisplayInput - Updating to use _merge and a nested object for styles
-            prop (<a href="https://github.com/mxenabled/mx-react-components/pull/656">
+            DisplayInput - Updating to use _merge and a nested object for styles prop (<a href="https://github.com/mxenabled/mx-react-components/pull/656">
               #656
             </a>)
           </li>
@@ -222,19 +214,11 @@ class Changelog extends React.Component {
           <li>Updates to React 15.5</li>
           <li>Updates to ES6 Classes</li>
           <li>Adds ability to apply theme to components</li>
-          <li>
-            Adds ability to set default timezone for moment within package
-          </li>
+          <li>Adds ability to set default timezone for moment within package</li>
           <li>Makes several components more accessible</li>
           <li>Adds many new icons to the Icon component</li>
-          <li>
-            D3 Chart components revamped to work better with React and be more
-            reusable
-          </li>
-          <li>
-            Revamps DateRangePicker component to be more responsive and user
-            friendly
-          </li>
+          <li>D3 Chart components revamped to work better with React and be more reusable</li>
+          <li>Revamps DateRangePicker component to be more responsive and user friendly</li>
           <li>
             Adds new component Menu(<a href="https://github.com/mxenabled/mx-react-components/pull/436">
               #436
@@ -277,8 +261,8 @@ class Changelog extends React.Component {
         <h3>v5 Breaking Changes</h3>
         <ul>
           <li>
-            Changes parts of the DateRangePicker and TimeBasedLineChart APIs.
-            Date props are now functions instead of values (<a href="https://github.com/mxenabled/mx-react-components/pull/652">
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now
+            functions instead of values (<a href="https://github.com/mxenabled/mx-react-components/pull/652">
               #652
             </a>).
           </li>
@@ -293,8 +277,7 @@ class Changelog extends React.Component {
             </a>).
           </li>
           <li>
-            Updates the medium breakpoint to 768px to align better with the ipad
-            and other tablets.(<a href="https://github.com/mxenabled/mx-react-components/pull/461">
+            Updates the medium breakpoint to 768px to align better with the ipad and other tablets.(<a href="https://github.com/mxenabled/mx-react-components/pull/461">
               #461
             </a>)
           </li>
@@ -303,8 +286,8 @@ class Changelog extends React.Component {
         <h3>v5 Complete Change log</h3>
         <ul>
           <li>
-            Changes parts of the DateRangePicker and TimeBasedLineChart APIs.
-            Date props are now functions instead of values (<a href="https://github.com/mxenabled/mx-react-components/pull/652">
+            Changes parts of the DateRangePicker and TimeBasedLineChart APIs. Date props are now
+            functions instead of values (<a href="https://github.com/mxenabled/mx-react-components/pull/652">
               #652
             </a>).
           </li>
@@ -389,8 +372,7 @@ class Changelog extends React.Component {
             </a>).
           </li>
           <li>
-            Fixes bug with the file type and extension validation in FileUpload
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/630">
+            Fixes bug with the file type and extension validation in FileUpload (<a href="https://github.com/mxenabled/mx-react-components/pull/630">
               #630
             </a>).
           </li>
@@ -400,8 +382,7 @@ class Changelog extends React.Component {
             </a>).
           </li>
           <li>
-            Adds default error messages with file and/or image validation fails
-            on FileUpload (<a href="https://github.com/mxenabled/mx-react-components/pull/629">
+            Adds default error messages with file and/or image validation fails on FileUpload (<a href="https://github.com/mxenabled/mx-react-components/pull/629">
               #629
             </a>).
           </li>
@@ -530,9 +511,7 @@ class Changelog extends React.Component {
           <li>
             SimpleSelect accessibility using Listbox/Option (<a href="https://github.com/mxenabled/mx-react-components/pull/556">
               #556
-            </a>) (<a href="https://github.com/mxenabled/mx-react-components/pull/557">
-              #557
-            </a>).
+            </a>) (<a href="https://github.com/mxenabled/mx-react-components/pull/557">#557</a>).
           </li>
           <li>
             SimpleSelect accessibility using Listbox/Option (<a href="https://github.com/mxenabled/mx-react-components/pull/556">
@@ -545,8 +524,7 @@ class Changelog extends React.Component {
             </a>).
           </li>
           <li>
-            Adds displayValue as argument to onDateSelect call in
-            DateRangePicker (<a href="https://github.com/mxenabled/mx-react-components/pull/554">
+            Adds displayValue as argument to onDateSelect call in DateRangePicker (<a href="https://github.com/mxenabled/mx-react-components/pull/554">
               #554
             </a>).
           </li>
@@ -576,8 +554,8 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Allows button component to be passed children with "visuallyHidden"
-            class for accessibility (<a href="https://github.com/mxenabled/mx-react-components/pull/541">
+            Allows button component to be passed children with "visuallyHidden" class for
+            accessibility (<a href="https://github.com/mxenabled/mx-react-components/pull/541">
               #541
             </a>)
           </li>
@@ -637,14 +615,12 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Style Polish and Fixes for default range options in DateRangePicker
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/526">
+            Style Polish and Fixes for default range options in DateRangePicker (<a href="https://github.com/mxenabled/mx-react-components/pull/526">
               #526
             </a>)
           </li>
           <li>
-            Fixes overflow rule in Safari to allow the display of modals inside
-            a Drawer (<a href="https://github.com/mxenabled/mx-react-components/pull/523">
+            Fixes overflow rule in Safari to allow the display of modals inside a Drawer (<a href="https://github.com/mxenabled/mx-react-components/pull/523">
               #523
             </a>)
           </li>
@@ -729,8 +705,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Add navConfig back into Drawer component to keep backward
-            compatibility. (<a href="https://github.com/mxenabled/mx-react-components/pull/498">
+            Add navConfig back into Drawer component to keep backward compatibility. (<a href="https://github.com/mxenabled/mx-react-components/pull/498">
               #498
             </a>)
           </li>
@@ -810,8 +785,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Adds ability to have an overlay for circles in D3 CircleGroup
-            component(<a href="https://github.com/mxenabled/mx-react-components/pull/477">
+            Adds ability to have an overlay for circles in D3 CircleGroup component(<a href="https://github.com/mxenabled/mx-react-components/pull/477">
               #477
             </a>)
           </li>
@@ -877,23 +851,19 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Updates the medium breakpoint to 768px to align better with the ipad
-            and other tablets.(<a href="https://github.com/mxenabled/mx-react-components/pull/461">
+            Updates the medium breakpoint to 768px to align better with the ipad and other tablets.(<a href="https://github.com/mxenabled/mx-react-components/pull/461">
               #461
             </a>)
           </li>
 
           <li>
-            Adds styles prop to the Drawer and TextArea components to enable
-            greater CSS control.(<a href="https://github.com/mxenabled/mx-react-components/pull/459">
+            Adds styles prop to the Drawer and TextArea components to enable greater CSS control.(<a href="https://github.com/mxenabled/mx-react-components/pull/459">
               #459
             </a>)
           </li>
           <li>
-            Adds a check to see if the handleResetClick prop is passed down, if
-            not, hide the x icon.(<a href="https://github.com/mxenabled/mx-react-components/pull/451">
-              #451
-            </a>)
+            Adds a check to see if the handleResetClick prop is passed down, if not, hide the x
+            icon.(<a href="https://github.com/mxenabled/mx-react-components/pull/451">#451</a>)
           </li>
           <li>
             Switches refs in RangeSelector to the accepted pattern.(<a href="https://github.com/mxenabled/mx-react-components/pull/454">
@@ -906,8 +876,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Adds two props to the drawer component and adds the Drawer to the
-            docs.(<a href="https://github.com/mxenabled/mx-react-components/pull/457">
+            Adds two props to the drawer component and adds the Drawer to the docs.(<a href="https://github.com/mxenabled/mx-react-components/pull/457">
               #457
             </a>)
           </li>
@@ -987,8 +956,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            BREAKING CHANGE: Fixes React unknown prop warnings on various
-            components(<a href="https://github.com/mxenabled/mx-react-components/pull/426">
+            BREAKING CHANGE: Fixes React unknown prop warnings on various components(<a href="https://github.com/mxenabled/mx-react-components/pull/426">
               #426
             </a>)
           </li>
@@ -1012,8 +980,8 @@ class Changelog extends React.Component {
         <h3>4.4.37</h3>
         <ul>
           <li>
-            Added a prop that allows users to focus their cursor in the text
-            field on load in the SimpleInput and SearchInput components (<a href="https://github.com/mxenabled/mx-react-components/pull/422">
+            Added a prop that allows users to focus their cursor in the text field on load in the
+            SimpleInput and SearchInput components (<a href="https://github.com/mxenabled/mx-react-components/pull/422">
               #422
             </a>)
           </li>
@@ -1040,13 +1008,11 @@ class Changelog extends React.Component {
         <h3>4.4.33</h3>
         <ul>
           <li>
-            Updates to React 15.3.1 -{" "}
+            Updates to React 15.3.1 -{' '}
             <a href="https://github.com/facebook/react/releases/tag/v15.3.1">
               React 15.3.1 details
-            </a>{" "}
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/418">
-              #418
-            </a>)
+            </a>{' '}
+            (<a href="https://github.com/mxenabled/mx-react-components/pull/418">#418</a>)
           </li>
         </ul>
 
@@ -1080,8 +1046,7 @@ class Changelog extends React.Component {
         <h3>4.4.1</h3>
         <ul>
           <li>
-            Select Component - Strips out Native select element and adds new
-            optionTextStyle prop (<a href="https://github.com/mxenabled/mx-react-components/pull/407">
+            Select Component - Strips out Native select element and adds new optionTextStyle prop (<a href="https://github.com/mxenabled/mx-react-components/pull/407">
               #407
             </a>)
           </li>
@@ -1109,8 +1074,7 @@ class Changelog extends React.Component {
         <h3>4.3.0</h3>
         <ul>
           <li>
-            Moves padding to parent so it can be overwritten in date range
-            picker. (<a href="https://github.com/mxenabled/mx-react-components/pull/402">
+            Moves padding to parent so it can be overwritten in date range picker. (<a href="https://github.com/mxenabled/mx-react-components/pull/402">
               #402
             </a>)
           </li>
@@ -1133,10 +1097,8 @@ class Changelog extends React.Component {
         <h3>4.2.22</h3>
         <ul>
           <li>
-            DateRangePicker - Adds new prop to close calendar on succesful range
-            selection if set to true. (<a href="https://github.com/mxenabled/mx-react-components/pull/397">
-              #397
-            </a>)
+            DateRangePicker - Adds new prop to close calendar on succesful range selection if set to
+            true. (<a href="https://github.com/mxenabled/mx-react-components/pull/397">#397</a>)
           </li>
         </ul>
 
@@ -1152,20 +1114,16 @@ class Changelog extends React.Component {
         <h3>4.2.19</h3>
         <ul>
           <li>
-            Donut Chart - Preventing too many opening and selection animations
-            from occurring (<a href="https://github.com/mxenabled/mx-react-components/pull/390">
+            Donut Chart - Preventing too many opening and selection animations from occurring (<a href="https://github.com/mxenabled/mx-react-components/pull/390">
               #390
             </a>)
           </li>
           <li>
-            Donut Chart - Ensuring opening animation occurs for all present arcs
-            on chart (<a href="https://github.com/mxenabled/mx-react-components/pull/386">
+            Donut Chart - Ensuring opening animation occurs for all present arcs on chart (<a href="https://github.com/mxenabled/mx-react-components/pull/386">
               #386
             </a>)
           </li>
-          <li>
-            Documents - opening browser automatically during npm run dev command
-          </li>
+          <li>Documents - opening browser automatically during npm run dev command</li>
         </ul>
 
         <h3>4.2.17</h3>
@@ -1259,8 +1217,7 @@ class Changelog extends React.Component {
           </li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="https://github.com/vintagepenguin">vintagepenguin</a>
+          New Contributors: <a href="https://github.com/vintagepenguin">vintagepenguin</a>
         </p>
 
         <h3>4.2.6</h3>
@@ -1307,8 +1264,7 @@ class Changelog extends React.Component {
         <h3>4.2.0</h3>
         <ul>
           <li>
-            Add Container component and switch Row and Column to use Bootstrap
-            grid system (<a href="https://github.com/mxenabled/mx-react-components/pull/365">
+            Add Container component and switch Row and Column to use Bootstrap grid system (<a href="https://github.com/mxenabled/mx-react-components/pull/365">
               #365
             </a>)
           </li>
@@ -1358,8 +1314,7 @@ class Changelog extends React.Component {
         <h3>4.1.6</h3>
         <ul>
           <li>
-            Fix issue with midnight and noon in DateTimePicker for non-chrome
-            browsers. (<a href="https://github.com/mxenabled/mx-react-components/pull/355">
+            Fix issue with midnight and noon in DateTimePicker for non-chrome browsers. (<a href="https://github.com/mxenabled/mx-react-components/pull/355">
               #355
             </a>)
           </li>
@@ -1464,8 +1419,8 @@ class Changelog extends React.Component {
         <h3>4.0.0</h3>
         <ul>
           <li>
-            <strong>BREAKING CHANGES</strong> to the ToggleSwitch componenet.
-            Please review the documentation. Now supports animations and icons.
+            <strong>BREAKING CHANGES</strong> to the ToggleSwitch componenet. Please review the
+            documentation. Now supports animations and icons.
           </li>
           <li>
             Update ToggleSwitch component (<a href="https://github.com/mxenabled/mx-react-components/pull/310">
@@ -1519,8 +1474,7 @@ class Changelog extends React.Component {
         <h3>3.1.42</h3>
         <ul>
           <li>
-            Drawer component - Add new showScrim prop to control showing scrim
-            for Drawer (<a href="https://github.com/mxenabled/mx-react-components/pull/334">
+            Drawer component - Add new showScrim prop to control showing scrim for Drawer (<a href="https://github.com/mxenabled/mx-react-components/pull/334">
               #334
             </a>)
           </li>
@@ -1529,8 +1483,7 @@ class Changelog extends React.Component {
         <h3>3.1.41</h3>
         <ul>
           <li>
-            Drawer component - Add new animateLeftDistance prop to control
-            animate in distance (<a href="https://github.com/mxenabled/mx-react-components/pull/333">
+            Drawer component - Add new animateLeftDistance prop to control animate in distance (<a href="https://github.com/mxenabled/mx-react-components/pull/333">
               #333
             </a>)
           </li>
@@ -1581,8 +1534,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Add Icons constant so list of icons can be reused and easily updated
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/325">
+            Add Icons constant so list of icons can be reused and easily updated (<a href="https://github.com/mxenabled/mx-react-components/pull/325">
               #325
             </a>)
           </li>
@@ -1605,15 +1557,13 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Change default header color on Drawer component from PORCELAIN to
-            WHITE (<a href="https://github.com/mxenabled/mx-react-components/pull/317">
+            Change default header color on Drawer component from PORCELAIN to WHITE (<a href="https://github.com/mxenabled/mx-react-components/pull/317">
               #317
             </a>)
           </li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="https://github.com/derek-boman">derek-boman</a>
+          New Contributors: <a href="https://github.com/derek-boman">derek-boman</a>
         </p>
 
         <h3>3.1.34</h3>
@@ -1628,8 +1578,7 @@ class Changelog extends React.Component {
         <h3>3.1.33</h3>
         <ul>
           <li>
-            Adds the ability set the color of each bar in the Barchart component
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/321">
+            Adds the ability set the color of each bar in the Barchart component (<a href="https://github.com/mxenabled/mx-react-components/pull/321">
               #321
             </a>)
           </li>
@@ -1656,8 +1605,7 @@ class Changelog extends React.Component {
         <h3>3.1.30</h3>
         <ul>
           <li>
-            Return event on click and name transitions for DonutChart animations
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/315">
+            Return event on click and name transitions for DonutChart animations (<a href="https://github.com/mxenabled/mx-react-components/pull/315">
               #315
             </a>)
           </li>
@@ -1675,8 +1623,7 @@ class Changelog extends React.Component {
         <h3>3.1.28</h3>
         <ul>
           <li>
-            Adds new icons duplicate and kabob horizontal to the Icon component
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/311">
+            Adds new icons duplicate and kabob horizontal to the Icon component (<a href="https://github.com/mxenabled/mx-react-components/pull/311">
               #311
             </a>)
           </li>
@@ -1717,10 +1664,8 @@ class Changelog extends React.Component {
         <h3>3.1.24</h3>
         <ul>
           <li>
-            Allow users of the Drawer component to pass custom styles for the
-            header and content sections (<a href="https://github.com/mxenabled/mx-react-components/pull/305">
-              #305
-            </a>)
+            Allow users of the Drawer component to pass custom styles for the header and content
+            sections (<a href="https://github.com/mxenabled/mx-react-components/pull/305">#305</a>)
           </li>
         </ul>
 
@@ -1867,8 +1812,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Fix new eslint errors after upgrading to eslint@2.7.0 and
-            eslint-config-mx@1.2.7(<a href="https://github.com/mxenabled/mx-react-components/pull/281">
+            Fix new eslint errors after upgrading to eslint@2.7.0 and eslint-config-mx@1.2.7(<a href="https://github.com/mxenabled/mx-react-components/pull/281">
               #281
             </a>)
           </li>
@@ -1889,8 +1833,7 @@ class Changelog extends React.Component {
         <h3>3.1.3</h3>
         <ul>
           <li>
-            Fixed bugs with the ButtonGroup component in Firefox and other
-            Button style bugs (<a href="https://github.com/mxenabled/mx-react-components/pull/278">
+            Fixed bugs with the ButtonGroup component in Firefox and other Button style bugs (<a href="https://github.com/mxenabled/mx-react-components/pull/278">
               #278
             </a>)
           </li>
@@ -1899,8 +1842,7 @@ class Changelog extends React.Component {
         <h3>3.1.2</h3>
         <ul>
           <li>
-            Added new icons to Icon component: bike, education, health, map, and
-            retirement (<a href="https://github.com/mxenabled/mx-react-components/pull/277">
+            Added new icons to Icon component: bike, education, health, map, and retirement (<a href="https://github.com/mxenabled/mx-react-components/pull/277">
               #277
             </a>)
           </li>
@@ -1908,13 +1850,9 @@ class Changelog extends React.Component {
         <h3>3.1.1</h3>
         <ul>
           <li>
-            Added new icons to Icon component: cash, investment, key and desktop
-            (<a href="https://github.com/mxenabled/mx-react-components/pull/271">
+            Added new icons to Icon component: cash, investment, key and desktop (<a href="https://github.com/mxenabled/mx-react-components/pull/271">
               #271
-            </a>,{" "}
-            <a href="https://github.com/mxenabled/mx-react-components/pull/270">
-              #270
-            </a>)
+            </a>, <a href="https://github.com/mxenabled/mx-react-components/pull/270">#270</a>)
           </li>
         </ul>
         <h3>3.0.2</h3>
@@ -2010,10 +1948,7 @@ class Changelog extends React.Component {
         <h3>2.3.0</h3>
         <ul>
           <li>Display Unsplash.it image in demo</li>
-          <li>
-            Icon: Radium dependency removed. `style` prop now only accepts an
-            object
-          </li>
+          <li>Icon: Radium dependency removed. `style` prop now only accepts an object</li>
           <li>
             PageIndicator: component added (<a href="https://github.com/mxenabled/mx-react-components/pull/249">
               #249
@@ -2091,15 +2026,13 @@ class Changelog extends React.Component {
           </li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="https://github.com/iheartrachie">iheartrachie</a>
+          New Contributors: <a href="https://github.com/iheartrachie">iheartrachie</a>
         </p>
 
         <h3>2.2.7</h3>
         <ul>
           <li>
-            Adds footerStyle and incorporates Button component in Modal
-            component (<a href="https://github.com/mxenabled/mx-react-components/pull/232">
+            Adds footerStyle and incorporates Button component in Modal component (<a href="https://github.com/mxenabled/mx-react-components/pull/232">
               #232
             </a>)
           </li>
@@ -2206,8 +2139,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Fixed bug with multiple Hover states, and added new active style on
-            Select (<a href="https://github.com/mxenabled/mx-react-components/pull/207">
+            Fixed bug with multiple Hover states, and added new active style on Select (<a href="https://github.com/mxenabled/mx-react-components/pull/207">
               #207
             </a>)
           </li>
@@ -2246,8 +2178,7 @@ class Changelog extends React.Component {
         <h3>2.0.3</h3>
         <ul>
           <li>
-            Lock eslint to 2.2.x and Radium to 0.14.x to prevent bugs introduced
-            in latest versions(<a href="https://github.com/mxenabled/mx-react-components/pull/198">
+            Lock eslint to 2.2.x and Radium to 0.14.x to prevent bugs introduced in latest versions(<a href="https://github.com/mxenabled/mx-react-components/pull/198">
               #198
             </a>)
           </li>
@@ -2497,8 +2428,7 @@ class Changelog extends React.Component {
           </li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="http://github.com/lukeschunk">lukeschunk</a>
+          New Contributors: <a href="http://github.com/lukeschunk">lukeschunk</a>
         </p>
 
         <h3>1.5.6</h3>
@@ -2531,8 +2461,7 @@ class Changelog extends React.Component {
         <h3>1.5.3</h3>
         <ul>
           <li>
-            Add new `contentFooter` prop to Modal component to allow for content
-            in footer (<a href="https://github.com/mxenabled/mx-react-components/pull/135">
+            Add new `contentFooter` prop to Modal component to allow for content in footer (<a href="https://github.com/mxenabled/mx-react-components/pull/135">
               #135
             </a>)
           </li>
@@ -2559,8 +2488,8 @@ class Changelog extends React.Component {
         <h3>1.5.0</h3>
         <ul>
           <li>
-            TimeBasedLineChart: `zeroState` prop added, default `margins`
-            updated, `style` prop is no longer used (<a href="https://github.com/mxenabled/mx-react-components/pull/131">
+            TimeBasedLineChart: `zeroState` prop added, default `margins` updated, `style` prop is
+            no longer used (<a href="https://github.com/mxenabled/mx-react-components/pull/131">
               #131
             </a>)
           </li>
@@ -2642,14 +2571,12 @@ class Changelog extends React.Component {
         <h3>1.3.1</h3>
         <ul>
           <li>
-            Modal - Update the way we center Modal content, add an isRelative
-            prop (<a href="https://github.com/mxenabled/mx-react-components/pull/119">
+            Modal - Update the way we center Modal content, add an isRelative prop (<a href="https://github.com/mxenabled/mx-react-components/pull/119">
               #119
             </a>)
           </li>
           <li>
-            TimeBasedLineChart - Don't render zero axis if to close to another
-            tick. (<a href="https://github.com/mxenabled/mx-react-components/pull/118">
+            TimeBasedLineChart - Don't render zero axis if to close to another tick. (<a href="https://github.com/mxenabled/mx-react-components/pull/118">
               #118
             </a>)
           </li>
@@ -2690,8 +2617,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Correct styling for Select component caret icon to match other
-            components (<a href="https://github.com/mxenabled/mx-react-components/pull/108">
+            Correct styling for Select component caret icon to match other components (<a href="https://github.com/mxenabled/mx-react-components/pull/108">
               #108
             </a>)
           </li>
@@ -2710,8 +2636,7 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Add selectedDateWrapperStyle and calendarWrapperStyle props to
-            DatePicker. (<a href="https://github.com/mxenabled/mx-react-components/pull/106">
+            Add selectedDateWrapperStyle and calendarWrapperStyle props to DatePicker. (<a href="https://github.com/mxenabled/mx-react-components/pull/106">
               #106
             </a>)
           </li>
@@ -2729,10 +2654,8 @@ class Changelog extends React.Component {
         <h3>1.2.3</h3>
         <ul>
           <li>
-            Fix issue where the click event was not being triggered on the
-            select component in IE 10/11. (<a href="https://github.com/mxenabled/mx-react-components/pull/79">
-              #79
-            </a>)
+            Fix issue where the click event was not being triggered on the select component in IE
+            10/11. (<a href="https://github.com/mxenabled/mx-react-components/pull/79">#79</a>)
           </li>
           <li>
             Fix CSS warning regarding unsupported CSS value of 'normal'. (<a href="https://github.com/mxenabled/mx-react-components/pull/80">
@@ -2740,10 +2663,8 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Change defaultDate and minimumDate props in DatePicker component to
-            expect a unix timestamp. (<a href="https://github.com/mxenabled/mx-react-components/pull/92">
-              #92
-            </a>)
+            Change defaultDate and minimumDate props in DatePicker component to expect a unix
+            timestamp. (<a href="https://github.com/mxenabled/mx-react-components/pull/92">#92</a>)
           </li>
           <li>
             Remove duplicate caret icon in the DatePicker component. (<a href="https://github.com/mxenabled/mx-react-components/pull/93">
@@ -2751,27 +2672,23 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Fix issue in the TypeAhead component where a blank string was added
-            if the string input did not match a valid option. (<a href="https://github.com/mxenabled/mx-react-components/pull/94">
+            Fix issue in the TypeAhead component where a blank string was added if the string input
+            did not match a valid option. (<a href="https://github.com/mxenabled/mx-react-components/pull/94">
               #94
             </a>)
           </li>
           <li>
-            Remove fontSize prop from the DatePicker component and allow it to
-            be passed in the styles prop. (<a href="https://github.com/mxenabled/mx-react-components/pull/95">
-              #95
-            </a>)
+            Remove fontSize prop from the DatePicker component and allow it to be passed in the
+            styles prop. (<a href="https://github.com/mxenabled/mx-react-components/pull/95">#95</a>)
           </li>
           <li>
-            Rename hoverCallBack prop to onDataPointHover in the
-            TimeBasedLineChart component. (<a href="https://github.com/mxenabled/mx-react-components/pull/97">
+            Rename hoverCallBack prop to onDataPointHover in the TimeBasedLineChart component. (<a href="https://github.com/mxenabled/mx-react-components/pull/97">
               #97
             </a>)
           </li>
           <li>
-            Change TimeBasedLineChart component boxSizing to content-box on the
-            wrapping element so the padding is not added to the width/height
-            params. (<a href="https://github.com/mxenabled/mx-react-components/pull/98">
+            Change TimeBasedLineChart component boxSizing to content-box on the wrapping element so
+            the padding is not added to the width/height params. (<a href="https://github.com/mxenabled/mx-react-components/pull/98">
               #98
             </a>)
           </li>
@@ -2781,30 +2698,25 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            Restrict rangeType prop to either 'day' or 'month' in the
-            TimeBasedLineChart component. (<a href="https://github.com/mxenabled/mx-react-components/pull/100">
-              #100
-            </a>)
+            Restrict rangeType prop to either 'day' or 'month' in the TimeBasedLineChart component.
+            (<a href="https://github.com/mxenabled/mx-react-components/pull/100">#100</a>)
           </li>
         </ul>
 
         <h3>1.2.2</h3>
         <ul>
           <li>
-            Flip tooltip on middle date rather than break point date in
-            TimeBasedLineChart (<a href="https://github.com/mxenabled/mx-react-components/pull/76">
+            Flip tooltip on middle date rather than break point date in TimeBasedLineChart (<a href="https://github.com/mxenabled/mx-react-components/pull/76">
               #76
             </a>)
           </li>
           <li>
-            Remove 100% height from DatePicker, add 40px bottom margin for
-            spacing (<a href="https://github.com/mxenabled/mx-react-components/commit/58eda17c263895e80304919f4e1b874e0c33b67b">
+            Remove 100% height from DatePicker, add 40px bottom margin for spacing (<a href="https://github.com/mxenabled/mx-react-components/commit/58eda17c263895e80304919f4e1b874e0c33b67b">
               see commit
             </a>)
           </li>
           <li>
-            Add 1 interval buffer between start and end toggles in RangeSelector
-            (<a href="https://github.com/mxenabled/mx-react-components/commit/52246399464bfe301594477406df1338e9329a65">
+            Add 1 interval buffer between start and end toggles in RangeSelector (<a href="https://github.com/mxenabled/mx-react-components/commit/52246399464bfe301594477406df1338e9329a65">
               see commit
             </a>)
           </li>
@@ -2839,8 +2751,7 @@ class Changelog extends React.Component {
           </li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="http://github.com/guilhermefloriani">guilhermefloriani</a>
+          New Contributors: <a href="http://github.com/guilhermefloriani">guilhermefloriani</a>
         </p>
 
         <h3>1.2.0</h3>
@@ -2866,21 +2777,18 @@ class Changelog extends React.Component {
             </a>)
           </li>
           <li>
-            BREAKING CHANGE: renamed `range` prop to `upperBound` on
-            RangeSelector component (<a href="https://github.com/mxenabled/mx-react-components/pull/64">
+            BREAKING CHANGE: renamed `range` prop to `upperBound` on RangeSelector component (<a href="https://github.com/mxenabled/mx-react-components/pull/64">
               #64
             </a>)
           </li>
           <li>
-            Add ability to set the lower bound (positive or negative) of the
-            RangeSelector (<a href="https://github.com/mxenabled/mx-react-components/pull/64">
+            Add ability to set the lower bound (positive or negative) of the RangeSelector (<a href="https://github.com/mxenabled/mx-react-components/pull/64">
               #64
             </a>)
           </li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="http://github.com/tumentumurchudur">tumentumurchudur</a>,{" "}
+          New Contributors: <a href="http://github.com/tumentumurchudur">tumentumurchudur</a>,{' '}
           <a href="http://github.com/shubhekshajalan">shubhekshajalan</a>
         </p>
 
@@ -2909,14 +2817,14 @@ class Changelog extends React.Component {
           </li>
         </ul>
         <p>
-          New Contributors: <a href="http://github.com/psigns">psigns</a>,{" "}
+          New Contributors: <a href="http://github.com/psigns">psigns</a>,{' '}
           <a href="http://github.com/tegon">tegon</a>
         </p>
 
         <h3>1.0.0</h3>
         <ul>
           <li>
-            Upgrade to React 0.14 (see{" "}
+            Upgrade to React 0.14 (see{' '}
             <a href="http://facebook.github.io/react/blog/2015/10/07/react-v0.14.html">
               React v0.14
             </a>)
@@ -2932,9 +2840,8 @@ class Changelog extends React.Component {
           <li>Add `dropdownStyle` prop to DonutChart</li>
         </ul>
         <p>
-          New Contributors:{" "}
-          <a href="http://github.com/httpete-ire">httpete-ire</a>,{" "}
-          <a href="http://github.com/wpmk2">wpmk2</a>,{" "}
+          New Contributors: <a href="http://github.com/httpete-ire">httpete-ire</a>,{' '}
+          <a href="http://github.com/wpmk2">wpmk2</a>,{' '}
           <a href="http://github.com/tkarling">tkarling</a>
         </p>
 
@@ -2954,8 +2861,8 @@ class Changelog extends React.Component {
           <li>Exclude the `dist` directory from repo</li>
         </ul>
       </div>
-    );
+    )
   }
 }
 
-module.exports = Changelog;
+module.exports = Changelog

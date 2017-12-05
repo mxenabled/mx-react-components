@@ -1,12 +1,12 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const moment = require("moment");
-const { Link } = require("react-router");
+const React = require('react')
+const moment = require('moment')
+const { Link } = require('react-router')
 
-const { DatePickerFullScreen } = require("mx-react-components");
+const { DatePickerFullScreen } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class DatePickerFullScreenDocs extends React.Component {
   render() {
@@ -15,8 +15,8 @@ class DatePickerFullScreenDocs extends React.Component {
         <h1>
           DatePickerFullScreen
           <label>
-            Used to display and edit a start and end value with the option to
-            define preset start/end values.
+            Used to display and edit a start and end value with the option to define preset
+            start/end values.
           </label>
         </h1>
 
@@ -34,10 +34,7 @@ class DatePickerFullScreenDocs extends React.Component {
           closeOnDateSelect <label>Boolean</label>
         </h5>
         <p>Default: false</p>
-        <p>
-          If set to `true`, the calendar will be close after the user selects a
-          data.
-        </p>
+        <p>If set to `true`, the calendar will be close after the user selects a data.</p>
 
         <h5>
           defaultDate <label>Number (unix timestamp)</label>
@@ -49,12 +46,9 @@ class DatePickerFullScreenDocs extends React.Component {
         </h5>
         <p>Default: 'MMM D, YYYY'</p>
         <p>
-          This is used to determine the format of the selected date. It should
-          follow the Moment.js conventions outlined{" "}
-          <a
-            href="http://momentjs.com/docs/#/parsing/string-format/"
-            target="_blank"
-          >
+          This is used to determine the format of the selected date. It should follow the Moment.js
+          conventions outlined{' '}
+          <a href="http://momentjs.com/docs/#/parsing/string-format/" target="_blank">
             here
           </a>.
         </p>
@@ -68,34 +62,26 @@ class DatePickerFullScreenDocs extends React.Component {
           locale <label>String</label>
         </h5>
         <p>Default: 'en'</p>
-        <p>
-          This is used to format the dates, day names, month names, etc based on
-          the locale.
-        </p>
+        <p>This is used to format the dates, day names, month names, etc based on the locale.</p>
 
         <h5>
           minimumDate <label>Number (unix timestamp)</label>
         </h5>
-        <p>
-          If set, the user will not be able to select a date prior to this date.
-        </p>
+        <p>If set, the user will not be able to select a date prior to this date.</p>
 
         <h5>
           onDateSelect <label>Function</label>
         </h5>
         <p>
-          A function to be called when the user has selected a date. The
-          selected date timestamp will be passed to this function.
+          A function to be called when the user has selected a date. The selected date timestamp
+          will be passed to this function.
         </p>
 
         <h5>
           placeholderText <label>String</label>
         </h5>
         <p>Default: Select A Date</p>
-        <p>
-          A string used as placeholder text for the selected date input when it
-          is empty.
-        </p>
+        <p>A string used as placeholder text for the selected date input when it is empty.</p>
 
         <h5>
           placeholderTextStyle <label>Object</label>
@@ -106,17 +92,14 @@ class DatePickerFullScreenDocs extends React.Component {
           showDayBorders <label>Boolean</label>
         </h5>
         <p>Default: false</p>
-        <p>
-          If set to 'true', then borders will be shown around each date in the
-          calendar.
-        </p>
+        <p>If set to 'true', then borders will be shown around each date in the calendar.</p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h5>
@@ -129,9 +112,9 @@ class DatePickerFullScreenDocs extends React.Component {
         </h5>
         <p>Default: true</p>
         <p>
-          If set to 'true', the user will be able to edit the selected date by
-          typing. If set to 'false', the user will only be able to change the
-          selected date by interacting with the calendar.
+          If set to 'true', the user will be able to edit the selected date by typing. If set to
+          'false', the user will only be able to change the selected date by interacting with the
+          calendar.
         </p>
 
         <h3>Example</h3>
@@ -145,8 +128,8 @@ class DatePickerFullScreenDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = DatePickerFullScreenDocs;
+module.exports = DatePickerFullScreenDocs

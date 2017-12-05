@@ -1,55 +1,55 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const moment = require("moment");
-const { Link } = require("react-router");
+const React = require('react')
+const moment = require('moment')
+const { Link } = require('react-router')
 
-const { TimeBasedLineChart } = require("mx-react-components");
+const { TimeBasedLineChart } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class TimeBasedLineChartDocs extends React.Component {
   state = {
     chartHeight: window.innerWidth * 0.6 / 2,
-    chartWidth: window.innerWidth * 0.6
-  };
+    chartWidth: window.innerWidth * 0.6,
+  }
 
   componentDidMount() {
-    window.addEventListener("resize", this._handleWindowResize);
+    window.addEventListener('resize', this._handleWindowResize)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this._handleWindowResize);
+    window.removeEventListener('resize', this._handleWindowResize)
   }
 
   _handleWindowResize = () => {
     this.setState({
       chartHeight: window.innerWidth * 0.6 / 2,
-      chartWidth: window.innerWidth * 0.6
-    });
-  };
+      chartWidth: window.innerWidth * 0.6,
+    })
+  }
 
   render() {
-    const lineChartData = [];
+    const lineChartData = []
 
     for (let i = 6; i > 0; i--) {
       lineChartData.push({
         x: moment()
-          .subtract(i, "months")
-          .startOf("month")
+          .subtract(i, 'months')
+          .startOf('month')
           .unix(),
-        y: Math.floor(Math.random() * 1000)
-      });
+        y: Math.floor(Math.random() * 1000),
+      })
     }
 
     for (let i = 0; i < 6; i++) {
       lineChartData.push({
         x: moment()
-          .add(i, "months")
-          .startOf("month")
+          .add(i, 'months')
+          .startOf('month')
           .unix(),
-        y: Math.floor(Math.random() * 1000)
-      });
+        y: Math.floor(Math.random() * 1000),
+      })
     }
 
     return (
@@ -57,22 +57,21 @@ class TimeBasedLineChartDocs extends React.Component {
         <h1>
           TimeBasedLineChart
           <label>
-            A D3 time-based line chart chart that supports tooltips and a data
-            breakpoint.
+            A D3 time-based line chart chart that supports tooltips and a data breakpoint.
           </label>
         </h1>
 
         <h3>Demo</h3>
         <TimeBasedLineChart
-          breakPointLabel={"This Month"}
+          breakPointLabel={'This Month'}
           data={lineChartData}
           getBreakPointDate={() =>
             moment()
-              .startOf("month")
+              .startOf('month')
               .unix()
           }
           height={this.state.chartHeight}
-          rangeType={"month"}
+          rangeType={'month'}
           showZeroLine={true}
           width={this.state.chartWidth}
         />
@@ -83,10 +82,9 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: today (as a Unix timestamp)</p>
         <p>
-          A function that returns a unix timestamp that sets the breakpoint for
-          the chart. The breakpoint is displayed as a vertical line on the
-          chart. If 'dashedFutureLine' is set to 'true', then the line after the
-          breakpoint will be dashed instead of solid.
+          A function that returns a unix timestamp that sets the breakpoint for the chart. The
+          breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to
+          'true', then the line after the breakpoint will be dashed instead of solid.
         </p>
 
         <h5>
@@ -94,24 +92,24 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: 'Today'</p>
         <p>
-          The text to display in the breakpoint label. The label is displayed at
-          the top of the chart above the breakpoint line.
+          The text to display in the breakpoint label. The label is displayed at the top of the
+          chart above the breakpoint line.
         </p>
 
         <h5>
           children <label>Node(s)</label>
         </h5>
         <p>
-          If defined, these nodes will be used for the tooltip. Typically this
-          is used in conjunction with 'hoverCallBack' to create custom tooltips.
+          If defined, these nodes will be used for the tooltip. Typically this is used in
+          conjunction with 'hoverCallBack' to create custom tooltips.
         </p>
 
         <h5>
           data <label>Arrray</label>
         </h5>
         <p>
-          An array of data objects that are used to set the x axis, y axis, and
-          line values. Example:
+          An array of data objects that are used to set the x axis, y axis, and line values.
+          Example:
         </p>
         <Markdown lang="js">
           {`
@@ -133,8 +131,8 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: false</p>
         <p>
-          If set to true, limits the circles on the line to the beginning,
-          middle, and end of the line.
+          If set to true, limits the circles on the line to the beginning, middle, and end of the
+          line.
         </p>
 
         <h5>
@@ -147,8 +145,8 @@ class TimeBasedLineChartDocs extends React.Component {
           margin <label>Object</label>
         </h5>
         <p>
-          A object that contains top, right, bottom, and left margin values.
-          These can be used to adjust the spacing around the chart. Default:
+          A object that contains top, right, bottom, and left margin values. These can be used to
+          adjust the spacing around the chart. Default:
         </p>
         <Markdown lang="js">
           {`
@@ -166,8 +164,8 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: 'day'</p>
         <p>
-          This should match the type of data you're passing in. It is used to
-          normalize the data points to month or day intervals.
+          This should match the type of data you're passing in. It is used to normalize the data
+          points to month or day intervals.
         </p>
 
         <h5>
@@ -175,8 +173,8 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: false</p>
         <p>
-          If set to 'true', then the area below zero will be shaded. This is set
-          to 'true' in the example above.
+          If set to 'true', then the area below zero will be shaded. This is set to 'true' in the
+          example above.
         </p>
 
         <h5>
@@ -184,8 +182,8 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: true</p>
         <p>
-          Set this to 'false' if don't want any part of the graph that is in the
-          future to be shaded.
+          Set this to 'false' if don't want any part of the graph that is in the future to be
+          shaded.
         </p>
 
         <h5>
@@ -193,8 +191,8 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: true</p>
         <p>
-          Set this to 'false' if you don't want to display the vertical line and
-          label that indicates the breakpoint.
+          Set this to 'false' if you don't want to display the vertical line and label that
+          indicates the breakpoint.
         </p>
 
         <h5>
@@ -202,16 +200,15 @@ class TimeBasedLineChartDocs extends React.Component {
         </h5>
         <p>Default: false</p>
         <p>
-          If set to 'true', then a tick, label, and line will be displayed for
-          the '0' yAxis value.
+          If set to 'true', then a tick, label, and line will be displayed for the '0' yAxis value.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h5>
@@ -224,8 +221,8 @@ class TimeBasedLineChartDocs extends React.Component {
           yAxisFormatter <label>Function</label>
         </h5>
         <p>
-          This function will be used to determine the format of the y axis tick
-          labels. If should return some type of value.
+          This function will be used to determine the format of the y axis tick labels. If should
+          return some type of value.
         </p>
 
         <h5>
@@ -267,8 +264,8 @@ class TimeBasedLineChartDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = TimeBasedLineChartDocs;
+module.exports = TimeBasedLineChartDocs

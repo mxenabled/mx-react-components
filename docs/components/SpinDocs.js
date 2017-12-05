@@ -1,8 +1,8 @@
-const React = require("react");
+const React = require('react')
 
-const { Icon, Spin } = require("mx-react-components");
+const { Icon, Spin } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class SpinDocs extends React.Component {
   render() {
@@ -11,8 +11,8 @@ class SpinDocs extends React.Component {
         <h1>
           Spin
           <label>
-            A component used to rotate an element 360 degrees at a specified
-            interval using CSS animations.
+            A component used to rotate an element 360 degrees at a specified interval using CSS
+            animations.
           </label>
         </h1>
 
@@ -31,17 +31,14 @@ class SpinDocs extends React.Component {
           direction <label>String</label>
         </h5>
         <p>
-          The direction of the spin. Available Options: counterclockwise,
-          clockwise. Default: 'counterclockwise'
+          The direction of the spin. Available Options: counterclockwise, clockwise. Default:
+          'counterclockwise'
         </p>
 
         <h5>
           speed <label>Number</label>
         </h5>
-        <p>
-          The time it takes the element to make 1 full rotation in milliseconds.
-          Default: 1000
-        </p>
+        <p>The time it takes the element to make 1 full rotation in milliseconds. Default: 1000</p>
 
         <h3>Example</h3>
         <Markdown>
@@ -55,8 +52,8 @@ class SpinDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = SpinDocs;
+module.exports = SpinDocs

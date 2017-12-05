@@ -1,9 +1,9 @@
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const { themeShape } = require("../../constants/App");
+const { themeShape } = require('../../constants/App')
 
-const StyleUtils = require("../../utils/Style");
+const StyleUtils = require('../../utils/Style')
 
 class ShadedAreaRectangleGroup extends React.Component {
   static propTypes = {
@@ -14,17 +14,17 @@ class ShadedAreaRectangleGroup extends React.Component {
     translation: PropTypes.string,
     width: PropTypes.number.isRequired,
     x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired
-  };
+    y: PropTypes.number.isRequired,
+  }
 
   static defaultProps = {
     fillOpacity: 0.1,
-    translation: "translate(0,0)"
-  };
+    translation: 'translate(0,0)',
+  }
 
   render() {
-    const theme = StyleUtils.mergeTheme(this.props.theme);
-    const fillColor = this.props.fillColor || theme.Colors.GRAY_300;
+    const theme = StyleUtils.mergeTheme(this.props.theme)
+    const fillColor = this.props.fillColor || theme.Colors.GRAY_300
 
     return (
       <g className="shaded-area">
@@ -38,8 +38,8 @@ class ShadedAreaRectangleGroup extends React.Component {
           y={this.props.y}
         />
       </g>
-    );
+    )
   }
 }
 
-module.exports = ShadedAreaRectangleGroup;
+module.exports = ShadedAreaRectangleGroup

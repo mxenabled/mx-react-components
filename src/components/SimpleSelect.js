@@ -1,20 +1,20 @@
-const React = require("react");
-const PropTypes = require("prop-types");
-const Radium = require("radium");
-const keycode = require("keycode");
-const _merge = require("lodash/merge");
+const React = require('react')
+const PropTypes = require('prop-types')
+const Radium = require('radium')
+const keycode = require('keycode')
+const _merge = require('lodash/merge')
 
-const Icon = require("./Icon");
-const { Listbox, Option } = require("./accessibility/Listbox");
+const Icon = require('./Icon')
+const { Listbox, Option } = require('./accessibility/Listbox')
 
-const { themeShape } = require("../constants/App");
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require("../utils/Style");
-const { deprecatePrimaryColor } = require("../utils/Deprecation");
+const StyleUtils = require('../utils/Style')
+const { deprecatePrimaryColor } = require('../utils/Deprecation')
 
 class SimpleSelect extends React.Component {
   static propTypes = {
-    "aria-label": PropTypes.string,
+    'aria-label': PropTypes.string,
     hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
     iconStyles: PropTypes.object,
@@ -25,64 +25,61 @@ class SimpleSelect extends React.Component {
     scrimClickOnSelect: PropTypes.bool,
     style: PropTypes.object,
     styles: PropTypes.object,
-    theme: themeShape
-  };
+    theme: themeShape,
+  }
 
   static defaultProps = {
-    "aria-label": "",
+    'aria-label': '',
     scrimClickOnSelect: false,
     items: [],
-    onScrimClick() {}
-  };
+    onScrimClick() {},
+  }
 
   componentDidMount() {
-    deprecatePrimaryColor(this.props, "hoverColor");
+    deprecatePrimaryColor(this.props, 'hoverColor')
 
-    window.addEventListener("keydown", this._handleKeyDown);
+    window.addEventListener('keydown', this._handleKeyDown)
 
     if (this.props.iconStyles) {
       console.warn(
-        "The iconStyles prop is deprecated and will be removed in a future release. Please use styles."
-      );
+        'The iconStyles prop is deprecated and will be removed in a future release. Please use styles.',
+      )
     }
 
     if (this.props.menuStyles) {
       console.warn(
-        "The menuStyles prop is deprecated and will be removed in a future release. Please use styles."
-      );
+        'The menuStyles prop is deprecated and will be removed in a future release. Please use styles.',
+      )
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener("keydown", this._handleKeyDown);
+    window.removeEventListener('keydown', this._handleKeyDown)
   }
 
   _handleItemClick = (item, e) => {
     if (this.props.scrimClickOnSelect) {
-      this.props.onScrimClick(e);
+      this.props.onScrimClick(e)
     }
 
-    item.onClick(e, item);
-  };
+    item.onClick(e, item)
+  }
 
   _handleKeyDown = e => {
-    if (keycode(e) === "esc") {
-      e.preventDefault();
-      this.props.onScrimClick();
+    if (keycode(e) === 'esc') {
+      e.preventDefault()
+      this.props.onScrimClick()
     }
-  };
+  }
 
   render() {
-    const theme = StyleUtils.mergeTheme(
-      this.props.theme,
-      this.props.hoverColor
-    );
-    const styles = this.styles(theme);
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor)
+    const styles = this.styles(theme)
 
     return (
       <div style={styles.component}>
         <Listbox
-          aria-label={this.props["aria-label"]}
+          aria-label={this.props['aria-label']}
           style={styles.menu}
           useGlobalKeyHandler={true}
         >
@@ -97,20 +94,16 @@ class SimpleSelect extends React.Component {
                     style={styles.item}
                   >
                     {item.icon ? (
-                      <Icon
-                        size={this.props.iconSize || 20}
-                        style={styles.icon}
-                        type={item.icon}
-                      />
+                      <Icon size={this.props.iconSize || 20} style={styles.icon} type={item.icon} />
                     ) : null}
                     <div style={styles.text}>{item.text}</div>
                   </Option>
-                );
+                )
               })}
         </Listbox>
         <div onClick={this.props.onScrimClick} style={styles.scrim} />
       </div>
-    );
+    )
   }
 
   styles = theme => {
@@ -120,72 +113,72 @@ class SimpleSelect extends React.Component {
         component: Object.assign(
           {
             height: 0,
-            position: "relative"
+            position: 'relative',
           },
-          this.props.style
+          this.props.style,
         ),
 
         menu: Object.assign(
           {},
           {
-            alignSelf: "stretch",
+            alignSelf: 'stretch',
             backgroundColor: theme.Colors.WHITE,
             borderRadius: 3,
             boxShadow: theme.ShadowHigh,
-            boxSizing: "border-box",
+            boxSizing: 'border-box',
             color: theme.Colors.GRAY_700,
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             fill: theme.Colors.GRAY_700,
             fontFamily: theme.FontFamily,
             fontSize: theme.FontSizes.MEDIUM,
             top: 10,
-            position: "absolute",
-            zIndex: 10
+            position: 'absolute',
+            zIndex: 10,
           },
-          this.props.menuStyles
+          this.props.menuStyles,
         ),
 
         item: Object.assign(
           {},
           {
-            display: "flex",
-            alignItems: "center",
-            boxSizing: "border-box",
+            display: 'flex',
+            alignItems: 'center',
+            boxSizing: 'border-box',
             height: 40,
             padding: theme.Spacing.MEDIUM,
 
-            ":hover": {
+            ':hover': {
               backgroundColor: theme.Colors.PRIMARY,
               color: theme.Colors.WHITE,
-              cursor: "pointer",
-              fill: theme.Colors.WHITE
-            }
+              cursor: 'pointer',
+              fill: theme.Colors.WHITE,
+            },
           },
-          this.props.itemStyles
+          this.props.itemStyles,
         ),
         icon: Object.assign(
           {},
           {
-            marginRight: theme.Spacing.SMALL
+            marginRight: theme.Spacing.SMALL,
           },
-          this.props.iconStyles
+          this.props.iconStyles,
         ),
         text: {
-          whiteSpace: "nowrap"
+          whiteSpace: 'nowrap',
         },
         scrim: {
           bottom: 0,
           left: 0,
-          position: "fixed",
+          position: 'fixed',
           right: 0,
           top: 0,
-          zIndex: 9
-        }
+          zIndex: 9,
+        },
       },
-      this.props.styles
-    );
-  };
+      this.props.styles,
+    )
+  }
 }
 
-module.exports = Radium(SimpleSelect);
+module.exports = Radium(SimpleSelect)

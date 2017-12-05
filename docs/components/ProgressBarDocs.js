@@ -1,9 +1,9 @@
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { ProgressBar } = require("mx-react-components");
+const { ProgressBar } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class ProgressBarDocs extends React.Component {
   render() {
@@ -22,7 +22,7 @@ class ProgressBarDocs extends React.Component {
           baseColor="#ACB0B3"
           percentage={50}
           progressColor="#2EBE51"
-          styles={{ component: { width: "80%" } }}
+          styles={{ component: { width: '80%' } }}
         />
 
         <h3>Usage</h3>
@@ -47,8 +47,8 @@ class ProgressBarDocs extends React.Component {
           percentage <label>Number</label>
         </h5>
         <p>
-          The percentage of the progress portion of the bar. Expressed in the
-          percentage value, ie: 50 for 50%
+          The percentage of the progress portion of the bar. Expressed in the percentage value, ie:
+          50 for 50%
         </p>
 
         <h5>
@@ -61,17 +61,16 @@ class ProgressBarDocs extends React.Component {
           styles <label>Objext</label>
         </h5>
         <p>
-          A nested styles object used to override the `component` and/or
-          `progress` divs in the component. This can also be used in place of
-          the height and bar colors.
+          A nested styles object used to override the `component` and/or `progress` divs in the
+          component. This can also be used in place of the height and bar colors.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h3>Example</h3>
@@ -87,8 +86,8 @@ class ProgressBarDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = ProgressBarDocs;
+module.exports = ProgressBarDocs

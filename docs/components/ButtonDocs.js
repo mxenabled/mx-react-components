@@ -1,41 +1,41 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { Button, Styles } = require("mx-react-components");
+const { Button, Styles } = require('mx-react-components')
 
-const Code = require("components/Code");
-const Markdown = require("components/Markdown");
+const Code = require('components/Code')
+const Markdown = require('components/Markdown')
 
 const buttonStyle = {
-  margin: "0 10px"
-};
+  margin: '0 10px',
+}
 
 const customTheme = {
   Colors: {
-    GRAY_300: "#ffc0bc",
-    PRIMARY: "#6C3F6F"
-  }
-};
+    GRAY_300: '#ffc0bc',
+    PRIMARY: '#6C3F6F',
+  },
+}
 
 class ButtonDocs extends React.Component {
   state = {
     buttonIsActive: false,
-    spinnerIsActive: false
-  };
+    spinnerIsActive: false,
+  }
 
   _handleButtonClick = () => {
     this.setState({
-      buttonIsActive: !this.state.buttonIsActive
-    });
-  };
+      buttonIsActive: !this.state.buttonIsActive,
+    })
+  }
 
   _handleSpinnerClick = () => {
     this.setState({
-      spinnerIsActive: !this.state.spinnerIsActive
-    });
-  };
+      spinnerIsActive: !this.state.spinnerIsActive,
+    })
+  }
 
   render() {
     return (
@@ -70,7 +70,7 @@ class ButtonDocs extends React.Component {
             backgroundColor: Styles.Colors.PRIMARY,
             padding: Styles.Spacing.LARGE,
             marginTop: Styles.Spacing.LARGE,
-            width: 150
+            width: 150,
           }}
         >
           <Button style={buttonStyle} type="primaryInverse">
@@ -114,16 +114,16 @@ class ButtonDocs extends React.Component {
           actionText <label>String</label>
         </h5>
         <p>
-          The button text when <Code>isActive</Code> is <Code>true</Code>. If
-          not defined, a spinner without text is shown.
+          The button text when <Code>isActive</Code> is <Code>true</Code>. If not defined, a spinner
+          without text is shown.
         </p>
 
         <h5>
           icon <label>String</label>
         </h5>
         <p>
-          This can be any of the <Code>Icon</Code> component values. If defined,
-          an icon will be shown to the left of the button content.
+          This can be any of the <Code>Icon</Code> component values. If defined, an icon will be
+          shown to the left of the button content.
         </p>
 
         <h5>
@@ -133,7 +133,7 @@ class ButtonDocs extends React.Component {
           Default: <Code>false</Code>
         </p>
         <p>
-          When <Code>true</Code> the <Code>Button</Code> will show either the{" "}
+          When <Code>true</Code> the <Code>Button</Code> will show either the{' '}
           <Code>actionText</Code> or a spinner.
         </p>
 
@@ -141,8 +141,8 @@ class ButtonDocs extends React.Component {
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h5>
@@ -153,12 +153,11 @@ class ButtonDocs extends React.Component {
         </p>
         <p>This sets the button type. Available options are:</p>
         <code>
-          ['primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base',
-          'neutral', 'disabled']
+          ['primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base', 'neutral',
+          'disabled']
         </code>
         <p>
-          Setting the type to <Code>disabled</Code> also prevents onClick events
-          from firing.
+          Setting the type to <Code>disabled</Code> also prevents onClick events from firing.
         </p>
 
         <h3>Example</h3>
@@ -168,8 +167,8 @@ class ButtonDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = ButtonDocs;
+module.exports = ButtonDocs

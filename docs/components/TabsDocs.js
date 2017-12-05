@@ -1,31 +1,29 @@
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { Tabs } = require("mx-react-components");
+const { Tabs } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class TabsDocs extends React.Component {
   state = {
-    selectedTab: 0
-  };
+    selectedTab: 0,
+  }
 
   _handleTabSelect = selectedTab => {
     this.setState({
-      selectedTab
-    });
-  };
+      selectedTab,
+    })
+  }
 
   render() {
-    const tabs = ["Donuts", "Ice Cream", "Bacon", "Chicken"];
+    const tabs = ['Donuts', 'Ice Cream', 'Bacon', 'Chicken']
 
     return (
       <div>
         <h1>
           Tabs
-          <label>
-            A component to display tabs for full screen or a dropdown for mobile
-          </label>
+          <label>A component to display tabs for full screen or a dropdown for mobile</label>
         </h1>
 
         <h3>Demo</h3>
@@ -74,10 +72,7 @@ class TabsDocs extends React.Component {
           selectedTab<label>Number</label>
         </h5>
         <p>Default: 0</p>
-        <p>
-          A number representing the tab that has been selected. Tabs are ordered
-          starting at 0.
-        </p>
+        <p>A number representing the tab that has been selected. Tabs are ordered starting at 0.</p>
 
         <h5>
           showBottomBorder <label>Boolean</label>
@@ -90,17 +85,17 @@ class TabsDocs extends React.Component {
         </h5>
         <p>Default: PRIMARY</p>
         <p>
-          <em>(required)</em> Array of values that you want respresented as
-          tabs. Each item in the array should be a string. The "onTabClick"
-          function will be called when you click on each one.
+          <em>(required)</em> Array of values that you want respresented as tabs. Each item in the
+          array should be a string. The "onTabClick" function will be called when you click on each
+          one.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h5>
@@ -112,8 +107,8 @@ class TabsDocs extends React.Component {
           DEPRECATED: useTabsInMobile <label>Boolean</label>
         </h5>
         <p>
-          Deprecated. For dropdown style tabs please use{" "}
-          <Link to="/components/select">Select</Link> instead.
+          Deprecated. For dropdown style tabs please use <Link to="/components/select">Select</Link>{' '}
+          instead.
         </p>
 
         <h3>Example</h3>
@@ -150,8 +145,8 @@ class TabsDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = TabsDocs;
+module.exports = TabsDocs

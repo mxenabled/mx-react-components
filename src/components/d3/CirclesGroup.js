@@ -1,9 +1,9 @@
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const { themeShape } = require("../../constants/App");
+const { themeShape } = require('../../constants/App')
 
-const StyleUtils = require("../../utils/Style");
+const StyleUtils = require('../../utils/Style')
 
 class CirclesGroup extends React.Component {
   static propTypes = {
@@ -19,8 +19,8 @@ class CirclesGroup extends React.Component {
     translation: PropTypes.string,
     useCircleOverlay: PropTypes.bool,
     xScaleValueFunction: PropTypes.func.isRequired,
-    yScaleValueFunction: PropTypes.func.isRequired
-  };
+    yScaleValueFunction: PropTypes.func.isRequired,
+  }
 
   static defaultProps = {
     circleOverlayRadius: 6,
@@ -28,30 +28,30 @@ class CirclesGroup extends React.Component {
     onCircleClick: () => {},
     shouldAnimate: true,
     strokeWidth: 2,
-    translation: "translate(0,0)",
-    useCircleOverlay: false
-  };
+    translation: 'translate(0,0)',
+    useCircleOverlay: false,
+  }
 
   componentDidMount() {
-    this._animateCircles();
+    this._animateCircles()
   }
 
   componentDidUpdate() {
-    this._animateCircles();
+    this._animateCircles()
   }
 
   _animateCircles = () => {
     if (this.props.shouldAnimate) {
       d3
         .select(this.circleGroup)
-        .selectAll(".circle")
+        .selectAll('.circle')
         .data(this.props.data)
         .transition()
-        .attr("cy", d => {
-          return this.props.yScaleValueFunction(d.y);
-        });
+        .attr('cy', d => {
+          return this.props.yScaleValueFunction(d.y)
+        })
     }
-  };
+  }
 
   render() {
     const {
@@ -63,24 +63,18 @@ class CirclesGroup extends React.Component {
       translation,
       useCircleOverlay,
       xScaleValueFunction,
-      yScaleValueFunction
-    } = this.props;
-    const preventCircleOverlapCutOff = 45;
-    const theme = StyleUtils.mergeTheme(this.props.theme);
-    const circleColor = this.props.circleColor || theme.Colors.GRAY_700;
+      yScaleValueFunction,
+    } = this.props
+    const preventCircleOverlapCutOff = 45
+    const theme = StyleUtils.mergeTheme(this.props.theme)
+    const circleColor = this.props.circleColor || theme.Colors.GRAY_700
 
     return (
-      <g
-        className="circle-group"
-        ref={ref => (this.circleGroup = ref)}
-        transform={translation}
-      >
+      <g className="circle-group" ref={ref => (this.circleGroup = ref)} transform={translation}>
         {data.length <= preventCircleOverlapCutOff
           ? data.map((item, index) => {
-              const cx = xScaleValueFunction(item.x);
-              const cy = shouldAnimate
-                ? adjustedHeight
-                : yScaleValueFunction(item.y);
+              const cx = xScaleValueFunction(item.x)
+              const cy = shouldAnimate ? adjustedHeight : yScaleValueFunction(item.y)
 
               return (
                 <g key={index}>
@@ -91,7 +85,7 @@ class CirclesGroup extends React.Component {
                     fill={theme.Colors.WHITE}
                     onClick={() => {
                       if (!useCircleOverlay) {
-                        this.props.onCircleClick(item);
+                        this.props.onCircleClick(item)
                       }
                     }}
                     r={circleRadius}
@@ -105,19 +99,19 @@ class CirclesGroup extends React.Component {
                       cy={yScaleValueFunction(item.y)}
                       fill={theme.Colors.WHITE}
                       onClick={() => {
-                        this.props.onCircleClick(item);
+                        this.props.onCircleClick(item)
                       }}
                       r={circleOverlayRadius}
                       style={{ fillOpacity: 0 }}
                     />
                   )}
                 </g>
-              );
+              )
             })
           : null}
       </g>
-    );
+    )
   }
 }
 
-module.exports = CirclesGroup;
+module.exports = CirclesGroup

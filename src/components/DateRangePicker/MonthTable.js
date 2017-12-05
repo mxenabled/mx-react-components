@@ -1,6 +1,6 @@
-const React = require("react");
-const PropTypes = require("prop-types");
-const moment = require("moment");
+const React = require('react')
+const PropTypes = require('prop-types')
+const moment = require('moment')
 
 class MonthTable extends React.Component {
   render() {
@@ -16,89 +16,70 @@ class MonthTable extends React.Component {
       minimumDate,
       selectedEndDate,
       selectedStartDate,
-      styles
-    } = this.props;
+      styles,
+    } = this.props
 
-    const days = [];
+    const days = []
     let startDate = moment
       .unix(currentDate)
-      .startOf("month")
-      .startOf("week");
+      .startOf('month')
+      .startOf('week')
     const endDate = moment
       .unix(currentDate)
-      .endOf("month")
-      .endOf("week");
+      .endOf('month')
+      .endOf('week')
 
     while (moment(startDate).isBefore(endDate)) {
-      const disabledDay =
-        minimumDate && startDate.isBefore(moment.unix(minimumDate));
+      const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate))
       const isActiveRange =
         selectedStartDate || selectedEndDate
-          ? isInActiveRange(
-              selectedStartDate,
-              selectedEndDate,
-              activeSelectDate,
-              startDate
-            )
-          : false;
+          ? isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate)
+          : false
       const whereInRange = getDateRangePosition(
         selectedStartDate,
         selectedEndDate,
         activeSelectDate,
-        startDate
-      );
+        startDate,
+      )
       const isSelectedDay =
-        startDate.isSame(moment.unix(selectedStartDate), "day") ||
-        startDate.isSame(moment.unix(selectedEndDate), "day");
-      const savedStartDate = startDate.date();
+        startDate.isSame(moment.unix(selectedStartDate), 'day') ||
+        startDate.isSame(moment.unix(selectedEndDate), 'day')
+      const savedStartDate = startDate.date()
       const day = (
         <a
-          aria-label={moment(startDate).format("MMM D, YYYY")}
+          aria-label={moment(startDate).format('MMM D, YYYY')}
           key={startDate}
-          onClick={
-            !disabledDay && handleDateSelect.bind(null, startDate.unix())
-          }
+          onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown}
-          onMouseEnter={
-            !disabledDay && handleDateHover.bind(null, startDate.unix())
-          }
+          onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
           ref={ref => {
             if (ref && moment.unix(focusedDay).date() === savedStartDate) {
-              ref.focus();
+              ref.focus()
             }
           }}
           role="button"
           style={Object.assign(
             {},
             styles.calendarDay,
-            startDate.isSame(moment.unix(currentDate), "month") &&
-              styles.currentMonth,
+            startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
             disabledDay && styles.calendarDayDisabled,
-            startDate.isSame(moment(), "day") && !isActiveRange && styles.today,
+            startDate.isSame(moment(), 'day') && !isActiveRange && styles.today,
             isActiveRange &&
-              Object.assign(
-                {},
-                styles.betweenDay,
-                styles["betweenDay" + whereInRange]
-              ),
+              Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
             isSelectedDay &&
-              Object.assign(
-                {},
-                styles.selectedDay,
-                styles["selected" + whereInRange]
-              )
+              Object.assign({}, styles.selectedDay, styles['selected' + whereInRange]),
           )}
-          tabIndex={startDate.isSame(moment.unix(focusedDay), "day") ? 0 : null}
+          tabIndex={startDate.isSame(moment.unix(focusedDay), 'day') ? 0 : null}
         >
           {startDate.date()}
         </a>
-      );
+      )
 
-      days.push(day);
-      startDate = startDate.add(1, "d");
+      days.push(day)
+      startDate = startDate.add(1, 'd')
     }
 
-    return <div style={styles.calendarTable}>{days}</div>;
+    return <div style={styles.calendarTable}>{days}</div>
   }
 }
 
@@ -114,7 +95,7 @@ MonthTable.propTypes = {
   minimumDate: PropTypes.number,
   selectedEndDate: PropTypes.number,
   selectedStartDate: PropTypes.number,
-  styles: PropTypes.object
-};
+  styles: PropTypes.object,
+}
 
-module.exports = MonthTable;
+module.exports = MonthTable

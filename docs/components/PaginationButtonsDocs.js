@@ -1,21 +1,21 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { PaginationButtons } = require("mx-react-components");
+const { PaginationButtons } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class PaginationButtonsDocs extends React.Component {
   state = {
     currentPage: 4,
-    totalPages: 20
-  };
+    totalPages: 20,
+  }
 
   _handleButtonClick = nextPage => {
-    this.setState({ currentPage: nextPage });
-  };
+    this.setState({ currentPage: nextPage })
+  }
 
   render() {
     return (
@@ -43,30 +43,23 @@ class PaginationButtonsDocs extends React.Component {
         <h5>
           onClick <label>Function</label>
         </h5>
-        <p>
-          Function used to handle button click event. Returns the number
-          clicked.
-        </p>
-        <p>
-          If prev/next button is clicked, the number returned is -1/+1 the
-          current page number.
-        </p>
+        <p>Function used to handle button click event. Returns the number clicked.</p>
+        <p>If prev/next button is clicked, the number returned is -1/+1 the current page number.</p>
 
         <h5>
           pageRange <label>Number</label>
         </h5>
         <p>Default: 9</p>
         <p>
-          The number of page buttons (not including prev/next buttons) shown in
-          the button group.
+          The number of page buttons (not including prev/next buttons) shown in the button group.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h5>
@@ -87,8 +80,8 @@ class PaginationButtonsDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = PaginationButtonsDocs;
+module.exports = PaginationButtonsDocs

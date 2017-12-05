@@ -1,17 +1,17 @@
-const PropTypes = require("prop-types");
-const React = require("react");
-const { Link } = require("react-router");
+const PropTypes = require('prop-types')
+const React = require('react')
+const { Link } = require('react-router')
 
-const { Select } = require("mx-react-components");
+const { Select } = require('mx-react-components')
 
 class Components extends React.Component {
   static contextTypes = {
-    router: PropTypes.object.isRequired
-  };
+    router: PropTypes.object.isRequired,
+  }
 
   _handleChange = selected => {
-    this.context.router.push("/components/" + selected.value);
-  };
+    this.context.router.push('/components/' + selected.value)
+  }
 
   render() {
     return (
@@ -22,137 +22,137 @@ class Components extends React.Component {
               onChange={this._handleChange}
               options={[
                 {
-                  value: "button",
-                  displayValue: "Button"
+                  value: 'button',
+                  displayValue: 'Button',
                 },
                 {
-                  value: "button-group",
-                  displayValue: "Button Group"
+                  value: 'button-group',
+                  displayValue: 'Button Group',
                 },
                 {
-                  value: "date-picker",
-                  displayValue: "Date Picker"
+                  value: 'date-picker',
+                  displayValue: 'Date Picker',
                 },
                 {
-                  value: "date-picker-full-screen",
-                  displayValue: "Date Picker Full Screen"
+                  value: 'date-picker-full-screen',
+                  displayValue: 'Date Picker Full Screen',
                 },
                 {
-                  value: "date-range-picker",
-                  displayValue: "Date Range Picker"
+                  value: 'date-range-picker',
+                  displayValue: 'Date Range Picker',
                 },
                 {
-                  value: "date-time-picker",
-                  displayValue: "Date Time Picker"
+                  value: 'date-time-picker',
+                  displayValue: 'Date Time Picker',
                 },
                 {
-                  value: "display-input",
-                  displayValue: "Display Input"
+                  value: 'display-input',
+                  displayValue: 'Display Input',
                 },
                 {
-                  value: "drawer",
-                  displayValue: "Drawer"
+                  value: 'drawer',
+                  displayValue: 'Drawer',
                 },
                 {
-                  value: "donut",
-                  displayValue: "Donut"
+                  value: 'donut',
+                  displayValue: 'Donut',
                 },
                 {
-                  value: "file-upload",
-                  displayValue: "File Upload"
+                  value: 'file-upload',
+                  displayValue: 'File Upload',
                 },
                 {
-                  value: "gauge",
-                  displayValue: "Gauge"
+                  value: 'gauge',
+                  displayValue: 'Gauge',
                 },
                 {
-                  value: "icon",
-                  displayValue: "Icon"
+                  value: 'icon',
+                  displayValue: 'Icon',
                 },
                 {
-                  value: "loader",
-                  displayValue: "Loader"
+                  value: 'loader',
+                  displayValue: 'Loader',
                 },
                 {
-                  value: "menu",
-                  displayValue: "Menu"
+                  value: 'menu',
+                  displayValue: 'Menu',
                 },
                 {
-                  value: "modal",
-                  displayValue: "Modal"
+                  value: 'modal',
+                  displayValue: 'Modal',
                 },
                 {
-                  value: "notify-on-scroll-threshold",
-                  displayValue: "Notify On Scroll Threshold"
+                  value: 'notify-on-scroll-threshold',
+                  displayValue: 'Notify On Scroll Threshold',
                 },
                 {
-                  value: "page-indicator",
-                  displayValue: "Page Indicator"
+                  value: 'page-indicator',
+                  displayValue: 'Page Indicator',
                 },
                 {
-                  value: "pagination-buttons",
-                  displayValue: "Pagination Buttons"
+                  value: 'pagination-buttons',
+                  displayValue: 'Pagination Buttons',
                 },
                 {
-                  value: "progress-bar",
-                  displayValue: "Progress Bar"
+                  value: 'progress-bar',
+                  displayValue: 'Progress Bar',
                 },
                 {
-                  value: "radio-button",
-                  displayValue: "Radio Button"
+                  value: 'radio-button',
+                  displayValue: 'Radio Button',
                 },
                 {
-                  value: "raja-icon",
-                  displayValue: "Raja Icon"
+                  value: 'raja-icon',
+                  displayValue: 'Raja Icon',
                 },
                 {
-                  value: "range-selector",
-                  displayValue: "Range Selector"
+                  value: 'range-selector',
+                  displayValue: 'Range Selector',
                 },
                 {
-                  value: "row-column",
-                  displayValue: "Grid Row & Column"
+                  value: 'row-column',
+                  displayValue: 'Grid Row & Column',
                 },
                 {
-                  value: "select",
-                  displayValue: "Select"
+                  value: 'select',
+                  displayValue: 'Select',
                 },
                 {
-                  value: "simple-slider",
-                  displayValue: "Simple Slider"
+                  value: 'simple-slider',
+                  displayValue: 'Simple Slider',
                 },
                 {
-                  value: "select-full-screen",
-                  displayValue: "Select Full Screen"
+                  value: 'select-full-screen',
+                  displayValue: 'Select Full Screen',
                 },
                 {
-                  value: "spin",
-                  displayValue: "Spin"
+                  value: 'spin',
+                  displayValue: 'Spin',
                 },
                 {
-                  value: "styles",
-                  displayValue: "Styles"
+                  value: 'styles',
+                  displayValue: 'Styles',
                 },
                 {
-                  value: "time-based-line-chart",
-                  displayValue: "Time Based Line Chart"
+                  value: 'time-based-line-chart',
+                  displayValue: 'Time Based Line Chart',
                 },
                 {
-                  value: "textarea",
-                  displayValue: "TextArea"
+                  value: 'textarea',
+                  displayValue: 'TextArea',
                 },
                 {
-                  value: "tabs",
-                  displayValue: "Tabs"
+                  value: 'tabs',
+                  displayValue: 'Tabs',
                 },
                 {
-                  value: "toggle-switch",
-                  displayValue: "Toggle Switch"
+                  value: 'toggle-switch',
+                  displayValue: 'Toggle Switch',
                 },
                 {
-                  value: "type-ahead",
-                  displayValue: "Type Ahead"
-                }
+                  value: 'type-ahead',
+                  displayValue: 'Type Ahead',
+                },
               ]}
               selected={null}
               valid={true}
@@ -167,9 +167,7 @@ class Components extends React.Component {
             <Link to="/components/menu">Menu</Link>
             <Link to="/components/message-box">MessageBox</Link>
             <Link to="/components/modal">Modal</Link>
-            <Link to="/components/notify-on-scroll-threshold">
-              Notify On Scroll Threshold
-            </Link>
+            <Link to="/components/notify-on-scroll-threshold">Notify On Scroll Threshold</Link>
             <Link to="/components/page-indicator">Page Indicator</Link>
             <Link to="/components/pagination-buttons">Pagination Buttons</Link>
             <Link to="/components/progress-bar">Progress Bar</Link>
@@ -180,9 +178,7 @@ class Components extends React.Component {
             <Link to="/components/button">Button</Link>
             <Link to="/components/button-group">Button Group</Link>
             <Link to="/components/date-picker">Date Picker</Link>
-            <Link to="/components/date-picker-full-screen">
-              Date Picker Full Screen
-            </Link>
+            <Link to="/components/date-picker-full-screen">Date Picker Full Screen</Link>
             <Link to="/components/date-range-picker">Date Range Picker</Link>
             <Link to="/components/date-time-picker">Date Time Picker</Link>
             <Link to="/components/display-input">Display Input</Link>
@@ -205,9 +201,7 @@ class Components extends React.Component {
             <Link to="/components/bar">Bar</Link>
             <Link to="/components/donut">Donut</Link>
             <Link to="/components/gauge">Gauge</Link>
-            <Link to="/components/time-based-line-chart">
-              Time Based Line Chart
-            </Link>
+            <Link to="/components/time-based-line-chart">Time Based Line Chart</Link>
 
             <h3>Responsive Grid</h3>
             <Link to="/components/row-column">Row & Column</Link>
@@ -221,8 +215,8 @@ class Components extends React.Component {
 
         <div className="content">{this.props.children}</div>
       </div>
-    );
+    )
   }
 }
 
-module.exports = Components;
+module.exports = Components

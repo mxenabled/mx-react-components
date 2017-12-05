@@ -1,26 +1,18 @@
-const React = require("react");
+const React = require('react')
 
-const {
-  Button,
-  Column,
-  Container,
-  Row,
-  Styles
-} = require("mx-react-components");
+const { Button, Column, Container, Row, Styles } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class RowDocs extends React.Component {
   render() {
-    const styles = this.styles();
+    const styles = this.styles()
 
     return (
       <div>
         <h1>
           Cotainer, Row and Column
-          <label>
-            Container, Row and Column components to be used in a response grid.
-          </label>
+          <label>Container, Row and Column components to be used in a response grid.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -36,16 +28,10 @@ class RowDocs extends React.Component {
               <Column span={{ large: 6, medium: 6 }}>
                 <div style={styles.responsiveDiv}>Third Column</div>
               </Column>
-              <Column
-                breakpoints={{ large: 1000 }}
-                span={{ large: 6, medium: 12 }}
-              >
+              <Column breakpoints={{ large: 1000 }} span={{ large: 6, medium: 12 }}>
                 <div style={styles.responsiveDiv}>Fourth Column</div>
               </Column>
-              <Column
-                offset={{ large: 10, medium: 4 }}
-                span={{ large: 2, medium: 4 }}
-              >
+              <Column offset={{ large: 10, medium: 4 }} span={{ large: 2, medium: 4 }}>
                 <Button style={styles.responsiveButton}>Save</Button>
               </Column>
             </Row>
@@ -91,18 +77,18 @@ class RowDocs extends React.Component {
 
         <h3>Row Usage</h3>
         <h5>
-          WARNING: This component requires the Bootstrap grid system. You must
-          have the bootstrap css file linked in your application.
+          WARNING: This component requires the Bootstrap grid system. You must have the bootstrap
+          css file linked in your application.
         </h5>
 
         <h5>
           children <label>Node</label>
         </h5>
         <p>
-          This should be one or more{" "}
+          This should be one or more{' '}
           {`
             <Column />
-        `}{" "}
+        `}{' '}
           nodes to be displayed.
         </p>
 
@@ -112,29 +98,28 @@ class RowDocs extends React.Component {
           offset<label>Object</label>
         </h5>
         <p>
-          Shape and defaults:{" "}
+          Shape and defaults:{' '}
           {`
           { large: 0, medium: 0, small: 0 }
         `}
         </p>
         <p>
-          A number representing the offset of columns at which to display the
-          enclosed content, based on the columnCount.
+          A number representing the offset of columns at which to display the enclosed content,
+          based on the columnCount.
         </p>
 
         <h5>
           span<label>Object</label>
         </h5>
         <p>
-          Shape and defaults:{" "}
+          Shape and defaults:{' '}
           {`
           { large: 12, medium: 12, small: 12 }
         `}
         </p>
         <p>
-          A number representing the columns span at which to display the
-          enclosed content, based on the columnCount. If set to 0, the column
-          will be hidden.
+          A number representing the columns span at which to display the enclosed content, based on
+          the columnCount. If set to 0, the column will be hidden.
         </p>
 
         <h5>
@@ -186,28 +171,28 @@ class RowDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 
   styles = () => {
     return {
       container: {
-        width: "100%"
+        width: '100%',
       },
       responsiveDiv: {
-        boxSizing: "border-box",
+        boxSizing: 'border-box',
         backgroundColor: Styles.Colors.GRAY_100,
-        border: "1px solid" + Styles.Colors.GRAY_300,
+        border: '1px solid' + Styles.Colors.GRAY_300,
         borderRadius: 3,
         marginBottom: 10,
         padding: 10,
-        width: "100%"
+        width: '100%',
       },
       responsiveButton: {
-        width: "100%"
-      }
-    };
-  };
+        width: '100%',
+      },
+    }
+  }
 }
 
-module.exports = RowDocs;
+module.exports = RowDocs

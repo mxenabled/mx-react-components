@@ -1,11 +1,11 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { TypeAhead } = require("mx-react-components");
+const { TypeAhead } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class TypeAheadDocs extends React.Component {
   render() {
@@ -19,19 +19,19 @@ class TypeAheadDocs extends React.Component {
         <h3>Demo</h3>
         <TypeAhead
           items={[
-            "JPMorgan Chase",
-            "Bank of America",
-            "Citigroup",
-            "Wells Fargo",
-            "The Bank of New York Mellon",
-            "U.S. Bancorp",
-            "HSBC Bank USA",
-            "Capital One",
-            "PNC Financial Services",
-            "State Street Corporation"
+            'JPMorgan Chase',
+            'Bank of America',
+            'Citigroup',
+            'Wells Fargo',
+            'The Bank of New York Mellon',
+            'U.S. Bancorp',
+            'HSBC Bank USA',
+            'Capital One',
+            'PNC Financial Services',
+            'State Street Corporation',
           ]}
           placeholderText="Select a Bank"
-          preSelectedItems={["Bank of America", "Wells Fargo"]}
+          preSelectedItems={['Bank of America', 'Wells Fargo']}
         />
 
         <h3>Usage</h3>
@@ -60,9 +60,8 @@ class TypeAheadDocs extends React.Component {
           onItemRemove <label>Function</label>
         </h5>
         <p>
-          A method to be called whenever an item is removed by the user. It will
-          be passed 2 parameters: the item removed, an updated array of selected
-          items. Example:
+          A method to be called whenever an item is removed by the user. It will be passed 2
+          parameters: the item removed, an updated array of selected items. Example:
         </p>
         <Markdown lang="js">
           {`
@@ -81,9 +80,8 @@ class TypeAheadDocs extends React.Component {
           onItemSelect <label>Function</label>
         </h5>
         <p>
-          A method to be called whenever an item is selected by the user. It
-          will be passed 2 parameters: the item selected, an updated array of
-          selected items. Example:
+          A method to be called whenever an item is selected by the user. It will be passed 2
+          parameters: the item selected, an updated array of selected items. Example:
         </p>
         <Markdown lang="js">
           {`
@@ -108,18 +106,18 @@ class TypeAheadDocs extends React.Component {
           preSelectedItems <label>Array</label>
         </h5>
         <p>
-          An array of Strings to be displayed as selected options by default.
-          These values should be contained in the items Array. These values will
-          be the starting point of the TypeAhead's selected values state. Once
-          the user begins interacting with the TypeAhead, they will be ignored.
+          An array of Strings to be displayed as selected options by default. These values should be
+          contained in the items Array. These values will be the starting point of the TypeAhead's
+          selected values state. Once the user begins interacting with the TypeAhead, they will be
+          ignored.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h3>Example</h3>
@@ -147,8 +145,8 @@ class TypeAheadDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = TypeAheadDocs;
+module.exports = TypeAheadDocs

@@ -1,11 +1,11 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { Gauge } = require("mx-react-components");
+const { Gauge } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 class GaugeDocs extends React.Component {
   render() {
@@ -14,8 +14,8 @@ class GaugeDocs extends React.Component {
         <h1>
           Gauge
           <label>
-            A D3 gauge that supports multiple colors for each tranche of the
-            gauge, and reference dots.
+            A D3 gauge that supports multiple colors for each tranche of the gauge, and reference
+            dots.
           </label>
         </h1>
 
@@ -25,12 +25,12 @@ class GaugeDocs extends React.Component {
           arcWidth={15}
           chartTotal={300}
           data={[]}
-          dataPointColors={["#FFA510"]}
+          dataPointColors={['#FFA510']}
           dataPoints={[
             {
-              name: "Data Dot 1",
-              value: 150
-            }
+              name: 'Data Dot 1',
+              value: 150,
+            },
           ]}
           defaultLabelText="Total Users"
           defaultLabelValue="300"
@@ -55,27 +55,21 @@ class GaugeDocs extends React.Component {
           baseArcColor <label>String</label>
         </h5>
         <p>Default: #e5e5e5</p>
-        <p>
-          A css color value (hex, rgba, etc) used to set the base arc color.
-        </p>
+        <p>A css color value (hex, rgba, etc) used to set the base arc color.</p>
 
         <h5>
           chartTotal <label>Number</label>
         </h5>
         <p>
-          A number representing the total possible value for the chart. If no
-          chartTotal is provided, then the sum of the data values is used. This
-          is useful if your data values only represent a portion of the total
-          available value.
+          A number representing the total possible value for the chart. If no chartTotal is
+          provided, then the sum of the data values is used. This is useful if your data values only
+          represent a portion of the total available value.
         </p>
 
         <h5>
           children <label>Node</label>
         </h5>
-        <p>
-          If children nodes are provided, they will be used in place of the
-          default data label.
-        </p>
+        <p>If children nodes are provided, they will be used in place of the default data label.</p>
 
         <h5>
           colors <label>Array</label>
@@ -103,9 +97,9 @@ class GaugeDocs extends React.Component {
         </h5>
         <p>Default: GRAY_700 </p>
         <p>
-          Array of css color values whose indexes correspond with the data
-          array. For example, the first color value in dataPointColors will
-          determine the dot color for the first item in dataPoints.
+          Array of css color values whose indexes correspond with the data array. For example, the
+          first color value in dataPointColors will determine the dot color for the first item in
+          dataPoints.
         </p>
 
         <h5>
@@ -118,8 +112,8 @@ class GaugeDocs extends React.Component {
           dataPoints <label>Array</label>
         </h5>
         <p>
-          Array of name/value pairs for data points. These will be displayed as
-          dots along the arc. Example:
+          Array of name/value pairs for data points. These will be displayed as dots along the arc.
+          Example:
         </p>
         <Markdown lang="js">
           {`
@@ -134,9 +128,7 @@ class GaugeDocs extends React.Component {
           defaultLabelText <label>String</label>
         </h5>
         <p>Default: Roll over item for details</p>
-        <p>
-          The text to display in the data label when not hovering over a slice.
-        </p>
+        <p>The text to display in the data label when not hovering over a slice.</p>
 
         <h5>
           height <label>Number</label>
@@ -149,8 +141,8 @@ class GaugeDocs extends React.Component {
         </h5>
         <p>Default: gauge-chart</p>
         <p>
-          An id used to give the chart unique classNames/references so that
-          multiple charts on a page don't attempt to animate each other.
+          An id used to give the chart unique classNames/references so that multiple charts on a
+          page don't attempt to animate each other.
         </p>
 
         <h5>
@@ -176,8 +168,8 @@ class GaugeDocs extends React.Component {
         </h5>
         <p>Default: true</p>
         <p>
-          Show a base arc that respresents the chartTotal. Typically used when
-          the data only covers a portion of the arc.
+          Show a base arc that respresents the chartTotal. Typically used when the data only covers
+          a portion of the arc.
         </p>
 
         <h5>
@@ -185,26 +177,24 @@ class GaugeDocs extends React.Component {
         </h5>
         <p>Default: true</p>
         <p>
-          If set to true, the defaultLabelText will be displayed in the center
-          of the chart. On slice hover, the defaultLabelText with change to
-          display the data corresponding with the slice.
+          If set to true, the defaultLabelText will be displayed in the center of the chart. On
+          slice hover, the defaultLabelText with change to display the data corresponding with the
+          slice.
         </p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h5>
           width <label>Number</label>
         </h5>
         <p>Default: 150</p>
-        <p>
-          Width of the component. Also used to calculate the radius of the arc.
-        </p>
+        <p>Width of the component. Also used to calculate the radius of the arc.</p>
 
         <h3>Example</h3>
         <Markdown>
@@ -229,8 +219,8 @@ class GaugeDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = GaugeDocs;
+module.exports = GaugeDocs

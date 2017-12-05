@@ -1,28 +1,28 @@
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
 class Container extends React.Component {
   static propTypes = {
     fluid: PropTypes.bool,
-    styles: PropTypes.object
-  };
+    styles: PropTypes.object,
+  }
 
   static defaultProps = {
-    fluid: true
-  };
+    fluid: true,
+  }
 
   render() {
     return (
       <div
-        className={"container" + (this.props.fluid ? "-fluid" : "")}
+        className={'container' + (this.props.fluid ? '-fluid' : '')}
         style={Object.assign({}, this.props.styles, {
-          boxSizing: "border-box"
+          boxSizing: 'border-box',
         })}
       >
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
-module.exports = Container;
+module.exports = Container

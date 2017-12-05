@@ -1,54 +1,54 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require("react");
-const { Link } = require("react-router");
+const React = require('react')
+const { Link } = require('react-router')
 
-const { SelectFullScreen } = require("mx-react-components");
+const { SelectFullScreen } = require('mx-react-components')
 
-const Markdown = require("components/Markdown");
+const Markdown = require('components/Markdown')
 
 const options = [
   {
-    value: "1",
-    displayValue: "Option 1"
+    value: '1',
+    displayValue: 'Option 1',
   },
   {
-    value: "2",
-    displayValue: "Option 2"
+    value: '2',
+    displayValue: 'Option 2',
   },
   {
-    value: "3",
-    displayValue: "Option 3"
+    value: '3',
+    displayValue: 'Option 3',
   },
   {
-    value: "4",
-    displayValue: "Option 4"
+    value: '4',
+    displayValue: 'Option 4',
   },
   {
-    value: "5",
-    displayValue: "Option 5"
+    value: '5',
+    displayValue: 'Option 5',
   },
   {
-    value: "6",
-    displayValue: "Option 6"
+    value: '6',
+    displayValue: 'Option 6',
   },
   {
-    value: "7",
-    displayValue: "Option 7"
+    value: '7',
+    displayValue: 'Option 7',
   },
   {
-    value: "8",
-    displayValue: "Option 8"
+    value: '8',
+    displayValue: 'Option 8',
   },
   {
-    value: "9",
-    displayValue: "Option 9"
+    value: '9',
+    displayValue: 'Option 9',
   },
   {
-    value: "10",
-    displayValue: "Option 10"
-  }
-];
+    value: '10',
+    displayValue: 'Option 10',
+  },
+]
 
 class SelectFullScreenDocs extends React.Component {
   render() {
@@ -56,17 +56,14 @@ class SelectFullScreenDocs extends React.Component {
       <div>
         <h1>
           SelectFullScreen
-          <label>
-            A custom select box meant to replace the default {"<select>"} html
-            element.
-          </label>
+          <label>A custom select box meant to replace the default {'<select>'} html element.</label>
         </h1>
 
         <h3>Demo</h3>
         <SelectFullScreen
           isFixed={true}
           options={options}
-          selected={{ value: "1", displayValue: "Option 1" }}
+          selected={{ value: '1', displayValue: 'Option 1' }}
         />
 
         <h3>Usage</h3>
@@ -78,10 +75,7 @@ class SelectFullScreenDocs extends React.Component {
         <h5>
           isFixed <label>Boolean</label>
         </h5>
-        <p>
-          A boolean used to determine if the options window is fixed or
-          absolute.
-        </p>
+        <p>A boolean used to determine if the options window is fixed or absolute.</p>
 
         <h5>
           onChange <label>Function</label>
@@ -111,33 +105,30 @@ class SelectFullScreenDocs extends React.Component {
           options <label>Array</label>
         </h5>
         <p>
-          An array of option objects with the follow key/value pairs: value:
-          String/Number, displayValue: String.
+          An array of option objects with the follow key/value pairs: value: String/Number,
+          displayValue: String.
         </p>
 
         <h5>
           optionsHeaderText <label>String</label>
         </h5>
         <p>
-          String to be displayed above the options directing the user what to do
-          (ie: Select An Option).
+          String to be displayed above the options directing the user what to do (ie: Select An
+          Option).
         </p>
 
         <h5>
           optionsStyle <label>Object or Array</label>
         </h5>
         <p>
-          A style object or Radium array that modifies the css styles of the
-          options wrapper element.
+          A style object or Radium array that modifies the css styles of the options wrapper
+          element.
         </p>
 
         <h5>
           optionStyle <label>Object or Array</label>
         </h5>
-        <p>
-          A style object or Radium array that modifies the css styles of each
-          option element.
-        </p>
+        <p>A style object or Radium array that modifies the css styles of each option element.</p>
 
         <h5>
           placeholderText <label>String</label>
@@ -148,25 +139,22 @@ class SelectFullScreenDocs extends React.Component {
           selected <label>Object</label>
         </h5>
         <p>
-          An object that represents the selected value. This is typically used
-          to pass in a default selected value. The object must have the
-          following key/value pairs: value: String/Number, displayValue: String.
+          An object that represents the selected value. This is typically used to pass in a default
+          selected value. The object must have the following key/value pairs: value: String/Number,
+          displayValue: String.
         </p>
 
         <h5>
           selectedStyle <label>Object or Array</label>
         </h5>
-        <p>
-          A style object or Radium array that modifies the css styles of the
-          selected valued.
-        </p>
+        <p>A style object or Radium array that modifies the css styles of the selected valued.</p>
 
         <h5>
           theme <label>Object</label>
         </h5>
         <p>
-          Customize the component&apos;s look. See{" "}
-          <Link to="/components/theme">Theme</Link> for more information.
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
         </p>
 
         <h3>Example</h3>
@@ -220,8 +208,8 @@ class SelectFullScreenDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = SelectFullScreenDocs;
+module.exports = SelectFullScreenDocs

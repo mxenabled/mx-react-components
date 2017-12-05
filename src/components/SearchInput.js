@@ -1,11 +1,11 @@
-const PropTypes = require("prop-types");
-const React = require("react");
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const Input = require("./SimpleInput");
+const Input = require('./SimpleInput')
 
-const { themeShape } = require("../constants/App");
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require("../utils/Style");
+const StyleUtils = require('../utils/Style')
 
 class SearchInput extends React.Component {
   static propTypes = {
@@ -18,18 +18,18 @@ class SearchInput extends React.Component {
     searchKeyword: PropTypes.string,
     style: PropTypes.object,
     styles: PropTypes.object,
-    theme: themeShape
-  };
+    theme: themeShape,
+  }
 
   static defaultProps = {
     onBlur: () => {},
     onChange: () => {},
-    placeholder: "Search"
-  };
+    placeholder: 'Search',
+  }
 
   render() {
-    const theme = StyleUtils.mergeTheme(this.props.theme);
-    const styles = this.styles();
+    const theme = StyleUtils.mergeTheme(this.props.theme)
+    const styles = this.styles()
 
     return (
       <div style={Object.assign({}, styles.component, this.props.style)}>
@@ -38,8 +38,8 @@ class SearchInput extends React.Component {
             onBlur: this.props.onBlur,
             onChange: this.props.onChange,
             placeholder: this.props.placeholder,
-            type: "text",
-            value: this.props.searchKeyword
+            type: 'text',
+            value: this.props.searchKeyword,
           }}
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
@@ -49,7 +49,7 @@ class SearchInput extends React.Component {
           theme={theme}
         />
       </div>
-    );
+    )
   }
 
   styles = () => {
@@ -57,13 +57,13 @@ class SearchInput extends React.Component {
       {},
       {
         component: {
-          display: "inline-block",
-          width: "100%"
-        }
+          display: 'inline-block',
+          width: '100%',
+        },
       },
-      this.props.styles
-    );
-  };
+      this.props.styles,
+    )
+  }
 }
 
-module.exports = SearchInput;
+module.exports = SearchInput
