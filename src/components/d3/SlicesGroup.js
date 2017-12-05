@@ -1,5 +1,5 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require('prop-types')
+const React = require('react')
 
 class SlicesGroup extends React.Component {
   static propTypes = {
@@ -8,12 +8,12 @@ class SlicesGroup extends React.Component {
     handleChartMouseOver: PropTypes.func.isRequired,
     sliceWidth: PropTypes.number.isRequired,
     translation: PropTypes.string.isRequired,
-    xScaleValueFunction: PropTypes.func.isRequired
-  };
+    xScaleValueFunction: PropTypes.func.isRequired,
+  }
 
-  render () {
+  render() {
     return (
-      <g className='slices'>
+      <g className="slices">
         {this.props.data.map((dataPoint, index) => {
           return (
             <rect
@@ -26,11 +26,11 @@ class SlicesGroup extends React.Component {
               x={this.props.xScaleValueFunction(dataPoint.x) - this.props.sliceWidth / 2}
               y={0}
             />
-          );
+          )
         })}
       </g>
-    );
+    )
   }
 }
 
-module.exports = SlicesGroup;
+module.exports = SlicesGroup

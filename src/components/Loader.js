@@ -1,11 +1,11 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const Spin = require('./Spin');
+const Spin = require('./Spin')
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require('../utils/Style')
 
 class Loader extends React.Component {
   static propTypes = {
@@ -13,44 +13,43 @@ class Loader extends React.Component {
     isLoading: PropTypes.bool,
     isRelative: PropTypes.bool,
     isSmall: PropTypes.bool,
-    theme: themeShape
-  };
+    theme: themeShape,
+  }
 
   static defaultProps = {
     isLoading: false,
     isRelative: false,
     isSmall: false,
-    children: 'LOADING...'
-  };
+    children: 'LOADING...',
+  }
 
-  render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme);
-    const styles = this.styles(theme);
+  render() {
+    const theme = StyleUtils.mergeTheme(this.props.theme)
+    const styles = this.styles(theme)
 
     if (this.props.isLoading) {
       return (
-        <div className='mx-loader' style={styles.component}>
-          <div className='mx-loader-content' style={styles.content}>
+        <div className="mx-loader" style={styles.component}>
+          <div className="mx-loader-content" style={styles.content}>
             <Spin>
               <div style={styles.circle} />
             </Spin>
-            {this.props.isSmall ? (
-              null
-            ) : (
-              <div className='mx-loader-text' style={styles.text} > {this.props.children} </div>
+            {this.props.isSmall ? null : (
+              <div className="mx-loader-text" style={styles.text}>
+                {' '}
+                {this.props.children}{' '}
+              </div>
             )}
           </div>
         </div>
-      );
+      )
     } else {
-      return (
-        <div />
-      );
+      return <div />
     }
   }
 
-  styles = (theme) => {
-    const color = this.props.color || theme.Colors.PRIMARY;
+  styles = theme => {
+    const color = this.props.color || theme.Colors.PRIMARY
 
     return {
       component: {
@@ -66,7 +65,7 @@ class Loader extends React.Component {
         right: 0,
         textAlign: 'center',
         top: 0,
-        zIndex: 100
+        zIndex: 100,
       },
       content: {
         textAlign: 'center',
@@ -77,7 +76,7 @@ class Loader extends React.Component {
         left: 0,
         margin: 'auto',
         width: this.props.isSmall ? '30px' : '50px',
-        height: this.props.isSmall ? '30px' : '50px'
+        height: this.props.isSmall ? '30px' : '50px',
       },
       circle: {
         borderRadius: '100%',
@@ -86,15 +85,14 @@ class Loader extends React.Component {
         borderTop: '3px solid ' + color,
         borderRight: '3px solid transparent',
         borderBottom: '3px solid transparent',
-        borderLeft: '3px solid transparent'
+        borderLeft: '3px solid transparent',
       },
       text: {
         marginTop: '10px',
-        fontSize: '10px'
-      }
-    };
+        fontSize: '10px',
+      },
+    }
   }
 }
 
-
-module.exports = Loader;
+module.exports = Loader

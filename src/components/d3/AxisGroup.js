@@ -1,8 +1,8 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const d3 = require('d3');
+const PropTypes = require('prop-types')
+const React = require('react')
+const d3 = require('d3')
 
-const ChartUtils = require('../../utils/Chart');
+const ChartUtils = require('../../utils/Chart')
 
 class AxisGroup extends React.Component {
   static propTypes = {
@@ -11,45 +11,46 @@ class AxisGroup extends React.Component {
     data: PropTypes.array.isRequired,
     orientation: PropTypes.string.isRequired,
     scaleFunction: PropTypes.func.isRequired,
-    translation: PropTypes.string
-  };
-
-  static defaultProps = {
-    translation: 'translate(0,0)'
-  };
-
-  componentDidMount () {
-    this._renderAxis();
+    translation: PropTypes.string,
   }
 
-  componentDidUpdate () {
-    this._renderAxis();
+  static defaultProps = {
+    translation: 'translate(0,0)',
+  }
+
+  componentDidMount() {
+    this._renderAxis()
+  }
+
+  componentDidUpdate() {
+    this._renderAxis()
   }
 
   _renderAxis = () => {
-    const max = d3.max(this.props.data, d => d[this.props.axis]);
-    const min = d3.min(this.props.data, d => d[this.props.axis]);
-    const { tickValues } = ChartUtils.getAxisTickSpecification(min, max);
+    const max = d3.max(this.props.data, d => d[this.props.axis])
+    const min = d3.min(this.props.data, d => d[this.props.axis])
+    const { tickValues } = ChartUtils.getAxisTickSpecification(min, max)
 
-    const axisFunction = d3.svg.axis()
+    const axisFunction = d3.svg
+      .axis()
       .scale(this.props.scaleFunction())
       .orient(this.props.orientation)
       .tickFormat(this.props.axisFormatFunction)
       .ticks(tickValues.length)
-      .tickValues(tickValues);
+      .tickValues(tickValues)
 
-    d3.select(this.axisGroup).call(axisFunction);
-  };
+    d3.select(this.axisGroup).call(axisFunction)
+  }
 
-  render () {
+  render() {
     return (
       <g
         className={this.props.axis + '-axis'}
-        ref={(ref) => this.axisGroup = ref}
+        ref={ref => (this.axisGroup = ref)}
         transform={this.props.translation}
       />
-    );
+    )
   }
 }
 
-module.exports = AxisGroup;
+module.exports = AxisGroup

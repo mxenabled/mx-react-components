@@ -1,12 +1,12 @@
-const React = require('react');
+const React = require('react')
 
-const { Button, Column, Container, Row, Styles } = require('mx-react-components');
+const { Button, Column, Container, Row, Styles } = require('mx-react-components')
 
-const Markdown = require('components/Markdown');
+const Markdown = require('components/Markdown')
 
 class RowDocs extends React.Component {
-  render () {
-    const styles = this.styles();
+  render() {
+    const styles = this.styles()
 
     return (
       <div>
@@ -19,32 +19,19 @@ class RowDocs extends React.Component {
         <div style={styles.container}>
           <Container>
             <Row>
-              <Column
-                offset={{ medium: 3 }}
-                span={{ large: 6, medium: 9 }}
-              >
+              <Column offset={{ medium: 3 }} span={{ large: 6, medium: 9 }}>
                 <div style={styles.responsiveDiv}>First Column</div>
               </Column>
-              <Column
-                span={{ large: 6, medium: 6 }}
-              >
+              <Column span={{ large: 6, medium: 6 }}>
                 <div style={styles.responsiveDiv}>Second Column</div>
               </Column>
-              <Column
-                span={{ large: 6, medium: 6 }}
-              >
+              <Column span={{ large: 6, medium: 6 }}>
                 <div style={styles.responsiveDiv}>Third Column</div>
               </Column>
-              <Column
-                breakpoints={{ large: 1000 }}
-                span={{ large: 6, medium: 12 }}
-              >
+              <Column breakpoints={{ large: 1000 }} span={{ large: 6, medium: 12 }}>
                 <div style={styles.responsiveDiv}>Fourth Column</div>
               </Column>
-              <Column
-                offset={{ large: 10, medium: 4 }}
-                span={{ large: 2, medium: 4 }}
-              >
+              <Column offset={{ large: 10, medium: 4 }} span={{ large: 2, medium: 4 }}>
                 <Button style={styles.responsiveButton}>Save</Button>
               </Column>
             </Row>
@@ -89,32 +76,61 @@ class RowDocs extends React.Component {
         </ul>
 
         <h3>Row Usage</h3>
-        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap css file linked in your application.</h5>
+        <h5>
+          WARNING: This component requires the Bootstrap grid system. You must have the bootstrap
+          css file linked in your application.
+        </h5>
 
-        <h5>children <label>Node</label></h5>
-        <p>This should be one or more {`
+        <h5>
+          children <label>Node</label>
+        </h5>
+        <p>
+          This should be one or more{' '}
+          {`
             <Column />
-        `} nodes to be displayed.</p>
+        `}{' '}
+          nodes to be displayed.
+        </p>
 
         <h3>Column Usage</h3>
 
-        <h5>offset<label>Object</label></h5>
-        <p>Shape and defaults: {`
+        <h5>
+          offset<label>Object</label>
+        </h5>
+        <p>
+          Shape and defaults:{' '}
+          {`
           { large: 0, medium: 0, small: 0 }
-        `}</p>
-        <p>A number representing the offset of columns at which to display the enclosed content, based on the columnCount.</p>
+        `}
+        </p>
+        <p>
+          A number representing the offset of columns at which to display the enclosed content,
+          based on the columnCount.
+        </p>
 
-        <h5>span<label>Object</label></h5>
-        <p>Shape and defaults: {`
+        <h5>
+          span<label>Object</label>
+        </h5>
+        <p>
+          Shape and defaults:{' '}
+          {`
           { large: 12, medium: 12, small: 12 }
-        `}</p>
-        <p>A number representing the columns span at which to display the enclosed content, based on the columnCount. If set to 0, the column will be hidden.</p>
+        `}
+        </p>
+        <p>
+          A number representing the columns span at which to display the enclosed content, based on
+          the columnCount. If set to 0, the column will be hidden.
+        </p>
 
-        <h5>relative <label>Boolean</label></h5>
+        <h5>
+          relative <label>Boolean</label>
+        </h5>
         <p>Default: true</p>
         <p>Determines if the column is positioned relative or not.</p>
 
-        <h5>children <label>Node</label></h5>
+        <h5>
+          children <label>Node</label>
+        </h5>
         <p>The content to be displayed in the column</p>
 
         <h3>Example</h3>
@@ -155,13 +171,13 @@ class RowDocs extends React.Component {
           `}
         </Markdown>
       </div>
-    );
+    )
   }
 
   styles = () => {
     return {
       container: {
-        width: '100%'
+        width: '100%',
       },
       responsiveDiv: {
         boxSizing: 'border-box',
@@ -170,13 +186,13 @@ class RowDocs extends React.Component {
         borderRadius: 3,
         marginBottom: 10,
         padding: 10,
-        width: '100%'
+        width: '100%',
       },
       responsiveButton: {
-        width: '100%'
-      }
-    };
-  };
+        width: '100%',
+      },
+    }
+  }
 }
 
-module.exports = RowDocs;
+module.exports = RowDocs

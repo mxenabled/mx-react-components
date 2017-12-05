@@ -1,8 +1,8 @@
-const PropTypes = require('prop-types');
-const React = require('react');
+const PropTypes = require('prop-types')
+const React = require('react')
 
-const d3 = require('d3');
-const moment = require('moment');
+const d3 = require('d3')
+const moment = require('moment')
 
 class TimeXAxisGroup extends React.Component {
   static propTypes = {
@@ -10,43 +10,44 @@ class TimeXAxisGroup extends React.Component {
     tickSize: PropTypes.number,
     timeAxisFormat: PropTypes.string.isRequired,
     translation: PropTypes.string,
-    xScaleFunction: PropTypes.func.isRequired
-  };
+    xScaleFunction: PropTypes.func.isRequired,
+  }
 
   static defaultProps = {
     tickSize: 6,
-    translation: 'translate(0,0)'
-  };
-
-  componentDidMount () {
-    this._renderAxis();
+    translation: 'translate(0,0)',
   }
 
-  componentDidUpdate () {
-    this._renderAxis();
+  componentDidMount() {
+    this._renderAxis()
+  }
+
+  componentDidUpdate() {
+    this._renderAxis()
   }
 
   _renderAxis = () => {
-    const timeAxisFunction = d3.svg.axis()
-    .scale(this.props.xScaleFunction())
-    .tickSize(this.props.tickSize, this.props.tickSize)
-    .tickValues(this.props.ticks)
-    .tickFormat(d => {
-      return moment.unix(d).format(this.props.timeAxisFormat);
-    });
+    const timeAxisFunction = d3.svg
+      .axis()
+      .scale(this.props.xScaleFunction())
+      .tickSize(this.props.tickSize, this.props.tickSize)
+      .tickValues(this.props.ticks)
+      .tickFormat(d => {
+        return moment.unix(d).format(this.props.timeAxisFormat)
+      })
 
-    d3.select(this.timeAxis).call(timeAxisFunction);
-  };
+    d3.select(this.timeAxis).call(timeAxisFunction)
+  }
 
-  render () {
+  render() {
     return (
       <g
-        className='time-axis'
-        ref={(ref) => this.timeAxis = ref}
+        className="time-axis"
+        ref={ref => (this.timeAxis = ref)}
         transform={this.props.translation}
       />
-    );
+    )
   }
 }
 
-module.exports = TimeXAxisGroup;
+module.exports = TimeXAxisGroup

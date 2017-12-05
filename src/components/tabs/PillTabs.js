@@ -1,21 +1,14 @@
-const React = require('react');
+const React = require('react')
 
-const ButtonGroup = require('../ButtonGroup');
-const Tabbable = require('./Tabbable');
+const ButtonGroup = require('../ButtonGroup')
+const Tabbable = require('./Tabbable')
 
-const StyleUtils = require('../../utils/Style');
+const StyleUtils = require('../../utils/Style')
 
-const PillTabs = ({
-  activeTabStyles,
-  onTabSelect,
-  selectedTab,
-  style,
-  tabs,
-  theme
-}) => {
+const PillTabs = ({ activeTabStyles, onTabSelect, selectedTab, style, tabs, theme }) => {
   const styles = {
     component: {
-      padding: theme.Spacing.SMALL
+      padding: theme.Spacing.SMALL,
     },
     tab: {
       backgroundColor: theme.Colors.GRAY_100,
@@ -25,51 +18,54 @@ const PillTabs = ({
       ':hover': {
         backgroundColor: theme.Colors.PRIMARY,
         color: theme.Colors.WHITE,
-        fill: theme.Colors.WHITE
+        fill: theme.Colors.WHITE,
       },
       ':focus': {
         backgroundColor: theme.Colors.PRIMARY,
         color: theme.Colors.WHITE,
-        fill: theme.Colors.WHITE
+        fill: theme.Colors.WHITE,
       },
       ':active': {
-        backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15)
-      }
+        backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
+      },
     },
-    selected: Object.assign({
-      backgroundColor: theme.Colors.WHITE,
-      color: theme.Colors.PRIMARY,
-      cursor: 'default',
-
-      ':hover': {
-        backgroundColor: 'transparent'
-      },
-      ':focus': {
+    selected: Object.assign(
+      {
         backgroundColor: theme.Colors.WHITE,
-        color: theme.Colors.PRIMARY
+        color: theme.Colors.PRIMARY,
+        cursor: 'default',
+
+        ':hover': {
+          backgroundColor: 'transparent',
+        },
+        ':focus': {
+          backgroundColor: theme.Colors.WHITE,
+          color: theme.Colors.PRIMARY,
+        },
+        ':active': {
+          backgroundColor: 'transparent',
+        },
       },
-      ':active': {
-        backgroundColor: 'transparent'
-      }
-    }, activeTabStyles)
-  };
+      activeTabStyles,
+    ),
+  }
 
   return (
     <div style={Object.assign({}, styles.component, style)}>
       <ButtonGroup
         buttons={tabs.map((tab, index) => ({
           'aria-label': tab,
-          onClick: (selectedTab === index ? null : onTabSelect.bind(this, index)),
+          onClick: selectedTab === index ? null : onTabSelect.bind(this, index),
           style: Object.assign({}, styles.tab, selectedTab === index && styles.selected),
-          text: tab
+          text: tab,
         }))}
         style={styles.buttonGroup}
-        type='neutral'
+        type="neutral"
       />
     </div>
-  );
-};
+  )
+}
 
-PillTabs.propTypes = Tabbable.propTypes;
+PillTabs.propTypes = Tabbable.propTypes
 
-module.exports = StyleUtils.withMergedTheme(Tabbable(PillTabs));
+module.exports = StyleUtils.withMergedTheme(Tabbable(PillTabs))

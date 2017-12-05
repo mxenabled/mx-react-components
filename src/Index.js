@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require('moment')
 
 module.exports = {
   BarChart: require('./components/BarChart'),
@@ -70,8 +70,8 @@ module.exports = {
 
   // App configuration
   Config: {
-    setDefaultTimeZone: (timezone) => {
-      moment.tz.setDefault(timezone);
-    }
-  }
-};
+    setDefaultTimeZone: timezone => {
+      moment.tz.setDefault(timezone)
+    },
+  },
+}

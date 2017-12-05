@@ -1,34 +1,40 @@
-const PropTypes = require('prop-types');
-const Radium = require('radium');
-const keycode = require('keycode');
-const React = require('react');
-const Icon = require('../Icon');
+const PropTypes = require('prop-types')
+const Radium = require('radium')
+const keycode = require('keycode')
+const React = require('react')
+const Icon = require('../Icon')
 
 class DefaultRanges extends React.Component {
   state = {
-    selectedOption: null
-  };
+    selectedOption: null,
+  }
 
-  render () {
-    const { defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles } = this.props;
+  render() {
+    const {
+      defaultRanges,
+      handleDefaultRangeSelection,
+      primaryColor,
+      selectedStartDate,
+      selectedEndDate,
+      styles,
+    } = this.props
 
     return (
       <div style={styles.rangeOptions}>
-
         {defaultRanges.map((range, index) => (
           <div
             key={range.displayValue + range.getStartDate()}
             onClick={() => {
-              handleDefaultRangeSelection(range);
-              this.setState({ selectedOption: index });
+              handleDefaultRangeSelection(range)
+              this.setState({ selectedOption: index })
             }}
-            onKeyUp={(e) => {
+            onKeyUp={e => {
               if (keycode(e) === 'enter') {
-                handleDefaultRangeSelection(range);
-                this.setState({ selectedOption: index });
+                handleDefaultRangeSelection(range)
+                this.setState({ selectedOption: index })
               }
             }}
-            role='button'
+            role="button"
             style={styles.rangeOption}
             tabIndex={0}
           >
@@ -37,18 +43,20 @@ class DefaultRanges extends React.Component {
                 size={20}
                 style={Object.assign({}, styles.rangeOptionIcon, {
                   fill:
-                    this.state.selectedOption === index && range.getStartDate() === selectedStartDate && range.getEndDate() === selectedEndDate ? primaryColor : 'transparent'
+                    this.state.selectedOption === index &&
+                    range.getStartDate() === selectedStartDate &&
+                    range.getEndDate() === selectedEndDate
+                      ? primaryColor
+                      : 'transparent',
                 })}
-                type='check-solid'
+                type="check-solid"
               />
             </div>
-            <div>
-              {range.displayValue}
-            </div>
+            <div>{range.displayValue}</div>
           </div>
         ))}
       </div>
-    );
+    )
   }
 }
 
@@ -61,8 +69,8 @@ DefaultRanges.propTypes = {
   styles: PropTypes.shape({
     defaultRangesTitle: PropTypes.object,
     rangeOption: PropTypes.object,
-    rangeOptions: PropTypes.object
-  })
-};
+    rangeOptions: PropTypes.object,
+  }),
+}
 
-module.exports = Radium(DefaultRanges);
+module.exports = Radium(DefaultRanges)

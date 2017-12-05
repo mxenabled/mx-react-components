@@ -1,12 +1,12 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const Radium = require('radium');
+const React = require('react')
+const PropTypes = require('prop-types')
+const Radium = require('radium')
 
-const Icon = require('./Icon');
+const Icon = require('./Icon')
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require('../utils/Style')
 
 class SelectFullScreen extends React.Component {
   static propTypes = {
@@ -21,116 +21,119 @@ class SelectFullScreen extends React.Component {
     placeholderText: PropTypes.string,
     selected: PropTypes.object,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    theme: themeShape
-  };
+    theme: themeShape,
+  }
 
   static defaultProps = {
     closeIcon: 'close',
     isFixed: false,
-    onChange () {},
+    onChange() {},
     options: [],
     optionsHeaderText: 'Select An Option',
     placeholderText: 'Select One',
-    selected: false
-  };
+    selected: false,
+  }
 
   state = {
     isOpen: false,
-    selected: false
-  };
+    selected: false,
+  }
 
-  componentDidMount () {
+  componentDidMount() {
     window.onkeyup = e => {
       if (e.keyCode === 27) {
-        this._handleCloseClick();
+        this._handleCloseClick()
       }
-    };
+    }
   }
 
   _handleClick = () => {
     this.setState({
-      isOpen: true
-    });
-  };
+      isOpen: true,
+    })
+  }
 
   _handleCloseClick = () => {
     this.setState({
-      isOpen: false
-    });
-  };
+      isOpen: false,
+    })
+  }
 
-  _handleOptionClick = (option) => {
+  _handleOptionClick = option => {
     this.setState({
       selected: option,
-      isOpen: false
-    });
+      isOpen: false,
+    })
 
-    this.props.onChange(option);
-  };
+    this.props.onChange(option)
+  }
 
-  _handleSelectChange = (e) => {
+  _handleSelectChange = e => {
     const selectedOption = this.props.options.filter(option => {
-      return option.value + '' === e.target.value;
-    })[0];
+      return option.value + '' === e.target.value
+    })[0]
 
-    this._handleOptionClick(selectedOption);
-  };
+    this._handleOptionClick(selectedOption)
+  }
 
   _optionFormatter = (option, styles) => {
     return (
       <div key={option.displayValue + option.value + '_value'} style={styles.option}>
         {option.displayValue}
       </div>
-    );
-  };
+    )
+  }
 
-  _renderOptions = (styles) => {
+  _renderOptions = styles => {
     if (this.state.isOpen) {
       return (
         <div style={[styles.optionsScrim, this.props.isFixed && { position: 'fixed' }]}>
           <div onClick={this._handleCloseClick} style={styles.close}>
-            <Icon
-              size={20}
-              style={styles.closeIcon}
-              type={this.props.closeIcon}
-            />
+            <Icon size={20} style={styles.closeIcon} type={this.props.closeIcon} />
             <div style={styles.closeText}>ESC</div>
           </div>
           <div style={styles.content}>
-            <div style={styles.optionsHeader}>
-              {this.props.optionsHeaderText}
-            </div>
-            <div className='mx-select-full-screen-options' style={[styles.optionsWrapper, this.props.optionsStyle]}>
+            <div style={styles.optionsHeader}>{this.props.optionsHeaderText}</div>
+            <div
+              className="mx-select-full-screen-options"
+              style={[styles.optionsWrapper, this.props.optionsStyle]}
+            >
               {this.props.options.map(option => {
                 return (
                   <div
-                    className='mx-select-full-screen-option'
+                    className="mx-select-full-screen-option"
                     key={option.displayValue + option.value}
                     onClick={this._handleOptionClick.bind(null, option)}
                   >
-                    {this.props.optionFormatter ? this.props.optionFormatter(option) : this._optionFormatter(option, styles)}
+                    {this.props.optionFormatter
+                      ? this.props.optionFormatter(option)
+                      : this._optionFormatter(option, styles)}
                   </div>
-                );
+                )
               })}
             </div>
           </div>
         </div>
-      );
+      )
     } else {
-      return null;
+      return null
     }
-  };
+  }
 
-  render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme);
-    const styles = this.styles(theme);
-    const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
+  render() {
+    const theme = StyleUtils.mergeTheme(this.props.theme)
+    const styles = this.styles(theme)
+    const selected = this.state.selected ||
+      this.props.selected || {
+        displayValue: this.props.placeholderText,
+        value: '',
+      }
 
     return (
-      <div className='mx-select-full-screen' style={[styles.component, this.props.style]}>
+      <div className="mx-select-full-screen" style={[styles.component, this.props.style]}>
         <div
-          className='mx-select-full-screen-selected'
-          key='selected'
+          className="mx-select-full-screen-selected"
+          key="selected"
           onClick={this._handleClick}
           style={this.props.selectedStyle}
         >
@@ -138,10 +141,10 @@ class SelectFullScreen extends React.Component {
         </div>
         {this._renderOptions(styles)}
       </div>
-    );
+    )
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
       close: {
         position: 'absolute',
@@ -149,13 +152,13 @@ class SelectFullScreen extends React.Component {
         top: 15,
         textAlign: 'center',
         cursor: 'pointer',
-        color: theme.Colors.GRAY_500
+        color: theme.Colors.GRAY_500,
       },
       closeIcon: {
-        color: theme.Colors.GRAY_500
+        color: theme.Colors.GRAY_500,
       },
       closeText: {
-        fontSize: theme.FontSizes.TINY
+        fontSize: theme.FontSizes.TINY,
       },
       component: {
         cursor: 'pointer',
@@ -163,14 +166,14 @@ class SelectFullScreen extends React.Component {
         fontSize: theme.FontSizes.LARGE,
         color: theme.Colors.GRAY_700,
         boxSizing: 'border-box',
-        outline: 'none'
+        outline: 'none',
       },
       content: {
         left: '50%',
         position: 'absolute',
         top: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 300
+        width: 300,
       },
       optionsScrim: {
         backgroundColor: '#fff',
@@ -180,13 +183,13 @@ class SelectFullScreen extends React.Component {
         position: 'absolute',
         right: 0,
         top: 0,
-        zIndex: 999
+        zIndex: 999,
       },
       optionsWrapper: {
         border: '1px solid ' + theme.Colors.GRAY_300,
         height: 250,
         overflow: 'auto',
-        width: 300
+        width: 300,
       },
       option: {
         cursor: 'pointer',
@@ -198,17 +201,17 @@ class SelectFullScreen extends React.Component {
         ':hover': {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE,
-          opacity: 1
-        }
+          opacity: 1,
+        },
       },
       optionsHeader: {
         color: theme.Colors.GRAY_700,
         fontSize: theme.FontSizes.XXLARGE,
         fontWeight: 'bold',
-        paddingBottom: 10
-      }
-    };
+        paddingBottom: 10,
+      },
+    }
   }
 }
 
-module.exports = Radium(SelectFullScreen);
+module.exports = Radium(SelectFullScreen)

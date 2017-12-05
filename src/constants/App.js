@@ -1,14 +1,14 @@
-const PropTypes = require('prop-types');
+const PropTypes = require('prop-types')
 
-const StyleConstants = require('./Style');
+const StyleConstants = require('./Style')
 
 const shapeForObject = (obj, propType) =>
   PropTypes.shape(
     Object.keys(obj).reduce((shape, key) => {
-      shape[key] = propType;
-      return shape;
-    }, {})
-  );
+      shape[key] = propType
+      return shape
+    }, {}),
+  )
 
 module.exports = {
   buttonTypes: [
@@ -18,956 +18,956 @@ module.exports = {
     'primary',
     'primaryOutline',
     'primaryInverse',
-    'secondary'
+    'secondary',
   ],
 
   Icons: [
     {
       value: 'accounts',
-      displayValue: 'Accounts'
+      displayValue: 'Accounts',
     },
     {
       value: 'add',
-      displayValue: 'Add'
+      displayValue: 'Add',
     },
     {
       value: 'add-solid',
-      displayValue: 'Add Solid'
+      displayValue: 'Add Solid',
     },
     {
       value: 'android',
-      displayValue: 'Android'
+      displayValue: 'Android',
     },
     {
       value: 'apple',
-      displayValue: 'Apple'
+      displayValue: 'Apple',
     },
     {
       value: 'appliances',
-      displayValue: 'Appliances'
+      displayValue: 'Appliances',
     },
     {
       value: 'arrow-down',
-      displayValue: 'Arrow Down'
+      displayValue: 'Arrow Down',
     },
     {
       value: 'arrow-down-fat',
-      displayValue: 'Arrow Down Fat'
+      displayValue: 'Arrow Down Fat',
     },
     {
       value: 'arrow-left',
-      displayValue: 'Arrow Left'
+      displayValue: 'Arrow Left',
     },
     {
       value: 'arrow-right',
-      displayValue: 'Arrow Right'
+      displayValue: 'Arrow Right',
     },
     {
       value: 'arrow-up',
-      displayValue: 'Arrow Up'
+      displayValue: 'Arrow Up',
     },
     {
       value: 'arrow-up-fat',
-      displayValue: 'Arrow Up Fat'
+      displayValue: 'Arrow Up Fat',
     },
     {
       value: 'art',
-      displayValue: 'Art'
+      displayValue: 'Art',
     },
     {
       value: 'attention',
-      displayValue: 'Attention'
+      displayValue: 'Attention',
     },
     {
       value: 'attention-solid',
-      displayValue: 'Attention Solid'
+      displayValue: 'Attention Solid',
     },
     {
       value: 'auto',
-      displayValue: 'Auto'
+      displayValue: 'Auto',
     },
     {
       value: 'backspace',
-      displayValue: 'Backspace'
+      displayValue: 'Backspace',
     },
     {
       value: 'bell',
-      displayValue: 'bell'
+      displayValue: 'bell',
     },
     {
       value: 'bike',
-      displayValue: 'Bike'
+      displayValue: 'Bike',
     },
     {
       value: 'bill-pay',
-      displayValue: 'Bill Pay'
+      displayValue: 'Bill Pay',
     },
     {
       value: 'bubbles',
-      displayValue: 'Bubbles'
+      displayValue: 'Bubbles',
     },
     {
       value: 'business',
-      displayValue: 'Business'
+      displayValue: 'Business',
     },
     {
       value: 'calendar',
-      displayValue: 'Calendar'
+      displayValue: 'Calendar',
     },
     {
       value: 'calendar-plus',
-      displayValue: 'Calendar Plus'
+      displayValue: 'Calendar Plus',
     },
     {
       value: 'camera',
-      displayValue: 'Camera'
+      displayValue: 'Camera',
     },
     {
       value: 'campaigns',
-      displayValue: 'Campaigns'
+      displayValue: 'Campaigns',
     },
     {
       value: 'caret-down',
-      displayValue: 'Caret Down'
+      displayValue: 'Caret Down',
     },
     {
       value: 'caret-left',
-      displayValue: 'Caret Left'
+      displayValue: 'Caret Left',
     },
     {
       value: 'caret-right',
-      displayValue: 'Caret Right'
+      displayValue: 'Caret Right',
     },
     {
       value: 'caret-up',
-      displayValue: 'Caret Up'
+      displayValue: 'Caret Up',
     },
     {
       value: 'cash',
-      displayValue: 'Cash'
+      displayValue: 'Cash',
     },
     {
       value: 'chart',
-      displayValue: 'Chart'
+      displayValue: 'Chart',
     },
     {
       value: 'check',
-      displayValue: 'Check'
+      displayValue: 'Check',
     },
     {
       value: 'check-skinny',
-      displayValue: 'Check Skinny'
+      displayValue: 'Check Skinny',
     },
     {
       value: 'check-solid',
-      displayValue: 'Check Solid'
+      displayValue: 'Check Solid',
     },
     {
       value: 'checkbox',
-      displayValue: 'Checkbox'
+      displayValue: 'Checkbox',
     },
     {
       value: 'checkbox-selected',
-      displayValue: 'Checkbox Selected'
+      displayValue: 'Checkbox Selected',
     },
     {
       value: 'checkbox-solid',
-      displayValue: 'Checkbox Solid'
+      displayValue: 'Checkbox Solid',
     },
     {
       value: 'checking',
-      displayValue: 'Checking'
+      displayValue: 'Checking',
     },
     {
       value: 'clock',
-      displayValue: 'Clock'
+      displayValue: 'Clock',
     },
     {
       value: 'close',
-      displayValue: 'Close'
+      displayValue: 'Close',
     },
     {
       value: 'close-skinny',
-      displayValue: 'Close Skinny'
+      displayValue: 'Close Skinny',
     },
     {
       value: 'close-solid',
-      displayValue: 'Close Solid'
+      displayValue: 'Close Solid',
     },
     {
       value: 'close-box',
-      displayValue: 'Close Box'
+      displayValue: 'Close Box',
     },
     {
       value: 'comparisons',
-      displayValue: 'Comparisons'
+      displayValue: 'Comparisons',
     },
     {
       value: 'credit-card',
-      displayValue: 'Credit Card'
+      displayValue: 'Credit Card',
     },
     {
       value: 'debts',
-      displayValue: 'Debts'
+      displayValue: 'Debts',
     },
     {
       value: 'delete',
-      displayValue: 'Delete'
+      displayValue: 'Delete',
     },
     {
       value: 'desktop',
-      displayValue: 'Desktop'
+      displayValue: 'Desktop',
     },
     {
       value: 'document',
-      displayValue: 'Document'
+      displayValue: 'Document',
     },
     {
       value: 'download',
-      displayValue: 'Download'
+      displayValue: 'Download',
     },
     {
       value: 'duplicate',
-      displayValue: 'Duplicate'
+      displayValue: 'Duplicate',
     },
     {
       value: 'edit',
-      displayValue: 'Edit'
+      displayValue: 'Edit',
     },
     {
       value: 'education',
-      displayValue: 'Education'
+      displayValue: 'Education',
     },
     {
       value: 'entertainment',
-      displayValue: 'Entertainment'
+      displayValue: 'Entertainment',
     },
     {
       value: 'envelope',
-      displayValue: 'Envelope'
+      displayValue: 'Envelope',
     },
     {
       value: 'filter',
-      displayValue: 'Filter'
+      displayValue: 'Filter',
     },
     {
       value: 'flag',
-      displayValue: 'Flag'
+      displayValue: 'Flag',
     },
     {
       value: 'folder',
-      displayValue: 'Folder'
+      displayValue: 'Folder',
     },
     {
       value: 'food',
-      displayValue: 'Food'
+      displayValue: 'Food',
     },
     {
       value: 'furniture',
-      displayValue: 'Furniture'
+      displayValue: 'Furniture',
     },
     {
       value: 'gallery',
-      displayValue: 'Gallery'
+      displayValue: 'Gallery',
     },
     {
       value: 'gear',
-      displayValue: 'Gear'
+      displayValue: 'Gear',
     },
     {
       value: 'gifts',
-      displayValue: 'Gifts'
+      displayValue: 'Gifts',
     },
     {
       value: 'hamburger',
-      displayValue: 'Hamburger'
+      displayValue: 'Hamburger',
     },
     {
       value: 'health',
-      displayValue: 'Health'
+      displayValue: 'Health',
     },
     {
       value: 'help',
-      displayValue: 'Help'
+      displayValue: 'Help',
     },
     {
       value: 'home',
-      displayValue: 'Home'
+      displayValue: 'Home',
     },
     {
       value: 'import',
-      displayValue: 'Import'
+      displayValue: 'Import',
     },
     {
       value: 'info',
-      displayValue: 'Info'
+      displayValue: 'Info',
     },
     {
       value: 'info-solid',
-      displayValue: 'Info-solid'
+      displayValue: 'Info-solid',
     },
     {
       value: 'investment',
-      displayValue: 'Investment'
+      displayValue: 'Investment',
     },
     {
       value: 'jewlery',
-      displayValue: 'Jewlery'
+      displayValue: 'Jewlery',
     },
     {
       value: 'kabob_horizontal',
-      displayValue: 'Kabob Horizontal'
+      displayValue: 'Kabob Horizontal',
     },
     {
       value: 'key',
-      displayValue: 'Key'
+      displayValue: 'Key',
     },
     {
       value: 'kids',
-      displayValue: 'Kids'
+      displayValue: 'Kids',
     },
     {
       value: 'line-of-credit',
-      displayValue: 'Line Of Credit'
+      displayValue: 'Line Of Credit',
     },
     {
       value: 'link',
-      displayValue: 'Link'
+      displayValue: 'Link',
     },
     {
       value: 'list-view',
-      displayValue: 'List View'
+      displayValue: 'List View',
     },
     {
       value: 'loans',
-      displayValue: 'Loans'
+      displayValue: 'Loans',
     },
     {
       value: 'lock',
-      displayValue: 'Lock'
+      displayValue: 'Lock',
     },
     {
       value: 'map',
-      displayValue: 'Map'
+      displayValue: 'Map',
     },
     {
       value: 'md-cash',
-      displayValue: 'Cash (MD)'
+      displayValue: 'Cash (MD)',
     },
     {
       value: 'md-check-mark',
-      displayValue: 'Check Mark (MD)'
+      displayValue: 'Check Mark (MD)',
     },
     {
       value: 'md-credit',
-      displayValue: 'Credit (MD)'
+      displayValue: 'Credit (MD)',
     },
     {
       value: 'md-debts',
-      displayValue: 'Debts (MD)'
+      displayValue: 'Debts (MD)',
     },
     {
       value: 'md-savings',
-      displayValue: 'Savings (MD)'
+      displayValue: 'Savings (MD)',
     },
     {
       value: 'mobile-phone',
-      displayValue: 'Mobile Phone'
+      displayValue: 'Mobile Phone',
     },
     {
       value: 'money-banknote',
-      displayValue: 'Money Banknote'
+      displayValue: 'Money Banknote',
     },
     {
       value: 'mx',
-      displayValue: 'MX'
+      displayValue: 'MX',
     },
     {
       value: 'needle',
-      displayValue: 'Needle'
+      displayValue: 'Needle',
     },
     {
       value: 'net-worth',
-      displayValue: 'Net Worth'
+      displayValue: 'Net Worth',
     },
     {
       value: 'net-worth2',
-      displayValue: 'Net Worth 2'
+      displayValue: 'Net Worth 2',
     },
     {
       value: 'no',
-      displayValue: 'NO'
+      displayValue: 'NO',
     },
     {
       value: 'pause',
-      displayValue: 'Pause'
+      displayValue: 'Pause',
     },
     {
       value: 'personal-care',
-      displayValue: 'Personal Care'
+      displayValue: 'Personal Care',
     },
     {
       value: 'pets',
-      displayValue: 'Pets'
+      displayValue: 'Pets',
     },
     {
       value: 'phone',
-      displayValue: 'Phone'
+      displayValue: 'Phone',
     },
     {
       value: 'play',
-      displayValue: 'Play'
+      displayValue: 'Play',
     },
     {
       value: 'play-solid',
-      displayValue: 'Play Solid'
+      displayValue: 'Play Solid',
     },
     {
       value: 'plus',
-      displayValue: 'Plus'
+      displayValue: 'Plus',
     },
     {
       value: 'plus-box',
-      displayValue: 'Plus Box'
+      displayValue: 'Plus Box',
     },
     {
       value: 'pointer',
-      displayValue: 'pointer'
+      displayValue: 'pointer',
     },
     {
       value: 'property',
-      displayValue: 'Property'
+      displayValue: 'Property',
     },
     {
       value: 'radio-empty',
-      displayValue: 'Radio Empty'
+      displayValue: 'Radio Empty',
     },
     {
       value: 'radio-filled',
-      displayValue: 'Radio Filled'
+      displayValue: 'Radio Filled',
     },
     {
       value: 'real-estate',
-      displayValue: 'Real Estate'
+      displayValue: 'Real Estate',
     },
     {
       value: 'retirement',
-      displayValue: 'Retirement'
+      displayValue: 'Retirement',
     },
     {
       value: 'rocket',
-      displayValue: 'Rocket'
+      displayValue: 'Rocket',
     },
     {
       value: 'savings',
-      displayValue: 'Savings'
+      displayValue: 'Savings',
     },
     {
       value: 'search',
-      displayValue: 'Search'
+      displayValue: 'Search',
     },
     {
       value: 'shopping',
-      displayValue: 'Shopping'
+      displayValue: 'Shopping',
     },
     {
       value: 'segments',
-      displayValue: 'Segments'
+      displayValue: 'Segments',
     },
     {
       value: 'spending',
-      displayValue: 'Spending'
+      displayValue: 'Spending',
     },
     {
       value: 'spinner',
-      displayValue: 'Spinner'
+      displayValue: 'Spinner',
     },
     {
       value: 'split',
-      displayValue: 'Split'
+      displayValue: 'Split',
     },
     {
       value: 'sports',
-      displayValue: 'Sports'
+      displayValue: 'Sports',
     },
     {
       value: 'submit-feedback',
-      displayValue: 'Submit Feedback'
+      displayValue: 'Submit Feedback',
     },
     {
       value: 'subtract',
-      displayValue: 'Subtract'
+      displayValue: 'Subtract',
     },
     {
       value: 'sync',
-      displayValue: 'Sync'
+      displayValue: 'Sync',
     },
     {
       value: 'taxes',
-      displayValue: 'Taxes'
+      displayValue: 'Taxes',
     },
     {
       value: 'transfer',
-      displayValue: 'Transfer'
+      displayValue: 'Transfer',
     },
     {
       value: 'transactions',
-      displayValue: 'Transactions'
+      displayValue: 'Transactions',
     },
     {
       value: 'travel',
-      displayValue: 'Travel'
+      displayValue: 'Travel',
     },
     {
       value: 'user',
-      displayValue: 'User'
+      displayValue: 'User',
     },
     {
       value: 'utilities',
-      displayValue: 'Utilities'
+      displayValue: 'Utilities',
     },
     {
       value: 'view',
-      displayValue: 'View'
+      displayValue: 'View',
     },
     {
       value: 'visit',
-      displayValue: 'Visit'
+      displayValue: 'Visit',
     },
     {
       value: 'windows',
-      displayValue: 'Windows'
+      displayValue: 'Windows',
     },
     {
       value: 'x-axis',
-      displayValue: 'X Axis'
+      displayValue: 'X Axis',
     },
     {
       value: 'y-axis',
-      displayValue: 'Y Axis'
-    }
+      displayValue: 'Y Axis',
+    },
   ],
 
   RajaIcons: [
     {
       displayValue: 'about',
-      value: 'about'
+      value: 'about',
     },
     {
       displayValue: 'airplane',
-      value: 'airplane'
+      value: 'airplane',
     },
     {
       displayValue: 'appliances',
-      value: 'appliances'
+      value: 'appliances',
     },
     {
       displayValue: 'atm',
-      value: 'atm'
+      value: 'atm',
     },
     {
       displayValue: 'auto',
-      value: 'auto'
+      value: 'auto',
     },
     {
       displayValue: 'bike',
-      value: 'bike'
+      value: 'bike',
     },
     {
       displayValue: 'boat',
-      value: 'boat'
+      value: 'boat',
     },
     {
       displayValue: 'briefcase',
-      value: 'briefcase'
+      value: 'briefcase',
     },
     {
       displayValue: 'bubble_budgets',
-      value: 'bubble_budgets'
+      value: 'bubble_budgets',
     },
     {
       displayValue: 'budget_increase',
-      value: 'budget_increase'
+      value: 'budget_increase',
     },
     {
       displayValue: 'budget_decrease',
-      value: 'budget_decrease'
+      value: 'budget_decrease',
     },
     {
       displayValue: 'business',
-      value: 'business'
+      value: 'business',
     },
     {
       displayValue: 'card',
-      value: 'card'
+      value: 'card',
     },
     {
       displayValue: 'cash',
-      value: 'cash'
+      value: 'cash',
     },
     {
       displayValue: 'chair',
-      value: 'chair'
+      value: 'chair',
     },
     {
       displayValue: 'check_mark',
-      value: 'check_mark'
+      value: 'check_mark',
     },
     {
       displayValue: 'checkbook',
-      value: 'checkbook'
+      value: 'checkbook',
     },
     {
       displayValue: 'circle',
-      value: 'circle'
+      value: 'circle',
     },
     {
       displayValue: 'circle_1',
-      value: 'circle_1'
+      value: 'circle_1',
     },
     {
       displayValue: 'circle_2',
-      value: 'circle_2'
+      value: 'circle_2',
     },
     {
       displayValue: 'circle_3',
-      value: 'circle_3'
+      value: 'circle_3',
     },
     {
       displayValue: 'circle_4',
-      value: 'circle_4'
+      value: 'circle_4',
     },
     {
       displayValue: 'circle_flag',
-      value: 'circle_flag'
+      value: 'circle_flag',
     },
     {
       displayValue: 'circle_question_mark',
-      value: 'circle_question_mark'
+      value: 'circle_question_mark',
     },
     {
       displayValue: 'clock',
-      value: 'clock'
+      value: 'clock',
     },
     {
       displayValue: 'close',
-      value: 'close'
+      value: 'close',
     },
     {
       displayValue: 'coin',
-      value: 'coin'
+      value: 'coin',
     },
     {
       displayValue: 'color_palette',
-      value: 'color_palette'
+      value: 'color_palette',
     },
     {
       displayValue: 'computer',
-      value: 'computer'
+      value: 'computer',
     },
     {
       displayValue: 'conversation',
-      value: 'conversation'
+      value: 'conversation',
     },
     {
       displayValue: 'credit',
-      value: 'credit'
+      value: 'credit',
     },
     {
       displayValue: 'debts',
-      value: 'debts'
+      value: 'debts',
     },
     {
       displayValue: 'donut_graph',
-      value: 'donut_graph'
+      value: 'donut_graph',
     },
     {
       displayValue: 'down',
-      value: 'down'
+      value: 'down',
     },
     {
       displayValue: 'download',
-      value: 'download'
+      value: 'download',
     },
     {
       displayValue: 'duplicate',
-      value: 'duplicate'
+      value: 'duplicate',
     },
     {
       displayValue: 'electronics',
-      value: 'electronics'
+      value: 'electronics',
     },
     {
       displayValue: 'film_projector',
-      value: 'film_projector'
+      value: 'film_projector',
     },
     {
       displayValue: 'flag',
-      value: 'flag'
+      value: 'flag',
     },
     {
       displayValue: 'food',
-      value: 'food'
+      value: 'food',
     },
     {
       displayValue: 'gear',
-      value: 'gear'
+      value: 'gear',
     },
     {
       displayValue: 'gift',
-      value: 'gift'
+      value: 'gift',
     },
     {
       displayValue: 'goals_icon',
-      value: 'goals_icon'
+      value: 'goals_icon',
     },
     {
       displayValue: 'golf_clubs',
-      value: 'golf_clubs'
+      value: 'golf_clubs',
     },
     {
       displayValue: 'gps_arrow',
-      value: 'gps_arrow'
+      value: 'gps_arrow',
     },
     {
       displayValue: 'graduation_cap',
-      value: 'graduation_cap'
+      value: 'graduation_cap',
     },
     {
       displayValue: 'guitar',
-      value: 'guitar'
+      value: 'guitar',
     },
     {
       displayValue: 'happy',
-      value: 'happy'
+      value: 'happy',
     },
     {
       displayValue: 'heart',
-      value: 'heart'
+      value: 'heart',
     },
     {
       displayValue: 'home',
-      value: 'home'
+      value: 'home',
     },
     {
       displayValue: 'institution',
-      value: 'institution'
+      value: 'institution',
     },
     {
       displayValue: 'insurance',
-      value: 'insurance'
+      value: 'insurance',
     },
     {
       displayValue: 'investments',
-      value: 'investments'
+      value: 'investments',
     },
     {
       displayValue: 'jewelry',
-      value: 'jewelry'
+      value: 'jewelry',
     },
     {
       displayValue: 'left',
-      value: 'left'
+      value: 'left',
     },
     {
       displayValue: 'lightbulb',
-      value: 'lightbulb'
+      value: 'lightbulb',
     },
     {
       displayValue: 'loan',
-      value: 'loan'
+      value: 'loan',
     },
     {
       displayValue: 'lock',
-      value: 'lock'
+      value: 'lock',
     },
     {
       displayValue: 'logout',
-      value: 'logout'
+      value: 'logout',
     },
     {
       displayValue: 'mail',
-      value: 'mail'
+      value: 'mail',
     },
     {
       displayValue: 'md_logo',
-      value: 'md_logo'
+      value: 'md_logo',
     },
     {
       displayValue: 'merchant',
-      value: 'merchant'
+      value: 'merchant',
     },
     {
       displayValue: 'motorcycle',
-      value: 'motorcycle'
+      value: 'motorcycle',
     },
     {
       displayValue: 'net_worth',
-      value: 'net_worth'
+      value: 'net_worth',
     },
     {
       displayValue: 'no',
-      value: 'no'
+      value: 'no',
     },
     {
       displayValue: 'not_cleared',
-      value: 'not_cleared'
+      value: 'not_cleared',
     },
     {
       displayValue: 'no_mail',
-      value: 'no_mail'
+      value: 'no_mail',
     },
     {
       displayValue: 'no_phone',
-      value: 'no_phone'
+      value: 'no_phone',
     },
     {
       displayValue: 'palm_tree',
-      value: 'palm_tree'
+      value: 'palm_tree',
     },
     {
       displayValue: 'password',
-      value: 'password'
+      value: 'password',
     },
     {
       displayValue: 'pencil',
-      value: 'pencil'
+      value: 'pencil',
     },
     {
       displayValue: 'personal',
-      value: 'personal'
+      value: 'personal',
     },
     {
       displayValue: 'personal_care',
-      value: 'personal_care'
+      value: 'personal_care',
     },
     {
       displayValue: 'pets',
-      value: 'pets'
+      value: 'pets',
     },
     {
       displayValue: 'phone',
-      value: 'phone'
+      value: 'phone',
     },
     {
       displayValue: 'plus',
-      value: 'plus'
+      value: 'plus',
     },
     {
       displayValue: 'plus_card',
-      value: 'plus_card'
+      value: 'plus_card',
     },
     {
       displayValue: 'power',
-      value: 'power'
+      value: 'power',
     },
     {
       displayValue: 'printer',
-      value: 'printer'
+      value: 'printer',
     },
     {
       displayValue: 'property',
-      value: 'property'
+      value: 'property',
     },
     {
       displayValue: 'question_mark',
-      value: 'question_mark'
+      value: 'question_mark',
     },
     {
       displayValue: 'real_estate',
-      value: 'real_estate'
+      value: 'real_estate',
     },
     {
       displayValue: 'refresh',
-      value: 'refresh'
+      value: 'refresh',
     },
     {
       displayValue: 'retirement',
-      value: 'retirement'
+      value: 'retirement',
     },
     {
       displayValue: 'right',
-      value: 'right'
+      value: 'right',
     },
     {
       displayValue: 'savings',
-      value: 'savings'
+      value: 'savings',
     },
     {
       displayValue: 'sad',
-      value: 'sad'
+      value: 'sad',
     },
     {
       displayValue: 'search',
-      value: 'search'
+      value: 'search',
     },
     {
       displayValue: 'share',
-      value: 'share'
+      value: 'share',
     },
     {
       displayValue: 'shopping_bag',
-      value: 'shopping_bag'
+      value: 'shopping_bag',
     },
     {
       displayValue: 'skydiving',
-      value: 'skydiving'
+      value: 'skydiving',
     },
     {
       displayValue: 'split',
-      value: 'split'
+      value: 'split',
     },
     {
       displayValue: 'sports_equipment',
-      value: 'sports_equipment'
+      value: 'sports_equipment',
     },
     {
       displayValue: 'tabular',
-      value: 'tabular'
+      value: 'tabular',
     },
     {
       displayValue: 'taxes',
-      value: 'taxes'
+      value: 'taxes',
     },
     {
       displayValue: 'transactions',
-      value: 'transactions'
+      value: 'transactions',
     },
     {
       displayValue: 'transfer',
-      value: 'transfer'
+      value: 'transfer',
     },
     {
       displayValue: 'trash',
-      value: 'trash'
+      value: 'trash',
     },
     {
       displayValue: 'up',
-      value: 'up'
+      value: 'up',
     },
     {
       displayValue: 'vacation',
-      value: 'vacation'
+      value: 'vacation',
     },
     {
       displayValue: 'vertical_bar_graph',
-      value: 'vertical_bar_graph'
+      value: 'vertical_bar_graph',
     },
     {
       displayValue: 'wallet',
-      value: 'wallet'
+      value: 'wallet',
     },
     {
       displayValue: 'warning',
-      value: 'warning'
+      value: 'warning',
     },
     {
       displayValue: 'wedding',
-      value: 'wedding'
-    }
+      value: 'wedding',
+    },
   ],
 
   themeShape: PropTypes.shape({
-    Colors: shapeForObject(StyleConstants.Colors, PropTypes.string)
-  })
-};
+    Colors: shapeForObject(StyleConstants.Colors, PropTypes.string),
+  }),
+}

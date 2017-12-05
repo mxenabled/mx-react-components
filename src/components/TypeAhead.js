@@ -1,13 +1,13 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const PropTypes = require('prop-types');
-const Radium = require('radium');
+const React = require('react')
+const ReactDOM = require('react-dom')
+const PropTypes = require('prop-types')
+const Radium = require('radium')
 
-const Icon = require('./Icon');
+const Icon = require('./Icon')
 
-const { themeShape } = require('../constants/App');
+const { themeShape } = require('../constants/App')
 
-const StyleUtils = require('../utils/Style');
+const StyleUtils = require('../utils/Style')
 
 class TypeAhead extends React.Component {
   static propTypes = {
@@ -16,314 +16,325 @@ class TypeAhead extends React.Component {
     onItemSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     preSelectedItems: PropTypes.array,
-    theme: themeShape
-  };
+    theme: themeShape,
+  }
 
   static defaultProps = {
     items: [],
-    onItemRemove () {},
-    onItemSelect () {},
+    onItemRemove() {},
+    onItemSelect() {},
     placeholderText: 'Select Filters',
-    preSelectedItems: []
-  };
+    preSelectedItems: [],
+  }
 
   state = {
     highlightedValue: null,
     isOpen: false,
     searchString: '',
-    selectedItems: this.props.preSelectedItems
-  };
+    selectedItems: this.props.preSelectedItems,
+  }
 
   _getFilteredItems = () => {
     return this.props.items.filter(item => {
-      return this.state.selectedItems.indexOf(item) === -1 &&
-             item.toLowerCase().indexOf(this.state.searchString.toLowerCase()) > -1;
-    });
-  };
+      return (
+        this.state.selectedItems.indexOf(item) === -1 &&
+        item.toLowerCase().indexOf(this.state.searchString.toLowerCase()) > -1
+      )
+    })
+  }
 
   _handleBlur = () => {
     this.setState({
       highlightedValue: null,
       isOpen: false,
-      searchString: ''
-    });
-  };
+      searchString: '',
+    })
+  }
 
   _handleFocus = () => {
     this.setState({
-      isOpen: true
-    });
+      isOpen: true,
+    })
 
-    ReactDOM.findDOMNode(this.input).focus();
-  };
+    ReactDOM.findDOMNode(this.input).focus()
+  }
 
   _handleItemMouseOver = () => {
     this.setState({
-      highlightedValue: null
-    });
-  };
+      highlightedValue: null,
+    })
+  }
 
   _handleSelectAll = () => {
-    this.props.onItemSelect(null, this.props.items);
+    this.props.onItemSelect(null, this.props.items)
 
     this.setState({
       highlightedValue: null,
       searchString: '',
-      selectedItems: this.props.items
-    });
-  };
+      selectedItems: this.props.items,
+    })
+  }
 
   _handleClearAll = () => {
-    this.props.onItemSelect(null, []);
+    this.props.onItemSelect(null, [])
 
     this.setState({
       highlightedValue: null,
       searchString: '',
-      selectedItems: []
-    });
-  };
+      selectedItems: [],
+    })
+  }
 
-  _handleItemSelect = (item) => {
+  _handleItemSelect = item => {
     //add to selectedItems
-    const selectedItems = this.state.selectedItems;
+    const selectedItems = this.state.selectedItems
 
-    selectedItems.push(item);
+    selectedItems.push(item)
 
-    this.props.onItemSelect(item, selectedItems);
+    this.props.onItemSelect(item, selectedItems)
 
     this.setState({
       highlightedValue: null,
       searchString: '',
-      selectedItems
-    });
+      selectedItems,
+    })
 
-    ReactDOM.findDOMNode(this.input).focus();
-  };
+    ReactDOM.findDOMNode(this.input).focus()
+  }
 
-  _handleItemRemove = (item) => {
+  _handleItemRemove = item => {
     const selectedItems = this.state.selectedItems.filter(selectedItem => {
-      return selectedItem !== item;
-    });
+      return selectedItem !== item
+    })
 
-    this.props.onItemRemove(item, selectedItems);
+    this.props.onItemRemove(item, selectedItems)
 
     this.setState({
-      selectedItems
-    });
+      selectedItems,
+    })
 
-    ReactDOM.findDOMNode(this.input).focus();
-  };
+    ReactDOM.findDOMNode(this.input).focus()
+  }
 
-  _handleInputKeyDown = (e) => {
-    const searchString = e.target.value;
-    const highlightedValue = this.state.highlightedValue;
-    const selectedItems = this.state.selectedItems;
-    const filteredItems = this._getFilteredItems();
+  _handleInputKeyDown = e => {
+    const searchString = e.target.value
+    const highlightedValue = this.state.highlightedValue
+    const selectedItems = this.state.selectedItems
+    const filteredItems = this._getFilteredItems()
 
     //add item on enter
     if (e.keyCode === 13 && highlightedValue && selectedItems.indexOf(highlightedValue) === -1) {
-      this._handleItemSelect(highlightedValue);
+      this._handleItemSelect(highlightedValue)
     }
 
     //add first returned item on tab
     if (e.keyCode === 9) {
-      e.preventDefault();
+      e.preventDefault()
 
-      const item = filteredItems[0];
+      const item = filteredItems[0]
 
       if (item) {
-        this._handleItemSelect(item);
+        this._handleItemSelect(item)
       }
     }
 
     //remove tag on backspace
     if (e.keyCode === 8 && !searchString && selectedItems.length) {
-      this._handleItemRemove(selectedItems[selectedItems.length - 1]);
+      this._handleItemRemove(selectedItems[selectedItems.length - 1])
     }
 
     //highlight next item on down
     if (e.keyCode === 40) {
-      e.preventDefault();
-      const nextIndex = filteredItems.indexOf(highlightedValue) + 1;
+      e.preventDefault()
+      const nextIndex = filteredItems.indexOf(highlightedValue) + 1
 
       if (nextIndex < filteredItems.length) {
         this.setState({
-          highlightedValue: filteredItems[nextIndex]
-        });
+          highlightedValue: filteredItems[nextIndex],
+        })
       }
 
-      this._scrollList(nextIndex, 'up');
+      this._scrollList(nextIndex, 'up')
 
       this.setState({
-        selectedValue: filteredItems[nextIndex]
-      });
+        selectedValue: filteredItems[nextIndex],
+      })
     }
 
     //highlight previous item on up
     if (e.keyCode === 38) {
-      e.preventDefault();
-      const previousIndex = filteredItems.indexOf(highlightedValue) - 1;
+      e.preventDefault()
+      const previousIndex = filteredItems.indexOf(highlightedValue) - 1
 
       if (previousIndex > -1) {
         this.setState({
-          highlightedValue: filteredItems[previousIndex]
-        });
+          highlightedValue: filteredItems[previousIndex],
+        })
       }
 
-      this._scrollList(previousIndex, 'down');
+      this._scrollList(previousIndex, 'down')
       this.setState({
-        selectedValue: filteredItems[previousIndex]
-      });
+        selectedValue: filteredItems[previousIndex],
+      })
     }
 
     //lose foucus on esc
     if (e.keyCode === 27) {
-      e.preventDefault();
+      e.preventDefault()
 
       this.setState({
         searchString: '',
         isOpen: false,
-        highlightedValue: null
-      });
+        highlightedValue: null,
+      })
 
-      ReactDOM.findDOMNode(this.input).blur();
+      ReactDOM.findDOMNode(this.input).blur()
     }
-  };
+  }
 
   _scrollList = (nextIndex, scrollDirection) => {
-    const filteredItems = this._getFilteredItems();
-    const ul = ReactDOM.findDOMNode(this.optionList);
-    const skipClearSelectAll = 2;
-    const activeLi = ul.children[nextIndex + skipClearSelectAll];
+    const filteredItems = this._getFilteredItems()
+    const ul = ReactDOM.findDOMNode(this.optionList)
+    const skipClearSelectAll = 2
+    const activeLi = ul.children[nextIndex + skipClearSelectAll]
 
     if (scrollDirection === 'up' && activeLi) {
-      const heightFromTop = (nextIndex + skipClearSelectAll) * activeLi.clientHeight + activeLi.clientHeight;
+      const heightFromTop =
+        (nextIndex + skipClearSelectAll) * activeLi.clientHeight + activeLi.clientHeight
 
       if (heightFromTop > ul.clientHeight || nextIndex === 0) {
-        ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight * skipClearSelectAll;
+        ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight * skipClearSelectAll
       }
     } else if (scrollDirection === 'down' && activeLi) {
-      const heightFromBottom = (filteredItems.length - nextIndex) * activeLi.clientHeight;
+      const heightFromBottom = (filteredItems.length - nextIndex) * activeLi.clientHeight
 
       if (heightFromBottom > ul.clientHeight) {
-        ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight * skipClearSelectAll;
+        ul.scrollTop = activeLi.offsetTop - activeLi.clientHeight * skipClearSelectAll
       }
 
       if (nextIndex === filteredItems.length - 1) {
-        ul.scrollTop = filteredItems.length * activeLi.clientHeight;
+        ul.scrollTop = filteredItems.length * activeLi.clientHeight
       }
     }
-  };
+  }
 
-  _handleInputChange = (e) => {
+  _handleInputChange = e => {
     this.setState({
-      searchString: e.target.value
-    });
-  };
+      searchString: e.target.value,
+    })
+  }
 
-  _renderSelectedItems = (styles) => {
+  _renderSelectedItems = styles => {
     return this.state.selectedItems.map((item, index) => {
       return (
-        <div className='mx-typeahead-selected' key={index} style={styles.itemTag}>
+        <div className="mx-typeahead-selected" key={index} style={styles.itemTag}>
           {item}
           <Icon
             elementProps={{
-              onClick: this._handleItemRemove.bind(null, item)
+              onClick: this._handleItemRemove.bind(null, item),
             }}
             size={15}
             style={styles.removeIcon}
-            type='close'
+            type="close"
           />
-        </div>);
-    });
-  };
+        </div>
+      )
+    })
+  }
 
-  _renderItemList = (styles) => {
+  _renderItemList = styles => {
     return (
       <div
-        className='mx-typeahead-option-list'
-        ref={(ref) => this.optionList = ref}
+        className="mx-typeahead-option-list"
+        ref={ref => (this.optionList = ref)}
         style={styles.itemList}
       >
         {this.state.selectedItems.length !== this.props.items.length ? (
           <div
-            className='mx-typeahead-select-all'
-            key='selectAllItem'
+            className="mx-typeahead-select-all"
+            key="selectAllItem"
             onMouseDown={this._handleSelectAll}
             onMouseOver={this._handleItemMouseOver}
             style={styles.item}
           >
             Select All
           </div>
-        ) : (
-          null
-        )}
+        ) : null}
 
         {this.state.selectedItems.length > 0 ? (
           <div
-            className='mx-typeahead-clear-all'
-            key='clearAllItem'
+            className="mx-typeahead-clear-all"
+            key="clearAllItem"
             onMouseDown={this._handleClearAll}
             onMouseOver={this._handleItemMouseOver}
             style={styles.item}
           >
             Clear
           </div>
-        ) : (
-          null
-        )}
+        ) : null}
 
         {this._getFilteredItems().map((item, index) => {
           return (
             <div
-              className='mx-typeahead-option'
+              className="mx-typeahead-option"
               key={index}
               onMouseDown={this._handleItemSelect.bind(null, item)}
               onMouseOver={this._handleItemMouseOver}
-              style={Object.assign({}, styles.item, (item === this.state.highlightedValue) && styles.activeItem)}
+              style={Object.assign(
+                {},
+                styles.item,
+                item === this.state.highlightedValue && styles.activeItem,
+              )}
             >
               {item}
             </div>
-          );
+          )
         })}
       </div>
-    );
-  };
+    )
+  }
 
-  render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme);
-    const styles = this.styles(theme);
+  render() {
+    const theme = StyleUtils.mergeTheme(this.props.theme)
+    const styles = this.styles(theme)
 
     return (
       <div
-        className='mx-typeahead'
+        className="mx-typeahead"
         onBlur={this._handleBlur}
         onFocus={this._handleFocus}
         style={Object.assign({}, styles.component, this.props.style)}
-        tabIndex='0'
+        tabIndex="0"
       >
         {this._renderSelectedItems(styles)}
 
         <input
-          className='mx-typeahead-input'
-          key='input'
+          className="mx-typeahead-input"
+          key="input"
           onChange={this._handleInputChange}
           onKeyDown={this._handleInputKeyDown}
           placeholder={!this.state.selectedItems.length ? this.props.placeholderText : null}
-          ref={(ref) => this.input = ref}
+          ref={ref => (this.input = ref)}
           style={styles.input}
-          type='text'
+          type="text"
           value={this.state.searchString}
         />
 
-        <div className='mx-typeahead-option-list-container' style={Object.assign({}, styles.itemListContainer, !this.state.isOpen && { display: 'none' })}>
+        <div
+          className="mx-typeahead-option-list-container"
+          style={Object.assign(
+            {},
+            styles.itemListContainer,
+            !this.state.isOpen && { display: 'none' },
+          )}
+        >
           {this._renderItemList(styles)}
         </div>
       </div>
-    );
+    )
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
       component: {
         backgroundColor: '#FFFFFF',
@@ -347,15 +358,15 @@ class TypeAhead extends React.Component {
           backgroundColor: '#FFFFFF',
           boxShadow: 'none',
           color: theme.Colors.GRAY_700,
-          outline: 'none'
-        }
+          outline: 'none',
+        },
       },
       activeItem: {
         backgroundColor: theme.Colors.PRIMARY,
-        color: theme.Colors.WHITE
+        color: theme.Colors.WHITE,
       },
       clearFix: {
-        clear: 'both'
+        clear: 'both',
       },
       input: {
         backgroundColor: '#FFFFFF',
@@ -369,13 +380,13 @@ class TypeAhead extends React.Component {
         ':focus': {
           borderWidth: 0,
           boxShadow: 'none',
-          outline: 'none'
-        }
+          outline: 'none',
+        },
       },
       itemList: {
         minHeight: '20px',
         maxHeight: '200px',
-        overflow: 'auto'
+        overflow: 'auto',
       },
       itemListContainer: {
         clear: 'both',
@@ -388,7 +399,7 @@ class TypeAhead extends React.Component {
         border: '1px solid #E5E5E5',
         borderRadius: '0 0 3px 3px',
         boxShadow: theme.ShadowHigh,
-        zIndex: 10
+        zIndex: 10,
       },
       itemTag: {
         backgroundColor: '#eee',
@@ -402,7 +413,7 @@ class TypeAhead extends React.Component {
         marginRight: '2px',
         marginBottom: '1px',
         paddingLeft: '3px',
-        position: 'relative'
+        position: 'relative',
       },
       item: {
         color: theme.Colors.GRAY_500,
@@ -416,20 +427,20 @@ class TypeAhead extends React.Component {
         ':focus': {
           border: 'none',
           boxShadow: 'none',
-          outline: 'none'
+          outline: 'none',
         },
         ':hover': {
           backgroundColor: theme.Colors.PRIMARY,
-          color: theme.Colors.WHITE
-        }
+          color: theme.Colors.WHITE,
+        },
       },
       removeIcon: {
         color: theme.Colors.GRAY_500,
         marginLeft: '5px',
-        cursor: 'pointer'
-      }
-    };
-  };
+        cursor: 'pointer',
+      },
+    }
+  }
 }
 
-module.exports = Radium(TypeAhead);
+module.exports = Radium(TypeAhead)

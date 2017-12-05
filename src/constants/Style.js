@@ -2,7 +2,7 @@ const Style = {
   BreakPoints: {
     large: 1200,
     medium: 768,
-    small: 320
+    small: 320,
   },
 
   Colors: {
@@ -28,7 +28,7 @@ const Style = {
 
     // Misc.
     BASE_ARC: '#F5F5F5',
-    SCRIM: 'rgba(247,248,248,0.9)'
+    SCRIM: 'rgba(247,248,248,0.9)',
   },
 
   FontSizes: {
@@ -38,7 +38,7 @@ const Style = {
     LARGE: 15,
     MEDIUM: 13,
     SMALL: 11,
-    TINY: 10
+    TINY: 10,
   },
 
   Fonts: {
@@ -46,7 +46,7 @@ const Style = {
     LIGHT: 'ProximaNovaLight, Helvetica, Arial, sans-serif',
     REGULAR: 'ProximaNovaRegular, Helvetica, Arial, sans-serif',
     ITALIC: 'ProximaNovaRegularItalic, Helvetica, Arial, sans-serif',
-    SEMIBOLD: 'ProximaNovaSemibold, Helvetica, Arial, sans-serif'
+    SEMIBOLD: 'ProximaNovaSemibold, Helvetica, Arial, sans-serif',
   },
 
   //Box Shadows
@@ -59,8 +59,8 @@ const Style = {
     LARGE: 20,
     MEDIUM: 15,
     SMALL: 10,
-    XSMALL: 5
-  }
-};
+    XSMALL: 5,
+  },
+}
 
-module.exports = Style;
+module.exports = Style

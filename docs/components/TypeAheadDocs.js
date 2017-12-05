@@ -1,14 +1,14 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require('react');
-const { Link } = require('react-router');
+const React = require('react')
+const { Link } = require('react-router')
 
-const { TypeAhead } = require('mx-react-components');
+const { TypeAhead } = require('mx-react-components')
 
-const Markdown = require('components/Markdown');
+const Markdown = require('components/Markdown')
 
 class TypeAheadDocs extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -28,20 +28,19 @@ class TypeAheadDocs extends React.Component {
             'HSBC Bank USA',
             'Capital One',
             'PNC Financial Services',
-            'State Street Corporation'
+            'State Street Corporation',
           ]}
-          placeholderText='Select a Bank'
-          preSelectedItems={[
-            'Bank of America',
-            'Wells Fargo'
-          ]}
+          placeholderText="Select a Bank"
+          preSelectedItems={['Bank of America', 'Wells Fargo']}
         />
 
         <h3>Usage</h3>
-        <h5>items <label>Array</label></h5>
+        <h5>
+          items <label>Array</label>
+        </h5>
         <p>An array of Strings used for the options list. Example:</p>
-        <Markdown lang='js'>
-  {`
+        <Markdown lang="js">
+          {`
     [
       'JPMorgan Chase',
       'Bank of America',
@@ -57,10 +56,15 @@ class TypeAheadDocs extends React.Component {
   `}
         </Markdown>
 
-        <h5>onItemRemove <label>Function</label></h5>
-        <p>A method to be called whenever an item is removed by the user. It will be passed 2 parameters: the item removed, an updated array of selected items. Example:</p>
-        <Markdown lang='js'>
-  {`
+        <h5>
+          onItemRemove <label>Function</label>
+        </h5>
+        <p>
+          A method to be called whenever an item is removed by the user. It will be passed 2
+          parameters: the item removed, an updated array of selected items. Example:
+        </p>
+        <Markdown lang="js">
+          {`
     _handleItemRemoved (item, selectedItems) {
       console.log(item + ' was removed from the list');
     }
@@ -72,10 +76,15 @@ class TypeAheadDocs extends React.Component {
   `}
         </Markdown>
 
-        <h5>onItemSelect <label>Function</label></h5>
-        <p>A method to be called whenever an item is selected by the user. It will be passed 2 parameters: the item selected, an updated array of selected items. Example:</p>
-        <Markdown lang='js'>
-  {`
+        <h5>
+          onItemSelect <label>Function</label>
+        </h5>
+        <p>
+          A method to be called whenever an item is selected by the user. It will be passed 2
+          parameters: the item selected, an updated array of selected items. Example:
+        </p>
+        <Markdown lang="js">
+          {`
     _handleItemSelected (item, selectedItems) {
       console.log(item + ' was selected from the list');
     }
@@ -87,19 +96,33 @@ class TypeAheadDocs extends React.Component {
   `}
         </Markdown>
 
-        <h5>placeholderText <label>String</label></h5>
+        <h5>
+          placeholderText <label>String</label>
+        </h5>
         <p>Default: 'Select Filters'</p>
         <p>The text to display by default when no items have been selected.</p>
 
-        <h5>preSelectedItems <label>Array</label></h5>
-        <p>An array of Strings to be displayed as selected options by default. These values should be contained in the items Array. These values will be the starting point of the TypeAhead's selected values state. Once the user begins interacting with the TypeAhead, they will be ignored.</p>
+        <h5>
+          preSelectedItems <label>Array</label>
+        </h5>
+        <p>
+          An array of Strings to be displayed as selected options by default. These values should be
+          contained in the items Array. These values will be the starting point of the TypeAhead's
+          selected values state. Once the user begins interacting with the TypeAhead, they will be
+          ignored.
+        </p>
 
-        <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+        <h5>
+          theme <label>Object</label>
+        </h5>
+        <p>
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
+        </p>
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <TypeAhead
       items={[
         'JPMorgan Chase',
@@ -122,8 +145,8 @@ class TypeAheadDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
-module.exports = TypeAheadDocs;
+module.exports = TypeAheadDocs
