@@ -246,10 +246,10 @@ class Modal extends React.Component {
         margin: '-12px -12px 0 0',
         cursor: 'pointer',
         border: 'none',
-        backgroundColor: 'transparent',
+        backgroundColor: 'transparent'
       },
       closeIcon: {
-        color: theme.Colors.GRAY_700,
+        color: theme.Colors.GRAY_700
       },
       container: {
         fontFamily: theme.FontFamily,
