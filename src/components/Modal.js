@@ -200,19 +200,21 @@ class Modal extends React.Component {
             </div>
             {this._renderFooter(styles, theme)}
             {this.props.showCloseIcon && (
-              <Icon
-                className='mx-modal-close'
-                elementProps={{
-                  tabIndex: 0,
-                  'aria-label': 'Close Modal',
-                  role: 'button',
-                  onClick: this.props.onRequestClose,
-                  onKeyUp: (e) => e.keyCode === 13 && this.props.onRequestClose()
-                }}
-                size={24}
+              <button
+                aria-label='Close Modal'
+                onClick={this.props.onRequestClose}
+                onKeyUp={e => e.keyCode === 13 && this.props.onRequestClose()}
+                role='button'
                 style={styles.close}
-                type='close-solid'
-              />
+                tabIndex={0}
+              >
+                <Icon
+                  className='mx-modal-close'
+                  size={24}
+                  style={styles.closeIcon}
+                  type='close-solid'
+                />
+              </button>
             )}
           </div>
         </div>
