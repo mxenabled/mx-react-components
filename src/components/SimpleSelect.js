@@ -78,6 +78,7 @@ class SimpleSelect extends React.Component {
 
               return (
                 <Option
+                  isSelected={isSelected}
                   key={i}
                   label={text}
                   onClick={e => {
