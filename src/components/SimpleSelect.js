@@ -74,17 +74,28 @@ class SimpleSelect extends React.Component {
           {this.props.children ?
             this.props.children :
             (this.props.items.map((item, i) => {
+              const { icon, isSelected, onClick, text, ...rest } = item;
+
               return (
                 <Option
                   key={i}
-                  label={item.text}
-                  onClick={this._handleItemClick.bind(null, item)}
+                  label={text}
+                  onClick={e => {
+                    if (this.props.scrimClickOnSelect) {
+                      this.props.onScrimClick(e);
+                    }
+
+                    if (onClick && typeof onClick === 'function') {
+                      onClick(e, item);
+                    }
+                  }}
                   style={styles.item}
+                  {...rest}
                 >
-                  {item.icon ? (
-                    <Icon size={this.props.iconSize || 20} style={styles.icon} type={item.icon} />
+                  {icon ? (
+                    <Icon size={this.props.iconSize || 20} style={styles.icon} type={icon} />
                   ) : null}
-                  <div style={styles.text}>{item.text}</div>
+                  <div style={styles.text}>{text}</div>
                 </Option>
               );
             })
