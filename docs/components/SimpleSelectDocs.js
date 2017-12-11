@@ -46,7 +46,7 @@ class SimpleSelectDocs extends React.Component {
               aria-label='Select a category'
               items={[
                 { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
-                { icon: 'kids', text: 'Kids', onClick: this._handleItemClick },
+                { icon: 'kids', isSelected: true, text: 'Kids', onClick: this._handleItemClick },
                 { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
               ]}
               onScrimClick={this._toggleMenu}
@@ -60,7 +60,7 @@ class SimpleSelectDocs extends React.Component {
         <p>The icon size used for icons in menu items if used.</p>
 
         <h5>items <label>Array</label> Required</h5>
-        <p>An array of objects that specify <em>icon</em>, <em>text</em>, and/or <em>onClick</em> of the item..</p>
+        <p>An array of objects that specify <em>icon</em>, <em>isSelected</em>, <em>text</em>, and/or <em>onClick</em> of the item..</p>
 
         <h5>onScrimClick <label>function</label></h5>
         <p><em>onClick</em> handler for the menu scrim.</p>
@@ -101,7 +101,7 @@ class SimpleSelectDocs extends React.Component {
           aria-label='Select a category'
           items={[
             { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
-            { icon: 'kids', text: 'Kids', onClick: this._handleItemClick },
+            { icon: 'kids', isSelected: true, text: 'Kids', onClick: this._handleItemClick },
             { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
           ]}
           onScrimClick={this._toggleMenu}
