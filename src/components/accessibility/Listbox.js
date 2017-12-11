@@ -2,7 +2,9 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const keycode = require('keycode');
+const _find = require('lodash/find');
 const _findIndex = require('lodash/findIndex');
+const _startsWith = require('lodash/startsWith');
 
 /**
  * Listbox
@@ -34,7 +36,8 @@ class Listbox extends React.Component {
     super(props);
 
     this.state = {
-      focusedIndex: this._getSelectedOptionIndex()
+      focusedIndex: this._getSelectedOptionIndex(),
+      searchString: ''
     };
   }
 
@@ -45,6 +48,7 @@ class Listbox extends React.Component {
   }
 
   componentWillUnmount () {
+    window.clearTimeout(this.timeoutId);
     this._eventTarget.removeEventListener('keydown', this._handleKeyDown);
   }
 
@@ -73,33 +77,51 @@ class Listbox extends React.Component {
         this._focusNext();
         break;
       case 'enter':
-      case 'space':
         e.preventDefault();
         e.stopPropagation();
         e.target.click();
         break;
     }
+
+    if (e.keyCode >= 48 && e.keyCode <= 90 || keycode(e) === 'space') {
+      window.clearTimeout(this.timeoutId);
+      const key = keycode(e) === 'space' ? ' ' : keycode(e);
+      const searchString = this.state.searchString.concat(key.toLowerCase());
+
+      this.setState({ searchString }, this._search(searchString));
+      this.timeoutId = window.setTimeout(() => this.setState({ searchString: '' }), 1000);
+    }
   };
 
-  _focusOption = () => {
-    const option = this.component.children[this.state.focusedIndex];
+  _search = (searchString) => {
+    const children = this._getChildren();
+    const focusedIndex = _findIndex(children, child => {
+      return _startsWith(child.props.label.toLowerCase(), searchString);
+    });
+
+    this.setState({ focusedIndex }, this._focusOption(focusedIndex));
+  }
+
+  _focusOption = (focusedIndex = this.state.focusedIndex) => {
+    const option = this.component.children[focusedIndex];
 
     if (option) setTimeout(() => option.focus());
   };
 
   _focusPrevious = () => {
     // go to the end if at the beginning
-    const focusedIndex = this.state.focusedIndex === 0 ? this._getChildren().length : this.state.focusedIndex;
+    const focusedIndex = this.state.focusedIndex === 0 ? this._getChildren().length - 1 : this.state.focusedIndex - 1;
 
-    this.setState({ focusedIndex: focusedIndex - 1 }, this._focusOption);
+    // focus previous
+    this.setState({ focusedIndex }, this._focusOption(focusedIndex));
   };
 
   _focusNext = () => {
     // go to the beginning if at the end
-    const focusedIndex = this.state.focusedIndex === this._getChildren().length - 1 ? -1 : this.state.focusedIndex;
+    const focusedIndex = this.state.focusedIndex === this._getChildren().length - 1 ? 0 : this.state.focusedIndex + 1;
 
     // focus next
-    this.setState({ focusedIndex: focusedIndex + 1 }, this._focusOption);
+    this.setState({ focusedIndex }, this._focusOption(focusedIndex));
   };
 
   render () {
