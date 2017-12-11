@@ -53,14 +53,6 @@ class SimpleSelect extends React.Component {
     window.removeEventListener('keydown', this._handleKeyDown);
   }
 
-  _handleItemClick = (item, e) => {
-    if (this.props.scrimClickOnSelect) {
-      this.props.onScrimClick(e);
-    }
-
-    item.onClick(e, item);
-  };
-
   _handleKeyDown = (e) => {
     if (keycode(e) === 'esc') {
       e.preventDefault();
