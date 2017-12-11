@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.9</h3>
+        <ul>
+          <li>Tweaks to SimpleSelect component to make accessibility easier (<a href='https://github.com/mxenabled/mx-react-components/pull/688'>#688</a>)</li>
+        </ul>
+
         <h3>5.1.8</h3>
         <ul>
           <li>Adds new prop focusOnLoad to Drawer component (<a href='https://github.com/mxenabled/mx-react-components/pull/684'>#684</a>)</li>

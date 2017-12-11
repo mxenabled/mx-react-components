@@ -128,11 +128,11 @@ class Listbox extends React.Component {
  */
 const Option = ({ children, isSelected, label, ...props }) => (
   <a
-    {...props}
     aria-label={isSelected && label ? `${label}, Current selection` : label}
     aria-selected={isSelected}
     role='option'
     tabIndex={0}
+    {...props}
   >
     {children}
   </a>
