@@ -180,7 +180,7 @@ class Modal extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <FocusTrap>
+      <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div

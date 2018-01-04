@@ -199,7 +199,7 @@ class Drawer extends React.Component {
 
     return (
       <StyleRoot>
-        <FocusTrap>
+        <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
           <div style={styles.componentWrapper}>
             <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
             <div
