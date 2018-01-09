@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.12</h3>
+        <ul>
+          <li>Change back icon in Drawer. Update header styles (<a href='https://github.com/mxenabled/mx-react-components/pull/692'>#692</a>)</li>
+        </ul>
+
         <h3>5.1.11</h3>
         <ul>
           <li>Allow clicking on elements outside focus trap (<a href='https://github.com/mxenabled/mx-react-components/pull/690'>#690</a>)</li>
