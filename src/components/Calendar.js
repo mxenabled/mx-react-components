@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
+const keycode = require('keycode');
 
 const Icon = require('./Icon');
 
@@ -27,7 +28,10 @@ class Calendar extends React.Component {
   };
 
   state = {
-    currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
+    currentDate:
+      this.props.selectedDate || this.props.minimumDate || moment().unix(),
+    focusedDay:
+      this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
 
   componentDidMount () {
@@ -35,7 +39,10 @@ class Calendar extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
+    if (
+      newProps.selectedDate &&
+      newProps.selectedDate !== this.props.selectedDate
+    ) {
       this.setState({
         currentDate: newProps.selectedDate
       });
@@ -47,15 +54,67 @@ class Calendar extends React.Component {
   };
 
   _handlePreviousClick = () => {
-    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
+    const currentDate = moment
+      .unix(this.state.currentDate)
+      .startOf('month')
+      .subtract(1, 'm')
+      .unix();
 
     this.setState({
       currentDate
     });
   };
 
+  _handleDayKeyDown = (e) => {
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+
+    if (keycode(e) === 'right') {
+      const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'left') {
+      const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'enter') {
+
+      this._handleDateSelect(this.state.focusedDay, e);
+    } else if (keycode(e) === 'up') {
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+
+      if (day.isBefore(startDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    } else if (keycode(e) === 'down') {
+      e.preventDefault(); //stop browser scrolling
+      const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
+
+      if (day.isSameOrAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
+      this.setState({ focusedDay: day.unix() });
+    }
+  };
+
   _handleNextClick = () => {
-    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
+    const currentDate = moment
+      .unix(this.state.currentDate)
+      .endOf('month')
+      .add(1, 'd')
+      .unix();
 
     this.setState({
       currentDate
@@ -63,8 +122,14 @@ class Calendar extends React.Component {
   };
 
   _getWeeks = () => {
-    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    const startDate = moment
+      .unix(this.state.currentDate)
+      .startOf('month')
+      .startOf('week');
+    const endDate = moment
+      .unix(this.state.currentDate)
+      .endOf('month')
+      .endOf('week');
     const weekLength = 7;
     const weeks = [];
     let days = [];
@@ -87,29 +152,51 @@ class Calendar extends React.Component {
     return weeks;
   };
 
-  _renderMonthTable = (styles) => {
+  _renderMonthTable = styles => {
     const weeks = this._getWeeks();
 
     return weeks.map(week => {
       return (
         <div key={week} style={styles.calendarWeek}>
           {week.map(day => {
-            const isCurrentMonth = day.isSame(moment.unix(this.state.currentDate), 'month');
-            const isSelectedDay = day.isSame(moment.unix(this.props.selectedDate), 'day');
+            const isCurrentMonth = day.isSame(
+              moment.unix(this.state.currentDate),
+              'month'
+            );
+            const isSelectedDay = day.isSame(
+              moment.unix(this.props.selectedDate),
+              'day'
+            );
             const isToday = day.isSame(moment(), 'day');
-            const disabledDay = this.props.minimumDate ? day.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+            const disabledDay = this.props.minimumDate ?
+              day.isBefore(moment.unix(this.props.minimumDate), 'day') :
+              null;
+            const savedStartDate = day.date();
+
 
             return (
               <div
                 key={day}
-                onClick={disabledDay ? null : this._handleDateSelect.bind(null, day.unix())}
-                style={Object.assign({},
+                onClick={
+                  disabledDay ?
+                    null :
+                    this._handleDateSelect.bind(null, day.unix())
+                }
+                onKeyDown={this._handleDayKeyDown}
+                ref={ref => {
+                  if (ref && moment.unix(this.state.focusedDay).date() === savedStartDate) {
+                    ref.focus();
+                  }
+                }}
+                style={Object.assign(
+                  {},
                   styles.calendarDay,
                   isCurrentMonth && styles.currentMonth,
                   disabledDay && styles.calendarDayDisabled,
                   isToday && styles.today,
                   isSelectedDay && styles.selectedDay
                 )}
+                tabIndex={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 0 : null}
               >
                 {day.date()}
               </div>
@@ -121,7 +208,10 @@ class Calendar extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(
+      this.props.theme,
+      this.props.primaryColor
+    );
     const styles = this.styles(theme);
 
     return (
@@ -135,9 +225,7 @@ class Calendar extends React.Component {
             style={styles.calendayHeaderNav}
             type='caret-left'
           />
-          <div>
-            {moment.unix(this.state.currentDate).format('MMMM YYYY')}
-          </div>
+          <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
           <Icon
             elementProps={{
               onClick: this._handleNextClick
@@ -161,16 +249,19 @@ class Calendar extends React.Component {
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
-      component: Object.assign({
-        backgroundColor: theme.Colors.WHITE,
-        border: '1px solid ' + theme.Colors.GRAY_300,
-        borderRadius: 3,
-        boxSizing: 'border-box',
-        marginTop: 10,
-        padding: 20
-      }, this.props.style),
+      component: Object.assign(
+        {
+          backgroundColor: theme.Colors.WHITE,
+          border: '1px solid ' + theme.Colors.GRAY_300,
+          borderRadius: 3,
+          boxSizing: 'border-box',
+          marginTop: 10,
+          padding: 20
+        },
+        this.props.style
+      ),
 
       //Calendar Header
       calendarHeader: {
