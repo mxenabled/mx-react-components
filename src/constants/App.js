@@ -279,6 +279,10 @@ module.exports = {
       displayValue: 'Gifts'
     },
     {
+      value: 'go-back',
+      displayValue: 'Go back'
+    },
+    {
       value: 'hamburger',
       displayValue: 'Hamburger'
     },
