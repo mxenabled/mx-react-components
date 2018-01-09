@@ -25,7 +25,7 @@ class RajaIconDocs extends React.Component {
       <div>
         <h1>
           Raja Icon
-          <label>A set of predfined svg icons inspired by the MX products</label>
+          <label>A set of predefined svg icons inspired by the MX products</label>
           <label>NOTE: These are legacy icons and are not maintained. New icons are added to the Icon component</label>
         </h1>
 

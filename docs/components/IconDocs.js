@@ -12,7 +12,7 @@ class IconDocs extends React.Component {
       <div>
         <h1>
           Icon
-          <label>A set of predfined svg icons inspired by the MX products</label>
+          <label>A set of predefined svg icons inspired by the MX products</label>
         </h1>
 
         <h3>Demo</h3>

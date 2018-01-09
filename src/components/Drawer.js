@@ -213,7 +213,7 @@ class Drawer extends React.Component {
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
-                      icon='arrow-left'
+                      icon='go-back'
                       onClick={this.close}
                       theme={theme}
                       type={'base'}
@@ -289,13 +289,7 @@ class Drawer extends React.Component {
         color: theme.Colors.GRAY_500
       },
       backArrow: {
-        paddingLeft: 20,
-        textAlign: 'left',
-        width: '25%',
-
-        [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
-          paddingLeft: 10
-        }
+        textAlign: 'left'
       },
       header: {
         alignItems: 'center',
@@ -306,27 +300,24 @@ class Drawer extends React.Component {
         fontFamily: theme.Fonts.REGULAR,
         fontSize: theme.FontSizes.LARGE,
         justifyContent: 'center',
-        padding: '7px 7px',
+        padding: '0 20px',
         position: 'relative',
         height: HEADER_HEIGHT,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
+          padding: '0 10px'
+        }
       },
       title: {
+        flex: '1 0 auto',
         overflow: 'hidden',
         textAlign: 'center',
         textOverflow: 'ellipsis',
-        width: '50%',
         whiteSpace: 'nowrap'
       },
       headerMenu: {
-        paddingRight: 20,
         textAlign: 'right',
-        width: '25%',
-        whiteSpace: 'nowrap',
-
-        '@media (max-width: 750px)': {
-          paddingRight: 10
-        }
+        whiteSpace: 'nowrap'
       },
       navLabel: {
         padding: '7px 14px',
