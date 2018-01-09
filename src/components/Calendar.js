@@ -86,7 +86,6 @@ class Calendar extends React.Component {
 
       this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'enter') {
-
       this._handleDateSelect(this.state.focusedDay, e);
     } else if (keycode(e) === 'up') {
       e.preventDefault(); //stop browser scrolling
