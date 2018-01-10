@@ -289,7 +289,8 @@ class Drawer extends React.Component {
         color: theme.Colors.GRAY_500
       },
       backArrow: {
-        textAlign: 'left'
+        textAlign: 'left',
+        width: '25%'
       },
       header: {
         alignItems: 'center',
@@ -317,7 +318,8 @@ class Drawer extends React.Component {
       },
       headerMenu: {
         textAlign: 'right',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        width: '25%'
       },
       navLabel: {
         padding: '7px 14px',
