@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.13</h3>
+        <ul>
+          <li>Fix regression in header style when there is no item on the right (<a href='https://github.com/mxenabled/mx-react-components/pull/693'>#693</a>)</li>
+        </ul>
+
         <h3>5.1.12</h3>
         <ul>
           <li>Change back icon in Drawer. Update header styles (<a href='https://github.com/mxenabled/mx-react-components/pull/692'>#692</a>)</li>
