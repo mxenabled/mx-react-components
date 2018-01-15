@@ -175,6 +175,8 @@ class Calendar extends React.Component {
 
             return (
               <div
+                className="calendar-day"
+                id={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 'focused-day': null}
                 key={day}
                 onClick={
                   disabledDay ?
@@ -214,7 +216,7 @@ class Calendar extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div style={styles.component}>
+      <div className="anotherTest" style={styles.component}>
         <div style={styles.calendarHeader}>
           <Icon
             elementProps={{
