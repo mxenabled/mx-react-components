@@ -65,57 +65,60 @@ class Calendar extends React.Component {
     });
   };
 
-  _handleDayKeyDown = (e) => {
+  calculateDayByKey = (code, currentDate, focusedDay) => {
     const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
-    let day;
+    let data = {
+      day: '',
+      shouldSetCurrentDate: false
+    };
 
-    if (keycode(e) === 'right') {
-      day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+    if (code === 'right') {
+      data.day = moment.unix(focusedDay).add(1, 'days').startOf('day');
 
-      if (day.isSameOrAfter(endDate)) {
-        this._setNewCurrentDate(day)
+      if (data.day.isSameOrAfter(endDate)) {
+        data.shouldSetCurrentDate = true;
       }
 
+    } else if (code === 'left') {
+      data.day = moment.unix(focusedDay).subtract(1, 'days').startOf('day');
 
-    } else if (keycode(e) === 'left') {
-      day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
-
-      if (day.isBefore(startDate)) {
-        this._setNewCurrentDate(day)
+      if (data.day.isBefore(startDate)) {
+        data.shouldSetCurrentDate = true;
       }
 
-
-    } else if (keycode(e) === 'enter') {
-      this._handleDateSelect(this.state.focusedDay, e);
-    } else if (keycode(e) === 'up') {
+    } else if (code === 'up') {
       e.preventDefault(); //stop browser scrolling
-      day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+      data.day = moment.unix(focusedDay).subtract(7, 'days').startOf('day');
 
-      if (day.isBefore(startDate)) {
-        this._setNewCurrentDate(day)
+      if (data.day.isBefore(startDate)) {
+        data.shouldSetCurrentDate = true;
       }
 
-
-    } else if (keycode(e) === 'down') {
+    } else if (code === 'down') {
       e.preventDefault(); //stop browser scrolling
-      day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
+      data.day = moment.unix(focusedDay).add(7, 'days').startOf('day');
 
-      if (day.isSameOrAfter(endDate)) {
-        this._setNewCurrentDate(day)
+      if (data.day.isSameOrAfter(endDate)) {
+        data.shouldSetCurrentDate = true;
       }
     }
 
-    this._setFocusedDay(day)
+    return data;
+  }
+
+  _handleDayKeyDown = (e) => {
+    debugger;
+    if (keycode(e) === 'enter') {
+      this._handleDateSelect(this.state.focusedDay, e);
+    } else {
+      const { day, shouldSetCurrentDate } = this.calculateDayByKey(keycode(e), this.state.currentDate, this.state.focusedDay)
+
+      if (shouldSetCurrentDate) this.setState({ currentDate: day.unix() });
+      this.setState({ focusedDay: day.unix() });
+    }
   };
 
-  _setNewCurrentDate = (day) => {
-    this.setState({ currentDate: day.unix() });
-  }
-
-  _setFocusedDay = (date) => {
-    this.setState({ focusedDay: date.unix() });
-  }
 
   // _handleDayKeyDown = (e) => {
   //   const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
