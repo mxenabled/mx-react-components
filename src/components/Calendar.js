@@ -68,45 +68,97 @@ class Calendar extends React.Component {
   _handleDayKeyDown = (e) => {
     const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    let day;
 
     if (keycode(e) === 'right') {
-      const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+      day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
 
       if (day.isSameOrAfter(endDate)) {
-        this.setState({ currentDate: day.unix() });
+        this._setNewCurrentDate(day)
       }
 
-      this.setState({ focusedDay: day.unix() });
+
     } else if (keycode(e) === 'left') {
-      const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
+      day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
 
       if (day.isBefore(startDate)) {
-        this.setState({ currentDate: day.unix() });
+        this._setNewCurrentDate(day)
       }
 
-      this.setState({ focusedDay: day.unix() });
+
     } else if (keycode(e) === 'enter') {
       this._handleDateSelect(this.state.focusedDay, e);
     } else if (keycode(e) === 'up') {
       e.preventDefault(); //stop browser scrolling
-      const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+      day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
 
       if (day.isBefore(startDate)) {
-        this.setState({ currentDate: day.unix() });
+        this._setNewCurrentDate(day)
       }
 
-      this.setState({ focusedDay: day.unix() });
+
     } else if (keycode(e) === 'down') {
       e.preventDefault(); //stop browser scrolling
-      const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
+      day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
 
       if (day.isSameOrAfter(endDate)) {
-        this.setState({ currentDate: day.unix() });
+        this._setNewCurrentDate(day)
       }
-
-      this.setState({ focusedDay: day.unix() });
     }
+
+    this._setFocusedDay(day)
   };
+
+  _setNewCurrentDate = (day) => {
+    this.setState({ currentDate: day.unix() });
+  }
+
+  _setFocusedDay = (date) => {
+    this.setState({ focusedDay: date.unix() });
+  }
+
+  // _handleDayKeyDown = (e) => {
+  //   const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+  //   const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+  //
+  //   if (keycode(e) === 'right') {
+  //     const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
+  //
+  //     if (day.isSameOrAfter(endDate)) {
+  //       this.setState({ currentDate: day.unix() });
+  //     }
+  //
+  //     this.setState({ focusedDay: day.unix() });
+  //   } else if (keycode(e) === 'left') {
+  //     const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
+  //
+  //     if (day.isBefore(startDate)) {
+  //       this.setState({ currentDate: day.unix() });
+  //     }
+  //
+  //     this.setState({ focusedDay: day.unix() });
+  //   } else if (keycode(e) === 'enter') {
+  //     this._handleDateSelect(this.state.focusedDay, e);
+  //   } else if (keycode(e) === 'up') {
+  //     e.preventDefault(); //stop browser scrolling
+  //     const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
+  //
+  //     if (day.isBefore(startDate)) {
+  //       this.setState({ currentDate: day.unix() });
+  //     }
+  //
+  //     this.setState({ focusedDay: day.unix() });
+  //   } else if (keycode(e) === 'down') {
+  //     e.preventDefault(); //stop browser scrolling
+  //     const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
+  //
+  //     if (day.isSameOrAfter(endDate)) {
+  //       this.setState({ currentDate: day.unix() });
+  //     }
+  //
+  //     this.setState({ focusedDay: day.unix() });
+  //   }
+  // };
 
   _handleNextClick = () => {
     const currentDate = moment
