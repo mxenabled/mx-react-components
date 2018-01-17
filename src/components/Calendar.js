@@ -7,7 +7,8 @@ const keycode = require('keycode');
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
-import { calculateDayByKey } from '../enhancers/calendar-enhancers'
+
+import { __calculateDayByKey } from '../enhancers/calendar-enhancers';
 
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
@@ -68,15 +69,20 @@ class Calendar extends React.Component {
 
 
   _handleDayKeyDown = (e) => {
-    e.preventDefault();
     const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
     if (keycode(e) === 'enter') {
       this._handleDateSelect(this.state.focusedDay, e);
-    } else {
-      const day = calculateDayByKey(keycode(e), this.state.focusedDay)
+    }
 
+    if (['left', 'right', 'up', 'down'].includes(keycode(e))) {
+      //prevent browser scrolling with arrow key press
+      e.preventDefault();
+
+      const day = __calculateDayByKey(keycode(e), this.state.focusedDay);
+
+      //toggle calendar view to next/previous month if necessary
       if (day.isBefore(startDate) || day.isAfter(endDate)) {
         this.setState({ currentDate: day.unix() });
       }
@@ -84,50 +90,6 @@ class Calendar extends React.Component {
       this.setState({ focusedDay: day.unix() });
     }
   };
-
-
-  // _handleDayKeyDown = (e) => {
-  //   const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-  //   const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
-  //
-  //   if (keycode(e) === 'right') {
-  //     const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
-  //
-  //     if (day.isSameOrAfter(endDate)) {
-  //       this.setState({ currentDate: day.unix() });
-  //     }
-  //
-  //     this.setState({ focusedDay: day.unix() });
-  //   } else if (keycode(e) === 'left') {
-  //     const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
-  //
-  //     if (day.isBefore(startDate)) {
-  //       this.setState({ currentDate: day.unix() });
-  //     }
-  //
-  //     this.setState({ focusedDay: day.unix() });
-  //   } else if (keycode(e) === 'enter') {
-  //     this._handleDateSelect(this.state.focusedDay, e);
-  //   } else if (keycode(e) === 'up') {
-  //     e.preventDefault(); //stop browser scrolling
-  //     const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
-  //
-  //     if (day.isBefore(startDate)) {
-  //       this.setState({ currentDate: day.unix() });
-  //     }
-  //
-  //     this.setState({ focusedDay: day.unix() });
-  //   } else if (keycode(e) === 'down') {
-  //     e.preventDefault(); //stop browser scrolling
-  //     const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
-  //
-  //     if (day.isSameOrAfter(endDate)) {
-  //       this.setState({ currentDate: day.unix() });
-  //     }
-  //
-  //     this.setState({ focusedDay: day.unix() });
-  //   }
-  // };
 
   _handleNextClick = () => {
     const currentDate = moment
@@ -196,8 +158,8 @@ class Calendar extends React.Component {
 
             return (
               <div
-                className="calendar-day"
-                id={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 'focused-day': null}
+                className='calendar-day'
+                id={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 'focused-day' : null}
                 key={day}
                 onClick={
                   disabledDay ?
@@ -237,7 +199,7 @@ class Calendar extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div className="anotherTest" style={styles.component}>
+      <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <Icon
             elementProps={{

@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import keycode from 'keycode';
-import { calculateDayByKey } from '../../enhancers/calendar-enhancers';
+import { __calculateDayByKey } from '../../enhancers/calendar-enhancers';
 
 import Calendar from '../Calendar';
 
@@ -40,23 +40,23 @@ describe('Calendar', () => {
   })
 
 
-  describe('calculateDayByKey', () => {
+  describe('__calculateDayByKey', () => {
     const focusedDay = moment().unix();
 
     it('should return correct day when right key is pressed', () => {
-      expect(calculateDayByKey('right', focusedDay)).toEqual(moment.unix(focusedDay).add(1, 'days').startOf('day'))
+      expect(__calculateDayByKey('right', focusedDay)).toEqual(moment.unix(focusedDay).add(1, 'days').startOf('day'))
     })
 
     it('should return correct day when left key is pressed', () => {
-      expect(calculateDayByKey('left', focusedDay)).toEqual(moment.unix(focusedDay).subtract(1, 'days').startOf('day'))
+      expect(__calculateDayByKey('left', focusedDay)).toEqual(moment.unix(focusedDay).subtract(1, 'days').startOf('day'))
     })
 
     it('should return correct day when up key is pressed', () => {
-      expect(calculateDayByKey('up', focusedDay)).toEqual(moment.unix(focusedDay).subtract(7, 'days').startOf('day'))
+      expect(__calculateDayByKey('up', focusedDay)).toEqual(moment.unix(focusedDay).subtract(7, 'days').startOf('day'))
     })
 
     it('should return correct day when down key is pressed', () => {
-      expect(calculateDayByKey('down', focusedDay)).toEqual(moment.unix(focusedDay).add(7, 'days').startOf('day'))
+      expect(__calculateDayByKey('down', focusedDay)).toEqual(moment.unix(focusedDay).add(7, 'days').startOf('day'))
     })
 
   })
