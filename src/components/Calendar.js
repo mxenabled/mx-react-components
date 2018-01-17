@@ -7,6 +7,7 @@ const keycode = require('keycode');
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
+import { calculateDayByKey } from '../enhancers/calendar-enhancers'
 
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
@@ -65,56 +66,21 @@ class Calendar extends React.Component {
     });
   };
 
-  calculateDayByKey = (code, currentDate, focusedDay) => {
-    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
-    let data = {
-      day: '',
-      shouldSetCurrentDate: false
-    };
-
-    if (code === 'right') {
-      data.day = moment.unix(focusedDay).add(1, 'days').startOf('day');
-
-      if (data.day.isSameOrAfter(endDate)) {
-        data.shouldSetCurrentDate = true;
-      }
-
-    } else if (code === 'left') {
-      data.day = moment.unix(focusedDay).subtract(1, 'days').startOf('day');
-
-      if (data.day.isBefore(startDate)) {
-        data.shouldSetCurrentDate = true;
-      }
-
-    } else if (code === 'up') {
-      e.preventDefault(); //stop browser scrolling
-      data.day = moment.unix(focusedDay).subtract(7, 'days').startOf('day');
-
-      if (data.day.isBefore(startDate)) {
-        data.shouldSetCurrentDate = true;
-      }
-
-    } else if (code === 'down') {
-      e.preventDefault(); //stop browser scrolling
-      data.day = moment.unix(focusedDay).add(7, 'days').startOf('day');
-
-      if (data.day.isSameOrAfter(endDate)) {
-        data.shouldSetCurrentDate = true;
-      }
-    }
-
-    return data;
-  }
 
   _handleDayKeyDown = (e) => {
-    debugger;
+    e.preventDefault();
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+
     if (keycode(e) === 'enter') {
       this._handleDateSelect(this.state.focusedDay, e);
     } else {
-      const { day, shouldSetCurrentDate } = this.calculateDayByKey(keycode(e), this.state.currentDate, this.state.focusedDay)
+      const day = calculateDayByKey(keycode(e), this.state.focusedDay)
 
-      if (shouldSetCurrentDate) this.setState({ currentDate: day.unix() });
+      if (day.isBefore(startDate) || day.isAfter(endDate)) {
+        this.setState({ currentDate: day.unix() });
+      }
+
       this.setState({ focusedDay: day.unix() });
     }
   };

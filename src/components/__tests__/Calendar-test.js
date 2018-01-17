@@ -2,6 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
 import moment from 'moment';
 import keycode from 'keycode';
+import { calculateDayByKey } from '../../enhancers/calendar-enhancers';
 
 import Calendar from '../Calendar';
 
@@ -38,16 +39,26 @@ describe('Calendar', () => {
     })
   })
 
-  describe('events', () => {
 
-    it('should set state correctly on left arrow keyDown', () => {
-      wrapper.find('#focused-day').simulate('keyDown', {keyCode: 37})
-      wrapper.update()
+  describe('calculateDayByKey', () => {
+    const focusedDay = moment().unix();
 
-      //events & setState are async so the state isn't changing by the time the assertion runs...
-      const currentDate = wrapper.state().currentDate;
-      expect(currentDate).toBe(moment().subtract(1, 'days').startOf('day').unix())
+    it('should return correct day when right key is pressed', () => {
+      expect(calculateDayByKey('right', focusedDay)).toEqual(moment.unix(focusedDay).add(1, 'days').startOf('day'))
     })
+
+    it('should return correct day when left key is pressed', () => {
+      expect(calculateDayByKey('left', focusedDay)).toEqual(moment.unix(focusedDay).subtract(1, 'days').startOf('day'))
+    })
+
+    it('should return correct day when up key is pressed', () => {
+      expect(calculateDayByKey('up', focusedDay)).toEqual(moment.unix(focusedDay).subtract(7, 'days').startOf('day'))
+    })
+
+    it('should return correct day when down key is pressed', () => {
+      expect(calculateDayByKey('down', focusedDay)).toEqual(moment.unix(focusedDay).add(7, 'days').startOf('day'))
+    })
+
   })
 
 });
