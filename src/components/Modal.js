@@ -5,6 +5,8 @@ const FocusTrap = require('focus-trap-react');
 const Button = require('./Button');
 const Icon = require('./Icon');
 
+const _merge = require('lodash/merge');
+
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -35,6 +37,7 @@ class Modal extends React.Component {
     showScrim: PropTypes.bool,
     showTitleBar: PropTypes.bool,
     style: PropTypes.object,
+    styles: PropTypes.object,
     theme: themeShape,
     title: PropTypes.string,
     tooltip: PropTypes.string,
@@ -223,7 +226,7 @@ class Modal extends React.Component {
   }
 
   styles = theme => {
-    return {
+    return _merge({}, {
       scrim: {
         zIndex: 1000,
         position: 'fixed',
@@ -330,7 +333,7 @@ class Modal extends React.Component {
         width: 400,
         textAlign: 'center'
       }
-    };
+    }, this.props.styles);
   };
 }
 
