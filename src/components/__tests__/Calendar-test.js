@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
-import { getNewDateStateChange } from '../../utils/Calendar';
+import { getNewDateStateChange } from '../Calendar';
 
 import Calendar from '../Calendar';
 

@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
 
-const Calendar = require('./Calendar');
+import Calendar from './Calendar';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');

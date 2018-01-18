@@ -2,7 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const moment = require('moment-timezone/builds/moment-timezone-with-data.min');
 
-const Calendar = require('./Calendar');
+import Calendar from './Calendar';
 const Column = require('./grid/Column');
 const Container = require('./grid/Container');
 const Icon = require('./Icon');
