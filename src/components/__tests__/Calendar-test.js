@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
-import { __calculateDayByKey } from '../../enhancers/calendar-enhancers';
+import { getNewDateStateChange } from '../../utils/Calendar';
 
 import Calendar from '../Calendar';
 
@@ -40,23 +40,61 @@ describe('Calendar', () => {
   });
 
 
-  describe('__calculateDayByKey', () => {
-    const focusedDay = moment().unix();
+  describe('getNewDateStateChange', () => {
+    const focusedDay = moment();
+    const startDate = moment().startOf('month').startOf('week');
+    const endDate = moment().endOf('month').endOf('week')
 
-    it('should return correct day when right key is pressed', () => {
-      expect(__calculateDayByKey('right', focusedDay)).toEqual(moment.unix(focusedDay).add(1, 'days').startOf('day'));
+    it('should return an object with a focusedDay key when right key is pressed', () => {
+      const result = {
+        focusedDay: moment(focusedDay).add(1, 'days').startOf('day').unix()
+      }
+
+      expect(getNewDateStateChange({ code: 'right', focusedDay, startDate, endDate })).toEqual(result);
     });
 
-    it('should return correct day when left key is pressed', () => {
-      expect(__calculateDayByKey('left', focusedDay)).toEqual(moment.unix(focusedDay).subtract(1, 'days').startOf('day'));
+    it('should return an object with a focusedDay key and a currentDate key when right key is pressed and newDate is outside of start and end date bounds', () => {
+      const result = {
+        focusedDay: moment(focusedDay).add(1, 'days').startOf('day').unix(),
+        currentDate: moment(focusedDay).add(1, 'days').startOf('day').unix()
+      }
+      const endDateOutOfRange = focusedDay;
+
+      expect(getNewDateStateChange({ code: 'right', focusedDay, startDate, endDateOutOfRange })).toEqual(result);
+    });
+
+    it('should return an object with a focusedDay key when left key is pressed', () => {
+      const result = {
+        focusedDay: moment(focusedDay).subtract(1, 'days').startOf('day').unix()
+      }
+
+      expect(getNewDateStateChange({ code: 'left', focusedDay, startDate, endDate })).toEqual(result);
+    });
+
+    it('should return an object with a focusedDay key and a currentDate key when left key is pressed and newDate is outside of start and end date bounds', () => {
+      const result = {
+        focusedDay: moment(focusedDay).subtract(1, 'days').startOf('day').unix(),
+        currentDate: moment(focusedDay).subtract(1, 'days').startOf('day').unix(),
+      }
+      const startDateOutOfRange = focusedDay;
+
+      expect(getNewDateStateChange({ code: 'left', focusedDay, startDateOutOfRange, endDate })).toEqual(result);
     });
 
     it('should return correct day when up key is pressed', () => {
-      expect(__calculateDayByKey('up', focusedDay)).toEqual(moment.unix(focusedDay).subtract(7, 'days').startOf('day'));
+      const result = {
+        focusedDay: moment(focusedDay).subtract(7, 'days').startOf('day').unix()
+      }
+
+      expect(getNewDateStateChange({ code: 'up', focusedDay, startDate, endDate })).toEqual(result);
     });
 
     it('should return correct day when down key is pressed', () => {
-      expect(__calculateDayByKey('down', focusedDay)).toEqual(moment.unix(focusedDay).add(7, 'days').startOf('day'));
+      const result = {
+        focusedDay: moment(focusedDay).add(7, 'days').startOf('day').unix()
+      }
+
+      expect(getNewDateStateChange({ code: 'down', focusedDay, startDate, endDate })).toEqual(result);
     });
   });
 });

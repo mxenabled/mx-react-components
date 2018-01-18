@@ -8,7 +8,7 @@ const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
 
-import { __calculateDayByKey } from '../enhancers/calendar-enhancers';
+import { getNewDateStateChange } from '../utils/Calendar';
 
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
@@ -51,10 +51,6 @@ class Calendar extends React.Component {
     }
   }
 
-  _handleDateSelect = (date, e) => {
-    this.props.onDateSelect(date, e);
-  };
-
   _handlePreviousClick = () => {
     const currentDate = moment
       .unix(this.state.currentDate)
@@ -67,29 +63,20 @@ class Calendar extends React.Component {
     });
   };
 
+  _handleDayKeyDown = e => {
+    e.preventDefault();
 
-  _handleDayKeyDown = (e) => {
-    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    if (keycode(e) === 'enter') this.props.onDateSelect(this.state.focusedDay, e);
 
-    if (keycode(e) === 'enter') {
-      this._handleDateSelect(this.state.focusedDay, e);
-    }
+    const newDateStateChange = getNewDateStateChange({
+      code: keycode(e),
+      focusedDay: moment.unix(this.state.focusedDay),
+      startDate: moment.unix(this.state.currentDate).startOf('month').startOf('week'),
+      endDate: moment.unix(this.state.currentDate).endOf('month').endOf('week')
+    });
 
-    if (['left', 'right', 'up', 'down'].includes(keycode(e))) {
-      //prevent browser scrolling with arrow key press
-      e.preventDefault();
-
-      const day = __calculateDayByKey(keycode(e), this.state.focusedDay);
-
-      //toggle calendar view to next/previous month if necessary
-      if (day.isBefore(startDate) || day.isAfter(endDate)) {
-        this.setState({ currentDate: day.unix() });
-      }
-
-      this.setState({ focusedDay: day.unix() });
-    }
-  };
+    if (newDateStateChange !== null) this.setState(newDateStateChange);
+  }
 
   _handleNextClick = () => {
     const currentDate = moment
@@ -161,11 +148,9 @@ class Calendar extends React.Component {
                 className='calendar-day'
                 id={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 'focused-day' : null}
                 key={day}
-                onClick={
-                  disabledDay ?
-                    null :
-                    this._handleDateSelect.bind(null, day.unix())
-                }
+                onClick={() => {
+                  if (!disabledDay) this.props.onDateSelect(day.unix());
+                }}
                 onKeyDown={this._handleDayKeyDown}
                 ref={ref => {
                   if (ref && moment.unix(this.state.focusedDay).date() === savedStartDate) {
