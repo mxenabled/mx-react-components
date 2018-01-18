@@ -11,7 +11,12 @@ const { themeShape } = require('../constants/App');
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
-export const getNewDateStateChange = ({ code, focusedDay, startDate, endDate }) => {
+export const getNewDateStateChange = ({
+  code,
+  focusedDay,
+  startDate,
+  endDate
+}) => {
   let day = null;
   let currentDate = null;
 
@@ -29,12 +34,13 @@ export const getNewDateStateChange = ({ code, focusedDay, startDate, endDate }) 
     currentDate = day.unix();
   }
 
-  return day ? {
+  return day ?
+  {
     focusedDay: day.unix(),
-    ...currentDate ? { currentDate } : {}
-  } : null;
+    ...(currentDate ? { currentDate } : {})
+  } :
+    null;
 };
-
 
 class Calendar extends React.Component {
   static propTypes = {
@@ -89,17 +95,24 @@ class Calendar extends React.Component {
   _handleDayKeyDown = e => {
     e.preventDefault();
 
-    if (keycode(e) === 'enter') this.props.onDateSelect(this.state.focusedDay, e);
+    if (keycode(e) === 'enter')
+      this.props.onDateSelect(this.state.focusedDay, e);
 
     const newDateStateChange = getNewDateStateChange({
       code: keycode(e),
       focusedDay: moment.unix(this.state.focusedDay),
-      startDate: moment.unix(this.state.currentDate).startOf('month').startOf('week'),
-      endDate: moment.unix(this.state.currentDate).endOf('month').endOf('week')
+      startDate: moment
+        .unix(this.state.currentDate)
+        .startOf('month')
+        .startOf('week'),
+      endDate: moment
+        .unix(this.state.currentDate)
+        .endOf('month')
+        .endOf('week')
     });
 
     if (newDateStateChange !== null) this.setState(newDateStateChange);
-  }
+  };
 
   _handleNextClick = () => {
     const currentDate = moment
@@ -165,18 +178,24 @@ class Calendar extends React.Component {
               null;
             const savedStartDate = day.date();
 
-
             return (
               <div
                 className='calendar-day'
-                id={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 'focused-day' : null}
+                id={
+                  day.isSame(moment.unix(this.state.focusedDay), 'day') ?
+                    'focused-day' :
+                    null
+                }
                 key={day}
                 onClick={() => {
                   if (!disabledDay) this.props.onDateSelect(day.unix());
                 }}
                 onKeyDown={this._handleDayKeyDown}
                 ref={ref => {
-                  if (ref && moment.unix(this.state.focusedDay).date() === savedStartDate) {
+                  if (
+                    ref &&
+                    moment.unix(this.state.focusedDay).date() === savedStartDate
+                  ) {
                     ref.focus();
                   }
                 }}
@@ -188,7 +207,11 @@ class Calendar extends React.Component {
                   isToday && styles.today,
                   isSelectedDay && styles.selectedDay
                 )}
-                tabIndex={day.isSame(moment.unix(this.state.focusedDay), 'day') ? 0 : null}
+                tabIndex={
+                  day.isSame(moment.unix(this.state.focusedDay), 'day') ?
+                    0 :
+                    null
+                }
               >
                 {day.date()}
               </div>
