@@ -48,7 +48,7 @@ describe('Calendar', () => {
     it('should return an object with a focusedDay key when right key is pressed', () => {
       const result = {
         focusedDay: moment(focusedDay).add(1, 'days').startOf('day').unix()
-      }
+      };
 
       expect(getNewDateStateChange({ code: 'right', focusedDay, startDate, endDate })).toEqual(result);
     });
@@ -57,7 +57,7 @@ describe('Calendar', () => {
       const result = {
         focusedDay: moment(focusedDay).add(1, 'days').startOf('day').unix(),
         currentDate: moment(focusedDay).add(1, 'days').startOf('day').unix()
-      }
+      };
       const endDateOutOfRange = focusedDay;
 
       expect(getNewDateStateChange({ code: 'right', focusedDay, startDate, endDateOutOfRange })).toEqual(result);
@@ -66,7 +66,7 @@ describe('Calendar', () => {
     it('should return an object with a focusedDay key when left key is pressed', () => {
       const result = {
         focusedDay: moment(focusedDay).subtract(1, 'days').startOf('day').unix()
-      }
+      };
 
       expect(getNewDateStateChange({ code: 'left', focusedDay, startDate, endDate })).toEqual(result);
     });
@@ -74,8 +74,8 @@ describe('Calendar', () => {
     it('should return an object with a focusedDay key and a currentDate key when left key is pressed and newDate is outside of start and end date bounds', () => {
       const result = {
         focusedDay: moment(focusedDay).subtract(1, 'days').startOf('day').unix(),
-        currentDate: moment(focusedDay).subtract(1, 'days').startOf('day').unix(),
-      }
+        currentDate: moment(focusedDay).subtract(1, 'days').startOf('day').unix()
+      };
       const startDateOutOfRange = focusedDay;
 
       expect(getNewDateStateChange({ code: 'left', focusedDay, startDateOutOfRange, endDate })).toEqual(result);
@@ -84,7 +84,7 @@ describe('Calendar', () => {
     it('should return correct day when up key is pressed', () => {
       const result = {
         focusedDay: moment(focusedDay).subtract(7, 'days').startOf('day').unix()
-      }
+      };
 
       expect(getNewDateStateChange({ code: 'up', focusedDay, startDate, endDate })).toEqual(result);
     });
@@ -92,7 +92,7 @@ describe('Calendar', () => {
     it('should return correct day when down key is pressed', () => {
       const result = {
         focusedDay: moment(focusedDay).add(7, 'days').startOf('day').unix()
-      }
+      };
 
       expect(getNewDateStateChange({ code: 'down', focusedDay, startDate, endDate })).toEqual(result);
     });
