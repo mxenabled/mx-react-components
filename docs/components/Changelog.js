@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.14</h3>
+        <ul>
+          <li>Merging Modal Styles with Styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/694'>#694</a>)</li>
+        </ul>
+
         <h3>5.1.13</h3>
         <ul>
           <li>Fix regression in header style when there is no item on the right (<a href='https://github.com/mxenabled/mx-react-components/pull/693'>#693</a>)</li>
