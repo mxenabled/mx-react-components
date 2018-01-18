@@ -1,9 +1,6 @@
-import moment from 'moment'
-
 export const getNewDateStateChange = ({ code, focusedDay, startDate, endDate }) => {
   let day = null;
   let currentDate = null;
-  console.log('XXXX code', code)
 
   if (code === 'right') {
     day = focusedDay.add(1, 'days').startOf('day');
@@ -16,7 +13,6 @@ export const getNewDateStateChange = ({ code, focusedDay, startDate, endDate }) 
   }
 
   if (day && (day.isBefore(startDate) || day.isAfter(endDate))) {
-    console.log('we in here')
     currentDate = day.unix();
   }
 
