@@ -220,17 +220,15 @@ class Calendar extends React.Component {
 
   styles = theme => {
     return {
-      component: Object.assign(
-        {
-          backgroundColor: theme.Colors.WHITE,
-          border: '1px solid ' + theme.Colors.GRAY_300,
-          borderRadius: 3,
-          boxSizing: 'border-box',
-          marginTop: 10,
-          padding: 20
-        },
-        this.props.style
-      ),
+      component: {
+        backgroundColor: theme.Colors.WHITE,
+        border: '1px solid ' + theme.Colors.GRAY_300,
+        borderRadius: 3,
+        boxSizing: 'border-box',
+        marginTop: 10,
+        padding: 20,
+        ...this.props.style
+      },
 
       //Calendar Header
       calendarHeader: {

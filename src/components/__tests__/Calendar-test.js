@@ -43,7 +43,7 @@ describe('Calendar', () => {
   describe('getNewDateStateChange', () => {
     const focusedDay = moment();
     const startDate = moment().startOf('month').startOf('week');
-    const endDate = moment().endOf('month').endOf('week')
+    const endDate = moment().endOf('month').endOf('week');
 
     it('should return an object with a focusedDay key when right key is pressed', () => {
       const result = {
