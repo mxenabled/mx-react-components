@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
+const keycode = require('keycode');
 
 const Icon = require('./Icon');
 
@@ -9,6 +10,37 @@ const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
 const { deprecatePrimaryColor } = require('../utils/Deprecation');
+
+export const getNewDateStateChange = ({
+  code,
+  focusedDay,
+  startDate,
+  endDate
+}) => {
+  let day = null;
+  let currentDate = null;
+
+  if (code === 'right') {
+    day = focusedDay.add(1, 'days').startOf('day');
+  } else if (code === 'left') {
+    day = focusedDay.subtract(1, 'days').startOf('day');
+  } else if (code === 'up') {
+    day = focusedDay.subtract(7, 'days').startOf('day');
+  } else if (code === 'down') {
+    day = focusedDay.add(7, 'days').startOf('day');
+  }
+
+  if (day && (day.isBefore(startDate) || day.isAfter(endDate))) {
+    currentDate = day.unix();
+  }
+
+  return day ?
+  {
+    focusedDay: day.unix(),
+    ...(currentDate ? { currentDate } : {})
+  } :
+    null;
+};
 
 class Calendar extends React.Component {
   static propTypes = {
@@ -27,7 +59,10 @@ class Calendar extends React.Component {
   };
 
   state = {
-    currentDate: this.props.selectedDate || this.props.minimumDate || moment().unix()
+    currentDate:
+      this.props.selectedDate || this.props.minimumDate || moment().unix(),
+    focusedDay:
+      this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
 
   componentDidMount () {
@@ -35,27 +70,56 @@ class Calendar extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
+    if (
+      newProps.selectedDate &&
+      newProps.selectedDate !== this.props.selectedDate
+    ) {
       this.setState({
         currentDate: newProps.selectedDate
       });
     }
   }
 
-  _handleDateSelect = (date, e) => {
-    this.props.onDateSelect(date, e);
-  };
-
   _handlePreviousClick = () => {
-    const currentDate = moment.unix(this.state.currentDate).startOf('month').subtract(1, 'm').unix();
+    const currentDate = moment
+      .unix(this.state.currentDate)
+      .startOf('month')
+      .subtract(1, 'm')
+      .unix();
 
     this.setState({
       currentDate
     });
   };
 
+  _handleDayKeyDown = e => {
+    e.preventDefault();
+
+    if (keycode(e) === 'enter')
+      this.props.onDateSelect(this.state.focusedDay, e);
+
+    const newDateStateChange = getNewDateStateChange({
+      code: keycode(e),
+      focusedDay: moment.unix(this.state.focusedDay),
+      startDate: moment
+        .unix(this.state.currentDate)
+        .startOf('month')
+        .startOf('week'),
+      endDate: moment
+        .unix(this.state.currentDate)
+        .endOf('month')
+        .endOf('week')
+    });
+
+    if (newDateStateChange !== null) this.setState(newDateStateChange);
+  };
+
   _handleNextClick = () => {
-    const currentDate = moment.unix(this.state.currentDate).endOf('month').add(1, 'd').unix();
+    const currentDate = moment
+      .unix(this.state.currentDate)
+      .endOf('month')
+      .add(1, 'd')
+      .unix();
 
     this.setState({
       currentDate
@@ -63,8 +127,14 @@ class Calendar extends React.Component {
   };
 
   _getWeeks = () => {
-    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
-    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
+    const startDate = moment
+      .unix(this.state.currentDate)
+      .startOf('month')
+      .startOf('week');
+    const endDate = moment
+      .unix(this.state.currentDate)
+      .endOf('month')
+      .endOf('week');
     const weekLength = 7;
     const weeks = [];
     let days = [];
@@ -87,29 +157,61 @@ class Calendar extends React.Component {
     return weeks;
   };
 
-  _renderMonthTable = (styles) => {
+  _renderMonthTable = styles => {
     const weeks = this._getWeeks();
 
     return weeks.map(week => {
       return (
         <div key={week} style={styles.calendarWeek}>
           {week.map(day => {
-            const isCurrentMonth = day.isSame(moment.unix(this.state.currentDate), 'month');
-            const isSelectedDay = day.isSame(moment.unix(this.props.selectedDate), 'day');
+            const isCurrentMonth = day.isSame(
+              moment.unix(this.state.currentDate),
+              'month'
+            );
+            const isSelectedDay = day.isSame(
+              moment.unix(this.props.selectedDate),
+              'day'
+            );
             const isToday = day.isSame(moment(), 'day');
-            const disabledDay = this.props.minimumDate ? day.isBefore(moment.unix(this.props.minimumDate), 'day') : null;
+            const disabledDay = this.props.minimumDate ?
+              day.isBefore(moment.unix(this.props.minimumDate), 'day') :
+              null;
+            const savedStartDate = day.date();
 
             return (
               <div
+                className='calendar-day'
+                id={
+                  day.isSame(moment.unix(this.state.focusedDay), 'day') ?
+                    'focused-day' :
+                    null
+                }
                 key={day}
-                onClick={disabledDay ? null : this._handleDateSelect.bind(null, day.unix())}
-                style={Object.assign({},
+                onClick={() => {
+                  if (!disabledDay) this.props.onDateSelect(day.unix());
+                }}
+                onKeyDown={this._handleDayKeyDown}
+                ref={ref => {
+                  if (
+                    ref &&
+                    moment.unix(this.state.focusedDay).date() === savedStartDate
+                  ) {
+                    ref.focus();
+                  }
+                }}
+                style={Object.assign(
+                  {},
                   styles.calendarDay,
                   isCurrentMonth && styles.currentMonth,
                   disabledDay && styles.calendarDayDisabled,
                   isToday && styles.today,
                   isSelectedDay && styles.selectedDay
                 )}
+                tabIndex={
+                  day.isSame(moment.unix(this.state.focusedDay), 'day') ?
+                    0 :
+                    null
+                }
               >
                 {day.date()}
               </div>
@@ -121,7 +223,10 @@ class Calendar extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(
+      this.props.theme,
+      this.props.primaryColor
+    );
     const styles = this.styles(theme);
 
     return (
@@ -135,9 +240,7 @@ class Calendar extends React.Component {
             style={styles.calendayHeaderNav}
             type='caret-left'
           />
-          <div>
-            {moment.unix(this.state.currentDate).format('MMMM YYYY')}
-          </div>
+          <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
           <Icon
             elementProps={{
               onClick: this._handleNextClick
@@ -161,16 +264,17 @@ class Calendar extends React.Component {
     );
   }
 
-  styles = (theme) => {
+  styles = theme => {
     return {
-      component: Object.assign({
+      component: {
         backgroundColor: theme.Colors.WHITE,
         border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: 3,
         boxSizing: 'border-box',
         marginTop: 10,
-        padding: 20
-      }, this.props.style),
+        padding: 20,
+        ...this.props.style
+      },
 
       //Calendar Header
       calendarHeader: {
@@ -252,4 +356,4 @@ class Calendar extends React.Component {
   };
 }
 
-module.exports = Radium(Calendar);
+export default Radium(Calendar);
