@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.15</h3>
+        <ul>
+          <li>Improved Calendar accessibility and keyboard navagability (<a href='https://github.com/mxenabled/mx-react-components/pull/691'>#691</a>)</li>
+        </ul>
+
         <h3>5.1.14</h3>
         <ul>
           <li>Merging Modal Styles with Styles prop (<a href='https://github.com/mxenabled/mx-react-components/pull/694'>#694</a>)</li>
