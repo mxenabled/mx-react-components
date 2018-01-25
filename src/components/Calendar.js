@@ -93,7 +93,7 @@ class Calendar extends React.Component {
   };
 
   _handleDayKeyDown = e => {
-    e.preventDefault();
+    if (keycode(e) === 'up' || keycode(e) === 'down') e.preventDefault();
 
     if (keycode(e) === 'enter')
       this.props.onDateSelect(this.state.focusedDay, e);
