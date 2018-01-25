@@ -179,7 +179,7 @@ class Calendar extends React.Component {
             const savedStartDate = day.date();
 
             return (
-              <div
+              <a
                 className='calendar-day'
                 id={
                   day.isSame(moment.unix(this.state.focusedDay), 'day') ?
@@ -214,7 +214,7 @@ class Calendar extends React.Component {
                 }
               >
                 {day.date()}
-              </div>
+              </a>
             );
           })}
         </div>
