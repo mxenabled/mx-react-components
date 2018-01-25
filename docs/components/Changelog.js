@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.17</h3>
+        <ul>
+          <li>Change calendar day tag to `<a>` for accessibility, focasability (<a href='https://github.com/mxenabled/mx-react-components/pull/696'>#696</a>)</li>
+        </ul>
+
         <h3>5.1.16</h3>
         <ul>
           <li>Fixes a bug with the way the Calendar is exported (<a href='https://github.com/mxenabled/mx-react-components/pull/695'>#695</a>)</li>
