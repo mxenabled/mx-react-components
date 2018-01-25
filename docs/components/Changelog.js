@@ -10,7 +10,7 @@ class Changelog extends React.Component {
 
         <h3>5.1.17</h3>
         <ul>
-          <li>Change calendar day tag to `<a>` for accessibility, focasability (<a href='https://github.com/mxenabled/mx-react-components/pull/696'>#696</a>)</li>
+          <li>Change calendar day tag to anchor tag for accessibility, focasability (<a href='https://github.com/mxenabled/mx-react-components/pull/696'>#696</a>)</li>
         </ul>
 
         <h3>5.1.16</h3>
