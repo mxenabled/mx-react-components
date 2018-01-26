@@ -235,9 +235,9 @@ class Calendar extends React.Component {
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <a
-            tabIndex={0}
             onCLick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
+            tabIndex={0}
           >
             <Icon
               size={20}
@@ -247,9 +247,9 @@ class Calendar extends React.Component {
           </a>
           <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
           <a
-            tabIndex={0}
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
+            tabIndex={0}
           >
             <Icon
               size={20}
