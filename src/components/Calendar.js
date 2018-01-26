@@ -88,7 +88,8 @@ class Calendar extends React.Component {
       .unix();
 
     this.setState({
-      currentDate
+      currentDate,
+      focusedDay: currentDate
     });
   };
 
@@ -122,7 +123,8 @@ class Calendar extends React.Component {
       .unix();
 
     this.setState({
-      currentDate
+      currentDate,
+      focusedDay: currentDate
     });
   };
 
@@ -232,23 +234,29 @@ class Calendar extends React.Component {
     return (
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
-          <Icon
-            elementProps={{
-              onClick: this._handlePreviousClick
-            }}
-            size={20}
-            style={styles.calendayHeaderNav}
-            type='caret-left'
-          />
+          <a
+            tabIndex={0}
+            onCLick={this._handlePreviousClick}
+            onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
+          >
+            <Icon
+              size={20}
+              style={styles.calendayHeaderNav}
+              type='caret-left'
+            />
+          </a>
           <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
-          <Icon
-            elementProps={{
-              onClick: this._handleNextClick
-            }}
-            size={20}
-            style={styles.calendayHeaderNav}
-            type='caret-right'
-          />
+          <a
+            tabIndex={0}
+            onClick={this._handleNextClick}
+            onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
+          >
+            <Icon
+              size={20}
+              style={styles.calendayHeaderNav}
+              type='caret-right'
+            />
+          </a>
         </div>
         <div style={styles.calendarWeekHeader}>
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
