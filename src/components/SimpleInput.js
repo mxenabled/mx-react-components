@@ -18,6 +18,7 @@ class Input extends React.Component {
     icon: PropTypes.string,
     placeholder: PropTypes.string,
     rightIcon: PropTypes.string,
+    simpleInputRef: PropTypes.func,
     style: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
@@ -70,6 +71,7 @@ class Input extends React.Component {
 
     return (
       <div
+        ref={this.props.simpleInputRef}
         style={Object.assign({}, styles.wrapper, this.state.focus ? styles.activeWrapper : null)}
       >
         {this.props.icon ? (
