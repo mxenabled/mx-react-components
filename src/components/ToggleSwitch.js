@@ -19,6 +19,7 @@ class ToggleSwitch extends React.Component {
     showLabels: PropTypes.bool,
     styles: PropTypes.object,
     theme: themeShape,
+    toggleSwitchRef: PropTypes.func,
     trueIcon: PropTypes.string
   };
 
@@ -42,7 +43,7 @@ class ToggleSwitch extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div className='toggle-switch-component' style={styles.component}>
+      <div className='toggle-switch-component' ref={this.props.toggleSwitchRef} style={styles.component}>
         {this.props.showLabels ? (
           <div className='left-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
         ) : null}
