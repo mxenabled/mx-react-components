@@ -16,6 +16,7 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class DisplayInput extends React.Component {
   static propTypes = {
     childrenStyle: PropTypes.object,
+    displayInputRef: PropTypes.func,
     elementProps: PropTypes.object,
     hint: PropTypes.string,
     isFocused: PropTypes.bool,
@@ -89,7 +90,7 @@ class DisplayInput extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
 
     return (
-      <Container>
+      <Container ref={this.props.displayInputRef}>
         <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
           <Row>
             {this.props.label ? (
