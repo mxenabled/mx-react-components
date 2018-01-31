@@ -14,6 +14,7 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class DatePicker extends React.Component {
   static propTypes = {
     closeOnDateSelect: PropTypes.bool,
+    datePickerRef: PropTypes.func,
     defaultDate: PropTypes.number,
     format: PropTypes.string,
     locale: PropTypes.string,
@@ -86,7 +87,7 @@ class DatePicker extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div style={styles.component}>
+      <div ref={this.props.datePickerRef} style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
             size={20}
