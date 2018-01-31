@@ -16,6 +16,7 @@ class SimpleSlider extends React.Component {
     onPercentChange: PropTypes.func.isRequired,
     percent: PropTypes.number.isRequired,
     selectedColor: PropTypes.string,
+    simpleSliderRef: PropTypes.func,
     styles: PropTypes.object,
     theme: themeShape
   };
@@ -96,7 +97,7 @@ class SimpleSlider extends React.Component {
     const { disabled } = this.props;
 
     return (
-      <div style={styles.component}>
+      <div ref={this.props.simpleSliderRef} style={styles.component}>
         <div
           onMouseLeave={disabled ? null : this._handleDragEnd}
           onMouseMove={disabled ? null : this._handleDragging}
