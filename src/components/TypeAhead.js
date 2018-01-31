@@ -16,7 +16,8 @@ class TypeAhead extends React.Component {
     onItemSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     preSelectedItems: PropTypes.array,
-    theme: themeShape
+    theme: themeShape,
+    typeAheadRef: PropTypes.func
   };
 
   static defaultProps = {
@@ -299,6 +300,7 @@ class TypeAhead extends React.Component {
         className='mx-typeahead'
         onBlur={this._handleBlur}
         onFocus={this._handleFocus}
+        ref={this.props.typeAheadRef}
         style={Object.assign({}, styles.component, this.props.style)}
         tabIndex='0'
       >
