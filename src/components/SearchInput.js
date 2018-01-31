@@ -15,6 +15,7 @@ class SearchInput extends React.Component {
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    searchInputRef: PropTypes.func,
     searchKeyword: PropTypes.string,
     style: PropTypes.object,
     styles: PropTypes.object,
@@ -32,7 +33,7 @@ class SearchInput extends React.Component {
     const styles = this.styles();
 
     return (
-      <div style={Object.assign({}, styles.component, this.props.style)}>
+      <div ref={this.props.searchInputRef} style={Object.assign({}, styles.component, this.props.style)}>
         <Input
           elementProps={{
             onBlur: this.props.onBlur,
