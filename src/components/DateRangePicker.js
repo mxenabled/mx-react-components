@@ -22,6 +22,7 @@ const SelectionPane = require('./DateRangePicker/SelectionPane');
 class DateRangePicker extends React.Component {
   static propTypes = {
     closeCalendarOnRangeSelect: PropTypes.bool,
+    dateRangePickerRef: PropTypes.func,
     defaultRanges: PropTypes.arrayOf(PropTypes.shape({
       displayValue: PropTypes.string,
       getEndDate: PropTypes.func,
@@ -274,7 +275,7 @@ class DateRangePicker extends React.Component {
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
 
     return (
-      <div style={styles.component}>
+      <div ref={this.props.dateRangePickerRef} style={styles.component}>
         <a
           onClick={this._toggleSelectionPane}
           onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
