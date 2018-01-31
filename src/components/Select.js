@@ -39,6 +39,7 @@ class Select extends React.Component {
     scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    selectRef: PropTypes.func,
     theme: themeShape,
     valid: PropTypes.bool
   };
@@ -193,7 +194,7 @@ class Select extends React.Component {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
+      <div className='mx-select' ref={this.props.selectRef} style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
