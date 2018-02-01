@@ -13,10 +13,10 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class SimpleSlider extends React.Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    elementRef: PropTypes.func,
     onPercentChange: PropTypes.func.isRequired,
     percent: PropTypes.number.isRequired,
     selectedColor: PropTypes.string,
-    simpleSliderRef: PropTypes.func,
     styles: PropTypes.object,
     theme: themeShape
   };
@@ -97,7 +97,7 @@ class SimpleSlider extends React.Component {
     const { disabled } = this.props;
 
     return (
-      <div ref={this.props.simpleSliderRef} style={styles.component}>
+      <div ref={this.props.elementRef} style={styles.component}>
         <div
           onMouseLeave={disabled ? null : this._handleDragEnd}
           onMouseMove={disabled ? null : this._handleDragging}
