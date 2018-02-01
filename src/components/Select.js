@@ -29,6 +29,7 @@ const optionShape = PropTypes.shape({
 class Select extends React.Component {
   static propTypes = {
     dropdownStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    elementRef: PropTypes.func,
     onChange: PropTypes.func,
     options: PropTypes.arrayOf(optionShape),
     optionsStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -39,7 +40,6 @@ class Select extends React.Component {
     scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    selectRef: PropTypes.func,
     theme: themeShape,
     valid: PropTypes.bool
   };
@@ -89,7 +89,7 @@ class Select extends React.Component {
 
   _close = () => {
     this.setState({ isOpen: false });
-    this.component.focus();
+    this.elementRef.focus();
   };
 
   _open = () => {
@@ -194,11 +194,11 @@ class Select extends React.Component {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select' ref={this.props.selectRef} style={Object.assign({}, this.props.style, { position: 'relative' })}>
+      <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
-          ref={ref => this.component = ref}
+          ref={ref => this.elementRef = ref}
           style={styles.component}
           tabIndex='0'
         >
