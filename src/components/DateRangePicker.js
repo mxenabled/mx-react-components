@@ -22,12 +22,12 @@ const SelectionPane = require('./DateRangePicker/SelectionPane');
 class DateRangePicker extends React.Component {
   static propTypes = {
     closeCalendarOnRangeSelect: PropTypes.bool,
-    elementRef: PropTypes.func,
     defaultRanges: PropTypes.arrayOf(PropTypes.shape({
       displayValue: PropTypes.string,
       getEndDate: PropTypes.func,
       getStartDate: PropTypes.func
     })),
+    elementRef: PropTypes.func,
     format: PropTypes.string,
     isRelative: PropTypes.bool,
     locale: PropTypes.string,

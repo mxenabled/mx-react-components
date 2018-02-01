@@ -13,8 +13,8 @@ class DatePickerFullScreen extends React.Component {
   static propTypes = {
     closeIcon: PropTypes.string,
     closeOnDateSelect: PropTypes.bool,
-    elementRef: PropTypes.func,
     defaultDate: PropTypes.number,
+    elementRef: PropTypes.func,
     format: PropTypes.string,
     inputStyle: PropTypes.object,
     isFixed: PropTypes.bool,
