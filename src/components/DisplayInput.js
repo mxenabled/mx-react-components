@@ -16,8 +16,8 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class DisplayInput extends React.Component {
   static propTypes = {
     childrenStyle: PropTypes.object,
-    displayInputRef: PropTypes.func,
     elementProps: PropTypes.object,
+    elementRef: PropTypes.func,
     hint: PropTypes.string,
     isFocused: PropTypes.bool,
     label: PropTypes.string,
@@ -90,7 +90,7 @@ class DisplayInput extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
 
     return (
-      <Container ref={this.props.displayInputRef}>
+      <Container>
         <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
           <Row>
             {this.props.label ? (
@@ -113,6 +113,7 @@ class DisplayInput extends React.Component {
                     aria-labelledby={this.props.label ? this._labelId : null}
                     id={this._inputId}
                     key='input'
+                    ref={this.props.elementRef}
                     style={styles.input}
                   />
                 </div>
