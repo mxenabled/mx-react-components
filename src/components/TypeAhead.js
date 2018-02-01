@@ -11,13 +11,13 @@ const StyleUtils = require('../utils/Style');
 
 class TypeAhead extends React.Component {
   static propTypes = {
+    elementRef: PropTypes.func,
     items: PropTypes.array,
     onItemRemove: PropTypes.func,
     onItemSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     preSelectedItems: PropTypes.array,
-    theme: themeShape,
-    typeAheadRef: PropTypes.func
+    theme: themeShape
   };
 
   static defaultProps = {
@@ -300,7 +300,7 @@ class TypeAhead extends React.Component {
         className='mx-typeahead'
         onBlur={this._handleBlur}
         onFocus={this._handleFocus}
-        ref={this.props.typeAheadRef}
+        ref={this.props.elementRef}
         style={Object.assign({}, styles.component, this.props.style)}
         tabIndex='0'
       >
