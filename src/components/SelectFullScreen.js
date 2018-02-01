@@ -11,6 +11,7 @@ const StyleUtils = require('../utils/Style');
 class SelectFullScreen extends React.Component {
   static propTypes = {
     closeIcon: PropTypes.string,
+    elementRef: PropTypes.func,
     isFixed: PropTypes.bool,
     onChange: PropTypes.func,
     optionFormatter: PropTypes.func,
@@ -21,7 +22,6 @@ class SelectFullScreen extends React.Component {
     placeholderText: PropTypes.string,
     selected: PropTypes.object,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    selectFullScreenRef: PropTypes.func,
     theme: themeShape
   };
 
@@ -128,7 +128,7 @@ class SelectFullScreen extends React.Component {
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 
     return (
-      <div className='mx-select-full-screen' ref={this.props.selectFullScreenRef} style={[styles.component, this.props.style]}>
+      <div className='mx-select-full-screen' ref={this.props.elementRef} style={[styles.component, this.props.style]}>
         <div
           className='mx-select-full-screen-selected'
           key='selected'
