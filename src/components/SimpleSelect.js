@@ -23,7 +23,7 @@ class SimpleSelect extends React.Component {
     menuStyles: PropTypes.object,
     onScrimClick: PropTypes.func,
     scrimClickOnSelect: PropTypes.bool,
-    simpleSelectRef: PropTypes.func,
+    elementRef: PropTypes.func,
     style: PropTypes.object,
     styles: PropTypes.object,
     theme: themeShape
@@ -66,7 +66,7 @@ class SimpleSelect extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div ref={this.props.simpleSelectRef} style={styles.component}>
+      <div ref={this.props.elementRef} style={styles.component}>
         <Listbox
           aria-label={this.props['aria-label']}
           style={styles.menu}
