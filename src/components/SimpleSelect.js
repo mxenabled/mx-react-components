@@ -15,6 +15,7 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class SimpleSelect extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
+    elementRef: PropTypes.func,
     hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
     iconStyles: PropTypes.object,
@@ -23,7 +24,6 @@ class SimpleSelect extends React.Component {
     menuStyles: PropTypes.object,
     onScrimClick: PropTypes.func,
     scrimClickOnSelect: PropTypes.bool,
-    elementRef: PropTypes.func,
     style: PropTypes.object,
     styles: PropTypes.object,
     theme: themeShape
