@@ -11,10 +11,10 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class TextArea extends React.Component {
   static propTypes = {
     elementProps: PropTypes.object,
+    elementRef: PropTypes.func,
     primaryColor: PropTypes.string,
     rows: PropTypes.number,
     styles: PropTypes.object,
-    textAreaRef: PropTypes.func,
     theme: themeShape,
     valid: PropTypes.bool
   };
@@ -58,7 +58,7 @@ class TextArea extends React.Component {
       <div
         onBlur={this._onBlur}
         onFocus={this._onFocus}
-        ref={this.props.textAreaRef}
+        ref={this.props.elementRef}
         style={Object.assign({}, styles.wrapper, this.state.focus ? styles.active : null)}
         tabIndex={0}
       >
