@@ -22,14 +22,13 @@ const TabsFactory = ({ type = 'standard', useTabsInMobile, ...props }) => {
   if (!TabsComponent) throw new Error(`Unknown Tabs type: ${type}`);
 
   return (
-    <TabsComponent ref={this.props.tabsRef} {...tabsProps} />
+    <TabsComponent {...tabsProps} />
   );
 };
 
 TabsFactory.propTypes = Object.assign({
   type: PropTypes.oneOf(Object.keys(TabsTypes)),
-  useTabsInMobile: PropTypes.bool, // deprecated
-  tabsRef: PropTypes.func
+  useTabsInMobile: PropTypes.bool // deprecated
 }, Tabbable.PropTypes);
 
 module.exports = TabsFactory;
