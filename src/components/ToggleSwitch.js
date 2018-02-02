@@ -11,6 +11,7 @@ const StyleUtils = require('../utils/Style');
 class ToggleSwitch extends React.Component {
   static propTypes = {
     checked: PropTypes.bool,
+    elementRef: PropTypes.func,
     falseIcon: PropTypes.string,
     leftLabel: PropTypes.string,
     onToggle: PropTypes.func,
@@ -42,7 +43,7 @@ class ToggleSwitch extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div className='toggle-switch-component' style={styles.component}>
+      <div className='toggle-switch-component' ref={this.props.elementRef} style={styles.component}>
         {this.props.showLabels ? (
           <div className='left-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
         ) : null}

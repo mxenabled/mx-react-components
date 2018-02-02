@@ -23,6 +23,7 @@ class DatePicker extends React.Component {
     dateFormat: PropTypes.string,
     dateIcon: PropTypes.string,
     datePlaceholder: PropTypes.string,
+    elementRef: PropTypes.func,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onDateSelect: PropTypes.func,
@@ -88,7 +89,7 @@ class DatePicker extends React.Component {
     e.stopPropagation();
 
     if (this.props.closeOnDateSelect) {
-      this.dateSelect.blur();
+      this.elementRef.blur();
 
       this.setState({
         showCalendar: false
@@ -163,7 +164,7 @@ class DatePicker extends React.Component {
               onBlur={this._handleDateBlur}
               onClick={this._handleDateClick}
               onFocus={this._handleDateFocus}
-              ref={(ref) => this.dateSelect = ref}
+              ref={(ref) => this.elementRef = ref}
               style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
               tabIndex={0}
             >

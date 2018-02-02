@@ -10,6 +10,7 @@ const StyleUtils = require('../utils/Style');
 class SearchInput extends React.Component {
   static propTypes = {
     baseColor: PropTypes.string,
+    elementRef: PropTypes.func,
     focusOnLoad: PropTypes.bool,
     handleResetClick: PropTypes.func,
     onBlur: PropTypes.func,
@@ -44,6 +45,7 @@ class SearchInput extends React.Component {
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
           icon='search'
+          ref={this.props.elementRef}
           resetClick={this.props.handleResetClick}
           rightIcon='close-solid'
           theme={theme}

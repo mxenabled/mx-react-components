@@ -12,6 +12,7 @@ const Icon = require('./Icon');
 class FileUpload extends React.Component {
   static propTypes = {
     allowedFileTypes: PropTypes.array,
+    elementRef: PropTypes.func,
     imageUrl: PropTypes.string,
     imageValidation: PropTypes.shape({
       exactHeight: PropTypes.number,
@@ -261,6 +262,7 @@ class FileUpload extends React.Component {
         onDragLeave={this._onDragLeave}
         onDragOver={this._onDragOver}
         onDrop={this._onDrop}
+        ref={this.props.elementRef}
         style={Object.assign({}, styles.dropzone, dropzoneLoaded ? styles.dropzoneLoaded : null)}
       >
         {dropzoneLoaded ? (

@@ -13,6 +13,7 @@ class Input extends React.Component {
   static propTypes = {
     baseColor: PropTypes.string,
     elementProps: PropTypes.object,
+    elementRef: PropTypes.func,
     focusOnLoad: PropTypes.bool,
     handleResetClick: PropTypes.func,
     icon: PropTypes.string,
@@ -42,8 +43,8 @@ class Input extends React.Component {
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'baseColor');
 
-    if (this.props.focusOnLoad && this.input) {
-      this.input.focus();
+    if (this.props.focusOnLoad && this.elementRef) {
+      this.elementRef.focus();
     }
   }
 
@@ -79,7 +80,7 @@ class Input extends React.Component {
           {...elementProps}
           onBlur={this._onBlur}
           onFocus={this._onFocus}
-          ref={ref => this.input = ref}
+          ref={ref => this.elementRef = ref}
           style={styles.input}
           type={this.props.type}
         />

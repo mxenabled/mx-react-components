@@ -12,6 +12,7 @@ class RadioButton extends React.Component {
     buttonStyle: PropTypes.object,
     checked: PropTypes.bool,
     color: PropTypes.string,
+    elementRef: PropTypes.func,
     onClick: PropTypes.func,
     style: PropTypes.object,
     theme: themeShape
@@ -30,7 +31,7 @@ class RadioButton extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div onClick={this.props.onClick} style={styles.component}>
+      <div onClick={this.props.onClick} ref={this.props.elementRef} style={styles.component}>
         <div style={styles.radioButton}>
           {this.props.checked ? <div style={styles.radioButtonActive} /> : null}
         </div>
