@@ -23,7 +23,7 @@ class DatePicker extends React.Component {
     dateFormat: PropTypes.string,
     dateIcon: PropTypes.string,
     datePlaceholder: PropTypes.string,
-    dateTimePickerRef: PropTypes.func,
+    elementRef: PropTypes.func,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onDateSelect: PropTypes.func,
@@ -157,7 +157,7 @@ class DatePicker extends React.Component {
     const spans = this.spans();
 
     return (
-      <Container fluid={true} ref={this.props.dateTimePickerRef}>
+      <Container fluid={true}>
         <Row>
           <Column span={spans.date}>
             <div
