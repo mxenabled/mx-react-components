@@ -88,12 +88,13 @@ class Calendar extends React.Component {
       .unix();
 
     this.setState({
-      currentDate
+      currentDate,
+      focusedDay: currentDate
     });
   };
 
   _handleDayKeyDown = e => {
-    e.preventDefault();
+    if (keycode(e) === 'up' || keycode(e) === 'down') e.preventDefault();
 
     if (keycode(e) === 'enter')
       this.props.onDateSelect(this.state.focusedDay, e);
@@ -122,7 +123,8 @@ class Calendar extends React.Component {
       .unix();
 
     this.setState({
-      currentDate
+      currentDate,
+      focusedDay: currentDate
     });
   };
 
@@ -232,23 +234,29 @@ class Calendar extends React.Component {
     return (
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
-          <Icon
-            elementProps={{
-              onClick: this._handlePreviousClick
-            }}
-            size={20}
-            style={styles.calendayHeaderNav}
-            type='caret-left'
-          />
+          <a
+            onCLick={this._handlePreviousClick}
+            onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
+            tabIndex={0}
+          >
+            <Icon
+              size={20}
+              style={styles.calendayHeaderNav}
+              type='caret-left'
+            />
+          </a>
           <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
-          <Icon
-            elementProps={{
-              onClick: this._handleNextClick
-            }}
-            size={20}
-            style={styles.calendayHeaderNav}
-            type='caret-right'
-          />
+          <a
+            onClick={this._handleNextClick}
+            onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
+            tabIndex={0}
+          >
+            <Icon
+              size={20}
+              style={styles.calendayHeaderNav}
+              type='caret-right'
+            />
+          </a>
         </div>
         <div style={styles.calendarWeekHeader}>
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
