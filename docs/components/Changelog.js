@@ -8,6 +8,13 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.1.18</h3>
+        <ul>
+          <li>Fixed tests for Calendar (<a href='https://github.com/mxenabled/mx-react-components/pull/700'>#700</a>)</li>
+          <li>Fix breaking func in date time picker. (<a href='https://github.com/mxenabled/mx-react-components/pull/698'>#698</a>)</li>
+          <li>Only Prevent Default on up or down arrow keypress in calendar. (<a href='https://github.com/mxenabled/mx-react-components/pull/697'>#697</a>)</li>
+        </ul>
+
         <h3>5.1.17</h3>
         <ul>
           <li>Change calendar day tag to anchor tag for accessibility, focasability (<a href='https://github.com/mxenabled/mx-react-components/pull/696'>#696</a>)</li>

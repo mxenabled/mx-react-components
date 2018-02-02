@@ -39,11 +39,10 @@ describe('Calendar', () => {
     });
   });
 
-
   describe('getNewDateStateChange', () => {
-    const focusedDay = moment();
-    const startDate = moment().startOf('month').startOf('week');
-    const endDate = moment().endOf('month').endOf('week');
+    const focusedDay = moment('2018-01-17');
+    const startDate = moment('2018-01-17').startOf('month').startOf('week');
+    const endDate = moment('2018-01-17').endOf('month').endOf('week');
 
     it('should return an object with a focusedDay key when right key is pressed', () => {
       const result = {
@@ -58,9 +57,11 @@ describe('Calendar', () => {
         focusedDay: moment(focusedDay).add(1, 'days').startOf('day').unix(),
         currentDate: moment(focusedDay).add(1, 'days').startOf('day').unix()
       };
-      const endDateOutOfRange = focusedDay;
+      //deliberately set to be out of range
+      const endDate = moment(focusedDay).clone();
 
-      expect(getNewDateStateChange({ code: 'right', focusedDay, startDate, endDateOutOfRange })).toEqual(result);
+
+      expect(getNewDateStateChange({ code: 'right', focusedDay, startDate, endDate })).toEqual(result);
     });
 
     it('should return an object with a focusedDay key when left key is pressed', () => {
@@ -76,9 +77,10 @@ describe('Calendar', () => {
         focusedDay: moment(focusedDay).subtract(1, 'days').startOf('day').unix(),
         currentDate: moment(focusedDay).subtract(1, 'days').startOf('day').unix()
       };
-      const startDateOutOfRange = focusedDay;
+      //deliberately set to be out of range
+      const startDate = moment(focusedDay).clone();
 
-      expect(getNewDateStateChange({ code: 'left', focusedDay, startDateOutOfRange, endDate })).toEqual(result);
+      expect(getNewDateStateChange({ code: 'left', focusedDay, startDate, endDate })).toEqual(result);
     });
 
     it('should return correct day when up key is pressed', () => {
