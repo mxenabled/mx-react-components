@@ -83,6 +83,7 @@ class SimpleInputDocs extends React.Component {
               rightIcon: { paddingRight: '40px' }
             }}
             theme={{ Colors: { PRIMARY: 'orange' } }}
+            valid={false}
           />
         `}
         </Markdown>
