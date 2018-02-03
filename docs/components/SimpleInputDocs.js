@@ -22,6 +22,12 @@ class SimpleInputDocs extends React.Component {
           elementProps={{
             placeholder: 'Type something'
           }}
+          // style={{ backgroundColor: 'purple', border: '4px solid green', marginTop: '50px' }}
+          styles={{
+            wrapper: { backgroundColor: 'red' },
+            activeWrapper: { backgroundColor: 'blue' }
+          }}
+
         />
 
         <h3>Usage</h3>
@@ -43,8 +49,8 @@ class SimpleInputDocs extends React.Component {
         <h5>rightIcon <label>String</label></h5>
         <p>The name of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
 
-        <h5>style <label>Object or Array</label></h5>
-        <p>blah blah</p>
+        <h5>style <label>Object</label></h5>
+        <p>The styles are applied to the outtermost wrapper element in the component.</p>
 
         <h5>styles <label>Object</label></h5>
         <p>blah blah</p>
@@ -71,6 +77,7 @@ class SimpleInputDocs extends React.Component {
             handleResetClick={myRightIconClickCallbackFunction}
             icon={'bike'}
             rightIcon={'close-solid'}
+            style={{ backgroundColor: 'purple', border: '4px solid green', marginTop: '50px' }}
           />
         `}
         </Markdown>
