@@ -16,7 +16,6 @@ class Input extends React.Component {
     focusOnLoad: PropTypes.bool,
     handleResetClick: PropTypes.func,
     icon: PropTypes.string,
-    placeholder: PropTypes.string,
     rightIcon: PropTypes.string,
     style: PropTypes.oneOfType([
       PropTypes.array,
