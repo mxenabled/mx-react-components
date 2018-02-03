@@ -22,13 +22,6 @@ class SimpleInputDocs extends React.Component {
           elementProps={{
             placeholder: 'Type something'
           }}
-          handleResetClick={() => {
-            /* eslint-disable no-console */
-            console.log('clicked me');
-            /* eslint-enable no-console */
-          }}
-          // icon={'bike'}
-          // rightIcon={'close-solid'}
         />
 
         <h3>Usage</h3>
@@ -36,7 +29,7 @@ class SimpleInputDocs extends React.Component {
         <p>The color of the <Code>input</Code> border on focus.</p>
 
         <h5>elementProps <label>Object</label></h5>
-        <p>Properties to pass directly to the <Code>input</Code> element.</p>
+        <p>Attributes to pass directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
 
         <h5>focusOnLoad <label>Boolean</label></h5>
         <p>Focus <Code>input</Code> on load, default of false.</p>
@@ -46,9 +39,6 @@ class SimpleInputDocs extends React.Component {
 
         <h5>icon <label>String</label></h5>
         <p>The name of icon to display in the left side of the <Code>input</Code>.</p>
-
-        <h5>placeholder <label>String</label></h5>
-        <p>The text to show before the user starts typing or when the <Code>input</Code> is empty.</p>
 
         <h5>rightIcon <label>String</label></h5>
         <p>The name of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
@@ -72,18 +62,15 @@ class SimpleInputDocs extends React.Component {
         <Markdown>
           {`
           <SimpleInput
-            placeholder='Type something'
-            type='text'
-            valid={false}
-          />
-
-          <SimpleInput
+            baseColor={'red'}
             elementProps={{
-              onChange: myOnChangeCallbackFunction
+              onChange: myOnChangeCallbackFunction,
               placeholder: 'Type something'
             }}
-            label='Type something'
-            valid={true}
+            focusOnLoad={true}
+            handleResetClick={myRightIconClickCallbackFunction}
+            icon={'bike'}
+            rightIcon={'close-solid'}
           />
         `}
         </Markdown>
