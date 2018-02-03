@@ -44,7 +44,7 @@ class SimpleInputDocs extends React.Component {
         <p>The name of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
 
         <h5>styles <label>Object</label></h5>
-        <p>Style changes or additions to specific component elements including:</p>
+        <p>Allows style additions or overrides to specific component elements including:</p>
           <ul >
           <li><Code>wrapper</Code>: the outermost element of the component.</li>
           <li><Code>activeWrapper</Code>: the outermost element of the component when active.</li>
@@ -52,10 +52,10 @@ class SimpleInputDocs extends React.Component {
           <li><Code>icon</Code>: the icon located in the left side of the <Code>input</Code> element.</li>
           <li><Code>rightIcon</Code>: the icon located in the right side of the <Code>input</Code> element.</li>
           </ul>
-          <p>*see example for syntax</p>
+          <p>*<Code>styles</Code> will override defaults and conflicting <Code>themes</Code></p>
 
         <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information. Themes may be overridden by <Code>styles</Code></p>
 
         <h5>type <label>String</label></h5>
         <p>blah blah</p>
@@ -82,6 +82,7 @@ class SimpleInputDocs extends React.Component {
               icon: { paddingLeft: '40px' },
               rightIcon: { paddingRight: '40px' }
             }}
+            theme={{ Colors: { PRIMARY: 'orange' } }}
           />
         `}
         </Markdown>
