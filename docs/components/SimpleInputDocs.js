@@ -22,12 +22,6 @@ class SimpleInputDocs extends React.Component {
           elementProps={{
             placeholder: 'Type something'
           }}
-          // style={{ backgroundColor: 'purple', border: '4px solid green', marginTop: '50px' }}
-          styles={{
-            wrapper: { backgroundColor: 'red' },
-            activeWrapper: { backgroundColor: 'blue' }
-          }}
-
         />
 
         <h3>Usage</h3>
@@ -49,11 +43,16 @@ class SimpleInputDocs extends React.Component {
         <h5>rightIcon <label>String</label></h5>
         <p>The name of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
 
-        <h5>style <label>Object</label></h5>
-        <p>The styles are applied to the outtermost wrapper element in the component.</p>
-
         <h5>styles <label>Object</label></h5>
-        <p>blah blah</p>
+        <p>Style changes or additions to specific component elements including:</p>
+          <ul >
+          <li><Code>wrapper</Code>: the outermost element of the component.</li>
+          <li><Code>activeWrapper</Code>: the outermost element of the component when active.</li>
+          <li><Code>input</Code>: the component's <Code>input</Code> element.</li>
+          <li><Code>icon</Code>: the icon located in the left side of the <Code>input</Code> element.</li>
+          <li><Code>rightIcon</Code>: the icon located in the right side of the <Code>input</Code> element.</li>
+          </ul>
+          <p>*see example for syntax</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
@@ -70,14 +69,19 @@ class SimpleInputDocs extends React.Component {
           <SimpleInput
             baseColor={'red'}
             elementProps={{
-              onChange: myOnChangeCallbackFunction,
               placeholder: 'Type something'
             }}
             focusOnLoad={true}
             handleResetClick={myRightIconClickCallbackFunction}
             icon={'bike'}
             rightIcon={'close-solid'}
-            style={{ backgroundColor: 'purple', border: '4px solid green', marginTop: '50px' }}
+            styles={{
+              wrapper: { backgroundColor: 'red', border: '4px solid green' },
+              activeWrapper: { backgroundColor: 'blue', border: '4px solid red' },
+              input: { color: 'purple' },
+              icon: { paddingLeft: '40px' },
+              rightIcon: { paddingRight: '40px' }
+            }}
           />
         `}
         </Markdown>
