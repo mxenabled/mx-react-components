@@ -55,10 +55,10 @@ class SimpleInputDocs extends React.Component {
           <p>*<Code>styles</Code> will override defaults and conflicting <Code>themes</Code></p>
 
         <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information. Themes may be overridden by <Code>styles</Code></p>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information. Themes will be overridden by conflicting <Code>styles</Code></p>
 
         <h5>type <label>String</label></h5>
-        <p>blah blah</p>
+        <p>Specifies the <Code>input</Code> type. Default <Code>type</Code> is text.</p>
 
         <h5>valid <label>Boolean</label></h5>
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red border.</p>
