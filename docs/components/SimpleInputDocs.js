@@ -27,9 +27,10 @@ class SimpleInputDocs extends React.Component {
         <h3>Usage</h3>
         <h5>baseColor <label>String</label></h5>
         <p>The color of the <Code>input</Code> border on focus.</p>
+        <p>*This prop is deprecated, please use <Code>themes</Code> instead.</p>
 
         <h5>elementProps <label>Object</label></h5>
-        <p>Attributes to pass directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
+        <p>Pass props directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
 
         <h5>focusOnLoad <label>Boolean</label></h5>
         <p>Focus <Code>input</Code> on load, default of false.</p>
@@ -38,10 +39,10 @@ class SimpleInputDocs extends React.Component {
         <p>The function that will execute when <Code>rightIcon</Code> is clicked. This prop will not work properly unless <Code>rightIcon</Code> is also declared. </p>
 
         <h5>icon <label>String</label></h5>
-        <p>The name of icon to display in the left side of the <Code>input</Code>.</p>
+        <p>The type of icon to display in the left side of the <Code>input</Code>.</p>
 
         <h5>rightIcon <label>String</label></h5>
-        <p>The name of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
+        <p>The type of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
 
         <h5>styles <label>Object</label></h5>
         <p>Allows style additions or overrides to specific component elements including:</p>
