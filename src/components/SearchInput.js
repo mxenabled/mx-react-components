@@ -45,7 +45,7 @@ class SearchInput extends React.Component {
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
           icon='search'
-          ref={this.props.elementRef}
+          elementRef={this.props.elementRef}
           resetClick={this.props.handleResetClick}
           rightIcon='close-solid'
           theme={theme}
