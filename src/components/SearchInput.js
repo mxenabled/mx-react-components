@@ -42,10 +42,10 @@ class SearchInput extends React.Component {
             type: 'text',
             value: this.props.searchKeyword
           }}
+          elementRef={this.props.elementRef}
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
           icon='search'
-          elementRef={this.props.elementRef}
           resetClick={this.props.handleResetClick}
           rightIcon='close-solid'
           theme={theme}
