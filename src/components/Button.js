@@ -14,8 +14,8 @@ class Button extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     actionText: PropTypes.string,
-    elementProps: PropTypes.object,
     buttonRef: PropTypes.func,
+    elementProps: PropTypes.object,
     icon: PropTypes.string,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
