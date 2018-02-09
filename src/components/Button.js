@@ -15,7 +15,7 @@ class Button extends React.Component {
     'aria-label': PropTypes.string,
     actionText: PropTypes.string,
     elementProps: PropTypes.object,
-    elementRef: PropTypes.func,
+    buttonRef: PropTypes.func,
     icon: PropTypes.string,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
@@ -60,14 +60,14 @@ class Button extends React.Component {
   render () {
     // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
     // Keep elementProps for backwards compatibility.
-    const { actionText, elementRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
+    const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
     const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
     const styles = this.styles(mergedTheme);
 
     return (
       <button
         disabled={this.props.type === 'disabled'}
-        ref={elementRef}
+        ref={buttonRef}
         style={Object.assign({}, styles.component, styles[this.props.type], style)}
         {...rest}
         {...elementProps}
