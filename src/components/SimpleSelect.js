@@ -56,7 +56,7 @@ class SimpleSelect extends React.Component {
   _handleKeyDown = (e) => {
     if (keycode(e) === 'esc') {
       e.preventDefault();
-      this.props.onScrimClick(e);
+      this.props.onScrimClick();
     }
   };
 
@@ -83,7 +83,7 @@ class SimpleSelect extends React.Component {
                   label={text}
                   onClick={e => {
                     if (this.props.scrimClickOnSelect) {
-                      this.props.onScrimClick(e);
+                      this.props.onScrimClick();
                     }
 
                     if (onClick && typeof onClick === 'function') {
