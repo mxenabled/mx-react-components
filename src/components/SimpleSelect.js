@@ -83,6 +83,7 @@ class SimpleSelect extends React.Component {
                   label={text}
                   onClick={e => {
                     if (this.props.scrimClickOnSelect) {
+                      e.stopPropagation();
                       this.props.onScrimClick();
                     }
 
@@ -102,7 +103,13 @@ class SimpleSelect extends React.Component {
             })
           )}
         </Listbox>
-        <div onClick={this.props.onScrimClick} style={styles.scrim} />
+        <div
+          onClick={e => {
+            e.stopPropagation();
+            this.props.onScrimClick();
+          }}
+          style={styles.scrim}
+        />
       </div>
     );
   }

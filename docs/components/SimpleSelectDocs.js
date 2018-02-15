@@ -63,7 +63,7 @@ class SimpleSelectDocs extends React.Component {
         <p>An array of objects that specify <em>icon</em>, <em>isSelected</em>, <em>text</em>, and/or <em>onClick</em> of the item..</p>
 
         <h5>onScrimClick <label>function</label></h5>
-        <p><em>onClick</em> handler for the menu scrim. Function will be passed the event as its first argument.</p>
+        <p><em>onClick</em> handler for the menu scrim.</p>
 
         <h5>scrimClickOnSelect <label>boolean</label></h5>
         <p>Boolean that triggers a scrim click on select. Can be used to auto-close.</p>
