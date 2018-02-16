@@ -7,6 +7,14 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.1.19</h3>
+        <ul>
+          <li>Fix "Last Year" default option for DateRangePicker(<a href='https://github.com/mxenabled/mx-react-components/pull/704'>#704</a>)</li>
+          <li>Added e.preventDefault before onScrimClick prop - note if users were relyinig on the event being passed to the callback, this will be a breaking change.(<a href='https://github.com/mxenabled/mx-react-components/pull/703'>#703</a>)</li>
+          <li>Update SimpleInput docs(<a href='https://github.com/mxenabled/mx-react-components/pull/702'>#702</a>)</li>
+          <li>Adds refs to focusable components(<a href='https://github.com/mxenabled/mx-react-components/pull/699'>#699</a>)</li>
+        </ul>
+        <p>New Contributors: <a href='https://github.com/markstewy'>markstewy</a></p>
 
         <h3>5.1.18</h3>
         <ul>
