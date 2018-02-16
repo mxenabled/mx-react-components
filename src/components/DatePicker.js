@@ -15,6 +15,7 @@ class DatePicker extends React.Component {
   static propTypes = {
     closeOnDateSelect: PropTypes.bool,
     defaultDate: PropTypes.number,
+    elementRef: PropTypes.func,
     format: PropTypes.string,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
@@ -86,7 +87,7 @@ class DatePicker extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div style={styles.component}>
+      <div ref={this.props.elementRef} style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
             size={20}

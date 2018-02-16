@@ -27,6 +27,7 @@ class DateRangePicker extends React.Component {
       getEndDate: PropTypes.func,
       getStartDate: PropTypes.func
     })),
+    elementRef: PropTypes.func,
     format: PropTypes.string,
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
@@ -278,6 +279,7 @@ class DateRangePicker extends React.Component {
         <a
           onClick={this._toggleSelectionPane}
           onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
+          ref={this.props.elementRef}
           style={styles.selectedDateWrapper}
           tabIndex={0}
         >

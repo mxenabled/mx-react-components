@@ -29,6 +29,7 @@ const optionShape = PropTypes.shape({
 class Select extends React.Component {
   static propTypes = {
     dropdownStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    elementRef: PropTypes.func,
     onChange: PropTypes.func,
     options: PropTypes.arrayOf(optionShape),
     optionsStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -88,7 +89,7 @@ class Select extends React.Component {
 
   _close = () => {
     this.setState({ isOpen: false });
-    this.component.focus();
+    this.elementRef.focus();
   };
 
   _open = () => {
@@ -197,7 +198,7 @@ class Select extends React.Component {
         <div className='mx-select-custom'
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
-          ref={ref => this.component = ref}
+          ref={ref => this.elementRef = ref}
           style={styles.component}
           tabIndex='0'
         >

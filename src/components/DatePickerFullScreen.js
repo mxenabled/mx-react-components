@@ -14,6 +14,7 @@ class DatePickerFullScreen extends React.Component {
     closeIcon: PropTypes.string,
     closeOnDateSelect: PropTypes.bool,
     defaultDate: PropTypes.number,
+    elementRef: PropTypes.func,
     format: PropTypes.string,
     inputStyle: PropTypes.object,
     isFixed: PropTypes.bool,
@@ -259,6 +260,7 @@ class DatePickerFullScreen extends React.Component {
     return (
       <div
         className='mx-date-picker-full-screen'
+        ref={this.props.elementRef}
         style={[styles.component, styles.clearFix, this.props.style]}
         tabIndex='0'
       >

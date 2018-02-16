@@ -17,6 +17,7 @@ class DisplayInput extends React.Component {
   static propTypes = {
     childrenStyle: PropTypes.object,
     elementProps: PropTypes.object,
+    elementRef: PropTypes.func,
     hint: PropTypes.string,
     isFocused: PropTypes.bool,
     label: PropTypes.string,
@@ -112,6 +113,7 @@ class DisplayInput extends React.Component {
                     aria-labelledby={this.props.label ? this._labelId : null}
                     id={this._inputId}
                     key='input'
+                    ref={this.props.elementRef}
                     style={styles.input}
                   />
                 </div>

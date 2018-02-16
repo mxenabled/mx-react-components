@@ -13,6 +13,7 @@ class RangeSelector extends React.Component {
   static propTypes = {
     defaultLowerValue: PropTypes.number,
     defaultUpperValue: PropTypes.number,
+    elementRef: PropTypes.func,
     formatter: PropTypes.func,
     interval: PropTypes.number,
     lowerBound: PropTypes.number,
@@ -234,7 +235,7 @@ class RangeSelector extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div className='mx-rangeselector' style={[styles.component, this.props.style]}>
+      <div className='mx-rangeselector' ref={this.props.elementRef} style={[styles.component, this.props.style]}>
         <div className='mx-rangeselector-presets' style={styles.presets}>
           {this.props.presets.map((preset, i) => {
             return (
