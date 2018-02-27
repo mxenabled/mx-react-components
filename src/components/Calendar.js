@@ -235,7 +235,7 @@ class Calendar extends React.Component {
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <a
-            onCLick={this._handlePreviousClick}
+            onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
             tabIndex={0}
           >
