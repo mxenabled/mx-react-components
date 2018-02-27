@@ -188,7 +188,7 @@ class Calendar extends React.Component {
                     'focused-day' :
                     null
                 }
-                key={day}
+                key={day.unix()}
                 onClick={e => {
                   if (!disabledDay) this.props.onDateSelect(day.unix(), e);
                 }}
