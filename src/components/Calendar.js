@@ -32,7 +32,7 @@ export const getNewDateStateChange = ({
     day = copyOfFocusedDay.add(7, 'days').startOf('day');
   }
 
-  if (day && (day.isBefore(startDate) || day.isAfter(endDate))) {
+  if (day && (day.isAfter(startDate) || day.isBefore(endDate))) {
     currentDate = day.unix();
   }
 
