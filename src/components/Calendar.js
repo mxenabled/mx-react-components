@@ -80,6 +80,19 @@ class Calendar extends React.Component {
     }
   }
 
+  _handleNextClick = () => {
+    const currentDate = moment
+      .unix(this.state.currentDate)
+      .endOf('month')
+      .add(1, 'd')
+      .unix();
+
+    this.setState({
+      currentDate,
+      focusedDay: currentDate
+    });
+  };
+
   _handlePreviousClick = () => {
     const currentDate = moment
       .unix(this.state.currentDate)
@@ -113,19 +126,6 @@ class Calendar extends React.Component {
     });
 
     if (newDateStateChange !== null) this.setState(newDateStateChange);
-  };
-
-  _handleNextClick = () => {
-    const currentDate = moment
-      .unix(this.state.currentDate)
-      .endOf('month')
-      .add(1, 'd')
-      .unix();
-
-    this.setState({
-      currentDate,
-      focusedDay: currentDate
-    });
   };
 
   _getWeeks = () => {
@@ -178,7 +178,6 @@ class Calendar extends React.Component {
             const disabledDay = this.props.minimumDate ?
               day.isBefore(moment.unix(this.props.minimumDate), 'day') :
               null;
-            const savedStartDate = day.date();
 
             return (
               <a
@@ -193,14 +192,7 @@ class Calendar extends React.Component {
                   if (!disabledDay) this.props.onDateSelect(day.unix(), e);
                 }}
                 onKeyDown={this._handleDayKeyDown}
-                ref={ref => {
-                  if (
-                    ref &&
-                    moment.unix(this.state.focusedDay).date() === savedStartDate
-                  ) {
-                    ref.focus();
-                  }
-                }}
+                ref={ref => (this[day.unix()] = ref)}
                 style={Object.assign(
                   {},
                   styles.calendarDay,
