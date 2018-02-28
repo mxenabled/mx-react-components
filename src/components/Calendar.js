@@ -82,6 +82,14 @@ class Calendar extends React.Component {
     }
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.focusedDay !== this.state.focusedDay) {
+      const focusedDayRef = this[this.state.focusedDay];
+
+      if (focusedDayRef && focusedDayRef.focus) focusedDayRef.focus();
+    }
+  }
+
   _handleNextClick = () => {
     const currentDate = moment
       .unix(this.state.currentDate)
