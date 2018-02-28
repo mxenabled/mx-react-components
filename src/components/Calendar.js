@@ -19,15 +19,17 @@ export const getNewDateStateChange = ({
 }) => {
   let day = null;
   let currentDate = null;
+  // Don't mutate existing focusedDay moment object
+  const copyOfFocusedDay = moment(focusedDay);
 
   if (code === 'right') {
-    day = focusedDay.add(1, 'days').startOf('day');
+    day = copyOfFocusedDay.add(1, 'days').startOf('day');
   } else if (code === 'left') {
-    day = focusedDay.subtract(1, 'days').startOf('day');
+    day = copyOfFocusedDay.subtract(1, 'days').startOf('day');
   } else if (code === 'up') {
-    day = focusedDay.subtract(7, 'days').startOf('day');
+    day = copyOfFocusedDay.subtract(7, 'days').startOf('day');
   } else if (code === 'down') {
-    day = focusedDay.add(7, 'days').startOf('day');
+    day = copyOfFocusedDay.add(7, 'days').startOf('day');
   }
 
   if (day && (day.isBefore(startDate) || day.isAfter(endDate))) {
@@ -80,6 +82,27 @@ class Calendar extends React.Component {
     }
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.focusedDay !== this.state.focusedDay) {
+      const focusedDayRef = this[this.state.focusedDay];
+
+      if (focusedDayRef && focusedDayRef.focus) focusedDayRef.focus();
+    }
+  }
+
+  _handleNextClick = () => {
+    const currentDate = moment
+      .unix(this.state.currentDate)
+      .endOf('month')
+      .add(1, 'd')
+      .unix();
+
+    this.setState({
+      currentDate,
+      focusedDay: currentDate
+    });
+  };
+
   _handlePreviousClick = () => {
     const currentDate = moment
       .unix(this.state.currentDate)
@@ -93,15 +116,15 @@ class Calendar extends React.Component {
     });
   };
 
-  _handleDayKeyDown = e => {
+  _handleDayKeyDown = (e, day) => {
     if (keycode(e) === 'up' || keycode(e) === 'down') e.preventDefault();
 
     if (keycode(e) === 'enter')
-      this.props.onDateSelect(this.state.focusedDay, e);
+      this.props.onDateSelect(day.unix(), e);
 
     const newDateStateChange = getNewDateStateChange({
       code: keycode(e),
-      focusedDay: moment.unix(this.state.focusedDay),
+      focusedDay: day,
       startDate: moment
         .unix(this.state.currentDate)
         .startOf('month')
@@ -113,19 +136,6 @@ class Calendar extends React.Component {
     });
 
     if (newDateStateChange !== null) this.setState(newDateStateChange);
-  };
-
-  _handleNextClick = () => {
-    const currentDate = moment
-      .unix(this.state.currentDate)
-      .endOf('month')
-      .add(1, 'd')
-      .unix();
-
-    this.setState({
-      currentDate,
-      focusedDay: currentDate
-    });
   };
 
   _getWeeks = () => {
@@ -178,7 +188,6 @@ class Calendar extends React.Component {
             const disabledDay = this.props.minimumDate ?
               day.isBefore(moment.unix(this.props.minimumDate), 'day') :
               null;
-            const savedStartDate = day.date();
 
             return (
               <a
@@ -188,19 +197,12 @@ class Calendar extends React.Component {
                     'focused-day' :
                     null
                 }
-                key={day}
+                key={day.unix()}
                 onClick={e => {
                   if (!disabledDay) this.props.onDateSelect(day.unix(), e);
                 }}
-                onKeyDown={this._handleDayKeyDown}
-                ref={ref => {
-                  if (
-                    ref &&
-                    moment.unix(this.state.focusedDay).date() === savedStartDate
-                  ) {
-                    ref.focus();
-                  }
-                }}
+                onKeyDown={e => this._handleDayKeyDown(e, day)}
+                ref={dayAnchorTag => (this[day.unix()] = dayAnchorTag)}
                 style={Object.assign(
                   {},
                   styles.calendarDay,
@@ -235,7 +237,7 @@ class Calendar extends React.Component {
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <a
-            onCLick={this._handlePreviousClick}
+            onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
             tabIndex={0}
           >
