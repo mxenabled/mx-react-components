@@ -19,15 +19,17 @@ export const getNewDateStateChange = ({
 }) => {
   let day = null;
   let currentDate = null;
+  // Don't mutate existing focusedDay moment object
+  const copyOfFocusedDay = moment(focusedDay);
 
   if (code === 'right') {
-    day = focusedDay.add(1, 'days').startOf('day');
+    day = copyOfFocusedDay.add(1, 'days').startOf('day');
   } else if (code === 'left') {
-    day = focusedDay.subtract(1, 'days').startOf('day');
+    day = copyOfFocusedDay.subtract(1, 'days').startOf('day');
   } else if (code === 'up') {
-    day = focusedDay.subtract(7, 'days').startOf('day');
+    day = copyOfFocusedDay.subtract(7, 'days').startOf('day');
   } else if (code === 'down') {
-    day = focusedDay.add(7, 'days').startOf('day');
+    day = copyOfFocusedDay.add(7, 'days').startOf('day');
   }
 
   if (day && (day.isBefore(startDate) || day.isAfter(endDate))) {
