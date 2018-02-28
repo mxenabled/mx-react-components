@@ -46,7 +46,6 @@ describe('Calendar', () => {
 
     it('should return an object with a focusedDay key when right key is pressed', () => {
       const result = {
-        currentDate: moment(focusedDay).add(1, 'days').startOf('day').unix(),
         focusedDay: moment(focusedDay).add(1, 'days').startOf('day').unix()
       };
 
@@ -67,7 +66,6 @@ describe('Calendar', () => {
 
     it('should return an object with a focusedDay key when left key is pressed', () => {
       const result = {
-        currentDate: moment(focusedDay).subtract(1, 'days').startOf('day').unix(),
         focusedDay: moment(focusedDay).subtract(1, 'days').startOf('day').unix()
       };
 
@@ -87,7 +85,6 @@ describe('Calendar', () => {
 
     it('should return correct day when up key is pressed', () => {
       const result = {
-        currentDate: moment(focusedDay).subtract(7, 'days').startOf('day').unix(),
         focusedDay: moment(focusedDay).subtract(7, 'days').startOf('day').unix()
       };
 
@@ -96,7 +93,6 @@ describe('Calendar', () => {
 
     it('should return correct day when down key is pressed', () => {
       const result = {
-        currentDate: moment(focusedDay).add(7, 'days').startOf('day').unix(),
         focusedDay: moment(focusedDay).add(7, 'days').startOf('day').unix()
       };
 
