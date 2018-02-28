@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.1.21</h3>
+        <ul>
+          <li>Accessibility Fixes to Calendar component(<a href='https://github.com/mxenabled/mx-react-components/pull/707'>#707</a>)</li>
+        </ul>
+
         <h3>5.1.20</h3>
         <ul>
           <li>Remove getComputedStyles from RangeSelector(<a href='https://github.com/mxenabled/mx-react-components/pull/706'>#706</a>)</li>
