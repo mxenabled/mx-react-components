@@ -108,15 +108,15 @@ class Calendar extends React.Component {
     });
   };
 
-  _handleDayKeyDown = e => {
+  _handleDayKeyDown = (e, day) => {
     if (keycode(e) === 'up' || keycode(e) === 'down') e.preventDefault();
 
     if (keycode(e) === 'enter')
-      this.props.onDateSelect(this.state.focusedDay, e);
+      this.props.onDateSelect(day.unix(), e);
 
     const newDateStateChange = getNewDateStateChange({
       code: keycode(e),
-      focusedDay: moment.unix(this.state.focusedDay),
+      focusedDay: day,
       startDate: moment
         .unix(this.state.currentDate)
         .startOf('month')
@@ -193,7 +193,7 @@ class Calendar extends React.Component {
                 onClick={e => {
                   if (!disabledDay) this.props.onDateSelect(day.unix(), e);
                 }}
-                onKeyDown={this._handleDayKeyDown}
+                onKeyDown={e => this._handleDayKeyDown(e, day)}
                 ref={ref => (this[day.unix()] = ref)}
                 style={Object.assign(
                   {},
