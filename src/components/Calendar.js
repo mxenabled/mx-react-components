@@ -202,7 +202,7 @@ class Calendar extends React.Component {
                   if (!disabledDay) this.props.onDateSelect(day.unix(), e);
                 }}
                 onKeyDown={e => this._handleDayKeyDown(e, day)}
-                ref={ref => (this[day.unix()] = ref)}
+                ref={dayAnchorTag => (this[day.unix()] = dayAnchorTag)}
                 style={Object.assign(
                   {},
                   styles.calendarDay,
