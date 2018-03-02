@@ -201,7 +201,7 @@ class Drawer extends React.Component {
       <StyleRoot>
         <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
           <div style={styles.componentWrapper}>
-            <div onClick={this.props.closeOnScrimClick && this.close} style={styles.scrim} />
+            <div onClick={this.props.closeOnScrimClick ? this.close : null } style={styles.scrim} />
             <div
               aria-label={this.props.title}
               ref={(ref) => (this._component = ref)}
