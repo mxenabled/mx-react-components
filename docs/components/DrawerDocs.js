@@ -51,11 +51,17 @@ class DrawerDocs extends React.Component {
         onClose={this._handleDrawerClose}
         title='Demo Drawer'
       >
-
-        {this.state.clickedMenu && <code>You clicked: {this.state.clickedMenu.text}</code>}
-        <p>
-        Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
-        </p>
+        {closeDrawer => {
+          return (
+            <div>
+              {this.state.clickedMenu && <code>You clicked: {this.state.clickedMenu.text}</code>}
+              <p>
+              Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
+              </p>
+              <Button onClick={closeDrawer}>Close Drawer</Button>
+            </div>
+          );
+        }}
       </Drawer>
     );
   };
@@ -148,7 +154,7 @@ class DrawerDocs extends React.Component {
           <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
         </ul>
 
-        <h3>Example</h3>
+        <h3>Normal Example</h3>
         <Markdown>
   {`
 
@@ -172,6 +178,43 @@ class DrawerDocs extends React.Component {
       title='Demo Drawer'
     >
       // Content Here
+    </Drawer>
+  `}
+        </Markdown>
+
+        <h3>Function as Children Example</h3>
+        <Markdown>
+  {`
+
+    _handleDrawerClose () {
+      this.setState({
+        demoDrawerOpen: false
+      });
+    },
+
+    <Drawer
+      breakPoints={{ large: 1200, medium: 1100 }}
+      contentStyle={styles.content}
+      headerMenu={(
+        <HeaderMenu
+          handleButtonClick={this._handleSimpleSelectClick}
+          handleScrimClick={this._handleSimpleSelectClick}
+          showSimpleSelectMenu={this.state.showMenu}
+        />
+      )}
+      onClose={this._handleDrawerClose}
+      title='Demo Drawer'
+    >
+      {closeDrawerFunction => {
+        return (
+          <div>
+            <p>
+              Content Here
+            </p>
+            <button onClick={closeDrawerFunction}>Close the drawer from the conten</button>
+          </div>
+        )
+      }}
     </Drawer>
   `}
         </Markdown>
