@@ -33,7 +33,10 @@ class Drawer extends React.Component {
     duration: PropTypes.number,
     easing: PropTypes.array,
     focusOnLoad: PropTypes.bool,
-    headerMenu: PropTypes.element,
+    headerMenu: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
     headerStyle: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
@@ -122,6 +125,10 @@ class Drawer extends React.Component {
     }
   };
 
+  _getExposedDrawerFunctions = () => {
+    return { close: this.close };
+  };
+
   /**
    * Figure out the height of the header. This can come from either:
    *
@@ -171,21 +178,21 @@ class Drawer extends React.Component {
     this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
   };
 
-  _renderNav = (styles, theme) => {
+  _renderNav = (navConfig, styles, theme) => {
     return (
       <nav style={styles.nav}>
         <Button
           icon='caret-left'
-          onClick={this.props.navConfig.onPreviousClick}
+          onClick={navConfig.onPreviousClick}
           theme={theme}
           type='base'
         />
         <span style={styles.navLabel}>
-          {this.props.navConfig.label}
+          {navConfig.label}
         </span>
         <Button
           icon='caret-right'
-          onClick={this.props.navConfig.onNextClick}
+          onClick={navConfig.onNextClick}
           theme={theme}
           type='base'
         />
@@ -196,6 +203,21 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
+    const { headerMenu, navConfig } = this.props;
+    let menu = null;
+
+    // If headerMenu is a function then we want to pass the Drawer's
+    // exposed functions to the call.
+    if (typeof headerMenu === 'function') {
+      menu = headerMenu(this._getExposedDrawerFunctions());
+    // If headerMenu is a normal node/element then use directly.
+    } else if (headerMenu) {
+      menu = headerMenu;
+    // If no headerMenu and navConfig passed then use Drawer's
+    // _renderNav function to generate the menu.
+    } else if (navConfig) {
+      menu = this._renderNav(navConfig, styles, theme);
+    }
 
     return (
       <StyleRoot>
@@ -227,15 +249,15 @@ class Drawer extends React.Component {
                     </Button>
                   }
                 </span>
-                <span style={styles.title}>
+                <h1 style={styles.title}>
                   {this.props.title}
-                </span>
+                </h1>
                 <div style={styles.headerMenu}>
-                  {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav(styles, theme)}
+                  {menu}
                 </div>
               </header>
               <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
-                {this.props.children}
+                {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
               </div>
             </div>
           </div>
@@ -315,7 +337,13 @@ class Drawer extends React.Component {
         }
       },
       title: {
+        alignItems: 'center',
+        display: 'flex',
         flex: '1 0 auto',
+        fontSize: theme.FontSizes.LARGE,
+        height: '100%',
+        justifyContent: 'center',
+        marginBottom: 0,
         overflow: 'hidden',
         textAlign: 'center',
         textOverflow: 'ellipsis',
