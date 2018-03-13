@@ -202,7 +202,7 @@ class Drawer extends React.Component {
     const { headerMenu, navConfig } = this.props;
     let menu = null;
 
-    // If headerMenu is afunction then we want to pass the Drawer's
+    // If headerMenu is a function then we want to pass the Drawer's
     // close function to the call.
     if (typeof headerMenu === 'function') {
       menu = headerMenu(this.close);
