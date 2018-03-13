@@ -199,6 +199,21 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
+    const { headerMenu, navConfig } = this.props;
+    let menu = null;
+
+    // If headerMenu is afunction then we want to pass the Drawer's
+    // close function to the call.
+    if (typeof headerMenu === 'function') {
+      menu = headerMenu(this.close);
+    // If headerMenu is a normal node/element then use directly.
+    } else if (headerMenu) {
+      menu = headerMenu;
+    // If no headerMenu and navConfig passed then use Drawer's
+    // _renderNav function to generate the menu.
+    } else if (navConfig) {
+      menu = this._renderNav(navConfig, styles, theme);
+    }
 
     return (
       <StyleRoot>
@@ -229,7 +244,7 @@ class Drawer extends React.Component {
                   {this.props.title}
                 </h1>
                 <div style={styles.headerMenu}>
-                  {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav(styles, theme)}
+                  {menu}
                 </div>
               </header>
               <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
