@@ -67,7 +67,7 @@ class Button extends React.Component {
 
     return (
       <button
-        className={css({...styles.component, ...styles[this.props.type], ...style})}
+        className={css({ ...styles.component, ...styles[this.props.type], ...style })}
         disabled={this.props.type === 'disabled'}
         ref={buttonRef}
         {...rest}
