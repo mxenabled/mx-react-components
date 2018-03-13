@@ -230,7 +230,7 @@ class Drawer extends React.Component {
                 </div>
               </header>
               <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
-                {this.props.children}
+                {typeof this.props.children === 'function' ? this.props.children(this.close) : this.props.children}
               </div>
             </div>
           </div>
