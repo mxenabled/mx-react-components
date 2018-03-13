@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-import { css } from 'glamor'
+
+import { css } from 'glamor';
 
 const Icon = require('./Icon');
 const Spin = require('./Spin');
