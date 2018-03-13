@@ -310,7 +310,13 @@ class Drawer extends React.Component {
         }
       },
       title: {
+        alignItems: 'center',
+        display: 'flex',
         flex: '1 0 auto',
+        fontSize: theme.FontSizes.MEDIUM,
+        height: '100%',
+        justifyContent: 'center',
+        marginBottom: 0,
         overflow: 'hidden',
         textAlign: 'center',
         textOverflow: 'ellipsis',
