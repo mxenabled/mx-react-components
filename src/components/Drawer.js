@@ -125,6 +125,10 @@ class Drawer extends React.Component {
     }
   };
 
+  _getExposedDrawerFunctions = () => {
+    return { close: this.close };
+  };
+
   /**
    * Figure out the height of the header. This can come from either:
    *
@@ -205,7 +209,7 @@ class Drawer extends React.Component {
     // If headerMenu is a function then we want to pass the Drawer's
     // close function to the call.
     if (typeof headerMenu === 'function') {
-      menu = headerMenu(this.close);
+      menu = headerMenu(this._getExposedDrawerFunctions());
     // If headerMenu is a normal node/element then use directly.
     } else if (headerMenu) {
       menu = headerMenu;
@@ -248,7 +252,7 @@ class Drawer extends React.Component {
                 </div>
               </header>
               <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
-                {typeof this.props.children === 'function' ? this.props.children(this.close) : this.props.children}
+                {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
               </div>
             </div>
           </div>
