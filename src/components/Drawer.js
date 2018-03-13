@@ -33,7 +33,10 @@ class Drawer extends React.Component {
     duration: PropTypes.number,
     easing: PropTypes.array,
     focusOnLoad: PropTypes.bool,
-    headerMenu: PropTypes.element,
+    headerMenu: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
     headerStyle: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
