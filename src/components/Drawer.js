@@ -222,9 +222,9 @@ class Drawer extends React.Component {
                     </Button>
                   }
                 </span>
-                <span style={styles.title}>
+                <h1 style={styles.title}>
                   {this.props.title}
-                </span>
+                </h1>
                 <div style={styles.headerMenu}>
                   {this.props.headerMenu ? this.props.headerMenu : this.props.navConfig && this._renderNav(styles, theme)}
                 </div>
