@@ -83,6 +83,9 @@ class DrawerDocs extends React.Component {
         {this.state.demoDrawerOpen && this._renderDrawer()}
 
         <h3>Usage</h3>
+        <h5>children<label>Node or Function</label></h5>
+        <p>Children of the Drawer component can be a normal DOM node or a function.  If children are a function, the function is called and the drawer's close method is passed as the functions first argument.  This is handy if you need to close the drawer from the drawer's content area and want to ensure the drawer's animation is run before close. See the second example below for more details.</p>
+
         <h5>animateLeftDistance<label>Number</label></h5>
         <p>This number represents the percent of the screen visible between the left edge of the screen and the left edge of the drawer.</p>
 
