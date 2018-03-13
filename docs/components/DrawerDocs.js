@@ -37,28 +37,28 @@ class DrawerDocs extends React.Component {
       <Drawer
         breakPoints={{ large: 1200, medium: 1100 }}
         contentStyle={styles.content}
-        headerMenu={closeDrawer => (
+        headerMenu={({ close }) => (
           <HeaderMenu
             buttonIcon='gear'
             buttonText='Settings'
             items={[
               { icon: 'auto', onClick: this._handleSimpleSelectClick, text: 'Auto' },
               { icon: 'kids', onClick: this._handleSimpleSelectClick, text: 'Kids' },
-              { icon: 'close', onClick: closeDrawer, text: 'Close Drawer' }
+              { icon: 'close', onClick: close, text: 'Close Drawer' }
             ]}
           />
         )}
         onClose={this._handleDrawerClose}
         title='Demo Drawer'
       >
-        {closeDrawer => {
+        {({ close }) => {
           return (
             <div>
               {this.state.clickedMenu && <code>You clicked: {this.state.clickedMenu.text}</code>}
               <p>
               Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
               </p>
-              <Button onClick={closeDrawer}>Close Drawer</Button>
+              <Button onClick={close}>Close Drawer</Button>
             </div>
           );
         }}
@@ -85,7 +85,7 @@ class DrawerDocs extends React.Component {
         <h3>Usage</h3>
         <h5>children<label>DOM Node/Element or Function</label></h5>
         <p>Children of the Drawer component can be a component, DOM node/element, or a function.</p>
-        <p>If children is a function, the function is called and the drawer's close method is passed as the functions first argument. The returned value of the function call must be a component or DOM node/element. This is handy if you need to close the drawer from the drawer's content area and want to ensure the drawer's animation is run before close. See the second example below for more details.</p>
+        <p>If children is a function, the function is called and passed an object of exposed drawer functions. Currently the Drawer's close function is the only exposed function in the object and has a key of `close`. The returned value of the function call must be a component or DOM node/element. This is handy if you need to close the drawer from the drawer's content area and want to ensure the drawer's animation is run before close. See the second example below for more details.</p>
 
         <h5>animateLeftDistance<label>Number</label></h5>
         <p>This number represents the percent of the screen visible between the left edge of the screen and the left edge of the drawer.</p>
@@ -126,7 +126,7 @@ class DrawerDocs extends React.Component {
 
         <h5>headerMenu<label>Component or Function</label></h5>
         <p>A component or function that you can use to  add a menu of items to the header of the drawer.</p>
-        <p>If headerMenu is a function, the function is called and the drawer's close function is passed as the first argument. The returned value of the function call must be a component or DOM node/element.</p>
+        <p>If headerMenu is a function, the function is called and passed an object of exposed drawer functions. Currently the Drawer's close function is the only exposed function in the object and has a key of `close`. The returned value of the function call must be a component or DOM node/element.</p>
         <p>See first example for how to pass a component as headerMenu.</p>
         <p>See second example for how to pass a function as headerMenu.</p>
 
@@ -201,23 +201,23 @@ class DrawerDocs extends React.Component {
     <Drawer
       breakPoints={{ large: 1200, medium: 1100 }}
       contentStyle={styles.content}
-      headerMenu={closeDrawerFunction => (
+      headerMenu={({ close }) => (
         <HeaderMenu
           handleButtonClick={this._handleSimpleSelectClick}
-          handleScrimClick={closeDrawerFunction}
+          handleScrimClick={close}
           showSimpleSelectMenu={this.state.showMenu}
         />
       )}
       onClose={this._handleDrawerClose}
       title='Demo Drawer'
     >
-      {closeDrawerFunction => {
+      {({ close }) => {
         return (
           <div>
             <p>
               Content Here
             </p>
-            <button onClick={closeDrawerFunction}>Close the drawer from the conten</button>
+            <button onClick={close}>Close the drawer from the conten</button>
           </div>
         )
       }}
