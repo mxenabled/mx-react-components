@@ -207,7 +207,7 @@ class Drawer extends React.Component {
     let menu = null;
 
     // If headerMenu is a function then we want to pass the Drawer's
-    // close function to the call.
+    // exposed functions to the call.
     if (typeof headerMenu === 'function') {
       menu = headerMenu(this._getExposedDrawerFunctions());
     // If headerMenu is a normal node/element then use directly.
