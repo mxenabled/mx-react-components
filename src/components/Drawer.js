@@ -174,21 +174,21 @@ class Drawer extends React.Component {
     this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
   };
 
-  _renderNav = (styles, theme) => {
+  _renderNav = (navConfig, styles, theme) => {
     return (
       <nav style={styles.nav}>
         <Button
           icon='caret-left'
-          onClick={this.props.navConfig.onPreviousClick}
+          onClick={navConfig.onPreviousClick}
           theme={theme}
           type='base'
         />
         <span style={styles.navLabel}>
-          {this.props.navConfig.label}
+          {navConfig.label}
         </span>
         <Button
           icon='caret-right'
-          onClick={this.props.navConfig.onNextClick}
+          onClick={navConfig.onNextClick}
           theme={theme}
           type='base'
         />
