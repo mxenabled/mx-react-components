@@ -244,9 +244,7 @@ class Drawer extends React.Component {
                       onClick={this.close}
                       theme={theme}
                       type={'base'}
-                    >
-                      <span className='visuallyHidden' style={styles.visuallyHidden}>Close Drawer</span>
-                    </Button>
+                    />
                   }
                 </span>
                 <h1 style={styles.title}>
