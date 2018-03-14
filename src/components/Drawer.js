@@ -240,6 +240,7 @@ class Drawer extends React.Component {
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
+                      aria-label={`Close ${this.props.title} Drawer`}
                       icon='go-back'
                       onClick={this.close}
                       theme={theme}
