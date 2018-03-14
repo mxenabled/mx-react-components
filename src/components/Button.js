@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Radium = require('radium');
+
+import { css } from 'glamor';
 
 const Icon = require('./Icon');
 const Spin = require('./Spin');
@@ -66,9 +67,9 @@ class Button extends React.Component {
 
     return (
       <button
+        className={css({ ...styles.component, ...styles[this.props.type], ...style })}
         disabled={this.props.type === 'disabled'}
         ref={buttonRef}
-        style={Object.assign({}, styles.component, styles[this.props.type], style)}
         {...rest}
         {...elementProps}
       >
@@ -248,4 +249,4 @@ class Button extends React.Component {
   };
 }
 
-module.exports = Radium(Button);
+module.exports = Button;
