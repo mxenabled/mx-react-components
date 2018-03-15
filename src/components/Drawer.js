@@ -362,17 +362,6 @@ class Drawer extends React.Component {
           display: 'none',
           padding: 0
         }
-      },
-      visuallyHidden: {
-        border: 0,
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'insert(50%)',
-        height: 1,
-        margin: '-1px',
-        overflow: 'hidden',
-        padding: 0,
-        position: 'absolute',
-        width: 1
       }
     }, this.props.styles);
   };
