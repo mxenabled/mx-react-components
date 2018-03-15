@@ -49,7 +49,7 @@ class DrawerDocs extends React.Component {
           />
         )}
         onClose={this._handleDrawerClose}
-        title='Demo Drawer'
+        title='Demo'
       >
         {({ close }) => {
           return (
@@ -150,7 +150,7 @@ class DrawerDocs extends React.Component {
 
         <h5>title<label>String</label></h5>
         <p>Default: ''</p>
-        <p>This will be displayed in the header of the drawer component.</p>
+        <p>This will be displayed in the header of the drawer component. It is also used to make the aria label for the drawer's close button more descriptive.</p>
 
         <h5>DEPRECATED: navConfig <label>Object</label></h5>
         <p>This object requires 3 properties:</p>
@@ -181,7 +181,7 @@ class DrawerDocs extends React.Component {
         />
       )}
       onClose={this._handleDrawerClose}
-      title='Demo Drawer'
+      title='Demo'
     >
       // Content Here
     </Drawer>
@@ -209,7 +209,7 @@ class DrawerDocs extends React.Component {
         />
       )}
       onClose={this._handleDrawerClose}
-      title='Demo Drawer'
+      title='Demo'
     >
       {({ close }) => {
         return (
