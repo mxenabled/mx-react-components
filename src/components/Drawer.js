@@ -4,6 +4,7 @@ const _isNumber = require('lodash/isNumber');
 const _merge = require('lodash/merge');
 const _throttle = require('lodash/throttle');
 const FocusTrap = require('focus-trap-react');
+const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
 const Velocity = require('velocity-animate');
@@ -174,6 +175,12 @@ class Drawer extends React.Component {
     return Velocity(el, transition, options);
   };
 
+  _handleKeyUp = e => {
+    if (keycode(e) === 'esc') {
+      this.close();
+    }
+  };
+
   _resize = () => {
     this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
   };
@@ -222,7 +229,7 @@ class Drawer extends React.Component {
     return (
       <StyleRoot>
         <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
-          <div style={styles.componentWrapper}>
+          <div onKeyUp={this._handleKeyUp} style={styles.componentWrapper}>
             <div
               onClick={() => {
                 if (this.props.closeOnScrimClick) this.close();
