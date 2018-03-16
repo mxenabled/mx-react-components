@@ -7,10 +7,16 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.1.25</h3>
+        <ul>
+          <li>Adds onKeyUp prop to Drawer component(<a href='https://github.com/mxenabled/mx-react-components/pull/715'>#715</a>)</li>
+        </ul>
+
         <h3>5.1.24</h3>
         <ul>
           <li>Accessibility fix for Drawer component close button(<a href='https://github.com/mxenabled/mx-react-components/pull/714'>#714</a>)</li>
         </ul>
+
         <h3>5.1.23</h3>
         <ul>
           <li>Removes Radium from button component, adds glamor as dep(<a href='https://github.com/mxenabled/mx-react-components/pull/713'>#713</a>)</li>
