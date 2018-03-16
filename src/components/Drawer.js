@@ -180,11 +180,7 @@ class Drawer extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    if (typeof this.props.onKeyUp === 'function') return this.props.onKeyUp(e);
-
-    if (keycode(e) === 'esc') return this.close();
-
-    return e;
+    if (keycode(e) === 'esc') this.close();
   };
 
   _resize = () => {
@@ -235,7 +231,7 @@ class Drawer extends React.Component {
     return (
       <StyleRoot>
         <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
-          <div onKeyUp={this._handleKeyUp} style={styles.componentWrapper}>
+          <div onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
               onClick={() => {
                 if (this.props.closeOnScrimClick) this.close();
