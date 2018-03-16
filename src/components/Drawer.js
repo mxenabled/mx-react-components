@@ -49,6 +49,7 @@ class Drawer extends React.Component {
       onPreviousClick: PropTypes.func.isRequired
     }),
     onClose: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func,
     onOpen: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
@@ -179,9 +180,11 @@ class Drawer extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    if (keycode(e) === 'esc') {
-      this.close();
-    }
+    if (typeof this.props.onKeyUp === 'function') return this.props.onKeyUp(e);
+
+    if (keycode(e) === 'esc') return this.close();
+
+    return e;
   };
 
   _resize = () => {
