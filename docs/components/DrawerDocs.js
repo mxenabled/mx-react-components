@@ -137,6 +137,9 @@ class DrawerDocs extends React.Component {
         <h5>onClose<label>Function</label> Required</h5>
         <p>This function will be called when a user clicks the close drawer button.</p>
 
+        <h5>onKeyUp<label>Function</label></h5>
+        <p>An event handler for the key up event of the drawer. If no handler is passed then the drawer will close when the esc key is pressed.</p>
+
         <h5>showCloseButton<label>Boolean</label></h5>
         <p>Default: true</p>
         <p>To remove the close drawer button in the top left corner, set this to <em>false</em>.</p>
