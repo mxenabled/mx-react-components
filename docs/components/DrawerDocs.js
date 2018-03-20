@@ -121,6 +121,12 @@ class DrawerDocs extends React.Component {
         <p>Default: true</p>
         <p>Determines if the Drawer component is focused on component mount</p>
 
+        <h5>focusTrapProps<label>Object</label></h5>
+        <p>Default: Empty Object</p>
+        <p>The Drawer component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the drawer for accessibility reasons.</p>
+        <p>The focusTrapProps object provides a mechanism for passing the focus trap component props.</p>
+        <p>See the library documentation for details on what props it accepts and how to use them.</p>
+
         <h5>headerStyle<label>Object or Array</label></h5>
         <p>Styles for the header part of the drawer.</p>
 
