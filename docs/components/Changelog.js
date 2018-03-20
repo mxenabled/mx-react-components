@@ -9,7 +9,7 @@ class Changelog extends React.Component {
         <h2>MX React Components V 5.0</h2>
         <h3>5.1.26</h3>
         <ul>
-          <li>Adds focusTrapPaused prop to Drawer component(<a href='https://github.com/mxenabled/mx-react-components/pull/716'>#716</a>)</li>
+          <li>Adds focusTrapProps prop to Drawer component(<a href='https://github.com/mxenabled/mx-react-components/pull/716'>#716</a>)</li>
         </ul>
 
         <h3>5.1.25</h3>
