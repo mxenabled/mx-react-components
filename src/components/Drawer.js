@@ -34,6 +34,7 @@ class Drawer extends React.Component {
     duration: PropTypes.number,
     easing: PropTypes.array,
     focusOnLoad: PropTypes.bool,
+    focusTrapPaused: PropTypes.bool,
     headerMenu: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func
@@ -64,6 +65,7 @@ class Drawer extends React.Component {
     duration: 500,
     easing: [0.28, 0.14, 0.34, 1.04],
     focusOnLoad: true,
+    focusTrapPaused: false,
     maxWidth: 960,
     onOpen: () => {},
     showCloseButton: true,
@@ -212,7 +214,7 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { headerMenu, navConfig } = this.props;
+    const { headerMenu, focusTrapPaused, navConfig } = this.props;
     let menu = null;
 
     // If headerMenu is a function then we want to pass the Drawer's
@@ -230,7 +232,7 @@ class Drawer extends React.Component {
 
     return (
       <StyleRoot>
-        <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+        <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }} paused={focusTrapPaused}>
           <div onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
               onClick={() => {
