@@ -1,9 +1,9 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const FocusTrap = require('focus-trap-react');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const _merge = require('lodash/merge');
 
@@ -183,7 +183,7 @@ class Modal extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+      <MXFocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
@@ -221,7 +221,7 @@ class Modal extends React.Component {
             )}
           </div>
         </div>
-      </FocusTrap>
+      </MXFocusTrap>
     );
   }
 

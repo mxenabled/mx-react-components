@@ -3,7 +3,6 @@ const _isEqual = require('lodash/isEqual');
 const _isNumber = require('lodash/isNumber');
 const _merge = require('lodash/merge');
 const _throttle = require('lodash/throttle');
-const FocusTrap = require('focus-trap-react');
 const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
@@ -11,6 +10,7 @@ const Velocity = require('velocity-animate');
 const { StyleRoot } = require('radium');
 
 const Button = require('../components/Button');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const { themeShape } = require('../constants/App');
 
@@ -240,7 +240,7 @@ class Drawer extends React.Component {
 
     return (
       <StyleRoot>
-        <FocusTrap {...mergedFocusTrapProps}>
+        <MXFocusTrap {...mergedFocusTrapProps}>
           <div onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
               onClick={() => {
@@ -279,7 +279,7 @@ class Drawer extends React.Component {
               </div>
             </div>
           </div>
-        </FocusTrap>
+        </MXFocusTrap>
       </ StyleRoot>
     );
   }

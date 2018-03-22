@@ -3,13 +3,14 @@
 const React = require('react');
 const { Link } = require('react-router');
 
-const { Button, Drawer, HeaderMenu } = require('mx-react-components');
+const { Button, Drawer, HeaderMenu, Modal } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
 class DrawerDocs extends React.Component {
   state = {
-    demoDrawerOpen: false
+    demoDrawerOpen: false,
+    demoDrawerOpen2: false
   };
 
   _handleDemoButtonClick = () => {
@@ -21,6 +22,12 @@ class DrawerDocs extends React.Component {
   _handleDrawerClose = () => {
     this.setState({
       demoDrawerOpen: false
+    });
+  };
+
+  _handleDrawerClose2 = () => {
+    this.setState({
+      demoDrawerOpen2: false
     });
   };
 
@@ -58,10 +65,31 @@ class DrawerDocs extends React.Component {
               <p>
               Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
               </p>
-              <Button onClick={close}>Close Drawer</Button>
+              <p>
+                <Button onClick={close}>Close Drawer</Button>
+              </p>
+              <p>
+                <Button onClick={() => this.setState({ demoDrawerOpen2: true })}>Open Child Drawer</Button>
+              </p>
+              {this.state.demoDrawerOpen2 && this._renderDrawer2()}
             </div>
           );
         }}
+      </Drawer>
+    );
+  };
+  _renderDrawer2 = () => {
+    return (
+      <Drawer
+        onClose={this._handleDrawerClose2}
+        title='Other Drawer'
+      >
+        <p>
+          <Button onClick={() => this.setState({ showModal: true })}>Show Modal</Button>
+        </p>
+        {this.state.showModal && <Modal onRequestClose={() => this.setState({ showModal: false })}>
+          <div style={{ padding: 20, textAlign: 'center' }}>Hello!</div>
+        </Modal>}
       </Drawer>
     );
   };
