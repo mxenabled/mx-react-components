@@ -26,6 +26,12 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-0'],
           plugins: ['transform-object-assign', 'transform-class-properties']
         }
+      },
+      {
+        test: /ButtonDocs\.js/,
+        include: /components/,
+        exclude: /node_modules/,
+        loader: path.resolve('./autoDocsLoader')
       }
     ],
     noParse: [/autoit.js/]

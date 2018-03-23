@@ -47,7 +47,14 @@ class ButtonDocs extends React.Component {
 
         <h3>Demo</h3>
         <div className='flex'>
+        <Markdown>
+          {`
+          @autoDocsTarget(primaryBtn)
+          `}
+        </Markdown>
+          @autoDocsSrc(primaryBtn)
           <Button>Primary</Button>
+          @autoDocsSrc(primaryBtn)
           <Button style={buttonStyle} type='primaryOutline'>Primary Outline</Button>
           <Button style={buttonStyle} type='secondary'>Secondary</Button>
           <Button style={buttonStyle} type='base'>Base</Button>
