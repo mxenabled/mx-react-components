@@ -38,32 +38,4 @@ class MXFocusTrap extends React.Component {
   }
 }
 
-/**
- * For testing purposes.  This provides an easy way to
- * unmount a child focus trap to ensure the parent is
- * unpaused. This component is only used in MXFocusTrap-test.js
- **/
-class WrappedMXFocusTrap extends React.Component {
-  state = {
-    renderChildTrap: true
-  }
-
-  render () {
-    return (
-      <MXFocusTrap>
-        <button>"Outer Focusable Button"</button>
-        {this.state.renderChildTrap ? (
-          <MXFocusTrap>
-            <button>"Inner Focusable Button"</button>
-          </MXFocusTrap>
-        ) : null}
-      </MXFocusTrap>
-    );
-  }
-}
-
-
-module.exports = {
-  MXFocusTrap,
-  WrappedMXFocusTrap
-};
+module.exports = MXFocusTrap;
