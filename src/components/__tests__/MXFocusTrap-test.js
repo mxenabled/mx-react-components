@@ -19,7 +19,7 @@ describe('MXFocusTrap', () => {
     wrapper.setState({ renderChildTrap: false });
     expect(parentTrap.state.paused).toEqual(false);
 
-    // Parent should be paused when child is unmounted.
+    // Parent should be paused when child is mounted.
     wrapper.setState({ renderChildTrap: true });
     expect(parentTrap.state.paused).toEqual(true);
   });
