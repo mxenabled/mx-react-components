@@ -29,11 +29,6 @@ describe('MXFocusTrap', () => {
   it('should pause and un-pause parent trap when child trap mounts and unmounts', () => {
     expect.assertions(2);
 
-    /**
-     * WrappedMXFocusTrap renders a MXFocusTrap within a MXFocusTrap
-     * and provides a way to unmount the child trap by setting
-     * state on the wrapper.
-     **/
     const wrapper = mount(<WrappedMXFocusTrap />);
     const parentTrap = wrapper.find(MXFocusTrap).first().instance();
 
