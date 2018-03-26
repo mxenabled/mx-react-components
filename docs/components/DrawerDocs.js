@@ -91,7 +91,7 @@ class DrawerDocs extends React.Component {
           <Button onClick={() => this.setState({ showModal: true })}>Show Modal</Button>
         </p>
         {this.state.showModal && <Modal onRequestClose={() => this.setState({ showModal: false })}>
-          <div style={{ padding: 50, textAlign: 'center' }}>Child Modal of Child Drawer Component!</div>
+          <div style={{ padding: 50, textAlign: 'center' }}>Child Modal Component of Child Drawer Component</div>
         </Modal>}
       </Drawer>
     );
