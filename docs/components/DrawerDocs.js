@@ -63,7 +63,7 @@ class DrawerDocs extends React.Component {
             <div>
               {this.state.clickedMenu && <code>You clicked: {this.state.clickedMenu.text}</code>}
               <p>
-              Pellentesque finibus eros magna, ac feugiat mauris pretium posuere. Aliquam nec turpis bibendum, hendrerit eros et, interdum neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc pulvinar tempus sollicitudin. Mauris vel suscipit dolor. Vestibulum hendrerit malesuada ipsum. Mauris feugiat dui vel leo consequat tempor. Praesent aliquet posuere consequat. Nunc vel tellus eleifend leo finibus auctor.
+                Drawer Component
               </p>
               <p>
                 <Button onClick={close}>Close Drawer</Button>
@@ -84,11 +84,14 @@ class DrawerDocs extends React.Component {
         onClose={this._handleDrawerClose2}
         title='Other Drawer'
       >
-        <p>
+        <p style={{ padding: 20 }}>
+          Child Drawer Component
+        </p>
+        <p style={{ paddingLeft: 20 }}>
           <Button onClick={() => this.setState({ showModal: true })}>Show Modal</Button>
         </p>
         {this.state.showModal && <Modal onRequestClose={() => this.setState({ showModal: false })}>
-          <div style={{ padding: 20, textAlign: 'center' }}>Hello!</div>
+          <div style={{ padding: 50, textAlign: 'center' }}>Child Modal of Child Drawer Component!</div>
         </Modal>}
       </Drawer>
     );
