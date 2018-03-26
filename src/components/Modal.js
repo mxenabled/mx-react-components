@@ -3,7 +3,7 @@ const React = require('react');
 
 const Button = require('./Button');
 const Icon = require('./Icon');
-const { MXFocusTrap } = require('../components/MXFocusTrap');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const _merge = require('lodash/merge');
 

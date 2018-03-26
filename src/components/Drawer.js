@@ -10,7 +10,7 @@ const Velocity = require('velocity-animate');
 const { StyleRoot } = require('radium');
 
 const Button = require('../components/Button');
-const { MXFocusTrap } = require('../components/MXFocusTrap');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const { themeShape } = require('../constants/App');
 
