@@ -1,7 +1,29 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { mount } from 'enzyme';
 
-const { MXFocusTrap, WrappedMXFocusTrap } = require('../MXFocusTrap');
+const MXFocusTrap = require('../MXFocusTrap');
+
+/**
+ * Simple testing component to make test below easier.
+ **/
+class WrappedMXFocusTrap extends React.Component {
+  state = {
+    renderChildTrap: true
+  }
+
+  render () {
+    return (
+      <MXFocusTrap>
+        <button>"Outer Focusable Button"</button>
+        {this.state.renderChildTrap ? (
+          <MXFocusTrap>
+            <button>"Inner Focusable Button"</button>
+          </MXFocusTrap>
+        ) : null}
+      </MXFocusTrap>
+    );
+  }
+}
 
 describe('MXFocusTrap', () => {
   it('should pause and un-pause parent trap when child trap mounts and unmounts', () => {
