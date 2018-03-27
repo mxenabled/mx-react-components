@@ -84,7 +84,7 @@ class RangeSelector extends React.Component {
 
   _setDefaultRangeValues = () => {
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
-    const width = component.offsetWidth;
+    const width = component ? component.offsetWidth : 0;
 
     //convert our values to a 0-based scale
     const lowerPosition = this.state.lowerValue - (this.props.lowerBound);
