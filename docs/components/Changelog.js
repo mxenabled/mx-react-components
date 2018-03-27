@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.1.28</h3>
+        <ul>
+          <li>Check for component before getting offsetWidth in RangeSelector(<a href='https://github.com/mxenabled/mx-react-components/pull/720'>#720</a>)</li>
+        </ul>
+
         <h3>5.1.27</h3>
         <ul>
           <li>Fixes issue with focus trap library in Drawer and Modal components(<a href='https://github.com/mxenabled/mx-react-components/pull/719'>#719</a>)</li>
