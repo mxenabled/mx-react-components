@@ -9,10 +9,10 @@ const { themeShape } = require('../constants/App');
  */
 export class ThemeProvider extends React.Component {
   static propTypes = { theme: themeShape }
-  static childContextTypes = { theme: themeShape }
+  static childContextTypes = { mxTheme: themeShape }
 
   getChildContext () {
-    return { theme: this.props.theme };
+    return { mxTheme: this.props.theme };
   }
 
   render () {
@@ -26,10 +26,10 @@ export class ThemeProvider extends React.Component {
  */
 export class ThemeContext extends React.Component {
   static contextTypes = {
-    theme: themeShape
+    mxTheme: themeShape
   }
 
   render () {
-    return this.props.children(this.context.theme);
+    return this.props.children(this.context.mxTheme);
   }
 }
