@@ -16,9 +16,15 @@ class Input extends React.Component {
     elementRef: PropTypes.func,
     focusOnLoad: PropTypes.bool,
     handleResetClick: PropTypes.func,
-    icon: PropTypes.string,
-    rightIcon: PropTypes.string,
+    icon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]),
     prefix: PropTypes.node,
+    rightIcon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]),
     //keep style for backwards compatibility
     style: PropTypes.oneOfType([
       PropTypes.array,
@@ -67,16 +73,27 @@ class Input extends React.Component {
   };
 
   render () {
-    const { elementProps } = this.props;
+    const { elementProps, icon, prefix, rightIcon, suffix } = this.props;
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.baseColor);
     const styles = this.styles(theme);
+    const leftIconProps = typeof icon === 'string' ?
+      { size: 20, style: styles.icon, type: icon } :
+      icon;
+    const rightIconProps = typeof rightIcon === 'string' ?
+      { size: 20, style: styles.rightIcon, type: rightIcon } :
+      rightIcon;
 
     return (
       <div
         style={Object.assign({}, styles.wrapper, this.state.focus ? styles.activeWrapper : null)}
       >
         {this.props.icon ? (
-          <Icon size={20} style={styles.icon} type={this.props.icon} />
+          <Icon
+            elementProps={{
+              onClick: () => this.elementRef && this.elementRef.focus()
+            }}
+            {...leftIconProps}
+          />
         ) : null}
         <input
           {...elementProps}
@@ -87,13 +104,12 @@ class Input extends React.Component {
           type={this.props.type}
         />
         {this.props.rightIcon && this.props.handleResetClick ? (
+        {this.props.rightIcon ? (
           <Icon
             elementProps={{
               onClick: this.props.handleResetClick
             }}
-            size={20}
-            style={styles.rightIcon}
-            type={this.props.rightIcon}
+            {...rightIconProps}
           />
         ) : null}
       </div>
