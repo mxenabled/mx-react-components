@@ -85,7 +85,7 @@ class Input extends React.Component {
 
     return (
       <div
-        style={Object.assign({}, styles.wrapper, this.state.focus ? styles.activeWrapper : null)}
+        style={this.state.focus ? { ...styles.wrapper, ...styles.activeWrapper } : styles.wrapper}
       >
         {this.props.icon ? (
           <Icon
