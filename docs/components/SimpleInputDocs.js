@@ -18,10 +18,19 @@ class SimpleInputDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+        <div style={{ marginBottom: 5 }}>
+          <label htmlFor='myInput'>
+            My Simple Input
+          </label>
+        </div>
         <SimpleInput
           elementProps={{
+            id: 'myInput',
             placeholder: 'Type something'
           }}
+          elementRef={ref => this.myInput = ref}
+          prefix={(<span onClick={() => this.myInput.focus()} style={{ paddingRight: 5 }}>Prefix</span>)}
+          suffix={(<span onClick={() => this.myInput.focus()} style={{ paddingRight: 5 }}>Suffix</span>)}
         />
 
         <h3>Usage</h3>
@@ -32,17 +41,23 @@ class SimpleInputDocs extends React.Component {
         <h5>elementProps <label>Object</label></h5>
         <p>Pass props directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
 
+        <h5>elementRef<label>Function</label></h5>
+        <p>A callback function used to get the ref of the input for things like handling focus.</p>
+
         <h5>focusOnLoad <label>Boolean</label></h5>
         <p>Focus <Code>input</Code> on load, default of false.</p>
 
         <h5>handleResetClick <label>Function</label></h5>
         <p>The function that will execute when <Code>rightIcon</Code> is clicked. This prop will not work properly unless <Code>rightIcon</Code> is also declared. </p>
 
-        <h5>icon <label>String</label></h5>
-        <p>The type of icon to display in the left side of the <Code>input</Code>.</p>
+        <h5>icon <label>String || Object</label></h5>
+        <p>The type of icon as a string or an object describing the props passed to the Icon component to display on the left side of the <Code>input</Code></p>
 
-        <h5>rightIcon <label>String</label></h5>
-        <p>The type of icon to display in the right side of the <Code>input</Code>. This icon is clickable and will execute the function specified in the <Code>handleResetClick</Code> prop.  This prop will not work properly unless <Code>handleResetClick</Code> is also declared.</p>
+        <h5>prefix <label>Node</label></h5>
+        <p>Anything that can be rendered: numbers, strings, elements or an array(or fragment) containing these types that is placed on the left side of the <Code>input</Code>.</p>
+
+        <h5>rightIcon <label>String || Object</label></h5>
+        <p>The type of icon as a string or an object describing the props passed to the Icon component to display on the right side of the <Code>input</Code></p>
 
         <h5>styles <label>Object</label></h5>
         <p>Allows style additions or overrides to specific component elements including:</p>
@@ -54,6 +69,9 @@ class SimpleInputDocs extends React.Component {
           <li><Code>rightIcon</Code>: the icon located in the right side of the <Code>input</Code> element.</li>
           </ul>
           <p>*<Code>styles</Code> will override defaults and conflicting <Code>themes</Code></p>
+
+        <h5>suffix <label>Node</label></h5>
+        <p>Anything that can be rendered: numbers, strings, elements or an array(or fragment) containing these types that is placed on the right side of the <Code>input</Code>.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information. Themes will be overridden by conflicting <Code>styles</Code></p>
@@ -72,9 +90,11 @@ class SimpleInputDocs extends React.Component {
             elementProps={{
               placeholder: 'Type something'
             }}
+            elementRef={ref => this.myInput = ref}
             focusOnLoad={true}
             handleResetClick={myRightIconClickCallbackFunction}
             icon={'bike'}
+            prefix={(<span onClick={() => this.myInput.focus()} style={{ paddingRight: 5 }}>Prefix</span>)}
             rightIcon={'close-solid'}
             styles={{
               wrapper: { backgroundColor: 'red', border: '4px solid green' },
@@ -83,6 +103,7 @@ class SimpleInputDocs extends React.Component {
               icon: { paddingLeft: '40px' },
               rightIcon: { paddingRight: '40px' }
             }}
+            suffix={(<span onClick={() => this.myInput.focus()} style={{ paddingRight: 5 }}>Suffix</span>)}
             theme={{ Colors: { PRIMARY: 'orange' } }}
             valid={false}
           />
