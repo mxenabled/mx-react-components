@@ -18,12 +18,14 @@ class Input extends React.Component {
     handleResetClick: PropTypes.func,
     icon: PropTypes.string,
     rightIcon: PropTypes.string,
+    prefix: PropTypes.node,
     //keep style for backwards compatibility
     style: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
     ]),
     styles: PropTypes.object,
+    suffix: PropTypes.node,
     theme: themeShape,
     type: PropTypes.string,
     valid: PropTypes.bool
