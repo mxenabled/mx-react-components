@@ -547,6 +547,7 @@ class DateRangePicker extends React.Component {
                           );
                           this._handleScrimClick();
                         }}
+                        style={styles.applyButton}
                         type='primary'
                       >
                         Apply
@@ -734,7 +735,8 @@ class DateRangePicker extends React.Component {
         applyButton: {
           display: 'flex',
           justifyContent: 'flex-end',
-          marginTop: theme.Spacing.XSMALL
+          // marginTop: theme.Spacing.XSMALL,
+          marginLeft: theme.Spacing.SMALL
         },
 
         //Selected and Selecting Range
