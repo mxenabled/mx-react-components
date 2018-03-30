@@ -106,7 +106,7 @@ class Input extends React.Component {
           style={styles.input}
           type={this.props.type}
         />
-        {this.props.rightIcon && this.props.handleResetClick ? (
+        {suffix ? suffix : null}
         {this.props.rightIcon ? (
           <Icon
             elementProps={{
