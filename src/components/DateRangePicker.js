@@ -500,7 +500,10 @@ class DateRangePicker extends React.Component {
                                   this._getDateRangePosition
                                 }
                                 handleDateHover={this._handleDateHover}
-                                handleDateSelect={this._handleDateSelect}
+                                handleDateSelect={date => {
+                                  this._handleDateSelect(date);
+                                  this.setState({ showCalendar: false });
+                                }}
                                 handleKeyDown={this._handleDayKeyDown}
                                 isInActiveRange={this._isInActiveRange}
                                 minimumDate={this.props.minimumDate}
@@ -508,51 +511,41 @@ class DateRangePicker extends React.Component {
                                 selectedStartDate={this.state.selectedStartDate}
                                 styles={styles}
                               />
-                              {!isLargeOrMediumWindowSize && (
-                                <div style={styles.applyButton}>
-                                  <Button
-                                    onClick={() =>
-                                      this.setState({ showCalendar: false })}
-                                    theme={theme}
-                                    type='primary'
-                                  >
-                                    Apply
-                                  </Button>
-                                </div>
-                              )}
                             </div>
                           </div>
                         )}
                     </div>
 
-                    <div style={styles.bottomPane}>
-                      <Button
-                        onClick={() => {
-                          this.setState({
-                            focusedDay: this.props.selectedStartDate,
-                            selectedStartDate: this.props.selectedStartDate,
-                            selectedEndDate: this.props.selectedEndDate
-                          });
-                          this._handleScrimClick();
-                        }}
-                        type='secondary'
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          this.props.onDateSelect(
-                            this.state.selectedStartDate,
-                            this.state.selectedEndDate
-                          );
-                          this._handleScrimClick();
-                        }}
-                        style={styles.applyButton}
-                        type='primary'
-                      >
-                        Apply
-                      </Button>
-                    </div>
+                    {!this.state.showCalendar ? (
+                      <div style={styles.bottomPane}>
+                        <Button
+                          onClick={() => {
+                            this.setState({
+                              focusedDay: this.props.selectedStartDate,
+                              selectedStartDate: this.props.selectedStartDate,
+                              selectedEndDate: this.props.selectedEndDate
+                            });
+                            this._handleScrimClick();
+                          }}
+                          type='secondary'
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            this.props.onDateSelect(
+                              this.state.selectedStartDate,
+                              this.state.selectedEndDate
+                            );
+                            this._handleScrimClick();
+                          }}
+                          style={styles.applyButton}
+                          type='primary'
+                        >
+                          Apply
+                        </Button>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </FocusTrap>
@@ -604,6 +597,14 @@ class DateRangePicker extends React.Component {
           display: 'flex',
           flexDirection: 'row',
           padding: theme.Spacing.SMALL,
+          paddingRight: theme.Spacing.MEDIUM,
+          justifyContent: 'flex-end'
+        },
+        bottomPaneMobile: {
+          display: 'flex',
+          flexDirection: 'row',
+          padding: theme.Spacing.SMALL,
+          paddingTop: theme.Spacing.MEDIUM,
           justifyContent: 'flex-end'
         },
         column: {
@@ -613,7 +614,8 @@ class DateRangePicker extends React.Component {
         row: {
           display: 'flex',
           flexDirection: 'row',
-          padding: theme.Spacing.SMALL
+          padding: theme.Spacing.SMALL,
+          justifyContent: 'center'
         },
 
         // Selected Date styles
@@ -735,8 +737,7 @@ class DateRangePicker extends React.Component {
         applyButton: {
           display: 'flex',
           justifyContent: 'flex-end',
-          // marginTop: theme.Spacing.XSMALL,
-          marginLeft: theme.Spacing.SMALL
+          marginLeft: theme.Spacing.MEDIUM
         },
 
         //Selected and Selecting Range
