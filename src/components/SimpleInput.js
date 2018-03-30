@@ -95,6 +95,7 @@ class Input extends React.Component {
             {...leftIconProps}
           />
         ) : null}
+        {prefix ? prefix : null}
         <input
           {...elementProps}
           onBlur={this._onBlur}
