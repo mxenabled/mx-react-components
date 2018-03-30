@@ -99,7 +99,10 @@ class Input extends React.Component {
           {...elementProps}
           onBlur={this._onBlur}
           onFocus={this._onFocus}
-          ref={ref => this.elementRef = ref}
+          ref={ref => {
+            this.elementRef = ref;
+            if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
+          }}
           style={styles.input}
           type={this.props.type}
         />
