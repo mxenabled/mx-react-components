@@ -107,10 +107,7 @@ class SimpleInputDocs extends React.Component {
             }}
             elementRef={ref => this.myInput = ref}
             focusOnLoad={true}
-            handleResetClick={myRightIconClickCallbackFunction}
-            icon={'bike'}
             prefix={(<span onClick={() => this.myInput.focus()} style={{ paddingRight: 5 }}>Prefix</span>)}
-            rightIcon={'close-solid'}
             styles={{
               wrapper: { backgroundColor: 'red', border: '4px solid green' },
               activeWrapper: { backgroundColor: 'blue', border: '4px solid red' },
