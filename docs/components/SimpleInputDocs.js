@@ -49,15 +49,18 @@ class SimpleInputDocs extends React.Component {
 
         <h5>handleResetClick <label>Function</label></h5>
         <p>The function that will execute when <Code>rightIcon</Code> is clicked. This prop will not work properly unless <Code>rightIcon</Code> is also declared. </p>
+        <p>*This prop is deprecated, please use <Code>prefix</Code> by passing an element with a click handler instead.</p>
 
         <h5>icon <label>String || Object</label></h5>
         <p>The type of icon as a string or an object describing the props passed to the Icon component to display on the left side of the <Code>input</Code></p>
+        <p>*This prop is deprecated, please use <Code>prefix</Code> instead.</p>
 
         <h5>prefix <label>Node</label></h5>
         <p>Anything that can be rendered: numbers, strings, elements or an array(or fragment) containing these types that is placed on the left side of the <Code>input</Code>.</p>
 
         <h5>rightIcon <label>String || Object</label></h5>
         <p>The type of icon as a string or an object describing the props passed to the Icon component to display on the right side of the <Code>input</Code></p>
+        <p>*This prop is deprecated, please use <Code>suffix</Code> instead.</p>
 
         <h5>styles <label>Object</label></h5>
         <p>Allows style additions or overrides to specific component elements including:</p>
