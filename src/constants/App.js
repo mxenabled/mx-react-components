@@ -411,6 +411,10 @@ module.exports = {
       displayValue: 'Pause'
     },
     {
+      value: 'percent',
+      displayValue: 'Percent'
+    },
+    {
       value: 'personal-care',
       displayValue: 'Personal Care'
     },
