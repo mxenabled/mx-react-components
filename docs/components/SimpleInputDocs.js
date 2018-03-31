@@ -112,8 +112,6 @@ class SimpleInputDocs extends React.Component {
               wrapper: { backgroundColor: 'red', border: '4px solid green' },
               activeWrapper: { backgroundColor: 'blue', border: '4px solid red' },
               input: { color: 'purple' },
-              icon: { paddingLeft: '40px' },
-              rightIcon: { paddingRight: '40px' }
             }}
             suffix={(<span onClick={() => this.myInput.focus()} style={{ paddingRight: 5 }}>Suffix</span>)}
             theme={{ Colors: { PRIMARY: 'orange' } }}
