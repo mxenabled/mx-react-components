@@ -48,7 +48,7 @@ class SimpleInputDocs extends React.Component {
         <h3>Usage</h3>
         <h5>baseColor <label>String</label></h5>
         <p>The color of the <Code>input</Code> border on focus.</p>
-        <p>*This prop is deprecated, please use <Code>themes</Code> instead.</p>
+        <p>*This prop is deprecated, please use <Code>theme</Code> instead.</p>
 
         <h5>elementProps <label>Object</label></h5>
         <p>Pass props directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
