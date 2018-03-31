@@ -223,6 +223,10 @@ module.exports = {
       displayValue: 'Document'
     },
     {
+      value: 'dollar',
+      displayValue: 'Dollar'
+    },
+    {
       value: 'download',
       displayValue: 'Download'
     },
