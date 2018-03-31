@@ -51,6 +51,15 @@ class Input extends React.Component {
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'baseColor');
 
+    /**
+     * TODO:
+     * icon and rightIcon are deprecated in favor of new props
+     * prefix and suffix. They should be removed in the next
+     * major release.
+     */
+    deprecateSimpleInputIcon(this.props, 'icon');
+    deprecateSimpleInputIcon(this.props, 'rightIcon');
+
     if (this.props.focusOnLoad && this.elementRef) {
       this.elementRef.focus();
     }
