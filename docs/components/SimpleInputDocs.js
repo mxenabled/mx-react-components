@@ -19,13 +19,25 @@ class SimpleInputDocs extends React.Component {
 
         <h3>Demo</h3>
         <div style={{ marginBottom: 5 }}>
-          <label htmlFor='myInput'>
+          <label htmlFor='inputOne'>
             My Simple Input
           </label>
         </div>
         <SimpleInput
           elementProps={{
-            id: 'myInput',
+            id: 'inputOne',
+            placeholder: 'Type something'
+          }}
+        />
+        <br />
+        <div style={{ marginBottom: 5 }}>
+          <label htmlFor='inputTwo'>
+            My Simple Input with prefix and suffix
+          </label>
+        </div>
+        <SimpleInput
+          elementProps={{
+            id: 'inputTwo',
             placeholder: 'Type something'
           }}
           elementRef={ref => this.myInput = ref}
