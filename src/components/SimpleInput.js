@@ -9,8 +9,7 @@ const { themeShape } = require('../constants/App');
 const StyleUtils = require('../utils/Style');
 const {
   deprecatePrimaryColor,
-  deprecateSimpleInputIcon,
-  deprecateSimpleInputHandleResetClick
+  deprecateProp
 } = require('../utils/Deprecation');
 
 class Input extends React.Component {
@@ -61,9 +60,11 @@ class Input extends React.Component {
      * favor of new props prefix and suffix. They should be removed
      * in the next major release.
      */
-    deprecateSimpleInputIcon(this.props, 'icon');
-    deprecateSimpleInputIcon(this.props, 'rightIcon');
-    deprecateSimpleInputHandleResetClick(this.props);
+    const componentDocsURL = 'simple-input';
+
+    deprecateProp(this.props, 'icon', 'prefix', componentDocsURL);
+    deprecateProp(this.props, 'rightIcon', 'suffix', componentDocsURL);
+    deprecateProp(this.props, 'handleResetClick', 'suffix', componentDocsURL);
 
     if (this.props.focusOnLoad && this.elementRef) {
       this.elementRef.focus();
