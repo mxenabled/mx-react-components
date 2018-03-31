@@ -7,7 +7,11 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const {
+  deprecatePrimaryColor,
+  deprecateSimpleInputIcon,
+  deprecateSimpleInputHandleResetClick
+} = require('../utils/Deprecation');
 
 class Input extends React.Component {
   static propTypes = {
@@ -53,12 +57,13 @@ class Input extends React.Component {
 
     /**
      * TODO:
-     * icon and rightIcon are deprecated in favor of new props
-     * prefix and suffix. They should be removed in the next
-     * major release.
+     * icon, rightIcon, and handleResetClick are deprecated in
+     * favor of new props prefix and suffix. They should be removed
+     * in the next major release.
      */
     deprecateSimpleInputIcon(this.props, 'icon');
     deprecateSimpleInputIcon(this.props, 'rightIcon');
+    deprecateSimpleInputHandleResetClick(this.props);
 
     if (this.props.focusOnLoad && this.elementRef) {
       this.elementRef.focus();
