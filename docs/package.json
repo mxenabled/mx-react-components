@@ -1,5 +1,6 @@
 {
   "name": "mx-react-components-docs",
+  "version": "0.0.0",
   "description": "A collection of generic React UI components",
   "main": "index.js",
   "author": "MX",
@@ -24,7 +25,8 @@
   "dependencies": {
     "highlight.js": "^9.2.0",
     "marked": "^0.3.5",
-    "mx-react-components": "file:..",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2"
   }

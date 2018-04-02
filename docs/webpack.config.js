@@ -58,6 +58,7 @@ module.exports = {
   resolve: {
     alias: {
       components: path.join(__dirname, 'components'),
+      'mx-react-components': path.join(__dirname, '../src'),
       utils: path.join(__dirname, '../src/utils')
     }
   }
