@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
 
 const StyleUtils = require('../../utils/Style');
@@ -51,4 +52,4 @@ class ShadedHatchPatternRectangleGroup extends React.Component {
   }
 }
 
-module.exports = ShadedHatchPatternRectangleGroup;
+module.exports = withTheme(ShadedHatchPatternRectangleGroup);

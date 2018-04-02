@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 
 import { css } from 'glamor';
 
-import { ThemeContext } from './Theme';
+import { withTheme } from './Theme';
 
 const Icon = require('./Icon');
 const Spin = require('./Spin');
@@ -61,42 +61,38 @@ class Button extends React.Component {
   };
 
   render () {
-    return (
-      <ThemeContext>{contextTheme => {
-        // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
-        // Keep elementProps for backwards compatibility.
-        const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme: propTheme, ...rest } = this.props;
-        const theme = StyleUtils.mergeTheme(contextTheme || propTheme, primaryColor);
-        const styles = this.styles(theme);
+    // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
+    // Keep elementProps for backwards compatibility.
+    const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
+    const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
+    const styles = this.styles(mergedTheme);
 
-        return (
-          <button
-            className={css({ ...styles.component, ...styles[this.props.type], ...style })}
-            disabled={this.props.type === 'disabled'}
-            ref={buttonRef}
-            {...rest}
-            {...elementProps}
-          >
-            <div style={styles.children}>
-              {(icon && !isActive) && (
-                <Icon
-                  size={20}
-                  style={styles.icon}
-                  type={icon}
-                />
-              )}
-              {isActive && (
-                <Spin direction='counterclockwise'>
-                  <Icon size={20} type='spinner' />
-                </Spin>
-              )}
-              <div style={styles.buttonText}>
-                {isActive ? actionText : children}
-              </div>
-            </div>
-          </button>
-        );
-      }}</ThemeContext>
+    return (
+      <button
+        className={css({ ...styles.component, ...styles[this.props.type], ...style })}
+        disabled={this.props.type === 'disabled'}
+        ref={buttonRef}
+        {...rest}
+        {...elementProps}
+      >
+        <div style={styles.children}>
+          {(icon && !isActive) && (
+            <Icon
+              size={20}
+              style={styles.icon}
+              type={icon}
+            />
+          )}
+          {isActive && (
+            <Spin direction='counterclockwise'>
+              <Icon size={20} type='spinner' />
+            </Spin>
+          )}
+          <div style={styles.buttonText}>
+            {isActive ? actionText : children}
+          </div>
+        </div>
+      </button>
     );
   }
 
@@ -255,4 +251,4 @@ class Button extends React.Component {
   };
 }
 
-module.exports = Button;
+module.exports = withTheme(Button);

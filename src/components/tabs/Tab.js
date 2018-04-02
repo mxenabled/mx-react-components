@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
 
+import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
 
 const StyleUtils = require('../../utils/Style');
@@ -65,4 +66,4 @@ class Tab extends React.Component {
   }
 }
 
-module.exports = Radium(Tab);
+module.exports = withTheme(Radium(Tab));

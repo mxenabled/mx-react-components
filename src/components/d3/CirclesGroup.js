@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
 
 const StyleUtils = require('../../utils/Style');
@@ -103,4 +104,4 @@ class CirclesGroup extends React.Component {
   }
 }
 
-module.exports = CirclesGroup;
+module.exports = withTheme(CirclesGroup);

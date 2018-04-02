@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
+import { withTheme } from './Theme';
 const Icon = require('../components/Icon');
 
 const { themeShape } = require('../constants/App');
@@ -98,4 +99,4 @@ class MessageBox extends React.Component {
   };
 }
 
-module.exports = MessageBox;
+module.exports = withTheme(MessageBox);

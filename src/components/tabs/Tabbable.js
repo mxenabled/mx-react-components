@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
 
 const StyleUtils = require('../../utils/Style');
@@ -79,4 +80,4 @@ Tabbable.propTypes = {
   theme: themeShape
 };
 
-module.exports = Tabbable;
+module.exports = withTheme(Tabbable);

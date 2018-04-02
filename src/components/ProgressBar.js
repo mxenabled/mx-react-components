@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -51,4 +52,4 @@ class ProgressBar extends React.Component {
   };
 }
 
-module.exports = ProgressBar;
+module.exports = withTheme(ProgressBar);

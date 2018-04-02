@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -174,4 +175,4 @@ class Input extends React.Component {
   };
 }
 
-module.exports = Input;
+module.exports = withTheme(Input);

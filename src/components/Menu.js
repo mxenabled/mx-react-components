@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const Icon = require('../components/Icon');
 
 const { themeShape } = require('../constants/App');
@@ -156,4 +157,4 @@ class Menu extends React.Component {
   };
 }
 
-module.exports = Menu;
+module.exports = withTheme(Menu);

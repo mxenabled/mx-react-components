@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const moment = require('moment-timezone/builds/moment-timezone-with-data.min');
 
+import { withTheme } from './Theme';
 import Calendar from './Calendar';
 const Column = require('./grid/Column');
 const Container = require('./grid/Container');
@@ -343,4 +344,4 @@ class DatePicker extends React.Component {
   };
 }
 
-module.exports = DatePicker;
+module.exports = withTheme(DatePicker);

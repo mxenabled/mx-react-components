@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from '../Theme';
 const d3 = require('d3');
 
 const { themeShape } = require('../../constants/App');
@@ -85,4 +86,4 @@ class LineGroup extends React.Component {
   }
 }
 
-module.exports = LineGroup;
+module.exports = withTheme(LineGroup);
