@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-indent */
 const React = require('react');
 const moment = require('moment');
-const { Link } = require('react-router');
+const { Link } = require('react-router-dom');
 
 const { TimeBasedLineChart } = require('mx-react-components');
 

@@ -1,7 +1,7 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
 const React = require('react');
-const { Link } = require('react-router');
+const { Link } = require('react-router-dom');
 
 const { TextArea } = require('mx-react-components');
 
