@@ -213,13 +213,11 @@ class DateRangePicker extends React.Component {
       this._endDateIsBeforeStartDate(startDate, endDate);
 
     if (modifiedRangeCompleteButDatesInversed) {
-      // this.props.onDateSelect(endDate, startDate);
       this.setState({
         selectedStartDate: endDate,
         selectedEndDate: startDate
       });
     } else {
-      // this.props.onDateSelect(startDate, endDate);
       this.setState({
         selectedStartDate: startDate,
         selectedEndDate: endDate
