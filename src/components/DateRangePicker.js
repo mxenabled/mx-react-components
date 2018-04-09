@@ -387,7 +387,6 @@ class DateRangePicker extends React.Component {
             <Icon size={20} style={styles.selectedDateIcon} type='calendar' />
           ) : null}
           <div style={styles.selectedDateText}>
-            {/*These below are based on props, not state, as it displays when the date picker is closed - should match the parent*/}
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
                 <span>
