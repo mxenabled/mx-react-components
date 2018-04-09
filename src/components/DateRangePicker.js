@@ -375,6 +375,8 @@ class DateRangePicker extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon =
       StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
+    const showCalendar = this.state.showCalendar || isLargeOrMediumWindowSize;
+
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true
@@ -439,8 +441,7 @@ class DateRangePicker extends React.Component {
                                 this.setState({
                                   currentDate: date || moment().unix(),
                                   selectedBox,
-                                  showCalendar:
-                                    !isLargeOrMediumWindowSize && true
+                                  showCalendar: true
                                 });
                               }}
                               selectedBox={this.state.selectedBox}
@@ -453,73 +454,72 @@ class DateRangePicker extends React.Component {
                         </div>
                       )}
 
-                      {(this.state.showCalendar ||
-                        isLargeOrMediumWindowSize) && (
-                          <div>
-                            <div style={styles.calendarWrapper}>
-                              <div style={styles.calendarHeader}>
-                                <MonthSelector
-                                  currentDate={this.state.currentDate}
-                                  setCurrentDate={currentDate =>
-                                    this.setState({
-                                      currentDate,
-                                      focusedDay: currentDate
-                                    })}
-                                />
-                                <YearSelector
-                                  currentDate={this.state.currentDate}
-                                  setCurrentDate={currentDate =>
-                                    this.setState({
-                                      currentDate,
-                                      focusedDay: currentDate
-                                    })}
-                                />
-                              </div>
-                              <div style={styles.calendarWeek}>
-                                {[
-                                  { label: 'S', value: 'Sunday' },
-                                  { label: 'M', value: 'Monday' },
-                                  { label: 'T', value: 'Tuesday' },
-                                  { label: 'W', value: 'Wednesday' },
-                                  { label: 'T', value: 'Thursday' },
-                                  { label: 'F', value: 'Friday' },
-                                  { label: 'S', value: 'Saturday' }
-                                ].map(day => {
-                                  return (
-                                    <div
-                                      key={day.value}
-                                      style={styles.calendarWeekDay}
-                                    >
-                                      {day.label}
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                              <MonthTable
-                                activeSelectDate={this.state.activeSelectDate}
+                      {showCalendar ? (
+                        <div>
+                          <div style={styles.calendarWrapper}>
+                            <div style={styles.calendarHeader}>
+                              <MonthSelector
                                 currentDate={this.state.currentDate}
-                                focusedDay={
-                                  this.state.focusedDay ||
-                                  this.state.currentDate
-                                }
-                                getDateRangePosition={
-                                  this._getDateRangePosition
-                                }
-                                handleDateHover={this._handleDateHover}
-                                handleDateSelect={date => {
-                                  this._handleDateSelect(date);
-                                  this.setState({ showCalendar: false });
-                                }}
-                                handleKeyDown={this._handleDayKeyDown}
-                                isInActiveRange={this._isInActiveRange}
-                                minimumDate={this.props.minimumDate}
-                                selectedEndDate={this.state.selectedEndDate}
-                                selectedStartDate={this.state.selectedStartDate}
-                                styles={styles}
+                                setCurrentDate={currentDate =>
+                                  this.setState({
+                                    currentDate,
+                                    focusedDay: currentDate
+                                  })}
+                              />
+                              <YearSelector
+                                currentDate={this.state.currentDate}
+                                setCurrentDate={currentDate =>
+                                  this.setState({
+                                    currentDate,
+                                    focusedDay: currentDate
+                                  })}
                               />
                             </div>
+                            <div style={styles.calendarWeek}>
+                              {[
+                                { label: 'S', value: 'Sunday' },
+                                { label: 'M', value: 'Monday' },
+                                { label: 'T', value: 'Tuesday' },
+                                { label: 'W', value: 'Wednesday' },
+                                { label: 'T', value: 'Thursday' },
+                                { label: 'F', value: 'Friday' },
+                                { label: 'S', value: 'Saturday' }
+                              ].map(day => {
+                                return (
+                                  <div
+                                    key={day.value}
+                                    style={styles.calendarWeekDay}
+                                  >
+                                    {day.label}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <MonthTable
+                              activeSelectDate={this.state.activeSelectDate}
+                              currentDate={this.state.currentDate}
+                              focusedDay={
+                                this.state.focusedDay ||
+                                this.state.currentDate
+                              }
+                              getDateRangePosition={
+                                this._getDateRangePosition
+                              }
+                              handleDateHover={this._handleDateHover}
+                              handleDateSelect={date => {
+                                this._handleDateSelect(date);
+                                this.setState({ showCalendar: false });
+                              }}
+                              handleKeyDown={this._handleDayKeyDown}
+                              isInActiveRange={this._isInActiveRange}
+                              minimumDate={this.props.minimumDate}
+                              selectedEndDate={this.state.selectedEndDate}
+                              selectedStartDate={this.state.selectedStartDate}
+                              styles={styles}
+                            />
                           </div>
-                        )}
+                        </div>
+                      ) : null}
                     </div>
 
                     {!this.state.showCalendar ? (
