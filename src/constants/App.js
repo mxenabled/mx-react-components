@@ -223,6 +223,10 @@ module.exports = {
       displayValue: 'Document'
     },
     {
+      value: 'dollar',
+      displayValue: 'Dollar'
+    },
+    {
       value: 'download',
       displayValue: 'Download'
     },
@@ -405,6 +409,10 @@ module.exports = {
     {
       value: 'pause',
       displayValue: 'Pause'
+    },
+    {
+      value: 'percent',
+      displayValue: 'Percent'
     },
     {
       value: 'personal-care',

@@ -7,7 +7,10 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const {
+  deprecatePrimaryColor,
+  deprecateProp
+} = require('../utils/Deprecation');
 
 class Input extends React.Component {
   static propTypes = {
@@ -16,14 +19,22 @@ class Input extends React.Component {
     elementRef: PropTypes.func,
     focusOnLoad: PropTypes.bool,
     handleResetClick: PropTypes.func,
-    icon: PropTypes.string,
-    rightIcon: PropTypes.string,
+    icon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]),
+    prefix: PropTypes.node,
+    rightIcon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]),
     //keep style for backwards compatibility
     style: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.object
     ]),
     styles: PropTypes.object,
+    suffix: PropTypes.node,
     theme: themeShape,
     type: PropTypes.string,
     valid: PropTypes.bool
@@ -42,6 +53,18 @@ class Input extends React.Component {
 
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'baseColor');
+
+    /**
+     * TODO:
+     * icon, rightIcon, and handleResetClick are deprecated in
+     * favor of new props prefix and suffix. They should be removed
+     * in the next major release.
+     */
+    const componentDocsURL = 'simple-input';
+
+    deprecateProp(this.props, 'icon', 'prefix', componentDocsURL);
+    deprecateProp(this.props, 'rightIcon', 'suffix', componentDocsURL);
+    deprecateProp(this.props, 'handleResetClick', 'suffix', componentDocsURL);
 
     if (this.props.focusOnLoad && this.elementRef) {
       this.elementRef.focus();
@@ -65,33 +88,47 @@ class Input extends React.Component {
   };
 
   render () {
-    const { elementProps } = this.props;
+    const { elementProps, icon, prefix, rightIcon, suffix } = this.props;
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.baseColor);
     const styles = this.styles(theme);
+    const leftIconProps = typeof icon === 'string' ?
+      { size: 20, style: styles.icon, type: icon } :
+      icon;
+    const rightIconProps = typeof rightIcon === 'string' ?
+      { size: 20, style: styles.rightIcon, type: rightIcon } :
+      rightIcon;
 
     return (
       <div
-        style={Object.assign({}, styles.wrapper, this.state.focus ? styles.activeWrapper : null)}
+        style={this.state.focus ? { ...styles.wrapper, ...styles.activeWrapper } : styles.wrapper}
       >
         {this.props.icon ? (
-          <Icon size={20} style={styles.icon} type={this.props.icon} />
+          <Icon
+            elementProps={{
+              onClick: () => this.elementRef && this.elementRef.focus()
+            }}
+            {...leftIconProps}
+          />
         ) : null}
+        {prefix ? prefix : null}
         <input
           {...elementProps}
           onBlur={this._onBlur}
           onFocus={this._onFocus}
-          ref={ref => this.elementRef = ref}
+          ref={ref => {
+            this.elementRef = ref;
+            if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
+          }}
           style={styles.input}
           type={this.props.type}
         />
-        {this.props.rightIcon && this.props.handleResetClick ? (
+        {suffix ? suffix : null}
+        {this.props.rightIcon ? (
           <Icon
             elementProps={{
               onClick: this.props.handleResetClick
             }}
-            size={20}
-            style={styles.rightIcon}
-            type={this.props.rightIcon}
+            {...rightIconProps}
           />
         ) : null}
       </div>
