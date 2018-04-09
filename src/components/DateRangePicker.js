@@ -14,7 +14,7 @@ const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
 const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
@@ -36,6 +36,7 @@ class DateRangePicker extends React.Component {
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onClose: PropTypes.func,
+    onDateRangeSelect: PropTypes.func,
     onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
@@ -127,7 +128,7 @@ class DateRangePicker extends React.Component {
     isRelative: true,
     locale: 'en',
     onClose () {},
-    onDateSelect () {},
+    onDateRangeSelect () {},
     placeholderText: 'Select A Date Range',
     showDefaultRanges: false
   };
@@ -147,6 +148,7 @@ class DateRangePicker extends React.Component {
 
   componentDidMount () {
     deprecatePrimaryColor(this.props);
+    deprecateProp(this.props, 'onDateSelect', 'onDateRangeSelect', 'date-range-picker');
   }
 
   componentWillReceiveProps (newProps) {
@@ -531,10 +533,21 @@ class DateRangePicker extends React.Component {
                       <Button
                         aria-label='Apply Date Range Selection'
                         onClick={() => {
-                          this.props.onDateSelect(
+                          this.props.onDateRangeSelect(
                             selectedStartDate,
                             selectedEndDate
                           );
+
+                          /**
+                                TODO: onDateSelect is deprecated.  We need to remove this
+                                check and call before the next major release.
+                              **/
+                          if (typeof this.props.onDateSelect === 'function') {
+                            this.props.onDateSelect(
+                              selectedStartDate,
+                              selectedEndDate
+                            );
+                          }
                           this._handleScrimClick();
                         }}
                         style={styles.applyButton}
