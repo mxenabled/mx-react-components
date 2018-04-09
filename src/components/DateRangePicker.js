@@ -2,13 +2,13 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const keycode = require('keycode');
-const FocusTrap = require('focus-trap-react');
 
 const moment = require('moment');
 const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
 const Button = require('./Button');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
@@ -31,6 +31,7 @@ class DateRangePicker extends React.Component {
       })
     ),
     elementRef: PropTypes.func,
+    focusTrapProps: PropTypes.object,
     format: PropTypes.string,
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
@@ -123,6 +124,7 @@ class DateRangePicker extends React.Component {
             .unix()
       }
     ],
+    focusTrapProps: {},
     format: 'MMM D, YYYY',
     isRelative: true,
     locale: 'en',
@@ -373,6 +375,13 @@ class DateRangePicker extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon =
       StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      paused: false,
+      ...this.props.focusTrapProps
+    };
 
     return (
       <div style={styles.component}>
@@ -414,7 +423,7 @@ class DateRangePicker extends React.Component {
         <div style={styles.container}>
           <div>
             {this.state.showSelectionPane && (
-              <FocusTrap>
+              <MXFocusTrap {...mergedFocusTrapProps}>
                 <div style={styles.optionsWrapper}>
                   <div style={styles.column}>
                     <div style={styles.row}>
@@ -545,7 +554,7 @@ class DateRangePicker extends React.Component {
                     ) : null}
                   </div>
                 </div>
-              </FocusTrap>
+              </MXFocusTrap>
             )}
           </div>
         </div>
