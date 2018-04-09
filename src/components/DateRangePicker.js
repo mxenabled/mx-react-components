@@ -375,7 +375,7 @@ class DateRangePicker extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon =
       StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
-    const showCalendar = this.state.showCalendar || isLargeOrMediumWindowSize;
+    const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
 
     const mergedFocusTrapProps = {
       focusTrapOptions: {
@@ -521,37 +521,34 @@ class DateRangePicker extends React.Component {
                         </div>
                       ) : null}
                     </div>
-
-                    {!this.state.showCalendar ? (
-                      <div style={styles.bottomPane}>
-                        <Button
-                          onClick={() => {
-                            this.setState({
-                              focusedDay: this.props.selectedStartDate,
-                              selectedStartDate: this.props.selectedStartDate,
-                              selectedEndDate: this.props.selectedEndDate
-                            });
-                            this._handleScrimClick();
-                          }}
-                          type='secondary'
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            this.props.onDateSelect(
-                              this.state.selectedStartDate,
-                              this.state.selectedEndDate
-                            );
-                            this._handleScrimClick();
-                          }}
-                          style={styles.applyButton}
-                          type='primary'
-                        >
-                          Apply
-                        </Button>
-                      </div>
-                    ) : null}
+                    <div style={styles.bottomPane}>
+                      <Button
+                        onClick={() => {
+                          this.setState({
+                            focusedDay: this.props.selectedStartDate,
+                            selectedStartDate: this.props.selectedStartDate,
+                            selectedEndDate: this.props.selectedEndDate
+                          });
+                          this._handleScrimClick();
+                        }}
+                        type='secondary'
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          this.props.onDateSelect(
+                            this.state.selectedStartDate,
+                            this.state.selectedEndDate
+                          );
+                          this._handleScrimClick();
+                        }}
+                        style={styles.applyButton}
+                        type='primary'
+                      >
+                        Apply
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </MXFocusTrap>
