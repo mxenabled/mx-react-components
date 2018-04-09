@@ -68,7 +68,7 @@ class DateRangePickerDocs extends React.Component {
         <p>If set, the user will not be able to select a date prior to this date.</p>
 
         <h5>onDateRangeSelect <label>Function</label></h5>
-        <p>A function to be called when the user has applied their selected date range. The ranges start and end dates are passed as arguements to the call.</p>
+        <p>A function to be called when the user has applied their selected date range. The range's start and end dates are passed as arguements to the call.</p>
 
         <h5>onDateSelect <label>Function</label></h5>
         <p>A function to be called when the user has selected a date. The selected date timestamp(s) will be passed to this function.</p>
