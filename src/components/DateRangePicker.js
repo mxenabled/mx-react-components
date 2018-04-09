@@ -514,6 +514,7 @@ class DateRangePicker extends React.Component {
                     </div>
                     <div style={styles.bottomPane}>
                       <Button
+                        aria-label='Cancel Date Range Selection'
                         onClick={() => {
                           this.setState({
                             focusedDay: this.props.selectedStartDate,
@@ -528,6 +529,7 @@ class DateRangePicker extends React.Component {
                         Cancel
                       </Button>
                       <Button
+                        aria-label='Apply Date Range Selection'
                         onClick={() => {
                           this.props.onDateSelect(
                             selectedStartDate,
