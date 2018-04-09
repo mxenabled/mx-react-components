@@ -3,6 +3,7 @@
 const React = require('react');
 const { Link } = require('react-router');
 
+const Code = require('components/Code');
 const { DateRangePicker } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
@@ -30,7 +31,7 @@ class DateRangePickerDocs extends React.Component {
 
         <h3>Demo</h3>
         <DateRangePicker
-          onDateSelect={this._handleDateRangeSelect}
+          onDateRangeSelect={this._handleDateRangeSelect}
           selectedEndDate={this.state.selectedEndDate}
           selectedStartDate={this.state.selectedStartDate}
           showDefaultRanges={true}
@@ -66,8 +67,12 @@ class DateRangePickerDocs extends React.Component {
         <h5>minimumDate <label>Number (unix timestamp)</label></h5>
         <p>If set, the user will not be able to select a date prior to this date.</p>
 
+        <h5>onDateRangeSelect <label>Function</label></h5>
+        <p>A function to be called when the user has applied their selected date range. The ranges start and end dates are passed as arguements to the call.</p>
+
         <h5>onDateSelect <label>Function</label></h5>
         <p>A function to be called when the user has selected a date. The selected date timestamp(s) will be passed to this function.</p>
+        <p>*This prop is deprecated and will be removed in a future release. Please use <Code>onDateRangeSelect</Code> instead.</p>
 
         <h5>placeholderText <label>String</label></h5>
         <p>Default: Select A Date</p>
@@ -103,7 +108,7 @@ class DateRangePickerDocs extends React.Component {
           },
 
           <DateRangePicker
-            onDateSelect={this._handleDateRangeSelect}
+            onDateRangeSelect={this._handleDateRangeSelect}
             selectedEndDate={this.state.selectedEndDate}
             selectedStartDate={this.state.selectedStartDate}
             showDefaultRanges={true}
