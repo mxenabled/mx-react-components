@@ -1,6 +1,5 @@
 import React from 'react';
 
-const ThemeContext = React.createContext('mxTheme');
 const { themeShape } = require('../constants/App');
 
 /**
@@ -10,35 +9,48 @@ const { themeShape } = require('../constants/App');
  */
 export class ThemeProvider extends React.Component {
   static propTypes = { theme: themeShape }
+  static childContextTypes = { mxTheme: themeShape }
+
+  getChildContext () {
+    return { mxTheme: this.props.theme };
+  }
 
   render () {
-    return (
-      <ThemeContext.Provider value={this.props.theme}>
-        {this.props.children}
-      </ThemeContext.Provider>
-    );
+    return this.props.children;
   }
 }
 
 /**
- * `withTheme` injects the `theme` from `ThemeProvider` as a prop into `Component`.
- *
- * `theme` can still be provided as a prop to the themed component to override the theme.
+ * ThemeContext is for use inside components that need access
+ * to the theme.
  */
+class ThemeContext extends React.Component {
+  static contextTypes = {
+    mxTheme: themeShape
+  }
+
+  render () {
+    return this.props.children(this.context.mxTheme);
+  }
+}
+
+ /**
+  * `withTheme` injects the `theme` from `ThemeProvider` as a prop into `Component`.
+  *
+  * `theme` can still be provided as a prop to the themed component to override the theme.
+  */
 export function withTheme (Component) {
-  // "ref" is provided by React.forwardRef
-  function ThemedComponent (props, ref) {
+  function ThemedComponent (props) {
     return (
-      <ThemeContext.Consumer>
+      <ThemeContext>
         {theme => (
-          <Component {...props} ref={ref} theme={props.theme || theme} />
+          <Component {...props} theme={props.theme || theme} />
         )}
-      </ThemeContext.Consumer>
+      </ThemeContext>
     );
   }
   ThemedComponent.propTypes = { theme: themeShape };
   ThemedComponent.displayName = `withTheme(${Component.displayName || Component.name})`;
 
-  // pass "ref" to ThemedComponent
-  return React.forwardRef(ThemedComponent);
+  return ThemedComponent;
 }

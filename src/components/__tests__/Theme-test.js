@@ -1,17 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ThemeContext, ThemeProvider } from '../Theme';
+import { ThemeProvider, withTheme } from '../Theme';
 
-const ThemedComponent = () => (
-  <ThemeContext>
-    {theme => (
-      <div style={{ color: theme ? theme.Colors.PRIMARY : DEFAULT_COLOR }}>
-        Hello Theme!
-      </div>
-    )}
-  </ThemeContext>
-);
+const ThemedComponent = withTheme(({ theme }) => (
+  <div style={{ color: theme ? theme.Colors.PRIMARY : DEFAULT_COLOR }}>
+    Hello Theme!
+  </div>
+));
 
 const DEFAULT_COLOR = '#F00';
 const THEME = {
