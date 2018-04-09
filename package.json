@@ -69,6 +69,7 @@
   },
   "jest": {
     "setupFiles": [
+      "<rootDir>/jest-shim.js",
       "<rootDir>/jest-setup.js"
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/node_modules/jest-enzyme/lib/index.js"
