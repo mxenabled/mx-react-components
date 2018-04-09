@@ -227,6 +227,10 @@ class DateRangePicker extends React.Component {
     }
 
     if (startDate && endDate && this.props.closeCalendarOnRangeSelect) {
+      this.props.onDateSelect(
+        startDate,
+        endDate
+      );
       this._handleScrimClick();
     }
   };
@@ -239,6 +243,10 @@ class DateRangePicker extends React.Component {
     });
 
     if (this.props.closeCalendarOnRangeSelect) {
+      this.props.onDateSelect(
+        range.getStartDate(),
+        range.getEndDate()
+      );
       this._handleScrimClick();
     }
   };
@@ -522,35 +530,37 @@ class DateRangePicker extends React.Component {
                         </div>
                       ) : null}
                     </div>
-                    <div style={styles.bottomPane}>
-                      <Button
-                        onClick={() => {
-                          this.setState({
-                            focusedDay: this.props.selectedStartDate,
-                            showCalendar: false,
-                            selectedStartDate: this.props.selectedStartDate,
-                            selectedEndDate: this.props.selectedEndDate
-                          });
-                          this._handleScrimClick();
-                        }}
-                        type='secondary'
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          this.props.onDateSelect(
-                            selectedStartDate,
-                            selectedEndDate
-                          );
-                          this._handleScrimClick();
-                        }}
-                        style={styles.applyButton}
-                        type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
-                      >
-                        Apply
-                      </Button>
-                    </div>
+                    {!this.props.closeCalendarOnRangeSelect ? (
+                      <div style={styles.bottomPane}>
+                        <Button
+                          onClick={() => {
+                            this.setState({
+                              focusedDay: this.props.selectedStartDate,
+                              showCalendar: false,
+                              selectedStartDate: this.props.selectedStartDate,
+                              selectedEndDate: this.props.selectedEndDate
+                            });
+                            this._handleScrimClick();
+                          }}
+                          type='secondary'
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            this.props.onDateSelect(
+                              selectedStartDate,
+                              selectedEndDate
+                            );
+                            this._handleScrimClick();
+                          }}
+                          style={styles.applyButton}
+                          type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
+                        >
+                          Apply
+                        </Button>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </MXFocusTrap>
