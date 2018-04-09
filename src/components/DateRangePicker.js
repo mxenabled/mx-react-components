@@ -22,7 +22,6 @@ const SelectionPane = require('./DateRangePicker/SelectionPane');
 
 class DateRangePicker extends React.Component {
   static propTypes = {
-    closeCalendarOnRangeSelect: PropTypes.bool,
     defaultRanges: PropTypes.arrayOf(
       PropTypes.shape({
         displayValue: PropTypes.string,
@@ -49,7 +48,6 @@ class DateRangePicker extends React.Component {
   };
 
   static defaultProps = {
-    closeCalendarOnRangeSelect: false,
     defaultRanges: [
       {
         displayValue: 'This Month',
@@ -225,14 +223,6 @@ class DateRangePicker extends React.Component {
         selectedEndDate: endDate
       });
     }
-
-    if (startDate && endDate && this.props.closeCalendarOnRangeSelect) {
-      this.props.onDateSelect(
-        startDate,
-        endDate
-      );
-      this._handleScrimClick();
-    }
   };
 
   _handleDefaultRangeSelection = range => {
@@ -241,14 +231,6 @@ class DateRangePicker extends React.Component {
       selectedEndDate: range.getEndDate(),
       focusedDay: range.getEndDate()
     });
-
-    if (this.props.closeCalendarOnRangeSelect) {
-      this.props.onDateSelect(
-        range.getStartDate(),
-        range.getEndDate()
-      );
-      this._handleScrimClick();
-    }
   };
 
   _handleDayKeyDown = e => {
@@ -530,37 +512,35 @@ class DateRangePicker extends React.Component {
                         </div>
                       ) : null}
                     </div>
-                    {!this.props.closeCalendarOnRangeSelect ? (
-                      <div style={styles.bottomPane}>
-                        <Button
-                          onClick={() => {
-                            this.setState({
-                              focusedDay: this.props.selectedStartDate,
-                              showCalendar: false,
-                              selectedStartDate: this.props.selectedStartDate,
-                              selectedEndDate: this.props.selectedEndDate
-                            });
-                            this._handleScrimClick();
-                          }}
-                          type='secondary'
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            this.props.onDateSelect(
-                              selectedStartDate,
-                              selectedEndDate
-                            );
-                            this._handleScrimClick();
-                          }}
-                          style={styles.applyButton}
-                          type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
-                        >
-                          Apply
-                        </Button>
-                      </div>
-                    ) : null}
+                    <div style={styles.bottomPane}>
+                      <Button
+                        onClick={() => {
+                          this.setState({
+                            focusedDay: this.props.selectedStartDate,
+                            showCalendar: false,
+                            selectedStartDate: this.props.selectedStartDate,
+                            selectedEndDate: this.props.selectedEndDate
+                          });
+                          this._handleScrimClick();
+                        }}
+                        type='secondary'
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          this.props.onDateSelect(
+                            selectedStartDate,
+                            selectedEndDate
+                          );
+                          this._handleScrimClick();
+                        }}
+                        style={styles.applyButton}
+                        type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
+                      >
+                        Apply
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </MXFocusTrap>
