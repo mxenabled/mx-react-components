@@ -54,7 +54,7 @@ class DateRangePickerDocs extends React.Component {
 
         <h5>focusTrapProps<label>Object</label></h5>
         <p>Default: Empty Object</p>
-        <p>The DateRangePicker component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the drawer for accessibility reasons.</p>
+        <p>The DateRangePicker component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the date range picker for accessibility reasons.</p>
         <p>The focusTrapProps object provides a mechanism for passing the focus trap component props.</p>
         <p>See the library documentation for details on what props it accepts and how to use them.</p>
 
