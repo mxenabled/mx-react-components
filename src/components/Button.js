@@ -40,7 +40,7 @@ class Button extends React.Component {
   _windowSizeIsSmall = (theme) => {
     const windowSize = StyleUtils.getWindowSize(theme.BreakPoints);
 
-    return windowSize === 'medium' || windowSize === 'large';
+    return !(windowSize === 'medium' || windowSize === 'large');
   };
 
   _childIsVisible = child =>
