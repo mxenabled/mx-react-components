@@ -542,15 +542,10 @@ class DateRangePicker extends React.Component {
         marginRight: 5
       },
       selectedDateText: {
-        color:
-          this.state.selectedStartDate && this.state.selectedEndDate ?
-            theme.Colors.GRAY_700 :
-            theme.Colors.GRAY_500
+        color: this.state.selectedStartDate && this.state.selectedEndDate ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500
       },
       selectedDateCaret: {
-        fill: this.state.showSelectionPane ?
-          theme.Colors.PRIMARY :
-          theme.Colors.GRAY_500
+        fill: this.state.showSelectionPane ? theme.Colors.PRIMARY : theme.Colors.GRAY_500
       },
 
       //Calendar Styles
@@ -658,10 +653,7 @@ class DateRangePicker extends React.Component {
         color: theme.Colors.WHITE
       },
       betweenDay: {
-        backgroundColor: StyleUtils.adjustHexOpacity(
-          theme.Colors.PRIMARY,
-          0.5
-        ),
+        backgroundColor: StyleUtils.adjustHexOpacity(theme.Colors.PRIMARY, 0.5),
         borderRadius: 0,
 
         ':hover': {
