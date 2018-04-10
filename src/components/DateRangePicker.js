@@ -8,12 +8,13 @@ const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
 const Button = require('./Button');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
 const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
@@ -21,18 +22,21 @@ const SelectionPane = require('./DateRangePicker/SelectionPane');
 
 class DateRangePicker extends React.Component {
   static propTypes = {
-    closeCalendarOnRangeSelect: PropTypes.bool,
-    defaultRanges: PropTypes.arrayOf(PropTypes.shape({
-      displayValue: PropTypes.string,
-      getEndDate: PropTypes.func,
-      getStartDate: PropTypes.func
-    })),
+    defaultRanges: PropTypes.arrayOf(
+      PropTypes.shape({
+        displayValue: PropTypes.string,
+        getEndDate: PropTypes.func,
+        getStartDate: PropTypes.func
+      })
+    ),
     elementRef: PropTypes.func,
+    focusTrapProps: PropTypes.object,
     format: PropTypes.string,
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onClose: PropTypes.func,
+    onDateRangeSelect: PropTypes.func,
     onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     primaryColor: PropTypes.string,
@@ -45,7 +49,6 @@ class DateRangePicker extends React.Component {
   };
 
   static defaultProps = {
-    closeCalendarOnRangeSelect: false,
     defaultRanges: [
       {
         displayValue: 'This Month',
@@ -78,24 +81,32 @@ class DateRangePicker extends React.Component {
         getStartDate: () => moment().startOf('year').subtract(1, 'y').unix()
       }
     ],
+    focusTrapProps: {},
     format: 'MMM D, YYYY',
     isRelative: true,
     locale: 'en',
     onClose () {},
-    onDateSelect () {},
+    onDateRangeSelect () {},
     placeholderText: 'Select A Date Range',
     showDefaultRanges: false
   };
 
-  state = {
-    currentDate: this.props.selectedEndDate || moment().unix(),
-    focusedDay: this.props.selectedEndDate || moment().unix(),
-    selectedBox: SelectedBox.FROM,
-    showSelectionPane: false
-  };
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      currentDate: props.selectedEndDate || moment().unix(),
+      focusedDay: props.selectedEndDate || moment().unix(),
+      selectedBox: SelectedBox.FROM,
+      selectedStartDate: this.props.selectedStartDate,
+      selectedEndDate: this.props.selectedEndDate,
+      showSelectionPane: false
+    };
+  }
 
   componentDidMount () {
     deprecatePrimaryColor(this.props);
+    deprecateProp(this.props, 'onDateSelect', 'onDateRangeSelect', 'date-range-picker');
   }
 
   componentWillReceiveProps (newProps) {
@@ -132,8 +143,8 @@ class DateRangePicker extends React.Component {
       focusedDay: date
     });
 
-    let endDate = this.props.selectedEndDate;
-    let startDate = this.props.selectedStartDate;
+    let endDate = this.state.selectedEndDate;
+    let startDate = this.state.selectedStartDate;
 
     if (this.state.selectedBox === SelectedBox.FROM) {
       startDate = date;
@@ -148,23 +159,24 @@ class DateRangePicker extends React.Component {
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
 
     if (modifiedRangeCompleteButDatesInversed) {
-      this.props.onDateSelect(endDate, startDate);
+      this.setState({
+        selectedStartDate: endDate,
+        selectedEndDate: startDate
+      });
     } else {
-      this.props.onDateSelect(startDate, endDate);
-    }
-
-    if (startDate && endDate && this.props.closeCalendarOnRangeSelect) {
-      this._handleScrimClick();
+      this.setState({
+        selectedStartDate: startDate,
+        selectedEndDate: endDate
+      });
     }
   };
 
   _handleDefaultRangeSelection = (range) => {
-    this.props.onDateSelect(range.getStartDate(), range.getEndDate(), range.displayValue);
-    this.setState({ focusedDay: range.getEndDate() });
-
-    if (this.props.closeCalendarOnRangeSelect) {
-      this._handleScrimClick();
-    }
+    this.setState({
+      selectedStartDate: range.getStartDate(),
+      selectedEndDate: range.getEndDate(),
+      focusedDay: range.getEndDate()
+    });
   };
 
   _handleDayKeyDown = (e) => {
@@ -273,12 +285,22 @@ class DateRangePicker extends React.Component {
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
+    const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
+    const { selectedEndDate, selectedStartDate } = this.state;
+
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      paused: false,
+      ...this.props.focusTrapProps
+    };
 
     return (
       <div style={styles.component}>
         <a
           onClick={this._toggleSelectionPane}
-          onKeyUp={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
+          onKeyDown={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           ref={this.props.elementRef}
           style={styles.selectedDateWrapper}
           tabIndex={0}
@@ -307,87 +329,154 @@ class DateRangePicker extends React.Component {
         </a>
         <div style={styles.container}>
           <div>
-            <div style={styles.optionsWrapper}>
-              {!this.state.showCalendar && (
-                <div>
-                  {this.props.showDefaultRanges &&
-                    <SelectionPane
-                      defaultRanges={this.props.defaultRanges}
-                      handleDefaultRangeSelection={this._handleDefaultRangeSelection}
-                      onDateBoxClick={(date, selectedBox) => {
-                        this.setState({
-                          currentDate: date || moment().unix(),
-                          selectedBox,
-                          showCalendar: !isLargeOrMediumWindowSize && true
-                        });
-                      }}
-                      selectedBox={this.state.selectedBox}
-                      selectedEndDate={this.props.selectedEndDate}
-                      selectedStartDate={this.props.selectedStartDate}
-                      styles={styles}
-                      theme={theme}
-                    />
-                  }
-                </div>
-              )}
+            {this.state.showSelectionPane ? (
+              <MXFocusTrap {...mergedFocusTrapProps}>
+                <div style={styles.optionsWrapper}>
+                  <div style={styles.column}>
+                    <div style={styles.row}>
+                      {!this.state.showCalendar && (
+                        <div>
+                          {this.props.showDefaultRanges && (
+                            <SelectionPane
+                              defaultRanges={this.props.defaultRanges}
+                              handleDefaultRangeSelection={
+                                this._handleDefaultRangeSelection
+                              }
+                              onDateBoxClick={(date, selectedBox) => {
+                                this.setState({
+                                  currentDate: date || moment().unix(),
+                                  selectedBox,
+                                  showCalendar: !isLargeOrMediumWindowSize
+                                });
+                              }}
+                              selectedBox={this.state.selectedBox}
+                              selectedEndDate={selectedEndDate}
+                              selectedStartDate={selectedStartDate}
+                              styles={styles}
+                              theme={theme}
+                            />
+                          )}
+                        </div>
+                      )}
 
-              {(this.state.showCalendar || isLargeOrMediumWindowSize) && (
-                <div>
-                  <div style={styles.calendarWrapper}>
-                    <div style={styles.calendarHeader}>
-                      <MonthSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
-                      <YearSelector currentDate={this.state.currentDate} setCurrentDate={(currentDate) => this.setState({ currentDate, focusedDay: currentDate })} />
-
-                    </div>
-                    <div style={styles.calendarWeek}>
-                      {[{ label: 'S', value: 'Sunday' },
-                        { label: 'M', value: 'Monday' },
-                        { label: 'T', value: 'Tuesday' },
-                        { label: 'W', value: 'Wednesday' },
-                        { label: 'T', value: 'Thursday' },
-                        { label: 'F', value: 'Friday' },
-                        { label: 'S', value: 'Saturday' }].map((day) => {
-                          return (
-                            <div key={day.value} style={styles.calendarWeekDay}>
-                              {day.label}
+                      {showCalendar ? (
+                        <div>
+                          <div style={styles.calendarWrapper}>
+                            <div style={styles.calendarHeader}>
+                              <MonthSelector
+                                currentDate={this.state.currentDate}
+                                setCurrentDate={currentDate =>
+                                  this.setState({
+                                    currentDate,
+                                    focusedDay: currentDate
+                                  })}
+                              />
+                              <YearSelector
+                                currentDate={this.state.currentDate}
+                                setCurrentDate={currentDate =>
+                                  this.setState({
+                                    currentDate,
+                                    focusedDay: currentDate
+                                  })}
+                              />
                             </div>
-                          );
-                        })}
+                            <div style={styles.calendarWeek}>
+                              {[
+                                { label: 'S', value: 'Sunday' },
+                                { label: 'M', value: 'Monday' },
+                                { label: 'T', value: 'Tuesday' },
+                                { label: 'W', value: 'Wednesday' },
+                                { label: 'T', value: 'Thursday' },
+                                { label: 'F', value: 'Friday' },
+                                { label: 'S', value: 'Saturday' }
+                              ].map(day => {
+                                return (
+                                  <div
+                                    key={day.value}
+                                    style={styles.calendarWeekDay}
+                                  >
+                                    {day.label}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <MonthTable
+                              activeSelectDate={this.state.activeSelectDate}
+                              currentDate={this.state.currentDate}
+                              focusedDay={
+                                this.state.focusedDay ||
+                                this.state.currentDate
+                              }
+                              getDateRangePosition={
+                                this._getDateRangePosition
+                              }
+                              handleDateHover={this._handleDateHover}
+                              handleDateSelect={date => {
+                                this._handleDateSelect(date);
+                                this.setState({ showCalendar: false });
+                              }}
+                              handleKeyDown={this._handleDayKeyDown}
+                              isInActiveRange={this._isInActiveRange}
+                              minimumDate={this.props.minimumDate}
+                              selectedEndDate={selectedEndDate}
+                              selectedStartDate={selectedStartDate}
+                              styles={styles}
+                            />
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
-                    <MonthTable
-                      activeSelectDate={this.state.activeSelectDate}
-                      currentDate={this.state.currentDate}
-                      focusedDay={this.state.focusedDay || this.state.currentDate}
-                      getDateRangePosition={this._getDateRangePosition}
-                      handleDateHover={this._handleDateHover}
-                      handleDateSelect={this._handleDateSelect}
-                      handleKeyDown={this._handleDayKeyDown}
-                      isInActiveRange={this._isInActiveRange}
-                      minimumDate={this.props.minimumDate}
-                      selectedEndDate={this.props.selectedEndDate}
-                      selectedStartDate={this.props.selectedStartDate}
-                      styles={styles}
-                    />
-                    {!isLargeOrMediumWindowSize && (
-                      <div style={styles.applyButton}>
-                        <Button
-                          onClick={() => this.setState({ showCalendar: false })}
-                          theme={theme}
-                          type='primary'
-                        >
-                          Apply
-                        </Button>
-                      </div>
-                    )}
+                    <div style={styles.bottomPane}>
+                      <Button
+                        aria-label='Cancel Date Range Selection'
+                        onClick={() => {
+                          this.setState({
+                            focusedDay: this.props.selectedStartDate,
+                            showCalendar: false,
+                            selectedStartDate: this.props.selectedStartDate,
+                            selectedEndDate: this.props.selectedEndDate
+                          });
+                          this._handleScrimClick();
+                        }}
+                        type='secondary'
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        aria-label='Apply Date Range Selection'
+                        onClick={() => {
+                          this.props.onDateRangeSelect(
+                            selectedStartDate,
+                            selectedEndDate
+                          );
+
+                          /**
+                                TODO: onDateSelect is deprecated.  We need to remove this
+                                check and call before the next major release.
+                              **/
+                          if (typeof this.props.onDateSelect === 'function') {
+                            this.props.onDateSelect(
+                              selectedStartDate,
+                              selectedEndDate
+                            );
+                          }
+                          this._handleScrimClick();
+                        }}
+                        style={styles.applyButton}
+                        type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
+                      >
+                        Apply
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              )}
-            </div>
+              </MXFocusTrap>
+            ) : null}
           </div>
         </div>
-        {(this.state.showSelectionPane) ? (
+        {this.state.showSelectionPane ? (
           <div onClick={this._handleScrimClick} style={styles.scrim} />
-        ) : null }
+        ) : null}
       </div>
     );
   }
@@ -415,6 +504,32 @@ class DateRangePicker extends React.Component {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
       },
 
+      bottomPane: {
+        backgroundColor: theme.Colors.GRAY_100,
+        display: 'flex',
+        flexDirection: 'row',
+        padding: theme.Spacing.SMALL,
+        paddingRight: theme.Spacing.MEDIUM,
+        justifyContent: 'flex-end'
+      },
+      bottomPaneMobile: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: theme.Spacing.SMALL,
+        paddingTop: theme.Spacing.MEDIUM,
+        justifyContent: 'flex-end'
+      },
+      column: {
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      row: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: theme.Spacing.SMALL,
+        justifyContent: 'center'
+      },
+
       // Selected Date styles
       selectedDateWrapper: {
         alignItems: 'center',
@@ -427,7 +542,7 @@ class DateRangePicker extends React.Component {
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedStartDate && this.props.selectedEndDate) ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500
+        color: this.state.selectedStartDate && this.state.selectedEndDate ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500
       },
       selectedDateCaret: {
         fill: this.state.showSelectionPane ? theme.Colors.PRIMARY : theme.Colors.GRAY_500
@@ -444,7 +559,6 @@ class DateRangePicker extends React.Component {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
         justifyContent: 'center',
         marginTop: isLargeOrMediumWindowSize ? 10 : 5,
-        padding: theme.Spacing.SMALL,
         position: 'absolute',
         left: isLargeOrMediumWindowSize ? '50%' : 0,
         right: isLargeOrMediumWindowSize ? 'auto' : 0,
@@ -530,7 +644,7 @@ class DateRangePicker extends React.Component {
       applyButton: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginTop: theme.Spacing.XSMALL
+        marginLeft: theme.Spacing.MEDIUM
       },
 
       //Selected and Selecting Range

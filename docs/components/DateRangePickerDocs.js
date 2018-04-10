@@ -3,6 +3,7 @@
 const React = require('react');
 const { Link } = require('react-router');
 
+const Code = require('components/Code');
 const { DateRangePicker } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
@@ -30,17 +31,13 @@ class DateRangePickerDocs extends React.Component {
 
         <h3>Demo</h3>
         <DateRangePicker
-          onDateSelect={this._handleDateRangeSelect}
+          onDateRangeSelect={this._handleDateRangeSelect}
           selectedEndDate={this.state.selectedEndDate}
           selectedStartDate={this.state.selectedStartDate}
           showDefaultRanges={true}
         />
 
         <h3>Usage</h3>
-        <h5>closeCalendarOnRangeSelect <label>boolean</label></h5>
-        <p>Default: false</p>
-        <p>Determines if the calendar is closed after successful range selection.</p>
-
         <h5>defaultRanges <label>Array of range option objects</label></h5>
         <p>Default: <a href='https://github.com/mxenabled/mx-react-components/blob/master/src/components/DateRangePicker.js#L41'>See Code for default array of ranges</a></p>
         <p>Array of default range objects used when showDefaultRanges prop is set to true.  If not supplied, the default above is used.</p>
@@ -54,6 +51,12 @@ class DateRangePickerDocs extends React.Component {
           }]
         `}
         </Markdown>
+
+        <h5>focusTrapProps<label>Object</label></h5>
+        <p>Default: Empty Object</p>
+        <p>The DateRangePicker component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the date range picker for accessibility reasons.</p>
+        <p>The <Code>focusTrapProps</Code> object provides a mechanism for passing the focus trap component props.</p>
+        <p>See the library documentation for details on what props it accepts and how to use them.</p>
 
         <h5>format <label>String</label></h5>
         <p>Default: 'MMM D, YYYY'</p>
@@ -70,8 +73,12 @@ class DateRangePickerDocs extends React.Component {
         <h5>minimumDate <label>Number (unix timestamp)</label></h5>
         <p>If set, the user will not be able to select a date prior to this date.</p>
 
+        <h5>onDateRangeSelect <label>Function</label></h5>
+        <p>A function to be called when the user has applied their selected date range. The range's start and end dates are passed as arguements to the call.</p>
+
         <h5>onDateSelect <label>Function</label></h5>
         <p>A function to be called when the user has selected a date. The selected date timestamp(s) will be passed to this function.</p>
+        <p>*This prop is deprecated and will be removed in a future release. Please use <Code>onDateRangeSelect</Code> instead.</p>
 
         <h5>placeholderText <label>String</label></h5>
         <p>Default: Select A Date</p>
@@ -107,7 +114,7 @@ class DateRangePickerDocs extends React.Component {
           },
 
           <DateRangePicker
-            onDateSelect={this._handleDateRangeSelect}
+            onDateRangeSelect={this._handleDateRangeSelect}
             selectedEndDate={this.state.selectedEndDate}
             selectedStartDate={this.state.selectedStartDate}
             showDefaultRanges={true}
