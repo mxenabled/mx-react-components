@@ -115,7 +115,10 @@ class DateRangePicker extends React.Component {
 
     if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
       this.setState({
-        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
+        focusedDay: isUpdatedSelectedEndDate ? newProps.selectedEndDate : this.state.focusedDay,
+        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate,
+        selectedEndDate: isUpdatedSelectedEndDate ? newProps.selectedEndDate : this.state.selectedEndDate,
+        selectedStartDate: isUpdatedSelectedStartDate ? newProps.selectedStartDate : this.state.selectedStartDate
       });
     }
   }
