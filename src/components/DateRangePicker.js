@@ -670,8 +670,7 @@ class DateRangePicker extends React.Component {
         top: 0,
         zIndex: 9
       }
-    },
-    this.props.styles);
+    }, this.props.styles);
   };
 }
 
