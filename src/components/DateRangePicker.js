@@ -438,6 +438,7 @@ class DateRangePicker extends React.Component {
                           });
                           this._handleScrimClick();
                         }}
+                        theme={this.props.theme}
                         type='secondary'
                       >
                         Cancel
@@ -463,6 +464,7 @@ class DateRangePicker extends React.Component {
                           this._handleScrimClick();
                         }}
                         style={styles.applyButton}
+                        theme={this.props.theme}
                         type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
                       >
                         Apply
