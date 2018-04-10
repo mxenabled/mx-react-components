@@ -52,75 +52,33 @@ class DateRangePicker extends React.Component {
     defaultRanges: [
       {
         displayValue: 'This Month',
-        getEndDate: () =>
-          moment()
-            .endOf('month')
-            .unix(),
-        getStartDate: () =>
-          moment()
-            .startOf('month')
-            .unix()
+        getEndDate: () => moment().endOf('month').unix(),
+        getStartDate: () => moment().startOf('month').unix()
       },
       {
         displayValue: 'Last 30 Days',
-        getEndDate: () =>
-          moment()
-            .endOf('day')
-            .unix(),
-        getStartDate: () =>
-          moment()
-            .subtract(29, 'days')
-            .startOf('day')
-            .unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(29, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Last Month',
-        getEndDate: () =>
-          moment()
-            .subtract(1, 'months')
-            .endOf('month')
-            .unix(),
-        getStartDate: () =>
-          moment()
-            .subtract(1, 'months')
-            .startOf('month')
-            .unix()
+        getEndDate: () => moment().subtract(1, 'months').endOf('month').unix(),
+        getStartDate: () => moment().subtract(1, 'months').startOf('month').unix()
       },
       {
         displayValue: 'Last 90 Days',
-        getEndDate: () =>
-          moment()
-            .endOf('day')
-            .unix(),
-        getStartDate: () =>
-          moment()
-            .subtract(89, 'days')
-            .startOf('day')
-            .unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(89, 'days').startOf('day').unix()
       },
       {
         displayValue: 'Year To Date',
-        getEndDate: () =>
-          moment()
-            .endOf('day')
-            .unix(),
-        getStartDate: () =>
-          moment()
-            .startOf('year')
-            .unix()
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().startOf('year').unix()
       },
       {
         displayValue: 'Last Year',
-        getEndDate: () =>
-          moment()
-            .startOf('year')
-            .subtract(1, 'd')
-            .unix(),
-        getStartDate: () =>
-          moment()
-            .startOf('year')
-            .subtract(1, 'y')
-            .unix()
+        getEndDate: () => moment().startOf('year').subtract(1, 'd').unix(),
+        getStartDate: () => moment().startOf('year').subtract(1, 'y').unix()
       }
     ],
     focusTrapProps: {},
@@ -152,27 +110,21 @@ class DateRangePicker extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    const isUpdatedSelectedEndDate =
-      newProps.selectedEndDate &&
-      newProps.selectedEndDate !== this.props.selectedEndDate;
-    const isUpdatedSelectedStartDate =
-      newProps.selectedStartDate &&
-      newProps.selectedStartDate !== this.props.selectedStartDate;
+    const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
+    const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
 
     if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
       this.setState({
-        currentDate: newProps.selectedEndDate ?
-          newProps.selectedEndDate :
-          newProps.selectedStartDate
+        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
       });
     }
   }
 
-  _getDateFormat = isLargeOrMediumWindowSize => {
+  _getDateFormat = (isLargeOrMediumWindowSize) => {
     return isLargeOrMediumWindowSize ? this.props.format : 'MMM D';
   };
 
-  _isLargeOrMediumWindowSize = theme => {
+  _isLargeOrMediumWindowSize = (theme) => {
     const windowSize = StyleUtils.getWindowSize(theme.BreakPoints);
 
     return windowSize === 'large' || windowSize === 'medium';
@@ -182,11 +134,8 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
-  _handleDateSelect = date => {
-    const theme = StyleUtils.mergeTheme(
-      this.props.theme,
-      this.props.primaryColor
-    );
+  _handleDateSelect = (date) => {
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
 
     this.setState({
@@ -199,20 +148,15 @@ class DateRangePicker extends React.Component {
 
     if (this.state.selectedBox === SelectedBox.FROM) {
       startDate = date;
-      if (isLargeOrMediumWindowSize)
-        this.setState({ selectedBox: SelectedBox.TO });
+      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.TO });
     }
 
     if (this.state.selectedBox === SelectedBox.TO) {
       endDate = date;
-      if (isLargeOrMediumWindowSize)
-        this.setState({ selectedBox: SelectedBox.FROM });
+      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.FROM });
     }
 
-    const modifiedRangeCompleteButDatesInversed =
-      startDate &&
-      endDate &&
-      this._endDateIsBeforeStartDate(startDate, endDate);
+    const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
 
     if (modifiedRangeCompleteButDatesInversed) {
       this.setState({
@@ -227,7 +171,7 @@ class DateRangePicker extends React.Component {
     }
   };
 
-  _handleDefaultRangeSelection = range => {
+  _handleDefaultRangeSelection = (range) => {
     this.setState({
       selectedStartDate: range.getStartDate(),
       selectedEndDate: range.getEndDate(),
@@ -236,20 +180,11 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDayKeyDown = e => {
-    const startDate = moment
-      .unix(this.state.currentDate)
-      .startOf('month')
-      .startOf('week');
-    const endDate = moment
-      .unix(this.state.currentDate)
-      .endOf('month')
-      .endOf('week');
+    const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
+    const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
     if (keycode(e) === 'right') {
-      const day = moment
-        .unix(this.state.focusedDay)
-        .add(1, 'days')
-        .startOf('day');
+      const day = moment.unix(this.state.focusedDay).add(1, 'days').startOf('day');
 
       if (day.isSameOrAfter(endDate)) {
         this.setState({ currentDate: day.unix() });
@@ -257,10 +192,7 @@ class DateRangePicker extends React.Component {
 
       this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'left') {
-      const day = moment
-        .unix(this.state.focusedDay)
-        .subtract(1, 'days')
-        .startOf('day');
+      const day = moment.unix(this.state.focusedDay).subtract(1, 'days').startOf('day');
 
       if (day.isBefore(startDate)) {
         this.setState({ currentDate: day.unix() });
@@ -271,10 +203,7 @@ class DateRangePicker extends React.Component {
       this._handleDateSelect(this.state.focusedDay);
     } else if (keycode(e) === 'up') {
       e.preventDefault(); //stop browser scrolling
-      const day = moment
-        .unix(this.state.focusedDay)
-        .subtract(7, 'days')
-        .startOf('day');
+      const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
 
       if (day.isBefore(startDate)) {
         this.setState({ currentDate: day.unix() });
@@ -283,10 +212,7 @@ class DateRangePicker extends React.Component {
       this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'down') {
       e.preventDefault(); //stop browser scrolling
-      const day = moment
-        .unix(this.state.focusedDay)
-        .add(7, 'days')
-        .startOf('day');
+      const day = moment.unix(this.state.focusedDay).add(7, 'days').startOf('day');
 
       if (day.isSameOrAfter(endDate)) {
         this.setState({ currentDate: day.unix() });
@@ -296,7 +222,7 @@ class DateRangePicker extends React.Component {
     }
   };
 
-  _handleDateHover = activeSelectDate => {
+  _handleDateHover = (activeSelectDate) => {
     this.setState({
       activeSelectDate
     });
@@ -323,13 +249,9 @@ class DateRangePicker extends React.Component {
     let isActive;
 
     if (start < end) {
-      isActive =
-        date.isSameOrAfter(moment.unix(start)) &&
-        date.isSameOrBefore(moment.unix(end));
+      isActive = date.isSameOrAfter(moment.unix(start)) && date.isSameOrBefore(moment.unix(end));
     } else {
-      isActive =
-        date.isSameOrBefore(moment.unix(start)) &&
-        date.isSameOrAfter(moment.unix(end));
+      isActive = date.isSameOrBefore(moment.unix(start)) && date.isSameOrAfter(moment.unix(end));
     }
 
     return isActive;
@@ -359,14 +281,10 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(
-      this.props.theme,
-      this.props.primaryColor
-    );
+    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
-    const shouldShowCalendarIcon =
-      StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
+    const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
     const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
     const { selectedEndDate, selectedStartDate } = this.state;
 
@@ -382,32 +300,26 @@ class DateRangePicker extends React.Component {
       <div style={styles.component}>
         <a
           onClick={this._toggleSelectionPane}
-          onKeyDown={e => keycode(e) === 'enter' && this._toggleSelectionPane()}
+          onKeyDown={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           ref={this.props.elementRef}
           style={styles.selectedDateWrapper}
           tabIndex={0}
         >
           {shouldShowCalendarIcon ? (
-            <Icon size={20} style={styles.selectedDateIcon} type='calendar' />
+            <Icon
+              size={20}
+              style={styles.selectedDateIcon}
+              type='calendar'
+            />
           ) : null}
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
-                <span>
-                  {moment
-                    .unix(this.props.selectedStartDate)
-                    .format(this._getDateFormat(isLargeOrMediumWindowSize))}
-                </span>
+                <span>{moment.unix(this.props.selectedStartDate).format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
                 <span> - </span>
-                <span>
-                  {moment
-                    .unix(this.props.selectedEndDate)
-                    .format(this._getDateFormat(isLargeOrMediumWindowSize))}
-                </span>
+                <span>{moment.unix(this.props.selectedEndDate).format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
               </div>
-            ) : (
-              this.props.placeholderText
-            )}
+            ) : this.props.placeholderText}
           </div>
           <Icon
             size={20}
@@ -417,7 +329,7 @@ class DateRangePicker extends React.Component {
         </a>
         <div style={styles.container}>
           <div>
-            {this.state.showSelectionPane && (
+            {this.state.showSelectionPane ? (
               <MXFocusTrap {...mergedFocusTrapProps}>
                 <div style={styles.optionsWrapper}>
                   <div style={styles.column}>
@@ -559,7 +471,7 @@ class DateRangePicker extends React.Component {
                   </div>
                 </div>
               </MXFocusTrap>
-            )}
+            ) : null}
           </div>
         </div>
         {this.state.showSelectionPane ? (
@@ -570,215 +482,212 @@ class DateRangePicker extends React.Component {
   }
 
   styles = (theme, isLargeOrMediumWindowSize) => {
-    return _merge(
-      {},
-      {
-        component: Object.assign(
-          {
-            backgroundColor: theme.Colors.WHITE,
-            borderColor: this.state.showSelectionPane ?
-              theme.Colors.PRIMARY :
-              theme.Colors.GRAY_300,
-            borderRadius: 3,
-            borderStyle: 'solid',
-            borderWidth: 1,
-            boxSizing: 'border-box',
-            color: theme.Colors.GRAY_900,
-            cursor: 'pointer',
-            display: 'inline-block',
-            fontFamily: theme.FontFamily,
-            fontSize: theme.FontSizes.MEDIUM,
-            padding: '10px 15px',
-            position:
-              this.props.isRelative && window.innerWidth > 450 ?
-                'relative' :
-                'static',
-            width: '100%'
-          },
-          this.props.style
-        ),
-
-        container: {
-          flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
-        },
-
-        bottomPane: {
-          backgroundColor: theme.Colors.GRAY_100,
-          display: 'flex',
-          flexDirection: 'row',
-          padding: theme.Spacing.SMALL,
-          paddingRight: theme.Spacing.MEDIUM,
-          justifyContent: 'flex-end'
-        },
-        bottomPaneMobile: {
-          display: 'flex',
-          flexDirection: 'row',
-          padding: theme.Spacing.SMALL,
-          paddingTop: theme.Spacing.MEDIUM,
-          justifyContent: 'flex-end'
-        },
-        column: {
-          display: 'flex',
-          flexDirection: 'column'
-        },
-        row: {
-          display: 'flex',
-          flexDirection: 'row',
-          padding: theme.Spacing.SMALL,
-          justifyContent: 'center'
-        },
-
-        // Selected Date styles
-        selectedDateWrapper: {
-          alignItems: 'center',
-          display: 'flex',
-          height: 20,
-          justifyContent: 'space-between'
-        },
-        selectedDateIcon: {
-          fill: theme.Colors.PRIMARY,
-          marginRight: 5
-        },
-        selectedDateText: {
-          color:
-            this.state.selectedStartDate && this.state.selectedEndDate ?
-              theme.Colors.GRAY_700 :
-              theme.Colors.GRAY_500
-        },
-        selectedDateCaret: {
-          fill: this.state.showSelectionPane ?
-            theme.Colors.PRIMARY :
-            theme.Colors.GRAY_500
-        },
-
-        //Calendar Styles
-        optionsWrapper: {
+    return _merge({}, {
+      component: Object.assign(
+        {
           backgroundColor: theme.Colors.WHITE,
-          border: '1px solid ' + theme.Colors.GRAY_300,
+          borderColor: this.state.showSelectionPane ?
+            theme.Colors.PRIMARY :
+            theme.Colors.GRAY_300,
           borderRadius: 3,
-          boxShadow: theme.ShadowHigh,
+          borderStyle: 'solid',
+          borderWidth: 1,
           boxSizing: 'border-box',
-          display: this.state.showSelectionPane ? 'flex' : 'none',
-          flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
-          justifyContent: 'center',
-          marginTop: isLargeOrMediumWindowSize ? 10 : 5,
-          position: 'absolute',
-          left: isLargeOrMediumWindowSize ? '50%' : 0,
-          right: isLargeOrMediumWindowSize ? 'auto' : 0,
-          transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
-          zIndex: 10,
-          maxWidth: 575,
-          width: window.innerWidth
-        },
-        calendarWrapper: {
-          boxSizing: 'border-box',
-          padding: 20,
-          margin: 'auto',
-          maxWidth: 275,
-          width: isLargeOrMediumWindowSize ? 275 : '100%'
-        },
-
-        //Calendar Header
-        calendarHeader: {
-          alignItems: 'center',
-          color: theme.Colors.GRAY_700,
-          display: 'flex',
-          fontSize: theme.FontSizes.LARGE,
-          height: 30,
-          justifyContent: 'space-between',
-          marginBottom: 15,
-          position: 'relative',
-          textAlign: 'center'
-        },
-
-        //Calendar week
-        calendarWeek: {
-          alignItems: 'center',
-          color: theme.Colors.GRAY_500,
-          display: 'flex',
-          fontFamily: theme.Fonts.SEMIBOLD,
-          fontSize: theme.FontSizes.SMALL,
-          height: 30,
-          justifyContent: 'center',
-          marginBottom: 2
-        },
-        calendarWeekDay: {
-          textAlign: 'center',
-          width: 30
-        },
-
-        //Calendar table
-        calendarTable: {
-          alignItems: 'center',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        },
-        calendarDay: {
-          alignItems: 'center',
-          boxSizing: 'border-box',
-          color: theme.Colors.GRAY_300,
+          color: theme.Colors.GRAY_900,
           cursor: 'pointer',
-          display: 'flex',
-          height: 30,
-          justifyContent: 'center',
-          marginBottom: 2,
-          width: 30,
+          display: 'inline-block',
+          fontFamily: theme.FontFamily,
+          fontSize: theme.FontSizes.MEDIUM,
+          padding: '10px 15px',
+          position:
+            this.props.isRelative && window.innerWidth > 450 ?
+              'relative' :
+              'static',
+          width: '100%'
+        },
+        this.props.style
+      ),
 
-          ':hover': {
-            border: '1px solid' + theme.Colors.PRIMARY
-          }
-        },
-        calendarDayDisabled: {
-          color: theme.Colors.GRAY_300,
+      container: {
+        flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
+      },
 
-          ':hover': {
-            cursor: 'default',
-            border: 'none'
-          }
-        },
-        today: {
-          backgroundColor: theme.Colors.GRAY_300,
-          color: theme.Colors.WHITE
-        },
-        currentMonth: {
-          color: theme.Colors.GRAY_700
-        },
-        applyButton: {
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginLeft: theme.Spacing.MEDIUM
-        },
+      bottomPane: {
+        backgroundColor: theme.Colors.GRAY_100,
+        display: 'flex',
+        flexDirection: 'row',
+        padding: theme.Spacing.SMALL,
+        paddingRight: theme.Spacing.MEDIUM,
+        justifyContent: 'flex-end'
+      },
+      bottomPaneMobile: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: theme.Spacing.SMALL,
+        paddingTop: theme.Spacing.MEDIUM,
+        justifyContent: 'flex-end'
+      },
+      column: {
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      row: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: theme.Spacing.SMALL,
+        justifyContent: 'center'
+      },
 
-        //Selected and Selecting Range
-        selectedDay: {
-          backgroundColor: theme.Colors.PRIMARY,
-          color: theme.Colors.WHITE
-        },
-        betweenDay: {
-          backgroundColor: StyleUtils.adjustHexOpacity(
-            theme.Colors.PRIMARY,
-            0.5
-          ),
-          borderRadius: 0,
+      // Selected Date styles
+      selectedDateWrapper: {
+        alignItems: 'center',
+        display: 'flex',
+        height: 20,
+        justifyContent: 'space-between'
+      },
+      selectedDateIcon: {
+        fill: theme.Colors.PRIMARY,
+        marginRight: 5
+      },
+      selectedDateText: {
+        color:
+          this.state.selectedStartDate && this.state.selectedEndDate ?
+            theme.Colors.GRAY_700 :
+            theme.Colors.GRAY_500
+      },
+      selectedDateCaret: {
+        fill: this.state.showSelectionPane ?
+          theme.Colors.PRIMARY :
+          theme.Colors.GRAY_500
+      },
 
-          ':hover': {
-            border: '1px solid' + theme.Colors.PRIMARY
-          }
-        },
+      //Calendar Styles
+      optionsWrapper: {
+        backgroundColor: theme.Colors.WHITE,
+        border: '1px solid ' + theme.Colors.GRAY_300,
+        borderRadius: 3,
+        boxShadow: theme.ShadowHigh,
+        boxSizing: 'border-box',
+        display: this.state.showSelectionPane ? 'flex' : 'none',
+        flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column',
+        justifyContent: 'center',
+        marginTop: isLargeOrMediumWindowSize ? 10 : 5,
+        position: 'absolute',
+        left: isLargeOrMediumWindowSize ? '50%' : 0,
+        right: isLargeOrMediumWindowSize ? 'auto' : 0,
+        transform: isLargeOrMediumWindowSize ? 'translateX(-50%)' : null,
+        zIndex: 10,
+        maxWidth: 575,
+        width: window.innerWidth
+      },
+      calendarWrapper: {
+        boxSizing: 'border-box',
+        padding: 20,
+        margin: 'auto',
+        maxWidth: 275,
+        width: isLargeOrMediumWindowSize ? 275 : '100%'
+      },
 
-        //Scrim
-        scrim: {
-          bottom: 0,
-          left: 0,
-          position: 'fixed',
-          right: 0,
-          top: 0,
-          zIndex: 9
+      //Calendar Header
+      calendarHeader: {
+        alignItems: 'center',
+        color: theme.Colors.GRAY_700,
+        display: 'flex',
+        fontSize: theme.FontSizes.LARGE,
+        height: 30,
+        justifyContent: 'space-between',
+        marginBottom: 15,
+        position: 'relative',
+        textAlign: 'center'
+      },
+
+      //Calendar week
+      calendarWeek: {
+        alignItems: 'center',
+        color: theme.Colors.GRAY_500,
+        display: 'flex',
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.SMALL,
+        height: 30,
+        justifyContent: 'center',
+        marginBottom: 2
+      },
+      calendarWeekDay: {
+        textAlign: 'center',
+        width: 30
+      },
+
+      //Calendar table
+      calendarTable: {
+        alignItems: 'center',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+      },
+      calendarDay: {
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        color: theme.Colors.GRAY_300,
+        cursor: 'pointer',
+        display: 'flex',
+        height: 30,
+        justifyContent: 'center',
+        marginBottom: 2,
+        width: 30,
+
+        ':hover': {
+          border: '1px solid' + theme.Colors.PRIMARY
         }
       },
-      this.props.styles
-    );
+      calendarDayDisabled: {
+        color: theme.Colors.GRAY_300,
+
+        ':hover': {
+          cursor: 'default',
+          border: 'none'
+        }
+      },
+      today: {
+        backgroundColor: theme.Colors.GRAY_300,
+        color: theme.Colors.WHITE
+      },
+      currentMonth: {
+        color: theme.Colors.GRAY_700
+      },
+      applyButton: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginLeft: theme.Spacing.MEDIUM
+      },
+
+      //Selected and Selecting Range
+      selectedDay: {
+        backgroundColor: theme.Colors.PRIMARY,
+        color: theme.Colors.WHITE
+      },
+      betweenDay: {
+        backgroundColor: StyleUtils.adjustHexOpacity(
+          theme.Colors.PRIMARY,
+          0.5
+        ),
+        borderRadius: 0,
+
+        ':hover': {
+          border: '1px solid' + theme.Colors.PRIMARY
+        }
+      },
+
+      //Scrim
+      scrim: {
+        bottom: 0,
+        left: 0,
+        position: 'fixed',
+        right: 0,
+        top: 0,
+        zIndex: 9
+      }
+    },
+    this.props.styles);
   };
 }
 
