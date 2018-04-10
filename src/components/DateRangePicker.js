@@ -221,10 +221,7 @@ class DateRangePicker extends React.Component {
 
   _handleScrimClick = () => {
     this.props.onClose();
-
-    this.setState({
-      showSelectionPane: false
-    });
+    this._resetToPropValuesAndClose();
   };
 
   _toggleSelectionPane = () => {
@@ -269,6 +266,16 @@ class DateRangePicker extends React.Component {
     }
 
     return where;
+  };
+
+  _resetToPropValuesAndClose = () => {
+    this.setState({
+      focusedDay: this.props.selectedStartDate,
+      selectedStartDate: this.props.selectedStartDate,
+      selectedEndDate: this.props.selectedEndDate,
+      showCalendar: false,
+      showSelectionPane: false
+    });
   };
 
   render () {
@@ -421,12 +428,6 @@ class DateRangePicker extends React.Component {
                       <Button
                         aria-label='Cancel Date Range Selection'
                         onClick={() => {
-                          this.setState({
-                            focusedDay: this.props.selectedStartDate,
-                            showCalendar: false,
-                            selectedStartDate: this.props.selectedStartDate,
-                            selectedEndDate: this.props.selectedEndDate
-                          });
                           this._handleScrimClick();
                         }}
                         theme={this.props.theme}
