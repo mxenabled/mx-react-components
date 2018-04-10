@@ -483,30 +483,23 @@ class DateRangePicker extends React.Component {
 
   styles = (theme, isLargeOrMediumWindowSize) => {
     return _merge({}, {
-      component: Object.assign(
-        {
-          backgroundColor: theme.Colors.WHITE,
-          borderColor: this.state.showSelectionPane ?
-            theme.Colors.PRIMARY :
-            theme.Colors.GRAY_300,
-          borderRadius: 3,
-          borderStyle: 'solid',
-          borderWidth: 1,
-          boxSizing: 'border-box',
-          color: theme.Colors.GRAY_900,
-          cursor: 'pointer',
-          display: 'inline-block',
-          fontFamily: theme.FontFamily,
-          fontSize: theme.FontSizes.MEDIUM,
-          padding: '10px 15px',
-          position:
-            this.props.isRelative && window.innerWidth > 450 ?
-              'relative' :
-              'static',
-          width: '100%'
-        },
-        this.props.style
-      ),
+      component: Object.assign({
+        backgroundColor: theme.Colors.WHITE,
+        borderColor: this.state.showSelectionPane ? theme.Colors.PRIMARY : theme.Colors.GRAY_300,
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        boxSizing: 'border-box',
+        color: theme.Colors.GRAY_900,
+        cursor: 'pointer',
+        display: 'inline-block',
+        fontFamily: theme.FontFamily,
+        fontSize: theme.FontSizes.MEDIUM,
+        padding: '10px 15px',
+        position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
+        width: '100%'
+      },
+      this.props.style),
 
       container: {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
