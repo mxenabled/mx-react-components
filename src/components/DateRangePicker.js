@@ -498,8 +498,7 @@ class DateRangePicker extends React.Component {
         padding: '10px 15px',
         position: this.props.isRelative && window.innerWidth > 450 ? 'relative' : 'static',
         width: '100%'
-      },
-      this.props.style),
+      }, this.props.style),
 
       container: {
         flexDirection: isLargeOrMediumWindowSize ? 'row' : 'column-reverse'
