@@ -10,7 +10,7 @@ class Changelog extends React.Component {
         <h3>5.1.31</h3>
         <ul>
           <li>Slight Design refresh of DateRangePicker component(<a href='https://github.com/mxenabled/mx-react-components/pull/724'>#724</a>)</li>
-          <li>Fix request animation framer console error(<a href='https://github.com/mxenabled/mx-react-components/pull/725'>#725</a>)</li>
+          <li>Fix request animation frame console error(<a href='https://github.com/mxenabled/mx-react-components/pull/725'>#725</a>)</li>
         </ul>
 
         <h3>5.1.30</h3>
