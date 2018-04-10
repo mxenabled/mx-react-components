@@ -346,7 +346,7 @@ class DateRangePicker extends React.Component {
                                 this.setState({
                                   currentDate: date || moment().unix(),
                                   selectedBox,
-                                  showCalendar: true
+                                  showCalendar: !isLargeOrMediumWindowSize
                                 });
                               }}
                               selectedBox={this.state.selectedBox}
