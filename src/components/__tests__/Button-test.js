@@ -35,7 +35,7 @@ describe('Button', () => {
     });
 
     it('should not pass down non element props being used elsewhere', () => {
-      const button = shallow(<Button isActive='foo' />);
+      const button = shallow(<Button actionText='foo' />);
 
       expect(button.html()).not.toContain('foo');
     });
