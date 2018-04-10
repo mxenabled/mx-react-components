@@ -179,7 +179,7 @@ class DateRangePicker extends React.Component {
     });
   };
 
-  _handleDayKeyDown = e => {
+  _handleDayKeyDown = (e) => {
     const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
