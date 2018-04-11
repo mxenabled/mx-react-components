@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.1.33</h3>
+        <ul>
+          <li>Fix state issues in DateRangePicker component(<a href='https://github.com/mxenabled/mx-react-components/pull/728'>#728</a>)</li>
+        </ul>
+
         <h3>5.1.32</h3>
         <ul>
           <li>Theme cancel and apply buttons in DateRangePicker componente(<a href='https://github.com/mxenabled/mx-react-components/pull/727'>#727</a>)</li>

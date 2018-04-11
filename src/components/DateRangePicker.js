@@ -115,7 +115,10 @@ class DateRangePicker extends React.Component {
 
     if (isUpdatedSelectedEndDate || isUpdatedSelectedStartDate) {
       this.setState({
-        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate
+        focusedDay: isUpdatedSelectedEndDate ? newProps.selectedEndDate : this.state.focusedDay,
+        currentDate: newProps.selectedEndDate ? newProps.selectedEndDate : newProps.selectedStartDate,
+        selectedEndDate: isUpdatedSelectedEndDate ? newProps.selectedEndDate : this.state.selectedEndDate,
+        selectedStartDate: isUpdatedSelectedStartDate ? newProps.selectedStartDate : this.state.selectedStartDate
       });
     }
   }
@@ -158,17 +161,10 @@ class DateRangePicker extends React.Component {
 
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
 
-    if (modifiedRangeCompleteButDatesInversed) {
-      this.setState({
-        selectedStartDate: endDate,
-        selectedEndDate: startDate
-      });
-    } else {
-      this.setState({
-        selectedStartDate: startDate,
-        selectedEndDate: endDate
-      });
-    }
+    this.setState({
+      selectedStartDate: modifiedRangeCompleteButDatesInversed ? endDate : startDate,
+      selectedEndDate: modifiedRangeCompleteButDatesInversed ? startDate : endDate
+    });
   };
 
   _handleDefaultRangeSelection = (range) => {
@@ -228,14 +224,6 @@ class DateRangePicker extends React.Component {
     });
   };
 
-  _handleScrimClick = () => {
-    this.props.onClose();
-
-    this.setState({
-      showSelectionPane: false
-    });
-  };
-
   _toggleSelectionPane = () => {
     this.setState({
       showSelectionPane: !this.state.showSelectionPane
@@ -278,6 +266,18 @@ class DateRangePicker extends React.Component {
     }
 
     return where;
+  };
+
+  _resetToPropValuesAndClose = () => {
+    this.props.onClose();
+
+    this.setState({
+      focusedDay: this.props.selectedStartDate,
+      selectedStartDate: this.props.selectedStartDate,
+      selectedEndDate: this.props.selectedEndDate,
+      showCalendar: false,
+      showSelectionPane: false
+    });
   };
 
   render () {
@@ -430,13 +430,7 @@ class DateRangePicker extends React.Component {
                       <Button
                         aria-label='Cancel Date Range Selection'
                         onClick={() => {
-                          this.setState({
-                            focusedDay: this.props.selectedStartDate,
-                            showCalendar: false,
-                            selectedStartDate: this.props.selectedStartDate,
-                            selectedEndDate: this.props.selectedEndDate
-                          });
-                          this._handleScrimClick();
+                          this._resetToPropValuesAndClose();
                         }}
                         theme={this.props.theme}
                         type='secondary'
@@ -461,7 +455,7 @@ class DateRangePicker extends React.Component {
                               selectedEndDate
                             );
                           }
-                          this._handleScrimClick();
+                          this._resetToPropValuesAndClose();
                         }}
                         style={styles.applyButton}
                         theme={this.props.theme}
@@ -477,7 +471,7 @@ class DateRangePicker extends React.Component {
           </div>
         </div>
         {this.state.showSelectionPane ? (
-          <div onClick={this._handleScrimClick} style={styles.scrim} />
+          <div onClick={this._resetToPropValuesAndClose} style={styles.scrim} />
         ) : null}
       </div>
     );
