@@ -66,7 +66,7 @@ const Tabbable = (TabsComponent) => {
     }
   };
 
-  return TabbableComponent;
+  return withTheme(TabbableComponent);
 };
 
 Tabbable.propTypes = {
@@ -80,4 +80,4 @@ Tabbable.propTypes = {
   theme: themeShape
 };
 
-module.exports = withTheme(Tabbable);
+module.exports = Tabbable;

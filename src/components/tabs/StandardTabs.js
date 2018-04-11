@@ -3,8 +3,6 @@ const React = require('react');
 const Tab = require('./Tab');
 const Tabbable = require('./Tabbable');
 
-const { withMergedTheme } = require('../../utils/Style');
-
 const StandardTabs = ({
   activeTabStyles,
   onTabSelect,
@@ -30,4 +28,4 @@ const StandardTabs = ({
 
 StandardTabs.propTypes = Tabbable.propTypes;
 
-module.exports = withMergedTheme(Tabbable(StandardTabs));
+module.exports = Tabbable(StandardTabs);
