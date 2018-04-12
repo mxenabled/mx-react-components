@@ -233,6 +233,15 @@ class Calendar extends React.Component {
       this.props.primaryColor
     );
     const styles = this.styles(theme);
+    const daysOfWeek = [
+      { label: 'Sunday', value: 'S' },
+      { label: 'Monday', value: 'M' },
+      { label: 'Tuesday', value: 'T' },
+      { label: 'Wednesday', value: 'W' },
+      { label: 'Thursday', value: 'T' },
+      { label: 'Friday', value: 'F' },
+      { label: 'Saturday', value: 'S' }
+    ];
 
     return (
       <div style={styles.component}>
@@ -262,10 +271,10 @@ class Calendar extends React.Component {
           </a>
         </div>
         <div style={styles.calendarWeekHeader}>
-          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+          {daysOfWeek.map((day) => {
             return (
-              <div key={i} style={styles.calendarWeekDay}>
-                {day}
+              <div aria-label={day.label} key={day.label} style={styles.calendarWeekDay}>
+                {day.value}
               </div>
             );
           })}
