@@ -4,8 +4,9 @@
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "scripts": {
-    "release": "yarn && yarn test && babel src --out-dir dist",
-    "dev-release": "yarn && babel src --watch --out-dir dist",
+    "build": "babel src --out-dir dist --ignore __tests__",
+    "release": "yarn && yarn test && yarn build",
+    "dev-release": "yarn && yarn build",
     "dev": "yarn && yarn upgrade && cd docs && yarn && yarn upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
     "docs:release": "yarn && cd docs && yarn && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
     "test": "jest && eslint src",
