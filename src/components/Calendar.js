@@ -191,7 +191,7 @@ class Calendar extends React.Component {
 
             return (
               <a
-                aria-label={day.format('dddd, MMMM Do, YYYY')}
+                aria-label={`${day.format('dddd, MMMM Do, YYYY')}${isSelectedDay ? ', Currently Selected' : ''}`}
                 className='calendar-day'
                 id={
                   day.isSame(moment.unix(this.state.focusedDay), 'day') ?
