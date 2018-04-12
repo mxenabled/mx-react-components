@@ -101,6 +101,7 @@ class Input extends React.Component {
 
     return (
       <div
+        className='mx-simple-input'
         style={this.state.focus ? { ...styles.wrapper, ...styles.activeWrapper } : styles.wrapper}
       >
         {this.props.icon ? (

@@ -13,28 +13,30 @@ describe('SimpleInput', () => {
 
   it('should render a prefix to the left of the input if prop provided', () => {
     const wrapper = mount(<SimpleInput prefix={(<span>Prefix</span>)} />);
-    const children = wrapper.find('div').first().children();
+    const children = wrapper.find('.mx-simple-input').first().children();
 
     expect(children.first().html()).toEqual('<span>Prefix</span>');
   });
 
   it('should render a suffix to the right of the input if prop provided', () => {
     const wrapper = mount(<SimpleInput suffix={(<span>Suffix</span>)} />);
-    const children = wrapper.find('div').first().children();
+    const children = wrapper.find('.mx-simple-input').first().children();
 
     expect(children.last().html()).toEqual('<span>Suffix</span>');
   });
 
   it('should render a icon to the left of the input if icon prop provided', () => {
+    // NOTE: this will log a warning in the console
     const wrapper = mount(<SimpleInput icon='cash' />);
-    const children = wrapper.find('div').first().children();
+    const children = wrapper.find('.mx-simple-input').first().children();
 
     expect(children.first().type()).toEqual(Icon);
   });
 
   it('should render a icon to the right of the input if rightIcon prop provided', () => {
+    // NOTE: this will log a warning in the console
     const wrapper = mount(<SimpleInput rightIcon='cash' />);
-    const children = wrapper.find('div').first().children();
+    const children = wrapper.find('.mx-simple-input').first().children();
 
     expect(children.last().type()).toEqual(Icon);
   });
