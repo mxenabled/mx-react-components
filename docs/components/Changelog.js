@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.1</h3>
+        <ul>
+          <li>Accessibility improvements to Calendar component used in DatePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/730'>#730</a>)</li>
+        </ul>
+
         <h3>5.2.0</h3>
         <ul>
           <li>New ThemeProvider component for easier theming (<a href='https://github.com/mxenabled/mx-react-components/pull/721'>#721</a>)</li>
