@@ -3,6 +3,8 @@ const PropTypes = require('prop-types');
 
 import { css } from 'glamor';
 
+import { withTheme } from './Theme';
+
 const Icon = require('./Icon');
 const Spin = require('./Spin');
 
@@ -250,4 +252,4 @@ class Button extends React.Component {
   };
 }
 
-module.exports = Button;
+module.exports = withTheme(Button);

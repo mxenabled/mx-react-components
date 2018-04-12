@@ -4,6 +4,7 @@ const Radium = require('radium');
 const moment = require('moment');
 const keycode = require('keycode');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -366,4 +367,4 @@ class Calendar extends React.Component {
   };
 }
 
-export default Radium(Calendar);
+export default withTheme(Radium(Calendar));

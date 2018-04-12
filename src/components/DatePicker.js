@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
 
+import { withTheme } from './Theme';
 import Calendar from './Calendar';
 const Icon = require('./Icon');
 
@@ -178,4 +179,4 @@ class DatePicker extends React.Component {
   };
 }
 
-module.exports = Radium(DatePicker);
+module.exports = withTheme(Radium(DatePicker));

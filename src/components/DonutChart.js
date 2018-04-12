@@ -4,6 +4,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const d3 = require('d3');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -399,4 +400,4 @@ class DonutChart extends React.Component {
   };
 }
 
-module.exports = Radium(DonutChart);
+module.exports = withTheme(Radium(DonutChart));

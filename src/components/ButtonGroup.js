@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+import { withTheme } from './Theme';
 const Button = require('./Button');
 
 const { buttonTypes, themeShape } = require('../constants/App');
@@ -106,4 +107,4 @@ class ButtonGroup extends React.Component {
   };
 }
 
-module.exports = Radium(ButtonGroup);
+module.exports = withTheme(Radium(ButtonGroup));

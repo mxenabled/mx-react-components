@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -434,4 +435,4 @@ class TypeAhead extends React.Component {
   };
 }
 
-module.exports = Radium(TypeAhead);
+module.exports = withTheme(Radium(TypeAhead));

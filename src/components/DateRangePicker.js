@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const keycode = require('keycode');
 
+import { withTheme } from './Theme';
 const moment = require('moment');
 const _merge = require('lodash/merge');
 
@@ -670,4 +671,4 @@ class DateRangePicker extends React.Component {
   };
 }
 
-module.exports = Radium(DateRangePicker);
+module.exports = withTheme(Radium(DateRangePicker));

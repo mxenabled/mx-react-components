@@ -5,6 +5,7 @@ const Radium = require('radium');
 const _merge = require('lodash/merge');
 const browser = require('bowser');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -174,4 +175,4 @@ class SimpleSlider extends React.Component {
   };
 }
 
-module.exports = Radium(SimpleSlider);
+module.exports = withTheme(Radium(SimpleSlider));

@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from '../Theme';
 const d3 = require('d3');
 const moment = require('moment');
 const _merge = require('lodash/merge');
@@ -91,4 +92,4 @@ class BarTimeXAxis extends React.Component {
   };
 }
 
-module.exports = BarTimeXAxis;
+module.exports = withTheme(BarTimeXAxis);

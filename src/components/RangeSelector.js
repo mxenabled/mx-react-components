@@ -4,6 +4,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _throttle = require('lodash/throttle');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -429,4 +430,4 @@ class RangeSelector extends React.Component {
   };
 }
 
-module.exports = Radium(RangeSelector);
+module.exports = withTheme(Radium(RangeSelector));

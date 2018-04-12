@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const Button = require('./Button');
 const Icon = require('./Icon');
 const MXFocusTrap = require('../components/MXFocusTrap');
@@ -337,4 +338,4 @@ class Modal extends React.Component {
   };
 }
 
-module.exports = Modal;
+module.exports = withTheme(Modal);

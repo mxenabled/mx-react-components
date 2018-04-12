@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -67,4 +68,4 @@ class PageIndicator extends React.Component {
   };
 }
 
-module.exports = PageIndicator;
+module.exports = withTheme(PageIndicator);

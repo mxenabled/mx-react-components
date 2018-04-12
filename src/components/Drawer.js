@@ -9,6 +9,7 @@ const React = require('react');
 const Velocity = require('velocity-animate');
 const { StyleRoot } = require('radium');
 
+import { withTheme } from './Theme';
 const Button = require('../components/Button');
 const MXFocusTrap = require('../components/MXFocusTrap');
 
@@ -386,4 +387,4 @@ class Drawer extends React.Component {
   };
 }
 
-module.exports = Drawer;
+module.exports = withTheme(Drawer);

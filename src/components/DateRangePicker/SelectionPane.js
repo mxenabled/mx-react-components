@@ -3,6 +3,7 @@ const moment = require('moment');
 const keycode = require('keycode');
 const PropTypes = require('prop-types');
 
+import { withTheme } from '../Theme';
 const DefaultRanges = require('../DateRangePicker/DefaultRanges');
 
 const { SelectedBox } = require('../../constants/DateRangePicker');
@@ -159,4 +160,4 @@ class SelectionPane extends React.Component {
   };
 }
 
-module.exports = SelectionPane;
+module.exports = withTheme(SelectionPane);
