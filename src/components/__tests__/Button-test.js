@@ -27,6 +27,15 @@ describe('Button', () => {
     expect(button.html()).toContain('aria-pressed');
   });
 
+  it('merges className when provided as a prop', () => {
+    const button = shallow(<Button className='foo' />);
+    const className = button.find('button').prop('className');
+
+    expect(className).toContain('foo');
+    // the glamor class should also be present
+    expect(className).toContain('css-');
+  });
+
   describe('non element props', () => {
     it('should not pass down non element props being used elsewhere', () => {
       const button = shallow(<Button icon='foo' />);
