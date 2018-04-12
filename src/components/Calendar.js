@@ -242,11 +242,15 @@ class Calendar extends React.Component {
       { label: 'Friday', value: 'F' },
       { label: 'Saturday', value: 'S' }
     ];
+    const currentMonthText = moment.unix(this.state.currentDate).format('MMMM YYYY');
+    const nextMonthText = moment.unix(this.state.currentDate).add(1, 'month').format('MMMM YYYY');
+    const previousMonthText = moment.unix(this.state.currentDate).subtract(1, 'month').format('MMMM YYYY');
 
     return (
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <a
+            aria-label={`Go back to ${previousMonthText}`}
             onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
             tabIndex={0}
@@ -257,8 +261,9 @@ class Calendar extends React.Component {
               type='caret-left'
             />
           </a>
-          <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
+          <div aria-label={currentMonthText}>{currentMonthText}</div>
           <a
+            aria-label={`Go forward to ${nextMonthText}`}
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
             tabIndex={0}
