@@ -5,6 +5,7 @@ const _merge = require('lodash/merge');
 const _omit = require('lodash/omit');
 const _functions = require('lodash/functions');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -474,4 +475,4 @@ class BarChart extends React.Component {
   };
 }
 
-module.exports = BarChart;
+module.exports = withTheme(BarChart);

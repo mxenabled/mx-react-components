@@ -5,6 +5,7 @@ const Radium = require('radium');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
 
@@ -317,4 +318,4 @@ class Select extends React.Component {
 }
 
 
-module.exports = Radium(Select);
+module.exports = withTheme(Radium(Select));

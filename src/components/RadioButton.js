@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
@@ -68,4 +69,4 @@ class RadioButton extends React.Component {
   };
 }
 
-module.exports = RadioButton;
+module.exports = withTheme(RadioButton);

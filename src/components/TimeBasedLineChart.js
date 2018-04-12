@@ -1,11 +1,12 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
-
 const d3 = require('d3');
 const moment = require('moment');
 const numeral = require('numeral');
 const _isEqual = require('lodash/isEqual');
+
+import { withTheme } from './Theme';
 
 const BreakPointGroup = require('./d3/BreakPointGroup');
 const GridLinesGroup = require('./d3/GridLinesGroup');
@@ -674,4 +675,4 @@ class TimeBasedLineChart extends React.Component {
   }
 }
 
-module.exports = Radium(TimeBasedLineChart);
+module.exports = withTheme(Radium(TimeBasedLineChart));

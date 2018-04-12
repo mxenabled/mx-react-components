@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const Input = require('./SimpleInput');
 
 const { themeShape } = require('../constants/App');
@@ -64,4 +65,4 @@ class SearchInput extends React.Component {
   };
 }
 
-module.exports = SearchInput;
+module.exports = withTheme(SearchInput);

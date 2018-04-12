@@ -72,4 +72,4 @@ const PillTabs = ({
 
 PillTabs.propTypes = Tabbable.propTypes;
 
-module.exports = StyleUtils.withMergedTheme(Tabbable(PillTabs));
+module.exports = Tabbable(PillTabs);

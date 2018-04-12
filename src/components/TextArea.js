@@ -1,7 +1,8 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-
 const _merge = require('lodash/merge');
+
+import { withTheme } from './Theme';
 
 const { themeShape } = require('../constants/App');
 
@@ -105,4 +106,4 @@ class TextArea extends React.Component {
   };
 }
 
-module.exports = TextArea;
+module.exports = withTheme(TextArea);

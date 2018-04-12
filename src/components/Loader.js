@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const Spin = require('./Spin');
 
 const { themeShape } = require('../constants/App');
@@ -97,4 +98,4 @@ class Loader extends React.Component {
 }
 
 
-module.exports = Loader;
+module.exports = withTheme(Loader);

@@ -1,5 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import moment from 'moment';
 
 import { getNewDateStateChange } from '../Calendar';
@@ -19,7 +19,7 @@ describe('Calendar', () => {
 
     const mockCallback = jest.fn();
 
-    wrapper = shallow(
+    wrapper = mount(
       <Calendar
         onDateSelect={mockCallback}
         selectedDate={moment().unix()}

@@ -39,6 +39,8 @@ module.exports = {
   Spin: require('./components/Spin'),
   Tabs: require('./components/Tabs'),
   TextArea: require('./components/TextArea'),
+  ThemeContext: require('./components/Theme').ThemeContext,
+  ThemeProvider: require('./components/Theme').ThemeProvider,
   TimeBasedLineChart: require('./components/TimeBasedLineChart'),
   ToggleSwitch: require('./components/ToggleSwitch'),
   Tooltip: require('./components/Tooltip'),

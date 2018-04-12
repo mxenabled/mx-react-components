@@ -4,6 +4,7 @@ const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
 const _merge = require('lodash/merge');
 
+import { withTheme } from './Theme';
 const Column = require('../components/grid/Column');
 const Container = require('../components/grid/Container');
 const Row = require('../components/grid/Row');
@@ -235,4 +236,4 @@ class DisplayInput extends React.Component {
   };
 }
 
-module.exports = Radium(DisplayInput);
+module.exports = withTheme(Radium(DisplayInput));

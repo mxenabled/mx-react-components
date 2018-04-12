@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -130,4 +131,4 @@ class Tooltip extends React.Component {
   };
 }
 
-module.exports = Tooltip;
+module.exports = withTheme(Tooltip);

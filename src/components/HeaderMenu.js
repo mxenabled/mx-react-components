@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const Button = require('./Button');
 const SimpleSelect = require('./SimpleSelect');
 
@@ -60,4 +61,4 @@ class HeaderMenu extends React.Component {
   }
 }
 
-module.exports = HeaderMenu;
+module.exports = withTheme(HeaderMenu);

@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -212,4 +213,4 @@ class SelectFullScreen extends React.Component {
   }
 }
 
-module.exports = Radium(SelectFullScreen);
+module.exports = withTheme(Radium(SelectFullScreen));

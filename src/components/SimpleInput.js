@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -100,6 +101,7 @@ class Input extends React.Component {
 
     return (
       <div
+        className='mx-simple-input'
         style={this.state.focus ? { ...styles.wrapper, ...styles.activeWrapper } : styles.wrapper}
       >
         {this.props.icon ? (
@@ -174,4 +176,4 @@ class Input extends React.Component {
   };
 }
 
-module.exports = Input;
+module.exports = withTheme(Input);

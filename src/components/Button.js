@@ -3,6 +3,8 @@ const PropTypes = require('prop-types');
 
 import { css } from 'glamor';
 
+import { withTheme } from './Theme';
+
 const Icon = require('./Icon');
 const Spin = require('./Spin');
 
@@ -16,6 +18,7 @@ class Button extends React.Component {
     'aria-label': PropTypes.string,
     actionText: PropTypes.string,
     buttonRef: PropTypes.func,
+    className: PropTypes.string,
     elementProps: PropTypes.object,
     icon: PropTypes.string,
     isActive: PropTypes.bool,
@@ -61,13 +64,13 @@ class Button extends React.Component {
   render () {
     // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
     // Keep elementProps for backwards compatibility.
-    const { actionText, buttonRef, children, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
+    const { actionText, buttonRef, children, className, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
     const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
     const styles = this.styles(mergedTheme);
 
     return (
       <button
-        className={css({ ...styles.component, ...styles[this.props.type], ...style })}
+        className={css({ ...styles.component, ...styles[this.props.type], ...style }) + ' ' + className}
         disabled={this.props.type === 'disabled'}
         ref={buttonRef}
         {...rest}
@@ -249,4 +252,4 @@ class Button extends React.Component {
   };
 }
 
-module.exports = Button;
+module.exports = withTheme(Button);

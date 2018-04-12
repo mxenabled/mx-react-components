@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 
+import { withTheme } from './Theme';
 const ButtonGroup = require('./ButtonGroup');
 
 const { themeShape } = require('../constants/App');
@@ -191,4 +192,4 @@ class PaginationButtons extends React.Component {
   };
 }
 
-module.exports = PaginationButtons;
+module.exports = withTheme(PaginationButtons);

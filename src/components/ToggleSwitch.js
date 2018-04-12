@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
@@ -133,4 +134,4 @@ class ToggleSwitch extends React.Component {
   };
 }
 
-module.exports = Radium(ToggleSwitch);
+module.exports = withTheme(Radium(ToggleSwitch));

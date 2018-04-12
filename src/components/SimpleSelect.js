@@ -4,6 +4,7 @@ const Radium = require('radium');
 const keycode = require('keycode');
 const _merge = require('lodash/merge');
 
+import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
 
@@ -171,4 +172,4 @@ class SimpleSelect extends React.Component {
   };
 }
 
-module.exports = Radium(SimpleSelect);
+module.exports = withTheme(Radium(SimpleSelect));
