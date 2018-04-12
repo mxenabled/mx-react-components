@@ -28,7 +28,7 @@ describe('Button', () => {
   });
 
   it('merges className when provided as a prop', () => {
-    const button = shallow(<Button className='foo' />);
+    const button = mount(<Button className='foo' />);
     const className = button.find('button').prop('className');
 
     expect(className).toContain('foo');

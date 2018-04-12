@@ -7,14 +7,20 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.0</h3>
+        <ul>
+          <li>New ThemeProvider component for easier theming (<a href='https://github.com/mxenabled/mx-react-components/pull/721'>#721</a>)</li>
+          <li>Fix regression with styling of the Modal footer buttons (<a href='https://github.com/mxenabled/mx-react-components/pull/729'>#729</a>)</li>
+        </ul>
+
         <h3>5.1.33</h3>
         <ul>
-          <li>Fix state issues in DateRangePicker component(<a href='https://github.com/mxenabled/mx-react-components/pull/728'>#728</a>)</li>
+          <li>Fix state issues in DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/728'>#728</a>)</li>
         </ul>
 
         <h3>5.1.32</h3>
         <ul>
-          <li>Theme cancel and apply buttons in DateRangePicker componente(<a href='https://github.com/mxenabled/mx-react-components/pull/727'>#727</a>)</li>
+          <li>Theme cancel and apply buttons in DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/727'>#727</a>)</li>
         </ul>
 
         <h3>5.1.31</h3>
