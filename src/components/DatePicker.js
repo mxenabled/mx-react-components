@@ -2,7 +2,6 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const moment = require('moment');
-const keycode = require('keycode');
 
 import { withTheme } from './Theme';
 import Calendar from './Calendar';
@@ -87,31 +86,17 @@ class DatePicker extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const styles = this.styles(theme);
-    const selectedDate = moment.unix(this.state.currentDate || this.props.defaultDate);
-    const selectedDateAriaLabelText = selectedDate.format('MMMM Do, YYYY');
-    const selectedDateDisplayText = selectedDate.format(this.props.format);
 
     return (
       <div ref={this.props.elementRef} style={styles.component}>
-        <div
-          aria-label={`Select a date. Currently selected ${selectedDateAriaLabelText}`}
-          onClick={this._toggleCalendar}
-          onKeyDown={e => {
-            if (keycode(e) === 'enter' || keycode(e) === 'space') {
-              this._toggleCalendar();
-            }
-          }}
-          role='button'
-          style={styles.selectedDateWrapper}
-          tabIndex={0}
-        >
+        <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
             size={20}
             style={styles.selectedDateIcon}
             type='calendar'
           />
           <div style={styles.selectedDateText}>
-            {(this.props.selectedDate || this.props.defaultDate) ? selectedDateDisplayText : this.props.placeholderText}
+            {(this.props.selectedDate || this.props.defaultDate) ? moment.unix(this.props.selectedDate || this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
           </div>
           <Icon
             size={20}
