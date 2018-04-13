@@ -192,6 +192,7 @@ class Calendar extends React.Component {
 
             return (
               <a
+                aria-label={`${day.format('dddd, MMMM Do, YYYY')}${isSelectedDay ? ', Currently Selected' : ''}`}
                 className='calendar-day'
                 id={
                   day.isSame(moment.unix(this.state.focusedDay), 'day') ?
@@ -233,11 +234,24 @@ class Calendar extends React.Component {
       this.props.primaryColor
     );
     const styles = this.styles(theme);
+    const daysOfWeek = [
+      { label: 'Sunday', value: 'S' },
+      { label: 'Monday', value: 'M' },
+      { label: 'Tuesday', value: 'T' },
+      { label: 'Wednesday', value: 'W' },
+      { label: 'Thursday', value: 'T' },
+      { label: 'Friday', value: 'F' },
+      { label: 'Saturday', value: 'S' }
+    ];
+    const currentMonthText = moment.unix(this.state.currentDate).format('MMMM YYYY');
+    const nextMonthText = moment.unix(this.state.currentDate).add(1, 'month').format('MMMM YYYY');
+    const previousMonthText = moment.unix(this.state.currentDate).subtract(1, 'month').format('MMMM YYYY');
 
     return (
       <div style={styles.component}>
         <div style={styles.calendarHeader}>
           <a
+            aria-label={`Go back a month to ${previousMonthText}`}
             onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
             tabIndex={0}
@@ -248,8 +262,9 @@ class Calendar extends React.Component {
               type='caret-left'
             />
           </a>
-          <div>{moment.unix(this.state.currentDate).format('MMMM YYYY')}</div>
+          <div aria-label={currentMonthText}>{currentMonthText}</div>
           <a
+            aria-label={`Go forward a month to ${nextMonthText}`}
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
             tabIndex={0}
@@ -262,10 +277,10 @@ class Calendar extends React.Component {
           </a>
         </div>
         <div style={styles.calendarWeekHeader}>
-          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
+          {daysOfWeek.map((day) => {
             return (
-              <div key={i} style={styles.calendarWeekDay}>
-                {day}
+              <div aria-label={day.label} key={day.label} style={styles.calendarWeekDay}>
+                {day.value}
               </div>
             );
           })}
