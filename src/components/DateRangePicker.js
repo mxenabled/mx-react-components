@@ -393,6 +393,7 @@ class DateRangePicker extends React.Component {
                               ].map(day => {
                                 return (
                                   <div
+                                    aria-label={day.value}
                                     key={day.value}
                                     style={styles.calendarWeekDay}
                                   >
