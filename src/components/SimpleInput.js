@@ -13,7 +13,7 @@ const {
   deprecateProp
 } = require('../utils/Deprecation');
 
-class Input extends React.Component {
+class SimpleInput extends React.Component {
   static propTypes = {
     baseColor: PropTypes.string,
     elementProps: PropTypes.object,
@@ -176,4 +176,4 @@ class Input extends React.Component {
   };
 }
 
-module.exports = withTheme(Input);
+module.exports = withTheme(SimpleInput);
