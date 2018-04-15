@@ -40,14 +40,16 @@ class ThemeContext extends React.Component {
   * `theme` can still be provided as a prop to the themed component to override the theme.
   */
 export function withTheme (Component) {
-  function ThemedComponent (props) {
-    return (
-      <ThemeContext>
-        {theme => (
-          <Component {...props} theme={props.theme || theme} />
-        )}
-      </ThemeContext>
-    );
+  class ThemedComponent extends React.Component {
+    render () {
+      return (
+        <ThemeContext>
+          {theme => (
+            <Component {...this.props} theme={this.props.theme || theme} />
+          )}
+        </ThemeContext>
+      );
+    }
   }
   ThemedComponent.propTypes = { theme: themeShape };
   ThemedComponent.displayName = `withTheme(${Component.displayName || Component.name})`;
