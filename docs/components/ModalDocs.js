@@ -111,6 +111,10 @@ class ModalDocs extends React.Component {
         <h5>contentStyle <label>Object</label></h5>
         <p>A style object used to style the content div that wrapps the modal&#39;s content</p>
 
+        <h5>focusOnLoad <label>Boolean</label></h5>
+        <p>Default: 'true'</p>
+        <p>The modal will try to focus its content on mount.  This prop provides a way to over ride that functionality in case you wish to focus another element instead.</p>
+
         <h5>footerContent <label>Node</label></h5>
         <p>A node used to add jsx to the footer element of the modal.</p>
 
