@@ -143,7 +143,7 @@ class Select extends React.Component {
       if (this.props.children) {
         return (
           <div className='mx-select-options' style={styles.options}>
-            {this.props.children}
+            {typeof this.props.children === 'function' ? this.props.children({ onOptionClick: this._handleOptionClick }) : this.props.children}
           </div>
         );
       } else {
