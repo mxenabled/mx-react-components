@@ -28,11 +28,38 @@ class MonthTable extends React.Component {
         isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
         false;
       const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
-      const isSelectedDay = startDate.isSame(moment.unix(selectedStartDate), 'day') || startDate.isSame(moment.unix(selectedEndDate), 'day');
+      const isSelectedStartDay = startDate.isSame(moment.unix(selectedStartDate), 'day');
+      const isSelectedEndDay = startDate.isSame(moment.unix(selectedEndDate), 'day');
+      const isSelectedDay = isSelectedStartDay || isSelectedEndDay;
       const savedStartDate = startDate.date();
+
+      /**
+       * Aria label possible states
+       *
+       * 1. Not in range, not selected
+       *      Thursday, April 13th, 2018
+       * 2. In range, not selected
+       *      Thursday, April 13th, 2018, within selected range.
+       * 3. In range, selected start date
+       *      Thursday, April 13th, 2018, selected start date for range.
+       * 4. In range, selected end date
+       *      Thursday, April 13th, 2018, selected end date for range.
+       * */
+      let ariaLabelStateText = '';
+      const ariaLabelDateText = moment(startDate).format('dddd, MMMM Do, YYYY');
+
+      if (!isSelectedDay && isActiveRange) {
+        ariaLabelStateText = ', within selected range';
+      } else if (isSelectedStartDay) {
+        ariaLabelStateText = ', selected start date for range.';
+      } else if (isSelectedEndDay) {
+        ariaLabelStateText = ', selected end date for range.';
+      }
+
       const day = (
         <a
-          aria-label={moment(startDate).format('MMM D, YYYY')}
+          aria-label={ariaLabelDateText + ariaLabelStateText}
+          aria-pressed={isSelectedDay}
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown}

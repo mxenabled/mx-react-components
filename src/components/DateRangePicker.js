@@ -288,6 +288,9 @@ class DateRangePicker extends React.Component {
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
     const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
     const { selectedEndDate, selectedStartDate } = this.state;
+    const { placeholderText } = this.props;
+    const selectedEndDateFromPropsAsMoment = moment.unix(this.props.selectedEndDate);
+    const selectedStartDateFromPropsAsMoment = moment.unix(this.props.selectedStartDate);
 
     const mergedFocusTrapProps = {
       focusTrapOptions: {
@@ -300,6 +303,11 @@ class DateRangePicker extends React.Component {
     return (
       <div style={styles.component}>
         <a
+          aria-label={`${placeholderText}${
+            this.props.selectedStartDate && this.props.selectedEndDate ?
+            `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected` :
+            ''
+          }`}
           onClick={this._toggleSelectionPane}
           onKeyDown={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           ref={this.props.elementRef}
@@ -316,11 +324,11 @@ class DateRangePicker extends React.Component {
           <div style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
-                <span>{moment.unix(this.props.selectedStartDate).format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
+                <span>{selectedStartDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
                 <span> - </span>
-                <span>{moment.unix(this.props.selectedEndDate).format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
+                <span>{selectedEndDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
               </div>
-            ) : this.props.placeholderText}
+            ) : placeholderText}
           </div>
           <Icon
             size={20}
@@ -393,6 +401,7 @@ class DateRangePicker extends React.Component {
                               ].map(day => {
                                 return (
                                   <div
+                                    aria-label={day.value}
                                     key={day.value}
                                     style={styles.calendarWeekDay}
                                   >

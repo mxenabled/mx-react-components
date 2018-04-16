@@ -7,6 +7,12 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.3</h3>
+        <ul>
+          <li>Accessibility improvements to DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/731'>#731</a>)</li>
+          <li>Adds new props to Modal component to control focus on mount and focus trap (<a href='https://github.com/mxenabled/mx-react-components/pull/733'>#733</a>)</li>
+        </ul>
+
         <h3>5.2.2</h3>
         <ul>
           <li>Ensure withTheme wrapped components work with ref (<a href='https://github.com/mxenabled/mx-react-components/pull/732'>#732</a>)</li>
