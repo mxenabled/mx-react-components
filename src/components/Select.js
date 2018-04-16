@@ -143,7 +143,7 @@ class Select extends React.Component {
       if (this.props.children) {
         return (
           <div className='mx-select-options' style={styles.options}>
-            {this.props.children}
+            {typeof this.props.children === 'function' ? this.props.children({ onOptionClick: this._handleOptionClick }) : this.props.children}
           </div>
         );
       } else {
@@ -199,7 +199,10 @@ class Select extends React.Component {
         <div className='mx-select-custom'
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
-          ref={ref => this.elementRef = ref}
+          ref={ref => {
+            this.elementRef = ref;
+            if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
+          }}
           style={styles.component}
           tabIndex='0'
         >
