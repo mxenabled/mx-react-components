@@ -12,6 +12,11 @@ class Changelog extends React.Component {
           <li>Accessibility improvements to DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/731'>#731</a>)</li>
         </ul>
 
+        <h3>5.2.2</h3>
+        <ul>
+          <li>Ensure withTheme wrapped components work with ref (<a href='https://github.com/mxenabled/mx-react-components/pull/732'>#732</a>)</li>
+        </ul>
+
         <h3>5.2.1</h3>
         <ul>
           <li>Accessibility improvements to Calendar component used in DatePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/730'>#730</a>)</li>
