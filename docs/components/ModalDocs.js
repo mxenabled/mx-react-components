@@ -115,6 +115,12 @@ class ModalDocs extends React.Component {
         <p>Default: 'true'</p>
         <p>The modal will try to focus its content on mount.  This prop provides a way to over ride that functionality in case you wish to focus another element instead.</p>
 
+        <h5>focusTrapProps<label>Object</label></h5>
+        <p>Default: Empty Object</p>
+        <p>The Modal component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the Modal for accessibility reasons.</p>
+        <p>The focusTrapProps object provides a mechanism for passing the focus trap component props.</p>
+        <p>See the library documentation for details on what props it accepts and how to use them.</p>
+
         <h5>footerContent <label>Node</label></h5>
         <p>A node used to add jsx to the footer element of the modal.</p>
 
