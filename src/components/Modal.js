@@ -29,6 +29,7 @@ class Modal extends React.Component {
     })),
     color: PropTypes.string,
     contentStyle: PropTypes.object,
+    focusOnLoad: PropTypes.bool,
     focusTrapProps: PropTypes.object,
     footerContent: PropTypes.node,
     footerStyle: PropTypes.object,
@@ -50,6 +51,7 @@ class Modal extends React.Component {
   static defaultProps = {
     'aria-label': '',
     buttons: [],
+    focusOnLoad: true,
     focusTrapProps: {},
     isRelative: false,
     showCloseIcon: true,
@@ -69,7 +71,8 @@ class Modal extends React.Component {
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'color');
 
-    this._modalContent.focus();
+    if (this.props.focusOnLoad) this._modalContent.focus();
+
     /*eslint-disable */
     if (this.props.hasOwnProperty('isOpen')) {
       console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
