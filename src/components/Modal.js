@@ -29,6 +29,7 @@ class Modal extends React.Component {
     })),
     color: PropTypes.string,
     contentStyle: PropTypes.object,
+    focusTrapProps: PropTypes.object,
     footerContent: PropTypes.node,
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
@@ -49,6 +50,7 @@ class Modal extends React.Component {
   static defaultProps = {
     'aria-label': '',
     buttons: [],
+    focusTrapProps: {},
     isRelative: false,
     showCloseIcon: true,
     showFooter: false,
@@ -182,9 +184,16 @@ class Modal extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
     const styles = this.styles(theme);
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      paused: false,
+      ...this.props.focusTrapProps
+    };
 
     return (
-      <MXFocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+      <MXFocusTrap {...mergedFocusTrapProps}>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
