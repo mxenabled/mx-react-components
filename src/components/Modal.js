@@ -11,7 +11,7 @@ const _merge = require('lodash/merge');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const { deprecatePrimaryColor, deprecatePropWithMessage } = require('../utils/Deprecation');
 
 class Modal extends React.Component {
   static propTypes = {
@@ -29,6 +29,8 @@ class Modal extends React.Component {
     })),
     color: PropTypes.string,
     contentStyle: PropTypes.object,
+    focusOnLoad: PropTypes.bool,
+    focusTrapProps: PropTypes.object,
     footerContent: PropTypes.node,
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
@@ -49,6 +51,8 @@ class Modal extends React.Component {
   static defaultProps = {
     'aria-label': '',
     buttons: [],
+    focusOnLoad: true,
+    focusTrapProps: {},
     isRelative: false,
     showCloseIcon: true,
     showFooter: false,
@@ -66,13 +70,14 @@ class Modal extends React.Component {
 
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'color');
+    deprecatePropWithMessage(
+      this.props,
+      'isOpen',
+      'Please handle Modal opening from its parent.',
+      'modal'
+    );
 
-    this._modalContent.focus();
-    /*eslint-disable */
-    if (this.props.hasOwnProperty('isOpen')) {
-      console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
-    }
-    /*eslint-enable */
+    if (this.props.focusOnLoad) this._modalContent.focus();
   }
 
   _handleTooltipToggle = (show) => {
@@ -182,9 +187,15 @@ class Modal extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
     const styles = this.styles(theme);
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      ...this.props.focusTrapProps
+    };
 
     return (
-      <MXFocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+      <MXFocusTrap {...mergedFocusTrapProps}>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
