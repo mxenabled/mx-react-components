@@ -11,7 +11,7 @@ const _merge = require('lodash/merge');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const { deprecatePrimaryColor, deprecatePropWithMessage } = require('../utils/Deprecation');
 
 class Modal extends React.Component {
   static propTypes = {
@@ -70,14 +70,14 @@ class Modal extends React.Component {
 
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'color');
+    deprecatePropWithMessage(
+      this.props,
+      'isOpen',
+      'Please handle Modal opening from its parent.',
+      'modal'
+    );
 
     if (this.props.focusOnLoad) this._modalContent.focus();
-
-    /*eslint-disable */
-    if (this.props.hasOwnProperty('isOpen')) {
-      console.warn('WARNING: The prop "isOpen" is deprecated in this version of the component. Please handle Modal opening from its parent.');
-    }
-    /*eslint-enable */
   }
 
   _handleTooltipToggle = (show) => {
