@@ -199,7 +199,10 @@ class Select extends React.Component {
         <div className='mx-select-custom'
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
-          ref={ref => this.elementRef = ref}
+          ref={ref => {
+            this.elementRef = ref;
+            if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
+          }}
           style={styles.component}
           tabIndex='0'
         >
