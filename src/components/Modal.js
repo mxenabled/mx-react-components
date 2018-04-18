@@ -17,6 +17,7 @@ class Modal extends React.Component {
   static propTypes = {
     'aria-describedby': PropTypes.string,
     'aria-label': PropTypes.string,
+    'aria-labelledby': PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.shape({
       actionText: PropTypes.string,
       className: PropTypes.string,
@@ -207,6 +208,7 @@ class Modal extends React.Component {
             <div
               aria-describedby={this.props['aria-describedby']}
               aria-label={this.props['aria-label']}
+              aria-labelledby={this.props['aria-labelledby']}
               className='mx-modal-content'
               ref={ref => this._modalContent = ref}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
