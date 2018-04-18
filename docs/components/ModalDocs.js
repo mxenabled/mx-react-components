@@ -84,9 +84,9 @@ class ModalDocs extends React.Component {
             tooltipTitle='This is my tooltip title'
           >
             <div style={{ padding: 20, textAlign: 'center' }}>
-              <img src={`https://unsplash.it/${imageWidth}/${imageHeight}?random`} style={imageStyle} />
               <h2 id='title' style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</h2>
               <p id='description'>With a picture</p>
+              <img alt='Random picture from the internet' src={`https://unsplash.it/${imageWidth}/${imageHeight}?random`} style={imageStyle} />
             </div>
           </Modal>
         ) : null}
@@ -213,6 +213,7 @@ class ModalDocs extends React.Component {
             <div style={{ padding: 20, textAlign: 'center' }}>
               <h2 id='title' style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</h2>
               <p id='description'>With a picture</p>
+              <img alt='Random picture from the internet' src='https://unsplash.it/1000/600?random' style={imageStyle} />
             </div>
           </Modal>
   `}
