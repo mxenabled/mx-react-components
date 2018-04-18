@@ -37,6 +37,7 @@ class Modal extends React.Component {
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
     onRequestClose: PropTypes.func,
+    role: PropTypes.string,
     showCloseIcon: PropTypes.bool,
     showFooter: PropTypes.bool,
     showScrim: PropTypes.bool,
@@ -56,6 +57,7 @@ class Modal extends React.Component {
     focusOnLoad: true,
     focusTrapProps: {},
     isRelative: false,
+    role: 'dialog',
     showCloseIcon: true,
     showFooter: false,
     showScrim: true,
@@ -211,6 +213,7 @@ class Modal extends React.Component {
               aria-labelledby={this.props['aria-labelledby']}
               className='mx-modal-content'
               ref={ref => this._modalContent = ref}
+              role={this.props.role}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
               tabIndex={0}
             >
