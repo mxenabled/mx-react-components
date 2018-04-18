@@ -146,6 +146,10 @@ class ModalDocs extends React.Component {
         <h5>onRequestClose <label>Function</label></h5>
         <p>A method that is called when the close button or scrim area is clicked by a user. Use this method to tell the Modal when it should close.</p>
 
+        <h5>role <label>string</label></h5>
+        <p>Default: 'dialog'</p>
+        <p>The role applied to the wrapping div around the Modal's children.  Used for accessibility purposes.  See <a href='https://www.w3.org/TR/wai-aria-1.1/#usage_intro'>WAI-ARIA documentation</a> for more details on roles.</p>
+
         <h5>showCloseIcon <label>Boolean</label></h5>
         <p>Default: 'true'</p>
         <p>Determines if the close icon is displayed in the top right corner of the Modal.  The Modal can still be closed by clicking on the scrim.</p>
