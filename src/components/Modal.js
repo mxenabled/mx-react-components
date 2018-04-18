@@ -15,6 +15,7 @@ const { deprecatePrimaryColor, deprecatePropWithMessage } = require('../utils/De
 
 class Modal extends React.Component {
   static propTypes = {
+    'aria-describedby': PropTypes.string,
     'aria-label': PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.shape({
       actionText: PropTypes.string,
@@ -204,6 +205,7 @@ class Modal extends React.Component {
           >
             {this._renderTitleBar(styles)}
             <div
+              aria-describedby={this.props['aria-describedby']}
               aria-label={this.props['aria-label']}
               className='mx-modal-content'
               ref={ref => this._modalContent = ref}
