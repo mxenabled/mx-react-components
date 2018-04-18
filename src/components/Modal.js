@@ -52,7 +52,6 @@ class Modal extends React.Component {
   };
 
   static defaultProps = {
-    'aria-label': '',
     buttons: [],
     focusOnLoad: true,
     focusTrapProps: {},
