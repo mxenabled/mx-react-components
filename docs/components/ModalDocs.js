@@ -3,7 +3,7 @@
 const React = require('react');
 const { Link } = require('react-router');
 
-const { Modal } = require('mx-react-components');
+const { Button, Modal } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -48,8 +48,8 @@ class ModalDocs extends React.Component {
 
         <h3>Demo</h3>
         <div style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <span className='button' onClick={this._handleModalClick}>Show Default Modal</span>
-          <span className='button' onClick={this._handleSmallModalClick}>Show Small Modal</span>
+          <Button className='button' onClick={this._handleModalClick}>Show Default Modal</Button>
+          <Button className='button' onClick={this._handleSmallModalClick}>Show Small Modal</Button>
         </div>
         {this.state.showModal ? (
           <Modal
