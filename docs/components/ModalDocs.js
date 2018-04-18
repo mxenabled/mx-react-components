@@ -53,6 +53,7 @@ class ModalDocs extends React.Component {
         </div>
         {this.state.showModal ? (
           <Modal
+            aria-describedby='description'
             buttons={[
               {
                 icon: 'close',
@@ -84,12 +85,15 @@ class ModalDocs extends React.Component {
             <div style={{ padding: 20, textAlign: 'center' }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
               <img src={`https://unsplash.it/${imageWidth}/${imageHeight}?random`} style={imageStyle} />
+              <p id='description'>With a picture</p>
             </div>
           </Modal>
         ) : null}
 
         <h3>Usage</h3>
 
+        <h5>aria-describedby <label>string</label></h5>
+        <p>An id of a child element that describes the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'>WAI-ARIA documentation for aria-describedby</a></p>
         <h5>buttons <label>Array</label></h5>
         <p>An array of objects with the properties: actionText, className, isActive, icon, label, onClick, style, and type. Used to display button in the footer of the modal. Example:</p>
         <Markdown>
@@ -172,6 +176,7 @@ class ModalDocs extends React.Component {
         <Markdown>
   {`
           <Modal
+            aria-describedby='description'
             buttons={[
               {
                 icon: 'close',
@@ -203,6 +208,7 @@ class ModalDocs extends React.Component {
             <div style={{ padding: 20, textAlign: 'center' }}>
               <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
               <img src='https://unsplash.it/1000/600?random' style={imageStyle} />
+              <p id='description'>With a picture</p>
             </div>
           </Modal>
   `}
