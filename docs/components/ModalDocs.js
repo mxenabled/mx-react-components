@@ -3,7 +3,7 @@
 const React = require('react');
 const { Link } = require('react-router');
 
-const { Modal } = require('mx-react-components');
+const { Button, Modal } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -48,11 +48,13 @@ class ModalDocs extends React.Component {
 
         <h3>Demo</h3>
         <div style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-          <span className='button' onClick={this._handleModalClick}>Show Default Modal</span>
-          <span className='button' onClick={this._handleSmallModalClick}>Show Small Modal</span>
+          <Button className='button' onClick={this._handleModalClick}>Show Default Modal</Button>
+          <Button className='button' onClick={this._handleSmallModalClick}>Show Small Modal</Button>
         </div>
         {this.state.showModal ? (
           <Modal
+            aria-describedby='description'
+            aria-labelledby='title'
             buttons={[
               {
                 icon: 'close',
@@ -82,13 +84,23 @@ class ModalDocs extends React.Component {
             tooltipTitle='This is my tooltip title'
           >
             <div style={{ padding: 20, textAlign: 'center' }}>
-              <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-              <img src={`https://unsplash.it/${imageWidth}/${imageHeight}?random`} style={imageStyle} />
+              <h2 id='title' style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</h2>
+              <p id='description'>With a picture</p>
+              <img alt='Random picture from the internet' src={`https://unsplash.it/${imageWidth}/${imageHeight}?random`} style={imageStyle} />
             </div>
           </Modal>
         ) : null}
 
         <h3>Usage</h3>
+
+        <h5>aria-describedby <label>string</label></h5>
+        <p>An id of a child element that describes the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'>WAI-ARIA documentation for aria-describedby</a></p>
+
+        <h5>aria-label <label>string</label></h5>
+        <p>A string applied as a label to the wrapping div around the Modal's children. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA14.html'>WAI-ARIA documentation for aria-label</a></p>
+
+        <h5>aria-labelledby <label>string</label></h5>
+        <p>An id of a child element that is the title of the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/WAI/GL/wiki/Using_aria-labelledby_to_concatenate_a_label_from_several_text_nodes'>WAI-ARIA documentation for aria-labelledby</a></p>
 
         <h5>buttons <label>Array</label></h5>
         <p>An array of objects with the properties: actionText, className, isActive, icon, label, onClick, style, and type. Used to display button in the footer of the modal. Example:</p>
@@ -134,6 +146,10 @@ class ModalDocs extends React.Component {
         <h5>onRequestClose <label>Function</label></h5>
         <p>A method that is called when the close button or scrim area is clicked by a user. Use this method to tell the Modal when it should close.</p>
 
+        <h5>role <label>string</label></h5>
+        <p>Default: 'dialog'</p>
+        <p>The role applied to the wrapping div around the Modal's children.  Used for accessibility purposes.  See <a href='https://www.w3.org/TR/wai-aria-1.1/#usage_intro'>WAI-ARIA documentation</a> for more details on roles.</p>
+
         <h5>showCloseIcon <label>Boolean</label></h5>
         <p>Default: 'true'</p>
         <p>Determines if the close icon is displayed in the top right corner of the Modal.  The Modal can still be closed by clicking on the scrim.</p>
@@ -172,6 +188,8 @@ class ModalDocs extends React.Component {
         <Markdown>
   {`
           <Modal
+            aria-describedby='description'
+            aria-labelledby='title'
             buttons={[
               {
                 icon: 'close',
@@ -201,8 +219,9 @@ class ModalDocs extends React.Component {
             tooltipTitle='This is my tooltip title'
           >
             <div style={{ padding: 20, textAlign: 'center' }}>
-              <p style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</p>
-              <img src='https://unsplash.it/1000/600?random' style={imageStyle} />
+              <h2 id='title' style={{ fontFamily: 'Helvetica, Arial, sans-serif', textAlign: 'center' }}>I am a modal!</h2>
+              <p id='description'>With a picture</p>
+              <img alt='Random picture from the internet' src='https://unsplash.it/1000/600?random' style={imageStyle} />
             </div>
           </Modal>
   `}

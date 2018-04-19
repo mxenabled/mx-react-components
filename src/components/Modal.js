@@ -15,7 +15,9 @@ const { deprecatePrimaryColor, deprecatePropWithMessage } = require('../utils/De
 
 class Modal extends React.Component {
   static propTypes = {
+    'aria-describedby': PropTypes.string,
     'aria-label': PropTypes.string,
+    'aria-labelledby': PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.shape({
       actionText: PropTypes.string,
       className: PropTypes.string,
@@ -35,6 +37,7 @@ class Modal extends React.Component {
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
     onRequestClose: PropTypes.func,
+    role: PropTypes.string,
     showCloseIcon: PropTypes.bool,
     showFooter: PropTypes.bool,
     showScrim: PropTypes.bool,
@@ -49,11 +52,11 @@ class Modal extends React.Component {
   };
 
   static defaultProps = {
-    'aria-label': '',
     buttons: [],
     focusOnLoad: true,
     focusTrapProps: {},
     isRelative: false,
+    role: 'dialog',
     showCloseIcon: true,
     showFooter: false,
     showScrim: true,
@@ -204,9 +207,12 @@ class Modal extends React.Component {
           >
             {this._renderTitleBar(styles)}
             <div
+              aria-describedby={this.props['aria-describedby']}
               aria-label={this.props['aria-label']}
+              aria-labelledby={this.props['aria-labelledby']}
               className='mx-modal-content'
               ref={ref => this._modalContent = ref}
+              role={this.props.role}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
               tabIndex={0}
             >
