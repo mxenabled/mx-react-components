@@ -243,7 +243,7 @@ class Drawer extends React.Component {
     } else if (navConfig) {
       menu = this._renderNav(navConfig, styles, theme);
     }
-    const titleUniqueId = _uniqueId('mx-drawer-titile-');
+    const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
       <StyleRoot>
