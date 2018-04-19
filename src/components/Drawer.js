@@ -21,6 +21,7 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 class Drawer extends React.Component {
   static propTypes = {
     'aria-describedby': PropTypes.string,
+    'aria-labelledby': PropTypes.string,
     animateLeftDistance: PropTypes.number,
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
@@ -252,6 +253,7 @@ class Drawer extends React.Component {
             />
             <div
               aria-describedby={this.props['aria-describedby']}
+              aria-labelledby={this.props['aria-labelledby'] || 'mx-drawer-title'}
               ref={(ref) => (this._component = ref)}
               role='dialog'
               style={Object.assign({}, styles.component, this.props.style)}
@@ -269,7 +271,7 @@ class Drawer extends React.Component {
                     />
                   }
                 </span>
-                <h1 style={styles.title}>
+                <h1 id='mx-drawer-title' style={styles.title}>
                   {this.props.title}
                 </h1>
                 <div style={styles.headerMenu}>
