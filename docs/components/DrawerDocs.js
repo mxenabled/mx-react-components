@@ -223,6 +223,7 @@ class DrawerDocs extends React.Component {
     },
 
     <Drawer
+      aria-describedby='description'
       breakPoints={{ large: 1200, medium: 1100 }}
       contentStyle={styles.content}
       headerMenu={(
@@ -235,7 +236,8 @@ class DrawerDocs extends React.Component {
       onClose={this._handleDrawerClose}
       title='Demo'
     >
-      // Content Here
+      <p id='description'>This is a demo drawer</p>
+      <div>// Content Here</div>
     </Drawer>
   `}
         </Markdown>
