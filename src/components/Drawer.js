@@ -55,6 +55,7 @@ class Drawer extends React.Component {
     onClose: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
     onOpen: PropTypes.func,
+    role: PropTypes.string,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
@@ -71,6 +72,7 @@ class Drawer extends React.Component {
     focusTrapProps: {},
     maxWidth: 960,
     onOpen: () => {},
+    role: 'dialog',
     showCloseButton: true,
     showScrim: true,
     title: ''
@@ -257,6 +259,7 @@ class Drawer extends React.Component {
               ref={(ref) => (this._component = ref)}
               role='dialog'
               style={Object.assign({}, styles.component, this.props.style)}
+              role={this.props.role}
               tabIndex={0}
             >
               <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
