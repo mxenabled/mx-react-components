@@ -82,7 +82,7 @@ const StyleUtils = {
   mergeTheme (theme, primaryColor) {
     const primaryColorTheme = primaryColor && { Colors: { PRIMARY: primaryColor } };
 
-    return _merge({}, StyleConstants, primaryColorTheme, theme);
+    return _merge({}, StyleConstants, theme, primaryColorTheme);
   },
 
   /**
