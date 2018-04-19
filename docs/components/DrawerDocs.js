@@ -237,7 +237,6 @@ class DrawerDocs extends React.Component {
       title='Demo'
     >
       <p id='description'>This is a demo drawer</p>
-      <div>// Content Here</div>
     </Drawer>
   `}
         </Markdown>
