@@ -3,6 +3,7 @@ const _isEqual = require('lodash/isEqual');
 const _isNumber = require('lodash/isNumber');
 const _merge = require('lodash/merge');
 const _throttle = require('lodash/throttle');
+const _uniqueId = require('lodash/uniqueId');
 const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
@@ -20,6 +21,8 @@ const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Drawer extends React.Component {
   static propTypes = {
+    'aria-describedby': PropTypes.string,
+    'aria-labelledby': PropTypes.string,
     animateLeftDistance: PropTypes.number,
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
@@ -53,6 +56,7 @@ class Drawer extends React.Component {
     onClose: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
     onOpen: PropTypes.func,
+    role: PropTypes.string,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
     styles: PropTypes.object,
@@ -69,6 +73,7 @@ class Drawer extends React.Component {
     focusTrapProps: {},
     maxWidth: 960,
     onOpen: () => {},
+    role: 'dialog',
     showCloseButton: true,
     showScrim: true,
     title: ''
@@ -238,6 +243,7 @@ class Drawer extends React.Component {
     } else if (navConfig) {
       menu = this._renderNav(navConfig, styles, theme);
     }
+    const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
       <StyleRoot>
@@ -250,13 +256,14 @@ class Drawer extends React.Component {
               style={styles.scrim}
             />
             <div
-              aria-label={this.props.title}
+              aria-describedby={this.props['aria-describedby']}
+              aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
               ref={(ref) => (this._component = ref)}
-              role='dialog'
-              style={Object.assign({}, styles.component, this.props.style)}
+              role={this.props.role}
+              style={{ ...styles.component, ...this.props.style }}
               tabIndex={0}
             >
-              <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
+              <header style={{ ...styles.header, ...this.props.headerStyle }}>
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
@@ -268,14 +275,14 @@ class Drawer extends React.Component {
                     />
                   }
                 </span>
-                <h1 style={styles.title}>
+                <h1 id={titleUniqueId} style={styles.title}>
                   {this.props.title}
                 </h1>
                 <div style={styles.headerMenu}>
                   {menu}
                 </div>
               </header>
-              <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+              <div style={{ ...styles.content, ...this.props.contentStyle }}>
                 {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
               </div>
             </div>

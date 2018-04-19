@@ -42,6 +42,7 @@ class DrawerDocs extends React.Component {
 
     return (
       <Drawer
+        aria-describedby='description'
         breakPoints={{ large: 1200, medium: 1100 }}
         contentStyle={styles.content}
         headerMenu={({ close }) => (
@@ -62,7 +63,7 @@ class DrawerDocs extends React.Component {
           return (
             <div>
               {this.state.clickedMenu && <code>You clicked: {this.state.clickedMenu.text}</code>}
-              <p>
+              <p id='description'>
                 Drawer Component
               </p>
               <p>
@@ -114,6 +115,13 @@ class DrawerDocs extends React.Component {
         {this.state.demoDrawerOpen && this._renderDrawer()}
 
         <h3>Usage</h3>
+
+        <h5>aria-describedby <label>string</label></h5>
+        <p>An id of a child element that describes the Drawer. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'>WAI-ARIA documentation for aria-describedby</a></p>
+
+        <h5>aria-labelledby <label>string</label></h5>
+        <p>An id of a child element that would be considered the title of the Drawer. If not provided, the drawer defaults to the title header within the drawer that is populated by the title prop. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/WAI/GL/wiki/Using_aria-labelledby_to_concatenate_a_label_from_several_text_nodes'>WAI-ARIA documentation for aria-labelledby</a></p>
+
         <h5>children<label>DOM Node/Element or Function</label></h5>
         <p>Children of the Drawer component can be a component, DOM node/element, or a function.</p>
         <p>If children is a function, the function is called and passed an object of exposed drawer functions. Currently the Drawer's close function is the only exposed function in the object and has a key of `close`. The returned value of the function call must be a component or DOM node/element. This is handy if you need to close the drawer from the drawer's content area and want to ensure the drawer's animation is run before close. See the second example below for more details.</p>
@@ -177,6 +185,10 @@ class DrawerDocs extends React.Component {
         <h5>onKeyUp<label>Function</label></h5>
         <p>An event handler for the key up event of the drawer. If no handler is passed then the drawer will close when the esc key is pressed.</p>
 
+        <h5>role <label>string</label></h5>
+        <p>Default: 'dialog'</p>
+        <p>The role applied to the wrapping div around the Drawer's children.  Used for accessibility purposes.  See <a href='https://www.w3.org/TR/wai-aria-1.1/#usage_intro'>WAI-ARIA documentation</a> for more details on roles.</p>
+
         <h5>showCloseButton<label>Boolean</label></h5>
         <p>Default: true</p>
         <p>To remove the close drawer button in the top left corner, set this to <em>false</em>.</p>
@@ -211,6 +223,7 @@ class DrawerDocs extends React.Component {
     },
 
     <Drawer
+      aria-describedby='description'
       breakPoints={{ large: 1200, medium: 1100 }}
       contentStyle={styles.content}
       headerMenu={(
@@ -223,7 +236,7 @@ class DrawerDocs extends React.Component {
       onClose={this._handleDrawerClose}
       title='Demo'
     >
-      // Content Here
+      <p id='description'>This is a demo drawer</p>
     </Drawer>
   `}
         </Markdown>
