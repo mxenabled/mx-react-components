@@ -3,6 +3,7 @@ const _isEqual = require('lodash/isEqual');
 const _isNumber = require('lodash/isNumber');
 const _merge = require('lodash/merge');
 const _throttle = require('lodash/throttle');
+const _uniqueId = require('lodash/uniqueId');
 const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
@@ -242,6 +243,7 @@ class Drawer extends React.Component {
     } else if (navConfig) {
       menu = this._renderNav(navConfig, styles, theme);
     }
+    const titleUniqueId = _uniqueId('mx-drawer-titile-');
 
     return (
       <StyleRoot>
@@ -255,7 +257,7 @@ class Drawer extends React.Component {
             />
             <div
               aria-describedby={this.props['aria-describedby']}
-              aria-labelledby={this.props['aria-labelledby'] || 'mx-drawer-title'}
+              aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
               ref={(ref) => (this._component = ref)}
               role={this.props.role}
               style={{ ...styles.component, ...this.props.style }}
@@ -273,7 +275,7 @@ class Drawer extends React.Component {
                     />
                   }
                 </span>
-                <h1 id='mx-drawer-title' style={styles.title}>
+                <h1 id={titleUniqueId} style={styles.title}>
                   {this.props.title}
                 </h1>
                 <div style={styles.headerMenu}>
