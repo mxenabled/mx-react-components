@@ -257,12 +257,11 @@ class Drawer extends React.Component {
               aria-describedby={this.props['aria-describedby']}
               aria-labelledby={this.props['aria-labelledby'] || 'mx-drawer-title'}
               ref={(ref) => (this._component = ref)}
-              role='dialog'
-              style={Object.assign({}, styles.component, this.props.style)}
               role={this.props.role}
+              style={{ ...styles.component, ...this.props.style }}
               tabIndex={0}
             >
-              <header style={Object.assign({}, styles.header, this.props.headerStyle)}>
+              <header style={{ ...styles.header, ...this.props.headerStyle }}>
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
@@ -281,7 +280,7 @@ class Drawer extends React.Component {
                   {menu}
                 </div>
               </header>
-              <div style={Object.assign({}, styles.content, this.props.contentStyle)}>
+              <div style={{ ...styles.content, ...this.props.contentStyle }}>
                 {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
               </div>
             </div>
