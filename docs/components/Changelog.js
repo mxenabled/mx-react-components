@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.7</h3>
+        <ul>
+          <li>Accessibility improvements - SimpleSelect (<a href='https://github.com/mxenabled/mx-react-components/pull/738'>#738</a>)</li>
+        </ul>
+
         <h3>5.2.6</h3>
         <ul>
           <li>Accessibility improvements - Modal (<a href='https://github.com/mxenabled/mx-react-components/pull/735'>#735</a>)</li>
