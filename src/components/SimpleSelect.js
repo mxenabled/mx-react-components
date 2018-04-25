@@ -18,6 +18,7 @@ class SimpleSelect extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     elementRef: PropTypes.func,
+    focusTrapProps: PropTypes.object,
     hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
     iconStyles: PropTypes.object,
@@ -33,6 +34,7 @@ class SimpleSelect extends React.Component {
 
   static defaultProps = {
     'aria-label': '',
+    focusTrapProps: {},
     scrimClickOnSelect: false,
     items: [],
     onScrimClick () {}
@@ -61,8 +63,15 @@ class SimpleSelect extends React.Component {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor);
     const styles = this.styles(theme);
 
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      ...this.props.focusTrapProps
+    };
+
     return (
-      <MXFocusTrap>
+      <MXFocusTrap {...mergedFocusTrapProps}>
         <div ref={this.props.elementRef} style={styles.component}>
           <Listbox
             aria-label={this.props['aria-label']}
