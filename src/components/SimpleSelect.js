@@ -7,16 +7,18 @@ const _merge = require('lodash/merge');
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
+const MXFocusTrap = require('./MXFocusTrap');
 
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 class SimpleSelect extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     elementRef: PropTypes.func,
+    focusTrapProps: PropTypes.object,
     hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
     iconStyles: PropTypes.object,
@@ -32,6 +34,7 @@ class SimpleSelect extends React.Component {
 
   static defaultProps = {
     'aria-label': '',
+    focusTrapProps: {},
     scrimClickOnSelect: false,
     items: [],
     onScrimClick () {}
@@ -39,16 +42,10 @@ class SimpleSelect extends React.Component {
 
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'hoverColor');
+    deprecateProp(this.props, 'iconStyles', 'styles', 'simple-select');
+    deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
 
     window.addEventListener('keydown', this._handleKeyDown);
-
-    if (this.props.iconStyles) {
-      console.warn('The iconStyles prop is deprecated and will be removed in a future release. Please use styles.');
-    }
-
-    if (this.props.menuStyles) {
-      console.warn('The menuStyles prop is deprecated and will be removed in a future release. Please use styles.');
-    }
   }
 
   componentWillUnmount () {
@@ -66,53 +63,62 @@ class SimpleSelect extends React.Component {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor);
     const styles = this.styles(theme);
 
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      ...this.props.focusTrapProps
+    };
+
     return (
-      <div ref={this.props.elementRef} style={styles.component}>
-        <Listbox
-          aria-label={this.props['aria-label']}
-          style={styles.menu}
-          useGlobalKeyHandler={true}
-        >
-          {this.props.children ?
-            this.props.children :
-            (this.props.items.map((item, i) => {
-              const { icon, isSelected, onClick, text, ...rest } = item;
+      <MXFocusTrap {...mergedFocusTrapProps}>
+        <div ref={this.props.elementRef} style={styles.component}>
+          <Listbox
+            aria-label={this.props['aria-label']}
+            style={styles.menu}
+            useGlobalKeyHandler={true}
+          >
+            {this.props.children ?
+              this.props.children :
+              (this.props.items.map((item, i) => {
+                const { icon, isSelected, onClick, text, ...rest } = item;
 
-              return (
-                <Option
-                  isSelected={isSelected}
-                  key={i}
-                  label={text}
-                  onClick={e => {
-                    if (this.props.scrimClickOnSelect) {
-                      e.stopPropagation();
-                      this.props.onScrimClick();
-                    }
+                return (
+                  <Option
+                    isSelected={isSelected}
+                    key={i}
+                    label={text}
+                    onClick={e => {
+                      if (this.props.scrimClickOnSelect) {
+                        e.stopPropagation();
+                        this.props.onScrimClick();
+                      }
 
-                    if (onClick && typeof onClick === 'function') {
-                      onClick(e, item);
-                    }
-                  }}
-                  style={styles.item}
-                  {...rest}
-                >
-                  {icon ? (
-                    <Icon size={this.props.iconSize || 20} style={styles.icon} type={icon} />
-                  ) : null}
-                  <div style={styles.text}>{text}</div>
-                </Option>
-              );
-            })
-          )}
-        </Listbox>
-        <div
-          onClick={e => {
-            e.stopPropagation();
-            this.props.onScrimClick();
-          }}
-          style={styles.scrim}
-        />
-      </div>
+                      if (onClick && typeof onClick === 'function') {
+                        onClick(e, item);
+                      }
+                    }}
+                    style={styles.item}
+                    {...rest}
+                  >
+                    {icon ? (
+                      <Icon size={this.props.iconSize || 20} style={styles.icon} type={icon} />
+                    ) : null}
+                    <div style={styles.text}>{text}</div>
+                  </Option>
+                );
+              })
+            )}
+          </Listbox>
+          <div
+            onClick={e => {
+              e.stopPropagation();
+              this.props.onScrimClick();
+            }}
+            style={styles.scrim}
+          />
+        </div>
+      </MXFocusTrap>
     );
   }
 
