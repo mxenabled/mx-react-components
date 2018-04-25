@@ -7,6 +7,7 @@ const _merge = require('lodash/merge');
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
+const MXFocusTrap = require('./MXFocusTrap');
 
 const { themeShape } = require('../constants/App');
 
@@ -61,52 +62,54 @@ class SimpleSelect extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div ref={this.props.elementRef} style={styles.component}>
-        <Listbox
-          aria-label={this.props['aria-label']}
-          style={styles.menu}
-          useGlobalKeyHandler={true}
-        >
-          {this.props.children ?
-            this.props.children :
-            (this.props.items.map((item, i) => {
-              const { icon, isSelected, onClick, text, ...rest } = item;
+      <MXFocusTrap>
+        <div ref={this.props.elementRef} style={styles.component}>
+          <Listbox
+            aria-label={this.props['aria-label']}
+            style={styles.menu}
+            useGlobalKeyHandler={true}
+          >
+            {this.props.children ?
+              this.props.children :
+              (this.props.items.map((item, i) => {
+                const { icon, isSelected, onClick, text, ...rest } = item;
 
-              return (
-                <Option
-                  isSelected={isSelected}
-                  key={i}
-                  label={text}
-                  onClick={e => {
-                    if (this.props.scrimClickOnSelect) {
-                      e.stopPropagation();
-                      this.props.onScrimClick();
-                    }
+                return (
+                  <Option
+                    isSelected={isSelected}
+                    key={i}
+                    label={text}
+                    onClick={e => {
+                      if (this.props.scrimClickOnSelect) {
+                        e.stopPropagation();
+                        this.props.onScrimClick();
+                      }
 
-                    if (onClick && typeof onClick === 'function') {
-                      onClick(e, item);
-                    }
-                  }}
-                  style={styles.item}
-                  {...rest}
-                >
-                  {icon ? (
-                    <Icon size={this.props.iconSize || 20} style={styles.icon} type={icon} />
-                  ) : null}
-                  <div style={styles.text}>{text}</div>
-                </Option>
-              );
-            })
-          )}
-        </Listbox>
-        <div
-          onClick={e => {
-            e.stopPropagation();
-            this.props.onScrimClick();
-          }}
-          style={styles.scrim}
-        />
-      </div>
+                      if (onClick && typeof onClick === 'function') {
+                        onClick(e, item);
+                      }
+                    }}
+                    style={styles.item}
+                    {...rest}
+                  >
+                    {icon ? (
+                      <Icon size={this.props.iconSize || 20} style={styles.icon} type={icon} />
+                    ) : null}
+                    <div style={styles.text}>{text}</div>
+                  </Option>
+                );
+              })
+            )}
+          </Listbox>
+          <div
+            onClick={e => {
+              e.stopPropagation();
+              this.props.onScrimClick();
+            }}
+            style={styles.scrim}
+          />
+        </div>
+      </MXFocusTrap>
     );
   }
 
