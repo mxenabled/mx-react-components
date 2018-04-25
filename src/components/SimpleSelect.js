@@ -11,7 +11,7 @@ const { Listbox, Option } = require('./accessibility/Listbox');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
+const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 class SimpleSelect extends React.Component {
   static propTypes = {
@@ -39,16 +39,10 @@ class SimpleSelect extends React.Component {
 
   componentDidMount () {
     deprecatePrimaryColor(this.props, 'hoverColor');
+    deprecateProp(this.props, 'iconStyles', 'styles', 'simple-select');
+    deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
 
     window.addEventListener('keydown', this._handleKeyDown);
-
-    if (this.props.iconStyles) {
-      console.warn('The iconStyles prop is deprecated and will be removed in a future release. Please use styles.');
-    }
-
-    if (this.props.menuStyles) {
-      console.warn('The menuStyles prop is deprecated and will be removed in a future release. Please use styles.');
-    }
   }
 
   componentWillUnmount () {
