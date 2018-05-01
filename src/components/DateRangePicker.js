@@ -402,7 +402,7 @@ class DateRangePicker extends React.Component {
                               ].map(day => {
                                 return (
                                   <div
-                                    aria-label={`Column Header for ${day.value}`}
+                                    aria-hidden={true}
                                     key={day.value}
                                     role='option'
                                     style={styles.calendarWeekDay}

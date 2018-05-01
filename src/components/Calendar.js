@@ -283,9 +283,8 @@ class Calendar extends React.Component {
           {daysOfWeek.map((day) => {
             return (
               <div
-                aria-label={`Column Header for ${day.label}`}
+                aria-hidden={true}
                 key={day.label}
-                role='option'
                 style={styles.calendarWeekDay}
               >
                 {day.value}
