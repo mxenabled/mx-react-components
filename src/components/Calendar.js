@@ -250,7 +250,7 @@ class Calendar extends React.Component {
 
     return (
       <div style={styles.component}>
-        <div style={styles.calendarHeaderBar}>
+        <div style={styles.calendarHeader}>
           <a
             aria-label={`Go back a month to ${previousMonthText}`}
             onClick={this._handlePreviousClick}
@@ -264,7 +264,7 @@ class Calendar extends React.Component {
               type='caret-left'
             />
           </a>
-          <h2 aria-label={`Currently in ${currentMonthText}`} style={styles.calendarHeaderMonthText}>{currentMonthText}</h2>
+          <div aria-label={`Currently in ${currentMonthText}`} role='heading'>{currentMonthText}</div>
           <a
             aria-label={`Go forward a month to ${nextMonthText}`}
             onClick={this._handleNextClick}
@@ -311,7 +311,7 @@ class Calendar extends React.Component {
       },
 
       //Calendar Header
-      calendarHeaderBar: {
+      calendarHeader: {
         alignItems: 'center',
         color: theme.Colors.GRAY_700,
         display: 'flex',
@@ -325,11 +325,6 @@ class Calendar extends React.Component {
       calendayHeaderNav: {
         width: 35,
         cursor: 'pointer'
-      },
-      calendarHeaderMonthText: {
-        fontSize: theme.FontSizes.LARGE,
-        margin: 0,
-        fontFamily: theme.Fonts.SEMIBOLD
       },
 
       //Calendar week
