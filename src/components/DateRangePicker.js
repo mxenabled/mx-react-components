@@ -404,7 +404,6 @@ class DateRangePicker extends React.Component {
                                   <div
                                     aria-hidden={true}
                                     key={day.value}
-                                    role='option'
                                     style={styles.calendarWeekDay}
                                   >
                                     {day.label}
