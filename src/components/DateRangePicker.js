@@ -311,6 +311,7 @@ class DateRangePicker extends React.Component {
           onClick={this._toggleSelectionPane}
           onKeyDown={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           ref={this.props.elementRef}
+          role='button'
           style={styles.selectedDateWrapper}
           tabIndex={0}
         >
