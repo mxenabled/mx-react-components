@@ -29,7 +29,13 @@ class Selector extends React.Component {
         >
           <Icon size={20} style={styles.calendarHeaderNav} type='caret-left' />
         </a>
-        <div style={styles.currentDate}>{this.props.currentDate}</div>
+        <div
+          aria-label={`Currently in ${this.props.currentDate}`}
+          role='heading'
+          style={styles.currentDate}
+        >
+          {this.props.currentDate}
+        </div>
         <a
           aria-label={`Next ${this.props.type}`}
           onClick={this.props.handleNextClick}
