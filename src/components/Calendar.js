@@ -254,6 +254,7 @@ class Calendar extends React.Component {
             aria-label={`Go back a month to ${previousMonthText}`}
             onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
+            role='option'
             tabIndex={0}
           >
             <Icon
@@ -267,6 +268,7 @@ class Calendar extends React.Component {
             aria-label={`Go forward a month to ${nextMonthText}`}
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
+            role='option'
             tabIndex={0}
           >
             <Icon
@@ -279,7 +281,12 @@ class Calendar extends React.Component {
         <div style={styles.calendarWeekHeader}>
           {daysOfWeek.map((day) => {
             return (
-              <div aria-label={day.label} key={day.label} style={styles.calendarWeekDay}>
+              <div
+                aria-label={`Column Header for ${day.label}`}
+                key={day.label}
+                role='option'
+                style={styles.calendarWeekDay}
+              >
                 {day.value}
               </div>
             );
