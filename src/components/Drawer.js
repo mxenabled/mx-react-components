@@ -98,7 +98,13 @@ class Drawer extends React.Component {
     window.addEventListener('resize', this._resizeThrottled);
 
     if (this.props.focusOnLoad) {
-      this._closeButton.focus();
+      // Close button might not be present depending on showCloseButtonProp
+      if (this.props.showCloseButton && this._closeButton) {
+        this._closeButton.focus();
+      // Fall back to focusing the component if no close button
+      } else if (this._component) {
+        this._component.focus();
+      }
     }
   }
 
