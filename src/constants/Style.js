@@ -1,4 +1,30 @@
 const Style = {
+  AccessibilityStyles: {
+
+    /**
+     * Recommended way to hide elements visually but
+     * still allow screen readers to read them.
+     * Verified working in Chrome, Firefox, Safari, IE 11, and Edge
+     *
+     * See https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+     *
+     * We've used the HTML 5 boiler plate version here as it has corrected some minor
+     * issues with the version in the linked article above.
+     * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L130
+     **/
+    VISUALLY_HIDDEN: {
+      border: 0,
+      clip: 'rect(0 0 0 0)',
+      height: 1,
+      margin: -1,
+      overflow: 'hidden',
+      padding: 0,
+      position: 'absolute',
+      width: 1,
+      whiteSpace: 'nowrap'
+    }
+  },
+
   BreakPoints: {
     large: 1200,
     medium: 768,

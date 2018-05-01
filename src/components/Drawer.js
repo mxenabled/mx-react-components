@@ -98,7 +98,7 @@ class Drawer extends React.Component {
     window.addEventListener('resize', this._resizeThrottled);
 
     if (this.props.focusOnLoad) {
-      this._component.focus();
+      this._closeButton.focus();
     }
   }
 
@@ -268,6 +268,7 @@ class Drawer extends React.Component {
                   {this.props.showCloseButton &&
                     <Button
                       aria-label={`Close ${this.props.title} Drawer`}
+                      buttonRef={ref => (this._closeButton = ref)}
                       icon='go-back'
                       onClick={this.close}
                       theme={theme}

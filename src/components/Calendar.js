@@ -205,6 +205,7 @@ class Calendar extends React.Component {
                 }}
                 onKeyDown={e => this._handleDayKeyDown(e, day)}
                 ref={dayAnchorTag => (this[day.unix()] = dayAnchorTag)}
+                role='button'
                 style={Object.assign(
                   {},
                   styles.calendarDay,
@@ -254,6 +255,7 @@ class Calendar extends React.Component {
             aria-label={`Go back a month to ${previousMonthText}`}
             onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
+            role='button'
             tabIndex={0}
           >
             <Icon
@@ -262,11 +264,12 @@ class Calendar extends React.Component {
               type='caret-left'
             />
           </a>
-          <div aria-label={currentMonthText}>{currentMonthText}</div>
+          <div aria-label={`Currently in ${currentMonthText}`} role='heading'>{currentMonthText}</div>
           <a
             aria-label={`Go forward a month to ${nextMonthText}`}
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
+            role='button'
             tabIndex={0}
           >
             <Icon
@@ -279,7 +282,11 @@ class Calendar extends React.Component {
         <div style={styles.calendarWeekHeader}>
           {daysOfWeek.map((day) => {
             return (
-              <div aria-label={day.label} key={day.label} style={styles.calendarWeekDay}>
+              <div
+                aria-hidden={true}
+                key={day.label}
+                style={styles.calendarWeekDay}
+              >
                 {day.value}
               </div>
             );

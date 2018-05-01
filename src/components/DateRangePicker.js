@@ -311,6 +311,7 @@ class DateRangePicker extends React.Component {
           onClick={this._toggleSelectionPane}
           onKeyDown={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           ref={this.props.elementRef}
+          role='button'
           style={styles.selectedDateWrapper}
           tabIndex={0}
         >
@@ -401,7 +402,7 @@ class DateRangePicker extends React.Component {
                               ].map(day => {
                                 return (
                                   <div
-                                    aria-label={day.value}
+                                    aria-hidden={true}
                                     key={day.value}
                                     style={styles.calendarWeekDay}
                                   >
