@@ -205,7 +205,7 @@ class Calendar extends React.Component {
                 }}
                 onKeyDown={e => this._handleDayKeyDown(e, day)}
                 ref={dayAnchorTag => (this[day.unix()] = dayAnchorTag)}
-                role='option'
+                role='button'
                 style={Object.assign(
                   {},
                   styles.calendarDay,
@@ -255,7 +255,7 @@ class Calendar extends React.Component {
             aria-label={`Go back a month to ${previousMonthText}`}
             onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
-            role='option'
+            role='button'
             tabIndex={0}
           >
             <Icon
@@ -269,7 +269,7 @@ class Calendar extends React.Component {
             aria-label={`Go forward a month to ${nextMonthText}`}
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
-            role='option'
+            role='button'
             tabIndex={0}
           >
             <Icon
