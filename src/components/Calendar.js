@@ -205,6 +205,7 @@ class Calendar extends React.Component {
                 }}
                 onKeyDown={e => this._handleDayKeyDown(e, day)}
                 ref={dayAnchorTag => (this[day.unix()] = dayAnchorTag)}
+                role='option'
                 style={Object.assign(
                   {},
                   styles.calendarDay,
