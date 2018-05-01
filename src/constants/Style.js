@@ -6,8 +6,6 @@ const Style = {
      * still allow screen readers to read them.
      * Verified working in Chrome, Firefox, Safari, IE 11, and Edge
      *
-     * Used for H1 Budgets title
-     *
      * See https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
      *
      * We've used the HTML 5 boiler plate version here as it has corrected some minor
