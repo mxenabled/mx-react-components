@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.9</h3>
+        <ul>
+          <li>Fix bug with Drawer introduced in 5.2.8 (<a href='https://github.com/mxenabled/mx-react-components/pull/740'>#740</a>)</li>
+        </ul>
+
         <h3>5.2.8</h3>
         <ul>
           <li>Accessibility improvements - Calendar, DateRangePicker, and Drawer (<a href='https://github.com/mxenabled/mx-react-components/pull/739'>#739</a>)</li>
