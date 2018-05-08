@@ -282,9 +282,9 @@ class Drawer extends React.Component {
                     />
                   }
                 </span>
-                <h1 id={titleUniqueId} style={styles.title}>
+                <h2 id={titleUniqueId} style={styles.title}>
                   {this.props.title}
-                </h1>
+                </h2>
                 <div style={styles.headerMenu}>
                   {menu}
                 </div>
