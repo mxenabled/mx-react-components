@@ -254,8 +254,9 @@ class Drawer extends React.Component {
     return (
       <StyleRoot>
         <MXFocusTrap {...mergedFocusTrapProps}>
-          <div onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
+          <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
+              className='mx-drawer-scrim'
               onClick={() => {
                 if (this.props.closeOnScrimClick) this.close();
               }}
@@ -269,12 +270,13 @@ class Drawer extends React.Component {
               style={{ ...styles.component, ...this.props.style }}
               tabIndex={0}
             >
-              <header style={{ ...styles.header, ...this.props.headerStyle }}>
+              <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
                       aria-label={`Close ${this.props.title} Drawer`}
                       buttonRef={ref => (this._closeButton = ref)}
+                      className='mx-drawer-close'
                       icon='go-back'
                       onClick={this.close}
                       theme={theme}
@@ -285,11 +287,11 @@ class Drawer extends React.Component {
                 <h2 id={titleUniqueId} style={styles.title}>
                   {this.props.title}
                 </h2>
-                <div style={styles.headerMenu}>
+                <div className='mx-drawer-header-menu' style={styles.headerMenu}>
                   {menu}
                 </div>
               </header>
-              <div style={{ ...styles.content, ...this.props.contentStyle }}>
+              <div className='mx-drawer-content' style={{ ...styles.content, ...this.props.contentStyle }}>
                 {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
               </div>
             </div>

@@ -13,7 +13,7 @@ class DefaultRanges extends React.Component {
     const { defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles } = this.props;
 
     return (
-      <div style={styles.rangeOptions}>
+      <div className='mx-default-ranges' style={styles.rangeOptions}>
 
         {defaultRanges.map((range, index) => (
           <div

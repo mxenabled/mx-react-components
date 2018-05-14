@@ -39,7 +39,7 @@ class HeaderMenu extends React.Component {
     );
 
     return (
-      <div style={{ width: 150 }}>
+      <div className='mx-header-menu' style={{ width: 150 }}>
         <Button
           icon={this.props.buttonIcon}
           onClick={this.toggle}

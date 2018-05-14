@@ -39,7 +39,7 @@ class SelectionPane extends React.Component {
     const { selectedStartDate, selectedEndDate } = this.props;
 
     return (
-      <div style={styles.container}>
+      <div className='mx-selection-pane' style={styles.container}>
         <div>
           <label style={styles.boxLabel}>From</label>
           <a

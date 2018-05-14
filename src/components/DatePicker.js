@@ -88,7 +88,7 @@ class DatePicker extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div ref={this.props.elementRef} style={styles.component}>
+      <div className='mx-date-picker' ref={this.props.elementRef} style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
             size={20}

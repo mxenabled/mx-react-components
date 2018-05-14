@@ -90,6 +90,7 @@ class Menu extends React.Component {
 
     return (
       <div
+        className='mx-menu'
         onClick={this.props.onClick}
         style={Object.assign({}, styles.component, this.props.style)}
       >

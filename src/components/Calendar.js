@@ -249,7 +249,7 @@ class Calendar extends React.Component {
     const previousMonthText = moment.unix(this.state.currentDate).subtract(1, 'month').format('MMMM YYYY');
 
     return (
-      <div style={styles.component}>
+      <div className='mx-calendar' style={styles.component}>
         <div style={styles.calendarHeader}>
           <a
             aria-label={`Go back a month to ${previousMonthText}`}

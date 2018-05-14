@@ -88,7 +88,7 @@ class MonthTable extends React.Component {
       startDate = startDate.add(1, 'd');
     }
 
-    return (<div style={styles.calendarTable}>{days}</div>);
+    return (<div className='mx-month-table' style={styles.calendarTable}>{days}</div>);
   }
 }
 
