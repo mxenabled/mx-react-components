@@ -26,7 +26,7 @@ class ProgressBar extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div style={styles.component}>
+      <div className='mx-progress-bar' style={styles.component}>
         <div style={styles.progress}>{this.props.children}</div>
       </div>
     );

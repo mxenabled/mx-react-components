@@ -57,6 +57,7 @@ class TextArea extends React.Component {
 
     return (
       <div
+        className='mx-text-area'
         onBlur={this._onBlur}
         onFocus={this._onFocus}
         ref={this.props.elementRef}
