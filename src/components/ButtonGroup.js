@@ -39,7 +39,7 @@ class ButtonGroup extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div>
+      <div className='mx-button-group'>
         {this.props.buttons.map((button, i) => {
           const isFirstChild = i === 0;
           const isLastChild = i === this.props.buttons.length - 1;

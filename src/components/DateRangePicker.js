@@ -301,7 +301,7 @@ class DateRangePicker extends React.Component {
     };
 
     return (
-      <div style={styles.component}>
+      <div className='mx-date-range-picker' style={styles.component}>
         <a
           aria-label={`${placeholderText}${
             this.props.selectedStartDate && this.props.selectedEndDate ?

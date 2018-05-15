@@ -82,7 +82,7 @@ class Tooltip extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div style={styles.component}>
+      <div className='mx-tooltip' style={styles.component}>
         {this.state.showTooltip ? (
           <div style={styles.tooltip}>
             {this.props.children}

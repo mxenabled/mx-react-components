@@ -31,7 +31,7 @@ class Tab extends React.Component {
       style = Object.assign({}, style, styles.activeTab, this.props.styles.activeTab);
 
     return (
-      <span onClick={this.props.onClick} style={style}>
+      <span className='mx-tab' onClick={this.props.onClick} style={style}>
         {this.props.children}
       </span>
     );

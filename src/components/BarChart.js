@@ -353,7 +353,7 @@ class BarChart extends React.Component {
       .rangeRoundBands([0, widthMargin], 0.2);
 
     return (
-      <div style={Object.assign({}, styles.component, this.props.style)}>
+      <div className='mx-bar-chart' style={Object.assign({}, styles.component, this.props.style)}>
         <svg
           height={height + margin.top + margin.bottom}
           preserveAspectRatio='xMinYMin meet'

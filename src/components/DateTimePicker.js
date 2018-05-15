@@ -158,7 +158,7 @@ class DatePicker extends React.Component {
     const spans = this.spans();
 
     return (
-      <Container fluid={true}>
+      <Container className='mx-date-time-picker' fluid={true}>
         <Row>
           <Column span={spans.date}>
             <div

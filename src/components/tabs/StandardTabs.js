@@ -11,7 +11,7 @@ const StandardTabs = ({
   tabs,
   theme
 }) => (
-  <div style={style}>
+  <div className='mx-standard-tabs' style={style}>
     {tabs.map((tab, index) => (
       <Tab
         isActive={selectedTab === index}

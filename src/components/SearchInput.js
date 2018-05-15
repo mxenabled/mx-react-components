@@ -34,7 +34,7 @@ class SearchInput extends React.Component {
     const styles = this.styles();
 
     return (
-      <div style={Object.assign({}, styles.component, this.props.style)}>
+      <div className='mx-search-input' style={Object.assign({}, styles.component, this.props.style)}>
         <Input
           elementProps={{
             onBlur: this.props.onBlur,

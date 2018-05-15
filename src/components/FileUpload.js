@@ -259,6 +259,7 @@ class FileUpload extends React.Component {
 
     return (
       <div
+        className='mx-file-upload'
         onClick={this._onDropzoneClick}
         onDragLeave={this._onDragLeave}
         onDragOver={this._onDragOver}

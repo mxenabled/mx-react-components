@@ -106,6 +106,7 @@ class Listbox extends React.Component {
     return (
       <div
         aria-label={this.props['aria-label']}
+        className='mx-listbox'
         ref={ref => this.component = ref}
         role='listbox'
         style={this.props.style}
