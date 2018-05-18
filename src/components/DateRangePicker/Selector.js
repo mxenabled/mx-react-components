@@ -21,16 +21,22 @@ class Selector extends React.Component {
       <div className='mx-selector' style={Object.assign({}, this.props.style, styles.container)}>
         <a
           aria-label={`Previous ${this.props.type}`}
+          className='mx-selector-previous'
           onClick={this.props.handlePreviousClick}
           onKeyUp={e =>
             keycode(e) === 'enter' && this.props.handlePreviousClick(e)}
           role='button'
           tabIndex={0}
         >
-          <Icon size={20} style={styles.calendarHeaderNav} type='caret-left' />
+          <Icon
+            size={20}
+            style={styles.calendarHeaderNav}
+            type='caret-left'
+          />
         </a>
         <div
           aria-label={`Currently in ${this.props.currentDate}`}
+          className='mx-selector-current-date'
           role='heading'
           style={styles.currentDate}
         >
@@ -38,12 +44,17 @@ class Selector extends React.Component {
         </div>
         <a
           aria-label={`Next ${this.props.type}`}
+          className='mx-selector-next'
           onClick={this.props.handleNextClick}
           onKeyUp={e => keycode(e) === 'enter' && this.props.handleNextClick(e)}
           role='button'
           tabIndex={0}
         >
-          <Icon size={20} style={styles.calendarHeaderNav} type='caret-right' />
+          <Icon
+            size={20}
+            style={styles.calendarHeaderNav}
+            type='caret-right'
+          />
         </a>
       </div>
     );

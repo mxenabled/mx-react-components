@@ -17,6 +17,7 @@ class DefaultRanges extends React.Component {
 
         {defaultRanges.map((range, index) => (
           <div
+            className='mx-default-ranges-range'
             key={range.displayValue + range.getStartDate()}
             onClick={() => {
               handleDefaultRangeSelection(range);

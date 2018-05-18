@@ -292,7 +292,7 @@ class DatePickerFullScreen extends React.Component {
             />
             <div style={styles.closeText}>ESC</div>
           </div>
-          <div className='mx-date-picker-full-screen-calendar-wrapper' style={styles.calendarWrapper}>
+          <div className='mx-date-picker-full-screen-calendar' style={styles.calendarWrapper}>
             {this._renderTitle(styles)}
             <div className='mx-date-picker-full-screen-calendar-header' key='calendarHeader' style={[styles.calendarHeader, { borderBottomStyle: this.props.showDayBorders ? 'solid' : 'none' }, styles.clearFix]}>
               <Icon

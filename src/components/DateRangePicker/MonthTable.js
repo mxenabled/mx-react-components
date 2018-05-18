@@ -60,6 +60,7 @@ class MonthTable extends React.Component {
         <a
           aria-label={ariaLabelDateText + ariaLabelStateText}
           aria-pressed={isSelectedDay}
+          className='mx-month-table-day'
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown}

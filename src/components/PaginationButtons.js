@@ -52,6 +52,7 @@ class PaginationButtons extends React.Component {
     const style = styles.component;
 
     return {
+      className: 'mx-pagination-previous',
       icon: 'caret-left',
       onClick: this._handleButtonClick.bind(null, 'prev'),
       style,
@@ -64,6 +65,7 @@ class PaginationButtons extends React.Component {
     const style = styles.component;
 
     return {
+      className: 'mx-pagination-next',
       icon: 'caret-right',
       onClick: this._handleButtonClick.bind(null, 'next'),
       style,

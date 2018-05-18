@@ -322,7 +322,7 @@ class DateRangePicker extends React.Component {
               type='calendar'
             />
           ) : null}
-          <div style={styles.selectedDateText}>
+          <div className='mx-date-range-picker-selected-date-text' style={styles.selectedDateText}>
             {this.props.selectedStartDate && this.props.selectedEndDate ? (
               <div>
                 <span>{selectedStartDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
@@ -342,7 +342,7 @@ class DateRangePicker extends React.Component {
             {this.state.showSelectionPane ? (
               <MXFocusTrap {...mergedFocusTrapProps}>
                 <div style={styles.optionsWrapper}>
-                  <div style={styles.column}>
+                  <div className='mx-date-range-picker-pane' style={styles.column}>
                     <div style={styles.row}>
                       {!this.state.showCalendar && (
                         <div>
@@ -371,8 +371,8 @@ class DateRangePicker extends React.Component {
 
                       {showCalendar ? (
                         <div>
-                          <div style={styles.calendarWrapper}>
-                            <div style={styles.calendarHeader}>
+                          <div className='mx-date-range-picker-calendar' style={styles.calendarWrapper}>
+                            <div className='mx-date-range-picker-calendar-header' style={styles.calendarHeader}>
                               <MonthSelector
                                 currentDate={this.state.currentDate}
                                 setCurrentDate={currentDate =>
@@ -390,7 +390,7 @@ class DateRangePicker extends React.Component {
                                   })}
                               />
                             </div>
-                            <div style={styles.calendarWeek}>
+                            <div className='mx-date-range-picker-week-label' style={styles.calendarWeek}>
                               {[
                                 { label: 'S', value: 'Sunday' },
                                 { label: 'M', value: 'Monday' },
