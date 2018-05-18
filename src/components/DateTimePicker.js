@@ -74,15 +74,9 @@ class DatePicker extends React.Component {
     deprecatePrimaryColor(this.props);
   }
 
-  _handleDateBlur = () => {
+  _toggleCalendar = () => {
     this.setState({
-      showCalendar: false
-    });
-  };
-
-  _handleDateFocus = () => {
-    this.setState({
-      showCalendar: true
+      showCalendar: !this.state.showCalendar
     });
   };
 
@@ -162,9 +156,7 @@ class DatePicker extends React.Component {
         <Row>
           <Column span={spans.date}>
             <div
-              onBlur={this._handleDateBlur}
-              onClick={this._handleDateClick}
-              onFocus={this._handleDateFocus}
+              onClick={this._toggleCalendar}
               ref={(ref) => this.elementRef = ref}
               style={Object.assign({}, styles.selectWrapper, this.state.showCalendar ? styles.activeSelectWrapper : null)}
               tabIndex={0}
@@ -184,14 +176,14 @@ class DatePicker extends React.Component {
                 style={styles.selectedDateCaret}
                 type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
               />
-              <div style={styles.calendarWrapper}>
-                <Calendar
-                  {...this.props}
-                  onDateSelect={this._handleDateSelect}
-                  style={styles.calendar}
-                  theme={theme}
-                />
-              </div>
+            </div>
+            <div style={styles.calendarWrapper}>
+              <Calendar
+                {...this.props}
+                onDateSelect={this._handleDateSelect}
+                style={styles.calendar}
+                theme={theme}
+              />
             </div>
           </Column>
           {this.props.children ? (
