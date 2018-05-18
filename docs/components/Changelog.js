@@ -7,6 +7,12 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+
+        <h3>5.2.12</h3>
+        <ul>
+          <li>Add more class names various components (<a href='https://github.com/mxenabled/mx-react-components/pull/743'>#743</a>)</li>
+        </ul>
+
         <h3>5.2.11</h3>
         <ul>
           <li>Add top-level classes to all components (<a href='https://github.com/mxenabled/mx-react-components/pull/742'>#742</a>)</li>
