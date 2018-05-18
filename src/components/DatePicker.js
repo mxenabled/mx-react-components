@@ -91,20 +91,22 @@ class DatePicker extends React.Component {
       <div className='mx-date-picker' ref={this.props.elementRef} style={styles.component}>
         <div onClick={this._toggleCalendar} style={styles.selectedDateWrapper}>
           <Icon
+            className='mx-date-picker-icon-calendar'
             size={20}
             style={styles.selectedDateIcon}
             type='calendar'
           />
-          <div style={styles.selectedDateText}>
+          <div className='mx-selected-date-text' style={styles.selectedDateText}>
             {(this.props.selectedDate || this.props.defaultDate) ? moment.unix(this.props.selectedDate || this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
           </div>
           <Icon
+            className='mx-date-picker-icon-caret'
             size={20}
             style={styles.selectedDateCaret}
             type={this.state.showCalendar ? 'caret-up' : 'caret-down'}
           />
         </div>
-        <div style={styles.calendarWrapper}>
+        <div className='mx-selected-date-calendar' style={styles.calendarWrapper}>
           <Calendar
             onDateSelect={this._handleDateSelect}
             selectedDate={this.state.currentDate}
@@ -113,7 +115,7 @@ class DatePicker extends React.Component {
           />
         </div>
         {(this.state.showCalendar) ? (
-          <div onClick={this._handleScrimClick} style={styles.scrim} />
+          <div className='mx-date-picker-scrim' onClick={this._handleScrimClick} style={styles.scrim} />
         ) : null }
       </div>
     );
