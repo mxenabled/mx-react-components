@@ -13,7 +13,7 @@ const getFocusableNodesInElement = el => {
   return focusableNodes && focusableNodes.length ? focusableNodes.filter(node => {
     const nodeTabIndexAttr = parseInt(node.getAttribute('tabindex'), 10);
     const nodeTabIndex = isNaN(nodeTabIndexAttr) ? 0 : nodeTabIndexAttr;
-    const nodeAriaHiddenAttr = node.getAttribute('aria-hidden');
+    const nodeAriaHiddenAttr = node.getAttribute('aria-hidden') === 'true';
 
     return nodeTabIndex >= 0 && !nodeAriaHiddenAttr;
   }) : [];
