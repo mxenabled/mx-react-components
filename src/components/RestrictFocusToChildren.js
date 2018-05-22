@@ -9,7 +9,6 @@ module.exports = class RestrictFocusToChildren extends React.Component {
   constructor (props, context) {
     super(props, context);
 
-    this._wrapper = React.createRef();
     this.focusableNodesInParent = [];
     this.focusableNodesInWrapper = [];
     this.preservedTabIndexValues = [];
