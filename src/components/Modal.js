@@ -32,7 +32,6 @@ class Modal extends React.Component {
     color: PropTypes.string,
     contentStyle: PropTypes.object,
     focusOnLoad: PropTypes.bool,
-    focusTrapProps: PropTypes.object,
     footerContent: PropTypes.node,
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
@@ -54,7 +53,6 @@ class Modal extends React.Component {
   static defaultProps = {
     buttons: [],
     focusOnLoad: true,
-    focusTrapProps: {},
     isRelative: false,
     role: 'dialog',
     showCloseIcon: true,
@@ -190,12 +188,6 @@ class Modal extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
     const styles = this.styles(theme);
-    const mergedFocusTrapProps = {
-      focusTrapOptions: {
-        clickOutsideDeactivates: true
-      },
-      ...this.props.focusTrapProps
-    };
 
     return (
       <MXFocusTrap {...mergedFocusTrapProps}>
