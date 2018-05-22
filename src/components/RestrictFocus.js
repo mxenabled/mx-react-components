@@ -10,25 +10,31 @@ module.exports = class RestrictFocus extends React.Component {
     super(props, context);
 
     this._wrapper = React.createRef();
-
-    this.state = {
-      focusableDOMNodes: []
-    };
+    this.focusableDOMNodes = [];
   }
 
   componentDidMount () {
-    this.setState({ focusableDOMNodes: reconcileNodeArrays(
-      getFocusableNodesInElement(document),
-      getFocusableNodesInElement(this._wrapper.current))
-    }, () => {
-      this.state.focusableDOMNodes.forEach(node => {
-        setNodeAttributes(node, { tabindex: -1, 'aria-hidden': true });
-      });
+    const focusableNodesInDocument = getFocusableNodesInElement(document);
+    const focusableNodesInWrapper = getFocusableNodesInElement(this._wrapper);
+
+    this.focusableDOMNodes = reconcileNodeArrays(
+      focusableNodesInDocument,
+      focusableNodesInWrapper
+    );
+
+    this.focusableDOMNodes.forEach(node => {
+      setNodeAttributes(node, { tabindex: -1, 'aria-hidden': true });
+    });
+
+    console.log('DidMount Test', {
+      focusableNodesInDocument,
+      focusableNodesInWrapper,
+      focusableDOMNodes: this.focusableDOMNodes
     });
   }
 
   componentWillUnmount () {
-    this.state.focusableDOMNodes.forEach(node => {
+    this.focusableDOMNodes.forEach(node => {
       setNodeAttributes(node, { tabindex: 0, 'aria-hidden': false });
     });
   }
