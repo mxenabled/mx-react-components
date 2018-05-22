@@ -49,6 +49,17 @@ const getFocusableNodesInElement = el => {
   }) : [];
 };
 
+/**
+ *  reconcileNodeArrays
+ *
+ * Returns a filtered array of DOM nodes where
+ * nodes in the childFocusableNodes param have
+ * been filtered out of the allFocusableNodes
+ * param.
+ *
+ * @param {array of DOM nodes} allFocusableNodes
+ * @param {array of DOM nodes} childFocusableNodes
+ */
 const reconcileNodeArrays = (allFocusableNodes, childFocusableNodes) => {
   return allFocusableNodes.filter(node => {
     return childFocusableNodes.indexOf(node) === -1;
