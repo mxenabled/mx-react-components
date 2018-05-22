@@ -11,16 +11,18 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
     this._wrapper = React.createRef();
     this.focusableNodesInParent = [];
+    this.focusableNodesInWrapper = [];
     this.preservedTabIndexValues = [];
+    this.previousFocusedNode = document.activeElement;
   }
 
   componentDidMount () {
     const focusableNodesInDocument = getFocusableNodesInElement(document);
-    const focusableNodesInWrapper = getFocusableNodesInElement(this._wrapper);
 
+    this.focusableNodesInWrapper = getFocusableNodesInElement(this._wrapper);
     this.focusableNodesInParent = reconcileNodeArrays(
       focusableNodesInDocument,
-      focusableNodesInWrapper
+      this.focusableNodesInWrapper
     );
 
     this.focusableNodesInParent.forEach(node => {
@@ -39,6 +41,19 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
       node.removeAttribute('aria-hidden');
     });
+
+    this._tryFocusPreviousNode();
+  }
+
+  _tryFocusPreviousNode () {
+    const node = this.previousFocusedNode || this.focusableNodesInWrapper[0];
+
+    if (!node || !node.focus || node === document.activeElement) return;
+
+    node.focus();
+    if (node.tagName.toLowerCase() === 'input') {
+      node.select();
+    }
   }
 
   render () {
