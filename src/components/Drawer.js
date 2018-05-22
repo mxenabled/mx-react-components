@@ -12,7 +12,7 @@ const { StyleRoot } = require('radium');
 
 import { withTheme } from './Theme';
 const Button = require('../components/Button');
-const MXFocusTrap = require('../components/MXFocusTrap');
+const RestrictFocusToChildren = require('../components/RestrictFocusToChildren');
 
 const { themeShape } = require('../constants/App');
 
@@ -244,7 +244,7 @@ class Drawer extends React.Component {
 
     return (
       <StyleRoot>
-        <MXFocusTrap>
+        <RestrictFocusToChildren>
           <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
               className='mx-drawer-scrim'
@@ -287,7 +287,7 @@ class Drawer extends React.Component {
               </div>
             </div>
           </div>
-        </MXFocusTrap>
+        </RestrictFocusToChildren>
       </ StyleRoot>
     );
   }
