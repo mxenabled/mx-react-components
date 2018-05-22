@@ -1,32 +1,36 @@
 const React = require('react');
+const {
+  getFocusableNodesInElement,
+  reconcileNodeArrays,
+  setNodeAttributes
+} = require('utils/FocusManagement');
 
 module.exports = class RestrictFocus extends React.Component {
   constructor (props, context) {
     super(props, context);
 
+    this._wrapper = React.createRef();
+
     this.state = {
-      focusableDOMNodes: [],
-      focusableWrapperNodes: []
+      focusableDOMNodes: []
     };
   }
 
   componentDidMount () {
-
-    /**
-     * 1. Query _wrapper and find focusable items
-     * 2. Query DOM and find focusable items
-     * 3. Filter out wrapper focusable nodes from DOM
-     * nodes array
-     * 4. aria hide and tab index -1 DOM nodes
-     */
+    this.setState({ focusableDOMNodes: reconcileNodeArrays(
+      getFocusableNodesInElement(document),
+      getFocusableNodesInElement(this._wrapper.current))
+    }, () => {
+      this.state.focusableDOMNodes.forEach(node => {
+        setNodeAttributes(node, { tabindex: -1, 'aria-hidden': true });
+      });
+    });
   }
 
   componentWillUnmount () {
-
-    /**
-     * Remove aria hidden attribue and set
-     * tabindex to 0 on DOM nodes
-     */
+    this.state.focusableDOMNodes.forEach(node => {
+      setNodeAttributes(node, { tabindex: 0, 'aria-hidden': false });
+    });
   }
 
   render () {
