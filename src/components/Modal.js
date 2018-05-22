@@ -4,7 +4,7 @@ const React = require('react');
 import { withTheme } from './Theme';
 const Button = require('./Button');
 const Icon = require('./Icon');
-const RestrictFocus = require('../components/RestrictFocus');
+const RestrictFocusToChildren = require('../components/RestrictFocusToChildren');
 
 const _merge = require('lodash/merge');
 
@@ -190,7 +190,7 @@ class Modal extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <RestrictFocus>
+      <RestrictFocusToChildren>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
@@ -230,7 +230,7 @@ class Modal extends React.Component {
             )}
           </div>
         </div>
-      </RestrictFocus>
+      </RestrictFocusToChildren>
     );
   }
 

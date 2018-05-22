@@ -5,7 +5,7 @@ const {
   setNodeAttributes
 } = require('utils/FocusManagement');
 
-module.exports = class RestrictFocus extends React.Component {
+module.exports = class RestrictFocusToChildren extends React.Component {
   constructor (props, context) {
     super(props, context);
 
