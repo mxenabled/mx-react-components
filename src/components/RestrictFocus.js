@@ -25,12 +25,6 @@ module.exports = class RestrictFocus extends React.Component {
     this.focusableDOMNodes.forEach(node => {
       setNodeAttributes(node, { tabindex: -1, 'aria-hidden': true });
     });
-
-    console.log('DidMount Test', {
-      focusableNodesInDocument,
-      focusableNodesInWrapper,
-      focusableDOMNodes: this.focusableDOMNodes
-    });
   }
 
   componentWillUnmount () {
