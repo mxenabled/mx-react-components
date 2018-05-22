@@ -117,6 +117,7 @@ class Bar extends React.Component {
 
     return (
       <path
+        className='mx-bar-chart-bar'
         d={this._drawPath({
           x: this.props.x,
           y,
@@ -353,7 +354,7 @@ class BarChart extends React.Component {
       .rangeRoundBands([0, widthMargin], 0.2);
 
     return (
-      <div style={Object.assign({}, styles.component, this.props.style)}>
+      <div className='mx-bar-chart' style={Object.assign({}, styles.component, this.props.style)}>
         <svg
           height={height + margin.top + margin.bottom}
           preserveAspectRatio='xMinYMin meet'
@@ -414,7 +415,7 @@ class BarChart extends React.Component {
           {this.props.yAxis ? this.props.yAxis : null}
           {this.props.xAxis ? this.props.xAxis : null}
           {this.props.threshold ? (
-            <g transform={`translate(${margin.left},${margin.top})`}>
+            <g className='mx-bar-chart-threshold' transform={`translate(${margin.left},${margin.top})`}>
               <line
                 style={styles.threshold}
                 x1={0}
@@ -425,6 +426,7 @@ class BarChart extends React.Component {
             </g>
           ) : null }
           <g
+            className='mx-bar-chart-tooltip'
             ref={(ref) => {
               this.tooltip = ref;
             }}

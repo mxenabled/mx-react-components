@@ -55,7 +55,7 @@ const PillTabs = ({
   };
 
   return (
-    <div style={Object.assign({}, styles.component, style)}>
+    <div className='mx-pill-tabs' style={Object.assign({}, styles.component, style)}>
       <ButtonGroup
         buttons={tabs.map((tab, index) => ({
           'aria-label': tab,

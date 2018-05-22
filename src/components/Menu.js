@@ -90,6 +90,7 @@ class Menu extends React.Component {
 
     return (
       <div
+        className='mx-menu'
         onClick={this.props.onClick}
         style={Object.assign({}, styles.component, this.props.style)}
       >
@@ -101,7 +102,7 @@ class Menu extends React.Component {
           />
         </div>
         {isOpen ? (
-          <div style={Object.assign({}, styles.menu, alignItems === 'right' ? { right: 3 } : { left: 3 })}>
+          <div className='mx-menu-open' style={Object.assign({}, styles.menu, alignItems === 'right' ? { right: 3 } : { left: 3 })}>
             {this._renderItems(styles, theme)}
           </div>
         ) : null}

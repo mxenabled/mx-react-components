@@ -98,7 +98,7 @@ class SimpleSlider extends React.Component {
     const { disabled } = this.props;
 
     return (
-      <div ref={this.props.elementRef} style={styles.component}>
+      <div className='mx-simple-slider' ref={this.props.elementRef} style={styles.component}>
         <div
           onMouseLeave={disabled ? null : this._handleDragEnd}
           onMouseMove={disabled ? null : this._handleDragging}

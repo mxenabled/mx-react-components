@@ -158,7 +158,7 @@ class DatePicker extends React.Component {
     const spans = this.spans();
 
     return (
-      <Container fluid={true}>
+      <Container className='mx-date-time-picker' fluid={true}>
         <Row>
           <Column span={spans.date}>
             <div
@@ -225,7 +225,7 @@ class DatePicker extends React.Component {
                   type='time'
                 />
               ) : (
-                <div style={styles.timeDisplay}>
+                <div className='mx-date-time-picker-time' style={styles.timeDisplay}>
                   {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.timeFormat) : this.props.timePlaceholder}
                 </div>
               )}
