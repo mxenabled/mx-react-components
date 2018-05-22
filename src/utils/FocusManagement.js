@@ -66,6 +66,17 @@ const reconcileNodeArrays = (allFocusableNodes, childFocusableNodes) => {
   });
 };
 
+/**
+ * setNodeAttributes
+ *
+ * Performs a side effect on the provided node param
+ * by changing it's attributes based upon the supplied
+ * attributes param using the nodes setAttribute
+ * function.  Returns nothing.
+ *
+ * @param {DOM node} node
+ * @param {Object} attributes
+ */
 const setNodeAttributes = (node, attributes) => {
   for (const key in attributes) {
     if (attributes.hasOwnProperty(key)) {
