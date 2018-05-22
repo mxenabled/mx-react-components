@@ -8,7 +8,7 @@ const focusableSelectors = [
 ];
 
 const getFocusableNodesInElement = el => {
-  const focusableNodes = el.querySelectorAll(focusableSelectors.join(','));
+  const focusableNodes = Array.prototype.slice.call(el.querySelectorAll(focusableSelectors.join(',')));
 
   return focusableNodes && focusableNodeslength ? focusableNodes.filter(node => {
     const nodeTabIndexAttr = parseInt(node.getAttribute('tabindex'), 10);
