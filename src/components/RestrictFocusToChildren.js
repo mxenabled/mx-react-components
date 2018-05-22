@@ -11,6 +11,7 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
     this._wrapper = React.createRef();
     this.focusableNodesInParent = [];
+    this.preservedTabIndexValues = [];
   }
 
   componentDidMount () {
@@ -23,13 +24,20 @@ module.exports = class RestrictFocusToChildren extends React.Component {
     );
 
     this.focusableNodesInParent.forEach(node => {
+      this.preservedTabIndexValues.push(node.getAttribute('tabindex'));
       setNodeAttributes(node, { tabindex: -1, 'aria-hidden': true });
     });
   }
 
   componentWillUnmount () {
-    this.focusableNodesInParent.forEach(node => {
-      setNodeAttributes(node, { tabindex: 0, 'aria-hidden': false });
+    this.focusableNodesInParent.forEach((node, index) => {
+      if (this.preservedTabIndexValues[index] === null) {
+        node.removeAttribute('tabindex');
+      } else {
+        node.setAttribute('tabindex', this.preservedTabIndexValues[index]);
+      }
+
+      node.removeAttribute('aria-hidden');
     });
   }
 
