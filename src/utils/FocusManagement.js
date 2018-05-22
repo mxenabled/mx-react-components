@@ -17,7 +17,7 @@ const getFocusableNodesInElement = el => {
   });
 };
 
-const removeFocusFromNodes = nodes => {
+const removeFocusAttributesFromNodes = nodes => {
   return nodes.forEach(node => {
     node.setAttribute('tabindex', -1);
     node.setAttribute('aria-hidden', true);
@@ -27,5 +27,5 @@ const removeFocusFromNodes = nodes => {
 module.exports = {
   focusableSelectors,
   getFocusableNodesInElement,
-  removeFocusFromNodes
+  removeFocusAttributesFromNodes
 };
