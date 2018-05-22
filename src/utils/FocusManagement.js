@@ -8,12 +8,20 @@ const focusableSelectors = [
 ];
 
 const getFocusableNodesInElement = el => {
-  return el.querySelectorAll(focusableSelectors.join(',')).filter(node => {
+  const focusableNodes = el.querySelectorAll(focusableSelectors.join(','));
+
+  return focusableNodes && focusableNodeslength ? focusableNodes.filter(node => {
     const nodeTabIndexAttr = parseInt(node.getAttribute('tabindex'), 10);
-    const nodeTabIndex = isNaN(nodeTabIndexAttr) ? node.tabIndex : nodeTabIndexAttr;
+    const nodeTabIndex = isNaN(nodeTabIndexAttr) ? 0 : nodeTabIndexAttr;
     const nodeAriaHiddenAttr = node.getAttribute('aria-hidden');
 
     return nodeTabIndex > 0 && !nodeAriaHiddenAttr;
+  }) : [];
+};
+
+const reconcileNodeArrays = (allFocusableNodes, childFocusableNodes) => {
+  return allFocusableNodes.filter(node => {
+    return childFocusableNodes.indexOf(node) === -1;
   });
 };
 
@@ -25,5 +33,6 @@ const toggleFocusAttributesForNode = (node, focusable) => {
 module.exports = {
   focusableSelectors,
   getFocusableNodesInElement,
+  reconcileNodeArrays,
   toggleFocusAttributesForNode
 };
