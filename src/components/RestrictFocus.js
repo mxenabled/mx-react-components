@@ -41,7 +41,7 @@ module.exports = class RestrictFocus extends React.Component {
 
   render () {
     return (
-      <div ref={ref => this._wrapper = ref}>
+      <div ref={ref => this._wrapper = ref} {...this.props}>
         {this.props.children}
       </div>
     );
