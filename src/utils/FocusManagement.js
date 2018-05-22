@@ -10,7 +10,7 @@ const focusableSelectors = [
 const getFocusableNodesInElement = el => {
   const focusableNodes = Array.prototype.slice.call(el.querySelectorAll(focusableSelectors.join(',')));
 
-  return focusableNodes && focusableNodeslength ? focusableNodes.filter(node => {
+  return focusableNodes && focusableNodes.length ? focusableNodes.filter(node => {
     const nodeTabIndexAttr = parseInt(node.getAttribute('tabindex'), 10);
     const nodeTabIndex = isNaN(nodeTabIndexAttr) ? 0 : nodeTabIndexAttr;
     const nodeAriaHiddenAttr = node.getAttribute('aria-hidden');
