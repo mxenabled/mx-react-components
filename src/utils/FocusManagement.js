@@ -15,7 +15,7 @@ const getFocusableNodesInElement = el => {
     const nodeTabIndex = isNaN(nodeTabIndexAttr) ? 0 : nodeTabIndexAttr;
     const nodeAriaHiddenAttr = node.getAttribute('aria-hidden');
 
-    return nodeTabIndex > 0 && !nodeAriaHiddenAttr;
+    return nodeTabIndex >= 0 && !nodeAriaHiddenAttr;
   }) : [];
 };
 
