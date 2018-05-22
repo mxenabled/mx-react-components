@@ -19,26 +19,23 @@ const getFocusableNodesInElement = el => {
   }) : [];
 };
 
-const hideNode = node => {
-  node.setAttribute('tabindex', -1);
-  node.setAttribute('aria-hidden', true);
-};
-
-const unHideNode = node => {
-  node.setAttribute('tabindex', 0);
-  node.setAttribute('aria-hidden', false);
-};
-
 const reconcileNodeArrays = (allFocusableNodes, childFocusableNodes) => {
   return allFocusableNodes.filter(node => {
     return childFocusableNodes.indexOf(node) === -1;
   });
 };
 
+const setNodeAttributes = (node, attributes) => {
+  for (const key in attributes) {
+    if (attributes.hasOwnProperty(key)) {
+      node.setAttribute(key, attributes[key]);
+    }
+  }
+};
+
 module.exports = {
   focusableSelectors,
   getFocusableNodesInElement,
-  hideNode,
-  unHideNode,
-  reconcileNodeArrays
+  reconcileNodeArrays,
+  setNodeAttributes
 };
