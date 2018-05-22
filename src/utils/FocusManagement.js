@@ -1,11 +1,18 @@
-const focusableSelectors = [
+/**
+ * focusableSelectors - froze array of strings
+ *
+ * Selectors for all HTML elements that are
+ * "focusable" including HTML elements with
+ * a tabindex applied.
+ */
+const focusableSelectors = Object.freeze([
   'input',
   'select',
   'a[href]',
   'textarea',
   'button',
   '[tabindex]'
-];
+]);
 
 const getFocusableNodesInElement = el => {
   const focusableNodes = Array.prototype.slice.call(el.querySelectorAll(focusableSelectors.join(',')));
