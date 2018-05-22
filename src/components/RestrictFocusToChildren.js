@@ -25,7 +25,7 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
     this.focusableNodesInParent.forEach(node => {
       this.preservedTabIndexValues.push(node.getAttribute('tabindex'));
-      setNodeAttributes(node, { tabindex: -1, 'aria-hidden': true });
+      setNodeAttributes(node, { tabindex: -1, 'aria-hidden': !node.contains(this._wrapper) });
     });
   }
 
