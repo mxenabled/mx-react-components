@@ -7,7 +7,7 @@ const _merge = require('lodash/merge');
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
-const MXFocusTrap = require('./MXFocusTrap');
+const RestrictFocusToChildren = require('./RestrictFocusToChildren');
 
 const { themeShape } = require('../constants/App');
 
@@ -61,15 +61,8 @@ class SimpleSelect extends React.Component {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor);
     const styles = this.styles(theme);
 
-    const mergedFocusTrapProps = {
-      focusTrapOptions: {
-        clickOutsideDeactivates: true
-      },
-      ...this.props.focusTrapProps
-    };
-
     return (
-      <MXFocusTrap {...mergedFocusTrapProps}>
+      <RestrictFocusToChildren>
         <div ref={this.props.elementRef} style={styles.component}>
           <Listbox
             aria-label={this.props['aria-label']}
@@ -116,7 +109,7 @@ class SimpleSelect extends React.Component {
             style={styles.scrim}
           />
         </div>
-      </MXFocusTrap>
+      </RestrictFocusToChildren>
     );
   }
 
