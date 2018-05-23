@@ -55,6 +55,14 @@ describe('RestrictFocusToChildren', () => {
       .toEqual(openButton.instance());
   });
 
+  it('should return focus to the last focused node on unmount', () => {
+    const closeButton = wrapper.find('#close-button').first();
+
+    closeButton.simulate('click');
+
+    expect(window.document.activeElement).toEqual(openButton.instance());
+  });
+
   it('should hide content in parent that is focusable when child is rendered', () => {
     const buttonHTML = openButton.html();
 
