@@ -41,6 +41,17 @@ describe('FocusManagement utils', () => {
     );
   });
 
+  afterEach(() => {
+    page.unmount();
+    child.unmount();
+    button.unmount();
+    link.unmount();
+    focusableDiv.unmount();
+    select.unmount();
+    textArea.unmount();
+    input.unmount();
+  });
+
   describe('getFocusableNodesInElement', () => {
     it('should find all focusable nodes that are NOT aria-hidden or have tabIndex 0f -1', () => {
       const focusableNodes = FocusManagement.getFocusableNodesInElement(page.instance());
