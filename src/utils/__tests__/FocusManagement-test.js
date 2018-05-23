@@ -79,4 +79,16 @@ describe('FocusManagement utils', () => {
       expect(filteredNodes).toEqual(expectedFilteredNodes);
     });
   });
+
+  describe('setNodeAttributes', () => {
+    it('should set attributes on a node', () => {
+      const buttonNode = button.instance();
+
+      expect(buttonNode.getAttribute('tabindex')).toEqual(null);
+
+      FocusManagement.setNodeAttributes(buttonNode, { tabindex: -1 });
+
+      expect(buttonNode.getAttribute('tabindex')).toEqual('-1');
+    });
+  });
 });
