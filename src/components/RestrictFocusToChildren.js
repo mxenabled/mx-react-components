@@ -3,7 +3,7 @@ const {
   getFocusableNodesInElement,
   reconcileNodeArrays,
   setNodeAttributes
-} = require('utils/FocusManagement');
+} = require('../utils/FocusManagement');
 
 module.exports = class RestrictFocusToChildren extends React.Component {
   constructor (props, context) {
