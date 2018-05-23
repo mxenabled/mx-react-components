@@ -9,7 +9,7 @@ const _merge = require('lodash/merge');
 
 const Icon = require('./Icon');
 const Button = require('./Button');
-const MXFocusTrap = require('../components/MXFocusTrap');
+const RestrictFocusToChildren = require('../components/RestrictFocusToChildren');
 
 const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
@@ -290,14 +290,6 @@ class DateRangePicker extends React.Component {
     const selectedEndDateFromPropsAsMoment = moment.unix(this.props.selectedEndDate);
     const selectedStartDateFromPropsAsMoment = moment.unix(this.props.selectedStartDate);
 
-    const mergedFocusTrapProps = {
-      focusTrapOptions: {
-        clickOutsideDeactivates: true
-      },
-      paused: false,
-      ...this.props.focusTrapProps
-    };
-
     return (
       <div className='mx-date-range-picker' style={styles.component}>
         <a
@@ -338,7 +330,7 @@ class DateRangePicker extends React.Component {
         <div style={styles.container}>
           <div>
             {this.state.showSelectionPane ? (
-              <MXFocusTrap {...mergedFocusTrapProps}>
+              <RestrictFocusToChildren>
                 <div style={styles.optionsWrapper}>
                   <div className='mx-date-range-picker-pane' style={styles.column}>
                     <div style={styles.row}>
@@ -475,7 +467,7 @@ class DateRangePicker extends React.Component {
                     </div>
                   </div>
                 </div>
-              </MXFocusTrap>
+              </RestrictFocusToChildren>
             ) : null}
           </div>
         </div>
