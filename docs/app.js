@@ -28,6 +28,7 @@ const NotifyOnScrollThreshold = require('components/NotifyOnScrollThresholdDocs'
 const PageIndicator = require('components/PageIndicatorDocs');
 const PaginationButtons = require('components/PaginationButtonsDocs');
 const ProgressBar = require('components/ProgressBarDocs');
+const RestrictFocusToChildren = require('components/RestrictFocusToChildrenDocs');
 const RadioButton = require('components/RadioButtonDocs');
 const RajaIcon = require('components/RajaIconDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
@@ -92,6 +93,7 @@ ReactDOM.render((
         <Route component={PageIndicator} path='page-indicator' />
         <Route component={PaginationButtons} path='pagination-buttons' />
         <Route component={ProgressBar} path='progress-bar' />
+        <Route component={RestrictFocusToChildren} path='restrict-focus-to-children' />
         <Route component={RadioButton} path='radio-button' />
         <Route component={RajaIcon} path='raja-icon' />
         <Route component={RangeSelector} path='range-selector' />
