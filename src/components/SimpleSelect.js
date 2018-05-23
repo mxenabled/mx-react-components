@@ -18,7 +18,6 @@ class SimpleSelect extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     elementRef: PropTypes.func,
-    focusTrapProps: PropTypes.object,
     hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
     iconStyles: PropTypes.object,
@@ -34,7 +33,6 @@ class SimpleSelect extends React.Component {
 
   static defaultProps = {
     'aria-label': '',
-    focusTrapProps: {},
     scrimClickOnSelect: false,
     items: [],
     onScrimClick () {}
