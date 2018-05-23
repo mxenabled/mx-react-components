@@ -4,7 +4,6 @@ import React from 'react';
 
 describe('FocusManagement utils', () => {
   let page;
-  let child;
   let button;
   let link;
   let focusableDiv;
@@ -20,20 +19,15 @@ describe('FocusManagement utils', () => {
     textArea = mount(<textarea />);
     input = mount(<input />);
 
-    child = mount(
-      <div>
-        Child content
-        {button}
-      </div>
-    );
-
     page = mount(
       <div>
         <div>Content {link}</div>
         <div aria-hidden={true} tabIndex={0}>Aria hidden with tab index</div>
         <div tabIndex={-1}>Aria visible but tab index of -1</div>
         {focusableDiv}
-        {child}
+        <div id='button'>
+          {button}
+        </div>
         {select}
         {textArea}
         {input}
@@ -43,7 +37,6 @@ describe('FocusManagement utils', () => {
 
   afterEach(() => {
     page.unmount();
-    child.unmount();
     button.unmount();
     link.unmount();
     focusableDiv.unmount();
@@ -66,6 +59,24 @@ describe('FocusManagement utils', () => {
 
       expect(focusableNodes).toHaveLength(6);
       expect(focusableNodes).toEqual(expectedArrayOfNodes);
+    });
+  });
+
+  describe('reconcileNodeArrays', () => {
+    it('should filter out child nodes from parent nodes array', () => {
+      const parentNodes = FocusManagement.getFocusableNodesInElement(page.instance());
+      const childNodes = FocusManagement.getFocusableNodesInElement(page.childAt(4).instance());
+      const filteredNodes = FocusManagement.reconcileNodeArrays(parentNodes, childNodes);
+      const expectedFilteredNodes = [
+        link.instance(),
+        focusableDiv.instance(),
+        select.instance(),
+        textArea.instance(),
+        input.instance()
+      ];
+
+      expect(filteredNodes).toHaveLength(5);
+      expect(filteredNodes).toEqual(expectedFilteredNodes);
     });
   });
 });
