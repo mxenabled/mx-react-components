@@ -22,7 +22,7 @@ class RestrictFocusToChildrenDocs extends React.Component {
           When mounted, the <Code>RestrictFocusToChildren</Code> component only allows focus on nodes that are focusable and are children of itself. This is useful for a11y in popover content such as modals and dialogs.
         </p>
         <p>
-          In the example below, the <Code>Outter Content Button</Code> would not be focusable once the <Code>RestrictFocusToChildren</Code> component mounted.
+          In the example below, the <Code>Outter Content Button</Code> would not be focusable once the <Code>RestrictFocusToChildren</Code> component mounted but would become focusable again once <Code>RestrictFocusToChildren</Code> un-mounted.
         </p>
 
         <h3>Example</h3>
