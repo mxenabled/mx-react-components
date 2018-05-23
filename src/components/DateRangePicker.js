@@ -31,7 +31,6 @@ class DateRangePicker extends React.Component {
       })
     ),
     elementRef: PropTypes.func,
-    focusTrapProps: PropTypes.object,
     format: PropTypes.string,
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
@@ -82,7 +81,6 @@ class DateRangePicker extends React.Component {
         getStartDate: () => moment().startOf('year').subtract(1, 'y').unix()
       }
     ],
-    focusTrapProps: {},
     format: 'MMM D, YYYY',
     isRelative: true,
     locale: 'en',
