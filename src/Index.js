@@ -68,6 +68,7 @@ module.exports = {
   Styles: require('./constants/Style'),
 
   // App Utils
+  FocusManagement: require('./utils/FocusManagement'),
   ChartUtils: require('./utils/Chart'),
   StyleUtils: require('./utils/Style'),
 
