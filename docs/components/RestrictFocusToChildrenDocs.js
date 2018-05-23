@@ -9,7 +9,7 @@ class RestrictFocusToChildrenDocs extends React.Component {
       <div>
         <h1>
           Restrict Focus To Children
-          <label>Wrapper that restricts focus to it's children</label>
+          <label>Wrapper that restricts focus to its children</label>
         </h1>
 
         <h3>Demo</h3>
