@@ -1,5 +1,5 @@
 /**
- * focusableSelectors - froze array of strings
+ * focusableSelectors - frozen array of strings
  *
  * Selectors for all HTML elements that are
  * "focusable" including HTML elements with
