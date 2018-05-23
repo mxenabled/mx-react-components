@@ -16,11 +16,9 @@ module.exports = class RestrictFocusToChildren extends React.Component {
   }
 
   componentDidMount () {
-    const focusableNodesInDocument = getFocusableNodesInElement(document);
-
     this.focusableNodesInWrapper = getFocusableNodesInElement(this._wrapper);
     this.focusableNodesInParent = reconcileNodeArrays(
-      focusableNodesInDocument,
+      getFocusableNodesInElement(document),
       this.focusableNodesInWrapper
     );
 
