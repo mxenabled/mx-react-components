@@ -24,6 +24,12 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
     this.focusableNodesInParent.forEach(node => {
       this.preservedTabIndexValues.push(node.getAttribute('tabindex'));
+
+      /**
+       * We focus modal and drawer wrapping divs on mount in some cases so if we aria hide
+       * that div, all the children inherit the hidden attribute.  To get around that we
+       * use the `contains` function on the node to determine if the node contains the wrapper.
+       */
       setNodeAttributes(node, { tabindex: -1, 'aria-hidden': !node.contains(this._wrapper) });
     });
   }
