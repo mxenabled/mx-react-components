@@ -23,6 +23,11 @@ module.exports = class RestrictFocusToChildren extends React.Component {
     );
 
     this.focusableNodesInParent.forEach(node => {
+
+      /**
+       * A node's tabindex might be set already so we have to preserve the value
+       * so that we can set it back to the original value on un-mount.
+       */
       this.preservedTabIndexValues.push(node.getAttribute('tabindex'));
 
       /**
