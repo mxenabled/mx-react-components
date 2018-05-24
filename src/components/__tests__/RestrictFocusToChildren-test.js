@@ -21,6 +21,7 @@ class TestComponent extends React.Component {
         >
           Open Content
         </button>
+        <div id='focusable-div' tabIndex={2}>Focusable Div</div>
         {this.state.showContent ? (
           <RestrictFocusToChildren>
             <div>
@@ -79,5 +80,14 @@ describe('RestrictFocusToChildren', () => {
 
     expect(openButtonHTML).not.toContain('tabindex');
     expect(openButtonHTML).not.toContain('aria-hidden');
+  });
+
+  it('should preserve tabindex on unmount', () => {
+    const focusableDiv = wrapper.find('#focusable-div').first();
+    const closeButton = wrapper.find('#close-button').first();
+
+    expect(focusableDiv.html()).toContain('tabindex="-1"');
+    closeButton.simulate('click');
+    expect(focusableDiv.html()).toContain('tabindex="2"');
   });
 });
