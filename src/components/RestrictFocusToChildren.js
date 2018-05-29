@@ -15,8 +15,8 @@ const handleFocusIn = e => {
    * Nodes that are added to the DOM after an instance does
    * its thing have to be handled here in the focusIn event
    * handler.  If the node about to be focused isn't in the
-   * last instance's focusable nodes array then we move focus
-   * back to where it should be.
+   * last instance's focusable nodes array then we redirect
+   * focus back to where it should be.
    */
   if (nodeIsNotHandledInInstance) {
     const firstFocusableNodeInLastInstance = lastInstance.focusableNodesInWrapper[0];
