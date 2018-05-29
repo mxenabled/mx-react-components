@@ -32,7 +32,7 @@ const handleFocusIn = e => {
     if (firstFocusableNodeInLastInstance === document.activeElement) {
       lastFocusableNodeInLastInstance.focus();
     // Tabbing forward (tab)
-    } else if (lastFocusableNodeInLastInstance === document.activeElement) {
+    } else {
       firstFocusableNodeInLastInstance.focus();
     }
   }
