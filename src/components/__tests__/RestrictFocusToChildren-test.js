@@ -3,6 +3,12 @@ import { mount } from 'enzyme';
 
 const RestrictFocusToChildren = require('../RestrictFocusToChildren');
 
+const eventMap = {};
+
+window.addEventListener = jest.genMockFn().mockImplementation((event, cb) => {
+  eventMap[event] = cb;
+});
+
 class TestComponent extends React.Component {
   state = {
     showContent: false
