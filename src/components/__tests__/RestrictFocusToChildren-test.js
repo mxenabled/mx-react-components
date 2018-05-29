@@ -11,7 +11,8 @@ window.addEventListener = jest.genMockFn().mockImplementation((event, cb) => {
 
 class TestComponent extends React.Component {
   state = {
-    showContent: false
+    showContent: false,
+    showNewContent: false
   }
 
   render () {
@@ -28,11 +29,22 @@ class TestComponent extends React.Component {
           Open Content
         </button>
         <div id='focusable-div' tabIndex={2}>Focusable Div</div>
+        {this.state.showNewContent ? (<button id='new-button'>New focusable Button</button>) : null}
         {this.state.showContent ? (
           <RestrictFocusToChildren>
             <div>
               <button id='close-button' onClick={() => this.setState({ showContent: false })}>
                 Close Content
+              </button>
+              <button
+                id='add-new-node'
+                onClick={e => {
+                  //Enzyme simulate click was not focusing the button
+                  e.target.focus();
+                  this.setState({ showNewContent: true });
+                }}
+              >
+                Add New Node
               </button>
             </div>
           </RestrictFocusToChildren>
@@ -95,5 +107,18 @@ describe('RestrictFocusToChildren', () => {
     expect(focusableDiv.html()).toContain('tabindex="-1"');
     closeButton.simulate('click');
     expect(focusableDiv.html()).toContain('tabindex="2"');
+  });
+
+  it('should redirect focus on focusin event if node is not in focusable nodes array', () => {
+    const closeButton = wrapper.find('#close-button').first();
+    const addNewNodeButton = wrapper.find('#add-new-node').first();
+
+    addNewNodeButton.simulate('click');
+
+    const newButton = wrapper.find('#new-button').first().instance();
+
+    eventMap.focusin({ target: newButton });
+
+    expect(window.document.activeElement).toEqual(closeButton.instance());
   });
 });
