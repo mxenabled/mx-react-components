@@ -1,13 +1,54 @@
 const React = require('react');
+const _last = require('lodash/last');
 const {
   getFocusableNodesInElement,
   reconcileNodeArrays,
   setNodeAttributes
 } = require('../utils/FocusManagement');
 
+const handleFocusIn = e => {
+  const lastInstance = _last(instances);
+  const nodeBeingFocused = e.target;
+  const nodeIsNotHandledInInstance = lastInstance.focusableNodesInWrapper.indexOf(nodeBeingFocused) === -1;
+
+  /**
+   * Nodes that are added to the DOM after an instance does
+   * its thing have to be handled here in the focusIn event
+   * handler.  If the node about to be focused isn't in the
+   * last instance's focusable nodes array then we move focus
+   * back to where it should be.
+   */
+  if (nodeIsNotHandledInInstance) {
+    const firstFocusableNodeInLastInstance = lastInstance.focusableNodesInWrapper[0];
+    const lastFocusableNodeInLastInstance = _last(lastInstance.focusableNodesInWrapper);
+
+    /**
+     * The direction the user is tabbing matters so we have to check
+     * which element was focused last and compare against the first
+     * and last elements in the instances focusable nodes array.
+     */
+
+    // Tabbing in reverse (shift+tab)
+    if (firstFocusableNodeInLastInstance === document.activeElement) {
+      lastFocusableNodeInLastInstance.focus();
+    // Tabbing forward (tab)
+    } else if (lastFocusableNodeInLastInstance === document.activeElement) {
+      firstFocusableNodeInLastInstance.focus();
+    }
+  }
+};
+
+let instances = [];
+
 module.exports = class RestrictFocusToChildren extends React.Component {
   constructor (props, context) {
     super(props, context);
+
+    if (instances.length === 0) {
+      window.addEventListener('focusin', handleFocusIn);
+    }
+
+    instances.push(this);
 
     this.focusableNodesInParent = [];
     this.focusableNodesInWrapper = [];
@@ -44,6 +85,12 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
       node.removeAttribute('aria-hidden');
     });
+
+    instances = instances.filter(instance => instance !== this);
+
+    if (instances.length === 0) {
+      window.removeEventListener('focusin', handleFocusIn);
+    }
 
     this._tryFocusPreviousNode();
   }
