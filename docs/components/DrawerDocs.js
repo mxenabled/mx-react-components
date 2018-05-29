@@ -10,7 +10,8 @@ const Markdown = require('components/Markdown');
 class DrawerDocs extends React.Component {
   state = {
     demoDrawerOpen: false,
-    demoDrawerOpen2: false
+    demoDrawerOpen2: false,
+    showNewChild: false
   };
 
   _handleDemoButtonClick = () => {
@@ -67,6 +68,13 @@ class DrawerDocs extends React.Component {
                 Drawer Component
               </p>
               <p>
+                <Button
+                  onClick={() => this.setState({ showNewChild: true })}
+                >
+                  Add Element Behind Drawer
+                </Button>
+              </p>
+              <p>
                 <Button onClick={close}>Close Drawer</Button>
               </p>
               <p>
@@ -112,6 +120,12 @@ class DrawerDocs extends React.Component {
         <Button onClick={this._handleDemoButtonClick}>
           Demo Drawer
         </Button>
+        {this.state.showNewChild ? (
+          <p style={{ backgroundColor: 'lightgrey', marginTop: 10, padding: 10 }}>
+            Button added by action in drawer. <br />
+            <Button onClick={() => this.setState({ showNewChild: false })}>Remove Me</Button>
+          </p>
+        ) : null}
         {this.state.demoDrawerOpen && this._renderDrawer()}
 
         <h3>Usage</h3>
