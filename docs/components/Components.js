@@ -98,10 +98,6 @@ class Components extends React.Component {
                   displayValue: 'Progress Bar'
                 },
                 {
-                  value: 'restrict-focus-to-children',
-                  displayValue: 'Restrict Focus To Children'
-                },
-                {
                   value: 'radio-button',
                   displayValue: 'Radio Button'
                 },
@@ -175,7 +171,6 @@ class Components extends React.Component {
             <Link to='/components/page-indicator'>Page Indicator</Link>
             <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
-            <Link to='/components/restrict-focus-to-children'>Restrict Focus To Children</Link>
             <Link to='/components/spin'>Spin</Link>
             <Link to='/components/file-upload'>File Upload</Link>
 
