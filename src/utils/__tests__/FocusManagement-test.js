@@ -61,34 +61,4 @@ describe('FocusManagement utils', () => {
       expect(focusableNodes).toEqual(expectedArrayOfNodes);
     });
   });
-
-  describe('reconcileNodeArrays', () => {
-    it('should filter out child nodes from parent nodes array', () => {
-      const parentNodes = FocusManagement.getFocusableNodesInElement(page.instance());
-      const childNodes = FocusManagement.getFocusableNodesInElement(page.childAt(4).instance());
-      const filteredNodes = FocusManagement.reconcileNodeArrays(parentNodes, childNodes);
-      const expectedFilteredNodes = [
-        link.instance(),
-        focusableDiv.instance(),
-        select.instance(),
-        textArea.instance(),
-        input.instance()
-      ];
-
-      expect(filteredNodes).toHaveLength(5);
-      expect(filteredNodes).toEqual(expectedFilteredNodes);
-    });
-  });
-
-  describe('setNodeAttributes', () => {
-    it('should set attributes on a node', () => {
-      const buttonNode = button.instance();
-
-      expect(buttonNode.getAttribute('tabindex')).toEqual(null);
-
-      FocusManagement.setNodeAttributes(buttonNode, { tabindex: -1 });
-
-      expect(buttonNode.getAttribute('tabindex')).toEqual('-1');
-    });
-  });
 });
