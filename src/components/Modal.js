@@ -4,7 +4,7 @@ const React = require('react');
 import { withTheme } from './Theme';
 const Button = require('./Button');
 const Icon = require('./Icon');
-const RestrictFocusToChildren = require('../components/RestrictFocusToChildren');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const _merge = require('lodash/merge');
 
@@ -32,6 +32,7 @@ class Modal extends React.Component {
     color: PropTypes.string,
     contentStyle: PropTypes.object,
     focusOnLoad: PropTypes.bool,
+    focusTrapProps: PropTypes.object,
     footerContent: PropTypes.node,
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
@@ -53,6 +54,7 @@ class Modal extends React.Component {
   static defaultProps = {
     buttons: [],
     focusOnLoad: true,
+    focusTrapProps: {},
     isRelative: false,
     role: 'dialog',
     showCloseIcon: true,
@@ -188,9 +190,15 @@ class Modal extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
     const styles = this.styles(theme);
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      ...this.props.focusTrapProps
+    };
 
     return (
-      <RestrictFocusToChildren>
+      <MXFocusTrap {...mergedFocusTrapProps}>
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
@@ -230,7 +238,7 @@ class Modal extends React.Component {
             )}
           </div>
         </div>
-      </RestrictFocusToChildren>
+      </MXFocusTrap>
     );
   }
 

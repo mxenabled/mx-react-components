@@ -12,7 +12,7 @@ const { StyleRoot } = require('radium');
 
 import { withTheme } from './Theme';
 const Button = require('../components/Button');
-const RestrictFocusToChildren = require('../components/RestrictFocusToChildren');
+const MXFocusTrap = require('../components/MXFocusTrap');
 
 const { themeShape } = require('../constants/App');
 
@@ -38,6 +38,7 @@ class Drawer extends React.Component {
     duration: PropTypes.number,
     easing: PropTypes.array,
     focusOnLoad: PropTypes.bool,
+    focusTrapProps: PropTypes.object,
     headerMenu: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func
@@ -69,6 +70,7 @@ class Drawer extends React.Component {
     duration: 500,
     easing: [0.28, 0.14, 0.34, 1.04],
     focusOnLoad: true,
+    focusTrapProps: {},
     maxWidth: 960,
     onOpen: () => {},
     role: 'dialog',
@@ -224,7 +226,14 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { headerMenu, navConfig } = this.props;
+    const { headerMenu, focusTrapProps, navConfig } = this.props;
+    const mergedFocusTrapProps = {
+      focusTrapOptions: {
+        clickOutsideDeactivates: true
+      },
+      paused: false,
+      ...focusTrapProps
+    };
 
     let menu = null;
 
@@ -244,7 +253,7 @@ class Drawer extends React.Component {
 
     return (
       <StyleRoot>
-        <RestrictFocusToChildren>
+        <MXFocusTrap {...mergedFocusTrapProps}>
           <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
               className='mx-drawer-scrim'
@@ -287,7 +296,7 @@ class Drawer extends React.Component {
               </div>
             </div>
           </div>
-        </RestrictFocusToChildren>
+        </MXFocusTrap>
       </ StyleRoot>
     );
   }
