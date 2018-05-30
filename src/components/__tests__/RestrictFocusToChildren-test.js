@@ -82,33 +82,6 @@ describe('RestrictFocusToChildren', () => {
     expect(window.document.activeElement).toEqual(openButton.instance());
   });
 
-  it('should hide content in parent that is focusable when child is rendered', () => {
-    const buttonHTML = openButton.html();
-
-    expect(buttonHTML).toContain('tabindex="-1"');
-    expect(buttonHTML).toContain('aria-hidden="true"');
-  });
-
-  it('should unhide content in parent that is focusable when child is removed', () => {
-    const closeButton = wrapper.find('#close-button').first();
-
-    closeButton.simulate('click');
-
-    const openButtonHTML = openButton.html();
-
-    expect(openButtonHTML).not.toContain('tabindex');
-    expect(openButtonHTML).not.toContain('aria-hidden');
-  });
-
-  it('should preserve tabindex on unmount', () => {
-    const focusableDiv = wrapper.find('#focusable-div').first();
-    const closeButton = wrapper.find('#close-button').first();
-
-    expect(focusableDiv.html()).toContain('tabindex="-1"');
-    closeButton.simulate('click');
-    expect(focusableDiv.html()).toContain('tabindex="2"');
-  });
-
   it('should redirect focus on focusin event if node is not in focusable nodes array', () => {
     const closeButton = wrapper.find('#close-button').first();
     const addNewNodeButton = wrapper.find('#add-new-node').first();
