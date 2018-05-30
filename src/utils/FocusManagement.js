@@ -49,45 +49,7 @@ const getFocusableNodesInElement = el => {
   }) : [];
 };
 
-/**
- *  reconcileNodeArrays
- *
- * Returns a filtered array of DOM nodes where
- * nodes in the childFocusableNodes param have
- * been filtered out of the allFocusableNodes
- * param.
- *
- * @param {array of DOM nodes} allFocusableNodes
- * @param {array of DOM nodes} childFocusableNodes
- */
-const reconcileNodeArrays = (allFocusableNodes, childFocusableNodes) => {
-  return allFocusableNodes.filter(node => {
-    return childFocusableNodes.indexOf(node) === -1;
-  });
-};
-
-/**
- * setNodeAttributes
- *
- * Performs a side effect on the provided node param
- * by changing it's attributes based upon the supplied
- * attributes param using the nodes setAttribute
- * function.  Returns nothing.
- *
- * @param {DOM node} node
- * @param {Object} attributes
- */
-const setNodeAttributes = (node, attributes) => {
-  for (const key in attributes) {
-    if (attributes.hasOwnProperty(key)) {
-      node.setAttribute(key, attributes[key]);
-    }
-  }
-};
-
 module.exports = {
   focusableSelectors,
-  getFocusableNodesInElement,
-  reconcileNodeArrays,
-  setNodeAttributes
+  getFocusableNodesInElement
 };
