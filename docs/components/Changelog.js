@@ -8,7 +8,7 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
-        <h3>5.2.13</h3>
+        <h3>Broken/Unpublished 5.2.13</h3>
         <ul>
           <li>Fixes Accessibility issue in DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/745'>#745</a>)</li>
           <li>Replaces FocusTrap library with new component RestrictFocusToChildren(See docs for more details) (<a href='https://github.com/mxenabled/mx-react-components/pull/744'>#744</a>)</li>
