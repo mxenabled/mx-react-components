@@ -1,10 +1,6 @@
 const React = require('react');
 const _last = require('lodash/last');
-const {
-  getFocusableNodesInElement,
-  reconcileNodeArrays,
-  setNodeAttributes
-} = require('../utils/FocusManagement');
+const { getFocusableNodesInElement } = require('../utils/FocusManagement');
 
 const handleFocusIn = e => {
   const lastInstance = _last(instances);
@@ -50,42 +46,15 @@ module.exports = class RestrictFocusToChildren extends React.Component {
 
     instances.push(this);
 
-    this.focusableNodesInParent = [];
     this.focusableNodesInWrapper = [];
-    this.preservedTabIndexValues = [];
     this.previousFocusedNode = document.activeElement;
   }
 
   componentDidMount () {
     this.focusableNodesInWrapper = getFocusableNodesInElement(this._wrapper);
-    this.focusableNodesInParent = reconcileNodeArrays(
-      getFocusableNodesInElement(document),
-      this.focusableNodesInWrapper
-    );
-
-    this.focusableNodesInParent.forEach(node => {
-      this.preservedTabIndexValues.push(node.getAttribute('tabindex'));
-
-      /**
-       * We focus modal and drawer wrapping divs on mount in some cases so if we aria hide
-       * that div, all the children inherit the hidden attribute.  To get around that we
-       * use the `contains` function on the node to determine if the node contains the wrapper.
-       */
-      setNodeAttributes(node, { tabindex: -1, 'aria-hidden': !node.contains(this._wrapper) });
-    });
   }
 
   componentWillUnmount () {
-    this.focusableNodesInParent.forEach((node, index) => {
-      if (this.preservedTabIndexValues[index] === null) {
-        node.removeAttribute('tabindex');
-      } else {
-        node.setAttribute('tabindex', this.preservedTabIndexValues[index]);
-      }
-
-      node.removeAttribute('aria-hidden');
-    });
-
     instances = instances.filter(instance => instance !== this);
 
     if (instances.length === 0) {
