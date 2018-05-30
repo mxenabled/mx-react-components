@@ -55,11 +55,6 @@ class SimpleSelectDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
-        <h5>focusTrapProps<label>Object</label></h5>
-        <p>Default: Empty Object</p>
-        <p>The SimpleSelect component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the SimpleSelect for accessibility reasons.</p>
-        <p>The focusTrapProps object provides a mechanism for passing the focus trap component props.</p>
-        <p>See the library documentation for details on what props it accepts and how to use them.</p>
 
         <h5>iconSize <label>Number</label></h5>
         <p>Default: 20</p>
