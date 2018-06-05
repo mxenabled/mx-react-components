@@ -303,6 +303,8 @@ class DateRangePicker extends React.Component {
     return (
       <div className='mx-date-range-picker' style={styles.component}>
         <button
+          aria-controls='calendarMenu'
+          aria-expanded={this.state.showSelectionPane}
           aria-haspopup='menu'
           aria-label={`${placeholderText}${
             this.props.selectedStartDate && this.props.selectedEndDate ?
@@ -339,7 +341,7 @@ class DateRangePicker extends React.Component {
           <div>
             {this.state.showSelectionPane ? (
               <MXFocusTrap {...mergedFocusTrapProps}>
-                <div style={styles.optionsWrapper}>
+                <div id='calendarMenu' style={styles.optionsWrapper}>
                   <div className='mx-date-range-picker-pane' style={styles.column}>
                     <div style={styles.row}>
                       {!this.state.showCalendar && (
