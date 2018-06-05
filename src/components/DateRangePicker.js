@@ -302,18 +302,18 @@ class DateRangePicker extends React.Component {
 
     return (
       <div className='mx-date-range-picker' style={styles.component}>
-        <a
+        <button
+          aria-controls='calendarMenu'
+          aria-expanded={this.state.showSelectionPane}
+          aria-haspopup='menu'
           aria-label={`${placeholderText}${
             this.props.selectedStartDate && this.props.selectedEndDate ?
             `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected` :
             ''
           }`}
           onClick={this._toggleSelectionPane}
-          onKeyDown={(e) => keycode(e) === 'enter' && this._toggleSelectionPane()}
           ref={this.props.elementRef}
-          role='button'
-          style={styles.selectedDateWrapper}
-          tabIndex={0}
+          style={styles.selectedDateButton}
         >
           {shouldShowCalendarIcon ? (
             <Icon
@@ -336,12 +336,21 @@ class DateRangePicker extends React.Component {
             style={styles.selectedDateCaret}
             type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
           />
-        </a>
+        </button>
         <div style={styles.container}>
           <div>
             {this.state.showSelectionPane ? (
               <MXFocusTrap {...mergedFocusTrapProps}>
-                <div style={styles.optionsWrapper}>
+                <div
+                  id='calendarMenu'
+                  onKeyUp={e => {
+                    if (keycode(e) === 'esc') {
+                      this.setState({ showSelectionPane: false });
+                    }
+                  }}
+                  role='menu'
+                  style={styles.optionsWrapper}
+                >
                   <div className='mx-date-range-picker-pane' style={styles.column}>
                     <div style={styles.row}>
                       {!this.state.showCalendar && (
@@ -538,10 +547,10 @@ class DateRangePicker extends React.Component {
       },
 
       // Selected Date styles
-      selectedDateWrapper: {
+      selectedDateButton: {
         alignItems: 'center',
+        border: 'none',
         display: 'flex',
-        height: 20,
         justifyContent: 'space-between'
       },
       selectedDateIcon: {
