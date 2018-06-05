@@ -348,6 +348,7 @@ class DateRangePicker extends React.Component {
                       this.setState({ showSelectionPane: false });
                     }
                   }}
+                  role='menu'
                   style={styles.optionsWrapper}
                 >
                   <div className='mx-date-range-picker-pane' style={styles.column}>
