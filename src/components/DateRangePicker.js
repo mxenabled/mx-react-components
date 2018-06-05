@@ -341,7 +341,15 @@ class DateRangePicker extends React.Component {
           <div>
             {this.state.showSelectionPane ? (
               <MXFocusTrap {...mergedFocusTrapProps}>
-                <div id='calendarMenu' style={styles.optionsWrapper}>
+                <div
+                  id='calendarMenu'
+                  onKeyUp={e => {
+                    if (keycode(e) === 'esc') {
+                      this.setState({ showSelectionPane: false });
+                    }
+                  }}
+                  style={styles.optionsWrapper}
+                >
                   <div className='mx-date-range-picker-pane' style={styles.column}>
                     <div style={styles.row}>
                       {!this.state.showCalendar && (
