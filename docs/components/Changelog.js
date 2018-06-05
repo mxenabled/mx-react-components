@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.15</h3>
+        <ul>
+          <li>a11y tweaks to the DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/747'>#747</a>)</li>
+        </ul>
+
         <h3>5.2.14</h3>
         <ul>
           <li>Reverts broken changes in 5.2.13 release but keeps accessibility fix in DisplayInput (<a href='https://github.com/mxenabled/mx-react-components/pull/746'>#746</a>)</li>
