@@ -180,22 +180,20 @@ class Button extends React.Component {
         }
       },
       secondary: {
-        backgroundColor: 'transparent',
-        borderColor: theme.Colors.GRAY_500,
-        color: theme.Colors.GRAY_500,
+        backgroundColor: theme.Colors.GRAY_300,
+        borderColor: 'transparent',
+        color: theme.Colors.GRAY_700,
         fill: theme.Colors.GRAY_500,
         transition: 'all .2s ease-in',
         ':hover': windowSizeIsSmall ? null : {
-          backgroundColor: theme.Colors.GRAY_500,
-          borderColor: theme.Colors.GRAY_500,
-          color: theme.Colors.WHITE,
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_300, -15),
+          borderColor: 'transparent',
           fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
         ':active': {
-          backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_500, -30),
-          borderColor: StyleUtils.adjustColor(theme.Colors.GRAY_500, -30),
-          color: theme.Colors.WHITE,
+          backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_300, -30),
+          borderColor: 'transparent',
           fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         }
