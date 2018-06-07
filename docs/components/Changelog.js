@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.16</h3>
+        <ul>
+          <li>updated secondary button styling to match ADA AA standards (<a href='https://github.com/mxenabled/mx-react-components/pull/748'>#748</a>)</li>
+        </ul>
+
         <h3>5.2.15</h3>
         <ul>
           <li>a11y tweaks to the DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/747'>#747</a>)</li>
