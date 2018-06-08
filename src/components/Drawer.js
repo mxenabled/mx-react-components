@@ -271,7 +271,7 @@ class Drawer extends React.Component {
               tabIndex={0}
             >
               <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
-                <span style={styles.backArrow}>
+                <span className={`${titleUniqueId}-close`} style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
                       aria-label={`Close ${this.props.title} Drawer`}
