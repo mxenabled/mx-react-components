@@ -234,7 +234,7 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { headerMenu, focusTrapProps, navConfig } = this.props;
+    const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true
@@ -282,7 +282,7 @@ class Drawer extends React.Component {
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
-                      aria-label={`Close ${this.props.title} Drawer`}
+                      aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
                       buttonRef={ref => (this._closeButton = ref)}
                       className='mx-drawer-close'
                       icon='go-back'
