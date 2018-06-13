@@ -170,10 +170,15 @@ class Drawer extends React.Component {
    */
   close = () => {
     this.props.beforeClose();
-    return this._animateComponent({ left: '100%' })
-      .then(() => {
-        this.props.onClose();
-      });
+
+    if (this.props.animateOnClose) {
+      return this._animateComponent({ left: '100%' })
+        .then(() => {
+          this.props.onClose();
+        });
+    } else {
+      this.props.onClose();
+    }
   };
 
   open = () => {
