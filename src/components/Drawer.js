@@ -67,6 +67,7 @@ class Drawer extends React.Component {
   };
 
   static defaultProps = {
+    animateOnClose: true,
     beforeClose: () => {},
     closeOnScrimClick: true,
     duration: 500,
