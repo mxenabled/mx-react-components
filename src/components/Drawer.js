@@ -23,6 +23,7 @@ class Drawer extends React.Component {
   static propTypes = {
     'aria-describedby': PropTypes.string,
     'aria-labelledby': PropTypes.string,
+    animateOnClose: PropTypes.bool,
     animateLeftDistance: PropTypes.number,
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
@@ -30,6 +31,7 @@ class Drawer extends React.Component {
       medium: PropTypes.number
     }),
     buttonPrimaryColor: PropTypes.string,
+    closeButtonAriaLabel: PropTypes.string,
     closeOnScrimClick: PropTypes.bool,
     contentStyle: PropTypes.oneOfType([
       PropTypes.array,
