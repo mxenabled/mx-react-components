@@ -549,6 +549,7 @@ class DateRangePicker extends React.Component {
       // Selected Date styles
       selectedDateButton: {
         alignItems: 'center',
+        backgroundColor: 'unset',
         border: 'none',
         display: 'flex',
         justifyContent: 'space-between'
