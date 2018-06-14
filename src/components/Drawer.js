@@ -23,8 +23,8 @@ class Drawer extends React.Component {
   static propTypes = {
     'aria-describedby': PropTypes.string,
     'aria-labelledby': PropTypes.string,
-    animateOnClose: PropTypes.bool,
     animateLeftDistance: PropTypes.number,
+    animateOnClose: PropTypes.bool,
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
       large: PropTypes.number,
@@ -177,7 +177,7 @@ class Drawer extends React.Component {
           this.props.onClose();
         });
     } else {
-      this.props.onClose();
+      return this.props.onClose();
     }
   };
 
