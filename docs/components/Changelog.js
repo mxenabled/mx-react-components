@@ -8,6 +8,12 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.17</h3>
+        <ul>
+          <li>Drawer - New props animateOnClose and closeButtonAriaLabel(See updated Drawer docs) (<a href='https://github.com/mxenabled/mx-react-components/pull/750'>#750</a>)</li>
+          <li>DateRangePicker - CSS styling bug fix (<a href='https://github.com/mxenabled/mx-react-components/pull/751'>#751</a>)</li>
+        </ul>
+
         <h3>5.2.16</h3>
         <ul>
           <li>updated secondary button styling to match ADA AA standards (<a href='https://github.com/mxenabled/mx-react-components/pull/748'>#748</a>)</li>
