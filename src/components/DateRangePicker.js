@@ -554,7 +554,8 @@ class DateRangePicker extends React.Component {
         display: 'flex',
         justifyContent: 'space-between',
         margin: 0,
-        padding: 0
+        padding: 0,
+        width: '100%'
       },
       selectedDateIcon: {
         fill: theme.Colors.PRIMARY,
