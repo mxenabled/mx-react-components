@@ -24,12 +24,14 @@ class Drawer extends React.Component {
     'aria-describedby': PropTypes.string,
     'aria-labelledby': PropTypes.string,
     animateLeftDistance: PropTypes.number,
+    animateOnClose: PropTypes.bool,
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
       large: PropTypes.number,
       medium: PropTypes.number
     }),
     buttonPrimaryColor: PropTypes.string,
+    closeButtonAriaLabel: PropTypes.string,
     closeOnScrimClick: PropTypes.bool,
     contentStyle: PropTypes.oneOfType([
       PropTypes.array,
@@ -65,6 +67,7 @@ class Drawer extends React.Component {
   };
 
   static defaultProps = {
+    animateOnClose: true,
     beforeClose: () => {},
     closeOnScrimClick: true,
     duration: 500,
@@ -167,10 +170,20 @@ class Drawer extends React.Component {
    */
   close = () => {
     this.props.beforeClose();
-    return this._animateComponent({ left: '100%' })
-      .then(() => {
-        this.props.onClose();
-      });
+
+    if (this.props.animateOnClose) {
+      return this._animateComponent({ left: '100%' })
+        .then(() => {
+          this.props.onClose();
+        });
+    } else {
+      // To keep close's api normalized we return a promise just
+      // as the _animateComponent function does above.
+      return Promise.resolve()
+        .then(() => {
+          this.props.onClose();
+        });
+    }
   };
 
   open = () => {
@@ -226,7 +239,7 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { headerMenu, focusTrapProps, navConfig } = this.props;
+    const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true
@@ -274,7 +287,7 @@ class Drawer extends React.Component {
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton &&
                     <Button
-                      aria-label={`Close ${this.props.title} Drawer`}
+                      aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
                       buttonRef={ref => (this._closeButton = ref)}
                       className='mx-drawer-close'
                       icon='go-back'
