@@ -177,7 +177,12 @@ class Drawer extends React.Component {
           this.props.onClose();
         });
     } else {
-      return this.props.onClose();
+      // To keep close's api normalized we return a promise just
+      // as the _animateComponent function does above.
+      return Promise.resolve()
+        .then(() => {
+          this.props.onClose();
+        });
     }
   };
 
