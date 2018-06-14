@@ -129,6 +129,10 @@ class DrawerDocs extends React.Component {
         <h5>animateLeftDistance<label>Number</label></h5>
         <p>This number represents the percent of the screen visible between the left edge of the screen and the left edge of the drawer.</p>
 
+        <h5>animateOnClose<label>bool</label></h5>
+        <p>Default: true</p>
+        <p>If passsed as false, prevents the drawer animation from running on close. Good for situations where you want to use the drawer's back button for something other than closing the drawer.</p>
+
         <h5>breakPoints<label>Object</label></h5>
         <p>This object takes 2 properties:</p>
         <ul style={styles.unorderdLists}>
@@ -140,6 +144,9 @@ class DrawerDocs extends React.Component {
           &#60;	large and &#62; medium: drawer width is 20% from left side <br />
           &#60;&#61; medium: drawer width is 100%
         </p>
+
+        <h5>closeButtonAriaLabel<label>String</label></h5>
+        <p>A string to be used as an aria-label on the drawer's back button. If not present, the drawer uses the title prop to construct the aria label instead.</p>
 
         <h5>closeOnScrimClick<label>Boolean</label></h5>
         <p>Default: true</p>
