@@ -30,12 +30,14 @@ class DateRangePickerDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
-        <DateRangePicker
-          onDateRangeSelect={this._handleDateRangeSelect}
-          selectedEndDate={this.state.selectedEndDate}
-          selectedStartDate={this.state.selectedStartDate}
-          showDefaultRanges={true}
-        />
+        <div style={{ width: '50%' }}>
+          <DateRangePicker
+            onDateRangeSelect={this._handleDateRangeSelect}
+            selectedEndDate={this.state.selectedEndDate}
+            selectedStartDate={this.state.selectedStartDate}
+            showDefaultRanges={true}
+          />
+        </div>
 
         <h3>Usage</h3>
         <h5>defaultRanges <label>Array of range option objects</label></h5>
