@@ -105,6 +105,7 @@ class DatePicker extends React.Component {
 
   _handleTimeFocus = () => {
     this.setState({
+      showCalendar: false,
       editTime: true
     });
   };
