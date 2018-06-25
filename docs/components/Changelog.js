@@ -8,6 +8,12 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.18</h3>
+        <ul>
+          <li>DateTimePicker - Bug Fix (<a href='https://github.com/mxenabled/mx-react-components/pull/753'>#753</a>)</li>
+          <li>DateRangePicker - Default Date Ranges now a11y (<a href='https://github.com/mxenabled/mx-react-components/pull/752'>#752</a>)</li>
+        </ul>
+
         <h3>5.2.17</h3>
         <ul>
           <li>Drawer - New props animateOnClose and closeButtonAriaLabel(See updated Drawer docs) (<a href='https://github.com/mxenabled/mx-react-components/pull/750'>#750</a>)</li>
