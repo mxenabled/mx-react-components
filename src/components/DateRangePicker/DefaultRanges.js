@@ -1,6 +1,5 @@
 const PropTypes = require('prop-types');
 const Radium = require('radium');
-const keycode = require('keycode');
 const React = require('react');
 const Icon = require('../Icon');
 
@@ -13,41 +12,40 @@ class DefaultRanges extends React.Component {
     const { defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles } = this.props;
 
     return (
-      <div className='mx-default-ranges' style={styles.rangeOptions}>
+      <div className='mx-default-ranges' role='' style={styles.rangeOptions}>
 
-        {defaultRanges.map((range, index) => (
-          <div
-            className='mx-default-ranges-range'
-            key={range.displayValue + range.getStartDate()}
-            onClick={() => {
-              handleDefaultRangeSelection(range);
-              this.setState({ selectedOption: index });
-            }}
-            onKeyUp={(e) => {
-              if (keycode(e) === 'enter') {
+        {defaultRanges.map((range, index) => {
+          const isSelectedRange =
+            this.state.selectedOption === index &&
+            range.getStartDate() === selectedStartDate &&
+            range.getEndDate() === selectedEndDate;
+
+          return (
+            <button
+              aria-label={`${range.displayValue} range${isSelectedRange ? ', Selected' : ''}`}
+              className='mx-default-ranges-range'
+              key={range.displayValue + range.getStartDate()}
+              onClick={() => {
                 handleDefaultRangeSelection(range);
                 this.setState({ selectedOption: index });
-              }
-            }}
-            role='button'
-            style={styles.rangeOption}
-            tabIndex={0}
-          >
-            <div>
-              <Icon
-                size={20}
-                style={Object.assign({}, styles.rangeOptionIcon, {
-                  fill:
-                    this.state.selectedOption === index && range.getStartDate() === selectedStartDate && range.getEndDate() === selectedEndDate ? primaryColor : 'transparent'
-                })}
-                type='check-solid'
-              />
-            </div>
-            <div>
-              {range.displayValue}
-            </div>
-          </div>
-        ))}
+              }}
+              style={styles.rangeOption}
+            >
+              <div>
+                <Icon
+                  size={20}
+                  style={Object.assign({}, styles.rangeOptionIcon, {
+                    fill: isSelectedRange ? primaryColor : 'transparent'
+                  })}
+                  type='check-solid'
+                />
+              </div>
+              <div>
+                {range.displayValue}
+              </div>
+            </button>
+          );
+        })}
       </div>
     );
   }

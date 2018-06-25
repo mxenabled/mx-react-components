@@ -139,7 +139,10 @@ class SelectionPane extends React.Component {
       },
       rangeOption: {
         alignItems: 'center',
+        backgroundColor: 'transparent',
+        border: 'none',
         boxSizing: 'border-box',
+        color: theme.Colors.GRAY_700,
         cursor: 'pointer',
         display: 'flex',
         padding: `${theme.Spacing.SMALL}px ${theme.Spacing.SMALL}px`,
