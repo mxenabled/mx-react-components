@@ -15,39 +15,46 @@ class DefaultRanges extends React.Component {
     return (
       <div className='mx-default-ranges' style={styles.rangeOptions}>
 
-        {defaultRanges.map((range, index) => (
-          <div
-            className='mx-default-ranges-range'
-            key={range.displayValue + range.getStartDate()}
-            onClick={() => {
-              handleDefaultRangeSelection(range);
-              this.setState({ selectedOption: index });
-            }}
-            onKeyUp={(e) => {
-              if (keycode(e) === 'enter') {
+        {defaultRanges.map((range, index) => {
+          const isSelectedRange =
+            this.state.selectedOption === index &&
+            range.getStartDate() === selectedStartDate &&
+            range.getEndDate() === selectedEndDate;
+
+          return (
+            <div
+              aria-pressed={isSelectedRange}
+              className='mx-default-ranges-range'
+              key={range.displayValue + range.getStartDate()}
+              onClick={() => {
                 handleDefaultRangeSelection(range);
                 this.setState({ selectedOption: index });
-              }
-            }}
-            role='button'
-            style={styles.rangeOption}
-            tabIndex={0}
-          >
-            <div>
-              <Icon
-                size={20}
-                style={Object.assign({}, styles.rangeOptionIcon, {
-                  fill:
-                    this.state.selectedOption === index && range.getStartDate() === selectedStartDate && range.getEndDate() === selectedEndDate ? primaryColor : 'transparent'
-                })}
-                type='check-solid'
-              />
+              }}
+              onKeyUp={(e) => {
+                if (keycode(e) === 'enter') {
+                  handleDefaultRangeSelection(range);
+                  this.setState({ selectedOption: index });
+                }
+              }}
+              role='button'
+              style={styles.rangeOption}
+              tabIndex={0}
+            >
+              <div>
+                <Icon
+                  size={20}
+                  style={Object.assign({}, styles.rangeOptionIcon, {
+                    fill: isSelectedRange ? primaryColor : 'transparent'
+                  })}
+                  type='check-solid'
+                />
+              </div>
+              <div>
+                {range.displayValue}
+              </div>
             </div>
-            <div>
-              {range.displayValue}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   }
