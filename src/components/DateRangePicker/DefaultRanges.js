@@ -12,7 +12,7 @@ class DefaultRanges extends React.Component {
     const { defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles } = this.props;
 
     return (
-      <div className='mx-default-ranges' style={styles.rangeOptions}>
+      <div className='mx-default-ranges' role='' style={styles.rangeOptions}>
 
         {defaultRanges.map((range, index) => {
           const isSelectedRange =
@@ -22,7 +22,7 @@ class DefaultRanges extends React.Component {
 
           return (
             <button
-              aria-pressed={isSelectedRange}
+              aria-label={`${range.displayValue} range${isSelectedRange ? ', Selected' : ''}`}
               className='mx-default-ranges-range'
               key={range.displayValue + range.getStartDate()}
               onClick={() => {
