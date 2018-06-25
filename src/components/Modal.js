@@ -202,7 +202,6 @@ class Modal extends React.Component {
         <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
           <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
           <div
-            className='mx-modal-container'
             style={Object.assign({}, styles.container, this.props.style)}
           >
             {this._renderTitleBar(styles)}
@@ -223,6 +222,7 @@ class Modal extends React.Component {
             {this.props.showCloseIcon && (
               <button
                 aria-label='Close Modal'
+                className='mx-modal-close'
                 onClick={this.props.onRequestClose}
                 onKeyUp={e => e.keyCode === 13 && this.props.onRequestClose()}
                 role='button'
@@ -230,7 +230,6 @@ class Modal extends React.Component {
                 tabIndex={0}
               >
                 <Icon
-                  className='mx-modal-close'
                   size={24}
                   style={styles.closeIcon}
                   type='close-solid'

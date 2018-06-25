@@ -55,7 +55,7 @@ class NotifyOnScrollThreshold extends React.Component {
 
   render () {
     return (
-      <div ref={(ref) => this.container = ref}>
+      <div className='mx-notify-scroll-threshold' ref={(ref) => this.container = ref}>
         {this.props.children(this.state.thresholdMet, this.state.scrollPosition, this.state.scrollHeight)}
       </div>
     );

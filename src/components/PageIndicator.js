@@ -27,7 +27,12 @@ class PageIndicator extends React.Component {
       const dotStyles = this.props.activeIndex === i ? Object.assign({}, styles.dot, styles.dotActive) : styles.dot;
 
       dots.push(
-        <span key={'dot' + i} onClick={this._handleDotClick.bind(null, i)} style={dotStyles} />
+        <span
+          className={'mx-page-dot-' + i}
+          key={'dot' + i}
+          onClick={this._handleDotClick.bind(null, i)}
+          style={dotStyles}
+        />
       );
     }
 
@@ -39,7 +44,7 @@ class PageIndicator extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div style={styles.component}>
+      <div className='mx-page-indicator' style={styles.component}>
         {this._renderDots(styles)}
       </div>
     );

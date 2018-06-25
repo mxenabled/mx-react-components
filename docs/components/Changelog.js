@@ -7,6 +7,39 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+
+        <h3>5.2.17</h3>
+        <ul>
+          <li>Drawer - New props animateOnClose and closeButtonAriaLabel(See updated Drawer docs) (<a href='https://github.com/mxenabled/mx-react-components/pull/750'>#750</a>)</li>
+          <li>DateRangePicker - CSS styling bug fix (<a href='https://github.com/mxenabled/mx-react-components/pull/751'>#751</a>)</li>
+        </ul>
+
+        <h3>5.2.16</h3>
+        <ul>
+          <li>updated secondary button styling to match ADA AA standards (<a href='https://github.com/mxenabled/mx-react-components/pull/748'>#748</a>)</li>
+        </ul>
+
+        <h3>5.2.15</h3>
+        <ul>
+          <li>a11y tweaks to the DateRangePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/747'>#747</a>)</li>
+        </ul>
+
+        <h3>5.2.14</h3>
+        <ul>
+          <li>Reverts broken changes in 5.2.13 release but keeps accessibility fix in DisplayInput (<a href='https://github.com/mxenabled/mx-react-components/pull/746'>#746</a>)</li>
+        </ul>
+
+        <h3>Broken/Unpublished 5.2.13</h3>
+        <ul>
+          <li>Fixes accessibility issue in DisplayInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/745'>#745</a>)</li>
+          <li>Replaces FocusTrap library with new component RestrictFocusToChildren(See docs for more details) (<a href='https://github.com/mxenabled/mx-react-components/pull/744'>#744</a>)</li>
+        </ul>
+
+        <h3>5.2.12</h3>
+        <ul>
+          <li>Add more class names various components (<a href='https://github.com/mxenabled/mx-react-components/pull/743'>#743</a>)</li>
+        </ul>
+
         <h3>5.2.11</h3>
         <ul>
           <li>Add top-level classes to all components (<a href='https://github.com/mxenabled/mx-react-components/pull/742'>#742</a>)</li>
