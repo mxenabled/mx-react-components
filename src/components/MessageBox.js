@@ -69,11 +69,13 @@ class MessageBox extends React.Component {
 
     return _merge({}, {
       component: {
-        color: theme.Colors.WHITE,
-        boxSizing: 'border-box'
+        color: theme.Colors.BLACK,
+        boxSizing: 'border-box',
+        border: '1px solid ' + theme.Colors.GRAY_300,
+        borderRadius: 6
       },
       header: {
-        background: color,
+        //background: color,
         display: 'flex',
         cursor: this.props.children ? 'pointer' : 'auto',
         padding: theme.Spacing.XSMALL,
@@ -89,7 +91,7 @@ class MessageBox extends React.Component {
         fontSize: theme.FontSizes.MEDIUM
       },
       icon: {
-        fill: theme.Colors.WHITE
+        fill: theme.Colors.BLACK
       },
       children: {
         backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
