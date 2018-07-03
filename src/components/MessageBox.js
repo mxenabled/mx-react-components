@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
+const _isNil = require('lodash/isNil');
 
 import { withTheme } from './Theme';
 const Icon = require('../components/Icon');
@@ -19,24 +20,14 @@ class MessageBox extends React.Component {
     title: PropTypes.string
   };
 
-  state = {
-    isOpen: true
-  };
-
-  _toggleMessageBox = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  };
-
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
       <div className='mx-message-box' style={styles.component}>
-        <div onClick={this.props.children ? this._toggleMessageBox : () => {}} style={styles.header}>
-          <div style={styles.leftHeader}>
+        <div style={styles.alertbar}>
+          <div style={styles.header}>
             <Icon
               size={20}
               style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
@@ -44,17 +35,9 @@ class MessageBox extends React.Component {
             />
             <div style={styles.title}>{this.props.title}</div>
           </div>
-
-          {this.props.children &&
-            <Icon
-              size={19}
-              style={styles.icon}
-              type={this.state.isOpen ? 'caret-up' : 'caret-down'}
-            />
-          }
         </div>
 
-        {this.state.isOpen &&
+        {!_isNil(this.props.children) &&
           <div style={styles.children}>
             {this.props.children}
           </div>
@@ -68,6 +51,13 @@ class MessageBox extends React.Component {
     const color = this.props.color || theme.Colors.PRIMARY;
 
     return _merge({}, {
+      alertbar: {
+        background: color,
+        borderTop: '1px solid ' + color,
+        borderTopLeftRadius: 6,
+        borderTopRightRadius: 6,
+        height: 5
+      },
       component: {
         color: theme.Colors.BLACK,
         boxSizing: 'border-box',
@@ -75,17 +65,16 @@ class MessageBox extends React.Component {
         borderRadius: 6
       },
       header: {
-        //background: color,
         display: 'flex',
-        cursor: this.props.children ? 'pointer' : 'auto',
-        padding: theme.Spacing.XSMALL,
+        padding: theme.Spacing.SMALL,
         alignItems: 'center'
+        // padding: theme.Spacing.SMALL
       },
-      leftHeader: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center'
-      },
+      // leftHeader: {
+      //   flex: 1,
+      //   display: 'flex',
+      //   alignItems: 'center'
+      // },
       title: {
         fontFamily: theme.Fonts.SEMIBOLD,
         fontSize: theme.FontSizes.MEDIUM
@@ -94,8 +83,9 @@ class MessageBox extends React.Component {
         fill: theme.Colors.BLACK
       },
       children: {
-        //backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
-        padding: this.props.children ? theme.Spacing.SMALL : null
+        padding: theme.Spacing.SMALL,
+        margin: theme.Spacing.MEDIUM,
+        alignItems: 'center'
       }
     }, this.props.styles);
   };
