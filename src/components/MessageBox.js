@@ -94,7 +94,7 @@ class MessageBox extends React.Component {
         fill: theme.Colors.BLACK
       },
       children: {
-        backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
+        //backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
         padding: this.props.children ? theme.Spacing.SMALL : null
       }
     }, this.props.styles);
