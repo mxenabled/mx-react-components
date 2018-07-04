@@ -26,15 +26,15 @@ class MessageBox extends React.Component {
 
     return (
       <div className='mx-message-box' style={styles.component}>
-        <div style={styles.alertbar}>
-          <div style={styles.header}>
-            <Icon
-              size={20}
-              style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
-              type={this.props.icon}
-            />
-            <div style={styles.title}>{this.props.title}</div>
-          </div>
+        <div style={styles.alertbar} />
+        <div style={styles.header}>
+          <Icon
+            size={20}
+            style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
+            type={this.props.icon}
+          />
+
+          <div style={styles.title}>{this.props.title}</div>
         </div>
 
         {!_isNil(this.props.children) &&
@@ -51,6 +51,16 @@ class MessageBox extends React.Component {
     const color = this.props.color || theme.Colors.PRIMARY;
 
     return _merge({}, {
+      component: {
+        color: theme.Colors.BLACK,
+        boxSizing: 'border-box',
+        border: '1px solid ' + theme.Colors.GRAY_300,
+        borderTop: 'none',
+        borderRadius: 6,
+        margin: 'auto',
+        alignItems: 'center',
+        paddingBottom: theme.Spacing.SMALL
+      },
       alertbar: {
         background: color,
         borderTop: '1px solid ' + color,
@@ -58,23 +68,12 @@ class MessageBox extends React.Component {
         borderTopRightRadius: 6,
         height: 5
       },
-      component: {
-        color: theme.Colors.BLACK,
-        boxSizing: 'border-box',
-        border: '1px solid ' + theme.Colors.GRAY_300,
-        borderRadius: 6
-      },
       header: {
         display: 'flex',
         padding: theme.Spacing.SMALL,
+        paddingBottom: 0,
         alignItems: 'center'
-        // padding: theme.Spacing.SMALL
       },
-      // leftHeader: {
-      //   flex: 1,
-      //   display: 'flex',
-      //   alignItems: 'center'
-      // },
       title: {
         fontFamily: theme.Fonts.SEMIBOLD,
         fontSize: theme.FontSizes.MEDIUM
@@ -83,9 +82,8 @@ class MessageBox extends React.Component {
         fill: theme.Colors.BLACK
       },
       children: {
-        padding: theme.Spacing.SMALL,
-        margin: theme.Spacing.MEDIUM,
-        alignItems: 'center'
+        paddingRight: theme.Spacing.SMALL,
+        paddingLeft: 40
       }
     }, this.props.styles);
   };
