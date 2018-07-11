@@ -358,6 +358,8 @@ class DateRangePicker extends React.Component {
                           {this.props.showDefaultRanges && (
                             <SelectionPane
                               defaultRanges={this.props.defaultRanges}
+                              getFromButtonRef={ref => (this._fromButton = ref)}
+                              getToButtonRef={ref => (this._toButton = ref)}
                               handleDefaultRangeSelection={
                                 this._handleDefaultRangeSelection
                               }
