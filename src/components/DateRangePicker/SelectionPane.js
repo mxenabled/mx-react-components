@@ -15,6 +15,8 @@ class SelectionPane extends React.Component {
   static propTypes = {
     currentDate: PropTypes.string,
     defaultRanges: PropTypes.array,
+    getFromButtonRef: PropTypes.func,
+    getToButtonRef: PropTypes.func,
     onDateBoxClick: PropTypes.func,
     primaryColor: PropTypes.string,
     selectedBox: PropTypes.string,
