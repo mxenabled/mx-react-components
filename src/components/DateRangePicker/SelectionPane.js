@@ -1,6 +1,5 @@
 const React = require('react');
 const moment = require('moment');
-const keycode = require('keycode');
 const PropTypes = require('prop-types');
 
 import { withTheme } from '../Theme';
