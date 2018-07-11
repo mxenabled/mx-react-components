@@ -1,8 +1,8 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Radium = require('radium');
 const keycode = require('keycode');
 const _findIndex = require('lodash/findIndex');
+const { css } = require('glamor');
 
 /**
  * Listbox
@@ -109,7 +109,7 @@ class Listbox extends React.Component {
         className='mx-listbox'
         ref={ref => this.component = ref}
         role='listbox'
-        style={this.props.style}
+        style={css(...this.props.style)}
       >
         {React.Children.map(this.props.children, (child, index) =>
           React.cloneElement(child, {
@@ -144,4 +144,4 @@ Option.propTypes = {
   label: PropTypes.string.isRequired
 };
 
-module.exports = { Listbox, Option: Radium(Option) };
+module.exports = { Listbox, Option };
