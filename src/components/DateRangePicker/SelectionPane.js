@@ -45,6 +45,7 @@ class SelectionPane extends React.Component {
             aria-label={`Select Start Date, ${selectedStartDate ? 'Current start date is ' + moment.unix(selectedStartDate).format('MMM D, YYYY') : ''}`}
             className='mx-selection-pane-from-field'
             onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
+            ref={this.props.getFromButtonRef}
             style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}
           >
             {selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}
@@ -55,6 +56,7 @@ class SelectionPane extends React.Component {
             aria-label={`Select End Date, ${selectedEndDate ? 'Current end date is ' + moment.unix(selectedEndDate).format('MMM D, YYYY') : ''}`}
             className='mx-selection-pane-to-field'
             onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
+            ref={this.props.getToButtonRef}
             style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}
           >
             {selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}
