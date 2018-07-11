@@ -1,5 +1,5 @@
 const React = require('react');
-const { Link } = require('react-router');
+const { Link } = require('react-router-dom');
 
 const { Button, ThemeProvider } = require('mx-react-components');
 
