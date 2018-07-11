@@ -34,6 +34,7 @@ class Button extends React.Component {
     elementProps: {},
     onClick () {},
     isActive: false,
+    styles: {},
     type: 'primary'
   };
 
