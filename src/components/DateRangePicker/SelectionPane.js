@@ -42,30 +42,24 @@ class SelectionPane extends React.Component {
       <div className='mx-selection-pane' style={styles.container}>
         <div>
           <label style={styles.boxLabel}>From</label>
-          <a
+          <button
             aria-label={`Select Start Date, ${selectedStartDate ? 'Current start date is ' + moment.unix(selectedStartDate).format('MMM D, YYYY') : ''}`}
             className='mx-selection-pane-from-field'
             onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
-            onKeyUp={(e) => keycode(e) === 'enter' && this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
-            role='button'
             style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}
-            tabIndex={0}
           >
             {selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}
-          </a>
+          </button>
 
           <label style={styles.boxLabel}>To</label>
-          <a
+          <button
             aria-label={`Select End Date, ${selectedEndDate ? 'Current end date is ' + moment.unix(selectedEndDate).format('MMM D, YYYY') : ''}`}
             className='mx-selection-pane-to-field'
             onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
-            onKeyUp={(e) => keycode(e) === 'enter' && this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
-            role='button'
             style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}
-            tabIndex={0}
           >
             {selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}
-          </a>
+          </button>
         </div>
         <div>
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
@@ -103,18 +97,22 @@ class SelectionPane extends React.Component {
         marginTop: theme.Spacing.SMALL
       },
       dateSelectBox: {
+        backgroundColor: 'transparent',
         borderColor: theme.Colors.GRAY_300,
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
         boxSizing: 'border-box',
+        color: theme.Colors.GRAY_700,
         cursor: 'pointer',
         display: 'block',
         fontFamily: theme.FontFamily,
         fontSize: theme.FontSizes.MEDIUM,
         marginBottom: theme.Spacing.SMALL,
         marginTop: theme.Spacing.XSMALL,
-        padding: '10px 15px'
+        padding: '10px 15px',
+        textAlign: 'left',
+        width: '100%'
       },
       selectedDateSelectBox: {
         borderColor: theme.Colors.PRIMARY,
