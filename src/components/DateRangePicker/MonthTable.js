@@ -3,6 +3,28 @@ const PropTypes = require('prop-types');
 const moment = require('moment');
 
 class MonthTable extends React.Component {
+  componentDidMount () {
+    this._focusDay(this.props.focusedDay);
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.focusedDay !== this.props.focusedDay) {
+      this._focusDay(this.props.focusedDay);
+    }
+  }
+
+  _focusDay = day => {
+    const refForDay = this[day];
+
+    if (refForDay && refForDay.focus) {
+      refForDay.focus();
+    }
+  }
+
+  _setRefForDay = day => ref => {
+    this[day] = ref;
+  }
+
   render () {
     const { activeSelectDate,
       currentDate,
@@ -31,7 +53,6 @@ class MonthTable extends React.Component {
       const isSelectedStartDay = startDate.isSame(moment.unix(selectedStartDate), 'day');
       const isSelectedEndDay = startDate.isSame(moment.unix(selectedEndDate), 'day');
       const isSelectedDay = isSelectedStartDay || isSelectedEndDay;
-      const savedStartDate = startDate.date();
 
       /**
        * Aria label possible states
@@ -65,11 +86,7 @@ class MonthTable extends React.Component {
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown.bind(null, startDate.unix())}
           onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
-          ref={ref => {
-            if (ref && moment.unix(focusedDay).date() === savedStartDate) {
-              ref.focus();
-            }
-          }}
+          ref={this._setRefForDay(startDate.unix())}
           role='button'
           style={Object.assign({},
             styles.calendarDay,
