@@ -175,10 +175,13 @@ class DateRangePicker extends React.Component {
       },
       () => {
         if (!isLargeOrMediumWindowSize) {
-          if (this.state.selectedBox === SelectedBox.FROM) {
-            this._focusFromButton();
-          } else {
-            this._focusToButton();
+          switch (this.state.selectedBox) {
+            case SelectedBox.FROM:
+              this._focusFromButton();
+              break;
+            case SelectedBox.TO:
+              this._focusToButton();
+              break;
           }
         }
       }
