@@ -96,8 +96,8 @@ class DateRangePicker extends React.Component {
     super(props);
 
     this.state = {
-      currentDate: props.selectedEndDate || moment().unix(),
       focusedDay: props.selectedEndDate || moment().unix(),
+      currentDate: props.selectedEndDate || moment().startOf('day').unix(),
       selectedBox: SelectedBox.FROM,
       selectedStartDate: this.props.selectedStartDate,
       selectedEndDate: this.props.selectedEndDate,
