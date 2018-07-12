@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Radium = require('radium');
+
+import { css } from 'glamor';
 
 import { withTheme } from './Theme';
 const Button = require('./Button');
@@ -50,14 +51,15 @@ class ButtonGroup extends React.Component {
 
           return (
             <Button
+              className={css(isDisabled && styles.disabled)}
               key={i}
               style={Object.assign({},
                 styles.component,
                 isFirstChild && styles.firstChild,
                 isLastChild && styles.lastChild,
                 isOnlyChild && styles.onlyChild,
-                isDisabled && styles.disabled,
-                style)}
+                style
+              )}
               theme={theme}
               type={this.props.type}
               {...rest}
@@ -107,4 +109,4 @@ class ButtonGroup extends React.Component {
   };
 }
 
-module.exports = withTheme(Radium(ButtonGroup));
+module.exports = withTheme(ButtonGroup);
