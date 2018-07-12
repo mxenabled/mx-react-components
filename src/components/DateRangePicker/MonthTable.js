@@ -2,6 +2,8 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const moment = require('moment');
 
+const { SelectedBox } = require('../../constants/DateRangePicker');
+
 class MonthTable extends React.Component {
   componentDidMount () {
     this._focusDay(this.props.focusedDay);
@@ -35,6 +37,7 @@ class MonthTable extends React.Component {
       handleKeyDown,
       isInActiveRange,
       minimumDate,
+      selectedBox,
       selectedEndDate,
       selectedStartDate,
       styles
@@ -67,6 +70,7 @@ class MonthTable extends React.Component {
        *      Thursday, April 13th, 2018, selected end date for range.
        * */
       let ariaLabelStateText = '';
+      const ariaLabelBeginingText = `Select ${selectedBox === SelectedBox.FROM ? 'start' : 'end'} date for range, `;
       const ariaLabelDateText = moment(startDate).format('dddd, MMMM Do, YYYY');
 
       if (!isSelectedDay && isActiveRange) {
@@ -79,7 +83,7 @@ class MonthTable extends React.Component {
 
       const day = (
         <a
-          aria-label={ariaLabelDateText + ariaLabelStateText}
+          aria-label={ariaLabelBeginingText + ariaLabelDateText + ariaLabelStateText}
           aria-pressed={isSelectedDay}
           className='mx-month-table-day'
           key={startDate}
@@ -121,6 +125,7 @@ MonthTable.propTypes = {
   handleKeyDown: PropTypes.func,
   isInActiveRange: PropTypes.func,
   minimumDate: PropTypes.number,
+  selectedBox: PropTypes.string,
   selectedEndDate: PropTypes.number,
   selectedStartDate: PropTypes.number,
   styles: PropTypes.object
