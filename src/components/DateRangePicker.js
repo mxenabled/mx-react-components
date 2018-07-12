@@ -150,6 +150,10 @@ class DateRangePicker extends React.Component {
     }
   };
 
+  _getToggledSelectBox = (currentSelectBox) => {
+    return currentSelectBox === SelectedBox.FROM ? SelectedBox.TO : SelectedBox.FROM;
+  };
+
   _handleDateSelect = (date) => {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
@@ -163,7 +167,7 @@ class DateRangePicker extends React.Component {
         return {
           currentDate: date,
           focusedDay: date,
-          selectedBox: state.selectedBox === SelectedBox.FROM ? SelectedBox.TO : SelectedBox.FROM,
+          selectedBox: isLargeOrMediumWindowSize ? this._getToggledSelectBox(state.selectedBox) : state.selectedBox,
           selectedStartDate: modifiedRangeCompleteButDatesInversed ? endDate : startDate,
           selectedEndDate: modifiedRangeCompleteButDatesInversed ? startDate : endDate,
           showCalendar: false
