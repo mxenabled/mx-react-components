@@ -30,5 +30,8 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-router": "^2.0.0"
+  },
+  "resolutions": {
+    "eslint-scope": "3.7.1"
   }
 }

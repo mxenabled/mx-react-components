@@ -68,6 +68,9 @@
     "webpack": "^1.0.0",
     "webpack-dev-server": "^1.16.2"
   },
+  "resolutions": {
+    "eslint-scope": "3.7.1"
+  },
   "jest": {
     "setupFiles": [
       "<rootDir>/jest-shim.js",
