@@ -459,6 +459,7 @@ class DateRangePicker extends React.Component {
                               handleKeyDown={this._handleDayKeyDown}
                               isInActiveRange={this._isInActiveRange}
                               minimumDate={this.props.minimumDate}
+                              selectedBox={this.state.selectedBox}
                               selectedEndDate={selectedEndDate}
                               selectedStartDate={selectedStartDate}
                               styles={styles}
