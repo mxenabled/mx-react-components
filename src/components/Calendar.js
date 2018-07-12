@@ -1,8 +1,9 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Radium = require('radium');
 const moment = require('moment');
 const keycode = require('keycode');
+
+import { css } from 'glamor';
 
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
@@ -193,7 +194,7 @@ class Calendar extends React.Component {
             return (
               <a
                 aria-label={`${day.format('dddd, MMMM Do, YYYY')}${isSelectedDay ? ', Currently Selected' : ''}`}
-                className='calendar-day'
+                className={'calendar-day ' + css(Object.assign({}, styles.calendarDayHover, styles.calendarDayDisabled))}
                 id={
                   day.isSame(moment.unix(this.state.focusedDay), 'day') ?
                     'focused-day' :
@@ -362,21 +363,22 @@ class Calendar extends React.Component {
         height: 30,
         justifyContent: 'center',
         marginBottom: 2,
-        width: 35,
-
+        width: 35
+      },
+      calendarDayHover: {
         ':hover': {
           border: '1px solid ' + theme.Colors.PRIMARY
         }
       },
       calendarDayDisabled: {
-        color: theme.Colors.GRAY_300,
-
+        color: theme.Colors.GRAY_300
+      },
+      calendarDayDisabledHover: {
         ':hover': {
           cursor: 'default',
           border: 'none'
         }
       },
-
       today: {
         backgroundColor: theme.Colors.GRAY_300,
         color: theme.Colors.WHITE
@@ -392,4 +394,4 @@ class Calendar extends React.Component {
   };
 }
 
-export default withTheme(Radium(Calendar));
+export default withTheme(Calendar);
