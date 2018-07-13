@@ -70,7 +70,7 @@ class MonthTable extends React.Component {
        *      Thursday, April 13th, 2018, selected end date for range.
        * */
       let ariaLabelStateText = '';
-      const ariaLabelBeginingText = `Select ${selectedBox === SelectedBox.FROM ? 'start' : 'end'} date for range, `;
+      const ariaLabelBeginningText = `Select ${selectedBox === SelectedBox.FROM ? 'start' : 'end'} date for range, `;
       const ariaLabelDateText = moment(startDate).format('dddd, MMMM Do, YYYY');
 
       if (!isSelectedDay && isActiveRange) {
@@ -83,7 +83,7 @@ class MonthTable extends React.Component {
 
       const day = (
         <a
-          aria-label={ariaLabelBeginingText + ariaLabelDateText + ariaLabelStateText}
+          aria-label={ariaLabelBeginningText + ariaLabelDateText + ariaLabelStateText}
           aria-pressed={isSelectedDay}
           className='mx-month-table-day'
           key={startDate}
