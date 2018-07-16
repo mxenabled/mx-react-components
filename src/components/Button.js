@@ -25,6 +25,7 @@ class Button extends React.Component {
     onClick: PropTypes.func,
     primaryColor: PropTypes.string,
     style: PropTypes.object,
+    styles: PropTypes.object,
     theme: themeShape,
     type: PropTypes.oneOf(buttonTypes)
   };
@@ -33,6 +34,7 @@ class Button extends React.Component {
     elementProps: {},
     onClick () {},
     isActive: false,
+    styles: {},
     type: 'primary'
   };
 
@@ -68,6 +70,9 @@ class Button extends React.Component {
     const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
     const styles = this.styles(mergedTheme);
 
+    // We need to remove the styles prop from rest so we don't pass it to children.
+    delete rest.styles;
+
     return (
       <button
         className={'mx-button ' + css({ ...styles.component, ...styles[this.props.type], ...style }) + ' ' + (className || '')}
@@ -101,7 +106,7 @@ class Button extends React.Component {
     const windowSizeIsSmall = this._windowSizeIsSmall(theme);
 
     return {
-      component: Object.assign({
+      component: {
         borderRadius: 2,
         borderStyle: 'solid',
         borderWidth: 1,
@@ -114,8 +119,9 @@ class Button extends React.Component {
         cursor: this.props.type === 'disabled' ? 'default' : 'pointer',
         transition: 'all .2s ease-in',
         minWidth: 16,
-        position: 'relative'
-      }, this.props.style),
+        position: 'relative',
+        ...this.props.style
+      },
       children: {
         justifyContent: 'center',
         display: 'flex',
@@ -245,7 +251,8 @@ class Button extends React.Component {
       },
       buttonText: {
         marginLeft: (this.props.isActive && this.props.actionText) ? 10 : 0
-      }
+      },
+      ...this.props.styles
     };
   };
 }
