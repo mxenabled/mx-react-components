@@ -8,6 +8,14 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.19</h3>
+        <ul>
+          <li>Button - Fix react prop type warning (<a href='https://github.com/mxenabled/mx-react-components/pull/763'>#763</a>)</li>
+          <li>DateRangePicker - Bug Fixes, a11y polish, code cleanup (<a href='https://github.com/mxenabled/mx-react-components/pull/758'>#758</a>)</li>
+          <li>SimpleSelect - Fix esc key event listner (<a href='https://github.com/mxenabled/mx-react-components/pull/756'>#756</a>)</li>
+          <li>Button - Allow more controll over styling (<a href='https://github.com/mxenabled/mx-react-components/pull/755'>#755</a>)</li>
+        </ul>
+
         <h3>5.2.18</h3>
         <ul>
           <li>DateTimePicker - Bug Fix (<a href='https://github.com/mxenabled/mx-react-components/pull/753'>#753</a>)</li>
