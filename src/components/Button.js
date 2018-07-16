@@ -18,7 +18,8 @@ class Button extends React.Component {
     'aria-label': PropTypes.string,
     actionText: PropTypes.string,
     buttonRef: PropTypes.func,
-    className: PropTypes.string,
+    // Object or string since glamor supplies an object, not a string.
+    className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     elementProps: PropTypes.object,
     icon: PropTypes.string,
     isActive: PropTypes.bool,
