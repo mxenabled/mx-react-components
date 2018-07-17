@@ -51,9 +51,23 @@ class SearchInput extends React.Component {
           elementRef={this.props.elementRef}
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
-          prefix={<Icon type='search' {...searchIconProps} />}
+          prefix={
+            <Icon
+              elementProps={{
+                onClick: () => this.props.elementRef && this.props.elementRef.focus()
+              }}
+              type='search'
+              {...searchIconProps}
+            />
+          }
           resetClick={this.props.handleResetClick}
-          suffix={<Icon type='close-solid' {...closeIconProps} />}
+          suffix={
+            <Icon
+              elementProps={{ onClick: this.props.handleResetClick }}
+              type='close-solid'
+              {...closeIconProps}
+            />
+          }
           theme={theme}
         />
       </div>
