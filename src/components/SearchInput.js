@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 
 import { withTheme } from './Theme';
+const Icon = require('./Icon');
 const Input = require('./SimpleInput');
 
 const { themeShape } = require('../constants/App');
@@ -31,7 +32,11 @@ class SearchInput extends React.Component {
 
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
-    const styles = this.styles();
+    const styles = this.styles(theme);
+    const searchIconProps =
+      { size: 20, style: styles.searchIcon };
+    const closeIconProps =
+      { size: 20, style: styles.closeIconIcon };
 
     return (
       <div className='mx-search-input' style={Object.assign({}, styles.component, this.props.style)}>
@@ -46,20 +51,29 @@ class SearchInput extends React.Component {
           elementRef={this.props.elementRef}
           focusOnLoad={this.props.focusOnLoad}
           handleResetClick={this.props.handleResetClick}
-          icon='search'
+          prefix={<Icon type='search' {...searchIconProps} />}
           resetClick={this.props.handleResetClick}
-          rightIcon='close-solid'
+          suffix={<Icon type='close-solid' {...closeIconProps} />}
           theme={theme}
         />
       </div>
     );
   }
 
-  styles = () => {
+  styles = (theme) => {
     return Object.assign({}, {
       component: {
         display: 'inline-block',
         width: '100%'
+      },
+      searchIcon: {
+        paddingRight: 7,
+        fill: theme.Colors.PRIMARY
+      },
+      closeIcon: {
+        paddingLeft: theme.Spacing.XSMALL,
+        fill: theme.Colors.GRAY_300,
+        cursor: 'pointer'
       }
     }, this.props.styles);
   };
