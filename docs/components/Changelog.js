@@ -8,6 +8,10 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.22</h3>
+        <ul>
+          <li>Search Input Typo:(<a href='https://github.com/mxenabled/mx-react-components/pull/764'>#766</a>)</li>
+        </ul>
         <h3>5.2.21</h3>
         <ul>
           <li>User Error publishing 5.2.20</li>
