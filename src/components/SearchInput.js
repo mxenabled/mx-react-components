@@ -36,7 +36,7 @@ class SearchInput extends React.Component {
     const searchIconProps =
       { size: 20, style: styles.searchIcon };
     const closeIconProps =
-      { size: 20, style: styles.closeIconIcon };
+      { size: 20, style: styles.closeIcon };
 
     return (
       <div className='mx-search-input' style={Object.assign({}, styles.component, this.props.style)}>
