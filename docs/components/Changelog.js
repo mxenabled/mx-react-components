@@ -8,6 +8,10 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 5.0</h2>
 
+        <h3>5.2.20</h3>
+        <ul>
+          <li>SearchInput - Remove use of deprecated Simple Input props (<a href='https://github.com/mxenabled/mx-react-components/pull/764'>#763</a>)</li>
+        </ul>
         <h3>5.2.19</h3>
         <ul>
           <li>Button - Fix react prop type warning (<a href='https://github.com/mxenabled/mx-react-components/pull/763'>#763</a>)</li>
