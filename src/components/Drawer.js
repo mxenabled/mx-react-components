@@ -58,6 +58,7 @@ class Drawer extends React.Component {
     onClose: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
     onOpen: PropTypes.func,
+    portalTo: PropTypes.string,
     role: PropTypes.string,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
