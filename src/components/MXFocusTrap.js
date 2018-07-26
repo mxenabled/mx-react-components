@@ -38,7 +38,13 @@ class MXFocusTrap extends React.Component {
     traps = traps.filter(component => component !== this);
     const lastTrap = traps[traps.length - 1];
 
-    if (lastTrap) lastTrap.setState({ paused: false });
+    if (lastTrap) {
+      lastTrap.setState({ paused: false });
+      ReactDOM.findDOMNode(lastTrap).setAttribute('aria-hidden', false);
+    } else {
+      this._sibblingNodeToRenderNextTo.setAttribute('aria-hidden', false);
+    }
+  }
 
   _getSibblingNodeToRenderNextTo = queryString => {
     if (!queryString || typeof queryString !== 'string') {
