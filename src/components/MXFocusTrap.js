@@ -1,5 +1,6 @@
 let traps = [];
 
+const PropTypes = require('prop-types');
 const React = require('react');
 const FocusTrap = require('focus-trap-react');
 
@@ -12,6 +13,10 @@ const FocusTrap = require('focus-trap-react');
  * This ensures that the previously trapped component is un-paused.
  */
 class MXFocusTrap extends React.Component {
+  static propTypes = {
+    portalTo: PropTypes.string
+  }
+
   state = {
     paused: false
   }
