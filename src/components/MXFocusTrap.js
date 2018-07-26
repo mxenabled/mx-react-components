@@ -4,6 +4,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const FocusTrap = require('focus-trap-react');
+const _get = require('lodash/get');
 
 /**
  * MXFocusTrap
@@ -26,11 +27,15 @@ class MXFocusTrap extends React.Component {
     // FocusTrap does it's own pausing but these React components also need to be paused
     traps.forEach(component => {
       component.setState({ paused: true });
-      ReactDOM.findDOMNode(component).setAttribute('aria-hidden', true);
+      const nodeForComponent = ReactDOM.findDOMNode(component);
+
+      if (nodeForComponent && nodeForComponent.setAttribute) {
+        nodeForComponent.setAttribute('aria-hidden', true);
+      }
     });
     traps.push(this);
 
-    this._sibblingNodeToRenderNextTo = this._getSibblingNodeToRenderNextTo(this.props.focusTrapOptions.portalTo);
+    this._sibblingNodeToRenderNextTo = this._getSibblingNodeToRenderNextTo(_get(this.props, 'focusTrapOptions.portalTo', null));
     this._sibblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
   }
 
