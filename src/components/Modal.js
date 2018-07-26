@@ -195,6 +195,7 @@ class Modal extends React.Component {
       focusTrapOptions: {
         clickOutsideDeactivates: true
       },
+      portalTo: this.props.portalTo,
       ...this.props.focusTrapProps
     };
 
