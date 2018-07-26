@@ -64,10 +64,13 @@ class MXFocusTrap extends React.Component {
   }
 
   render () {
-    return (
-      <FocusTrap {...this.props} paused={this.state.paused}>
-        {this.props.children}
-      </FocusTrap>
+    return ReactDOM.createPortal(
+      (
+        <FocusTrap {...this.props} paused={this.state.paused}>
+          {this.props.children}
+        </FocusTrap>
+      ),
+      this._sibblingNodeToRenderNextTo.parentNode
     );
   }
 }
