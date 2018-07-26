@@ -32,6 +32,16 @@ class MXFocusTrap extends React.Component {
     const lastTrap = traps[traps.length - 1];
 
     if (lastTrap) lastTrap.setState({ paused: false });
+
+  _getSibblingNodeToRenderNextTo = queryString => {
+    if (!queryString || typeof queryString !== 'string') {
+      return this._getEmptyDivSibling();
+    }
+
+    const sibbling = document.querySelector(queryString);
+
+    return sibbling && sibbling.setAttribute ? sibbling : this._getEmptyDivSibling();
+  }
   }
 
   render () {
