@@ -193,9 +193,9 @@ class Modal extends React.Component {
     const styles = this.styles(theme);
     const mergedFocusTrapProps = {
       focusTrapOptions: {
-        clickOutsideDeactivates: true
+        clickOutsideDeactivates: true,
+        portalTo: this.props.portalTo
       },
-      portalTo: this.props.portalTo,
       ...this.props.focusTrapProps
     };
 

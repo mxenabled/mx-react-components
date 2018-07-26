@@ -243,10 +243,10 @@ class Drawer extends React.Component {
     const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig, portalTo } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
-        clickOutsideDeactivates: true
+        clickOutsideDeactivates: true,
+        portalTo
       },
       paused: false,
-      portalTo,
       ...focusTrapProps
     };
 

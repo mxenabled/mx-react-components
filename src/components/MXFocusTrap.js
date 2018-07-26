@@ -15,7 +15,7 @@ const FocusTrap = require('focus-trap-react');
  */
 class MXFocusTrap extends React.Component {
   static propTypes = {
-    portalTo: PropTypes.string
+    focusTrapOptions: PropTypes.object
   }
 
   state = {
@@ -30,7 +30,7 @@ class MXFocusTrap extends React.Component {
     });
     traps.push(this);
 
-    this._sibblingNodeToRenderNextTo = this._getSibblingNodeToRenderNextTo(this.props.portalTo);
+    this._sibblingNodeToRenderNextTo = this._getSibblingNodeToRenderNextTo(this.props.focusTrapOptions.portalTo);
     this._sibblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
   }
 
