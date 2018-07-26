@@ -42,6 +42,12 @@ class MXFocusTrap extends React.Component {
 
     return sibbling && sibbling.setAttribute ? sibbling : this._getEmptyDivSibling();
   }
+
+  _getEmptyDivSibling = () => {
+    const emptyDiv = document.createElement('div');
+
+    document.body.appendChild(emptyDiv);
+    return emptyDiv;
   }
 
   render () {
