@@ -24,8 +24,14 @@ class MXFocusTrap extends React.Component {
 
   componentWillMount () {
     // FocusTrap does it's own pausing but these React components also need to be paused
-    traps.forEach(component => component.setState({ paused: true }));
+    traps.forEach(component => {
+      component.setState({ paused: true });
+      ReactDOM.findDOMNode(component).setAttribute('aria-hidden', true);
+    });
     traps.push(this);
+
+    this._sibblingNodeToRenderNextTo = this._getSibblingNodeToRenderNextTo(this.props.portalTo);
+    this._sibblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
   }
 
   componentWillUnmount () {
