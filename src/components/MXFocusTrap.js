@@ -35,8 +35,8 @@ class MXFocusTrap extends React.Component {
     });
     traps.push(this);
 
-    this._sibblingNodeToRenderNextTo = this._getSibblingNodeToRenderNextTo(_get(this.props, 'focusTrapOptions.portalTo', null));
-    this._sibblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
+    this._siblingNodeToRenderNextTo = this._getSiblingNodeToRenderNextTo(_get(this.props, 'focusTrapOptions.portalTo', null));
+    this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
   }
 
   componentWillUnmount () {
@@ -47,18 +47,18 @@ class MXFocusTrap extends React.Component {
       lastTrap.setState({ paused: false });
       ReactDOM.findDOMNode(lastTrap).setAttribute('aria-hidden', false);
     } else {
-      this._sibblingNodeToRenderNextTo.setAttribute('aria-hidden', false);
+      this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', false);
     }
   }
 
-  _getSibblingNodeToRenderNextTo = queryString => {
+  _getSiblingNodeToRenderNextTo = queryString => {
     if (!queryString || typeof queryString !== 'string') {
       return this._getEmptyDivSibling();
     }
 
-    const sibbling = document.querySelector(queryString);
+    const sibling = document.querySelector(queryString);
 
-    return sibbling && sibbling.setAttribute ? sibbling : this._getEmptyDivSibling();
+    return sibling && sibling.setAttribute ? sibling : this._getEmptyDivSibling();
   }
 
   _getEmptyDivSibling = () => {
@@ -75,7 +75,7 @@ class MXFocusTrap extends React.Component {
           {this.props.children}
         </FocusTrap>
       ),
-      this._sibblingNodeToRenderNextTo.parentNode
+      this._siblingNodeToRenderNextTo.parentNode
     );
   }
 }
