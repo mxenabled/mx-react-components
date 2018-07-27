@@ -8,36 +8,93 @@ const MXFocusTrap = require('../MXFocusTrap');
  **/
 class WrappedMXFocusTrap extends React.Component {
   state = {
-    renderChildTrap: true
+    renderParentTrap: false,
+    renderChildTrap: false
   }
 
   render () {
     return (
-      <MXFocusTrap>
-        <button>"Outer Focusable Button"</button>
-        {this.state.renderChildTrap ? (
-          <MXFocusTrap>
-            <button>"Inner Focusable Button"</button>
-          </MXFocusTrap>
-        ) : null}
-      </MXFocusTrap>
+      <div id='app'>
+        <div>App Content</div>
+        <div>
+          Modal Content
+          {this.state.renderParentTrap ? (
+            <MXFocusTrap focusTrapOptions={{ portalTo: '#app' }}>
+              <button>"Outer Focusable Button"</button>
+              {this.state.renderChildTrap ? (
+                <MXFocusTrap focusTrapOptions={{ portalTo: '#app' }}>
+                  <button>"Inner Focusable Button"</button>
+                </MXFocusTrap>
+              ) : null}
+            </MXFocusTrap>
+          ) : null}
+        </div>
+      </div>
     );
   }
 }
 
 describe('MXFocusTrap', () => {
-  it('should pause and un-pause parent trap when child trap mounts and unmounts', () => {
-    expect.assertions(2);
+  let container;
+  let wrapper;
 
-    const wrapper = mount(<WrappedMXFocusTrap />);
+  beforeAll(() => {
+    container = global.document.createElement('div');
+    global.document.body.append(container);
+  });
+
+  beforeEach(() => {
+    wrapper = mount(<WrappedMXFocusTrap />, { attachTo: container });
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+  });
+
+  it('should set parentTrap as un-paused when initialy rendered with no child traps', () => {
+    wrapper.setState({ renderParentTrap: true });
+
     const parentTrap = wrapper.find(MXFocusTrap).first().instance();
 
-    // Parent should be un-paused when child is unmounted.
-    wrapper.setState({ renderChildTrap: false });
     expect(parentTrap.state.paused).toEqual(false);
+  });
 
-    // Parent should be paused when child is mounted.
+  it('should pause and un-pause parent trap when child trap mounts and unmounts', () => {
+    wrapper.setState({ renderParentTrap: true });
+    const parentTrap = wrapper.find(MXFocusTrap).first().instance();
+
     wrapper.setState({ renderChildTrap: true });
     expect(parentTrap.state.paused).toEqual(true);
+
+    wrapper.setState({ renderChildTrap: false });
+    expect(parentTrap.state.paused).toEqual(false);
+  });
+
+  it('should aria hide and un-hide parent trap when child trap mounts and unmounts', () => {
+    wrapper.setState({ renderParentTrap: true });
+    const parentTrap = wrapper.find(MXFocusTrap).first();
+
+    wrapper.setState({ renderChildTrap: true });
+    expect(parentTrap.html()).toContain('aria-hidden="true"');
+
+    wrapper.setState({ renderChildTrap: false });
+    expect(parentTrap.html()).toContain('aria-hidden="false"');
+  });
+
+  it('should aria hide and un-hide the application root div when parent trap is mounted and unmounted', () => {
+    wrapper.setState({ renderParentTrap: true });
+    expect(window.document.querySelector('#app').outerHTML).toContain('aria-hidden="true"');
+
+    wrapper.setState({ renderParentTrap: false });
+    expect(window.document.querySelector('#app').outerHTML).toContain('aria-hidden="false"');
+  });
+
+  it('should portal the focus trap to be a sibling with the root div container', () => {
+    wrapper.setState({ renderParentTrap: true });
+    const parentTrap = wrapper.find(MXFocusTrap).first();
+    const parentOfRootNode = window.document.querySelector('#app').parentNode;
+    const lastChildOfParent = parentOfRootNode.children[parentOfRootNode.children.length - 1];
+
+    expect(lastChildOfParent.outerHTML).toEqual(parentTrap.html());
   });
 });
