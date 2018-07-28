@@ -147,6 +147,9 @@ class ModalDocs extends React.Component {
         <h5>onRequestClose <label>Function</label></h5>
         <p>A method that is called when the close button or scrim area is clicked by a user. Use this method to tell the Modal when it should close.</p>
 
+        <h5>portalTo <label>String</label></h5>
+        <p>A query string used to look up an element in the DOM to render the Modal next to. If not provided then the Modal is rendered in place. This uses the React Portals functionality. See <a href='https://reactjs.org/docs/portals.html'>documentation</a> for details.</p>
+
         <h5>role <label>string</label></h5>
         <p>Default: 'dialog'</p>
         <p>The role applied to the wrapping div around the Modal's children.  Used for accessibility purposes.  See <a href='https://www.w3.org/TR/wai-aria-1.1/#usage_intro'>WAI-ARIA documentation</a> for more details on roles.</p>
@@ -212,6 +215,7 @@ class ModalDocs extends React.Component {
             )}
             footerStyle={{ padding: '40px 20px' }}
             onRequestClose={this._handleModalClose}
+            portalTo='#app'
             showFooter={true}
             showTitleBar={true}
             title='This is the header text'
