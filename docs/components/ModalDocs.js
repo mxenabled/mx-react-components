@@ -76,6 +76,7 @@ class ModalDocs extends React.Component {
             )}
             footerStyle={{ padding: '40px 20px' }}
             onRequestClose={this._handleModalClose}
+            portalTo='#app'
             showFooter={true}
             showTitleBar={true}
             title='This is the header text'
