@@ -7,7 +7,7 @@ const _merge = require('lodash/merge');
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
-const FocusTrap = require('focus-trap-react');
+const MXFocusTrap = require('./MXFocusTrap');
 
 const { themeShape } = require('../constants/App');
 
@@ -65,7 +65,7 @@ class SimpleSelect extends React.Component {
     };
 
     return (
-      <FocusTrap {...mergedFocusTrapProps}>
+      <MXFocusTrap {...mergedFocusTrapProps}>
         <div onKeyUp={this._handleKeyUp} ref={this.props.elementRef} style={styles.component}>
           <Listbox
             aria-label={this.props['aria-label']}
@@ -112,7 +112,7 @@ class SimpleSelect extends React.Component {
             style={styles.scrim}
           />
         </div>
-      </FocusTrap>
+      </MXFocusTrap>
     );
   }
 
