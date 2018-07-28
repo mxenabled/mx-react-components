@@ -45,23 +45,6 @@ describe('MXFocusTrap', () => {
     wrapper.unmount();
   });
 
-  it('should aria hide and un-hide the application root div when parent trap is mounted and unmounted', () => {
-    wrapper.setState({ renderParentTrap: true });
-    expect(global.document.body.children[0].outerHTML).toContain('aria-hidden="true"');
-
-    wrapper.setState({ renderParentTrap: false });
-    expect(global.document.body.children[0].outerHTML).toContain('aria-hidden="false"');
-  });
-
-  it('should portal the focus trap to be a sibling with the root div container', () => {
-    wrapper.setState({ renderParentTrap: true });
-    const parentTrap = wrapper.find(MXFocusTrap).first();
-    const parentOfRootNode = global.document.body;
-    const lastChildOfParent = parentOfRootNode.children[parentOfRootNode.children.length - 1];
-
-    expect(lastChildOfParent.outerHTML).toEqual(parentTrap.html());
-  });
-
   it('should set parentTrap as un-paused when initialy rendered with no child traps', () => {
     wrapper.setState({ renderParentTrap: true });
     const parentTrap = wrapper.find(MXFocusTrap).first().instance();
