@@ -36,7 +36,9 @@ class MXFocusTrap extends React.Component {
     traps.push(this);
 
     this._siblingNodeToRenderNextTo = this._getSiblingNodeToRenderNextTo(_get(this.props, 'focusTrapOptions.portalTo', null));
-    this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
+    if (this._siblingNodeToRenderNextTo && this._siblingNodeToRenderNextTo.setAttribute) {
+      this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
+    }
   }
 
   componentWillUnmount () {
@@ -46,36 +48,40 @@ class MXFocusTrap extends React.Component {
     if (lastTrap) {
       lastTrap.setState({ paused: false });
       ReactDOM.findDOMNode(lastTrap).setAttribute('aria-hidden', false);
-    } else {
+      return;
+    }
+
+    if (this._siblingNodeToRenderNextTo && this._siblingNodeToRenderNextTo.setAttribute) {
       this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', false);
     }
   }
 
   _getSiblingNodeToRenderNextTo = queryString => {
     if (!queryString || typeof queryString !== 'string') {
-      return this._getEmptyDivSibling();
+      return null;
     }
 
-    const sibling = document.querySelector(queryString);
-
-    return sibling && sibling.setAttribute ? sibling : this._getEmptyDivSibling();
-  }
-
-  _getEmptyDivSibling = () => {
-    const emptyDiv = document.createElement('div');
-
-    document.body.appendChild(emptyDiv);
-    return emptyDiv;
+    return document.querySelector(queryString);
   }
 
   render () {
-    return ReactDOM.createPortal(
-      (
-        <FocusTrap {...this.props} paused={this.state.paused}>
-          {this.props.children}
-        </FocusTrap>
-      ),
-      this._siblingNodeToRenderNextTo.parentNode
+    // Portal next to selected sibling
+    if (this._siblingNodeToRenderNextTo && this._siblingNodeToRenderNextTo.parentNode) {
+      return ReactDOM.createPortal(
+        (
+          <FocusTrap {...this.props} paused={this.state.paused}>
+            {this.props.children}
+          </FocusTrap>
+        ),
+        this._siblingNodeToRenderNextTo.parentNode
+      );
+    }
+
+    // Render in normal location
+    return (
+      <FocusTrap {...this.props} paused={this.state.paused}>
+        {this.props.children}
+      </FocusTrap>
     );
   }
 }
