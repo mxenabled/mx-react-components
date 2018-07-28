@@ -57,6 +57,7 @@ class DrawerDocs extends React.Component {
           />
         )}
         onClose={this._handleDrawerClose}
+        portalTo='#app'
         title='Demo'
       >
         {({ close }) => {
@@ -83,6 +84,7 @@ class DrawerDocs extends React.Component {
     return (
       <Drawer
         onClose={this._handleDrawerClose2}
+        portalTo='#app'
         title='Other Drawer'
       >
         <p style={{ padding: 20 }}>
