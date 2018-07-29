@@ -27,18 +27,19 @@ class MXFocusTrap extends React.Component {
     // FocusTrap does it's own pausing but these React components also need to be paused
     traps.forEach(component => {
       component.setState({ paused: true });
-      const nodeForComponent = ReactDOM.findDOMNode(component);
 
-      if (nodeForComponent && nodeForComponent.setAttribute) {
-        nodeForComponent.setAttribute('aria-hidden', true);
-      }
+      this._safelySetNodeAriaHiddenAttribute(
+        ReactDOM.findDOMNode(component),
+        true
+      );
     });
     traps.push(this);
 
     this._siblingNodeToRenderNextTo = this._getSiblingNodeToRenderNextTo(_get(this.props, 'focusTrapOptions.portalTo', null));
-    if (this._siblingNodeToRenderNextTo && this._siblingNodeToRenderNextTo.setAttribute) {
-      this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', true);
-    }
+    this._safelySetNodeAriaHiddenAttribute(
+      this._siblingNodeToRenderNextTo,
+      true
+    );
   }
 
   componentWillUnmount () {
@@ -47,17 +48,16 @@ class MXFocusTrap extends React.Component {
 
     if (lastTrap) {
       lastTrap.setState({ paused: false });
-      const nodeForLastTrap = ReactDOM.findDOMNode(lastTrap);
 
-      if (nodeForLastTrap && nodeForLastTrap.setAttribute) {
-        nodeForLastTrap.setAttribute('aria-hidden', false);
-      }
-
-      return;
-    }
-
-    if (this._siblingNodeToRenderNextTo && this._siblingNodeToRenderNextTo.setAttribute) {
-      this._siblingNodeToRenderNextTo.setAttribute('aria-hidden', false);
+      this._safelySetNodeAriaHiddenAttribute(
+        ReactDOM.findDOMNode(lastTrap),
+        false
+      );
+    } else {
+      this._safelySetNodeAriaHiddenAttribute(
+        this._siblingNodeToRenderNextTo,
+        false
+      );
     }
   }
 
@@ -67,6 +67,12 @@ class MXFocusTrap extends React.Component {
     }
 
     return document.querySelector(queryString);
+  }
+
+  _safelySetNodeAriaHiddenAttribute = (node, state) => {
+    if (node && node.setAttribute) {
+      node.setAttribute('aria-hidden', state);
+    }
   }
 
   render () {
