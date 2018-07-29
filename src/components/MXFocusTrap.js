@@ -47,7 +47,12 @@ class MXFocusTrap extends React.Component {
 
     if (lastTrap) {
       lastTrap.setState({ paused: false });
-      ReactDOM.findDOMNode(lastTrap).setAttribute('aria-hidden', false);
+      const nodeForLastTrap = ReactDOM.findDOMNode(lastTrap);
+
+      if (nodeForLastTrap && nodeForLastTrap.setAttribute) {
+        nodeForLastTrap.setAttribute('aria-hidden', false);
+      }
+
       return;
     }
 
