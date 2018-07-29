@@ -35,7 +35,9 @@ class MXFocusTrap extends React.Component {
     });
     traps.push(this);
 
-    this._siblingNodeToRenderNextTo = this._getSiblingNodeToRenderNextTo(_get(this.props, 'focusTrapOptions.portalTo', null));
+    this._siblingNodeToRenderNextTo = this._getSiblingNodeToRenderNextTo(
+      _get(this.props, 'focusTrapOptions.portalTo', null)
+    );
     this._safelySetNodeAriaHiddenAttribute(
       this._siblingNodeToRenderNextTo,
       true
