@@ -7,6 +7,33 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.23</h3>
+        <ul>
+          <li>A11y fix for Modal and Drawer components(<a href='https://github.com/mxenabled/mx-react-components/pull/767'>#767</a>)</li>
+        </ul>
+
+        <h3>5.2.22</h3>
+        <ul>
+          <li>Search Input Typo:(<a href='https://github.com/mxenabled/mx-react-components/pull/764'>#766</a>)</li>
+        </ul>
+
+        <h3>5.2.21</h3>
+        <ul>
+          <li>User Error publishing 5.2.20</li>
+        </ul>
+
+        <h3>5.2.20</h3>
+        <ul>
+          <li>SearchInput - Remove use of deprecated Simple Input props (<a href='https://github.com/mxenabled/mx-react-components/pull/764'>#763</a>)</li>
+        </ul>
+
+        <h3>5.2.19</h3>
+        <ul>
+          <li>Button - Fix react prop type warning (<a href='https://github.com/mxenabled/mx-react-components/pull/763'>#763</a>)</li>
+          <li>DateRangePicker - Bug Fixes, a11y polish, code cleanup (<a href='https://github.com/mxenabled/mx-react-components/pull/758'>#758</a>)</li>
+          <li>SimpleSelect - Fix esc key event listner (<a href='https://github.com/mxenabled/mx-react-components/pull/756'>#756</a>)</li>
+          <li>Button - Allow more controll over styling (<a href='https://github.com/mxenabled/mx-react-components/pull/755'>#755</a>)</li>
+        </ul>
 
         <h3>5.2.18</h3>
         <ul>

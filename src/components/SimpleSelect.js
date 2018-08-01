@@ -44,15 +44,9 @@ class SimpleSelect extends React.Component {
     deprecatePrimaryColor(this.props, 'hoverColor');
     deprecateProp(this.props, 'iconStyles', 'styles', 'simple-select');
     deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
-
-    window.addEventListener('keydown', this._handleKeyDown);
   }
 
-  componentWillUnmount () {
-    window.removeEventListener('keydown', this._handleKeyDown);
-  }
-
-  _handleKeyDown = (e) => {
+  _handleKeyUp = (e) => {
     if (keycode(e) === 'esc') {
       e.preventDefault();
       this.props.onScrimClick();
@@ -72,7 +66,7 @@ class SimpleSelect extends React.Component {
 
     return (
       <MXFocusTrap {...mergedFocusTrapProps}>
-        <div ref={this.props.elementRef} style={styles.component}>
+        <div onKeyUp={this._handleKeyUp} ref={this.props.elementRef} style={styles.component}>
           <Listbox
             aria-label={this.props['aria-label']}
             style={styles.menu}

@@ -2,7 +2,31 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const moment = require('moment');
 
+const { SelectedBox } = require('../../constants/DateRangePicker');
+
 class MonthTable extends React.Component {
+  componentDidMount () {
+    this._focusDay(this.props.focusedDay);
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.focusedDay !== this.props.focusedDay) {
+      this._focusDay(this.props.focusedDay);
+    }
+  }
+
+  _focusDay = day => {
+    const refForDay = this[day];
+
+    if (refForDay && refForDay.focus) {
+      refForDay.focus();
+    }
+  }
+
+  _setRefForDay = day => ref => {
+    this[day] = ref;
+  }
+
   render () {
     const { activeSelectDate,
       currentDate,
@@ -13,6 +37,7 @@ class MonthTable extends React.Component {
       handleKeyDown,
       isInActiveRange,
       minimumDate,
+      selectedBox,
       selectedEndDate,
       selectedStartDate,
       styles
@@ -31,7 +56,6 @@ class MonthTable extends React.Component {
       const isSelectedStartDay = startDate.isSame(moment.unix(selectedStartDate), 'day');
       const isSelectedEndDay = startDate.isSame(moment.unix(selectedEndDate), 'day');
       const isSelectedDay = isSelectedStartDay || isSelectedEndDay;
-      const savedStartDate = startDate.date();
 
       /**
        * Aria label possible states
@@ -46,6 +70,7 @@ class MonthTable extends React.Component {
        *      Thursday, April 13th, 2018, selected end date for range.
        * */
       let ariaLabelStateText = '';
+      const ariaLabelBeginningText = `Select ${selectedBox === SelectedBox.FROM ? 'start' : 'end'} date for range, `;
       const ariaLabelDateText = moment(startDate).format('dddd, MMMM Do, YYYY');
 
       if (!isSelectedDay && isActiveRange) {
@@ -58,18 +83,14 @@ class MonthTable extends React.Component {
 
       const day = (
         <a
-          aria-label={ariaLabelDateText + ariaLabelStateText}
+          aria-label={ariaLabelBeginningText + ariaLabelDateText + ariaLabelStateText}
           aria-pressed={isSelectedDay}
           className='mx-month-table-day'
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
-          onKeyDown={handleKeyDown}
+          onKeyDown={handleKeyDown.bind(null, startDate.unix())}
           onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
-          ref={ref => {
-            if (ref && moment.unix(focusedDay).date() === savedStartDate) {
-              ref.focus();
-            }
-          }}
+          ref={this._setRefForDay(startDate.unix())}
           role='button'
           style={Object.assign({},
             styles.calendarDay,
@@ -104,6 +125,7 @@ MonthTable.propTypes = {
   handleKeyDown: PropTypes.func,
   isInActiveRange: PropTypes.func,
   minimumDate: PropTypes.number,
+  selectedBox: PropTypes.string,
   selectedEndDate: PropTypes.number,
   selectedStartDate: PropTypes.number,
   styles: PropTypes.object

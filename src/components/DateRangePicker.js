@@ -96,8 +96,8 @@ class DateRangePicker extends React.Component {
     super(props);
 
     this.state = {
-      currentDate: props.selectedEndDate || moment().unix(),
-      focusedDay: props.selectedEndDate || moment().unix(),
+      currentDate: props.selectedEndDate || moment().startOf('day').unix(),
+      focusedDay: props.selectedEndDate || moment().startOf('day').unix(),
       selectedBox: SelectedBox.FROM,
       selectedStartDate: this.props.selectedStartDate,
       selectedEndDate: this.props.selectedEndDate,
@@ -138,34 +138,54 @@ class DateRangePicker extends React.Component {
     return moment.unix(endDate).isBefore(moment.unix(startDate));
   };
 
+  _focusFromButton = () => {
+    if (this._fromButton && this._fromButton.focus) {
+      this._fromButton.focus();
+    }
+  };
+
+  _focusToButton = () => {
+    if (this._toButton && this._toButton.focus) {
+      this._toButton.focus();
+    }
+  };
+
+  _getToggledSelectBox = (currentSelectBox) => {
+    return currentSelectBox === SelectedBox.FROM ? SelectedBox.TO : SelectedBox.FROM;
+  };
+
   _handleDateSelect = (date) => {
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
-
-    this.setState({
-      currentDate: date,
-      focusedDay: date
-    });
-
-    let endDate = this.state.selectedEndDate;
-    let startDate = this.state.selectedStartDate;
-
-    if (this.state.selectedBox === SelectedBox.FROM) {
-      startDate = date;
-      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.TO });
-    }
-
-    if (this.state.selectedBox === SelectedBox.TO) {
-      endDate = date;
-      if (isLargeOrMediumWindowSize) this.setState({ selectedBox: SelectedBox.FROM });
-    }
-
+    const { selectedBox, selectedEndDate, selectedStartDate } = this.state;
+    const endDate = selectedBox === SelectedBox.TO ? date : selectedEndDate;
+    const startDate = selectedBox === SelectedBox.FROM ? date : selectedStartDate;
     const modifiedRangeCompleteButDatesInversed = startDate && endDate && this._endDateIsBeforeStartDate(startDate, endDate);
 
-    this.setState({
-      selectedStartDate: modifiedRangeCompleteButDatesInversed ? endDate : startDate,
-      selectedEndDate: modifiedRangeCompleteButDatesInversed ? startDate : endDate
-    });
+    this.setState(
+      state => {
+        return {
+          currentDate: date,
+          focusedDay: date,
+          selectedBox: isLargeOrMediumWindowSize ? this._getToggledSelectBox(state.selectedBox) : state.selectedBox,
+          selectedStartDate: modifiedRangeCompleteButDatesInversed ? endDate : startDate,
+          selectedEndDate: modifiedRangeCompleteButDatesInversed ? startDate : endDate,
+          showCalendar: false
+        };
+      },
+      () => {
+        if (!isLargeOrMediumWindowSize) {
+          switch (this.state.selectedBox) {
+            case SelectedBox.FROM:
+              this._focusFromButton();
+              break;
+            case SelectedBox.TO:
+              this._focusToButton();
+              break;
+          }
+        }
+      }
+    );
   };
 
   _handleDefaultRangeSelection = (range) => {
@@ -176,7 +196,7 @@ class DateRangePicker extends React.Component {
     });
   };
 
-  _handleDayKeyDown = (e) => {
+  _handleDayKeyDown = (date, e) => {
     const startDate = moment.unix(this.state.currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(this.state.currentDate).endOf('month').endOf('week');
 
@@ -197,7 +217,9 @@ class DateRangePicker extends React.Component {
 
       this.setState({ focusedDay: day.unix() });
     } else if (keycode(e) === 'enter') {
-      this._handleDateSelect(this.state.focusedDay);
+      e.preventDefault();
+      e.stopPropagation();
+      this._handleDateSelect(date);
     } else if (keycode(e) === 'up') {
       e.preventDefault(); //stop browser scrolling
       const day = moment.unix(this.state.focusedDay).subtract(7, 'days').startOf('day');
@@ -358,6 +380,8 @@ class DateRangePicker extends React.Component {
                           {this.props.showDefaultRanges && (
                             <SelectionPane
                               defaultRanges={this.props.defaultRanges}
+                              getFromButtonRef={ref => (this._fromButton = ref)}
+                              getToButtonRef={ref => (this._toButton = ref)}
                               handleDefaultRangeSelection={
                                 this._handleDefaultRangeSelection
                               }
@@ -431,13 +455,11 @@ class DateRangePicker extends React.Component {
                                 this._getDateRangePosition
                               }
                               handleDateHover={this._handleDateHover}
-                              handleDateSelect={date => {
-                                this._handleDateSelect(date);
-                                this.setState({ showCalendar: false });
-                              }}
+                              handleDateSelect={this._handleDateSelect}
                               handleKeyDown={this._handleDayKeyDown}
                               isInActiveRange={this._isInActiveRange}
                               minimumDate={this.props.minimumDate}
+                              selectedBox={this.state.selectedBox}
                               selectedEndDate={selectedEndDate}
                               selectedStartDate={selectedStartDate}
                               styles={styles}
