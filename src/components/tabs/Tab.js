@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
+const { css } = require('glamor');
 
 import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
@@ -19,7 +20,6 @@ class Tab extends React.Component {
 
   static defaultProps = {
     isActive: false,
-    isFocused: false,
     onClick: () => {},
     styles: {}
   }
@@ -33,8 +33,7 @@ class Tab extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    let style = Object.assign({}, styles.tab, this.props.styles.tab,
-      this.state.isFocused ? { backgroundColor: this.props.theme.Colors.GRAY_100 } : {});
+    let style = Object.assign({}, styles.tab, this.props.styles.tab);
 
     if (this.props.isActive)
       style = Object.assign({}, style, styles.activeTab, this.props.styles.activeTab);
@@ -42,12 +41,9 @@ class Tab extends React.Component {
     return (
       <div
         aria-label={`${this.props.children} tab`}
-        className='mx-tab'
-        onBlur={() => this.setState({ isFocused: false })}
+        className={`mx-tab ${css(style)}`}
         onClick={this.props.onClick}
-        onFocus={() => this.setState({ isFocused: true })}
         onKeyUp={e => this._handleSpaceAndEnter(e)}
-        style={style}
         tabIndex={0}
       >
         {this.props.children}
@@ -66,9 +62,11 @@ class Tab extends React.Component {
         fontStyle: theme.Fonts.SEMIBOLD,
         padding: theme.Spacing.MEDIUM,
         whiteSpace: 'nowrap',
-
         ':hover': {
           color: theme.Colors.GRAY_700
+        },
+        ':focus': {
+          backgroundColor: theme.Colors.GRAY_100
         }
       },
       activeTab: Object.assign({
