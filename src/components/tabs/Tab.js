@@ -4,6 +4,7 @@ const React = require('react');
 
 import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
+const { isEnterOrSpaceKey } = require('../../utils/KeyPress');
 
 const StyleUtils = require('../../utils/Style');
 
@@ -18,22 +19,39 @@ class Tab extends React.Component {
 
   static defaultProps = {
     isActive: false,
+    isFocused: false,
     onClick: () => {},
     styles: {}
+  }
+
+  _handleSpaceAndEnter = (e) => {
+    if (isEnterOrSpaceKey(e)) {
+      this.props.onClick();
+    }
   }
 
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    let style = Object.assign({}, styles.tab, this.props.styles.tab);
+    let style = Object.assign({}, styles.tab, this.props.styles.tab,
+      this.state.isFocused ? { backgroundColor: this.props.theme.Colors.GRAY_100 } : {});
 
     if (this.props.isActive)
       style = Object.assign({}, style, styles.activeTab, this.props.styles.activeTab);
 
     return (
-      <span className='mx-tab' onClick={this.props.onClick} style={style}>
+      <div
+        aria-label={`${this.props.children} tab`}
+        className='mx-tab'
+        onBlur={() => this.setState({ isFocused: false })}
+        onClick={this.props.onClick}
+        onFocus={() => this.setState({ isFocused: true })}
+        onKeyUp={e => this._handleSpaceAndEnter(e)}
+        style={style}
+        tabIndex={0}
+      >
         {this.props.children}
-      </span>
+      </div>
     );
   }
 
