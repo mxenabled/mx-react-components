@@ -35,6 +35,8 @@ class MXFocusTrap extends React.Component {
     });
     traps.push(this);
 
+    this._trapNumber = traps.length;
+
     this._siblingNodeToRenderNextTo = this._getSiblingNodeToRenderNextTo(
       _get(this.props, 'focusTrapOptions.portalTo', null)
     );
@@ -83,7 +85,7 @@ class MXFocusTrap extends React.Component {
       return ReactDOM.createPortal(
         (
           <FocusTrap {...this.props} paused={this.state.paused}>
-            {this.props.children}
+            {this.props.children(this._trapNumber)}
           </FocusTrap>
         ),
         this._siblingNodeToRenderNextTo.parentNode
@@ -93,7 +95,7 @@ class MXFocusTrap extends React.Component {
     // Render in normal location
     return (
       <FocusTrap {...this.props} paused={this.state.paused}>
-        {this.props.children}
+        {this.props.children(this._trapNumber)}
       </FocusTrap>
     );
   }
