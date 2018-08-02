@@ -57,7 +57,6 @@ class DrawerDocs extends React.Component {
           />
         )}
         onClose={this._handleDrawerClose}
-        portalTo='#app'
         title='Demo'
       >
         {({ close }) => {
@@ -84,7 +83,6 @@ class DrawerDocs extends React.Component {
     return (
       <Drawer
         onClose={this._handleDrawerClose2}
-        portalTo='#app'
         title='Other Drawer'
       >
         <p style={{ padding: 20 }}>
@@ -194,9 +192,6 @@ class DrawerDocs extends React.Component {
         <h5>onKeyUp<label>Function</label></h5>
         <p>An event handler for the key up event of the drawer. If no handler is passed then the drawer will close when the esc key is pressed.</p>
 
-        <h5>portalTo <label>String</label></h5>
-        <p>A query string used to look up an element in the DOM to render the Drawer next to. If not provided then the Drawer is rendered in place. This uses the React Portals functionality. See <a href='https://reactjs.org/docs/portals.html'>documentation</a> for details.</p>
-
         <h5>role <label>string</label></h5>
         <p>Default: 'dialog'</p>
         <p>The role applied to the wrapping div around the Drawer's children.  Used for accessibility purposes.  See <a href='https://www.w3.org/TR/wai-aria-1.1/#usage_intro'>WAI-ARIA documentation</a> for more details on roles.</p>
@@ -246,7 +241,6 @@ class DrawerDocs extends React.Component {
         />
       )}
       onClose={this._handleDrawerClose}
-      portalTo='#app'
       title='Demo'
     >
       <p id='description'>This is a demo drawer</p>
@@ -275,7 +269,6 @@ class DrawerDocs extends React.Component {
         />
       )}
       onClose={this._handleDrawerClose}
-      portalTo='#app'
       title='Demo'
     >
       {({ close }) => {
@@ -284,7 +277,7 @@ class DrawerDocs extends React.Component {
             <p>
               Content Here
             </p>
-            <button onClick={close}>Close the drawer from the content</button>
+            <button onClick={close}>Close the drawer from the conten</button>
           </div>
         )
       }}
