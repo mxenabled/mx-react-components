@@ -21,12 +21,16 @@ class MessageBoxDocs extends React.Component {
           color={Styles.Colors.DANGER}
           icon='attention-solid'
           styles={styles.messageBoxNoChildren}
-          title='This is a MessageBox with no children.'
+          title='This is a MessageBox title with no children.'
         />
 
         <MessageBox
+          button='Button'
           icon='attention-solid'
-          title='This is a MessageBox with children.'
+          isSmall={false}
+          message='This is a message box.'
+          subMessage='this is a submessage'
+          title='This is a MessageBox with children and a button.'
         >
           <div style={styles.messageBoxContents}>
             <div style={styles.messageBoxText}>This is some message box text.</div>
@@ -92,7 +96,8 @@ class MessageBoxDocs extends React.Component {
       messageBoxNoChildren: {
         component: {
           marginBottom: Styles.Spacing.LARGE
-        }
+        },
+        fontFace: Styles.Fonts.SEMIBOLD
       }
     };
   };
