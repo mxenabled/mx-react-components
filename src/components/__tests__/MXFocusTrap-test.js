@@ -20,12 +20,22 @@ class WrappedMXFocusTrap extends React.Component {
           Modal Content
           {this.state.renderParentTrap ? (
             <MXFocusTrap focusTrapOptions={{ portalTo: '#app' }}>
-              <button>"Outer Focusable Button"</button>
-              {this.state.renderChildTrap ? (
-                <MXFocusTrap focusTrapOptions={{ portalTo: '#app' }}>
-                  <button>"Inner Focusable Button"</button>
-                </MXFocusTrap>
-              ) : null}
+              {trapNumber => {
+                return (
+                  <div>
+                    <button id='outer' style={{ zIndex: trapNumber }}>"Outer Focusable Button"</button>
+                    {this.state.renderChildTrap ? (
+                      <MXFocusTrap focusTrapOptions={{ portalTo: '#app' }}>
+                        {secondTrapNumber => {
+                          return (
+                            <button id='inner' style={{ zIndex: secondTrapNumber }}>"Inner Focusable Button"</button>
+                          );
+                        }}
+                      </MXFocusTrap>
+                    ) : null}
+                  </div>
+                );
+              }}
             </MXFocusTrap>
           ) : null}
         </div>
@@ -72,5 +82,17 @@ describe('MXFocusTrap', () => {
 
     wrapper.setState({ renderChildTrap: false });
     expect(parentTrap.html()).toContain('aria-hidden="false"');
+  });
+
+  it('should have the correct zIndex based upon trap number', () => {
+    wrapper.setState({ renderParentTrap: true });
+    const outerButton = wrapper.find('#outer').first();
+
+    expect(outerButton.html()).toContain('z-index: 1');
+
+    wrapper.setState({ renderChildTrap: true });
+    const innerButton = wrapper.find('#inner').first();
+
+    expect(innerButton.html()).toContain('z-index: 2');
   });
 });

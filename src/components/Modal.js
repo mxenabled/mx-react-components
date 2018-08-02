@@ -189,8 +189,6 @@ class Modal extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
-    const styles = this.styles(theme);
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true,
@@ -201,53 +199,60 @@ class Modal extends React.Component {
 
     return (
       <MXFocusTrap {...mergedFocusTrapProps}>
-        <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
-          <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
-          <div
-            style={Object.assign({}, styles.container, this.props.style)}
-          >
-            {this._renderTitleBar(styles)}
-            <div
-              aria-describedby={this.props['aria-describedby']}
-              aria-label={this.props['aria-label']}
-              aria-labelledby={this.props['aria-labelledby']}
-              className='mx-modal-content'
-              ref={ref => this._modalContent = ref}
-              role={this.props.role}
-              style={Object.assign({}, styles.content, this.props.contentStyle)}
-              tabIndex={0}
-            >
-              {this.props.children}
-              {this._renderTooltip(styles, theme)}
-            </div>
-            {this._renderFooter(styles, theme)}
-            {this.props.showCloseIcon && (
-              <button
-                aria-label='Close Modal'
-                className='mx-modal-close'
-                onClick={this.props.onRequestClose}
-                onKeyUp={e => e.keyCode === 13 && this.props.onRequestClose()}
-                role='button'
-                style={styles.close}
-                tabIndex={0}
+        {trapNumber => {
+          const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
+          const styles = this.styles(theme, trapNumber);
+
+          return (
+            <div className='mx-modal' style={Object.assign({}, styles.scrim, this.props.isRelative && styles.relative)}>
+              <div className='mx-modal-scrim' onClick={this.props.onRequestClose} style={Object.assign({}, styles.scrim, styles.overlay, this.props.isRelative && styles.relative)} />
+              <div
+                style={Object.assign({}, styles.container, this.props.style)}
               >
-                <Icon
-                  size={24}
-                  style={styles.closeIcon}
-                  type='close-solid'
-                />
-              </button>
-            )}
-          </div>
-        </div>
+                {this._renderTitleBar(styles)}
+                <div
+                  aria-describedby={this.props['aria-describedby']}
+                  aria-label={this.props['aria-label']}
+                  aria-labelledby={this.props['aria-labelledby']}
+                  className='mx-modal-content'
+                  ref={ref => this._modalContent = ref}
+                  role={this.props.role}
+                  style={Object.assign({}, styles.content, this.props.contentStyle)}
+                  tabIndex={0}
+                >
+                  {this.props.children}
+                  {this._renderTooltip(styles, theme)}
+                </div>
+                {this._renderFooter(styles, theme)}
+                {this.props.showCloseIcon && (
+                  <button
+                    aria-label='Close Modal'
+                    className='mx-modal-close'
+                    onClick={this.props.onRequestClose}
+                    onKeyUp={e => e.keyCode === 13 && this.props.onRequestClose()}
+                    role='button'
+                    style={styles.close}
+                    tabIndex={0}
+                  >
+                    <Icon
+                      size={24}
+                      style={styles.closeIcon}
+                      type='close-solid'
+                    />
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        }}
       </MXFocusTrap>
     );
   }
 
-  styles = theme => {
+  styles = (theme, trapNumber = 1) => {
     return _merge({}, {
       scrim: {
-        zIndex: 1000,
+        zIndex: trapNumber * 1000,
         position: 'fixed',
         top: 0,
         right: 0,
@@ -277,7 +282,7 @@ class Modal extends React.Component {
         fontFamily: theme.FontFamily,
         boxSizing: 'border-box',
         position: 'relative',
-        zIndex: 1001,
+        zIndex: trapNumber * 1001,
         backgroundColor: theme.Colors.WHITE,
         boxShadow: theme.ShadowHigh,
         borderRadius: 2,

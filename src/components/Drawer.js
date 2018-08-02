@@ -238,92 +238,97 @@ class Drawer extends React.Component {
   };
 
   render () {
-    const { theme } = this.state;
-    const styles = this.styles(theme);
-    const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig, portalTo } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true,
-        portalTo
+        portalTo: this.props.portalTo
       },
       paused: false,
-      ...focusTrapProps
+      ...this.props.focusTrapProps
     };
-
-    let menu = null;
-
-    // If headerMenu is a function then we want to pass the Drawer's
-    // exposed functions to the call.
-    if (typeof headerMenu === 'function') {
-      menu = headerMenu(this._getExposedDrawerFunctions());
-    // If headerMenu is a normal node/element then use directly.
-    } else if (headerMenu) {
-      menu = headerMenu;
-    // If no headerMenu and navConfig passed then use Drawer's
-    // _renderNav function to generate the menu.
-    } else if (navConfig) {
-      menu = this._renderNav(navConfig, styles, theme);
-    }
-    const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
       <StyleRoot>
         <MXFocusTrap {...mergedFocusTrapProps}>
-          <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
-            <div
-              className='mx-drawer-scrim'
-              onClick={() => {
-                if (this.props.closeOnScrimClick) this.close();
-              }}
-              style={styles.scrim}
-            />
-            <div
-              aria-describedby={this.props['aria-describedby']}
-              aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
-              ref={(ref) => (this._component = ref)}
-              role={this.props.role}
-              style={{ ...styles.component, ...this.props.style }}
-              tabIndex={0}
-            >
-              <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
-                <span style={styles.backArrow}>
-                  {this.props.showCloseButton &&
-                    <Button
-                      aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
-                      buttonRef={ref => (this._closeButton = ref)}
-                      className='mx-drawer-close'
-                      icon='go-back'
-                      onClick={this.close}
-                      theme={theme}
-                      type={'base'}
-                    />
-                  }
-                </span>
-                <h2 id={titleUniqueId} style={styles.title}>
-                  {this.props.title}
-                </h2>
-                <div className='mx-drawer-header-menu' style={styles.headerMenu}>
-                  {menu}
+          {trapNumber => {
+            const { theme } = this.state;
+            const styles = this.styles(theme, trapNumber);
+            const { closeButtonAriaLabel, headerMenu, navConfig } = this.props;
+
+            let menu = null;
+
+            // If headerMenu is a function then we want to pass the Drawer's
+            // exposed functions to the call.
+            if (typeof headerMenu === 'function') {
+              menu = headerMenu(this._getExposedDrawerFunctions());
+            // If headerMenu is a normal node/element then use directly.
+            } else if (headerMenu) {
+              menu = headerMenu;
+            // If no headerMenu and navConfig passed then use Drawer's
+            // _renderNav function to generate the menu.
+            } else if (navConfig) {
+              menu = this._renderNav(navConfig, styles, theme);
+            }
+            const titleUniqueId = _uniqueId('mx-drawer-title-');
+
+            return (
+              <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
+                <div
+                  className='mx-drawer-scrim'
+                  onClick={() => {
+                    if (this.props.closeOnScrimClick) this.close();
+                  }}
+                  style={styles.scrim}
+                />
+                <div
+                  aria-describedby={this.props['aria-describedby']}
+                  aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
+                  ref={(ref) => (this._component = ref)}
+                  role={this.props.role}
+                  style={{ ...styles.component, ...this.props.style }}
+                  tabIndex={0}
+                >
+                  <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
+                    <span style={styles.backArrow}>
+                      {this.props.showCloseButton &&
+                        <Button
+                          aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
+                          buttonRef={ref => (this._closeButton = ref)}
+                          className='mx-drawer-close'
+                          icon='go-back'
+                          onClick={this.close}
+                          theme={theme}
+                          type={'base'}
+                        />
+                      }
+                    </span>
+                    <h2 id={titleUniqueId} style={styles.title}>
+                      {this.props.title}
+                    </h2>
+                    <div className='mx-drawer-header-menu' style={styles.headerMenu}>
+                      {menu}
+                    </div>
+                  </header>
+                  <div className='mx-drawer-content' style={{ ...styles.content, ...this.props.contentStyle }}>
+                    {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
+                  </div>
                 </div>
-              </header>
-              <div className='mx-drawer-content' style={{ ...styles.content, ...this.props.contentStyle }}>
-                {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
               </div>
-            </div>
-          </div>
+            );
+          }}
         </MXFocusTrap>
       </ StyleRoot>
     );
   }
 
-  styles = (theme) => {
+  styles = (theme, trapNumber = 1) => {
     const HEADER_HEIGHT = this._getHeaderHeight();
 
     return _merge({}, {
       component: {
         border: '1px solid ' + theme.Colors.GRAY_300,
         boxSizing: 'border-box',
-        zIndex: 1001,
+        zIndex: trapNumber * 1002,
         top: 0,
         bottom: 0,
         left: '100%',
@@ -345,7 +350,7 @@ class Drawer extends React.Component {
         position: 'fixed',
         right: 0,
         top: 0,
-        zIndex: 999
+        zIndex: trapNumber * 1000
       },
       content: {
         backgroundColor: theme.Colors.WHITE,
@@ -353,7 +358,7 @@ class Drawer extends React.Component {
         height: `calc(100% - ${HEADER_HEIGHT})`
       },
       scrim: {
-        zIndex: 1000,
+        zIndex: trapNumber * 1001,
         position: 'fixed',
         top: 0,
         right: 0,
