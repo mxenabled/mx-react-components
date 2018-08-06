@@ -1715,19 +1715,24 @@ class Icon extends React.Component {
           </g>
         );
       case 'waffle':
+        const size = {
+          height: '66.94',
+          width: '66.94'
+        };
+
         return (
           <g>
-            <rect x='87' y='88' width='66.94' height='66.94'/>
-            <rect x='87' y='221.88' width='66.94' height='66.94'/>
-            <rect x='87' y='355.76' width='66.94' height='66.94'/>
-            <rect x='220.88' y='88' width='66.94' height='66.94'/>
-            <rect x='220.88' y='221.88' width='66.94' height='66.94'/>
-            <rect x='220.88' y='355.76' width='66.94' height='66.94'/>
-            <rect x='354.76' y='88' width='66.94' height='66.94'/>
-            <rect x='354.76' y='221.88' width='66.94' height='66.94'/>
-            <rect x='354.76' y='355.76' width='66.94' height='66.94'/>
+            <rect {...size} x='87' y='88' />
+            <rect {...size} x='87' y='221.88' />
+            <rect {...size} x='87' y='355.76' />
+            <rect {...size} x='220.88' y='88' />
+            <rect {...size} x='220.88' y='221.88' />
+            <rect {...size} x='220.88' y='355.76' />
+            <rect {...size} x='354.76' y='88' />
+            <rect {...size} x='354.76' y='221.88' />
+            <rect {...size} x='354.76' y='355.76' />
           </g>
-        )
+        );
       default:
         return null;
     }
