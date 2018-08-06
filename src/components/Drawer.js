@@ -58,6 +58,7 @@ class Drawer extends React.Component {
     onClose: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
     onOpen: PropTypes.func,
+    portalTo: PropTypes.string,
     role: PropTypes.string,
     showCloseButton: PropTypes.bool,
     showScrim: PropTypes.bool,
@@ -239,10 +240,11 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig } = this.props;
+    const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig, portalTo } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
-        clickOutsideDeactivates: true
+        clickOutsideDeactivates: true,
+        portalTo
       },
       paused: false,
       ...focusTrapProps

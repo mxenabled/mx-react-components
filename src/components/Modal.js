@@ -37,6 +37,7 @@ class Modal extends React.Component {
     footerStyle: PropTypes.object,
     isRelative: PropTypes.bool,
     onRequestClose: PropTypes.func,
+    portalTo: PropTypes.string,
     role: PropTypes.string,
     showCloseIcon: PropTypes.bool,
     showFooter: PropTypes.bool,
@@ -192,7 +193,8 @@ class Modal extends React.Component {
     const styles = this.styles(theme);
     const mergedFocusTrapProps = {
       focusTrapOptions: {
-        clickOutsideDeactivates: true
+        clickOutsideDeactivates: true,
+        portalTo: this.props.portalTo
       },
       ...this.props.focusTrapProps
     };
