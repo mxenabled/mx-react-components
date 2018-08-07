@@ -12,11 +12,11 @@ const StyleUtils = require('../utils/Style');
 
 class MessageBox extends React.Component {
   static propTypes = {
-    button: PropTypes.string,
+    button: PropTypes.node,
     color: PropTypes.string,
     icon: PropTypes.string,
     isSmall: PropTypes.bool,
-    message: PropTypes.string,
+    message: PropTypes.node,
     styles: PropTypes.object,
     subMessage: PropTypes.string,
     theme: themeShape,
@@ -50,22 +50,20 @@ class MessageBox extends React.Component {
                   </div>
                 }
               </div>
-              <div className='sub-message' style={styles.subMessage}>
+              <div className='sub-message'>
                 {!_isNil(this.props.subMessage) &&
-                  <div className='message-bod'>
+                  <div className='message-bod' style={styles.subMessage}>
                     {this.props.subMessage}
                   </div>
                 }
               </div>
             </div>
           </div>
-          <div className='message-button' style={styles.button}>
-            {!_isNil(this.props.button) &&
-              <div className='button'>
-                {this.props.button}
-              </div>
-            }
-          </div>
+          {!_isNil(this.props.button) &&
+            <div style={styles.button}>
+              {this.props.button}
+            </div>
+          }
         </div>
       </div>
     );
@@ -77,23 +75,25 @@ class MessageBox extends React.Component {
     return _merge({}, {
       component: {
         color: theme.Colors.BLACK,
+        boxShadow: theme.ShadowLow,
         boxSizing: 'border-box',
-        border: '1px solid ' + theme.Colors.GRAY_300,
         borderTop: 'none',
-        borderRadius: 6,
+        borderRadius: 4,
         display: 'flex',
         flexDirection: 'column'
       },
       alertbar: {
         background: color,
         borderTop: '1px solid ' + color,
-        borderTopLeftRadius: 6,
-        borderTopRightRadius: 6,
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
         height: 5
       },
       button: {
-        alignSelf: 'flex-end',
-        flexGrow: this.props.isSmall ? 1 : 0
+        alignSelf: this.props.isSmall ? null : 'flex-end',
+        margin: 5,
+        marginTop: this.props.isSmall ? 15 : 5,
+        whiteSpace: 'nowrap'
       },
       header: {
         display: 'flex',
@@ -101,16 +101,18 @@ class MessageBox extends React.Component {
         paddingBottom: 0
       },
       title: {
-        fontFamily: theme.Fonts.SEMIBOLD,
-        fontSize: theme.FontSizes.MEDIUM
-      },
-      icon: {
-        fill: theme.Colors.BLACK
+        fontFamily: theme.Fonts.SEMIBOLD
       },
       messageBody: {
         alignItems: 'baseline',
-        display: 'flex',
-        flexGrow: 2
+        display: 'flex'
+      },
+      messageContent: {
+        boxSizing: this.props.isSmall ? null : 'content-box',
+        textAlign: 'left',
+        width: this.props.isSmall ? '100%' : '75%',
+        paddingRight: this.props.isSmall ? 30 : 0,
+        fontSize: theme.FontSizes.MEDIUM
       },
       mainMessage: {
         paddingTop: theme.Spacing.XSMALL
