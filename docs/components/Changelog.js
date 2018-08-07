@@ -7,6 +7,13 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.24</h3>
+        <ul>
+          <li>Focus Trap Fix For Mobile (<a href='https://github.com/mxenabled/mx-react-components/pull/772'>#772</a>)</li>
+          <li>New Waffle Icon (<a href='https://github.com/mxenabled/mx-react-components/pull/773'>#773</a>)</li>
+          <li>Updates moment.js to fix vulnerability (<a href='https://github.com/mxenabled/mx-react-components/pull/774'>#774</a>)</li>
+        </ul>
+
         <h3>5.2.22</h3>
         <ul>
           <li>Search Input Typo:(<a href='https://github.com/mxenabled/mx-react-components/pull/764'>#766</a>)</li>
