@@ -547,6 +547,10 @@ module.exports = {
       displayValue: 'Visit'
     },
     {
+      value: 'waffle',
+      displayValue: 'Waffle'
+    },
+    {
       value: 'windows',
       displayValue: 'Windows'
     },
