@@ -2,11 +2,15 @@
 /* eslint-disable react/jsx-indent */
 const React = require('react');
 
-const { Icon, Styles, AppConstants } = require('mx-react-components');
+const { Button, Icon, Styles, AppConstants } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
 class IconDocs extends React.Component {
+  state = {
+    fillBackground: false
+  }
+
   render () {
     return (
       <div>
@@ -20,7 +24,12 @@ class IconDocs extends React.Component {
           {AppConstants.Icons.map(icon => {
             return (
               <div key={icon.value} style={{ width: 100, height: 100, textAlign: 'center' }}>
-                <Icon key={icon.value} size={40} type={icon.value} />
+                <Icon
+                  backgroundFillColor={this.state.fillBackground ? 'yellow' : 'transparent'}
+                  key={icon.value}
+                  size={40}
+                  type={icon.value}
+                />
                 <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
               </div>
             );
@@ -28,6 +37,11 @@ class IconDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
+        <h5>backgroundFillColor <label>String</label></h5>
+        <p>Default: 'transparent'</p>
+        <p>Some icons have extra path data to provide a background fill incase you want parts of them to not be see through.</p>
+        <p><Button onClick={() => (this.setState(state => ({ fillBackground: !state.fillBackground })))}>Toggle background fill for supported icons</Button></p>
+
         <h5>size <label>Number, String</label></h5>
         <p>A single number representing the width and height of the icon in pixels.</p>
 
