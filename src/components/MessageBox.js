@@ -18,7 +18,6 @@ class MessageBox extends React.Component {
     isSmall: PropTypes.bool,
     message: PropTypes.node,
     styles: PropTypes.object,
-    subMessage: PropTypes.string,
     theme: themeShape,
     title: PropTypes.string
   };
@@ -32,7 +31,7 @@ class MessageBox extends React.Component {
         <div className='alert-bar' style={styles.alertbar} />
         <div className='message-section' style={styles.messageSection}>
           <div className='message-body' style={styles.messageBody}>
-            <div className='icon-column' style={styles.iconColumn} >
+            <div className='icon-column'>
               <Icon
                 size={20}
                 style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
@@ -47,13 +46,6 @@ class MessageBox extends React.Component {
                 {!_isNil(this.props.message) &&
                   <div className='message-bod' style={styles.messageBod}>
                     {this.props.message}
-                  </div>
-                }
-              </div>
-              <div className='sub-message'>
-                {!_isNil(this.props.subMessage) &&
-                  <div className='message-bod' style={styles.subMessage}>
-                    {this.props.subMessage}
                   </div>
                 }
               </div>
@@ -75,7 +67,7 @@ class MessageBox extends React.Component {
     return _merge({}, {
       component: {
         color: theme.Colors.BLACK,
-        boxShadow: theme.ShadowLow,
+        boxShadow: theme.ShadowMed,
         boxSizing: 'border-box',
         borderTop: 'none',
         borderRadius: 4,
@@ -84,16 +76,18 @@ class MessageBox extends React.Component {
       },
       alertbar: {
         background: color,
+        border: theme.Colors.GRAY_300,
+        color: theme.Colors.GRAY_900,
         borderTop: '1px solid ' + color,
         borderTopLeftRadius: 4,
         borderTopRightRadius: 4,
         height: 5
       },
       button: {
+        marginTop: this.props.isSmall ? 10 : null,
+        whiteSpace: 'nowrap',
         alignSelf: this.props.isSmall ? null : 'flex-end',
-        margin: 5,
-        marginTop: this.props.isSmall ? 15 : 5,
-        whiteSpace: 'nowrap'
+        textAlign: this.props.isSmall ? 'center' : null
       },
       header: {
         display: 'flex',
@@ -105,13 +99,14 @@ class MessageBox extends React.Component {
       },
       messageBody: {
         alignItems: 'baseline',
-        display: 'flex'
+        display: 'flex',
+        flex: '1 1 auto'
       },
       messageContent: {
         boxSizing: this.props.isSmall ? null : 'content-box',
         textAlign: 'left',
         width: this.props.isSmall ? '100%' : '75%',
-        paddingRight: this.props.isSmall ? 30 : 0,
+        paddingRight: this.props.isSmall ? 30 : null,
         fontSize: theme.FontSizes.MEDIUM
       },
       mainMessage: {
@@ -121,11 +116,6 @@ class MessageBox extends React.Component {
         display: 'flex',
         flexDirection: this.props.isSmall ? 'column' : 'row',
         padding: theme.Spacing.SMALL
-      },
-      subMessage: {
-        fontSize: theme.FontSizes.SMALL,
-        fontStyle: 'italic',
-        paddingTop: theme.Spacing.XSMALL
       }
     }, this.props.styles);
   };
