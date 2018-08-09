@@ -28,23 +28,23 @@ class MessageBox extends React.Component {
 
     return (
       <div className='mx-message-box' style={styles.component}>
-        <div className='alert-bar' style={styles.alertbar} />
-        <div className='message-section' style={styles.messageSection}>
-          <div className='message-body' style={styles.messageBody}>
-            <div className='icon-column'>
+        <div style={styles.alertbar} />
+        <div style={styles.messageSection}>
+          <div style={styles.messageBody}>
+            <div>
               <Icon
                 size={20}
                 style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
                 type={this.props.icon}
               />
             </div>
-            <div className='message-content' style={styles.messageContent}>
-              <div className='title' style={styles.title}>
+            <div style={styles.messageContent}>
+              <div style={styles.title}>
                 {this.props.title}
               </div>
-              <div className='main-message' style={styles.mainMessage}>
+              <div style={styles.mainMessage}>
                 {!_isNil(this.props.message) &&
-                  <div className='message-bod' style={styles.messageBod}>
+                  <div>
                     {this.props.message}
                   </div>
                 }
@@ -66,7 +66,7 @@ class MessageBox extends React.Component {
 
     return _merge({}, {
       component: {
-        color: theme.Colors.BLACK,
+        color: theme.Colors.GRAY_900,
         boxShadow: theme.ShadowMed,
         boxSizing: 'border-box',
         borderTop: 'none',
