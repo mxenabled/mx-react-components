@@ -4,6 +4,7 @@ const _isEqual = require('lodash/isEqual');
 
 class Icon extends React.Component {
   static propTypes = {
+    backgroundFillColor: PropTypes.string,
     elementProps: PropTypes.object,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     style: PropTypes.object,
@@ -11,6 +12,7 @@ class Icon extends React.Component {
   };
 
   static defaultProps = {
+    backgroundFillColor: 'transparent',
     elementProps: {},
     size: 24,
     type: 'accounts'
