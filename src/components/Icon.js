@@ -23,7 +23,9 @@ class Icon extends React.Component {
   }
 
   _renderSvg = () => {
-    switch (this.props.type) {
+    const { backgroundFillColor, type } = this.props;
+
+    switch (type) {
       case 'accounts':
         return (
           <g>
