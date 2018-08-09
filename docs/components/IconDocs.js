@@ -25,10 +25,10 @@ class IconDocs extends React.Component {
             return (
               <div key={icon.value} style={{ width: 100, height: 100, textAlign: 'center' }}>
                 <Icon
-                  backgroundFillColor={this.state.fillBackground ? Styles.Colors.PRIMARY : 'transparent'}
+                  backgroundFillColor={this.state.fillBackground ? Styles.Colors.LIGHT_WARNING : 'transparent'}
                   key={icon.value}
                   size={40}
-                  style={{ fill: Styles.Colors.GRAY_900 }}
+                  style={{ fill: this.state.fillIcon ? Styles.Colors.PRIMARY : Styles.Colors.GRAY_900 }}
                   type={icon.value}
                 />
                 <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
@@ -40,11 +40,15 @@ class IconDocs extends React.Component {
         <h3>Usage</h3>
         <h5>backgroundFillColor <label>String</label></h5>
         <p>Default: 'transparent'</p>
-        <p>Some icons have extra path data to provide a background fill incase you want parts of them to not be see through.</p>
+        <p>Some icons have extra svg path data to provide a background fill incase you want parts of them to not be see through. You can set this prop to any valid color or hexadecimal value to change the the background fill on supported icons. Click the button below to see the supported icons toggle their background fill color.</p>
         <p><Button onClick={() => (this.setState(state => ({ fillBackground: !state.fillBackground })))}>Toggle background fill for supported icons</Button></p>
 
         <h5>size <label>Number, String</label></h5>
         <p>A single number representing the width and height of the icon in pixels.</p>
+
+        <h5>style <label>object</label></h5>
+        <p>A style object applied to the main svg element of the icon. You can use this to over ride styling or change the fill color of the icon. Click the button below to over ride the style and change the icon fill color to blue.</p>
+        <p><Button onClick={() => (this.setState(state => ({ fillIcon: !state.fillIcon })))}>Toggle icon fill color</Button></p>
 
         <h5>type <label>String</label></h5>
         <p>The name of the icon to be displayed. See above for available options.</p>
