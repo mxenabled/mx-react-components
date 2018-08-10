@@ -31,6 +31,7 @@ class IconDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+        <p style={{ marginBottom: Styles.Spacing.XLARGE }}>Warning: Icons marked as deprecated will be removed in a future release.</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
           {AppConstants.Icons.map(icon => {
             return (
