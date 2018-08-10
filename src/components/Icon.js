@@ -1067,6 +1067,7 @@ class Icon extends React.Component {
           </g>
         );
       case 'md-cash':
+        console.warn('WARNING: The "md-cash" icon has been deprecated in favor of the "money-banknote" icon and will be removed in a future release.');
         return (
           <g>
             <path d='M255.9,376.2c-54.5,0-108.9,0-163.4,0c-12.9,0-16.8-3.9-16.8-16.9c0-68.9,0-137.8,0-206.7
@@ -1083,10 +1084,12 @@ class Icon extends React.Component {
           </g>
         );
       case 'md-check-mark':
+        console.warn('WARNING: The "md-check-mark" icon has been deprecated in favor of the "check-skinny" icon and will be removed in a future release.');
         return (
           <path d='M210.7,400.8H210l-132.3-133l66.1-65.4l66.8,66.8l157.4-158.1l66.1,66.1L210.7,400.8z' />
         );
       case 'md-credit':
+        console.warn('WARNING: The "md-credit" icon has been deprecated in favor of the "credit-card" icon and will be removed in a future release.');
         return (
           <path d='M77.4,189v-22.3c0-1.9,0.2-4.2,0.7-7c3.2-10.2,10.5-15.3,21.6-15.3h312.6
             c1.9,0,4.2,0.2,7,0.7c10.2,3.3,15.4,10.5,15.4,21.6V189H77.4z M434.6,233.7v111.6c0,1.9-0.2,4.2-0.7,7
@@ -1094,6 +1097,7 @@ class Icon extends React.Component {
           />
         );
       case 'md-debts':
+        console.warn('WARNING: The "md-debts" icon has been deprecated in favor of the "debts" icon and will be removed in a future release.');
         return (
           <path d='M423.4,423.4c-0.5,6.5-4.2,10.2-11.2,11.2H99.8c-6.5-0.5-10.2-4.2-11.2-11.2
             c0-0.9,0.5-2.6,1.4-4.9l65.6-274.1l44.6-22.3V88.6c0.5-6.5,4.2-10.2,11.2-11.2h89.3c6.5,0.5,10.2,4.2,11.2,11.2v33.5l44.6,22.3
@@ -1106,6 +1110,7 @@ class Icon extends React.Component {
           />
         );
       case 'md-savings':
+        console.warn('WARNING: The "md-savings" icon has been deprecated in favor of the "savings" icon and will be removed in a future release.');
         return (
           <path d='M246.6,184.3c30.2,0,58.2,7.2,81.4,19.6c16.5-19.1,44.8-17.1,48.6-12.3c4.3,5.4-1.8,11.9-6.8,17.6
             c-3.7,4.2-6.6,13.6-7.7,19.9c13.7,14.1,23.2,30.7,27.2,48.8l23.2,4.5c7,1.4,11.6,8.1,10.3,15.2l-6.9,35.7
