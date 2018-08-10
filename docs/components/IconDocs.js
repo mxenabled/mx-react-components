@@ -43,7 +43,7 @@ class IconDocs extends React.Component {
         <h5>backgroundFillColor <label>String</label></h5>
         <p>Default: 'transparent'</p>
         <p>Some icons have extra svg path data to provide a background fill incase you want parts of them to not be see through. You can set this prop to any valid html color or hexadecimal color value to change the the background fill on supported icons. Use the input below to update the background fill color to see the supported icons update.</p>
-        <p>
+        <div>
           <SimpleInput
             elementProps={{
               defaultValue: this.state.backgroundFill,
@@ -58,7 +58,7 @@ class IconDocs extends React.Component {
               }
             }}
             suffix={(
-              <div style={{
+              <span style={{
                 backgroundColor: this.state.backgroundFill,
                 border: `1px solid ${Styles.Colors.GRAY_700}`,
                 height: 20,
@@ -68,11 +68,11 @@ class IconDocs extends React.Component {
             )}
             type='text'
           />
-        </p>
+        </div>
 
         <h5>size <label>Number, String</label></h5>
         <p>A single number representing the width and height of the icon in pixels. Change the icon's size by using the number input below.</p>
-        <p>
+        <div>
           <SimpleInput
             elementProps={{
               defaultValue: this.state.iconSize,
@@ -88,10 +88,11 @@ class IconDocs extends React.Component {
             }}
             type='number'
           />
-        </p>
+        </div>
+
         <h5>style <label>object</label></h5>
         <p>A style object applied to the main svg element of the icon. You can use this to over ride styling or change the fill color of the icon. Use the input below to over ride the style and change the icon fill to a differnt color.</p>
-        <p>
+        <div>
           <SimpleInput
             elementProps={{
               defaultValue: this.state.iconFill,
@@ -106,7 +107,7 @@ class IconDocs extends React.Component {
               }
             }}
             suffix={(
-              <div style={{
+              <span style={{
                 backgroundColor: this.state.iconFill,
                 border: `1px solid ${Styles.Colors.GRAY_700}`,
                 height: 20,
@@ -116,7 +117,8 @@ class IconDocs extends React.Component {
             )}
             type='text'
           />
-        </p>
+        </div>
+
         <h5>type <label>String</label></h5>
         <p>The name of the icon to be displayed. See above for available options.</p>
 
