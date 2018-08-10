@@ -14,6 +14,15 @@ class IconDocs extends React.Component {
   }
 
   render () {
+    const deprecatedIcons = [
+      'export',
+      'md-cash',
+      'md-check-mark',
+      'md-credit',
+      'md-debts',
+      'md-savings'
+    ];
+
     return (
       <div>
         <h1>
@@ -33,7 +42,7 @@ class IconDocs extends React.Component {
                   style={{ fill: this.state.iconFill }}
                   type={icon.value}
                 />
-                <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value})</div>
+                <div style={{ color: Styles.Colors.GRAY_500, fontSize: Styles.FontSizes.SMALL, marginTop: 5 }}>({icon.value}){`${deprecatedIcons.includes(icon.value) ? ' Deprecated' : ''}`}</div>
               </div>
             );
           })}
