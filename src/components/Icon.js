@@ -25,6 +25,8 @@ class Icon extends React.Component {
   _renderSvg = () => {
     const { backgroundFillColor, type } = this.props;
 
+    // TODO: Remove deprecated icons in next major release
+
     switch (type) {
       case 'accounts':
         return (
