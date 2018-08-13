@@ -92,7 +92,7 @@ class DisplayInput extends React.Component {
 
     return (
       <Container className='mx-display-input'>
-        <div aria-hidden={this.props.elementProps.disabled} style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
+        <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
