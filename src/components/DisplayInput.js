@@ -72,8 +72,7 @@ class DisplayInput extends React.Component {
 
   render () {
     // Input properties
-    const { elementProps } = this.props;
-    const { disabled, onChange, ...rest } = elementProps;
+    const { disabled, onChange, ...rest } = this.props.elementProps;
 
     // Methods
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
