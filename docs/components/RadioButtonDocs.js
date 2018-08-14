@@ -35,7 +35,6 @@ class RadioButtonDocs extends React.Component {
           activeButtonStyle={{ backgroundColor: '#FBB600' }}
           buttonStyle={{ height: 30, width: 30 }}
           checked={this.state.selected === 'custom'}
-          color='#FBB600'
           onClick={this._handleRadioClick.bind(null, 'custom')}
           style={{ marginTop: 20 }}
         >
@@ -71,7 +70,6 @@ class RadioButtonDocs extends React.Component {
               activeButtonStyle={{ backgroundColor: '#FBB600' }}
               buttonStyle={{ height: 30, width: 30 }}
               checked={true}
-              color='#FBB600'
               onClick={this._handleRadioClick}
               style={{ marginTop: 20 }}
             >
