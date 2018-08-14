@@ -8,7 +8,6 @@ const Button = require('./Button');
 const { buttonTypes, themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class ButtonGroup extends React.Component {
   static propTypes = {
@@ -20,7 +19,6 @@ class ButtonGroup extends React.Component {
       text: PropTypes.string,
       type: PropTypes.oneOf(buttonTypes)
     }).isRequired),
-    primaryColor: PropTypes.string,
     theme: themeShape,
     type: PropTypes.oneOf(buttonTypes)
   };
@@ -30,12 +28,8 @@ class ButtonGroup extends React.Component {
     type: 'primaryOutline'
   };
 
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
-
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
