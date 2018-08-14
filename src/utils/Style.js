@@ -76,13 +76,10 @@ const StyleUtils = {
    * Abstraction to simplify merging theme colors.
    *
    * @param {Object} theme - Override keys in StyleConstants
-   * @param {String} primaryColor - Deprecated, will be removed in a future release once it has been replaced by `theme` in each component
    * @returns {Object}
    */
-  mergeTheme (theme, primaryColor) {
-    const primaryColorTheme = primaryColor && { Colors: { PRIMARY: primaryColor } };
-
-    return _merge({}, StyleConstants, theme, primaryColorTheme);
+  mergeTheme (theme) {
+    return _merge({}, StyleConstants, theme);
   },
 
   /**
