@@ -16,9 +16,5 @@ describe('StyleUtils', () => {
       expect(StyleUtils.mergeTheme({}).Colors.PRIMARY).toBeDefined();
       expect(StyleUtils.mergeTheme({}).Colors.PRIMARY).toEqual(StyleConstants.Colors.PRIMARY);
     });
-
-    it('should give precedence to the primaryColor prop over theme', () => {
-      expect(StyleUtils.mergeTheme(theme, '#C0FFEE').Colors.PRIMARY).toEqual('#C0FFEE');
-    });
   });
 });
