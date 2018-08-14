@@ -29,7 +29,6 @@ const PageIndicator = require('components/PageIndicatorDocs');
 const PaginationButtons = require('components/PaginationButtonsDocs');
 const ProgressBar = require('components/ProgressBarDocs');
 const RadioButton = require('components/RadioButtonDocs');
-const RajaIcon = require('components/RajaIconDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const RowColumn = require('components/RowColumnDocs');
 const SearchInput = require('components/SearchInputDocs');
