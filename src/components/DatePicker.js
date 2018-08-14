@@ -14,7 +14,6 @@ const StyleUtils = require('../utils/Style');
 class DatePicker extends React.Component {
   static propTypes = {
     closeOnDateSelect: PropTypes.bool,
-    defaultDate: PropTypes.number,
     elementRef: PropTypes.func,
     format: PropTypes.string,
     locale: PropTypes.string,
@@ -35,27 +34,14 @@ class DatePicker extends React.Component {
   };
 
   state = {
-    currentDate: this.props.selectedDate || this.props.defaultDate || moment().unix(),
+    currentDate: this.props.selectedDate || moment().unix(),
     showCalendar: false
   };
-
-  componentDidMount () {
-    if (this.props.defaultDate) {
-      console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
-    }
-  }
 
   componentWillReceiveProps (newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
       this.setState({
         currentDate: newProps.selectedDate
-      });
-    }
-
-    if (newProps.defaultDate && newProps.defaultDate !== this.props.defaultDate) {
-      console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
-      this.setState({
-        currentDate: newProps.defaultDate
       });
     }
   }
@@ -94,7 +80,7 @@ class DatePicker extends React.Component {
             type='calendar'
           />
           <div className='mx-selected-date-text' style={styles.selectedDateText}>
-            {(this.props.selectedDate || this.props.defaultDate) ? moment.unix(this.props.selectedDate || this.props.defaultDate).format(this.props.format) : this.props.placeholderText}
+            {this.props.selectedDate ? moment.unix(this.props.selectedDate).format(this.props.format) : this.props.placeholderText}
           </div>
           <Icon
             className='mx-date-picker-icon-caret'
@@ -160,7 +146,7 @@ class DatePicker extends React.Component {
         marginRight: 5
       },
       selectedDateText: {
-        color: (this.props.selectedDate || this.props.defaultDate) ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500,
+        color: this.props.selectedDate ? theme.Colors.GRAY_700 : theme.Colors.GRAY_500,
         flex: 1
       },
       selectedDateCaret: {
