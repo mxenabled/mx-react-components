@@ -10,7 +10,6 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class DatePicker extends React.Component {
   static propTypes = {
@@ -22,7 +21,6 @@ class DatePicker extends React.Component {
     minimumDate: PropTypes.number,
     onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
-    primaryColor: PropTypes.string,
     selectedDate: PropTypes.number,
     style: PropTypes.object,
     theme: themeShape
@@ -42,7 +40,6 @@ class DatePicker extends React.Component {
   };
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props);
     if (this.props.defaultDate) {
       console.warn('WARNING: defaultDate has been replaced with selectedDate and will be removed in a future release. Check usage of ' + this.constructor.displayName + '.');
     }
@@ -84,7 +81,7 @@ class DatePicker extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
