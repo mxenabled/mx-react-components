@@ -62,7 +62,7 @@ class SelectionPane extends React.Component {
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
             Select a Range
           </div>
-          <DefaultRanges {...this.props} styles={styles} />
+          <DefaultRanges {...this.props} styles={styles} theme={theme} />
         </div>
       </div>
     );
