@@ -9,7 +9,6 @@ const Changelog = require('components/Changelog');
 const Components = require('components/Components');
 const { ConfigDocs } = require('components/ConfigDocs');
 const DatePicker = require('components/DatePickerDocs');
-const DatePickerFullScreen = require('components/DatePickerFullScreenDocs');
 const DateRangePicker = require('components/DateRangePickerDocs');
 const DateTimePicker = require('components/DateTimePickerDocs');
 const DisplayInput = require('components/DisplayInputDocs');
