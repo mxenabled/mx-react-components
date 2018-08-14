@@ -46,9 +46,6 @@ class SimpleInputDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>baseColor <label>String</label></h5>
-        <p>The color of the <Code>input</Code> border on focus.</p>
-        <p>*This prop is deprecated, please use <Code>theme</Code> instead.</p>
 
         <h5>elementProps <label>Object</label></h5>
         <p>Pass props directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
@@ -59,20 +56,8 @@ class SimpleInputDocs extends React.Component {
         <h5>focusOnLoad <label>Boolean</label></h5>
         <p>Focus <Code>input</Code> on load, default of false.</p>
 
-        <h5>handleResetClick <label>Function</label></h5>
-        <p>The function that will execute when <Code>rightIcon</Code> is clicked. This prop will not work properly unless <Code>rightIcon</Code> is also declared. </p>
-        <p>*This prop is deprecated, please use <Code>suffix</Code> by passing an element with a click handler instead.</p>
-
-        <h5>icon <label>String || Object</label></h5>
-        <p>The type of icon as a string or an object describing the props passed to the Icon component to display on the left side of the <Code>input</Code></p>
-        <p>*This prop is deprecated, please use <Code>prefix</Code> instead.</p>
-
         <h5>prefix <label>Node</label></h5>
         <p>Anything that can be rendered: numbers, strings, elements or an array(or fragment) containing these types that is placed on the left side of the <Code>input</Code>.</p>
-
-        <h5>rightIcon <label>String || Object</label></h5>
-        <p>The type of icon as a string or an object describing the props passed to the Icon component to display on the right side of the <Code>input</Code></p>
-        <p>*This prop is deprecated, please use <Code>suffix</Code> instead.</p>
 
         <h5>styles <label>Object</label></h5>
         <p>Allows style additions or overrides to specific component elements including:</p>
