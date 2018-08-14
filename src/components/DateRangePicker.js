@@ -15,7 +15,6 @@ const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
 const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
@@ -40,7 +39,6 @@ class DateRangePicker extends React.Component {
     onDateRangeSelect: PropTypes.func,
     onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
-    primaryColor: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
     showDefaultRanges: PropTypes.bool,
@@ -106,7 +104,6 @@ class DateRangePicker extends React.Component {
   }
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props);
     deprecateProp(this.props, 'onDateSelect', 'onDateRangeSelect', 'date-range-picker');
   }
 
@@ -155,7 +152,7 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const { selectedBox, selectedEndDate, selectedStartDate } = this.state;
     const endDate = selectedBox === SelectedBox.TO ? date : selectedEndDate;
@@ -304,7 +301,7 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
