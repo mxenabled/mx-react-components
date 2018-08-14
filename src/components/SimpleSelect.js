@@ -12,7 +12,6 @@ const MXFocusTrap = require('./MXFocusTrap');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecateProp } = require('../utils/Deprecation');
 
 class SimpleSelect extends React.Component {
   static propTypes = {
@@ -22,7 +21,6 @@ class SimpleSelect extends React.Component {
     iconSize: PropTypes.number,
     items: PropTypes.array.isRequired,
     itemStyles: PropTypes.object,
-    menuStyles: PropTypes.object,
     onScrimClick: PropTypes.func,
     scrimClickOnSelect: PropTypes.bool,
     style: PropTypes.object,
@@ -37,10 +35,6 @@ class SimpleSelect extends React.Component {
     items: [],
     onScrimClick () {}
   };
-
-  componentDidMount () {
-    deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
-  }
 
   _handleKeyUp = (e) => {
     if (keycode(e) === 'esc') {
@@ -118,8 +112,7 @@ class SimpleSelect extends React.Component {
         height: 0,
         position: 'relative'
       }, this.props.style),
-
-      menu: Object.assign({}, {
+      menu: {
         alignSelf: 'stretch',
         backgroundColor: theme.Colors.WHITE,
         borderRadius: 3,
@@ -134,8 +127,7 @@ class SimpleSelect extends React.Component {
         top: 10,
         position: 'absolute',
         zIndex: 10
-      }, this.props.menuStyles),
-
+      },
       item: Object.assign({}, {
         display: 'flex',
         alignItems: 'center',
