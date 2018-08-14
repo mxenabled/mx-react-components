@@ -161,6 +161,7 @@ class Components extends React.Component {
 
           <div className='links'>
             <h3>General</h3>
+            <Link to='/components/drawer'>Drawer</Link>
             <Link to='/components/icon'>Icon</Link>
             <Link to='/components/raja-icon'>Raja Icon</Link>
             <Link to='/components/loader'>Loader</Link>
@@ -182,7 +183,6 @@ class Components extends React.Component {
             <Link to='/components/date-range-picker'>Date Range Picker</Link>
             <Link to='/components/date-time-picker'>Date Time Picker</Link>
             <Link to='/components/display-input'>Display Input</Link>
-            <Link to='/components/drawer'>Drawer</Link>
             <Link to='/components/file-upload'>File Upload</Link>
             <Link to='/components/radio-button'>Radio Button</Link>
             <Link to='/components/range-selector'>Range Selector</Link>
