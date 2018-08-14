@@ -34,10 +34,6 @@ class Components extends React.Component {
                   displayValue: 'Date Picker'
                 },
                 {
-                  value: 'date-picker-full-screen',
-                  displayValue: 'Date Picker Full Screen'
-                },
-                {
                   value: 'date-range-picker',
                   displayValue: 'Date Range Picker'
                 },
@@ -178,7 +174,6 @@ class Components extends React.Component {
             <Link to='/components/button'>Button</Link>
             <Link to='/components/button-group'>Button Group</Link>
             <Link to='/components/date-picker'>Date Picker</Link>
-            <Link to='/components/date-picker-full-screen'>Date Picker Full Screen</Link>
             <Link to='/components/date-range-picker'>Date Range Picker</Link>
             <Link to='/components/date-time-picker'>Date Time Picker</Link>
             <Link to='/components/display-input'>Display Input</Link>
