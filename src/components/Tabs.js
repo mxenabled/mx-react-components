@@ -11,11 +11,7 @@ const TabsTypes = {
   pill: PillTabs
 };
 
-const TabsFactory = ({ type = 'standard', useTabsInMobile, ...props }) => {
-  if (typeof useTabsInMobile !== 'undefined') {
-    console.warn('The useTabsInMobile prop is deprecated and will be removed in a future release.');
-  }
-
+const TabsFactory = ({ type = 'standard', ...props }) => {
   const tabsProps = _pick(props, Object.keys(Tabbable.propTypes));
   const TabsComponent = TabsTypes[type];
 
@@ -27,8 +23,7 @@ const TabsFactory = ({ type = 'standard', useTabsInMobile, ...props }) => {
 };
 
 TabsFactory.propTypes = Object.assign({
-  type: PropTypes.oneOf(Object.keys(TabsTypes)),
-  useTabsInMobile: PropTypes.bool // deprecated
+  type: PropTypes.oneOf(Object.keys(TabsTypes))
 }, Tabbable.PropTypes);
 
 module.exports = TabsFactory;
