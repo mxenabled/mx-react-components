@@ -1,7 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { mount } from 'enzyme';
 
-const Icon = require('../Icon');
 const SimpleInput = require('../SimpleInput');
 
 describe('SimpleInput', () => {
