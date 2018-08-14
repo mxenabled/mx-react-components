@@ -11,7 +11,7 @@ const _merge = require('lodash/merge');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor, deprecatePropWithMessage } = require('../utils/Deprecation');
+const { deprecatePropWithMessage } = require('../utils/Deprecation');
 
 class Modal extends React.Component {
   static propTypes = {
@@ -25,11 +25,9 @@ class Modal extends React.Component {
       icon: PropTypes.string,
       label: PropTypes.string,
       onClick: PropTypes.func,
-      primaryColor: PropTypes.string,
       style: PropTypes.object,
       type: PropTypes.oneOf(['primary', 'secondary'])
     })),
-    color: PropTypes.string,
     contentStyle: PropTypes.object,
     focusOnLoad: PropTypes.bool,
     focusTrapProps: PropTypes.object,
@@ -73,7 +71,6 @@ class Modal extends React.Component {
   };
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props, 'color');
     deprecatePropWithMessage(
       this.props,
       'isOpen',
@@ -189,7 +186,7 @@ class Modal extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const mergedFocusTrapProps = {
       focusTrapOptions: {

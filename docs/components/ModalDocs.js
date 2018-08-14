@@ -114,7 +114,6 @@ class ModalDocs extends React.Component {
       icon: '',
       label: 'Click Me',
       onClick: function () { //do something },
-      primaryColor: Styles.Colors.WARNING,
       style: { marginTop: 10 }, //a style object
       type: 'primary' //either 'primary' or 'secondary'
     }]
