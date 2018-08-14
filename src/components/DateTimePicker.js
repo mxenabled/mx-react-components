@@ -12,7 +12,6 @@ const Row = require('./grid/Row');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 const MAX_HOUR = 23;
 const MAX_MINUTE = 59;
@@ -28,7 +27,6 @@ class DatePicker extends React.Component {
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onDateSelect: PropTypes.func,
-    primaryColor: PropTypes.string,
     selectedDate: PropTypes.number,
     showIcons: PropTypes.bool,
     styles: PropTypes.object,
@@ -69,10 +67,6 @@ class DatePicker extends React.Component {
     showCalendar: false,
     editTime: false
   };
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
 
   _toggleCalendar = () => {
     this.setState({
@@ -148,7 +142,7 @@ class DatePicker extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const spans = this.spans();
 
