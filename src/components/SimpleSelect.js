@@ -20,7 +20,6 @@ class SimpleSelect extends React.Component {
     elementRef: PropTypes.func,
     focusTrapProps: PropTypes.object,
     iconSize: PropTypes.number,
-    iconStyles: PropTypes.object,
     items: PropTypes.array.isRequired,
     itemStyles: PropTypes.object,
     menuStyles: PropTypes.object,
@@ -40,7 +39,6 @@ class SimpleSelect extends React.Component {
   };
 
   componentDidMount () {
-    deprecateProp(this.props, 'iconStyles', 'styles', 'simple-select');
     deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
   }
 
@@ -152,9 +150,9 @@ class SimpleSelect extends React.Component {
           fill: theme.Colors.WHITE
         }
       }, this.props.itemStyles),
-      icon: Object.assign({}, {
+      icon: {
         marginRight: theme.Spacing.SMALL
-      }, this.props.iconStyles),
+      },
       text: {
         whiteSpace: 'nowrap'
       },
