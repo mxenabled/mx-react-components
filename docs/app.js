@@ -92,7 +92,6 @@ ReactDOM.render((
         <Route component={PaginationButtons} path='pagination-buttons' />
         <Route component={ProgressBar} path='progress-bar' />
         <Route component={RadioButton} path='radio-button' />
-        <Route component={RajaIcon} path='raja-icon' />
         <Route component={RangeSelector} path='range-selector' />
         <Route component={RowColumn} path='row-column' />
         <Route component={SearchInput} path='search-input' />
