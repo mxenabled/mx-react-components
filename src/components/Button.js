@@ -11,7 +11,6 @@ const Spin = require('./Spin');
 const { buttonTypes, themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Button extends React.Component {
   static propTypes = {
@@ -24,7 +23,6 @@ class Button extends React.Component {
     icon: PropTypes.string,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
-    primaryColor: PropTypes.string,
     style: PropTypes.object,
     styles: PropTypes.object,
     theme: themeShape,
@@ -38,10 +36,6 @@ class Button extends React.Component {
     styles: {},
     type: 'primary'
   };
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
 
   _windowSizeIsSmall = (theme) => {
     const windowSize = StyleUtils.getWindowSize(theme.BreakPoints);
@@ -67,8 +61,8 @@ class Button extends React.Component {
   render () {
     // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
     // Keep elementProps for backwards compatibility.
-    const { actionText, buttonRef, children, className, elementProps, icon, isActive, primaryColor, style, theme, ...rest } = this.props;
-    const mergedTheme = StyleUtils.mergeTheme(theme, primaryColor);
+    const { actionText, buttonRef, children, className, elementProps, icon, isActive, style, theme, ...rest } = this.props;
+    const mergedTheme = StyleUtils.mergeTheme(theme);
     const styles = this.styles(mergedTheme);
 
     // We need to remove the styles prop from rest so we don't pass it to children.
