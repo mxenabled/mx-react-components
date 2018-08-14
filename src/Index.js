@@ -27,7 +27,6 @@ module.exports = {
   PaginationButtons: require('./components/PaginationButtons'),
   ProgressBar: require('./components/ProgressBar'),
   RadioButton: require('./components/RadioButton'),
-  RajaIcon: require('./components/RajaIcon'),
   Row: require('./components/grid/Row'),
   RangeSelector: require('./components/RangeSelector'),
   SearchInput: require('./components/SearchInput'),
