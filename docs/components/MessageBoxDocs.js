@@ -87,13 +87,6 @@ class MessageBoxDocs extends React.Component {
 
   styles = () => {
     return {
-      messageBoxContents: {
-        color: Styles.Colors.GRAY_700,
-        display: 'flex'
-      },
-      messageBoxText: {
-        flex: 1
-      },
       messageBoxNoMessage: {
         component: {
           marginBottom: Styles.Spacing.LARGE

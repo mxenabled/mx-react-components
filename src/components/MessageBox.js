@@ -94,6 +94,9 @@ class MessageBox extends React.Component {
         padding: theme.Spacing.SMALL,
         paddingBottom: 0
       },
+      icon: {
+        fill: theme.Colors.GRAY_900
+      },
       title: {
         fontFamily: theme.Fonts.SEMIBOLD
       },
