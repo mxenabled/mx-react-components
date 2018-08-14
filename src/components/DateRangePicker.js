@@ -37,7 +37,6 @@ class DateRangePicker extends React.Component {
     minimumDate: PropTypes.number,
     onClose: PropTypes.func,
     onDateRangeSelect: PropTypes.func,
-    onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
@@ -85,7 +84,6 @@ class DateRangePicker extends React.Component {
     isRelative: true,
     locale: 'en',
     onClose () {},
-    onDateRangeSelect () {},
     placeholderText: 'Select A Date Range',
     showDefaultRanges: false
   };
@@ -101,10 +99,6 @@ class DateRangePicker extends React.Component {
       selectedEndDate: this.props.selectedEndDate,
       showSelectionPane: false
     };
-  }
-
-  componentDidMount () {
-    deprecateProp(this.props, 'onDateSelect', 'onDateRangeSelect', 'date-range-picker');
   }
 
   componentWillReceiveProps (newProps) {
@@ -484,16 +478,6 @@ class DateRangePicker extends React.Component {
                             selectedEndDate
                           );
 
-                          /**
-                                TODO: onDateSelect is deprecated.  We need to remove this
-                                check and call before the next major release.
-                              **/
-                          if (typeof this.props.onDateSelect === 'function') {
-                            this.props.onDateSelect(
-                              selectedStartDate,
-                              selectedEndDate
-                            );
-                          }
                           this._resetToPropValuesAndClose();
                         }}
                         style={styles.applyButton}
