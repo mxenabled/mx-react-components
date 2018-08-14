@@ -34,7 +34,7 @@ class MessageBox extends React.Component {
             <div>
               <Icon
                 size={20}
-                style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
+                style={{ ...styles.icon, ...{ marginRight: theme.Spacing.SMALL } }}
                 type={this.props.icon}
               />
             </div>
