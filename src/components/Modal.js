@@ -11,7 +11,6 @@ const _merge = require('lodash/merge');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePropWithMessage } = require('../utils/Deprecation');
 
 class Modal extends React.Component {
   static propTypes = {
@@ -71,13 +70,6 @@ class Modal extends React.Component {
   };
 
   componentDidMount () {
-    deprecatePropWithMessage(
-      this.props,
-      'isOpen',
-      'Please handle Modal opening from its parent.',
-      'modal'
-    );
-
     if (this.props.focusOnLoad) this._modalContent.focus();
   }
 
