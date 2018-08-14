@@ -9,13 +9,11 @@ const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
 const {
-  deprecatePrimaryColor,
   deprecateProp
 } = require('../utils/Deprecation');
 
 class SimpleInput extends React.Component {
   static propTypes = {
-    baseColor: PropTypes.string,
     elementProps: PropTypes.object,
     elementRef: PropTypes.func,
     focusOnLoad: PropTypes.bool,
@@ -53,8 +51,6 @@ class SimpleInput extends React.Component {
   };
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props, 'baseColor');
-
     /**
      * TODO:
      * icon, rightIcon, and handleResetClick are deprecated in
@@ -90,7 +86,7 @@ class SimpleInput extends React.Component {
 
   render () {
     const { elementProps, icon, prefix, rightIcon, suffix } = this.props;
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.baseColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const leftIconProps = typeof icon === 'string' ?
       { size: 20, style: styles.icon, type: icon } :
