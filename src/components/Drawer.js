@@ -17,7 +17,6 @@ const MXFocusTrap = require('../components/MXFocusTrap');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Drawer extends React.Component {
   static propTypes = {
@@ -30,7 +29,6 @@ class Drawer extends React.Component {
       large: PropTypes.number,
       medium: PropTypes.number
     }),
-    buttonPrimaryColor: PropTypes.string,
     closeButtonAriaLabel: PropTypes.string,
     closeOnScrimClick: PropTypes.bool,
     contentStyle: PropTypes.oneOfType([
@@ -86,7 +84,7 @@ class Drawer extends React.Component {
   constructor (props) {
     super(props);
 
-    const theme = StyleUtils.mergeTheme(props.theme, props.buttonPrimaryColor);
+    const theme = StyleUtils.mergeTheme(props.theme);
     const breakPoints = props.breakPoints || theme.BreakPoints;
 
     this.state = { breakPoints, theme };
@@ -97,7 +95,6 @@ class Drawer extends React.Component {
   }
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props, 'buttonPrimaryColor');
     this.open();
     window.addEventListener('resize', this._resizeThrottled);
 
