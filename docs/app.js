@@ -74,7 +74,6 @@ ReactDOM.render((
         <Route component={ButtonGroup} path='button-group' />
         <Route component={ConfigDocs} path='config' />
         <Route component={DatePicker} path='date-picker' />
-        <Route component={DatePickerFullScreen} path='date-picker-full-screen' />
         <Route component={DateRangePicker} path='date-range-picker' />
         <Route component={DateTimePicker} path='date-time-picker' />
         <Route component={DisplayInput} path='display-input' />
