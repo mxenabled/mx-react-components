@@ -12,14 +12,13 @@ const MXFocusTrap = require('./MXFocusTrap');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
+const { deprecateProp } = require('../utils/Deprecation');
 
 class SimpleSelect extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     elementRef: PropTypes.func,
     focusTrapProps: PropTypes.object,
-    hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
     iconStyles: PropTypes.object,
     items: PropTypes.array.isRequired,
@@ -41,7 +40,6 @@ class SimpleSelect extends React.Component {
   };
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props, 'hoverColor');
     deprecateProp(this.props, 'iconStyles', 'styles', 'simple-select');
     deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
   }
@@ -54,7 +52,7 @@ class SimpleSelect extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     const mergedFocusTrapProps = {
