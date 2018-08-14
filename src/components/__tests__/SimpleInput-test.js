@@ -25,22 +25,6 @@ describe('SimpleInput', () => {
     expect(children.last().html()).toEqual('<span>Suffix</span>');
   });
 
-  it('should render a icon to the left of the input if icon prop provided', () => {
-    // NOTE: this will log a warning in the console
-    const wrapper = mount(<SimpleInput icon='cash' />);
-    const children = wrapper.find('.mx-simple-input').first().children();
-
-    expect(children.first().type()).toEqual(Icon);
-  });
-
-  it('should render a icon to the right of the input if rightIcon prop provided', () => {
-    // NOTE: this will log a warning in the console
-    const wrapper = mount(<SimpleInput rightIcon='cash' />);
-    const children = wrapper.find('.mx-simple-input').first().children();
-
-    expect(children.last().type()).toEqual(Icon);
-  });
-
   it('should provide a ref to the input via the elementRef prop', () => {
     let inputRef;
 
