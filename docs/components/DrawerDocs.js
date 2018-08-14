@@ -216,14 +216,6 @@ class DrawerDocs extends React.Component {
         <p>Default: ''</p>
         <p>This will be displayed in the header of the drawer component. It is also used to make the aria label for the drawer's close button more descriptive.</p>
 
-        <h5>DEPRECATED: navConfig <label>Object</label></h5>
-        <p>This object requires 3 properties:</p>
-        <ul style={styles.unorderdLists}>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>label <label>String</label></h5>This will be displayed between the two arrow buttons.</li>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onPreviousClick <label>Function</label></h5> This function will be called when the left arrow is clicked.</li>
-          <li style={styles.listItem}><h5 style={styles.h5ListItem}>onNextClick <label>Function</label></h5> this function will be called when the right arrow is clicked.</li>
-        </ul>
-
         <h3>Normal Example</h3>
         <Markdown>
   {`
