@@ -20,7 +20,6 @@ class SimpleSelect extends React.Component {
     focusTrapProps: PropTypes.object,
     iconSize: PropTypes.number,
     items: PropTypes.array.isRequired,
-    itemStyles: PropTypes.object,
     onScrimClick: PropTypes.func,
     scrimClickOnSelect: PropTypes.bool,
     style: PropTypes.object,
@@ -128,7 +127,7 @@ class SimpleSelect extends React.Component {
         position: 'absolute',
         zIndex: 10
       },
-      item: Object.assign({}, {
+      item: {
         display: 'flex',
         alignItems: 'center',
         boxSizing: 'border-box',
@@ -141,7 +140,7 @@ class SimpleSelect extends React.Component {
           cursor: 'pointer',
           fill: theme.Colors.WHITE
         }
-      }, this.props.itemStyles),
+      },
       icon: {
         marginRight: theme.Spacing.SMALL
       },
