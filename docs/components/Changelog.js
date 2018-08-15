@@ -7,6 +7,15 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.25</h3>
+        <ul>
+          <li>Icon Background Color (<a href='https://github.com/mxenabled/mx-react-components/pull/777'>#777</a>)</li>
+          <li>DisplayInput - Fix a11y disable bug (<a href='https://github.com/mxenabled/mx-react-components/pull/779'>#779</a>)</li>
+          <li>Select - a11y polish (<a href='https://github.com/mxenabled/mx-react-components/pull/776'>#776</a>)</li>
+          <li>Tabs - a11y polish (<a href='https://github.com/mxenabled/mx-react-components/pull/768'>#768</a>)</li>
+          <li>Tabs - Theme bug fix (<a href='https://github.com/mxenabled/mx-react-components/pull/791'>#791</a>)</li>
+        </ul>
+
         <h3>5.2.24</h3>
         <ul>
           <li>Focus Trap Fix For Mobile (<a href='https://github.com/mxenabled/mx-react-components/pull/772'>#772</a>)</li>
