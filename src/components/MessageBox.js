@@ -34,7 +34,7 @@ class MessageBox extends React.Component {
             <div>
               <Icon
                 size={20}
-                style={{ ...styles.icon, ...{ marginRight: theme.Spacing.SMALL } }}
+                style={{ ...styles.icon }}
                 type={this.props.icon}
               />
             </div>
@@ -95,7 +95,8 @@ class MessageBox extends React.Component {
         paddingBottom: 0
       },
       icon: {
-        fill: theme.Colors.GRAY_900
+        fill: theme.Colors.GRAY_900,
+        marginRight: theme.Spacing.SMALL
       },
       title: {
         fontFamily: theme.Fonts.SEMIBOLD
