@@ -4,6 +4,7 @@ const React = require('react');
 
 const { Icon, SimpleInput, Styles, AppConstants } = require('mx-react-components');
 
+const Code = require('components/Code');
 const Markdown = require('components/Markdown');
 
 class IconDocs extends React.Component {
@@ -80,6 +81,9 @@ class IconDocs extends React.Component {
           />
         </div>
 
+        <h5>elementProps <label>Object</label></h5>
+        <p>Pass props directly to the <Code>icon</Code> element. ie. focusable, etc.</p>
+
         <h5>size <label>Number, String</label></h5>
         <p>A single number representing the width and height of the icon in pixels. Change the icon's size by using the number input below.</p>
         <div>
@@ -145,7 +149,7 @@ class IconDocs extends React.Component {
         </Markdown>
 
         <h5>Release Canidate 5.0.0</h5>
-        <p>Properties to be passed to the svg element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
+        <p>Properties to be passed to the svg element must now be passed via the new elementProps property.  This was done to fix React unknown prop warnings.</p>
 
         <Markdown>
         {`
