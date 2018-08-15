@@ -43,12 +43,12 @@ class MessageBox extends React.Component {
                 type={this.props.icon}
               />
             </section>
-            <section style={styles.messageContent}>
+            <section role='status' style={styles.messageContent}>
               <p style={styles.title}>
                 {this.props.title}
               </p>
               { this.props.message ?
-                (<p role='status' style={styles.message}>
+                (<p style={styles.message}>
                   {(this.props.message)}
                 </p>) :
               null }
