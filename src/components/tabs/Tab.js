@@ -1,9 +1,11 @@
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
+const { css } = require('glamor');
 
 import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');
+const { isEnterOrSpaceKey } = require('../../utils/KeyPress');
 
 const StyleUtils = require('../../utils/Style');
 
@@ -22,6 +24,12 @@ class Tab extends React.Component {
     styles: {}
   }
 
+  _handleSpaceAndEnter = (e) => {
+    if (isEnterOrSpaceKey(e)) {
+      this.props.onClick();
+    }
+  }
+
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
@@ -31,9 +39,15 @@ class Tab extends React.Component {
       style = Object.assign({}, style, styles.activeTab, this.props.styles.activeTab);
 
     return (
-      <span className='mx-tab' onClick={this.props.onClick} style={style}>
+      <div
+        aria-label={`${this.props.children} tab`}
+        className={`mx-tab ${css(style)}`}
+        onClick={this.props.onClick}
+        onKeyUp={e => this._handleSpaceAndEnter(e)}
+        tabIndex={0}
+      >
         {this.props.children}
-      </span>
+      </div>
     );
   }
 
@@ -48,8 +62,11 @@ class Tab extends React.Component {
         fontStyle: theme.Fonts.SEMIBOLD,
         padding: theme.Spacing.MEDIUM,
         whiteSpace: 'nowrap',
-
         ':hover': {
+          color: theme.Colors.GRAY_700
+        },
+        ':focus': {
+          backgroundColor: theme.Colors.GRAY_300,
           color: theme.Colors.GRAY_700
         }
       },
