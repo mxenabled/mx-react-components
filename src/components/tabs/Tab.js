@@ -66,7 +66,8 @@ class Tab extends React.Component {
           color: theme.Colors.GRAY_700
         },
         ':focus': {
-          backgroundColor: theme.Colors.GRAY_100
+          backgroundColor: theme.Colors.GRAY_300,
+          color: theme.Colors.GRAY_700
         }
       },
       activeTab: Object.assign({
