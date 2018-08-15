@@ -74,13 +74,16 @@ class NotifyOnScrollThresholdDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
+        <h5>children <label>Function</label></h5>
+        <p>A function that receives thresholdMet, scrollPosition, and scrollHeight as arguments.</p>
+
         <h5>onThresholdMet <label>Function</label></h5>
         <p>Default: No Operation</p>
         <p>A function called when the threshold is met.</p>
 
         <h5>threshold <label>Number</label></h5>
         <p>Default: 0.9</p>
-        <p>A number between 0 and 1 that respresents a percentage between 0% and 100%</p>
+        <p>A number between 0 and 1 that respresents a percentage between 0% and 100%.</p>
 
         <h3>Example</h3>
 
@@ -90,7 +93,6 @@ class NotifyOnScrollThresholdDocs extends React.Component {
 
         <ul>
           <li>The children of the component must be a function that returns jsx in the form of your choosing.</li>
-          <li>The children function recieves as arguments, thresholdMet, scrollPosition, and scrollHeight.</li>
           <li>The component takes an optional onThresholdMet callback prop that can also be used if the thresholdMet argument in the children function isn't adaquite for your needs.</li>
         </ul>
 
