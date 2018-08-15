@@ -13,40 +13,41 @@ const PillTabs = ({
   tabs,
   theme
 }) => {
+  const mergedTheme = StyleUtils.mergeTheme(theme);
   const styles = {
     component: {
-      padding: theme.Spacing.SMALL
+      padding: mergedTheme.Spacing.SMALL
     },
     tab: {
-      backgroundColor: theme.Colors.GRAY_100,
-      borderColor: theme.Colors.GRAY_300,
+      backgroundColor: mergedTheme.Colors.GRAY_100,
+      borderColor: mergedTheme.Colors.GRAY_300,
       outline: 'none',
 
       ':hover': {
-        backgroundColor: theme.Colors.PRIMARY,
-        color: theme.Colors.WHITE,
-        fill: theme.Colors.WHITE
+        backgroundColor: mergedTheme.Colors.PRIMARY,
+        color: mergedTheme.Colors.WHITE,
+        fill: mergedTheme.Colors.WHITE
       },
       ':focus': {
-        backgroundColor: theme.Colors.PRIMARY,
-        color: theme.Colors.WHITE,
-        fill: theme.Colors.WHITE
+        backgroundColor: mergedTheme.Colors.PRIMARY,
+        color: mergedTheme.Colors.WHITE,
+        fill: mergedTheme.Colors.WHITE
       },
       ':active': {
-        backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15)
+        backgroundColor: StyleUtils.adjustColor(mergedTheme.Colors.PRIMARY, -15)
       }
     },
     selected: Object.assign({
-      backgroundColor: theme.Colors.WHITE,
-      color: theme.Colors.PRIMARY,
+      backgroundColor: mergedTheme.Colors.WHITE,
+      color: mergedTheme.Colors.PRIMARY,
       cursor: 'default',
 
       ':hover': {
         backgroundColor: 'transparent'
       },
       ':focus': {
-        backgroundColor: theme.Colors.WHITE,
-        color: theme.Colors.PRIMARY
+        backgroundColor: mergedTheme.Colors.WHITE,
+        color: mergedTheme.Colors.PRIMARY
       },
       ':active': {
         backgroundColor: 'transparent'
