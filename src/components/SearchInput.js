@@ -3,7 +3,7 @@ const React = require('react');
 
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
-const Input = require('./SimpleInput');
+const SimpleInput = require('./SimpleInput');
 
 const { themeShape } = require('../constants/App');
 
@@ -40,7 +40,7 @@ class SearchInput extends React.Component {
 
     return (
       <div className='mx-search-input' style={Object.assign({}, styles.component, this.props.style)}>
-        <Input
+        <SimpleInput
           elementProps={{
             onBlur: this.props.onBlur,
             onChange: this.props.onChange,
@@ -50,7 +50,6 @@ class SearchInput extends React.Component {
           }}
           elementRef={this.props.elementRef}
           focusOnLoad={this.props.focusOnLoad}
-          handleResetClick={this.props.handleResetClick}
           prefix={
             <Icon
               elementProps={{
@@ -60,7 +59,6 @@ class SearchInput extends React.Component {
               {...searchIconProps}
             />
           }
-          resetClick={this.props.handleResetClick}
           suffix={
             <Icon
               elementProps={{ onClick: this.props.handleResetClick }}
