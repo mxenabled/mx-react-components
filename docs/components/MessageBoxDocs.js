@@ -45,8 +45,14 @@ class MessageBoxDocs extends React.Component {
             <h5>icon<label>String</label></h5>
             <p>The type of icon to display in the upper left of the MessageBox header.</p>
 
-            <h5>message<label>Node</label></h5>
+            <h5>isSmall<label>Boolean</label></h5>
+            <p>If thisis set to 'true', then the button will center, and the message will take up the full width. Designed for smaller screen sizes.</p>
+
+            <h5>message<label>String</label></h5>
             <p>The message to display in the MessageBox.</p>
+
+            <h5>styles<label>Object</label></h5>
+            <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
 
             <h5>theme <label>Object</label></h5>
             <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>

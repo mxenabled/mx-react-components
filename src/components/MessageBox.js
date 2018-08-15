@@ -16,7 +16,7 @@ class MessageBox extends React.Component {
     color: PropTypes.string,
     icon: PropTypes.string,
     isSmall: PropTypes.bool,
-    message: PropTypes.node,
+    message: PropTypes.string,
     styles: PropTypes.object,
     theme: themeShape,
     title: PropTypes.string
@@ -27,29 +27,32 @@ class MessageBox extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div className='mx-message-box' style={styles.component}>
+      <article
+        aria-live='polite'
+        className='mx-message-box'
+        role='region'
+        style={styles.component}
+      >
         <div style={styles.alertbar} />
-        <div style={styles.messageSection}>
+        <div style={styles.messageWrapper}>
           <div style={styles.messageBody}>
-            <div>
+            <section>
               <Icon
                 size={20}
-                style={{ ...styles.icon }}
+                style={styles.icon}
                 type={this.props.icon}
               />
-            </div>
-            <div style={styles.messageContent}>
-              <div style={styles.title}>
+            </section>
+            <section style={styles.messageContent}>
+              <p style={styles.title}>
                 {this.props.title}
-              </div>
-              <div style={styles.mainMessage}>
-                {!_isNil(this.props.message) &&
-                  <div>
-                    {this.props.message}
-                  </div>
-                }
-              </div>
-            </div>
+              </p>
+              { this.props.message ?
+                (<p role='status' style={styles.message}>
+                  {(this.props.message)}
+                </p>) :
+              null }
+            </section>
           </div>
           {!_isNil(this.props.button) &&
             <div style={styles.button}>
@@ -57,7 +60,7 @@ class MessageBox extends React.Component {
             </div>
           }
         </div>
-      </div>
+      </article>
     );
   }
 
@@ -99,7 +102,9 @@ class MessageBox extends React.Component {
         marginRight: theme.Spacing.SMALL
       },
       title: {
-        fontFamily: theme.Fonts.SEMIBOLD
+        fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.MEDIUM,
+        marginBottom: 0
       },
       messageBody: {
         alignItems: 'baseline',
@@ -113,10 +118,11 @@ class MessageBox extends React.Component {
         paddingRight: this.props.isSmall ? 30 : null,
         fontSize: theme.FontSizes.MEDIUM
       },
-      mainMessage: {
-        paddingTop: theme.Spacing.XSMALL
+      message: {
+        fontSize: theme.FontSizes.MEDIUM,
+        marginBottom: 0
       },
-      messageSection: {
+      messageWrapper: {
         display: 'flex',
         flexDirection: this.props.isSmall ? 'column' : 'row',
         padding: theme.Spacing.SMALL
