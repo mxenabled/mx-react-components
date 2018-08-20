@@ -46,7 +46,7 @@ class SearchInput extends React.Component {
             onChange: this.props.onChange,
             placeholder: this.props.placeholder,
             type: 'text',
-            value: this.props.searchKeyword 
+            value: this.props.searchKeyword
           }}
           elementRef={this.props.elementRef}
           focusOnLoad={this.props.focusOnLoad}
