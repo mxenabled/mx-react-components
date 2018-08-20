@@ -82,7 +82,7 @@ class IconDocs extends React.Component {
         </div>
 
         <h5>elementProps <label>Object</label></h5>
-        <p>Pass props directly to the <Code>icon</Code> element. ie. focusable, etc.</p>
+        <p>Pass native HTML attributes for SVG elements directly to the icon's wrapping SVG element. ie. height, width, etc.</p>
 
         <h5>size <label>Number, String</label></h5>
         <p>A single number representing the width and height of the icon in pixels. Change the icon's size by using the number input below.</p>
