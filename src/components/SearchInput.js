@@ -11,7 +11,6 @@ const StyleUtils = require('../utils/Style');
 
 class SearchInput extends React.Component {
   static propTypes = {
-    baseColor: PropTypes.string,
     elementRef: PropTypes.func,
     focusOnLoad: PropTypes.bool,
     handleResetClick: PropTypes.func,

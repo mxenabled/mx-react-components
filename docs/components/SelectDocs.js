@@ -68,7 +68,7 @@ class SelectDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>dropdownStyle <label>Object | Array</label></h5>
+        <h5>dropdownStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the 'div' element that wraps the selected option and options menu elements.</p>
 
         <h5>hoverColor <label>String</label></h5>
@@ -78,18 +78,18 @@ class SelectDocs extends React.Component {
         <p>A function that is called when a new value has been selected.</p>
 
         <h5>options <label>Array</label></h5>
-        <p>An array of option objects with the follow key/value pairs: icon: String, value: String/Number, displayValue: String.</p>
+        <p>An array of option objects with the following key/value pairs: icon: String, value: String/Number, displayValue: String.</p>
 
         <h5>optionsStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the options wrapper element.</p>
 
-        <h5>optionTextStyle <label>Object</label></h5>
-        <p>A style object that modifies the css style of the selected option.</p>
+        <h5>optionTextStyle <label>Object or Array </label></h5>
+        <p>A style object or Radium array that modifies the css style of the selected option.</p>
 
         <h5>placeholderText <label>String</label></h5>
         <p>A text to be displayed when there is no value selected.</p>
 
-        <h5>scrimStyle <label>Object | Array</label></h5>
+        <h5>scrimStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of scrim. The scrim is used to handle clicking away from the select box and has a default opacity of 0.</p>
 
         <h5>selected <label>Object</label></h5>

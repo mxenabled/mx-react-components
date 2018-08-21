@@ -41,14 +41,20 @@ class SearchInputDocs extends React.Component {
         />
 
         <h3>Usage</h3>
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the wrapping input of the SearchInput component.</p>
+
+        <h5>focusOnLoad <label>Boolean</label></h5>
+        <p>If true, focusOnLoad immedaitely focuses the input when the component mounts.</p>
+
+        <h5>handleResetClick <label>Function</label></h5>
+        <p>A method to be called when reset icon is clicked, in the demo above it is used to clear the input value.</p>
+
         <h5>onBlur <label>Function</label></h5>
         <p>A method to be called when the user clicks the mouse outside the component.</p>
 
         <h5>onChange <label>Function</label></h5>
         <p>A method to be called as the user types in the search input field.</p>
-
-        <h5>handleResetClick <label>Function</label></h5>
-        <p>A method to be called when reset icon is clicked, in the demo above it is used to clear the input value.</p>
 
         <h5>placeholder <label>String</label></h5>
         <p>The text to show before the user starts typing or when the search input field is empty.</p>
