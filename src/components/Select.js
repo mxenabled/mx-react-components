@@ -196,14 +196,16 @@ class Select extends React.Component {
 
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
-        <button className='mx-select-custom'
+        <div className='mx-select-custom'
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
           ref={ref => {
             this.elementRef = ref;
             if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
           }}
+          role='button'
           style={styles.component}
+          tabIndex={0}
         >
           {this._renderScrim(styles)}
           <div className='mx-select-selected' key='selected' style={styles.selected}>
@@ -221,7 +223,7 @@ class Select extends React.Component {
             />
           </div>
           {this.props.options.length || this.props.children ? this._renderOptions(styles) : null}
-        </button>
+        </div>
       </div>
     );
   }
@@ -244,9 +246,7 @@ class Select extends React.Component {
           fontSize: theme.FontSizes.MEDIUM,
           padding: '8px 10px',
           position: 'relative',
-          boxSizing: 'border-box',
-          width: '100%',
-          textAlign: 'left'
+          boxSizing: 'border-box'
         }, this.props.dropdownStyle),
       select: {
         position: 'absolute',
