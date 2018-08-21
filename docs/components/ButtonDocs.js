@@ -97,12 +97,21 @@ class ButtonDocs extends React.Component {
         <h5>actionText <label>String</label></h5>
         <p>The button text when <Code>isActive</Code> is <Code>true</Code>. If not defined, a spinner without text is shown.</p>
 
+        <h5>buttonRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the button element.</p>
+
+        <h5>elementProps <label>Object</label></h5>
+        <p>Pass native HTML attributes directly to the button element.</p>
+
         <h5>icon <label>String</label></h5>
         <p>This can be any of the <Code>Icon</Code> component values. If defined, an icon will be shown to the left of the button content.</p>
 
         <h5>isActive <label>Boolean</label></h5>
         <p>Default: <Code>false</Code></p>
         <p>When <Code>true</Code> the <Code>Button</Code> will show either the <Code>actionText</Code> or a spinner.</p>
+
+        <h5>onClick <label>Function</label></h5>
+        <p>A callback function that will be triggered on component click.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
