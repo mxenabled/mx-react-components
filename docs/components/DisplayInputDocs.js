@@ -68,6 +68,18 @@ class DisplayInputDocs extends React.Component {
           valid={true}
         />
         <DisplayInput
+          elementProps={{
+            disabled: true,
+            id: 'input-id',
+            onFocus: this._handleInputFocus,
+            placeholder: 'Disabled Input',
+            value: 'Disabled'
+          }}
+          label='Disabled Display Input'
+          status={this.state.statusMessage}
+          valid={true}
+        />
+        <DisplayInput
           childrenStyle={{ backgroundColor: Styles.Colors.GRAY_100 }}
           label='Display Children'
         >
@@ -130,7 +142,8 @@ class DisplayInputDocs extends React.Component {
         {`
           <DisplayInput
             elementProps={{
-              onChange: myOnChangeCallbackFunction
+              disabled: true,
+              onChange: myOnChangeCallbackFunction,
               placeholder: 'Type something'
             }}
             label='Display Input'

@@ -14,7 +14,6 @@ const PillTabs = ({
   theme
 }) => {
   const mergedTheme = StyleUtils.mergeTheme(theme);
-
   const styles = {
     component: {
       padding: mergedTheme.Spacing.SMALL
