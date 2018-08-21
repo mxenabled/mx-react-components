@@ -38,6 +38,9 @@ class DatePickerDocs extends React.Component {
         <p>Default: false</p>
         <p>If set to `true`, the calendar will be close after the user selects a data.</p>
 
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the wrapping div of the DatePicker component.</p>
+
         <h5>format <label>String</label></h5>
         <p>Default: 'MMM D, YYYY'</p>
         <p>This is used to determine the format of the selected date. It should follow the Moment.js conventions outlined <a href='http://momentjs.com/docs/#/parsing/string-format/' target='_blank'>here</a>.</p>
