@@ -4,7 +4,6 @@ const React = require('react');
 
 const { Icon, SimpleInput, Styles, AppConstants } = require('mx-react-components');
 
-const Code = require('components/Code');
 const Markdown = require('components/Markdown');
 
 class IconDocs extends React.Component {
@@ -104,7 +103,7 @@ class IconDocs extends React.Component {
           />
         </div>
 
-        <h5>style <label>object</label></h5>
+        <h5>style <label>Object</label></h5>
         <p>A style object applied to the main svg element of the icon. You can use this to over ride styling or change the fill color of the icon. Use the input below to over ride the style and change the icon fill to a differnt color.</p>
         <div>
           <SimpleInput

@@ -94,13 +94,13 @@ class ModalDocs extends React.Component {
 
         <h3>Usage</h3>
 
-        <h5>aria-describedby <label>string</label></h5>
+        <h5>aria-describedby <label>String</label></h5>
         <p>An id of a child element that describes the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'>WAI-ARIA documentation for aria-describedby</a></p>
 
-        <h5>aria-label <label>string</label></h5>
+        <h5>aria-label <label>String</label></h5>
         <p>A string applied as a label to the wrapping div around the Modal's children. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA14.html'>WAI-ARIA documentation for aria-label</a></p>
 
-        <h5>aria-labelledby <label>string</label></h5>
+        <h5>aria-labelledby <label>String</label></h5>
         <p>An id of a child element that is the title of the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/WAI/GL/wiki/Using_aria-labelledby_to_concatenate_a_label_from_several_text_nodes'>WAI-ARIA documentation for aria-labelledby</a></p>
 
         <h5>buttons <label>Array</label></h5>
