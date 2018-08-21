@@ -55,6 +55,12 @@ class SimpleSelectDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
+        <h5>aria-label <label>String</label></h5>
+        <p>An attribute used for accessibility, but not required. The string is used to define the attribute it labels.</p>
+
+        <h5>elementRef <label>Function</label></h5>
+        <p>A function callback for getting the ref of the wrapping div on the SimpleSelect component.</p>
+
         <h5>focusTrapProps<label>Object</label></h5>
         <p>Default: Empty Object</p>
         <p>The SimpleSelect component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the SimpleSelect for accessibility reasons.</p>
@@ -67,6 +73,9 @@ class SimpleSelectDocs extends React.Component {
 
         <h5>items <label>Array</label> Required</h5>
         <p>An array of objects that specify <em>icon</em>, <em>isSelected</em>, <em>text</em>, and/or <em>onClick</em> of the item..</p>
+
+        <h5>itemStyles <label>Object</label></h5>
+        <p>An object of styles for the <em>items</em> array.</p>
 
         <h5>onScrimClick <label>function</label></h5>
         <p><em>onClick</em> handler for the menu scrim.</p>

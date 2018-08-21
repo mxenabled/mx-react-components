@@ -94,6 +94,9 @@ class ButtonDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
+        <h5>aria-label <label>String</label></h5>
+        <p>An attribute used for accessibility, but not required. The string is used to define the attribute it labels.</p>
+
         <h5>actionText <label>String</label></h5>
         <p>The button text when <Code>isActive</Code> is <Code>true</Code>. If not defined, a spinner without text is shown.</p>
 
