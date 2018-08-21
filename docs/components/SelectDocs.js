@@ -83,6 +83,9 @@ class SelectDocs extends React.Component {
         <h5>optionsStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the options wrapper element.</p>
 
+        <h5>optionStyle <label>Object or Array</label></h5>
+        <p>A style object or Radium array that modifies the css styles of each option element.</p>
+
         <h5>optionTextStyle <label>Object or Array </label></h5>
         <p>A style object or Radium array that modifies the css style of the selected option.</p>
 

@@ -70,7 +70,11 @@ class SelectFullScreenDocs extends React.Component {
         <h5>closeIcon <label>String</label></h5>
         <p>The name of the icon to used for the closing the options window.</p>
 
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the wrapping div of the SelectFullScreen component.</p>
+
         <h5>isFixed <label>Boolean</label></h5>
+        <p>Default: false</p>
         <p>A boolean used to determine if the options window is fixed or absolute.</p>
 
         <h5>onChange <label>Function</label></h5>
