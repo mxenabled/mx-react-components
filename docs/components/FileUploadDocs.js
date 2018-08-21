@@ -53,6 +53,12 @@ class FileUploadDocs extends React.Component {
         <h5>allowedFileTypes <label>Array</label></h5>
         <p>An array of file types and extensions allowed for upload.</p>
 
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the wrapping div of the FieUpload component.</p>
+
+        <h5>imageUrl <label>String</label></h5>
+        <p>The URL that provides the path to an image to display for the uploaded file.</p>
+
         <h5>imageValidation <label>Object</label></h5>
         <p>An object used for image dimension validation.</p>
         <p>Options are:</p>
@@ -71,23 +77,23 @@ class FileUploadDocs extends React.Component {
         <h5>maxFileSize <label>Number</label></h5>
         <p>Sets the maximum file size allowed. Measured in bytes.</p>
 
-        <h5>OnFileAdd <label>function</label></h5>
+        <h5>onFileAdd <label>Function</label></h5>
         <p>Event handler for when a file is added.</p>
 
-        <h5>OnFileRemove <label>function</label></h5>
+        <h5>onFileRemove <label>Function</label></h5>
         <p>Event handler for when a file is removed.</p>
 
-        <h5>OnFileValidation <label>function</label></h5>
+        <h5>onFileValidation <label>Function</label></h5>
         <p>Event handler for when a file is invalid (too large or wrong file type).</p>
 
         <h5>style <label>Object</label></h5>
-        <p>A style object used to style the div that wraps the uploader&#39;s content</p>
+        <p>A style object used to style the div that wraps the uploader&#39;s content.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>uploadedFile <label>Any</label></h5>
-        <p>The uploaded file</p>
+        <p>The uploaded file.</p>
 
         <h3>Example</h3>
         <Markdown>
