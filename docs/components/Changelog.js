@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 5.0</h2>
+        <h3>5.2.26</h3>
+        <ul>
+          <li>Fix Firefox/IE 11 but in Select introduced in 5.2.25(<a href='https://github.com/mxenabled/mx-react-components/pull/794'>#794</a>)</li>
+        </ul>
+
         <h3>5.2.25</h3>
         <ul>
           <li>Icon Background Color (<a href='https://github.com/mxenabled/mx-react-components/pull/777'>#777</a>)</li>
