@@ -71,8 +71,8 @@ class SelectDocs extends React.Component {
         <h5>dropdownStyle <label>Object or Array</label></h5>
         <p>A style object or Radium array that modifies the css styles of the 'div' element that wraps the selected option and options menu elements.</p>
 
-        <h5>hoverColor <label>String</label></h5>
-        <p>This will be the background color for the menu options.</p>
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the button on the wrapping div of the Select component.</p>
 
         <h5>onChange <label>Function</label></h5>
         <p>A function that is called when a new value has been selected.</p>
