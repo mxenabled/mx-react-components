@@ -50,17 +50,24 @@ class TabsDocs extends React.Component {
 
         <h3>Usage</h3>
 
-        <h5>activeTabStyles<label>Object</label></h5>
+        <h5>activeTabStyles <label>Object</label></h5>
         <p>Styles for the active tab.</p>
 
-        <h5>alignment<label>'left' or 'center'</label></h5>
+        <h5>alignment <label>'left' or 'center'</label></h5>
         <p>Default: 'left'</p>
         <p>Tab alignment.</p>
+
+        <h5>isActive <label>Boolean</label></h5>
+        <p>Default: 'false'</p>
+        <p>If set to true, allows for "activeTabeStyles" to apply to the active tab.</p>
+
+        <h5>onClick <label>function</label></h5>
+        <p>A callback function that is triggered when a tab is clicked on.</p>
 
         <h5>onTabSelect <label>Function</label></h5>
         <p><em>(required)</em> A function called when you click on a tab</p>
 
-        <h5>selectedTab<label>Number</label></h5>
+        <h5>selectedTab <label>Number</label></h5>
         <p>Default: 0</p>
         <p>A number representing the tab that has been selected. Tabs are ordered starting at 0.</p>
 
