@@ -53,7 +53,9 @@ class PaginationButtonsDocs extends React.Component {
 
         <h5>type <label>String</label></h5>
         <p>Default: <Code>'primary'</Code></p>
-        <p>The sets the button type.</p>
+        <p>This sets the button type. Available options are:</p>
+        <code>['primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base', 'neutral', 'disabled']</code>
+        <p>Setting the type to <Code>disabled</Code> also prevents onClick events from firing.</p>
 
         <h3>Example</h3>
         <Markdown>
