@@ -30,6 +30,10 @@ class Components extends React.Component {
                   displayValue: 'Button Group'
                 },
                 {
+                  value: 'container-column-row',
+                  displayValue: 'Grid Contain, Column & Row'
+                },
+                {
                   value: 'date-picker',
                   displayValue: 'Date Picker'
                 },
@@ -108,10 +112,6 @@ class Components extends React.Component {
                 {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
-                },
-                {
-                  value: 'row-column',
-                  displayValue: 'Grid Row & Column'
                 },
                 {
                   value: 'select',
