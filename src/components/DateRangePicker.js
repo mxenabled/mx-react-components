@@ -560,7 +560,7 @@ class DateRangePicker extends React.Component {
       selectionContainer: {
         display: 'flex',
         flexDirection: 'column',
-        flex: '1 0 auto',
+        flex: '1 0 auto'
       },
       row: {
         display: 'flex',
