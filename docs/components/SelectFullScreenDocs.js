@@ -103,10 +103,10 @@ class SelectFullScreenDocs extends React.Component {
         <p>String to be displayed above the options directing the user what to do (ie: Select An Option).</p>
 
         <h5>optionsStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the css styles of the options wrapper element.</p>
+        <p>A style object or Radium array that modifies the CSS styles of the options wrapper element.</p>
 
         <h5>optionStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the css styles of each option element.</p>
+        <p>A style object or Radium array that modifies the CSS styles of each option element.</p>
 
         <h5>placeholderText <label>String</label></h5>
         <p>A text to be displayed when there is no value selected.</p>
@@ -115,7 +115,7 @@ class SelectFullScreenDocs extends React.Component {
         <p>An object that represents the selected value. This is typically used to pass in a default selected value. The object must have the following key/value pairs: value: String/Number, displayValue: String.</p>
 
         <h5>selectedStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the css styles of the selected valued.</p>
+        <p>A style object or Radium array that modifies the CSS styles of the selected valued.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>

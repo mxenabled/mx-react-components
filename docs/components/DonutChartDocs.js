@@ -71,7 +71,7 @@ class DonutChartDocs extends React.Component {
 
         <h5>baseArcColor <label>String</label></h5>
         <p>Default: #e5e5e5</p>
-        <p>A css color value (hex, rgba, etc) used to set the base arc color.</p>
+        <p>A CSS color value (hex, rgba, etc) used to set the base arc color.</p>
 
         <h5>chartTotal <label>Number</label></h5>
         <p>A number representing the total possible value for the chart. If no chartTotal is provided, then the sum of the data values is used. This is useful if your data values only represent a portion of the total available value.</p>
@@ -96,7 +96,7 @@ class DonutChartDocs extends React.Component {
 
         <h5>dataPointColors <label>Array</label></h5>
         <p>Default: D3 Generated Colors</p>
-        <p>Array of css color values whose indexes correspond with the data array. For example, the first color value in dataPointColors will determine the dot color for the first item in dataPoints.</p>
+        <p>Array of CSS color values whose indexes correspond with the data array. For example, the first color value in dataPointColors will determine the dot color for the first item in dataPoints.</p>
 
         <h5>dataPointRadius <label>Number</label></h5>
         <p>Default: 5</p>

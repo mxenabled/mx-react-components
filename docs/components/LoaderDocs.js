@@ -34,7 +34,7 @@ class LoaderDocs extends React.Component {
 
         <h3>Usage</h3>
         <h5>color <label>String</label></h5>
-        <p>A css hex value or color keyword that sets the color of the loading circle.</p>
+        <p>A CSS hex value or color keyword that sets the color of the loading circle.</p>
 
         <h5>isLoading <label>Boolean</label></h5>
         <p>If this is set to 'true', then the loader element will be displayed. If it's set to 'false', then an empty 'div' will be rendered.</p>

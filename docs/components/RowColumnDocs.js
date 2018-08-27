@@ -117,7 +117,7 @@ class RowDocs extends React.Component {
         <p>A number representing the columns span at which to display the enclosed content, based on the columnCount. If set to 0, the column will be hidden.</p>
 
         <h3>Row Usage</h3>
-        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap css file linked in your application.</h5>
+        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap CSS file linked in your application.</h5>
 
         <h5>children <label>Node</label></h5>
         <p>This should be one or more {`

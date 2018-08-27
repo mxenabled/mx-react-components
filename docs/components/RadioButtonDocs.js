@@ -44,10 +44,10 @@ class RadioButtonDocs extends React.Component {
 
         <h3>Usage</h3>
         <h5>activeButtonStyle <label>Object</label></h5>
-        <p>A style object that modifies the css styles of the inner 'div' element that creates the checked indicator for the radio button.</p>
+        <p>A style object that modifies the CSS styles of the inner 'div' element that creates the checked indicator for the radio button.</p>
 
         <h5>buttonStyle <label>Object</label></h5>
-        <p>A style object that modifies the css styles of the 'div' element that creates the radio button.</p>
+        <p>A style object that modifies the CSS styles of the 'div' element that creates the radio button.</p>
 
         <h5>checked <label>Boolean</label></h5>
         <p>A boolean indicating if the radio button should show as checked.</p>
@@ -59,7 +59,7 @@ class RadioButtonDocs extends React.Component {
         <p>A callback function that will be triggered on component click.</p>
 
         <h5>style <label>Object</label></h5>
-        <p>A style object that modifies the css styles of the 'div' element that wraps the component.</p>
+        <p>A style object that modifies the CSS styles of the 'div' element that wraps the component.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
