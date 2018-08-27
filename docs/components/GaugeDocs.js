@@ -29,10 +29,10 @@ class GaugeDocs extends React.Component {
               value: 150
             }
           ]}
-          defaultLabelText='Total Users'
-          defaultLabelValue='300'
           id='gauge-1'
+          numberLabel='300'
           numberOfSegments={50}
+          textLabel='Total Users'
         />
 
 
@@ -71,7 +71,6 @@ class GaugeDocs extends React.Component {
         </Markdown>
 
         <h5>dataPointColors <label>Array</label></h5>
-        <p>Default: GRAY_700 </p>
         <p>Array of css color values whose indexes correspond with the data array. For example, the first color value in dataPointColors will determine the dot color for the first item in dataPoints.</p>
 
         <h5>dataPointRadius <label>Number</label></h5>
@@ -89,20 +88,24 @@ class GaugeDocs extends React.Component {
   `}
         </Markdown>
 
-        <h5>defaultLabelText <label>String</label></h5>
-        <p>Default: Roll over item for details</p>
-        <p>The text to display in the data label when not hovering over a slice.</p>
-
+        <h5>formatter <label>Function</label></h5>
+        <p>A function used to format a value for display as a label.</p>
 
         <h5>height <label>Number</label></h5>
-        <p>Default: 360</p>
+        <p>Default: 1560</p>
         <p>Height, in pixels, of the entire component.</p>
 
         <h5>id <label>string</label></h5>
-        <p>Default: gauge-chart</p>
+        <p>Default: gauge</p>
         <p>An id used to give the chart unique classNames/references so that multiple charts on a page don't attempt to animate each other.</p>
 
-        <h5>numberOfSegments <label>integer</label></h5>
+        <h5>numberLabel <label>String</label></h5>
+        <p>The value to display in the data label.</p>
+
+        <h5>numberLabelColor <label>String</label></h5>
+        <p>The color of the value displayed in the data label.</p>
+
+        <h5>numberOfSegments <label>Number</label></h5>
         <p>Default: 6</p>
         <p>Number of segments or slices that you will have in your gauge</p>
 
@@ -121,6 +124,12 @@ class GaugeDocs extends React.Component {
         <h5>showDataLabel <label>Boolean</label></h5>
         <p>Default: true</p>
         <p>If set to true, the defaultLabelText will be displayed in the center of the chart. On slice hover, the defaultLabelText with change to display the data corresponding with the slice.</p>
+
+        <h5>textLabel <label>String</label></h5>
+        <p>The text to display in the data label.</p>
+
+        <h5>textLabelColor <label>String</label></h5>
+        <p>The color of the text displayed in the data label.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
@@ -144,10 +153,10 @@ class GaugeDocs extends React.Component {
           value: 150
         }
       ]}
-      defaultLabelText='Total Users'
-      defaultLabelValue='300'
       id='gauge-1'
       numberOfSegments={50}
+      numberLabel='300'
+      textLabel='Total Users'
     />
   `}
         </Markdown>
