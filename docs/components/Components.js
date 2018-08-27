@@ -31,7 +31,7 @@ class Components extends React.Component {
                 },
                 {
                   value: 'container-column-row',
-                  displayValue: 'Grid Contain, Column & Row'
+                  displayValue: 'Grid Container, Column & Row'
                 },
                 {
                   value: 'date-picker',
