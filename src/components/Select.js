@@ -203,8 +203,9 @@ class Select extends React.Component {
             this.elementRef = ref;
             if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
           }}
+          role='button'
           style={styles.component}
-          tabIndex='0'
+          tabIndex={0}
         >
           {this._renderScrim(styles)}
           <div className='mx-select-selected' key='selected' style={styles.selected}>

@@ -72,7 +72,7 @@ class DisplayInput extends React.Component {
 
   render () {
     // Input properties
-    const { elementProps } = this.props;
+    const { disabled, onChange, ...rest } = this.props.elementProps;
 
     // Methods
     const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
@@ -92,7 +92,7 @@ class DisplayInput extends React.Component {
 
     return (
       <Container className='mx-display-input'>
-        <div aria-hidden={this.props.elementProps.disabled} style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
+        <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
@@ -110,10 +110,12 @@ class DisplayInput extends React.Component {
               ) : (
                 <div style={styles.inputWrapper}>
                   <input
-                    {...elementProps}
+                    {...rest}
+                    aria-disabled={disabled}
                     aria-labelledby={this.props.label ? this._labelId : null}
                     id={this._inputId}
                     key='input'
+                    onChange={disabled ? null : onChange}
                     ref={this.props.elementRef}
                     style={styles.input}
                   />
