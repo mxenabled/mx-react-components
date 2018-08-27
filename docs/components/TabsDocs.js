@@ -59,7 +59,7 @@ class TabsDocs extends React.Component {
 
         <h5>isActive <label>Boolean</label></h5>
         <p>Default: 'false'</p>
-        <p>If set to true, allows for "activeTabeStyles" to apply to the active tab.</p>
+        <p>If set to true, allows for "activeTabStyles" to apply to the active tab.</p>
 
         <h5>onClick <label>function</label></h5>
         <p>A callback function that is triggered when a tab is clicked on.</p>
