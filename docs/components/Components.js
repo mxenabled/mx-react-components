@@ -203,7 +203,7 @@ class Components extends React.Component {
             <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>
 
             <h3>Responsive Grid</h3>
-            <Link to='/components/row-column'>Row & Column</Link>
+            <Link to='/components/row-column'>Column, Container & Row</Link>
 
             <h3>Customization</h3>
             <Link to='/components/config'>Config</Link>
