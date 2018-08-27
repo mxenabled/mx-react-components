@@ -47,26 +47,26 @@ class DonutChartDocs extends React.Component {
 
         <h3>Usage</h3>
         <h5>activeIndex <label>Number</label></h5>
+        <p>Default: -1</p>
         <p>Required for hover animations and data labels. Used to determine which slice is currently active. Represented visually by making the slice slightly larger or zoomed in and displaying the data label.</p>
 
         <h5>activeOffset <label>Number</label></h5>
-        <p>Default: 3</p>
+        <p>Default: 0</p>
         <p>A number, in pixels, that the slice will increase on mouse hover.</p>
 
         <h5>animateOnHover <label>Boolean</label></h5>
         <p>Default: false</p>
-        <p>Show animation on hover</p>
+        <p>Shows animation on hover when set to `true`.</p>
 
         <h5>animationDuration <label>number</label></h5>
         <p>Default: 500</p>
-        <p>Determines how long the load animation is in milliseconds</p>
+        <p>Determines how long the load animation is in milliseconds.</p>
 
         <h5>animationTypeOnLoad <label>string</label></h5>
-        <p>Default: roll</p>
         <p>Determines which of two animations will be used when chart is loaded or data is changed.  Roll will rotate the chart in while pop will bounce the chart in.</p>
 
         <h5>arcWidth <label>Number</label></h5>
-        <p>Default: 80</p>
+        <p>Default: 10</p>
         <p>Width of the arc in pixels.</p>
 
         <h5>baseArcColor <label>String</label></h5>
@@ -74,7 +74,6 @@ class DonutChartDocs extends React.Component {
         <p>A css color value (hex, rgba, etc) used to set the base arc color.</p>
 
         <h5>chartTotal <label>Number</label></h5>
-        <p>Default: 100</p>
         <p>A number representing the total possible value for the chart. If no chartTotal is provided, then the sum of the data values is used. This is useful if your data values only represent a portion of the total available value.</p>
 
         <h5>children <label>Node</label></h5>
@@ -100,7 +99,7 @@ class DonutChartDocs extends React.Component {
         <p>Array of css color values whose indexes correspond with the data array. For example, the first color value in dataPointColors will determine the dot color for the first item in dataPoints.</p>
 
         <h5>dataPointRadius <label>Number</label></h5>
-        <p>Default: 40</p>
+        <p>Default: 5</p>
         <p>The radius, in pixels, of each dataPoint dot.</p>
 
         <h5>dataPoints <label>Array</label></h5>
@@ -115,11 +114,13 @@ class DonutChartDocs extends React.Component {
         </Markdown>
 
         <h5>defaultLabelText <label>String</label></h5>
-        <p>Default: Roll over item for details</p>
         <p>The text to display in the data label when not hovering over a slice.</p>
 
-        <h5>dropdownStyle <label>Object | Array</label></h5>
-        <p>A Radium style object or array that will be applied to the dropdown select box.</p>
+        <h5>defaultLabelValue <label>String</label></h5>
+        <p>The value to display in the data label when not hovering over a slice.</p>
+
+        <h5>formatter <label>Function</label></h5>
+        <p>A function used to format a value for display as a label.</p>
 
         <h5>height <label>Number</label></h5>
         <p>Default: 360</p>
@@ -158,7 +159,7 @@ class DonutChartDocs extends React.Component {
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>width <label>Number</label></h5>
-        <p>Default: 360</p>
+        <p>Default: 150</p>
         <p>Width of the component. Also used to calculate the radius of the arc.</p>
 
         <h3>Example</h3>
