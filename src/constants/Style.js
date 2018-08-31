@@ -76,9 +76,9 @@ const Style = {
   },
 
   //Box Shadows
-  ShadowLow: '0 1px 2px rgba(0,0,0,0.1)',
-  ShadowMed: '0 2px 6px rgba(0,0,0,0.1)',
-  ShadowHigh: '0 10px 30px 5px rgba(0,0,0,0.1)',
+  ShadowLow: '0 1px 3px rgba(87,102,117,0.20)',
+  ShadowMed: '0 3px 8px rgba(87,102,117,0.15)',
+  ShadowHigh: '0 10px 20px rgba(87,102,117,0.16)',
 
   Spacing: {
     XLARGE: 30,
