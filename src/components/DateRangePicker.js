@@ -364,7 +364,7 @@ class DateRangePicker extends React.Component {
                   role='menu'
                   style={styles.optionsWrapper}
                 >
-                  <div className='mx-date-range-picker-pane' style={styles.column}>
+                  <div className='mx-date-range-picker-pane' style={styles.selectionContainer}>
                     <div style={styles.row}>
                       {!this.state.showCalendar && (
                         <div>
@@ -538,14 +538,14 @@ class DateRangePicker extends React.Component {
         paddingTop: theme.Spacing.MEDIUM,
         justifyContent: 'flex-end'
       },
-      column: {
+      selectionContainer: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        flex: '1 0 auto'
       },
       row: {
         display: 'flex',
         flexDirection: 'row',
-        padding: theme.Spacing.SMALL,
         justifyContent: 'center'
       },
 
