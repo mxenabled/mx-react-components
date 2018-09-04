@@ -8,7 +8,6 @@ module.exports = {
   Column: require('./components/grid/Column'),
   Container: require('./components/grid/Container'),
   DatePicker: require('./components/DatePicker'),
-  DatePickerFullScreen: require('./components/DatePickerFullScreen'),
   DateRangePicker: require('./components/DateRangePicker'),
   DateTimePicker: require('./components/DateTimePicker'),
   DisplayInput: require('./components/DisplayInput'),
