@@ -12,7 +12,6 @@ const { Listbox, Option } = require('./accessibility/Listbox');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 // returns a function that takes a click event, stops it, then calls the callback
 const haltEvent = callback => e => {
@@ -37,7 +36,6 @@ class Select extends React.Component {
     optionStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     optionTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     placeholderText: PropTypes.string,
-    primaryColor: PropTypes.string,
     scrimStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -59,10 +57,6 @@ class Select extends React.Component {
       isOpen: false,
       selected: props.selected
     };
-  }
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
   }
 
   componentWillReceiveProps (newProps) {
@@ -190,7 +184,7 @@ class Select extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const selected = this.state.selected || this.props.selected || { displayValue: this.props.placeholderText, value: '' };
 

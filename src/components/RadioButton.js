@@ -5,14 +5,12 @@ import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class RadioButton extends React.Component {
   static propTypes = {
     activeButtonStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
     checked: PropTypes.bool,
-    color: PropTypes.string,
     elementRef: PropTypes.func,
     onClick: PropTypes.func,
     style: PropTypes.object,
@@ -23,12 +21,8 @@ class RadioButton extends React.Component {
     onClick: () => {}
   };
 
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
-
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.color);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (

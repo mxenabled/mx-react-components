@@ -8,7 +8,6 @@ import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class RangeSelector extends React.Component {
   static propTypes = {
@@ -21,7 +20,6 @@ class RangeSelector extends React.Component {
     onLowerDragStop: PropTypes.func,
     onUpperDragStop: PropTypes.func,
     presets: PropTypes.array,
-    selectedColor: PropTypes.string,
     theme: themeShape,
     updateOnDrag: PropTypes.bool,
     upperBound: PropTypes.number
@@ -61,7 +59,6 @@ class RangeSelector extends React.Component {
   }
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props);
     this._setDefaultRangeValues();
 
     window.addEventListener('resize', _throttle(this._setDefaultRangeValues, 300));
@@ -231,7 +228,7 @@ class RangeSelector extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.selectedColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
