@@ -23,7 +23,7 @@ class TabsDocs extends React.Component {
       <div>
         <h1>
           Tabs
-          <label>A component to display tabs for full screen or a dropdown for mobile</label>
+          <label>A component to display tabs</label>
         </h1>
 
         <h3>Demo</h3>
@@ -77,9 +77,6 @@ class TabsDocs extends React.Component {
 
         <h5>type <label>One of: ['standard', 'pill']</label></h5>
         <p>Default: standard</p>
-
-        <h5>DEPRECATED: useTabsInMobile <label>Boolean</label></h5>
-        <p>Deprecated. For dropdown style tabs please use <Link to='/components/select'>Select</Link> instead.</p>
 
         <h3>Example</h3>
         <Markdown>

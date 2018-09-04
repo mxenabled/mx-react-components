@@ -7,13 +7,11 @@ import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class TextArea extends React.Component {
   static propTypes = {
     elementProps: PropTypes.object,
     elementRef: PropTypes.func,
-    primaryColor: PropTypes.string,
     rows: PropTypes.number,
     styles: PropTypes.object,
     theme: themeShape,
@@ -29,10 +27,6 @@ class TextArea extends React.Component {
   state = {
     focus: false
   };
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
 
   _onFocus = () => {
     this.textarea.focus();
@@ -52,7 +46,7 @@ class TextArea extends React.Component {
 
   render () {
     const { elementProps, rows } = this.props;
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
