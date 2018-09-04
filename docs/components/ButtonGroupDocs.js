@@ -66,15 +66,15 @@ class ButtonGroupDocs extends React.Component {
         <h3>Usage</h3>
         <h5>buttons <label>Array of Objects</label></h5>
         <p>Default: <Code>[]</Code></p>
-        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <Code>aria-label</Code>, <Code>icon</Code>, <Code>text</Code>, and <Code>style</Code>.</p>
+        <p>An array of objects that will populate the button values. Works with as little as one object. Objects take an <Code>aria-label</Code>, <Code>icon</Code>, <Code>onClick</Code>, <Code>style</Code>, and <Code>text</Code>.</p>
         <p>A button can be disabled by adding <Code>type = 'disabled'</Code> but no other button types are supported within the button group.</p>
         <p>The <Code>aria-label</Code> attribute for each button is used for accessibility purposes but is not required.  See the <Link to='/components/button'>Button</Link> component documentation for more details.</p>
 
         <h5>icon <label>String</label></h5>
-        <p>The name of the <a href='/components/icon'>icon</a></p>
+        <p>The name of the <a href='/components/icon'>icon.</a></p>
 
         <h5>text <label>String</label></h5>
-        <p>The text to be displayed in the button</p>
+        <p>The text to be displayed in the button.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>

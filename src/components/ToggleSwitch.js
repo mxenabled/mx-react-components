@@ -28,7 +28,7 @@ class ToggleSwitch extends React.Component {
     checked: false,
     falseIcon: 'close-skinny',
     leftLabel: 'Off',
-    onToggle () {},
+    onToggle: () => {},
     rightLabel: 'On',
     showLabels: false,
     showIcons: true,

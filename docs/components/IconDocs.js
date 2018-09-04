@@ -80,6 +80,9 @@ class IconDocs extends React.Component {
           />
         </div>
 
+        <h5>elementProps <label>Object</label></h5>
+        <p>Pass native HTML attributes for SVG elements directly to the icon's wrapping SVG element. ie. height, width, etc.</p>
+
         <h5>size <label>Number, String</label></h5>
         <p>A single number representing the width and height of the icon in pixels. Change the icon's size by using the number input below.</p>
         <div>
@@ -100,7 +103,7 @@ class IconDocs extends React.Component {
           />
         </div>
 
-        <h5>style <label>object</label></h5>
+        <h5>style <label>Object</label></h5>
         <p>A style object applied to the main svg element of the icon. You can use this to over ride styling or change the fill color of the icon. Use the input below to over ride the style and change the icon fill to a differnt color.</p>
         <div>
           <SimpleInput
@@ -145,7 +148,7 @@ class IconDocs extends React.Component {
         </Markdown>
 
         <h5>Release Canidate 5.0.0</h5>
-        <p>Properties to be passed to the svg element must now be passed via the new elementProps property.  This was done to fix React unknow prop warnings.</p>
+        <p>Properties to be passed to the svg element must now be passed via the new elementProps property.  This was done to fix React unknown prop warnings.</p>
 
         <Markdown>
         {`

@@ -5,6 +5,7 @@ const { Link } = require('react-router');
 
 const { PaginationButtons } = require('mx-react-components');
 
+const Code = require('components/Code');
 const Markdown = require('components/Markdown');
 
 class PaginationButtonsDocs extends React.Component {
@@ -49,6 +50,12 @@ class PaginationButtonsDocs extends React.Component {
 
         <h5>totalPages <label>Number</label></h5>
         <p><em>(required)</em> The total number of pages.</p>
+
+        <h5>type <label>String</label></h5>
+        <p>Default: <Code>'primary'</Code></p>
+        <p>This sets the button type. Available options are:</p>
+        <code>['primary', 'primaryOutline', 'primaryInverse', 'secondary', 'base', 'neutral', 'disabled']</code>
+        <p>Setting the type to <Code>disabled</Code> also prevents onClick events from firing.</p>
 
         <h3>Example</h3>
         <Markdown>

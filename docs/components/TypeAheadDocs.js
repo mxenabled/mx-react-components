@@ -38,6 +38,9 @@ class TypeAheadDocs extends React.Component {
         />
 
         <h3>Usage</h3>
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the button element.</p>
+
         <h5>items <label>Array</label></h5>
         <p>An array of Strings used for the options list. Example:</p>
         <Markdown lang='js'>

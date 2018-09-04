@@ -23,8 +23,8 @@ class TypeAhead extends React.Component {
 
   static defaultProps = {
     items: [],
-    onItemRemove () {},
-    onItemSelect () {},
+    onItemRemove: () => {},
+    onItemSelect: () => {},
     placeholderText: 'Select Filters',
     preSelectedItems: []
   };

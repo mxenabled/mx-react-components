@@ -19,7 +19,7 @@ export const ConfigDocs = () => {
       <h5>setDefaultTimeZone <label>String</label></h5>
       <p>Default: user's local timezone</p>
       <p>Will set the default timezone for moment.js across all components. This is useful if you do not want moment's usual default of user's local timezone.</p>
-      <p>See <a href='https://momentjs.com/timezone/docs/#/using-timezones/default-timezone/'>moment docs</a> for more infomation</p>
+      <p>See <a href='https://momentjs.com/timezone/docs/#/using-timezones/default-timezone/'>moment docs</a> for more infomation.</p>
     </div>
   );
 };

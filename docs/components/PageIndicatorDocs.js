@@ -40,7 +40,7 @@ class PageIndicatorDocs extends React.Component {
         <h5>count <label>Number</label></h5>
         <p>The number of "pages" or dots to display.</p>
 
-        <h5>OnClick <label>function</label></h5>
+        <h5>onClick <label>Function</label></h5>
         <p>A function to be called when a dot is clicked. The function will be passed the index of the clicked dot.</p>
 
         <h5>theme <label>Object</label></h5>

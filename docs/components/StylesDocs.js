@@ -89,7 +89,7 @@ class StylesDocs extends React.Component {
         <Markdown lang='js'>
           {`
             Styles.FontSizes.JUMBO // 30px
-            Styles.FontSizes.XXLARGE // 20px
+            Styles.FontSizes.XXLARGE // 21px
             Styles.FontSizes.XLARGE // 17px
             Styles.FontSizes.LARGE // 15px
             Styles.FontSizes.MEDIUM // 13px

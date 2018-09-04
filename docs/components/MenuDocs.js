@@ -58,7 +58,7 @@ class MenuDocs extends React.Component {
         <p>An array of objects that specify icon, label and onClick of the item.</p>
 
         <h5>onClick<label>Function</label></h5>
-        <p>Callback function for the menu click</p>
+        <p>Callback function for the menu click.</p>
 
         <h5>style<label>Object</label></h5>
         <p>Styles for the container around the component.</p>

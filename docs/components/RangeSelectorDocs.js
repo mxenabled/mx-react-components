@@ -64,6 +64,9 @@ class RangeSelectorDocs extends React.Component {
         <h5>defaultUpperValue <label>Number</label></h5>
         <p>The default value for the upper value/toggle.</p>
 
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref of the wrapping div of the RangeSelector component.</p>
+
         <h5>formatter <label>Function</label></h5>
         <p>A function to be used to format the toggle labels. The toggle value will be passed to this function and the function should return a formatted value.</p>
 
@@ -83,11 +86,15 @@ class RangeSelectorDocs extends React.Component {
         <h5>presets <label>Array</label></h5>
         <p>An array of objects with the following key/value pairs that will be used to preset the toggle values/positions when clicked: lowerValue: Number, upperValue: number, label: String.</p>
 
-        <h5>upperBound <label>Number</label></h5>
-        <p>A number that sets the upper bound of the RangeSelector and is used to calculate the relative position of the toggles.</p>
-
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+
+        <h5>updateOnDrag <label>Boolean</label></h5>
+        <p>Default: false</p>
+        <p>A boolean indicating if the RangeSelector should update on drag.</p>
+
+        <h5>upperBound <label>Number</label></h5>
+        <p>A number that sets the upper bound of the RangeSelector and is used to calculate the relative position of the toggles.</p>
 
         <h3>Example</h3>
         <Markdown>

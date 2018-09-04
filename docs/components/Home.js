@@ -40,7 +40,7 @@ class Home extends React.Component {
                 <img src='images/radium-logo.png' />
                 <h2>Radium</h2>
                 <p>
-                  We use Radium for inline css styles that are scoped to each component and prevent conflicts with other component or global styles.
+                  We use Radium for inline CSS styles that are scoped to each component and prevent conflicts with other component or global styles.
                 </p>
               </div>
             </div>

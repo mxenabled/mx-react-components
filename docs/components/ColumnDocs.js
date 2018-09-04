@@ -28,7 +28,7 @@ class ColumnDocs extends React.Component {
         </div>
 
         <h3>Usage</h3>
-        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap css file linked in your application.</h5>
+        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap CSS file linked in your application.</h5>
 
         <h5>children <label>Node</label></h5>
         <p>This should be one or more {`

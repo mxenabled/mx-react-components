@@ -94,6 +94,9 @@ class DisplayInputDocs extends React.Component {
         <h5>childrenStyle <label>Object</label></h5>
         <p>When providing custom children use this to to style the wrapping div.</p>
 
+        <h5>elementRef <label>Function</label></h5>
+        <p>A callback function for getting the ref on the input that shows if there are no children passed in to DisplayInput.</p>
+
         <h5>hint <label>String</label></h5>
         <p>Hint text to display to user on input hover.</p>
 
@@ -115,11 +118,11 @@ class DisplayInputDocs extends React.Component {
         <h5>status <label>Object</label></h5>
         <p>An Object that contains a status type ('error' or 'success') and a status message that is displayed to the right of the input field.</p>
 
-        <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
-
         <h5>styles <label>Object</label></h5>
         <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
+
+        <h5>theme <label>Object</label></h5>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>valid <label>Boolean</label></h5>
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.</p>

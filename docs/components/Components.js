@@ -30,6 +30,10 @@ class Components extends React.Component {
                   displayValue: 'Button Group'
                 },
                 {
+                  value: 'container-column-row',
+                  displayValue: 'Grid Container, Column & Row'
+                },
+                {
                   value: 'date-picker',
                   displayValue: 'Date Picker'
                 },
@@ -102,10 +106,6 @@ class Components extends React.Component {
                   displayValue: 'Range Selector'
                 },
                 {
-                  value: 'row-column',
-                  displayValue: 'Grid Row & Column'
-                },
-                {
                   value: 'select',
                   displayValue: 'Select'
                 },
@@ -164,7 +164,6 @@ class Components extends React.Component {
             <Link to='/components/pagination-buttons'>Pagination Buttons</Link>
             <Link to='/components/progress-bar'>Progress Bar</Link>
             <Link to='/components/spin'>Spin</Link>
-            <Link to='/components/file-upload'>File Upload</Link>
 
             <h3>Form</h3>
             <Link to='/components/button'>Button</Link>
@@ -194,7 +193,7 @@ class Components extends React.Component {
             <Link to='/components/time-based-line-chart'>Time Based Line Chart</Link>
 
             <h3>Responsive Grid</h3>
-            <Link to='/components/row-column'>Row & Column</Link>
+            <Link to='/components/row-column'>Column, Container & Row</Link>
 
             <h3>Customization</h3>
             <Link to='/components/config'>Config</Link>

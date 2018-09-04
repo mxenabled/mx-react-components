@@ -50,11 +50,12 @@ class SimpleInputDocs extends React.Component {
         <h5>elementProps <label>Object</label></h5>
         <p>Pass props directly to the <Code>input</Code> element. ie. placeholder, value, onchange, etc.</p>
 
-        <h5>elementRef<label>Function</label></h5>
+        <h5>elementRef <label>Function</label></h5>
         <p>A callback function used to get the ref of the input for things like handling focus.</p>
 
         <h5>focusOnLoad <label>Boolean</label></h5>
-        <p>Focus <Code>input</Code> on load, default of false.</p>
+        <p>Default: false</p>
+        <p>Focus <Code>input</Code> on load.</p>
 
         <h5>prefix <label>Node</label></h5>
         <p>Anything that can be rendered: numbers, strings, elements or an array(or fragment) containing these types that is placed on the left side of the <Code>input</Code>.</p>
@@ -74,12 +75,13 @@ class SimpleInputDocs extends React.Component {
         <p>Anything that can be rendered: numbers, strings, elements or an array(or fragment) containing these types that is placed on the right side of the <Code>input</Code>.</p>
 
         <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information. Themes will be overridden by conflicting <Code>styles</Code></p>
+        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information. Themes will be overridden by conflicting <Code>styles</Code>.</p>
 
         <h5>type <label>String</label></h5>
         <p>Specifies the <Code>input</Code> type. Default <Code>type</Code> is text.</p>
 
         <h5>valid <label>Boolean</label></h5>
+        <p>Default: true</p>
         <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red border.</p>
 
         <h3>Example</h3>

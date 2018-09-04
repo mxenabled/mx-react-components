@@ -26,10 +26,12 @@ class SpinDocs extends React.Component {
         <p>An element that you wish to spin.</p>
 
         <h5>direction <label>String</label></h5>
-        <p>The direction of the spin. Available Options: counterclockwise, clockwise. Default: 'counterclockwise'</p>
+        <p>Default: 'counterclockwise'</p>
+        <p>The direction of the spin. Available Options: counterclockwise, clockwise.</p>
 
         <h5>speed <label>Number</label></h5>
-        <p>The time it takes the element to make 1 full rotation in milliseconds. Default: 1000</p>
+        <p>Default: 1000</p>
+        <p>The time it takes the element to make 1 full rotation in milliseconds.</p>
 
         <h3>Example</h3>
         <Markdown>

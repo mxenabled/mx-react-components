@@ -11,8 +11,8 @@ class RowDocs extends React.Component {
     return (
       <div>
         <h1>
-          Cotainer, Row and Column
-          <label>Container, Row and Column components to be used in a response grid.</label>
+          Column, Container and Row
+          <label>Column, Container and Row components to be used in a response grid.</label>
         </h1>
 
         <h3>Demo</h3>
@@ -88,35 +88,42 @@ class RowDocs extends React.Component {
           <li>Small: 100% width</li>
         </ul>
 
-        <h3>Row Usage</h3>
-        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap css file linked in your application.</h5>
+        <h3>Container Usage</h3>
+        <h5>fluid <label>Boolean</label></h5>
+        <p>Default: true</p>
+        <p>When set to true, fluid sets the container to use 100% width across all viewport and device sizes, rather than using a responsive pixel width. See <a href='https://getbootstrap.com/docs/4.0/layout/grid/'>bootstrap grid docs</a> for more details.</p>
 
-        <h5>children <label>Node</label></h5>
-        <p>This should be one or more {`
-            <Column />
-        `} nodes to be displayed.</p>
+        <h5>styles <label>Object</label></h5>
+        <p>A style object that allows you to override any style attribute in the component.</p>
 
         <h3>Column Usage</h3>
+        <h5>children <label>Node</label></h5>
+        <p>The content to be displayed in the column.</p>
 
-        <h5>offset<label>Object</label></h5>
+        <h5>offset <label>Object</label></h5>
         <p>Shape and defaults: {`
           { large: 0, medium: 0, small: 0 }
         `}</p>
         <p>A number representing the offset of columns at which to display the enclosed content, based on the columnCount.</p>
 
-        <h5>span<label>Object</label></h5>
-        <p>Shape and defaults: {`
-          { large: 12, medium: 12, small: 12 }
-        `}</p>
-        <p>A number representing the columns span at which to display the enclosed content, based on the columnCount. If set to 0, the column will be hidden.</p>
-
         <h5>relative <label>Boolean</label></h5>
         <p>Default: true</p>
         <p>Determines if the column is positioned relative or not.</p>
 
-        <h5>children <label>Node</label></h5>
-        <p>The content to be displayed in the column</p>
+        <h5>span<label>Object</label></h5>
+        <p>Shape and defaults: {`
+          { large: 12, medium: 12, small: 12 }
+          `}</p>
+        <p>A number representing the columns span at which to display the enclosed content, based on the columnCount. If set to 0, the column will be hidden.</p>
 
+        <h3>Row Usage</h3>
+        <h5>WARNING: This component requires the Bootstrap grid system.  You must have the bootstrap CSS file linked in your application.</h5>
+
+        <h5>children <label>Node</label></h5>
+        <p>This should be one or more {`
+            <Column />
+        `} nodes to be displayed.</p>
+/
         <h3>Example</h3>
         <Markdown>
           {`

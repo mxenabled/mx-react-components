@@ -94,13 +94,13 @@ class ModalDocs extends React.Component {
 
         <h3>Usage</h3>
 
-        <h5>aria-describedby <label>string</label></h5>
+        <h5>aria-describedby <label>String</label></h5>
         <p>An id of a child element that describes the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html'>WAI-ARIA documentation for aria-describedby</a></p>
 
-        <h5>aria-label <label>string</label></h5>
+        <h5>aria-label <label>String</label></h5>
         <p>A string applied as a label to the wrapping div around the Modal's children. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/TR/WCAG20-TECHS/ARIA14.html'>WAI-ARIA documentation for aria-label</a></p>
 
-        <h5>aria-labelledby <label>string</label></h5>
+        <h5>aria-labelledby <label>String</label></h5>
         <p>An id of a child element that is the title of the Modal. Used by screen readers for accessibility purposes. See <a href='https://www.w3.org/WAI/GL/wiki/Using_aria-labelledby_to_concatenate_a_label_from_several_text_nodes'>WAI-ARIA documentation for aria-labelledby</a></p>
 
         <h5>buttons <label>Array</label></h5>
@@ -121,7 +121,7 @@ class ModalDocs extends React.Component {
         </Markdown>
 
         <h5>contentStyle <label>Object</label></h5>
-        <p>A style object used to style the content div that wrapps the modal&#39;s content</p>
+        <p>A style object used to style the content div that wrapps the modal&#39;s content.</p>
 
         <h5>focusOnLoad <label>Boolean</label></h5>
         <p>Default: 'true'</p>
@@ -136,8 +136,8 @@ class ModalDocs extends React.Component {
         <h5>footerContent <label>Node</label></h5>
         <p>A node used to add jsx to the footer element of the modal.</p>
 
-        <h5>footerStyle <label>Object or Array</label></h5>
-        <p>A style object used to style the footer div that wrapps the modal&#39;s footer</p>
+        <h5>footerStyle <label>Object</label></h5>
+        <p>A style object used to style the footer div that wrapps the modal&#39;s footer.</p>
 
         <h5>isRelative <label>Boolean</label></h5>
         <p>Default: 'false'</p>
@@ -149,7 +149,7 @@ class ModalDocs extends React.Component {
         <h5>portalTo <label>String</label></h5>
         <p>A query string used to look up an element in the DOM to render the Modal next to. If not provided then the Modal is rendered in place. This uses the React Portals functionality. See <a href='https://reactjs.org/docs/portals.html'>documentation</a> for details.</p>
 
-        <h5>role <label>string</label></h5>
+        <h5>role <label>String</label></h5>
         <p>Default: 'dialog'</p>
         <p>The role applied to the wrapping div around the Modal's children.  Used for accessibility purposes.  See <a href='https://www.w3.org/TR/wai-aria-1.1/#usage_intro'>WAI-ARIA documentation</a> for more details on roles.</p>
 

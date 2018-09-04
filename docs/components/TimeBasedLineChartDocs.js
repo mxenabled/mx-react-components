@@ -65,19 +65,12 @@ class TimeBasedLineChartDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>getBreakPointDate <label>Function</label></h5>
-        <p>Default: today (as a Unix timestamp)</p>
-        <p>A function that returns a unix timestamp that sets the breakpoint for the chart. The breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to 'true', then the line after the breakpoint will be dashed instead of solid.</p>
-
         <h5>breakPointLabel <label>String</label></h5>
         <p>Default: 'Today'</p>
         <p>The text to display in the breakpoint label. The label is displayed at the top of the chart above the breakpoint line.</p>
 
-        <h5>children <label>Node(s)</label></h5>
-        <p>If defined, these nodes will be used for the tooltip. Typically this is used in conjunction with 'hoverCallBack' to create custom tooltips.</p>
-
         <h5>data <label>Arrray</label></h5>
-        <p>An array of data objects that are used to set the x axis, y axis, and line values. Example:</p>
+        <p><em>(required)</em> An array of data objects that are used to set the x axis, y axis, and line values. Example:</p>
         <Markdown lang='js'>
         {`
           [{
@@ -87,20 +80,27 @@ class TimeBasedLineChartDocs extends React.Component {
         `}
         </Markdown>
 
+        <h5>getBreakPointDate <label>Function</label></h5>
+        <p>Default: today (as a Unix timestamp)</p>
+        <p>A function that returns a unix timestamp that sets the breakpoint for the chart. The breakpoint is displayed as a vertical line on the chart. If 'dashedFutureLine' is set to 'true', then the line after the breakpoint will be dashed instead of solid.</p>
+
         <h5>height <label>Number</label></h5>
         <p>Default: 400</p>
         <p>Sets the overall height of the chart.</p>
 
-        <h5>limitLineCircles <label>Bool</label></h5>
+        <h5>hoveredDataPointDetails <label>Array</label></h5>
+        <p>An array of objects with details of the data point that is currently hovered over.</p>
+
+        <h5>limitLineCircles <label>Boolean</label></h5>
         <p>Default: false</p>
-        <p>If set to true, limits the circles on the line to the beginning, middle, and end of the line.</p>
+        <p>If set to 'true', limits the circles on the line to the beginning, middle, and end of the line.</p>
 
         <h5>lineColor <label>String</label></h5>
         <p>Default: #359BCF</p>
         <p>A CSS color value that sets the color of the data line.</p>
 
         <h5>margin <label>Object</label></h5>
-        <p>A object that contains top, right, bottom, and left margin values. These can be used to adjust the spacing around the chart. Default:</p>
+        <p>An object that contains top, right, bottom, and left margin values. These can be used to adjust the spacing around the chart. Default:</p>
         <Markdown lang='js'>
         {`
           {

@@ -25,23 +25,23 @@ class ProgressBarDocs extends React.Component {
         />
 
         <h3>Usage</h3>
-        <h5>baseColor <label>string</label></h5>
+        <h5>baseColor <label>String</label></h5>
         <p>Default: GRAY_300</p>
-        <p>An hex color string used to set the base of the bar</p>
+        <p>An hex color string used to set the base of the bar.</p>
 
         <h5>children <label>Node</label></h5>
-        <p>An element to be displayed in the progress bar</p>
+        <p>An element to be displayed in the progress bar.</p>
 
         <h5>height <label>Number</label></h5>
         <p>Default: 10</p>
-        <p>The height, in pixels of the bar</p>
+        <p>The height, in pixels of the bar.</p>
 
         <h5>percentage <label>Number</label></h5>
-        <p>The percentage of the progress portion of the bar. Expressed in the percentage value, ie: 50 for 50%</p>
+        <p>The percentage of the progress portion of the bar. Expressed in the percentage value, ie: 50 for 50%.</p>
 
         <h5>progressColor <label>String</label></h5>
         <p>Default: PRIMARY (#359BCF)</p>
-        <p>An hex color string used to set the progress of the bar</p>
+        <p>An hex color string used to set the progress of the bar.</p>
 
         <h5>styles <label>Objext</label></h5>
         <p>A nested styles object used to override the `component` and/or `progress` divs in the component. This can also be used in place of the height and bar colors.</p>
