@@ -14,6 +14,7 @@ module.exports = {
   DonutChart: require('./components/DonutChart'),
   Drawer: require('./components/Drawer'),
   FileUpload: require('./components/FileUpload'),
+  FocusTrap: require('./components/MXFocusTrap'),
   Gauge: require('./components/Gauge'),
   HeaderMenu: require('./components/HeaderMenu'),
   Icon: require('./components/Icon'),
