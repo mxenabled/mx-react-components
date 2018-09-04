@@ -114,9 +114,9 @@ class StylesDocs extends React.Component {
         <h5>Box Shadows</h5>
         <Markdown lang='js'>
           {`
-            Styles.ShadowLow: '0 1px 2px rgba(0,0,0,0.1)',
-            Styles.ShadowMed: '0 2px 6px rgba(0,0,0,0.1)',
-            Styles.ShadowHigh: '0 10px 30px 5px rgba(0,0,0,0.1)',
+            Styles.ShadowLow: '0 1px 3px rgba(87,102,117,0.20)',
+            Styles.ShadowMed: '0 3px 8px rgba(87,102,117,0.15)',
+            Styles.ShadowHigh: '0 10px 20px rgba(87,102,117,0.16)',
           `}
         </Markdown>
 
