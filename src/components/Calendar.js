@@ -10,7 +10,6 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 export const getNewDateStateChange = ({
   code,
@@ -50,7 +49,6 @@ class Calendar extends React.Component {
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onDateSelect: PropTypes.func,
-    primaryColor: PropTypes.string,
     selectedDate: PropTypes.number,
     style: PropTypes.object,
     theme: themeShape
@@ -67,10 +65,6 @@ class Calendar extends React.Component {
     focusedDay:
       this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
 
   componentWillReceiveProps (newProps) {
     if (
@@ -230,10 +224,7 @@ class Calendar extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(
-      this.props.theme,
-      this.props.primaryColor
-    );
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const daysOfWeek = [
       { label: 'Sunday', value: 'S' },
