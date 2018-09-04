@@ -15,7 +15,6 @@ const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
 const { MonthSelector, YearSelector } = require('./DateRangePicker/Selector');
@@ -38,9 +37,7 @@ class DateRangePicker extends React.Component {
     minimumDate: PropTypes.number,
     onClose: PropTypes.func,
     onDateRangeSelect: PropTypes.func,
-    onDateSelect: PropTypes.func,
     placeholderText: PropTypes.string,
-    primaryColor: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
     showDefaultRanges: PropTypes.bool,
@@ -87,7 +84,6 @@ class DateRangePicker extends React.Component {
     isRelative: true,
     locale: 'en',
     onClose () {},
-    onDateRangeSelect () {},
     placeholderText: 'Select A Date Range',
     showDefaultRanges: false
   };
@@ -103,11 +99,6 @@ class DateRangePicker extends React.Component {
       selectedEndDate: this.props.selectedEndDate,
       showSelectionPane: false
     };
-  }
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-    deprecateProp(this.props, 'onDateSelect', 'onDateRangeSelect', 'date-range-picker');
   }
 
   componentWillReceiveProps (newProps) {
@@ -155,7 +146,7 @@ class DateRangePicker extends React.Component {
   };
 
   _handleDateSelect = (date) => {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const { selectedBox, selectedEndDate, selectedStartDate } = this.state;
     const endDate = selectedBox === SelectedBox.TO ? date : selectedEndDate;
@@ -304,7 +295,7 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
@@ -487,16 +478,6 @@ class DateRangePicker extends React.Component {
                             selectedEndDate
                           );
 
-                          /**
-                                TODO: onDateSelect is deprecated.  We need to remove this
-                                check and call before the next major release.
-                              **/
-                          if (typeof this.props.onDateSelect === 'function') {
-                            this.props.onDateSelect(
-                              selectedStartDate,
-                              selectedEndDate
-                            );
-                          }
                           this._resetToPropValuesAndClose();
                         }}
                         style={styles.applyButton}

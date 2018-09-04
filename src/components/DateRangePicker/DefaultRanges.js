@@ -2,6 +2,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
 const Icon = require('../Icon');
+const { themeShape } = require('../../constants/App');
 
 class DefaultRanges extends React.Component {
   state = {
@@ -9,7 +10,7 @@ class DefaultRanges extends React.Component {
   };
 
   render () {
-    const { defaultRanges, handleDefaultRangeSelection, primaryColor, selectedStartDate, selectedEndDate, styles } = this.props;
+    const { defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles, theme } = this.props;
 
     return (
       <div className='mx-default-ranges' role='' style={styles.rangeOptions}>
@@ -35,7 +36,7 @@ class DefaultRanges extends React.Component {
                 <Icon
                   size={20}
                   style={Object.assign({}, styles.rangeOptionIcon, {
-                    fill: isSelectedRange ? primaryColor : 'transparent'
+                    fill: isSelectedRange ? theme.Colors.PRIMARY : 'transparent'
                   })}
                   type='check-solid'
                 />
@@ -61,7 +62,8 @@ DefaultRanges.propTypes = {
     defaultRangesTitle: PropTypes.object,
     rangeOption: PropTypes.object,
     rangeOptions: PropTypes.object
-  })
+  }),
+  theme: themeShape
 };
 
 module.exports = Radium(DefaultRanges);

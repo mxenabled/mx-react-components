@@ -9,7 +9,6 @@ const { SelectedBox } = require('../../constants/DateRangePicker');
 const { themeShape } = require('../../constants/App');
 
 const StyleUtils = require('../../utils/Style');
-const { deprecatePrimaryColor } = require('../../utils/Deprecation');
 
 class SelectionPane extends React.Component {
   static propTypes = {
@@ -18,7 +17,6 @@ class SelectionPane extends React.Component {
     getFromButtonRef: PropTypes.func,
     getToButtonRef: PropTypes.func,
     onDateBoxClick: PropTypes.func,
-    primaryColor: PropTypes.string,
     selectedBox: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
@@ -26,16 +24,12 @@ class SelectionPane extends React.Component {
     theme: themeShape
   };
 
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
-
   _handleDateBoxClick = (date, selectedBox) => {
     this.props.onDateBoxClick(date, selectedBox);
   }
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const { selectedStartDate, selectedEndDate } = this.props;
 
@@ -68,7 +62,7 @@ class SelectionPane extends React.Component {
           <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
             Select a Range
           </div>
-          <DefaultRanges {...this.props} primaryColor={theme.Colors.PRIMARY} styles={styles} />
+          <DefaultRanges {...this.props} styles={styles} theme={theme} />
         </div>
       </div>
     );
