@@ -1,6 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const _merge = require('lodash/merge');
+const _isNil = require('lodash/isNil');
 
 import { withTheme } from './Theme';
 const Icon = require('../components/Icon');
@@ -11,22 +12,14 @@ const StyleUtils = require('../utils/Style');
 
 class MessageBox extends React.Component {
   static propTypes = {
-    children: PropTypes.node,
+    button: PropTypes.node,
     color: PropTypes.string,
     icon: PropTypes.string,
+    isSmall: PropTypes.bool,
+    message: PropTypes.string,
     styles: PropTypes.object,
     theme: themeShape,
     title: PropTypes.string
-  };
-
-  state = {
-    isOpen: true
-  };
-
-  _toggleMessageBox = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
   };
 
   render () {
@@ -34,33 +27,40 @@ class MessageBox extends React.Component {
     const styles = this.styles(theme);
 
     return (
-      <div className='mx-message-box' style={styles.component}>
-        <div onClick={this.props.children ? this._toggleMessageBox : () => {}} style={styles.header}>
-          <div style={styles.leftHeader}>
-            <Icon
-              size={20}
-              style={Object.assign({}, styles.icon, { marginRight: theme.Spacing.SMALL })}
-              type={this.props.icon}
-            />
-            <div style={styles.title}>{this.props.title}</div>
+      <article
+        aria-live='polite'
+        className='mx-message-box'
+        role='region'
+        style={styles.component}
+      >
+        <div style={styles.alertbar} />
+        <div style={styles.messageWrapper}>
+          <div style={styles.messageBody}>
+            <section>
+              <Icon
+                size={20}
+                style={styles.icon}
+                type={this.props.icon}
+              />
+            </section>
+            <section role='status' style={styles.messageContent}>
+              <p style={styles.title}>
+                {this.props.title}
+              </p>
+              { this.props.message ?
+                (<p style={styles.message}>
+                  {(this.props.message)}
+                </p>) :
+              null }
+            </section>
           </div>
-
-          {this.props.children &&
-            <Icon
-              size={19}
-              style={styles.icon}
-              type={this.state.isOpen ? 'caret-up' : 'caret-down'}
-            />
+          {!_isNil(this.props.button) &&
+            <div style={styles.button}>
+              {this.props.button}
+            </div>
           }
         </div>
-
-        {this.state.isOpen &&
-          <div style={styles.children}>
-            {this.props.children}
-          </div>
-        }
-
-      </div>
+      </article>
     );
   }
 
@@ -69,31 +69,63 @@ class MessageBox extends React.Component {
 
     return _merge({}, {
       component: {
-        color: theme.Colors.WHITE,
-        boxSizing: 'border-box'
+        color: theme.Colors.GRAY_900,
+        boxShadow: theme.ShadowMed,
+        boxSizing: 'border-box',
+        borderTop: 'none',
+        borderRadius: 4,
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      alertbar: {
+        background: color,
+        border: theme.Colors.GRAY_300,
+        color: theme.Colors.GRAY_900,
+        borderTop: '1px solid ' + color,
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+        height: 5
+      },
+      button: {
+        marginTop: this.props.isSmall ? 10 : null,
+        whiteSpace: 'nowrap',
+        alignSelf: this.props.isSmall ? null : 'flex-end',
+        textAlign: this.props.isSmall ? 'center' : null
       },
       header: {
-        background: color,
         display: 'flex',
-        cursor: this.props.children ? 'pointer' : 'auto',
-        padding: theme.Spacing.XSMALL,
-        alignItems: 'center'
+        padding: theme.Spacing.SMALL,
+        paddingBottom: 0
       },
-      leftHeader: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center'
+      icon: {
+        fill: theme.Colors.GRAY_900,
+        marginRight: theme.Spacing.SMALL
       },
       title: {
         fontFamily: theme.Fonts.SEMIBOLD,
+        fontSize: theme.FontSizes.MEDIUM,
+        marginBottom: 0
+      },
+      messageBody: {
+        alignItems: 'baseline',
+        display: 'flex',
+        flex: '1 1 auto'
+      },
+      messageContent: {
+        boxSizing: this.props.isSmall ? null : 'content-box',
+        textAlign: 'left',
+        width: this.props.isSmall ? '100%' : '75%',
+        paddingRight: this.props.isSmall ? 30 : null,
         fontSize: theme.FontSizes.MEDIUM
       },
-      icon: {
-        fill: theme.Colors.WHITE
+      message: {
+        fontSize: theme.FontSizes.MEDIUM,
+        marginBottom: 0
       },
-      children: {
-        backgroundColor: StyleUtils.adjustHexOpacity(color, 0.1),
-        padding: this.props.children ? theme.Spacing.SMALL : null
+      messageWrapper: {
+        display: 'flex',
+        flexDirection: this.props.isSmall ? 'column' : 'row',
+        padding: theme.Spacing.SMALL
       }
     }, this.props.styles);
   };
