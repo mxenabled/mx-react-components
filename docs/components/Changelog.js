@@ -6,10 +6,30 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
-        <h2>MX React Components V 5.0</h2>
+        <h2>MX React Components V 6.0.0</h2>
+        <h3>6.0.0</h3>
+        <ul>
+          <li>MessageBox - BREAKING CHANGES to update MessageBox component. Review the documentation (<a href='https://github.com/mxenabled/mx-react-components/pull/754'>#754</a>)</li>
+          <li>DatePickerFullScren - Removes unsupported DatePickerFullScreen component (<a href='https://github.com/mxenabled/mx-react-components/pull/780'>#780</a>)</li>
+          <li>RajaIcon - Removes unsupported RajaIcon component (<a href='https://github.com/mxenabled/mx-react-components/pull/781'>#781</a>)</li>
+          <li>Icon - Removes outdated icons from Icon component (<a href='https://github.com/mxenabled/mx-react-components/pull/782'>#782</a>)</li>
+          <li>Removes deprecated props in Button, ButtonGroup, Calendar, and DatePicker components (<a href='https://github.com/mxenabled/mx-react-components/pull/783'>#783</a>)</li>
+          <li>Removes deprecated props in DateRangePicker, DefaultRanges, and SelectionPane components (<a href='https://github.com/mxenabled/mx-react-components/pull/784'>#784</a>)</li>
+          <li>Removes deprecated props in DateTimePicker, DisplayInput, and Drawer components (<a href='https://github.com/mxenabled/mx-react-components/pull/785'>#785</a>)</li>
+          <li>Removes deprecated props in Menu, Modal, and PaginationButtons components (<a href='https://github.com/mxenabled/mx-react-components/pull/786'>#786</a>)</li>
+          <li>Removes deprecated props in RadioButton, RangeSelector, and Select components (<a href='https://github.com/mxenabled/mx-react-components/pull/787'>#787</a>)</li>
+          <li>Removes deprecated props in SimpleInput, SimpleSelect, and SimpleSlider components (<a href='https://github.com/mxenabled/mx-react-components/pull/788'>#788</a>)</li>
+          <li>Removes deprecated props in Tabs, and TextArea components. Updates mergeTheme style utils (<a href='https://github.com/mxenabled/mx-react-components/pull/789'>#789</a>)</li>
+          <li>Removes deprecated props in SearchInput component (<a href='https://github.com/mxenabled/mx-react-components/pull/790'>#790</a>)</li>
+          <li>Docs - Thorough audit of all component Docs (<a href='https://github.com/mxenabled/mx-react-components/pull/792'>#792</a>)</li>
+          <li>Adds FocusTrap to export (<a href='https://github.com/mxenabled/mx-react-components/pull/793'>#793</a>)</li>
+          <li>DateRangePicker - Fixes spacing (<a href='https://github.com/mxenabled/mx-react-components/pull/795'>#795</a>)</li>
+          <li>Style - Updates shadows to the new spec (<a href='https://github.com/mxenabled/mx-react-components/pull/796'>#796</a>)</li>
+        </ul>
+
         <h3>5.2.26</h3>
         <ul>
-          <li>Fix Firefox/IE 11 but in Select introduced in 5.2.25(<a href='https://github.com/mxenabled/mx-react-components/pull/794'>#794</a>)</li>
+          <li>Fix Firefox/IE 11 but in Select introduced in 5.2.25 (<a href='https://github.com/mxenabled/mx-react-components/pull/794'>#794</a>)</li>
         </ul>
 
         <h3>5.2.25</h3>
@@ -1102,7 +1122,7 @@ class Changelog extends React.Component {
 
         <h3>4.0.0</h3>
         <ul>
-          <li><strong>BREAKING CHANGES</strong> to the ToggleSwitch componenet. Please review the documentation. Now supports animations and icons.</li>
+          <li><strong>BREAKING CHANGES</strong> to the ToggleSwitch component. Please review the documentation. Now supports animations and icons.</li>
           <li>Update ToggleSwitch component (<a href='https://github.com/mxenabled/mx-react-components/pull/310'>#310</a>)</li>
           <li>Add DateTimePicker component (<a href='https://github.com/mxenabled/mx-react-components/pull/338'>#338</a>)</li>
           <li>Fix issue with Calendar component border color (<a href='https://github.com/mxenabled/mx-react-components/pull/339'>#339</a>)</li>
