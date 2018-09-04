@@ -12,19 +12,14 @@ const MXFocusTrap = require('./MXFocusTrap');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor, deprecateProp } = require('../utils/Deprecation');
 
 class SimpleSelect extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string,
     elementRef: PropTypes.func,
     focusTrapProps: PropTypes.object,
-    hoverColor: PropTypes.string,
     iconSize: PropTypes.number,
-    iconStyles: PropTypes.object,
     items: PropTypes.array.isRequired,
-    itemStyles: PropTypes.object,
-    menuStyles: PropTypes.object,
     onScrimClick: PropTypes.func,
     scrimClickOnSelect: PropTypes.bool,
     style: PropTypes.object,
@@ -40,12 +35,6 @@ class SimpleSelect extends React.Component {
     onScrimClick () {}
   };
 
-  componentDidMount () {
-    deprecatePrimaryColor(this.props, 'hoverColor');
-    deprecateProp(this.props, 'iconStyles', 'styles', 'simple-select');
-    deprecateProp(this.props, 'menuStyles', 'styles', 'simple-select');
-  }
-
   _handleKeyUp = (e) => {
     if (keycode(e) === 'esc') {
       e.preventDefault();
@@ -54,7 +43,7 @@ class SimpleSelect extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.hoverColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     const mergedFocusTrapProps = {
@@ -122,8 +111,7 @@ class SimpleSelect extends React.Component {
         height: 0,
         position: 'relative'
       }, this.props.style),
-
-      menu: Object.assign({}, {
+      menu: {
         alignSelf: 'stretch',
         backgroundColor: theme.Colors.WHITE,
         borderRadius: 3,
@@ -138,9 +126,8 @@ class SimpleSelect extends React.Component {
         top: 10,
         position: 'absolute',
         zIndex: 10
-      }, this.props.menuStyles),
-
-      item: Object.assign({}, {
+      },
+      item: {
         display: 'flex',
         alignItems: 'center',
         boxSizing: 'border-box',
@@ -153,10 +140,10 @@ class SimpleSelect extends React.Component {
           cursor: 'pointer',
           fill: theme.Colors.WHITE
         }
-      }, this.props.itemStyles),
-      icon: Object.assign({}, {
+      },
+      icon: {
         marginRight: theme.Spacing.SMALL
-      }, this.props.iconStyles),
+      },
       text: {
         whiteSpace: 'nowrap'
       },

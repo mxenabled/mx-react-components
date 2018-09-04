@@ -15,13 +15,11 @@ class SimpleSelectDocs extends React.Component {
 
   _handleItemClick = (e, item) => {
     this._toggleMenu();
-    this.setState({ selectedItem: item });
+    this.setState({ selectedItem: item.text });
   };
 
   _toggleMenu = () => {
-    this.setState({
-      showMenu: !this.state.showMenu
-    });
+    this.setState(state => ({ showMenu: !state.showMenu }));
   };
 
   render () {
@@ -33,25 +31,30 @@ class SimpleSelectDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
-        <div style={{ width: 177 }}>
-          <Button
-            icon='gear'
-            onClick={this._toggleMenu}
-            type='neutral'
-          >
-            Settings
-          </Button>
-          {this.state.showMenu ? (
-            <SimpleSelect
-              aria-label='Select a category'
-              items={[
-                { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
-                { icon: 'kids', isSelected: true, text: 'Kids', onClick: this._handleItemClick },
-                { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
-              ]}
-              onScrimClick={this._toggleMenu}
-            />
-          ) : null}
+        <div style={{ alignItems: 'center', display: 'flex', width: 177 }}>
+          <span>
+            <Button
+              icon='gear'
+              onClick={this._toggleMenu}
+              type='neutral'
+            >
+              Settings
+            </Button>
+            {this.state.showMenu ? (
+              <SimpleSelect
+                aria-label='Select a category'
+                items={[
+                  { icon: 'auto', text: 'Auto', onClick: this._handleItemClick },
+                  { icon: 'kids', isSelected: true, text: 'Kids', onClick: this._handleItemClick },
+                  { icon: 'pets', text: 'Pets', onClick: this._handleItemClick }
+                ]}
+                onScrimClick={this._toggleMenu}
+              />
+            ) : null}
+          </span>
+          <span style={{ marginLeft: 10 }}>
+            {this.state.selectedItem}
+          </span>
         </div>
 
         <h3>Usage</h3>
@@ -89,9 +92,7 @@ class SimpleSelectDocs extends React.Component {
     },
 
     _toggleMenu () {
-      this.setState({
-        showMenu: !this.state.showMenu
-      });
+      this.setState(state => ({ showMenu: !state.showMenu }));
     },
 
     <div>

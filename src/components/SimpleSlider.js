@@ -9,7 +9,6 @@ import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class SimpleSlider extends React.Component {
   static propTypes = {
@@ -17,7 +16,6 @@ class SimpleSlider extends React.Component {
     elementRef: PropTypes.func,
     onPercentChange: PropTypes.func.isRequired,
     percent: PropTypes.number.isRequired,
-    selectedColor: PropTypes.string,
     styles: PropTypes.object,
     theme: themeShape
   };
@@ -33,8 +31,6 @@ class SimpleSlider extends React.Component {
   };
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props, 'selectedColor');
-
     const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
     const width = component.clientWidth;
     const leftPixels = this.props.percent * width;
@@ -93,7 +89,7 @@ class SimpleSlider extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.selectedColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
     const { disabled } = this.props;
 
