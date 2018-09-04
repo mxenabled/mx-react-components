@@ -7,7 +7,6 @@ const ButtonGroup = require('./ButtonGroup');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 const { buttonTypes } = require('../constants/App');
 
@@ -16,7 +15,6 @@ class PaginationButtons extends React.Component {
     currentPage: PropTypes.number.isRequired,
     onClick: PropTypes.func,
     pageRange: PropTypes.number,
-    primaryColor: PropTypes.string,
     style: PropTypes.object,
     theme: themeShape,
     totalPages: PropTypes.number.isRequired,
@@ -29,10 +27,6 @@ class PaginationButtons extends React.Component {
     totalPages: 1,
     type: 'primaryOutline'
   };
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
 
   _handleButtonClick = (buttonClicked) => {
     const { currentPage, totalPages } = this.props;
@@ -165,7 +159,7 @@ class PaginationButtons extends React.Component {
   };
 
   render () {
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (

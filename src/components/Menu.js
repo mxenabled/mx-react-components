@@ -7,7 +7,6 @@ const Icon = require('../components/Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Menu extends React.Component {
   static propTypes = {
@@ -19,7 +18,6 @@ class Menu extends React.Component {
       onClick: PropTypes.func
     })).isRequired,
     onClick: PropTypes.func,
-    primaryColor: PropTypes.string,
     theme: themeShape
   };
 
@@ -32,10 +30,6 @@ class Menu extends React.Component {
   state = {
     hoverItemIndex: null
   };
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
-  }
 
   componentWillReceiveProps (nextProps) {
     if (!nextProps.isOpen) {
@@ -85,7 +79,7 @@ class Menu extends React.Component {
 
   render () {
     const { isOpen, alignItems } = this.props;
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
