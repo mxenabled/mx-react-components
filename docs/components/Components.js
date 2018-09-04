@@ -98,10 +98,6 @@ class Components extends React.Component {
                   displayValue: 'Radio Button'
                 },
                 {
-                  value: 'raja-icon',
-                  displayValue: 'Raja Icon'
-                },
-                {
                   value: 'range-selector',
                   displayValue: 'Range Selector'
                 },
@@ -158,7 +154,6 @@ class Components extends React.Component {
           <div className='links'>
             <h3>General</h3>
             <Link to='/components/icon'>Icon</Link>
-            <Link to='/components/raja-icon'>Raja Icon</Link>
             <Link to='/components/loader'>Loader</Link>
             <Link to='/components/menu'>Menu</Link>
             <Link to='/components/message-box'>MessageBox</Link>

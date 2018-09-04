@@ -28,7 +28,6 @@ const PageIndicator = require('components/PageIndicatorDocs');
 const PaginationButtons = require('components/PaginationButtonsDocs');
 const ProgressBar = require('components/ProgressBarDocs');
 const RadioButton = require('components/RadioButtonDocs');
-const RajaIcon = require('components/RajaIconDocs');
 const RangeSelector = require('components/RangeSelectorDocs');
 const RowColumn = require('components/RowColumnDocs');
 const SearchInput = require('components/SearchInputDocs');
@@ -91,7 +90,6 @@ ReactDOM.render((
         <Route component={PaginationButtons} path='pagination-buttons' />
         <Route component={ProgressBar} path='progress-bar' />
         <Route component={RadioButton} path='radio-button' />
-        <Route component={RajaIcon} path='raja-icon' />
         <Route component={RangeSelector} path='range-selector' />
         <Route component={RowColumn} path='row-column' />
         <Route component={SearchInput} path='search-input' />
