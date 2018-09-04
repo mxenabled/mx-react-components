@@ -17,7 +17,6 @@ const MXFocusTrap = require('../components/MXFocusTrap');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class Drawer extends React.Component {
   static propTypes = {
@@ -30,7 +29,6 @@ class Drawer extends React.Component {
       large: PropTypes.number,
       medium: PropTypes.number
     }),
-    buttonPrimaryColor: PropTypes.string,
     closeButtonAriaLabel: PropTypes.string,
     closeOnScrimClick: PropTypes.bool,
     contentStyle: PropTypes.oneOfType([
@@ -50,11 +48,6 @@ class Drawer extends React.Component {
       PropTypes.object
     ]),
     maxWidth: PropTypes.number,
-    navConfig: PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      onNextClick: PropTypes.func.isRequired,
-      onPreviousClick: PropTypes.func.isRequired
-    }),
     onClose: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
     onOpen: PropTypes.func,
@@ -86,7 +79,7 @@ class Drawer extends React.Component {
   constructor (props) {
     super(props);
 
-    const theme = StyleUtils.mergeTheme(props.theme, props.buttonPrimaryColor);
+    const theme = StyleUtils.mergeTheme(props.theme);
     const breakPoints = props.breakPoints || theme.BreakPoints;
 
     this.state = { breakPoints, theme };
@@ -97,7 +90,6 @@ class Drawer extends React.Component {
   }
 
   componentDidMount () {
-    deprecatePrimaryColor(this.props, 'buttonPrimaryColor');
     this.open();
     window.addEventListener('resize', this._resizeThrottled);
 
@@ -215,32 +207,10 @@ class Drawer extends React.Component {
     this._animateComponent({ left: this._getAnimationDistance() }, { duration: 0 });
   };
 
-  _renderNav = (navConfig, styles, theme) => {
-    return (
-      <nav style={styles.nav}>
-        <Button
-          icon='caret-left'
-          onClick={navConfig.onPreviousClick}
-          theme={theme}
-          type='base'
-        />
-        <span style={styles.navLabel}>
-          {navConfig.label}
-        </span>
-        <Button
-          icon='caret-right'
-          onClick={navConfig.onNextClick}
-          theme={theme}
-          type='base'
-        />
-      </nav>
-    );
-  };
-
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { closeButtonAriaLabel, headerMenu, focusTrapProps, navConfig, portalTo } = this.props;
+    const { closeButtonAriaLabel, headerMenu, focusTrapProps, portalTo } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true,
@@ -250,20 +220,8 @@ class Drawer extends React.Component {
       ...focusTrapProps
     };
 
-    let menu = null;
+    const menu = typeof headerMenu === 'function' ? headerMenu(this._getExposedDrawerFunctions()) : headerMenu;
 
-    // If headerMenu is a function then we want to pass the Drawer's
-    // exposed functions to the call.
-    if (typeof headerMenu === 'function') {
-      menu = headerMenu(this._getExposedDrawerFunctions());
-    // If headerMenu is a normal node/element then use directly.
-    } else if (headerMenu) {
-      menu = headerMenu;
-    // If no headerMenu and navConfig passed then use Drawer's
-    // _renderNav function to generate the menu.
-    } else if (navConfig) {
-      menu = this._renderNav(navConfig, styles, theme);
-    }
     const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
@@ -403,16 +361,6 @@ class Drawer extends React.Component {
         textAlign: 'right',
         whiteSpace: 'nowrap',
         width: '25%'
-      },
-      navLabel: {
-        padding: '7px 14px',
-        position: 'relative',
-        bottom: 5,
-
-        '@media (max-width: 750px)': {
-          display: 'none',
-          padding: 0
-        }
       }
     }, this.props.styles);
   };

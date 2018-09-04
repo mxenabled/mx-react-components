@@ -12,7 +12,6 @@ const Row = require('../components/grid/Row');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { deprecatePrimaryColor } = require('../utils/Deprecation');
 
 class DisplayInput extends React.Component {
   static propTypes = {
@@ -24,7 +23,6 @@ class DisplayInput extends React.Component {
     label: PropTypes.string,
     labelStyle: PropTypes.object,
     placeholder: PropTypes.string,
-    primaryColor: PropTypes.string,
     showHint: PropTypes.bool,
     status: PropTypes.shape({
       type: PropTypes.string,
@@ -46,10 +44,6 @@ class DisplayInput extends React.Component {
   componentWillMount () {
     this._labelId = _uniqueId('DI');
     this._inputId = this.props.elementProps.id || _uniqueId('DI');
-  }
-
-  componentDidMount () {
-    deprecatePrimaryColor(this.props);
   }
 
   _isLargeOrMediumWindowSize = (theme) => {
@@ -75,7 +69,7 @@ class DisplayInput extends React.Component {
     const { disabled, onChange, ...rest } = this.props.elementProps;
 
     // Methods
-    const theme = StyleUtils.mergeTheme(this.props.theme, this.props.primaryColor);
+    const theme = StyleUtils.mergeTheme(this.props.theme);
     const hasChildren = !!this.props.children;
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const showHint = this.props.showHint && !this.props.status && isLargeOrMediumWindowSize;
