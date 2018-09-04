@@ -359,26 +359,6 @@ module.exports = {
       displayValue: 'Map'
     },
     {
-      value: 'md-cash',
-      displayValue: 'Cash (MD)'
-    },
-    {
-      value: 'md-check-mark',
-      displayValue: 'Check Mark (MD)'
-    },
-    {
-      value: 'md-credit',
-      displayValue: 'Credit (MD)'
-    },
-    {
-      value: 'md-debts',
-      displayValue: 'Debts (MD)'
-    },
-    {
-      value: 'md-savings',
-      displayValue: 'Savings (MD)'
-    },
-    {
       value: 'mobile-phone',
       displayValue: 'Mobile Phone'
     },
