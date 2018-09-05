@@ -31,3 +31,5 @@ dist
 
 # Webpack files
 demo/bundle.js
+
+.DS_Store
