@@ -123,7 +123,7 @@ class RowDocs extends React.Component {
         <p>This should be one or more {`
             <Column />
         `} nodes to be displayed.</p>
-/
+
         <h3>Example</h3>
         <Markdown>
           {`

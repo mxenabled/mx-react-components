@@ -54,7 +54,7 @@ class FileUploadDocs extends React.Component {
         <p>An array of file types and extensions allowed for upload.</p>
 
         <h5>elementRef <label>Function</label></h5>
-        <p>A callback function for getting the ref of the wrapping div of the FieUpload component.</p>
+        <p>A callback function for getting the ref of the wrapping div of the FileUpload component.</p>
 
         <h5>imageUrl <label>String</label></h5>
         <p>The URL that provides the path to an image to display for the uploaded file.</p>

@@ -71,7 +71,7 @@ class ButtonGroupDocs extends React.Component {
         <p>The <Code>aria-label</Code> attribute for each button is used for accessibility purposes but is not required.  See the <Link to='/components/button'>Button</Link> component documentation for more details.</p>
 
         <h5>icon <label>String</label></h5>
-        <p>The name of the <a href='/components/icon'>icon.</a></p>
+        <p>The name of the <a href='/components/icon'>icon</a>.</p>
 
         <h5>text <label>String</label></h5>
         <p>The text to be displayed in the button.</p>
