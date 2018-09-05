@@ -27,7 +27,7 @@ class ProgressBarDocs extends React.Component {
         <h3>Usage</h3>
         <h5>baseColor <label>String</label></h5>
         <p>Default: GRAY_300</p>
-        <p>An hex color string used to set the base of the bar.</p>
+        <p>A hex color string used to set the base of the bar.</p>
 
         <h5>children <label>Node</label></h5>
         <p>An element to be displayed in the progress bar.</p>

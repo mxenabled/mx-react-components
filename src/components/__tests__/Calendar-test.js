@@ -22,7 +22,7 @@ describe('Calendar', () => {
     wrapper = mount(
       <Calendar
         onDateSelect={mockCallback}
-        selectedDate={moment().unix()}
+        selectedDate={1533124800}
         theme={theme}
       />
     );

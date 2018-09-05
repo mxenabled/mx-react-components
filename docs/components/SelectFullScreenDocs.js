@@ -115,7 +115,7 @@ class SelectFullScreenDocs extends React.Component {
         <p>An object that represents the selected value. This is typically used to pass in a default selected value. The object must have the following key/value pairs: value: String/Number, displayValue: String.</p>
 
         <h5>selectedStyle <label>Object or Array</label></h5>
-        <p>A style object or Radium array that modifies the CSS styles of the selected valued.</p>
+        <p>A style object or Radium array that modifies the CSS styles of the selected value.</p>
 
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>

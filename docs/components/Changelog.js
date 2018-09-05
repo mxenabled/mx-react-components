@@ -29,7 +29,7 @@ class Changelog extends React.Component {
 
         <h3>5.2.26</h3>
         <ul>
-          <li>Fix Firefox/IE 11 but in Select introduced in 5.2.25 (<a href='https://github.com/mxenabled/mx-react-components/pull/794'>#794</a>)</li>
+          <li>Fix Firefox/IE 11 bug in Select introduced in 5.2.25 (<a href='https://github.com/mxenabled/mx-react-components/pull/794'>#794</a>)</li>
         </ul>
 
         <h3>5.2.25</h3>

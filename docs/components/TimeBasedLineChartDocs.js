@@ -69,7 +69,7 @@ class TimeBasedLineChartDocs extends React.Component {
         <p>Default: 'Today'</p>
         <p>The text to display in the breakpoint label. The label is displayed at the top of the chart above the breakpoint line.</p>
 
-        <h5>data <label>Arrray</label></h5>
+        <h5>data <label>Array</label></h5>
         <p><em>(required)</em> An array of data objects that are used to set the x axis, y axis, and line values. Example:</p>
         <Markdown lang='js'>
         {`

@@ -107,7 +107,7 @@ class GaugeDocs extends React.Component {
 
         <h5>numberOfSegments <label>Number</label></h5>
         <p>Default: 6</p>
-        <p>Number of segments or slices that you will have in your gauge</p>
+        <p>Number of segments or slices that you will have in your gauge.</p>
 
         <h5>opacity <label>Number</label></h5>
         <p>Default: 1</p>

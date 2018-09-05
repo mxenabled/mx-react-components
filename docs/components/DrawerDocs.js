@@ -129,7 +129,7 @@ class DrawerDocs extends React.Component {
 
         <h5>animateOnClose<label>bool</label></h5>
         <p>Default: true</p>
-        <p>If passsed as false, prevents the Drawer animation from running on close. Good for situations where you want to use the drawer's back button for something other than closing the Drawer.</p>
+        <p>If passed as false, prevents the Drawer animation from running on close. Good for situations where you want to use the drawer's back button for something other than closing the Drawer.</p>
 
         <h5>beforeClose <label>Function</label></h5>
         <p>A callback function that is called before the Drawer's close animation runs and the `onClose` prop is called.</p>
@@ -155,7 +155,7 @@ class DrawerDocs extends React.Component {
 
         <h5>closeOnScrimClick <label>Boolean</label></h5>
         <p>Default: true</p>
-        <p>To prevent the dDawer from closing if a user clicks on the screen outside of the Drawer, set this to <em>false</em>.</p>
+        <p>To prevent the Drawer from closing if a user clicks on the screen outside of the Drawer, set this to <em>false</em>.</p>
 
         <h5>contentStyle <label>Object or Array</label></h5>
         <p>Styles for the content inside the Drawer.</p>
@@ -174,7 +174,7 @@ class DrawerDocs extends React.Component {
 
         <h5>focusTrapProps<label>Object</label></h5>
         <p>Default: Empty Object</p>
-        <p>The Drawer component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the Drawer for accessibility reasons.</p>
+        <p>The Drawer component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabbing outside the Drawer for accessibility reasons.</p>
         <p>The focusTrapProps object provides a mechanism for passing the focus trap component props.</p>
         <p>See the library documentation for details on what props it accepts and how to use them.</p>
 
@@ -192,7 +192,7 @@ class DrawerDocs extends React.Component {
         <p>This is the maximum width of the Drawer component.</p>
 
         <h5>onClose<label>Function</label> Required</h5>
-        <p>This function will be called when a user clicks the close Drawer button.</p>
+        <p>This function will be called when a user clicks the close drawer button.</p>
 
         <h5>onKeyUp<label>Function</label></h5>
         <p>An event handler for the key up event of the Drawer. If no handler is passed then the Drawer will close when the esc key is pressed.</p>
@@ -209,7 +209,7 @@ class DrawerDocs extends React.Component {
 
         <h5>showCloseButton<label>Boolean</label></h5>
         <p>Default: true</p>
-        <p>To remove the close Drawer button in the top left corner, set this to <em>false</em>.</p>
+        <p>To remove the close drawer button in the top left corner, set this to <em>false</em>.</p>
 
         <h5>showScrim<label>Boolean</label></h5>
         <p>Default: true</p>
