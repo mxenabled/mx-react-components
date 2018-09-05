@@ -25,6 +25,7 @@ class Changelog extends React.Component {
           <li>Adds FocusTrap to export (<a href='https://github.com/mxenabled/mx-react-components/pull/793'>#793</a>)</li>
           <li>DateRangePicker - Fixes spacing (<a href='https://github.com/mxenabled/mx-react-components/pull/795'>#795</a>)</li>
           <li>Style - Updates shadows to the new spec (<a href='https://github.com/mxenabled/mx-react-components/pull/796'>#796</a>)</li>
+          <li>Docs - Fixed typos found in docs (<a href='https://github.com/mxenabled/mx-react-components/pull/798'>#798</a>)</li>
         </ul>
 
         <h3>5.2.26</h3>
