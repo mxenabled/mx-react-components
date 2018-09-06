@@ -16,7 +16,7 @@ class MessageBox extends React.Component {
     color: PropTypes.string,
     icon: PropTypes.string,
     isSmall: PropTypes.bool,
-    message: PropTypes.string,
+    message: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
     styles: PropTypes.object,
     theme: themeShape,
     title: PropTypes.string
