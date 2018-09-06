@@ -48,7 +48,7 @@ class MessageBoxDocs extends React.Component {
             <h5>isSmall<label>Boolean</label></h5>
             <p>If thisis set to 'true', then the button will center, and the message will take up the full width. Designed for smaller screen sizes.</p>
 
-            <h5>message<label>String</label></h5>
+            <h5>message<label>Node, String</label></h5>
             <p>The message to display in the MessageBox.</p>
 
             <h5>styles<label>Object</label></h5>
