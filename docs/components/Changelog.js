@@ -6,7 +6,12 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
-        <h2>MX React Components V 6.0.0</h2>
+        <h2>MX React Components V 6.0.1</h2>
+        <h3>6.0.1</h3>
+        <ul>
+          <li>MessageBox - updates prop type (<a href='https://github.com/mxenabled/mx-react-components/pull/799'>#799</a>)</li>
+        </ul>
+
         <h3>6.0.0</h3>
         <ul>
           <li>MessageBox - BREAKING CHANGES to update MessageBox component. Review the documentation (<a href='https://github.com/mxenabled/mx-react-components/pull/754'>#754</a>)</li>
