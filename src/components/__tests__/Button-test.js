@@ -17,8 +17,8 @@ describe('Button', () => {
     const withIcon = mount(<Button icon='add' />);
     const withoutIcon = mount(<Button />);
 
-    expect(withIcon.find(Icon)).toBePresent();
-    expect(withoutIcon.find(Icon)).toBeEmpty();
+    expect(withIcon.find(Icon)).toExist();
+    expect(withoutIcon.find(Icon)).not.toExist();
   });
 
   it('can support real button attributes', () => {
