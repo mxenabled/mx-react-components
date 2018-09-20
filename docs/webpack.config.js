@@ -1,30 +1,29 @@
-var path = require('path');
-var webpack = require('webpack');
+/* eslint-disable no-process-env */
+const path = require('path');
+const webpack = require('webpack');
 
-var isProd = (process.env.NODE_ENV === 'production');
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  devtool: !isProd && 'eval',
+  devtool: isProd ? 'hidden-source-map' : 'eval',
   entry: {
-    app: './app.js'
+    app: ['@babel/polyfill', './app.js']
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.js$/,
         include: /components/,
         exclude: /node_modules/,
         loader: 'eslint-loader'
-      }
-    ],
-    loaders: [
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['transform-object-assign', 'transform-class-properties']
+          presets: ['@babel/react', '@babel/env'],
+          plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-proposal-class-properties']
         }
       }
     ],
@@ -33,28 +32,6 @@ module.exports = {
   output: {
     filename: './bundle.js'
   },
-  plugins:function () {
-    var plugins = []
-
-    plugins.push(new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    }));
-
-    if (isProd) {
-      // Production specific plugins
-      plugins.push(new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        },
-        output: {
-          comments: false //Removes comments from minified files
-        },
-        sourceMap: false //Source maps are slow and unwanted
-      }));
-    }
-
-    return plugins;
-  }(),
   resolve: {
     alias: {
       components: path.join(__dirname, 'components'),
