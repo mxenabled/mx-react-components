@@ -10,7 +10,8 @@
     "dev": "npm install && npm upgrade && cd docs && npm install && npm upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
     "docs:release": "npm install && cd docs && npm instal && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
     "test": "jest && eslint src",
-    "watch": "jest --watch --coverage=false"
+    "watch": "jest --watch --coverage=false",
+    "eslint": "eslint src --fix"
   },
   "repository": {
     "type": "git",
@@ -60,7 +61,9 @@
     "es6-promise": "^4.2.4",
     "eslint": "^5.6.0",
     "eslint-config-mx": "^1.6.0",
+    "eslint-config-prettier": "^3.0.1",
     "eslint-loader": "^2.1.1",
+    "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-react": "^7.11.1",
     "exports-loader": "^0.7.0",
     "imports-loader": "^0.8.0",

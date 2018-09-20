@@ -280,7 +280,7 @@ class TimeBasedLineChart extends React.Component {
     }
 
     if (!_isEqual(newProps.theme, this.props.theme)) {
-      const theme = StyleUtils.mergeTheme(props.theme);
+      const theme = StyleUtils.mergeTheme(this.props.theme);
       const styles = styles(theme);
 
       this.setState({ styles, theme });
@@ -584,9 +584,9 @@ class TimeBasedLineChart extends React.Component {
                   data.filter((datum, index) => {
                     return index % Math.ceil(data.length / 10) === 0;
                   })
-                  .map(datum => {
-                    return moment.unix(datum.x).utc().unix();
-                  })
+                    .map(datum => {
+                      return moment.unix(datum.x).utc().unix();
+                    })
                 }
                 timeAxisFormat={rangeType === 'day' ? 'MMM D' : 'MMM'}
                 translation={this._getTimeAxisTranslation()}
@@ -666,10 +666,10 @@ class TimeBasedLineChart extends React.Component {
               {this._renderHoveredDataPointDetails()}
             </div>
           </div>
-         ) : (
-           zeroState && zeroState ||
-             <div style={this.state.styles.zeroState}>No Data Found</div>
-         )}
+        ) : (
+          zeroState && zeroState
+             || <div style={this.state.styles.zeroState}>No Data Found</div>
+        )}
       </div>
     );
   }

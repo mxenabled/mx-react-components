@@ -61,9 +61,9 @@ class SimpleSelect extends React.Component {
             style={styles.menu}
             useGlobalKeyHandler={true}
           >
-            {this.props.children ?
-              this.props.children :
-              (this.props.items.map((item, i) => {
+            {this.props.children
+              ? this.props.children
+              : (this.props.items.map((item, i) => {
                 const { icon, isSelected, onClick, text, ...rest } = item;
 
                 return (
@@ -91,7 +91,7 @@ class SimpleSelect extends React.Component {
                   </Option>
                 );
               })
-            )}
+              )}
           </Listbox>
           <div
             onClick={e => {

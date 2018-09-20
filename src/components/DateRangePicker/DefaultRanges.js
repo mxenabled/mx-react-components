@@ -16,10 +16,10 @@ class DefaultRanges extends React.Component {
       <div className='mx-default-ranges' role='' style={styles.rangeOptions}>
 
         {defaultRanges.map((range, index) => {
-          const isSelectedRange =
-            this.state.selectedOption === index &&
-            range.getStartDate() === selectedStartDate &&
-            range.getEndDate() === selectedEndDate;
+          const isSelectedRange
+            = this.state.selectedOption === index
+            && range.getStartDate() === selectedStartDate
+            && range.getEndDate() === selectedEndDate;
 
           return (
             <button

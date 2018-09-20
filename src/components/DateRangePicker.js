@@ -320,9 +320,9 @@ class DateRangePicker extends React.Component {
           aria-expanded={this.state.showSelectionPane}
           aria-haspopup='menu'
           aria-label={`${placeholderText}${
-            this.props.selectedStartDate && this.props.selectedEndDate ?
-            `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected` :
-            ''
+            this.props.selectedStartDate && this.props.selectedEndDate
+              ? `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected`
+              : ''
           }`}
           onClick={this._toggleSelectionPane}
           ref={this.props.elementRef}
@@ -439,8 +439,8 @@ class DateRangePicker extends React.Component {
                               activeSelectDate={this.state.activeSelectDate}
                               currentDate={this.state.currentDate}
                               focusedDay={
-                                this.state.focusedDay ||
-                                this.state.currentDate
+                                this.state.focusedDay
+                                || this.state.currentDate
                               }
                               getDateRangePosition={
                                 this._getDateRangePosition

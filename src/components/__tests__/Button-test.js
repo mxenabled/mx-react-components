@@ -42,11 +42,5 @@ describe('Button', () => {
 
       expect(button.html()).not.toContain('foo');
     });
-
-    it('should not pass down non element props being used elsewhere', () => {
-      const button = mount(<Button actionText='foo' />);
-
-      expect(button.html()).not.toContain('foo');
-    });
   });
 });

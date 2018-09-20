@@ -36,12 +36,12 @@ export const getNewDateStateChange = ({
     currentDate = day.unix();
   }
 
-  return day ?
-  {
-    focusedDay: day.unix(),
-    ...(currentDate ? { currentDate } : {})
-  } :
-    null;
+  return day
+    ? {
+      focusedDay: day.unix(),
+      ...(currentDate ? { currentDate } : {})
+    }
+    : null;
 };
 
 class Calendar extends React.Component {
@@ -68,8 +68,8 @@ class Calendar extends React.Component {
 
   componentWillReceiveProps (newProps) {
     if (
-      newProps.selectedDate &&
-      newProps.selectedDate !== this.props.selectedDate
+      newProps.selectedDate
+      && newProps.selectedDate !== this.props.selectedDate
     ) {
       this.setState({
         currentDate: newProps.selectedDate
@@ -180,18 +180,18 @@ class Calendar extends React.Component {
               'day'
             );
             const isToday = day.isSame(moment(), 'day');
-            const disabledDay = this.props.minimumDate ?
-              day.isBefore(moment.unix(this.props.minimumDate), 'day') :
-              null;
+            const disabledDay = this.props.minimumDate
+              ? day.isBefore(moment.unix(this.props.minimumDate), 'day')
+              : null;
 
             return (
               <a
                 aria-label={`${day.format('dddd, MMMM Do, YYYY')}${isSelectedDay ? ', Currently Selected' : ''}`}
                 className='calendar-day'
                 id={
-                  day.isSame(moment.unix(this.state.focusedDay), 'day') ?
-                    'focused-day' :
-                    null
+                  day.isSame(moment.unix(this.state.focusedDay), 'day')
+                    ? 'focused-day'
+                    : null
                 }
                 key={day.unix()}
                 onClick={e => {
@@ -209,9 +209,9 @@ class Calendar extends React.Component {
                   isSelectedDay && styles.selectedDay
                 )}
                 tabIndex={
-                  day.isSame(moment.unix(this.state.focusedDay), 'day') ?
-                    0 :
-                    null
+                  day.isSame(moment.unix(this.state.focusedDay), 'day')
+                    ? 0
+                    : null
                 }
               >
                 {day.date()}
