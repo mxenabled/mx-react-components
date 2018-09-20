@@ -7,11 +7,10 @@
     "build": "babel src --out-dir dist --ignore __tests__",
     "release": "npm install && npm run test && npm run build",
     "dev-release": "npm install && npm run build -- --watch",
-    "dev": "npm install && npm upgrade && cd docs && npm install && npm upgrade && open 'http://localhost:8080' && NODE_ENV=development webpack-dev-server --inline --hot --host 0.0.0.0",
-    "docs:release": "npm install && cd docs && npm instal && NODE_ENV=production webpack --progress && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
+    "dev": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development",
+    "docs:release": "NODE_ENV=production webpack --progress --mode='production' && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"../package.json\").version')\"",
     "test": "jest && eslint src",
-    "watch": "jest --watch --coverage=false",
-    "eslint": "eslint src --fix"
+    "watch": "jest --watch --coverage=false"
   },
   "repository": {
     "type": "git",
@@ -35,15 +34,18 @@
     "d3": "^3.5.6",
     "focus-trap-react": "^3.1.4",
     "glamor": "^2.20.40",
+    "highlight.js": "^9.2.0",
     "keycode": "^2.1.8",
     "lodash": "^4.17.11",
+    "marked": "^0.5.0",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.17",
     "numeral": "^1.5.3",
     "prop-types": "^15.5.8",
-    "radium": "^0.19.5",
+    "radium": "^0.19.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-router": "^3.0.0",
     "velocity-animate": "^1.5.2"
   },
   "devDependencies": {
@@ -51,6 +53,9 @@
     "@babel/core": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/plugin-transform-object-assign": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -68,7 +73,11 @@
     "exports-loader": "^0.7.0",
     "imports-loader": "^0.8.0",
     "jest": "^23.6.0",
-    "jest-enzyme": "^6.0.5"
+    "jest-enzyme": "^6.0.5",
+    "node-libs-browser": "^1.0.0",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
   },
   "jest": {
     "setupFiles": [
