@@ -1,7 +1,8 @@
 sudo: false
-language: node_js
-node_js:
-  - "6.0.1"
+image: node:6
+cache:
+  paths:
+    - node_modules/
 script:
   - npm ci
   - npm test
