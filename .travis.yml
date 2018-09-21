@@ -5,4 +5,4 @@ cache:
     - node_modules/
 script:
   - npm ci
-  - npm test
+  - npm run test
