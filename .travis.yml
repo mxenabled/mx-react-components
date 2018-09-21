@@ -1,8 +1,6 @@
+language: node_js
+node_js: "8.11"
 sudo: false
-image: node:8.11
-cache:
-  paths:
-    - node_modules/
 script:
   - npm ci
   - npm run test
