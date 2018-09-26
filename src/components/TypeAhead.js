@@ -38,8 +38,8 @@ class TypeAhead extends React.Component {
 
   _getFilteredItems = () => {
     return this.props.items.filter(item => {
-      return this.state.selectedItems.indexOf(item) === -1 &&
-             item.toLowerCase().indexOf(this.state.searchString.toLowerCase()) > -1;
+      return this.state.selectedItems.indexOf(item) === -1
+             && item.toLowerCase().indexOf(this.state.searchString.toLowerCase()) > -1;
     });
   };
 

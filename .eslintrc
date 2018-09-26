@@ -1,3 +1,20 @@
 {
-  "extends": "mx"
+  "extends": [
+    "mx",
+    "plugin:jest/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": [
+    "jest"
+  ],
+  "rules": {
+    "lines-around-comment": "off",
+    "max-nested-callbacks": 0,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }], // ignore variables that begin with _
+    "jsx-max-props-per-line": 0
+  },
+  "env": {
+    "jest/globals": true
+    }
 }
