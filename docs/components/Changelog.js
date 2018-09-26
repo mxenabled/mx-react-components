@@ -6,7 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
-        <h2>MX React Components V 6.0.1</h2>
+        <h2>MX React Components V 6.1.0</h2>
+
+        <h3>6.1.0</h3>
+        <ul>
+          <li>Update Babel and Webpack (<a href='https://github.com/mxenabled/mx-react-components/pull/801'>#801</a>)</li>
+        </ul>
+
         <h3>6.0.1</h3>
         <ul>
           <li>MessageBox - Updates prop type (<a href='https://github.com/mxenabled/mx-react-components/pull/799'>#799</a>)</li>
