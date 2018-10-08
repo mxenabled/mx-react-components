@@ -28,15 +28,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              plugins: [
-                '@babel/plugin-transform-modules-commonjs',
-                '@babel/plugin-transform-object-assign',
-                '@babel/plugin-proposal-object-rest-spread',
-                '@babel/plugin-proposal-class-properties'
-              ],
-              presets: ['@babel/env', '@babel/react']
-            }
           }
         ]
       }
