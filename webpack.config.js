@@ -44,7 +44,7 @@ module.exports = {
     noParse: [/autoit.js/]
   },
   output: {
-    filename: './docs/bundle.js'
+    filename: '../docs/bundle.js'
   },
   resolve: {
     alias: {
