@@ -1,6 +1,5 @@
 const PropTypes = require('prop-types');
-const React = require('react')
-const d3 = require('d3')
+const React = require('react');
 const _isEqual = require('lodash/isEqual');
 const _merge = require('lodash/merge');
 const _omit = require('lodash/omit');
@@ -36,7 +35,7 @@ class Bar extends React.Component {
 
       d3.select(this.bar)
         .attr('transform', transform)
-        .transition()
+      .transition()
         .duration(this.props.animationDuration)
         .attr('transform', 'scale(1)');
     }
@@ -52,11 +51,11 @@ class Bar extends React.Component {
 
       d3.select(this.bar)
         .transition()
-        .duration(100)
-        .attr('transform', transform)
+          .duration(100)
+          .attr('transform', transform)
         .transition()
-        .duration(100)
-        .attr('transform', 'scale(1)');
+          .duration(100)
+          .attr('transform', 'scale(1)');
     }
   }
 
@@ -71,34 +70,34 @@ class Bar extends React.Component {
 
   _drawPath = ({ x, y, width, height, value, radius }) => {
     if (value > 0 || (value === 0 && !this.props.hasNegative)) {
-      return 'M' + x + ',' + y
-         + 'h' + (width - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
-         + 'v' + (height - radius)
-         + 'h' + (-width)
-         + 'v' + (-height + radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
-         + 'Z';
+      return 'M' + x + ',' + y +
+         'h' + (width - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
+         'v' + (height - radius) +
+         'h' + (-width) +
+         'v' + (-height + radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
+         'Z';
     } else if (value < 0 || (value === 0 && !this.props.hasPositive)) {
-      return 'M' + x + ',' + y
-         + 'h' + width
-         + 'v' + (height - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
-         + 'h' + (radius * 2 - width)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
-         + 'v' + (radius - height)
-         + 'Z';
+      return 'M' + x + ',' + y +
+         'h' + width +
+         'v' + (height - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius +
+         'h' + (radius * 2 - width) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
+         'v' + (radius - height) +
+         'Z';
     } else {
-      return 'M' + x + ',' + y
-         + 'h' + (width - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
-         + 'v' + (height - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
-         + 'h' + (radius * 2 - width)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
-         + 'v' + (radius - height)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
-         + 'Z';
+      return 'M' + x + ',' + y +
+         'h' + (width - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius +
+         'v' + (height - radius) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius +
+         'h' + (radius * 2 - width) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius +
+         'v' + (radius - height) +
+         'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius +
+         'Z';
     }
   };
 

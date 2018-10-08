@@ -34,7 +34,7 @@ class ThemeContext extends React.Component {
   }
 }
 
-/**
+ /**
   * `withTheme` injects the `theme` from `ThemeProvider` as a prop into `Component`.
   *
   * `theme` can still be provided as a prop to the themed component to override the theme.

@@ -270,7 +270,7 @@ class RangeSelector extends React.Component {
             >
               Groups
             </div>
-          ) : null}
+            ) : null}
           <div
             className='mx-rangeselector-track-holder'
             onMouseDown={this._handleTrackMouseDown}

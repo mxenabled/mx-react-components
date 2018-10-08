@@ -32,10 +32,10 @@ class SearchInput extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    const searchIconProps
-      = { size: 20, style: styles.searchIcon };
-    const closeIconProps
-      = { size: 20, style: styles.closeIcon };
+    const searchIconProps =
+      { size: 20, style: styles.searchIcon };
+    const closeIconProps =
+      { size: 20, style: styles.closeIcon };
 
     return (
       <div className='mx-search-input' style={Object.assign({}, styles.component, this.props.style)}>

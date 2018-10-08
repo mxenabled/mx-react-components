@@ -302,7 +302,7 @@ class FileUpload extends React.Component {
                   this.state.failedValidationTypes.map(validationType => {
                     return (<div style={styles.invalidMessage}>{this._getDefaultValidationMessage(validationType)}</div>);
                   })
-                ) : null}
+              ) : null}
                 {this.props.children}
               </div>
             )}

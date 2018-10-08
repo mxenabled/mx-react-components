@@ -49,9 +49,9 @@ class MonthTable extends React.Component {
 
     while (moment(startDate).isBefore(endDate)) {
       const disabledDay = minimumDate && startDate.isBefore(moment.unix(minimumDate));
-      const isActiveRange = (selectedStartDate || selectedEndDate)
-        ? isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate)
-        : false;
+      const isActiveRange = (selectedStartDate || selectedEndDate) ?
+        isInActiveRange(selectedStartDate, selectedEndDate, activeSelectDate, startDate) :
+        false;
       const whereInRange = getDateRangePosition(selectedStartDate, selectedEndDate, activeSelectDate, startDate);
       const isSelectedStartDay = startDate.isSame(moment.unix(selectedStartDate), 'day');
       const isSelectedEndDay = startDate.isSame(moment.unix(selectedEndDate), 'day');

@@ -47,15 +47,15 @@ class MessageBox extends React.Component {
               <p style={styles.title}>
                 {this.props.title}
               </p>
-              { this.props.message
-                ? (<p style={styles.message}>
+              { this.props.message ?
+                (<p style={styles.message}>
                   {(this.props.message)}
-                </p>)
-                : null }
+                </p>) :
+              null }
             </section>
           </div>
-          {!_isNil(this.props.button)
-            && <div style={styles.button}>
+          {!_isNil(this.props.button) &&
+            <div style={styles.button}>
               {this.props.button}
             </div>
           }

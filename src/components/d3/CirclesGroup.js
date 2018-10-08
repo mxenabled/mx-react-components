@@ -1,6 +1,5 @@
-const PropTypes = require('prop-types')
-const React = require('react')
-const d3 = require('d3')
+const PropTypes = require('prop-types');
+const React = require('react');
 
 import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');

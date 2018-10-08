@@ -17,8 +17,8 @@ describe('Button', () => {
     const withIcon = mount(<Button icon='add' />);
     const withoutIcon = mount(<Button />);
 
-    expect(withIcon.find(Icon)).toExist();
-    expect(withoutIcon.find(Icon)).not.toExist();
+    expect(withIcon.find(Icon)).toBePresent();
+    expect(withoutIcon.find(Icon)).toBeEmpty();
   });
 
   it('can support real button attributes', () => {
@@ -39,6 +39,12 @@ describe('Button', () => {
   describe('non element props', () => {
     it('should not pass down non element props being used elsewhere', () => {
       const button = mount(<Button icon='foo' />);
+
+      expect(button.html()).not.toContain('foo');
+    });
+
+    it('should not pass down non element props being used elsewhere', () => {
+      const button = mount(<Button actionText='foo' />);
 
       expect(button.html()).not.toContain('foo');
     });

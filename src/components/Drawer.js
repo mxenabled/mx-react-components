@@ -151,9 +151,9 @@ class Drawer extends React.Component {
    */
   _getHeaderHeight = () => {
     return _get(this.props, ['headerStyle', 'height'],
-      _get(this.props,
-        ['styles', 'header', 'height'],
-        '50px'));
+                _get(this.props,
+                     ['styles', 'header', 'height'],
+                     '50px'));
   };
 
   /**
@@ -245,8 +245,8 @@ class Drawer extends React.Component {
             >
               <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
                 <span style={styles.backArrow}>
-                  {this.props.showCloseButton
-                    && <Button
+                  {this.props.showCloseButton &&
+                    <Button
                       aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
                       buttonRef={ref => (this._closeButton = ref)}
                       className='mx-drawer-close'
@@ -254,7 +254,7 @@ class Drawer extends React.Component {
                       onClick={this.close}
                       theme={theme}
                       type={'base'}
-                       />
+                    />
                   }
                 </span>
                 <h2 id={titleUniqueId} style={styles.title}>
@@ -270,7 +270,7 @@ class Drawer extends React.Component {
             </div>
           </div>
         </MXFocusTrap>
-      </StyleRoot>
+      </ StyleRoot>
     );
   }
 

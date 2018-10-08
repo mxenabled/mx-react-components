@@ -28,12 +28,12 @@ class TimeXAxisGroup extends React.Component {
 
   _renderAxis = () => {
     const timeAxisFunction = d3.svg.axis()
-      .scale(this.props.xScaleFunction())
-      .tickSize(this.props.tickSize, this.props.tickSize)
-      .tickValues(this.props.ticks)
-      .tickFormat(d => {
-        return moment.unix(d).format(this.props.timeAxisFormat);
-      });
+    .scale(this.props.xScaleFunction())
+    .tickSize(this.props.tickSize, this.props.tickSize)
+    .tickValues(this.props.ticks)
+    .tickFormat(d => {
+      return moment.unix(d).format(this.props.timeAxisFormat);
+    });
 
     d3.select(this.timeAxis).call(timeAxisFunction);
   };

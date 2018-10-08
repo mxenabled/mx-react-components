@@ -55,7 +55,7 @@ class HeaderMenu extends React.Component {
             styles={{ menu: { left: 65 } }}
             theme={theme}
           />
-        ) : null}
+         ) : null}
       </div>
     );
   }

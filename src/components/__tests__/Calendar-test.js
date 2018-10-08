@@ -31,11 +31,11 @@ describe('Calendar', () => {
 
   describe('rendering', () => {
     it('should mount and render 35 calendar days', () => {
-      expect(wrapper.find('.calendar-day')).toHaveLength(35);
+      expect(wrapper.find('.calendar-day').length).toBe(35);
     });
 
     it('should only render one focused day', () => {
-      expect(wrapper.find('#focused-day')).toHaveLength(1);
+      expect(wrapper.find('#focused-day').length).toBe(1);
     });
   });
 
