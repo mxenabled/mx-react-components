@@ -1,5 +1,6 @@
 /* eslint-disable no-process-env */
 const path = require('path');
+const webpack = require('webpack');
 
 const isProd = (process.env.NODE_ENV === 'production');
 
@@ -39,6 +40,9 @@ module.exports = {
   output: {
     filename: '../docs/bundle.js'
   },
+  plugins: [
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+  ],
   resolve: {
     alias: {
       components: path.join(__dirname, './docs/components'),
