@@ -1,6 +1,6 @@
 {
   "name": "mx-react-components",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
   "files": [
@@ -37,10 +37,8 @@
     "d3": "^3.5.6",
     "focus-trap-react": "^3.1.4",
     "glamor": "^2.20.40",
-    "highlight.js": "^9.2.0",
     "keycode": "^2.1.8",
     "lodash": "^4.17.11",
-    "marked": "^0.5.0",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.17",
     "numeral": "^1.5.3",
@@ -48,7 +46,6 @@
     "radium": "^0.19.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-router": "^3.0.0",
     "velocity-animate": "^1.5.2"
   },
   "devDependencies": {
@@ -64,23 +61,26 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
-    "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme": "^3.6.0",
     "es6-promise": "^4.2.4",
-    "eslint": "^5.6.0",
     "eslint-config-mx": "^1.6.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-react": "^7.11.1",
+    "eslint": "^5.6.0",
     "exports-loader": "^0.7.0",
+    "highlight.js": "^9.2.0",
     "imports-loader": "^0.8.0",
-    "jest": "^23.6.0",
     "jest-enzyme": "^6.0.5",
+    "jest": "^23.6.0",
+    "marked": "^0.5.0",
     "node-libs-browser": "^1.0.0",
-    "webpack": "^4.19.1",
+    "react-router": "^3.0.0",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
+    "webpack-dev-server": "^3.1.8",
+    "webpack": "^4.19.1"
   },
   "jest": {
     "globals": {
