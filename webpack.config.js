@@ -1,5 +1,8 @@
 /* eslint-disable no-process-env */
 const path = require('path');
+const webpack = require('webpack');
+
+const isProd = (process.env.NODE_ENV === 'production');
 
 module.exports = {
   devServer: {
@@ -10,9 +13,9 @@ module.exports = {
     port: 8080,
     progress: true
   },
-  devtool: 'eval',
+  devtool: !isProd && 'eval',
   entry: {
-    app: ['@babel/polyfill', './docs/app.js']
+    app: ['./docs/app.js']
   },
   module: {
     rules: [
@@ -28,15 +31,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              plugins: [
-                '@babel/plugin-transform-modules-commonjs',
-                '@babel/plugin-transform-object-assign',
-                '@babel/plugin-proposal-object-rest-spread',
-                '@babel/plugin-proposal-class-properties'
-              ],
-              presets: ['@babel/env', '@babel/react']
-            }
           }
         ]
       }
@@ -44,8 +38,11 @@ module.exports = {
     noParse: [/autoit.js/]
   },
   output: {
-    filename: './docs/bundle.js'
+    filename: '../docs/bundle.js'
   },
+  plugins: [
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+  ],
   resolve: {
     alias: {
       components: path.join(__dirname, './docs/components'),
