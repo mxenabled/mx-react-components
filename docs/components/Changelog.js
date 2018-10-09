@@ -8,6 +8,16 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
+          <h3>6.1.2</h3>
+          <ul>
+            <li>Move doc dependcies to dev (<a href='https://github.com/mxenabled/mx-react-components/pull/807'>#807</a>)</li>
+          </ul>
+
+          <h3>6.1.1</h3>
+          <ul>
+            <li>Fix doc releasing and bundle size (<a href='https://github.com/mxenabled/mx-react-components/pull/805'>#805</a>)</li>
+          </ul>
+
         <h3>6.1.0</h3>
         <ul>
           <li>Update Babel and Webpack (<a href='https://github.com/mxenabled/mx-react-components/pull/801'>#801</a>)</li>
