@@ -7,12 +7,13 @@
     "dist"
   ],
   "scripts": {
+    "bundlesize": "bundlesize",
     "build": "babel src --out-dir dist --ignore '**/**/__tests__'",
     "release": "npm install && npm run test && npm run build",
     "dev-release": "npm install && npm run build -- --watch",
     "dev": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development",
     "docs:release": "NODE_ENV=production webpack --progress --mode=production && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"./package.json\").version')\"",
-    "test": "jest && eslint src",
+    "test": "jest && eslint src && bundlesize",
     "watch": "jest --watch --coverage=false"
   },
   "repository": {
@@ -101,5 +102,12 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
-  }
+  },
+  "bundlesize": [{
+    "path": "dist/Index.js",
+    "maxSize": "875 b"
+  }, {
+    "path": "docs/bundle.js",
+    "maxSize": "572 kB"
+  }]
 }
