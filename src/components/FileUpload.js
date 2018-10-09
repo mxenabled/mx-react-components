@@ -37,7 +37,8 @@ class FileUpload extends React.Component {
   state = {
     dragging: false,
     imageSource: null,
-    failedValidationTypes: []
+    failedFile: null,
+    failedValidationTypes: [],
   };
 
   componentDidMount () {
@@ -136,6 +137,10 @@ class FileUpload extends React.Component {
         this._validateFile(result.file, result.width, result.height);
       });
     } else {
+      this.setState({
+        dragging: false,
+        imageSource: null,
+      })
       this._validateFile(file);
     }
   };
@@ -177,7 +182,9 @@ class FileUpload extends React.Component {
     this._input.value = null;
 
     this.setState({
-      imageSource: null
+      imageSource: null,
+      failedValidationTypes: [],
+      failedFile: null,
     });
     this.props.onFileRemove();
   };
@@ -225,6 +232,10 @@ class FileUpload extends React.Component {
     const isInvalidFileType = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(file.type) < 0;
     const isInvalidFileExtension = this.props.allowedFileTypes && this.props.allowedFileTypes.indexOf(fileExt) < 0;
 
+    this.setState({
+      failedFile: null,
+    })
+
     if (isTooBig) {
       failedValidationTypes.push('file_size');
     }
@@ -235,6 +246,12 @@ class FileUpload extends React.Component {
 
     if (failedValidationTypes.indexOf('file_type') < 0 && failedValidationTypes.indexOf('file_size') < 0) {
       failedValidationTypes = failedValidationTypes.concat(this._validateImageDimensions(width, height));
+    }
+
+    if (failedValidationTypes.length) {
+      this.setState({
+        failedFile: file,
+      })
     }
 
     if (this.props.onFileValidation && failedValidationTypes.length) {
@@ -254,8 +271,13 @@ class FileUpload extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    const dropzoneLoaded = this.props.imageUrl || this.props.uploadedFile;
+    const dropzoneLoaded = this.props.imageUrl || this.props.uploadedFile || this.state.failedFile;
     const imageSource = this.state.imageSource || this.props.imageUrl;
+    let failedDocument;
+
+    if (this.state.failedFile) {
+      failedDocument = !this.state.failedFile.type.includes('image')
+    }
 
     return (
       <div
@@ -270,22 +292,23 @@ class FileUpload extends React.Component {
         {dropzoneLoaded ? (
           <div style={styles.fileInfo}>
             {this.props.children}
-            {imageSource ? (
+            {(imageSource && !failedDocument) ? (
               <img src={imageSource} style={styles.previewImage} />
             ) : (
               <Icon size={60} style={styles.documentIcon} type='document' />
             )}
-            {this.props.uploadedFile ? (
+            {(this.props.uploadedFile || this.state.failedFile) ? (
               <div>
-                <div>{this.props.uploadedFile.name}</div>
-                <div>{numeral(this.props.uploadedFile.size / 1000).format('0.0')}k</div>
-                <Button
-                  icon='delete'
-                  onClick={this._removeFile}
-                  style={styles.button}
-                  theme={theme}
-                  type='secondary'
-                />
+                <div>{this.state.failedFile ? this.state.failedFile.name : this.props.uploadedFile.name}</div>
+                <div>{numeral((this.state.failedFile ? this.state.failedFile.size : this.props.uploadedFile.size) / 1000).format('0.0')}k</div>
+                {(!this.props.imageUrl || this.state.failedFile) && (
+                  <Button
+                    icon='delete'
+                    onClick={this._removeFile}
+                    style={styles.button}
+                    theme={theme}
+                    type='secondary'
+                  />)}
               </div>
             ) : null}
           </div>
@@ -361,7 +384,8 @@ class FileUpload extends React.Component {
         opacity: this.state.dragging ? 0.5 : 1
       },
       documentIcon: {
-        fill: theme.Colors.GRAY_500
+        fill: theme.Colors.GRAY_500,
+        margin: '10px 0',
       },
       button: {
         marginTop: 10
