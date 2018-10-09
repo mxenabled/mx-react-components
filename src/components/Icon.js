@@ -2,7 +2,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const _isEqual = require('lodash/isEqual');
 
-import getIconPath from '../constants/IconPaths'
+import { getIconPath } from '../constants/IconPaths'
 
 class Icon extends React.Component {
   static propTypes = {

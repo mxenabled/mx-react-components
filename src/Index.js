@@ -63,7 +63,7 @@ module.exports = {
 
   // App constants
   AppConstants: require('./constants/App'),
-  GetIconPathByType: require('./constants/IconPaths'),
+  IconPaths: require('./constants/IconPaths'),
   Styles: require('./constants/Style'),
 
   // App Utils

@@ -1746,4 +1746,6 @@ const getIconPath = (type, backgroundFillColor = 'transparent') => {
   return iconPaths[type]
 }
 
-module.exports = getIconPath
+module.exports = {
+  getIconPath
+}
