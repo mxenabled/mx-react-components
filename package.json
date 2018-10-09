@@ -12,10 +12,8 @@
     "dev-release": "npm install && npm run build -- --watch",
     "dev": "NODE_ENV=development webpack-dev-server --hot --inline --mode=development",
     "docs:release": "NODE_ENV=production webpack --progress --mode=production && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"./package.json\").version')\"",
-    "docs": "NODE_ENV=production webpack --progress --mode=production",
     "test": "jest && eslint src",
-    "watch": "jest --watch --coverage=false",
-    "profile": "webpack --profile --json > stats.json"
+    "watch": "jest --watch --coverage=false"
   },
   "repository": {
     "type": "git",
@@ -81,7 +79,6 @@
     "jest-enzyme": "^6.0.5",
     "node-libs-browser": "^1.0.0",
     "webpack": "^4.19.1",
-    "webpack-bundle-analyzer": "^3.0.2",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"
   },
