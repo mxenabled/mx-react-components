@@ -1,4 +1,4 @@
-import React from 'react'
+const React = require('react')
 
 const getIconPath = (type, backgroundFillColor = 'transparent') => {
   const iconPaths = {
@@ -1746,4 +1746,4 @@ const getIconPath = (type, backgroundFillColor = 'transparent') => {
   return iconPaths[type]
 }
 
-export default getIconPath
+module.exports = getIconPath
