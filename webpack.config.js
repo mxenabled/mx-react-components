@@ -1,6 +1,8 @@
 /* eslint-disable no-process-env */
 const path = require('path');
 
+const isProd = (process.env.NODE_ENV === 'production');
+
 module.exports = {
   devServer: {
     host: '0.0.0.0',
@@ -10,9 +12,9 @@ module.exports = {
     port: 8080,
     progress: true
   },
-  devtool: 'eval',
+  devtool: !isProd && 'eval',
   entry: {
-    app: ['@babel/polyfill', './docs/app.js']
+    app: ['./docs/app.js']
   },
   module: {
     rules: [
