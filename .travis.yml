@@ -8,5 +8,4 @@ script:
   - npm run docs:ci
   - npm run docs:audit
   - npm run docs:build
-  - npm run docs:bundlesize
   - npm run test
