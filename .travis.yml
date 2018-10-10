@@ -6,5 +6,4 @@ script:
   - npm audit
   - npm run docs:ci
   - npm run docs:audit
-  - npm run build
   - npm run test
