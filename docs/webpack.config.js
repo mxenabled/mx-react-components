@@ -13,7 +13,7 @@ module.exports = {
   },
   devtool: !isProd && 'eval',
   entry: {
-    app: ['./app.js']
+    app: './app.js'
   },
   module: {
     rules: [
@@ -44,14 +44,14 @@ module.exports = {
     ],
   },
   output: {
-    filename: './bundle.js'
+    filename: '../bundle.js'
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
   ],
   resolve: {
     alias: {
-      components: path.join(__dirname, './components'),
+      components: path.join(__dirname, 'components'),
       'mx-react-components': path.join(__dirname, '../src'),
       utils: path.join(__dirname, '../src/utils')
     }
