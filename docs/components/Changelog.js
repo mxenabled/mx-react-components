@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
+          <h3>6.1.3</h3>
+          <ul>
+            <li>Split doc and dist package.json (<a href='https://github.com/mxenabled/mx-react-components/pull/812'>#812</a>)</li>
+          </ul>
+
           <h3>6.1.2</h3>
           <ul>
             <li>Move doc dependcies to dev (<a href='https://github.com/mxenabled/mx-react-components/pull/807'>#807</a>)</li>

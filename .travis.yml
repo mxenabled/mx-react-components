@@ -4,4 +4,7 @@ sudo: false
 script:
   - npm ci
   - npm audit
+  - npm run docs:ci
+  - npm run docs:audit
+  - npm run docs:bundlesize
   - npm run test
