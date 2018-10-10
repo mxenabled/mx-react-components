@@ -8,9 +8,10 @@
   ],
   "scripts": {
     "build": "babel src --out-dir dist --ignore '**/**/__tests__'",
+    "bundlesize": "bundlesize",
     "release": "npm install && npm run test && npm run build",
     "dev-release": "npm install && npm run build -- --watch",
-    "test": "jest && eslint src",
+    "test": "jest && eslint src && bundlesize",
     "watch": "jest --watch --coverage=false"
   },
   "repository": {
@@ -92,8 +93,8 @@
   "bundlesize": [
     {
       "compression": "none",
-      "path": "docs/bundle.js",
-      "maxSize": "2.28MB"
+      "path": "dist/Index.js",
+      "maxSize": "3.32 kB"
     }
   ]
 }
