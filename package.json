@@ -3,19 +3,18 @@
   "version": "6.1.2",
   "description": "A collection of generic React UI components",
   "main": "dist/Index.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "audit": "npm audit && cd docs && npm audit",
     "build": "babel src --out-dir dist --ignore '**/**/__tests__'",
+    "build:docs": "cd docs && NODE_ENV=production webpack --progress --mode=production",
     "ci": "npm ci && cd docs && npm ci",
     "release": "npm install && npm run test && npm run build",
     "dev-release": "npm install && npm run build -- --watch",
     "dev": "cd docs && NODE_ENV=development webpack-dev-server --mode=development",
-    "docs:release": "NODE_ENV=production webpack --progress --mode=production && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"./package.json\").version')\"",
+    "docs:release": "build:docs && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"./package.json\").version')\"",
     "docs": "cd docs && NODE_ENV=production webpack --progress --mode=production",
-    "test": "jest && eslint src",
+    "test": "jest && eslint src &&  && bundlesize",
     "watch": "jest --watch --coverage=false"
   },
   "repository": {
@@ -96,5 +95,12 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
-  }
+  },
+  "bundlesize": [{
+    "path": "dist/Index.js",
+    "maxSize": "875 b"
+  }, {
+    "path": "docs/bundle.js",
+    "maxSize": "572 kB"
+  }]
 }
