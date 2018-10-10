@@ -29,7 +29,4 @@ node_modules
 # NPM Release Files
 dist
 
-# Webpack files
-demo/bundle.js
-
 .DS_Store

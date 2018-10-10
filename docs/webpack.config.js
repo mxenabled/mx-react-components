@@ -11,7 +11,7 @@ module.exports = {
     port: 8080,
     progress: true
   },
-  devtool: !isProd && 'eval',
+  devtool: !isProd && 'eval-source-map',
   entry: {
     app: './app.js'
   },

@@ -103,12 +103,9 @@
   },
   "bundlesize": [
     {
-      "path": "dist/Index.js",
-      "maxSize": "875 b"
-    },
-    {
+      "compression": "none",
       "path": "docs/bundle.js",
-      "maxSize": "572 kB"
+      "maxSize": "2.28MB"
     }
   ]
 }
