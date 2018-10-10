@@ -4,8 +4,7 @@ sudo: false
 script:
   - npm ci
   - npm audit
-  - npm run build
   - npm run docs:ci
   - npm run docs:audit
-  - npm run docs:build
+  - npm run build
   - npm run test
