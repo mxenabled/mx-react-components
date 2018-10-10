@@ -15,7 +15,7 @@
     "docs:build": "cd docs && NODE_ENV=production webpack --progress --mode=production",
     "docs:bundlesize": "bundlesize",
     "docs:ci": "cd docs && npm ci",
-    "docs:release": "docs:build && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"./package.json\").version')\"",
+    "docs:release": "cd docs && NODE_ENV=production webpack --progress --mode=production && git add -A && git commit -m \"Docs Version: $(node -p 'require(\"./package.json\").version')\"",
     "test": "jest && eslint src",
     "watch": "jest --watch --coverage=false"
   },
