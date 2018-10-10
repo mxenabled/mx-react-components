@@ -2,6 +2,6 @@ language: node_js
 node_js: "8.12"
 sudo: false
 script:
-  - npm ci
-  - npm audit
+  - npm run ci
+  - npm run audit
   - npm run test
