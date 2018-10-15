@@ -1,11 +1,7 @@
 {
   "name": "mx-react-components",
-  "version": "6.1.3",
+  "version": "6.1.3-release",
   "description": "A collection of generic React UI components",
-  "main": "dist/Index.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "babel src --out-dir dist --ignore '**/**/__tests__'",
     "bundlesize": "bundlesize",
