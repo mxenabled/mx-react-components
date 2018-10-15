@@ -7,14 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 6.1.0</h2>
-        <h3>6.1.1</h3>
-        <ul>
-          <li>Remove use of `useGlobalKeyHandler = true` in `SimpleSelect` and `Select`. (<a href='https://github.com/mxenabled/mx-react-components/pull/802/files'>#802</a>)</li>
-        </ul>
-
           <h3>6.1.3</h3>
           <ul>
             <li>Split doc and dist package.json (<a href='https://github.com/mxenabled/mx-react-components/pull/812'>#812</a>)</li>
+            <li>Export svg paths used in the Icon component for external use. (<a href='https://github.com/mxenabled/mx-react-components/pull/809'>#809</a>)</li>
+            <li>Remove use of `useGlobalKeyHandler = true` in `SimpleSelect` and `Select`. (<a href='https://github.com/mxenabled/mx-react-components/pull/802'>#802</a>)</li>
           </ul>
 
           <h3>6.1.2</h3>
