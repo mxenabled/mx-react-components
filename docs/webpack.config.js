@@ -7,15 +7,13 @@ const isProd = (process.env.NODE_ENV === 'production');
 module.exports = {
   devServer: {
     host: '0.0.0.0',
-    hot: true,
-    inline: true,
     open: true,
     port: 8080,
     progress: true
   },
-  devtool: !isProd && 'eval',
+  devtool: !isProd && 'eval-source-map',
   entry: {
-    app: ['./docs/app.js']
+    app: './app.js'
   },
   module: {
     rules: [
@@ -31,23 +29,32 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
+            options: {
+              plugins: [
+                '@babel/plugin-transform-modules-commonjs',
+                '@babel/plugin-transform-object-assign',
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/plugin-proposal-class-properties'
+              ],
+              presets: ['@babel/env', '@babel/react'],
+            }
           }
         ]
       }
     ],
-    noParse: [/autoit.js/]
   },
   output: {
-    filename: '../docs/bundle.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname)
   },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
   ],
   resolve: {
     alias: {
-      components: path.join(__dirname, './docs/components'),
-      'mx-react-components': path.join(__dirname, './src'),
-      utils: path.join(__dirname, './src/utils')
+      components: path.join(__dirname, './components'),
+      'mx-react-components': path.join(__dirname, '../src'),
+      utils: path.join(__dirname, '../src/utils')
     }
   }
 };

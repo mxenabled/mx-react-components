@@ -12,6 +12,11 @@ class Changelog extends React.Component {
           <li>Remove use of `useGlobalKeyHandler = true` in `SimpleSelect` and `Select`. (<a href='https://github.com/mxenabled/mx-react-components/pull/802/files'>#802</a>)</li>
         </ul>
 
+          <h3>6.1.3</h3>
+          <ul>
+            <li>Split doc and dist package.json (<a href='https://github.com/mxenabled/mx-react-components/pull/812'>#812</a>)</li>
+          </ul>
+
           <h3>6.1.2</h3>
           <ul>
             <li>Move doc dependcies to dev (<a href='https://github.com/mxenabled/mx-react-components/pull/807'>#807</a>)</li>
