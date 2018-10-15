@@ -15,6 +15,7 @@
     "url": "https://github.com/moneydesktop/mx-react-components"
   },
   "main": "dist/Index.js",
+  "files": ["dist"],
   "keywords": [
     "react",
     "components",
