@@ -8,9 +8,9 @@ const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
 const Velocity = require('velocity-animate');
-const { StyleRoot } = require('radium');
 
 import { withTheme } from './Theme';
+const { css } = require('glamor');
 const Button = require('../components/Button');
 const MXFocusTrap = require('../components/MXFocusTrap');
 
@@ -225,52 +225,50 @@ class Drawer extends React.Component {
     const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
-      <StyleRoot>
-        <MXFocusTrap {...mergedFocusTrapProps}>
-          <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
-            <div
-              className='mx-drawer-scrim'
-              onClick={() => {
-                if (this.props.closeOnScrimClick) this.close();
-              }}
-              style={styles.scrim}
-            />
-            <div
-              aria-describedby={this.props['aria-describedby']}
-              aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
-              ref={(ref) => (this._component = ref)}
-              role={this.props.role}
-              style={{ ...styles.component, ...this.props.style }}
-              tabIndex={0}
-            >
-              <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
-                <span style={styles.backArrow}>
-                  {this.props.showCloseButton
-                    && <Button
-                      aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
-                      buttonRef={ref => (this._closeButton = ref)}
-                      className='mx-drawer-close'
-                      icon='go-back'
-                      onClick={this.close}
-                      theme={theme}
-                      type={'base'}
-                       />
-                  }
-                </span>
-                <h2 id={titleUniqueId} style={styles.title}>
-                  {this.props.title}
-                </h2>
-                <div className='mx-drawer-header-menu' style={styles.headerMenu}>
-                  {menu}
-                </div>
-              </header>
-              <div className='mx-drawer-content' style={{ ...styles.content, ...this.props.contentStyle }}>
-                {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
+      <MXFocusTrap {...mergedFocusTrapProps}>
+        <div className={`mx-drawer ${css(styles.component)}`} onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp}>
+          <div
+            className='mx-drawer-scrim'
+            onClick={() => {
+              if (this.props.closeOnScrimClick) this.close();
+            }}
+            style={styles.scrim}
+          />
+          <div
+            aria-describedby={this.props['aria-describedby']}
+            aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
+            className={css({ ...styles.component, ...this.props.style })}
+            ref={(ref) => (this._component = ref)}
+            role={this.props.role}
+            tabIndex={0}
+          >
+            <header className={`mx-drawer-header ${css({ ...styles.header, ...this.props.headerStyle })}`}>
+              <span style={styles.backArrow}>
+                {this.props.showCloseButton
+                  && <Button
+                    aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
+                    buttonRef={ref => (this._closeButton = ref)}
+                    className='mx-drawer-close'
+                    icon='go-back'
+                    onClick={this.close}
+                    theme={theme}
+                    type={'base'}
+                     />
+                }
+              </span>
+              <h2 id={titleUniqueId} style={styles.title}>
+                {this.props.title}
+              </h2>
+              <div className='mx-drawer-header-menu' style={styles.headerMenu}>
+                {menu}
               </div>
+            </header>
+            <div className='mx-drawer-content' style={{ ...styles.content, ...this.props.contentStyle }}>
+              {typeof this.props.children === 'function' ? this.props.children(this._getExposedDrawerFunctions()) : this.props.children}
             </div>
           </div>
-        </MXFocusTrap>
-      </StyleRoot>
+        </div>
+      </MXFocusTrap>
     );
   }
 
