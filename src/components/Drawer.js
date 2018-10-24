@@ -226,7 +226,7 @@ class Drawer extends React.Component {
 
     return (
       <MXFocusTrap {...mergedFocusTrapProps}>
-        <div className={`mx-drawer ${css(styles.componentMediaQueries)}`} onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.component}>
+        <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
           <div
             className='mx-drawer-scrim'
             onClick={() => {
