@@ -226,7 +226,7 @@ class Drawer extends React.Component {
 
     return (
       <MXFocusTrap {...mergedFocusTrapProps}>
-        <div className={`mx-drawer ${css(styles.component)}`} onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp}>
+        <div className={`mx-drawer ${css(styles.componentMediaQueries)}`} onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.component}>
           <div
             className='mx-drawer-scrim'
             onClick={() => {
@@ -237,12 +237,13 @@ class Drawer extends React.Component {
           <div
             aria-describedby={this.props['aria-describedby']}
             aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
-            className={css({ ...styles.component, ...this.props.style })}
+            className={css(styles.componentMediaQueries)}
             ref={(ref) => (this._component = ref)}
             role={this.props.role}
+            style={{...styles.component, ...this.props.style}}
             tabIndex={0}
           >
-            <header className={`mx-drawer-header ${css({ ...styles.header, ...this.props.headerStyle })}`}>
+            <header className={`mx-drawer-header ${css(styles.headerMediaQueries)}`} style={{...styles.header, ...this.props.headerStyle}}>
               <span style={styles.backArrow}>
                 {this.props.showCloseButton
                   && <Button
@@ -287,7 +288,8 @@ class Drawer extends React.Component {
         width: '80%',
         backgroundColor: theme.Colors.GRAY_100,
         boxShadow: theme.ShadowHigh,
-
+      },
+      componentMediaQueries: {
         [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
           width: '100%'
         },
@@ -338,6 +340,8 @@ class Drawer extends React.Component {
         position: 'relative',
         height: HEADER_HEIGHT,
         boxSizing: 'border-box',
+      },
+      headerMediaQueries: {
         [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
           padding: '0 10px'
         }
