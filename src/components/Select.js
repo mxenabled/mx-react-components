@@ -243,7 +243,7 @@ class Select extends React.Component {
           position: 'relative',
           boxSizing: 'border-box',
           ':focus': {
-            outline: 'dotted thin #333',
+            outline: 'dotted thin ' + theme.Colors.GRAY_900,
             outlineOffset: '1px'
           }
         }, this.props.dropdownStyle),
