@@ -5,6 +5,7 @@ const Radium = require('radium');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+import { css } from 'glamor'
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const { Listbox, Option } = require('./accessibility/Listbox');
@@ -191,6 +192,7 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
+          className={css(styles.component)}
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
           ref={ref => {
@@ -198,7 +200,6 @@ class Select extends React.Component {
             if (typeof this.props.elementRef === 'function') this.props.elementRef(ref);
           }}
           role='button'
-          style={styles.component}
           tabIndex={0}
         >
           {this._renderScrim(styles)}
@@ -240,7 +241,11 @@ class Select extends React.Component {
           fontSize: theme.FontSizes.MEDIUM,
           padding: '8px 10px',
           position: 'relative',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          ':focus': {
+            outline: 'dotted thin #333',
+            outlineOffset: '1px'
+          }
         }, this.props.dropdownStyle),
       select: {
         position: 'absolute',
