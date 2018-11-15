@@ -59,7 +59,6 @@ class SimpleSelect extends React.Component {
           <Listbox
             aria-label={this.props['aria-label']}
             style={styles.menu}
-            useGlobalKeyHandler={true}
           >
             {this.props.children
               ? this.props.children

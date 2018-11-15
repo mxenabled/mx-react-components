@@ -147,7 +147,6 @@ class Select extends React.Component {
             className='mx-select-options'
             ref={(ref) => this.optionList = ref}
             style={styles.options}
-            useGlobalKeyHandler={true}
           >
             {this.props.options.map(option => {
               return (
