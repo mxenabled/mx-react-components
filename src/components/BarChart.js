@@ -70,35 +70,49 @@ class Bar extends React.Component {
   };
 
   _drawPath = ({ x, y, width, height, value, radius }) => {
-    if (value > 0 || (value === 0 && !this.props.hasNegative)) {
-      return 'M' + x + ',' + y
-         + 'h' + (width - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
-         + 'v' + (height - radius)
-         + 'h' + (-width)
-         + 'v' + (-height + radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
-         + 'Z';
-    } else if (value < 0 || (value === 0 && !this.props.hasPositive)) {
-      return 'M' + x + ',' + y
-         + 'h' + width
-         + 'v' + (height - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
-         + 'h' + (radius * 2 - width)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
-         + 'v' + (radius - height)
-         + 'Z';
+    const { direction } = this.props
+
+    if (direction === 'horizontal') {
+      console.log(x, y, width, height, value, radius)
+        return 'M' + x + ',' + y
+           + 'h' + (width - radius)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
+           + 'v' + (height - radius * 2)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
+           + 'h' + (-width + radius)
+           + 'v' + (-height)
+           + 'Z';
     } else {
-      return 'M' + x + ',' + y
-         + 'h' + (width - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
-         + 'v' + (height - radius)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
-         + 'h' + (radius * 2 - width)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
-         + 'v' + (radius - height)
-         + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
-         + 'Z';
+      if (value > 0 || (value === 0 && !this.props.hasNegative)) {
+        return 'M' + x + ',' + y
+           + 'h' + (width - radius)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
+           + 'v' + (height - radius)
+           + 'h' + (-width)
+           + 'v' + (-height + radius)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
+           + 'Z';
+      } else if (value < 0 || (value === 0 && !this.props.hasPositive)) {
+        return 'M' + x + ',' + y
+           + 'h' + width
+           + 'v' + (height - radius)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
+           + 'h' + (radius * 2 - width)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
+           + 'v' + (radius - height)
+           + 'Z';
+      } else {
+        return 'M' + x + ',' + y
+           + 'h' + (width - radius)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
+           + 'v' + (height - radius)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
+           + 'h' + (radius * 2 - width)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
+           + 'v' + (radius - height)
+           + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
+           + 'Z';
+      }
     }
   };
 
@@ -156,6 +170,7 @@ class BarChart extends React.Component {
     onClick: PropTypes.func,
     onHover: PropTypes.func,
     showTooltips: PropTypes.bool,
+    showBarLabels: PropTypes.bool,
     style: PropTypes.object,
     theme: themeShape,
     threshold: PropTypes.number,
@@ -181,7 +196,8 @@ class BarChart extends React.Component {
     style: {},
     tooltipFormat: (val) => val,
     width: 500,
-    showTooltips: true
+    showBarLabels: false,
+    showTooltips: true,
   };
 
   state = {
@@ -322,37 +338,123 @@ class BarChart extends React.Component {
     }
   };
 
+  _getDomains = data => {
+    const { direction } = this.props
+    const { hasNegative, hasPositive } = this.state;
+    let xDomain
+    let yDomain
+
+    if (direction === 'horizontal') {
+      xDomain = [0, Math.max.apply(null, data)]
+      yDomain = this.props.data.map(d => d.label)
+    } else {
+      if (hasNegative && hasPositive) {
+        yDomain = [Math.min.apply(null, data), Math.max.apply(null, data)];
+      } else if (hasNegative && !hasPositive) {
+        yDomain = [Math.min.apply(null, data), 0];
+      } else {
+        yDomain = [0, Math.max.apply(null, data)];
+      }
+
+      xDomain = this.props.data.map(d => {
+        return d.label;
+      });
+    }
+
+    return { xDomain, yDomain }
+  }
+
+  _getAxisFunctions = (xDomain, yDomain) => {
+    const { direction } = this.props
+    const { height, margin, width } = this.props;
+    const widthMargin = width - margin.left - margin.right;
+    const heightMargin = height - margin.top - margin.bottom;
+    let xFunc
+    let yFunc
+
+    if (direction === 'horizontal') {
+      xFunc = d3.scale.linear()
+        .range([0, widthMargin])
+        .domain(xDomain)
+
+      yFunc = d3.scale.ordinal()
+        .rangeRoundBands([heightMargin, 0], 0.2)
+        .domain(yDomain)
+    } else {
+      yFunc = d3.scale.linear()
+        .domain(yDomain)
+        .range([heightMargin, 0]);
+
+      xFunc = d3.scale.ordinal()
+        .domain(xDomain)
+        .rangeRoundBands([0, widthMargin], 0.2);
+    }
+
+    return { xFunc, yFunc }
+  }
+
+  _getBarDimensions = (d, xFunc, yFunc) => {
+    const { direction, height, margin, width } = this.props;
+    const { hasNegative } = this.state
+    const positive = (d.value > 0)
+    const heightMargin = height - margin.top - margin.bottom;
+    let h
+    let w
+    let x
+    let y
+
+    if (direction === 'horizontal') {
+      x = 0
+      y = yFunc(d.label)
+      w = xFunc(d.value)
+      h = yFunc.rangeBand()
+    } else {
+      x = xFunc(d.label);
+      y = positive ? yFunc(d.value) : yFunc(0);
+      w = xFunc.rangeBand();
+      const baseHeight = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
+
+      h = this._getHeight(baseHeight);
+    }
+
+    return { h, w, x, y }
+  }
+
+  _getLabelPosition = (d, xFunc, yFunc) => {
+    const { direction } = this.props
+
+    let labelX
+    let labelY
+
+    if (direction === 'horizontal') {
+      labelX = xFunc(d.value) + 5
+      labelY = yFunc(d.label) + yFunc.rangeBand() / 2 + 4
+    } else {
+      labelX = xFunc(d.label) + xFunc.rangeBand() / 2
+      labelY = yFunc(d.value) - 5
+    //   .attr("x", (function(d) { return xScale(d.food) + xScale.rangeBand() / 2 ; }  ))
+    // .attr("y", function(d) { return yScale(d.quantity) + 1; })
+    }
+
+    return {
+      labelX,
+      labelY
+    }
+  }
+
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = _merge({}, this.styles(theme), this.props.style);
-    const { height, margin, width } = this.props;
+    const { direction, height, margin, width } = this.props;
     const widthMargin = width - margin.left - margin.right;
     const heightMargin = height - margin.top - margin.bottom;
     const { hasNegative, hasPositive } = this.state;
     const data = this.props.data.reduce((acc, d) => {
       return acc.concat(d.value);
     }, []);
-    let yDomain;
 
-    if (hasNegative && hasPositive) {
-      yDomain = [Math.min.apply(null, data), Math.max.apply(null, data)];
-    } else if (hasNegative && !hasPositive) {
-      yDomain = [Math.min.apply(null, data), 0];
-    } else {
-      yDomain = [0, Math.max.apply(null, data)];
-    }
-
-    const xDomain = this.props.data.map(d => {
-      return d.label;
-    });
-
-    const yFunc = d3.scale.linear()
-      .domain(yDomain)
-      .range([heightMargin, 0]);
-
-    const xFunc = d3.scale.ordinal()
-      .domain(xDomain)
-      .rangeRoundBands([0, widthMargin], 0.2);
+    const { xDomain, yDomain } = this._getDomains(data)
+    const { xFunc, yFunc } = this._getAxisFunctions(xDomain, yDomain)
 
     return (
       <div className='mx-bar-chart' style={Object.assign({}, styles.component, this.props.style)}>
@@ -367,13 +469,11 @@ class BarChart extends React.Component {
               if (d.value === 0 && !this.props.minBarHeight) {
                 return null;
               }
+              const { h, x, y, w } = this._getBarDimensions(d, xFunc, yFunc)
+              const { labelX, labelY } = this._getLabelPosition(d, xFunc, yFunc)
 
               const positive = (d.value > 0);
-              const x = xFunc(d.label);
-              const y = positive ? yFunc(d.value) : yFunc(0);
-              const w = xFunc.rangeBand();
               const baseHeight = hasNegative ? Math.abs(yFunc(d.value) - yFunc(0)) : heightMargin - yFunc(d.value);
-              const h = this._getHeight(baseHeight);
               const r = this._getRadius(d);
               const key = d.label + d.value;
               const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
@@ -389,27 +489,34 @@ class BarChart extends React.Component {
                 style = baseStyle;
               }
 
+
               return (
-                <Bar
-                  animateOnHover={this.props.animateOnHover}
-                  animationDuration={700}
-                  clicked={clicked}
-                  hasNegative={hasNegative}
-                  hasPositive={hasPositive}
-                  height={h}
-                  hovering={hovering}
-                  key={key}
-                  minBarHeight={this.props.minBarHeight}
-                  onClick={this._handleOnClick.bind(null, d)}
-                  onMouseOut={this._handleMouseOut}
-                  onMouseOver={this._handleMouseOver.bind(null, x, y, w, h, d)}
-                  radius={r}
-                  style={style}
-                  value={d.value}
-                  width={w}
-                  x={x}
-                  y={y}
-                />
+                <g>
+                  <Bar
+                    animateOnHover={this.props.animateOnHover}
+                    animationDuration={700}
+                    clicked={clicked}
+                    direction={direction}
+                    hasNegative={hasNegative}
+                    hasPositive={hasPositive}
+                    height={h}
+                    hovering={hovering}
+                    key={key}
+                    minBarHeight={this.props.minBarHeight}
+                    onClick={this._handleOnClick.bind(null, d)}
+                    onMouseOut={this._handleMouseOut}
+                    onMouseOver={this._handleMouseOver.bind(null, x, y, w, h, d)}
+                    radius={r}
+                    style={style}
+                    value={d.value}
+                    width={w}
+                    x={x}
+                    y={y}
+                  />
+                  {this.props.showBarLabels ? (
+                    <text style={styles.barLabel} x={labelX} y={labelY}>{d.label}</text>
+                  ) : null}
+                </g>
               );
             })}
           </g>
@@ -473,6 +580,11 @@ class BarChart extends React.Component {
         stroke: theme.Colors.GRAY_500,
         strokeDasharray: '4,4',
         strokeWidth: 1
+      },
+      barLabel: {
+        textAnchor: this.props.direction === 'horizontal' ? 'start' : 'middle',
+        color: theme.Colors.GRAY_700,
+        fontSize: theme.FontSizes.MEDIUM,
       }
     };
   };
