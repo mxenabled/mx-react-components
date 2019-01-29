@@ -37,7 +37,9 @@ class DonutChart extends React.Component {
     padAngle: PropTypes.number,
     showBaseArc: PropTypes.bool,
     showDataLabel: PropTypes.bool,
+    toggleDataLabelOnHover: PropTypes.bool,
     theme: themeShape,
+
     width: PropTypes.number
   };
 
@@ -62,6 +64,7 @@ class DonutChart extends React.Component {
     padAngle: 0.02,
     showBaseArc: true,
     showDataLabel: true,
+    toggleDataLabelOnHover: true,
     width: 150
   };
 
@@ -323,9 +326,10 @@ class DonutChart extends React.Component {
       } else {
         const activeDataSet = this.props.data[this.state.activeIndex] || {};
         const color = this.state.activeIndex === -1 ? colors[0] : colors[this.state.activeIndex];
-        const text = this.state.activeIndex === -1 ? this.props.defaultLabelText : activeDataSet.name;
-        const value = this.state.activeIndex === -1 ? this.props.formatter(this.props.defaultLabelValue) : this.props.formatter(activeDataSet.value);
-
+        const activeAndDataLabelHover = this.state.activeIndex !== -1 && this.props.toggleDataLabelOnHover
+        const text = activeAndDataLabelHover ? activeDataSet.name : this.props.defaultLabelText
+        const value = activeAndDataLabelHover? this.props.formatter(activeDataSet.value): this.props.formatter(this.props.defaultLabelValue)
+        
         return (
           <div
             className='mx-donutchart-data'
