@@ -35,10 +35,10 @@ class DonutChart extends React.Component {
     onMouseLeave: PropTypes.func,
     opacity: PropTypes.number,
     padAngle: PropTypes.number,
+    shouldToggleDataLabelOnHover: PropTypes.bool,
     showBaseArc: PropTypes.bool,
     showDataLabel: PropTypes.bool,
     theme: themeShape,
-    shouldToggleDataLabelOnHover: PropTypes.bool,
 
     width: PropTypes.number
   };
