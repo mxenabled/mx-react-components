@@ -197,10 +197,12 @@ class Drawer extends React.Component {
   };
 
   _handleKeyUp = e => {
-    e.preventDefault();
-    e.stopPropagation();
 
-    if (keycode(e) === 'esc') this.close();
+    if (keycode(e) === 'esc') {
+      e.preventDefault();
+      e.stopPropagation();
+      this.close();
+    }
   };
 
   _resize = () => {
