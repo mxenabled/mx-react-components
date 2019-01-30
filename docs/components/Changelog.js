@@ -10,6 +10,7 @@ class Changelog extends React.Component {
         <h3>6.1.4</h3>
           <ul>
             <li>Drawer - Event propagation fix. Spin - Clear interval on unmount. (<a href='https://github.com/mxenabled/mx-react-components/pull/817'>#817</a>)</li>
+            <li>DonutChart - Add new prop toggleDataLabelOnHover. See docs for details. (<a href='https://github.com/mxenabled/mx-react-components/pull/819'>#819</a>)</li>
             <li>SimpleSelect - Event propagation fix (<a href='https://github.com/mxenabled/mx-react-components/pull/820'>#820</a>)</li>
             <li>DateRangePicker - DefaultRanges a11y improvements (<a href='https://github.com/mxenabled/mx-react-components/pull/821'>#821</a>)</li>
           </ul>
