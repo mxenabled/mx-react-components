@@ -7,6 +7,12 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 6.1.0</h2>
+        <h3>6.1.4</h3>
+          <ul>
+            <li>Drawer - Event propagation fix. Spin - Clear interval on unmount. (<a href='https://github.com/mxenabled/mx-react-components/pull/817'>#817</a>)</li>
+            <li>DateRangePicker - DefaultRanges a11y improvements (<a href='https://github.com/mxenabled/mx-react-components/pull/821'>#821</a>)</li>
+          </ul>
+
           <h3>6.1.3</h3>
           <ul>
             <li>Split doc and dist package.json (<a href='https://github.com/mxenabled/mx-react-components/pull/812'>#812</a>)</li>
