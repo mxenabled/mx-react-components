@@ -20,7 +20,7 @@ class Spin extends React.Component {
     const spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
     let rotation = 0;
 
-    setInterval(() => {
+    this.interval = setInterval(() => {
       el.style.transform = 'rotate(' + rotation * spinDirection + 'deg)';
 
       if (rotation < 360) {
@@ -29,6 +29,10 @@ class Spin extends React.Component {
         rotation = 0;
       }
     }, speed / 360);
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.interval)
   }
 
   render () {

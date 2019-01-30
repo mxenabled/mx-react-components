@@ -1,7 +1,7 @@
 const PropTypes = require('prop-types');
-const Radium = require('radium');
 const React = require('react');
 const Icon = require('../Icon');
+const { css } = require('glamor')
 const { themeShape } = require('../../constants/App');
 
 class DefaultRanges extends React.Component {
@@ -13,7 +13,7 @@ class DefaultRanges extends React.Component {
     const { defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles, theme } = this.props;
 
     return (
-      <div className='mx-default-ranges' role='' style={styles.rangeOptions}>
+      <div aria-live="polite" className='mx-default-ranges' style={styles.rangeOptions}>
 
         {defaultRanges.map((range, index) => {
           const isSelectedRange
@@ -23,21 +23,21 @@ class DefaultRanges extends React.Component {
 
           return (
             <button
-              aria-label={`${range.displayValue} range${isSelectedRange ? ', Selected' : ''}`}
-              className='mx-default-ranges-range'
+              aria-label={`${range.displayValue} range`}
+              aria-pressed={isSelectedRange}
+              className={`${css(styles.rangeOption)} mx-default-ranges-range`}
               key={range.displayValue + range.getStartDate()}
               onClick={() => {
                 handleDefaultRangeSelection(range);
                 this.setState({ selectedOption: index });
               }}
-              style={styles.rangeOption}
             >
               <div>
                 <Icon
                   size={20}
-                  style={Object.assign({}, styles.rangeOptionIcon, {
+                  style={{ ...styles.rangeOptionIcon,
                     fill: isSelectedRange ? theme.Colors.PRIMARY : 'transparent'
-                  })}
+                  }}
                   type='check-solid'
                 />
               </div>
@@ -66,4 +66,4 @@ DefaultRanges.propTypes = {
   theme: themeShape
 };
 
-module.exports = Radium(DefaultRanges);
+module.exports = DefaultRanges;
