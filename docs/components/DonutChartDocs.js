@@ -160,7 +160,7 @@ class DonutChartDocs extends React.Component {
 
         <h5>shouldToggleDataLabelOnHover <label>Boolean</label></h5>
         <p>Default: true</p>
-        <p>When set to true, on slice hover, the defaultLabelText with change to display the data corresponding with the slice.</p>
+        <p>When set to true, on slice hover, the defaultLabelText will change to display the data corresponding with the slice.</p>
 
         <h5>width <label>Number</label></h5>
         <p>Default: 150</p>

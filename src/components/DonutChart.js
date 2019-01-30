@@ -62,9 +62,9 @@ class DonutChart extends React.Component {
     onMouseLeave () {},
     opacity: 1,
     padAngle: 0.02,
+    shouldToggleDataLabelOnHover: true,
     showBaseArc: true,
     showDataLabel: true,
-    shouldToggleDataLabelOnHover: true,
     width: 150
   };
 
@@ -328,7 +328,7 @@ class DonutChart extends React.Component {
         const color = this.state.activeIndex === -1 ? colors[0] : colors[this.state.activeIndex];
         const activeAndDataLabelHover = this.state.activeIndex !== -1 && this.props.shouldToggleDataLabelOnHover
         const text = activeAndDataLabelHover ? activeDataSet.name : this.props.defaultLabelText
-        const value = activeAndDataLabelHover? this.props.formatter(activeDataSet.value): this.props.formatter(this.props.defaultLabelValue)
+        const value = this.props.formatter(activeAndDataLabelHover ? activeDataSet.value : this.props.defaultValue)
 
         return (
           <div
