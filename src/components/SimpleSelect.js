@@ -38,6 +38,7 @@ class SimpleSelect extends React.Component {
   _handleKeyUp = (e) => {
     if (keycode(e) === 'esc') {
       e.preventDefault();
+      e.stopPropagation();
       this.props.onScrimClick();
     }
   };
