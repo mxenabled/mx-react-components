@@ -328,7 +328,7 @@ class DonutChart extends React.Component {
         const color = this.state.activeIndex === -1 ? colors[0] : colors[this.state.activeIndex];
         const activeAndDataLabelHover = this.state.activeIndex !== -1 && this.props.shouldToggleDataLabelOnHover
         const text = activeAndDataLabelHover ? activeDataSet.name : this.props.defaultLabelText
-        const value = this.props.formatter(activeAndDataLabelHover ? activeDataSet.value : this.props.defaultValue)
+        const value = this.props.formatter(activeAndDataLabelHover ? activeDataSet.value : this.props.defaultLabelValue)
 
         return (
           <div
