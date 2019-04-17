@@ -55,7 +55,7 @@ class Modal extends React.Component {
     focusTrapProps: {},
     isRelative: false,
     role: 'dialog',
-    showCloseIcon: true,
+    showCloseIcon: false,
     showFooter: false,
     showScrim: true,
     showTitleBar: false,
@@ -257,7 +257,8 @@ class Modal extends React.Component {
         margin: '-12px -12px 0 0',
         cursor: 'pointer',
         border: 'none',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        display: 'none'
       },
       closeIcon: {
         color: theme.Colors.GRAY_700
@@ -269,7 +270,7 @@ class Modal extends React.Component {
         zIndex: 1001,
         backgroundColor: theme.Colors.WHITE,
         boxShadow: theme.ShadowHigh,
-        borderRadius: 2,
+        borderRadius: 4,
         top: 20,
         maxWidth: 'calc(100% - 40px)',
         display: 'inline-block',
