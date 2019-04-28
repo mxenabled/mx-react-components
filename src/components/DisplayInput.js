@@ -131,7 +131,7 @@ class DisplayInput extends React.Component {
           {this.props.status ? (
             <Column offset={twoWidthColumn} span={statusColumn} >
               <div style={styles.status}>
-                <div style={styles[this.props.status.type]}>{this.props.status.message}</div>
+                <div role="alert" style={styles[this.props.status.type]}>{this.props.status.message}</div>
               </div>
             </Column>
           ) : null}
