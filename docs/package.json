@@ -19,9 +19,9 @@
     "marked": "^0.5.0",
     "moment": "^2.22.2",
     "prop-types": "^15.5.8",
+    "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-router": "^3.0.0",
-    "react": "^16.5.2"
+    "react-router": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
@@ -36,7 +36,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
-    "bundlesize": "^0.17.0",
+    "bundlesize": "^0.17.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.6.0",
