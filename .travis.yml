@@ -6,8 +6,6 @@ script:
   - npm run build
   - npm audit
   - npm test
-  - npm run bundlesize
   - cd docs
   - npm ci
   - npm audit
-  - npm run bundlesize

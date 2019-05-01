@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "build": "babel src --out-dir dist --ignore '**/**/__tests__'",
-    "bundlesize": "bundlesize",
     "release": "npm install && npm run test && npm run build",
     "dev-release": "npm install && npm run build -- --watch",
     "test": "jest && eslint src",
@@ -36,6 +35,7 @@
     "d3": "^3.5.6",
     "focus-trap-react": "^3.1.4",
     "glamor": "^2.20.40",
+    "jest": "^24.7.1",
     "keycode": "^2.1.8",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -59,7 +59,6 @@
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
-    "bundlesize": "^0.17.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.6.0",
@@ -68,8 +67,7 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-react": "^7.11.1",
-    "jest": "^23.6.0",
-    "jest-enzyme": "^6.0.5"
+    "jest-enzyme": "^7.0.2"
   },
   "jest": {
     "globals": {
@@ -89,12 +87,5 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
-  },
-  "bundlesize": [
-    {
-      "compression": "none",
-      "path": "dist/Index.js",
-      "maxSize": "3.37 kB"
-    }
-  ]
+  }
 }
