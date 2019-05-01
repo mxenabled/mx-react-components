@@ -7,7 +7,14 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 6.1.0</h2>
-        <h3>6.1.4</h3>
+          <h3>6.1.5</h3>
+          <ul>
+            <li>Select - Accessibility fix for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/815'>#815</a>)</li>
+            <li>DisplayInput - Accessibility fix for error state (<a href='https://github.com/mxenabled/mx-react-components/pull/823'>#823</a>)</li>
+            <li>NPM Audit - Updated dependcies reported as having vulnerabilities (<a href='https://github.com/mxenabled/mx-react-components/pull/825'>#825</a>)</li>
+          </ul>
+
+          <h3>6.1.4</h3>
           <ul>
             <li>Drawer - Event propagation fix. Spin - Clear interval on unmount. (<a href='https://github.com/mxenabled/mx-react-components/pull/817'>#817</a>)</li>
             <li>DonutChart - Add new prop toggleDataLabelOnHover. See docs for details. (<a href='https://github.com/mxenabled/mx-react-components/pull/819'>#819</a>)</li>
