@@ -317,8 +317,7 @@ class DateRangePicker extends React.Component {
       <div className='mx-date-range-picker' style={styles.component}>
         <button
           aria-controls='calendarMenu'
-          aria-expanded={this.state.showSelectionPane}
-          aria-haspopup='menu'
+          aria-haspopup={true}
           aria-label={`${placeholderText}${
             this.props.selectedStartDate && this.props.selectedEndDate
               ? `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected`
