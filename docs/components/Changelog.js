@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 6.1.0</h2>
+          <h3>6.1.6</h3>
+          <ul>
+            <li>DateRangePicker - Accessibility fix for colliding aria labels. (<a href='https://github.com/mxenabled/mx-react-components/pull/827'>#827</a>)</li>
+          </ul>
+
           <h3>6.1.5</h3>
           <ul>
             <li>Select - Accessibility fix for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/815'>#815</a>)</li>
