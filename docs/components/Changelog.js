@@ -7,6 +7,12 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 6.1.0</h2>
+
+          <h3>6.1.7</h3>
+          <ul>
+            <li>Tab - Semantic HTML for Accessibility and default button style overrides. (<a href='https://github.com/mxenabled/mx-react-components/pull/828'>#828</a>)</li>
+          </ul>
+
           <h3>6.1.6</h3>
           <ul>
             <li>DateRangePicker - Accessibility fix for colliding aria labels. (<a href='https://github.com/mxenabled/mx-react-components/pull/827'>#827</a>)</li>
