@@ -39,21 +39,21 @@ class Tab extends React.Component {
       style = Object.assign({}, style, styles.activeTab, this.props.styles.activeTab);
 
     return (
-      <div
+      <button
         aria-label={`${this.props.children} tab`}
         className={`mx-tab ${css(style)}`}
         onClick={this.props.onClick}
-        onKeyUp={e => this._handleSpaceAndEnter(e)}
-        tabIndex={0}
       >
         {this.props.children}
-      </div>
+      </button>
     );
   }
 
   styles = (theme) => {
     return {
       tab: {
+        backgroundColor: 'transparent',
+        border: 'none',
         boxSizing: 'border-box',
         color: theme.Colors.GRAY_500,
         cursor: 'pointer',
