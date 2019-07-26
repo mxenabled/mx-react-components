@@ -8,6 +8,7 @@ const ReactDOM = require('react-dom');
 import { css } from 'glamor'
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
+const SearchInput = require('./SearchInput')
 const { Listbox, Option } = require('./accessibility/Listbox');
 
 const { themeShape } = require('../constants/App');
@@ -41,7 +42,8 @@ class Select extends React.Component {
     selected: optionShape,
     selectedStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     theme: themeShape,
-    valid: PropTypes.bool
+    valid: PropTypes.bool,
+    withSearch: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -56,13 +58,17 @@ class Select extends React.Component {
 
     this.state = {
       isOpen: false,
-      selected: props.selected
+      selected: props.selected,
+      options: props.options,
     };
   }
 
   componentWillReceiveProps (newProps) {
     if (!_isEqual(newProps.selected, this.props.selected)) {
       this.setState({ selected: newProps.selected });
+    }
+    if(!_isEqual(newProps.options, this.props.options)) {
+      this.setState({ options: newProps.options })
     }
   }
 
@@ -84,7 +90,7 @@ class Select extends React.Component {
   };
 
   _close = () => {
-    this.setState({ isOpen: false });
+    this.setState({ isOpen: false, options: this.props.options });
     this.elementRef.focus();
   };
 
@@ -133,6 +139,14 @@ class Select extends React.Component {
     }
   };
 
+  _handleSearch = (e) => {
+    const filteredOptions = this.props.options.filter((item) => {
+      return item.displayValue.toLowerCase().includes(e.target.value)
+    })
+
+    this.setState({ options: filteredOptions })
+  }
+
   _renderOptions = (styles) => {
     if (this.state.isOpen) {
       if (this.props.children) {
@@ -149,6 +163,11 @@ class Select extends React.Component {
             ref={(ref) => this.optionList = ref}
             style={styles.options}
           >
+            {this.props.withSearch && 
+            <SearchInput
+              focusOnLoad={true}
+              onChange={(e) => this._handleSearch(e)}
+            />}
             {this.props.options.map(option => {
               return (
                 <Option
