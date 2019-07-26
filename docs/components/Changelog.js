@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
+          <h3>6.1.8</h3>
+          <ul>
+            <li>DateRangePicker - Remove menu role for JAWS a11y issue. (<a href='https://github.com/mxenabled/mx-react-components/pull/831'>#831</a>)</li>
+          </ul>
+
           <h3>6.1.7</h3>
           <ul>
             <li>Tab - Semantic HTML for Accessibility and default button style overrides. (<a href='https://github.com/mxenabled/mx-react-components/pull/828'>#828</a>)</li>
