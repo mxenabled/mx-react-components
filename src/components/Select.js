@@ -164,11 +164,11 @@ class Select extends React.Component {
             style={styles.options}
           >
             {this.props.withSearch && 
-            <SearchInput
-              focusOnLoad={true}
-              onChange={(e) => this._handleSearch(e)}
-            />}
-            {this.props.options.map(option => {
+              <SearchInput
+                focusOnLoad={true}
+                onChange={(e) => this._handleSearch(e)}
+              />}
+            {this.state.options.map(option => {
               return (
                 <Option
                   className='mx-select-option'
