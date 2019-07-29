@@ -160,36 +160,36 @@ class Select extends React.Component {
             {this.props.withSearch && 
               <SearchInput
                 focusOnLoad={true}
-                onChange={e => this._onSearchInputChange(e)}
+                onChange={this._onSearchInputChange}
               />}
             {this.props.options
               .filter(option => this.state.searchTerm ? option.displayValue.toLowerCase().includes(this.state.searchTerm) : true)
-                .map(option => {
-                  return (
-                    <Option
-                      className='mx-select-option'
-                      isSelected={_isEqual(option, this.state.selected)}
-                      key={option.displayValue + option.value}
-                      label={option.displayValue}
-                      onClick={haltEvent(this._handleOptionClick.bind(null, option))}
-                      style={Object.assign({},
-                        styles.option,
-                        this.props.optionStyle,
-                        _isEqual(option, this.state.selected) ? styles.activeOption : null
-                      )}
-                    >
-                      {option.icon ? (
-                        <Icon
-                          size={20}
-                          style={styles.optionIcon}
-                          type={option.icon}
-                        />
-                      ) : null}
-                      <div style={styles.optionText}>{option.displayValue}</div>
-                      {_isEqual(option, this.state.selected) ? <Icon size={20} type='check' /> : null }
-                    </Option>
-                  );
-                }
+              .map(option => {
+                return (
+                  <Option
+                    className='mx-select-option'
+                    isSelected={_isEqual(option, this.state.selected)}
+                    key={option.displayValue + option.value}
+                    label={option.displayValue}
+                    onClick={haltEvent(this._handleOptionClick.bind(null, option))}
+                    style={Object.assign({},
+                      styles.option,
+                      this.props.optionStyle,
+                      _isEqual(option, this.state.selected) ? styles.activeOption : null
+                    )}
+                  >
+                    {option.icon ? (
+                      <Icon
+                        size={20}
+                        style={styles.optionIcon}
+                        type={option.icon}
+                      />
+                    ) : null}
+                    <div style={styles.optionText}>{option.displayValue}</div>
+                    {_isEqual(option, this.state.selected) ? <Icon size={20} type='check' /> : null }
+                  </Option>
+                );
+              }
             )}
           </Listbox>
         );
