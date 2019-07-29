@@ -106,6 +106,9 @@ class SelectDocs extends React.Component {
 
         <h5>valid <label>Boolean</label></h5>
         <p>If set to 'false', then the element will be marked as invalid and a red border will be placed around the element.</p>
+        
+        <h5>withSearch <label>Boolean</label></h5>
+        <p>If set to true, the component renders with the Search component to support longer lists of options</p>
 
         <h3>Example</h3>
         <Markdown>
