@@ -54,7 +54,6 @@ class Modal extends React.Component {
     focusOnLoad: true,
     focusTrapProps: {},
     isRelative: false,
-    role: 'dialog',
     showCloseIcon: true,
     showFooter: false,
     showScrim: true,
@@ -204,7 +203,6 @@ class Modal extends React.Component {
               ref={ref => this._modalContent = ref}
               role={this.props.role}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
-              tabIndex={0}
             >
               {this.props.children}
               {this._renderTooltip(styles, theme)}
@@ -218,7 +216,6 @@ class Modal extends React.Component {
                 onKeyUp={e => e.keyCode === 13 && this.props.onRequestClose()}
                 role='button'
                 style={styles.close}
-                tabIndex={0}
               >
                 <Icon
                   size={24}

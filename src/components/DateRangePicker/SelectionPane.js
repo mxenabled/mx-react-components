@@ -149,8 +149,7 @@ class SelectionPane extends React.Component {
         },
 
         ':focus': {
-          backgroundColor: theme.Colors.GRAY_100,
-          outline: 'none'
+          backgroundColor: theme.Colors.GRAY_100
         }
       },
       rangeOptionIcon: {
