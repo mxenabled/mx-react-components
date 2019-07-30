@@ -138,7 +138,7 @@ class Select extends React.Component {
   };
 
   _onSearchInputChange = e => {
-    this.setState({ searchTerm: e.target.value })
+    this.setState({ searchTerm: e.target.value.toLowerCase() })
   }
 
   _renderOptions = (styles) => {
@@ -156,6 +156,7 @@ class Select extends React.Component {
             className='mx-select-options'
             ref={(ref) => this.optionList = ref}
             style={styles.options}
+            withSearch={this.props.withSearch}
           >
             {this.props.withSearch && 
               <SearchInput
