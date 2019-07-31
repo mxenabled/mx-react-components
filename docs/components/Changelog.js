@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
+          <h3>6.1.11</h3>
+          <ul>
+            <li>Modal - Revert tabindex change due to Focus Trap error</li>
+          </ul>
+
           <h3>6.1.10</h3>
           <ul>
             <li>Modal - Revert tabindex change due to Focus Trap error</li>
