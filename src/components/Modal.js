@@ -203,7 +203,7 @@ class Modal extends React.Component {
               ref={ref => this._modalContent = ref}
               role={this.props.role}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
-              tabIndex={-1} // Focus will default to wrapper with focusOnLoad prop
+              tabIndex={-1} // DO NOT REMOVE: Focus will default to wrapper with focusOnLoad prop
             >
               {this.props.children}
               {this._renderTooltip(styles, theme)}
