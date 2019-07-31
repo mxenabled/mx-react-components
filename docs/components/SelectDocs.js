@@ -62,10 +62,20 @@ class SelectDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+
+        <h5>Default:</h5>
         <Select
           key='default'
           options={options}
           valid={true}
+        />
+
+        <h5>With prop: <Code>withSearch</Code></h5>
+        <Select
+          key='withSearch'
+          options={options}
+          valid={true}
+          withSearch={true}
         />
 
         <h3>Usage</h3>

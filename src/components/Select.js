@@ -1,4 +1,5 @@
 const _isEqual = require('lodash/isEqual');
+const _includes = require('lodash/includes');
 const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
@@ -164,7 +165,7 @@ class Select extends React.Component {
                 onChange={this._onSearchInputChange}
               />}
             {this.props.options
-              .filter(option => this.state.searchTerm ? option.displayValue.toLowerCase().includes(this.state.searchTerm) : true)
+              .filter(option => this.state.searchTerm ? _includes(option.displayValue.toLowerCase(), this.state.searchTerm) : true)
               .map(option => {
                 return (
                   <Option

@@ -77,7 +77,7 @@ class Listbox extends React.Component {
       case 'enter':
       case 'space':
         // Allow space for text input when options are not in focus, otherwise space acts as a selection
-        if (this.props.withSearch && this.state.focusedIndex >= 0) return
+        if (this.props.withSearch && this.state.focusedIndex <= 0) return
         e.preventDefault();
         e.stopPropagation();
         e.target.click();
