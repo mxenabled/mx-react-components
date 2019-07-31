@@ -203,6 +203,7 @@ class Modal extends React.Component {
               ref={ref => this._modalContent = ref}
               role={this.props.role}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
+              tabIndex={-1}
             >
               {this.props.children}
               {this._renderTooltip(styles, theme)}
@@ -213,8 +214,6 @@ class Modal extends React.Component {
                 aria-label='Close Modal'
                 className='mx-modal-close'
                 onClick={this.props.onRequestClose}
-                onKeyUp={e => e.keyCode === 13 && this.props.onRequestClose()}
-                role='button'
                 style={styles.close}
               >
                 <Icon
