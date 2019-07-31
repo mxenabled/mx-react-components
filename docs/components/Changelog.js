@@ -8,6 +8,12 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
+          <h3>6.1.9</h3>
+          <ul>
+            <li>DateRangePicker - Remove style override for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/833'>#833</a>)</li>
+            <li>Modal - General a11y improvements, remove default role and extraneous button properties. (<a href='https://github.com/mxenabled/mx-react-components/pull/833'>#833</a>)</li>
+          </ul>
+
           <h3>6.1.8</h3>
           <ul>
             <li>DateRangePicker - Remove menu role for JAWS a11y issue. (<a href='https://github.com/mxenabled/mx-react-components/pull/831'>#831</a>)</li>
