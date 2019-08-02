@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
+          <h3>6.1.12</h3>
+          <ul>
+            <li>Select - Add ability to search dropdown options via withSearch prop. (<a href='https://github.com/mxenabled/mx-react-components/issues/832'>#832</a>)</li>
+          </ul>
+
           <h3>6.1.11</h3>
           <ul>
             <li>Modal - Revert tabindex change due to Focus Trap error</li>

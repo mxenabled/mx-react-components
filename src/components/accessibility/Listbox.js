@@ -23,11 +23,13 @@ const _findIndex = require('lodash/findIndex');
 class Listbox extends React.Component {
   static propTypes = {
     'aria-label': PropTypes.string.isRequired,
-    useGlobalKeyHandler: PropTypes.bool
+    useGlobalKeyHandler: PropTypes.bool,
+    withSearch: PropTypes.bool
   };
 
   static defaultProps = {
-    useGlobalKeyHandler: false
+    useGlobalKeyHandler: false,
+    withSearch: false
   };
 
   constructor (props) {
@@ -74,6 +76,8 @@ class Listbox extends React.Component {
         break;
       case 'enter':
       case 'space':
+        // Allow space for text input when options are not in focus, otherwise space acts as a selection
+        if (this.props.withSearch && this.state.focusedIndex <= 0) return
         e.preventDefault();
         e.stopPropagation();
         e.target.click();
