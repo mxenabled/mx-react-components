@@ -6,6 +6,7 @@ const { Link } = require('react-router');
 const { Select } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
+const Code = require('components/Code');
 
 const options = [
   {
@@ -61,10 +62,20 @@ class SelectDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
+
+        <h5>Default:</h5>
         <Select
           key='default'
           options={options}
           valid={true}
+        />
+
+        <h5>With prop: <Code>withSearch</Code></h5>
+        <Select
+          key='withSearch'
+          options={options}
+          valid={true}
+          withSearch={true}
         />
 
         <h3>Usage</h3>
@@ -106,6 +117,10 @@ class SelectDocs extends React.Component {
 
         <h5>valid <label>Boolean</label></h5>
         <p>If set to 'false', then the element will be marked as invalid and a red border will be placed around the element.</p>
+        
+        <h5>withSearch <label>Boolean</label></h5>
+        <p>Default: <Code>false</Code></p>
+        <p>If set to true, the component renders with the Search component to support longer lists of options</p>
 
         <h3>Example</h3>
         <Markdown>
