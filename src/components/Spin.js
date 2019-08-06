@@ -10,14 +10,14 @@ class Spin extends React.Component {
   };
 
   static defaultProps = {
-    direction: 'clockwise',
+    direction: 'counterclockwise',
     speed: 1000
   };
 
-  componentDidMount () {
+  componentDidMount() {
     const el = ReactDOM.findDOMNode(this);
     const speed = this.props.speed;
-    const spinDirection = this.props.direction === 'clockwise' ? -1 : 1;
+    const spinDirection = this.props.direction === 'clockwise' ? 1 : -1;
     let rotation = 0;
 
     this.interval = setInterval(() => {
@@ -31,11 +31,11 @@ class Spin extends React.Component {
     }, speed / 360);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.interval)
   }
 
-  render () {
+  render() {
     return (
       <div className='mx-spin' style={{ display: 'inline-block' }}>
         {this.props.children}
