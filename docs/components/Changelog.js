@@ -6,12 +6,14 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
-        <h2>MX React Components V 6.1.0</h2>
+        <h2>MX React Components V 6.2.0</h2>
 
-          <h3>6.2.0</h3>
-          <ul>
-            <li>Spin - Corrected default state for direction prop and corrected spin direction based on spin direction prop. (<a href='https://github.com/mxenabled/mx-react-components/issues/834'>#834</a>)</li>
-          </ul>
+        <h3>6.2.0</h3>
+        <ul>
+          <li>Spin - Corrected default state for direction prop and corrected spin direction based on spin direction prop. (<a href='https://github.com/mxenabled/mx-react-components/issues/834'>#834</a>)</li>
+        </ul>
+
+        <h2>MX React Components V 6.1.0</h2>
 
           <h3>6.1.12</h3>
           <ul>
