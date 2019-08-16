@@ -443,6 +443,10 @@ module.exports = {
       displayValue: 'Real Estate'
     },
     {
+      value: 'remarketing',
+      displayValue: 'Remarketing'
+    },
+    {
       value: 'retirement',
       displayValue: 'Retirement'
     },
