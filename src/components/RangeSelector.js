@@ -1,5 +1,4 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _throttle = require('lodash/throttle');
@@ -56,6 +55,8 @@ class RangeSelector extends React.Component {
       upperValue,
       trackClicked: false
     };
+
+    this.rangeSelectorRef = React.createRef();
   }
 
   componentDidMount () {
@@ -81,7 +82,7 @@ class RangeSelector extends React.Component {
   };
 
   _setDefaultRangeValues = () => {
-    const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
+    const component = this.rangeSelectorRef.current;
     const width = component ? component.offsetWidth : 0;
 
     //convert our values to a 0-based scale
@@ -129,7 +130,7 @@ class RangeSelector extends React.Component {
 
   _handleTrackMouseDown = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const newPixels = clientX - ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
+    const newPixels = clientX - this.rangeSelectorRef.current.getBoundingClientRect().left;
     const updatedState = {
       trackClicked: true
     };
@@ -158,7 +159,7 @@ class RangeSelector extends React.Component {
         selectedLabel: null
       };
 
-      let newPixels = clientX - ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
+      let newPixels = clientX - this.rangeSelectorRef.current.getBoundingClientRect().left;
 
       //make sure we don't go past the end of the track
       newPixels = Math.min(newPixels, this.state.width);
@@ -257,9 +258,7 @@ class RangeSelector extends React.Component {
           onMouseUp={this._handleDragEnd}
           onTouchEnd={this._handleDragEnd}
           onTouchMove={this._handleDragging}
-          ref={(ref) => {
-            this.rangeSelectorRef = ref;
-          }}
+          ref={this.rangeSelectorRef}
           style={styles.range}
         >
           {this.props.presets.length ? (
