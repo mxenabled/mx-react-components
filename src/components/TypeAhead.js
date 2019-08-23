@@ -1,5 +1,4 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 
@@ -29,6 +28,12 @@ class TypeAhead extends React.Component {
     preSelectedItems: []
   };
 
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+    this.optionListRef = React.createRef();
+  }
+
   state = {
     highlightedValue: null,
     isOpen: false,
@@ -56,7 +61,7 @@ class TypeAhead extends React.Component {
       isOpen: true
     });
 
-    ReactDOM.findDOMNode(this.input).focus();
+    this.inputRef.current.focus();
   };
 
   _handleItemMouseOver = () => {
@@ -99,7 +104,7 @@ class TypeAhead extends React.Component {
       selectedItems
     });
 
-    ReactDOM.findDOMNode(this.input).focus();
+    this.inputRef.current.focus();
   };
 
   _handleItemRemove = (item) => {
@@ -113,7 +118,7 @@ class TypeAhead extends React.Component {
       selectedItems
     });
 
-    ReactDOM.findDOMNode(this.input).focus();
+    this.inputRef.current.focus();
   };
 
   _handleInputKeyDown = (e) => {
@@ -188,13 +193,13 @@ class TypeAhead extends React.Component {
         highlightedValue: null
       });
 
-      ReactDOM.findDOMNode(this.input).blur();
+      this.inputRef.current.blur();
     }
   };
 
   _scrollList = (nextIndex, scrollDirection) => {
     const filteredItems = this._getFilteredItems();
-    const ul = ReactDOM.findDOMNode(this.optionList);
+    const ul = this.optionListRef.current;
     const skipClearSelectAll = 2;
     const activeLi = ul.children[nextIndex + skipClearSelectAll];
 
@@ -244,7 +249,7 @@ class TypeAhead extends React.Component {
     return (
       <div
         className='mx-typeahead-option-list'
-        ref={(ref) => this.optionList = ref}
+        ref={this.optionListRef}
         style={styles.itemList}
       >
         {this.state.selectedItems.length !== this.props.items.length ? (
@@ -313,7 +318,7 @@ class TypeAhead extends React.Component {
           onChange={this._handleInputChange}
           onKeyDown={this._handleInputKeyDown}
           placeholder={!this.state.selectedItems.length ? this.props.placeholderText : null}
-          ref={(ref) => this.input = ref}
+          ref={this.inputRef}
           style={styles.input}
           type='text'
           value={this.state.searchString}
