@@ -4,7 +4,6 @@ const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
-const ReactDOM = require('react-dom');
 
 import { css } from 'glamor'
 import { withTheme } from './Theme';
@@ -63,6 +62,8 @@ class Select extends React.Component {
       selected: props.selected,
       searchTerm: "",
     };
+
+    this.optionListRef = React.createRef();
   }
 
   componentWillReceiveProps (newProps) {
@@ -105,7 +106,7 @@ class Select extends React.Component {
   };
 
   _scrollListDown = (nextIndex) => {
-    const ul = ReactDOM.findDOMNode(this.optionList);
+    const ul = this.optionList.current;
     const activeLi = ul.children[nextIndex];
     const heightFromTop = nextIndex * activeLi.clientHeight;
 
@@ -115,7 +116,7 @@ class Select extends React.Component {
   };
 
   _scrollListUp = (prevIndex) => {
-    const ul = ReactDOM.findDOMNode(this.optionList);
+    const ul = this.optionList.current;
     const activeLi = ul.children[prevIndex];
     const heightFromBottom = (this.props.options.length - prevIndex) * activeLi.clientHeight;
 
@@ -155,7 +156,7 @@ class Select extends React.Component {
           <Listbox
             aria-label={this.props.placeholderText}
             className='mx-select-options'
-            ref={(ref) => this.optionList = ref}
+            ref={this.optionListRef}
             style={styles.options}
             withSearch={this.props.withSearch}
           >
