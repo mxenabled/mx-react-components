@@ -1,5 +1,4 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _merge = require('lodash/merge');
@@ -24,6 +23,11 @@ class SimpleSlider extends React.Component {
     disabled: false
   };
 
+  constructor(props) {
+    super(props);
+    this.rangeSelectorRef = React.createRef();
+  }
+
   state = {
     dragging: false,
     leftPixels: 0,
@@ -31,7 +35,7 @@ class SimpleSlider extends React.Component {
   };
 
   componentDidMount () {
-    const component = ReactDOM.findDOMNode(this.rangeSelectorRef);
+    const component = this.rangeSelectorRef.current;
     const width = component.clientWidth;
     const leftPixels = this.props.percent * width;
 
@@ -58,7 +62,7 @@ class SimpleSlider extends React.Component {
 
   _handleMouseEvents = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const leftSpace = ReactDOM.findDOMNode(this.rangeSelectorRef).getBoundingClientRect().left;
+    const leftSpace = this.rangeSelectorRef.current.getBoundingClientRect().left;
     let currentPercent = (clientX - leftSpace) / this.state.width;
 
     if (currentPercent < 0) {
@@ -101,9 +105,7 @@ class SimpleSlider extends React.Component {
           onMouseUp={disabled ? null : this._handleDragEnd}
           onTouchEnd={disabled ? null : this._handleDragEnd}
           onTouchMove={disabled ? null : this._handleDragging}
-          ref={(ref) => {
-            this.rangeSelectorRef = ref;
-          }}
+          ref={this.rangeSelectorRef}
           style={styles.range}
         >
           <div
