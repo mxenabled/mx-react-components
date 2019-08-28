@@ -1,6 +1,5 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const ReactDOM = require('react-dom');
 
 class Spin extends React.Component {
   static propTypes = {
@@ -14,8 +13,13 @@ class Spin extends React.Component {
     speed: 1000
   };
 
+  constructor(props) {
+    super(props);
+    this.spinRef = React.createRef();
+  }
+
   componentDidMount() {
-    const el = ReactDOM.findDOMNode(this);
+    const el = this.spinRef.current
     const speed = this.props.speed;
     const spinDirection = this.props.direction === 'clockwise' ? 1 : -1;
     let rotation = 0;
@@ -37,7 +41,7 @@ class Spin extends React.Component {
 
   render() {
     return (
-      <div className='mx-spin' style={{ display: 'inline-block' }}>
+      <div className='mx-spin' ref={this.spinRef} style={{ display: 'inline-block' }}>
         {this.props.children}
       </div>
     );
