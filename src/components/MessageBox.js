@@ -52,6 +52,7 @@ class MessageBox extends React.Component {
                   {(this.props.message)}
                 </p>)
                 : null }
+              {this.props.children ? this.props.children : null}
             </section>
           </div>
           {!_isNil(this.props.button)
