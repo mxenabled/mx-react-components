@@ -6,6 +6,23 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h2>MX React Components V 6.4.0</h2>
+
+        <h3>6.4.0</h3>
+        <ul>
+          <li>MessageBox - Added the ability to add children. (<a href='https://github.com/mxenabled/mx-react-components/issues/839'>#839</a>)</li>
+          <li>DisplayInput - Added the ability to add styles to parent container. (<a href='https://github.com/mxenabled/mx-react-components/issues/839'>#839</a>)</li>
+        </ul>
+        
+        <h2>MX React Components V 6.3.0</h2>
+
+        <h3>6.3.0</h3>
+        <ul>
+          <li>Fix Index.js file to work on case sensitive file systems. (<a href='https://github.com/mxenabled/mx-react-components/issues/835'>#835</a>)</li>
+          <li>Replace findDOMNode calls with refs. (<a href='https://github.com/mxenabled/mx-react-components/issues/835'>#835</a>)</li>
+          <li>Fix npm audit vulnerability. (<a href='https://github.com/mxenabled/mx-react-components/issues/837'>#837</a>) (<a href='https://github.com/mxenabled/mx-react-components/issues/838'>#838</a>)</li>
+        </ul>
+
         <h2>MX React Components V 6.2.0</h2>
 
         <h3>6.2.0</h3>

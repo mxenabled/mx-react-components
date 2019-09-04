@@ -39,6 +39,9 @@ class MessageBoxDocs extends React.Component {
             <h5>button<label>Node</label></h5>
             <p>The button to display in the MessageBox.</p>
 
+            <h5>children<label>DOM Node/Element</label></h5>
+            <p>Children of the MessageBox component can be a component or a DOM node/element.</p>
+
             <h5>color<label>String</label></h5>
             <p>The primary color of the box.</p>
 
