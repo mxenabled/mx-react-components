@@ -85,7 +85,7 @@ class DisplayInput extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
 
     return (
-      <Container styles={styles.container} className='mx-display-input'>
+      <Container className='mx-display-input' styles={styles.container} >
         <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
           <Row>
             {this.props.label ? (
