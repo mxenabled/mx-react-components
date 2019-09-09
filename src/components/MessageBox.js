@@ -12,8 +12,10 @@ const StyleUtils = require('../utils/Style');
 
 class MessageBox extends React.Component {
   static propTypes = {
+    ariaLive: PropTypes.string,
     button: PropTypes.node,
     color: PropTypes.string,
+    contentRole: PropTypes.string,
     icon: PropTypes.string,
     isSmall: PropTypes.bool,
     message: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
@@ -22,13 +24,18 @@ class MessageBox extends React.Component {
     title: PropTypes.string
   };
 
+  static defaultProps = {
+    ariaLive: 'region',
+    contentRole: 'status',
+  }
+
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
       <article
-        aria-live='polite'
+        aria-live={this.props.ariaLive}
         className='mx-message-box'
         role='region'
         style={styles.component}
@@ -43,7 +50,7 @@ class MessageBox extends React.Component {
                 type={this.props.icon}
               />
             </section>
-            <section role='status' style={styles.messageContent}>
+            <section role={this.props.contentRole} style={styles.messageContent}>
               <p style={styles.title}>
                 {this.props.title}
               </p>
@@ -115,7 +122,7 @@ class MessageBox extends React.Component {
       messageContent: {
         boxSizing: this.props.isSmall ? null : 'content-box',
         textAlign: 'left',
-        width: this.props.isSmall ? '100%' : '75%',
+        width: this.props.children ? '100%' : '75%',
         paddingRight: this.props.isSmall ? 30 : null,
         fontSize: theme.FontSizes.MEDIUM
       },
