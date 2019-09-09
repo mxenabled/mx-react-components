@@ -36,6 +36,10 @@ class MessageBoxDocs extends React.Component {
         <h3>Usage</h3>
         {
           <div>
+            <h5>ariaLive<label>String</label></h5>
+            <p>Default: 'region'</p>
+            <p>The aria live property to append to article/parent element.</p>
+
             <h5>button<label>Node</label></h5>
             <p>The button to display in the MessageBox.</p>
 
@@ -44,6 +48,10 @@ class MessageBoxDocs extends React.Component {
 
             <h5>color<label>String</label></h5>
             <p>The primary color of the box.</p>
+
+            <h5>contentRole<label>String</label></h5>
+            <p>Default: 'status'</p>
+            <p>The aria role of the content section(title, message, and children).</p>
 
             <h5>icon<label>String</label></h5>
             <p>The type of icon to display in the upper left of the MessageBox header.</p>
