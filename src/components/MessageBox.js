@@ -25,7 +25,7 @@ class MessageBox extends React.Component {
   };
 
   static defaultProps = {
-    ariaLive: 'region',
+    ariaLive: 'polite',
     contentRole: 'status',
   }
 
@@ -122,7 +122,7 @@ class MessageBox extends React.Component {
       messageContent: {
         boxSizing: this.props.isSmall ? null : 'content-box',
         textAlign: 'left',
-        width: this.props.children ? '100%' : '75%',
+        width: this.props.isSmall || this.props.children ? '100%' : '75%',
         paddingRight: this.props.isSmall ? 30 : null,
         fontSize: theme.FontSizes.MEDIUM
       },
