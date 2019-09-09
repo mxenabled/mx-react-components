@@ -37,7 +37,7 @@ class MessageBoxDocs extends React.Component {
         {
           <div>
             <h5>ariaLive<label>String</label></h5>
-            <p>Default: 'region'</p>
+            <p>Default: 'polite'</p>
             <p>The aria live property to append to article/parent element.</p>
 
             <h5>button<label>Node</label></h5>
