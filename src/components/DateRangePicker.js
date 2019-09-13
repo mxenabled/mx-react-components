@@ -295,13 +295,13 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
+    const { children, placeholderText } = this.props;
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
     const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
     const { selectedEndDate, selectedStartDate } = this.state;
-    const { placeholderText } = this.props;
     const selectedEndDateFromPropsAsMoment = moment.unix(this.props.selectedEndDate);
     const selectedStartDateFromPropsAsMoment = moment.unix(this.props.selectedStartDate);
 
@@ -313,42 +313,51 @@ class DateRangePicker extends React.Component {
       ...this.props.focusTrapProps
     };
 
+    const buttonProps = {
+      'aria-controls': 'calendarMenu',
+      'aria-haspopup': true,
+      'aria-label': `${placeholderText}${
+        this.props.selectedStartDate && this.props.selectedEndDate
+          ? `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected`
+          : ''
+      }`,
+      onClick: this._toggleSelectionPane
+    }
+
     return (
       <div className='mx-date-range-picker' style={styles.component}>
-        <button
-          aria-controls='calendarMenu'
-          aria-haspopup={true}
-          aria-label={`${placeholderText}${
-            this.props.selectedStartDate && this.props.selectedEndDate
-              ? `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected`
-              : ''
-          }`}
-          onClick={this._toggleSelectionPane}
-          ref={this.props.elementRef}
-          style={styles.selectedDateButton}
-        >
-          {shouldShowCalendarIcon ? (
-            <Icon
-              size={20}
-              style={styles.selectedDateIcon}
-              type='calendar'
-            />
-          ) : null}
-          <div className='mx-date-range-picker-selected-date-text' style={styles.selectedDateText}>
-            {this.props.selectedStartDate && this.props.selectedEndDate ? (
-              <div>
-                <span>{selectedStartDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
-                <span> - </span>
-                <span>{selectedEndDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
-              </div>
-            ) : placeholderText}
-          </div>
-          <Icon
-            size={20}
-            style={styles.selectedDateCaret}
-            type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
-          />
-        </button>
+        {
+          children && typeof children === 'function' ? this.props.children(buttonProps) : 
+            (
+              <button
+                {...buttonProps}
+                ref={this.props.elementRef}
+                style={styles.selectedDateButton}
+              >
+                {shouldShowCalendarIcon ? (
+                  <Icon
+                    size={20}
+                    style={styles.selectedDateIcon}
+                    type='calendar'
+                  />
+                ) : null}
+                <div className='mx-date-range-picker-selected-date-text' style={styles.selectedDateText}>
+                  {this.props.selectedStartDate && this.props.selectedEndDate ? (
+                    <div>
+                      <span>{selectedStartDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
+                      <span> - </span>
+                      <span>{selectedEndDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
+                    </div>
+                  ) : placeholderText}
+                </div>
+                <Icon
+                  size={20}
+                  style={styles.selectedDateCaret}
+                  type={this.state.showSelectionPane ? 'caret-up' : 'caret-down'}
+                />
+              </button>
+            )
+        }
         <div style={styles.container}>
           <div>
             {this.state.showSelectionPane ? (
