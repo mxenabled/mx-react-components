@@ -59,9 +59,9 @@ class DateRangePickerDocs extends React.Component {
                 },
               }}
             >
-              {(buttonProps) => {
-                return (<Button elementProps={buttonProps} icon="clock" type="neutral">My Custom Button</Button>)
-              }}
+              {buttonProps => (
+                <Button elementProps={buttonProps} icon="clock" type="neutral">My Custom Button</Button>
+              )}
             </DateRangePicker>
           </div>
         </div>
@@ -204,7 +204,7 @@ class DateRangePickerDocs extends React.Component {
                 },
               }}
             >
-              {(elementProps) => {
+              {elementProps => {
                 return (<button {...elementProps}>My Custom Button</button>)
               }}
             </DateRangePicker>
@@ -231,7 +231,7 @@ class DateRangePickerDocs extends React.Component {
                 },
               }}
             >
-              {(elementProps) => {
+              {elementProps => {
                 return (
                   <button
                     {...elementProps}
