@@ -4,7 +4,7 @@ const React = require('react');
 const { Link } = require('react-router');
 
 const Code = require('components/Code');
-const { DateRangePicker } = require('mx-react-components');
+const { Button, DateRangePicker } = require('mx-react-components');
 
 const Markdown = require('components/Markdown');
 
@@ -30,13 +30,40 @@ class DateRangePickerDocs extends React.Component {
         </h1>
 
         <h3>Demo</h3>
-        <div style={{ width: '50%' }}>
-          <DateRangePicker
-            onDateRangeSelect={this._handleDateRangeSelect}
-            selectedEndDate={this.state.selectedEndDate}
-            selectedStartDate={this.state.selectedStartDate}
-            showDefaultRanges={true}
-          />
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+          <h5>Standard Usage</h5>
+          <div style={{ marginBottom: 15 }}>
+            <DateRangePicker
+              onDateRangeSelect={this._handleDateRangeSelect}
+              selectedEndDate={this.state.selectedEndDate}
+              selectedStartDate={this.state.selectedStartDate}
+              showDefaultRanges={true}
+            />
+          </div>
+          <h5>Render Props - Custom Trigger Button</h5>
+          <div>
+            <DateRangePicker
+              onDateRangeSelect={this._handleDateRangeSelect}
+              selectedEndDate={this.state.selectedEndDate}
+              selectedStartDate={this.state.selectedStartDate}
+              showDefaultRanges={true}
+              styles={{
+                component: {
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
+                  width: 160,
+                },
+                optionsWrapper: {
+                  marginTop: 0,
+                },
+              }}
+            >
+              {(buttonProps) => {
+                return (<Button elementProps={buttonProps} icon="clock" type="neutral">My Custom Button</Button>)
+              }}
+            </DateRangePicker>
+          </div>
         </div>
 
         <h3>Usage</h3>
@@ -59,6 +86,43 @@ class DateRangePickerDocs extends React.Component {
         <p>The DateRangePicker component uses the <a href='https://github.com/davidtheclark/focus-trap-react'>Focus Trap React</a> library to prevent a user from tabing outside the date range picker for accessibility reasons.</p>
         <p>The <Code>focusTrapProps</Code> object provides a mechanism for passing the focus trap component props.</p>
         <p>See the library documentation for details on what props it accepts and how to use them.</p>
+
+        <h5>children <label>Function</label></h5>
+        <p>If a function is provided as children to the component, the return value of the function will be rendered in place of the standard button that triggers showing/hiding the calendar menu. The function receives as an argument an object of properties that can be assigned to the element you provide in the function. See documented function argument object and examples below for more details. </p>
+
+        <p>Function Argument <label>Object</label></p>
+
+        <Markdown lang='js'>
+          {`
+            {
+              /**
+              * An id used to associate the element you provide
+              * with the calendar rendered when the DateRangePicker
+              * is open. This association is for accessibility.
+              */
+              "aria-controls": String,
+              /**
+              * A boolean that is always true. This is for accessiblity
+              * and informs screen readers to tell users that interacting
+              * with your element will open popover content.
+              */
+              "aria-haspopup": Boolean,
+              /**
+              * A string that describes the state of the selected date
+              * range that will help screen readers describe your element
+              * to users.
+              */
+              "aria-label": String,
+              /**
+              * A function that when called will toggle open/close the
+              * calendar menu. You can pass this directly to the onClick
+              * handler of your provided element or wrap it in a function
+              * and do extra work before calling it.
+              */
+              onClick: Function
+            }
+          `}
+        </Markdown>       
 
         <h5>format <label>String</label></h5>
         <p>Default: 'MMM D, YYYY'</p>
@@ -101,7 +165,7 @@ class DateRangePickerDocs extends React.Component {
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
-        <h3>Example</h3>
+        <h3>Standard Example</h3>
         <Markdown>
         {`
           _handleDateRangeSelect (selectedStartDate, selectedEndDate) {
@@ -118,6 +182,69 @@ class DateRangePickerDocs extends React.Component {
             showDefaultRanges={true}
           />
         `}
+        </Markdown>
+
+        <h3>Using a function as children to replace the trigger button</h3>
+        <Markdown>
+          {`
+            <DateRangePicker
+              onDateRangeSelect={this._handleDateRangeSelect}
+              selectedEndDate={this.state.selectedEndDate}
+              selectedStartDate={this.state.selectedStartDate}
+              showDefaultRanges={true}
+              styles={{
+                component: {
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
+                  width: 160,
+                },
+                optionsWrapper: {
+                  marginTop: 0,
+                },
+              }}
+            >
+              {(elementProps) => {
+                return (<button {...elementProps}>My Custom Button</button>)
+              }}
+            </DateRangePicker>
+          `}
+        </Markdown>
+
+        <h3>Using a function as children but providing extra functionality on click</h3>
+        <Markdown>
+          {`
+            <DateRangePicker
+              onDateRangeSelect={this._handleDateRangeSelect}
+              selectedEndDate={this.state.selectedEndDate}
+              selectedStartDate={this.state.selectedStartDate}
+              showDefaultRanges={true}
+              styles={{
+                component: {
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
+                  width: 160,
+                },
+                optionsWrapper: {
+                  marginTop: 0,
+                },
+              }}
+            >
+              {(elementProps) => {
+                return (
+                  <button
+                    {...elementProps}
+                    onClick={() => {
+                      // Do extra work here
+                      elementProps.onClick()
+                    }}
+                  >
+                    My Custom Button
+                  </button>)
+              }}
+            </DateRangePicker>
+          `}
         </Markdown>
       </div>
     );
