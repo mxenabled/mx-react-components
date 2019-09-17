@@ -121,7 +121,7 @@ class DonutChartDocs extends React.Component {
 
         <h5>elementPropsForChartSVG <label>Object</label></h5>
         <p>Default: Empty Object</p>
-        <p>element properties you wish to apply to the SVG element of the donut chart.</p>
+        <p>Element properties you wish to apply to the SVG element of the donut chart.</p>
 
         <h5>formatter <label>Function</label></h5>
         <p>A function used to format a value for display as a label.</p>
