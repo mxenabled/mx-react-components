@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.5.0</h2>
 
+        <h3>6.5.1</h3>
+        <ul>
+          <li>DonutChart - Adds new `elementPropsForChartSVG` property. (<a href='https://github.com/mxenabled/mx-react-components/issues/842'>#842</a>)</li>
+        </ul>
+
         <h3>6.5.0</h3>
         <ul>
           <li>MessageBox - Added the ability to set `aria-live` on parent element and `role` on content div. (<a href='https://github.com/mxenabled/mx-react-components/issues/840'>#840</a>)</li>
