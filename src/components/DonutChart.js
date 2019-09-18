@@ -27,6 +27,7 @@ class DonutChart extends React.Component {
     dataPoints: PropTypes.array,
     defaultLabelText: PropTypes.string,
     defaultLabelValue: PropTypes.string,
+    elementPropsForChartSVG: PropTypes.object,
     formatter: PropTypes.func,
     height: PropTypes.number,
     id: PropTypes.string,
@@ -52,6 +53,7 @@ class DonutChart extends React.Component {
     data: [],
     dataPointRadius: 5,
     dataPoints: [],
+    elementPropsForChartSVG: {},
     formatter (value) {
       return value;
     },
@@ -365,6 +367,7 @@ class DonutChart extends React.Component {
       >
         {this._renderDataLabel(styles, colors)}
         <svg
+          {...this.props.elementPropsForChartSVG}
           className='mx-donutchart-svg'
           height={this.props.height}
           width={this.props.width}
