@@ -18,7 +18,7 @@ class Selector extends React.Component {
     const styles = this.styles();
 
     return (
-      <div className='mx-selector' style={Object.assign({}, this.props.style, styles.container)}>
+      <div className='mx-selector' style={{ ...styles.container, ...this.props.style }}>
         <a
           aria-label={`Previous ${this.props.type}`}
           className='mx-selector-previous'

@@ -4,6 +4,8 @@ const moment = require('moment');
 
 const { SelectedBox } = require('../../constants/DateRangePicker');
 
+import { css } from  'glamor'
+
 class MonthTable extends React.Component {
   componentDidMount () {
     this._focusDay(this.props.focusedDay);
@@ -85,21 +87,20 @@ class MonthTable extends React.Component {
         <a
           aria-label={ariaLabelBeginningText + ariaLabelDateText + ariaLabelStateText}
           aria-pressed={isSelectedDay}
-          className='mx-month-table-day'
+          className={`${css({
+            ...styles.calendarDay,
+            ...startDate.isSame(moment.unix(currentDate), 'month') ? styles.currentMonth : {},
+            ...disabledDay ? styles.calendarDayDisabled : {},
+            ...startDate.isSame(moment(), 'day') && !isActiveRange ? styles.today : {},
+            ...isActiveRange ? { ...styles.betweenDay, ...styles['betweenDay' + whereInRange]} : {},
+            ...isSelectedDay ? { ...styles.selectedDay, ...styles['selected' + whereInRange]} : {}
+          })} mx-month-table-day`}
           key={startDate}
           onClick={!disabledDay && handleDateSelect.bind(null, startDate.unix())}
           onKeyDown={handleKeyDown.bind(null, startDate.unix())}
           onMouseEnter={!disabledDay && handleDateHover.bind(null, startDate.unix())}
           ref={this._setRefForDay(startDate.unix())}
           role='button'
-          style={Object.assign({},
-            styles.calendarDay,
-            startDate.isSame(moment.unix(currentDate), 'month') && styles.currentMonth,
-            disabledDay && styles.calendarDayDisabled,
-            (startDate.isSame(moment(), 'day') && !isActiveRange) && styles.today,
-            isActiveRange && Object.assign({}, styles.betweenDay, styles['betweenDay' + whereInRange]),
-            isSelectedDay && Object.assign({}, styles.selectedDay, styles['selected' + whereInRange])
-          )}
           tabIndex={startDate.isSame(moment.unix(focusedDay), 'day') ? 0 : null}
         >
           {startDate.date()}
@@ -110,7 +111,7 @@ class MonthTable extends React.Component {
       startDate = startDate.add(1, 'd');
     }
 
-    return (<div className='mx-month-table' style={styles.calendarTable}>{days}</div>);
+    return (<div className={`${css(styles.calendarTable)} mx-month-table`}>{days}</div>);
   }
 }
 
