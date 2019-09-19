@@ -42,7 +42,7 @@ class SelectionPane extends React.Component {
             className='mx-selection-pane-from-field'
             onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
             ref={this.props.getFromButtonRef}
-            style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : null)}
+            style={{ ...styles.dateSelectBox, ...this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : {}}}
           >
             {selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}
           </button>
@@ -53,13 +53,13 @@ class SelectionPane extends React.Component {
             className='mx-selection-pane-to-field'
             onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
             ref={this.props.getToButtonRef}
-            style={Object.assign({}, styles.dateSelectBox, this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : null)}
+            style={{ ...styles.dateSelectBox, ...this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : {}}}
           >
             {selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}
           </button>
         </div>
         <div>
-          <div style={Object.assign({}, styles.defaultRangesTitle, { color: theme.Colors.PRIMARY })}>
+          <div style={{ ...styles.defaultRangesTitle, color: theme.Colors.PRIMARY }}>
             Select a Range
           </div>
           <DefaultRanges {...this.props} styles={styles} theme={theme} />

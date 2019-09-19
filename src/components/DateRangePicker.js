@@ -2,7 +2,6 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const keycode = require('keycode');
 
-import { css } from 'glamor'
 import { withTheme } from './Theme';
 const moment = require('moment');
 const _merge = require('lodash/merge');
@@ -642,7 +641,7 @@ class DateRangePicker extends React.Component {
         flexWrap: 'wrap',
         justifyContent: 'center'
       },
-      calendarDay: css({
+      calendarDay: {
         alignItems: 'center',
         boxSizing: 'border-box',
         color: theme.Colors.GRAY_300,
@@ -656,15 +655,15 @@ class DateRangePicker extends React.Component {
         ':hover': {
           border: '1px solid' + theme.Colors.PRIMARY
         }
-      }),
-      calendarDayDisabled: css({
+      },
+      calendarDayDisabled: {
         color: theme.Colors.GRAY_300,
 
         ':hover': {
           cursor: 'default',
           border: 'none'
         }
-      }),
+      },
       today: {
         backgroundColor: theme.Colors.GRAY_300,
         color: theme.Colors.WHITE
@@ -683,14 +682,14 @@ class DateRangePicker extends React.Component {
         backgroundColor: theme.Colors.PRIMARY,
         color: theme.Colors.WHITE
       },
-      betweenDay: css({
+      betweenDay: {
         backgroundColor: StyleUtils.adjustHexOpacity(theme.Colors.PRIMARY, 0.5),
         borderRadius: 0,
 
         ':hover': {
           border: '1px solid' + theme.Colors.PRIMARY
         }
-      }),
+      },
 
       //Scrim
       scrim: {
