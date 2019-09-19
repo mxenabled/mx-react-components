@@ -6,12 +6,14 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
-        <h2>MX React Components V 6.5.0</h2>
+        <h2>MX React Components V 6.6.0</h2>
 
-        <h3>6.5.2</h3>
+        <h3>6.6.0</h3>
         <ul>
           <li>DateRangePicker - Render Props for custom trigger element. (<a href='https://github.com/mxenabled/mx-react-components/issues/841'>#841</a>)</li>
         </ul>
+
+        <h2>MX React Components V 6.5.0</h2>
 
         <h3>6.5.1</h3>
         <ul>
