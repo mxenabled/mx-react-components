@@ -1,6 +1,5 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Radium = require('radium');
 const keycode = require('keycode');
 
 import { withTheme } from './Theme';
@@ -704,4 +703,4 @@ class DateRangePicker extends React.Component {
   };
 }
 
-module.exports = withTheme(Radium(DateRangePicker));
+module.exports = withTheme(DateRangePicker);
