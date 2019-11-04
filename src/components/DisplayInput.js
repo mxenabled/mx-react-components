@@ -41,7 +41,7 @@ class DisplayInput extends React.Component {
     valid: true
   };
 
-  componentWillMount () {
+  componentWillMount() {
     this._labelId = _uniqueId('DI');
     this._inputId = this.props.elementProps.id || _uniqueId('DI');
   }
@@ -64,7 +64,7 @@ class DisplayInput extends React.Component {
     return { large: 12, medium: 12, small: 12 };
   }
 
-  render () {
+  render() {
     // Input properties
     const { disabled, onChange, ...rest } = this.props.elementProps;
 
@@ -94,7 +94,7 @@ class DisplayInput extends React.Component {
                   {this.props.label}
                 </label>
               </Column>
-            ) : null }
+            ) : null}
 
             <Column relative={!hasChildren} span={inputColumn}>
               {hasChildren ? (
@@ -102,19 +102,20 @@ class DisplayInput extends React.Component {
                   {this.props.children}
                 </div>
               ) : (
-                <div style={styles.inputWrapper}>
-                  <input
-                    {...rest}
-                    aria-disabled={disabled}
-                    aria-labelledby={this.props.label ? this._labelId : null}
-                    id={this._inputId}
-                    key='input'
-                    onChange={disabled ? null : onChange}
-                    ref={this.props.elementRef}
-                    style={styles.input}
-                  />
-                </div>
-              )}
+                  <div style={styles.inputWrapper}>
+                    <input
+                      {...rest}
+                      aria-disabled={disabled}
+                      aria-labelledby={this.props.label ? this._labelId : null}
+                      disabled={disabled}
+                      id={this._inputId}
+                      key='input'
+                      onChange={disabled ? null : onChange}
+                      ref={this.props.elementRef}
+                      style={styles.input}
+                    />
+                  </div>
+                )}
             </Column>
 
             {showHint ? (
@@ -123,7 +124,7 @@ class DisplayInput extends React.Component {
                   {this.props.showHint && !this.props.status ? (<div>{this.props.hint}</div>) : null}
                 </div>
               </Column>
-            ) : null }
+            ) : null}
           </Row>
         </div>
 
