@@ -107,6 +107,7 @@ class DisplayInput extends React.Component {
                     {...rest}
                     aria-disabled={disabled}
                     aria-labelledby={this.props.label ? this._labelId : null}
+                    disabled={disabled}
                     id={this._inputId}
                     key='input'
                     onChange={disabled ? null : onChange}
