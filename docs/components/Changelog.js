@@ -8,6 +8,13 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.6.0</h2>
 
+        <h3>6.6.1</h3>
+        <ul>
+          <li>Display Input - Added disbaled attribute to Display Input. (<a href='https://github.com/mxenabled/mx-react-components/issues/846'>#846</a>)</li>
+          <li>Numeral - Updated to 2.0.6. (<a href='https://github.com/mxenabled/mx-react-components/issues/845'>#845</a>)</li>
+          <li>Jest - Moved from dev to dev dependncies. (<a href='https://github.com/mxenabled/mx-react-components/issues/844'>#844</a>)</li>
+        </ul>
+
         <h3>6.6.0</h3>
         <ul>
           <li>DateRangePicker - Render Props for custom trigger element. (<a href='https://github.com/mxenabled/mx-react-components/issues/841'>#841</a>)</li>
