@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.6.0</h2>
 
+        <h3>6.6.2</h3>
+        <ul>
+          <li>No Change from 6.6.1. This release just replaces the 6.6.1 release that had issues with the dist folder. 6.6.1 has been unpublished.</li>
+        </ul>
+
         <h3>6.6.1</h3>
         <ul>
           <li>Display Input - Added disbaled attribute to Display Input. (<a href='https://github.com/mxenabled/mx-react-components/issues/846'>#846</a>)</li>
