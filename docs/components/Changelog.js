@@ -10,7 +10,8 @@ class Changelog extends React.Component {
 
         <h3>6.6.3</h3>
         <ul>
-          <li> Adds the `onStart` and `onCancel` callbacks to the DateRangePicker component. (<a href='https://github.com/mxenabled/mx-react-components/issues/848'>#848</a>)</li>
+          <li> Adds the `onOpen` and `onCancel` callbacks to the DateRangePicker component. (<a href='https://github.com/mxenabled/mx-react-components/issues/848'>#848</a>)</li>
+
         </ul>
 
         <h3>6.6.2</h3>
