@@ -122,7 +122,7 @@ class DateRangePickerDocs extends React.Component {
               onClick: Function
             }
           `}
-        </Markdown>       
+        </Markdown>
 
         <h5>format <label>String</label></h5>
         <p>Default: 'MMM D, YYYY'</p>
@@ -139,8 +139,14 @@ class DateRangePickerDocs extends React.Component {
         <h5>minimumDate <label>Number (unix timestamp)</label></h5>
         <p>If set, the user will not be able to select a date prior to this date.</p>
 
+        <h5>onCancel <label>Function</label></h5>
+        <p>A function to be called when the user presses the cancel button or clicks on the scrim to cancel the date selection. Can be useful for analytics.</p>
+
         <h5>onDateRangeSelect <label>Function</label></h5>
         <p>A function to be called when the user has applied their selected date range. The range's start and end dates are passed as arguements to the call.</p>
+
+        <h5>onStart <label>Function</label></h5>
+        <p>A function to be called when the user opens the calendar. Can be useful for analytics.</p>
 
         <h5>placeholderText <label>String</label></h5>
         <p>Default: Select A Date</p>
