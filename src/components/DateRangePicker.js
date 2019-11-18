@@ -372,7 +372,10 @@ class DateRangePicker extends React.Component {
                   id='calendarMenu'
                   onKeyUp={e => {
                     if (keycode(e) === 'esc') {
-                      this.setState({ showSelectionPane: false });
+                      this.setState({ showSelectionPane: false }, () => {
+                        this.props.onCancel()
+                        this.props.onClose()
+                      });
                     }
                   }}
                   style={styles.optionsWrapper}
