@@ -285,7 +285,7 @@ class DateRangePicker extends React.Component {
     this.props.onClose();
 
     this.setState({
-      focusedDay: this.props.selectedStartDate,
+      focusedDay: this.props.selectedEndDate,
       selectedStartDate: this.props.selectedStartDate,
       selectedEndDate: this.props.selectedEndDate,
       showCalendar: false,
