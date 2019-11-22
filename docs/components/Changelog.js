@@ -8,6 +8,12 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.6.0</h2>
 
+        <h3>6.6.3</h3>
+        <ul>
+          <li> Adds the `onOpen` and `onCancel` callbacks to the DateRangePicker component. (<a href='https://github.com/mxenabled/mx-react-components/issues/848'>#848</a>)</li>
+
+        </ul>
+
         <h3>6.6.2</h3>
         <ul>
           <li>No Change from 6.6.1. This release just replaces the 6.6.1 release that had issues with the dist folder. 6.6.1 has been unpublished.</li>
@@ -44,7 +50,7 @@ class Changelog extends React.Component {
           <li>MessageBox - Added the ability to add children. (<a href='https://github.com/mxenabled/mx-react-components/issues/839'>#839</a>)</li>
           <li>DisplayInput - Added the ability to add styles to parent container. (<a href='https://github.com/mxenabled/mx-react-components/issues/839'>#839</a>)</li>
         </ul>
-        
+
         <h2>MX React Components V 6.3.0</h2>
 
         <h3>6.3.0</h3>
