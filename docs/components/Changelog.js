@@ -11,7 +11,7 @@ class Changelog extends React.Component {
         <h3>6.6.3</h3>
         <ul>
           <li> Adds the `onOpen` and `onCancel` callbacks to the DateRangePicker component. (<a href='https://github.com/mxenabled/mx-react-components/issues/848'>#848</a>)</li>
-
+          <li> Updates `_resetToPropValuesAndClose` method to reset the selected month and focused date properly </li>
         </ul>
 
         <h3>6.6.2</h3>
