@@ -34,8 +34,10 @@ class DateRangePicker extends React.Component {
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
+    onCancel: PropTypes.func,
     onClose: PropTypes.func,
     onDateRangeSelect: PropTypes.func,
+    onOpen: PropTypes.func,
     placeholderText: PropTypes.string,
     selectedEndDate: PropTypes.number,
     selectedStartDate: PropTypes.number,
@@ -82,7 +84,9 @@ class DateRangePicker extends React.Component {
     format: 'MMM D, YYYY',
     isRelative: true,
     locale: 'en',
-    onClose () {},
+    onCancel: () => {},
+    onClose: () => {},
+    onOpen: () => {},
     placeholderText: 'Select A Date Range',
     showDefaultRanges: false
   };
@@ -238,6 +242,9 @@ class DateRangePicker extends React.Component {
   };
 
   _toggleSelectionPane = () => {
+    if (!this.state.showSelectionPane) {
+      this.props.onOpen()
+    }
     this.setState({
       showSelectionPane: !this.state.showSelectionPane
     });
@@ -321,13 +328,13 @@ class DateRangePicker extends React.Component {
           ? `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected`
           : ''
       }`,
-      onClick: this._toggleSelectionPane
+      onClick: this._toggleSelectionPane,
     }
 
     return (
       <div className='mx-date-range-picker' style={styles.component}>
         {
-          children && typeof children === 'function' ? this.props.children(buttonProps) : 
+          children && typeof children === 'function' ? this.props.children(buttonProps) :
             (
               <button
                 {...buttonProps}
@@ -366,7 +373,10 @@ class DateRangePicker extends React.Component {
                   id='calendarMenu'
                   onKeyUp={e => {
                     if (keycode(e) === 'esc') {
-                      this.setState({ showSelectionPane: false });
+                      this.setState({ showSelectionPane: false }, () => {
+                        this.props.onCancel()
+                        this.props.onClose()
+                      });
                     }
                   }}
                   style={styles.optionsWrapper}
@@ -470,6 +480,7 @@ class DateRangePicker extends React.Component {
                       <Button
                         aria-label='Cancel Date Range Selection'
                         onClick={() => {
+                          this.props.onCancel()
                           this._resetToPropValuesAndClose();
                         }}
                         theme={this.props.theme}
@@ -501,7 +512,10 @@ class DateRangePicker extends React.Component {
           </div>
         </div>
         {this.state.showSelectionPane ? (
-          <div onClick={this._resetToPropValuesAndClose} style={styles.scrim} />
+          <div onClick={() => {
+            this.props.onCancel()
+            this._resetToPropValuesAndClose()
+          }} style={styles.scrim} />
         ) : null}
       </div>
     );
