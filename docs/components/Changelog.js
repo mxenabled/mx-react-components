@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.6.0</h2>
 
+          <h3>6.6.4</h3>
+          <ul>
+            <li>No Change from 6.6.3. This release just replaces the 6.6.3 release that had issues with the dist folder. 6.6.3 has been unpublished.</li>
+          </ul>
+
         <h3>6.6.3</h3>
         <ul>
           <li> Adds the `onOpen` and `onCancel` callbacks to the DateRangePicker component. (<a href='https://github.com/mxenabled/mx-react-components/issues/848'>#848</a>)</li>
