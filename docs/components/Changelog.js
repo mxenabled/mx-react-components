@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.6.0</h2>
 
+          <h3>6.6.5</h3>
+          <ul>
+            <li>No Change from 6.6.4. This release just replaces the 6.6.4 release that had issues with the dist folder and file case sensitivity. 6.6.4 has been unpublished.</li>
+          </ul>
+
           <h3>6.6.4</h3>
           <ul>
             <li>No Change from 6.6.3. This release just replaces the 6.6.3 release that had issues with the dist folder. 6.6.3 has been unpublished.</li>
