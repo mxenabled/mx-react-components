@@ -125,7 +125,7 @@ class DisplayInputDocs extends React.Component {
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h5>valid <label>Boolean</label></h5>
-        <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border.</p>
+        <p>Indicates whether the value of Input field is valid. If it is not valid, the input field will have a red bottom border and the aria-label will update to the error message, if provided.</p>
 
         <h3>Example</h3>
         <Markdown>
