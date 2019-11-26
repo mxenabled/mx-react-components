@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.6.0</h2>
 
+          <h3>6.6.6</h3>
+          <ul>
+            <li>Adds behavior to the DisplayInput component that when an error message is present, it will replace the aria-label of the input so a user will be notified a correction needs to be made when they focus the input.</li>
+          </ul>
+
           <h3>6.6.5</h3>
           <ul>
             <li>No Change from 6.6.4. This release just replaces the 6.6.4 release that had issues with the dist folder and file case sensitivity. 6.6.4 has been unpublished.</li>
