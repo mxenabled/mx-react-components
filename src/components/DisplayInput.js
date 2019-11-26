@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
 const _merge = require('lodash/merge');
+const _get = require('lodash/get');
 
 import { withTheme } from './Theme';
 const Column = require('../components/grid/Column');
@@ -84,6 +85,8 @@ class DisplayInput extends React.Component {
     // Styles
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
 
+    const errorMessage = _get(this.props.status, 'message', null)
+
     return (
       <Container className='mx-display-input' styles={styles.container} >
         <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
@@ -106,7 +109,8 @@ class DisplayInput extends React.Component {
                   <input
                     {...rest}
                     aria-disabled={disabled}
-                    aria-labelledby={this.props.label ? this._labelId : null}
+                    aria-label={errorMessage}
+                    aria-labelledby={hasLabel && !errorMessage ? this._labelId : null}
                     disabled={disabled}
                     id={this._inputId}
                     key='input'
