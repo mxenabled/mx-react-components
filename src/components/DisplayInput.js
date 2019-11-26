@@ -93,7 +93,7 @@ class DisplayInput extends React.Component {
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
-                <label htmlFor={this._inputId} id={this._labelId} style={Object.assign({}, styles.labelText, this.props.labelStyle)}>
+                <label htmlFor={this._inputId} id={this._labelId} style={{...styles.labelText, ...this.props.labelStyle}}>
                   {this.props.label}
                 </label>
               </Column>
@@ -101,7 +101,7 @@ class DisplayInput extends React.Component {
 
             <Column relative={!hasChildren} span={inputColumn}>
               {hasChildren ? (
-                <div style={Object.assign({}, styles.children, this.props.childrenStyle)}>
+                <div style={{...styles.children, ...this.props.childrenStyle}}>
                   {this.props.children}
                 </div>
               ) : (
