@@ -27,9 +27,11 @@ class RadioButton extends React.Component {
 
     return (
       <button
+        aria-checked={this.props.checked}
         className='mx-radio-button-item'
         onClick={this.props.onClick}
         ref={this.props.elementRef}
+        role="radio"
         style={styles.component}
       >
         <div className='mx-radio-button' style={styles.radioButton}>
@@ -49,7 +51,8 @@ class RadioButton extends React.Component {
         backgroundColor: 'transparent',
         border: 'none',
         fontSize: theme.FontSizes.MEDIUM,
-        padding: 0
+        padding: 0,
+        outline: 'none'
       }, this.props.style),
       radioButton: Object.assign({}, {
         display: 'flex',
