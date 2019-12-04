@@ -18,15 +18,15 @@ class RadioButton extends React.Component {
   };
 
   static defaultProps = {
-    onClick: () => {}
+    onClick: () => { }
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
-      <div
+      <button
         className='mx-radio-button-item'
         onClick={this.props.onClick}
         ref={this.props.elementRef}
@@ -36,7 +36,7 @@ class RadioButton extends React.Component {
           {this.props.checked ? <div style={styles.radioButtonActive} /> : null}
         </div>
         <div style={styles.children}>{this.props.children}</div>
-      </div>
+      </button>
     );
   }
 
@@ -45,7 +45,11 @@ class RadioButton extends React.Component {
       component: Object.assign({}, {
         cursor: 'pointer',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        border: 'none',
+        fontSize: theme.FontSizes.MEDIUM,
+        padding: 0
       }, this.props.style),
       radioButton: Object.assign({}, {
         display: 'flex',
