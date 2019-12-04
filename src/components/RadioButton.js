@@ -5,13 +5,13 @@ import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { isEnterOrSpaceKey } = require('../utils/KeyPress')
 
 class RadioButton extends React.Component {
   static propTypes = {
     activeButtonStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
     checked: PropTypes.bool,
+    elementProps: PropTypes.object,
     elementRef: PropTypes.func,
     onClick: PropTypes.func,
     style: PropTypes.object,
@@ -22,31 +22,25 @@ class RadioButton extends React.Component {
     onClick: () => { }
   };
 
-  _handleKeyDown = e => {
-    e.preventDefault();
-    if (isEnterOrSpaceKey(e)) return;
-  }
-
   render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
-      <div
+      <button
         aria-checked={this.props.checked}
         className='mx-radio-button-item'
         onClick={this.props.onClick}
-        onKeyDown={this._handleKeyDown}
         ref={this.props.elementRef}
         role="radio"
         style={styles.component}
-        tabIndex={this.props.checked ? 0 : -1}
+        {...this.props.elementProps}
       >
         <div className='mx-radio-button' style={styles.radioButton}>
           {this.props.checked ? <div style={styles.radioButtonActive} /> : null}
         </div>
         <div style={styles.children}>{this.props.children}</div>
-      </div>
+      </button>
     );
   }
 
@@ -56,11 +50,10 @@ class RadioButton extends React.Component {
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
-        // backgroundColor: 'transparent',
-        // border: 'none',
-        // fontSize: theme.FontSizes.MEDIUM,
-        // padding: 0,
-        // outline: 'none'
+        backgroundColor: 'transparent',
+        outline: 'none',
+        border: 'none',
+        fontSize: theme.FontSizes.MEDIUM,
       }, this.props.style),
       radioButton: Object.assign({}, {
         display: 'flex',
