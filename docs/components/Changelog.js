@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.7.0</h2>
 
+        <h3>6.7.01</h3>
+        <ul>
+          <li>Changed the wrapping `div` for the ToggleSwitch component to a native `button` element and provided the role `switch` for SR purposes.</li>
+        </ul>
+
         <h3>6.7.0</h3>
         <ul>
           <li>Added elementProps prop to the RadioButton component to allow users to apply their own attributes to the native html element. Added radio role and aria-checked to RadioButton's wrapping button element for increased accessibility.</li>
