@@ -8,6 +8,7 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
+const { isEnterOrSpaceKey } = require('../utils/KeyPress')
 
 class ToggleSwitch extends React.Component {
   static propTypes = {
@@ -28,7 +29,7 @@ class ToggleSwitch extends React.Component {
     checked: false,
     falseIcon: 'close-skinny',
     leftLabel: 'Off',
-    onToggle: () => {},
+    onToggle: () => { },
     rightLabel: 'On',
     showLabels: false,
     showIcons: true,
@@ -39,12 +40,17 @@ class ToggleSwitch extends React.Component {
     this.props.onToggle(event);
   };
 
-  render () {
+  _handleKeyDown = (event) => {
+    event.preventDefault();
+    if (isEnterOrSpaceKey(event)) this._handleToggle(event);
+  };
+
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
-      <div className='toggle-switch-component' ref={this.props.elementRef} style={styles.component}>
+      <div aria-checked={this.props.checked} className='toggle-switch-component' onKeyDown={this._handleKeyDown} ref={this.props.elementRef} role="switch" style={styles.component} tabIndex={0} >
         {this.props.showLabels ? (
           <div className='left-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
         ) : null}
