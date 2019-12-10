@@ -8,7 +8,6 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { isTabKey } = require('../utils/KeyPress')
 
 class ToggleSwitch extends React.Component {
   static propTypes = {
@@ -40,19 +39,12 @@ class ToggleSwitch extends React.Component {
     this.props.onToggle(event);
   };
 
-  _handleKeyDown = (event) => {
-    if (!isTabKey(event)) {
-      event.preventDefault();
-      this._handleToggle(event);
-    }
-  };
-
   render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
-      <button aria-checked={this.props.checked} className='toggle-switch-component' onClick={this._handleToggle} onKeyDown={this._handleKeyDown} ref={this.props.elementRef} role="switch" style={styles.component}>
+      <button aria-checked={this.props.checked} className='toggle-switch-component' onClick={this._handleToggle} ref={this.props.elementRef} role="switch" style={styles.component}>
         {this.props.showLabels ? (
           <div className='left-label' style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
         ) : null}
