@@ -8,7 +8,7 @@ const Icon = require('./Icon');
 const { themeShape } = require('../constants/App');
 
 const StyleUtils = require('../utils/Style');
-const { isEnterOrSpaceKey } = require('../utils/KeyPress')
+const { isEnterOrSpaceKey, isTabKey } = require('../utils/KeyPress')
 
 class ToggleSwitch extends React.Component {
   static propTypes = {
@@ -41,8 +41,10 @@ class ToggleSwitch extends React.Component {
   };
 
   _handleKeyDown = (event) => {
-    event.preventDefault();
-    if (isEnterOrSpaceKey(event)) this._handleToggle(event);
+    if (!isTabKey(event)) {
+      event.preventDefault();
+      if (isEnterOrSpaceKey(event)) this._handleToggle(event);
+    }
   };
 
   render() {
