@@ -6,6 +6,14 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h2>MX React Components V 6.8.0</h2>
+
+        <h3>6.8.0</h3>
+        <ul>
+          <li>Added a new Icon, "checkmark".</li>
+          <li>Updated `react` and `react-dom` packages to 16.12.0.</li>
+        </ul>
+
         <h2>MX React Components V 6.7.0</h2>
 
         <h3>6.7.1</h3>
