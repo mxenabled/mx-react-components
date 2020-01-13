@@ -28,7 +28,7 @@ class ToggleSwitch extends React.Component {
     checked: false,
     falseIcon: 'close-skinny',
     leftLabel: 'Off',
-    onToggle: () => {},
+    onToggle: () => { },
     rightLabel: 'On',
     showLabels: false,
     showIcons: true,
@@ -39,18 +39,18 @@ class ToggleSwitch extends React.Component {
     this.props.onToggle(event);
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
     return (
-      <div className='toggle-switch-component' ref={this.props.elementRef} style={styles.component}>
+      <button aria-checked={this.props.checked} className='toggle-switch-component' onClick={this._handleToggle} ref={this.props.elementRef} role="switch" style={styles.component}>
         {this.props.showLabels ? (
-          <div className='left-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
+          <div className='left-label' style={Object.assign({}, styles.label, this.props.checked ? styles.inactiveLabel : styles.activeLabel)}>{this.props.leftLabel}</div>
         ) : null}
         <div
           className='toggle-switch-track'
-          onClick={this._handleToggle}
+
           style={Object.assign({}, styles.track, styles[this.props.checked + 'Track'])}
         >
           {this.props.showIcons ? (
@@ -64,7 +64,7 @@ class ToggleSwitch extends React.Component {
         {this.props.showLabels ? (
           <div className='right-label' onClick={this._handleToggle} style={Object.assign({}, styles.label, this.props.checked ? styles.activeLabel : styles.inactiveLabel)}>{this.props.rightLabel}</div>
         ) : null}
-      </div>
+      </button>
     );
   }
 
@@ -75,7 +75,9 @@ class ToggleSwitch extends React.Component {
         display: 'flex',
         fontFamily: theme.Fonts.REGULAR,
         fontSize: theme.FontSizes.MEDIUM,
-        position: 'relative'
+        position: 'relative',
+        border: 'none',
+        background: 'transparent'
       },
       icon: {
         fill: theme.Colors.WHITE,

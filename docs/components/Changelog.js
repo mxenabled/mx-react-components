@@ -1,27 +1,39 @@
 const React = require('react');
 
 class Changelog extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <h1>Change Log</h1>
 
+        <h2>MX React Components V 6.7.0</h2>
+
+        <h3>6.7.1</h3>
+        <ul>
+          <li>Changed the wrapping `div` for the ToggleSwitch component to a native `button` element and provided the role `switch` for SR purposes.</li>
+        </ul>
+
+        <h3>6.7.0</h3>
+        <ul>
+          <li>Added elementProps prop to the RadioButton component to allow users to apply their own attributes to the native html element. Added radio role and aria-checked to RadioButton's wrapping button element for increased accessibility.</li>
+        </ul>
+
         <h2>MX React Components V 6.6.0</h2>
 
-          <h3>6.6.6</h3>
-          <ul>
-            <li>Adds behavior to the DisplayInput component that when an error message is present, it will replace the aria-label of the input so a user will be notified a correction needs to be made when they focus the input.</li>
-          </ul>
+        <h3>6.6.6</h3>
+        <ul>
+          <li>Adds behavior to the DisplayInput component that when an error message is present, it will replace the aria-label of the input so a user will be notified a correction needs to be made when they focus the input.</li>
+        </ul>
 
-          <h3>6.6.5</h3>
-          <ul>
-            <li>No Change from 6.6.4. This release just replaces the 6.6.4 release that had issues with the dist folder and file case sensitivity. 6.6.4 has been unpublished.</li>
-          </ul>
+        <h3>6.6.5</h3>
+        <ul>
+          <li>No Change from 6.6.4. This release just replaces the 6.6.4 release that had issues with the dist folder and file case sensitivity. 6.6.4 has been unpublished.</li>
+        </ul>
 
-          <h3>6.6.4</h3>
-          <ul>
-            <li>No Change from 6.6.3. This release just replaces the 6.6.3 release that had issues with the dist folder. 6.6.3 has been unpublished.</li>
-          </ul>
+        <h3>6.6.4</h3>
+        <ul>
+          <li>No Change from 6.6.3. This release just replaces the 6.6.3 release that had issues with the dist folder. 6.6.3 has been unpublished.</li>
+        </ul>
 
         <h3>6.6.3</h3>
         <ul>
@@ -84,73 +96,73 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.1.0</h2>
 
-          <h3>6.1.12</h3>
-          <ul>
-            <li>Select - Add ability to search dropdown options via withSearch prop. (<a href='https://github.com/mxenabled/mx-react-components/issues/832'>#832</a>)</li>
-          </ul>
+        <h3>6.1.12</h3>
+        <ul>
+          <li>Select - Add ability to search dropdown options via withSearch prop. (<a href='https://github.com/mxenabled/mx-react-components/issues/832'>#832</a>)</li>
+        </ul>
 
-          <h3>6.1.11</h3>
-          <ul>
-            <li>Modal - Revert tabindex change due to Focus Trap error</li>
-          </ul>
+        <h3>6.1.11</h3>
+        <ul>
+          <li>Modal - Revert tabindex change due to Focus Trap error</li>
+        </ul>
 
-          <h3>6.1.10</h3>
-          <ul>
-            <li>Modal - Revert tabindex change due to Focus Trap error</li>
-          </ul>
+        <h3>6.1.10</h3>
+        <ul>
+          <li>Modal - Revert tabindex change due to Focus Trap error</li>
+        </ul>
 
-          <h3>6.1.9</h3>
-          <ul>
-            <li>DateRangePicker - Remove style override for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/833'>#833</a>)</li>
-            <li>Modal - General a11y improvements, remove default role and extraneous button properties. (<a href='https://github.com/mxenabled/mx-react-components/pull/833'>#833</a>)</li>
-          </ul>
+        <h3>6.1.9</h3>
+        <ul>
+          <li>DateRangePicker - Remove style override for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/833'>#833</a>)</li>
+          <li>Modal - General a11y improvements, remove default role and extraneous button properties. (<a href='https://github.com/mxenabled/mx-react-components/pull/833'>#833</a>)</li>
+        </ul>
 
-          <h3>6.1.8</h3>
-          <ul>
-            <li>DateRangePicker - Remove menu role for JAWS a11y issue. (<a href='https://github.com/mxenabled/mx-react-components/pull/831'>#831</a>)</li>
-          </ul>
+        <h3>6.1.8</h3>
+        <ul>
+          <li>DateRangePicker - Remove menu role for JAWS a11y issue. (<a href='https://github.com/mxenabled/mx-react-components/pull/831'>#831</a>)</li>
+        </ul>
 
-          <h3>6.1.7</h3>
-          <ul>
-            <li>Tab - Semantic HTML for Accessibility and default button style overrides. (<a href='https://github.com/mxenabled/mx-react-components/pull/828'>#828</a>)</li>
-          </ul>
+        <h3>6.1.7</h3>
+        <ul>
+          <li>Tab - Semantic HTML for Accessibility and default button style overrides. (<a href='https://github.com/mxenabled/mx-react-components/pull/828'>#828</a>)</li>
+        </ul>
 
-          <h3>6.1.6</h3>
-          <ul>
-            <li>DateRangePicker - Accessibility fix for colliding aria labels. (<a href='https://github.com/mxenabled/mx-react-components/pull/827'>#827</a>)</li>
-          </ul>
+        <h3>6.1.6</h3>
+        <ul>
+          <li>DateRangePicker - Accessibility fix for colliding aria labels. (<a href='https://github.com/mxenabled/mx-react-components/pull/827'>#827</a>)</li>
+        </ul>
 
-          <h3>6.1.5</h3>
-          <ul>
-            <li>Select - Accessibility fix for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/815'>#815</a>)</li>
-            <li>DisplayInput - Accessibility fix for error state (<a href='https://github.com/mxenabled/mx-react-components/pull/823'>#823</a>)</li>
-            <li>NPM Audit - Updated dependcies reported as having vulnerabilities (<a href='https://github.com/mxenabled/mx-react-components/pull/825'>#825</a>)</li>
-          </ul>
+        <h3>6.1.5</h3>
+        <ul>
+          <li>Select - Accessibility fix for focus state. (<a href='https://github.com/mxenabled/mx-react-components/pull/815'>#815</a>)</li>
+          <li>DisplayInput - Accessibility fix for error state (<a href='https://github.com/mxenabled/mx-react-components/pull/823'>#823</a>)</li>
+          <li>NPM Audit - Updated dependcies reported as having vulnerabilities (<a href='https://github.com/mxenabled/mx-react-components/pull/825'>#825</a>)</li>
+        </ul>
 
-          <h3>6.1.4</h3>
-          <ul>
-            <li>Drawer - Event propagation fix. Spin - Clear interval on unmount. (<a href='https://github.com/mxenabled/mx-react-components/pull/817'>#817</a>)</li>
-            <li>DonutChart - Add new prop toggleDataLabelOnHover. See docs for details. (<a href='https://github.com/mxenabled/mx-react-components/pull/819'>#819</a>)</li>
-            <li>SimpleSelect - Event propagation fix (<a href='https://github.com/mxenabled/mx-react-components/pull/820'>#820</a>)</li>
-            <li>DateRangePicker - DefaultRanges a11y improvements (<a href='https://github.com/mxenabled/mx-react-components/pull/821'>#821</a>)</li>
-          </ul>
+        <h3>6.1.4</h3>
+        <ul>
+          <li>Drawer - Event propagation fix. Spin - Clear interval on unmount. (<a href='https://github.com/mxenabled/mx-react-components/pull/817'>#817</a>)</li>
+          <li>DonutChart - Add new prop toggleDataLabelOnHover. See docs for details. (<a href='https://github.com/mxenabled/mx-react-components/pull/819'>#819</a>)</li>
+          <li>SimpleSelect - Event propagation fix (<a href='https://github.com/mxenabled/mx-react-components/pull/820'>#820</a>)</li>
+          <li>DateRangePicker - DefaultRanges a11y improvements (<a href='https://github.com/mxenabled/mx-react-components/pull/821'>#821</a>)</li>
+        </ul>
 
-          <h3>6.1.3</h3>
-          <ul>
-            <li>Split doc and dist package.json (<a href='https://github.com/mxenabled/mx-react-components/pull/812'>#812</a>)</li>
-            <li>Export svg paths used in the Icon component for external use. (<a href='https://github.com/mxenabled/mx-react-components/pull/809'>#809</a>)</li>
-            <li>Remove use of `useGlobalKeyHandler = true` in `SimpleSelect` and `Select`. (<a href='https://github.com/mxenabled/mx-react-components/pull/802'>#802</a>)</li>
-          </ul>
+        <h3>6.1.3</h3>
+        <ul>
+          <li>Split doc and dist package.json (<a href='https://github.com/mxenabled/mx-react-components/pull/812'>#812</a>)</li>
+          <li>Export svg paths used in the Icon component for external use. (<a href='https://github.com/mxenabled/mx-react-components/pull/809'>#809</a>)</li>
+          <li>Remove use of `useGlobalKeyHandler = true` in `SimpleSelect` and `Select`. (<a href='https://github.com/mxenabled/mx-react-components/pull/802'>#802</a>)</li>
+        </ul>
 
-          <h3>6.1.2</h3>
-          <ul>
-            <li>Move doc dependcies to dev (<a href='https://github.com/mxenabled/mx-react-components/pull/807'>#807</a>)</li>
-          </ul>
+        <h3>6.1.2</h3>
+        <ul>
+          <li>Move doc dependcies to dev (<a href='https://github.com/mxenabled/mx-react-components/pull/807'>#807</a>)</li>
+        </ul>
 
-          <h3>6.1.1</h3>
-          <ul>
-            <li>Fix doc releasing and bundle size (<a href='https://github.com/mxenabled/mx-react-components/pull/805'>#805</a>)</li>
-          </ul>
+        <h3>6.1.1</h3>
+        <ul>
+          <li>Fix doc releasing and bundle size (<a href='https://github.com/mxenabled/mx-react-components/pull/805'>#805</a>)</li>
+        </ul>
 
         <h3>6.1.0</h3>
         <ul>

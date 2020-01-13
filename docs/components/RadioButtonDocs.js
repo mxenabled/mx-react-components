@@ -16,7 +16,7 @@ class RadioButtonDocs extends React.Component {
     });
   };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -63,6 +63,9 @@ class RadioButtonDocs extends React.Component {
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
+        <h5>elementProps <label>Object</label></h5>
+        <p>Pass native HTML attributes directly to the button element.</p>
+
         <h3>Example</h3>
         <Markdown>
           {`
@@ -70,6 +73,9 @@ class RadioButtonDocs extends React.Component {
               activeButtonStyle={{ backgroundColor: '#FBB600' }}
               buttonStyle={{ height: 30, width: 30 }}
               checked={true}
+              elementProps={{
+                tabIndex: -1
+              }}
               onClick={this._handleRadioClick}
               style={{ marginTop: 20 }}
             >
