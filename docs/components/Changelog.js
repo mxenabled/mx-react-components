@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 6.7.0</h2>
 
+        <h3>6.7.2</h3>
+        <ul>
+          <li>Add a new checkmark icon to the Icon list.</li>
+        </ul>
+
         <h3>6.7.1</h3>
         <ul>
           <li>Changed the wrapping `div` for the ToggleSwitch component to a native `button` element and provided the role `switch` for SR purposes.</li>
