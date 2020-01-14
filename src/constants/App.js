@@ -179,10 +179,6 @@ module.exports = {
       displayValue: 'Checking'
     },
     {
-      value: 'checkmark',
-      displayValue: 'Checkmark'
-    },
-    {
       value: 'clock',
       displayValue: 'Clock'
     },
