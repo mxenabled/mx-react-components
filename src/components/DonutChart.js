@@ -74,7 +74,7 @@ class DonutChart extends React.Component {
     activeIndex: this.props.activeIndex || -1
   };
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this._setupD3Functions(this.props);
   }
 
@@ -82,7 +82,7 @@ class DonutChart extends React.Component {
     this._animateChart();
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     this._setupD3Functions(newProps);
 
     if (newProps.activeIndex !== this.props.activeIndex) {

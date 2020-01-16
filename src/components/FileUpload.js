@@ -46,7 +46,7 @@ class FileUpload extends React.Component {
     });
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     this._input.value = null;
 
     if (newProps.uploadedFile !== this.props.uploadedFile) {

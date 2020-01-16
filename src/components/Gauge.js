@@ -59,11 +59,11 @@ class Gauge extends React.Component {
     radiansMultiplier: (Math.PI / 180)
   };
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this._setupD3Functions(this.props);
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (!_isEqual(this.props.data, newProps.data)) {
       this._setupD3Functions(newProps);
     }

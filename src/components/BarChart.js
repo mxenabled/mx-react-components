@@ -191,7 +191,7 @@ class BarChart extends React.Component {
     hasPositive: false
   };
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this._hasPositiveOrNegativeValues();
   }
 

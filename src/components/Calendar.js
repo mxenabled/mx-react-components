@@ -66,7 +66,7 @@ class Calendar extends React.Component {
       this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (
       newProps.selectedDate
       && newProps.selectedDate !== this.props.selectedDate

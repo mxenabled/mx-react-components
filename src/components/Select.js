@@ -66,7 +66,7 @@ class Select extends React.Component {
     this.optionListRef = React.createRef();
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (!_isEqual(newProps.selected, this.props.selected)) {
       this.setState({ selected: newProps.selected });
     }
