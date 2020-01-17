@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 7.0.0</h2>
 
+        <h3>7.0.1</h3>
+        <ul>
+          <li>Prefixed deprecated lifecycle methods with `UNSAFE_`.</li>
+        </ul>
+
         <h3>7.0.0</h3>
         <ul>
           <li>Updated react and react-dom versions to 16.12.0</li>
