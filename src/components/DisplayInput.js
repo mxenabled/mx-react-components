@@ -42,7 +42,7 @@ class DisplayInput extends React.Component {
     valid: true
   };
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this._labelId = _uniqueId('DI');
     this._inputId = this.props.elementProps.id || _uniqueId('DI');
   }

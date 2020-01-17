@@ -23,7 +23,7 @@ class MXFocusTrap extends React.Component {
     paused: false
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     // FocusTrap does it's own pausing but these React components also need to be paused
     traps.forEach(component => {
       component.setState({ paused: true });

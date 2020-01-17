@@ -31,7 +31,7 @@ class Menu extends React.Component {
     hoverItemIndex: null
   };
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (!nextProps.isOpen) {
       this.setState({
         hoverItemIndex: null

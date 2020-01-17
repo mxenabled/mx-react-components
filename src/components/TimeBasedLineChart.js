@@ -267,7 +267,7 @@ class TimeBasedLineChart extends React.Component {
     this._styleChart();
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (newProps.height !== null || newProps.width !== null || newProps.margin !== null) {
       const height = newProps.height || this.props.height;
       const width = newProps.width || this.props.width;

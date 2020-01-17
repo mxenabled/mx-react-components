@@ -85,7 +85,7 @@ class Drawer extends React.Component {
     this.state = { breakPoints, theme };
   }
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this._resizeThrottled = _throttle(this._resize, 100);
   }
 
@@ -104,7 +104,7 @@ class Drawer extends React.Component {
     }
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (!_isEqual(newProps.breakPoints, this.props.breakPoints)) {
       this.setState({
         breakPoints: this.props.breakPoints

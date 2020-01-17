@@ -27,7 +27,7 @@ const Tabbable = (TabsComponent) => {
       };
     }
 
-    componentWillReceiveProps (nextProps) {
+    UNSAFE_componentWillReceiveProps (nextProps) {
       if (nextProps.selectedTab !== this.state.selectedTab) {
         this.setState({
           selectedTab: nextProps.selectedTab

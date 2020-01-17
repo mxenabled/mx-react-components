@@ -29,7 +29,7 @@ class LineGroup extends React.Component {
     translation: 'translate(0,0)'
   };
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     const flatLine = d3.svg.line()
       .x(d => {
         return this.props.xScaleValueFunction(d.x);

@@ -38,7 +38,7 @@ class DatePicker extends React.Component {
     showCalendar: false
   };
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (newProps.selectedDate && newProps.selectedDate !== this.props.selectedDate) {
       this.setState({
         currentDate: newProps.selectedDate

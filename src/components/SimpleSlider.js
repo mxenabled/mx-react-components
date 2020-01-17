@@ -42,7 +42,7 @@ class SimpleSlider extends React.Component {
     this.setState({ width, leftPixels });
   }
 
-  componentWillReceiveProps (newProps) {
+  UNSAFE_componentWillReceiveProps (newProps) {
     if (this.props.percent !== newProps.percent) {
       const leftPixels = newProps.percent * this.state.width;
 
