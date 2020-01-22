@@ -27,6 +27,7 @@ class Modal extends React.Component {
       style: PropTypes.object,
       type: PropTypes.oneOf(['primary', 'secondary'])
     })),
+    contentHasTabIndex: PropTypes.bool,
     contentStyle: PropTypes.object,
     focusOnLoad: PropTypes.bool,
     focusTrapProps: PropTypes.object,
@@ -51,6 +52,7 @@ class Modal extends React.Component {
 
   static defaultProps = {
     buttons: [],
+    contentHasTabIndex: true,
     focusOnLoad: true,
     focusTrapProps: {},
     isRelative: false,
@@ -203,7 +205,7 @@ class Modal extends React.Component {
               ref={ref => this._modalContent = ref}
               role={this.props.role}
               style={Object.assign({}, styles.content, this.props.contentStyle)}
-              tabIndex={0}
+              tabIndex={this.props.contentHasTabIndex ? 0 : null}
             >
               {this.props.children}
               {this._renderTooltip(styles, theme)}
