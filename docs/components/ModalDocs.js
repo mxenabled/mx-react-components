@@ -123,6 +123,9 @@ class ModalDocs extends React.Component {
         <h5>contentStyle <label>Object</label></h5>
         <p>A style object used to style the content div that wrapps the modal&#39;s content.</p>
 
+        <h5>contentHasTabIndex <label>Object</label></h5>
+        <p>A boolean to determine if the content of the modal should have a tabIndex. Defaults to true.</p>
+
         <h5>focusOnLoad <label>Boolean</label></h5>
         <p>Default: 'true'</p>
         <p>The modal will try to focus its content on mount.  This prop provides a way to over ride that functionality in case you wish to focus another element instead.</p>
