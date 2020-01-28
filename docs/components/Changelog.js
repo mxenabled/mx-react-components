@@ -10,7 +10,7 @@ class Changelog extends React.Component {
 
         <h3>7.0.3</h3>
         <ul>
-          <li>Add `style` prop to Loader component for overriding styles.</li>
+          <li>Add `styles` prop to Loader component for overriding styles.</li>
         </ul>
 
         <h3>7.0.2</h3>
