@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+const _merge = require('lodash/merge')
 
 import { withTheme } from './Theme';
 const Spin = require('./Spin');
@@ -14,6 +15,7 @@ class Loader extends React.Component {
     isLoading: PropTypes.bool,
     isRelative: PropTypes.bool,
     isSmall: PropTypes.bool,
+    styles: PropTypes.object,
     theme: themeShape
   };
 
@@ -24,7 +26,7 @@ class Loader extends React.Component {
     children: 'LOADING...'
   };
 
-  render () {
+  render() {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
 
@@ -38,8 +40,8 @@ class Loader extends React.Component {
             {this.props.isSmall ? (
               null
             ) : (
-              <div className='mx-loader-text' style={styles.text} > {this.props.children} </div>
-            )}
+                <div className='mx-loader-text' style={styles.text} > {this.props.children} </div>
+              )}
           </div>
         </div>
       );
@@ -53,7 +55,7 @@ class Loader extends React.Component {
   styles = (theme) => {
     const color = this.props.color || theme.Colors.PRIMARY;
 
-    return {
+    return _merge({}, {
       component: {
         backgroundColor: 'rgba(255,255,255,0.9)',
         bottom: 0,
@@ -93,7 +95,7 @@ class Loader extends React.Component {
         marginTop: '10px',
         fontSize: '10px'
       }
-    };
+    }, this.props.styles)
   }
 }
 
