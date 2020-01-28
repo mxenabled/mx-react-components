@@ -8,7 +8,7 @@ const { Loader } = require('mx-react-components');
 const Markdown = require('components/Markdown');
 
 class LoaderDocs extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <h1>
@@ -49,12 +49,15 @@ class LoaderDocs extends React.Component {
         <p>Default: 'LOADING...'</p>
         <p>If set, this value will be displayed below the loading circle.</p>
 
+        <h5>styles <label>Object</label></h5>
+        <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
+
         <h5>theme <label>Object</label></h5>
         <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
 
         <h3>Example</h3>
         <Markdown>
-  {`
+          {`
     <Loader
       isLoading={true}
       isRelative={true}
