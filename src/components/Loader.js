@@ -54,92 +54,50 @@ class Loader extends React.Component {
 
   styles = (theme) => {
     const color = this.props.color || theme.Colors.PRIMARY;
-    const style = this.props.style
 
-    return style ?
-      {
-        component: {
-          backgroundColor: 'rgba(255,255,255,0.9)',
-          bottom: 0,
-          color: '#999',
-          fontFamily: theme.Fonts.REGULAR,
-          fontSize: '10px',
-          fontWeight: 600,
-          left: 0,
-          letterSpacing: '1px',
-          position: this.props.isRelative ? 'absolute' : 'fixed',
-          right: 0,
-          textAlign: 'center',
-          top: 0,
-          zIndex: 100
-        },
-        content: {
-          textAlign: 'center',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          margin: 'auto',
-          width: this.props.isSmall ? '30px' : '50px',
-          height: this.props.isSmall ? '30px' : '50px'
-        },
-        circle: {
-          borderRadius: '100%',
-          width: this.props.isSmall ? '30px' : '50px',
-          height: this.props.isSmall ? '30px' : '50px',
-          borderTop: '3px solid ' + color,
-          borderRight: '3px solid transparent',
-          borderBottom: '3px solid transparent',
-          borderLeft: '3px solid transparent'
-        },
-        text: {
-          marginTop: '10px',
-          fontSize: '10px'
-        }
+    const componentsStyles = {
+      component: {
+        backgroundColor: 'rgba(255,255,255,0.9)',
+        bottom: 0,
+        color: '#999',
+        fontFamily: theme.Fonts.REGULAR,
+        fontSize: '10px',
+        fontWeight: 600,
+        left: 0,
+        letterSpacing: '1px',
+        position: this.props.isRelative ? 'absolute' : 'fixed',
+        right: 0,
+        textAlign: 'center',
+        top: 0,
+        zIndex: 100
+      },
+      content: {
+        textAlign: 'center',
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        margin: 'auto',
+        width: this.props.isSmall ? '30px' : '50px',
+        height: this.props.isSmall ? '30px' : '50px'
+      },
+      circle: {
+        borderRadius: '100%',
+        width: this.props.isSmall ? '30px' : '50px',
+        height: this.props.isSmall ? '30px' : '50px',
+        borderTop: '3px solid ' + color,
+        borderRight: '3px solid transparent',
+        borderBottom: '3px solid transparent',
+        borderLeft: '3px solid transparent'
+      },
+      text: {
+        marginTop: '10px',
+        fontSize: '10px'
       }
-      :
-      _merge({}, {
-        component: {
-          backgroundColor: 'rgba(255,255,255,0.9)',
-          bottom: 0,
-          color: '#999',
-          fontFamily: theme.Fonts.REGULAR,
-          fontSize: '10px',
-          fontWeight: 600,
-          left: 0,
-          letterSpacing: '1px',
-          position: this.props.isRelative ? 'absolute' : 'fixed',
-          right: 0,
-          textAlign: 'center',
-          top: 0,
-          zIndex: 100
-        },
-        content: {
-          textAlign: 'center',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          margin: 'auto',
-          width: this.props.isSmall ? '30px' : '50px',
-          height: this.props.isSmall ? '30px' : '50px'
-        },
-        circle: {
-          borderRadius: '100%',
-          width: this.props.isSmall ? '30px' : '50px',
-          height: this.props.isSmall ? '30px' : '50px',
-          borderTop: '3px solid ' + color,
-          borderRight: '3px solid transparent',
-          borderBottom: '3px solid transparent',
-          borderLeft: '3px solid transparent'
-        },
-        text: {
-          marginTop: '10px',
-          fontSize: '10px'
-        }
-      }, style)
+    }
+
+    return this.props.styles ? _merge({}, componentsStyles, this.props.styles) : componentsStyles
   }
 }
 
