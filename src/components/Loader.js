@@ -55,7 +55,7 @@ class Loader extends React.Component {
   styles = (theme) => {
     const color = this.props.color || theme.Colors.PRIMARY;
 
-    const componentsStyles = {
+    const componentStyles = {
       component: {
         backgroundColor: 'rgba(255,255,255,0.9)',
         bottom: 0,
@@ -97,7 +97,7 @@ class Loader extends React.Component {
       }
     }
 
-    return this.props.styles ? _merge({}, componentsStyles, this.props.styles) : componentsStyles
+    return this.props.styles ? _merge({}, componentStyles, this.props.styles) : componentStyles
   }
 }
 
