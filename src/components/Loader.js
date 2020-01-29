@@ -54,8 +54,9 @@ class Loader extends React.Component {
 
   styles = (theme) => {
     const color = this.props.color || theme.Colors.PRIMARY;
+    const style = this.props.style
 
-    return this.props.style ?
+    return style ?
       {
         component: {
           backgroundColor: 'rgba(255,255,255,0.9)',
@@ -138,7 +139,7 @@ class Loader extends React.Component {
           marginTop: '10px',
           fontSize: '10px'
         }
-      }, this.props.styles)
+      }, style)
   }
 }
 
