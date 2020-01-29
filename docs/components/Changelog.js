@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 7.0.0</h2>
 
+        <h3>7.0.3</h3>
+        <ul>
+          <li>Add `styles` prop to Loader component for overriding styles.</li>
+        </ul>
+
         <h3>7.0.2</h3>
         <ul>
           <li>Add `contentHasTabIndex` prop to Modal component for greater specificity for a11y concerns.</li>
