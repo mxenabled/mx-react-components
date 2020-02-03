@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 7.0.0</h2>
 
+        <h3>7.1.0</h3>
+        <ul>
+          <li>Add `iconSize` prop to the Button component to control the icon size.</li>
+        </ul>
+
         <h3>7.0.3</h3>
         <ul>
           <li>Add `styles` prop to Loader component for overriding styles.</li>

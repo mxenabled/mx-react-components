@@ -21,6 +21,7 @@ class Button extends React.Component {
     className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     elementProps: PropTypes.object,
     icon: PropTypes.string,
+    iconSize: PropTypes.number,
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
     style: PropTypes.object,
@@ -32,6 +33,7 @@ class Button extends React.Component {
   static defaultProps = {
     elementProps: {},
     onClick () {},
+    iconSize: 20,
     isActive: false,
     styles: {},
     type: 'primary'
@@ -61,7 +63,7 @@ class Button extends React.Component {
   render () {
     // Manually consume everything that isn't going to be passed down to the button so we don't have to keep adding props one at a time.
     // Keep elementProps for backwards compatibility.
-    const { actionText, buttonRef, children, className, elementProps, icon, isActive, style, theme, ...rest } = this.props;
+    const { actionText, buttonRef, children, className, elementProps, icon, iconSize, isActive, style, theme, ...rest } = this.props;
     const mergedTheme = StyleUtils.mergeTheme(theme);
     const styles = this.styles(mergedTheme);
 
@@ -79,14 +81,14 @@ class Button extends React.Component {
         <div style={styles.children}>
           {(icon && !isActive) && (
             <Icon
-              size={20}
+              size={iconSize}
               style={styles.icon}
               type={icon}
             />
           )}
           {isActive && (
             <Spin direction='counterclockwise'>
-              <Icon size={20} type='spinner' />
+              <Icon size={iconSize} type='spinner' />
             </Spin>
           )}
           <div style={styles.buttonText}>
