@@ -363,6 +363,10 @@ module.exports = {
       displayValue: 'Map'
     },
     {
+      value: 'map-2',
+      displayValue: 'Map 2'
+    },
+    {
       value: 'mobile-phone',
       displayValue: 'Mobile Phone'
     },
@@ -409,6 +413,10 @@ module.exports = {
     {
       value: 'phone',
       displayValue: 'Phone'
+    },
+    {
+      value: 'pig',
+      displayValue: 'Pig'
     },
     {
       value: 'play',
@@ -507,6 +515,10 @@ module.exports = {
       displayValue: 'Taxes'
     },
     {
+      value: 'temple',
+      displayValue: 'Temple'
+    },
+    {
       value: 'transfer',
       displayValue: 'Transfer'
     },
@@ -537,6 +549,10 @@ module.exports = {
     {
       value: 'waffle',
       displayValue: 'Waffle'
+    },
+    {
+      value: 'wallet',
+      displayValue: 'Wallet'
     },
     {
       value: 'windows',
