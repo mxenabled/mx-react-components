@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 7.0.0</h2>
 
+        <h3>7.1.1</h3>
+        <ul>
+          <li>The build for `7.1.0` was corrupted when published. Incremented and published again.</li>
+        </ul>
+
         <h3>7.1.0</h3>
         <ul>
           <li>Add `iconSize` prop to the Button component to control the icon size.</li>
