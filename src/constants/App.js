@@ -27,6 +27,10 @@ module.exports = {
       displayValue: 'Accounts'
     },
     {
+      value: 'adCampaign',
+      displayValue: 'Ad Campaign'
+    },
+    {
       value: 'add',
       displayValue: 'Add'
     },
