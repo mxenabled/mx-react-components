@@ -8,6 +8,16 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 7.0.0</h2>
 
+        <h3>7.2.2</h3>
+        <ul>
+          <li>The Select component had style conflicts when hover/focus on an active/selected item.</li>
+        </ul>
+
+        <h3>7.2.1</h3>
+        <ul>
+          <li>Added the `adCampaign` icon type to the Icon component.</li>
+        </ul>
+
         <h3>7.1.1</h3>
         <ul>
           <li>The build for `7.1.0` was corrupted when published. Incremented and published again.</li>
