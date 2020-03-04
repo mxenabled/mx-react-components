@@ -177,8 +177,7 @@ class Select extends React.Component {
                     onClick={haltEvent(this._handleOptionClick.bind(null, option))}
                     style={Object.assign({},
                       styles.option,
-                      this.props.optionStyle,
-                      _isEqual(option, this.state.selected) ? styles.activeOption : null
+                      this.props.optionStyle
                     )}
                   >
                     {option.icon ? (
@@ -302,10 +301,6 @@ class Select extends React.Component {
           maxHeight: 260,
           overflow: 'auto'
         }, this.props.optionsStyle),
-      activeOption: {
-        fill: theme.Colors.PRIMARY,
-        color: theme.Colors.PRIMARY
-      },
       option: {
         display: 'flex',
         alignItems: 'center',
