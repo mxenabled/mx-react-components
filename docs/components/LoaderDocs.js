@@ -1,11 +1,11 @@
 // eslint-disable react/jsx-indent rule added for proper <Markdown /> formatting
 /* eslint-disable react/jsx-indent */
-const React = require('react');
-const { Link } = require('react-router');
+const React = require('react')
+const { Link } = require('react-router')
 
-const { Loader } = require('mx-react-components');
+const { Loader } = require('mx-react-components')
 
-const Markdown = require('components/Markdown');
+const Markdown = require('components/Markdown')
 
 class LoaderDocs extends React.Component {
   render() {
@@ -13,11 +13,13 @@ class LoaderDocs extends React.Component {
       <div>
         <h1>
           Loader
-          <label>A loading scrim that can be placed over the entire page or relative to a element.</label>
+          <label>
+            A loading scrim that can be placed over the entire page or relative to a element.
+          </label>
         </h1>
 
         <h3>Demo</h3>
-        <div className='flex'>
+        <div className="flex">
           <div style={style}>
             <Loader isLoading={true} isRelative={true} />
           </div>
@@ -25,35 +27,81 @@ class LoaderDocs extends React.Component {
             <Loader isLoading={true} isRelative={true} isSmall={true} />
           </div>
           <div style={style}>
-            <Loader color='red' isLoading={true} isRelative={true} />
+            <Loader color="red" isLoading={true} isRelative={true} />
           </div>
-          <div style={Object.assign({}, style, { backgroundImage: 'url("../images/sample-image.jpg")' })}>
-            <Loader isLoading={true} isRelative={true}>Custom Loading Message</Loader>
+          <div style={style}>
+            <Loader direction="counterclockwise" isLoading={true} isRelative={true} />
+          </div>
+          <div
+            style={Object.assign({}, style, {
+              backgroundImage: 'url("../images/sample-image.jpg")',
+            })}
+          >
+            <Loader isLoading={true} isRelative={true}>
+              Custom Loading Message
+            </Loader>
           </div>
         </div>
 
         <h3>Usage</h3>
-        <h5>color <label>String</label></h5>
+        <h5>
+          color <label>String</label>
+        </h5>
         <p>A CSS hex value or color keyword that sets the color of the loading circle.</p>
 
-        <h5>isLoading <label>Boolean</label></h5>
-        <p>If this is set to 'true', then the loader element will be displayed. If it's set to 'false', then an empty 'div' will be rendered.</p>
+        <h5>
+          direction <label>String</label>
+        </h5>
+        <p>Default: 'clockwise'</p>
+        <p>
+          Sets the spin direction of the loader. Available options: 'clockwise', 'counterclockwise'
+        </p>
 
-        <h5>isRelative <label>Boolean</label></h5>
-        <p>If this is set to 'true', then the loader will be bound by the closest parent component with a 'position: relative'.</p>
+        <h5>
+          isLoading <label>Boolean</label>
+        </h5>
+        <p>
+          If this is set to 'true', then the loader element will be displayed. If it's set to
+          'false', then an empty 'div' will be rendered.
+        </p>
 
-        <h5>isSmall <label>Boolean</label></h5>
-        <p>If this is set to 'true', then the word "Loading" will not be displayed and the loading cirle's size will be reduced to 30x30 pixels.</p>
+        <h5>
+          isRelative <label>Boolean</label>
+        </h5>
+        <p>
+          If this is set to 'true', then the loader will be bound by the closest parent component
+          with a 'position: relative'.
+        </p>
 
-        <h5>children <label>Node</label></h5>
+        <h5>
+          isSmall <label>Boolean</label>
+        </h5>
+        <p>
+          If this is set to 'true', then the word "Loading" will not be displayed and the loading
+          cirle's size will be reduced to 30x30 pixels.
+        </p>
+
+        <h5>
+          children <label>Node</label>
+        </h5>
         <p>Default: 'LOADING...'</p>
         <p>If set, this value will be displayed below the loading circle.</p>
 
-        <h5>styles <label>Object</label></h5>
-        <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
+        <h5>
+          styles <label>Object</label>
+        </h5>
+        <p>
+          A nested object that allows you to set styles on any of the elements in the component. See
+          the `styles` method in the component code for a full list of available keys and values.
+        </p>
 
-        <h5>theme <label>Object</label></h5>
-        <p>Customize the component&apos;s look. See <Link to='/components/theme'>Theme</Link> for more information.</p>
+        <h5>
+          theme <label>Object</label>
+        </h5>
+        <p>
+          Customize the component&apos;s look. See <Link to="/components/theme">Theme</Link> for
+          more information.
+        </p>
 
         <h3>Example</h3>
         <Markdown>
@@ -68,7 +116,7 @@ class LoaderDocs extends React.Component {
   `}
         </Markdown>
       </div>
-    );
+    )
   }
 }
 
@@ -79,7 +127,7 @@ const style = {
   width: '33.3%',
   paddingTop: '20%',
   margin: '20px',
-  position: 'relative'
-};
+  position: 'relative',
+}
 
-module.exports = LoaderDocs;
+module.exports = LoaderDocs

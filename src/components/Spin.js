@@ -9,7 +9,7 @@ class Spin extends React.Component {
   };
 
   static defaultProps = {
-    direction: 'counterclockwise',
+    direction: 'clockwise',
     speed: 1000
   };
 
