@@ -37,7 +37,7 @@ class SpinDocs extends React.Component {
           direction <label>String</label>
         </h5>
         <p>Default: 'clockwise'</p>
-        <p>The direction of the spin. Available Options: counterclockwise, clockwise.</p>
+        <p>The direction of the spin. Available Options: 'counterclockwise', 'clockwise'.</p>
 
         <h5>
           speed <label>Number</label>
