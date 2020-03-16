@@ -12,6 +12,7 @@ const StyleUtils = require('../utils/Style');
 class Loader extends React.Component {
   static propTypes = {
     color: PropTypes.string,
+    direction: PropTypes.oneOf(['counterclockwise', 'clockwise']),
     isLoading: PropTypes.bool,
     isRelative: PropTypes.bool,
     isSmall: PropTypes.bool,
@@ -20,6 +21,7 @@ class Loader extends React.Component {
   };
 
   static defaultProps = {
+    direction: 'clockwise',
     isLoading: false,
     isRelative: false,
     isSmall: false,
@@ -34,7 +36,7 @@ class Loader extends React.Component {
       return (
         <div className='mx-loader' style={styles.component}>
           <div className='mx-loader-content' style={styles.content}>
-            <Spin>
+            <Spin direction={this.props.direction}>
               <div style={styles.circle} />
             </Spin>
             {this.props.isSmall ? (
