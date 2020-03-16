@@ -6,6 +6,13 @@ class Changelog extends React.Component {
       <div>
         <h1>Change Log</h1>
 
+        <h2>MX React Components V 8.0.0</h2>
+
+        <h3>8.0.0</h3>
+        <ul>
+          <li>Changed the default behavior of the Spin and Loader components to spin clockwise. Updated the Loader API to accept direction as a prop.</li>
+        </ul>
+
         <h2>MX React Components V 7.0.0</h2>
 
         <h3>7.2.2</h3>
