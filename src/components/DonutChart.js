@@ -1,3 +1,4 @@
+// Why is Travis failing? :(
 const _isEqual = require('lodash/isEqual');
 const React = require('react');
 const PropTypes = require('prop-types');
