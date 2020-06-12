@@ -8,5 +8,4 @@ script:
   - npm test
   - cd docs
   - npm ci
-  - npm run build
   - npm audit
