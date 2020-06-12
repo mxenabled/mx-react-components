@@ -1,3 +1,4 @@
+// hello world
 const _isEqual = require('lodash/isEqual');
 const React = require('react');
 const PropTypes = require('prop-types');
