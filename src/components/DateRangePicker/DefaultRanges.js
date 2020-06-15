@@ -1,25 +1,31 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const Icon = require('../Icon');
+const PropTypes = require('prop-types')
+const React = require('react')
+const Icon = require('../Icon')
 const { css } = require('glamor')
-const { themeShape } = require('../../constants/App');
+const { themeShape } = require('../../constants/App')
 
 class DefaultRanges extends React.Component {
   state = {
-    selectedOption: null
-  };
+    selectedOption: null,
+  }
 
-  render () {
-    const { defaultRanges, handleDefaultRangeSelection, selectedStartDate, selectedEndDate, styles, theme } = this.props;
+  render() {
+    const {
+      defaultRanges,
+      handleDefaultRangeSelection,
+      selectedStartDate,
+      selectedEndDate,
+      styles,
+      theme,
+    } = this.props
 
     return (
-      <div aria-live="polite" className='mx-default-ranges' style={styles.rangeOptions}>
-
+      <div aria-live="polite" className="mx-default-ranges" style={styles.rangeOptions}>
         {defaultRanges.map((range, index) => {
-          const isSelectedRange
-            = this.state.selectedOption === index
-            && range.getStartDate() === selectedStartDate
-            && range.getEndDate() === selectedEndDate;
+          const isSelectedRange =
+            this.state.selectedOption === index &&
+            range.getStartDate() === selectedStartDate &&
+            range.getEndDate() === selectedEndDate
 
           return (
             <button
@@ -28,27 +34,25 @@ class DefaultRanges extends React.Component {
               className={`${css(styles.rangeOption)} mx-default-ranges-range`}
               key={range.displayValue + range.getStartDate()}
               onClick={() => {
-                handleDefaultRangeSelection(range);
-                this.setState({ selectedOption: index });
+                handleDefaultRangeSelection(range)
+                this.setState({ selectedOption: index })
               }}
             >
               <div>
                 <Icon
                   size={20}
-                  style={{ ...styles.rangeOptionIcon,
-                    fill: isSelectedRange ? theme.Colors.PRIMARY : 'transparent'
+                  style={{
+                    fill: isSelectedRange ? theme.Colors.PRIMARY : 'transparent',
                   }}
-                  type='check-solid'
+                  type="check-solid"
                 />
               </div>
-              <div>
-                {range.displayValue}
-              </div>
+              <div>{range.displayValue}</div>
             </button>
-          );
+          )
         })}
       </div>
-    );
+    )
   }
 }
 
@@ -61,9 +65,9 @@ DefaultRanges.propTypes = {
   styles: PropTypes.shape({
     defaultRangesTitle: PropTypes.object,
     rangeOption: PropTypes.object,
-    rangeOptions: PropTypes.object
+    rangeOptions: PropTypes.object,
   }),
-  theme: themeShape
-};
+  theme: themeShape,
+}
 
-module.exports = DefaultRanges;
+module.exports = DefaultRanges
