@@ -8,6 +8,16 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.0.3</h3>
+        <ul>
+          <li>Push correct branch. Now it fixes bug that previous release created. Refactored propTypes correctly.</li>
+        </ul>
+
+        <h3>8.0.2</h3>
+        <ul>
+          <li>Fix bug that previous release created. Refactored propTypes correctly.</li>
+        </ul>
+
         <h3>8.0.1</h3>
         <ul>
           <li>Update all dependencies that had minor changes because the pipeline was failing on npm audit in Travis.</li>
