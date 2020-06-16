@@ -20,10 +20,10 @@ const StyleUtils = require('../utils/Style');
 
 class Drawer extends React.Component {
   static propTypes = {
-    'aria-describedby': PropTypes.string,
-    'aria-labelledby': PropTypes.string,
     animateLeftDistance: PropTypes.number,
     animateOnClose: PropTypes.bool,
+    'aria-describedby': PropTypes.string,
+    'aria-labelledby': PropTypes.string,
     beforeClose: PropTypes.func,
     breakPoints: PropTypes.shape({
       large: PropTypes.number,
