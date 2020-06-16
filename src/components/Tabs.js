@@ -23,7 +23,8 @@ const TabsFactory = ({ type = 'standard', ...props }) => {
 };
 
 TabsFactory.propTypes = {
-  type: PropTypes.oneOf([...Object.keys(TabsTypes), ...Tabbable.PropTypes]),
+  type: PropTypes.oneOf([...Object.keys(TabsTypes)]),
+  ...Tabbable.PropTypes,
 }
 
 module.exports = TabsFactory;
