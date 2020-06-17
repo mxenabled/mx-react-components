@@ -119,6 +119,10 @@ class DonutChartDocs extends React.Component {
         <h5>defaultLabelValue <label>String</label></h5>
         <p>The value to display in the data label when not hovering over a slice.</p>
 
+        <h5>elementPropsForChartG <label>Object</label></h5>
+        <p>Default: Empty Object</p>
+        <p>Element properties you wish to apply to the outer most G element of the donut chart.</p>
+
         <h5>elementPropsForChartSVG <label>Object</label></h5>
         <p>Default: Empty Object</p>
         <p>Element properties you wish to apply to the SVG element of the donut chart.</p>

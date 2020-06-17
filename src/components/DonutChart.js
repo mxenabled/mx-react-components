@@ -27,6 +27,7 @@ class DonutChart extends React.Component {
     dataPoints: PropTypes.array,
     defaultLabelText: PropTypes.string,
     defaultLabelValue: PropTypes.string,
+    elementPropsForChartG: PropTypes.object,
     elementPropsForChartSVG: PropTypes.object,
     formatter: PropTypes.func,
     height: PropTypes.number,
@@ -53,6 +54,7 @@ class DonutChart extends React.Component {
     data: [],
     dataPointRadius: 5,
     dataPoints: [],
+    elementPropsForChartG: {},
     elementPropsForChartSVG: {},
     formatter (value) {
       return value;
@@ -372,7 +374,11 @@ class DonutChart extends React.Component {
           height={this.props.height}
           width={this.props.width}
         >
-          <g className='mx-donutchart-g' transform={position}>
+          <g 
+            {...this.props.elementPropsForChartG}
+            className='mx-donutchart-g'
+            transform={position}
+          >
             {this._renderBaseArc(baseArcColor)}
             {this._renderArcs(colors)}
             {this._renderDataPoints(dataPointColors)}
