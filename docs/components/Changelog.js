@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.1.0</h3>
+        <ul>
+          <li>Add elementPropsForChartG prop to outermost g element of DonutChart, to control props of said g element.</li>
+        </ul>
+
         <h3>8.0.3</h3>
         <ul>
           <li>Push correct branch. Now it fixes bug that previous release created. Refactored propTypes correctly.</li>
