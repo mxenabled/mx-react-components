@@ -69,6 +69,9 @@
     "jest": "^24.7.1",
     "jest-enzyme": "^7.0.2"
   },
+  "resolutions": {
+    "minimist": "^1.2.3"
+  },
   "jest": {
     "globals": {
       "LOG_LEVEL": "INFO"
