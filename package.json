@@ -37,7 +37,7 @@
     "glamor": "^2.20.40",
     "keycode": "^2.1.8",
     "lodash": "^4.17.15",
-    "moment": "^2.26.0",
+    "moment": "^2.22.0",
     "moment-timezone": "^0.5.31",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
