@@ -46,6 +46,7 @@ class MonthTable extends React.Component {
     } = this.props;
 
     const days = [];
+
     let startDate = moment.unix(currentDate).startOf('month').startOf('week');
     const endDate = moment.unix(currentDate).endOf('month').endOf('week');
 

@@ -102,7 +102,9 @@ class Gauge extends React.Component {
     const segmentSize = 270 / (numberOfSegments);
     const convertToPie = this.state.radiansMultiplier;
     const segments = [];
+
     let startAngle = -135;
+
     let endAngle = startAngle + segmentSize;
 
     for (let i = 1; i <= numberOfSegments; i++) {
