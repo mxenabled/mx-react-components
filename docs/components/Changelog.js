@@ -8,6 +8,26 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.1.0</h3>
+        <ul>
+          <li>Add elementPropsForChartG prop to outermost g element of DonutChart, to control props of said g element.</li>
+        </ul>
+
+        <h3>8.0.3</h3>
+        <ul>
+          <li>Push correct branch. Now it fixes bug that previous release created. Refactored propTypes correctly.</li>
+        </ul>
+
+        <h3>8.0.2</h3>
+        <ul>
+          <li>Fix bug that previous release created. Refactored propTypes correctly.</li>
+        </ul>
+
+        <h3>8.0.1</h3>
+        <ul>
+          <li>Update all dependencies that had minor changes because the pipeline was failing on npm audit in Travis.</li>
+        </ul>
+
         <h3>8.0.0</h3>
         <ul>
           <li>Changed the default behavior of the Spin and Loader components to spin clockwise. Updated the Loader API to accept direction as a prop.</li>

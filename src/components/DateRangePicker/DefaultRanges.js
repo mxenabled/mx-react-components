@@ -35,7 +35,7 @@ class DefaultRanges extends React.Component {
               <div>
                 <Icon
                   size={20}
-                  style={{ ...styles.rangeOptionIcon,
+                  style={{
                     fill: isSelectedRange ? theme.Colors.PRIMARY : 'transparent'
                   }}
                   type='check-solid'

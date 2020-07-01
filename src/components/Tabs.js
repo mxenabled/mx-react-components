@@ -22,8 +22,9 @@ const TabsFactory = ({ type = 'standard', ...props }) => {
   );
 };
 
-TabsFactory.propTypes = Object.assign({
-  type: PropTypes.oneOf(Object.keys(TabsTypes))
-}, Tabbable.PropTypes);
+TabsFactory.propTypes = {
+  type: PropTypes.oneOf([...Object.keys(TabsTypes)]),
+  ...Tabbable.PropTypes,
+}
 
 module.exports = TabsFactory;
