@@ -83,7 +83,9 @@
       "<rootDir>/jest-shim.js",
       "<rootDir>/jest-setup.js"
     ],
-    "setupFilesAfterEnv": ["./node_modules/jest-enzyme/lib/index.js"],
+    "setupFilesAfterEnv": [
+      "./node_modules/jest-enzyme/lib/index.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
