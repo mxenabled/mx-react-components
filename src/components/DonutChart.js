@@ -174,7 +174,9 @@ class DonutChart extends React.Component {
         const constantMultiplier = 2;
         const maxValue = 1;
         const timePadding = 0.9;
+
         let time = t;
+
         let value = 0;
 
         const b0 = maxValue - time;

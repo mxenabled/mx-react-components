@@ -217,6 +217,7 @@ class BarChart extends React.Component {
 
   _hasPositiveOrNegativeValues = () => {
     let hasNegative = false;
+
     let hasPositive = false;
 
     this.props.data.forEach(d => {
@@ -332,6 +333,7 @@ class BarChart extends React.Component {
     const data = this.props.data.reduce((acc, d) => {
       return acc.concat(d.value);
     }, []);
+
     let yDomain;
 
     if (hasNegative && hasPositive) {
@@ -379,6 +381,7 @@ class BarChart extends React.Component {
               const clicked = this.state.clickedData.value === d.value && this.state.clickedData.label === d.label;
               const hovering = this.state.hoveringObj.value === d.value && this.state.hoveringObj.label === d.label;
               const baseStyle = d.color ? Object.assign({}, styles.bar, { fill: d.color }) : styles.bar;
+
               let style;
 
               if (clicked) {
