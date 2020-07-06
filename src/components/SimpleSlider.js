@@ -63,7 +63,6 @@ class SimpleSlider extends React.Component {
   _handleMouseEvents = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const leftSpace = this.rangeSelectorRef.current.getBoundingClientRect().left;
-
     let currentPercent = (clientX - leftSpace) / this.state.width;
 
     if (currentPercent < 0) {

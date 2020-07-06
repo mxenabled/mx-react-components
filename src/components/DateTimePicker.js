@@ -112,7 +112,6 @@ class DatePicker extends React.Component {
     const am = value.indexOf('am') >= 0;
     const pm = value.indexOf('pm') >= 0;
     const minute = Number(time[1].substring(0, 2));
-
     let hour = Number(time[0]);
 
     hour = am && hour === 12 ? 0 : hour;

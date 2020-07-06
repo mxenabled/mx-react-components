@@ -5,11 +5,8 @@ const Chart = {
     // generate_tick_specification method
 
     let step = 0;
-
     let numberOfTicks = 0;
-
     let start = 0;
-
     let end = 0;
 
     if (min < max) {

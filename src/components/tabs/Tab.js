@@ -33,7 +33,6 @@ class Tab extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-
     let style = Object.assign({}, styles.tab, this.props.styles.tab);
 
     if (this.props.isActive)

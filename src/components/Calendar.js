@@ -18,7 +18,6 @@ export const getNewDateStateChange = ({
   endDate
 }) => {
   let day = null;
-
   let currentDate = null;
   // Don't mutate existing focusedDay moment object
   const copyOfFocusedDay = moment(focusedDay);
@@ -145,7 +144,6 @@ class Calendar extends React.Component {
       .endOf('week');
     const weekLength = 7;
     const weeks = [];
-
     let days = [];
 
     while (moment(startDate).isBefore(endDate)) {

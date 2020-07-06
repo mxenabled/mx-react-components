@@ -30,7 +30,6 @@ class PaginationButtons extends React.Component {
 
   _handleButtonClick = (buttonClicked) => {
     const { currentPage, totalPages } = this.props;
-
     let goToPage = buttonClicked;
 
     if (buttonClicked === 'prev') {

@@ -10,7 +10,6 @@ const doubleHexCode = color =>
 const StyleUtils = {
   adjustColor (col, amt) {
     let color = col;
-
     let usePound = false;
 
     if (color[0] === '#') {
@@ -62,7 +61,6 @@ const StyleUtils = {
 
   getWindowSize (breakPoints) {
     const width = window.innerWidth;
-
     let windowSize = 'small';
 
     if (width >= breakPoints.large) {

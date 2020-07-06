@@ -22,7 +22,6 @@ class Spin extends React.Component {
     const el = this.spinRef.current
     const speed = this.props.speed;
     const spinDirection = this.props.direction === 'clockwise' ? 1 : -1;
-
     let rotation = 0;
 
     this.interval = setInterval(() => {
