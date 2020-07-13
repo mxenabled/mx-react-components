@@ -14,10 +14,10 @@ const StyleUtils = require('../utils/Style');
 
 class Button extends React.Component {
   static propTypes = {
-    actionText: PropTypes.string,
     'aria-label': PropTypes.string,
-    buttonRef: PropTypes.func,
     // Object or string since glamor supplies an object, not a string.
+    actionText: PropTypes.string,
+    buttonRef: PropTypes.func,
     className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     elementProps: PropTypes.object,
     icon: PropTypes.string,
