@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+const Radium = require('radium');
 
 import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
@@ -51,9 +52,11 @@ class RadioButton extends React.Component {
         display: 'flex',
         alignItems: 'center',
         backgroundColor: 'transparent',
-        outline: 'none',
         border: 'none',
         fontSize: theme.FontSizes.MEDIUM,
+        ':focus': {
+          outline: 'dotted thin #333'
+        }
       }, this.props.style),
       radioButton: Object.assign({}, {
         display: 'flex',
@@ -76,4 +79,4 @@ class RadioButton extends React.Component {
   };
 }
 
-module.exports = withTheme(RadioButton);
+module.exports = withTheme(Radium(RadioButton));
