@@ -34,7 +34,6 @@ class RadioButton extends React.Component {
         onClick={this.props.onClick}
         ref={this.props.elementRef}
         role="radio"
-
         {...this.props.elementProps}
       >
         <div className='mx-radio-button' style={styles.radioButton}>
