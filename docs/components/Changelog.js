@@ -10,7 +10,7 @@ class Changelog extends React.Component {
 
         <h3>8.1.1</h3>
         <ul>
-          <li>Updates the outline style used when the radio button is focused.</li>
+          <li>Updates the outline style that is being used when the radio button is focused.</li>
         </ul>
 
         <h3>8.1.0</h3>
