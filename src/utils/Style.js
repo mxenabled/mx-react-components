@@ -4,48 +4,47 @@ const _merge = require('lodash/merge');
 const StyleConstants = require('../constants/Style');
 const { themeShape } = require('../constants/App');
 
-const doubleHexCode = color =>
-  color.split('').map(char => char + char).join('');
-
 const StyleUtils = {
   adjustColor (col, amt) {
-    let color = col;
-    let usePound = false;
-    
+
+    let color = col
+    let usePound = false
+
     if (color[0] === '#') {
-      color = color.slice(1).padStart(6, '0');
+      color = color.slice(1)
       // turn it into a 6 digit string
       usePound = true;
     }
 
+    const colorPadded = color.padStart(6, '0')
+
     // subtract amount from each individual red green blue value
-    let r = parseInt(color.slice(0,2), 16) + amt  
-    let g = parseInt(color.slice(2,4), 16) + amt
-    let b = parseInt(color.slice(4,6), 16) + amt
+    let intRVal = parseInt(colorPadded.slice(0,2), 16) + amt  
+    let intGVal = parseInt(colorPadded.slice(2,4), 16) + amt
+    let intBVal = parseInt(colorPadded.slice(4,6), 16) + amt
 
-    if (r > 255) {
-      r = 255;
-    } else if (r < 0) {
-      r = 0;
+    if (intRVal > 255) {
+      intRVal = 255;
+    } else if (intRVal < 0) {
+      intRVal = 0;
+    }
+    if (intGVal > 255) {
+      intGVal = 255;
+    } else if (intGVal < 0) {
+      intGVal = 0;
     }
 
-    if (b > 255) {
-      b = 255;
-    } else if (b < 0) {
-      b = 0;
+    if (intBVal > 255) {
+      intBVal = 255;
+    } else if (intBVal < 0) {
+      intBVal = 0;
     }
+    
+    const hexR = intRVal.toString(16).padStart(2, '0') 
+    const hexG = intGVal.toString(16).padStart(2, '0')
+    const hexB = intBVal.toString(16).padStart(2, '0')
 
-    if (g > 255) {
-      g = 255;
-    } else if (g < 0) {
-      g = 0;
-    }
-    r = r.toString(16) 
-    b = b.toString(16)
-    g = g.toString(16)
-
-      // concatenate string
-     return (usePound ? '#' : '') + (r + g + b).padStart(6, '0')
+    return (usePound ? '#' : '') + (hexR + hexG + hexB)
   },
 
   adjustHexOpacity (color, opacity) {
