@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+const { css } = require('glamor');
 
 import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
@@ -29,11 +30,10 @@ class RadioButton extends React.Component {
     return (
       <button
         aria-checked={this.props.checked}
-        className='mx-radio-button-item'
+        className={styles.component}
         onClick={this.props.onClick}
         ref={this.props.elementRef}
         role="radio"
-        style={styles.component}
         {...this.props.elementProps}
       >
         <div className='mx-radio-button' style={styles.radioButton}>
@@ -46,16 +46,19 @@ class RadioButton extends React.Component {
 
   styles = (theme) => {
     return {
-      component: Object.assign({}, {
+      component: css({
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         backgroundColor: 'transparent',
-        outline: 'none',
         border: 'none',
         fontSize: theme.FontSizes.MEDIUM,
-      }, this.props.style),
-      radioButton: Object.assign({}, {
+        ':focus': {
+          outline: 'dotted thin #333'
+        },
+        ...this.props.style
+      }),
+      radioButton: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -64,14 +67,16 @@ class RadioButton extends React.Component {
         marginRight: 5,
         border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: '100%',
-        backgroundColor: theme.Colors.WHITE
-      }, this.props.buttonStyle),
-      radioButtonActive: Object.assign({}, {
+        backgroundColor: theme.Colors.WHITE,
+        ...this.props.buttonStyle
+      },
+      radioButtonActive: {
         width: '60%',
         height: '60%',
         borderRadius: '100%',
-        backgroundColor: theme.Colors.PRIMARY
-      }, this.props.activeButtonStyle)
+        backgroundColor: theme.Colors.PRIMARY,
+        ...this.props.activeButtonStyle
+      }
     };
   };
 }

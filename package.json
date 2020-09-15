@@ -1,6 +1,6 @@
 {
   "name": "mx-react-components",
-  "version": "8.1.0",
+  "version": "8.1.1",
   "description": "A collection of generic React UI components",
   "main": "dist/index.js",
   "files": [
@@ -36,7 +36,7 @@
     "focus-trap-react": "^3.1.4",
     "glamor": "^2.20.40",
     "keycode": "^2.1.8",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",
     "numeral": "^2.0.6",
