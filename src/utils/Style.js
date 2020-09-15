@@ -11,11 +11,12 @@ const StyleUtils = {
     let usePound = false
 
     if (color[0] === '#') {
+      // remove hash sign
       color = color.slice(1)
-      // turn it into a 6 digit string
       usePound = true;
     }
 
+    // turn it into a 6 digit string
     const colorPadded = color.padStart(6, '0')
 
     // subtract amount from each individual red green blue value
@@ -40,10 +41,12 @@ const StyleUtils = {
       intBVal = 0;
     }
     
+    // pad each 2 digit hex value to ensure it is in the correct format for css
     const hexR = intRVal.toString(16).padStart(2, '0') 
     const hexG = intGVal.toString(16).padStart(2, '0')
     const hexB = intBVal.toString(16).padStart(2, '0')
 
+    // concatenate the 3 values
     return (usePound ? '#' : '') + (hexR + hexG + hexB)
   },
 
