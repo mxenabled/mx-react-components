@@ -11,16 +11,17 @@ const StyleUtils = {
   adjustColor (col, amt) {
     let color = col;
     let usePound = false;
-
+    
     if (color[0] === '#') {
-      color = color.slice(1);
-      if (color.length === 3) color = doubleHexCode(color);
+      color = color.slice(1).padStart(6, '0');
+      // turn it into a 6 digit string
       usePound = true;
     }
 
-    const num = parseInt(color, 16);
-
-    let r = (num >> 16) + amt;
+    // subtract amount from each individual red green blue value
+    let r = parseInt(color.slice(0,2), 16) + amt  
+    let g = parseInt(color.slice(2,4), 16) + amt
+    let b = parseInt(color.slice(4,6), 16) + amt
 
     if (r > 255) {
       r = 255;
@@ -28,23 +29,23 @@ const StyleUtils = {
       r = 0;
     }
 
-    let b = ((num >> 8) & 0x00FF) + amt;
-
     if (b > 255) {
       b = 255;
     } else if (b < 0) {
       b = 0;
     }
 
-    let g = (num & 0x0000FF) + amt;
-
     if (g > 255) {
       g = 255;
     } else if (g < 0) {
       g = 0;
     }
+    r = r.toString(16) 
+    b = b.toString(16)
+    g = g.toString(16)
 
-    return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+      // concatenate string
+     return (usePound ? '#' : '') + (r + g + b).padStart(6, '0')
   },
 
   adjustHexOpacity (color, opacity) {
