@@ -4,47 +4,50 @@ const _merge = require('lodash/merge');
 const StyleConstants = require('../constants/Style');
 const { themeShape } = require('../constants/App');
 
-const doubleHexCode = color =>
-  color.split('').map(char => char + char).join('');
-
 const StyleUtils = {
   adjustColor (col, amt) {
-    let color = col;
-    let usePound = false;
+
+    let color = col
+    let usePound = false
 
     if (color[0] === '#') {
-      color = color.slice(1);
-      if (color.length === 3) color = doubleHexCode(color);
+      // remove hash sign
+      color = color.slice(1)
       usePound = true;
     }
 
-    const num = parseInt(color, 16);
+    // turn it into a 6 digit string
+    const colorPadded = color.padStart(6, '0')
 
-    let r = (num >> 16) + amt;
+    // subtract amount from each individual red green blue value
+    let intRVal = parseInt(colorPadded.slice(0,2), 16) + amt  
+    let intGVal = parseInt(colorPadded.slice(2,4), 16) + amt
+    let intBVal = parseInt(colorPadded.slice(4,6), 16) + amt
 
-    if (r > 255) {
-      r = 255;
-    } else if (r < 0) {
-      r = 0;
+    if (intRVal > 255) {
+      intRVal = 255;
+    } else if (intRVal < 0) {
+      intRVal = 0;
+    }
+    if (intGVal > 255) {
+      intGVal = 255;
+    } else if (intGVal < 0) {
+      intGVal = 0;
     }
 
-    let b = ((num >> 8) & 0x00FF) + amt;
-
-    if (b > 255) {
-      b = 255;
-    } else if (b < 0) {
-      b = 0;
+    if (intBVal > 255) {
+      intBVal = 255;
+    } else if (intBVal < 0) {
+      intBVal = 0;
     }
+    
+    // pad each 2 digit hex value to ensure it is in the correct format for css
+    const hexR = intRVal.toString(16).padStart(2, '0') 
+    const hexG = intGVal.toString(16).padStart(2, '0')
+    const hexB = intBVal.toString(16).padStart(2, '0')
 
-    let g = (num & 0x0000FF) + amt;
-
-    if (g > 255) {
-      g = 255;
-    } else if (g < 0) {
-      g = 0;
-    }
-
-    return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+    // concatenate the 3 values
+    return (usePound ? '#' : '') + (hexR + hexG + hexB)
   },
 
   adjustHexOpacity (color, opacity) {
