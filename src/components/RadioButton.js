@@ -46,7 +46,7 @@ class RadioButton extends React.Component {
 
   styles = (theme) => {
     return {
-      component: css(Object.assign({}, {
+      component: css({
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
@@ -55,9 +55,10 @@ class RadioButton extends React.Component {
         fontSize: theme.FontSizes.MEDIUM,
         ':focus': {
           outline: 'dotted thin #333'
-        }
-      }, this.props.style)),
-      radioButton: Object.assign({}, {
+        },
+        ...this.props.style
+      }),
+      radioButton: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -66,14 +67,16 @@ class RadioButton extends React.Component {
         marginRight: 5,
         border: '1px solid ' + theme.Colors.GRAY_300,
         borderRadius: '100%',
-        backgroundColor: theme.Colors.WHITE
-      }, this.props.buttonStyle),
-      radioButtonActive: Object.assign({}, {
+        backgroundColor: theme.Colors.WHITE,
+        ...this.props.buttonStyle
+      },
+      radioButtonActive: {
         width: '60%',
         height: '60%',
         borderRadius: '100%',
-        backgroundColor: theme.Colors.PRIMARY
-      }, this.props.activeButtonStyle)
+        backgroundColor: theme.Colors.PRIMARY,
+        ...this.props.activeButtonStyle
+      }
     };
   };
 }
