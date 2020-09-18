@@ -53,7 +53,6 @@ class RadioButton extends React.Component {
         backgroundColor: 'transparent',
         border: 'none',
         fontSize: theme.FontSizes.MEDIUM,
-        outline: 'none',
         ...this.props.style
       },
       radioButton: {
