@@ -30,7 +30,7 @@ class RadioButton extends React.Component {
     return (
       <button
         aria-checked={this.props.checked}
-        className={styles.component}
+        className="mx-radio-button-item"
         onClick={this.props.onClick}
         ref={this.props.elementRef}
         role="radio"
