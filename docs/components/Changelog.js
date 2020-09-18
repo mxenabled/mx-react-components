@@ -10,7 +10,7 @@ class Changelog extends React.Component {
 
         <h3>8.2.2</h3>
         <ul>
-          <li>Removes the outline from being hidden on the RadioButton component.</li>
+          <li>Removes the outline from being hidden in the inline styling on the RadioButton component.</li>
         </ul>
 
         <h3>8.2.1</h3>
