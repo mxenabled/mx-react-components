@@ -1,6 +1,5 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const { css } = require('glamor');
 
 import { withTheme } from './Theme';
 const { themeShape } = require('../constants/App');
@@ -30,10 +29,11 @@ class RadioButton extends React.Component {
     return (
       <button
         aria-checked={this.props.checked}
-        className={styles.component}
+        className="mx-radio-button-item"
         onClick={this.props.onClick}
         ref={this.props.elementRef}
         role="radio"
+        style={styles.component}
         {...this.props.elementProps}
       >
         <div className='mx-radio-button' style={styles.radioButton}>
@@ -46,18 +46,16 @@ class RadioButton extends React.Component {
 
   styles = (theme) => {
     return {
-      component: css({
+      component: {
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         backgroundColor: 'transparent',
         border: 'none',
         fontSize: theme.FontSizes.MEDIUM,
-        ':focus': {
-          outline: 'dotted thin #333'
-        },
+        outline: 'none',
         ...this.props.style
-      }),
+      },
       radioButton: {
         display: 'flex',
         alignItems: 'center',

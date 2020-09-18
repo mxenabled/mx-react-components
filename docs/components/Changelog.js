@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.2.1</h3>
+        <ul>
+          <li>Restores the correct styling provided to the RadioButton component.</li>
+        </ul>
+
         <h3>8.2.0</h3>
         <ul>
           <li>Updates the adjustColor function. Fixes issues with color wrap around.</li>
