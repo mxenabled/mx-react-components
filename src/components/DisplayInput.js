@@ -29,6 +29,7 @@ class DisplayInput extends React.Component {
       type: PropTypes.string,
       message: PropTypes.string
     }),
+    statusRole: PropTypes.string,
     styles: PropTypes.object,
     theme: themeShape,
     valid: PropTypes.bool
@@ -39,6 +40,7 @@ class DisplayInput extends React.Component {
       type: 'text'
     },
     isFocused: false,
+    statusRole: "alert",
     valid: true
   };
 
@@ -136,7 +138,7 @@ class DisplayInput extends React.Component {
           {this.props.status ? (
             <Column offset={twoWidthColumn} span={statusColumn} >
               <div style={styles.status}>
-                <div role="alert" style={styles[this.props.status.type]}>{this.props.status.message}</div>
+                <div role={this.props.statusRole} style={styles[this.props.status.type]}>{this.props.status.message}</div>
               </div>
             </Column>
           ) : null}

@@ -118,6 +118,9 @@ class DisplayInputDocs extends React.Component {
         <h5>status <label>Object</label></h5>
         <p>An Object that contains a status type ('error' or 'success') and a status message that is displayed to the right of the input field.</p>
 
+        <h5>statusRole <label>String</label></h5>
+        <p>A string that will override the default "alert" role for the status message element.</p>
+
         <h5>styles <label>Object</label></h5>
         <p>A nested object that allows you to set styles on any of the elements in the component. See the `styles` method in the component code for a full list of available keys and values.</p>
 

@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.2.3</h3>
+        <ul>
+          <li>Add "statusRole" prop to DisplayInput component.</li>
+        </ul>
+
         <h3>8.2.2</h3>
         <ul>
           <li>Removes the outline from being hidden in the inline styling on the RadioButton component.</li>
