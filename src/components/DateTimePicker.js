@@ -78,7 +78,9 @@ class DatePicker extends React.Component {
     e.stopPropagation();
 
     if (this.props.closeOnDateSelect) {
-      this.elementRef.blur();
+      if (this.elementRef && this.elementRef.blur) { 
+        this.elementRef.blur();
+      }
 
       this.setState({
         showCalendar: false
