@@ -37,7 +37,9 @@ class TextArea extends React.Component {
   };
 
   _onBlur = () => {
-    this.textarea.blur();
+    if (this.textarea && this.textarea.blur) { 
+      this.textarea.blur();
+    }
 
     this.setState({
       focus: false

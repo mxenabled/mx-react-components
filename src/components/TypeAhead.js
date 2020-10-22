@@ -193,7 +193,9 @@ class TypeAhead extends React.Component {
         highlightedValue: null
       });
 
-      this.inputRef.current.blur();
+      if (this.inputRef.current && this.inputRef.current.blur) { 
+        this.inputRef.current.blur();
+      }
     }
   };
 
