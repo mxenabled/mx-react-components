@@ -26,7 +26,6 @@ class ToggleSwitch extends React.Component {
   };
 
   static defaultProps = {
-    ariaLabel: "Toggle Switch",
     checked: false,
     falseIcon: 'close-skinny',
     leftLabel: 'Off',
