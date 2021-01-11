@@ -7,7 +7,10 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
-
+        <h3>8.2.4</h3>
+        <ul>
+          <li>Adds "buttonProps" prop to ToggleSwitch component</li>
+        </ul>
         <h3>8.2.3</h3>
         <ul>
           <li>Add "statusRole" prop to DisplayInput component.</li>
