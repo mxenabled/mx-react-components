@@ -344,16 +344,11 @@ class Drawer extends React.Component {
         boxSizing: 'border-box',
         [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
           padding: '0 10px'
-        }
+        },
       },
       title: {
-        alignItems: 'center',
-        display: 'flex',
         flex: '1 0 auto',
-        fontSize: theme.FontSizes.LARGE,
-        height: '100%',
-        justifyContent: 'center',
-        marginBottom: 0,
+        maxWidth: '90%',
         overflow: 'hidden',
         textAlign: 'center',
         textOverflow: 'ellipsis',
