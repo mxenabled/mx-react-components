@@ -344,7 +344,7 @@ class Drawer extends React.Component {
         boxSizing: 'border-box',
         [`@media (max-width: ${this.state.breakPoints.medium}px)`]: {
           padding: '0 10px'
-        },
+        }
       },
       title: {
         flex: '1 0 auto',
