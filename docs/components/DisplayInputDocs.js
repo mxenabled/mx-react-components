@@ -65,7 +65,7 @@ class DisplayInputDocs extends React.Component {
           label='Display Input'
           showHint={this.state.showHint}
           status={this.state.statusMessage}
-          valid={true}
+          valid={this.state.valid}
         />
         <DisplayInput
           elementProps={{
