@@ -4,7 +4,7 @@ const _uniqueId = require('lodash/uniqueId');
 const _merge = require('lodash/merge');
 const _get = require('lodash/get');
 
-import { css } from 'glamor'
+import { css } from '@mxenabled/cssinjs'
 
 import { withTheme } from './Theme';
 const Column = require('../components/grid/Column');

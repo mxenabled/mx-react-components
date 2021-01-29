@@ -1,7 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-import { css } from 'glamor';
+import { css } from '@mxenabled/cssinjs';
 
 import { withTheme } from './Theme';
 
@@ -17,8 +17,7 @@ class Button extends React.Component {
     actionText: PropTypes.string,
     'aria-label': PropTypes.string,
     buttonRef: PropTypes.func,
-    // Object or string since glamor supplies an object, not a string.
-    className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    className: PropTypes.string,
     elementProps: PropTypes.object,
     icon: PropTypes.string,
     iconSize: PropTypes.number,
