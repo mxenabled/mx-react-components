@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
+        <h3>8.2.7</h3>
+        <ul>
+          <li>Adds truncating the overflowing text in the Drawer component's title.</li>
+        </ul>
+
         <h3>8.2.6</h3>
         <ul>
           <li>Adds "aria-describedby" to DisplayInput component status element with the same unique ID as the input element for accessibility.</li>
