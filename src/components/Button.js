@@ -1,7 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-import { css } from 'glamor';
+import { style as css } from 'typestyle';
 
 import { withTheme } from './Theme';
 
