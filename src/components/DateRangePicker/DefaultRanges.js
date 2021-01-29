@@ -1,7 +1,7 @@
 const PropTypes = require('prop-types');
 const React = require('react');
 const Icon = require('../Icon');
-const { css } = require('glamor')
+const { css } = require('@mxenabled/cssinjs');
 const { themeShape } = require('../../constants/App');
 
 class DefaultRanges extends React.Component {
