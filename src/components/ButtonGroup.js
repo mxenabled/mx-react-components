@@ -69,7 +69,9 @@ class ButtonGroup extends React.Component {
       component: Object.assign({
         boxSizing: 'border-box',
         borderRadius: 0,
-        borderWidth: 1,
+        borderLeftWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
         borderRightWidth: this.props.type === 'base' ? 1 : 0,
         margin: 0,
         verticalAlign: 'middle'
