@@ -227,7 +227,6 @@ class Drawer extends React.Component {
     const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
-      <div>
         <MXFocusTrap {...mergedFocusTrapProps}>
           <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
@@ -275,7 +274,6 @@ class Drawer extends React.Component {
             </div>
           </div>
         </MXFocusTrap>
-      </div>
     );
   }
 
