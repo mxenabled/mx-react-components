@@ -8,7 +8,7 @@ const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
 const Velocity = require('velocity-animate');
-const { StyleRoot } = require('radium');
+import { css } from 'glamor';
 
 import { withTheme } from './Theme';
 const Button = require('../components/Button');
@@ -227,7 +227,6 @@ class Drawer extends React.Component {
     const titleUniqueId = _uniqueId('mx-drawer-title-');
 
     return (
-      <StyleRoot>
         <MXFocusTrap {...mergedFocusTrapProps}>
           <div className='mx-drawer' onKeyUp={typeof this.props.onKeyUp === 'function' ? this.props.onKeyUp : this._handleKeyUp} style={styles.componentWrapper}>
             <div
@@ -240,12 +239,15 @@ class Drawer extends React.Component {
             <div
               aria-describedby={this.props['aria-describedby']}
               aria-labelledby={this.props['aria-labelledby'] || titleUniqueId}
+              className={css({ ...styles.component, ...this.props.style })}
               ref={(ref) => (this._component = ref)}
               role={this.props.role}
-              style={{ ...styles.component, ...this.props.style }}
               tabIndex={0}
             >
-              <header className='mx-drawer-header' style={{ ...styles.header, ...this.props.headerStyle }}>
+              <header className={`mx-drawer-header ${css({
+                  ...styles.header,
+                  ...this.props.headerStyle,
+                })}`}>
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton
                     && <Button
@@ -272,7 +274,6 @@ class Drawer extends React.Component {
             </div>
           </div>
         </MXFocusTrap>
-      </StyleRoot>
     );
   }
 
