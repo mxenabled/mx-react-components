@@ -8,6 +8,7 @@ const keycode = require('keycode');
 const PropTypes = require('prop-types');
 const React = require('react');
 const Velocity = require('velocity-animate');
+
 import { css } from 'glamor';
 
 import { withTheme } from './Theme';
