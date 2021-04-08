@@ -98,6 +98,7 @@ class DateRangePicker extends React.Component {
       currentDate: props.selectedEndDate || moment().startOf('day').unix(),
       focusedDay: props.selectedEndDate || moment().startOf('day').unix(),
       selectedBox: SelectedBox.FROM,
+      selectedDefaultRange: '',
       selectedStartDate: this.props.selectedStartDate,
       selectedEndDate: this.props.selectedEndDate,
       showSelectionPane: false
@@ -184,6 +185,7 @@ class DateRangePicker extends React.Component {
 
   _handleDefaultRangeSelection = (range) => {
     this.setState({
+      selectedDefaultRange: range.displayValue,
       selectedStartDate: range.getStartDate(),
       selectedEndDate: range.getEndDate(),
       focusedDay: range.getEndDate()
@@ -308,7 +310,7 @@ class DateRangePicker extends React.Component {
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
     const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
-    const { selectedEndDate, selectedStartDate } = this.state;
+    const { selectedDefaultRange, selectedEndDate, selectedStartDate } = this.state;
     const selectedEndDateFromPropsAsMoment = moment.unix(this.props.selectedEndDate);
     const selectedStartDateFromPropsAsMoment = moment.unix(this.props.selectedStartDate);
 
@@ -493,7 +495,8 @@ class DateRangePicker extends React.Component {
                         onClick={() => {
                           this.props.onDateRangeSelect(
                             selectedStartDate,
-                            selectedEndDate
+                            selectedEndDate,
+                            selectedDefaultRange
                           );
 
                           this._resetToPropValuesAndClose();

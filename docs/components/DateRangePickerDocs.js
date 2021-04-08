@@ -143,7 +143,7 @@ class DateRangePickerDocs extends React.Component {
         <p>A function to be called when the user presses the cancel button or clicks on the scrim to cancel the date selection. Can be useful for analytics.</p>
 
         <h5>onDateRangeSelect <label>Function</label></h5>
-        <p>A function to be called when the user has applied their selected date range. The range's start and end dates are passed as arguements to the call.</p>
+        <p>A function to be called when the user has applied their selected date range. The range's start date, end date, and display value are passed as arguements to the call.</p>
 
         <h5>onOpen <label>Function</label></h5>
         <p>A function to be called when the user opens the calendar. Can be useful for analytics.</p>
