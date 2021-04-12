@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
+        <h3>8.2.9</h3>
+        <ul>
+          <li>Adds 3rd param to onDateRangeSelect to pass the selectedDefaultRange in the callback.</li>
+        </ul>
+
         <h3>8.2.8</h3>
         <ul>
           <li>Removes using radium in the Drawer component and uses glamor instead.</li>
