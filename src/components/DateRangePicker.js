@@ -162,6 +162,7 @@ class DateRangePicker extends React.Component {
         return {
           currentDate: date,
           focusedDay: date,
+          selectedDefaultRange: '',
           selectedBox: isLargeOrMediumWindowSize ? this._getToggledSelectBox(state.selectedBox) : state.selectedBox,
           selectedStartDate: modifiedRangeCompleteButDatesInversed ? endDate : startDate,
           selectedEndDate: modifiedRangeCompleteButDatesInversed ? startDate : endDate,
