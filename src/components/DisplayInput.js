@@ -1,9 +1,10 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Radium = require('radium');
 const _uniqueId = require('lodash/uniqueId');
 const _merge = require('lodash/merge');
 const _get = require('lodash/get');
+
+import { css } from 'glamor'
 
 import { withTheme } from './Theme';
 const Column = require('../components/grid/Column');
@@ -91,7 +92,12 @@ class DisplayInput extends React.Component {
 
     return (
       <Container className='mx-display-input' styles={styles.container} >
-        <div style={Object.assign({}, styles.wrapper, this.props.isFocused ? styles.wrapperFocus : {})}>
+        <div 
+          className={css({
+            ...styles.wrapper,
+            ...this.props.isFocused ? styles.wrapperFocus : {}
+          })}
+        >
           <Row>
             {this.props.label ? (
               <Column span={labelColumn}>
@@ -113,12 +119,12 @@ class DisplayInput extends React.Component {
                     aria-disabled={disabled}
                     aria-label={errorMessage}
                     aria-labelledby={hasLabel && !errorMessage ? this._labelId : null}
+                    className={css(styles.input)}
                     disabled={disabled}
                     id={this._inputId}
                     key='input'
                     onChange={disabled ? null : onChange}
                     ref={this.props.elementRef}
-                    style={styles.input}
                   />
                 </div>
               )}
@@ -237,7 +243,7 @@ class DisplayInput extends React.Component {
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
 
-        ':focus': wrapperFocus
+        ':focus-within': wrapperFocus
       }, this.props.style),
 
       wrapperFocus
@@ -245,4 +251,4 @@ class DisplayInput extends React.Component {
   };
 }
 
-module.exports = withTheme(Radium(DisplayInput));
+module.exports = withTheme(DisplayInput);
