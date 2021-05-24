@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
+        <h3>8.2.11</h3>
+        <ul>
+          <li>Removes using radium in the DisplayInput component and uses glamor instead.</li>
+        </ul>
+
         <h3>8.2.10</h3>
         <ul>
           <li>Resets selectedDefaultRange to an empty string when dates in the calendar are selected.</li>
