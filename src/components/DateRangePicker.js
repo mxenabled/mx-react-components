@@ -324,7 +324,7 @@ class DateRangePicker extends React.Component {
     };
 
     const buttonProps = {
-      'aria-controls': 'calendarMenu',
+      'aria-controls': this.state.showSelectionPane ? 'calendarMenu' : null,
       'aria-haspopup': true,
       'aria-label': `${placeholderText}${
         this.props.selectedStartDate && this.props.selectedEndDate
