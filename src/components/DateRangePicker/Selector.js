@@ -36,6 +36,7 @@ class Selector extends React.Component {
         </a>
         <div
           aria-label={`Currently in ${this.props.currentDate}`}
+          aria-level="2"
           className='mx-selector-current-date'
           role='heading'
           style={styles.currentDate}
