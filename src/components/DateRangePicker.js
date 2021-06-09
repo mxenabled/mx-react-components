@@ -76,7 +76,7 @@ class DateRangePicker extends React.Component {
       },
       {
         displayValue: 'Last Year',
-        getEndDate: () => moment().startOf('year').subtract(1, 'd').unix(),
+        getEndDate: () => moment().endOf('year').subtract(1, 'y').unix(),
         getStartDate: () => moment().startOf('year').subtract(1, 'y').unix()
       }
     ],
