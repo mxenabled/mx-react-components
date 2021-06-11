@@ -663,7 +663,7 @@ class DateRangePicker extends React.Component {
       calendarDay: {
         alignItems: 'center',
         boxSizing: 'border-box',
-        color: theme.Colors.GRAY_300,
+        color: theme.Colors.GRAY_700,
         cursor: 'pointer',
         display: 'flex',
         height: 30,
@@ -685,7 +685,7 @@ class DateRangePicker extends React.Component {
       },
       today: {
         backgroundColor: theme.Colors.GRAY_300,
-        color: theme.Colors.WHITE
+        color: theme.Colors.GRAY_700
       },
       currentMonth: {
         color: theme.Colors.GRAY_700
