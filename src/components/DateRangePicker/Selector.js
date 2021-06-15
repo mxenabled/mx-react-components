@@ -34,14 +34,13 @@ class Selector extends React.Component {
             type='caret-left'
           />
         </a>
-        <div
+        <h2
           aria-label={`Currently in ${this.props.currentDate}`}
           className='mx-selector-current-date'
-          role='heading'
           style={styles.currentDate}
         >
           {this.props.currentDate}
-        </div>
+        </h2>
         <a
           aria-label={`Next ${this.props.type}`}
           className='mx-selector-next'
