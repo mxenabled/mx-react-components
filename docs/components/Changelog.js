@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.2.15</h3>
+        <ul>
+          <li>Updates the aria-controls in the DateRangePick component to use "calendarMenu" when the showSelectionPane state value is true.</li>
+        </ul>
+
         <h3>8.2.14</h3>
         <ul>
           <li>Replaces the header div in the DateRangePicker Selector to use an h2 element instead.</li>
