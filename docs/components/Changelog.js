@@ -7,6 +7,16 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
+        <h3>8.2.13</h3>
+        <ul>
+          <li>Increase contrast in the DateRangePicker element for improved accessibility compliance.</li>
+        </ul>
+
+        <h3>8.2.12</h3>
+        <ul>
+          <li>Get the end of the last day of last year instead of the beginning of the last day of last year when selecting 'Last Year' in DateRangePicker</li>
+        </ul>
+
         <h3>8.2.11</h3>
         <ul>
           <li>Removes using radium in the DisplayInput component and uses glamor instead.</li>
