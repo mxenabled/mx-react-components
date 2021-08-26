@@ -9,6 +9,7 @@ const Icon = require('./Icon');
 
 const { themeShape } = require('../constants/App');
 
+import { isEnterOrSpaceKey } from '../utils/KeyPress'
 const StyleUtils = require('../utils/Style');
 
 export const getNewDateStateChange = ({
@@ -113,8 +114,7 @@ class Calendar extends React.Component {
 
   _handleDayKeyDown = (e, day) => {
     if (keycode(e) === 'up' || keycode(e) === 'down') e.preventDefault();
-
-    if (keycode(e) === 'enter')
+    if (isEnterOrSpaceKey(e))
       this.props.onDateSelect(day.unix(), e);
 
     const newDateStateChange = getNewDateStateChange({
