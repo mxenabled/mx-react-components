@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.2.17</h3>
+        <ul>
+          <li>Updates the day buttons in the Calendar and DateRangePicker components to accept space bar as a trigger. They already accepted enter, so with space and enter they should be compliant for a11y behavior expectations.</li>
+        </ul>
+
         <h3>8.2.16</h3>
         <ul>
           <li>Updates the end date in the DateRangePicker component to use the end of day rather than the start of day when selecting dates in the month table.</li>
