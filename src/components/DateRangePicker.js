@@ -13,6 +13,7 @@ const MXFocusTrap = require('../components/MXFocusTrap');
 const { SelectedBox } = require('../constants/DateRangePicker');
 const { themeShape } = require('../constants/App');
 
+import { isEnterOrSpaceKey } from '../utils/KeyPress'
 const StyleUtils = require('../utils/Style');
 
 const MonthTable = require('./DateRangePicker/MonthTable');
@@ -213,7 +214,7 @@ class DateRangePicker extends React.Component {
       }
 
       this.setState({ focusedDay: day.unix() });
-    } else if (keycode(e) === 'enter') {
+    } else if (isEnterOrSpaceKey(e)) {
       e.preventDefault();
       e.stopPropagation();
       this._handleDateSelect(date);
