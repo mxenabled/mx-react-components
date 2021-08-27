@@ -114,8 +114,11 @@ class Calendar extends React.Component {
 
   _handleDayKeyDown = (e, day) => {
     if (keycode(e) === 'up' || keycode(e) === 'down') e.preventDefault();
-    if (isEnterOrSpaceKey(e))
+    if (isEnterOrSpaceKey(e)) {
+      e.preventDefault();
+      e.stopPropagation();
       this.props.onDateSelect(day.unix(), e);
+    }
 
     const newDateStateChange = getNewDateStateChange({
       code: keycode(e),
