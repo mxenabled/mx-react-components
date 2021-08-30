@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.2.18</h3>
+        <ul>
+          <li>Added a fast-follow bugfix from 8.2.17 to include stopPropagation and preventDefault to stop spacebar from scrolling in the calendar component when used to select a date.</li>
+        </ul>
+
         <h3>8.2.17</h3>
         <ul>
           <li>Updates the day buttons in the Calendar and DateRangePicker components to accept space bar as a trigger. They already accepted enter, so with space and enter they should be compliant for a11y behavior expectations.</li>
