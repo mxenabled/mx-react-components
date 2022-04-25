@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.3.0</h3>
+        <ul>
+          <li>Updates moment package to fix a dependency security vulnerability</li>
+        </ul>
+
         <h3>8.2.18</h3>
         <ul>
           <li>Added a fast-follow bugfix from 8.2.17 to include stopPropagation and preventDefault to stop spacebar from scrolling in the calendar component when used to select a date.</li>
