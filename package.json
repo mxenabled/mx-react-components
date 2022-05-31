@@ -31,10 +31,10 @@
   },
   "homepage": "http://moneydesktop.github.io/mx-react-components/",
   "dependencies": {
+    "@mxenabled/cssinjs": "^0.6.0",
     "bowser": "^1.9.4",
     "d3": "^3.5.6",
     "focus-trap-react": "^3.1.4",
-    "glamor": "^2.20.40",
     "keycode": "^2.1.8",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",

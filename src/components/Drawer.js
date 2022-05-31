@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const Velocity = require('velocity-animate');
 
-import { css } from 'glamor';
+import { css } from '@mxenabled/cssinjs';
 
 import { withTheme } from './Theme';
 const Button = require('../components/Button');

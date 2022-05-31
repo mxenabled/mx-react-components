@@ -32,8 +32,7 @@ describe('Button', () => {
     const className = button.find('button').prop('className');
 
     expect(className).toContain('foo');
-    // the glamor class should also be present
-    expect(className).toContain('css-');
+    expect((className.match(/ /g) || []).length).toEqual(2)
   });
 
   describe('non element props', () => {

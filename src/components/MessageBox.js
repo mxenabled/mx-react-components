@@ -87,9 +87,10 @@ class MessageBox extends React.Component {
       },
       alertbar: {
         background: color,
-        border: theme.Colors.GRAY_300,
         color: theme.Colors.GRAY_900,
-        borderTop: '1px solid ' + color,
+        borderColor: `${color} ${theme.Colors.GRAY_300} ${theme.Colors.GRAY_300} ${theme.Colors.GRAY_300}`,
+        borderTopWidth: '1px',
+        borderTopStyle: 'solid',
         borderTopLeftRadius: 4,
         borderTopRightRadius: 4,
         height: 5

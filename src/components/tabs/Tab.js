@@ -1,7 +1,7 @@
 const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
-const { css } = require('glamor');
+const { css } = require('@mxenabled/cssinjs');
 
 import { withTheme } from '../Theme';
 const { themeShape } = require('../../constants/App');

@@ -5,7 +5,7 @@ const PropTypes = require('prop-types');
 const Radium = require('radium');
 const React = require('react');
 
-import { css } from 'glamor'
+import { css } from '@mxenabled/cssinjs'
 import { withTheme } from './Theme';
 const Icon = require('./Icon');
 const SearchInput = require('./SearchInput')

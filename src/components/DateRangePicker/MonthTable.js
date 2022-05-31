@@ -4,7 +4,7 @@ const moment = require('moment');
 
 const { SelectedBox } = require('../../constants/DateRangePicker');
 
-import { css } from  'glamor'
+const { css } = require('@mxenabled/cssinjs');
 
 class MonthTable extends React.Component {
   componentDidMount () {
