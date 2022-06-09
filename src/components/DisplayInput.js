@@ -187,7 +187,7 @@ class DisplayInput extends React.Component {
         textAlign: 'left',
         width: '100%',
 
-        ':focus': {
+        '&:focus': {
           boxShadow: 'none',
           outline: 'none'
         }
@@ -243,7 +243,7 @@ class DisplayInput extends React.Component {
         WebkitAppearance: 'none',
         whiteSpace: 'nowrap',
 
-        ':focus-within': wrapperFocus
+        '&:focus-within': wrapperFocus
       }, this.props.style),
 
       wrapperFocus

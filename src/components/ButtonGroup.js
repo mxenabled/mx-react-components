@@ -92,10 +92,10 @@ class ButtonGroup extends React.Component {
         color: theme.Colors.GRAY_300,
         cursor: 'default',
         fill: theme.Colors.GRAY_300,
-        ':hover': {
+        '&:hover': {
           backgroundColor: 'transparent'
         },
-        ':active': {
+        '&:active': {
           backgroundColor: 'transparent'
         }
       }

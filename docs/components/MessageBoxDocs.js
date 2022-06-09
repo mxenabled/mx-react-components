@@ -115,12 +115,12 @@ class MessageBoxDocs extends React.Component {
         border: Styles.Colors.GRAY_300,
         color: Styles.Colors.GRAY_900,
 
-        ':hover': {
+        '&:hover': {
           backgroundColor: StyleUtils.adjustColor(Styles.Colors.GRAY_300, -15),
           borderColor: StyleUtils.adjustColor(Styles.Colors.GRAY_300, -15)
         },
 
-        ':active': {
+        '&:active': {
           backgroundColor: StyleUtils.adjustColor(Styles.Colors.GRAY_300, -30),
           borderColor: StyleUtils.adjustColor(Styles.Colors.GRAY_300, -30)
         }

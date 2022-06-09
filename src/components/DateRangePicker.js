@@ -672,14 +672,14 @@ class DateRangePicker extends React.Component {
         marginBottom: 2,
         width: 30,
 
-        ':hover': {
+        '&:hover': {
           border: '1px solid' + theme.Colors.PRIMARY
         }
       },
       calendarDayDisabled: {
         color: theme.Colors.GRAY_300,
 
-        ':hover': {
+        '&:hover': {
           cursor: 'default',
           border: 'none'
         }
@@ -706,7 +706,7 @@ class DateRangePicker extends React.Component {
         backgroundColor: StyleUtils.adjustHexOpacity(theme.Colors.PRIMARY, 0.5),
         borderRadius: 0,
 
-        ':hover': {
+        '&:hover': {
           border: '1px solid' + theme.Colors.PRIMARY
         }
       },
