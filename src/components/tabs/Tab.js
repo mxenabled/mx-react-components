@@ -62,10 +62,10 @@ class Tab extends React.Component {
         fontStyle: theme.Fonts.SEMIBOLD,
         padding: theme.Spacing.MEDIUM,
         whiteSpace: 'nowrap',
-        ':hover': {
+        '&:hover': {
           color: theme.Colors.GRAY_700
         },
-        ':focus': {
+        '&:focus': {
           backgroundColor: theme.Colors.GRAY_300,
           color: theme.Colors.GRAY_700
         }
@@ -75,7 +75,7 @@ class Tab extends React.Component {
         color: theme.Colors.PRIMARY,
         borderBottom: '2px solid ' + theme.Colors.PRIMARY,
 
-        ':hover': {
+        '&:hover': {
           color: theme.Colors.PRIMARY
         }
       }, this.props.activeTabStyles)

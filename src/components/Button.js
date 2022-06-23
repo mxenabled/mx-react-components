@@ -131,12 +131,12 @@ class Button extends React.Component {
         fill: theme.Colors.WHITE,
         transition: 'all .2s ease-in',
 
-        ':hover': windowSizeIsSmall ? null : {
+        '&:hover': windowSizeIsSmall ? null : {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
           borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -15),
           transition: 'all .2s ease-in'
         },
-        ':active': {
+        '&:active': {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
           borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
           transition: 'all .2s ease-in'
@@ -149,13 +149,13 @@ class Button extends React.Component {
         fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
-        ':hover': windowSizeIsSmall ? null : {
+        '&:hover': windowSizeIsSmall ? null : {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE,
           fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
-        ':active': {
+        '&:active': {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
           borderColor: StyleUtils.adjustColor(theme.Colors.PRIMARY, -30),
           color: theme.Colors.WHITE,
@@ -170,12 +170,12 @@ class Button extends React.Component {
         fill: theme.Colors.PRIMARY,
         transition: 'all .2s ease-in',
 
-        ':hover': windowSizeIsSmall ? null : {
+        '&:hover': windowSizeIsSmall ? null : {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.WHITE, -15),
           borderColor: StyleUtils.adjustColor(theme.Colors.WHITE, -15),
           transition: 'all .2s ease-in'
         },
-        ':active': {
+        '&:active': {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.WHITE, -30),
           borderColor: StyleUtils.adjustColor(theme.Colors.WHITE, -30),
           transition: 'all .2s ease-in'
@@ -187,13 +187,13 @@ class Button extends React.Component {
         color: theme.Colors.GRAY_700,
         fill: theme.Colors.GRAY_500,
         transition: 'all .2s ease-in',
-        ':hover': windowSizeIsSmall ? null : {
+        '&:hover': windowSizeIsSmall ? null : {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_300, -15),
           borderColor: 'transparent',
           fill: theme.Colors.WHITE,
           transition: 'all .2s ease-in'
         },
-        ':active': {
+        '&:active': {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_300, -30),
           borderColor: 'transparent',
           fill: theme.Colors.WHITE,
@@ -208,13 +208,13 @@ class Button extends React.Component {
         borderColor: 'transparent',
         borderRadius: 2,
         borderWidth: 1,
-        ':hover': windowSizeIsSmall ? null : {
+        '&:hover': windowSizeIsSmall ? null : {
           color: StyleUtils.adjustColor(theme.Colors.PRIMARY, -8),
           fill: StyleUtils.adjustColor(theme.Colors.PRIMARY, -8),
           transition: 'all .2s ease-in',
           borderColor: theme.Colors.GRAY_300
         },
-        ':active': {
+        '&:active': {
           color: StyleUtils.adjustColor(theme.Colors.PRIMARY, -16),
           fill: StyleUtils.adjustColor(theme.Colors.PRIMARY, -16),
           transition: 'all .2s ease-in',
@@ -228,10 +228,10 @@ class Button extends React.Component {
         borderWidth: 1,
         color: theme.Colors.PRIMARY,
         fill: theme.Colors.PRIMARY,
-        ':hover': windowSizeIsSmall ? null : {
+        '&:hover': windowSizeIsSmall ? null : {
           backgroundColor: theme.Colors.GRAY_100
         },
-        ':active': {
+        '&:active': {
           backgroundColor: StyleUtils.adjustColor(theme.Colors.GRAY_100, -15)
         }
       },

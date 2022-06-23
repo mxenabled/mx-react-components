@@ -23,17 +23,17 @@ const PillTabs = ({
       borderColor: mergedTheme.Colors.GRAY_300,
       outline: 'none',
 
-      ':hover': {
+      '&:hover': {
         backgroundColor: mergedTheme.Colors.PRIMARY,
         color: mergedTheme.Colors.WHITE,
         fill: mergedTheme.Colors.WHITE
       },
-      ':focus': {
+      '&:focus': {
         backgroundColor: mergedTheme.Colors.PRIMARY,
         color: mergedTheme.Colors.WHITE,
         fill: mergedTheme.Colors.WHITE
       },
-      ':active': {
+      '&:active': {
         backgroundColor: StyleUtils.adjustColor(mergedTheme.Colors.PRIMARY, -15)
       }
     },
@@ -42,14 +42,14 @@ const PillTabs = ({
       color: mergedTheme.Colors.PRIMARY,
       cursor: 'default',
 
-      ':hover': {
+      '&:hover': {
         backgroundColor: 'transparent'
       },
-      ':focus': {
+      '&:focus': {
         backgroundColor: mergedTheme.Colors.WHITE,
         color: mergedTheme.Colors.PRIMARY
       },
-      ':active': {
+      '&:active': {
         backgroundColor: 'transparent'
       }
     }, activeTabStyles)

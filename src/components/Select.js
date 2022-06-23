@@ -259,7 +259,7 @@ class Select extends React.Component {
           padding: '8px 10px',
           position: 'relative',
           boxSizing: 'border-box',
-          ':focus': {
+          '&:focus': {
             outline: 'dotted thin ' + theme.Colors.GRAY_900,
             outlineOffset: '1px'
           }
@@ -311,8 +311,8 @@ class Select extends React.Component {
         padding: 10,
         whiteSpace: 'nowrap',
 
-        ':focus': focusedOption,
-        ':hover': focusedOption
+        '&:focus': focusedOption,
+        '&:hover': focusedOption
       },
       optionIcon: {
         marginRight: 5
