@@ -8,6 +8,11 @@ class Changelog extends React.Component {
 
         <h2>MX React Components V 8.0.0</h2>
 
+        <h3>8.4.1</h3>
+        <ul>
+          <li>Fix missing hover and other pseudo classes.</li>
+        </ul>
+
         <h3>8.4.0</h3>
         <ul>
           <li>Switch from Glamor to @mxenabled/cssinjs free-style wrapper. No user-facing changes expected.</li>
