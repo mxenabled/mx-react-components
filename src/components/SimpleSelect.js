@@ -134,7 +134,7 @@ class SimpleSelect extends React.Component {
         height: 40,
         padding: theme.Spacing.MEDIUM,
 
-        ':hover': {
+        '&:hover': {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE,
           cursor: 'pointer',

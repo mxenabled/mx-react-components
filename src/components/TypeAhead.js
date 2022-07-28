@@ -353,7 +353,7 @@ class TypeAhead extends React.Component {
         width: '100%',
         minHeight: '35px',
 
-        ':focus': {
+        '&:focus': {
           backgroundColor: '#FFFFFF',
           boxShadow: 'none',
           color: theme.Colors.GRAY_700,
@@ -376,7 +376,7 @@ class TypeAhead extends React.Component {
         outline: 'none',
         WebkitAppearance: 'none',
 
-        ':focus': {
+        '&:focus': {
           borderWidth: 0,
           boxShadow: 'none',
           outline: 'none'
@@ -423,12 +423,12 @@ class TypeAhead extends React.Component {
         paddingLeft: '10px',
         lineHeight: '1em',
 
-        ':focus': {
+        '&:focus': {
           border: 'none',
           boxShadow: 'none',
           outline: 'none'
         },
-        ':hover': {
+        '&:hover': {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE
         }

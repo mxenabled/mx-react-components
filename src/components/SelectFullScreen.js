@@ -197,7 +197,7 @@ class SelectFullScreen extends React.Component {
         whiteSpace: 'nowrap',
         fontSize: theme.FontSizes.MEDIUM,
 
-        ':hover': {
+        '&:hover': {
           backgroundColor: theme.Colors.PRIMARY,
           color: theme.Colors.WHITE,
           opacity: 1

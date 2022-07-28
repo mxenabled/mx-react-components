@@ -358,14 +358,14 @@ class Calendar extends React.Component {
         marginBottom: 2,
         width: 35,
 
-        ':hover': {
+        '&:hover': {
           border: '1px solid ' + theme.Colors.PRIMARY
         }
       },
       calendarDayDisabled: {
         color: theme.Colors.GRAY_300,
 
-        ':hover': {
+        '&:hover': {
           cursor: 'default',
           border: 'none'
         }
