@@ -144,11 +144,11 @@ class SelectionPane extends React.Component {
         width: '50%',
         fontSize: theme.FontSizes.SMALL,
 
-        ':hover': {
+        '&:hover': {
           backgroundColor: theme.Colors.GRAY_100
         },
 
-        ':focus': {
+        '&:focus': {
           backgroundColor: theme.Colors.GRAY_100
         }
       },
