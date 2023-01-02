@@ -63,7 +63,7 @@
     "eslint": "^5.16.0",
     "eslint-config-mx": "^1.7.0",
     "eslint-config-prettier": "^3.6.0",
-    "eslint-loader": "^2.2.1",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-jest": "^21.27.2",
     "eslint-plugin-react": "^7.20.0",
     "jest": "^24.9.0",
