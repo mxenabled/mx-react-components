@@ -41,7 +41,7 @@
     "moment-timezone": "^0.5.31",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
-    "radium": "^0.19.6",
+    "radium": "^0.26.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "velocity-animate": "^1.5.2"
