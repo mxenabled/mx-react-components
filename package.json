@@ -35,7 +35,7 @@
     "bowser": "^1.9.4",
     "d3": "^3.5.6",
     "focus-trap-react": "^3.1.4",
-    "keycode": "^2.1.8",
+    "keycode": "^2.2.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.31",
