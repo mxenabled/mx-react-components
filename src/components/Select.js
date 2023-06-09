@@ -179,6 +179,7 @@ class Select extends React.Component {
                       styles.option,
                       this.props.optionStyle
                     )}
+                    {...option?.optionProps}
                   >
                     {option.icon ? (
                       <Icon
@@ -187,7 +188,7 @@ class Select extends React.Component {
                         type={option.icon}
                       />
                     ) : null}
-                    <div style={styles.optionText}>{option.displayValue}</div>
+                    <div aria-label={`Order Debt Payoff by ${option.displayValue}`} role='option' style={styles.optionText}>{option.displayValue}</div>
                     {_isEqual(option, this.state.selected) ? <Icon size={20} type='check' /> : null }
                   </Option>
                 );
@@ -209,6 +210,8 @@ class Select extends React.Component {
     return (
       <div className='mx-select' style={Object.assign({}, this.props.style, { position: 'relative' })}>
         <div className='mx-select-custom'
+          aria-label={this.props['aria-label']}
+          aria-expanded={this.state.isOpen}
           className={css(styles.component)}
           onClick={haltEvent(this._open)}
           onKeyDown={this._handleKeyDown}
