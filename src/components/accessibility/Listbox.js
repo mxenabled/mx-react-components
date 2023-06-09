@@ -131,7 +131,7 @@ class Listbox extends React.Component {
  *
  * Handles accessibility for options in a Listbox.
  */
-const Option = ({ children, isSelected, label, ...props }) => (
+const Option = ({ children, isSelected, ...props }) => (
   <a
     aria-selected={isSelected}
     role='option'
