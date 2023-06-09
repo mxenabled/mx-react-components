@@ -46,7 +46,7 @@
     "eslint-plugin-react": "^7.20.0",
     "jest-enzyme": "^7.1.2",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }
 }
