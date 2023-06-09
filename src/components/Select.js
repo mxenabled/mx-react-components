@@ -179,7 +179,6 @@ class Select extends React.Component {
                       styles.option,
                       this.props.optionStyle
                     )}
-                    {...option?.optionProps}
                   >
                     {option.icon ? (
                       <Icon
