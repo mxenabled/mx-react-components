@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
+        <h3>8.4.4</h3>
+        <ul>
+          <li>Republish for change log</li>
+        </ul>
+
         <h3>8.4.3</h3>
         <ul>
           <li>Updating Select and Listbox for accessibility</li>
