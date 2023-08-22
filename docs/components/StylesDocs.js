@@ -99,15 +99,15 @@ class StylesDocs extends React.Component {
         </Markdown>
 
         <h5>Fonts</h5>
-        <p>In order to leverage the ProximaNova fonts, you will need to include those fonts in your application using <Code>@font_face</Code> and make sure the names match.</p>
+        <p>In order to leverage the Inter fonts, you will need to include those fonts in your application using <Code>@font_face</Code> and make sure the names match.</p>
 
         <Markdown lang='js'>
           {`
-            Styles.Fonts.THIN // ProximaNovaThin, Helvetica, Arial, sans-serif
-            Styles.Fonts.LIGHT // ProximaNovaLight, Helvetica, Arial, sans-serif
-            Styles.Fonts.REGULAR // ProximaNovaRegular, Helvetica, Arial, sans-serif
-            Styles.Fonts.ITALIC // ProximaNovaRegularItalic, Helvetica, Arial, sans-serif
-            Styles.Fonts.SEMIBOLD // ProximaNovaSemibold, Helvetica, Arial, sans-serif
+            Styles.Fonts.THIN // InterRegular, Helvetica, Arial, sans-serif
+            Styles.Fonts.LIGHT // InterRegular, Helvetica, Arial, sans-serif
+            Styles.Fonts.REGULAR // InterRegular, Helvetica, Arial, sans-serif
+            Styles.Fonts.ITALIC // InterRegular, Helvetica, Arial, sans-serif
+            Styles.Fonts.SEMIBOLD // InterSemibold, Helvetica, Arial, sans-serif
           `}
         </Markdown>
 

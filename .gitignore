@@ -33,3 +33,6 @@ dist
 demo/bundle.js
 
 .DS_Store
+
+# Webstorm cache
+.idea
