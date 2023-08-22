@@ -297,7 +297,7 @@ class DrawerDocs extends React.Component {
     return {
       content: {
         padding: 60,
-        fontFamily: 'ProximaNovaRegular, Helvetica, Arial, sans-serif',
+        fontFamily: 'InterRegular, Helvetica, Arial, sans-serif',
         color: '#2E323F'
       },
       unorderdLists: {

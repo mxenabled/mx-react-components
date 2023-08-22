@@ -68,11 +68,11 @@ const Style = {
   },
 
   Fonts: {
-    THIN: 'ProximaNovaThin, Helvetica, Arial, sans-serif',
-    LIGHT: 'ProximaNovaLight, Helvetica, Arial, sans-serif',
-    REGULAR: 'ProximaNovaRegular, Helvetica, Arial, sans-serif',
-    ITALIC: 'ProximaNovaRegularItalic, Helvetica, Arial, sans-serif',
-    SEMIBOLD: 'ProximaNovaSemibold, Helvetica, Arial, sans-serif'
+    THIN: 'InterRegular, Helvetica, Arial, sans-serif',
+    LIGHT: 'InterRegular, Helvetica, Arial, sans-serif',
+    REGULAR: 'InterRegular, Helvetica, Arial, sans-serif',
+    ITALIC: 'InterRegular, Helvetica, Arial, sans-serif',
+    SEMIBOLD: 'InterSemibold, Helvetica, Arial, sans-serif'
   },
 
   //Box Shadows
