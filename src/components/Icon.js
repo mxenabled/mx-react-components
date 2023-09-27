@@ -38,7 +38,7 @@ class Icon extends React.Component {
         className='mx-icon'
         preserveAspectRatio='xMidYMid meet'
         style={styles.component}
-        viewBox='0 0 512 512'
+        viewBox={this.props.type === 'wallet' ? '0 0 38 38' : '0 0 512 512'}
       >
         {getIconPath(this.props.type, this.props.backgroundFillColor)}
       </svg>
