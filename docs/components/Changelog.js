@@ -7,6 +7,11 @@ class Changelog extends React.Component {
         <h1>Change Log</h1>
 
         <h2>MX React Components V 8.0.0</h2>
+        <h3>8.5.1</h3>
+        <ul>
+          <li>Replaced wallet icon</li>
+        </ul>
+
         <h3>8.5.0</h3>
         <ul>
           <li>Changing Font to Inter</li>
