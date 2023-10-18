@@ -8,6 +8,7 @@ const Icon = require('../Icon');
 class Selector extends React.Component {
   static propTypes = {
     currentDate: PropTypes.string,
+    getTranslation: PropTypes.func,
     handleNextClick: PropTypes.func,
     handlePreviousClick: PropTypes.func,
     setCurrentDate: PropTypes.func,
@@ -16,11 +17,12 @@ class Selector extends React.Component {
 
   render () {
     const styles = this.styles();
+    const { getTranslation } = this.props
 
     return (
       <div className='mx-selector' style={{ ...styles.container, ...this.props.style }}>
         <a
-          aria-label={`Previous ${this.props.type}`}
+          aria-label={getTranslation(this.props.type === 'Month' ? 'Previous Month' : 'Previous Year')}
           className='mx-selector-previous'
           onClick={this.props.handlePreviousClick}
           onKeyUp={e =>
@@ -35,14 +37,14 @@ class Selector extends React.Component {
           />
         </a>
         <h2
-          aria-label={`Currently in ${this.props.currentDate}`}
+          aria-label={getTranslation('Currently in %1', this.props.currentDate)}
           className='mx-selector-current-date'
           style={styles.currentDate}
         >
           {this.props.currentDate}
         </h2>
         <a
-          aria-label={`Next ${this.props.type}`}
+          aria-label={getTranslation(getTranslation(this.props.type === 'Month' ? 'Next Month' : 'Next Year'))}
           className='mx-selector-next'
           onClick={this.props.handleNextClick}
           onKeyUp={e => keycode(e) === 'enter' && this.props.handleNextClick(e)}
@@ -97,11 +99,12 @@ class MonthSelector extends React.Component {
 
   render () {
     const styles = this.styles();
+    const momentDate = moment.unix(this.props.currentDate).format('MMMM')
 
     return (
       <Selector
         {...this.props}
-        currentDate={moment.unix(this.props.currentDate).format('MMMM')}
+        currentDate={momentDate.charAt(0).toUpperCase() + momentDate.slice(1)}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
         style={styles.monthSelector}

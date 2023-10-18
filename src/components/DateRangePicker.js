@@ -3,6 +3,8 @@ const PropTypes = require('prop-types');
 const keycode = require('keycode');
 
 import { withTheme } from './Theme';
+import 'moment/locale/es'
+import 'moment/locale/fr'
 const moment = require('moment');
 const _merge = require('lodash/merge');
 
@@ -32,6 +34,7 @@ class DateRangePicker extends React.Component {
     elementRef: PropTypes.func,
     focusTrapProps: PropTypes.object,
     format: PropTypes.string,
+    getTranslation: PropTypes.func.isRequired,
     isRelative: PropTypes.bool,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
@@ -49,38 +52,6 @@ class DateRangePicker extends React.Component {
   };
 
   static defaultProps = {
-    defaultRanges: [
-      {
-        displayValue: 'This Month',
-        getEndDate: () => moment().endOf('month').unix(),
-        getStartDate: () => moment().startOf('month').unix()
-      },
-      {
-        displayValue: 'Last 30 Days',
-        getEndDate: () => moment().endOf('day').unix(),
-        getStartDate: () => moment().subtract(29, 'days').startOf('day').unix()
-      },
-      {
-        displayValue: 'Last Month',
-        getEndDate: () => moment().subtract(1, 'months').endOf('month').unix(),
-        getStartDate: () => moment().subtract(1, 'months').startOf('month').unix()
-      },
-      {
-        displayValue: 'Last 90 Days',
-        getEndDate: () => moment().endOf('day').unix(),
-        getStartDate: () => moment().subtract(89, 'days').startOf('day').unix()
-      },
-      {
-        displayValue: 'Year To Date',
-        getEndDate: () => moment().endOf('day').unix(),
-        getStartDate: () => moment().startOf('year').unix()
-      },
-      {
-        displayValue: 'Last Year',
-        getEndDate: () => moment().endOf('year').subtract(1, 'y').unix(),
-        getStartDate: () => moment().startOf('year').subtract(1, 'y').unix()
-      }
-    ],
     focusTrapProps: {},
     format: 'MMM D, YYYY',
     isRelative: true,
@@ -88,7 +59,6 @@ class DateRangePicker extends React.Component {
     onCancel: () => {},
     onClose: () => {},
     onOpen: () => {},
-    placeholderText: 'Select A Date Range',
     showDefaultRanges: false
   };
 
@@ -106,6 +76,10 @@ class DateRangePicker extends React.Component {
     };
   }
 
+  componentDidMount() {
+    moment.locale(this.props.locale)
+  }
+
   UNSAFE_componentWillReceiveProps (newProps) {
     const isUpdatedSelectedEndDate = newProps.selectedEndDate && newProps.selectedEndDate !== this.props.selectedEndDate;
     const isUpdatedSelectedStartDate = newProps.selectedStartDate && newProps.selectedStartDate !== this.props.selectedStartDate;
@@ -120,7 +94,7 @@ class DateRangePicker extends React.Component {
     }
   }
 
-  _getDateFormat = (isLargeOrMediumWindowSize) => {
+  _getDateFormat = (isLargeOrMediumWindowSize) => { // here
     return isLargeOrMediumWindowSize ? this.props.format : 'MMM D';
   };
 
@@ -269,6 +243,12 @@ class DateRangePicker extends React.Component {
     return isActive;
   };
 
+  _formatMomentDate = (date, format = 'MMMM Do, YYYY') => {
+    const d = moment.unix(date).format(format)
+
+    return d.charAt(0).toUpperCase() + d.slice(1)
+  }
+
   _getDateRangePosition = (selectedStart, selectedEnd, active, date) => {
     const start = selectedStart || active;
     const end = selectedEnd || active;
@@ -306,15 +286,49 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const { children, placeholderText } = this.props;
+    const { children, getTranslation, placeholderText } = this.props;
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
     const shouldShowCalendarIcon = StyleUtils.getWindowSize(theme.BreakPoints) !== 'small';
     const showCalendar = isLargeOrMediumWindowSize || this.state.showCalendar;
     const { selectedDefaultRange, selectedEndDate, selectedStartDate } = this.state;
-    const selectedEndDateFromPropsAsMoment = moment.unix(this.props.selectedEndDate);
-    const selectedStartDateFromPropsAsMoment = moment.unix(this.props.selectedStartDate);
+
+    const defaultRangesWithCopy = [
+      {
+        displayValue: getTranslation('This Month',),
+        getEndDate: () => moment().endOf('month').unix(),
+        getStartDate: () => moment().startOf('month').unix()
+      },
+      {
+        displayValue: getTranslation('Last 30 Days',),
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(29, 'days').startOf('day').unix()
+      },
+      {
+        displayValue: getTranslation('Last Month',),
+        getEndDate: () => moment().subtract(1, 'months').endOf('month').unix(),
+        getStartDate: () => moment().subtract(1, 'months').startOf('month').unix()
+      },
+      {
+        displayValue: getTranslation('Last 90 Days',),
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().subtract(89, 'days').startOf('day').unix()
+      },
+      {
+        displayValue: getTranslation('Year To Date',),
+        getEndDate: () => moment().endOf('day').unix(),
+        getStartDate: () => moment().startOf('year').unix()
+      },
+      {
+        displayValue: getTranslation('Last Year',),
+        getEndDate: () => moment().endOf('year').subtract(1, 'y').unix(),
+        getStartDate: () => moment().startOf('year').subtract(1, 'y').unix()
+      }
+    ]
+
+    const weekDayNames = moment.weekdays()
+    const weekDayObject = moment.weekdaysMin().map((d, index) => ({ label: d.charAt(0).toUpperCase(), value: weekDayNames[index].charAt(0).toUpperCase()}))
 
     const mergedFocusTrapProps = {
       focusTrapOptions: {
@@ -329,7 +343,7 @@ class DateRangePicker extends React.Component {
       'aria-haspopup': true,
       'aria-label': `${placeholderText}${
         this.props.selectedStartDate && this.props.selectedEndDate
-          ? `, ${selectedStartDateFromPropsAsMoment.format('MMMM Do, YYYY')} to ${selectedEndDateFromPropsAsMoment.format('MMMM Do, YYYY')} currently selected`
+          ? getTranslation(`%1 to %2 currently selected`, this._formatMomentDate(this.props.selectedStartDate), this._formatMomentDate(this.props.selectedEndDate))
           : ''
       }`,
       onClick: this._toggleSelectionPane,
@@ -355,9 +369,9 @@ class DateRangePicker extends React.Component {
                 <div className='mx-date-range-picker-selected-date-text' style={styles.selectedDateText}>
                   {this.props.selectedStartDate && this.props.selectedEndDate ? (
                     <div>
-                      <span>{selectedStartDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
+                      <span>{this._formatMomentDate(this.props.selectedStartDate, this._getDateFormat(isLargeOrMediumWindowSize))}</span>
                       <span> - </span>
-                      <span>{selectedEndDateFromPropsAsMoment.format(this._getDateFormat(isLargeOrMediumWindowSize))}</span>
+                      <span>{this._formatMomentDate(this.props.selectedEndDate, this._getDateFormat(isLargeOrMediumWindowSize))}</span>
                     </div>
                   ) : placeholderText}
                 </div>
@@ -391,9 +405,10 @@ class DateRangePicker extends React.Component {
                         <div>
                           {this.props.showDefaultRanges && (
                             <SelectionPane
-                              defaultRanges={this.props.defaultRanges}
+                              defaultRanges={this.props.defaultRanges || defaultRangesWithCopy}
                               getFromButtonRef={ref => (this._fromButton = ref)}
                               getToButtonRef={ref => (this._toButton = ref)}
+                              getTranslation={this.props.getTranslation}
                               handleDefaultRangeSelection={
                                 this._handleDefaultRangeSelection
                               }
@@ -420,6 +435,7 @@ class DateRangePicker extends React.Component {
                             <div className='mx-date-range-picker-calendar-header' style={styles.calendarHeader}>
                               <MonthSelector
                                 currentDate={this.state.currentDate}
+                                getTranslation={this.props.getTranslation}
                                 setCurrentDate={currentDate =>
                                   this.setState({
                                     currentDate,
@@ -428,6 +444,7 @@ class DateRangePicker extends React.Component {
                               />
                               <YearSelector
                                 currentDate={this.state.currentDate}
+                                getTranslation={this.props.getTranslation}
                                 setCurrentDate={currentDate =>
                                   this.setState({
                                     currentDate,
@@ -436,19 +453,11 @@ class DateRangePicker extends React.Component {
                               />
                             </div>
                             <div className='mx-date-range-picker-week-label' style={styles.calendarWeek}>
-                              {[
-                                { label: 'S', value: 'Sunday' },
-                                { label: 'M', value: 'Monday' },
-                                { label: 'T', value: 'Tuesday' },
-                                { label: 'W', value: 'Wednesday' },
-                                { label: 'T', value: 'Thursday' },
-                                { label: 'F', value: 'Friday' },
-                                { label: 'S', value: 'Saturday' }
-                              ].map(day => {
+                              {weekDayObject.map((day, index) => {
                                 return (
                                   <div
                                     aria-hidden={true}
-                                    key={day.value}
+                                    key={`${day.value}-${index}`}
                                     style={styles.calendarWeekDay}
                                   >
                                     {day.label}
@@ -466,6 +475,7 @@ class DateRangePicker extends React.Component {
                               getDateRangePosition={
                                 this._getDateRangePosition
                               }
+                              getTranslation={this.props.getTranslation}
                               handleDateHover={this._handleDateHover}
                               handleDateSelect={this._handleDateSelect}
                               handleKeyDown={this._handleDayKeyDown}
@@ -482,7 +492,7 @@ class DateRangePicker extends React.Component {
                     </div>
                     <div style={styles.bottomPane}>
                       <Button
-                        aria-label='Cancel Date Range Selection'
+                        aria-label={getTranslation('Cancel Date Range Selection')}
                         onClick={() => {
                           this.props.onCancel()
                           this._resetToPropValuesAndClose();
@@ -490,10 +500,10 @@ class DateRangePicker extends React.Component {
                         theme={this.props.theme}
                         type='secondary'
                       >
-                        Cancel
+                        {getTranslation('Cancel')}
                       </Button>
                       <Button
-                        aria-label='Apply Date Range Selection'
+                        aria-label={getTranslation('Apply Date Range Selection')}
                         onClick={() => {
                           this.props.onDateRangeSelect(
                             selectedStartDate,
@@ -507,7 +517,7 @@ class DateRangePicker extends React.Component {
                         theme={this.props.theme}
                         type={selectedStartDate && selectedEndDate ? 'primary' : 'disabled'}
                       >
-                        Apply
+                        {getTranslation('Apply')}
                       </Button>
                     </div>
                   </div>

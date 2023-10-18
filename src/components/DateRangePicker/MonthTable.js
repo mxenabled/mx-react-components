@@ -34,6 +34,7 @@ class MonthTable extends React.Component {
       currentDate,
       focusedDay,
       getDateRangePosition,
+      getTranslation,
       handleDateHover,
       handleDateSelect,
       handleKeyDown,
@@ -72,20 +73,20 @@ class MonthTable extends React.Component {
        *      Thursday, April 13th, 2018, selected end date for range.
        * */
       let ariaLabelStateText = '';
-      const ariaLabelBeginningText = `Select ${selectedBox === SelectedBox.FROM ? 'start' : 'end'} date for range, `;
+      const ariaLabelBeginningText = `Select ${selectedBox === SelectedBox.FROM ? 'start' : 'end'} date for range`;
       const ariaLabelDateText = moment(startDate).format('dddd, MMMM Do, YYYY');
 
       if (!isSelectedDay && isActiveRange) {
-        ariaLabelStateText = ', within selected range';
+        ariaLabelStateText = 'within selected range.';
       } else if (isSelectedStartDay) {
-        ariaLabelStateText = ', selected start date for range.';
+        ariaLabelStateText = 'selected start date for range.';
       } else if (isSelectedEndDay) {
-        ariaLabelStateText = ', selected end date for range.';
+        ariaLabelStateText = 'selected end date for range.';
       }
 
       const day = (
         <a
-          aria-label={ariaLabelBeginningText + ariaLabelDateText + ariaLabelStateText}
+          aria-label={getTranslation(`${ariaLabelBeginningText}, %1, ${ariaLabelStateText}`, ariaLabelDateText)}
           aria-pressed={isSelectedDay}
           className={`${css({
             ...styles.calendarDay,
@@ -121,6 +122,7 @@ MonthTable.propTypes = {
   currentDate: PropTypes.number,
   focusedDay: PropTypes.number,
   getDateRangePosition: PropTypes.func,
+  getTranslation: PropTypes.func,
   handleDateHover: PropTypes.func,
   handleDateSelect: PropTypes.func,
   handleKeyDown: PropTypes.func,
