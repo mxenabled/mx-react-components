@@ -94,7 +94,7 @@ class DateRangePicker extends React.Component {
     }
   }
 
-  _getDateFormat = (isLargeOrMediumWindowSize) => { // here
+  _getDateFormat = (isLargeOrMediumWindowSize) => {
     return isLargeOrMediumWindowSize ? this.props.format : 'MMM D';
   };
 
