@@ -77,16 +77,16 @@ class MonthTable extends React.Component {
       const ariaLabelDateText = moment(startDate).format('dddd, MMMM Do, YYYY');
 
       if (!isSelectedDay && isActiveRange) {
-        ariaLabelStateText = 'within selected range.';
+        ariaLabelStateText = ', within selected range.';
       } else if (isSelectedStartDay) {
-        ariaLabelStateText = 'selected start date for range.';
+        ariaLabelStateText = ', selected start date for range.';
       } else if (isSelectedEndDay) {
-        ariaLabelStateText = 'selected end date for range.';
+        ariaLabelStateText = ', selected end date for range.';
       }
 
       const day = (
         <a
-          aria-label={getTranslation(`${ariaLabelBeginningText}, %1, ${ariaLabelStateText}`, ariaLabelDateText)}
+          aria-label={getTranslation(`${ariaLabelBeginningText}, %1${ariaLabelStateText}`, ariaLabelDateText)}
           aria-pressed={isSelectedDay}
           className={`${css({
             ...styles.calendarDay,
