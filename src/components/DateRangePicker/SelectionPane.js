@@ -16,6 +16,8 @@ class SelectionPane extends React.Component {
     defaultRanges: PropTypes.array,
     getFromButtonRef: PropTypes.func,
     getToButtonRef: PropTypes.func,
+    getTranslation: PropTypes.func,
+    locale: PropTypes.string,
     onDateBoxClick: PropTypes.func,
     selectedBox: PropTypes.string,
     selectedEndDate: PropTypes.number,
@@ -24,43 +26,53 @@ class SelectionPane extends React.Component {
     theme: themeShape
   };
 
+  componentDidMount() {
+    moment.locale(this.props.locale)
+  }
+
   _handleDateBoxClick = (date, selectedBox) => {
     this.props.onDateBoxClick(date, selectedBox);
+  }
+
+  _formatDate = (date) => {
+    const d = moment.unix(date).format('MMM D, YYYY')
+
+    return d.charAt(0).toUpperCase() + d.slice(1)
   }
 
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    const { selectedStartDate, selectedEndDate } = this.props;
+    const { getTranslation, selectedStartDate, selectedEndDate } = this.props;
 
     return (
       <div className='mx-selection-pane' style={styles.container}>
         <div>
-          <label style={styles.boxLabel}>From</label>
+          <label style={styles.boxLabel}>{getTranslation('From')}</label>
           <button
-            aria-label={`Select Start Date, ${selectedStartDate ? 'Current start date is ' + moment.unix(selectedStartDate).format('MMM D, YYYY') : ''}`}
+            aria-label={getTranslation(`Select Start Date${selectedStartDate ? ', Current start date is' : ''} %1`, this._formatDate(selectedStartDate))}
             className='mx-selection-pane-from-field'
             onClick={() => this._handleDateBoxClick(selectedStartDate, SelectedBox.FROM)}
             ref={this.props.getFromButtonRef}
             style={{ ...styles.dateSelectBox, ...this.props.selectedBox === SelectedBox.FROM ? styles.selectedDateSelectBox : {}}}
           >
-            {selectedStartDate ? moment.unix(selectedStartDate).format('MMM D, YYYY') : 'Select Start Date'}
+            {selectedStartDate ? this._formatDate(selectedStartDate) : getTranslation('Select Start Date')}
           </button>
 
-          <label style={styles.boxLabel}>To</label>
+          <label style={styles.boxLabel}>{getTranslation('To')}</label>
           <button
-            aria-label={`Select End Date, ${selectedEndDate ? 'Current end date is ' + moment.unix(selectedEndDate).format('MMM D, YYYY') : ''}`}
+            aria-label={getTranslation(`Select End Date${selectedEndDate ? ', Current end date is' : ''} %1`, this._formatDate(selectedEndDate))}
             className='mx-selection-pane-to-field'
             onClick={() => this._handleDateBoxClick(selectedEndDate, SelectedBox.TO)}
             ref={this.props.getToButtonRef}
             style={{ ...styles.dateSelectBox, ...this.props.selectedBox === SelectedBox.TO ? styles.selectedDateSelectBox : {}}}
           >
-            {selectedEndDate ? moment.unix(selectedEndDate).format('MMM D, YYYY') : 'Select End Date'}
+            {selectedEndDate ? this._formatDate(selectedEndDate) : getTranslation('Select End Date')}
           </button>
         </div>
         <div>
           <div style={{ ...styles.defaultRangesTitle, color: theme.Colors.PRIMARY }}>
-            Select a Range
+            {getTranslation('Select a Range')}
           </div>
           <DefaultRanges {...this.props} styles={styles} theme={theme} />
         </div>
