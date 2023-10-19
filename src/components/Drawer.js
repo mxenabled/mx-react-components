@@ -40,6 +40,7 @@ class Drawer extends React.Component {
     easing: PropTypes.array,
     focusOnLoad: PropTypes.bool,
     focusTrapProps: PropTypes.object,
+    getTranslation: PropTypes.func,
     headerMenu: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func
@@ -213,7 +214,7 @@ class Drawer extends React.Component {
   render () {
     const { theme } = this.state;
     const styles = this.styles(theme);
-    const { closeButtonAriaLabel, headerMenu, focusTrapProps, portalTo } = this.props;
+    const { closeButtonAriaLabel, headerMenu, focusTrapProps, getTranslation, portalTo } = this.props;
     const mergedFocusTrapProps = {
       focusTrapOptions: {
         clickOutsideDeactivates: true,
@@ -252,7 +253,7 @@ class Drawer extends React.Component {
                 <span style={styles.backArrow}>
                   {this.props.showCloseButton
                     && <Button
-                      aria-label={closeButtonAriaLabel || `Close ${this.props.title} Drawer`}
+                      aria-label={closeButtonAriaLabel || getTranslation('Close %1 Drawer', this.props.title)}
                       buttonRef={ref => (this._closeButton = ref)}
                       className='mx-drawer-close'
                       icon='go-back'
