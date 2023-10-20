@@ -284,7 +284,7 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const { children, getTranslation = (string) => string, placeholderText } = this.props;
+    const { children, getTranslation, placeholderText } = this.props;
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
