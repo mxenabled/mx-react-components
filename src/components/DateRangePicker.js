@@ -244,9 +244,7 @@ class DateRangePicker extends React.Component {
   };
 
   _formatMomentDate = (date, format = 'MMMM Do, YYYY') => {
-    const d = moment.unix(date).format(format)
-
-    return d.charAt(0).toUpperCase() + d.slice(1)
+    return moment.unix(date).format(format)
   }
 
   _getDateRangePosition = (selectedStart, selectedEnd, active, date) => {
@@ -286,7 +284,7 @@ class DateRangePicker extends React.Component {
   };
 
   render () {
-    const { children, getTranslation, placeholderText } = this.props;
+    const { children, getTranslation = (string) => string, placeholderText } = this.props;
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const isLargeOrMediumWindowSize = this._isLargeOrMediumWindowSize(theme);
     const styles = this.styles(theme, isLargeOrMediumWindowSize);
@@ -328,7 +326,7 @@ class DateRangePicker extends React.Component {
     ]
 
     const weekDayNames = moment.weekdays()
-    const weekDayObject = moment.weekdaysMin().map((d, index) => ({ label: d.charAt(0).toUpperCase(), value: weekDayNames[index].charAt(0).toUpperCase()}))
+    const weekDayObject = moment.weekdaysMin().map((d, index) => ({ label: d, value: weekDayNames[index]}))
 
     const mergedFocusTrapProps = {
       focusTrapOptions: {

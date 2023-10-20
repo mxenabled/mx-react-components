@@ -99,12 +99,11 @@ class MonthSelector extends React.Component {
 
   render () {
     const styles = this.styles();
-    const momentDate = moment.unix(this.props.currentDate).format('MMMM')
 
     return (
       <Selector
         {...this.props}
-        currentDate={momentDate.charAt(0).toUpperCase() + momentDate.slice(1)}
+        currentDate={moment.unix(this.props.currentDate).format('MMMM')}
         handleNextClick={this._handleNextClick}
         handlePreviousClick={this._handlePreviousClick}
         style={styles.monthSelector}
