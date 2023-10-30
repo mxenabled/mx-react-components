@@ -35,9 +35,7 @@ class SelectionPane extends React.Component {
   }
 
   _formatDate = (date) => {
-    const d = moment.unix(date).format('MMM D, YYYY')
-
-    return d.charAt(0).toUpperCase() + d.slice(1)
+    return moment.unix(date).format('MMM D, YYYY')
   }
 
   render () {
