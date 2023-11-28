@@ -47,6 +47,7 @@ export const getNewDateStateChange = ({
 
 class Calendar extends React.Component {
   static propTypes = {
+    getTranslation: PropTypes.func,
     locale: PropTypes.string,
     minimumDate: PropTypes.number,
     onDateSelect: PropTypes.func,
@@ -66,6 +67,10 @@ class Calendar extends React.Component {
     focusedDay:
       this.props.selectedDate || this.props.minimumDate || moment().unix()
   };
+
+  componentDidMount() {
+    moment.locale(this.props.locale)
+  }
 
   UNSAFE_componentWillReceiveProps (newProps) {
     if (
@@ -189,7 +194,7 @@ class Calendar extends React.Component {
 
             return (
               <a
-                aria-label={`${day.format('dddd, MMMM Do, YYYY')}${isSelectedDay ? ', Currently Selected' : ''}`}
+                aria-label={isSelectedDay ? this.props.getTranslation('%1, Currently Selected', day.format('dddd, MMMM Do, YYYY')) : day.format('dddd, MMMM Do, YYYY')}
                 className='calendar-day'
                 id={
                   day.isSame(moment.unix(this.state.focusedDay), 'day')
@@ -229,15 +234,6 @@ class Calendar extends React.Component {
   render () {
     const theme = StyleUtils.mergeTheme(this.props.theme);
     const styles = this.styles(theme);
-    const daysOfWeek = [
-      { label: 'Sunday', value: 'S' },
-      { label: 'Monday', value: 'M' },
-      { label: 'Tuesday', value: 'T' },
-      { label: 'Wednesday', value: 'W' },
-      { label: 'Thursday', value: 'T' },
-      { label: 'Friday', value: 'F' },
-      { label: 'Saturday', value: 'S' }
-    ];
     const currentMonthText = moment.unix(this.state.currentDate).format('MMMM YYYY');
     const nextMonthText = moment.unix(this.state.currentDate).add(1, 'month').format('MMMM YYYY');
     const previousMonthText = moment.unix(this.state.currentDate).subtract(1, 'month').format('MMMM YYYY');
@@ -246,7 +242,7 @@ class Calendar extends React.Component {
       <div className='mx-calendar' style={styles.component}>
         <div className='mx-calendar-header' style={styles.calendarHeader}>
           <a
-            aria-label={`Go back a month to ${previousMonthText}`}
+            aria-label={this.props.getTranslation('Go back a month to %1', previousMonthText)}
             className='mx-calendar-previous'
             onClick={this._handlePreviousClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handlePreviousClick()}
@@ -259,9 +255,9 @@ class Calendar extends React.Component {
               type='caret-left'
             />
           </a>
-          <div aria-label={`Currently in ${currentMonthText}`} className='mx-calendar-current-month' role='heading'>{currentMonthText}</div>
+          <div aria-label={this.props.getTranslation('Currently in %1',currentMonthText)} className='mx-calendar-current-month' role='heading'>{currentMonthText}</div>
           <a
-            aria-label={`Go forward a month to ${nextMonthText}`}
+            aria-label={this.props.getTranslation('Go forward a month to %1', nextMonthText)}
             className='mx-calendar-next'
             onClick={this._handleNextClick}
             onKeyUp={e => keycode(e) === 'enter' && this._handleNextClick()}
@@ -276,15 +272,15 @@ class Calendar extends React.Component {
           </a>
         </div>
         <div className='mx-calendar-week-header' style={styles.calendarWeekHeader}>
-          {daysOfWeek.map((day) => {
+          {moment.weekdaysMin().map((day, index) => {
             return (
               <div
                 aria-hidden={true}
                 className='mx-calendar-week-day'
-                key={day.label}
+                key={index}
                 style={styles.calendarWeekDay}
               >
-                {day.value}
+                {day}
               </div>
             );
           })}
